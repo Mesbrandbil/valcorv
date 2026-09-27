@@ -23,18 +23,18 @@
    ===================================================================== */
 :root{
   --paper:#F5F3EE; --paper-2:#EEEBE4; --card:#FBFAF7; --ink:#111111;
-  --ink-2:rgba(17,17,17,.68); --ink-3:rgba(17,17,17,.47); --ink-4:rgba(17,17,17,.28);
+  --ink-2:rgba(17,17,17,.74); --ink-3:rgba(17,17,17,.60); --ink-4:rgba(17,17,17,.36);
   --hair:rgba(17,17,17,.13); --hair-2:rgba(17,17,17,.07);
   --signal:#C4441C; --signal-2:rgba(196,68,28,.10);
   --sans:'IBM Plex Sans', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;
   --mono:'IBM Plex Mono', ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
   --ease:cubic-bezier(.2,.7,.1,1); --ease-io:cubic-bezier(.65,0,.35,1);
   --t:1;
+  --k:1; /* presentation scale, set by measure(): the app scales up uniformly above 1440x900 */
   --head:60px; --rail:304px; --econ:92px; --sheetW:540px; --gut:40px;
   --shadow:0 1px 0 rgba(17,17,17,.03), 0 34px 80px -34px rgba(17,17,17,.24), 0 10px 26px -14px rgba(17,17,17,.10);
 }
 @media (max-width:1360px){ :root{ --rail:276px; --sheetW:492px; --head:56px; --econ:86px; --gut:30px } }
-@media (min-width:1800px){ :root{ --rail:356px; --sheetW:600px; --head:68px; --econ:100px; --gut:52px } }
 
 *{box-sizing:border-box;margin:0;padding:0}
 html,body{height:100%;overflow:hidden;background:var(--paper);color:var(--ink)}
@@ -46,11 +46,12 @@ ol,ul{list-style:none}
 .lab{font:500 10px/1.25 var(--mono);letter-spacing:.11em;text-transform:uppercase;color:var(--ink-3)}
 svg.g{width:16px;height:16px;flex:none;overflow:visible}
 .snap *, .snap *::before, .snap *::after{transition:none !important;animation:none !important}
-.paused *{animation-play-state:paused !important}
+.paused .n .chk,.paused .live,.paused .steps .spin,.paused .carrier .c-wait i{animation-play-state:paused !important}
+.paused .amb,.paused .n .pulse{opacity:0 !important}
 
 /* ---------- app frame ---------- */
-#app{position:fixed;inset:0;display:grid;grid-template-rows:var(--head) minmax(0,1fr)}
-#top{position:relative;z-index:20;display:flex;align-items:center;gap:22px;padding:0 18px 0 var(--gut);border-bottom:1px solid var(--hair);background:var(--paper);min-width:0}
+#app{position:fixed;left:0;top:0;width:calc(100vw / var(--k));height:calc(100vh / var(--k));transform:scale(var(--k));transform-origin:0 0;display:grid;grid-template-rows:var(--head) minmax(0,1fr)}
+#top{position:relative;z-index:20;display:flex;align-items:center;gap:16px;padding:0 18px 0 var(--gut);border-bottom:1px solid var(--hair);background:var(--paper);min-width:0}
 .brand{display:flex;align-items:center;gap:10px;flex:none}
 .brand .mk{width:22px;height:22px}
 .brand .wm{font:500 17px/1 var(--sans);letter-spacing:-.01em}
@@ -59,7 +60,7 @@ svg.g{width:16px;height:16px;flex:none;overflow:visible}
 .siteid{flex:none}
 .siteid .nm{font:500 11px/1.2 var(--mono);letter-spacing:.12em;text-transform:uppercase}
 .siteid .sb{font:400 12px/1.3 var(--sans);color:var(--ink-3);margin-top:3px}
-#proghead{display:flex;align-items:center;gap:18px;padding:7px 16px 7px 14px;border-radius:12px;position:relative;min-width:0}
+#proghead{display:flex;align-items:center;gap:16px;padding:7px 14px 7px 13px;border-radius:12px;position:relative;min-width:0}
 #proghead::before,#proghead::after{content:"";position:absolute;inset:0;border:1px solid var(--hair);border-radius:12px;pointer-events:none}
 #proghead::after{inset:3px;border-radius:9px;border-color:var(--hair-2)}
 .pf{display:flex;flex-direction:column;gap:3px;white-space:nowrap}
@@ -81,9 +82,16 @@ svg.g{width:16px;height:16px;flex:none;overflow:visible}
 .btn.primary{background:var(--ink);color:var(--paper);border-color:var(--ink)}
 .btn.primary:hover{background:#2a2a2a}
 .btn.wait{background:transparent;color:var(--ink-3);border-color:var(--hair)}
+#b-play{width:128px;justify-content:center}
 #b-rewind{display:none}
+#top.h-icons #b-rewind span,#top.h-icons #b-reset span{display:none}
+#top.h-icons #b-rewind,#top.h-icons #b-reset{width:32px;padding:0;justify-content:center}
+#top.h-nolead .pf.lead{display:none}
+#top.h-notag .brand .tag{display:none}
+#proghead{overflow:hidden}
+.clock{min-width:74px}
 .can-rewind #b-rewind{display:inline-flex}
-@media (max-width:1500px){ .brand .tag{display:none} }
+@media (max-width:1500px){ .brand .tag .tl{display:none} }
 @media (max-width:1360px){ #b-rewind span,#b-reset span{display:none} #b-rewind,#b-reset{width:32px;padding:0;justify-content:center} }
 @media (max-width:1360px){ #top{gap:12px} #proghead{gap:13px;padding:7px 12px 7px 12px} .pf.pstat{width:184px;padding-right:12px} .pf b{font-size:12px} .pf b.mono{font-size:11.5px} .siteid .nm{letter-spacing:.07em} .clock b{font-size:20px} .btn{padding:0 11px} }
 .btn.icon{width:32px;padding:0;justify-content:center}
@@ -104,7 +112,10 @@ svg.g{width:16px;height:16px;flex:none;overflow:visible}
 #site .dash{fill:none;stroke:#9C9994;stroke-width:calc(var(--sw)*.9px);stroke-dasharray:calc(var(--sw)*3px) calc(var(--sw)*3px)}
 #env-fill{fill:rgba(17,17,17,.045);stroke:none;opacity:0;transition:opacity calc(var(--t)*1600ms) var(--ease)}
 .env-drawn #env-fill{opacity:1}
+.env-drawn:not(.env-settled) #env-fill{transition-delay:calc(var(--t)*1500ms)}
 #site .grid{fill:none;stroke:#C9C5BC;stroke-width:calc(var(--sw)*.9px)}
+#site #ticks{fill:none;stroke:var(--ink);stroke-width:calc(var(--sw)*2.6px);stroke-linecap:round;opacity:.26;transition:opacity calc(var(--t)*800ms)}
+.focus #site #ticks{opacity:.12}
 #site .paint{font-family:var(--mono);font-weight:500;letter-spacing:.14em;fill:#A6A39D}
 #site .draw{stroke-linecap:butt;stroke-dasharray:1 2;stroke-dashoffset:1;transition:stroke-dashoffset calc(var(--t)*2400ms) var(--ease-io) calc(var(--t)*var(--d,0ms)),fill-opacity calc(var(--t)*1400ms) var(--ease) calc(var(--t)*(var(--d,0ms) + 900ms))}
 #site .fade{opacity:0;transition:opacity calc(var(--t)*1400ms) var(--ease) calc(var(--t)*var(--d,0ms))}
@@ -127,24 +138,37 @@ svg.g{width:16px;height:16px;flex:none;overflow:visible}
 #sz3 .hx{fill:none;stroke:#34332f;stroke-width:calc(var(--sw)*1px);stroke-linecap:round;opacity:0;transition:opacity calc(var(--t)*450ms) calc(var(--t)*var(--i)*55ms)}
 #sz3.off .hx{opacity:1}
 .dim #site{opacity:.5}
+/* zoomed transfer view: fade the drawing out at the canvas edge instead of slicing buildings */
+[data-stage^="transfer"] #site{-webkit-mask-image:linear-gradient(90deg,transparent,#000 80px);mask-image:linear-gradient(90deg,transparent,#000 80px)}
+
+/* intro link: header programme -> envelope */
+#plink{position:absolute;left:0;top:0;width:100%;height:100%;pointer-events:none;z-index:21;overflow:visible}
+#plink path{fill:none;stroke:var(--ink);stroke-width:1;stroke-opacity:.5;stroke-dasharray:1 2;stroke-dashoffset:1;opacity:0;transition:stroke-dashoffset calc(var(--t)*1300ms) var(--ease-io),opacity calc(var(--t)*500ms)}
+#plink circle{fill:var(--ink);opacity:0;transition:opacity calc(var(--t)*500ms) calc(var(--t)*1100ms)}
+.plink-on #plink path{stroke-dashoffset:0;opacity:1}
+.plink-on #plink circle{opacity:.7}
+#proghead::before{transition:border-color calc(var(--t)*600ms)}
+.plink-on #proghead::before{border-color:var(--ink-3)}
 
 /* ---------- overlay: envelope, labels, nodes ---------- */
 .env{fill:none;stroke:var(--ink);stroke-linejoin:round}
 #env-a{stroke-width:1.15;stroke-opacity:.62}
+.env-pulse #env-a{stroke-opacity:1;stroke-width:1.8}
 #env-b{stroke-width:.8;stroke-opacity:.26}
 #env-a,#env-b{stroke-dasharray:1 2;stroke-dashoffset:1;transition:stroke-dashoffset calc(var(--t)*2600ms) var(--ease-io)}
 .env-drawn #env-a,.env-drawn #env-b{stroke-dashoffset:0}
 .env-settled #env-a,.env-settled #env-b{stroke-dasharray:none}
 #env-lab{opacity:0;transition:opacity calc(var(--t)*1000ms) var(--ease)}
 .env-drawn #env-lab{opacity:1}
+.env-drawn:not(.env-settled) #env-lab{transition-delay:calc(var(--t)*1900ms)}
 .env-drawn #env-lab.hid{opacity:0}
-#env-lab text{font:500 10px var(--mono);letter-spacing:.16em;fill:var(--ink-3);text-transform:uppercase}
+#env-lab text{font:500 11px var(--mono);letter-spacing:.16em;fill:var(--ink-2);text-transform:uppercase;paint-order:stroke;stroke:var(--paper);stroke-width:3px;stroke-linejoin:round}
 #env-notch{stroke:var(--ink);stroke-width:1;opacity:.55}
 .zl{opacity:0;transition:opacity calc(var(--t)*900ms) var(--ease)}
 .labels-on .zl{opacity:1}
-.dim .zl{opacity:.35}
+.dim .zl text{fill:rgba(17,17,17,.42)} .dim .zl line{stroke-opacity:.15} .dim .zl circle{opacity:.25}
 .labels-on .zl.hid,.zl.hid,.sz-on #szlab.hid{opacity:0}
-.zl text{font:500 10px var(--mono);letter-spacing:.12em;fill:var(--ink-2);paint-order:stroke;stroke:var(--paper);stroke-width:3px;stroke-linejoin:round}
+.zl text{font:500 10.5px var(--mono);letter-spacing:.12em;fill:var(--ink-2);paint-order:stroke;stroke:var(--paper);stroke-width:3px;stroke-linejoin:round}
 .zl line{stroke:var(--ink);stroke-opacity:.35;stroke-width:1}
 .zl circle{fill:var(--ink);opacity:.55}
 #szlab{opacity:0;transition:opacity calc(var(--t)*700ms)}
@@ -200,6 +224,12 @@ svg.g{width:16px;height:16px;flex:none;overflow:visible}
 .teth.sig{stroke:var(--signal);opacity:.9}
 .anc{fill:none;stroke:var(--ink);stroke-width:1;stroke-dasharray:2 2;opacity:.6}
 .anc.sig{stroke:var(--signal)}
+.teth.ret{stroke-dasharray:.5 3.2;stroke-linecap:round;stroke-width:1.3;opacity:.75}
+.teth.cov{stroke-dasharray:none;opacity:.55}
+.anc.ret{stroke-dasharray:.5 2.4;stroke-linecap:round}
+.anc.cov{stroke-dasharray:none;opacity:.45}
+.n.st-changed .ring{stroke-opacity:.95;stroke-width:1.4}
+.hero-out #reticle{opacity:0}
 #h-slice{fill:none;stroke:var(--signal);stroke-width:1;stroke-dasharray:2.5 3;opacity:.9}
 #reticle path{fill:none;stroke:var(--ink);stroke-width:1;opacity:.7}
 #reticle{opacity:0;transition:opacity calc(var(--t)*600ms)}
@@ -231,7 +261,6 @@ svg.g{width:16px;height:16px;flex:none;overflow:visible}
 #caption{opacity:1;transition:opacity calc(var(--t)*500ms)}
 .no-cap #caption{opacity:0}
 @keyframes capIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
-@media (min-width:1800px){ #caption{width:min(600px,42%)} #caption .ct{font-size:38px} #caption .cs{font-size:15.5px;max-width:460px} }
 @media (max-width:1360px){ #caption .ct{font-size:27px} #caption .cs{font-size:13px;max-width:340px} #caption{top:24px} }
 
 #intro{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;z-index:8;pointer-events:none;padding-bottom:6%}
@@ -241,7 +270,6 @@ svg.g{width:16px;height:16px;flex:none;overflow:visible}
 #intro.l1 .il1,#intro.l2 .il2,#intro.l2 .il3{opacity:1;transform:none}
 #intro.out .il{opacity:0;transform:translateY(-16px);transition-duration:calc(var(--t)*800ms)}
 @media (max-width:1360px){ #intro .il{font-size:38px} }
-@media (min-width:1800px){ #intro .il{font-size:56px} }
 #cta{position:absolute;left:50%;bottom:calc(var(--econ) * .5);transform:translate(-50%,10px);z-index:9;display:flex;align-items:center;gap:14px;opacity:0;pointer-events:none;transition:opacity calc(var(--t)*800ms) var(--ease),transform calc(var(--t)*800ms) var(--ease)}
 .cta-on[data-stage="intro"] #cta{opacity:1;transform:translate(-50%,0);pointer-events:auto}
 #cta .btn{height:44px;padding:0 22px 0 18px;border-radius:22px;font-size:11px}
@@ -251,8 +279,8 @@ svg.g{width:16px;height:16px;flex:none;overflow:visible}
 /* hero conditions card */
 #herocard{position:absolute;left:var(--gut);top:212px;width:300px;z-index:5;background:var(--card);border:1px solid var(--hair);border-radius:16px;padding:18px 18px 14px;box-shadow:var(--shadow);opacity:0;transform:translateY(12px);pointer-events:none;transition:opacity calc(var(--t)*800ms) var(--ease),transform calc(var(--t)*800ms) var(--ease)}
 .card-on #herocard{opacity:1;transform:none;pointer-events:auto}
+.card-on.card-dim #herocard{opacity:.62}
 @media (max-width:1360px){ #herocard{top:196px;width:276px;padding:15px 15px 12px} }
-@media (min-width:1800px){ #herocard{top:250px;width:340px} }
 .hc-top{display:flex;justify-content:space-between;align-items:center}
 .hc-title{font:400 22px/1.1 var(--sans);margin-top:12px;letter-spacing:-.01em}
 .hc-sub{font:500 11px/1.3 var(--mono);letter-spacing:.08em;margin-top:6px}
@@ -270,17 +298,20 @@ li.ok .ck .c-p{stroke-dashoffset:0}
 li.ok .ck .c-w,li.bad .ck .c-w{opacity:0}
 li.bad .ck .c-p{stroke-dashoffset:1;transition-duration:calc(var(--t)*300ms)}
 li.bad .ck .c-x{opacity:1}
+.conds li.flash{animation:rowFlash calc(var(--t)*1100ms) var(--ease) 1}
+@keyframes rowFlash{0%,25%{background:rgba(17,17,17,.09)}100%{background:rgba(17,17,17,0)}}
 .hc-foot{display:flex;align-items:center;justify-content:space-between;margin-top:12px;font:500 10px/1.3 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3)}
 .hc-foot b{font-weight:500;color:var(--ink)}
 
 /* readout attached to the hero node */
 #readout{position:absolute;left:0;top:0;z-index:4;pointer-events:none;opacity:0;transition:opacity calc(var(--t)*600ms);will-change:transform;width:262px;padding:11px 13px 10px;background:rgba(251,250,247,.94);border:1px solid var(--hair);border-radius:12px;box-shadow:0 12px 30px -18px rgba(17,17,17,.25)}
 .ro-on #readout{opacity:1}
+.cam-moving #readout,.focus.cam-moving #env-lab{opacity:0 !important;transition-duration:calc(var(--t)*250ms)}
 .ro-name{font:500 10px/1.2 var(--mono);letter-spacing:.14em;text-transform:uppercase}
 .ro-a{font:500 10px/1.25 var(--mono);letter-spacing:.11em;text-transform:uppercase;margin-top:7px;padding-top:7px;border-top:1px solid var(--hair)}
-.ro-b{font:400 12.5px/1.3 var(--sans);color:var(--ink-2);margin-top:3px}
+.ro-b{font:400 13px/1.3 var(--sans);color:var(--ink-2);margin-top:3px}
 .ro-b.mono{font:500 12px/1.3 var(--mono)}
-#readout.sig .ro-a{color:var(--signal)}
+#readout.sig .ro-a{color:var(--signal);font-size:12px;letter-spacing:.12em}
 #readout .swap{animation:capIn calc(var(--t)*700ms) var(--ease) both}
 .slice{margin-top:0;height:0;overflow:hidden;opacity:0;transition:opacity calc(var(--t)*600ms)}
 #readout.has-slice .slice{opacity:1;height:36px;margin-top:9px;overflow:visible}
@@ -296,17 +327,21 @@ li.bad .ck .c-x{opacity:1}
 /* labels on non-hero decided nodes */
 .nlab{position:absolute;left:0;top:0;z-index:3;pointer-events:none;will-change:transform;opacity:0;transition:opacity calc(var(--t)*700ms);white-space:nowrap;padding:6px 9px 6px;background:rgba(245,243,238,.92);border:1px solid var(--hair-2);border-radius:8px}
 .nlab.on{opacity:1}
-.nlab .a{font:500 10px/1.2 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--ink-2)}
-.nlab .b{font:400 11.5px/1.3 var(--sans);color:var(--ink);margin-top:2px}
-.nlab .c{font:500 10px/1.2 var(--mono);letter-spacing:.08em;color:var(--ink-3);margin-top:2px}
-.nlab.left{text-align:right}
+.nlab .a{font:500 10.5px/1.2 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--ink-2)}
+.nlab .b{font:400 12.5px/1.3 var(--sans);color:var(--ink);margin-top:2px}
+.nlab .c{font:500 10.5px/1.2 var(--mono);letter-spacing:.06em;color:var(--ink-3);margin-top:2px}
+/* each outcome keeps its own line language on its plate */
+.nlab.o-changed{border-color:rgba(17,17,17,.28)}
+.nlab.o-retained{border:1px dashed rgba(17,17,17,.45)}
+.nlab.o-transferred{border-color:rgba(17,17,17,.45);box-shadow:0 0 0 2px var(--paper),0 0 0 3px var(--hair)}
 
 /* decision sheet */
-#sheet{position:absolute;right:28px;top:26px;max-height:calc(100% - var(--econ) - 48px);width:var(--sheetW);z-index:7;background:var(--card);border:1px solid var(--hair);border-radius:20px;box-shadow:var(--shadow);opacity:0;transform:translateX(28px) scale(.985);pointer-events:none;transition:opacity calc(var(--t)*800ms) var(--ease),transform calc(var(--t)*900ms) var(--ease);overflow:hidden}
+#sheet{position:absolute;right:28px;top:26px;max-height:calc(100% - var(--econ) - 48px);width:var(--sheetW);z-index:7;background:var(--card);border:1px solid var(--hair);border-radius:20px;box-shadow:var(--shadow);opacity:0;transform:translateX(28px) scale(.985);pointer-events:none;transition:opacity calc(var(--t)*800ms) var(--ease),transform calc(var(--t)*900ms) var(--ease),height calc(var(--t)*450ms) var(--ease-io);overflow-x:hidden;overflow-y:auto;scrollbar-width:none}
+#sheet::-webkit-scrollbar{display:none}
 .sheet-on #sheet{opacity:1;transform:none;pointer-events:auto}
 @media (max-width:1360px){ #sheet{right:20px;top:18px;max-height:calc(100% - var(--econ) - 34px)} }
-.sv{position:relative;padding:32px 36px 28px;display:flex;flex-direction:column;animation:svIn calc(var(--t)*700ms) var(--ease) both}
-.sv.leave{position:absolute;left:0;top:0;width:100%;pointer-events:none;animation:svOut calc(var(--t)*350ms) ease both}
+.sv{position:relative;padding:32px 36px 28px;display:flex;flex-direction:column;animation:svIn calc(var(--t)*650ms) var(--ease) calc(var(--t)*160ms) both}
+.sv.leave{position:absolute;left:0;top:0;width:100%;pointer-events:none;animation:svOut calc(var(--t)*180ms) ease both}
 @keyframes svIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
 @keyframes svOut{to{opacity:0;transform:translateY(-6px)}}
 @media (max-width:1360px){ .sv{padding:24px 26px 22px} }
@@ -316,11 +351,10 @@ li.bad .ck .c-x{opacity:1}
 .sheet-h{font:300 38px/1.08 var(--sans);letter-spacing:-.02em;margin-top:18px}
 .sheet-p{font:400 15px/1.5 var(--sans);color:var(--ink-2);margin-top:12px;max-width:440px}
 @media (max-width:1360px){ .sheet-h{font-size:31px;margin-top:14px} .sheet-p{font-size:13.5px} }
-@media (min-width:1800px){ .sheet-h{font-size:44px} .sheet-p{font-size:16.5px;max-width:520px} }
-.facts{display:grid;grid-template-columns:1.25fr 1fr 1fr;margin-top:24px;border-top:1px solid var(--hair);border-bottom:1px solid var(--hair)}
+.facts{display:grid;grid-template-columns:1.25fr 1fr 1fr;margin-top:20px;border-top:1px solid var(--hair);border-bottom:1px solid var(--hair)}
 .facts>div{padding:13px 12px 13px 0}
 .facts>div+div{padding-left:14px;border-left:1px solid var(--hair)}
-.facts dt{font:500 10px/1.2 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3)}
+.facts dt{font:500 10.5px/1.2 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);min-height:2.4em}
 .facts dd{font:500 13px/1.3 var(--sans);margin-top:7px}
 .facts dd.mono{font:500 14px/1.2 var(--mono)}
 .facts dd small{display:block;font:400 10.5px/1.3 var(--mono);color:var(--ink-3);margin-top:3px;letter-spacing:.02em}
@@ -329,23 +363,23 @@ li.bad .ck .c-x{opacity:1}
 .ob .x{display:flex;align-items:center;gap:6px;font:400 12px/1.25 var(--sans);margin-top:5px}
 .ob svg.g{width:13px;height:13px}
 .obs svg.oa{width:16px;height:8px;color:var(--ink-3)}
-.sheet-cont{margin-top:20px;padding-top:16px;border-top:1px solid var(--hair);display:flex;flex-direction:column;gap:10px;opacity:0;transform:translateY(6px);transition:opacity calc(var(--t)*600ms) var(--ease),transform calc(var(--t)*600ms) var(--ease)}
+.sheet-cont{position:sticky;bottom:-28px;margin:20px -36px -28px;padding:16px 36px 24px;background:var(--card);border-top:1px solid var(--hair);display:flex;flex-direction:column;gap:10px;opacity:0;transform:translateY(6px);transition:opacity calc(var(--t)*600ms) var(--ease),transform calc(var(--t)*600ms) var(--ease)}
 .sheet-cont.on{opacity:1;transform:none}
 .sheet-cont .row{display:flex;gap:10px;align-items:center}
 .sheet-cont .sub,#cont .sub{font:500 10px/1.3 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3)}
 .sheet-cont .bigbtn,#cont .bigbtn{position:relative;overflow:hidden}
-.sheet-cont .bigbtn .pr,#cont .bigbtn .pr{position:absolute;left:0;bottom:0;height:2px;background:rgba(245,243,238,.55);width:0}
+.sheet-cont .bigbtn .pr,#cont .bigbtn .pr{position:absolute;left:18px;bottom:8px;height:2px;border-radius:1px;background:rgba(245,243,238,.6);width:0}
 @media (max-width:1360px){ .obs{padding:8px 11px;gap:7px;margin-top:10px} .ob .x{font-size:11.5px} }
-.ask{font:500 10px/1 var(--mono);letter-spacing:.14em;color:var(--ink);margin-top:26px;display:flex;align-items:center;gap:10px}
+.ask{font:500 10px/1 var(--mono);letter-spacing:.14em;color:var(--ink);margin-top:20px;display:flex;align-items:center;gap:10px}
 .ask::after{content:"";flex:1;height:1px;background:var(--hair)}
 .choices{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:14px}
 .choice{position:relative;display:flex;flex-direction:column;border:1px solid var(--hair);border-radius:14px;padding:15px 14px 13px;background:var(--paper);transition:border-color calc(var(--t)*250ms),background calc(var(--t)*250ms),transform calc(var(--t)*250ms) var(--ease)}
 .choice:hover{border-color:var(--ink);background:#fff;transform:translateY(-2px)}
 .choice .k{position:absolute;right:12px;top:12px}
 .choice svg.g{width:22px;height:22px}
-.choice b{display:block;font:500 11.5px/1.25 var(--mono);letter-spacing:.1em;text-transform:uppercase;margin-top:14px}
+.choice b{display:block;font:500 11.5px/1.25 var(--mono);letter-spacing:.08em;text-transform:uppercase;margin-top:14px;min-height:2.5em}
 .choice .d{font:400 12.5px/1.42 var(--sans);color:var(--ink-2);margin-top:7px;flex:1;min-height:72px}
-.choice .o{font:500 10px/1.3 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--ink);margin-top:10px;padding-top:9px;border-top:1px solid var(--hair)}
+.choice .o{white-space:nowrap;font:500 10px/1.3 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--ink);margin-top:10px;padding-top:9px;border-top:1px solid var(--hair)}
 @media (max-width:1360px){ .choice .d{font-size:11.5px} .choice{padding:12px 11px 11px} .facts{margin-top:18px} .ask{margin-top:18px} }
 .sheet-foot{margin-top:16px;font:400 12px/1.4 var(--sans);color:var(--ink-3);display:flex;gap:8px;align-items:center}
 .opts{margin-top:22px;border-top:1px solid var(--hair)}
@@ -356,9 +390,7 @@ li.bad .ck .c-x{opacity:1}
 .opt b{display:block;font:500 14.5px/1.3 var(--sans)}
 .opt span.s{display:block;font:400 12.5px/1.4 var(--sans);color:var(--ink-3);margin-top:2px}
 .opt em{font:normal 500 10px/1.3 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3);text-align:right}
-.opt.rec{background:rgba(17,17,17,.03)}
-.opt.rec .rad{border-color:var(--ink);box-shadow:inset 0 0 0 3px var(--card),inset 0 0 0 7px var(--ink)}
-.opt .tagr{display:inline-block;font:500 10px/1 var(--mono);letter-spacing:.1em;padding:3px 5px;border:1px solid var(--ink);border-radius:3px;margin-left:8px;vertical-align:2px;color:var(--ink)}
+.opt .tagr{display:inline-block;font:500 10px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;padding:3px 5px;border:1px solid var(--ink);border-radius:3px;margin-left:8px;vertical-align:2px;color:var(--ink)}
 .linkback{margin-top:4px;padding-top:16px;font:500 10px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);display:inline-flex;gap:8px;align-items:center;align-self:flex-start}
 .linkback:hover{color:var(--ink)}
 .steps{margin-top:28px;border-top:1px solid var(--hair)}
@@ -382,12 +414,7 @@ li.bad .ck .c-x{opacity:1}
 .dl2 dd{font:400 14px/1.4 var(--sans)}
 .dl2 dd.mono{font:500 13px/1.4 var(--mono)}
 @media (max-width:1360px){ .dl2>div{padding:9px 0} .dl2 dd{font-size:13px} }
-.ack{display:flex;gap:12px;align-items:flex-start;margin-top:18px;padding:14px;border:1px dashed var(--ink-4);border-radius:12px;font:400 13px/1.45 var(--sans);color:var(--ink-2);width:100%}
-.ack .bx{width:16px;height:16px;border:1px solid var(--ink-3);border-radius:4px;flex:none;margin-top:1px;display:grid;place-items:center}
-.ack .bx svg{width:12px;height:12px;opacity:0}
-.ack.on{border-style:solid;border-color:var(--ink-3);color:var(--ink)}
-.ack.on .bx{background:var(--ink);border-color:var(--ink)}
-.ack.on .bx svg{opacity:1;color:var(--paper)}
+.decl{margin-top:18px;padding:14px 16px;border:1px dashed var(--ink-4);border-left:2px solid var(--ink);border-radius:4px 12px 12px 4px;font:400 13.5px/1.45 var(--sans);color:var(--ink)}
 .acts{display:flex;gap:10px;align-items:center;margin-top:18px}
 .bigbtn{height:46px;padding:0 22px;border-radius:23px;background:var(--ink);color:var(--paper);font:500 11px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;display:inline-flex;align-items:center;gap:10px;transition:opacity calc(var(--t)*300ms),background calc(var(--t)*200ms)}
 .bigbtn[disabled]{opacity:.28;cursor:default}
@@ -403,8 +430,8 @@ li.bad .ck .c-x{opacity:1}
 /* transfer: packet, carriers, plaque */
 #packet{position:absolute;left:0;top:0;z-index:6;width:336px;background:var(--card);border:1px solid var(--hair);border-radius:14px;box-shadow:var(--shadow);opacity:0;transform:translateY(10px) scale(.97);transition:opacity calc(var(--t)*700ms) var(--ease),transform calc(var(--t)*700ms) var(--ease),width calc(var(--t)*650ms) var(--ease-io),height calc(var(--t)*650ms) var(--ease-io),left calc(var(--t)*650ms) var(--ease-io),top calc(var(--t)*650ms) var(--ease-io),border-radius calc(var(--t)*650ms) var(--ease-io);overflow:hidden;pointer-events:none}
 #packet.on{opacity:1;transform:none}
-#packet .pk-in{padding:15px 16px 12px;transition:opacity calc(var(--t)*300ms)}
-#packet.folded .pk-in{opacity:0}
+#packet .pk-in{padding:15px 16px 12px;transform-origin:50% 40%;transition:opacity calc(var(--t)*260ms),transform calc(var(--t)*420ms) var(--ease-io)}
+#packet.folded .pk-in{opacity:0;transform:scale(.9)}
 #packet .pk-h{display:flex;justify-content:space-between;align-items:center;padding-bottom:10px;border-bottom:1px solid var(--hair)}
 #packet .pk-t{font:500 13px/1.2 var(--sans);margin-top:0}
 #packet ul{margin-top:4px}
@@ -419,13 +446,13 @@ li.bad .ck .c-x{opacity:1}
 #packet .pk-tok i{width:7px;height:7px;background:var(--ink);border-radius:1px;display:block}
 #packet.folded .pk-tok{opacity:1}
 #packet.gone{opacity:0;transform:scale(.9)}
-#carriers{position:absolute;right:24px;top:24px;bottom:calc(var(--econ) + 24px);width:clamp(248px,25%,318px);z-index:6;display:flex;flex-direction:column;justify-content:center;gap:10px;pointer-events:none;transition:opacity calc(var(--t)*700ms)}
+#carriers{position:absolute;right:24px;top:24px;bottom:calc(var(--econ) + 24px);width:clamp(248px,25%,318px);z-index:6;display:flex;flex-direction:column;justify-content:center;gap:10px;pointer-events:none;overflow:hidden;padding:4px 0;transition:opacity calc(var(--t)*700ms)}
 #carriers.gone{opacity:0}
 @media (max-width:1360px){ #carriers{top:18px;bottom:calc(var(--econ) + 18px);gap:8px} }
-.carrier{position:relative;flex:0 0 auto;min-height:148px;display:flex;flex-direction:column;border:1px solid var(--hair);border-radius:14px;background:var(--card);padding:13px 16px 12px;opacity:0;transform:translateX(46px);transition:opacity calc(var(--t)*700ms) var(--ease),transform calc(var(--t)*800ms) var(--ease),border-color calc(var(--t)*300ms),box-shadow calc(var(--t)*300ms),background calc(var(--t)*300ms);box-shadow:0 1px 0 rgba(17,17,17,.02)}
+.carrier{position:relative;flex:0 1 auto;min-height:0;max-height:170px;height:148px;display:flex;flex-direction:column;border:1px solid var(--hair);border-radius:14px;background:var(--card);padding:13px 16px 12px;opacity:0;transform:translateX(46px);transition:opacity calc(var(--t)*700ms) var(--ease),transform calc(var(--t)*800ms) var(--ease),border-color calc(var(--t)*300ms),box-shadow calc(var(--t)*300ms),background calc(var(--t)*300ms);box-shadow:0 1px 0 rgba(17,17,17,.02)}
 .carrier.in{opacity:1;transform:none}
 .carrier.quoted{pointer-events:auto;cursor:pointer}
-.carrier.quoted:hover{border-color:var(--ink);box-shadow:var(--shadow)}
+#carriers.armed .carrier.quoted:hover{border-color:var(--ink);box-shadow:var(--shadow)}
 .carrier .c-top{display:flex;justify-content:space-between;align-items:center;gap:8px}
 .carrier .c-name{font:500 10.5px/1.2 var(--mono);letter-spacing:.1em;text-transform:uppercase;white-space:nowrap;min-width:0;overflow:hidden;text-overflow:ellipsis}
 .carrier .c-stat{flex:none;font:500 10px/1.2 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3);white-space:nowrap}
@@ -435,9 +462,10 @@ li.bad .ck .c-x{opacity:1}
 .carrier .c-price{display:flex;align-items:baseline;gap:7px;margin-top:12px}
 .carrier .c-price span{font:500 10px/1 var(--mono);letter-spacing:.08em;color:var(--ink-3)}
 .carrier .c-price b{font:400 26px/1 var(--mono);letter-spacing:-.01em}
+.carrier.quoted .c-price b{animation:capIn calc(var(--t)*500ms) var(--ease) both}
 .carrier .c-facts{display:grid;grid-template-columns:1fr 1.2fr .9fr;gap:8px;margin-top:9px;padding-top:8px;border-top:1px solid var(--hair-2)}
-.carrier .c-facts em{display:block;font:normal 500 10px/1.2 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3)}
-.carrier .c-facts b{display:block;font:500 11px/1.2 var(--mono);margin-top:3px;white-space:nowrap}
+.carrier .c-facts em{display:block;font:normal 500 10.5px/1.2 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3)}
+.carrier .c-facts b{display:block;font:500 12px/1.2 var(--mono);margin-top:3px;white-space:nowrap}
 .carrier .c-wait{position:absolute;left:16px;right:16px;bottom:14px;height:1px;background:var(--hair);overflow:hidden;opacity:0}
 .carrier.recv .c-wait{opacity:1}
 .carrier .c-wait i{position:absolute;top:0;bottom:0;width:30%;background:var(--ink);animation:wait calc(var(--t)*1400ms) var(--ease-io) infinite}
@@ -448,14 +476,14 @@ li.bad .ck .c-x{opacity:1}
 .carrier .c-dec small{display:block;font:400 12px/1.3 var(--sans);letter-spacing:0;text-transform:none;color:var(--ink-3);margin-top:4px}
 .carrier .c-price .c-sel{margin-left:auto;align-self:center;font:500 10px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--ink);padding:6px 11px;border:1px solid var(--ink);border-radius:13px;opacity:0;transition:opacity calc(var(--t)*300ms),background calc(var(--t)*200ms),color calc(var(--t)*200ms)}
 .carrier.quoted .c-price .c-sel{opacity:1}
-.carrier.quoted:hover .c-price .c-sel{background:var(--ink);color:var(--paper)}
+#carriers.armed .carrier.quoted:hover .c-price .c-sel{background:var(--ink);color:var(--paper)}
 .carrier.selected{border-color:var(--ink);outline:1px solid var(--ink);outline-offset:3px;box-shadow:var(--shadow);background:#fff}
 .carrier.selected .c-price .c-sel,.carrier.muted .c-price .c-sel{display:none}
 .carrier.muted{opacity:.38}
 @media (max-width:1360px){ .carrier .c-stat .q{display:none} .carrier .c-name{letter-spacing:.05em;white-space:nowrap} .carrier .c-stat{letter-spacing:.04em} .carrier{padding:10px 13px 9px;min-height:128px} .carrier .c-price b{font-size:21px} .carrier .c-facts{margin-top:6px;padding-top:6px} .carrier .c-kind{font-size:11px} }
-@media (min-width:1800px){ .carrier .c-price b{font-size:32px} }
 #offnote{position:absolute;z-index:6;font:500 10px/1.4 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);opacity:0;transition:opacity calc(var(--t)*600ms);width:230px;pointer-events:none}
 #offnote.on{opacity:1}
+#offnote small{display:block;margin-top:8px;padding-top:7px;border-top:1px solid var(--hair);font-size:10px;letter-spacing:.1em;color:var(--ink-3)}
 #plaque{position:absolute;left:0;top:0;z-index:6;width:258px;background:var(--card);border:1px solid var(--ink);border-radius:14px;padding:18px 20px 16px;box-shadow:var(--shadow);opacity:0;transform:scale(.94);transition:opacity calc(var(--t)*700ms) var(--ease),transform calc(var(--t)*800ms) var(--ease);pointer-events:none}
 #plaque::after{content:"";position:absolute;inset:4px;border:1px solid var(--hair);border-radius:10px;pointer-events:none}
 #plaque.on{opacity:1;transform:none}
@@ -465,6 +493,8 @@ li.bad .ck .c-x{opacity:1}
 #plaque .p4{font:500 10px/1.3 var(--mono);letter-spacing:.08em;color:var(--ink-2);margin-top:10px;text-transform:uppercase}
 #plaque .p6{display:flex;align-items:center;gap:8px;font:500 10px/1.3 var(--mono);letter-spacing:.08em;text-transform:uppercase;margin-top:10px}
 #plaque .p6::before{content:"";width:12px;height:8px;border:1px solid var(--ink);border-radius:5px;box-shadow:0 0 0 2px var(--card),0 0 0 3px var(--ink-4)}
+#plaque .p7{font:400 12.5px/1.3 var(--sans);color:var(--ink);margin-top:8px}
+#plaque .p8{font:500 10px/1.3 var(--mono);letter-spacing:.08em;color:var(--ink-3);margin-top:4px;text-transform:uppercase}
 #plaque .p5{font:500 10px/1.3 var(--mono);letter-spacing:.08em;color:var(--ink-3);margin-top:12px;padding-top:10px;border-top:1px solid var(--hair)}
 
 /* continue bar */
@@ -481,15 +511,15 @@ li.bad .ck .c-x{opacity:1}
 .eh{display:flex;flex-direction:column;gap:8px;width:118px;flex:none;padding-top:10px}
 .eh2{font:400 11.5px/1.35 var(--sans);color:var(--ink-3)}
 .eq{flex:1;display:flex;align-items:stretch;min-width:0}
-.cell{position:relative;display:flex;gap:10px;align-items:flex-start;padding:10px 14px 0 0;opacity:.55;transition:opacity calc(var(--t)*500ms);min-width:0}
+.cell{position:relative;display:flex;gap:10px;align-items:flex-start;padding:10px 14px 0 0;opacity:.72;transition:opacity calc(var(--t)*500ms);min-width:0}
 .cell::before{content:"";position:absolute;left:0;right:14px;top:0;height:1px;background:var(--hair)}
 .cell::after{content:"";position:absolute;left:0;right:14px;top:-1px;height:2px;background:var(--ink);transform:scaleX(0);transform-origin:left;transition:transform calc(var(--t)*700ms) var(--ease)}
 .cell.on{opacity:1}
 .cell.on::after{transform:none}
 .cell.sig.on::after{background:var(--signal)}
 .cell svg.g{width:18px;height:18px;margin-top:-1px;flex:none}
-.cell b{display:flex;align-items:center;gap:8px;font:500 10px/1.2 var(--mono);letter-spacing:.12em;text-transform:uppercase;white-space:nowrap}
-.cell span{display:block;font:400 12px/1.35 var(--sans);color:var(--ink-2);margin-top:3px;white-space:nowrap}
+.cell b{display:flex;align-items:center;gap:8px;font:500 11px/1.2 var(--mono);letter-spacing:.12em;text-transform:uppercase;white-space:nowrap}
+.cell span{display:block;font:400 12.5px/1.35 var(--sans);color:var(--ink-2);margin-top:3px;white-space:nowrap}
 .cell span+span{margin-top:0}
 .cell span.mono{font:500 11.5px/1.35 var(--mono);color:var(--ink)}
 .cell .cnt{font:normal 500 11px/1 var(--mono);letter-spacing:0;color:var(--ink-2);display:none;margin-left:2px}
@@ -518,7 +548,8 @@ li.bad .ck .c-x{opacity:1}
 .stats{display:grid;grid-template-columns:repeat(3,1fr);padding:0 20px 12px;border-bottom:1px solid var(--hair-2)}
 .stats div{display:flex;flex-direction:column;gap:4px}
 .stats em{font:normal 500 10px/1.2 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3)}
-.stats b{font:400 19px/1 var(--mono);font-variant-numeric:tabular-nums}
+.stats b{font:400 19px/1 var(--mono);font-variant-numeric:tabular-nums;white-space:nowrap}
+.stats b small{font:500 10.5px/1 var(--mono);letter-spacing:.06em;color:var(--signal)}
 #stream{flex:1;overflow:hidden;padding:4px 0 0;min-height:0}
 #legend{display:none;padding:14px 20px 0}
 [data-stage="intro"] #legend{display:block;animation:rowIn calc(var(--t)*700ms) var(--ease) both}
@@ -532,8 +563,12 @@ li.bad .ck .c-x{opacity:1}
 #record:empty::before{content:"Every important event will be appended here, in order.";display:block;padding:6px 20px;font:400 12.5px/1.4 var(--sans);color:var(--ink-3)}
 .srow{display:grid;grid-template-columns:40px 1fr;gap:0 8px;padding:9px 18px 9px;border-bottom:1px solid var(--hair-2);cursor:pointer;animation:rowIn calc(var(--t)*600ms) var(--ease) both}
 .srow:hover{background:rgba(17,17,17,.025)}
+.srow:not([data-activity-id]){cursor:default}
+.srow:not([data-activity-id]):hover{background:none}
 .srow .t{font:500 11px/1.35 var(--mono);color:var(--ink-3)}
-.srow .n{font:400 13px/1.35 var(--sans);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.srow .n{font:400 13.5px/1.35 var(--sans);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.srow .z .zn{min-width:0;overflow:hidden;text-overflow:ellipsis}
+.srow .z i,.srow .z .gs,.srow .z .sl{flex:none}
 .srow .z{grid-column:2;display:flex;align-items:center;gap:6px;margin-top:3px;overflow:hidden;font:500 10px/1.2 var(--mono);letter-spacing:.09em;text-transform:uppercase;color:var(--ink-3);white-space:nowrap}
 .srow .z i{font-style:normal;color:var(--ink-4)}
 .srow .z .zn{font:400 11.5px/1.2 var(--sans);letter-spacing:0;text-transform:none;color:var(--ink-3)}
@@ -556,10 +591,10 @@ li.bad .ck .c-x{opacity:1}
 .rr.k-dev .m::after{border-color:var(--ink);border-width:1.5px;left:3px;top:4px;width:7px;height:7px}
 .rr.k-decision .m::after{border-radius:1px;background:var(--ink);border-color:var(--ink)}
 .rr.k-sched .m::after{border-style:dashed}
-.rr .x{font:400 12.5px/1.4 var(--sans)}
+.rr .x{font:400 13px/1.4 var(--sans)}
 .rr.k-decision .x{font-weight:500}
 .rr.k-sched .x{color:var(--ink-3)}
-.rr .s{font:400 11px/1.4 var(--sans);color:var(--ink-2);margin-top:1px}
+.rr .s{font:400 11.5px/1.4 var(--sans);color:var(--ink-2);margin-top:1px}
 .rr .i{font:500 10px/1.4 var(--mono);letter-spacing:.04em;color:var(--ink-3);margin-top:2px}
 .rr.k-decision{background:rgba(17,17,17,.03)}
 .rr.k-decision::before{content:"";position:absolute;left:0;top:0;bottom:0;width:2px;background:var(--ink)}
@@ -574,7 +609,6 @@ li.bad .ck .c-x{opacity:1}
 .sum-list li svg.g{width:16px;height:16px}
 .sum-note{font:400 12px/1.45 var(--sans);color:var(--ink-3);margin-top:10px}
 @media (max-width:1360px){ .sum-big b{font-size:30px} .sum-list li{height:27px;font-size:12px} .srow{padding:8px 16px} .r-head{padding:14px 16px 10px} .stats{padding:0 16px 10px} .rr{padding:5px 16px} .sum{padding:4px 16px 12px} }
-@media (min-width:1800px){ .srow .n{font-size:14px} .rr .x{font-size:13.5px} .stats b{font-size:22px} }
 
 /* ---------- detail card ---------- */
 #detail{position:absolute;left:0;top:0;z-index:12;width:286px;background:var(--card);border:1px solid var(--hair);border-radius:14px;box-shadow:var(--shadow);padding:16px 18px 14px;opacity:0;transform:translateY(6px);pointer-events:none;transition:opacity calc(var(--t)*400ms) var(--ease),transform calc(var(--t)*400ms) var(--ease)}
@@ -596,18 +630,19 @@ li.bad .ck .c-x{opacity:1}
 /* ---------- end screen ---------- */
 #end{position:fixed;inset:0;z-index:40;background:var(--paper);display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity calc(var(--t)*1200ms) var(--ease)}
 [data-stage="end"] #end{opacity:1;pointer-events:auto}
-.end-in{width:min(1120px,84vw)}
+.end-in{width:min(1200px,86vw)}
 .e1,.e2{font:300 46px/1.16 var(--sans);letter-spacing:-.02em;opacity:0;transform:translateY(12px);transition:opacity calc(var(--t)*1200ms) var(--ease),transform calc(var(--t)*1200ms) var(--ease)}
 .e1{color:var(--ink-3)}
 .e2{margin-top:10px}
 #end.s1 .e1,#end.s2 .e2{opacity:1;transform:none}
 @media (max-width:1360px){ .e1,.e2{font-size:38px} }
-@media (min-width:1800px){ .e1,.e2{font-size:56px} }
-.chain{display:flex;align-items:flex-start;margin-top:64px;border-top:1px solid var(--hair);padding-top:22px}
+.eth{font:500 12px/1.4 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--ink-2);margin-top:44px;opacity:0;transition:opacity calc(var(--t)*1000ms) var(--ease)}
+#end.s3 .eth{opacity:1}
+.chain{display:flex;align-items:flex-start;margin-top:18px;border-top:1px solid var(--hair);padding-top:22px}
 .chain .st{flex:1;opacity:0;transform:translateY(8px);transition:opacity calc(var(--t)*800ms) var(--ease),transform calc(var(--t)*800ms) var(--ease)}
-.chain .st b{display:block;font:500 15px/1 var(--mono);letter-spacing:.16em}
-.chain .st span{display:block;font:400 12.5px/1.4 var(--sans);color:var(--ink-3);margin-top:9px;max-width:160px}
-.chain .st em{display:block;font:normal 500 10.5px/1.45 var(--mono);letter-spacing:.02em;color:var(--ink);margin-top:12px;padding-top:10px;border-top:1px solid var(--hair);max-width:170px}
+.chain .st b{display:block;font:500 21px/1 var(--mono);letter-spacing:.12em}
+.chain .st span{display:block;font:400 14px/1.4 var(--sans);color:var(--ink-2);margin-top:10px;max-width:180px}
+.chain .st em{display:block;font:normal 500 12px/1.45 var(--mono);letter-spacing:.02em;color:var(--ink);margin-top:14px;padding-top:10px;border-top:1px solid var(--hair);max-width:200px}
 .chain .ar{width:40px;padding-top:2px;margin-right:18px;color:var(--ink-3);opacity:0;transition:opacity calc(var(--t)*600ms)}
 .chain .ar svg{width:36px;height:14px}
 .chain .st.on,.chain .ar.on{opacity:1;transform:none}
@@ -621,6 +656,29 @@ li.bad .ck .c-x{opacity:1}
 #end.s5 .e4{opacity:1}
 .e4 p{font:400 12px/1.5 var(--sans);color:var(--ink-3)}
 .e4 .ea{display:flex;gap:8px}
+
+/* ---------- laptop heights: compact the floating surfaces so nothing clips ---------- */
+@media (max-width:1360px){ .sheet-cont{margin:16px -26px -22px;padding:14px 26px 20px;bottom:-22px} }
+@media (max-width:1500px){ .carrier .c-stat .q{display:none} }
+@media (max-height:880px){
+  .sv{padding:22px 28px 18px}
+  .sheet-cont{margin:14px -28px -18px;padding:12px 28px 16px;bottom:-18px}
+  .sheet-h{font-size:30px;margin-top:10px} .sheet-p{font-size:13.5px;margin-top:8px}
+  .facts{margin-top:14px} .facts>div{padding:9px 10px 9px 0} .facts>div+div{padding-left:12px}
+  .obs{margin-top:10px;padding:8px 12px} .ask{margin-top:14px} .choices{margin-top:10px}
+  .choice{padding:12px 12px 11px} .choice b{margin-top:10px} .choice .d{min-height:0}
+  .bigval{margin-top:14px;padding:12px 0} .bigval b{font-size:32px}
+  .recblock{margin-top:12px;padding:10px 14px} .dl2{margin-top:14px} .dl2>div{padding:8px 0}
+  .steps{margin-top:16px} .steps li{height:42px} .sheet-foot{margin-top:10px} .note{margin-top:10px}
+  .carrier{height:132px;padding:10px 14px 9px} .carrier .c-price{margin-top:8px} .carrier .c-price b{font-size:22px} .carrier .c-facts{margin-top:6px;padding-top:6px}
+  #carriers{gap:8px;top:14px;bottom:calc(var(--econ) + 14px)}
+}
+@media (max-height:780px){
+  .obs,.sheet-foot{display:none}
+  .sheet-h{font-size:27px} .choice .d{font-size:11.5px} .facts{margin-top:10px} .choice b{margin-top:8px} .sv{padding-top:18px}
+  .carrier{height:120px} .carrier .c-kind{display:none}
+  #herocard{top:170px} .conds li{height:28px}
+}
 </style>
 </head>
 <body>
@@ -631,7 +689,7 @@ li.bad .ck .c-x{opacity:1}
     <pattern id="hatch" width="4" height="4" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="4" height="4" fill="#F5F3EE"/><line x1="0" y1="0" x2="0" y2="4" stroke="#C4441C" stroke-width="1.1" stroke-opacity=".55"/></pattern>
     <symbol id="g-inside" viewBox="-10 -10 20 20"><circle r="6.6" fill="none" stroke="currentColor" stroke-opacity=".45"/><circle r="3" fill="currentColor"/></symbol>
     <symbol id="g-checking" viewBox="-10 -10 20 20"><circle r="7.6" fill="none" stroke="currentColor" stroke-dasharray="2.2 2.7"/><circle r="3" fill="currentColor"/></symbol>
-    <symbol id="g-outside" viewBox="-10 -10 20 20"><circle r="5.6" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M0 -7.2V-9.8M0 7.2V9.8M-7.2 0H-9.8M7.2 0H9.8" stroke="currentColor" stroke-width="1.3"/></symbol>
+    <symbol id="g-outside" viewBox="-10 -10 20 20"><circle r="5.2" fill="none" stroke="currentColor" stroke-width="1.6"/><circle r="8.6" fill="none" stroke="currentColor" stroke-width="1" stroke-dasharray="2 2.2"/></symbol>
     <symbol id="g-changed" viewBox="-10 -10 20 20"><circle r="6.6" fill="none" stroke="currentColor" stroke-opacity=".45"/><rect x="-3.2" y="-3.2" width="6.4" height="6.4" fill="currentColor"/></symbol>
     <symbol id="g-retained" viewBox="-10 -10 20 20"><circle r="8.4" fill="none" stroke="currentColor" stroke-dasharray="1.4 1.6"/><path d="M-7.2 -0.2L-0.2 -7.2M-6.3 3.8L3.8 -6.3M-3.8 6.3L6.3 -3.8M0.2 7.2L7.2 0.2" stroke="currentColor" stroke-width=".75" stroke-opacity=".6"/><circle r="3.4" fill="#F5F3EE"/><circle r="2.3" fill="currentColor"/></symbol>
     <symbol id="g-cover" viewBox="-12 -10 24 20"><rect x="-11.2" y="-6.6" width="22.4" height="13.2" rx="6.6" fill="none" stroke="currentColor"/><rect x="-8.8" y="-4.2" width="17.6" height="8.4" rx="4.2" fill="none" stroke="currentColor" stroke-width=".8"/><circle cx="-3.4" r="2.1" fill="currentColor"/><circle cx="3.6" r="2" fill="none" stroke="currentColor" stroke-width=".8"/><path d="M3.6 -1V0H4.5" fill="none" stroke="currentColor" stroke-width=".7"/></symbol>
@@ -652,14 +710,14 @@ li.bad .ck .c-x{opacity:1}
 
 <div id="app" data-stage="intro">
   <header id="top">
-    <div class="brand"><svg class="mk"><use href="#g-mark"/></svg><span class="wm">Priora</span><span class="tag">End-state concept</span></div>
+    <div class="brand"><svg class="mk"><use href="#g-mark"/></svg><span class="wm">Priora</span><span class="tag"><span class="tl">End-state </span>concept</span></div>
     <div class="hsep"></div>
-    <div class="siteid"><div class="nm">Nordhavn Bioprocessing</div><div class="sb">Copenhagen · fictional site</div></div>
+    <div class="siteid"><div class="nm" id="h-site">Nordhavn Bioprocessing</div><div class="sb"><span id="h-city">Copenhagen</span> · fictional site</div></div>
     <div id="proghead" aria-label="Annual programme">
-      <div class="pf pstat"><em>Property + BI programme</em><b id="pstat"><svg class="g"><use href="#g-inside"/></svg><span>All activity inside</span></b></div>
-      <div class="pf"><em>Annual programme</em><b><span class="mono">DKK 4.2bn</span> insured value</b></div>
-      <div class="pf lead"><em>Lead carrier</em><b>Northstar Commercial</b></div>
-      <div class="pf"><em>Renewal</em><b class="mono">01 JAN 2027</b></div>
+      <div class="pf pstat"><em id="h-prog">Property + BI programme</em><b id="pstat"><svg class="g"><use href="#g-inside"/></svg><span>All activity inside</span></b></div>
+      <div class="pf"><em>Annual programme</em><b><span class="mono" id="h-value">DKK 4.2bn</span> insured value</b></div>
+      <div class="pf lead"><em>Lead carrier</em><b id="h-lead">Northstar Commercial</b></div>
+      <div class="pf"><em>Renewal</em><b class="mono" id="h-renew">01 JAN 2027</b></div>
     </div>
     <div class="spacer"></div>
     <div class="clock"><span class="lab">Site time</span><b id="clock">08:55</b></div>
@@ -669,6 +727,8 @@ li.bad .ck .c-x{opacity:1}
       <button class="btn" id="b-reset" data-act="reset" title="Reset scenario (R)" aria-label="Reset scenario"><svg><use href="#g-reset"/></svg><span>Reset</span></button>
     </div>
   </header>
+  <!-- Intro only: ties the programme in the header to the envelope drawn on the site. -->
+  <svg id="plink" aria-hidden="true"><path id="plink-p" pathLength="1"/><circle id="plink-c" r="2.6"/></svg>
 
   <main id="main">
     <section id="canvas" aria-label="Site">
@@ -693,7 +753,7 @@ li.bad .ck .c-x{opacity:1}
       <div id="caption"><div class="cn cin"><span id="cap-n">01</span><i></i><span>09</span><span class="layers" id="layers"></span></div><div class="ct cin" id="cap-t"></div><div class="cs cin" id="cap-s"></div></div>
 
       <div id="intro">
-        <div class="il il1">Every site already has insurance.</div>
+        <div class="il il1">This site already has insurance.</div>
         <div class="il il2">But risk is not static.<br>It changes with every physical activity.</div>
         <div class="il il3">Nordhavn Bioprocessing · Copenhagen · a fictional site</div>
       </div>
@@ -705,7 +765,7 @@ li.bad .ck .c-x{opacity:1}
       <div id="sheet"></div>
       <div id="packet"></div>
       <div id="carriers"></div>
-      <div id="offnote">Carriers set appetite and price. Priora supplies the observed state and does not rank offers.</div>
+      <div id="offnote">Carriers set appetite and price. Priora supplies the observed state and does not rank offers.<small>Fictional carriers · illustrative prices</small></div>
       <div id="plaque"></div>
       <div id="cont"></div>
       <div id="detail"></div>
@@ -715,11 +775,11 @@ li.bad .ck .c-x{opacity:1}
         <div class="eq">
           <div class="cell c-normal" data-k="normal"><svg class="g"><use href="#g-inside"/></svg><div><b>Normal activity<em class="cnt" id="cnt-normal"></em></b><span>Inside annual programme</span><span class="mono">DKK 0 incremental</span></div></div>
           <div class="op"><svg><use href="#g-arrow-s"/></svg></div>
-          <div class="cell c-dev sig" data-k="deviation"><svg class="g" style="color:var(--signal)"><use href="#g-outside"/></svg><div><b>Deviation</b><span>Decision required</span></div></div>
+          <div class="cell c-dev sig" data-k="deviation"><svg class="g" style="color:var(--signal)"><use href="#g-outside"/></svg><div><b>Deviation</b><span>Extra risk unpriced</span><span>Decision required</span></div></div>
           <div class="op"><svg><use href="#g-arrow-s"/></svg></div>
           <div class="cell c-ch" data-k="change"><svg class="g"><use href="#g-changed"/></svg><div><b>Change<em class="cnt" id="cnt-change"></em></b><span class="mono">DKK 0</span></div></div>
           <div class="cell c-re" data-k="retain"><svg class="g"><use href="#g-retained"/></svg><div><b>Retain<em class="cnt" id="cnt-retain"></em></b><span>Company carries</span><span>incremental exposure</span></div></div>
-          <div class="cell c-tr" data-k="transfer"><svg class="g"><use href="#g-cover"/></svg><div><b>Transfer<em class="cnt" id="cnt-transfer"></em></b><span>Market price</span><span class="mono" id="econ-price">on request</span></div></div>
+          <div class="cell c-tr" data-k="transfer"><svg class="g"><use href="#g-cover"/></svg><div><b>Transfer<em class="cnt" id="cnt-transfer"></em></b><span>Market price</span><span class="mono" id="econ-price">set by carriers</span></div></div>
         </div>
       </div>
     </section>
@@ -766,6 +826,7 @@ li.bad .ck .c-x{opacity:1}
     <div class="end-in">
       <p class="e1">Physical risk used to be priced from what might happen.</p>
       <p class="e2">Priora makes more of what is actually happening legible.</p>
+      <p class="eth">Observed physical state becomes an economic decision.</p>
       <div class="chain" id="chain"></div>
       <div class="e3"><svg class="mk"><use href="#g-mark"/></svg><span class="wm">Priora</span><span class="ln"></span><span class="tg">Infrastructure for activity-level physical risk</span></div>
       <div class="e4"><p>Conceptual future-state demonstration. Not current insurance functionality.<br>Nordhavn Bioprocessing, all carriers, people and prices are fictional.</p>
@@ -796,17 +857,35 @@ li.bad .ck .c-x{opacity:1}
                      programme accepted the risk. It becomes a DECISION.
    DECISION          The risk owner chooses: change the activity (DKK 0),
                      retain the risk (explicit and owned) or transfer it.
-   OFFER             A carrier's own response to the risk packet. Carriers set
-                     appetite and price; Priora supplies activity-level state.
-   RECORD            Every important event is appended to an ordered,
-                     fingerprinted timeline that is never rewritten in a run.
+   CARRIER APPETITE  Each carrier's own rule, applied to the capacity request
+                     (observed state only, see capacityRequest()). Priora never
+                     prices: a carrier either declines or quotes its own terms.
+   OFFER             A carrier's response, kept in S.offers (pending, quoted,
+                     declined). The owner may select one; nothing is ranked.
+   RECORD            Every important event is appended to an ordered timeline
+                     that is never rewritten in a run. Decisions carry a
+                     fingerprint.
+
+   The story, stage by stage (SCRIPT and CAPTIONS drive it)
+     intro      the site and its annual programme envelope are drawn
+     operating  routine activity flows in; nearly all of it stays inside
+     hero       one activity starts and its conditions are verified
+     deviation  a condition changes; the node leaves the envelope (key moment)
+     decision   change / retain / transfer, each with its own sub-stages
+     portfolio  the site keeps operating: the whole end state in one picture
+     end        the thesis: RECORD > TRUST > DECISION > PRICE > CAPACITY
 
    Presentation rules this file keeps
-     - The accent (#C4441C) marks only the deviated activity: its node, tether,
-       "outside" label, exposure slice and the DEVIATION cell of the economics.
-     - No price appears before the market answers (economics TRANSFER cell).
+     - The accent (#C4441C) marks only the open deviation: its node, tether,
+       "outside" label, exposure slice, the "open" count and the DEVIATION cell.
+     - Resolved states never reuse the deviation's look: retained is dotted and
+       owned, covered is solid and double, changed returns inside.
+     - No price appears before the market answers (economics TRANSFER cell),
+       and no offer is highlighted until the presenter points at it.
      - Outcomes start when they were decided: cover runs 14:48 to 18:00.
      - Labels never sit under cards or off the canvas (collision pass in frame()).
+     - Above 1440x900 the whole app scales uniformly (--k, see measure()); all
+       layout maths is in unscaled canvas px (relRect() converts DOM boxes).
 
    Code layout
      1. DEMO DATA        every value shown on screen (change demo values here)
@@ -864,45 +943,62 @@ const DEMO = {
   // The hero activity. Any activity with conditions could be swapped in here.
   hero: {
     id: 'act-hotwork-r03', name: 'Hot work', zone: 'roof', location: 'Roof 03', loc: [67, 22, 12],
-    start: '14:18', window: '14:18–18:00', operator: 'Contractor · certified operator', ref: 'ACT-1418-R03',
+    start: '14:18', window: '14:18–18:00', operator: 'Welding contractor · certified operator', ref: 'ACT-1418-R03',
     conditions: [
-      { id: 'operator', label: 'Certified operator' },
-      { id: 'extinguisher', label: 'Extinguishing equipment' },
-      { id: 'firewatch', label: 'Fire watch' },
+      // packet: how a condition that holds is reported to the market (optional)
+      { id: 'operator', label: 'Certified operator', packet: ['Operator', 'Certified'] },
+      { id: 'extinguisher', label: 'Extinguishing equipment', packet: ['Extinguishing equipment', 'Confirmed'] },
+      { id: 'firewatch', label: 'Fire watch', packet: ['Fire watch', 'Active'] },
       { id: 'combustibles', label: 'Combustibles cleared' },
+      // dependsOn: a site condition (S.conditions) this activity relies on
       { id: 'sprinkler', label: 'Automatic sprinkler protection', dependsOn: 'sprinkler-zone-3' },
     ],
+    // What changes, and what it means for the accepted risk.
     deviation: {
-      cause: 'Sprinkler Zone 3 taken offline', at: '14:42', until: '18:00', duration: '3h 18m',
+      cause: 'Sprinkler Zone 3 taken offline', protection: 'Sprinkler Zone 3 offline', affects: 'Roof 03 · Production Hall 2',
+      at: '14:42', until: '18:00', duration: '3h 18m',
+      summary: 'Roof hot work is continuing while sprinkler protection in the affected zone is unavailable.',
       exposure: 'Roof hot work without automatic sprinkler protection', assetExposure: 'Production Hall 2',
     },
   },
 
-  // Change path controls. Restore is the guided, recommended option.
+  // Change path controls. Every control changes the physical state; Priora then
+  // recalculates the risk state. 'guided' marks the one the scripted demo uses.
+  // resolved: the sentence shown once the risk is back inside. continues: false
+  // when the control stops the work instead of letting it continue.
   changeOptions: [
-    { id: 'move-tomorrow', title: 'Move hot work to tomorrow', sub: 'Stop now and resume at 07:00 with Zone 3 active.', effect: 'Paused · inside',
-      steps: ['Stopping hot work on Roof 03...', 'State recalculated...'], rec: 'Hot work stopped · rescheduled to tomorrow 07:00', note: 'Rescheduled to tomorrow 07:00' },
-    { id: 'restore-sprinkler', recommended: true, title: 'Restore sprinkler protection', sub: 'Reopen the Zone 3 valve. Protection back within minutes.', effect: 'Inside · DKK 0',
-      steps: ['Protection restoring...', 'State recalculated...'], rec: 'Sprinkler Zone 3 restored', note: 'Sprinkler Zone 3 restored', restores: true },
+    { id: 'move-tomorrow', title: 'Move hot work to tomorrow', sub: 'Stop now and resume at 07:00 with Zone 3 active.', effect: 'Stopped · inside',
+      steps: ['Stopping hot work on Roof 03...', 'State recalculated...'], final: "Removed from today's risk state", continues: false,
+      rec: 'Hot work stopped · rescheduled to tomorrow 07:00', note: 'Rescheduled to tomorrow 07:00', plate: 'Decision made · rescheduled',
+      resolved: 'Hot work is stopped and rescheduled to tomorrow 07:00, with Zone 3 active. No incremental risk remains today.',
+      conditions: 'Work stopped · resumes 07:00 with Zone 3 active' },
+    { id: 'restore-sprinkler', guided: true, title: 'Restore sprinkler protection', sub: 'Reopen the Zone 3 valve. Protection back within minutes.', effect: 'Inside · DKK 0',
+      steps: ['Protection restoring...', 'State recalculated...'], rec: 'Sprinkler Zone 3 restored', note: 'Sprinkler Zone 3 restored', restores: true,
+      resolved: 'Sprinkler Zone 3 is restored. The incremental risk disappears back into the annual programme and hot work continues.',
+      conditions: '5 of 5 verified · Sprinkler Zone 3 restored' },
     { id: 'temp-suppression', title: 'Add temporary suppression', sub: 'Mobile suppression unit and a second fire watch.', effect: 'Inside · DKK 0',
-      steps: ['Temporary suppression deployed...', 'State recalculated...'], rec: 'Temporary suppression added · Roof 03', note: 'Temporary suppression added' },
+      steps: ['Temporary suppression deployed...', 'State recalculated...'], rec: 'Temporary suppression added · Roof 03', note: 'Temporary suppression added',
+      resolved: 'Temporary suppression is in place on Roof 03. The incremental risk disappears back into the annual programme and hot work continues.',
+      conditions: '4 of 5 · sprinkler offline, temporary suppression in place' },
     { id: 'move-zone', title: 'Move work outside affected zone', sub: 'Relocate to Roof 01, covered by Sprinkler Zone 1.', effect: 'Inside · DKK 0',
-      steps: ['Relocating work to Roof 01...', 'State recalculated...'], rec: 'Hot work relocated · Roof 01', note: 'Relocated to Roof 01', relocate: { loc: [41, 20, 12], location: 'Roof 01' } },
+      steps: ['Relocating work to Roof 01...', 'State recalculated...'], rec: 'Hot work relocated · Roof 01', note: 'Relocated to Roof 01', relocate: { loc: [41, 20, 12], location: 'Roof 01' },
+      resolved: 'Hot work moves to Roof 01, covered by Sprinkler Zone 1. The incremental risk disappears back into the annual programme and hot work continues.',
+      conditions: '5 of 5 verified · Roof 01, Sprinkler Zone 1' },
   ],
 
-  // Risk packet: the observed activity-level state sent to the market.
-  packet: [
-    ['Activity', 'Hot work'], ['Location', 'Roof 03'], ['Duration', '3h 18m'],
-    ['Current protection', 'Sprinkler Zone 3 offline', 'sig'], ['Operator', 'Certified'], ['Fire watch', 'Active'],
-    ['Extinguishing equipment', 'Confirmed'], ['Asset exposure', 'Production Hall 2'], ['Existing programme', 'Outside accepted conditions', 'sig'],
-  ],
-
-  // Carriers (fictional). Each defines its own appetite and terms.
+  // Carriers (fictional names, illustrative prices). Each applies its OWN appetite
+  // rule to the capacity request (observed state, no price; see capacityRequest())
+  // and, if it wants the risk, quotes its own terms for the requested window.
+  // Priora never prices or ranks. delay: ms until the carrier answers.
   carriers: [
-    { id: 'northstar', name: 'Northstar Commercial', role: 'Existing carrier', declined: true, reason: 'Outside appetite', delay: 700 },
-    { id: 'atlas', name: 'Atlas Specialty', role: 'Temporary activity cover', price: 980, until: '18:00', deductible: 100000, capacity: 'DKK 25m', delay: 1500 },
-    { id: 'boreal', name: 'Boreal Risk', role: 'Temporary activity cover', price: 1240, until: '18:00', deductible: 50000, capacity: 'DKK 25m', delay: 2250 },
-    { id: 'helvetic', name: 'Helvetic Industrial', role: 'Temporary activity cover', price: 1680, until: '18:00', deductible: 25000, capacity: 'DKK 25m', delay: 3050 },
+    { id: 'northstar', name: 'Northstar Commercial', role: 'Existing carrier', delay: 700,
+      appetite: req => req.impaired.length === 0, decline: 'Outside appetite' },
+    { id: 'boreal', name: 'Boreal Risk', role: 'Temporary activity cover', delay: 1500,
+      appetite: req => req.hours <= 12, price: 1240, deductible: 50000, capacity: 'DKK 25m' },
+    { id: 'atlas', name: 'Atlas Specialty', role: 'Temporary activity cover', delay: 2250,
+      appetite: req => req.hours <= 8, price: 980, deductible: 100000, capacity: 'DKK 25m' },
+    { id: 'helvetic', name: 'Helvetic Industrial', role: 'Temporary activity cover', delay: 3050,
+      appetite: req => req.hours <= 24, price: 1680, deductible: 25000, capacity: 'DKK 25m' },
   ],
 
   // Routine activities during the working day: [time, id, name, zone, location, [x,y,z], persistent]
@@ -934,16 +1030,39 @@ const DEMO = {
   portfolio: [
     { t: '14:56', id: 'q-01', name: 'Pump inspection', zone: 'utilities', location: 'Pump house P1', loc: [9, 24, 4.5], outcome: 'inside' },
     { t: '15:08', id: 'q-02', name: 'Electrical cabinet opened', zone: 'laboratory', location: 'Panel L3', loc: [26, 52, 5.5], outcome: 'inside' },
-    { t: '15:12', id: 'd-01', name: 'Crane lift', zone: 'loading', location: 'Loading Area', loc: [92, 45, 0], outcome: 'changed', note: 'Rescheduled outside wind limit', rec: 'Crane lift rescheduled outside wind limit' },
+    { t: '15:12', id: 'd-01', name: 'Crane lift', zone: 'loading', location: 'Loading Area', loc: [92, 45, 0], outcome: 'changed', note: 'Rescheduled to a calmer wind window', rec: 'Crane lift rescheduled · wind back within limit' },
     { t: '15:20', id: 'q-03', name: 'Filter replacement', zone: 'production', location: 'Line 3', loc: [44, 36, 7], outcome: 'inside' },
     { t: '15:34', id: 'd-02', name: 'Grinding', zone: 'warehouse', location: 'Aisle F', loc: [45, 72, 5], outcome: 'changed', note: 'Moved outside Warehouse rack zone', rec: 'Grinding moved outside Warehouse rack zone' },
-    { t: '15:41', id: 'd-03', name: 'Gas detector bypass', zone: 'laboratory', location: 'Lab 1', loc: [7, 50, 6], outcome: 'retained', note: 'Retained until 17:30', owner: 'Mikkel Sørensen · Laboratory Manager', rec: 'Gas detector bypass retained · Laboratory' },
+    { t: '15:41', id: 'd-03', name: 'Freezer bank on temporary power', zone: 'laboratory', location: 'Lab 1', loc: [7, 50, 6], outcome: 'retained', note: 'Retained until 17:30 · sample stock exposed', owner: 'Mikkel Sørensen · Laboratory Manager', rec: 'Freezer bank on temporary power · risk retained · Laboratory', when: p => p !== 'retain' },
+    { t: '15:41', id: 'd-06', name: 'Freezer bank on temporary power', zone: 'laboratory', location: 'Lab 1', loc: [7, 50, 6], outcome: 'changed', note: 'Backup generator connected', rec: 'Freezer bank on temporary power · backup generator connected', when: p => p === 'retain' },
     { t: '15:47', id: 'q-04', name: 'Forklift maintenance', zone: 'loading', location: 'Bay 4', loc: [101, 58, 0], outcome: 'inside' },
     { t: '16:02', id: 'q-05', name: 'Roof inspection', zone: 'roof', location: 'Roof 01', loc: [38, 13, 12], outcome: 'inside' },
     { t: '16:05', id: 'd-04', name: 'Crane lift over Production Hall 2', zone: 'production2', location: 'Production Hall 2', loc: [86, 36, 0], outcome: 'transferred', note: '2h cover · Boreal Risk · DKK 640', carrier: 'Boreal Risk', price: 640, until: '18:05', rec: 'Crane lift over Production Hall 2 · Boreal Risk DKK 640 bound', when: p => p !== 'transfer' },
-    { t: '16:05', id: 'd-05', name: 'Torch-on roofing', zone: 'roof', location: 'Roof 02', loc: [52, 27, 12], outcome: 'changed', note: 'Switched to cold-applied membrane', rec: 'Torch-on roofing switched to cold-applied membrane', when: p => p === 'transfer' },
+    { t: '16:05', id: 'd-05', name: 'Roof torch work', zone: 'roof', location: 'Roof 02', loc: [52, 27, 12], outcome: 'changed', note: 'Switched to a flame-free method', rec: 'Roof torch work switched to a flame-free method', when: p => p === 'transfer' },
   ],
 };
+
+/* Risk packet: the observed activity-level state sent to the market, built from
+   the hero and its conditions, so a different hero sends a different packet.
+   Each field is [label, value, 'sig' when it is what makes this a deviation]. */
+DEMO.packet = (function () {
+  const h = DEMO.hero, d = h.deviation;
+  return [
+    ['Activity', h.name], ['Location', h.location], ['Duration', d.duration],
+    ['Current protection', d.protection, 'sig'],
+    ...h.conditions.filter(c => c.packet).map(c => c.packet),
+    ['Asset exposure', d.assetExposure], ['Existing programme', 'Outside accepted conditions', 'sig'],
+  ];
+})();
+/* The request each carrier's appetite rule is applied to: observed state only. */
+function capacityRequest() {
+  const h = DEMO.hero, d = h.deviation;
+  return {
+    activity: h.name, location: h.location, from: d.at, until: d.until,
+    hours: (toMin(d.until) - toMin(d.at)) / 60,
+    impaired: h.conditions.filter(c => c.dependsOn).map(c => c.id), // protections unavailable
+  };
+}
 
 /* Narrative captions: chapter number + one sentence per stage (9 chapters). */
 const CHAPTERS = '09';
@@ -951,24 +1070,26 @@ const CAPTIONS = {
   intro: ['01', 'A site already has insurance.', 'Nordhavn Bioprocessing operates inside an annual property and business interruption programme: the envelope drawn around the site.'],
   operating: ['02', 'Physical work changes the real risk, all day.', 'Every activity is observed as it happens and checked against the conditions under which the risk was accepted.'],
   operating2: ['03', 'Most activity stays inside the accepted envelope.', 'Nothing special happens. Ordinary work simply moves through the system.'],
-  hero: ['04', 'Hot work begins on Roof 03.', 'Priora checks the conditions this activity depends on. All five hold, so it sits inside the envelope.'],
-  deviation: ['05', 'Something changes.', '14:42 · Sprinkler Zone 3 is taken offline while hot work continues above it. The activity leaves the conditions of the annual programme.'],
-  decision: ['06', 'The risk becomes a decision.', 'Change the activity, retain the risk, or transfer it. The risk owner decides, not the system.'],
+  hero: ['04', 'Hot work begins on Roof 03.', 'Welding on the roof. Priora checks the five conditions this activity depends on. All hold, so it sits inside the envelope.'],
+  deviation: ['05', 'Something changes.', '14:42 · Sprinkler Zone 3 is taken offline while hot work continues in the zone.'],
+  // shown at the instant the node crosses the envelope (ACT.heroCrossed)
+  'deviation-out': ['05', 'Outside the accepted envelope.', 'The annual programme accepted this work with sprinklers active. Without them, the extra risk is unpriced, and it needs an owner.'],
+  decision: ['06', 'The risk becomes a decision.', 'Observed physical state has become an economic choice: change the activity, retain the risk, or transfer it. The risk owner decides.'],
   'change-options': ['06', 'Change the activity.', 'Often the simplest outcome: modify the work until it is back inside the envelope.'],
-  'change-resolving': ['06', 'Change the activity.', 'The physical state is restored, then the risk state is recalculated.'],
-  'change-resolved': ['07', 'The decision is recorded.', 'The incremental risk disappears back into the annual programme at DKK 0. The activity continues.'],
+  'change-resolving': ['06', 'Change the activity.', 'The physical state changes first, then the risk state is recalculated.'],
+  'change-resolved': () => ['07', 'The decision is recorded.', 'The incremental risk disappears back into the annual programme at DKK 0.' + (changeOption().continues === false ? ' The work resumes tomorrow.' : ' The activity continues.')],
   'retain-confirm': ['06', 'Retain the risk.', 'A legitimate economic choice, made explicitly rather than by accident.'],
   retained: ['07', 'The decision is recorded.', 'Nordhavn knowingly carries the incremental exposure until 18:00. What, who, when and for how long are preserved.'],
-  'transfer-packaging': ['06', 'Transfer the risk.', 'Priora packages the observed activity-level state and asks the market. Carriers apply their own appetite and pricing.'],
+  'transfer-packaging': ['06', 'Requesting capacity.', 'Priora packages what it observed about this one activity and asks the market. Carriers apply their own appetite and pricing.'],
   'transfer-offers': ['06', 'The market responds.', 'Four carriers, their own terms. One declines as outside appetite. Priora does not price or rank the offers.'],
-  'transfer-bound': ['07', 'The decision is recorded.', 'Temporary capacity covers this slice of risk from 14:48 until 18:00, alongside the annual programme, not instead of it.'],
+  'transfer-bound': ['07', 'The decision is recorded.', 'Temporary capacity covers this slice of risk from 14:48 until 18:00, alongside the annual programme, not instead of it. Hot work continues.'],
   portfolio: ['08', 'The site keeps operating.', 'Hundreds of physical actions a day. Most disappear into the annual programme. A few become explicit decisions.'],
   end: ['09', 'From record to capacity.', ''],
 };
 /* The operational stack the story moves through: PHYSICAL > STATE > DECISION > PRICE.
    Each caption lights the layers reached so far; the current one is underlined. */
-const LAYERS = ['Physical', 'State', 'Decision', 'Price'];
-const LAYER_AT = { intro: 1, operating: 2, operating2: 2, hero: 2, deviation: 2, decision: 3, 'change-options': 3, 'change-resolving': 3, 'change-resolved': 3, 'retain-confirm': 3, retained: 3, 'transfer-packaging': 3, 'transfer-offers': 4, 'transfer-bound': 4, portfolio: 4, end: 4 };
+const LAYERS = ['Record', 'Trust', 'Decision', 'Price', 'Capacity'];
+const LAYER_AT = { intro: 0, operating: 1, operating2: 1, hero: 2, deviation: 2, 'deviation-out': 2, decision: 3, 'change-options': 3, 'change-resolving': 3, 'change-resolved': 3, 'retain-confirm': 3, retained: 3, 'transfer-packaging': 3, 'transfer-offers': 4, 'transfer-bound': 5, portfolio: 5, end: 5 };
 
 const STATE_LABEL = { checking: 'Checking state', inside: 'Inside envelope', outside: 'Outside envelope', changed: 'Changed · inside', retained: 'Risk retained', transferred: 'Temporary cover', system: 'System', restored: 'System' };
 const STATE_GLYPH = { checking: 'g-checking', inside: 'g-inside', outside: 'g-outside', changed: 'g-changed', retained: 'g-retained', transferred: 'g-cover', system: 'g-system', restored: 'g-restored' };
@@ -1130,6 +1251,8 @@ function buildSite() {
   const zr = poly([[60.6, 8.6, H.h], [73.4, 8.6, H.h], [73.4, 35.4, H.h], [60.6, 35.4, H.h]]);
   const zp = poly([[74.6, 8.6, H2.h], [93.4, 8.6, H2.h], [93.4, 29.4, H2.h], [74.6, 29.4, H2.h]]);
   out.push(`<g id="sz3"><path class="zf" d="${zr}${zp}"/><path class="zx" d="${zr}${zp}"/><path class="zo" d="${zr}${zp}"/>${heads}${crosses}</g>`);
+  // Trace of absorbed activity: one faint mark per routine activity that stayed inside (syncTicks)
+  out.push('<path id="ticks" d=""/>');
   return out.join('');
 }
 
@@ -1149,10 +1272,12 @@ function freshState(speed) {
     offers: [], selectedOffer: null, offersDone: false, summary: null,
     timeline: [], stream: [],
     counters: { observed: 0, inside: 0, outside: 0, decisions: 0, changed: 0, retained: 0, transferred: 0, premium: 0 },
-    economics: 'none', canRewind: false, ack: false, recSeq: 401, lastHash: 0x5a17c0de,
+    economics: 'none', canRewind: false, observedDerived: false, recSeq: 401, lastHash: 0x5a17c0de,
   };
 }
 const HERO = () => S.activities[DEMO.hero.id];
+/* The change control the owner picked (empty object before a choice). */
+const changeOption = () => (S.decision && DEMO.changeOptions.find(x => x.id === S.decision.option)) || {};
 
 /* ==========================================================================
    4. SCHEDULER · a simulated clock. Every timer and JS tween runs on it, so
@@ -1190,7 +1315,9 @@ const Sched = (function () {
     get now() { return simT; },
     get speed() { return speed; },
     get paused() { return paused; },
-    setSpeed(m) { speed = clamp(Number(m) || 1, 0.05, 200); },
+    get busy() { return tweens.length > 0; },
+    // multiplier 0.05 to 200; anything that is not a finite number keeps the current speed
+    setSpeed(m) { const v = Number(m); speed = clamp(Number.isFinite(v) && v > 0 ? v : speed, 0.05, 200); },
     pause(p) { paused = !!p; },
     after(ms, fn, group) { const t = { at: simT + Math.max(0, ms), fn, group: group || 'main', id: seq++ }; timers.push(t); return t; },
     cancel(group) { timers = timers.filter(t => t.group !== group); },
@@ -1228,7 +1355,7 @@ const Sched = (function () {
    5. RENDERERS
    ========================================================================== */
 const app = $('#app'), canvas = $('#canvas'), siteSvg = $('#site'), fx = $('#fx');
-const UI = { W: 1000, H: 700, cam: { s: 4, tx: 0, ty: 0 }, view: 'full', nodes: {}, nlabs: {}, lines: [], detailId: null, carrierLines: null, boundLines: null, tokens: [] };
+const UI = { k: 1, W: 1000, H: 700, cam: { s: 4, tx: 0, ty: 0 }, view: 'full', nodes: {}, nlabs: {}, lines: [], detailId: null, carrierLines: null, boundLines: null, tokens: [] };
 
 /* ----- camera: a world (iso) box mapped into a screen region ----- */
 function cssPx(name, fallback) { const v = parseFloat(getComputedStyle(document.documentElement).getPropertyValue(name)); return isNaN(v) ? fallback : v; }
@@ -1254,9 +1381,14 @@ function computeView(name) {
     const left = gut + (W < 1100 ? 290 : 320);
     reg = { x: left, y: 120, w: W - left - 30, h: H - 120 - E - 36 };
   } else if (name === 'deviation') {
-    box = around([40, 52, 20, 36]);
+    // Pull back to the whole annual programme envelope, so the node is seen
+    // leaving the complete envelope, not just crossing a line.
+    const T2 = heroExitIso(40);
+    const x0 = Math.min(ENV.box.x, T2[0] - 20), x1 = Math.max(ENV.box.x + ENV.box.w, T2[0] + 20);
+    const y0 = Math.min(ENV.box.y, T2[1] - 20), y1 = ENV.box.y + ENV.box.h;
+    box = { x: x0, y: y0, w: x1 - x0, h: y1 - y0 };
     const left = gut + (W < 1100 ? 290 : 320);
-    reg = { x: left, y: 110, w: W - left - 24, h: H - 110 - E - 30 };
+    reg = { x: left, y: 90, w: W - left - 20, h: H - 90 - E - 20 };
   } else if (name === 'decision') {
     // Pull back to the whole site: the full annual programme envelope with one
     // activity sitting outside it, framed in the space left of the decision sheet.
@@ -1288,11 +1420,12 @@ function cameraTo(name, dur) {
   const W = UI.W, H = UI.H;
   const c0 = [(W / 2 - from.tx) / from.s, (H / 2 - from.ty) / from.s];
   const c1 = [(W / 2 - to.tx) / to.s, (H / 2 - to.ty) / to.s];
+  app.classList.add('cam-moving'); // floating labels fade out while the frame moves (see CSS)
   Sched.tween({ dur: dur == null ? 1800 : dur, tag: 'camera', ease: EASE.inOut, update: v => {
     const s = Math.exp(lerp(Math.log(from.s), Math.log(to.s), v));
     const cx = lerp(c0[0], c1[0], v), cy = lerp(c0[1], c1[1], v);
     UI.cam = { s, tx: W / 2 - cx * s, ty: H / 2 - cy * s };
-  } });
+  }, done: () => app.classList.remove('cam-moving') });
 }
 const w2s = p => [p[0] * UI.cam.s + UI.cam.tx, p[1] * UI.cam.s + UI.cam.ty];
 function norm(v) { const l = Math.hypot(v[0], v[1]) || 1; return [v[0] / l, v[1] / l]; }
@@ -1312,11 +1445,15 @@ function rayHit(pts, A, d) {
 
 /* ----- resize ----- */
 function measure() {
+  // Presentation scale: above 1440x900 the whole app scales up uniformly, so a large
+  // screen shows the same composition instead of a small interface in empty space.
+  UI.k = Math.max(1, Math.min(innerWidth / 1440, innerHeight / 900, 2.4));
+  document.documentElement.style.setProperty('--k', UI.k.toFixed(4));
   UI.W = canvas.clientWidth; UI.H = canvas.clientHeight; econPx = cssPx('--econ', 92);
   fx.setAttribute('viewBox', `0 0 ${UI.W} ${UI.H}`);
   siteSvg.setAttribute('viewBox', `0 0 ${UI.W} ${UI.H}`);
 }
-function onResize() { measure(); Sched.kill('camera'); UI.cam = computeView(UI.view); placeTransfer(); snapRecord(); }
+function onResize() { app.classList.remove('cam-moving'); measure(); fitHeader(); Sched.kill('camera'); UI.cam = computeView(UI.view); placeTransfer(); snapRecord(); }
 
 /* ----- zone labels (screen space, constant size) ----- */
 function buildZoneLabels() {
@@ -1342,7 +1479,7 @@ function nodeMarkup() {
     `<g class="own"><circle class="ob" r="14"/><path class="oh" d="${OWN_HATCH}"/><circle class="op" r="5.4"/></g>` +
     '<g class="cap"><rect class="c1" x="-12" y="-10" width="40" height="20" rx="10"/><rect class="c2" x="-9" y="-7" width="34" height="14" rx="7"/><circle class="ck" cx="15.5" cy="0" r="3.6"/><path class="ck" d="M15.5 -2V0H17.2"/></g>' +
     '<circle class="ring" r="6.6"/><circle class="chk" r="9"/>' +
-    '<g class="out"><circle r="8.5"/><path d="M0 -11.5V-16M0 11.5V16M-11.5 0H-16M11.5 0H16"/></g>' +
+    '<g class="out"><circle r="8.5"/></g>' +
     '<circle class="dot" r="3.1"/><rect class="sq" x="-3.4" y="-3.4" width="6.8" height="6.8"/>';
 }
 function ensureNode(a) {
@@ -1365,8 +1502,13 @@ function syncNode(a) {
   ['checking', 'inside', 'outside', 'changed', 'retained', 'transferred'].forEach(s => n.g.classList.toggle('st-' + s, a.state === s));
   n.g.classList.toggle('bg', a.kind !== 'hero');
   n.g.classList.toggle('hero', a.kind === 'hero');
-  n.teth.classList.toggle('sig', a.state === 'outside');
-  n.anc.classList.toggle('sig', a.state === 'outside');
+  // tether language: outside = dashed signal, retained = dotted ink (owned), transferred = solid (covered)
+  [n.teth, n.anc].forEach(el => {
+    el.classList.toggle('sig', a.state === 'outside');
+    el.classList.toggle('ret', a.state === 'retained');
+    el.classList.toggle('cov', a.state === 'transferred');
+  });
+  if (a.kind === 'hero') app.classList.toggle('hero-out', a.state === 'outside');
 }
 function removeNode(id) {
   const n = UI.nodes[id];
@@ -1385,13 +1527,18 @@ function overlap(a, b, pad) {
 function hitsAny(r, list, pad) { return list.some(o => overlap(r, o, pad) > 0); }
 function inFrame(r) { return r.x >= 6 && r.y >= 6 && r.x + r.w <= UI.W - 6 && r.y + r.h <= UI.H - econPx - 4; }
 let econPx = 92; // height of the economic logic strip, refreshed in measure()
+/* An element's box in canvas layout px (getBoundingClientRect is in screen px, scaled by --k). */
+function relRect(el, ref) {
+  const r = el.getBoundingClientRect(), c = (ref || canvas).getBoundingClientRect(), k = UI.k;
+  return { x: (r.left - c.left) / k, y: (r.top - c.top) / k, w: r.width / k, h: r.height / k };
+}
 function overlayRects() {
-  const out = [], cr = canvas.getBoundingClientRect();
+  const out = [];
   const add = el => {
     if (!el) return;
-    const r = el.getBoundingClientRect();
-    if (r.width < 2 || r.height < 2) return;
-    out.push({ x: r.left - cr.left, y: r.top - cr.top, w: r.width, h: r.height });
+    const r = relRect(el);
+    if (r.w < 2 || r.h < 2) return;
+    out.push(r);
   };
   const has = c => app.classList.contains(c);
   if (!has('no-cap')) { [$('#caption .cn'), $('#cap-t'), $('#cap-s')].forEach(e => { const n = out.length; add(e); if (out[n]) out[n].cap = true; }); }
@@ -1407,6 +1554,8 @@ function overlayRects() {
 
 /* ----- per-frame layout of everything that lives in screen space ----- */
 function frame() {
+  const now = performance.now();
+  UI.dt = Math.min(120, now - (UI.lastT || now)); UI.lastT = now;
   const cam = UI.cam, s = cam.s;
   $('#cam').setAttribute('transform', `matrix(${s.toFixed(5)} 0 0 ${s.toFixed(5)} ${cam.tx.toFixed(2)} ${cam.ty.toFixed(2)})`);
   siteSvg.style.setProperty('--sw', (1 / s).toFixed(5));
@@ -1449,13 +1598,13 @@ function frame() {
       }
     } else { n.teth.style.display = 'none'; n.anc.style.display = 'none'; n.dir = null; }
     n.pos = P;
-    const kt = a.kind === 'hero' ? (FOCUS.has(S.stage) ? 1.5 : 1.2) : 1;
-    n.k += (kt - n.k) * 0.12;
+    const kt = a.kind === 'hero' ? (a.state === 'outside' ? 1.8 : FOCUS.has(S.stage) ? 1.5 : 1.2) : 1;
+    n.k += (kt - n.k) * (1 - Math.exp(-UI.dt / 140));
     n.g.setAttribute('transform', `translate(${P[0].toFixed(1)} ${P[1].toFixed(1)}) scale(${n.k.toFixed(3)})`);
   }
 
   // Envelope deformation: the membrane follows the hero node out, then pinches off.
-  const pinch = 44, rN = 11;
+  const pinch = 58, rN = 11;
   let bulge = 0, notch = 0, ring = 0;
   if (def) {
     const u = def.u, relax = Math.max(8, (def.uT - pinch) * 0.9);
@@ -1497,10 +1646,10 @@ function frame() {
     // default: along the front-left edge. In the decision overview: the first stretch of
     // edge where the whole label is in frame and clear of the readout card.
     let i = Math.round(N * 0.24), labHidden = false;
-    const labT = UI.view === 'decision' ? 'ANNUAL PROGRAMME ENVELOPE' : 'ANNUAL PROGRAMME ENVELOPE · PROPERTY + BI';
+    const labT = UI.view === 'decision' ? 'ANNUAL PROGRAMME ENVELOPE' : 'ANNUAL PROGRAMME · ACCEPTED RISK ENVELOPE';
     const tEl = $('#env-lab-t');
     if (tEl.textContent !== labT) tEl.textContent = labT;
-    const half = labT.length * 3.9;
+    const half = labT.length * 4.3;
     if (UI.view === 'decision') {
       const fr = [0.64, 0.6, 0.68, 0.56, 0.24, 0.3, 0.18].find(f => {
         const k = Math.round(N * f), a = ptsB[k], b2 = ptsB[(k + 6) % N], d = norm([b2[0] - a[0], b2[1] - a[1]]);
@@ -1510,7 +1659,8 @@ function frame() {
       });
       if (fr != null) i = Math.round(N * fr);
     }
-    if (hero && FOCUS.has(S.stage) && UI.view !== 'decision') {
+    // zoomed views: walk along the edge to a clear spot (the whole-envelope views keep the front-left edge)
+    if (hero && FOCUS.has(S.stage) && UI.view !== 'decision' && UI.view !== 'deviation') {
       const A = w2s(iso(hero.loc[0], hero.loc[1], hero.loc[2]));
       const E = def ? def.E : rayHit(base, A, norm([A[0] - C[0], A[1] - C[1]]));
       if (E) {
@@ -1525,7 +1675,9 @@ function frame() {
           return inFrame(r) && !hitsAny(r, cardRects, 2);
         };
         const ks = [at(190), at(250), at(210, 1), at(290, 1), at(320), at(130)];
-        i = ks.find(clear);
+        const farFromExit = k => Math.hypot(base[k][0] - E[0], base[k][1] - E[1]) > 150;
+        i = ks.find(k => clear(k) && farFromExit(k));
+        if (i == null) i = ks.find(clear);
         if (i == null) { i = ks[0]; labHidden = true; } // nowhere clear: hide rather than print it under a card
       }
     }
@@ -1629,30 +1781,45 @@ function frame() {
   }
   // Zone labels hide (fade) when a card or plate covers them or they would be clipped.
   const blockers = obs.concat(placed);
-  { const r = $('#env-lab-t').getBoundingClientRect(), cr = canvas.getBoundingClientRect(); if (r.width > 2) blockers.push({ x: r.left - cr.left, y: r.top - cr.top, w: r.width, h: r.height }); }
+  { const r = relRect($('#env-lab-t')); if (r.w > 2) blockers.push(r); }
   const shown = [];
   zr.forEach(z => {
     const hid = !inFrame(z.r) || hitsAny(z.r, blockers, 4) || hitsAny(z.r, shown, 6);
     z.el.classList.toggle('hid', hid);
     if (!hid) shown.push(z.r);
   });
+  if (app.classList.contains('plink-on')) placeProgLink(ptsA);
   // Transfer lines
   drawTransferLines();
   // Detail card follows its node
   if (UI.detailId) placeDetail();
 }
 
+/* Intro link from the programme block in the header down to the top of the envelope. */
+function placeProgLink(pts) {
+  const ph = relRect($('#proghead'), app), cr = relRect(canvas, app);
+  let top = pts[0];
+  pts.forEach(p => { if (p[1] < top[1]) top = p; });
+  const ex = cr.x + top[0], ey = cr.y + top[1];
+  // drop down clear of the chapter caption and breadcrumb, then angle in to the envelope
+  const cn = relRect($('#caption .cn'), app), capRight = cn.w > 2 ? cn.x + cn.w + 28 : ex;
+  const sx = clamp(Math.max(ex, capRight), ph.x + 24, ph.x + ph.w - 24), sy = ph.y + ph.h;
+  const my = sy + (ey - sy) * 0.55;
+  $('#plink-p').setAttribute('d', `M${sx.toFixed(1)} ${sy.toFixed(1)}V${my.toFixed(1)}L${ex.toFixed(1)} ${(ey - 3).toFixed(1)}`);
+  $('#plink-c').setAttribute('cx', ex.toFixed(1)); $('#plink-c').setAttribute('cy', ey.toFixed(1));
+}
+
 function placeReadout(P) {
   const ro = $('#readout');
-  if (!app.classList.contains('ro-on')) return;
+  if (!app.classList.contains('ro-on')) { ro._pos = null; ro._pk = null; return; }
   const w = ro.offsetWidth || 262, h = ro.offsetHeight || 110, st = S.stage;
   let limit = UI.W - 16;
   if (app.classList.contains('sheet-on')) limit = UI.W - cssPx('--sheetW', 540) - 44;
   if (st.indexOf('transfer') === 0) limit = transferLayout().pX - 24;
   const bottom = UI.H - econPx - 16;
   // keep clear of the chapter caption and the conditions card
-  const cr = canvas.getBoundingClientRect(), avoid = [];
-  const addR = el => { const r = el.getBoundingClientRect(); if (r.width > 2) avoid.push({ x: r.left - cr.left, y: r.top - cr.top, w: r.width, h: r.height }); };
+  const avoid = [];
+  const addR = el => { const r = relRect(el); if (r.w > 2) avoid.push(r); };
   if (!app.classList.contains('no-cap')) ['#caption .cn', '#cap-t', '#cap-s'].forEach(q => addR($(q)));
   if (app.classList.contains('card-on')) addR($('#herocard'));
   const cand = {
@@ -1662,25 +1829,35 @@ function placeReadout(P) {
     above: [P[0] - w * 0.55, P[1] - h - 34],
     under: [P[0] - w * 0.55, P[1] + 36],
   };
-  const order = (st === 'hero' || st === 'deviation') ? ['right', 'below', 'left', 'above'] : (FOCUS.has(st) ? ['above', 'left', 'under', 'right'] : ['right', 'left', 'above']);
-  let pick = null;
-  for (const k of order) {
+  const order = st === 'hero' ? ['right', 'below', 'left', 'above'] : st === 'deviation' ? ['right', 'above', 'below', 'left'] : (FOCUS.has(st) ? ['above', 'left', 'under', 'right'] : ['right', 'left', 'above']);
+  let pick = null, pk = null;
+  // hysteresis: keep the side it is on while that side still fits
+  const tryOrder = ro._pk && order.includes(ro._pk) ? [ro._pk].concat(order.filter(k => k !== ro._pk)) : order;
+  for (const k of tryOrder) {
     const c = cand[k].slice();
     if (k === 'above' || k === 'under') c[0] = clamp(c[0], 12, limit - w);
     const r = { x: c[0], y: c[1], w, h };
-    if (c[0] >= 10 && c[0] + w <= limit && c[1] >= 10 && c[1] + h <= bottom && !hitsAny(r, avoid, 10)) { pick = c; break; }
+    if (c[0] >= 10 && c[0] + w <= limit && c[1] >= 10 && c[1] + h <= bottom && !hitsAny(r, avoid, 10)) { pick = c; pk = k; break; }
   }
-  if (!pick) { pick = cand[order[0]]; pick[0] = clamp(pick[0], 10, limit - w); pick[1] = clamp(pick[1], 10, bottom - h); }
-  ro.style.transform = `translate(${pick[0].toFixed(1)}px, ${pick[1].toFixed(1)}px)`;
+  if (!pick) { pk = order[0]; pick = cand[pk]; pick[0] = clamp(pick[0], 10, limit - w); pick[1] = clamp(pick[1], 10, bottom - h); }
+  ro._pk = pk;
+  // glide toward the target instead of jumping (snaps while hidden during camera moves)
+  const snap = !ro._pos || app.classList.contains('cam-moving');
+  ro._pos = snap ? pick : [lerp(ro._pos[0], pick[0], 0.28), lerp(ro._pos[1], pick[1], 0.28)];
+  ro.style.transform = `translate(${ro._pos[0].toFixed(1)}px, ${ro._pos[1].toFixed(1)}px)`;
 }
 
 /* ----- clock, counters, controls ----- */
 function renderClock() { $('#clock').textContent = hhmm(S.clockMin); }
 function renderCounters() {
   const c = S.counters;
+  // In the final picture observed is derived, so observed = inside + decisions on every frame.
+  if (S.observedDerived) c.observed = c.inside + c.decisions + c.outside;
+  syncTicks(Math.round(c.inside) - DEMO.counters.atOpen);
   $('#c-obs').textContent = Math.round(c.observed);
   $('#c-in').textContent = Math.round(c.inside);
-  $('#c-dec').textContent = Math.round(c.decisions);
+  // an open deviation is neither inside nor decided: show it, so the numbers add up
+  $('#c-dec').innerHTML = Math.round(c.decisions) + (c.outside > 0.5 ? `<small> · ${Math.round(c.outside)} open</small>` : '');
   $('#s-obs').textContent = Math.round(c.observed);
   $('#s-in').textContent = Math.round(c.inside);
   $('#s-dec').textContent = Math.round(c.decisions);
@@ -1689,7 +1866,8 @@ function renderCounters() {
   $('#s-tr').textContent = Math.round(c.transferred);
   $('#s-prem').textContent = dkk(c.premium);
   const agg = $('#rec-agg');
-  if (agg) agg.textContent = Math.round(c.inside - (HERO() && ['inside', 'checking'].includes(HERO().state) ? 1 : 0));
+  const h = HERO(), heroCounted = h && (h.state === 'inside' || (h.state === 'checking' && S.heroFailed));
+  if (agg) agg.textContent = Math.round(c.inside - (heroCounted ? 1 : 0));
   const pf = S.stage === 'portfolio';
   $('#cnt-normal').textContent = pf ? '×' + Math.round(c.inside) : '';
   $('#cnt-change').textContent = pf ? '×' + Math.round(c.changed) : '';
@@ -1701,10 +1879,10 @@ function renderCounters() {
 /* TRANSFER cell of the economic logic. Priora never shows a price before the
    market has answered: on request, then the number of quotes, then the bound price. */
 function renderTransferCell() {
-  let v = 'on request';
+  let v = 'set by carriers';
   const quotes = S.offers.filter(o => o.status === 'quoted').length;
   const sel = S.selectedOffer && DEMO.carriers.find(x => x.id === S.selectedOffer);
-  if (S.summary && (S.stage === 'portfolio' || S.stage === 'end')) v = S.summary.premium ? dkk(S.summary.premium) + ' bound' : 'none today';
+  if (S.stage === 'portfolio' || S.stage === 'end') v = S.counters.premium > 0.5 ? dkk(S.counters.premium) + ' bound' : 'none yet';
   else if (sel && S.decision && S.decision.status === 'bound') v = dkk(sel.price) + ' bound';
   else if (quotes) v = quotes + (quotes === 1 ? ' quote' : ' quotes');
   else if (S.stage === 'transfer-packaging' && S.decision) v = 'requested';
@@ -1716,7 +1894,7 @@ function renderStatus() {
   const a = HERO();
   let g = 'g-inside', t = 'All activity inside';
   if (S.stage === 'portfolio' || S.stage === 'end') { const d = Math.round(S.counters.decisions); t = d + ' explicit decision' + (d === 1 ? '' : 's') + ' today'; }
-  else if (a && a.state === 'outside') { g = 'g-outside'; t = '1 activity outside conditions'; }
+  else if (a && a.state === 'outside') { g = 'g-outside'; t = '1 activity outside envelope'; }
   else if (a && a.state === 'checking' && S.heroFailed) { g = 'g-checking'; t = 'Recalculating 1 activity'; }
   else if (a && a.state === 'retained') { g = 'g-retained'; t = '1 increment retained'; }
   else if (a && a.state === 'transferred') { g = 'g-cover'; t = '1 slice on temporary cover'; }
@@ -1740,23 +1918,36 @@ function clockTo(hm, dur) {
 }
 const TIMED = new Set(['operating', 'hero', 'deviation', 'change-resolving', 'transfer-packaging', 'transfer-offers', 'change-resolved', 'retained', 'transfer-bound', 'portfolio']);
 const FOCUS = new Set(['hero', 'deviation', 'decision', 'change-options', 'change-resolving', 'change-resolved', 'retain-confirm', 'retained', 'transfer-packaging', 'transfer-offers', 'transfer-bound']);
+/* Keep the header on one line: drop optional detail, in this order, until it fits. */
+const HEADER_FIT = ['h-icons', 'h-nolead', 'h-notag'];
+function fitHeader() {
+  const top = $('#top'), ph = $('#proghead');
+  HEADER_FIT.forEach(c => top.classList.remove(c));
+  for (const c of HEADER_FIT) {
+    if (top.scrollWidth <= top.clientWidth + 1 && ph.scrollWidth <= ph.clientWidth + 1) break;
+    top.classList.add(c);
+  }
+}
 function renderControls() {
   const b = $('#b-play'), st = S.stage;
   let label = 'Pause', icon = 'g-pause';
   if (st === 'intro') { label = 'Play'; icon = 'g-play'; }
   else if (st === 'end') { label = 'Replay'; icon = 'g-reset'; }
   else if (S.paused) { label = 'Resume'; icon = 'g-play'; }
-  else if (!TIMED.has(st)) { label = 'Awaiting decision'; }
-  else if (st === 'transfer-offers' && S.offersDone) { label = 'Awaiting selection'; }
-  const waiting = label.indexOf('Awaiting') === 0;
+  let waiting = false;
+  if (st !== 'intro' && st !== 'end' && !S.paused) {
+    if (!TIMED.has(st)) { label = 'Your decision'; waiting = true; }
+    else if (st === 'transfer-offers' && S.offersDone) { label = 'Pick an offer'; waiting = true; }
+  }
   b.innerHTML = waiting ? `<span>${label}</span>` : `<svg><use href="#${icon}"/></svg><span>${label}</span>`;
   b.classList.toggle('wait', waiting);
   app.classList.toggle('can-rewind', !!S.canRewind);
+  fitHeader();
 }
 
 /* ----- caption ----- */
 function setCaption(key) {
-  const c = CAPTIONS[key];
+  const c = typeof CAPTIONS[key] === 'function' ? CAPTIONS[key]() : CAPTIONS[key];
   if (!c) return;
   $('#cap-n').textContent = c[0];
   $('#cap-t').textContent = c[1];
@@ -1798,7 +1989,15 @@ function pushStream(e) {
   const list = $('#stream');
   list.insertBefore(li, list.firstChild);
   while (list.children.length > 30) list.lastChild.remove();
+  // FLIP: start the list one row up, then let it settle, so older rows slide down
+  list.style.transition = 'none'; list.style.transform = `translateY(${-li.offsetHeight}px)`;
+  void list.offsetWidth;
+  list.style.transition = 'transform calc(var(--t)*420ms) var(--ease)'; list.style.transform = '';
   return e;
+}
+function renameStream(aid, name) {
+  S.stream.forEach(e => { if (e.aid === aid) e.name = name; });
+  $$(`#stream .srow[data-activity-id="${aid}"] .n`).forEach(el => { el.textContent = name; });
 }
 function updateStream(aid, state) {
   S.stream.forEach(e => { if (e.aid === aid) e.state = state; });
@@ -1815,7 +2014,7 @@ function pushRecord(time, text, opt) {
   S.timeline.push(e);
   const li = document.createElement('li');
   li.className = 'rr k-' + e.kind;
-  li.innerHTML = `<span class="t">${e.time}</span><span class="m"></span><div><div class="x">${opt.html || esc(text)}</div>${e.sub ? `<div class="s">${esc(e.sub)}</div>` : ''}<div class="i">${e.rec} · ${e.fp}${e.kind === 'sched' ? ' · SCHEDULED' : ''}</div></div>`;
+  li.innerHTML = `<span class="t">${e.time}</span><span class="m"></span><div><div class="x">${opt.html || esc(text)}</div>${e.sub ? `<div class="s">${esc(e.sub)}</div>` : ''}<div class="i">${e.kind === 'agg' ? 'Aggregate · live count' : e.rec + (e.kind === 'decision' ? ' · ' + e.fp : '') + (e.kind === 'sched' ? ' · SCHEDULED' : '')}</div></div>`;
   const list = $('#record');
   const sched = list.querySelector('.k-sched');
   if (sched && e.kind !== 'sched') list.insertBefore(li, sched); else list.appendChild(li);
@@ -1833,18 +2032,20 @@ function snapRecord() {
   let b = max;
   for (const li of list.children) { if (li.offsetTop >= max - 1) { b = li.offsetTop; break; } }
   list.style.paddingBottom = (16 + b - max) + 'px';
-  list.scrollTop = b;
+  list.scrollTo({ top: b, behavior: app.classList.contains('snap') ? 'auto' : 'smooth' });
 }
 
 /* ----- hero conditions card ----- */
+/* Footer of the conditions card, derived from the checks (any number of conditions). */
+function heroCardFoot() {
+  const n = DEMO.hero.conditions.length, ok = S.heroChecks.filter(Boolean).length, a = HERO(), st = a ? a.state : 'checking';
+  if (S.heroFailed) return `<span>${ok} of ${n} hold</span><b>${st === 'outside' ? 'Outside envelope' : 'Recalculating'}</b>`;
+  if (ok === n) return `<span>${n} of ${n} verified</span><b>Inside envelope</b>`;
+  return `<span>Checking ${ok} of ${n}</span><b>Checking state</b>`;
+}
 function renderHeroCard() {
   const h = DEMO.hero, a = HERO();
-  const ok = S.heroChecks.filter(Boolean).length;
-  const state = a ? a.state : 'checking';
-  let foot;
-  if (S.heroFailed) foot = state === 'outside' ? `<span>4 of 5 hold</span><b>Outside envelope</b>` : `<span>4 of 5 hold</span><b>Recalculating</b>`;
-  else if (ok === 5) foot = `<span>5 of 5 verified</span><b>Inside envelope</b>`;
-  else foot = `<span>Checking ${ok} of 5</span><b>Checking state</b>`;
+  const state = a ? a.state : 'checking', foot = heroCardFoot();
   $('#herocard').innerHTML = `<div class="hc-top"><span class="lab">Activity · ${h.ref}</span>${G(STATE_GLYPH[state])}</div>
     <div class="hc-title">${esc(h.name)}</div>
     <div class="hc-sub">${h.location.toUpperCase()} · ${h.window}</div>
@@ -1856,13 +2057,20 @@ function renderHeroCard() {
     }).join('')}</ul>
     <div class="hc-foot">${foot}</div>`;
 }
-function setHeroCheck(i, v) {
-  S.heroChecks[i] = v;
-  const li = $$('#herocard .conds li')[i];
-  if (!li) return renderHeroCard();
-  li.classList.toggle('ok', v); li.querySelector('em').textContent = v ? 'VERIFIED' : '';
-  const ok = S.heroChecks.filter(Boolean).length;
-  $('#herocard .hc-foot').innerHTML = ok === 5 ? `<span>5 of 5 verified</span><b>Inside envelope</b>` : `<span>Checking ${ok} of 5</span><b>Checking state</b>`;
+function setHeroCheck(i, v) { S.heroChecks[i] = v; updateHeroCard(); }
+/* Update the card in place, so a check mark un-draws and its row flashes instead of hard-cutting. */
+function updateHeroCard() {
+  const card = $('#herocard'), a = HERO(), rows = card.querySelectorAll('.conds li');
+  if (!rows.length) return renderHeroCard();
+  DEMO.hero.conditions.forEach((c, i) => {
+    const li = rows[i], bad = S.heroFailed && !!c.dependsOn;
+    if (bad && !li.classList.contains('bad')) li.classList.add('flash');
+    li.classList.toggle('bad', bad); li.classList.toggle('ok', !bad && !!S.heroChecks[i]);
+    li.querySelector('em').textContent = bad ? 'UNAVAILABLE' : (S.heroChecks[i] ? 'VERIFIED' : '');
+  });
+  card.querySelector('.hc-foot').innerHTML = heroCardFoot();
+  const top = card.querySelector('.hc-top');
+  top.lastElementChild.remove(); top.insertAdjacentHTML('beforeend', G(STATE_GLYPH[a ? a.state : 'checking']));
 }
 
 /* ----- readout next to the hero node ----- */
@@ -1872,9 +2080,10 @@ function renderReadout(swap) {
   const sel = S.selectedOffer && DEMO.carriers.find(c => c.id === S.selectedOffer);
   const D = DEMO.day;
   const M = {
-    checking: S.heroFailed ? ['Recalculating risk state', 'Sprinkler Zone 3 offline', false] : ['Checking state', 'Verifying 5 conditions', false],
-    inside: ['Inside programme', 'DKK 0 incremental', true],
-    outside: ['Outside agreed conditions', 'Decision required', false],
+    checking: S.decision && S.decision.path === 'change' ? ['Recalculating risk state', changeOption().note, false]
+      : S.heroFailed ? ['Recalculating risk state', DEMO.hero.deviation.protection, false] : ['Checking state', `Verifying ${DEMO.hero.conditions.length} conditions`, false],
+    inside: ['Inside accepted envelope', 'DKK 0 incremental · within the annual programme', false],
+    outside: ['Outside accepted envelope', 'Extra risk not priced in the annual programme', false],
     changed: ['Back inside accepted envelope', 'DKK 0 incremental', true],
     retained: ['Risk retained · Nordhavn', `${D.retainAt} to ${D.coverEnd} · no insurance purchased`, false],
     transferred: ['Covered by temporary capacity', sel ? `${sel.name} · ${dkk(sel.price)}` : '', false],
@@ -1915,7 +2124,8 @@ function sliceSvg(state) {
 
 /* ----- decision sheet (one composed surface, many views) ----- */
 function showSheet(view) {
-  const sheet = $('#sheet');
+  const sheet = $('#sheet'), swap = app.classList.contains('sheet-on') && sheet.querySelector('.sv');
+  if (swap) sheet.style.height = sheet.offsetHeight + 'px'; // hold the height, then glide to the new view's
   if (document.activeElement && sheet.contains(document.activeElement)) document.activeElement.blur();
   $$('.sv', sheet).forEach(v => { v.classList.add('leave'); setTimeout(() => v.remove(), 380); });
   const div = document.createElement('div');
@@ -1923,15 +2133,28 @@ function showSheet(view) {
   div.dataset.view = view;
   div.innerHTML = SHEET[view]();
   sheet.appendChild(div);
+  sheet.dataset.lock = performance.now() + 450; // clicks within 450 ms belong to the previous view
+  if (swap) {
+    const maxH = parseFloat(getComputedStyle(sheet).maxHeight) || 1e4, target = Math.min(div.offsetHeight + 2, maxH);
+    requestAnimationFrame(() => { sheet.style.height = target + 'px'; });
+    Sched.after(560, () => { sheet.style.height = ''; }, 'life');
+  }
   app.classList.add('sheet-on');
+  syncInert();
 }
-function hideSheet() { app.classList.remove('sheet-on'); }
+function hideSheet() { app.classList.remove('sheet-on'); syncInert(); }
+/* Hidden surfaces are inert, so Tab and Enter never reach an invisible button. */
+function syncInert() {
+  $('#cta').inert = !(S.stage === 'intro' && app.classList.contains('cta-on'));
+  $('#end').inert = S.stage !== 'end';
+  $('#sheet').inert = !app.classList.contains('sheet-on');
+}
 const SHEET = {
   decision() {
     const d = DEMO.hero.deviation;
     return `<div class="eyebrow"><span class="sd"></span>${DEMO.day.decisionAsked} · Decision requested · ${DEMO.owner.role}</div>
       <h2 class="sheet-h">Risk state changed</h2>
-      <p class="sheet-p">Roof hot work is continuing while sprinkler protection in the affected zone is unavailable.</p>
+      <p class="sheet-p">${esc(d.summary)}</p>
       <dl class="facts">
         <div><dt>Existing programme</dt><dd>Outside agreed conditions</dd></div>
         <div><dt>Incremental exposure</dt><dd class="mono">TEMPORARY</dd></div>
@@ -1950,13 +2173,13 @@ const SHEET = {
         <button class="choice" data-act="choose:retain"><span class="kbd k">2</span>${G('g-retained')}<b>Retain risk</b><span class="d">Knowingly carry the incremental exposure. Priora records who, what and for how long.</span><span class="o">Owned and recorded</span></button>
         <button class="choice" data-act="choose:transfer"><span class="kbd k">3</span>${G('g-cover')}<b>Transfer risk</b><span class="d">Ask the market whether a carrier will cover this temporary slice.</span><span class="o">Carrier priced</span></button>
       </div>
-      <div class="sheet-foot">Priora supplies the observed state. The decision stays with the risk owner.</div>`;
+      <div class="sheet-foot">Priora supplies the observed state. The economic decision stays with the risk owner.</div>`;
   },
   'change-options'() {
     return `<div class="eyebrow"><span class="sd ink"></span>Change activity · 4 controls available</div>
       <h2 class="sheet-h">Bring the work back inside the envelope</h2>
       <p class="sheet-p">Each control changes the physical state. Priora recalculates the risk state before the work continues.</p>
-      <div class="opts">${DEMO.changeOptions.map(o => `<button class="opt ${o.recommended ? 'rec' : ''}" data-act="confirm:${o.id}"><span class="rad"></span><span><b>${esc(o.title)}${o.recommended ? '<span class="tagr">RECOMMENDED</span>' : ''}</b><span class="s">${esc(o.sub)}</span></span><em>${esc(o.effect)}</em></button>`).join('')}</div>
+      <div class="opts">${DEMO.changeOptions.map(o => `<button class="opt" data-act="confirm:${o.id}"><span class="rad"></span><span><b>${esc(o.title)}${o.guided ? '<span class="tagr">Fastest</span>' : ''}</b><span class="s">${esc(o.sub)}</span></span><em>${esc(o.effect)}</em></button>`).join('')}</div>
       <button class="linkback" data-act="back"><svg class="g" style="width:10px;height:10px"><use href="#g-back"/></svg>Back to the three choices</button>`;
   },
   'change-resolving'() {
@@ -1967,7 +2190,7 @@ const SHEET = {
       <ol class="steps">
         <li data-step="0"><span class="spin"></span>${CHECK_SVG}<span>${esc(o.steps[0])}</span><em></em></li>
         <li data-step="1"><span class="spin"></span>${CHECK_SVG}<span>${esc(o.steps[1])}</span><em></em></li>
-        <li data-step="2"><span class="spin"></span>${CHECK_SVG}<span>Back inside accepted envelope</span><em></em></li>
+        <li data-step="2"><span class="spin"></span>${CHECK_SVG}<span>${esc(o.final || 'Back inside accepted envelope')}</span><em></em></li>
       </ol>`;
   },
   'change-resolved'() {
@@ -1975,7 +2198,7 @@ const SHEET = {
     const recs = S.timeline.filter(e => e.path === 'change');
     return `<div class="eyebrow"><span class="sd ink"></span>${DEMO.day.changeInsideAt} · State recalculated</div>
       <h2 class="sheet-h">Back inside accepted envelope</h2>
-      <p class="sheet-p">${esc(o.note)}. The incremental risk has disappeared back into the annual programme and the activity continues.</p>
+      <p class="sheet-p">${esc(o.resolved)}</p>
       <div class="bigval"><em>Incremental price</em><b>DKK 0</b></div>
       ${recs.map(e => `<div class="recblock"><div class="rt">${e.time}</div><div class="rx">${esc(e.text)}</div><div class="ri">${e.rec} · ${e.fp}</div></div>`).join('')}`;
   },
@@ -1989,8 +2212,8 @@ const SHEET = {
         <div><dt>Decision owner</dt><dd>${o.role} · ${esc(o.name)}</dd></div>
         <div><dt>Additional insurance</dt><dd>None purchased</dd></div>
       </dl>
-      <button class="ack ${S.ack ? 'on' : ''}" data-act="ack"><span class="bx"><svg><use href="#g-check"/></svg></span><span>Nordhavn Bioprocessing knowingly carries this incremental exposure until 18:00, outside the annual programme.</span></button>
-      <div class="acts"><button class="bigbtn" data-act="confirm" ${S.ack ? '' : 'disabled'}>Accept retained risk</button></div>
+      <p class="decl">${esc(DEMO.owner.company)} knowingly carries this incremental exposure until ${d.until}, outside the annual programme. The decision is recorded with its owner.</p>
+      <div class="acts"><button class="bigbtn" data-act="confirm">Accept retained risk</button></div>
       <button class="linkback" data-act="back"><svg class="g" style="width:10px;height:10px"><use href="#g-back"/></svg>Back to the three choices</button>`;
   },
   retained() {
@@ -1999,7 +2222,7 @@ const SHEET = {
       <h2 class="sheet-h">Risk retained</h2>
       <p class="sheet-p">No additional insurance purchased. The exposure is explicit, owned and time-bound, not an accidental gap.</p>
       <div class="recblock"><div class="rt">${e ? e.time : DEMO.day.retainAt}</div><div class="rx">Incremental risk retained by Nordhavn Bioprocessing</div>
-        <div class="rs">Decision: ${esc(DEMO.owner.name)}, ${DEMO.owner.role}<br>Exposure: roof hot work without automatic sprinkler protection · 3h 18m · until 18:00</div>
+        <div class="rs">Decision: ${esc(DEMO.owner.name)}, ${DEMO.owner.role}<br>Exposure: ${esc(DEMO.hero.deviation.exposure.toLowerCase())} · retained ${DEMO.day.retainAt}–${DEMO.hero.deviation.until}</div>
         <div class="ri">${e ? e.rec + ' · ' + e.fp : ''}</div></div>
       <p class="note">The activity continues. The record preserves what changed, who accepted it, when, for how long and what was retained.</p>`;
   },
@@ -2035,28 +2258,47 @@ function renderPacket() {
   pk.innerHTML = `<div class="pk-in"><div class="pk-h"><span class="pk-t">Requesting capacity</span><span class="lab">PKT-0412</span></div>
     <ul>${DEMO.packet.map((f, i) => `<li data-i="${i}"><span>${esc(f[0])}</span><b class="${f[2] || ''}">${esc(f[1])}</b></li>`).join('')}</ul>
     <div class="pk-f"><span class="lab">Observed state · sealed</span><span class="lab" id="pk-fp"></span></div></div>
-    <div class="pk-tok"><i></i>PKT-0412 · 9 FIELDS</div>`;
-  placeTransfer();
+    <div class="pk-tok"><i></i>PKT-0412 · ${DEMO.packet.length} FIELDS</div>`;
+  pk.style.transition = 'none'; placeTransfer(); void pk.offsetWidth; pk.style.transition = '';
 }
 function renderCarriers() {
-  $('#carriers').innerHTML = DEMO.carriers.map(c => `<div class="carrier" data-carrier="${c.id}" data-act="offer:${c.id}">
+  $('#carriers').classList.remove('armed');
+  $('#carriers').innerHTML = DEMO.carriers.map(c => { const o = S.offers.find(x => x.carrierId === c.id) || {}; return `<div class="carrier" data-carrier="${c.id}" data-act="offer:${c.id}">
       <div class="c-top"><span class="c-name">${esc(c.name)}</span><span class="c-stat">Waiting</span></div>
       <div class="c-kind">${esc(c.role)}</div>
-      <div class="c-body">${c.declined
-        ? `<div class="c-dec">${esc(c.reason)}<small>No quote</small></div>`
+      <div class="c-body">${o.declined
+        ? `<div class="c-dec">${esc(o.reason)}<small>No quote</small></div>`
         : `<div class="c-price"><span>DKK</span><b data-p>0</b><span class="c-sel">Select</span></div>
-           <div class="c-facts"><div><em>Duration</em><b>Until ${c.until}</b></div><div><em>Deductible</em><b>${dkk(c.deductible)}</b></div><div><em>Capacity</em><b>${c.capacity}</b></div></div>`}</div>
-      <div class="c-wait"><i></i></div></div>`).join('');
+           <div class="c-facts"><div><em>Duration</em><b>Until ${o.until}</b></div><div><em>Deductible</em><b>${dkk(o.deductible)}</b></div><div><em>Capacity</em><b>${o.capacity}</b></div></div>`}</div>
+      <div class="c-wait"><i></i></div></div>`; }).join('');
+}
+/* Hover styling on offers switches on only after the pointer really moves, so the
+   pointer left over from the Transfer click never makes one offer look chosen. */
+function armOffers() {
+  const c = $('#carriers'); let start = null;
+  const mv = e => {
+    if (S.stage !== 'transfer-offers') { document.removeEventListener('pointermove', mv); return; }
+    if (!start) { start = [e.clientX, e.clientY]; return; }
+    if (Math.hypot(e.clientX - start[0], e.clientY - start[1]) > 8) { c.classList.add('armed'); document.removeEventListener('pointermove', mv); }
+  };
+  document.addEventListener('pointermove', mv);
 }
 function carrierAnchor(id) {
   const el = $(`.carrier[data-carrier="${id}"]`);
   if (!el) return null;
-  const r = el.getBoundingClientRect(), c = canvas.getBoundingClientRect();
-  return [r.left - c.left, r.top - c.top + r.height / 2];
+  const r = relRect(el);
+  return [r.x, r.y + r.h / 2];
 }
 function drawTransferLines() {
   const g = $('#fx-lines');
   const L = transferLayout();
+  if (UI.packetLead) {
+    const hero = HERO(), n = hero && UI.nodes[hero.id], pk = $('#packet');
+    if (n) {
+      const P = [n.pos[0] + 22, n.pos[1]], to = [pk.offsetLeft, pk.offsetTop + Math.min(64, pk.offsetHeight / 2)], mx = (P[0] + to[0]) / 2;
+      UI.packetLead.setAttribute('d', `M${P[0].toFixed(1)} ${P[1].toFixed(1)}C${mx.toFixed(1)} ${P[1].toFixed(1)} ${mx.toFixed(1)} ${to[1].toFixed(1)} ${to[0].toFixed(1)} ${to[1].toFixed(1)}`);
+    }
+  }
   if (UI.carrierLines) {
     const from = [L.pX + L.pW / 2 + 84, L.midY];
     UI.carrierLines.forEach(l => {
@@ -2088,6 +2330,7 @@ function clearTransferFx() {
   if (UI.boundLines) ['a', 'b', 'a2', 'b2'].forEach(k => UI.boundLines[k].remove());
   UI.boundLines = null;
   UI.tokens.forEach(t => t.remove()); UI.tokens = [];
+  if (UI.packetLead) { UI.packetLead.remove(); UI.packetLead = null; }
 }
 
 /* ----- continue bar ----- */
@@ -2112,10 +2355,29 @@ function showCont(label, sub, autoMs, act) {
     placeTransfer();
   }
   if (autoMs) {
-    const pr = c.querySelector('.pr');
-    Sched.tween({ dur: autoMs, raw: true, tag: 'autobar', ease: EASE.linear, update: v => { pr.style.width = (v * 100).toFixed(2) + '%'; } });
+    const pr = c.querySelector('.pr'), subEl = c.querySelector('.sub'), base = subEl.textContent;
+    let shown = -1;
+    Sched.tween({ dur: autoMs, raw: true, tag: 'autobar', ease: EASE.linear, update: v => {
+      pr.style.width = `calc((100% - 36px) * ${v.toFixed(4)})`;
+      const left = Math.ceil((1 - v) * autoMs / 1000);
+      if (left !== shown) { shown = left; subEl.textContent = base + (left > 0 ? ' · in ' + left + 's' : ''); }
+    } });
     Sched.after(autoMs, () => Ctl.continue(), 'auto');
   }
+}
+/* A presenter who clicks into the scene is explaining something: stop the auto-continue countdown. */
+function holdAuto() {
+  if (!Sched.has('auto')) return;
+  Sched.cancel('auto'); Sched.kill('autobar');
+  $$('#cont .sub, .sheet-cont .sub').forEach(s => { s.textContent = s.textContent.replace(/ · in \d+s$/, '') + ' · auto-continue off'; });
+  $$('.bigbtn .pr').forEach(p => { p.style.width = '0'; });
+}
+/* Next, from a key or a click: never skips the key moment, and ignores a press that lands
+   within 0.9 s of a stage change (so a double press cannot skip a whole chapter). */
+function userContinue() {
+  if (S.stage === 'deviation') return false;
+  if (performance.now() - (S.stageAt || 0) < 900) return false;
+  return Ctl.continue();
 }
 function hideCont() { $('#cont').classList.remove('on'); $$('.sheet-cont').forEach(e => e.remove()); Sched.cancel('auto'); Sched.kill('autobar'); }
 
@@ -2128,13 +2390,20 @@ function openDetail(id) {
   const sel = a.kind === 'hero' && S.selectedOffer ? DEMO.carriers.find(c => c.id === S.selectedOffer) : null;
   const rows = [['Window', a.window || (a.start + ' · ongoing'), 1], ['Location', a.location], ['Zone', DEMO.zones[a.zone] || a.zone]];
   if (a.kind === 'hero') {
-    rows.push(['Conditions', S.heroFailed ? '4 of 5 · sprinkler protection unavailable' : (S.heroChecks.filter(Boolean).length + ' of 5 verified')]);
-    if (S.decision) rows.push(['Decision', { change: 'Changed · ' + (DEMO.changeOptions.find(o => o.id === S.decision.option) || {}).title, retain: 'Retained · ' + DEMO.owner.name, transfer: 'Transferred' }[S.decision.path] || '']);
-    if (sel) rows.push(['Capacity', `${sel.name} · ${dkk(sel.price)} · until 18:00`, 1]);
+    const co = S.decision && S.decision.path === 'change' && S.stage !== 'change-resolving' ? changeOption().conditions : null;
+    rows.push(['Conditions', co || (S.heroFailed ? '4 of 5 · sprinkler protection unavailable' : (S.heroChecks.filter(Boolean).length + ' of 5 verified'))]);
+    if (S.decision) {
+      const d = S.decision, tr = d.status === 'bound' ? 'Transferred · ' + d.carrier : (S.offersDone ? 'Transfer requested · awaiting selection' : 'Transfer requested · awaiting carriers');
+      rows.push(['Decision', { change: 'Changed · ' + changeOption().title, retain: 'Retained · ' + DEMO.owner.name, transfer: tr }[d.path] || '']);
+    }
+    if (sel) rows.push(['Capacity', `${sel.name} · ${dkk(sel.price)} · until ${DEMO.day.coverEnd}`, 1]);
   }
   if (a.note) rows.push(['Note', a.note]);
   if (a.owner) rows.push(['Decision', a.owner]);
-  rows.push(['Record', a.rec || ('REC-' + hex8(fnv(a.id)).slice(0, 4).toUpperCase() + '-' + hex8(fnv(a.name)).slice(0, 4).toUpperCase()), 1]);
+  // routine work is kept in the aggregate entry; the hero is pending until its conditions are verified
+  const agg = S.timeline.find(e => e.kind === 'agg');
+  rows.push(['Record', a.rec || (a.kind === 'hero' ? 'Pending verification' : (agg ? `In the ${agg.time} routine aggregate` : '')), 1]);
+  holdAuto();
   $('#detail').innerHTML = `<button class="dx" data-act="close-detail" aria-label="Close"><svg><use href="#g-close"/></svg></button>
     <div class="ds ${st === 'outside' ? 'sig' : ''}">${G(STATE_GLYPH[st], '', st === 'outside' ? 'color:var(--signal)' : '')}<span class="lab">${STATE_LABEL[st]}</span></div>
     <div class="dn">${esc(a.name)}</div><div class="dz">${esc(DEMO.zones[a.zone] || '')} · since ${a.start}</div>
@@ -2145,12 +2414,13 @@ function openDetail(id) {
 function placeDetail() {
   const id = UI.detailId, n = UI.nodes[id], el = $('#detail');
   let P = n ? n.pos : [UI.W - 320, 120];
-  const w = el.offsetWidth || 286, h = el.offsetHeight || 260;
-  let x = P[0] + 26, y = P[1] - 40;
-  if (x + w > UI.W - 16) x = P[0] - 26 - w;
-  x = clamp(x, 16, UI.W - w - 16);
-  y = clamp(y, 16, UI.H - cssPx('--econ', 88) - h - 12);
-  el.style.left = x.toFixed(0) + 'px'; el.style.top = y.toFixed(0) + 'px';
+  const w = el.offsetWidth || 286, h = el.offsetHeight || 260, bottom = UI.H - econPx - 12;
+  const avoid = overlayRects().filter(o => !o.detail && !o.cap);
+  const fit = (x, y) => ({ x: clamp(x, 16, UI.W - w - 16), y: clamp(y, 16, bottom - h) });
+  // right, left, above, below the node; the first that covers no card, sheet or plaque wins
+  const cands = [fit(P[0] + 26, P[1] - 40), fit(P[0] - 26 - w, P[1] - 40), fit(P[0] - w / 2, P[1] - h - 26), fit(P[0] - w / 2, P[1] + 26)];
+  const pick = cands.find(c => !hitsAny({ x: c.x, y: c.y, w, h }, avoid, 8)) || cands[0];
+  el.style.left = pick.x.toFixed(0) + 'px'; el.style.top = pick.y.toFixed(0) + 'px';
 }
 function closeDetail() { UI.detailId = null; $('#detail').classList.remove('on'); }
 
@@ -2164,7 +2434,7 @@ function renderChain() {
     `${m.observed} activities observed today`,
     `${S.timeline.length} fingerprinted records`,
     `${m.decisions} explicit decisions · ${m.changed} changed, ${m.retained} retained, ${m.transferred} transferred`,
-    m.path === 'transfer' && sel ? `3 carrier quotes · ${dkk(sel.price)} selected` : `${other.carrier} quote · ${dkk(other.price)}`,
+    m.path === 'transfer' && sel ? `${S.offers.filter(o => o.status === 'quoted').length} carrier quotes · ${dkk(sel.price)} selected` : `${other.carrier} quote · ${dkk(other.price)}`,
     `${m.transferred} temporary cover bound · ${dkk(m.premium)} incremental`,
   ] : ['', '', '', '', ''];
   const steps = [['RECORD', 'Physical state observed as it happens'], ['TRUST', 'Verified, ordered, fingerprinted'], ['DECISION', 'Change, retain or transfer'], ['PRICE', 'Set by carriers on real state'], ['CAPACITY', 'Bound only when needed']];
@@ -2188,15 +2458,17 @@ function setActState(a, st) { a.state = st; syncNode(a); if (UI.detailId === a.i
 function retire(a) {
   const n = UI.nodes[a.id];
   if (n) n.g.classList.add('gone');
+  if (UI.detailId === a.id) closeDetail();
   Sched.after(900, () => { delete S.activities[a.id]; removeNode(a.id); }, 'life');
 }
-function devTo(a, to, dur, ease) {
+function devTo(a, to, dur, ease, done) {
   const from = a.dev;
-  Sched.tween({ dur, tag: 'dev-' + a.id, ease: ease || EASE.inOut, update: v => { a.dev = lerp(from, to, v); } });
+  Sched.tween({ dur, tag: 'dev-' + a.id, ease: ease || EASE.inOut, update: v => { a.dev = lerp(from, to, v); }, done });
 }
 function setLabel(a, line1, line2, line3) {
   let el = UI.nlabs[a.id];
   if (!el) { el = document.createElement('div'); el.className = 'nlab'; $('#nlabs').appendChild(el); UI.nlabs[a.id] = el; }
+  el.className = 'nlab o-' + a.state + (el.classList.contains('on') ? ' on' : '');
   el.innerHTML = `<div class="a">${line1}</div><div class="b">${esc(line2)}</div>${line3 ? `<div class="c">${esc(line3)}</div>` : ''}`;
   requestAnimationFrame(() => el.classList.add('on'));
 }
@@ -2212,17 +2484,21 @@ const ACT = {
   introClear() { $('#intro').classList.add('out'); },
   drawSite() { siteSvg.classList.add('drawn'); Sched.after(1900, () => app.classList.add('labels-on'), 'chapter'); Sched.after(3400, () => siteSvg.classList.add('settled'), 'life'); },
   drawEnvelope() { app.classList.add('env-drawn'); Sched.after(3000, () => app.classList.add('env-settled'), 'life'); },
-  introCaption() { app.classList.remove('no-cap'); setCaption('intro'); },
-  introCTA() { app.classList.add('cta-on'); },
+  introCaption() { app.classList.remove('no-cap'); app.classList.add('plink-on'); setCaption('intro'); },
+  introCTA() {
+    app.classList.add('cta-on'); syncInert();
+    // Play was pressed while the intro was still drawing: it ran fast, now hold caption 01, then start
+    if (S.introRush) { Ctl.setSpeed(S.introRush); S.introRush = 0; Sched.after(1800, () => { if (S.stage === 'intro') startScenario(); }, 'chapter'); }
+  },
 
   /* operating */
   enterOperating() {
     finishIntro();
-    app.classList.add('running', 'econ-on');
+    app.classList.add('running');
+    Sched.after(350, () => app.classList.add('econ-on'), 'life'); // after the Play button has faded
     setCaption('operating');
     cameraTo('full', 1400);
     S.economics = 'normal'; renderEconomics();
-    S.counters.observed = S.counters.inside = DEMO.counters.atOpen; renderCounters();
     pushRecord(DEMO.day.open, 'Day opened · site baseline verified', { sub: 'Annual programme conditions loaded · Property + BI', kind: 'state' });
     pushRecord(DEMO.day.open, '', { html: 'Routine activity · <b id="rec-agg" class="mono">12</b> recorded inside envelope', kind: 'agg' });
     renderCounters();
@@ -2243,7 +2519,7 @@ const ACT = {
   spawnHero() {
     const h = DEMO.hero;
     addActivity({ id: h.id, name: h.name, zone: h.zone, location: h.location, loc: h.loc.slice(), start: h.start, window: h.window, kind: 'hero', rec: null });
-    pushStream({ time: h.start, name: 'Hot work · ' + h.location, zone: 'Roof', state: 'checking', aid: h.id, kind: 'hero' });
+    pushStream({ time: h.start, name: h.name + ' · ' + h.location, zone: DEMO.zones[h.zone], state: 'checking', aid: h.id, kind: 'hero' });
     bump({ observed: 1 });
     app.classList.add('ro-on'); renderReadout(true);
   },
@@ -2251,26 +2527,27 @@ const ACT = {
   check(i) { setHeroCheck(i, true); },
   heroVerified() {
     const a = HERO();
-    setActState(a, 'inside'); updateStream(a.id, 'inside'); renderReadout(true); renderHeroCard();
+    setActState(a, 'inside'); updateStream(a.id, 'inside'); renderReadout(true); updateHeroCard();
     bump({ inside: 1 });
     const h = DEMO.hero;
     pushRecord(h.start, `${h.name} started · ${h.location} · inside envelope`, { sub: `${h.operator} · planned ${h.window}` });
     a.rec = pushRecord(h.start, '5 of 5 conditions verified', { kind: 'state' }).rec;
   },
-  heroWait() { clockTo(toMin(DEMO.day.heroHold), 3400); },
+  heroWait() { clockTo(toMin(DEMO.day.heroHold), 2600); },
 
   /* deviation */
   enterDeviation() { setCaption('deviation'); clockTo(DEMO.hero.deviation.at); },
   sprinklerOffline() {
     setSZ3('offline');
-    pushStream({ time: DEMO.day.deviation, name: 'Sprinkler Zone 3 offline', zone: 'Production Hall 2', state: 'system', kind: 'system' });
-    pushRecord(DEMO.day.deviation, 'Sprinkler Zone 3 taken offline', { sub: 'Roof 03 and Production Hall 2 · automatic protection unavailable', kind: 'dev' });
+    pushStream({ time: DEMO.day.deviation, name: DEMO.hero.deviation.protection, zone: DEMO.hero.deviation.affects, state: 'system', kind: 'system' });
+    const d = DEMO.hero.deviation;
+    pushRecord(d.at, d.cause, { sub: d.affects + ' · automatic protection unavailable', kind: 'dev' });
   },
   // The condition fails: Priora recalculates (spinning ring) while the node is still on the roof.
   conditionFlips() {
     const a = HERO();
     S.heroFailed = true; S.heroChecks[4] = false;
-    setActState(a, 'checking'); updateStream(a.id, 'checking'); renderReadout(true); renderHeroCard();
+    setActState(a, 'checking'); updateStream(a.id, 'checking'); renderReadout(true); updateHeroCard();
   },
   // THE KEY MOMENT. The node travels out along its exit ray; the envelope membrane
   // stretches with it and pinches off (see frame()). Its state, glyph and every
@@ -2283,15 +2560,18 @@ const ACT = {
       a.dev = v;
       if (!a.crossed && v >= (a.crossV || 0.42)) { a.crossed = true; ACT.heroCrossed(); }
     } });
-    cameraTo('deviation', 4200);
   },
+  // Before the node moves, pull back to the whole annual programme envelope and let
+  // the conditions card recede, so the crossing is the only thing moving on screen.
+  pullBack() { app.classList.add('card-dim'); cameraTo('deviation', 1500); },
   heroCrossed() {
     const a = HERO();
-    setActState(a, 'outside'); renderReadout(true); updateStream(a.id, 'outside'); renderHeroCard();
+    setActState(a, 'outside'); renderReadout(true); updateStream(a.id, 'outside'); updateHeroCard();
     bump({ inside: -1, outside: 1 });
     S.economics = 'deviation'; renderEconomics();
+    setCaption('deviation-out');
   },
-  recordOutside() { pushRecord(DEMO.day.deviation, 'Risk state moved outside annual programme conditions', { sub: `${DEMO.hero.name} · ${DEMO.hero.location} · incremental exposure temporary, ${DEMO.hero.deviation.duration}`, kind: 'dev' }); },
+  recordOutside() { pushRecord(DEMO.day.deviation, 'Risk moved outside the annual programme', { sub: `${DEMO.hero.name} · ${DEMO.hero.location} · incremental exposure temporary, ${DEMO.hero.deviation.duration}`, kind: 'dev' }); },
   decisionRequested() { clockTo(DEMO.day.decisionAsked); pushRecord(DEMO.day.decisionAsked, 'Decision requested · ' + DEMO.owner.role); },
 
   /* decision */
@@ -2299,7 +2579,8 @@ const ACT = {
     setCaption('decision'); cameraTo('decision', 1900);
     app.classList.remove('card-on'); app.classList.add('dim');
     // the sheet follows the camera, so the node has settled before the panel arrives
-    Sched.after(350, () => { if (S.stage === 'decision') showSheet('decision'); }, 'chapter');
+    // 'The risk becomes a decision.' holds alone over the whole site before the sheet arrives
+    Sched.after(1700, () => { if (S.stage === 'decision') showSheet('decision'); }, 'chapter');
   },
 
   /* change path */
@@ -2313,24 +2594,29 @@ const ACT = {
     const o = DEMO.changeOptions.find(x => x.id === S.decision.option);
     const a = HERO();
     if (o.restores) setSZ3('restored');
-    if (o.relocate) {
-      const from = a.loc.slice(), to = o.relocate.loc;
-      Sched.tween({ dur: 2600, ease: EASE.inOut, update: v => { a.loc = from.map((f, i) => lerp(f, to[i], v)); } });
-      a.location = o.relocate.location;
-    }
+    if (o.relocate) a.location = o.relocate.location; // the node slides over once it is back inside (changeReturn)
+    if (o.continues === false) a.window = `${DEMO.hero.start}–${DEMO.day.changeAt} · resumes 07:00`;
     clockTo(DEMO.day.changeAt);
     const e = pushRecord(DEMO.day.changeAt, o.rec, { kind: 'event' }); e.path = 'change';
   },
   changeReturn() {
     const a = HERO();
+    app.classList.remove('dim');
     setActState(a, 'checking'); renderReadout(true);
-    devTo(a, 0, 2600, EASE.inOut);
+    const o = changeOption();
+    devTo(a, 0, 2600, EASE.inOut, () => {
+      if (!o.relocate) return;
+      const from = a.loc.slice(), to = o.relocate.loc;
+      Sched.tween({ dur: 1800, ease: EASE.inOut, update: v => { a.loc = from.map((f, i) => lerp(f, to[i], v)); } });
+      renameStream(a.id, DEMO.hero.name + ' · ' + o.relocate.location);
+    });
   },
   changeInside() {
     const a = HERO(), o = DEMO.changeOptions.find(x => x.id === S.decision.option);
     S.heroFailed = false; S.heroChecks = [true, true, true, true, true];
     a.note = o.note;
     setActState(a, 'changed'); updateStream(a.id, 'changed'); renderReadout(true);
+    app.classList.add('env-pulse'); Sched.after(1100, () => app.classList.remove('env-pulse'), 'life');
     S.deviation.status = 'changed';
     clockTo(DEMO.day.changeInsideAt);
     const e = pushRecord(DEMO.day.changeInsideAt, 'Risk state returned inside annual programme · Incremental price DKK 0', { kind: 'decision', sub: 'Decision: change activity · ' + o.title + ' · ' + DEMO.owner.name });
@@ -2342,14 +2628,23 @@ const ACT = {
 
   /* transfer path */
   packetShow() { renderPacket(); requestAnimationFrame(() => $('#packet').classList.add('on')); },
+  // hairline from the activity to the packet: the packet is the activity's own observed state
+  packetLead() {
+    const p = document.createElementNS(NS, 'path');
+    p.setAttribute('class', 'xl dr'); p.setAttribute('pathLength', '1');
+    $('#fx-lines').appendChild(p); UI.packetLead = p;
+    drawTransferLines();
+    Sched.tween({ dur: 800, ease: EASE.inOut, update: v => { p.style.strokeDashoffset = (1 - v).toFixed(3); } });
+  },
   packetField(i) { const li = $(`#packet li[data-i="${i}"]`); if (li) li.classList.add('on'); },
   packetSeal() {
-    const e = pushRecord(DEMO.day.requestAt, 'Capacity requested · risk packet sent to 4 carriers', { sub: 'PKT-0412 · 9 fields of observed state' });
+    const e = pushRecord(DEMO.day.requestAt, `Capacity requested · risk packet sent to ${DEMO.carriers.length} carriers`, { sub: `PKT-0412 · ${DEMO.packet.length} fields of observed state` });
     $('#pk-fp').textContent = e.fp;
     $('#packet').classList.add('sealed');
   },
   carriersArrive() { renderCarriers(); $$('#carriers .carrier').forEach((c, i) => Sched.after(i * 110, () => c.classList.add('in'), 'life')); },
   packetFold() {
+    if (UI.packetLead) { UI.packetLead.remove(); UI.packetLead = null; }
     const L = transferLayout(), pk = $('#packet');
     pk.style.height = pk.offsetHeight + 'px';
     void pk.offsetWidth;
@@ -2390,19 +2685,19 @@ const ACT = {
     const el = $(`.carrier[data-carrier="${id}"]`);
     if (!el || !o) return;
     el.classList.remove('recv');
-    if (c.declined) {
+    if (o.declined) {
       o.status = 'declined'; el.classList.add('declined'); el.querySelector('.c-stat').textContent = 'Declined';
       const l = (UI.carrierLines || []).find(x => x.id === id); if (l) l.el.style.strokeOpacity = 0.15;
     } else {
-      o.status = 'quoted'; el.classList.add('quoted'); el.querySelector('.c-stat').innerHTML = '<span class="q">Quote · </span>' + DEMO.day.quotes;
-      const b = el.querySelector('[data-p]');
-      Sched.tween({ dur: 700, ease: EASE.out, update: v => { b.textContent = group3(c.price * v); } });
+      o.status = 'quoted'; el.classList.add('quoted'); el.tabIndex = 0; el.setAttribute('role', 'button'); el.querySelector('.c-stat').innerHTML = '<span class="q">Quote · </span>' + DEMO.day.quotes;
+      el.querySelector('[data-p]').textContent = group3(o.price);
     }
     renderTransferCell();
   },
   offersComplete() {
-    S.offersDone = true; renderControls();
-    pushRecord(DEMO.day.quotes, '4 carrier responses · 3 quotes', { sub: 'Northstar Commercial declined · outside appetite' });
+    S.offersDone = true; renderControls(); armOffers();
+    const quoted = S.offers.filter(o => o.status === 'quoted'), declined = S.offers.filter(o => o.status === 'declined');
+    pushRecord(DEMO.day.quotes, `${S.offers.length} carrier responses · ${quoted.length} quotes`, { sub: declined.map(o => `${o.name} declined · ${o.reason.toLowerCase()}`).join(' · ') });
     $('#offnote').classList.add('on');
   },
 
@@ -2424,9 +2719,9 @@ const ACT = {
       Sched.tween({ dur: 900, ease: EASE.out, update: v => { hero.notchK = 1 - v; } });
       const sel = DEMO.carriers.find(c => c.id === S.selectedOffer);
       const lab = {
-        changed: ['Decision made · changed', 'Hot work · ' + hero.location, hero.note || ''],
-        retained: ['Risk retained · Nordhavn', 'Hot work · Roof 03', DEMO.owner.name + ' · until 18:00'],
-        transferred: ['Temporary cover · ' + (sel ? sel.name : ''), 'Hot work · Roof 03', (sel ? dkk(sel.price) : '') + ` · ${DEMO.day.boundAt} to ${DEMO.day.coverEnd}`],
+        changed: [changeOption().plate || 'Decision made · changed', DEMO.hero.name + ' · ' + hero.location, hero.note || ''],
+        retained: ['Risk retained · Nordhavn', DEMO.hero.name + ' · ' + hero.location, DEMO.owner.name + ' · until ' + DEMO.day.coverEnd],
+        transferred: ['Temporary cover · ' + (sel ? sel.name : ''), DEMO.hero.name + ' · ' + hero.location, (sel ? dkk(sel.price) : '') + ` · ${DEMO.day.boundAt} to ${DEMO.day.coverEnd}`],
       }[hero.state];
       if (lab) Sched.after(1600, () => setLabel(hero, lab[0], lab[1], lab[2]), 'life');
     }
@@ -2443,14 +2738,18 @@ const ACT = {
     const premium = (path === 'transfer' && sel ? sel.price : 0) + dec.filter(p => p.outcome === 'transferred').reduce((s, p) => s + p.price, 0);
     const decisions = f.changed + f.retained + f.transferred;
     S.summary = Object.assign({ observed: DEMO.counters.finalObserved, inside: DEMO.counters.finalObserved - decisions, decisions, premium, path }, f);
-    S.counters.outside = 0;
-    countTo({ observed: DEMO.counters.finalObserved, inside: DEMO.counters.finalObserved - decisions, decisions, changed: f.changed, retained: f.retained, transferred: f.transferred, premium }, 9000);
+    S.counters.outside = 0; S.observedDerived = true;
+    // routine work keeps flowing in; each decision is counted when it is actually made (spawnPortfolio)
+    countTo({ inside: DEMO.counters.finalObserved - decisions }, 9000);
     const onSite = Object.values(S.activities).filter(a => a.persistent || a.kind === 'hero').length + items.length;
-    $('#sum-note').textContent = `On the site now: ${onSite} activities. ${onSite - decisions} inside the envelope, ${decisions} explicit decisions. Every decision is in the record.`;
+    $('#sum-note').textContent = '';
     clockTo(DEMO.day.portfolioEnd, 9000);
     Sched.after(2600, ambientPulse, 'life');
     items.forEach((p, i) => Sched.after(900 + i * 720, () => ACT.spawnPortfolio(p), 'chapter'));
-    Sched.after(900 + items.length * 720 + 600, () => { S.canRewind = true; renderControls(); showCont('See the thesis', 'From record to capacity', PORTFOLIO_AUTO_MS, 'continue'); }, 'chapter');
+    Sched.after(900 + items.length * 720 + 2100, () => { // after the last decision has resolved
+      $('#sum-note').textContent = `On the site now: ${onSite} activities. ${onSite - decisions} inside the envelope, ${decisions} explicit decisions. Every decision is in the record.`;
+      S.canRewind = true; renderControls(); showCont('See the thesis', 'From record to capacity', PORTFOLIO_AUTO_MS, 'continue');
+    }, 'chapter');
   },
   spawnPortfolio(p) {
     // Remove any transient routine node still on the site so the picture stays at 16.
@@ -2458,20 +2757,53 @@ const ACT = {
     const a = addActivity({ id: p.id, name: p.name, zone: p.zone, location: p.location, loc: p.loc, start: p.t, kind: 'portfolio', note: p.note, owner: p.owner, persistent: true });
     Sched.after(800, () => {
       if (!S.activities[a.id]) return;
-      setActState(a, p.outcome);
-      if (p.outcome === 'retained' || p.outcome === 'transferred') devTo(a, 1, 1500, EASE.inOut);
-      if (p.outcome !== 'inside') {
+      if (p.outcome === 'inside') { setActState(a, 'inside'); return; }
+      // a small echo of the hero's story: it leaves the envelope, then its decision is made
+      setActState(a, 'outside'); bump({ outside: 1 });
+      devTo(a, 1, 900, EASE.inOut, () => {
+        if (!S.activities[a.id]) return;
+        setActState(a, p.outcome);
+        if (p.outcome === 'changed') devTo(a, 0, 900, EASE.inOut); // changed work returns inside
         const l1 = { changed: 'Decision made · changed', retained: 'Risk retained · Nordhavn', transferred: 'Temporary cover · ' + (p.carrier || '') }[p.outcome];
         setLabel(a, l1, p.name, p.note);
         const e = pushRecord(p.t, p.rec, { kind: 'decision', sub: p.owner ? 'Decision: ' + p.owner : '' });
         a.rec = e.rec;
-      }
+        bump({ outside: -1, decisions: 1, [p.outcome]: 1, premium: p.price || 0 });
+      });
     }, 'life');
   },
 };
 
 /* Ambient micro-activity: brief pulses on the site. Decorative only, never an activity node.
    They show that far more happens than the sample listed in the stream. */
+/* Marks for absorbed activity: fixed pseudo-random spots on roofs and the loading
+   apron, revealed one per activity that passes inside the envelope. Decorative:
+   they show that the counter is made of real, ordinary work. */
+const TICK_SPOTS = (function () {
+  const areas = [[GEO.hall, GEO.hall.h], [GEO.ware, GEO.ware.h], [GEO.load, 0], [GEO.util, GEO.util.h], [GEO.lab, GEO.lab.h], [GEO.hall2, GEO.hall2.h]];
+  const weight = areas.map(([b]) => (b.x1 - b.x0) * (b.y1 - b.y0)), total = weight.reduce((s, w) => s + w, 0);
+  let seed = 11;
+  const rnd = () => { seed = (seed * 16807) % 2147483647; return (seed - 1) / 2147483646; };
+  const out = [];
+  while (out.length < 200) {
+    let r = rnd() * total, k = 0;
+    while (r > weight[k]) { r -= weight[k]; k++; }
+    const [b, z] = areas[k];
+    out.push(iso(lerp(b.x0 + 1.5, b.x1 - 1.5, rnd()), lerp(b.y0 + 1.5, b.y1 - 1.5, rnd()), z));
+  }
+  return out;
+})();
+let ticksShown = -1;
+function syncTicks(n) {
+  n = clamp(n, 0, TICK_SPOTS.length);
+  if (n === ticksShown) return;
+  ticksShown = n;
+  let d = '';
+  for (let i = 0; i < n; i++) d += `M${TICK_SPOTS[i][0].toFixed(2)} ${TICK_SPOTS[i][1].toFixed(2)}h.01`;
+  const el = document.getElementById('ticks');
+  if (el) el.setAttribute('d', d);
+}
+
 const AMBIENT_SPOTS = (function () {
   const tops = [GEO.util, GEO.hall, GEO.hall2, GEO.lab, GEO.ware];
   const out = [];
@@ -2497,19 +2829,25 @@ function ambientPulse() {
 }
 
 /* Timings in presentation milliseconds (speed 1). */
-const OPERATING_MS = 21000;
-const AUTO_MS = 16000;
-const PORTFOLIO_AUTO_MS = 26000;
+const OPERATING_MS = 17000;
+const AUTO_MS = 11000;           // resolved sheet: auto-continue to the portfolio
+const PORTFOLIO_AUTO_MS = 14000; // final picture: auto-continue to the end screen
 
 /* The scenario script: timed steps per stage, as data.  [ms, action, arg] */
 const SCRIPT = {
-  intro: [[250, 'introLine', 1], [1350, 'introLine', 2], [3300, 'introClear'], [3500, 'drawSite'], [4500, 'drawEnvelope'], [5600, 'introCaption'], [6200, 'introCTA']],
-  operating: [[0, 'enterOperating'], [12500, 'caption2'], [OPERATING_MS, 'goto', 'hero']],
-  hero: [[0, 'enterHero'], [500, 'spawnHero'], [1500, 'heroCard'], [2500, 'check', 0], [3100, 'check', 1], [3700, 'check', 2], [4300, 'check', 3], [4900, 'check', 4], [5600, 'heroVerified'], [6300, 'heroWait'], [10200, 'goto', 'deviation']],
-  deviation: [[0, 'enterDeviation'], [150, 'sprinklerOffline'], [1300, 'conditionFlips'], [2000, 'heroExits'], [4500, 'recordOutside'], [5600, 'decisionRequested'], [7000, 'goto', 'decision']],
+  intro: [[250, 'introLine', 1], [1700, 'introLine', 2], [5600, 'introClear'], [5800, 'drawSite'], [6800, 'drawEnvelope'], [7900, 'introCaption'], [8500, 'introCTA']],
+  operating: [[0, 'enterOperating'], [9500, 'caption2'], [OPERATING_MS, 'goto', 'hero']],
+  hero: [[0, 'enterHero'], [500, 'spawnHero'], [1500, 'heroCard'], [2500, 'check', 0], [3100, 'check', 1], [3700, 'check', 2], [4300, 'check', 3], [4900, 'check', 4], [5600, 'heroVerified'], [6300, 'heroWait'], [9000, 'goto', 'deviation']],
+  deviation: [[0, 'enterDeviation'], [150, 'sprinklerOffline'], [1300, 'conditionFlips'], [2300, 'pullBack'], [3900, 'heroExits'], [7800, 'recordOutside'], [8600, 'decisionRequested'], [9800, 'goto', 'decision']],
   decision: [[0, 'enterDecision']],
   'change-resolving': [[0, 'changeStep', 0], [300, 'changePhysical'], [2000, 'changeStep', 1], [2200, 'changeReturn'], [4300, 'changeStep', 2], [4800, 'changeInside'], [5400, 'changeStep', 3], [5600, 'changeResolved']],
-  'transfer-packaging': [[300, 'packetShow'], [900, 'packetField', 0], [1150, 'packetField', 1], [1400, 'packetField', 2], [1650, 'packetField', 3], [1900, 'packetField', 4], [2150, 'packetField', 5], [2400, 'packetField', 6], [2650, 'packetField', 7], [2900, 'packetField', 8], [3300, 'packetSeal'], [3500, 'carriersArrive'], [4000, 'packetFold'], [4750, 'packetSend'], [6000, 'carriersReceived'], [6100, 'goto', 'transfer-offers']],
+  // one field every 250 ms, then the sealed packet holds ~2.5 s before it folds and travels
+  'transfer-packaging': (function () {
+    const fieldAt = i => 900 + i * 320, seal = fieldAt(DEMO.packet.length - 1) + 400;
+    return [[300, 'packetShow'], [450, 'packetLead']]
+      .concat(DEMO.packet.map((f, i) => [fieldAt(i), 'packetField', i]))
+      .concat([[seal, 'packetSeal'], [seal + 1800, 'packetFold'], [seal + 2150, 'carriersArrive'], [seal + 2650, 'packetSend'], [seal + 3900, 'carriersReceived'], [seal + 4000, 'goto', 'transfer-offers']]);
+  })(),
   'transfer-offers': DEMO.carriers.map(c => [c.delay, 'offerArrives', c.id]).concat([[3400, 'offersComplete']]),
   portfolio: [[0, 'enterPortfolio']],
 };
@@ -2526,20 +2864,22 @@ function runChapter(name) {
 
 /* ----- stage machine ----- */
 function setStage(st) {
-  S.stage = st;
+  if (S.stage !== st) closeDetail();
+  S.stage = st; S.stageAt = performance.now();
   app.dataset.stage = st;
   app.classList.toggle('focus', FOCUS.has(st));
-  if (CAPTIONS[st] && !['operating', 'hero', 'deviation', 'decision', 'portfolio', 'intro'].includes(st)) setCaption(st);
+  if (CAPTIONS[st] && !['operating', 'hero', 'deviation', 'decision', 'portfolio', 'intro', 'end'].includes(st)) setCaption(st);
   if (st === 'change-resolved' || st === 'retained' || st === 'transfer-bound') {
     S.canRewind = true;
     Sched.after(1400, () => { if (S.stage === st) showCont('Continue', 'The site keeps operating', AUTO_MS, 'continue'); }, 'chapter');
   }
-  renderControls(); renderCounters();
+  renderControls(); renderCounters(); syncInert();
   window.dispatchEvent(new CustomEvent('priora:stage', { detail: { stage: st } }));
 }
 function goStage(st) { setStage(st); runChapter(st); }
 
 function finishIntro() {
+  app.classList.remove('plink-on');
   $('#intro').classList.add('l1', 'l2', 'out');
   siteSvg.classList.add('drawn');
   app.classList.add('labels-on', 'env-drawn');
@@ -2551,6 +2891,7 @@ function finishIntro() {
    7. CONTROLLER · every button, key and API call goes through these
    ========================================================================== */
 function hardReset() {
+  if (S && S.introRush) Ctl.setSpeed(S.introRush); // a rushed intro never leaves the demo at 4x
   const speed = Sched.speed;
   Sched.clear();
   S = freshState(speed);
@@ -2559,8 +2900,8 @@ function hardReset() {
   UI.nodes = {}; UI.nlabs = {};
   clearTransferFx();
   $('#stream').innerHTML = ''; $('#record').innerHTML = ''; $('#rec-count').textContent = 'Append-only';
-  $('#sheet').innerHTML = ''; $('#herocard').innerHTML = ''; $('#readout').innerHTML = '';
-  $('#packet').className = ''; $('#packet').innerHTML = ''; $('#carriers').innerHTML = ''; $('#plaque').className = ''; $('#offnote').className = '';
+  $('#sheet').innerHTML = ''; $('#sheet').style.height = ''; $('#herocard').innerHTML = ''; $('#readout').innerHTML = '';
+  $('#packet').className = ''; $('#packet').innerHTML = ''; $('#carriers').innerHTML = ''; $('#carriers').className = ''; $('#plaque').className = ''; $('#offnote').className = '';
   $('#cont').className = ''; $('#cont').innerHTML = '';
   closeDetail();
   $('#intro').className = '';
@@ -2576,11 +2917,13 @@ function hardReset() {
 }
 function startScenario() {
   Sched.clear();
-  S.paused = false; Sched.pause(false); app.classList.remove('paused');
+  if (S.introRush) { Ctl.setSpeed(S.introRush); S.introRush = 0; }
+  S.paused = false; Sched.pause(false); app.classList.remove('paused'); S.startedAt = performance.now();
   goStage('operating');
 }
 function setPaused(p) {
   S.paused = p; Sched.pause(p);
+  if (!p) S.startedAt = performance.now();
   app.classList.toggle('paused', p);
   renderControls();
 }
@@ -2593,13 +2936,18 @@ function snapFlush(pred) {
 
 const Ctl = {
   play() {
-    if (S.stage === 'intro') { startScenario(); return true; }
+    if (S.stage === 'intro') {
+      // still drawing the site and its envelope: finish that at 4x rather than skip it (see introCTA)
+      if (!app.classList.contains('cta-on')) { if (!S.introRush) { S.introRush = Sched.speed; Ctl.setSpeed(Sched.speed * 4); } return true; }
+      startScenario(); return true;
+    }
     if (S.stage === 'end') { hardReset(); startScenario(); return true; }
     if (S.paused) { setPaused(false); return true; }
     return false;
   },
   toggle() {
     if (S.stage === 'intro' || S.stage === 'end' || S.paused) return Ctl.play();
+    if (performance.now() - (S.startedAt || 0) < 700) return false; // second click of a double click
     if (S.stage === 'transfer-offers' && S.offersDone) return false;
     if (TIMED.has(S.stage)) { setPaused(true); return true; }
     return false;
@@ -2620,11 +2968,15 @@ const Ctl = {
     closeDetail();
     S.heroPath = path;
     if (path === 'change') { S.economics = 'change'; renderEconomics(); setStage('change-options'); showSheet('change-options'); }
-    if (path === 'retain') { S.economics = 'retain'; renderEconomics(); S.ack = false; setStage('retain-confirm'); showSheet('retain-confirm'); }
+    if (path === 'retain') { S.economics = 'retain'; renderEconomics(); setStage('retain-confirm'); showSheet('retain-confirm'); }
     if (path === 'transfer') {
       S.economics = 'transfer'; renderEconomics();
       hideSheet(); clockTo(DEMO.day.requestAt);
-      S.offers = DEMO.carriers.map(c => ({ carrierId: c.id, name: c.name, status: 'pending', price: c.price || null, deductible: c.deductible || null, until: c.until || null, capacity: c.capacity || null, declined: !!c.declined }));
+      const req = capacityRequest();
+      S.offers = DEMO.carriers.map(c => {
+        const ok = !!c.appetite(req);
+        return { carrierId: c.id, name: c.name, status: 'pending', declined: !ok, reason: ok ? null : c.decline, price: ok ? c.price : null, deductible: ok ? c.deductible : null, capacity: ok ? c.capacity : null, until: ok ? req.until : null };
+      });
       S.decision = { path: 'transfer', owner: DEMO.owner.name, status: 'requesting' };
       setStage('transfer-packaging');
       cameraTo('transfer', 1600);
@@ -2638,7 +2990,6 @@ const Ctl = {
     setStage('decision'); setCaption('decision'); showSheet('decision');
     return true;
   },
-  ack() { if (S.stage !== 'retain-confirm') return false; S.ack = !S.ack; showSheetInPlace(); return true; },
   confirm(optionId) {
     if (S.stage === 'change-options') {
       const o = DEMO.changeOptions.find(x => x.id === (optionId || 'restore-sprinkler'));
@@ -2650,14 +3001,13 @@ const Ctl = {
       return true;
     }
     if (S.stage === 'retain-confirm') {
-      S.ack = true;
       const a = HERO(), o = DEMO.owner, d = DEMO.hero.deviation;
       S.decision = { path: 'retain', owner: o.name, role: o.role, at: DEMO.day.retainAt, exposure: d.exposure, duration: d.duration, until: d.until, insurance: 'none' };
       S.deviation.status = 'retained';
       clockTo(DEMO.day.retainAt);
       setActState(a, 'retained'); updateStream(a.id, 'retained'); renderReadout(true);
       bump({ outside: -1, decisions: 1, retained: 1 });
-      const e = pushRecord(DEMO.day.retainAt, 'Incremental risk retained by ' + DEMO.owner.company, { kind: 'decision', sub: `Decision: ${o.name} · ${o.role} · ${d.duration} · until ${d.until} · no additional insurance purchased` });
+      const e = pushRecord(DEMO.day.retainAt, 'Incremental risk retained by ' + DEMO.owner.company, { kind: 'decision', sub: `Decision: ${o.name} · ${o.role} · retained ${DEMO.day.retainAt}–${d.until} · no additional insurance purchased` });
       e.path = 'retain'; a.rec = e.rec;
       setStage('retained');
       showSheet('retained');
@@ -2667,6 +3017,7 @@ const Ctl = {
   },
   selectOffer(id) {
     if (S.stage !== 'transfer-offers') return false;
+    if (S.paused) setPaused(false);
     let o = S.offers.find(x => x.carrierId === id);
     if (!o || o.declined) return false;
     // Selecting before every response is in: first let the market finish answering, so the
@@ -2675,7 +3026,7 @@ const Ctl = {
     if (o.status !== 'quoted') return false;
     const c = DEMO.carriers.find(x => x.id === id), a = HERO();
     S.selectedOffer = id;
-    S.decision = Object.assign(S.decision || {}, { path: 'transfer', carrier: c.name, price: c.price, until: c.until, status: 'bound', at: DEMO.day.boundAt, from: DEMO.day.boundAt });
+    S.decision = Object.assign(S.decision || {}, { path: 'transfer', carrier: c.name, price: o.price, until: o.until, status: 'bound', at: DEMO.day.boundAt, from: DEMO.day.boundAt });
     S.deviation.status = 'transferred';
     closeDetail();
     setStage('transfer-bound');
@@ -2687,7 +3038,7 @@ const Ctl = {
     // fold token away, bring the bound plaque
     $('#packet').classList.add('gone');
     const pl = $('#plaque');
-    pl.innerHTML = `<div class="p1">CAPACITY BOUND</div><div class="p2">${esc(c.name)}</div><div class="p3">${dkk(c.price)}</div><div class="p4">Valid until ${c.until} · from ${DEMO.day.boundAt}<br>Temporary activity cover</div><div class="p6">Annual programme unchanged</div><div class="p5" id="pl-rec"></div>`;
+    pl.innerHTML = `<div class="p1">CAPACITY BOUND</div><div class="p2">${esc(c.name)}</div><div class="p3">${dkk(c.price)}</div><div class="p4">Valid until ${o.until} · from ${DEMO.day.boundAt}<br>Temporary activity cover</div><div class="p6">Annual programme unchanged</div><div class="p7">${esc(DEMO.hero.name)} continues · ${esc(DEMO.hero.location)}</div><div class="p5" id="pl-rec"></div><div class="p8">Fictional carrier · illustrative price</div>`;
     placeTransfer();
     Sched.after(250, () => pl.classList.add('on'), 'chapter');
     // connection: carrier to plaque to activity (double hairline)
@@ -2702,10 +3053,10 @@ const Ctl = {
     Sched.after(1500, () => {
       setActState(a, 'transferred'); updateStream(a.id, 'transferred'); renderReadout(true);
       bump({ outside: -1, decisions: 1, transferred: 1, premium: c.price });
-      const e = pushRecord(DEMO.day.boundAt, 'Temporary capacity bound · ' + dkk(c.price), { kind: 'decision', sub: `${c.name} · ${DEMO.day.boundAt} to ${c.until} · decision: ${DEMO.owner.name}` });
+      const e = pushRecord(DEMO.day.boundAt, 'Temporary capacity bound · ' + dkk(c.price), { kind: 'decision', sub: `${c.name} · ${DEMO.day.boundAt} to ${o.until} · decision: ${DEMO.owner.name}` });
       e.path = 'transfer'; a.rec = e.rec;
       $('#pl-rec').textContent = e.rec + ' · ' + e.fp;
-      pushRecord(c.until, 'Temporary cover expires', { kind: 'sched', sub: c.name + ' · activity returns to annual programme terms' });
+      pushRecord(o.until, 'Temporary cover expires', { kind: 'sched', sub: c.name + ' · activity returns to annual programme terms' });
       renderEconomics();
     }, 'chapter');
     return true;
@@ -2729,7 +3080,10 @@ const Ctl = {
       goStage('portfolio');
       return true;
     }
-    if (st === 'portfolio') { Sched.cancel('auto'); Sched.flushUntil(() => !Sched.has('chapter')); goEnd(); return true; }
+    if (st === 'portfolio') {
+      if (Sched.has('chapter')) { snapFlush(() => !Sched.has('chapter')); return true; } // finish the final picture
+      Sched.cancel('auto'); goEnd(); return true;
+    }
     return false;
   },
   rewind() {
@@ -2738,6 +3092,8 @@ const Ctl = {
     app.classList.add('snap');
     startScenario();
     Sched.flushUntil(() => S.stage === 'decision');
+    Sched.flushUntil(() => app.classList.contains('sheet-on'));
+    Sched.kill('camera'); app.classList.remove('cam-moving'); UI.view = 'decision'; UI.cam = computeView('decision');
     S.canRewind = true;
     renderControls();
     frame();
@@ -2745,16 +3101,12 @@ const Ctl = {
     return true;
   },
 };
-function showSheetInPlace() {
-  const sv = $('#sheet .sv:last-child');
-  if (sv) { sv.innerHTML = SHEET[sv.dataset.view](); sv.style.animation = 'none'; }
-}
 function goEnd() {
   closeDetail(); hideCont();
   setStage('end');
   renderChain();
   const end = $('#end');
-  const seq = [[300, () => end.classList.add('s1')], [1700, () => end.classList.add('s2')]];
+  const seq = [[300, () => end.classList.add('s1')], [1700, () => end.classList.add('s2')], [2900, () => end.classList.add('s3')]];
   for (let i = 0; i < 5; i++) {
     seq.push([3300 + i * 520, () => { const st = $(`#chain .st[data-i="${i}"]`); if (st) st.classList.add('on'); const ar = $(`#chain .ar[data-i="${i}"]`); if (ar) ar.classList.add('on'); }]);
   }
@@ -2767,7 +3119,10 @@ document.addEventListener('click', e => {
   const act = e.target.closest('[data-act]');
   if (act) {
     const [name, arg] = act.dataset.act.split(':');
-    if (act.disabled) return;
+    if (act.disabled || e.detail > 1) return; // the second click of a double click never acts
+    const sh = act.closest('#sheet');
+    if (sh && performance.now() < +(sh.dataset.lock || 0)) return;
+    if (e.detail && act.blur) act.blur(); // pointer clicks do not leave focus behind for Space to re-fire
     switch (name) {
       case 'play': Ctl.play(); break;
       case 'toggle': Ctl.toggle(); break;
@@ -2777,9 +3132,8 @@ document.addEventListener('click', e => {
       case 'choose': Ctl.choose(arg); break;
       case 'confirm': Ctl.confirm(arg); break;
       case 'offer': Ctl.selectOffer(arg); break;
-      case 'continue': Ctl.continue(); break;
+      case 'continue': userContinue(); break;
       case 'back': Ctl.back(); break;
-      case 'ack': Ctl.ack(); break;
       case 'close-detail': closeDetail(); break;
     }
     return;
@@ -2791,12 +3145,18 @@ document.addEventListener('click', e => {
 window.addEventListener('keydown', e => {
   if (e.metaKey || e.ctrlKey || e.altKey) return;
   const k = e.key;
-  if ((k === ' ' || k === 'Enter') && e.target.closest && e.target.closest('button')) return;
-  if (k === ' ' || k === 'Enter') { e.preventDefault(); if (S.stage === 'intro' || S.stage === 'end') Ctl.play(); else if (S.paused) Ctl.play(); else Ctl.continue(); }
+  // a control that has keyboard focus: Space / Enter activate it (offers are not buttons, so click them)
+  const ctl = e.target.closest && e.target.closest('button, [data-act]');
+  if ((k === ' ' || k === 'Enter') && ctl) { if (ctl.tagName !== 'BUTTON') { e.preventDefault(); ctl.click(); } return; }
+  if (k === ' ') { e.preventDefault(); Ctl.toggle(); }                        // Space: play, pause, resume
+  else if (k === 'Enter' || k === 'ArrowRight' || k === 'PageDown' || k === 'n' || k === 'N') { e.preventDefault(); userContinue(); } // next (clickers send PageDown)
   else if (k === 'r' || k === 'R') Ctl.reset();
   else if (k === 'p' || k === 'P') Ctl.toggle();
-  else if (k === '1' || k === '2' || k === '3') { if (S.stage === 'decision') Ctl.choose(['change', 'retain', 'transfer'][+k - 1]); }
-  else if (k === 'Escape') closeDetail();
+  else if (k === '1' || k === '2' || k === '3') {
+    if (S.stage === 'decision') Ctl.choose(['change', 'retain', 'transfer'][+k - 1]);
+    else if (S.stage === 'transfer-offers') { const q = $$('#carriers .carrier.quoted')[+k - 1]; if (q) Ctl.selectOffer(q.dataset.carrier); }
+  }
+  else if (k === 'Escape') { if (UI.detailId) closeDetail(); else Ctl.back(); }
 });
 window.addEventListener('resize', onResize);
 
@@ -2824,14 +3184,28 @@ window.PrioraDemo = {
 };
 
 /* ----- boot ----- */
+/* Header values come from DEMO (the static markup is only a no-JS fallback). */
+(function renderHeader() {
+  const p = DEMO.programme;
+  $('#h-site').textContent = DEMO.site.name; $('#h-city').textContent = DEMO.site.city;
+  $('#h-prog').textContent = p.title; $('#h-value').textContent = p.insuredValue;
+  $('#h-lead').textContent = p.leadCarrier; $('#h-renew').textContent = p.renewal;
+})();
 $('#world').innerHTML = buildSite();
 buildZoneLabels();
-$('#env-lab-t').textContent = 'ANNUAL PROGRAMME ENVELOPE · PROPERTY + BI';
+$('#env-lab-t').textContent = 'ANNUAL PROGRAMME · ACCEPTED RISK ENVELOPE';
 S = freshState(1);
 Ctl.setSpeed(1);
 hardReset();
 runChapter('intro');
-(function loop() { Sched.tick(); frame(); requestAnimationFrame(loop); })();
+// Full-rate redraw while anything moves (tweens, or within 1.5 s of a stage change), ~8 fps when idle.
+(function loop() {
+  Sched.tick();
+  const now = performance.now();
+  if (Sched.busy || now - Math.max(UI.lastBusy || 0, S.stageAt || 0) < 1500 || now - (UI.lastFrame || 0) > 125) { frame(); UI.lastFrame = now; }
+  if (Sched.busy) UI.lastBusy = now;
+  requestAnimationFrame(loop);
+})();
 setInterval(() => Sched.tick(), 50);
 })();
 </script>
