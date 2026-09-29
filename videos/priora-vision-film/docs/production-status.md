@@ -1,6 +1,6 @@
 # Production status and resume guide
 
-Last updated: 2026-09-29, cut 2 in build (cinematic re-staging, natural narration on a 92 BPM grid).
+Last updated: 2026-09-29, cut 2 rendered and delivered as a preview (128.17 s, guide voice).
 
 ## Where things stand
 
@@ -11,10 +11,11 @@ Last updated: 2026-09-29, cut 2 in build (cinematic re-staging, natural narratio
 | Demo extraction, site kit, interface kit, sketch kit | done (interface grey text raised to readable contrast in cut 2) | assets/, docs/ |
 | Narration (guide) | cut 2: natural speed, lines on the 92 BPM half-beat grid, no fixed runtime (126.53 s); L17 split a/b/c with "whether they will cover it" | narration/, SCRIPT.md |
 | Pipeline | done; film-lib gains the beat grid, shared cut times and a DOM board camera | scripts/build-cues.mjs, assets/js/film-lib.js |
-| Scenes | cut 2 re-staging in progress (a1-world, a1-inserts (new), a1-paper, a1-after, a2-resolve, a3-change, a3-close); chrome updated | compositions/ |
-| Audio engine | cut 2: 92 BPM score and editorial accents in progress | audio-engine/ |
+| Scenes | cut 2: all eight compositions re-staged and integrated (a1-world, a1-inserts, a1-paper, a1-after, a2-resolve, a3-change, a3-close, chrome); full HyperFrames check passes | compositions/ |
+| Audio engine | cut 2: score on the 92 BPM grid, editorial accents, holds; master -16.0 LUFS, -1.05 dBTP | audio-engine/ |
 | First cut (guide voice, 90 s) | delivered | renders/priora-vision-film-cut1.mp4 (not tracked), stills/cut1/ |
-| Seek-order check | tool ready (scripts/seek-check.py); run on the full cut 2 | scripts/seek-check.py |
+| Cut 2 (guide voice, 128.17 s) | rendered | renders/priora-vision-film-cut2.mp4 and -preview.mp4 (not tracked), stills/cut2/ |
+| Seek-order check | run on cut 2: 83 of 97 sampled frames pixel-identical in any seek order; 14 differ only by text anti-aliasing and 1 to 3 px on graphite lines mid-draw (see below) | scripts/seek-check.py |
 | ElevenLabs narration | blocked (network) | see below |
 | Final render and delivery | not started | renders/ |
 
@@ -38,6 +39,10 @@ Agreed route: the ElevenLabs web app in the agent's own Playwright Chromium, the
 1. Read BRIEF.md (decisions), STORYBOARD.md (the plan), this file (state), frame.md (look).
 2. Everything built so far is committed on branch claude/new-session-81b4mg (draft PR Mesbrandbil/valcorv#2).
 3. Tool setup a fresh container needs: apt ffmpeg sox fluidsynth musescore-general-soundfont; pip kokoro-onnx soundfile numpy scipy librosa pyloudnorm pocketsphinx; Kokoro model files from the kokoro-onnx GitHub release into /root/.cache/kokoro/; npx hyperframes@0.8.92 browser ensure.
+
+## Seek check on the assembled cut 2
+
+Each scene was pixel-identical in any seek order on its own. Assembled, 14 of 97 sampled frames differ between ascending and shuffled seeks: text anti-aliasing flips in a1-paper (stamp), a2-resolve (VERIFIED labels) and the a3-close crossfade, and draw fronts 1 to 3 px apart on a1-world graphite lines being drawn (11.1, 21.2, 26.5, 33.1 s). At 21.18 s the shuffled (direct) seek equals a fresh page seek, so it is the sequential path that drifts there. Tried and rejected: removing the surface layer's opacity (no change); `will-change: transform` on every scene slot (worse: 17 of 97, because a promoted slot keeps its raster scale while board cameras zoom). Next: per-scene fixes (a1-world's containment draw, text layering in a1-paper and a2-resolve).
 
 ## Hard-won rules for every composition
 
