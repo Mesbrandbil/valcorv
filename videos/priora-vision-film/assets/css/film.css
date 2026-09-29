@@ -1,0 +1,269 @@
+/*
+  film.css: base tokens, type scale and layout rules for the Priora vision film (1920x1080).
+
+  Load order: index.html links this file in <head>. It imports fonts.css, so every
+  composition gets IBM Plex without its own @font-face. Sub-compositions may also
+  link it (<link rel="stylesheet" href="../assets/css/film.css">); the assembler
+  hoists the link into the page head and de-duplicates it, so that is harmless.
+
+  Rules of use (see docs/pipeline.md):
+  - Colours only through the tokens below. Blue (--signal*) never appears in Act I.
+  - Nothing meant to be read is smaller than 18px. --fs-meta (16px) is decorative only.
+  - Scene-specific CSS lives inside the scene's <template><style>, with ids and
+    classes prefixed by the scene id. This file holds only shared, generic rules.
+*/
+@import url("./fonts.css");
+
+:root {
+  /* Paper and ink */
+  --paper: #f5f3ee;
+  --paper-2: #efece5;
+  --paper-3: #eae6dd;
+  --paper-hi: #fbfaf7;
+  --ink: #111111;
+  --ink-2: #2a2a2a;
+  --charcoal: #34332f;
+  --graphite: #3b3a36;
+  --graphite-light: #8f8c86;
+  --grey-1: #5e5d59;
+  --grey-2: #6a6863;
+  --grey-3: #9c9994;
+  --grey-4: #a9a6a0;
+  --rule: #cfcbc3;
+  --rule-soft: #e1dcd1;
+
+  /* The one signal colour: live connection, changed condition, decision state */
+  --signal: #1f47d6;
+  --signal-ink: #1838a8;
+  --signal-soft: #dce2f5;
+
+  /* Faces of the isometric site in its precise (demo) state */
+  --face-top: #fbfaf6;
+  --face-right: #eae6dd;
+  --face-left: #e1dcd1;
+  --ground: #efece5;
+
+  /* Type */
+  --sans: "IBM Plex Sans", "Helvetica Neue", Arial, sans-serif;
+  --mono: "IBM Plex Mono", Menlo, Consolas, monospace;
+
+  --fs-display-xl: 104px;
+  --fs-display: 96px;
+  --fs-display-sm: 88px;
+  --fs-heading: 60px;
+  --fs-heading-sm: 44px;
+  --fs-body-lg: 30px;
+  --fs-body: 26px;
+  --fs-body-sm: 24px;
+  --fs-label-lg: 20px;
+  --fs-label: 18px;
+  --fs-meta: 16px; /* decorative metadata only, never required reading */
+
+  --track-display: -0.02em;
+  --track-heading: -0.015em;
+  --track-label: 0.12em;
+  --track-label-wide: 0.14em;
+
+  /* Lines (screen px at 1080p) */
+  --lw-pencil: 1.5px;
+  --lw-pencil-fine: 1px;
+  --lw-precise: 1.25px;
+  --lw-signal: 2px;
+
+  /* Frame */
+  --safe: 96px;
+  --sheet-inset: 36px;
+
+  /* Motion vocabulary (strings for GSAP, documented here so scenes agree) */
+  --ease-camera: "power2.inOut";
+  --ease-enter: "power3.out";
+  --ease-snap: "expo.out";
+}
+
+/* ---------- Base ---------- */
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: geometricPrecision;
+  font-kerning: normal;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* ---------- Type scale ---------- */
+
+.fl-display-xl,
+.fl-display,
+.fl-display-sm {
+  font-family: var(--sans);
+  font-weight: 300;
+  line-height: 1.08;
+  letter-spacing: var(--track-display);
+  color: var(--ink);
+  margin: 0;
+}
+.fl-display-xl {
+  font-size: var(--fs-display-xl);
+}
+.fl-display {
+  font-size: var(--fs-display);
+}
+.fl-display-sm {
+  font-size: var(--fs-display-sm);
+}
+
+.fl-heading,
+.fl-heading-sm {
+  font-family: var(--sans);
+  font-weight: 400;
+  line-height: 1.12;
+  letter-spacing: var(--track-heading);
+  color: var(--ink);
+  margin: 0;
+}
+.fl-heading {
+  font-size: var(--fs-heading);
+}
+.fl-heading-sm {
+  font-size: var(--fs-heading-sm);
+}
+
+.fl-body-lg,
+.fl-body,
+.fl-body-sm {
+  font-family: var(--sans);
+  font-weight: 400;
+  line-height: 1.35;
+  color: var(--ink-2);
+  margin: 0;
+}
+.fl-body-lg {
+  font-size: var(--fs-body-lg);
+}
+.fl-body {
+  font-size: var(--fs-body);
+}
+.fl-body-sm {
+  font-size: var(--fs-body-sm);
+}
+
+.fl-label,
+.fl-label-lg,
+.fl-meta {
+  font-family: var(--mono);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: var(--track-label);
+  line-height: 1.25;
+  color: var(--graphite);
+  margin: 0;
+  white-space: nowrap;
+}
+.fl-label {
+  font-size: var(--fs-label);
+}
+.fl-label-lg {
+  font-size: var(--fs-label-lg);
+}
+.fl-meta {
+  font-size: var(--fs-meta);
+  font-weight: 400;
+  color: var(--grey-1);
+}
+
+.fl-mono {
+  font-family: var(--mono);
+}
+.fl-num {
+  font-family: var(--mono);
+  font-variant-numeric: tabular-nums;
+}
+.fl-light {
+  font-weight: 300;
+}
+.fl-medium {
+  font-weight: 500;
+}
+.fl-semibold {
+  font-weight: 600;
+}
+.fl-signal {
+  color: var(--signal);
+}
+.fl-muted {
+  color: var(--grey-1);
+}
+
+/* ---------- Layout ---------- */
+
+/* Full-frame layer inside a scene. */
+.fl-layer {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* Safe area for required reading: 96px from every edge. */
+.fl-safe {
+  position: absolute;
+  inset: var(--safe);
+}
+
+/* Full-bleed SVG stage (the site drawing, camera-framed via viewBox). */
+.fl-stage {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  overflow: hidden;
+}
+
+/* Pencil and precise strokes. Stroke widths stay constant on screen under the camera. */
+.fl-stroke,
+.fl-stroke * {
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
+}
+.fl-pencil {
+  stroke: var(--graphite);
+  stroke-width: var(--lw-pencil);
+}
+.fl-pencil-fine {
+  stroke: var(--graphite-light);
+  stroke-width: var(--lw-pencil-fine);
+}
+.fl-precise {
+  stroke: var(--grey-1);
+  stroke-width: var(--lw-precise);
+}
+.fl-signal-stroke {
+  stroke: var(--signal);
+  stroke-width: var(--lw-signal);
+}
+
+/* Hairline rules for frame furniture. */
+.fl-rule {
+  display: block;
+  height: 1px;
+  background: var(--rule);
+}
+
+/* Text blocks that must never force-wrap mid-phrase. */
+.fl-nowrap {
+  white-space: nowrap;
+}

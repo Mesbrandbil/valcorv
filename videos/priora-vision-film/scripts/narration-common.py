@@ -57,7 +57,7 @@ def validate_lines(data: dict) -> None:
         ids.add(lid)
         if line["speaker"] not in ("narrator", "worker"):
             raise ValueError(f"{lid}: speaker must be narrator or worker")
-        if "—" in line["text"]:
+        if "\u2014" in line["text"]:
             raise ValueError(f"{lid}: em dash in display text")
         n = len(tokens(line["text"]))
         for engine in ("guide", "elevenlabs"):
@@ -140,7 +140,7 @@ def aligner_words(tok: str, pronunciations: dict | None = None) -> list[str]:
         if low in forms:
             return [entry.get("aligner_word", key.lower())]
     out = []
-    for part in re.split(r"[-–/]", low):
+    for part in re.split("[-\u2013/]", low):
         part = part.strip(_EDGE_PUNCT)
         if not part:
             continue
