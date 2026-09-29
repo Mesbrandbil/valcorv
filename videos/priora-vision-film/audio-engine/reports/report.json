@@ -5,235 +5,259 @@
     "voice": "/home/user/valcorv/videos/priora-vision-film/assets/audio/voice.wav",
     "events": []
   },
-  "duration": 90.0,
+  "duration": 128.16666666666666,
   "cues": {
     "l01": {
-      "t": 0.8,
+      "t": 2.935,
       "source": "cue:l01"
     },
     "hour": {
-      "t": 3.02,
+      "t": 5.165,
       "source": "cue:hour"
     },
     "contractors": {
-      "t": 3.67,
+      "t": 6.196,
       "source": "cue:contractors"
     },
+    "equipment": {
+      "t": 8.086,
+      "source": "cue:equipment"
+    },
     "isolated": {
-      "t": 5.9,
+      "t": 8.916,
       "source": "cue:isolated"
     },
     "workMoves": {
-      "t": 6.99,
+      "t": 10.226,
       "source": "cue:workMoves"
     },
     "insurance": {
-      "t": 8.17,
+      "t": 12.065,
       "source": "cue:insurance"
     },
     "accepted": {
-      "t": 10.49,
+      "t": 14.615,
       "source": "cue:accepted"
     },
     "translate": {
-      "t": 11.82,
+      "t": 16.578,
       "source": "cue:translate"
     },
     "permits": {
-      "t": 12.58,
+      "t": 17.368,
       "source": "cue:permits"
     },
     "checklists": {
-      "t": 13.79,
+      "t": 18.608,
       "source": "cue:checklists"
     },
     "noOne": {
-      "t": 14.76,
+      "t": 20.543,
       "source": "cue:noOne"
     },
     "moving": {
-      "t": 15.72,
+      "t": 21.603,
       "source": "cue:moving"
     },
     "head": {
-      "t": 16.51,
+      "t": 22.463,
       "source": "cue:head"
     },
     "roof03": {
-      "t": 17.39,
+      "t": 24.26,
       "source": "cue:roof03"
     },
     "hotWork": {
-      "t": 18.09,
+      "t": 25.04,
       "source": "cue:hotWork"
     },
     "safeguards": {
-      "t": 19.41,
+      "t": 26.52,
       "source": "cue:safeguards"
     },
     "inPlace": {
-      "t": 20.49,
+      "t": 27.69,
       "source": "cue:inPlace"
     },
     "landing": {
-      "t": 20.69,
+      "t": 28.772,
       "source": "cue:landing"
     },
+    "then": {
+      "t": 29.022,
+      "source": "cue:then"
+    },
     "offline": {
-      "t": 22.28,
+      "t": 30.532,
       "source": "cue:offline"
     },
     "nothingLooks": {
-      "t": 23.98,
+      "t": 33.587,
       "source": "cue:nothingLooks"
     },
     "changed": {
-      "t": 26.2,
+      "t": 36.297,
       "source": "cue:changed"
     },
     "nobody": {
-      "t": 27.03,
+      "t": 37.227,
       "source": "cue:nobody"
     },
+    "nobodyEnd": {
+      "t": 38.227,
+      "source": "cue:nobodyEnd"
+    },
     "afterwards": {
-      "t": 28.96,
+      "t": 40.435,
       "source": "cue:afterwards"
     },
     "q1": {
-      "t": 31.6,
+      "t": 43.696,
       "source": "cue:q1"
     },
     "q3": {
-      "t": 34.57,
+      "t": 47.676,
       "source": "cue:q3"
     },
     "gap": {
-      "t": 36.85,
+      "t": 50.807,
       "source": "cue:gap"
     },
     "tooLate": {
-      "t": 38.28,
+      "t": 52.357,
       "source": "cue:tooLate"
     },
     "rewindStart": {
-      "t": 39.01,
+      "t": 53.107,
       "source": "cue:rewindStart"
     },
     "rewindEnd": {
-      "t": 42.36,
+      "t": 58.722,
       "source": "cue:rewindEnd"
     },
     "l12": {
-      "t": 42.66,
+      "t": 59.022,
       "source": "cue:l12"
     },
     "decisionWord": {
-      "t": 43.02,
+      "t": 59.452,
       "source": "cue:decisionWord"
     },
+    "riskChanged": {
+      "t": 61.752,
+      "source": "cue:riskChanged"
+    },
     "worker": {
-      "t": 45.81,
+      "t": 63.261,
       "source": "cue:worker"
     },
     "workerEnd": {
-      "t": 48.2,
+      "t": 65.651,
       "source": "cue:six"
     },
     "connects": {
-      "t": 49.12,
+      "t": 67.298,
       "source": "cue:connects"
     },
     "keepsRecord": {
-      "t": 54.76,
+      "t": 74.489,
       "source": "cue:keepsRecord"
     },
     "prevention": {
-      "t": 55.61,
+      "t": 75.978,
       "source": "cue:prevention"
     },
     "proof": {
-      "t": 57.34,
+      "t": 78.128,
       "source": "cue:proof"
     },
     "l16": {
-      "t": 59.55,
+      "t": 81.196,
       "source": "cue:l16"
     },
     "offline2": {
-      "t": 60.47,
+      "t": 82.156,
       "source": "cue:offline2"
     },
     "sees": {
-      "t": 62.52,
+      "t": 84.666,
       "source": "cue:sees"
     },
     "cross": {
-      "t": 63.57,
+      "t": 85.816,
       "source": "cue:cross"
     },
     "riskOwner": {
-      "t": 64.87,
+      "t": 88.696,
       "source": "cue:riskOwner"
     },
     "change": {
-      "t": 66.48,
+      "t": 90.656,
       "source": "cue:change"
     },
     "retain": {
-      "t": 67.61,
+      "t": 93.761,
       "source": "cue:retain"
     },
     "carriers": {
-      "t": 70.15,
+      "t": 98.016,
       "source": "cue:carriers"
     },
     "ordinary": {
-      "t": 72.7,
+      "t": 102.859,
       "source": "cue:ordinary"
     },
     "decisionsL18": {
-      "t": 75.36,
+      "t": 105.949,
       "source": "cue:decisionsL18"
     },
+    "closeIn": {
+      "t": 106.719,
+      "source": "cue:closeIn"
+    },
     "chainRecord": {
-      "t": 76.49,
+      "t": 107.935,
       "source": "cue:chainRecord"
     },
     "chainTrust": {
-      "t": 77.34,
+      "t": 108.895,
       "source": "cue:chainTrust"
     },
     "chainDecision": {
-      "t": 78.96,
+      "t": 111.177,
       "source": "cue:chainDecision"
     },
     "chainPrice": {
-      "t": 81.01,
+      "t": 113.6,
       "source": "cue:chainPrice"
     },
     "chainCapacity": {
-      "t": 82.78,
+      "t": 115.883,
       "source": "cue:chainCapacity"
     },
+    "chainHold": {
+      "t": 116.693,
+      "source": "cue:chainHold"
+    },
     "priora": {
-      "t": 84.17,
+      "t": 119.348,
       "source": "cue:priora"
     },
     "infrastructure": {
-      "t": 85.25,
+      "t": 120.958,
       "source": "cue:infrastructure"
     }
   },
   "events": {
-    "total": 247,
+    "total": 288,
     "by_source_kind": {
       "designed:distant-clank": 2,
+      "designed:radio-click": 1,
       "designed:radio-squelch": 1,
-      "designed:relay-click": 1,
-      "designed:solenoid-click": 1,
       "designed:system-tick": 1,
       "designed:valve-clunk": 1,
       "scene:align-snap": 20,
+      "scene:arc": 1,
       "scene:capture-start": 1,
       "scene:chain-capacity": 1,
       "scene:chain-decision": 1,
@@ -244,98 +268,769 @@
       "scene:confirm": 6,
       "scene:connect-line": 4,
       "scene:cross-snap": 1,
+      "scene:cut": 17,
       "scene:decision-accent": 2,
+      "scene:focus": 3,
       "scene:footsteps": 2,
       "scene:fray": 1,
+      "scene:gauge": 1,
+      "scene:handwheel": 2,
       "scene:incident": 1,
       "scene:latch": 1,
       "scene:latch-soft": 1,
       "scene:node-pass": 6,
       "scene:packet": 1,
       "scene:paper-lift": 1,
-      "scene:paper-slide": 15,
-      "scene:pencil-hatch": 1,
-      "scene:pencil-stroke": 63,
-      "scene:pencil-tick": 51,
-      "scene:pin": 7,
-      "scene:radio-click": 1,
-      "scene:record-append": 6,
+      "scene:paper-slide": 3,
+      "scene:pencil-hatch": 2,
+      "scene:pencil-stroke": 77,
+      "scene:pencil-tick": 54,
+      "scene:pin": 13,
+      "scene:pull": 10,
+      "scene:push": 3,
+      "scene:record-append": 3,
       "scene:relay-click": 1,
       "scene:response-tick": 4,
       "scene:row-unavailable": 1,
-      "scene:ruler-contact": 4,
+      "scene:ruler-contact": 3,
       "scene:set-square-tap": 1,
       "scene:sheet-in": 2,
+      "scene:sheet-lay": 1,
       "scene:stamp": 1,
       "scene:stretch": 1,
-      "scene:technical-pen": 23,
+      "scene:technical-pen": 8,
       "scene:valve-clunk": 1,
-      "scene:van": 1
+      "scene:van": 1,
+      "scene:whip": 12
     },
     "control": {
-      "subtract_at": 22.28,
-      "subtract_fade": 2.1,
-      "rewind_event": 39.01
-    }
+      "subtract_at": 30.532,
+      "subtract_fade": 3.055,
+      "rewind_event": 53.107
+    },
+    "holds": 5
+  },
+  "editorial_grid": {
+    "count": 51,
+    "on_half_beat_within_20ms": 40,
+    "max_offset_from_half_beat_ms": 163.0,
+    "rows": [
+      {
+        "t": 2.935,
+        "kind": "pull",
+        "scene": "a1-world",
+        "name": "pull",
+        "at": "1.1.5",
+        "offset_ms": 0.2
+      },
+      {
+        "t": 6.196,
+        "kind": "cut",
+        "scene": "a1-world",
+        "name": "cut-gate",
+        "at": "2.2.5",
+        "offset_ms": 0.3
+      },
+      {
+        "t": 7.826,
+        "kind": "cut",
+        "scene": "a1-inserts",
+        "name": "loto-cut-in",
+        "at": "3.1",
+        "offset_ms": -0.1
+      },
+      {
+        "t": 10.109,
+        "kind": "cut",
+        "scene": "a1-inserts",
+        "name": "loto-cut-out",
+        "at": "3.4.5",
+        "offset_ms": 0.3
+      },
+      {
+        "t": 10.109,
+        "kind": "cut",
+        "scene": "a1-world",
+        "name": "cut-morning",
+        "at": "3.4.5",
+        "offset_ms": 0.3
+      },
+      {
+        "t": 12.065,
+        "kind": "pull",
+        "scene": "a1-world",
+        "name": "rise",
+        "at": "4.3.5",
+        "offset_ms": -0.2
+      },
+      {
+        "t": 15.326,
+        "kind": "sheet-lay",
+        "scene": "a1-paper",
+        "name": "sheet-lay",
+        "at": "5.4.5",
+        "offset_ms": -0.1
+      },
+      {
+        "t": 16.304,
+        "kind": "whip",
+        "scene": "a1-paper",
+        "name": "follow",
+        "at": "6.2",
+        "offset_ms": -0.3
+      },
+      {
+        "t": 17.12,
+        "kind": "whip",
+        "scene": "a1-paper",
+        "name": "whip-permit",
+        "at": "6.3.5",
+        "offset_ms": -162.6
+      },
+      {
+        "t": 17.772,
+        "kind": "whip",
+        "scene": "a1-paper",
+        "name": "whip-briefing",
+        "at": "6.4.5",
+        "offset_ms": -162.8
+      },
+      {
+        "t": 18.424,
+        "kind": "whip",
+        "scene": "a1-paper",
+        "name": "whip-checklist",
+        "at": "7.1.5",
+        "offset_ms": -163.0
+      },
+      {
+        "t": 19.076,
+        "kind": "pull",
+        "scene": "a1-paper",
+        "name": "pull-back",
+        "at": "7.2",
+        "offset_ms": 163.0
+      },
+      {
+        "t": 24.13,
+        "kind": "push",
+        "scene": "a1-world",
+        "name": "push-roof03",
+        "at": "9.2",
+        "offset_ms": -0.4
+      },
+      {
+        "t": 24.783,
+        "kind": "cut",
+        "scene": "a1-inserts",
+        "name": "weld-cut-in",
+        "at": "9.3",
+        "offset_ms": 0.4
+      },
+      {
+        "t": 26.087,
+        "kind": "cut",
+        "scene": "a1-inserts",
+        "name": "weld-cut-out",
+        "at": "10.1",
+        "offset_ms": 0.0
+      },
+      {
+        "t": 26.087,
+        "kind": "cut",
+        "scene": "a1-world",
+        "name": "cut-roof03",
+        "at": "10.1",
+        "offset_ms": 0.0
+      },
+      {
+        "t": 29.022,
+        "kind": "cut",
+        "scene": "a1-inserts",
+        "name": "sz3-cut-in",
+        "at": "11.1.5",
+        "offset_ms": 0.3
+      },
+      {
+        "t": 31.304,
+        "kind": "cut",
+        "scene": "a1-inserts",
+        "name": "sz3-cut-out",
+        "at": "12.1",
+        "offset_ms": -0.3
+      },
+      {
+        "t": 31.304,
+        "kind": "cut",
+        "scene": "a1-world",
+        "name": "cut-sz3",
+        "at": "12.1",
+        "offset_ms": -0.3
+      },
+      {
+        "t": 31.304,
+        "kind": "hold",
+        "scene": "a1-world",
+        "name": "hold-sz3",
+        "at": "12.1",
+        "offset_ms": -0.3
+      },
+      {
+        "t": 33.587,
+        "kind": "cut",
+        "scene": "a1-world",
+        "name": "cut-nothing",
+        "at": "12.4.5",
+        "offset_ms": 0.0
+      },
+      {
+        "t": 35.543,
+        "kind": "push",
+        "scene": "a1-world",
+        "name": "push-edge",
+        "at": "13.3.5",
+        "offset_ms": -0.5
+      },
+      {
+        "t": 38.152,
+        "kind": "pull",
+        "scene": "a1-world",
+        "name": "pull-back",
+        "at": "14.3.5",
+        "offset_ms": -0.2
+      },
+      {
+        "t": 38.227,
+        "kind": "hold",
+        "scene": "a1-world",
+        "name": "hold-9c",
+        "at": "14.3.5",
+        "offset_ms": 74.8
+      },
+      {
+        "t": 40.435,
+        "kind": "cut",
+        "scene": "a1-world",
+        "name": "cut-after",
+        "at": "15.3",
+        "offset_ms": 0.2
+      },
+      {
+        "t": 41.705,
+        "kind": "pull",
+        "scene": "a1-world",
+        "name": "pull-after",
+        "at": "16.1",
+        "offset_ms": -34.1
+      },
+      {
+        "t": 45.326,
+        "kind": "whip",
+        "scene": "a1-after",
+        "name": "whip-1",
+        "at": "17.2.5",
+        "offset_ms": -0.1
+      },
+      {
+        "t": 47.609,
+        "kind": "whip",
+        "scene": "a1-after",
+        "name": "whip-2",
+        "at": "18.2",
+        "offset_ms": 0.3
+      },
+      {
+        "t": 50.543,
+        "kind": "pull",
+        "scene": "a1-after",
+        "name": "pull-wide",
+        "at": "19.2.5",
+        "offset_ms": -0.5
+      },
+      {
+        "t": 51.848,
+        "kind": "hold",
+        "scene": "a1-after",
+        "name": "gap-hold",
+        "at": "19.4.5",
+        "offset_ms": 0.2
+      },
+      {
+        "t": 81.22,
+        "kind": "cut",
+        "scene": "a3-change",
+        "name": "cut-in",
+        "at": "31.1.5",
+        "offset_ms": 24.3
+      },
+      {
+        "t": 83.478,
+        "kind": "cut",
+        "scene": "a3-change",
+        "name": "cut-card",
+        "at": "32.1",
+        "offset_ms": -0.3
+      },
+      {
+        "t": 83.498,
+        "kind": "focus",
+        "scene": "a3-change",
+        "name": "focus-row",
+        "at": "32.1",
+        "offset_ms": 19.7
+      },
+      {
+        "t": 85.761,
+        "kind": "cut",
+        "scene": "a3-change",
+        "name": "cut-edge",
+        "at": "32.4.5",
+        "offset_ms": 0.1
+      },
+      {
+        "t": 86.969,
+        "kind": "hold",
+        "scene": "a3-change",
+        "name": "crossing-hold",
+        "at": "33.2.5",
+        "offset_ms": -96.2
+      },
+      {
+        "t": 88.696,
+        "kind": "cut",
+        "scene": "a3-change",
+        "name": "cut-sheet",
+        "at": "34.1",
+        "offset_ms": 0.3
+      },
+      {
+        "t": 88.716,
+        "kind": "focus",
+        "scene": "a3-change",
+        "name": "focus-sheet",
+        "at": "34.1",
+        "offset_ms": 20.3
+      },
+      {
+        "t": 89.348,
+        "kind": "pull",
+        "scene": "a3-change",
+        "name": "pull-choices",
+        "at": "34.2",
+        "offset_ms": 0.2
+      },
+      {
+        "t": 90.652,
+        "kind": "push",
+        "scene": "a3-change",
+        "name": "push-change",
+        "at": "34.4",
+        "offset_ms": -0.2
+      },
+      {
+        "t": 93.261,
+        "kind": "whip",
+        "scene": "a3-change",
+        "name": "whip-retain",
+        "at": "35.4",
+        "offset_ms": 0.1
+      },
+      {
+        "t": 96.196,
+        "kind": "whip",
+        "scene": "a3-change",
+        "name": "whip-transfer",
+        "at": "36.4.5",
+        "offset_ms": 0.3
+      },
+      {
+        "t": 97.173,
+        "kind": "cut",
+        "scene": "a3-change",
+        "name": "cut-packet",
+        "at": "37.2",
+        "offset_ms": -0.9
+      },
+      {
+        "t": 97.194,
+        "kind": "focus",
+        "scene": "a3-change",
+        "name": "focus-packet",
+        "at": "37.2",
+        "offset_ms": 20.1
+      },
+      {
+        "t": 102.717,
+        "kind": "pull",
+        "scene": "a3-change",
+        "name": "pull-site",
+        "at": "39.2.5",
+        "offset_ms": -0.4
+      },
+      {
+        "t": 107.133,
+        "kind": "pull",
+        "scene": "a3-close",
+        "name": "site-recede",
+        "at": "41.1.5",
+        "offset_ms": -149.6
+      },
+      {
+        "t": 108.26,
+        "kind": "whip",
+        "scene": "a3-close",
+        "name": "ride-trust",
+        "at": "41.3",
+        "offset_ms": -0.9
+      },
+      {
+        "t": 110.543,
+        "kind": "whip",
+        "scene": "a3-close",
+        "name": "ride-decision",
+        "at": "42.2.5",
+        "offset_ms": -0.5
+      },
+      {
+        "t": 112.826,
+        "kind": "whip",
+        "scene": "a3-close",
+        "name": "ride-price",
+        "at": "43.2",
+        "offset_ms": -0.1
+      },
+      {
+        "t": 115.108,
+        "kind": "whip",
+        "scene": "a3-close",
+        "name": "ride-capacity",
+        "at": "44.1.5",
+        "offset_ms": -0.7
+      },
+      {
+        "t": 115.76,
+        "kind": "pull",
+        "scene": "a3-close",
+        "name": "chain-reveal",
+        "at": "44.2.5",
+        "offset_ms": -0.9
+      },
+      {
+        "t": 116.739,
+        "kind": "hold",
+        "scene": "a3-close",
+        "name": "chain-hold",
+        "at": "44.4",
+        "offset_ms": -0.1
+      }
+    ]
   },
   "score": {
-    "bpm": 96.0,
-    "grid_anchors": {
-      "B": 14.76,
-      "F": 44.12,
-      "H": 66.48
-    },
+    "bpm": 92.0,
+    "grid_offset": 0.0,
+    "beat_s": 0.65217,
+    "bar_s": 2.6087,
+    "sections": [
+      {
+        "section": "A strings enter",
+        "t": 2.609,
+        "bar": "1.1",
+        "cue": "l01",
+        "cue_t": 2.935,
+        "from_cue_beats": -0.5,
+        "what": "Dsus2, D drone, felt piano motif"
+      },
+      {
+        "section": "A pulse",
+        "t": 5.217,
+        "bar": "2.1",
+        "cue": "contractors",
+        "cue_t": 6.196,
+        "from_cue_beats": -1.5,
+        "what": "gentle operational pulse"
+      },
+      {
+        "section": "B build",
+        "t": 20.87,
+        "bar": "8.1",
+        "cue": "noOne",
+        "cue_t": 20.543,
+        "from_cue_beats": 0.5,
+        "what": "the rhythmic system builds under S6"
+      },
+      {
+        "section": "B high B",
+        "t": 28.696,
+        "bar": "11.1",
+        "cue": "then",
+        "cue_t": 29.022,
+        "from_cue_beats": -0.5,
+        "what": "the tone that will remain"
+      },
+      {
+        "section": "C subtraction",
+        "t": 30.532,
+        "bar": "11.3.816",
+        "cue": "offline",
+        "cue_t": 30.532,
+        "from_cue_beats": 0.0,
+        "what": "on the word: all but the high B removed"
+      },
+      {
+        "section": "C tone out",
+        "t": 39.13,
+        "bar": "15.1",
+        "cue": "nobodyEnd",
+        "cue_t": 38.227,
+        "from_cue_beats": 1.39,
+        "what": "the high B has thinned away"
+      },
+      {
+        "section": "D aftermath",
+        "t": 41.739,
+        "bar": "16.1",
+        "cue": "afterwards",
+        "cue_t": 40.435,
+        "from_cue_beats": 2.0,
+        "what": "low tension"
+      },
+      {
+        "section": "E clarity",
+        "t": 60.0,
+        "bar": "23.1",
+        "cue": "l12",
+        "cue_t": 59.022,
+        "from_cue_beats": 1.5,
+        "what": "a clean fifth and one piano note"
+      },
+      {
+        "section": "E pulse",
+        "t": 62.609,
+        "bar": "24.1",
+        "cue": "riskChanged",
+        "cue_t": 61.752,
+        "from_cue_beats": 1.31,
+        "what": "the quantised pulse enters after the resolve"
+      },
+      {
+        "section": "F ostinato",
+        "t": 67.826,
+        "bar": "26.1",
+        "cue": "connects",
+        "cue_t": 67.298,
+        "from_cue_beats": 0.81,
+        "what": "clarity: felt ostinato, chord per bar"
+      },
+      {
+        "section": "G step down",
+        "t": 82.174,
+        "bar": "31.3",
+        "cue": "offline2",
+        "cue_t": 82.156,
+        "from_cue_beats": 0.03,
+        "what": "piano and cello step out"
+      },
+      {
+        "section": "G near silence",
+        "t": 86.087,
+        "bar": "33.1",
+        "cue": "cross",
+        "cue_t": 85.816,
+        "from_cue_beats": 0.42,
+        "what": "one low D through the crossing"
+      },
+      {
+        "section": "H momentum",
+        "t": 91.304,
+        "bar": "35.1",
+        "cue": "riskOwner",
+        "cue_t": 88.696,
+        "from_cue_beats": 4.0,
+        "what": "the three choices"
+      },
+      {
+        "section": "I swell",
+        "t": 101.739,
+        "bar": "39.1",
+        "cue": "ordinary",
+        "cue_t": 102.859,
+        "from_cue_beats": -1.72,
+        "what": "swell under the pull back"
+      },
+      {
+        "section": "I peak",
+        "t": 106.957,
+        "bar": "41.1",
+        "cue": "closeIn",
+        "cue_t": 106.719,
+        "from_cue_beats": 0.36,
+        "what": "the swell's crest"
+      },
+      {
+        "section": "J close",
+        "t": 106.957,
+        "bar": "41.1",
+        "cue": "closeIn",
+        "cue_t": 106.719,
+        "from_cue_beats": 0.36,
+        "what": "the chain harmony"
+      },
+      {
+        "section": "J record",
+        "t": 106.957,
+        "bar": "41.1",
+        "cue": "chainRecord",
+        "cue_t": 107.935,
+        "from_cue_beats": -1.5,
+        "what": "G add9"
+      },
+      {
+        "section": "J decision",
+        "t": 112.174,
+        "bar": "43.1",
+        "cue": "chainDecision",
+        "cue_t": 111.177,
+        "from_cue_beats": 1.53,
+        "what": "Em7"
+      },
+      {
+        "section": "J price",
+        "t": 114.783,
+        "bar": "44.1",
+        "cue": "chainPrice",
+        "cue_t": 113.6,
+        "from_cue_beats": 1.81,
+        "what": "A sus4"
+      },
+      {
+        "section": "J resolution",
+        "t": 117.391,
+        "bar": "45.1",
+        "cue": "chainCapacity",
+        "cue_t": 115.883,
+        "from_cue_beats": 2.31,
+        "what": "D add9 wide under the full-chain hold"
+      }
+    ],
     "parts": {
-      "strings-a1": 35,
-      "piano-a1": 22,
+      "strings-a1": 28,
+      "piano-a1": 20,
       "pad-a1": 2,
-      "cello-a1": 5,
-      "bass-a1": 1,
-      "strings-held": 2,
-      "strings-a2": 22,
-      "piano-a2": 42,
+      "cello-a1": 4,
+      "strings-held": 1,
+      "bass-aft": 1,
+      "cello-aft": 1,
+      "strings-aft": 7,
+      "piano-aft": 5,
+      "strings-a2": 29,
+      "piano-a2": 49,
       "pad-a2": 2,
-      "cello-a2": 5,
+      "cello-a2": 6,
       "cello-cross": 1,
-      "strings-a3": 16,
-      "piano-a3": 28,
+      "strings-a3": 13,
+      "piano-a3": 40,
       "cello-a3": 4,
       "pad-a3": 2,
-      "strings-close": 12,
-      "piano-close": 5,
+      "strings-close": 24,
       "pad-close": 2,
-      "bass-close": 1
+      "cello-close": 2,
+      "bass-close": 1,
+      "piano-close": 7
     },
-    "pulse_events": 172,
+    "hold_exempt_parts": [
+      "bass-aft",
+      "bass-close",
+      "cello-aft",
+      "cello-close",
+      "cello-cross",
+      "pad-close",
+      "piano-aft",
+      "piano-close",
+      "strings-aft",
+      "strings-close",
+      "strings-held"
+    ],
+    "pulse_events": 259,
     "family_gain_db": {
-      "strings": 16.77,
-      "piano": 19.74,
-      "pad": 10.26,
-      "cello": 4.34,
-      "bass": 16.46,
-      "sub": -40.37,
-      "pulse": 7.16
+      "strings": 16.88,
+      "piano": 19.72,
+      "pad": 11.58,
+      "cello": 3.98,
+      "bass": 17.41,
+      "sub": -39.96,
+      "pulse": 6.61
+    },
+    "holds": [
+      {
+        "t": 31.304,
+        "dur": 2.283,
+        "gain_db": -8.0,
+        "at": "12.1",
+        "scene": "a1-world"
+      },
+      {
+        "t": 38.227,
+        "dur": 2.208,
+        "gain_db": -8.0,
+        "at": "14.3.615",
+        "scene": "a1-world"
+      },
+      {
+        "t": 51.848,
+        "dur": 1.259,
+        "gain_db": -8.0,
+        "at": "19.4.5",
+        "scene": "a1-after"
+      },
+      {
+        "t": 86.969,
+        "dur": 1.074,
+        "gain_db": -8.0,
+        "at": "33.2.352",
+        "scene": "a3-change"
+      },
+      {
+        "t": 116.739,
+        "dur": 2.388,
+        "gain_db": -8.0,
+        "at": "44.4",
+        "scene": "a3-close"
+      }
+    ],
+    "removed_by_holds": {
+      "piano_notes": 0,
+      "pulse_events": 1
+    },
+    "grid_check": {
+      "onsets": 510,
+      "by_grid_unit": {
+        "bar": 204,
+        "beat": 141,
+        "half": 119,
+        "sixteenth": 46
+      },
+      "max_offset_from_sixteenth_ms": 0.0
     }
   },
   "rewind": {
-    "start": 39.01,
-    "end": 42.36,
-    "landing_story_time": 20.69,
-    "act1_bed_rms_dbfs": -30.6,
-    "offline_passes_at": 41.348,
-    "scrub_seconds_of_story": 18.32
+    "start": 53.107,
+    "end": 58.722,
+    "landing_story_time": 28.772,
+    "act1_bed_rms_dbfs": -30.4,
+    "offline_passes_at": 57.087,
+    "scrub_seconds_of_story": 24.34
   },
-  "voice_activity_seconds": 70.91,
+  "voice_activity_seconds": 77.72,
   "master": {
     "mode": "target",
     "iterations": 1,
-    "gain_db": 0.867,
-    "lufs": -16.004,
+    "gain_db": 0.758,
+    "lufs": -16.013,
     "true_peak_dbtp": -1.05,
-    "voice_limiter_max_db": 1.29,
-    "voice_limited_over_0_5db_seconds": 0.058,
-    "bed_ceiling_max_db": 4.16,
-    "bed_ceiling_seconds": 0.481
+    "voice_limiter_max_db": 1.16,
+    "voice_limited_over_0_5db_seconds": 0.194,
+    "bed_ceiling_max_db": 3.63,
+    "bed_ceiling_seconds": 0.919
   },
   "outputs": {
     "voice": "/home/user/valcorv/videos/priora-vision-film/assets/audio/master-voice.wav",
@@ -351,436 +1046,465 @@
   "qa": {
     "stems": {
       "master": {
-        "lufs_integrated": -16.0,
-        "lra_lu": 2.83,
+        "lufs_integrated": -16.01,
+        "lra_lu": 4.74,
         "true_peak_dbtp": -1.05,
         "sample_peak_dbfs": -1.07,
-        "rms_dbfs": -19.48,
-        "crest_factor_db": 18.4,
+        "rms_dbfs": -19.89,
+        "crest_factor_db": 18.82,
         "dc_offset": [
-          -2.08e-07,
-          -1.26e-07
+          1.58e-07,
+          2.16e-07
         ],
-        "sub30_rel_db": -44.3,
-        "band_2k_5k_vs_200_2k_db": -13.4,
-        "lr_correlation": 0.969,
-        "mono_foldown_loss_db": 0.05,
-        "short_term_max_lufs": -14.82
+        "sub30_rel_db": -44.7,
+        "band_2k_5k_vs_200_2k_db": -13.6,
+        "lr_correlation": 0.957,
+        "mono_foldown_loss_db": -0.01,
+        "short_term_max_lufs": -14.55
       },
       "music": {
-        "lufs_integrated": -28.07,
-        "lra_lu": 12.9,
-        "true_peak_dbtp": -7.28,
-        "sample_peak_dbfs": -7.29,
-        "rms_dbfs": -31.17,
-        "crest_factor_db": 23.88,
+        "lufs_integrated": -26.76,
+        "lra_lu": 15.68,
+        "true_peak_dbtp": -6.77,
+        "sample_peak_dbfs": -6.78,
+        "rms_dbfs": -30.24,
+        "crest_factor_db": 23.47,
         "dc_offset": [
-          -2.61e-07,
-          -1.85e-07
+          -4.09e-08,
+          -2.13e-08
         ],
-        "sub30_rel_db": -49.0,
-        "band_2k_5k_vs_200_2k_db": -19.3,
-        "lr_correlation": 0.558,
-        "mono_foldown_loss_db": 1.12,
-        "short_term_max_lufs": -23.34
+        "sub30_rel_db": -48.0,
+        "band_2k_5k_vs_200_2k_db": -18.4,
+        "lr_correlation": 0.549,
+        "mono_foldown_loss_db": 1.14,
+        "short_term_max_lufs": -22.18
       },
       "sfx": {
-        "lufs_integrated": -40.25,
-        "lra_lu": 15.04,
-        "true_peak_dbtp": -15.03,
-        "sample_peak_dbfs": -15.03,
-        "rms_dbfs": -43.21,
-        "crest_factor_db": 28.18,
+        "lufs_integrated": -41.01,
+        "lra_lu": 13.51,
+        "true_peak_dbtp": -15.41,
+        "sample_peak_dbfs": -15.43,
+        "rms_dbfs": -44.01,
+        "crest_factor_db": 28.58,
         "dc_offset": [
-          -7.59e-08,
-          -6.93e-08
+          -2.43e-08,
+          1.38e-08
         ],
-        "sub30_rel_db": -44.2,
-        "band_2k_5k_vs_200_2k_db": -14.0,
-        "lr_correlation": 0.75,
-        "mono_foldown_loss_db": 0.12,
-        "short_term_max_lufs": -32.14
+        "sub30_rel_db": -43.9,
+        "band_2k_5k_vs_200_2k_db": -14.9,
+        "lr_correlation": 0.704,
+        "mono_foldown_loss_db": 0.57,
+        "short_term_max_lufs": -32.0
       },
       "voice": {
-        "lufs_integrated": -15.97,
-        "lra_lu": 2.75,
+        "lufs_integrated": -15.4,
+        "lra_lu": 4.59,
         "true_peak_dbtp": -1.4,
         "sample_peak_dbfs": -1.41,
-        "rms_dbfs": -19.8,
-        "crest_factor_db": 18.39,
+        "rms_dbfs": -20.33,
+        "crest_factor_db": 18.92,
         "dc_offset": [
-          1.84e-08,
-          1.84e-08
+          1.25e-07,
+          1.25e-07
         ],
-        "sub30_rel_db": -44.2,
-        "band_2k_5k_vs_200_2k_db": -13.3,
-        "short_term_max_lufs": -15.13
+        "sub30_rel_db": -44.5,
+        "band_2k_5k_vs_200_2k_db": -13.4,
+        "short_term_max_lufs": -14.89
       }
     },
     "sections": {
       "act1": {
         "start": 0.0,
-        "end": 39.01,
+        "end": 53.107,
         "master": {
-          "lufs_integrated": -15.82,
-          "lra_lu": 1.88,
-          "true_peak_dbtp": -1.16,
-          "sample_peak_dbfs": -1.17,
-          "rms_dbfs": -19.14,
-          "crest_factor_db": 17.98,
+          "lufs_integrated": -15.74,
+          "lra_lu": 3.33,
+          "true_peak_dbtp": -1.12,
+          "sample_peak_dbfs": -1.13,
+          "rms_dbfs": -19.5,
+          "crest_factor_db": 18.37,
           "dc_offset": [
-            -1.9e-07,
-            3.62e-07
+            3.79e-07,
+            1.67e-07
           ],
-          "sub30_rel_db": -44.2,
+          "sub30_rel_db": -44.3,
           "band_2k_5k_vs_200_2k_db": -13.6,
-          "lr_correlation": 0.972,
-          "mono_foldown_loss_db": 0.02,
-          "short_term_max_lufs": -14.82
+          "lr_correlation": 0.966,
+          "mono_foldown_loss_db": 0.01,
+          "short_term_max_lufs": -14.55
         },
         "music+sfx": {
-          "lufs_integrated": -28.41,
-          "lra_lu": 13.96,
-          "true_peak_dbtp": -12.18,
-          "sample_peak_dbfs": -12.2,
-          "rms_dbfs": -31.51,
-          "crest_factor_db": 19.31,
+          "lufs_integrated": -27.51,
+          "lra_lu": 16.56,
+          "true_peak_dbtp": -6.69,
+          "sample_peak_dbfs": -6.7,
+          "rms_dbfs": -30.68,
+          "crest_factor_db": 23.99,
           "dc_offset": [
-            -2.76e-07,
-            2.75e-07
+            1.34e-07,
+            -7.76e-08
           ],
-          "sub30_rel_db": -46.9,
-          "band_2k_5k_vs_200_2k_db": -17.1,
-          "lr_correlation": 0.516,
-          "mono_foldown_loss_db": 1.29,
-          "short_term_max_lufs": -25.39
+          "sub30_rel_db": -44.5,
+          "band_2k_5k_vs_200_2k_db": -17.2,
+          "lr_correlation": 0.548,
+          "mono_foldown_loss_db": 1.16,
+          "short_term_max_lufs": -23.42
         }
       },
       "rewind": {
-        "start": 39.01,
-        "end": 42.36,
+        "start": 53.107,
+        "end": 58.722,
         "master": {
-          "lufs_integrated": -29.97,
-          "lra_lu": 0.12,
-          "true_peak_dbtp": -16.8,
-          "sample_peak_dbfs": -16.8,
-          "rms_dbfs": -32.77,
-          "crest_factor_db": 15.96,
+          "lufs_integrated": -30.94,
+          "lra_lu": 2.2,
+          "true_peak_dbtp": -18.07,
+          "sample_peak_dbfs": -18.07,
+          "rms_dbfs": -33.58,
+          "crest_factor_db": 15.5,
           "dc_offset": [
-            3.22e-06,
-            -5.19e-06
+            -2.82e-06,
+            -4.17e-07
           ],
-          "sub30_rel_db": -54.3,
-          "band_2k_5k_vs_200_2k_db": -12.3,
-          "lr_correlation": 0.383,
-          "mono_foldown_loss_db": 1.63,
-          "short_term_max_lufs": -29.88
+          "sub30_rel_db": -55.8,
+          "band_2k_5k_vs_200_2k_db": -14.2,
+          "lr_correlation": 0.442,
+          "mono_foldown_loss_db": 1.56,
+          "short_term_max_lufs": -29.14
         },
         "music+sfx": {
-          "lufs_integrated": -29.97,
-          "lra_lu": 0.12,
-          "true_peak_dbtp": -16.8,
-          "sample_peak_dbfs": -16.8,
-          "rms_dbfs": -32.77,
-          "crest_factor_db": 15.96,
+          "lufs_integrated": -30.94,
+          "lra_lu": 2.2,
+          "true_peak_dbtp": -18.07,
+          "sample_peak_dbfs": -18.07,
+          "rms_dbfs": -33.58,
+          "crest_factor_db": 15.5,
           "dc_offset": [
-            3.16e-06,
-            -5.25e-06
+            -2.88e-06,
+            -4.76e-07
           ],
-          "sub30_rel_db": -54.3,
-          "band_2k_5k_vs_200_2k_db": -12.3,
-          "lr_correlation": 0.383,
-          "mono_foldown_loss_db": 1.63,
-          "short_term_max_lufs": -29.88
+          "sub30_rel_db": -55.8,
+          "band_2k_5k_vs_200_2k_db": -14.2,
+          "lr_correlation": 0.442,
+          "mono_foldown_loss_db": 1.56,
+          "short_term_max_lufs": -29.14
         }
       },
       "act2": {
-        "start": 42.36,
-        "end": 59.25,
+        "start": 58.722,
+        "end": 80.896,
         "master": {
-          "lufs_integrated": -16.37,
-          "lra_lu": 2.23,
+          "lufs_integrated": -16.39,
+          "lra_lu": 3.87,
           "true_peak_dbtp": -1.05,
           "sample_peak_dbfs": -1.07,
-          "rms_dbfs": -19.43,
-          "crest_factor_db": 18.36,
+          "rms_dbfs": -19.58,
+          "crest_factor_db": 18.51,
           "dc_offset": [
-            -2.22e-06,
-            -3.44e-06
+            8.59e-06,
+            8.95e-06
           ],
-          "sub30_rel_db": -44.4,
-          "band_2k_5k_vs_200_2k_db": -12.8,
-          "lr_correlation": 0.953,
-          "mono_foldown_loss_db": 0.09,
-          "short_term_max_lufs": -15.51
+          "sub30_rel_db": -44.8,
+          "band_2k_5k_vs_200_2k_db": -13.0,
+          "lr_correlation": 0.942,
+          "mono_foldown_loss_db": 0.08,
+          "short_term_max_lufs": -14.88
         },
         "music+sfx": {
-          "lufs_integrated": -26.82,
-          "lra_lu": 6.79,
-          "true_peak_dbtp": -7.35,
-          "sample_peak_dbfs": -7.35,
-          "rms_dbfs": -29.16,
-          "crest_factor_db": 21.81,
+          "lufs_integrated": -25.33,
+          "lra_lu": 11.85,
+          "true_peak_dbtp": -8.28,
+          "sample_peak_dbfs": -8.29,
+          "rms_dbfs": -28.26,
+          "crest_factor_db": 19.97,
           "dc_offset": [
-            -2.25e-06,
-            -3.47e-06
+            8.49e-06,
+            8.85e-06
           ],
-          "sub30_rel_db": -50.3,
-          "band_2k_5k_vs_200_2k_db": -20.3,
-          "lr_correlation": 0.558,
-          "mono_foldown_loss_db": 1.16,
-          "short_term_max_lufs": -23.58
+          "sub30_rel_db": -52.3,
+          "band_2k_5k_vs_200_2k_db": -20.1,
+          "lr_correlation": 0.572,
+          "mono_foldown_loss_db": 1.04,
+          "short_term_max_lufs": -22.43
         }
       },
       "act3": {
-        "start": 59.25,
-        "end": 75.99,
+        "start": 80.896,
+        "end": 107.435,
         "master": {
-          "lufs_integrated": -16.24,
-          "lra_lu": 3.42,
-          "true_peak_dbtp": -1.35,
-          "sample_peak_dbfs": -1.36,
-          "rms_dbfs": -19.51,
-          "crest_factor_db": 18.15,
+          "lufs_integrated": -16.34,
+          "lra_lu": 4.41,
+          "true_peak_dbtp": -1.05,
+          "sample_peak_dbfs": -1.09,
+          "rms_dbfs": -19.87,
+          "crest_factor_db": 18.78,
           "dc_offset": [
-            2.65e-06,
-            4.18e-06
+            -6.44e-06,
+            -9.44e-06
           ],
-          "sub30_rel_db": -45.0,
-          "band_2k_5k_vs_200_2k_db": -13.6,
-          "lr_correlation": 0.973,
-          "mono_foldown_loss_db": 0.05,
-          "short_term_max_lufs": -14.97
+          "sub30_rel_db": -45.5,
+          "band_2k_5k_vs_200_2k_db": -14.3,
+          "lr_correlation": 0.95,
+          "mono_foldown_loss_db": 0.03,
+          "short_term_max_lufs": -14.84
         },
         "music+sfx": {
-          "lufs_integrated": -26.88,
-          "lra_lu": 15.9,
-          "true_peak_dbtp": -7.97,
-          "sample_peak_dbfs": -7.97,
-          "rms_dbfs": -30.17,
-          "crest_factor_db": 22.2,
+          "lufs_integrated": -25.46,
+          "lra_lu": 20.42,
+          "true_peak_dbtp": -9.47,
+          "sample_peak_dbfs": -9.47,
+          "rms_dbfs": -29.07,
+          "crest_factor_db": 19.6,
           "dc_offset": [
-            2.24e-06,
-            3.76e-06
+            -6.88e-06,
+            -9.89e-06
           ],
-          "sub30_rel_db": -49.0,
-          "band_2k_5k_vs_200_2k_db": -22.6,
-          "lr_correlation": 0.688,
-          "mono_foldown_loss_db": 0.79,
-          "short_term_max_lufs": -24.58
+          "sub30_rel_db": -51.2,
+          "band_2k_5k_vs_200_2k_db": -20.1,
+          "lr_correlation": 0.581,
+          "mono_foldown_loss_db": 1.07,
+          "short_term_max_lufs": -22.37
         }
       },
       "close": {
-        "start": 75.99,
-        "end": 90.0,
+        "start": 107.435,
+        "end": 128.167,
         "master": {
-          "lufs_integrated": -15.64,
-          "lra_lu": 2.7,
-          "true_peak_dbtp": -1.91,
-          "sample_peak_dbfs": -1.99,
-          "rms_dbfs": -19.46,
-          "crest_factor_db": 17.48,
+          "lufs_integrated": -15.71,
+          "lra_lu": 6.5,
+          "true_peak_dbtp": -1.33,
+          "sample_peak_dbfs": -1.34,
+          "rms_dbfs": -20.17,
+          "crest_factor_db": 18.83,
           "dc_offset": [
-            -2.07e-06,
-            -1.42e-06
+            -1.76e-07,
+            3.53e-06
           ],
-          "sub30_rel_db": -43.6,
-          "band_2k_5k_vs_200_2k_db": -13.4,
-          "lr_correlation": 0.981,
-          "mono_foldown_loss_db": -0.01,
-          "short_term_max_lufs": -15.08
+          "sub30_rel_db": -44.3,
+          "band_2k_5k_vs_200_2k_db": -13.8,
+          "lr_correlation": 0.968,
+          "mono_foldown_loss_db": -0.41,
+          "short_term_max_lufs": -14.76
         },
         "music+sfx": {
-          "lufs_integrated": -29.67,
-          "lra_lu": 10.59,
-          "true_peak_dbtp": -13.46,
-          "sample_peak_dbfs": -13.47,
-          "rms_dbfs": -32.91,
-          "crest_factor_db": 19.44,
+          "lufs_integrated": -28.9,
+          "lra_lu": 13.28,
+          "true_peak_dbtp": -13.4,
+          "sample_peak_dbfs": -13.4,
+          "rms_dbfs": -32.2,
+          "crest_factor_db": 18.79,
           "dc_offset": [
-            -2.11e-06,
-            -1.46e-06
+            -2.35e-07,
+            3.48e-06
           ],
-          "sub30_rel_db": -48.1,
-          "band_2k_5k_vs_200_2k_db": -20.2,
-          "lr_correlation": 0.581,
-          "mono_foldown_loss_db": 1.07,
-          "short_term_max_lufs": -28.03
+          "sub30_rel_db": -50.5,
+          "band_2k_5k_vs_200_2k_db": -16.6,
+          "lr_correlation": 0.495,
+          "mono_foldown_loss_db": 1.28,
+          "short_term_max_lufs": -27.01
         }
       }
     },
     "bed_vs_voice": {
-      "voice_momentary_median_lufs": -16.0,
-      "bed_under_speech_median_lufs": -30.1,
-      "bed_in_pauses_median_lufs": -34.5
+      "voice_momentary_median_lufs": -15.5,
+      "bed_under_speech_median_lufs": -30.7,
+      "bed_in_pauses_median_lufs": -35.8
     },
     "edges": {
       "music": [],
-      "sfx": [
-        {
-          "t": 60.47,
-          "step": 0.01334,
-          "ratio": 85.8,
-          "explained": "intended onset of a sound event at 60.470s"
-        }
-      ],
+      "sfx": [],
       "master": []
     },
     "onsets_from_silence": {
       "music": [],
-      "sfx": [
-        82.7402
-      ]
+      "sfx": []
     },
     "onset_timing": {
-      "count": 29,
-      "max_abs_delta_ms": 25.0,
-      "median_abs_delta_ms": 0.5,
+      "count": 30,
+      "clear": 17,
+      "max_abs_delta_ms": 32.5,
+      "median_abs_delta_ms": 1.0,
+      "max_abs_delta_ms_including_masked": 33.0,
+      "note": "clear rows have no other sound starting within 80 ms and no continuous sound running through them; a masked reading measures its neighbour, not a timing error (placement is sample exact)",
       "rows": [
         {
           "kind": "stamp",
-          "t": 13.52,
-          "delta_ms": 0.0
+          "t": 17.609,
+          "delta_ms": -1.0,
+          "masked": true
         },
         {
           "kind": "valve-clunk",
-          "t": 22.35,
-          "delta_ms": -25.0
+          "t": 30.682,
+          "delta_ms": 32.5,
+          "masked": false
+        },
+        {
+          "kind": "gauge",
+          "t": 31.342,
+          "delta_ms": 29.5,
+          "masked": true
         },
         {
           "kind": "latch-soft",
-          "t": 42.36,
-          "delta_ms": 0.0
+          "t": 58.722,
+          "delta_ms": 0.0,
+          "masked": false
         },
         {
           "kind": "confirm",
-          "t": 52.71,
-          "delta_ms": 0.0
+          "t": 72.319,
+          "delta_ms": -0.5,
+          "masked": false
         },
         {
           "kind": "confirm",
-          "t": 53.13,
-          "delta_ms": -1.5
+          "t": 72.739,
+          "delta_ms": 0.0,
+          "masked": false
         },
         {
           "kind": "confirm",
-          "t": 53.55,
-          "delta_ms": -0.5
+          "t": 73.159,
+          "delta_ms": -0.5,
+          "masked": false
         },
         {
           "kind": "confirm",
-          "t": 53.97,
-          "delta_ms": 0.0
+          "t": 73.579,
+          "delta_ms": -1.0,
+          "masked": false
         },
         {
           "kind": "confirm",
-          "t": 54.39,
-          "delta_ms": -1.0
+          "t": 73.999,
+          "delta_ms": 0.0,
+          "masked": false
         },
         {
           "kind": "record-append",
-          "t": 54.86,
-          "delta_ms": 0.0
+          "t": 74.589,
+          "delta_ms": -1.5,
+          "masked": false
         },
         {
           "kind": "record-append",
-          "t": 55.26,
-          "delta_ms": -1.5
+          "t": 74.989,
+          "delta_ms": -0.5,
+          "masked": false
         },
         {
           "kind": "valve-clunk",
-          "t": 60.47,
-          "delta_ms": -0.5
+          "t": 82.156,
+          "delta_ms": 33.0,
+          "masked": true
         },
         {
           "kind": "record-append",
-          "t": 60.47,
-          "delta_ms": -0.5
+          "t": 82.174,
+          "delta_ms": 15.0,
+          "masked": true
         },
         {
-          "kind": "record-append",
-          "t": 60.73,
-          "delta_ms": -1.5
+          "kind": "focus",
+          "t": 83.498,
+          "delta_ms": -0.5,
+          "masked": true
         },
         {
           "kind": "system-tick",
-          "t": 62.52,
-          "delta_ms": -1.0
+          "t": 84.666,
+          "delta_ms": -1.0,
+          "masked": false
         },
         {
           "kind": "cross-snap",
-          "t": 64.71,
-          "delta_ms": -1.0
+          "t": 86.739,
+          "delta_ms": -1.5,
+          "masked": false
+        },
+        {
+          "kind": "focus",
+          "t": 88.716,
+          "delta_ms": -19.5,
+          "masked": true
         },
         {
           "kind": "choice-accent",
-          "t": 66.48,
-          "delta_ms": 0.0
+          "t": 90.652,
+          "delta_ms": 0.5,
+          "masked": true
         },
         {
           "kind": "confirm",
-          "t": 66.6,
-          "delta_ms": 19.5
+          "t": 90.973,
+          "delta_ms": -16.0,
+          "masked": true
         },
         {
           "kind": "choice-accent",
-          "t": 67.61,
-          "delta_ms": -0.5
+          "t": 93.711,
+          "delta_ms": -1.0,
+          "masked": false
         },
         {
           "kind": "choice-accent",
-          "t": 70.15,
-          "delta_ms": -0.5
+          "t": 96.236,
+          "delta_ms": -0.5,
+          "masked": true
+        },
+        {
+          "kind": "focus",
+          "t": 97.194,
+          "delta_ms": -0.5,
+          "masked": true
         },
         {
           "kind": "decision-accent",
-          "t": 74.16,
-          "delta_ms": -0.5
+          "t": 104.021,
+          "delta_ms": -0.5,
+          "masked": true
         },
         {
           "kind": "decision-accent",
-          "t": 74.51,
-          "delta_ms": -1.0
-        },
-        {
-          "kind": "record-append",
-          "t": 75.42,
-          "delta_ms": 16.0
-        },
-        {
-          "kind": "record-append",
-          "t": 75.67,
-          "delta_ms": 0.0
+          "t": 105.978,
+          "delta_ms": -0.5,
+          "masked": true
         },
         {
           "kind": "chain-record",
-          "t": 76.45,
-          "delta_ms": 0.0
+          "t": 107.895,
+          "delta_ms": -1.0,
+          "masked": false
         },
         {
           "kind": "chain-trust",
-          "t": 77.3,
-          "delta_ms": 0.0
+          "t": 108.855,
+          "delta_ms": -1.0,
+          "masked": false
         },
         {
           "kind": "chain-decision",
-          "t": 78.92,
-          "delta_ms": -0.5
+          "t": 111.137,
+          "delta_ms": -0.5,
+          "masked": false
         },
         {
           "kind": "chain-price",
-          "t": 80.97,
-          "delta_ms": -1.0
+          "t": 113.56,
+          "delta_ms": -1.0,
+          "masked": false
         },
         {
           "kind": "chain-capacity",
-          "t": 82.74,
-          "delta_ms": -0.5
+          "t": 115.843,
+          "delta_ms": 0.0,
+          "masked": true
         },
         {
           "kind": "latch",
-          "t": 84.606,
-          "delta_ms": 0.0
+          "t": 119.784,
+          "delta_ms": -0.5,
+          "masked": false
         }
       ]
     },
@@ -791,8 +1515,210 @@
     "head_tail": {
       "first_sample_abs": 0.0,
       "last_sample_abs": 0.0,
-      "last_50ms_peak_dbfs": -100.5
+      "last_50ms_peak_dbfs": -112.9
+    },
+    "grid": {
+      "detector_offset_ms": -5.0,
+      "rhythmic_layers_pulse_and_piano": {
+        "detected_onsets": 134,
+        "signed_median_offset_ms": 1.02,
+        "median_abs_offset_from_sixteenth_ms": 1.17,
+        "p90_abs_offset_ms": 22.34,
+        "within_5ms_of_grid": 0.799,
+        "within_10ms_of_grid": 0.843,
+        "within_20ms_of_grid": 0.881
+      },
+      "piano_note_ons_to_nearest_attack": {
+        "notes": 113,
+        "median_ms": 4.52,
+        "within_15ms": 0.602,
+        "note": "notes that start over their own sustain (repeated ostinato notes, chord tones) show no separate 6 dB rise; they are not late, only unheard as attacks"
+      },
+      "by_family": {
+        "strings": {
+          "detected_onsets": 5,
+          "signed_median_offset_ms": 49.61,
+          "median_abs_offset_from_sixteenth_ms": 66.83,
+          "p90_abs_offset_ms": 77.84,
+          "within_5ms_of_grid": 0.0,
+          "within_10ms_of_grid": 0.2,
+          "within_20ms_of_grid": 0.2
+        },
+        "piano": {
+          "detected_onsets": 97,
+          "signed_median_offset_ms": 7.57,
+          "median_abs_offset_from_sixteenth_ms": 8.09,
+          "p90_abs_offset_ms": 36.47,
+          "within_5ms_of_grid": 0.33,
+          "within_10ms_of_grid": 0.608,
+          "within_20ms_of_grid": 0.773
+        },
+        "pad": {
+          "detected_onsets": 99,
+          "signed_median_offset_ms": -1.87,
+          "median_abs_offset_from_sixteenth_ms": 41.26,
+          "p90_abs_offset_ms": 74.7,
+          "within_5ms_of_grid": 0.061,
+          "within_10ms_of_grid": 0.141,
+          "within_20ms_of_grid": 0.283
+        },
+        "cello": {
+          "detected_onsets": 5,
+          "signed_median_offset_ms": 1.48,
+          "median_abs_offset_from_sixteenth_ms": 45.65,
+          "p90_abs_offset_ms": 72.92,
+          "within_5ms_of_grid": 0.2,
+          "within_10ms_of_grid": 0.2,
+          "within_20ms_of_grid": 0.2
+        },
+        "bass": {
+          "detected_onsets": 1,
+          "signed_median_offset_ms": -69.26,
+          "median_abs_offset_from_sixteenth_ms": 69.26,
+          "p90_abs_offset_ms": 69.26,
+          "within_5ms_of_grid": 0.0,
+          "within_10ms_of_grid": 0.0,
+          "within_20ms_of_grid": 0.0
+        },
+        "sub": {
+          "detected_onsets": 12,
+          "signed_median_offset_ms": 45.7,
+          "median_abs_offset_from_sixteenth_ms": 65.17,
+          "p90_abs_offset_ms": 77.55,
+          "within_5ms_of_grid": 0.0,
+          "within_10ms_of_grid": 0.0,
+          "within_20ms_of_grid": 0.083
+        },
+        "pulse": {
+          "detected_onsets": 195,
+          "signed_median_offset_ms": -0.04,
+          "median_abs_offset_from_sixteenth_ms": 0.3,
+          "p90_abs_offset_ms": 1.12,
+          "within_5ms_of_grid": 0.933,
+          "within_10ms_of_grid": 0.959,
+          "within_20ms_of_grid": 0.959
+        },
+        "verb-plate": {
+          "detected_onsets": 88,
+          "signed_median_offset_ms": 25.02,
+          "median_abs_offset_from_sixteenth_ms": 33.35,
+          "p90_abs_offset_ms": 58.08,
+          "within_5ms_of_grid": 0.023,
+          "within_10ms_of_grid": 0.034,
+          "within_20ms_of_grid": 0.057
+        },
+        "verb-hall": {
+          "detected_onsets": 8,
+          "signed_median_offset_ms": 1.37,
+          "median_abs_offset_from_sixteenth_ms": 49.93,
+          "p90_abs_offset_ms": 65.04,
+          "within_5ms_of_grid": 0.0,
+          "within_10ms_of_grid": 0.125,
+          "within_20ms_of_grid": 0.375
+        }
+      },
+      "music_stem": {
+        "detected_onsets": 86,
+        "signed_median_offset_ms": 7.07,
+        "median_abs_offset_from_sixteenth_ms": 8.67,
+        "p90_abs_offset_ms": 55.46,
+        "within_5ms_of_grid": 0.326,
+        "within_10ms_of_grid": 0.57,
+        "within_20ms_of_grid": 0.767
+      },
+      "note": "a sixteenth is 163 ms; an attack is a 6 dB rise within 24 ms, prominent within 18 dB of its surroundings. Sustained families (pad, strings, reverb returns) have few true attacks; their readings are the patches' own slow shimmer and are not a timing measure.",
+      "scheduled": {
+        "onsets": 510,
+        "by_grid_unit": {
+          "bar": 204,
+          "beat": 141,
+          "half": 119,
+          "sixteenth": 46
+        },
+        "max_offset_from_sixteenth_ms": 0.0
+      }
+    },
+    "silences": {
+      "unnoticed_change (offline + 1 beat to L08 end)": {
+        "from": 31.18,
+        "to": 38.23,
+        "median_lufs_m": -40.4,
+        "max_lufs_m": -35.5
+      },
+      "after_L08 (to afterwards)": {
+        "from": 38.53,
+        "to": 40.39,
+        "median_lufs_m": -47.9,
+        "max_lufs_m": -44.2
+      },
+      "landing (rewindEnd to first note)": {
+        "from": 58.77,
+        "to": 60.0,
+        "median_lufs_m": -55.8,
+        "max_lufs_m": -30.8
+      },
+      "crossing (cross to riskOwner)": {
+        "from": 85.82,
+        "to": 88.7,
+        "median_lufs_m": -44.4,
+        "max_lufs_m": -39.4
+      },
+      "full_chain_hold (chainHold to priora)": {
+        "from": 116.69,
+        "to": 119.3,
+        "median_lufs_m": -27.2,
+        "max_lufs_m": -23.9
+      },
+      "final_2s": {
+        "from": 126.17,
+        "to": 128.17,
+        "median_lufs_m": -53.3,
+        "max_lufs_m": -48.9
+      },
+      "reference_act2_ostinato (bar near connects + 4 bars)": {
+        "from": 67.83,
+        "to": 78.26,
+        "median_lufs_m": -26.0,
+        "max_lufs_m": -20.0
+      },
+      "holds": [
+        {
+          "t": 31.3,
+          "dur": 2.28,
+          "gain_db": -8.0,
+          "before_median": -32.4,
+          "inside_median": -36.5
+        },
+        {
+          "t": 38.23,
+          "dur": 2.21,
+          "gain_db": -8.0,
+          "before_median": -44.5,
+          "inside_median": -47.8
+        },
+        {
+          "t": 51.85,
+          "dur": 1.26,
+          "gain_db": -8.0,
+          "before_median": -31.5,
+          "inside_median": -33.1
+        },
+        {
+          "t": 86.97,
+          "dur": 1.07,
+          "gain_db": -8.0,
+          "before_median": -42.6,
+          "inside_median": -44.9
+        },
+        {
+          "t": 116.74,
+          "dur": 2.39,
+          "gain_db": -8.0,
+          "before_median": -32.3,
+          "inside_median": -26.9
+        }
+      ]
     }
   },
-  "seconds": 87.4
+  "seconds": 220.7
 }

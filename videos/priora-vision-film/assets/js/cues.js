@@ -1522,21 +1522,6 @@ window.FL_EVENTS = {
    "local": 1.248,
    "at": "cue:isolated-0.168"
   },
-  "loto-cut-out": {
-   "name": "loto-cut-out",
-   "kind": "cut",
-   "material": "paper",
-   "gain_db": -12,
-   "what": "back to the site on 'Work moves'",
-   "snap": {
-    "mode": "cut",
-    "off": 0.0003
-   },
-   "scene": "a1-inserts",
-   "t": 10.109,
-   "local": 2.609,
-   "at": "cue:workMoves"
-  },
   "weld-cut-in": {
    "name": "weld-cut-in",
    "kind": "cut",
@@ -1566,18 +1551,6 @@ window.FL_EVENTS = {
    "t": 24.783,
    "local": 17.283,
    "at": "cue:hotWork"
-  },
-  "weld-cut-out": {
-   "name": "weld-cut-out",
-   "kind": "cut",
-   "material": "felt",
-   "gain_db": -12,
-   "what": "back to Roof 03 on 'every'",
-   "snap": "cut",
-   "scene": "a1-inserts",
-   "t": 26.087,
-   "local": 18.587,
-   "at": "cue:certificate"
   },
   "sz3-cut-in": {
    "name": "sz3-cut-in",
@@ -1621,21 +1594,6 @@ window.FL_EVENTS = {
    "t": 30.832,
    "local": 23.332,
    "at": "cue:offline+0.300"
-  },
-  "sz3-cut-out": {
-   "name": "sz3-cut-out",
-   "kind": "cut",
-   "material": "paper",
-   "gain_db": -14,
-   "what": "to the zone 3 roof (S8b)",
-   "snap": {
-    "mode": "next",
-    "off": -0.0003
-   },
-   "scene": "a1-inserts",
-   "t": 31.304,
-   "local": 23.804,
-   "at": "L07.end"
   }
  },
  "a1-paper": {

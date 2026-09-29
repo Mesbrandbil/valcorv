@@ -29,18 +29,6 @@
       "what": "the LOTO tag drops on its string and the string goes taut"
     },
     {
-      "name": "loto-cut-out",
-      "at": "cue:workMoves",
-      "kind": "cut",
-      "material": "paper",
-      "gain_db": -12,
-      "what": "back to the site on 'Work moves'",
-      "snap": {
-        "mode": "cut",
-        "off": 0.0003
-      }
-    },
-    {
       "name": "weld-cut-in",
       "at": "cue:hotWork",
       "kind": "cut",
@@ -63,15 +51,6 @@
         "mode": "cut",
         "off": 0.0004
       }
-    },
-    {
-      "name": "weld-cut-out",
-      "at": "cue:certificate",
-      "kind": "cut",
-      "material": "felt",
-      "gain_db": -12,
-      "what": "back to Roof 03 on 'every'",
-      "snap": "cut"
     },
     {
       "name": "sz3-cut-in",
@@ -103,18 +82,6 @@
       "gain_db": -12,
       "dur": 0.51,
       "what": "the needle falls from 7.2 bar on 'goes offline' and ticks on the zero stop (the fall began dur seconds earlier)"
-    },
-    {
-      "name": "sz3-cut-out",
-      "at": "L07.end",
-      "kind": "cut",
-      "material": "paper",
-      "gain_db": -14,
-      "what": "to the zone 3 roof (S8b)",
-      "snap": {
-        "mode": "next",
-        "off": -0.0003
-      }
     }
   ]
 }

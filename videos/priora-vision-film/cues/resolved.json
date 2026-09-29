@@ -785,21 +785,6 @@
       "at": "cue:workMoves"
     },
     {
-      "name": "loto-cut-out",
-      "kind": "cut",
-      "material": "paper",
-      "gain_db": -12,
-      "what": "back to the site on 'Work moves'",
-      "snap": {
-        "mode": "cut",
-        "off": 0.0003
-      },
-      "scene": "a1-inserts",
-      "t": 10.109,
-      "local": 2.609,
-      "at": "cue:workMoves"
-    },
-    {
       "name": "hse-loop-01",
       "kind": "pencil-scatter",
       "gain_db": -17,
@@ -1805,18 +1790,6 @@
       "at": "cue:certificate"
     },
     {
-      "name": "weld-cut-out",
-      "kind": "cut",
-      "material": "felt",
-      "gain_db": -12,
-      "what": "back to Roof 03 on 'every'",
-      "snap": "cut",
-      "scene": "a1-inserts",
-      "t": 26.087,
-      "local": 18.587,
-      "at": "cue:certificate"
-    },
-    {
       "name": "safeguards-draw-03",
       "kind": "pencil",
       "gain_db": -16,
@@ -1997,21 +1970,6 @@
       "scene": "a1-world",
       "t": 31.304,
       "local": 31.304,
-      "at": "L07.end"
-    },
-    {
-      "name": "sz3-cut-out",
-      "kind": "cut",
-      "material": "paper",
-      "gain_db": -14,
-      "what": "to the zone 3 roof (S8b)",
-      "snap": {
-        "mode": "next",
-        "off": -0.0003
-      },
-      "scene": "a1-inserts",
-      "t": 31.304,
-      "local": 23.804,
       "at": "L07.end"
     },
     {
@@ -3280,8 +3238,8 @@
       "track": 20,
       "volume": 1,
       "start": 0,
-      "duration": 90,
-      "media": 90,
+      "duration": 128.166,
+      "media": 128.167,
       "present": true
     },
     {
@@ -3290,8 +3248,8 @@
       "track": 21,
       "volume": 1,
       "start": 0,
-      "duration": 90,
-      "media": 90,
+      "duration": 128.166,
+      "media": 128.167,
       "present": true
     },
     {
@@ -3300,8 +3258,8 @@
       "track": 22,
       "volume": 1,
       "start": 0,
-      "duration": 90,
-      "media": 90,
+      "duration": 128.166,
+      "media": 128.167,
       "present": true
     }
   ]

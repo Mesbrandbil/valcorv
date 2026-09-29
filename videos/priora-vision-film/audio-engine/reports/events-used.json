@@ -1,578 +1,543 @@
 [
   {
-    "name": "cons-1",
-    "gain_db": -6.0,
-    "dur": 0.4,
-    "what": "first stroke: the production hall's north roof edge, set square",
+    "name": "lead-1",
+    "gain_db": -7.0,
+    "dur": 0.95,
+    "what": "S1: the first graphite stroke lands at the roof corner and crosses the frame (downbeat)",
     "scene": "a1-world",
     "kind": "set-square-tap",
-    "t": 0.12,
+    "t": 0.652,
     "index": 0,
     "seed": 1000
   },
   {
-    "name": "cons-1",
-    "gain_db": -6.0,
-    "dur": 0.4,
-    "what": "first stroke: the production hall's north roof edge, set square",
+    "name": "lead-1",
+    "gain_db": -7.0,
+    "dur": 0.95,
+    "what": "S1: the first graphite stroke lands at the roof corner and crosses the frame (downbeat)",
     "scene": "a1-world",
     "kind": "pencil-stroke",
-    "t": 0.15,
+    "t": 0.682,
     "index": 0,
     "seed": 1001,
     "pressure": 0.8
   },
   {
-    "name": "cons-2",
+    "name": "lead-2",
     "gain_db": -9.0,
-    "dur": 0.3,
-    "what": "second roof edge",
+    "dur": 0.5,
+    "what": "S1: the second edge meets it at the corner (beat 3)",
     "scene": "a1-world",
-    "kind": "ruler-contact",
-    "t": 0.44,
+    "kind": "pencil-stroke",
+    "t": 1.957,
     "index": 1,
     "seed": 1037
   },
   {
-    "name": "cons-2",
-    "gain_db": -9.0,
-    "dur": 0.3,
-    "what": "second roof edge",
+    "name": "lead-over",
+    "gain_db": -15.0,
+    "dur": 0.26,
+    "light": true,
+    "what": "S1: construction overshoot past the corner (beat 4)",
     "scene": "a1-world",
     "kind": "pencil-stroke",
-    "t": 0.48,
-    "index": 1,
-    "seed": 1038,
-    "pressure": 0.75,
-    "speed": 1.2
-  },
-  {
-    "name": "cons-3",
-    "gain_db": -11.0,
-    "dur": 0.2,
-    "what": "roof division",
-    "scene": "a1-world",
-    "kind": "pencil-stroke",
-    "t": 0.66,
-    "index": 2,
+    "t": 2.609,
+    "index": 0,
     "seed": 1074
   },
   {
+    "name": "pull",
+    "gain_db": -14.0,
+    "dur": 2.935,
+    "what": "S2: continuous pull back from the corner to the whole site",
+    "scene": "a1-world",
+    "kind": "pull",
+    "t": 2.935,
+    "index": 0,
+    "seed": 1111
+  },
+  {
     "name": "site-draw-01",
-    "gain_db": -17.7494,
-    "dur": 0.2541,
-    "what": "the site draws itself, radiating from Roof 03",
+    "gain_db": -17.3047,
+    "dur": 0.2617,
+    "what": "S2: the site draws itself, radiating from Roof 03",
     "scene": "a1-world",
     "kind": "pencil-tick",
-    "t": 0.85,
+    "t": 2.985,
     "index": 0,
-    "seed": 107767,
-    "pan": 0.3148
-  },
-  {
-    "name": "site-draw-01",
-    "gain_db": -15.51,
-    "dur": 0.2911,
-    "what": "the site draws itself, radiating from Roof 03",
-    "scene": "a1-world",
-    "kind": "pencil-stroke",
-    "t": 0.9633,
-    "index": 0,
-    "seed": 107768,
-    "pan": -0.0203
-  },
-  {
-    "name": "site-draw-02",
-    "gain_db": -16.4821,
-    "dur": 0.2011,
-    "what": "the site draws itself, radiating from Roof 03",
-    "scene": "a1-world",
-    "kind": "pencil-stroke",
-    "t": 1.07,
-    "index": 1,
     "seed": 111356,
-    "pan": 0.39
+    "pan": -0.2542
   },
   {
     "name": "site-draw-02",
-    "gain_db": -15.0877,
-    "dur": 0.2549,
-    "what": "the site draws itself, radiating from Roof 03",
+    "gain_db": -16.4273,
+    "dur": 0.2755,
+    "what": "S2: the site draws itself, radiating from Roof 03",
     "scene": "a1-world",
-    "kind": "pencil-stroke",
-    "t": 1.1655,
+    "kind": "pencil-tick",
+    "t": 3.155,
     "index": 1,
-    "seed": 111357,
-    "pan": -0.2022
-  },
-  {
-    "name": "site-draw-03",
-    "gain_db": -13.3028,
-    "dur": 0.2187,
-    "what": "the site draws itself, radiating from Roof 03",
-    "scene": "a1-world",
-    "kind": "pencil-stroke",
-    "t": 1.29,
-    "index": 2,
     "seed": 114945,
-    "pan": -0.3014
+    "pan": -0.2517
+  },
+  {
+    "name": "site-draw-02",
+    "gain_db": -14.0936,
+    "dur": 0.2545,
+    "what": "S2: the site draws itself, radiating from Roof 03",
+    "scene": "a1-world",
+    "kind": "pencil-stroke",
+    "t": 3.2709,
+    "index": 1,
+    "seed": 114946,
+    "pan": 0.0159
   },
   {
     "name": "site-draw-03",
-    "gain_db": -17.3158,
-    "dur": 0.275,
-    "what": "the site draws itself, radiating from Roof 03",
+    "gain_db": -15.2814,
+    "dur": 0.1747,
+    "what": "S2: the site draws itself, radiating from Roof 03",
+    "scene": "a1-world",
+    "kind": "pencil-tick",
+    "t": 3.325,
+    "index": 2,
+    "seed": 118534,
+    "pan": -0.1574
+  },
+  {
+    "name": "site-draw-03",
+    "gain_db": -15.3674,
+    "dur": 0.2605,
+    "what": "S2: the site draws itself, radiating from Roof 03",
     "scene": "a1-world",
     "kind": "pencil-stroke",
-    "t": 1.4824,
+    "t": 3.4457,
     "index": 2,
-    "seed": 114946,
-    "pan": -0.0391
+    "seed": 118535,
+    "pan": -0.2669
+  },
+  {
+    "name": "site-draw-04",
+    "gain_db": -18.4106,
+    "dur": 0.1671,
+    "what": "S2: the site draws itself, radiating from Roof 03",
+    "scene": "a1-world",
+    "kind": "pencil-tick",
+    "t": 3.495,
+    "index": 3,
+    "seed": 122123,
+    "pan": -0.2878
   },
   {
     "name": "site-hatch",
-    "gain_db": -16.0,
-    "dur": 3.2,
+    "gain_db": -17.0,
+    "dur": 2.4,
     "scene": "a1-world",
     "kind": "pencil-hatch",
-    "t": 1.5,
+    "t": 3.535,
     "index": 0,
-    "seed": 1222
+    "seed": 1296
   },
   {
     "name": "site-draw-04",
-    "gain_db": -15.0913,
-    "dur": 0.2724,
-    "what": "the site draws itself, radiating from Roof 03",
+    "gain_db": -16.0472,
+    "dur": 0.136,
+    "what": "S2: the site draws itself, radiating from Roof 03",
     "scene": "a1-world",
     "kind": "pencil-stroke",
-    "t": 1.51,
-    "index": 3,
-    "seed": 122123,
-    "pan": 0.3032
-  },
-  {
-    "name": "site-draw-04",
-    "gain_db": -13.6172,
-    "dur": 0.1658,
-    "what": "the site draws itself, radiating from Roof 03",
-    "scene": "a1-world",
-    "kind": "pencil-tick",
-    "t": 1.6379,
+    "t": 3.6053,
     "index": 3,
     "seed": 122124,
-    "pan": 0.0082
+    "pan": 0.1471
   },
   {
     "name": "site-draw-05",
-    "gain_db": -15.6745,
-    "dur": 0.2278,
-    "what": "the site draws itself, radiating from Roof 03",
+    "gain_db": -18.6449,
+    "dur": 0.2293,
+    "what": "S2: the site draws itself, radiating from Roof 03",
     "scene": "a1-world",
     "kind": "pencil-tick",
-    "t": 1.73,
+    "t": 3.665,
     "index": 4,
-    "seed": 125712,
-    "pan": -0.3543
-  },
-  {
-    "name": "site-draw-05",
-    "gain_db": -14.5097,
-    "dur": 0.2499,
-    "what": "the site draws itself, radiating from Roof 03",
-    "scene": "a1-world",
-    "kind": "pencil-stroke",
-    "t": 1.8695,
-    "index": 4,
-    "seed": 125713,
-    "pan": 0.334
-  },
-  {
-    "name": "site-draw-06",
-    "gain_db": -14.5795,
-    "dur": 0.2978,
-    "what": "the site draws itself, radiating from Roof 03",
-    "scene": "a1-world",
-    "kind": "pencil-stroke",
-    "t": 1.95,
-    "index": 5,
     "seed": 129301,
-    "pan": 0.0433
+    "pan": -0.0659
+  },
+  {
+    "name": "site-draw-05",
+    "gain_db": -17.9029,
+    "dur": 0.204,
+    "what": "S2: the site draws itself, radiating from Roof 03",
+    "scene": "a1-world",
+    "kind": "pencil-tick",
+    "t": 3.8102,
+    "index": 4,
+    "seed": 129302,
+    "pan": -0.3661
   },
   {
     "name": "site-draw-06",
-    "gain_db": -15.2498,
-    "dur": 0.1824,
-    "what": "the site draws itself, radiating from Roof 03",
+    "gain_db": -16.5428,
+    "dur": 0.2987,
+    "what": "S2: the site draws itself, radiating from Roof 03",
     "scene": "a1-world",
     "kind": "pencil-tick",
-    "t": 2.1397,
+    "t": 3.835,
     "index": 5,
-    "seed": 129302,
-    "pan": 0.2578
-  },
-  {
-    "name": "site-draw-07",
-    "gain_db": -14.1827,
-    "dur": 0.1755,
-    "what": "the site draws itself, radiating from Roof 03",
-    "scene": "a1-world",
-    "kind": "pencil-stroke",
-    "t": 2.17,
-    "index": 6,
     "seed": 132890,
-    "pan": 0.3148
+    "pan": -0.0912
+  },
+  {
+    "name": "site-draw-06",
+    "gain_db": -14.5112,
+    "dur": 0.1641,
+    "what": "S2: the site draws itself, radiating from Roof 03",
+    "scene": "a1-world",
+    "kind": "pencil-stroke",
+    "t": 3.9662,
+    "index": 5,
+    "seed": 132891,
+    "pan": -0.3426
   },
   {
     "name": "site-draw-07",
-    "gain_db": -17.2093,
-    "dur": 0.1494,
-    "what": "the site draws itself, radiating from Roof 03",
+    "gain_db": -18.0567,
+    "dur": 0.1395,
+    "what": "S2: the site draws itself, radiating from Roof 03",
     "scene": "a1-world",
     "kind": "pencil-stroke",
-    "t": 2.2842,
+    "t": 4.005,
     "index": 6,
-    "seed": 132891,
-    "pan": 0.1546
-  },
-  {
-    "name": "site-draw-08",
-    "gain_db": -17.5614,
-    "dur": 0.1664,
-    "what": "the site draws itself, radiating from Roof 03",
-    "scene": "a1-world",
-    "kind": "pencil-stroke",
-    "t": 2.39,
-    "index": 7,
     "seed": 136479,
-    "pan": 0.1205
+    "pan": -0.2297
+  },
+  {
+    "name": "site-draw-07",
+    "gain_db": -14.8979,
+    "dur": 0.1689,
+    "what": "S2: the site draws itself, radiating from Roof 03",
+    "scene": "a1-world",
+    "kind": "pencil-stroke",
+    "t": 4.1057,
+    "index": 6,
+    "seed": 136480,
+    "pan": -0.117
   },
   {
     "name": "site-draw-08",
-    "gain_db": -13.4569,
-    "dur": 0.282,
-    "what": "the site draws itself, radiating from Roof 03",
+    "gain_db": -16.7907,
+    "dur": 0.1637,
+    "what": "S2: the site draws itself, radiating from Roof 03",
     "scene": "a1-world",
-    "kind": "pencil-tick",
-    "t": 2.525,
+    "kind": "pencil-stroke",
+    "t": 4.175,
     "index": 7,
-    "seed": 136480,
-    "pan": -0.2418
-  },
-  {
-    "name": "site-draw-09",
-    "gain_db": -17.1732,
-    "dur": 0.1084,
-    "what": "the site draws itself, radiating from Roof 03",
-    "scene": "a1-world",
-    "kind": "pencil-tick",
-    "t": 2.61,
-    "index": 8,
     "seed": 140068,
-    "pan": 0.1449
+    "pan": 0.3966
   },
   {
     "name": "site-draw-09",
-    "gain_db": -13.023,
-    "dur": 0.1085,
-    "what": "the site draws itself, radiating from Roof 03",
+    "gain_db": -18.7107,
+    "dur": 0.1459,
+    "what": "S2: the site draws itself, radiating from Roof 03",
     "scene": "a1-world",
-    "kind": "pencil-stroke",
-    "t": 2.7904,
+    "kind": "pencil-tick",
+    "t": 4.345,
     "index": 8,
-    "seed": 140069,
-    "pan": 0.0755
-  },
-  {
-    "name": "site-draw-10",
-    "gain_db": -14.5831,
-    "dur": 0.113,
-    "what": "the site draws itself, radiating from Roof 03",
-    "scene": "a1-world",
-    "kind": "pencil-tick",
-    "t": 2.83,
-    "index": 9,
     "seed": 143657,
-    "pan": 0.2848
+    "pan": 0.359
+  },
+  {
+    "name": "site-draw-09",
+    "gain_db": -15.9929,
+    "dur": 0.1354,
+    "what": "S2: the site draws itself, radiating from Roof 03",
+    "scene": "a1-world",
+    "kind": "pencil-stroke",
+    "t": 4.5043,
+    "index": 8,
+    "seed": 143658,
+    "pan": 0.3897
   },
   {
     "name": "site-draw-10",
-    "gain_db": -14.9128,
-    "dur": 0.1926,
-    "what": "the site draws itself, radiating from Roof 03",
+    "gain_db": -15.1818,
+    "dur": 0.1648,
+    "what": "S2: the site draws itself, radiating from Roof 03",
     "scene": "a1-world",
-    "kind": "pencil-stroke",
-    "t": 2.9413,
+    "kind": "pencil-tick",
+    "t": 4.515,
     "index": 9,
-    "seed": 143658,
-    "pan": -0.0539
-  },
-  {
-    "name": "site-draw-11",
-    "gain_db": -15.9533,
-    "dur": 0.1849,
-    "what": "the site draws itself, radiating from Roof 03",
-    "scene": "a1-world",
-    "kind": "pencil-tick",
-    "t": 3.05,
-    "index": 10,
     "seed": 147246,
-    "pan": -0.2571
+    "pan": -0.3214
+  },
+  {
+    "name": "site-draw-10",
+    "gain_db": -15.9369,
+    "dur": 0.2649,
+    "what": "S2: the site draws itself, radiating from Roof 03",
+    "scene": "a1-world",
+    "kind": "pencil-tick",
+    "t": 4.647,
+    "index": 9,
+    "seed": 147247,
+    "pan": 0.385
   },
   {
     "name": "site-draw-11",
-    "gain_db": -15.7337,
-    "dur": 0.1186,
-    "what": "the site draws itself, radiating from Roof 03",
-    "scene": "a1-world",
-    "kind": "pencil-tick",
-    "t": 3.2464,
-    "index": 10,
-    "seed": 147247,
-    "pan": 0.3516
-  },
-  {
-    "name": "gate",
-    "gain_db": -13.0,
-    "dur": 0.6,
+    "gain_db": -18.0063,
+    "dur": 0.1243,
+    "what": "S2: the site draws itself, radiating from Roof 03",
     "scene": "a1-world",
     "kind": "pencil-stroke",
-    "t": 3.27,
-    "index": 0,
-    "seed": 1555
+    "t": 4.685,
+    "index": 10,
+    "seed": 150835,
+    "pan": 0.2561
+  },
+  {
+    "name": "site-draw-11",
+    "gain_db": -17.7426,
+    "dur": 0.2395,
+    "what": "S2: the site draws itself, radiating from Roof 03",
+    "scene": "a1-world",
+    "kind": "pencil-stroke",
+    "t": 4.7849,
+    "index": 10,
+    "seed": 150836,
+    "pan": -0.1781
   },
   {
     "name": "site-draw-12",
-    "gain_db": -16.3445,
-    "dur": 0.0823,
-    "what": "the site draws itself, radiating from Roof 03",
+    "gain_db": -14.775,
+    "dur": 0.1481,
+    "what": "S2: the site draws itself, radiating from Roof 03",
     "scene": "a1-world",
-    "kind": "pencil-tick",
-    "t": 3.27,
+    "kind": "pencil-stroke",
+    "t": 4.855,
     "index": 11,
     "seed": 154424,
-    "pan": 0.2892
-  },
-  {
-    "name": "site-draw-12",
-    "gain_db": -13.022,
-    "dur": 0.1277,
-    "what": "the site draws itself, radiating from Roof 03",
-    "scene": "a1-world",
-    "kind": "pencil-stroke",
-    "t": 3.3616,
-    "index": 11,
-    "seed": 154425,
-    "pan": -0.3462
-  },
-  {
-    "name": "site-draw-13",
-    "gain_db": -15.6695,
-    "dur": 0.1158,
-    "what": "the site draws itself, radiating from Roof 03",
-    "scene": "a1-world",
-    "kind": "pencil-stroke",
-    "t": 3.49,
-    "index": 12,
-    "seed": 158013,
-    "pan": -0.3307
-  },
-  {
-    "name": "route-01",
-    "gain_db": -17.5797,
-    "dur": 0.2527,
-    "scene": "a1-world",
-    "kind": "pencil-tick",
-    "t": 3.57,
-    "index": 0,
-    "seed": 161602,
-    "pan": -0.1658
-  },
-  {
-    "name": "site-draw-13",
-    "gain_db": -15.5107,
-    "dur": 0.2324,
-    "what": "the site draws itself, radiating from Roof 03",
-    "scene": "a1-world",
-    "kind": "pencil-stroke",
-    "t": 3.6281,
-    "index": 12,
-    "seed": 158014,
-    "pan": 0.3066
-  },
-  {
-    "name": "route-02",
-    "gain_db": -16.3025,
-    "dur": 0.2279,
-    "scene": "a1-world",
-    "kind": "pencil-tick",
-    "t": 3.66,
-    "index": 1,
-    "seed": 165191,
-    "pan": -0.0408
+    "pan": 0.1981
   },
   {
     "name": "van",
     "gain_db": -10.0,
-    "dur": 2.4,
+    "dur": 1.9,
     "scene": "a1-world",
     "kind": "van",
-    "t": 3.67,
+    "t": 4.896,
     "index": 0,
-    "seed": 1740
+    "seed": 1629
+  },
+  {
+    "name": "site-draw-12",
+    "gain_db": -15.1426,
+    "dur": 0.0941,
+    "what": "S2: the site draws itself, radiating from Roof 03",
+    "scene": "a1-world",
+    "kind": "pencil-tick",
+    "t": 4.9661,
+    "index": 11,
+    "seed": 154425,
+    "pan": -0.2797
+  },
+  {
+    "name": "site-draw-13",
+    "gain_db": -17.6065,
+    "dur": 0.2596,
+    "what": "S2: the site draws itself, radiating from Roof 03",
+    "scene": "a1-world",
+    "kind": "pencil-stroke",
+    "t": 5.025,
+    "index": 12,
+    "seed": 161602,
+    "pan": 0.1988
+  },
+  {
+    "name": "gate",
+    "gain_db": -16.0,
+    "dur": 0.5,
+    "scene": "a1-world",
+    "kind": "pencil-stroke",
+    "t": 5.096,
+    "index": 0,
+    "seed": 1703
+  },
+  {
+    "name": "site-draw-13",
+    "gain_db": -16.5655,
+    "dur": 0.1629,
+    "what": "S2: the site draws itself, radiating from Roof 03",
+    "scene": "a1-world",
+    "kind": "pencil-stroke",
+    "t": 5.1735,
+    "index": 12,
+    "seed": 161603,
+    "pan": -0.05
   },
   {
     "name": "site-draw-14",
-    "gain_db": -15.1107,
-    "dur": 0.181,
-    "what": "the site draws itself, radiating from Roof 03",
+    "gain_db": -18.1577,
+    "dur": 0.139,
+    "what": "S2: the site draws itself, radiating from Roof 03",
     "scene": "a1-world",
-    "kind": "pencil-tick",
-    "t": 3.71,
+    "kind": "pencil-stroke",
+    "t": 5.195,
     "index": 13,
-    "seed": 172369,
-    "pan": -0.388
-  },
-  {
-    "name": "route-03",
-    "gain_db": -18.4172,
-    "dur": 0.2476,
-    "scene": "a1-world",
-    "kind": "pencil-tick",
-    "t": 3.75,
-    "index": 2,
-    "seed": 175958,
-    "pan": 0.0802
+    "seed": 168780,
+    "pan": -0.0058
   },
   {
     "name": "site-draw-14",
-    "gain_db": -15.0189,
-    "dur": 0.2188,
-    "what": "the site draws itself, radiating from Roof 03",
+    "gain_db": -15.9122,
+    "dur": 0.1955,
+    "what": "S2: the site draws itself, radiating from Roof 03",
     "scene": "a1-world",
-    "kind": "pencil-stroke",
-    "t": 3.8067,
+    "kind": "pencil-tick",
+    "t": 5.3274,
     "index": 13,
-    "seed": 172370,
-    "pan": 0.1622
-  },
-  {
-    "name": "route-04",
-    "gain_db": -17.9487,
-    "dur": 0.1318,
-    "scene": "a1-world",
-    "kind": "pencil-tick",
-    "t": 3.84,
-    "index": 3,
-    "seed": 179547,
-    "pan": -0.3033
-  },
-  {
-    "name": "route-05",
-    "gain_db": -18.3248,
-    "dur": 0.2887,
-    "scene": "a1-world",
-    "kind": "pencil-stroke",
-    "t": 3.93,
-    "index": 4,
-    "seed": 183136,
-    "pan": 0.3935
-  },
-  {
-    "name": "site-draw-15",
-    "gain_db": -16.0127,
-    "dur": 0.1811,
-    "what": "the site draws itself, radiating from Roof 03",
-    "scene": "a1-world",
-    "kind": "pencil-stroke",
-    "t": 3.93,
-    "index": 14,
-    "seed": 186725,
-    "pan": 0.0079
-  },
-  {
-    "name": "route-06",
-    "gain_db": -19.9865,
-    "dur": 0.1287,
-    "scene": "a1-world",
-    "kind": "pencil-tick",
-    "t": 4.02,
-    "index": 5,
-    "seed": 190314,
-    "pan": -0.1144
-  },
-  {
-    "name": "site-draw-15",
-    "gain_db": -14.4156,
-    "dur": 0.2921,
-    "what": "the site draws itself, radiating from Roof 03",
-    "scene": "a1-world",
-    "kind": "pencil-tick",
-    "t": 4.0541,
-    "index": 14,
-    "seed": 186726,
-    "pan": -0.3996
+    "seed": 168781,
+    "pan": -0.0123
   },
   {
     "name": "footsteps",
-    "gain_db": -12.0,
-    "dur": 7.5,
-    "what": "five contractors in file from the gate to the loading-area apron",
+    "gain_db": -13.0,
+    "dur": 13.5,
+    "what": "four contractors in file from the gate to the loading-area apron",
     "scene": "a1-world",
     "kind": "footsteps",
-    "t": 4.07,
+    "t": 5.746,
     "index": 0,
-    "seed": 1999,
-    "count": 14
+    "seed": 1777,
+    "count": 25
+  },
+  {
+    "name": "route-01",
+    "gain_db": -22.9748,
+    "dur": 0.2247,
+    "scene": "a1-world",
+    "kind": "pencil-stroke",
+    "t": 5.996,
+    "index": 0,
+    "seed": 175958,
+    "pan": -0.3628
+  },
+  {
+    "name": "route-02",
+    "gain_db": -20.3807,
+    "dur": 0.2108,
+    "scene": "a1-world",
+    "kind": "pencil-tick",
+    "t": 6.126,
+    "index": 1,
+    "seed": 179547,
+    "pan": -0.1579
+  },
+  {
+    "name": "cut-gate",
+    "gain_db": -12.0,
+    "material": "paper",
+    "what": "S3a: cut to the gate road medium-close",
+    "scene": "a1-world",
+    "kind": "cut",
+    "t": 6.196,
+    "index": 0,
+    "seed": 1888
+  },
+  {
+    "name": "route-03",
+    "gain_db": -20.4623,
+    "dur": 0.086,
+    "scene": "a1-world",
+    "kind": "pencil-stroke",
+    "t": 6.256,
+    "index": 2,
+    "seed": 186725,
+    "pan": -0.0979
+  },
+  {
+    "name": "route-04",
+    "gain_db": -19.3147,
+    "dur": 0.1116,
+    "scene": "a1-world",
+    "kind": "pencil-tick",
+    "t": 6.386,
+    "index": 3,
+    "seed": 190314,
+    "pan": -0.1424
+  },
+  {
+    "name": "route-05",
+    "gain_db": -22.1998,
+    "dur": 0.2124,
+    "scene": "a1-world",
+    "kind": "pencil-stroke",
+    "t": 6.516,
+    "index": 4,
+    "seed": 193903,
+    "pan": -0.1936
+  },
+  {
+    "name": "route-tag",
+    "gain_db": -15.0,
+    "dur": 0.9,
+    "lettering": true,
+    "what": "CONTRACTORS \u00b7 GATE 2 \u00b7 07:10",
+    "snap": {
+      "mode": "next",
+      "off": 0.0003
+    },
+    "scene": "a1-world",
+    "kind": "technical-pen",
+    "t": 6.522,
+    "index": 0,
+    "seed": 2036
+  },
+  {
+    "name": "route-06",
+    "gain_db": -22.5014,
+    "dur": 0.12,
+    "scene": "a1-world",
+    "kind": "pencil-stroke",
+    "t": 6.646,
+    "index": 5,
+    "seed": 201081,
+    "pan": -0.3173
   },
   {
     "name": "route-07",
-    "gain_db": -17.6055,
-    "dur": 0.2063,
-    "scene": "a1-world",
-    "kind": "pencil-stroke",
-    "t": 4.11,
-    "index": 6,
-    "seed": 197492,
-    "pan": -0.309
-  },
-  {
-    "name": "site-draw-16",
-    "gain_db": -15.9406,
-    "dur": 0.2456,
-    "what": "the site draws itself, radiating from Roof 03",
+    "gain_db": -18.0315,
+    "dur": 0.1684,
     "scene": "a1-world",
     "kind": "pencil-tick",
-    "t": 4.15,
-    "index": 15,
-    "seed": 201081,
-    "pan": -0.0649
+    "t": 6.776,
+    "index": 6,
+    "seed": 204670,
+    "pan": 0.2773
+  },
+  {
+    "name": "route-07",
+    "gain_db": -20.893,
+    "dur": 0.2992,
+    "scene": "a1-world",
+    "kind": "pencil-tick",
+    "t": 6.8754,
+    "index": 6,
+    "seed": 204671,
+    "pan": -0.0246
   },
   {
     "name": "route-08",
-    "gain_db": -16.8362,
-    "dur": 0.1887,
-    "scene": "a1-world",
-    "kind": "pencil-tick",
-    "t": 4.2,
-    "index": 7,
-    "seed": 204670,
-    "pan": 0.3361
-  },
-  {
-    "name": "site-draw-16",
-    "gain_db": -17.0789,
-    "dur": 0.1234,
-    "what": "the site draws itself, radiating from Roof 03",
+    "gain_db": -21.2623,
+    "dur": 0.0848,
     "scene": "a1-world",
     "kind": "pencil-stroke",
-    "t": 4.258,
-    "index": 15,
-    "seed": 201082,
-    "pan": -0.1466
+    "t": 6.906,
+    "index": 7,
+    "seed": 208259,
+    "pan": 0.1101
   },
   {
-    "t": 4.57,
+    "t": 7.096,
     "kind": "radio-squelch",
     "gain_db": 0.0,
     "source": "designed",
@@ -581,290 +546,259 @@
     "pan": 0.45
   },
   {
-    "name": "toolbox",
-    "gain_db": -14.0,
-    "dur": 1.2,
-    "scene": "a1-world",
-    "kind": "pencil-stroke",
-    "t": 4.67,
-    "index": 0,
-    "seed": 2147
-  },
-  {
-    "name": "radio-click",
-    "gain_db": -10.0,
-    "scene": "a1-world",
-    "kind": "radio-click",
-    "t": 5.45,
+    "name": "loto-cut-in",
+    "material": "paper",
+    "gain_db": -12.0,
+    "what": "S3b: cut to the LOTO valve close-up",
+    "snap": {
+      "mode": "cut",
+      "off": -0.0001
+    },
+    "scene": "a1-inserts",
+    "kind": "cut",
+    "t": 7.826,
     "index": 0,
     "seed": 2184
   },
   {
-    "name": "loto",
-    "gain_db": -12.0,
-    "dur": 0.7,
-    "what": "valve and lockout tag at Utilities",
-    "scene": "a1-world",
-    "kind": "pencil-stroke",
-    "t": 5.7,
+    "name": "loto-handwheel",
+    "gain_db": -10.0,
+    "dur": 0.489,
+    "what": "a quarter turn, closing",
+    "scene": "a1-inserts",
+    "kind": "handwheel",
+    "t": 7.989,
     "index": 0,
     "seed": 2221
   },
   {
-    "name": "hse-loop-01",
-    "gain_db": -20.3839,
-    "dur": 0.2205,
-    "scene": "a1-world",
+    "name": "loto-tag",
+    "gain_db": -12.0,
+    "what": "the LOTO tag drops on its string and the string goes taut",
+    "scene": "a1-inserts",
     "kind": "pencil-tick",
-    "t": 6.09,
+    "t": 8.748,
     "index": 0,
-    "seed": 219026,
-    "pan": -0.375
+    "seed": 2258
   },
   {
-    "t": 6.2,
-    "kind": "solenoid-click",
-    "gain_db": -2.0,
-    "source": "designed",
+    "name": "cut-morning",
+    "gain_db": -12.0,
+    "material": "paper",
+    "what": "S3c: cut back to the wide site from the LOTO insert",
+    "snap": {
+      "mode": "cut",
+      "off": 0.0003
+    },
     "scene": "a1-world",
-    "seed": 5,
-    "pan": 0.3
+    "kind": "cut",
+    "t": 10.109,
+    "index": 0,
+    "seed": 2295
   },
   {
-    "name": "hse-loop-02",
-    "gain_db": -16.2815,
-    "dur": 0.285,
-    "scene": "a1-world",
-    "kind": "pencil-stroke",
-    "t": 6.21,
-    "index": 1,
-    "seed": 222615,
-    "pan": -0.1028
-  },
-  {
-    "name": "loto-label",
-    "gain_db": -15.0,
-    "dur": 0.9,
-    "scene": "a1-world",
-    "kind": "technical-pen",
-    "t": 6.25,
+    "name": "loto-cut-out",
+    "material": "paper",
+    "gain_db": -12.0,
+    "what": "back to the site on 'Work moves'",
+    "snap": {
+      "mode": "cut",
+      "off": 0.0003
+    },
+    "scene": "a1-inserts",
+    "kind": "cut",
+    "t": 10.109,
     "index": 0,
     "seed": 2332
   },
   {
-    "t": 6.26,
-    "kind": "relay-click",
-    "gain_db": -6.0,
-    "source": "designed",
-    "scene": "a1-world",
-    "seed": 6,
-    "pan": 0.3
-  },
-  {
-    "name": "hse-loop-03",
-    "gain_db": -20.6698,
-    "dur": 0.187,
+    "name": "hse-loop-01",
+    "gain_db": -20.0576,
+    "dur": 0.1125,
     "scene": "a1-world",
     "kind": "pencil-stroke",
-    "t": 6.33,
-    "index": 2,
-    "seed": 229793,
-    "pan": 0.034
-  },
-  {
-    "name": "hse-loop-04",
-    "gain_db": -17.5688,
-    "dur": 0.1808,
-    "scene": "a1-world",
-    "kind": "pencil-tick",
-    "t": 6.45,
-    "index": 3,
-    "seed": 233382,
-    "pan": -0.3753
-  },
-  {
-    "name": "hse-loop-04",
-    "gain_db": -19.9589,
-    "dur": 0.2353,
-    "scene": "a1-world",
-    "kind": "pencil-stroke",
-    "t": 6.5472,
-    "index": 3,
-    "seed": 233383,
-    "pan": 0.0402
-  },
-  {
-    "name": "hse-loop-05",
-    "gain_db": -20.41,
-    "dur": 0.0897,
-    "scene": "a1-world",
-    "kind": "pencil-tick",
-    "t": 6.57,
-    "index": 4,
-    "seed": 236971,
-    "pan": -0.2944
-  },
-  {
-    "name": "hse-loop-06",
-    "gain_db": -18.0054,
-    "dur": 0.2878,
-    "scene": "a1-world",
-    "kind": "pencil-stroke",
-    "t": 6.69,
-    "index": 5,
-    "seed": 240560,
-    "pan": 0.0262
-  },
-  {
-    "name": "hse-loop-07",
-    "gain_db": -19.4734,
-    "dur": 0.1168,
-    "scene": "a1-world",
-    "kind": "pencil-tick",
-    "t": 6.81,
-    "index": 6,
-    "seed": 244149,
-    "pan": 0.1995
-  },
-  {
-    "name": "hse-loop-08",
-    "gain_db": -20.3274,
-    "dur": 0.215,
-    "scene": "a1-world",
-    "kind": "pencil-stroke",
-    "t": 6.93,
-    "index": 7,
-    "seed": 247738,
-    "pan": 0.159
-  },
-  {
-    "name": "markers-01",
-    "gain_db": -12.0,
-    "dur": 0.3,
-    "scene": "a1-world",
-    "kind": "pencil-stroke",
-    "t": 6.99,
+    "t": 10.159,
     "index": 0,
-    "seed": 2591
+    "seed": 229793,
+    "pan": 0.1165
   },
   {
-    "name": "hse-loop-08",
-    "gain_db": -18.8178,
-    "dur": 0.2153,
+    "name": "talk-label",
+    "gain_db": -17.0,
+    "dur": 0.8,
+    "lettering": true,
     "scene": "a1-world",
-    "kind": "pencil-stroke",
-    "t": 7.0199,
-    "index": 7,
-    "seed": 247739,
-    "pan": 0.2487
+    "kind": "technical-pen",
+    "t": 10.259,
+    "index": 0,
+    "seed": 2406
   },
   {
-    "name": "hse-loop-09",
-    "gain_db": -19.1328,
-    "dur": 0.2905,
+    "name": "hse-loop-02",
+    "gain_db": -19.5949,
+    "dur": 0.1493,
     "scene": "a1-world",
     "kind": "pencil-tick",
-    "t": 7.05,
-    "index": 8,
-    "seed": 254916,
-    "pan": 0.2112
-  },
-  {
-    "name": "hse-loop-10",
-    "gain_db": -19.099,
-    "dur": 0.1219,
-    "scene": "a1-world",
-    "kind": "pencil-stroke",
-    "t": 7.17,
-    "index": 9,
-    "seed": 258505,
-    "pan": 0.2227
+    "t": 10.267,
+    "index": 1,
+    "seed": 236971,
+    "pan": 0.2272
   },
   {
     "name": "hse-footsteps",
-    "gain_db": -18.0,
-    "dur": 6,
+    "gain_db": -20.0,
+    "dur": 11.991,
     "what": "the HSE site walk",
     "scene": "a1-world",
     "kind": "footsteps",
-    "t": 7.19,
+    "t": 10.309,
     "index": 0,
-    "seed": 2702,
-    "count": 11
+    "seed": 2480,
+    "count": 22
+  },
+  {
+    "name": "hse-loop-03",
+    "gain_db": -20.7143,
+    "dur": 0.1134,
+    "scene": "a1-world",
+    "kind": "pencil-stroke",
+    "t": 10.375,
+    "index": 2,
+    "seed": 244149,
+    "pan": -0.2827
+  },
+  {
+    "name": "markers-01",
+    "gain_db": -11.0,
+    "what": "S3c: five activity markers pop in on consecutive half beats",
+    "snap": {
+      "mode": "next",
+      "off": 0.0002
+    },
+    "scene": "a1-world",
+    "kind": "pencil-tick",
+    "t": 10.435,
+    "index": 0,
+    "seed": 2554
+  },
+  {
+    "name": "hse-loop-04",
+    "gain_db": -18.0183,
+    "dur": 0.2906,
+    "scene": "a1-world",
+    "kind": "pencil-stroke",
+    "t": 10.483,
+    "index": 3,
+    "seed": 251327,
+    "pan": -0.0363
+  },
+  {
+    "name": "hse-loop-05",
+    "gain_db": -21.5672,
+    "dur": 0.2463,
+    "scene": "a1-world",
+    "kind": "pencil-stroke",
+    "t": 10.591,
+    "index": 4,
+    "seed": 254916,
+    "pan": 0.1848
+  },
+  {
+    "name": "hse-loop-06",
+    "gain_db": -18.332,
+    "dur": 0.1364,
+    "scene": "a1-world",
+    "kind": "pencil-tick",
+    "t": 10.699,
+    "index": 5,
+    "seed": 258505,
+    "pan": -0.1692
   },
   {
     "name": "markers-02",
-    "gain_db": -12.0,
-    "dur": 0.3,
-    "scene": "a1-world",
-    "kind": "pencil-stroke",
-    "t": 7.19,
-    "index": 1,
-    "seed": 2739
-  },
-  {
-    "name": "hse-loop-11",
-    "gain_db": -20.6416,
-    "dur": 0.2923,
+    "gain_db": -11.0,
+    "what": "S3c: five activity markers pop in on consecutive half beats",
+    "snap": {
+      "mode": "next",
+      "off": 0.0002
+    },
     "scene": "a1-world",
     "kind": "pencil-tick",
-    "t": 7.29,
-    "index": 10,
+    "t": 10.761,
+    "index": 1,
+    "seed": 2702
+  },
+  {
+    "name": "hse-loop-06",
+    "gain_db": -18.2895,
+    "dur": 0.1604,
+    "scene": "a1-world",
+    "kind": "pencil-stroke",
+    "t": 10.7979,
+    "index": 5,
+    "seed": 258506,
+    "pan": -0.0647
+  },
+  {
+    "name": "hse-loop-07",
+    "gain_db": -19.9548,
+    "dur": 0.2609,
+    "scene": "a1-world",
+    "kind": "pencil-tick",
+    "t": 10.807,
+    "index": 6,
+    "seed": 265683,
+    "pan": -0.0056
+  },
+  {
+    "name": "hse-loop-08",
+    "gain_db": -18.9424,
+    "dur": 0.1198,
+    "scene": "a1-world",
+    "kind": "pencil-tick",
+    "t": 10.915,
+    "index": 7,
     "seed": 269272,
-    "pan": 0.1938
+    "pan": -0.3358
+  },
+  {
+    "name": "hse-loop-09",
+    "gain_db": -21.4105,
+    "dur": 0.2129,
+    "scene": "a1-world",
+    "kind": "pencil-tick",
+    "t": 11.023,
+    "index": 8,
+    "seed": 272861,
+    "pan": 0.3316
   },
   {
     "name": "markers-03",
-    "gain_db": -12.0,
-    "dur": 0.3,
+    "gain_db": -11.0,
+    "what": "S3c: five activity markers pop in on consecutive half beats",
+    "snap": {
+      "mode": "next",
+      "off": 0.0002
+    },
     "scene": "a1-world",
-    "kind": "pencil-stroke",
-    "t": 7.39,
+    "kind": "pencil-tick",
+    "t": 11.087,
     "index": 2,
-    "seed": 2813
-  },
-  {
-    "name": "markers-04",
-    "gain_db": -12.0,
-    "dur": 0.3,
-    "scene": "a1-world",
-    "kind": "pencil-stroke",
-    "t": 7.59,
-    "index": 3,
     "seed": 2850
   },
   {
-    "name": "markers-05",
-    "gain_db": -12.0,
-    "dur": 0.3,
+    "name": "hse-loop-10",
+    "gain_db": -21.1961,
+    "dur": 0.1294,
     "scene": "a1-world",
-    "kind": "pencil-stroke",
-    "t": 7.79,
-    "index": 4,
-    "seed": 2887
+    "kind": "pencil-tick",
+    "t": 11.131,
+    "index": 9,
+    "seed": 280039,
+    "pan": 0.2563
   },
   {
-    "name": "callout-slide",
-    "gain_db": -12.0,
-    "dur": 0.3,
-    "scene": "a1-paper",
-    "kind": "paper-slide",
-    "t": 7.95,
-    "index": 0,
-    "seed": 2924
-  },
-  {
-    "name": "callout-frame",
-    "gain_db": -14.0,
-    "dur": 0.45,
-    "scene": "a1-paper",
-    "kind": "ruler-contact",
-    "t": 7.97,
-    "index": 0,
-    "seed": 2961
-  },
-  {
-    "t": 7.99,
+    "t": 11.226,
     "kind": "distant-clank",
     "gain_db": 0.0,
     "source": "designed",
@@ -873,16 +807,32 @@
     "pan": -0.6
   },
   {
-    "name": "callout-frame",
-    "gain_db": -14.0,
-    "dur": 0.45,
-    "scene": "a1-paper",
-    "kind": "pencil-stroke",
-    "t": 8.01,
-    "index": 0,
-    "seed": 2962,
-    "pressure": 0.75,
-    "speed": 1.2
+    "name": "markers-04",
+    "gain_db": -11.0,
+    "what": "S3c: five activity markers pop in on consecutive half beats",
+    "snap": {
+      "mode": "next",
+      "off": 0.0002
+    },
+    "scene": "a1-world",
+    "kind": "pencil-tick",
+    "t": 11.413,
+    "index": 3,
+    "seed": 2924
+  },
+  {
+    "name": "markers-05",
+    "gain_db": -11.0,
+    "what": "S3c: five activity markers pop in on consecutive half beats",
+    "snap": {
+      "mode": "next",
+      "off": 0.0002
+    },
+    "scene": "a1-world",
+    "kind": "pencil-tick",
+    "t": 11.739,
+    "index": 4,
+    "seed": 2961
   },
   {
     "name": "envelope-construct",
@@ -891,577 +841,833 @@
     "light": true,
     "scene": "a1-world",
     "kind": "pencil-stroke",
-    "t": 8.27,
+    "t": 12.065,
     "index": 0,
     "seed": 2998
   },
   {
-    "name": "envelope-firm",
-    "gain_db": -9.0,
-    "dur": 1.77,
-    "until": "cue:accepted",
-    "what": "the firm pass closes on 'accepted'",
+    "name": "rise",
+    "gain_db": -20.0,
+    "dur": 1.304,
+    "what": "S4: the camera rises to a clean overview",
     "scene": "a1-world",
-    "kind": "pencil-stroke",
-    "t": 8.72,
+    "kind": "pull",
+    "t": 12.065,
     "index": 0,
     "seed": 3035
   },
   {
-    "name": "heading",
-    "gain_db": -16.0,
-    "dur": 0.63,
-    "scene": "a1-paper",
-    "kind": "technical-pen",
-    "t": 8.77,
+    "name": "envelope-firm",
+    "gain_db": -9.0,
+    "dur": 2.224,
+    "what": "the firm pass closes on 'accepted'",
+    "snap": {
+      "mode": "cut",
+      "off": 0.3258
+    },
+    "scene": "a1-world",
+    "kind": "pencil-stroke",
+    "t": 12.391,
     "index": 0,
     "seed": 3072
-  },
-  {
-    "name": "clause-42",
-    "gain_db": -14.0,
-    "dur": 0.43,
-    "scene": "a1-paper",
-    "kind": "technical-pen",
-    "t": 9.26,
-    "index": 41,
-    "seed": 3109
-  },
-  {
-    "name": "heading-rule",
-    "gain_db": -18.0,
-    "dur": 0.2,
-    "scene": "a1-paper",
-    "kind": "ruler-contact",
-    "t": 9.4,
-    "index": 0,
-    "seed": 3146
-  },
-  {
-    "name": "heading-rule",
-    "gain_db": -18.0,
-    "dur": 0.2,
-    "scene": "a1-paper",
-    "kind": "pencil-stroke",
-    "t": 9.44,
-    "index": 0,
-    "seed": 3147,
-    "pressure": 0.75,
-    "speed": 1.2
-  },
-  {
-    "name": "clause-42b",
-    "gain_db": -16.0,
-    "dur": 0.21,
-    "scene": "a1-paper",
-    "kind": "technical-pen",
-    "t": 9.7,
-    "index": 0,
-    "seed": 3183
-  },
-  {
-    "name": "clause-43",
-    "gain_db": -14.0,
-    "dur": 0.49,
-    "scene": "a1-paper",
-    "kind": "technical-pen",
-    "t": 9.97,
-    "index": 42,
-    "seed": 3220
   },
   {
     "name": "envelope-label",
     "gain_db": -15.0,
     "dur": 0.7,
+    "lettering": true,
     "scene": "a1-world",
     "kind": "technical-pen",
-    "t": 10.14,
+    "t": 14.265,
+    "index": 0,
+    "seed": 3109
+  },
+  {
+    "name": "sheet-lay",
+    "gain_db": -9.0,
+    "dur": 0.652,
+    "what": "the sheet slides in from the right and lies flat",
+    "snap": {
+      "mode": "near",
+      "off": -0.0001
+    },
+    "scene": "a1-paper",
+    "kind": "sheet-lay",
+    "t": 15.326,
+    "index": 0,
+    "seed": 3146
+  },
+  {
+    "name": "underline",
+    "gain_db": -13.0,
+    "dur": 0.36,
+    "what": "graphite underline under 'sprinkler protection ... in service'",
+    "snap": {
+      "mode": "near",
+      "off": 0.6519
+    },
+    "scene": "a1-paper",
+    "kind": "ruler-contact",
+    "t": 15.978,
+    "index": 0,
+    "seed": 3183
+  },
+  {
+    "name": "underline",
+    "gain_db": -13.0,
+    "dur": 0.36,
+    "what": "graphite underline under 'sprinkler protection ... in service'",
+    "snap": {
+      "mode": "near",
+      "off": 0.6519
+    },
+    "scene": "a1-paper",
+    "kind": "pencil-stroke",
+    "t": 16.018,
+    "index": 0,
+    "seed": 3184,
+    "pressure": 0.75,
+    "speed": 1.2
+  },
+  {
+    "name": "follow",
+    "gain_db": -20.0,
+    "dur": 0.6,
+    "what": "the camera follows the arrow to PROCEDURE",
+    "snap": {
+      "mode": "cut",
+      "off": -0.0003
+    },
+    "scene": "a1-paper",
+    "kind": "whip",
+    "t": 16.304,
+    "index": 0,
+    "seed": 3220
+  },
+  {
+    "name": "lead-arrow",
+    "gain_db": -12.0,
+    "dur": 0.6,
+    "what": "the underline runs on into an arrow down to the procedure",
+    "snap": {
+      "mode": "cut",
+      "off": -0.0003
+    },
+    "scene": "a1-paper",
+    "kind": "pencil-stroke",
+    "t": 16.304,
     "index": 0,
     "seed": 3257
   },
   {
-    "name": "leader",
-    "gain_db": -18.0,
-    "dur": 0.6,
+    "name": "procedure-line",
+    "gain_db": -15.0,
+    "dur": 0.58,
+    "what": "'Confirm sprinklers in service' written and underlined",
     "scene": "a1-paper",
     "kind": "technical-pen",
-    "t": 10.64,
+    "t": 16.704,
     "index": 0,
     "seed": 3294
   },
   {
-    "name": "underline-43",
-    "gain_db": -14.0,
-    "dur": 0.32,
+    "name": "arrow-permit",
+    "gain_db": -15.0,
+    "dur": 0.376,
+    "what": "solid arrow procedure to permit",
     "scene": "a1-paper",
-    "kind": "technical-pen",
-    "t": 11.37,
-    "index": 42,
+    "kind": "pencil-stroke",
+    "t": 17.08,
+    "index": 0,
     "seed": 3331
   },
   {
-    "name": "lead-arrow",
-    "gain_db": -18.0,
-    "dur": 0.35,
+    "name": "whip-permit",
+    "gain_db": -16.0,
+    "dur": 0.3261,
     "scene": "a1-paper",
-    "kind": "technical-pen",
-    "t": 11.6,
+    "kind": "whip",
+    "t": 17.12,
     "index": 0,
     "seed": 3368
   },
   {
-    "name": "procedure",
-    "gain_db": -12.0,
-    "dur": 0.3,
+    "name": "permit-line",
+    "gain_db": -16.0,
+    "dur": 0.2,
     "scene": "a1-paper",
-    "kind": "paper-slide",
-    "t": 11.82,
+    "kind": "technical-pen",
+    "t": 17.386,
     "index": 0,
     "seed": 3405
   },
   {
-    "name": "arrow-permit",
-    "gain_db": -20.0,
-    "dur": 0.3,
+    "name": "permit-tick",
+    "gain_db": -11.0,
     "scene": "a1-paper",
-    "kind": "technical-pen",
-    "t": 12.38,
+    "kind": "pencil-tick",
+    "t": 17.586,
     "index": 0,
     "seed": 3442
   },
   {
-    "name": "permit",
-    "gain_db": -12.0,
-    "dur": 0.3,
+    "name": "permit-stamp",
+    "gain_db": -7.0,
+    "what": "APPROVED \u00b7 HSE, on the beat",
+    "snap": {
+      "mode": "next",
+      "off": 0.0003
+    },
     "scene": "a1-paper",
-    "kind": "paper-slide",
-    "t": 12.58,
+    "kind": "stamp",
+    "t": 17.609,
     "index": 0,
     "seed": 3479
   },
   {
-    "name": "procedure-underline",
-    "gain_db": -18.0,
-    "dur": 0.26,
+    "name": "arrow-briefing-01",
+    "gain_db": -22.0957,
+    "dur": 0.1525,
+    "what": "dashed arrow permit to briefing",
     "scene": "a1-paper",
-    "kind": "technical-pen",
-    "t": 12.77,
+    "kind": "pencil-tick",
+    "t": 17.732,
     "index": 0,
-    "seed": 3516
+    "seed": 341052,
+    "pan": -0.2408
   },
   {
-    "name": "arrow-briefing",
-    "gain_db": -20.0,
-    "dur": 0.3,
+    "name": "arrow-briefing-02",
+    "gain_db": -19.6356,
+    "dur": 0.2161,
+    "what": "dashed arrow permit to briefing",
     "scene": "a1-paper",
-    "kind": "technical-pen",
-    "t": 12.94,
-    "index": 0,
-    "seed": 3553
+    "kind": "pencil-stroke",
+    "t": 17.765,
+    "index": 1,
+    "seed": 344641,
+    "pan": -0.0397
   },
   {
-    "name": "briefing",
-    "gain_db": -12.0,
-    "dur": 0.3,
+    "name": "whip-briefing",
+    "gain_db": -16.0,
+    "dur": 0.3261,
     "scene": "a1-paper",
-    "kind": "paper-slide",
-    "t": 13.12,
+    "kind": "whip",
+    "t": 17.772,
     "index": 0,
     "seed": 3590
   },
   {
-    "name": "permit-signature",
-    "gain_db": -16.0,
-    "dur": 0.36,
+    "name": "arrow-briefing-03",
+    "gain_db": -22.9145,
+    "dur": 0.2727,
+    "what": "dashed arrow permit to briefing",
     "scene": "a1-paper",
-    "kind": "technical-pen",
-    "t": 13.3,
-    "index": 0,
-    "seed": 3627
-  },
-  {
-    "name": "permit-tick",
-    "gain_db": -14.0,
-    "dur": 0.16,
-    "scene": "a1-paper",
-    "kind": "pencil-tick",
-    "t": 13.36,
-    "index": 0,
-    "seed": 3664
-  },
-  {
-    "name": "permit-stamp",
-    "gain_db": -8.0,
-    "dur": 0.16,
-    "scene": "a1-paper",
-    "kind": "stamp",
-    "t": 13.52,
-    "index": 0,
-    "seed": 3701
-  },
-  {
-    "name": "arrow-checklist",
-    "gain_db": -20.0,
-    "dur": 0.3,
-    "scene": "a1-paper",
-    "kind": "technical-pen",
-    "t": 13.61,
-    "index": 0,
-    "seed": 3738
-  },
-  {
-    "name": "checklist",
-    "gain_db": -12.0,
-    "dur": 0.3,
-    "scene": "a1-paper",
-    "kind": "paper-slide",
-    "t": 13.79,
-    "index": 0,
-    "seed": 3775
-  },
-  {
-    "name": "briefing-initials-01",
-    "gain_db": -22.0,
-    "scene": "a1-paper",
-    "kind": "technical-pen",
-    "t": 14.24,
-    "index": 0,
-    "seed": 3812
-  },
-  {
-    "name": "checklist-tick-1",
-    "gain_db": -14.0,
-    "dur": 0.14,
-    "scene": "a1-paper",
-    "kind": "pencil-tick",
-    "t": 14.29,
-    "index": 0,
-    "seed": 3849
-  },
-  {
-    "name": "briefing-initials-02",
-    "gain_db": -22.0,
-    "scene": "a1-paper",
-    "kind": "technical-pen",
-    "t": 14.31,
-    "index": 1,
-    "seed": 3886
-  },
-  {
-    "name": "briefing-initials-03",
-    "gain_db": -22.0,
-    "scene": "a1-paper",
-    "kind": "technical-pen",
-    "t": 14.38,
+    "kind": "pencil-stroke",
+    "t": 17.798,
     "index": 2,
+    "seed": 351819,
+    "pan": -0.0506
+  },
+  {
+    "name": "arrow-briefing-04",
+    "gain_db": -22.1504,
+    "dur": 0.1589,
+    "what": "dashed arrow permit to briefing",
+    "scene": "a1-paper",
+    "kind": "pencil-tick",
+    "t": 17.831,
+    "index": 3,
+    "seed": 355408,
+    "pan": -0.0626
+  },
+  {
+    "name": "arrow-briefing-05",
+    "gain_db": -18.7627,
+    "dur": 0.1495,
+    "what": "dashed arrow permit to briefing",
+    "scene": "a1-paper",
+    "kind": "pencil-tick",
+    "t": 17.864,
+    "index": 4,
+    "seed": 358997,
+    "pan": -0.2833
+  },
+  {
+    "name": "arrow-briefing-06",
+    "gain_db": -18.4973,
+    "dur": 0.2442,
+    "what": "dashed arrow permit to briefing",
+    "scene": "a1-paper",
+    "kind": "pencil-stroke",
+    "t": 17.897,
+    "index": 5,
+    "seed": 362586,
+    "pan": -0.0606
+  },
+  {
+    "name": "arrow-briefing-07",
+    "gain_db": -20.9351,
+    "dur": 0.2241,
+    "what": "dashed arrow permit to briefing",
+    "scene": "a1-paper",
+    "kind": "pencil-tick",
+    "t": 17.93,
+    "index": 6,
+    "seed": 366175,
+    "pan": 0.2646
+  },
+  {
+    "name": "arrow-briefing-08",
+    "gain_db": -20.0007,
+    "dur": 0.1756,
+    "what": "dashed arrow permit to briefing",
+    "scene": "a1-paper",
+    "kind": "pencil-stroke",
+    "t": 17.963,
+    "index": 7,
+    "seed": 369764,
+    "pan": -0.1549
+  },
+  {
+    "name": "arrow-briefing-09",
+    "gain_db": -18.6257,
+    "dur": 0.2958,
+    "what": "dashed arrow permit to briefing",
+    "scene": "a1-paper",
+    "kind": "pencil-tick",
+    "t": 17.996,
+    "index": 8,
+    "seed": 373353,
+    "pan": -0.3389
+  },
+  {
+    "name": "arrow-briefing-10",
+    "gain_db": -18.5261,
+    "dur": 0.2598,
+    "what": "dashed arrow permit to briefing",
+    "scene": "a1-paper",
+    "kind": "pencil-stroke",
+    "t": 18.029,
+    "index": 9,
+    "seed": 376942,
+    "pan": -0.2454
+  },
+  {
+    "name": "briefing-note",
+    "gain_db": -16.0,
+    "dur": 0.24,
+    "what": "the speech outline",
+    "scene": "a1-paper",
+    "kind": "pencil-stroke",
+    "t": 18.058,
+    "index": 0,
     "seed": 3923
   },
   {
-    "name": "briefing-initials-04",
-    "gain_db": -22.0,
+    "name": "briefing-line",
+    "gain_db": -17.0,
+    "dur": 0.26,
+    "what": "'sprinklers on', grey",
     "scene": "a1-paper",
     "kind": "technical-pen",
-    "t": 14.45,
-    "index": 3,
+    "t": 18.198,
+    "index": 0,
     "seed": 3960
   },
   {
-    "name": "checklist-tick-2",
-    "gain_db": -14.0,
-    "dur": 0.14,
+    "name": "arrow-checklist-01",
+    "gain_db": -23.7035,
+    "dur": 0.1196,
+    "what": "dotted arrow briefing to checklist",
+    "scene": "a1-paper",
+    "kind": "pencil-stroke",
+    "t": 18.384,
+    "index": 0,
+    "seed": 387709,
+    "pan": -0.0266
+  },
+  {
+    "name": "arrow-checklist-02",
+    "gain_db": -22.1664,
+    "dur": 0.2484,
+    "what": "dotted arrow briefing to checklist",
     "scene": "a1-paper",
     "kind": "pencil-tick",
-    "t": 14.47,
+    "t": 18.409,
     "index": 1,
-    "seed": 3997
+    "seed": 391298,
+    "pan": 0.1278
   },
   {
-    "name": "briefing-initials-05",
-    "gain_db": -22.0,
-    "scene": "a1-paper",
-    "kind": "technical-pen",
-    "t": 14.52,
-    "index": 4,
-    "seed": 4034
-  },
-  {
-    "name": "checklist-question",
+    "name": "whip-checklist",
     "gain_db": -16.0,
-    "dur": 0.3,
+    "dur": 0.3261,
     "scene": "a1-paper",
-    "kind": "technical-pen",
-    "t": 14.74,
+    "kind": "whip",
+    "t": 18.424,
     "index": 0,
     "seed": 4071
   },
   {
+    "name": "arrow-checklist-03",
+    "gain_db": -24.4178,
+    "dur": 0.1624,
+    "what": "dotted arrow briefing to checklist",
+    "scene": "a1-paper",
+    "kind": "pencil-stroke",
+    "t": 18.434,
+    "index": 2,
+    "seed": 398476,
+    "pan": 0.0961
+  },
+  {
+    "name": "arrow-checklist-04",
+    "gain_db": -22.831,
+    "dur": 0.2374,
+    "what": "dotted arrow briefing to checklist",
+    "scene": "a1-paper",
+    "kind": "pencil-tick",
+    "t": 18.459,
+    "index": 3,
+    "seed": 402065,
+    "pan": 0.1926
+  },
+  {
+    "name": "arrow-checklist-05",
+    "gain_db": -20.3425,
+    "dur": 0.1531,
+    "what": "dotted arrow briefing to checklist",
+    "scene": "a1-paper",
+    "kind": "pencil-stroke",
+    "t": 18.484,
+    "index": 4,
+    "seed": 405654,
+    "pan": 0.3167
+  },
+  {
+    "name": "arrow-checklist-06",
+    "gain_db": -24.0073,
+    "dur": 0.1934,
+    "what": "dotted arrow briefing to checklist",
+    "scene": "a1-paper",
+    "kind": "pencil-stroke",
+    "t": 18.509,
+    "index": 5,
+    "seed": 409243,
+    "pan": -0.3651
+  },
+  {
+    "name": "arrow-checklist-07",
+    "gain_db": -21.2751,
+    "dur": 0.2271,
+    "what": "dotted arrow briefing to checklist",
+    "scene": "a1-paper",
+    "kind": "pencil-stroke",
+    "t": 18.534,
+    "index": 6,
+    "seed": 412832,
+    "pan": -0.3187
+  },
+  {
+    "name": "arrow-checklist-08",
+    "gain_db": -23.6038,
+    "dur": 0.2636,
+    "what": "dotted arrow briefing to checklist",
+    "scene": "a1-paper",
+    "kind": "pencil-tick",
+    "t": 18.559,
+    "index": 7,
+    "seed": 416421,
+    "pan": 0.3836
+  },
+  {
+    "name": "arrow-checklist-09",
+    "gain_db": -22.6318,
+    "dur": 0.2192,
+    "what": "dotted arrow briefing to checklist",
+    "scene": "a1-paper",
+    "kind": "pencil-stroke",
+    "t": 18.584,
+    "index": 8,
+    "seed": 420010,
+    "pan": -0.1228
+  },
+  {
+    "name": "arrow-checklist-10",
+    "gain_db": -21.6507,
+    "dur": 0.2033,
+    "what": "dotted arrow briefing to checklist",
+    "scene": "a1-paper",
+    "kind": "pencil-stroke",
+    "t": 18.609,
+    "index": 9,
+    "seed": 423599,
+    "pan": 0.3296
+  },
+  {
+    "name": "arrow-checklist-11",
+    "gain_db": -24.3376,
+    "dur": 0.2341,
+    "what": "dotted arrow briefing to checklist",
+    "scene": "a1-paper",
+    "kind": "pencil-tick",
+    "t": 18.634,
+    "index": 10,
+    "seed": 427188,
+    "pan": 0.2649
+  },
+  {
+    "name": "arrow-checklist-12",
+    "gain_db": -21.1385,
+    "dur": 0.2358,
+    "what": "dotted arrow briefing to checklist",
+    "scene": "a1-paper",
+    "kind": "pencil-tick",
+    "t": 18.659,
+    "index": 11,
+    "seed": 430777,
+    "pan": -0.0556
+  },
+  {
+    "name": "arrow-checklist-13",
+    "gain_db": -21.2428,
+    "dur": 0.2469,
+    "what": "dotted arrow briefing to checklist",
+    "scene": "a1-paper",
+    "kind": "pencil-stroke",
+    "t": 18.684,
+    "index": 12,
+    "seed": 434366,
+    "pan": -0.0164
+  },
+  {
+    "name": "checklist-line",
+    "gain_db": -18.0,
+    "dur": 0.2,
+    "what": "'Sprinklers', pale",
+    "scene": "a1-paper",
+    "kind": "technical-pen",
+    "t": 18.69,
+    "index": 0,
+    "seed": 4515
+  },
+  {
+    "name": "arrow-checklist-14",
+    "gain_db": -21.9541,
+    "dur": 0.1724,
+    "what": "dotted arrow briefing to checklist",
+    "scene": "a1-paper",
+    "kind": "pencil-stroke",
+    "t": 18.709,
+    "index": 13,
+    "seed": 441544,
+    "pan": 0.358
+  },
+  {
+    "name": "question-mark",
+    "gain_db": -13.0,
+    "dur": 0.18,
+    "scene": "a1-paper",
+    "kind": "pencil-stroke",
+    "t": 18.89,
+    "index": 0,
+    "seed": 4589
+  },
+  {
+    "name": "pull-back",
+    "gain_db": -14.0,
+    "dur": 1,
+    "what": "the whole sheet: the clause and the four artefacts, the thread thinning across them",
+    "scene": "a1-paper",
+    "kind": "pull",
+    "t": 19.076,
+    "index": 0,
+    "seed": 4626
+  },
+  {
     "name": "field-01",
-    "gain_db": -12.6058,
-    "dur": 0.1241,
-    "what": "the accumulation",
+    "gain_db": -13.2192,
+    "dur": 0.1669,
+    "what": "S6: the accumulation arrives in waves on half beats (the first three under the sheet)",
+    "snap": {
+      "mode": "prev",
+      "off": -0.6524
+    },
     "scene": "a1-world",
     "kind": "pencil-tick",
-    "t": 14.81,
+    "t": 19.565,
     "index": 0,
-    "seed": 398476,
-    "pan": -0.3676
+    "seed": 452311,
+    "pan": 0.2412
   },
   {
     "name": "field-02",
-    "gain_db": -14.9448,
-    "dur": 0.2987,
-    "what": "the accumulation",
+    "gain_db": -12.2235,
+    "dur": 0.1907,
+    "what": "S6: the accumulation arrives in waves on half beats (the first three under the sheet)",
+    "snap": {
+      "mode": "prev",
+      "off": -0.6524
+    },
     "scene": "a1-world",
-    "kind": "pencil-tick",
-    "t": 14.91,
+    "kind": "pencil-stroke",
+    "t": 19.891,
     "index": 1,
-    "seed": 402065,
-    "pan": 0.0377
-  },
-  {
-    "name": "field-03",
-    "gain_db": -14.0894,
-    "dur": 0.2247,
-    "what": "the accumulation",
-    "scene": "a1-world",
-    "kind": "pencil-tick",
-    "t": 15.01,
-    "index": 2,
-    "seed": 405654,
-    "pan": -0.0733
-  },
-  {
-    "name": "containment-01",
-    "gain_db": -12.0,
-    "dur": 0.62,
-    "scene": "a1-world",
-    "kind": "pencil-stroke",
-    "t": 15.11,
-    "index": 0,
-    "seed": 4219
-  },
-  {
-    "name": "field-04",
-    "gain_db": -13.6661,
-    "dur": 0.22,
-    "what": "the accumulation",
-    "scene": "a1-world",
-    "kind": "pencil-tick",
-    "t": 15.11,
-    "index": 3,
-    "seed": 412832,
-    "pan": -0.2138
-  },
-  {
-    "name": "field-05",
-    "gain_db": -16.5626,
-    "dur": 0.085,
-    "what": "the accumulation",
-    "scene": "a1-world",
-    "kind": "pencil-stroke",
-    "t": 15.21,
-    "index": 4,
-    "seed": 416421,
-    "pan": 0.0335
-  },
-  {
-    "name": "field-06",
-    "gain_db": -16.0918,
-    "dur": 0.2179,
-    "what": "the accumulation",
-    "scene": "a1-world",
-    "kind": "pencil-stroke",
-    "t": 15.31,
-    "index": 5,
-    "seed": 420010,
-    "pan": 0.2006
-  },
-  {
-    "name": "field-07",
-    "gain_db": -14.4428,
-    "dur": 0.2905,
-    "what": "the accumulation",
-    "scene": "a1-world",
-    "kind": "pencil-tick",
-    "t": 15.41,
-    "index": 6,
-    "seed": 423599,
-    "pan": 0.3333
-  },
-  {
-    "name": "field-08",
-    "gain_db": -16.5607,
-    "dur": 0.1961,
-    "what": "the accumulation",
-    "scene": "a1-world",
-    "kind": "pencil-stroke",
-    "t": 15.51,
-    "index": 7,
-    "seed": 427188,
-    "pan": -0.3512
-  },
-  {
-    "name": "field-09",
-    "gain_db": -16.2396,
-    "dur": 0.1016,
-    "what": "the accumulation",
-    "scene": "a1-world",
-    "kind": "pencil-stroke",
-    "t": 15.61,
-    "index": 8,
-    "seed": 430777,
-    "pan": 0.3982
-  },
-  {
-    "name": "sheet-lift",
-    "gain_db": -12.0,
-    "dur": 0.6,
-    "scene": "a1-paper",
-    "kind": "paper-lift",
-    "t": 15.62,
-    "index": 0,
-    "seed": 4478
-  },
-  {
-    "name": "field-10",
-    "gain_db": -16.2901,
-    "dur": 0.1984,
-    "what": "the accumulation",
-    "scene": "a1-world",
-    "kind": "pencil-tick",
-    "t": 15.71,
-    "index": 9,
-    "seed": 437955,
-    "pan": 0.2128
-  },
-  {
-    "name": "containment-02",
-    "gain_db": -12.0,
-    "dur": 0.62,
-    "scene": "a1-world",
-    "kind": "pencil-stroke",
-    "t": 15.77,
-    "index": 1,
-    "seed": 4552
-  },
-  {
-    "name": "field-10",
-    "gain_db": -13.6764,
-    "dur": 0.1042,
-    "what": "the accumulation",
-    "scene": "a1-world",
-    "kind": "pencil-tick",
-    "t": 15.7975,
-    "index": 9,
-    "seed": 437956,
-    "pan": -0.0478
-  },
-  {
-    "name": "field-11",
-    "gain_db": -16.1197,
-    "dur": 0.2331,
-    "what": "the accumulation",
-    "scene": "a1-world",
-    "kind": "pencil-tick",
-    "t": 15.81,
-    "index": 10,
-    "seed": 445133,
-    "pan": -0.393
-  },
-  {
-    "name": "field-12",
-    "gain_db": -14.4292,
-    "dur": 0.2109,
-    "what": "the accumulation",
-    "scene": "a1-world",
-    "kind": "pencil-stroke",
-    "t": 15.91,
-    "index": 11,
-    "seed": 448722,
-    "pan": 0.128
-  },
-  {
-    "name": "field-13",
-    "gain_db": -16.0896,
-    "dur": 0.1373,
-    "what": "the accumulation",
-    "scene": "a1-world",
-    "kind": "pencil-stroke",
-    "t": 16.01,
-    "index": 12,
-    "seed": 452311,
-    "pan": 0.0426
-  },
-  {
-    "name": "field-14",
-    "gain_db": -16.4132,
-    "dur": 0.1112,
-    "what": "the accumulation",
-    "scene": "a1-world",
-    "kind": "pencil-tick",
-    "t": 16.11,
-    "index": 13,
     "seed": 455900,
-    "pan": 0.1509
+    "pan": -0.0719
   },
   {
-    "name": "containment-03",
-    "gain_db": -13.0,
-    "dur": 0.62,
+    "name": "field-02",
+    "gain_db": -15.9146,
+    "dur": 0.1216,
+    "what": "S6: the accumulation arrives in waves on half beats (the first three under the sheet)",
+    "snap": {
+      "mode": "prev",
+      "off": -0.6524
+    },
     "scene": "a1-world",
     "kind": "pencil-stroke",
-    "t": 16.17,
-    "index": 2,
+    "t": 20.0052,
+    "index": 1,
+    "seed": 455901,
+    "pan": 0.1379
+  },
+  {
+    "name": "circle-question",
+    "gain_db": -14.0,
+    "dur": 0.34,
+    "what": "the question mark circled in the hold",
+    "scene": "a1-paper",
+    "kind": "pencil-stroke",
+    "t": 20.076,
+    "index": 0,
     "seed": 4737
   },
   {
-    "name": "field-14",
-    "gain_db": -16.6508,
-    "dur": 0.1583,
-    "what": "the accumulation",
-    "scene": "a1-world",
-    "kind": "pencil-tick",
-    "t": 16.1935,
-    "index": 13,
-    "seed": 455901,
-    "pan": 0.1964
-  },
-  {
-    "name": "field-15",
-    "gain_db": -15.403,
-    "dur": 0.202,
-    "what": "the accumulation",
+    "name": "field-03",
+    "gain_db": -12.7509,
+    "dur": 0.216,
+    "what": "S6: the accumulation arrives in waves on half beats (the first three under the sheet)",
+    "snap": {
+      "mode": "prev",
+      "off": -0.6524
+    },
     "scene": "a1-world",
     "kind": "pencil-stroke",
-    "t": 16.21,
-    "index": 14,
+    "t": 20.217,
+    "index": 2,
     "seed": 463078,
-    "pan": 0.0925
+    "pan": 0.2179
   },
   {
-    "name": "field-16",
-    "gain_db": -14.9436,
-    "dur": 0.267,
-    "what": "the accumulation",
-    "scene": "a1-world",
-    "kind": "pencil-tick",
-    "t": 16.31,
-    "index": 15,
-    "seed": 466667,
-    "pan": 0.3636
-  },
-  {
-    "name": "hot-marker",
-    "gain_db": -9.0,
-    "dur": 0.6,
+    "name": "field-03",
+    "gain_db": -12.8341,
+    "dur": 0.1489,
+    "what": "S6: the accumulation arrives in waves on half beats (the first three under the sheet)",
+    "snap": {
+      "mode": "prev",
+      "off": -0.6524
+    },
     "scene": "a1-world",
     "kind": "pencil-stroke",
-    "t": 17.89,
+    "t": 20.3047,
+    "index": 2,
+    "seed": 463079,
+    "pan": 0.0409
+  },
+  {
+    "name": "field-04",
+    "gain_db": -16.2402,
+    "dur": 0.1841,
+    "what": "S6: the accumulation arrives in waves on half beats (the first three under the sheet)",
+    "snap": {
+      "mode": "prev",
+      "off": -0.6524
+    },
+    "scene": "a1-world",
+    "kind": "pencil-tick",
+    "t": 20.543,
+    "index": 3,
+    "seed": 466667,
+    "pan": -0.2415
+  },
+  {
+    "name": "sheet-lift",
+    "gain_db": -9.0,
+    "dur": 0.42,
+    "what": "the sheet lifts off to the left, fast and flat, on 'But'",
+    "scene": "a1-paper",
+    "kind": "paper-lift",
+    "t": 20.543,
     "index": 0,
     "seed": 4848
   },
   {
-    "t": 18.16,
+    "name": "field-05",
+    "gain_db": -15.9684,
+    "dur": 0.139,
+    "what": "S6: the accumulation arrives in waves on half beats (the first three under the sheet)",
+    "snap": {
+      "mode": "prev",
+      "off": -0.6524
+    },
+    "scene": "a1-world",
+    "kind": "pencil-tick",
+    "t": 20.869,
+    "index": 4,
+    "seed": 473845,
+    "pan": -0.3342
+  },
+  {
+    "name": "containment-01",
+    "gain_db": -12.0,
+    "dur": 0.6,
+    "snap": {
+      "mode": "cut",
+      "off": 0.3265
+    },
+    "scene": "a1-world",
+    "kind": "pencil-stroke",
+    "t": 20.87,
+    "index": 0,
+    "seed": 4922
+  },
+  {
+    "name": "field-05",
+    "gain_db": -16.8659,
+    "dur": 0.1319,
+    "what": "S6: the accumulation arrives in waves on half beats (the first three under the sheet)",
+    "snap": {
+      "mode": "prev",
+      "off": -0.6524
+    },
+    "scene": "a1-world",
+    "kind": "pencil-tick",
+    "t": 20.9818,
+    "index": 4,
+    "seed": 473846,
+    "pan": 0.1826
+  },
+  {
+    "name": "field-06",
+    "gain_db": -16.8174,
+    "dur": 0.0907,
+    "what": "S6: the accumulation arrives in waves on half beats (the first three under the sheet)",
+    "snap": {
+      "mode": "prev",
+      "off": -0.6524
+    },
+    "scene": "a1-world",
+    "kind": "pencil-stroke",
+    "t": 21.195,
+    "index": 5,
+    "seed": 481023,
+    "pan": -0.339
+  },
+  {
+    "name": "containment-02",
+    "gain_db": -12.0,
+    "dur": 0.6,
+    "snap": {
+      "mode": "cut",
+      "off": 0.6525
+    },
+    "scene": "a1-world",
+    "kind": "pencil-stroke",
+    "t": 21.196,
+    "index": 1,
+    "seed": 4996
+  },
+  {
+    "name": "field-07",
+    "gain_db": -12.4644,
+    "dur": 0.1773,
+    "what": "S6: the accumulation arrives in waves on half beats (the first three under the sheet)",
+    "snap": {
+      "mode": "prev",
+      "off": -0.6524
+    },
+    "scene": "a1-world",
+    "kind": "pencil-stroke",
+    "t": 21.521,
+    "index": 6,
+    "seed": 488201,
+    "pan": 0.0628
+  },
+  {
+    "name": "roof-marker",
+    "gain_db": -12.0,
+    "dur": 0.5,
+    "what": "the ROOF 03 marker",
+    "snap": {
+      "mode": "cut",
+      "off": 0.9785
+    },
+    "scene": "a1-world",
+    "kind": "pencil-stroke",
+    "t": 21.522,
+    "index": 0,
+    "seed": 5070
+  },
+  {
+    "name": "field-08",
+    "gain_db": -16.1268,
+    "dur": 0.0812,
+    "what": "S6: the accumulation arrives in waves on half beats (the first three under the sheet)",
+    "snap": {
+      "mode": "prev",
+      "off": -0.6524
+    },
+    "scene": "a1-world",
+    "kind": "pencil-tick",
+    "t": 21.847,
+    "index": 7,
+    "seed": 495379,
+    "pan": -0.0642
+  },
+  {
+    "name": "containment-03",
+    "gain_db": -13.0,
+    "dur": 0.6,
+    "snap": {
+      "mode": "cut",
+      "off": 1.3045
+    },
+    "scene": "a1-world",
+    "kind": "pencil-stroke",
+    "t": 21.848,
+    "index": 2,
+    "seed": 5144
+  },
+  {
+    "name": "field-09",
+    "gain_db": -13.2998,
+    "dur": 0.2888,
+    "what": "S6: the accumulation arrives in waves on half beats (the first three under the sheet)",
+    "snap": {
+      "mode": "prev",
+      "off": -0.6524
+    },
+    "scene": "a1-world",
+    "kind": "pencil-tick",
+    "t": 22.173,
+    "index": 8,
+    "seed": 502557,
+    "pan": 0.1124
+  },
+  {
+    "t": 23.463,
+    "kind": "radio-click",
+    "gain_db": -2.0,
+    "source": "designed",
+    "scene": "a1-world",
+    "seed": 9,
+    "pan": -0.4
+  },
+  {
+    "t": 23.943,
     "kind": "distant-clank",
     "gain_db": -3.0,
     "source": "designed",
@@ -1470,484 +1676,828 @@
     "pan": 0.55
   },
   {
-    "name": "safeguards-draw-01",
-    "gain_db": -15.0,
-    "dur": 0.3,
-    "what": "the five safeguard items start drawing (each ticks later on its word)",
+    "name": "push-roof03",
+    "gain_db": -10.0,
+    "dur": 0.652,
+    "what": "S7a: one-beat push from the extreme wide to Roof 03",
     "scene": "a1-world",
-    "kind": "pencil-stroke",
-    "t": 18.19,
+    "kind": "push",
+    "t": 24.13,
     "index": 0,
-    "seed": 4885
-  },
-  {
-    "name": "safeguards-draw-02",
-    "gain_db": -15.0,
-    "dur": 0.3,
-    "what": "the five safeguard items start drawing (each ticks later on its word)",
-    "scene": "a1-world",
-    "kind": "pencil-stroke",
-    "t": 18.32,
-    "index": 1,
-    "seed": 4922
-  },
-  {
-    "name": "safeguards-draw-03",
-    "gain_db": -15.0,
-    "dur": 0.3,
-    "what": "the five safeguard items start drawing (each ticks later on its word)",
-    "scene": "a1-world",
-    "kind": "pencil-stroke",
-    "t": 18.45,
-    "index": 2,
-    "seed": 4959
-  },
-  {
-    "name": "safeguards-draw-04",
-    "gain_db": -15.0,
-    "dur": 0.3,
-    "what": "the five safeguard items start drawing (each ticks later on its word)",
-    "scene": "a1-world",
-    "kind": "pencil-stroke",
-    "t": 18.58,
-    "index": 3,
-    "seed": 4996
-  },
-  {
-    "name": "safeguards-draw-05",
-    "gain_db": -15.0,
-    "dur": 0.3,
-    "what": "the five safeguard items start drawing (each ticks later on its word)",
-    "scene": "a1-world",
-    "kind": "pencil-stroke",
-    "t": 18.71,
-    "index": 4,
-    "seed": 5033
-  },
-  {
-    "name": "sz3-label",
-    "gain_db": -16.0,
-    "dur": 0.6,
-    "scene": "a1-world",
-    "kind": "technical-pen",
-    "t": 19.09,
-    "index": 0,
-    "seed": 5070
-  },
-  {
-    "name": "tick-01",
-    "gain_db": -8.0,
-    "what": "CERTIFICATE",
-    "scene": "a1-world",
-    "kind": "pencil-tick",
-    "t": 19.33,
-    "index": 0,
-    "seed": 5107
-  },
-  {
-    "name": "tick-02",
-    "gain_db": -8.0,
-    "what": "FIRE WATCH",
-    "scene": "a1-world",
-    "kind": "pencil-tick",
-    "t": 19.6,
-    "index": 1,
-    "seed": 5144
-  },
-  {
-    "name": "tick-03",
-    "gain_db": -8.0,
-    "what": "EXTINGUISHER",
-    "scene": "a1-world",
-    "kind": "pencil-tick",
-    "t": 19.86,
-    "index": 2,
-    "seed": 5181
-  },
-  {
-    "name": "tick-04",
-    "gain_db": -8.0,
-    "what": "AREA CLEARED",
-    "scene": "a1-world",
-    "kind": "pencil-tick",
-    "t": 20.13,
-    "index": 3,
     "seed": 5218
   },
   {
-    "name": "tick-05",
-    "gain_db": -7.0,
-    "what": "SPRINKLERS",
+    "name": "hot-marker",
+    "gain_db": -10.0,
+    "dur": 0.6,
+    "what": "the ROOF 03 marker becomes the hot-work marker",
     "scene": "a1-world",
-    "kind": "pencil-tick",
-    "t": 20.39,
-    "index": 4,
+    "kind": "pencil-stroke",
+    "t": 24.21,
+    "index": 0,
     "seed": 5255
   },
   {
-    "name": "valve-tag",
-    "gain_db": -12.0,
-    "dur": 1.1,
-    "what": "another hand tags the zone 3 valve",
-    "scene": "a1-world",
-    "kind": "technical-pen",
-    "t": 20.96,
+    "name": "weld-arc",
+    "gain_db": -16.0,
+    "dur": 1.304,
+    "what": "the arc point flickering while the torch travels along the seam",
+    "snap": {
+      "mode": "cut",
+      "off": 0.0004
+    },
+    "scene": "a1-inserts",
+    "kind": "arc",
+    "t": 24.783,
     "index": 0,
     "seed": 5292
   },
   {
-    "name": "valve-clunk",
-    "gain_db": -9.0,
-    "scene": "a1-world",
-    "kind": "valve-clunk",
-    "t": 22.2,
+    "name": "weld-cut-in",
+    "material": "felt",
+    "gain_db": -12.0,
+    "what": "S7b: cut to the welder close-up",
+    "snap": {
+      "mode": "cut",
+      "off": 0.0004
+    },
+    "scene": "a1-inserts",
+    "kind": "cut",
+    "t": 24.783,
     "index": 0,
     "seed": 5329
   },
   {
-    "name": "connection-01",
-    "gain_db": -22.4648,
-    "dur": 0.283,
-    "scene": "a1-world",
-    "kind": "pencil-stroke",
-    "t": 24.53,
-    "index": 0,
-    "seed": 524091,
-    "pan": 0.1142
-  },
-  {
-    "name": "connection-02",
-    "gain_db": -22.0588,
-    "dur": 0.0847,
-    "scene": "a1-world",
-    "kind": "pencil-tick",
-    "t": 24.64,
-    "index": 1,
-    "seed": 527680,
-    "pan": -0.0199
-  },
-  {
-    "name": "connection-03",
-    "gain_db": -21.293,
-    "dur": 0.2888,
-    "scene": "a1-world",
-    "kind": "pencil-stroke",
-    "t": 24.75,
-    "index": 2,
-    "seed": 531269,
-    "pan": 0.0041
-  },
-  {
-    "name": "connection-04",
-    "gain_db": -20.342,
-    "dur": 0.2755,
-    "scene": "a1-world",
-    "kind": "pencil-tick",
-    "t": 24.86,
-    "index": 3,
-    "seed": 534858,
-    "pan": 0.3688
-  },
-  {
-    "name": "connection-05",
-    "gain_db": -23.798,
-    "dur": 0.1284,
-    "scene": "a1-world",
-    "kind": "pencil-tick",
-    "t": 24.97,
-    "index": 4,
-    "seed": 538447,
-    "pan": -0.0165
-  },
-  {
-    "name": "connection-06",
-    "gain_db": -20.0328,
-    "dur": 0.1883,
-    "scene": "a1-world",
-    "kind": "pencil-tick",
-    "t": 25.08,
-    "index": 5,
-    "seed": 542036,
-    "pan": -0.0204
-  },
-  {
-    "name": "connection-07",
-    "gain_db": -23.4869,
-    "dur": 0.2863,
-    "scene": "a1-world",
-    "kind": "pencil-stroke",
-    "t": 25.19,
-    "index": 6,
-    "seed": 545625,
-    "pan": 0.0537
-  },
-  {
-    "name": "connection-08",
-    "gain_db": -23.2107,
-    "dur": 0.2563,
-    "scene": "a1-world",
-    "kind": "pencil-tick",
-    "t": 25.3,
-    "index": 7,
-    "seed": 549214,
-    "pan": 0.3899
-  },
-  {
-    "name": "connection-09",
-    "gain_db": -19.3788,
-    "dur": 0.2927,
-    "scene": "a1-world",
-    "kind": "pencil-tick",
-    "t": 25.41,
-    "index": 8,
-    "seed": 552803,
-    "pan": -0.1799
-  },
-  {
-    "name": "connection-10",
-    "gain_db": -23.0063,
-    "dur": 0.213,
-    "scene": "a1-world",
-    "kind": "pencil-tick",
-    "t": 25.52,
-    "index": 9,
-    "seed": 556392,
-    "pan": 0.3243
-  },
-  {
-    "name": "envelope-redraw",
+    "name": "safeguards-draw-01",
     "gain_db": -16.0,
-    "dur": 1.9,
+    "dur": 0.3,
     "light": true,
-    "what": "the envelope quietly redrawn inward",
+    "what": "each safeguard draws where it stands before its tick",
     "scene": "a1-world",
     "kind": "pencil-stroke",
-    "t": 26.2,
+    "t": 25.663,
     "index": 0,
+    "seed": 5366
+  },
+  {
+    "name": "safeguards-draw-02",
+    "gain_db": -16.0,
+    "dur": 0.3,
+    "light": true,
+    "what": "each safeguard draws where it stands before its tick",
+    "scene": "a1-world",
+    "kind": "pencil-stroke",
+    "t": 25.989,
+    "index": 1,
+    "seed": 5403
+  },
+  {
+    "name": "cut-roof03",
+    "gain_db": -12.0,
+    "material": "paper",
+    "what": "S7c: cut back to Roof 03 from the worker insert",
+    "snap": "cut",
+    "scene": "a1-world",
+    "kind": "cut",
+    "t": 26.087,
+    "index": 0,
+    "seed": 5440
+  },
+  {
+    "name": "weld-cut-out",
+    "material": "felt",
+    "gain_db": -12.0,
+    "what": "back to Roof 03 on 'every'",
+    "snap": "cut",
+    "scene": "a1-inserts",
+    "kind": "cut",
+    "t": 26.087,
+    "index": 0,
+    "seed": 5477
+  },
+  {
+    "name": "safeguards-draw-03",
+    "gain_db": -16.0,
+    "dur": 0.3,
+    "light": true,
+    "what": "each safeguard draws where it stands before its tick",
+    "scene": "a1-world",
+    "kind": "pencil-stroke",
+    "t": 26.315,
+    "index": 2,
+    "seed": 5514
+  },
+  {
+    "name": "ticks-01",
+    "gain_db": -8.0,
+    "what": "CERTIFICATE, FIRE WATCH, EXTINGUISHER, AREA CLEARED, SPRINKLERS on consecutive half beats",
+    "snap": {
+      "mode": "near"
+    },
+    "scene": "a1-world",
+    "kind": "pencil-tick",
+    "t": 26.413,
+    "index": 0,
+    "seed": 5551
+  },
+  {
+    "name": "safeguards-draw-04",
+    "gain_db": -16.0,
+    "dur": 0.3,
+    "light": true,
+    "what": "each safeguard draws where it stands before its tick",
+    "scene": "a1-world",
+    "kind": "pencil-stroke",
+    "t": 26.641,
+    "index": 3,
+    "seed": 5588
+  },
+  {
+    "name": "ticks-02",
+    "gain_db": -8.0,
+    "what": "CERTIFICATE, FIRE WATCH, EXTINGUISHER, AREA CLEARED, SPRINKLERS on consecutive half beats",
+    "snap": {
+      "mode": "near"
+    },
+    "scene": "a1-world",
+    "kind": "pencil-tick",
+    "t": 26.739,
+    "index": 1,
+    "seed": 5625
+  },
+  {
+    "name": "safeguards-draw-05",
+    "gain_db": -16.0,
+    "dur": 0.3,
+    "light": true,
+    "what": "each safeguard draws where it stands before its tick",
+    "scene": "a1-world",
+    "kind": "pencil-stroke",
+    "t": 26.967,
+    "index": 4,
+    "seed": 5662
+  },
+  {
+    "name": "ticks-03",
+    "gain_db": -8.0,
+    "what": "CERTIFICATE, FIRE WATCH, EXTINGUISHER, AREA CLEARED, SPRINKLERS on consecutive half beats",
+    "snap": {
+      "mode": "near"
+    },
+    "scene": "a1-world",
+    "kind": "pencil-tick",
+    "t": 27.065,
+    "index": 2,
+    "seed": 5699
+  },
+  {
+    "name": "ticks-04",
+    "gain_db": -8.0,
+    "what": "CERTIFICATE, FIRE WATCH, EXTINGUISHER, AREA CLEARED, SPRINKLERS on consecutive half beats",
+    "snap": {
+      "mode": "near"
+    },
+    "scene": "a1-world",
+    "kind": "pencil-tick",
+    "t": 27.391,
+    "index": 3,
+    "seed": 5736
+  },
+  {
+    "name": "ticks-05",
+    "gain_db": -8.0,
+    "what": "CERTIFICATE, FIRE WATCH, EXTINGUISHER, AREA CLEARED, SPRINKLERS on consecutive half beats",
+    "snap": {
+      "mode": "near"
+    },
+    "scene": "a1-world",
+    "kind": "pencil-tick",
+    "t": 27.717,
+    "index": 4,
     "seed": 5773
   },
   {
-    "name": "fray",
-    "gain_db": -24.0,
-    "dur": 1.8,
-    "scene": "a1-world",
-    "kind": "fray",
-    "t": 27.13,
+    "name": "sz3-cut-in",
+    "material": "paper",
+    "gain_db": -12.0,
+    "what": "S8a: cut to the Sprinkler Zone 3 control valve",
+    "scene": "a1-inserts",
+    "kind": "cut",
+    "t": 29.022,
     "index": 0,
     "seed": 5810
   },
   {
-    "name": "frag-photo",
-    "gain_db": -16.0,
-    "dur": 0.22,
-    "scene": "a1-after",
-    "kind": "paper-slide",
-    "t": 28.61,
+    "name": "sz3-handwheel",
+    "gain_db": -10.0,
+    "dur": 1.31,
+    "what": "the handwheel turns closed over 'sprinkler zone', the rising stem runs in",
+    "scene": "a1-inserts",
+    "kind": "handwheel",
+    "t": 29.222,
     "index": 0,
     "seed": 5847
   },
   {
-    "name": "frag-programme",
-    "gain_db": -16.0,
-    "dur": 0.22,
-    "scene": "a1-after",
-    "kind": "paper-slide",
-    "t": 29.01,
-    "index": 0,
-    "seed": 5884
-  },
-  {
-    "name": "incident",
-    "gain_db": -8.0,
-    "dur": 1.6,
-    "scene": "a1-world",
-    "kind": "incident",
-    "t": 29.26,
+    "name": "sz3-valve-clunk",
+    "gain_db": -6.0,
+    "what": "the gate seats on 'offline': muted, mechanical, no alarm",
+    "scene": "a1-inserts",
+    "kind": "valve-clunk",
+    "t": 30.532,
     "index": 0,
     "seed": 5921
   },
   {
-    "name": "frag-call",
-    "gain_db": -16.0,
-    "dur": 0.22,
-    "scene": "a1-after",
-    "kind": "paper-slide",
-    "t": 29.41,
+    "name": "sz3-gauge",
+    "gain_db": -12.0,
+    "dur": 0.51,
+    "what": "the needle falls from 7.2 bar on 'goes offline' and ticks on the zero stop (the fall began dur seconds earlier)",
+    "scene": "a1-inserts",
+    "kind": "gauge",
+    "t": 30.832,
     "index": 0,
     "seed": 5958
   },
   {
-    "name": "frag-permit",
+    "name": "cut-sz3",
     "gain_db": -16.0,
-    "dur": 0.22,
-    "scene": "a1-after",
-    "kind": "paper-slide",
-    "t": 29.59,
+    "material": "felt",
+    "what": "S8b: cut to the zone 3 roof; the heads go grey on half beats",
+    "snap": {
+      "mode": "next",
+      "off": -0.0003
+    },
+    "scene": "a1-world",
+    "kind": "cut",
+    "t": 31.304,
     "index": 0,
     "seed": 5995
   },
   {
-    "name": "frag-workorder",
-    "gain_db": -16.0,
-    "dur": 0.22,
-    "scene": "a1-after",
-    "kind": "paper-slide",
-    "t": 29.99,
-    "index": 0,
-    "seed": 6032
-  },
-  {
-    "name": "pin-photo",
-    "gain_db": -12.0,
-    "scene": "a1-after",
-    "kind": "pin",
-    "t": 30.1,
+    "name": "sz3-cut-out",
+    "material": "paper",
+    "gain_db": -14.0,
+    "what": "to the zone 3 roof (S8b)",
+    "snap": {
+      "mode": "next",
+      "off": -0.0003
+    },
+    "scene": "a1-inserts",
+    "kind": "cut",
+    "t": 31.304,
     "index": 0,
     "seed": 6069
   },
   {
-    "name": "frag-statement",
+    "name": "cut-nothing",
     "gain_db": -16.0,
-    "dur": 0.22,
-    "scene": "a1-after",
-    "kind": "paper-slide",
-    "t": 30.39,
+    "material": "felt",
+    "what": "S9a: Roof 03 and zone 3 together",
+    "scene": "a1-world",
+    "kind": "cut",
+    "t": 33.587,
     "index": 0,
     "seed": 6106
   },
   {
-    "name": "pin-programme",
-    "gain_db": -12.0,
-    "scene": "a1-after",
-    "kind": "pin",
-    "t": 30.43,
+    "name": "connection-01",
+    "gain_db": -23.9141,
+    "dur": 0.2338,
+    "snap": {
+      "mode": "next"
+    },
+    "scene": "a1-world",
+    "kind": "pencil-stroke",
+    "t": 33.913,
     "index": 0,
-    "seed": 6143
+    "seed": 595871,
+    "pan": 0.396
   },
   {
-    "name": "frag-email",
-    "gain_db": -16.0,
-    "dur": 0.22,
-    "scene": "a1-after",
-    "kind": "paper-slide",
-    "t": 30.79,
+    "name": "connection-01",
+    "gain_db": -23.9733,
+    "dur": 0.1075,
+    "snap": {
+      "mode": "next"
+    },
+    "scene": "a1-world",
+    "kind": "pencil-stroke",
+    "t": 33.9987,
     "index": 0,
-    "seed": 6180
+    "seed": 595872,
+    "pan": 0.2644
   },
   {
-    "name": "pin-call",
-    "gain_db": -12.0,
-    "scene": "a1-after",
-    "kind": "pin",
-    "t": 30.94,
-    "index": 0,
-    "seed": 6217
-  },
-  {
-    "name": "pin-permit",
-    "gain_db": -12.0,
-    "scene": "a1-after",
-    "kind": "pin",
-    "t": 31.22,
-    "index": 0,
-    "seed": 6254
-  },
-  {
-    "name": "pin-workorder",
-    "gain_db": -12.0,
-    "scene": "a1-after",
-    "kind": "pin",
-    "t": 31.48,
-    "index": 0,
-    "seed": 6291
-  },
-  {
-    "name": "question-1",
-    "gain_db": -28.0,
-    "scene": "a1-after",
-    "kind": "paper-slide",
-    "t": 31.6,
-    "index": 0,
-    "seed": 6328,
-    "dur": 0.18
-  },
-  {
-    "name": "pin-email",
-    "gain_db": -12.0,
-    "scene": "a1-after",
-    "kind": "pin",
-    "t": 32.06,
-    "index": 0,
-    "seed": 6365
-  },
-  {
-    "name": "pin-statement",
-    "gain_db": -12.0,
-    "scene": "a1-after",
-    "kind": "pin",
-    "t": 32.2,
-    "index": 0,
-    "seed": 6402
-  },
-  {
-    "name": "question-2",
-    "gain_db": -28.0,
-    "scene": "a1-after",
-    "kind": "paper-slide",
-    "t": 32.94,
+    "name": "connection-02",
+    "gain_db": -23.3596,
+    "dur": 0.1531,
+    "snap": {
+      "mode": "next"
+    },
+    "scene": "a1-world",
+    "kind": "pencil-stroke",
+    "t": 34.013,
     "index": 1,
-    "seed": 6439,
-    "dur": 0.18
+    "seed": 599460,
+    "pan": 0.3805
   },
   {
-    "name": "question-3",
-    "gain_db": -28.0,
-    "scene": "a1-after",
-    "kind": "paper-slide",
-    "t": 34.57,
+    "name": "connection-03",
+    "gain_db": -26.8664,
+    "dur": 0.2321,
+    "snap": {
+      "mode": "next"
+    },
+    "scene": "a1-world",
+    "kind": "pencil-tick",
+    "t": 34.113,
     "index": 2,
-    "seed": 6476,
-    "dur": 0.18
+    "seed": 603049,
+    "pan": 0.1668
   },
   {
-    "name": "gap-rule",
-    "gain_db": -10.0,
-    "dur": 0.82,
-    "scene": "a1-after",
-    "kind": "ruler-contact",
-    "t": 36.0,
+    "name": "connection-04",
+    "gain_db": -22.8357,
+    "dur": 0.2667,
+    "snap": {
+      "mode": "next"
+    },
+    "scene": "a1-world",
+    "kind": "pencil-stroke",
+    "t": 34.213,
+    "index": 3,
+    "seed": 606638,
+    "pan": 0.1985
+  },
+  {
+    "name": "connection-05",
+    "gain_db": -24.2381,
+    "dur": 0.1042,
+    "snap": {
+      "mode": "next"
+    },
+    "scene": "a1-world",
+    "kind": "pencil-stroke",
+    "t": 34.313,
+    "index": 4,
+    "seed": 610227,
+    "pan": -0.0356
+  },
+  {
+    "name": "connection-06",
+    "gain_db": -25.8752,
+    "dur": 0.0953,
+    "snap": {
+      "mode": "next"
+    },
+    "scene": "a1-world",
+    "kind": "pencil-tick",
+    "t": 34.413,
+    "index": 5,
+    "seed": 613816,
+    "pan": -0.1795
+  },
+  {
+    "name": "connection-07",
+    "gain_db": -26.2836,
+    "dur": 0.1968,
+    "snap": {
+      "mode": "next"
+    },
+    "scene": "a1-world",
+    "kind": "pencil-stroke",
+    "t": 34.513,
+    "index": 6,
+    "seed": 617405,
+    "pan": 0.1866
+  },
+  {
+    "name": "connection-08",
+    "gain_db": -23.9357,
+    "dur": 0.2353,
+    "snap": {
+      "mode": "next"
+    },
+    "scene": "a1-world",
+    "kind": "pencil-tick",
+    "t": 34.613,
+    "index": 7,
+    "seed": 620994,
+    "pan": 0.2472
+  },
+  {
+    "name": "connection-09",
+    "gain_db": -22.8276,
+    "dur": 0.2051,
+    "snap": {
+      "mode": "next"
+    },
+    "scene": "a1-world",
+    "kind": "pencil-stroke",
+    "t": 34.713,
+    "index": 8,
+    "seed": 624583,
+    "pan": 0.0351
+  },
+  {
+    "name": "connection-10",
+    "gain_db": -26.0631,
+    "dur": 0.2538,
+    "snap": {
+      "mode": "next"
+    },
+    "scene": "a1-world",
+    "kind": "pencil-stroke",
+    "t": 34.813,
+    "index": 9,
+    "seed": 628172,
+    "pan": -0.0881
+  },
+  {
+    "name": "connection-10",
+    "gain_db": -23.8401,
+    "dur": 0.1604,
+    "snap": {
+      "mode": "next"
+    },
+    "scene": "a1-world",
+    "kind": "pencil-tick",
+    "t": 34.9015,
+    "index": 9,
+    "seed": 628173,
+    "pan": -0.2971
+  },
+  {
+    "name": "push-edge",
+    "gain_db": -17.0,
+    "dur": 0.652,
+    "what": "S9b: a gentle push to the envelope edge beside Roof 03",
+    "snap": {
+      "mode": "cut",
+      "off": -0.0005
+    },
+    "scene": "a1-world",
+    "kind": "push",
+    "t": 35.543,
     "index": 0,
     "seed": 6513
   },
   {
-    "name": "gap-rule",
-    "gain_db": -10.0,
-    "dur": 0.82,
-    "scene": "a1-after",
-    "kind": "technical-pen",
-    "t": 36.04,
+    "name": "envelope-redraw",
+    "gain_db": -17.0,
+    "dur": 1.5,
+    "light": true,
+    "what": "the envelope quietly redrawn inward",
+    "snap": {
+      "mode": "cut",
+      "off": 0.0003
+    },
+    "scene": "a1-world",
+    "kind": "pencil-stroke",
+    "t": 36.196,
     "index": 0,
-    "seed": 6514
+    "seed": 6550
   },
   {
-    "name": "latch",
-    "gain_db": -6.0,
+    "name": "fray",
+    "gain_db": -24.0,
+    "dur": 1.1,
+    "snap": {
+      "mode": "cut",
+      "off": 0.0001
+    },
     "scene": "a1-world",
-    "kind": "latch-soft",
-    "t": 42.36,
+    "kind": "fray",
+    "t": 37.174,
     "index": 0,
     "seed": 6587
   },
   {
+    "name": "pull-back",
+    "gain_db": -18.0,
+    "dur": 1.957,
+    "what": "S9c: slow pull back to Roof 03 and zone 3",
+    "snap": {
+      "mode": "cut",
+      "off": -0.0002
+    },
+    "scene": "a1-world",
+    "kind": "pull",
+    "t": 38.152,
+    "index": 0,
+    "seed": 6624
+  },
+  {
+    "name": "cut-after",
+    "gain_db": -12.0,
+    "material": "graphite",
+    "what": "S10a: cut to Roof 03 medium-close",
+    "scene": "a1-world",
+    "kind": "cut",
+    "t": 40.435,
+    "index": 0,
+    "seed": 6698
+  },
+  {
+    "name": "incident",
+    "gain_db": -8.0,
+    "dur": 0.75,
+    "text": "INCIDENT \u00b7 ROOF 03 \u00b7 16:07",
+    "scene": "a1-world",
+    "kind": "incident",
+    "t": 40.485,
+    "index": 0,
+    "seed": 6735
+  },
+  {
+    "name": "incident-hatch",
+    "gain_db": -18.0,
+    "dur": 0.16,
+    "scene": "a1-world",
+    "kind": "pencil-hatch",
+    "t": 40.815,
+    "index": 0,
+    "seed": 6772
+  },
+  {
+    "name": "pull-after",
+    "gain_db": -14.0,
+    "dur": 1.304,
+    "what": "S10b: the site recedes as the camera pulls back to afterwardsWide",
+    "scene": "a1-world",
+    "kind": "pull",
+    "t": 41.705,
+    "index": 0,
+    "seed": 6809
+  },
+  {
+    "name": "pin-wave-01",
+    "gain_db": -12.0,
+    "what": "S10b: photo, call log, statement, work order pin while the site recedes",
+    "snap": {
+      "mode": "cut",
+      "off": 0.6519
+    },
+    "scene": "a1-after",
+    "kind": "pin",
+    "t": 42.391,
+    "index": 0,
+    "seed": 6846
+  },
+  {
+    "name": "pin-wave-02",
+    "gain_db": -12.0,
+    "what": "S10b: photo, call log, statement, work order pin while the site recedes",
+    "snap": {
+      "mode": "cut",
+      "off": 0.6519
+    },
+    "scene": "a1-after",
+    "kind": "pin",
+    "t": 42.717,
+    "index": 1,
+    "seed": 6883
+  },
+  {
+    "name": "pin-wave-03",
+    "gain_db": -12.0,
+    "what": "S10b: photo, call log, statement, work order pin while the site recedes",
+    "snap": {
+      "mode": "cut",
+      "off": 0.6519
+    },
+    "scene": "a1-after",
+    "kind": "pin",
+    "t": 43.043,
+    "index": 2,
+    "seed": 6920
+  },
+  {
+    "name": "pin-wave-04",
+    "gain_db": -12.0,
+    "what": "S10b: photo, call log, statement, work order pin while the site recedes",
+    "snap": {
+      "mode": "cut",
+      "off": 0.6519
+    },
+    "scene": "a1-after",
+    "kind": "pin",
+    "t": 43.369,
+    "index": 3,
+    "seed": 6957
+  },
+  {
+    "name": "question-1",
+    "gain_db": -28.0,
+    "what": "What was happening?",
+    "scene": "a1-after",
+    "kind": "paper-slide",
+    "t": 43.696,
+    "index": 0,
+    "seed": 6994,
+    "dur": 0.18
+  },
+  {
+    "name": "pin-crowd-1-01",
+    "gain_db": -17.0,
+    "what": "email, shift note, photo 16:12 crowd in behind (background plane)",
+    "scene": "a1-after",
+    "kind": "pin",
+    "t": 44.348,
+    "index": 0,
+    "seed": 7031
+  },
+  {
+    "name": "pin-crowd-1-02",
+    "gain_db": -17.0,
+    "what": "email, shift note, photo 16:12 crowd in behind (background plane)",
+    "scene": "a1-after",
+    "kind": "pin",
+    "t": 44.674,
+    "index": 1,
+    "seed": 7068
+  },
+  {
+    "name": "pin-crowd-1-03",
+    "gain_db": -17.0,
+    "what": "email, shift note, photo 16:12 crowd in behind (background plane)",
+    "scene": "a1-after",
+    "kind": "pin",
+    "t": 45.0,
+    "index": 2,
+    "seed": 7105
+  },
+  {
+    "name": "whip-1",
+    "gain_db": -16.0,
+    "dur": 0.652,
+    "what": "one-beat lateral dolly to shot 2, parallax on three planes",
+    "scene": "a1-after",
+    "kind": "whip",
+    "t": 45.326,
+    "index": 0,
+    "seed": 7142
+  },
+  {
+    "name": "question-2",
+    "gain_db": -28.0,
+    "what": "Which condition applied?",
+    "scene": "a1-after",
+    "kind": "paper-slide",
+    "t": 45.536,
+    "index": 1,
+    "seed": 7179,
+    "dur": 0.18
+  },
+  {
+    "name": "pin-programme",
+    "gain_db": -12.0,
+    "what": "PROGRAMME 4.3 pins as the camera lands",
+    "scene": "a1-after",
+    "kind": "pin",
+    "t": 45.978,
+    "index": 0,
+    "seed": 7216
+  },
+  {
+    "name": "pin-crowd-2-01",
+    "gain_db": -17.0,
+    "what": "call log 16:08, witness note (background plane)",
+    "scene": "a1-after",
+    "kind": "pin",
+    "t": 46.304,
+    "index": 0,
+    "seed": 7253
+  },
+  {
+    "name": "pin-crowd-2-02",
+    "gain_db": -17.0,
+    "what": "call log 16:08, witness note (background plane)",
+    "scene": "a1-after",
+    "kind": "pin",
+    "t": 46.63,
+    "index": 1,
+    "seed": 7290
+  },
+  {
+    "name": "whip-2",
+    "gain_db": -16.0,
+    "dur": 0.652,
+    "what": "one-beat lateral dolly to shot 3",
+    "scene": "a1-after",
+    "kind": "whip",
+    "t": 47.609,
+    "index": 1,
+    "seed": 7327
+  },
+  {
+    "name": "question-3",
+    "gain_db": -28.0,
+    "what": "Can you prove / what was true?",
+    "scene": "a1-after",
+    "kind": "paper-slide",
+    "t": 47.676,
+    "index": 2,
+    "seed": 7364,
+    "dur": 0.18
+  },
+  {
+    "name": "pin-permit",
+    "gain_db": -12.0,
+    "what": "PERMIT HW-0412 pins as the camera lands",
+    "scene": "a1-after",
+    "kind": "pin",
+    "t": 48.261,
+    "index": 0,
+    "seed": 7401
+  },
+  {
+    "name": "permit-loop",
+    "gain_db": -15.0,
+    "dur": 0.5,
+    "what": "the SPRINKLERS tick circled on 'true'",
+    "scene": "a1-after",
+    "kind": "pencil-stroke",
+    "t": 48.606,
+    "index": 0,
+    "seed": 7438
+  },
+  {
+    "name": "pin-crowd-3-01",
+    "gain_db": -17.0,
+    "what": "photo 16:14, email 16:40 (background plane)",
+    "scene": "a1-after",
+    "kind": "pin",
+    "t": 49.239,
+    "index": 0,
+    "seed": 7475
+  },
+  {
+    "name": "pin-crowd-3-02",
+    "gain_db": -17.0,
+    "what": "photo 16:14, email 16:40 (background plane)",
+    "scene": "a1-after",
+    "kind": "pin",
+    "t": 49.565,
+    "index": 1,
+    "seed": 7512
+  },
+  {
+    "name": "pull-wide",
+    "gain_db": -12.0,
+    "dur": 1.304,
+    "what": "S10d: two-beat pull back to the whole board",
+    "snap": {
+      "mode": "cut",
+      "off": -0.0005
+    },
+    "scene": "a1-after",
+    "kind": "pull",
+    "t": 50.543,
+    "index": 0,
+    "seed": 7549
+  },
+  {
+    "name": "gap-rule",
+    "gain_db": -10.0,
+    "dur": 0.7,
+    "scene": "a1-after",
+    "kind": "ruler-contact",
+    "t": 50.807,
+    "index": 0,
+    "seed": 7586
+  },
+  {
+    "name": "gap-rule",
+    "gain_db": -10.0,
+    "dur": 0.7,
+    "scene": "a1-after",
+    "kind": "technical-pen",
+    "t": 50.847,
+    "index": 0,
+    "seed": 7587
+  },
+  {
+    "name": "latch",
+    "gain_db": -6.0,
+    "what": "the rewind lands on the landing frame",
+    "scene": "a1-world",
+    "kind": "latch-soft",
+    "t": 58.722,
+    "index": 0,
+    "seed": 7697
+  },
+  {
     "name": "precision-snap",
     "gain_db": -10.0,
     "dur": 1.9,
     "scene": "a2-resolve",
     "kind": "align-snap",
-    "t": 42.793,
+    "t": 59.1879,
     "index": 0,
-    "seed": 205344,
-    "pan": -0.5141
+    "seed": 239754,
+    "pan": -0.451
   },
   {
     "name": "precision-snap",
@@ -1955,10 +2505,10 @@
     "dur": 1.9,
     "scene": "a2-resolve",
     "kind": "align-snap",
-    "t": 42.9551,
+    "t": 59.3154,
     "index": 0,
-    "seed": 205345,
-    "pan": 0.3013
+    "seed": 239755,
+    "pan": -0.5952
   },
   {
     "name": "precision-snap",
@@ -1966,10 +2516,10 @@
     "dur": 1.9,
     "scene": "a2-resolve",
     "kind": "align-snap",
-    "t": 43.1187,
+    "t": 59.4648,
     "index": 0,
-    "seed": 205346,
-    "pan": 0.1229
+    "seed": 239756,
+    "pan": -0.4091
   },
   {
     "name": "precision-snap",
@@ -1977,10 +2527,10 @@
     "dur": 1.9,
     "scene": "a2-resolve",
     "kind": "align-snap",
-    "t": 43.261,
+    "t": 59.5935,
     "index": 0,
-    "seed": 205347,
-    "pan": -0.5635
+    "seed": 239757,
+    "pan": -0.1685
   },
   {
     "name": "precision-snap",
@@ -1988,10 +2538,10 @@
     "dur": 1.9,
     "scene": "a2-resolve",
     "kind": "align-snap",
-    "t": 43.3924,
+    "t": 59.7417,
     "index": 0,
-    "seed": 205348,
-    "pan": 0.0143
+    "seed": 239758,
+    "pan": 0.1889
   },
   {
     "name": "precision-snap",
@@ -1999,10 +2549,10 @@
     "dur": 1.9,
     "scene": "a2-resolve",
     "kind": "align-snap",
-    "t": 43.5339,
+    "t": 59.9079,
     "index": 0,
-    "seed": 205349,
-    "pan": -0.059
+    "seed": 239759,
+    "pan": -0.2358
   },
   {
     "name": "precision-snap",
@@ -2010,10 +2560,10 @@
     "dur": 1.9,
     "scene": "a2-resolve",
     "kind": "align-snap",
-    "t": 43.6674,
+    "t": 60.0311,
     "index": 0,
-    "seed": 205350,
-    "pan": 0.3405
+    "seed": 239760,
+    "pan": -0.2833
   },
   {
     "name": "precision-snap",
@@ -2021,10 +2571,21 @@
     "dur": 1.9,
     "scene": "a2-resolve",
     "kind": "align-snap",
-    "t": 43.8216,
+    "t": 60.179,
     "index": 0,
-    "seed": 205351,
-    "pan": 0.127
+    "seed": 239761,
+    "pan": -0.3266
+  },
+  {
+    "name": "precision-snap",
+    "gain_db": -14.0,
+    "dur": 1.9,
+    "scene": "a2-resolve",
+    "kind": "align-snap",
+    "t": 60.344,
+    "index": 0,
+    "seed": 239762,
+    "pan": -0.1386
   },
   {
     "name": "header-in",
@@ -2032,20 +2593,9 @@
     "dur": 1.1,
     "scene": "a2-resolve",
     "kind": "sheet-in",
-    "t": 43.92,
+    "t": 60.352,
     "index": 0,
-    "seed": 6661
-  },
-  {
-    "name": "precision-snap",
-    "gain_db": -14.0,
-    "dur": 1.9,
-    "scene": "a2-resolve",
-    "kind": "align-snap",
-    "t": 43.9599,
-    "index": 0,
-    "seed": 205352,
-    "pan": 0.5809
+    "seed": 7771
   },
   {
     "name": "precision-snap",
@@ -2053,10 +2603,10 @@
     "dur": 1.9,
     "scene": "a2-resolve",
     "kind": "align-snap",
-    "t": 44.1273,
+    "t": 60.4695,
     "index": 0,
-    "seed": 205353,
-    "pan": -0.1247
+    "seed": 239763,
+    "pan": 0.2254
   },
   {
     "name": "header-in",
@@ -2064,9 +2614,9 @@
     "dur": 1.1,
     "scene": "a2-resolve",
     "kind": "align-snap",
-    "t": 44.17,
+    "t": 60.602,
     "index": 0,
-    "seed": 6662
+    "seed": 7772
   },
   {
     "name": "precision-snap",
@@ -2074,10 +2624,10 @@
     "dur": 1.9,
     "scene": "a2-resolve",
     "kind": "align-snap",
-    "t": 44.2676,
+    "t": 60.6246,
     "index": 0,
-    "seed": 205354,
-    "pan": 0.4996
+    "seed": 239764,
+    "pan": 0.2634
   },
   {
     "name": "header-in",
@@ -2085,9 +2635,9 @@
     "dur": 1.1,
     "scene": "a2-resolve",
     "kind": "align-snap",
-    "t": 44.32,
+    "t": 60.752,
     "index": 0,
-    "seed": 6663
+    "seed": 7773
   },
   {
     "name": "precision-snap",
@@ -2095,10 +2645,10 @@
     "dur": 1.9,
     "scene": "a2-resolve",
     "kind": "align-snap",
-    "t": 44.3997,
+    "t": 60.769,
     "index": 0,
-    "seed": 205355,
-    "pan": -0.5672
+    "seed": 239765,
+    "pan": 0.258
   },
   {
     "name": "precision-snap",
@@ -2106,10 +2656,10 @@
     "dur": 1.9,
     "scene": "a2-resolve",
     "kind": "align-snap",
-    "t": 44.5685,
+    "t": 60.9229,
     "index": 0,
-    "seed": 205356,
-    "pan": 0.1346
+    "seed": 239766,
+    "pan": -0.2121
   },
   {
     "name": "capture-start",
@@ -2117,9 +2667,9 @@
     "dur": 0.6,
     "scene": "a2-resolve",
     "kind": "capture-start",
-    "t": 45.46,
+    "t": 62.911,
     "index": 0,
-    "seed": 6698
+    "seed": 7808
   },
   {
     "name": "word-token-01",
@@ -2127,9 +2677,9 @@
     "dur": 0.5,
     "scene": "a2-resolve",
     "kind": "align-snap",
-    "t": 48.6,
+    "t": 66.051,
     "index": 0,
-    "seed": 6735
+    "seed": 7845
   },
   {
     "name": "word-token-02",
@@ -2137,9 +2687,9 @@
     "dur": 0.5,
     "scene": "a2-resolve",
     "kind": "align-snap",
-    "t": 48.8,
+    "t": 66.251,
     "index": 1,
-    "seed": 6772
+    "seed": 7882
   },
   {
     "name": "word-token-03",
@@ -2147,19 +2697,9 @@
     "dur": 0.5,
     "scene": "a2-resolve",
     "kind": "align-snap",
-    "t": 49.0,
+    "t": 66.451,
     "index": 2,
-    "seed": 6809
-  },
-  {
-    "name": "connect-4-2",
-    "gain_db": -12.0,
-    "dur": 0.9,
-    "scene": "a2-resolve",
-    "kind": "connect-line",
-    "t": 49.12,
-    "index": 1,
-    "seed": 6846
+    "seed": 7919
   },
   {
     "name": "word-token-04",
@@ -2167,9 +2707,19 @@
     "dur": 0.5,
     "scene": "a2-resolve",
     "kind": "align-snap",
-    "t": 49.2,
+    "t": 66.651,
     "index": 3,
-    "seed": 6883
+    "seed": 7956
+  },
+  {
+    "name": "connect-4-2",
+    "gain_db": -12.0,
+    "dur": 0.9,
+    "scene": "a2-resolve",
+    "kind": "connect-line",
+    "t": 67.298,
+    "index": 1,
+    "seed": 7993
   },
   {
     "name": "connect-sz3",
@@ -2177,9 +2727,9 @@
     "dur": 0.5,
     "scene": "a2-resolve",
     "kind": "connect-line",
-    "t": 50.12,
+    "t": 68.338,
     "index": 0,
-    "seed": 6920
+    "seed": 8030
   },
   {
     "name": "connect-4-3",
@@ -2187,9 +2737,9 @@
     "dur": 0.6,
     "scene": "a2-resolve",
     "kind": "connect-line",
-    "t": 50.54,
+    "t": 68.758,
     "index": 2,
-    "seed": 6957
+    "seed": 8067
   },
   {
     "name": "verify-tick-01",
@@ -2197,9 +2747,9 @@
     "dur": 0.36,
     "scene": "a2-resolve",
     "kind": "confirm",
-    "t": 52.71,
+    "t": 72.319,
     "index": 0,
-    "seed": 6994,
+    "seed": 8104,
     "variant": 0
   },
   {
@@ -2208,9 +2758,9 @@
     "dur": 0.36,
     "scene": "a2-resolve",
     "kind": "confirm",
-    "t": 53.13,
+    "t": 72.739,
     "index": 1,
-    "seed": 7031,
+    "seed": 8141,
     "variant": 1
   },
   {
@@ -2219,9 +2769,9 @@
     "dur": 0.36,
     "scene": "a2-resolve",
     "kind": "confirm",
-    "t": 53.55,
+    "t": 73.159,
     "index": 2,
-    "seed": 7068,
+    "seed": 8178,
     "variant": 2
   },
   {
@@ -2230,9 +2780,9 @@
     "dur": 0.36,
     "scene": "a2-resolve",
     "kind": "confirm",
-    "t": 53.97,
+    "t": 73.579,
     "index": 3,
-    "seed": 7105,
+    "seed": 8215,
     "variant": 3
   },
   {
@@ -2241,9 +2791,9 @@
     "dur": 0.36,
     "scene": "a2-resolve",
     "kind": "confirm",
-    "t": 54.39,
+    "t": 73.999,
     "index": 4,
-    "seed": 7142,
+    "seed": 8252,
     "variant": 4
   },
   {
@@ -2252,9 +2802,9 @@
     "dur": 0.75,
     "scene": "a2-resolve",
     "kind": "record-append",
-    "t": 54.86,
+    "t": 74.589,
     "index": 0,
-    "seed": 7179
+    "seed": 8289
   },
   {
     "name": "record-append-2",
@@ -2262,12 +2812,22 @@
     "dur": 0.75,
     "scene": "a2-resolve",
     "kind": "record-append",
-    "t": 55.26,
+    "t": 74.989,
     "index": 1,
-    "seed": 7216
+    "seed": 8326
   },
   {
-    "t": 60.32,
+    "name": "cut-in",
+    "material": "paper",
+    "gain_db": -14.0,
+    "scene": "a3-change",
+    "kind": "cut",
+    "t": 81.22,
+    "index": 0,
+    "seed": 8363
+  },
+  {
+    "t": 82.006,
     "kind": "valve-clunk",
     "gain_db": -4.0,
     "source": "designed",
@@ -2279,43 +2839,57 @@
   {
     "name": "system-event",
     "gain_db": -8.0,
-    "dur": 0.75,
+    "dur": 0.6,
     "scene": "a3-change",
     "kind": "record-append",
-    "t": 60.47,
+    "t": 82.174,
     "index": 0,
-    "seed": 7253
+    "seed": 8400
   },
   {
     "name": "system-event",
     "gain_db": -14.0,
-    "dur": 0.75,
+    "dur": 0.6,
     "scene": "a3-change",
     "kind": "relay-click",
-    "t": 60.48,
+    "t": 82.184,
     "index": 0,
-    "seed": 7254
+    "seed": 8401
   },
   {
-    "name": "record-system",
+    "name": "cut-card",
+    "material": "felt",
+    "gain_db": -14.0,
+    "snap": {
+      "mode": "cut",
+      "off": -0.0003
+    },
+    "scene": "a3-change",
+    "kind": "cut",
+    "t": 83.478,
+    "index": 0,
+    "seed": 8437
+  },
+  {
+    "name": "focus-row",
     "gain_db": -16.0,
     "scene": "a3-change",
-    "kind": "record-append",
-    "t": 60.73,
+    "kind": "focus",
+    "t": 83.498,
     "index": 0,
-    "seed": 7290
+    "seed": 8474
   },
   {
     "name": "row-unavailable",
     "gain_db": -9.0,
     "scene": "a3-change",
     "kind": "row-unavailable",
-    "t": 62.52,
+    "t": 84.566,
     "index": 0,
-    "seed": 7327
+    "seed": 8511
   },
   {
-    "t": 62.52,
+    "t": 84.666,
     "kind": "system-tick",
     "gain_db": 0.0,
     "source": "designed",
@@ -2323,24 +2897,56 @@
     "seed": 12
   },
   {
+    "name": "cut-edge",
+    "material": "paper",
+    "gain_db": -16.0,
+    "snap": {
+      "mode": "cut",
+      "off": 0.0001
+    },
+    "scene": "a3-change",
+    "kind": "cut",
+    "t": 85.761,
+    "index": 0,
+    "seed": 8548
+  },
+  {
     "name": "node-stretch",
     "gain_db": -10.0,
-    "dur": 1,
+    "dur": 0.815,
+    "snap": {
+      "mode": "cut",
+      "off": 0.0001
+    },
     "scene": "a3-change",
     "kind": "stretch",
-    "t": 63.57,
+    "t": 85.761,
     "index": 0,
-    "seed": 7364
+    "seed": 8585
   },
   {
     "name": "node-cross",
     "gain_db": -6.0,
     "dur": 0.46,
+    "snap": {
+      "mode": "next",
+      "off": 0.652
+    },
     "scene": "a3-change",
     "kind": "cross-snap",
-    "t": 64.71,
+    "t": 86.739,
     "index": 0,
-    "seed": 7401
+    "seed": 8622
+  },
+  {
+    "name": "cut-sheet",
+    "material": "paper",
+    "gain_db": -14.0,
+    "scene": "a3-change",
+    "kind": "cut",
+    "t": 88.696,
+    "index": 0,
+    "seed": 8696
   },
   {
     "name": "sheet-in",
@@ -2348,40 +2954,85 @@
     "dur": 0.4,
     "scene": "a3-change",
     "kind": "sheet-in",
-    "t": 66.13,
+    "t": 88.696,
     "index": 0,
-    "seed": 7438
+    "seed": 8733
+  },
+  {
+    "name": "focus-sheet",
+    "gain_db": -16.0,
+    "scene": "a3-change",
+    "kind": "focus",
+    "t": 88.716,
+    "index": 0,
+    "seed": 8770
+  },
+  {
+    "name": "pull-choices",
+    "gain_db": -14.0,
+    "dur": 0.652,
+    "snap": {
+      "mode": "cut",
+      "off": 0.0003
+    },
+    "scene": "a3-change",
+    "kind": "pull",
+    "t": 89.348,
+    "index": 0,
+    "seed": 8807
   },
   {
     "name": "choice-01",
     "variant": 1,
     "gain_db": -10.0,
+    "snap": "cut",
     "scene": "a3-change",
     "kind": "choice-accent",
-    "t": 66.48,
+    "t": 90.652,
     "index": 0,
-    "seed": 7475
+    "seed": 8844
+  },
+  {
+    "name": "push-change",
+    "gain_db": -14.0,
+    "dur": 0.652,
+    "snap": "cut",
+    "scene": "a3-change",
+    "kind": "push",
+    "t": 90.652,
+    "index": 0,
+    "seed": 8881
   },
   {
     "name": "node-return",
     "gain_db": -12.0,
-    "dur": 0.8,
+    "dur": 0.6,
     "scene": "a3-change",
     "kind": "align-snap",
-    "t": 66.58,
+    "t": 90.953,
     "index": 0,
-    "seed": 7512
+    "seed": 8918
   },
   {
     "name": "node-return",
     "gain_db": -18.0,
-    "dur": 0.8,
+    "dur": 0.6,
     "scene": "a3-change",
     "kind": "confirm",
-    "t": 66.6,
+    "t": 90.973,
     "index": 0,
-    "seed": 7513,
+    "seed": 8919,
     "variant": 0
+  },
+  {
+    "name": "whip-retain",
+    "gain_db": -16.0,
+    "dur": 0.489,
+    "scene": "a3-change",
+    "kind": "whip",
+    "t": 93.261,
+    "index": 0,
+    "seed": 8955
   },
   {
     "name": "choice-02",
@@ -2389,9 +3040,19 @@
     "gain_db": -10.0,
     "scene": "a3-change",
     "kind": "choice-accent",
-    "t": 67.61,
+    "t": 93.711,
     "index": 1,
-    "seed": 7549
+    "seed": 8992
+  },
+  {
+    "name": "whip-transfer",
+    "gain_db": -16.0,
+    "dur": 0.489,
+    "scene": "a3-change",
+    "kind": "whip",
+    "t": 96.196,
+    "index": 0,
+    "seed": 9029
   },
   {
     "name": "choice-03",
@@ -2399,155 +3060,231 @@
     "gain_db": -10.0,
     "scene": "a3-change",
     "kind": "choice-accent",
-    "t": 70.15,
+    "t": 96.236,
     "index": 2,
-    "seed": 7586
+    "seed": 9066
+  },
+  {
+    "name": "cut-packet",
+    "material": "paper",
+    "gain_db": -14.0,
+    "snap": {
+      "mode": "cut",
+      "off": -0.0005
+    },
+    "scene": "a3-change",
+    "kind": "cut",
+    "t": 97.173,
+    "index": 0,
+    "seed": 9103
+  },
+  {
+    "name": "focus-packet",
+    "gain_db": -16.0,
+    "scene": "a3-change",
+    "kind": "focus",
+    "t": 97.194,
+    "index": 0,
+    "seed": 9140
   },
   {
     "name": "packet-send",
     "gain_db": -12.0,
     "dur": 0.5,
+    "snap": {
+      "mode": "next",
+      "off": 0.0004
+    },
     "scene": "a3-change",
     "kind": "packet",
-    "t": 70.75,
+    "t": 97.5,
     "index": 0,
-    "seed": 7623
+    "seed": 9177
   },
   {
     "name": "carrier-response-01",
     "gain_db": -13.0,
+    "snap": {
+      "mode": "cut",
+      "off": 0.0002
+    },
     "scene": "a3-change",
     "kind": "response-tick",
-    "t": 71.6,
+    "t": 98.478,
     "index": 0,
-    "seed": 7660
+    "seed": 9214
   },
   {
     "name": "carrier-response-02",
     "gain_db": -13.0,
+    "snap": {
+      "mode": "cut",
+      "off": 0.0002
+    },
     "scene": "a3-change",
     "kind": "response-tick",
-    "t": 71.85,
+    "t": 99.131,
     "index": 1,
-    "seed": 7697
-  },
-  {
-    "name": "layer-slice",
-    "gain_db": -12.0,
-    "dur": 0.7,
-    "scene": "a3-change",
-    "kind": "connect-line",
-    "t": 72.0,
-    "index": 0,
-    "seed": 7734
+    "seed": 9251
   },
   {
     "name": "carrier-response-03",
     "gain_db": -13.0,
+    "snap": {
+      "mode": "cut",
+      "off": 0.0002
+    },
     "scene": "a3-change",
     "kind": "response-tick",
-    "t": 72.1,
+    "t": 99.783,
     "index": 2,
-    "seed": 7771
+    "seed": 9288
   },
   {
     "name": "carrier-response-04",
     "gain_db": -13.0,
+    "snap": {
+      "mode": "cut",
+      "off": 0.0002
+    },
     "scene": "a3-change",
     "kind": "response-tick",
-    "t": 72.35,
+    "t": 100.435,
     "index": 3,
-    "seed": 7808
+    "seed": 9325
   },
   {
-    "name": "decision-01",
-    "gain_db": -8.0,
+    "name": "layer-slice",
+    "gain_db": -12.0,
+    "dur": 0.55,
+    "snap": {
+      "mode": "cut",
+      "off": -0.652
+    },
     "scene": "a3-change",
-    "kind": "decision-accent",
-    "t": 74.16,
+    "kind": "connect-line",
+    "t": 102.065,
     "index": 0,
-    "seed": 7845
+    "seed": 9362
+  },
+  {
+    "name": "pull-site",
+    "gain_db": -12.0,
+    "dur": 3.913,
+    "snap": "cut",
+    "scene": "a3-change",
+    "kind": "pull",
+    "t": 102.717,
+    "index": 0,
+    "seed": 9399
   },
   {
     "name": "node-pass-01",
     "gain_db": -20.0,
     "scene": "a3-change",
     "kind": "node-pass",
-    "t": 74.3,
+    "t": 103.874,
     "index": 0,
-    "seed": 7882
+    "seed": 9436
   },
   {
-    "name": "decision-02",
+    "name": "decision-01",
     "gain_db": -8.0,
+    "snap": {
+      "mode": "cut",
+      "off": -0.0003
+    },
     "scene": "a3-change",
     "kind": "decision-accent",
-    "t": 74.51,
-    "index": 1,
-    "seed": 7919
+    "t": 104.021,
+    "index": 0,
+    "seed": 9473
   },
   {
     "name": "node-pass-02",
     "gain_db": -20.0,
     "scene": "a3-change",
     "kind": "node-pass",
-    "t": 74.56,
+    "t": 104.257,
     "index": 1,
-    "seed": 7956
+    "seed": 9510
   },
   {
     "name": "node-pass-03",
     "gain_db": -20.0,
     "scene": "a3-change",
     "kind": "node-pass",
-    "t": 74.82,
+    "t": 104.611,
     "index": 2,
-    "seed": 7993
+    "seed": 9547
   },
   {
     "name": "node-pass-04",
     "gain_db": -20.0,
     "scene": "a3-change",
     "kind": "node-pass",
-    "t": 75.08,
+    "t": 104.959,
     "index": 3,
-    "seed": 8030
+    "seed": 9584
   },
   {
     "name": "node-pass-05",
     "gain_db": -20.0,
     "scene": "a3-change",
     "kind": "node-pass",
-    "t": 75.34,
+    "t": 105.285,
     "index": 4,
-    "seed": 8067
-  },
-  {
-    "name": "record-rail-01",
-    "gain_db": -16.0,
-    "scene": "a3-change",
-    "kind": "record-append",
-    "t": 75.42,
-    "index": 0,
-    "seed": 8104
+    "seed": 9621
   },
   {
     "name": "node-pass-06",
     "gain_db": -20.0,
     "scene": "a3-change",
     "kind": "node-pass",
-    "t": 75.6,
+    "t": 105.636,
     "index": 5,
-    "seed": 8141
+    "seed": 9658
   },
   {
-    "name": "record-rail-02",
-    "gain_db": -16.0,
+    "name": "decision-02",
+    "gain_db": -8.0,
     "scene": "a3-change",
-    "kind": "record-append",
-    "t": 75.67,
+    "kind": "decision-accent",
+    "t": 105.978,
     "index": 1,
-    "seed": 8178
+    "seed": 9695
+  },
+  {
+    "name": "line-straighten",
+    "gain_db": -18.0,
+    "dur": 0.62,
+    "scene": "a3-close",
+    "kind": "ruler-contact",
+    "t": 107.133,
+    "index": 0,
+    "seed": 9732
+  },
+  {
+    "name": "site-recede",
+    "gain_db": -16.0,
+    "dur": 0.62,
+    "scene": "a3-close",
+    "kind": "pull",
+    "t": 107.133,
+    "index": 0,
+    "seed": 9769
+  },
+  {
+    "name": "line-straighten",
+    "gain_db": -18.0,
+    "dur": 0.62,
+    "scene": "a3-close",
+    "kind": "pencil-stroke",
+    "t": 107.173,
+    "index": 0,
+    "seed": 9733,
+    "pressure": 0.75,
+    "speed": 1.2
   },
   {
     "name": "confirm-record",
@@ -2555,9 +3292,23 @@
     "scene": "a3-close",
     "kind": "chain-record",
     "gain_db": 0.0,
-    "t": 76.45,
+    "t": 107.895,
     "index": 0,
-    "seed": 8215
+    "seed": 9806
+  },
+  {
+    "name": "ride-trust",
+    "gain_db": -22.0,
+    "dur": 0.652,
+    "snap": {
+      "mode": "prev",
+      "off": -0.3265
+    },
+    "scene": "a3-close",
+    "kind": "whip",
+    "t": 108.26,
+    "index": 0,
+    "seed": 9843
   },
   {
     "name": "confirm-trust",
@@ -2565,9 +3316,23 @@
     "scene": "a3-close",
     "kind": "chain-trust",
     "gain_db": 0.0,
-    "t": 77.3,
+    "t": 108.855,
     "index": 0,
-    "seed": 8252
+    "seed": 9880
+  },
+  {
+    "name": "ride-decision",
+    "gain_db": -22.0,
+    "dur": 0.652,
+    "snap": {
+      "mode": "prev",
+      "off": -0.3261
+    },
+    "scene": "a3-close",
+    "kind": "whip",
+    "t": 110.543,
+    "index": 0,
+    "seed": 9917
   },
   {
     "name": "confirm-decision",
@@ -2575,9 +3340,23 @@
     "scene": "a3-close",
     "kind": "chain-decision",
     "gain_db": 0.0,
-    "t": 78.92,
+    "t": 111.137,
     "index": 0,
-    "seed": 8289
+    "seed": 9954
+  },
+  {
+    "name": "ride-price",
+    "gain_db": -22.0,
+    "dur": 0.652,
+    "snap": {
+      "mode": "cut",
+      "off": -0.6518
+    },
+    "scene": "a3-close",
+    "kind": "whip",
+    "t": 112.826,
+    "index": 0,
+    "seed": 9991
   },
   {
     "name": "confirm-price",
@@ -2585,9 +3364,37 @@
     "scene": "a3-close",
     "kind": "chain-price",
     "gain_db": 0.0,
-    "t": 80.97,
+    "t": 113.56,
     "index": 0,
-    "seed": 8326
+    "seed": 10028
+  },
+  {
+    "name": "ride-capacity",
+    "gain_db": -22.0,
+    "dur": 0.652,
+    "snap": {
+      "mode": "cut",
+      "off": -0.6524
+    },
+    "scene": "a3-close",
+    "kind": "whip",
+    "t": 115.108,
+    "index": 0,
+    "seed": 10065
+  },
+  {
+    "name": "chain-reveal",
+    "gain_db": -14.0,
+    "dur": 0.978,
+    "snap": {
+      "mode": "cut",
+      "off": -0.0004
+    },
+    "scene": "a3-close",
+    "kind": "pull",
+    "t": 115.76,
+    "index": 0,
+    "seed": 10102
   },
   {
     "name": "confirm-capacity",
@@ -2595,9 +3402,9 @@
     "scene": "a3-close",
     "kind": "chain-capacity",
     "gain_db": 0.0,
-    "t": 82.74,
+    "t": 115.843,
     "index": 0,
-    "seed": 8363
+    "seed": 10139
   },
   {
     "name": "wordmark-latch",
@@ -2605,8 +3412,8 @@
     "scene": "a3-close",
     "kind": "latch",
     "gain_db": 0.0,
-    "t": 84.57,
+    "t": 119.748,
     "index": 0,
-    "seed": 8400
+    "seed": 10213
   }
 ]
