@@ -402,6 +402,10 @@
   FL._applyBoard = applyBoard;
   FL._boardLerp = boardLerp;
 
+  // Seek exactness (cut 2): GSAP's default force3D "auto" writes translate3d mid-tween, which
+  // promotes compositor layers and makes text anti-aliasing depend on seek history. 2D only.
+  if (gsap && gsap.config) gsap.config({ force3D: false });
+
   if (gsap && gsap.registerPlugin) {
     // Register the vendored GreenSock plugins that index.html loaded (no-op when absent).
     ["DrawSVGPlugin", "CustomEase", "MotionPathPlugin", "MorphSVGPlugin", "SplitText"].forEach(function (n) {
