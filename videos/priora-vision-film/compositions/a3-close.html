@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="en-GB">
+  <head>
+    <meta charset="UTF-8" />
+    <title>a3-close: record to capacity, then Priora (Frame 6)</title>
+    <!-- Ignored by the assembler. Everything that must exist at render time is inside <template>. -->
+  </head>
+  <body>
+    <template id="a3-close-template">
+      <link rel="stylesheet" href="assets/css/film.css" />
+      <link rel="stylesheet" href="assets/css/product.css" />
+      <link rel="stylesheet" href="assets/css/film-ui.css" />
+      <style>
+        #root {
+          position: absolute;
+          inset: 0;
+          overflow: hidden;
+        }
+        /* One wrapper owns the crossfade in (FL.sceneFade). It carries its own paper, identical to
+           the film's paper layer (same base, grain tile and vignette, same origin), so the product
+           frame of a3-change is covered by clean paper once the crossfade completes, whether or
+           not a3-change fades itself out. */
+        #a3-close-fade,
+        #a3-close-paper,
+        #a3-close-paper-grain,
+        #a3-close-paper-vignette,
+        #a3-close-end-wrap {
+          position: absolute;
+          inset: 0;
+        }
+        #a3-close-paper {
+          background-color: var(--paper-ground);
+        }
+        #a3-close-paper-grain {
+          background-image: url("assets/textures/paper-grain.png");
+          background-size: 512px 512px;
+          background-repeat: repeat;
+        }
+        #a3-close-paper-vignette {
+          background: radial-gradient(ellipse 75% 70% at 50% 48%, rgba(59, 58, 51, 0) 58%, rgba(59, 58, 51, 0.035) 82%, rgba(59, 58, 51, 0.07) 100%);
+        }
+        /* The chain lifts as one piece: this wrapper owns its opacity and y. */
+        #a3-close-chain-wrap {
+          position: absolute;
+          left: 0;
+          top: 0;
+          width: 1920px;
+          height: 1080px;
+        }
+        /* The qualifier is required reading: raised from the kit's 17 px to the film's 18 px floor. */
+        #a3-close-end-wrap .fui-end-q {
+          font-size: 18px;
+          line-height: 1.6;
+        }
+      </style>
+
+      <div id="root" data-composition-id="a3-close" data-width="1920" data-height="1080">
+        <div id="a3-close-fade">
+          <div id="a3-close-paper" aria-hidden="true" data-layout-ignore>
+            <div id="a3-close-paper-grain"></div>
+            <div id="a3-close-paper-vignette"></div>
+          </div>
+          <div id="a3-close-chain-wrap"></div>
+          <div id="a3-close-end-wrap"></div>
+        </div>
+      </div>
+
+      <script>
+        // Frame 6. Globals from index.html <head>: gsap (+ DrawSVG), FL, CUES, SCENES, UIKit.
+        // Every sync time is a cue from cues/cuesheet.json; nothing is hard-coded in seconds.
+        var ID = "a3-close";
+        var clk = FL.clock(ID);
+        var T = function (anchor, off) {
+          return clk.t(anchor, off);
+        };
+        var el = function (id) {
+          return document.getElementById(id);
+        };
+        var fade = el("a3-close-fade");
+        var chainWrap = el("a3-close-chain-wrap");
+        var endWrap = el("a3-close-end-wrap");
+
+        // A word lands a hair ahead of its spoken onset, so picture and voice read as one event.
+        var LEAD = -0.04;
+
+        // ---------------------------------------------------------------- build (state at time 0)
+        var FS = 44, BY = 176; // chain word size and bracket baseline (UIKit.chain defaults, passed explicitly)
+        var chain = UIKit.chain({ prefix: ID, scene: ID, parent: chainWrap, left: 96, top: 428, size: FS, bracketY: BY });
+        var card = UIKit.endCard({ prefix: ID, scene: ID, parent: endWrap });
+        // Typographic apostrophe (the kit's DATA has a straight one; Plex Sans has U+2019).
+        chain.descs[3].textContent = chain.descs[3].textContent.replace("'", "’");
+
+        // Chain geometry, recomputed exactly as UIKit.chain lays it out (Plex Mono advance 0.6 em
+        // plus 0.16 em tracking), so nothing is measured from the DOM.
+        var vis = UIKit.DATA.chain.map(function (c) {
+          return c[0].length * FS * 0.76 - FS * 0.16;
+        });
+        var xs = chain.xs;
+        var chainSvg = chain.el.querySelector("svg.fui-ch-svg");
+        var defs = FL.svgEl("defs", { id: "a3-close-chain-defs" }, chainSvg);
+        var clipRect = function (name, x, y, h) {
+          var cp = FL.svgEl("clipPath", { id: "a3-close-clip-" + name, clipPathUnits: "userSpaceOnUse" }, defs);
+          return FL.svgEl("rect", { id: "a3-close-clip-" + name + "-r", x: x.toFixed(2), y: y.toFixed(2), width: 0, height: h }, cp);
+        };
+
+        // Arrows. Each arrow is one path with two subpaths (shaft, head), and Chrome restarts the
+        // dash pattern per subpath, so a DrawSVG draw alone shows the head before the shaft reaches
+        // it. A clip that sweeps left to right with the same timing makes the arrow grow cleanly.
+        var AR_LEAD = 0.32, AR_DUR = 0.42; // UIKit.chain.reveal: the arrow draws at t - 0.32 for 0.42 s
+        var arrowClips = chain.arrows.map(function (a, i) {
+          var x0 = xs[i] + vis[i] + 28 - 3,
+            x1 = xs[i + 1] - 28 + 3;
+          a.setAttribute("clip-path", "url(#a3-close-clip-arrow-" + i + ")");
+          return { r: clipRect("arrow-" + i, x0, FS * 0.5 - 10, 20), w: x1 - x0 };
+        });
+        var revealWord = function (t, i) {
+          chain.reveal(tl, t, i);
+          if (i > 0) {
+            var c = arrowClips[i - 1];
+            tl.fromTo(c.r, { attr: { width: 0 } }, { attr: { width: c.w }, duration: AR_DUR, ease: "power2.inOut", immediateRender: false }, t - AR_LEAD);
+          }
+        };
+
+        // OVER TIME: the dashed bracket is a run of short subpaths, so DrawSVG cannot draw it on
+        // (every dash restarts the pattern). It is revealed by a clip that grows under each future
+        // word as it arrives, instead of appearing at once after CAPACITY (no room for that).
+        var over = chain.el.querySelector("g.fui-ch-br.dashed");
+        var overPath = over.querySelector("path");
+        var overText = over.querySelector("text");
+        overText.style.opacity = "0"; // the label waits for the second step
+        var bx0 = xs[2] - 3,
+          bx1 = xs[4] + vis[4] + 3;
+        var gapMid = function (i) {
+          return (xs[i] + vis[i] + xs[i + 1]) / 2;
+        };
+        // TODAY: UIKit.chain.bracket shows the group at t but fades the label only from t + 0.3, and
+        // the label has no hidden start state, so it would flash on for 0.3 s, vanish, then fade in.
+        // Start it hidden so the kit's own fade is the only thing that shows it.
+        chain.el.querySelector("g.fui-ch-br:not(.dashed) text").style.opacity = "0";
+        var overClip = clipRect("over", bx0, BY - 16, 20);
+        overPath.setAttribute("clip-path", "url(#a3-close-clip-over)");
+        var ow1 = gapMid(2) - bx0, // under DECISION, reaching into the gap towards PRICE
+          ow2 = gapMid(3) - bx0, // under PRICE, reaching towards CAPACITY
+          ow3 = bx1 - bx0; // the whole span, closing tick included
+
+        var tl = gsap.timeline({ paused: true });
+
+        // ---------------------------------------------------------------- crossfade in to clean paper
+        FL.sceneFade(tl, fade, ID);
+
+        // ---------------------------------------------------------------- 6.1 the chain
+        // Each word on its cue; only the arrow that is drawing is cobalt, the finished chain is ink.
+        revealWord(T("chainRecord", LEAD), 0);
+        revealWord(T("chainTrust", LEAD), 1);
+        chain.bracket(tl, T("chainTrust", 0.55), "today"); // TODAY · PREVENTION AND PROOF (one solid path)
+        revealWord(T("chainDecision", LEAD), 2);
+
+        var tOver1 = T("chainDecision", 0.45),
+          tOver2 = T("chainPrice", 0.45),
+          tOver3 = T("chainCapacity", 0.2); // closes with CAPACITY's descriptor, so the whole chain settles together
+        tl.fromTo(over, { opacity: 0 }, { opacity: 1, duration: 0.001, ease: "none", immediateRender: false }, tOver1);
+        tl.fromTo(overClip, { attr: { width: 0 } }, { attr: { width: ow1 }, duration: 0.55, ease: "power2.inOut", immediateRender: false }, tOver1);
+        revealWord(T("chainPrice", LEAD), 3);
+        tl.fromTo(overClip, { attr: { width: ow1 } }, { attr: { width: ow2 }, duration: 0.5, ease: "power2.inOut", immediateRender: false }, tOver2);
+        tl.fromTo(overText, { opacity: 0, attr: { transform: "translate(0 6)" } }, { opacity: 1, attr: { transform: "translate(0 0)" }, duration: 0.5, ease: "power3.out", immediateRender: false }, tOver2 + 0.2);
+        revealWord(T("chainCapacity", LEAD), 4);
+        tl.fromTo(overClip, { attr: { width: ow2 } }, { attr: { width: ow3 }, duration: 0.4, ease: "power2.inOut", immediateRender: false }, tOver3);
+
+        // ---------------------------------------------------------------- 6.2 Priora
+        // The finished chain holds still through the silence after "capacity" (frame.md: the final
+        // chain gets silence and screen time), then lifts and fades as "Priora" begins; the
+        // wordmark rises out of its rule as the chain clears and latches during the word; the
+        // descriptor sets on "Infrastructure"; the qualifier follows. Everything is still well
+        // before the last two seconds.
+        var tLift = T("priora", -0.22);
+        tl.fromTo(chainWrap, { opacity: 1 }, { opacity: 0, duration: 0.45, ease: "power1.inOut", immediateRender: false }, tLift);
+        tl.fromTo(chainWrap, { y: 0 }, { y: -22, duration: 0.45, ease: "power2.in", immediateRender: false }, tLift);
+
+        var tMark = T("priora", -0.08); // rule draws; the latch lands at tMark + 0.48 = priora + 0.40
+        var tDesc = T("infrastructure", -0.05);
+        // The qualifier fades for 1.0 s; it must be complete at least 2 s before END (the end hold
+        // is perfectly still), whatever the re-locked narration does to the gap after L20.
+        var tQual = Math.max(tDesc + 0.4, Math.min(T("infrastructure", 0.6), clk.duration - 2.0 - 1.0 - 0.15));
+        card.reveal(tl, tMark, { descriptorAt: tDesc, qualifierAt: tQual });
+
+        window.__timelines["a3-close"] = tl;
+      </script>
+    </template>
+  </body>
+</html>

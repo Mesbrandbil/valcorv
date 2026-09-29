@@ -1,0 +1,11 @@
+{
+  "note": "Frame 6 sound events. Anchored to the same cues and offsets as the tweens in compositions/a3-close.html: each chain word lands 0.04 s ahead of its spoken onset; the wordmark latches at priora + 0.40 (endCard.reveal at priora - 0.08, latch 0.48 s later).",
+  "events": [
+    { "name": "confirm-record", "at": "cue:chainRecord-0.04", "kind": "chain-confirm-1", "dur": 0.4 },
+    { "name": "confirm-trust", "at": "cue:chainTrust-0.04", "kind": "chain-confirm-2", "dur": 0.4 },
+    { "name": "confirm-decision", "at": "cue:chainDecision-0.04", "kind": "chain-confirm-3", "dur": 0.4 },
+    { "name": "confirm-price", "at": "cue:chainPrice-0.04", "kind": "chain-confirm-4", "dur": 0.4 },
+    { "name": "confirm-capacity", "at": "cue:chainCapacity-0.04", "kind": "chain-confirm-5", "dur": 0.4 },
+    { "name": "wordmark-latch", "at": "cue:priora+0.40", "kind": "latch", "dur": 0.12 }
+  ]
+}
