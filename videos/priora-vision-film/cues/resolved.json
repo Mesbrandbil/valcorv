@@ -1444,26 +1444,6 @@
       "at": "cue:nobody+0.1"
     },
     {
-      "name": "frag-photo",
-      "kind": "paper-slide",
-      "gain_db": -16,
-      "dur": 0.22,
-      "scene": "a1-after",
-      "t": 40.085,
-      "local": 0.252,
-      "at": "cue:afterwards-0.35"
-    },
-    {
-      "name": "frag-programme",
-      "kind": "paper-slide",
-      "gain_db": -16,
-      "dur": 0.22,
-      "scene": "a1-after",
-      "t": 40.485,
-      "local": 0.652,
-      "at": "cue:afterwards+0.05"
-    },
-    {
       "name": "incident",
       "kind": "incident",
       "gain_db": -8,
@@ -1474,154 +1454,229 @@
       "at": "cue:afterwards+0.3"
     },
     {
-      "name": "frag-call",
-      "kind": "paper-slide",
-      "gain_db": -16,
-      "dur": 0.22,
-      "scene": "a1-after",
-      "t": 40.885,
-      "local": 1.052,
-      "at": "cue:afterwards+0.45"
-    },
-    {
-      "name": "frag-permit",
-      "kind": "paper-slide",
-      "gain_db": -16,
-      "dur": 0.22,
-      "scene": "a1-after",
-      "t": 41.165,
-      "local": 1.332,
-      "at": "cue:wrong-0.05"
-    },
-    {
-      "name": "frag-workorder",
-      "kind": "paper-slide",
-      "gain_db": -16,
-      "dur": 0.22,
-      "scene": "a1-after",
-      "t": 41.565,
-      "local": 1.732,
-      "at": "cue:wrong+0.35"
-    },
-    {
-      "name": "pin-photo",
+      "name": "pin-wave-01",
       "kind": "pin",
       "gain_db": -12,
+      "what": "S10b: photo, call log, statement, work order pin while the site recedes",
       "scene": "a1-after",
-      "t": 41.575,
-      "local": 1.742,
-      "at": "cue:afterwards+1.14"
+      "t": 42.391,
+      "local": 2.558,
+      "at": "L09:questions.start+0.686"
     },
     {
-      "name": "pin-programme",
+      "name": "pin-wave-02",
       "kind": "pin",
       "gain_db": -12,
+      "what": "S10b: photo, call log, statement, work order pin while the site recedes",
       "scene": "a1-after",
-      "t": 41.905,
-      "local": 2.072,
-      "at": "cue:afterwards+1.47"
+      "t": 42.717,
+      "local": 2.884,
+      "at": "L09:questions.start+0.686"
     },
     {
-      "name": "frag-statement",
-      "kind": "paper-slide",
-      "gain_db": -16,
-      "dur": 0.22,
-      "scene": "a1-after",
-      "t": 41.965,
-      "local": 2.132,
-      "at": "cue:wrong+0.75"
-    },
-    {
-      "name": "frag-email",
-      "kind": "paper-slide",
-      "gain_db": -16,
-      "dur": 0.22,
-      "scene": "a1-after",
-      "t": 42.365,
-      "local": 2.532,
-      "at": "cue:wrong+1.15"
-    },
-    {
-      "name": "pin-call",
+      "name": "pin-wave-03",
       "kind": "pin",
       "gain_db": -12,
+      "what": "S10b: photo, call log, statement, work order pin while the site recedes",
       "scene": "a1-after",
-      "t": 42.415,
-      "local": 2.582,
-      "at": "cue:afterwards+1.98"
+      "t": 43.043,
+      "local": 3.21,
+      "at": "L09:questions.start+0.686"
     },
     {
-      "name": "pin-permit",
+      "name": "pin-wave-04",
       "kind": "pin",
       "gain_db": -12,
+      "what": "S10b: photo, call log, statement, work order pin while the site recedes",
       "scene": "a1-after",
-      "t": 42.795,
-      "local": 2.962,
-      "at": "cue:wrong+1.58"
-    },
-    {
-      "name": "pin-workorder",
-      "kind": "pin",
-      "gain_db": -12,
-      "scene": "a1-after",
-      "t": 43.055,
-      "local": 3.222,
-      "at": "cue:wrong+1.84"
-    },
-    {
-      "name": "pin-email",
-      "kind": "pin",
-      "gain_db": -12,
-      "scene": "a1-after",
-      "t": 43.635,
-      "local": 3.802,
-      "at": "cue:wrong+2.42"
+      "t": 43.369,
+      "local": 3.536,
+      "at": "L09:questions.start+0.686"
     },
     {
       "name": "question-1",
       "kind": "question",
       "gain_db": -18,
+      "what": "What was happening?",
       "scene": "a1-after",
       "t": 43.696,
       "local": 3.863,
       "at": "cue:q1"
     },
     {
-      "name": "pin-statement",
+      "name": "pin-crowd-1-01",
       "kind": "pin",
-      "gain_db": -12,
+      "gain_db": -17,
+      "what": "email, shift note, photo 16:12 crowd in behind (background plane)",
       "scene": "a1-after",
-      "t": 43.775,
-      "local": 3.942,
-      "at": "cue:wrong+2.56"
+      "t": 44.348,
+      "local": 4.515,
+      "at": "cue:q1+0.652"
+    },
+    {
+      "name": "pin-crowd-1-02",
+      "kind": "pin",
+      "gain_db": -17,
+      "what": "email, shift note, photo 16:12 crowd in behind (background plane)",
+      "scene": "a1-after",
+      "t": 44.674,
+      "local": 4.841,
+      "at": "cue:q1+0.652"
+    },
+    {
+      "name": "pin-crowd-1-03",
+      "kind": "pin",
+      "gain_db": -17,
+      "what": "email, shift note, photo 16:12 crowd in behind (background plane)",
+      "scene": "a1-after",
+      "t": 45,
+      "local": 5.167,
+      "at": "cue:q1+0.652"
+    },
+    {
+      "name": "whip-1",
+      "kind": "whip",
+      "gain_db": -16,
+      "dur": 0.652,
+      "what": "one-beat lateral dolly to shot 2, parallax on three planes",
+      "scene": "a1-after",
+      "t": 45.326,
+      "local": 5.493,
+      "at": "cue:q2-0.210"
     },
     {
       "name": "question-2",
       "kind": "question",
       "gain_db": -18,
+      "what": "Which condition applied?",
       "scene": "a1-after",
       "t": 45.536,
       "local": 5.703,
       "at": "cue:q2"
     },
     {
+      "name": "pin-programme",
+      "kind": "pin",
+      "gain_db": -12,
+      "what": "PROGRAMME 4.3 pins as the camera lands",
+      "scene": "a1-after",
+      "t": 45.978,
+      "local": 6.145,
+      "at": "cue:q2+0.442"
+    },
+    {
+      "name": "pin-crowd-2-01",
+      "kind": "pin",
+      "gain_db": -17,
+      "what": "call log 16:08, witness note (background plane)",
+      "scene": "a1-after",
+      "t": 46.304,
+      "local": 6.471,
+      "at": "cue:q2+0.768"
+    },
+    {
+      "name": "pin-crowd-2-02",
+      "kind": "pin",
+      "gain_db": -17,
+      "what": "call log 16:08, witness note (background plane)",
+      "scene": "a1-after",
+      "t": 46.63,
+      "local": 6.797,
+      "at": "cue:q2+0.768"
+    },
+    {
+      "name": "whip-2",
+      "kind": "whip",
+      "gain_db": -16,
+      "dur": 0.652,
+      "what": "one-beat lateral dolly to shot 3",
+      "scene": "a1-after",
+      "t": 47.609,
+      "local": 7.776,
+      "at": "cue:q3-0.067"
+    },
+    {
       "name": "question-3",
       "kind": "question",
       "gain_db": -18,
+      "what": "Can you prove / what was true?",
       "scene": "a1-after",
       "t": 47.676,
       "local": 7.843,
       "at": "cue:q3"
     },
     {
+      "name": "pin-permit",
+      "kind": "pin",
+      "gain_db": -12,
+      "what": "PERMIT HW-0412 pins as the camera lands",
+      "scene": "a1-after",
+      "t": 48.261,
+      "local": 8.428,
+      "at": "cue:q3+0.585"
+    },
+    {
+      "name": "permit-loop",
+      "kind": "pencil",
+      "gain_db": -15,
+      "dur": 0.5,
+      "what": "the SPRINKLERS tick circled on 'true'",
+      "scene": "a1-after",
+      "t": 48.606,
+      "local": 8.773,
+      "at": "L10:true.start-0.04"
+    },
+    {
+      "name": "pin-crowd-3-01",
+      "kind": "pin",
+      "gain_db": -17,
+      "what": "photo 16:14, email 16:40 (background plane)",
+      "scene": "a1-after",
+      "t": 49.239,
+      "local": 9.406,
+      "at": "cue:q3+1.563"
+    },
+    {
+      "name": "pin-crowd-3-02",
+      "kind": "pin",
+      "gain_db": -17,
+      "what": "photo 16:14, email 16:40 (background plane)",
+      "scene": "a1-after",
+      "t": 49.565,
+      "local": 9.732,
+      "at": "cue:q3+1.563"
+    },
+    {
+      "name": "pull-wide",
+      "kind": "pull",
+      "gain_db": -12,
+      "dur": 1.304,
+      "what": "S10d: two-beat pull back to the whole board",
+      "scene": "a1-after",
+      "t": 50.543,
+      "local": 10.71,
+      "at": "cue:gap-0.264"
+    },
+    {
       "name": "gap-rule",
       "kind": "gap-rule",
       "gain_db": -10,
-      "dur": 0.82,
+      "dur": 0.7,
       "scene": "a1-after",
-      "t": 49.957,
-      "local": 10.124,
-      "at": "cue:gap-0.85"
+      "t": 50.807,
+      "local": 10.974,
+      "at": "cue:gap"
+    },
+    {
+      "name": "gap-hold",
+      "kind": "hold",
+      "dur": 1.259,
+      "until": "cue:rewindStart",
+      "what": "the board and the gap still until the rewind",
+      "scene": "a1-after",
+      "t": 51.848,
+      "local": 12.015,
+      "at": "cue:gap+1.041"
     },
     {
       "name": "rewind",

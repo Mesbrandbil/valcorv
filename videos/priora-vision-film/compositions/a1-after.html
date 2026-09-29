@@ -2,7 +2,7 @@
 <html lang="en-GB">
   <head>
     <meta charset="UTF-8">
-    <title>a1-after: afterwards, the gap found too late (Frame 3)</title>
+    <title>a1-after: afterwards, the evidence board and the gap found too late (Frame 3)</title>
     <!-- Ignored by the assembler. Everything the render needs is inside <template>. -->
   </head>
   <body>
@@ -10,15 +10,23 @@
       <link rel="stylesheet" href="assets/css/film.css">
       <link rel="stylesheet" href="assets/css/film-sketch.css">
       <style>
-        /* An overlay above a1-world (camera afterwardsWide during this beat): transparent, no
-           full-bleed paper. Only the evidence fragments carry paper fills. */
+        /* An overlay above a1-world (z 102). a1-world holds SiteKit.CAMERAS.afterwardsWide, the site
+           receded to 35 percent, from about two beats after 'L09:questions.start' to rewindStart. This
+           scene is transparent: only the evidence fragments carry paper fills. */
         #root {
           position: absolute;
           inset: 0;
           overflow: hidden;
           pointer-events: none;
         }
-        #a1-after-board {
+        /* Three depth planes, each a full-frame SVG whose camera group is framed by its own FL.boardCam
+           (the flBoard plugin writes a CSS transform on the SVG group, origin 0 0; SVG children are
+           painted fresh every frame, so no compositor raster cache depends on seek order), plus a
+           screen-space sheet for the gap timeline. */
+        #a1-after-bgsvg,
+        #a1-after-midsvg,
+        #a1-after-fgsvg,
+        #a1-after-gapsheet {
           position: absolute;
           left: 0;
           top: 0;
@@ -26,182 +34,430 @@
           height: 1080px;
           overflow: visible;
         }
-        /* IBM Plex only (film-sketch.css names system fallbacks in its stacks). */
-        #a1-after-board .skt-lab {
+        /* IBM Plex only (film-sketch.css names the families literally; the compiler must not see them). */
+        #a1-after-stage .skt-lab {
           font-family: var(--mono);
         }
-        #a1-after-board .skt-sans {
+        #a1-after-stage .skt-sans {
           font-family: var(--sans);
+        }
+        /* Background plane: smaller and sharp, about 55 percent contrast (lighter graphite on opaque paper). */
+        #a1-after-bgsvg {
+          --skt-c: #8f8c86;
+          --skt-l: #b3b0a9;
+        }
+        /* Foreground plane: larger and paler, about 25 percent contrast, paper slightly translucent. */
+        #a1-after-fgsvg {
+          --skt-c: #c3bfb7;
+          --skt-l: #d6d2ca;
+        }
+        #a1-after-fgsvg .skt-occ {
+          fill-opacity: 0.82;
+        }
+        /* The questions: Plex Sans Light in ink, on a paper halo over the receded site. */
+        #a1-after-midsvg .a1-after-q .skt-sans {
+          fill: #2a2a2a;
         }
       </style>
 
       <div id="root" data-composition-id="a1-after" data-width="1920" data-height="1080">
-        <svg id="a1-after-board" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" data-layout-ignore=""></svg>
+        <div id="a1-after-stage" data-layout-ignore="">
+          <svg id="a1-after-bgsvg" xmlns="http://www.w3.org/2000/svg" data-layout-ignore=""></svg>
+          <svg id="a1-after-midsvg" xmlns="http://www.w3.org/2000/svg" data-layout-ignore=""></svg>
+          <svg id="a1-after-fgsvg" xmlns="http://www.w3.org/2000/svg" data-layout-ignore=""></svg>
+          <svg id="a1-after-gapsheet" xmlns="http://www.w3.org/2000/svg" data-layout-ignore=""></svg>
+        </div>
       </div>
 
       <script>
-        // Frame 3: afterwards. Evidence is pinned to places on the site, three questions stack at
-        // left, then everything falls back and the gap is drawn as a distance in time. Built as a
-        // story timeline whose time equals a1-world's story time (minus the landing), so the
-        // rewind un-draws it in step with the site and it has cleared by rewindEnd.
+        // Frame 3, cut 2: afterwards (S10b fragments, S10c the three questions, S10d the gap, S11 rewind).
+        //
+        // S10b "questions begin afterwards:" while a1-world pulls back to afterwardsWide, the first five
+        //   fragments pin in a wave on consecutive half beats, framing shot 1 (nothing of this scene is
+        //   visible before then: a1-world owns the incident shot).
+        // S10c a lateral dolly across an evidence board with parallax. Three depth planes, each its own
+        //   FL.boardCam moved together with different lateral factors: background (smaller, sharp, 55
+        //   percent contrast) x0.55, subject x1, foreground (larger, paler, passes the lens) x1.45. The
+        //   receded site beneath holds still (the farthest plane). Each question is its own composed shot:
+        //   Plex Sans Light 84 px in clear negative space beside the fragment that embodies it, scaled up as
+        //   a hero with a restrained contact shadow; one-beat dolly moves (power3.inOut) on the shared cut
+        //   of the next question; the previous question and its fragments fall back to 30 percent and leave
+        //   with the dolly. Background fragments, investigation lines and question marks crowd in behind
+        //   during the holds, and each hold carries a very slow lateral drift with the same parallax.
+        // S10d on the shared cut of 'gap' a two-beat pull back reveals the whole board, everything falls
+        //   back to 30 percent, and the gap timeline draws across the lower third (screen space). Still
+        //   from the end of the pull to rewindStart.
+        // S11 everything above is one story timeline (story 0 = cue 'landing', exactly as in a1-world),
+        //   played forward, then scrubbed back with FL.rewindEase() over [rewindStart, rewindEnd], so the
+        //   board un-draws, the dolly runs backwards and the frame is empty well before rewindEnd.
+        //
+        // HANDOFF: at rewindEnd this scene shows nothing (the story is back before its first tween).
+        //
         // Globals from index.html: gsap (+ DrawSVG, CustomEase), FL, CUES, SCENES, SiteKit, SketchKit.
         var ID = "a1-after";
         var clk = FL.clock(ID);
         var T = function (a, off) {
           return clk.t(a, off);
         };
+        var BEAT = FL.BEAT,
+          HB = FL.BEAT / 2;
         var RS = T("rewindStart"),
           RE = T("rewindEnd"),
           LANDL = T("landing"); // negative: the landing is before this scene starts
-        // story time for a cue: story 0 is the landing, exactly as in a1-world's story
-        var S = function (a, off) {
-          return T(a, off) - LANDL;
+        // story time of a scene-local time (story 0 is the landing, as in a1-world's story)
+        var S = function (t) {
+          return t - LANDL;
         };
-
-        var board = document.getElementById("a1-after-board");
-        var P = SketchKit.paper(board, { prefix: ID, scene: ID });
+        var U = SketchKit.util;
         var story = FL.story();
         var g = function (parent, attrs) {
           return FL.svgEl("g", attrs || {}, parent);
         };
-        var gFrags = g(P.top, { id: ID + "-frags" }); // fragments, leaders, question marks
-        var gKeep = g(P.top, { id: ID + "-keep" }); // the work order: the change itself, falls back less
-        var gQs = g(P.top, { id: ID + "-questions" });
-        var gGap = g(P.top, { id: ID + "-gap" });
 
-        // ---------------------------------------------------------------- pins on the site
-        // a1-world sits at SiteKit.CAMERAS.afterwardsWide during this beat.
-        var cam = SiteKit.CAMERAS.afterwardsWide;
-        var A = (window.SITE_MODEL && SITE_MODEL.anchors) || {};
-        var iso = SketchKit.iso;
-        var scr = function (w) {
-          var s = FL.worldToScreen(w, cam);
-          return [+s[0].toFixed(2), +s[1].toFixed(2)];
+        // ================================================================ TIMES (scene-local)
+        // Every sync point comes from the narration: shared cuts with clk.c(), grid points with clk.b().
+        var tWave = clk.b("L09:questions.start", 0.5, "next", 2); // first pin of the wave (half-beat grid)
+        var tQ1 = T("q1"),
+          tQ2 = T("q2"),
+          tQ3 = T("q3"),
+          tQ3b = T("L10:what#2.start"),
+          tTrue = T("L10:true.start"),
+          tGap = T("gap");
+        var d1 = clk.c("q2"), // dolly shot 1 -> shot 2
+          d2 = clk.c("q3"), // dolly shot 2 -> shot 3
+          pb = clk.c("gap"); // pull back to the whole board
+        var DOLLY = BEAT,
+          PULL = 2 * BEAT;
+        var tStill = pb + PULL; // the board is still from here to rewindStart
+
+        // ================================================================ PLANES AND CAMERAS
+        var Pbg = SketchKit.paper(document.getElementById("a1-after-bgsvg"), { prefix: ID + "-bg", scene: ID });
+        var Pmid = SketchKit.paper(document.getElementById("a1-after-midsvg"), { prefix: ID + "-md", scene: ID });
+        var Pfg = SketchKit.paper(document.getElementById("a1-after-fgsvg"), { prefix: ID + "-fg", scene: ID });
+        var Pgap = SketchKit.paper(document.getElementById("a1-after-gapsheet"), { prefix: ID + "-gp", scene: ID });
+
+        var D = 1500, // lateral distance between question shots on the subject plane (board px)
+          KB = 0.55, // background parallax factor
+          KF = 1.45; // foreground parallax factor
+        var shot = function (i, k) {
+          return { x: i * D * k, y: 0, w: 1920 };
         };
-        var aw = function (name, fallback) {
-          return A[name] && A[name].world ? A[name].world : fallback;
+        // the camera groups: everything of a plane lives inside its group
+        var camGB = g(Pbg.top, { id: ID + "-bgcam" }),
+          camGM = g(Pmid.top, { id: ID + "-midcam" }),
+          camGF = g(Pfg.top, { id: ID + "-fgcam" });
+        var camM = FL.boardCam(camGM);
+        var camB = FL.boardCam(camGB);
+        var camF = FL.boardCam(camGF);
+        camM.apply(shot(0, 1));
+        camB.apply(shot(0, KB));
+        camF.apply(shot(0, KF));
+
+        // opacity wrappers (one owner each: the story)
+        var gBG = g(camGB, { id: ID + "-bgall" });
+        var gBGlines = g(gBG, { id: ID + "-bglines" });
+        var gFG = g(camGF, { id: ID + "-fgall" });
+        var gH = [0, 1, 2].map(function (i) {
+          return g(camGM, { id: ID + "-hero" + (i + 1) });
+        });
+        var gQ = [0, 1, 2].map(function (i) {
+          return g(camGM, { id: ID + "-q" + (i + 1), class: "a1-after-q" });
+        });
+
+        // A fragment scaled about its own top-left corner. swK keeps the line weight near swK * 1.5 px.
+        var scaled = function (parent, x, y, s, swK) {
+          return g(parent, {
+            transform: "translate(" + x + " " + y + ") scale(" + s + ") translate(" + -x + " " + -y + ")",
+            style: "--sw:" + (swK / s).toFixed(4),
+          });
         };
-        var PIN = {
-          photo: scr(iso(66, 17, 12)), // Roof 03, north-east part of the roof
-          permit: scr(aw("roof03Centre", [38.971, 32.5])), // the hot-work point on Roof 03
-          statement: scr(iso(66.5, 29, 12)), // where the fire watch stood on Roof 03
-          call: scr(aw("sprinklerZone3Valve", [46.765, 35])), // the valve room
-          workorder: scr(aw("sprinklerZone3Label", [74.478, 42])), // Sprinkler Zone 3
-          programme: scr(aw("heroExitPoint", [66.489, 15.39])), // the accepted envelope's condition
-          email: scr(iso(66, 8, 12)), // Production Hall, the building under Roof 03
+        // A pin on the top edge of a fragment, right of centre (clear of the lettering): paper under the
+        // head, a small hand ring, a dot.
+        var addPin = function (P, frag, key) {
+          var b = frag.box,
+            cx = b.x + b.w * 0.62,
+            cy = b.y + 1,
+            r = 4.6;
+          var R = FL.prng("pin-" + key),
+            a0 = R() * 6.283,
+            pts = [];
+          for (var i = 0; i <= 14; i++) {
+            var a = a0 + ((6.283 + 0.55) * i) / 14,
+              f = 1 + 0.04 * Math.sin(2 * a) + 0.03 * (i / 14 - 0.5);
+            pts.push([cx + Math.cos(a) * r * f, cy + Math.sin(a) * r * f]);
+          }
+          var occ = FL.svgEl("circle", { class: "skt-occ", cx: cx, cy: cy, r: r + 2 }, frag.root);
+          var rec = U.hand(P, frag.root, U.smoothCmds(pts, false), { seed: "pin-" + key, jit: 0.25, over: false, cls: "skt-fine" });
+          var dot = FL.svgEl("circle", { class: "skt-fill", cx: cx, cy: cy, r: 1.8 }, frag.root);
+          frag.fadeIn(occ, { dur: 0.02, advance: 0 });
+          var st = frag.stroke(rec, { dur: 0.14, type: "pin" });
+          frag.pop(dot, { dur: 0.08, cx: cx, cy: cy, scale: 1.8 });
+          frag.pinAt = st.at;
+          return frag;
+        };
+        // A restrained contact shadow under a hero fragment (subject plane only): a soft graphite rect,
+        // offset a little down, that appears with the fragment's frame. The sheet lies flat; no tilt.
+        var shadowDefs = FL.svgEl("defs", {}, document.getElementById("a1-after-midsvg"));
+        var shadowFilter = FL.svgEl("filter", { id: ID + "-contact", x: "-20%", y: "-20%", width: "140%", height: "150%" }, shadowDefs);
+        FL.svgEl("feGaussianBlur", { stdDeviation: "2.6" }, shadowFilter);
+        var addShadow = function (frag) {
+          var b = frag.box;
+          var sh = FL.svgEl("rect", { x: b.x + 1, y: b.y + 3, width: b.w, height: b.h, fill: "#3b3a36", "fill-opacity": 0.13, filter: "url(#" + ID + "-contact)" });
+          frag.root.parentNode.insertBefore(sh, frag.root);
+          var frameStep = frag.steps[1],
+            cur = frag.cur;
+          frag.fadeIn(sh, { at: frameStep.at, dur: 0.3, advance: 0 });
+          frag.cur = cur;
+          return frag;
+        };
+        // Draw a fragment so that its pin lands exactly at scene-local time tPin.
+        var pinAtTime = function (frag, tPin, speed) {
+          frag.drawOn(story, S(tPin - frag.pinAt / speed), { speed: speed, events: false });
+        };
+        // Draw a fragment from t0 so that its pin lands exactly at tPin.
+        var drawBetween = function (frag, t0, tPin) {
+          frag.drawOn(story, S(t0), { speed: frag.pinAt / (tPin - t0), events: false });
+        };
+        // Draw a hand record (main + overdraw) with DrawSVG on the story.
+        var drawRec = function (rec, t, d) {
+          story.fromTo(rec.main, { drawSVG: "0%" }, { drawSVG: "100%", duration: d, ease: "power1.inOut", immediateRender: true }, S(t));
+          if (rec.over) story.fromTo(rec.over, { drawSVG: "0%" }, { drawSVG: "100%", duration: d * 0.8, ease: "power1.inOut", immediateRender: true }, S(t + d * 0.45));
+        };
+        var fadeTo = function (el, from, to, t, d) {
+          story.fromTo(el, { opacity: from }, { opacity: to, duration: d, ease: "power1.inOut", immediateRender: false }, S(t));
         };
 
-        // ---------------------------------------------------------------- fragments
-        // Every named fragment sits fully inside the 96 px safe area, clear of the clock corner, the
-        // question block (x 96 to 1067, y 209 to 457) and the gap band; leaders avoid the questions.
-        var FR = {
-          photo: { x: 560, y: 500 },
-          programme: { x: 1150, y: 118 },
-          call: { x: 1548, y: 170 },
-          permit: { x: 1548, y: 338 },
-          workorder: { x: 1520, y: 540 },
-          statement: { x: 1290, y: 840 },
-          email: { x: 836, y: 148, h: 108 }, // below the rewind counter (top centre, y 58 to 123)
+        // ================================================================ SUBJECT PLANE (heroes + questions)
+        // Shot frames on this plane: shot 1 x 0..1920, shot 2 x 1500..3420, shot 3 x 3000..4920.
+        var HERO_SW = 1.25;
+        // Shot 1 "What was happening?": the photo and the fire watch's statement, right; question left.
+        var photo = addShadow(addPin(Pmid, SketchKit.evidence(Pmid, "photo", { layer: scaled(gH[0], 1060, 236, 2.0, HERO_SW), x: 1060, y: 236 }), "photo"));
+        var statement = addShadow(addPin(Pmid, SketchKit.evidence(Pmid, "statement", { layer: scaled(gH[0], 1250, 664, 1.6, HERO_SW), x: 1250, y: 664 }), "statement"));
+        // Shot 2 "Which condition applied?": the programme clause upper left, question lower right (the
+        // clause sits just past the right edge of shot 1, so it can start drawing before the dolly).
+        var programme = addShadow(addPin(Pmid, SketchKit.evidence(Pmid, "programme", { layer: scaled(gH[1], 1944, 214, 2.4, HERO_SW), x: 1944, y: 214 }), "programme"));
+        // Shot 3 "Can you prove what was true?": question upper left, the permit right.
+        var permit = addShadow(addPin(Pmid, SketchKit.evidence(Pmid, "permit", { layer: scaled(gH[2], 4150, 404, 2.2, HERO_SW), x: 4150, y: 404 }), "permit"));
+        // On "true": the permit's SPRINKLERS tick is circled, and a question mark sets beside it
+        // (true at 14:12, not at 14:42).
+        var sprRow = permit.lines[permit.lines.length - 1];
+        var lx0 = sprRow.x0 - 16,
+          lx1 = sprRow.x1 + 44,
+          lcy = sprRow.y - 6;
+        var loopPts = [],
+          lR = FL.prng("permit-loop");
+        for (var li = 0; li <= 22; li++) {
+          var la = 3.55 + ((6.283 + 0.7) * li) / 22,
+            lf = 1 + 0.05 * Math.sin(3 * la + 1.1) + 0.05 * (li / 22 - 0.5) + (lR() - 0.5) * 0.02;
+          loopPts.push([(lx0 + lx1) / 2 + Math.cos(la) * ((lx1 - lx0) / 2) * lf, lcy + Math.sin(la) * 15 * lf]);
+        }
+        var loop = U.hand(Pmid, permit.root, U.smoothCmds(loopPts, false), { seed: "permit-loop", jit: 0.45 });
+        var loopQ = SketchKit.questionMark(Pmid, [lx1 + 14, lcy + 5], { layer: permit.root.parentNode, size: 26, rot: 6 });
+
+        // the questions (typeset, silent in the kit; the sound events are declared in the sidecar)
+        var q1 = SketchKit.typeStack(Pmid, [150, 562], ["What was happening?"], { layer: gQ[0], size: 84, weight: 300, sound: false });
+        var q2 = SketchKit.typeStack(Pmid, [2340, 772], ["Which condition applied?"], { layer: gQ[1], size: 84, weight: 300, sound: false });
+        var q3 = SketchKit.typeStack(Pmid, [3150, 392], ["Can you prove", "what was true?"], { layer: gQ[2], size: 84, weight: 300, lh: 100, sound: false });
+        [q1, q2, q3].forEach(function (q) {
+          q.lines.forEach(function (ln) {
+            ln.text.el.classList.add("skt-halo");
+          });
+        });
+
+        // ================================================================ BACKGROUND PLANE (crowding)
+        // Screen x of a background point = board x - i * 825 at shot i. Placed clear of each shot's
+        // question and hero, inside the frame or bleeding off its edges; clear of the clock corner.
+        var BGS = 0.85;
+        var bgFrag = function (kind, x, y, extra) {
+          var o = Object.assign({ layer: scaled(gBG, x, y, BGS, 1.0), x: x, y: y }, extra || {});
+          return addPin(Pbg, SketchKit.evidence(Pbg, kind, o), kind + "-" + x + "-" + y);
         };
-        var frag = {};
-        Object.keys(FR).forEach(function (k) {
-          var o = Object.assign({ layer: k === "workorder" ? gKeep : gFrags, titleSize: 18, size: 18, pin: PIN[k] }, FR[k]);
-          frag[k] = SketchKit.evidence(P, k, o);
-        });
-        // background extras for the crowding: cut by the frame edge, texture only
-        var EXTRAS = [
-          { title: "SHIFT NOTE · 15:30", lines: ["ROOF 03 · ONGOING"], x: -64, y: 560, w: 292, h: 104 },
-          { title: "PHOTO · ROOF 03 · 16:12", lines: ["NORTH EDGE"], x: 330, y: -58, w: 300, h: 104 },
-          { title: "CALL LOG · 16:08", lines: ["SITE OFFICE"], x: 1742, y: 706, w: 262, h: 104 },
-          { title: "WITNESS NOTE · 16:20", lines: ["ROOF ACCESS"], x: -150, y: 866, w: 300, h: 104 },
-        ];
-        var extras = EXTRAS.map(function (ex) {
-          return SketchKit.evidence(P, "note", Object.assign({ layer: gFrags, titleSize: 18, size: 18 }, ex));
-        });
-        // dashed investigation lines between fragments, and hand question marks
+        var bg = {
+          call: bgFrag("call", 180, 150),
+          workorder: bgFrag("workorder", 1330, 878),
+          email: bgFrag("email", 520, 770),
+          shift: bgFrag("note", 560, 128, { title: "SHIFT NOTE · 15:30", lines: ["ROOF 03 · ONGOING"], w: 300, h: 110 }),
+          photo2: bgFrag("photo", 1200, 64, { title: "PHOTO · ROOF 03 · 16:12" }),
+          call2: bgFrag("note", 2150, 560, { title: "CALL LOG · 16:08", lines: ["SITE OFFICE"], w: 262, h: 104 }),
+          witness: bgFrag("note", 2420, 150, { title: "WITNESS NOTE · 16:20", lines: ["ROOF ACCESS"], w: 300, h: 104 }),
+          photo3: bgFrag("photo", 2880, 788, { title: "PHOTO · ROOF 03 · 16:14" }),
+          email2: bgFrag("email", 3050, 290, { title: "EMAIL · 16:40", lines: ["RE: INCIDENT"] }),
+        };
         var edge = function (f, sx, sy) {
-          return [f.box.x + f.box.w * sx, f.box.y + f.box.h * sy];
+          var b = f.box,
+            k = BGS; // fragments are scaled about their top-left corner
+          return [b.x + b.w * sx * k, b.y + b.h * sy * k];
         };
-        var inv = [
-          [frag.email, 1, 0.4, frag.programme, 0, 0.7, -0.1],
-          [frag.programme, 1, 0.6, frag.call, 0, 0.35, 0.1],
-          [frag.call, 0.3, 1, frag.permit, 0.3, 0, 0.14],
-          [frag.permit, 0.6, 1, frag.workorder, 0.6, 0, -0.12],
-          [frag.workorder, 0.1, 1, frag.statement, 0.85, 0, 0.1],
+        var bgLines = [
+          [bg.call, 1, 0.5, bg.shift, 0, 0.5, 0.12],
+          [bg.email, 1, 0.5, bg.workorder, 0, 0.5, -0.1],
+          [bg.photo2, 1, 0.8, bg.call2, 0.4, 0, 0.1],
+          [bg.call2, 1, 0.5, bg.photo3, 0, 0.3, -0.12],
+          [bg.witness, 0.5, 1, bg.email2, 0, 0.4, 0.14],
         ].map(function (L) {
-          return SketchKit.investigationLine(P, edge(L[0], L[1], L[2]), edge(L[3], L[4], L[5]), { layer: gFrags, bend: L[6] });
+          return SketchKit.investigationLine(Pbg, edge(L[0], L[1], L[2]), edge(L[3], L[4], L[5]), { layer: gBGlines, bend: L[6], dur: 0.6 });
         });
-        var qm = [
-          [1500, 306, 44],
-          [760, 168, 36],
-          [1170, 650, 40],
-          [1706, 690, 34],
+        var bgQ = [
+          [960, 196, 34],
+          [1120, 950, 30],
+          [2600, 430, 38],
+          [3300, 770, 34],
         ].map(function (q) {
-          return SketchKit.questionMark(P, [q[0], q[1]], { layer: gFrags, size: q[2] });
+          return SketchKit.questionMark(Pbg, [q[0], q[1]], { layer: gBG, size: q[2] });
         });
 
-        // ---------------------------------------------------------------- the three questions
-        var qs = SketchKit.typeStack(P, [96, 262], ["What was happening?", "Which condition applied?", "Can you prove what was true?"], { layer: gQs, size: 76, weight: 300 });
-        // a paper halo so the type reads over the receded site and any leader beneath it
-        qs.lines.forEach(function (ln) {
-          ln.text.el.classList.add("skt-halo");
-        });
+        // ================================================================ FOREGROUND PLANE (passes the lens)
+        // Screen x of a foreground point = board x - i * 2175 at shot i. Large and pale, at the frame edges
+        // during the holds; FG2 crosses the top of the frame in dolly 1, FG3 the bottom in dolly 2.
+        var FGS = 2.6;
+        var fg = [
+          SketchKit.evidence(Pfg, "photo", { layer: scaled(gFG, -180, 846, FGS, 1.6), x: -180, y: 846, title: "PHOTO · ROOF 03 · 16:11" }),
+          SketchKit.evidence(Pfg, "note", { layer: scaled(gFG, 1990, -150, FGS, 1.6), x: 1990, y: -150, title: "RADIO LOG · 14:43", lines: [], w: 300, h: 110 }),
+          SketchKit.evidence(Pfg, "photo", { layer: scaled(gFG, 4175, 880, FGS, 1.6), x: 4175, y: 880, title: "PHOTO · ROOF 03 · 16:18" }),
+        ];
 
-        // ---------------------------------------------------------------- the gap
-        var gap = SketchKit.gapTimeline(P, { layer: gGap, y: 772, x0: 180, x1: 1740, leftX: 330, rightX: 1590 });
+        // ================================================================ THE GAP (screen space)
+        var gap = SketchKit.gapTimeline(Pgap, { layer: Pgap.top, y: 772, x0: 180, x1: 1740, leftX: 330, rightX: 1590, size: 22, gapSize: 26, noteSize: 26 });
 
         // ================================================================ STORY (story 0 = landing)
-        var SP = 2.0; // fragments draw quickly: frame, lettering, then the leader lands on the site
-        var at = {
-          photo: S("afterwards", -0.35),
-          programme: S("afterwards", 0.05),
-          call: S("afterwards", 0.45),
-          permit: S("wrong", -0.05),
-          workorder: S("wrong", 0.35),
-          statement: S("wrong", 0.75),
-          email: S("wrong", 1.15),
-        };
-        var pinAt = {};
-        Object.keys(at).forEach(function (k) {
-          frag[k].drawOn(story, at[k], { speed: SP, events: false });
-          var ps = frag[k].steps.filter(function (s) {
-            return s.type === "pin";
-          })[0];
-          pinAt[k] = +(at[k] + (ps ? ps.at / SP : 0) + LANDL).toFixed(3); // scene-local, for the events sidecar
-        });
-        // the crowding keeps accumulating at the edges while the questions set
-        extras[0].drawOn(story, S("q1", -0.45), { speed: SP, events: false });
-        extras[1].drawOn(story, S("q1", 0.55), { speed: SP, events: false });
-        extras[2].drawOn(story, S("q2", 0.2), { speed: SP, events: false });
-        extras[3].drawOn(story, S("q3", -0.5), { speed: SP, events: false });
-        [S("q1", 0.9), S("q2", -0.4), S("q2", 0.7), S("q3", -0.9), S("q3", 0.4)].forEach(function (t, i) {
-          inv[i].drawOn(story, t, { events: false });
-        });
-        [S("q2", -0.25), S("q2", 1.0), S("q3", -0.2), S("q3", 0.85)].forEach(function (t, i) {
-          qm[i].drawOn(story, t, { events: false });
-        });
-        // the questions, each on its first word
-        qs.lines[0].drawOn(story, S("q1"), { events: false });
-        qs.lines[1].drawOn(story, S("q2"), { events: false });
-        qs.lines[2].drawOn(story, S("q3"), { events: false });
+        // S10b: the first wave pins on consecutive half beats while the site recedes.
+        var SPW = 4.0, // the wave: snappy
+          SPB = 2.8; // background crowding
+        pinAtTime(photo, tWave, SPW);
+        pinAtTime(bg.call, tWave + HB, SPW);
+        pinAtTime(statement, tWave + 2 * HB, SPW);
+        pinAtTime(bg.workorder, tWave + 3 * HB, SPW);
+        fg[0].drawOn(story, S(tWave), { speed: 3, events: false });
 
-        // L11: questions and fragments fall back; the gap timeline draws; THE GAP on "gap"
-        story.fromTo([gFrags, gQs], { opacity: 1 }, { opacity: 0.3, duration: 0.9, ease: "power1.inOut", immediateRender: false }, S("gap", -0.9));
-        story.fromTo(gKeep, { opacity: 1 }, { opacity: 0.5, duration: 0.9, ease: "power1.inOut", immediateRender: false }, S("gap", -0.9));
-        gap.children[0].drawOn(story, S("gap", -0.85), { speed: 1.1, events: false });
-        gap.left.drawOn(story, S("gap", -0.45), { speed: 1.3, events: false });
-        gap.right.drawOn(story, S("gap", -0.12), { speed: 1.3, events: false });
-        gap.bracket.drawOn(story, S("gap"), { speed: 1.0, events: false });
-        gap.note.drawOn(story, S("tooLate", -0.35), { speed: 1.0, events: false });
-        // then hold, still, until the rewind
+        // S10c shot 1: "What was happening?" on its first word; crowding behind during the hold.
+        q1.lines[0].drawOn(story, S(tQ1), { events: false });
+        pinAtTime(bg.email, tQ1 + 2 * HB, SPB);
+        pinAtTime(bg.shift, tQ1 + 3 * HB, SPB);
+        pinAtTime(bg.photo2, tQ1 + 4 * HB, SPB);
+        bgLines[0].drawOn(story, S(tQ1 + 1.5 * HB), { events: false });
+        bgLines[1].drawOn(story, S(tQ1 + 3.5 * HB), { events: false });
+        bgQ[0].drawOn(story, S(tQ1 + 2.5 * HB), { events: false });
+        bgQ[1].drawOn(story, S(tQ1 + 4 * HB), { events: false });
+        fg[1].drawOn(story, S(tQ1 + 1), { speed: 3, events: false }); // off frame until dolly 1
+
+        // dolly 1 (one beat) on the shared cut of "Which"; the programme clause draws in as it arrives
+        // and pins when the camera lands; the question sets on its word.
+        var dolly = function (i, t) {
+          camM.to(story, shot(i, 1), S(t), DOLLY, "power3.inOut");
+          camB.to(story, shot(i, KB), S(t), DOLLY, "power3.inOut");
+          camF.to(story, shot(i, KF), S(t), DOLLY, "power3.inOut");
+        };
+        // A very slow lateral drift during a question hold, in the direction of travel, with the same
+        // parallax (DRIFT px on the subject plane; under 1.5 percent of the frame per 4 s).
+        var DRIFT = 12;
+        var drift = function (i, t0, t1) {
+          var r = function (k) {
+            var a = shot(i, k);
+            return { x: a.x + DRIFT * k, y: 0, w: 1920 };
+          };
+          camM.to(story, r(1), S(t0), t1 - t0, "sine.inOut");
+          camB.to(story, r(KB), S(t0), t1 - t0, "sine.inOut");
+          camF.to(story, r(KF), S(t0), t1 - t0, "sine.inOut");
+        };
+        drift(0, tQ1, d1);
+        dolly(1, d1);
+        fadeTo(gQ[0], 1, 0.3, d1, HB);
+        fadeTo(gH[0], 1, 0.3, d1, BEAT);
+        drawBetween(programme, d1 - 0.3, d1 + DOLLY);
+        q2.lines[0].drawOn(story, S(tQ2), { events: false });
+        pinAtTime(bg.call2, d1 + DOLLY + HB, SPB);
+        pinAtTime(bg.witness, d1 + DOLLY + 2 * HB, SPB);
+        bgLines[2].drawOn(story, S(d1 + DOLLY + 1.5 * HB), { events: false });
+        bgQ[2].drawOn(story, S(d1 + DOLLY + 2 * HB), { events: false });
+        fg[2].drawOn(story, S(d1 + DOLLY + 0.4), { speed: 3, events: false }); // off frame until dolly 2
+
+        // dolly 2 on the shared cut of "Can"; the permit pins as the camera lands; the question sets in
+        // two lines, "Can you prove" / "what was true?", each on its word; the tick is circled on "true".
+        drift(1, d1 + DOLLY, d2);
+        dolly(2, d2);
+        fadeTo(gQ[1], 1, 0.3, d2, HB);
+        fadeTo(gH[1], 1, 0.3, d2, BEAT);
+        drawBetween(permit, d2 - 0.3, d2 + DOLLY);
+        q3.lines[0].drawOn(story, S(tQ3), { events: false });
+        q3.lines[1].drawOn(story, S(tQ3b), { events: false });
+        drawRec(loop, tTrue - 0.04, 0.5);
+        loopQ.drawOn(story, S(tTrue + 0.42), { events: false });
+        pinAtTime(bg.photo3, d2 + DOLLY + 3 * HB, SPB);
+        pinAtTime(bg.email2, d2 + DOLLY + 4 * HB, SPB);
+        bgLines[3].drawOn(story, S(d2 + DOLLY + 3.5 * HB), { events: false });
+        bgLines[4].drawOn(story, S(d2 + DOLLY + 4.5 * HB), { events: false });
+        bgQ[3].drawOn(story, S(d2 + DOLLY + 5 * HB), { events: false });
+
+        drift(2, d2 + DOLLY, pb);
+
+        // S10d: the pull back to the whole board on the shared cut of "gap". Wide rects frame each plane's
+        // content in the upper two thirds; the foreground passes out and fades.
+        var bboxOf = function (list) {
+          var x0 = 1e9,
+            y0 = 1e9,
+            x1 = -1e9,
+            y1 = -1e9;
+          list.forEach(function (b) {
+            x0 = Math.min(x0, b[0]);
+            y0 = Math.min(y0, b[1]);
+            x1 = Math.max(x1, b[2]);
+            y1 = Math.max(y1, b[3]);
+          });
+          return [x0, y0, x1, y1];
+        };
+        var heroBox = function (f, s) {
+          return [f.box.x, f.box.y, f.box.x + f.box.w * s, f.box.y + f.box.h * s];
+        };
+        var qBox = function (q, x, yTop) {
+          var w = Math.max.apply(
+            null,
+            q.lines.map(function (l) {
+              return l.text.w;
+            }),
+          );
+          return [x, yTop, x + w, yTop + q.lines.length * 100];
+        };
+        var wideRect = function (box, cyScreen, margin) {
+          var w = (box[2] - box[0]) * margin,
+            k = 1920 / w;
+          var cx = (box[0] + box[2]) / 2,
+            cy = (box[1] + box[3]) / 2;
+          return { x: cx - w / 2, y: cy - cyScreen / k, w: w };
+        };
+        var midBox = bboxOf([heroBox(photo, 2.0), heroBox(statement, 1.6), heroBox(programme, 2.4), heroBox(permit, 2.2), qBox(q1, 150, 490), qBox(q2, 2340, 700), qBox(q3, 3150, 322)]);
+        var bgBox = bboxOf(
+          Object.keys(bg).map(function (k) {
+            return heroBox(bg[k], BGS);
+          }),
+        );
+        var WIDE_M = wideRect(midBox, 372, 1.08);
+        var WIDE_B = wideRect(bgBox, 400, 1.02);
+        var fs = shot(2, KF),
+          WIDE_F = { x: fs.x + 960 - 3300, y: 540 - 3300 * 0.5625, w: 6600 };
+        camM.to(story, WIDE_M, S(pb), PULL, "power2.inOut");
+        camB.to(story, WIDE_B, S(pb), PULL, "power2.inOut");
+        camF.to(story, WIDE_F, S(pb), PULL, "power2.inOut");
+        fadeTo(gFG, 1, 0, pb, BEAT);
+        fadeTo(gQ[2], 1, 0.3, pb, 1.5 * BEAT);
+        fadeTo(gH[2], 1, 0.3, pb, 1.5 * BEAT);
+        fadeTo(gBG, 1, 0.55, pb, 1.5 * BEAT);
+
+        // the gap timeline on "gap": the rule, then 14:42 and DAY +2 at its ends, then THE GAP, then the
+        // note beneath; everything set by "too late", then still to rewindStart.
+        gap.children[0].drawOn(story, S(tGap), { speed: 1.25, events: false });
+        gap.left.drawOn(story, S(tGap + 0.12), { speed: 2.0, events: false });
+        gap.right.drawOn(story, S(tGap + 0.46), { speed: 2.2, events: false });
+        gap.bracket.drawOn(story, S(tGap + 0.6), { speed: 1.9, events: false });
+        gap.note.drawOn(story, S(tGap + 1.1), { speed: 1.15, events: false });
 
         // ================================================================ REGISTERED TIMELINE
-        // Forward: story time follows film time. Rewind: the same curve as a1-world, from
-        // rewindStart back to the landing (story 0), so the board clears as the tape runs back.
+        // Forward: story time follows film time. Rewind: the same curve as a1-world, from rewindStart back
+        // to the landing (story 0), so the board clears and the dolly runs back as the tape reverses.
         var tl = gsap.timeline({ paused: true });
         FL.scrub(tl, story, { at: 0, from: -LANDL, to: RS - LANDL, duration: RS, ease: "none" });
         FL.scrub(tl, story, { at: RS, from: RS - LANDL, to: 0, duration: RE - RS, ease: FL.rewindEase() });
-        tl.data = { pinAt: pinAt }; // metadata only (sound-event authoring); no visual state
+        // metadata only (sound-event authoring and review); no visual state
+        tl.data = { wave: tWave, d1: d1, d2: d2, pb: pb, still: tStill, pins: { photo: tWave, statement: tWave + 2 * HB, programme: d1 + DOLLY, permit: d2 + DOLLY } };
 
         window.__timelines["a1-after"] = tl;
       </script>

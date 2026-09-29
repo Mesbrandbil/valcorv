@@ -897,6 +897,9 @@
   // follows 16:9) by writing transform on the board. Text and SVG inside re-rasterise crisply at
   // every seek (no will-change on the board). Rects: {x, y, w}, [x, y, w], or {cx, cy, w} / {cx, cy, s}
   // (s = zoom: board px per frame px is 1/s, so s 2 shows a 960-wide region at 2x).
+  // Seek exactness (verified in cut 2): a board that is an SVG <g> inside a full-frame <svg> renders
+  // pixel-identical frames in any seek order; a DOM <div> board can differ by 1 to 3 levels depending
+  // on seek history (compositor raster cache). Prefer an SVG group when the content allows it.
   //   var cam = FL.boardCam(boardEl, { rects: { wide: {cx: 2880, cy: 1620, w: 5760}, card: [..] } });
   //   cam.apply("wide")                      static first frame (build time)
   //   cam.cut(tl, "card", at)                instant cut (zero-length, seek-safe)
