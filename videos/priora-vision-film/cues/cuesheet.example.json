@@ -1,0 +1,46 @@
+{
+  "schema": "priora-cuesheet/1",
+  "note": "EXAMPLE cue sheet showing every feature of scripts/build-cues.mjs, shaped like STORYBOARD.md. Copy to cues/cuesheet.json and edit. Validate with: node scripts/build-cues.mjs --cuesheet cues/cuesheet.example.json --check --allow-missing",
+  "fps": 30,
+  "film": { "duration": "END", "compositionId": "film" },
+  "cues": {
+    "l01": { "at": "L01.start", "note": "first word" },
+    "hour": { "at": "L01:hour.start", "note": "clock sweeps 06:00 to 07:00" },
+    "insurance": "L03.start",
+    "accepted": { "at": "L03:accepted.start", "note": "envelope closes on this word" },
+    "movingSite": "L05.end",
+    "roof03": "L06:Roof.start",
+    "landing": { "at": "L07.start-0.4", "note": "the instant before Sprinkler Zone 3 goes offline; the rewind lands here" },
+    "offline": "L07:offline.start",
+    "afterwards": "L09.start",
+    "whatTrue": { "at": "L10:what#2.start", "note": "word occurrence index: the second 'what' in L10" },
+    "rewindStart": { "at": "L11.end+0.5", "note": "picture and sound begin to reverse" },
+    "rewindEnd": { "at": "L12.start-0.3", "note": "the rewind lands on story time 'landing'" },
+    "welding": "L13.start",
+    "prevention": "L15:Prevention.start",
+    "again": "L16:again.start",
+    "cross": { "at": "L16.end+0.3", "note": "the node crosses the envelope, in the silence after L16" },
+    "chainRecord": "L19a:Record.start",
+    "priora": "L20:Priora.start",
+    "qualifier": "cue:priora+2.4",
+    "finalHold": "END-2.0"
+  },
+  "scenes": [
+    { "id": "a1-world", "src": "compositions/a1-world.html", "track": 1, "start": "START", "end": "cue:rewindEnd+0.4", "note": "Act I site, story timeline and the rewind" },
+    { "id": "a2-resolve", "src": "compositions/a2-resolve.html", "track": 2, "start": "cue:rewindEnd", "end": "cue:again-0.3", "crossfade": true, "note": "identical frame at rewindEnd; 0.4 s declared crossfade" },
+    { "id": "a3-change", "src": "compositions/a3-change.html", "track": 1, "start": "cue:again-0.3", "end": "cue:chainRecord-0.5" },
+    { "id": "a3-close", "src": "compositions/a3-close.html", "track": 2, "start": "cue:chainRecord-0.5", "end": "END" },
+    { "id": "a1-paper", "src": "compositions/a1-paper.html", "track": 3, "layer": "overlay", "start": "cue:insurance-0.3", "end": "cue:movingSite+0.6" },
+    { "id": "a1-after", "src": "compositions/a1-after.html", "track": 3, "layer": "overlay", "start": "cue:afterwards-0.6", "end": "cue:rewindEnd" },
+    { "id": "chrome", "src": "compositions/chrome.html", "track": 4, "layer": "overlay", "z": 200, "start": "START", "end": "cue:chainRecord-0.5", "note": "frame furniture above every scene" }
+  ],
+  "audio": [
+    { "id": "voice", "src": "assets/audio/voice.wav", "track": 20, "volume": 1 },
+    { "id": "music", "src": "assets/audio/music.wav", "track": 21, "volume": 1, "optional": true },
+    { "id": "sfx", "src": "assets/audio/sfx.wav", "track": 22, "volume": 1, "optional": true }
+  ],
+  "inline": {
+    "SITE_PRECISE": "assets/site/site-precise.svg",
+    "GLYPHS": "assets/site/glyphs.svg"
+  }
+}

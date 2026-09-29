@@ -153,6 +153,8 @@
     });
     const styleEl = src.querySelector('style');
     if (styleEl) styleEl.textContent = styleEl.textContent.replace(/url\(#/g, 'url(#' + P);
+    // no fallback fonts in a stack: the HyperFrames compiler would fetch a substitute font for them
+    if (styleEl) styleEl.textContent = styleEl.textContent.replace(/'IBM Plex Mono',\s*ui-monospace,\s*monospace/g, "'IBM Plex Mono'").replace(/'IBM Plex Sans',\s*[^;}]+/g, "'IBM Plex Sans'");
 
     const defs = mk('defs', {}, svg);
     src.querySelectorAll('defs > *').forEach(n => defs.appendChild(document.importNode(n, true)));
@@ -171,7 +173,7 @@
 .sk-svg .sk-rough .sk-env-construct{stroke:var(--skc);stroke-opacity:.35;stroke-width:calc(var(--sw)*.9px)}
 .sk-svg .sk-rough .sk-env-firm{stroke:var(--skc);stroke-width:calc(var(--sw)*1.4px)}
 .sk-svg .sk-rough .sk-head{fill:var(--skc)}
-.sk-svg .sk-rough text{fill:var(--skc);font-family:'IBM Plex Mono',ui-monospace,monospace;font-weight:400;letter-spacing:.12em}
+.sk-svg .sk-rough text{fill:var(--skc);font-family:'IBM Plex Mono';font-weight:400;letter-spacing:.12em}
 .sk-svg .sk-rough .sk-lab line{stroke:var(--skc);stroke-opacity:.6;stroke-width:1}
 `;
     // tremor filter (applied in screen space via CSS filter on the svg)

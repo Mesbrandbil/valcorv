@@ -103,6 +103,17 @@
     FL.events(sceneId)           -> { name: { t, local, ...meta } } resolved from the scene's
                                    compositions/<scene>.events.json via scripts/build-cues.mjs.
 
+  Scene utilities
+    FL.lineWords(sceneId, lineId) -> [{ w, t, end }] narration words in scene-local seconds.
+    FL.sceneFade(tl, el, sceneId, { ease, frame }) -> opacity fade in over the declared crossfade
+                                   (SCENES[id].xfadeIn) and out over xfadeOut, ending one frame before
+                                   the slot ends. el must be a wrapper inside the scene, never the root.
+    FL.roughen(paths, parent, { seed, amount, overdraw, overClass }) -> { main, over }: rough twins
+                                   (jittered copies, same command structure) of precise paths, appended
+                                   to parent; each copy carries el.__precise (normalised precise d)
+                                   for FL.morphD back to precise.
+    FL.clamp(v, a, b), FL.lerp(a, b, t), FL.mapRange(v, a0, a1, b0, b1)
+
   Plugins registered here: flCamera, flCamMix, flScrub, flText. Nothing else in the page is modified.
 */
 (function () {
@@ -707,6 +718,54 @@
   FL.textSet = function (tl, el, text, at) {
     tl.to(el, { flText: { text: String(text) }, duration: 0, immediateRender: false }, at || 0);
     return tl;
+  };
+
+  // ---------------------------------------------------------------- scene utilities
+  FL.clamp = function (v, a, b) {
+    return v < a ? a : v > b ? b : v;
+  };
+  FL.lerp = function (a, b, t) {
+    return a + (b - a) * t;
+  };
+  FL.mapRange = function (v, a0, a1, b0, b1) {
+    return b0 + ((v - a0) / (a1 - a0)) * (b1 - b0);
+  };
+  FL.lineWords = function (sceneId, lineId) {
+    var s = (W.SCENES || {})[sceneId];
+    if (!s) throw new Error("FL.lineWords: unknown scene '" + sceneId + "'");
+    return FL.words(lineId).map(function (w) {
+      return { w: w.w, t: w.start - s.start, end: w.end - s.start };
+    });
+  };
+  FL.sceneFade = function (tl, el, sceneId, o) {
+    o = o || {};
+    var s = (W.SCENES || {})[sceneId];
+    if (!s) throw new Error("FL.sceneFade: unknown scene '" + sceneId + "'");
+    var frame = o.frame || 1 / ((W.FILM && W.FILM.fps) || 30);
+    if (s.xfadeIn > 0) tl.fromTo(el, { opacity: 0 }, { opacity: 1, duration: s.xfadeIn, ease: o.ease || "power1.inOut" }, 0);
+    if (s.xfadeOut > 0)
+      tl.fromTo(el, { opacity: 1 }, { opacity: 0, duration: Math.max(frame, s.xfadeOut - frame), ease: o.ease || "power1.inOut", immediateRender: false }, s.duration - s.xfadeOut);
+    return tl;
+  };
+  FL.roughen = function (paths, parent, o) {
+    o = o || {};
+    var rng = FL.prng(o.seed != null ? o.seed : "fl-rough");
+    var amount = o.amount != null ? o.amount : 0.16;
+    var overdraw = o.overdraw != null ? o.overdraw : 0.22;
+    var main = [],
+      over = [];
+    [].concat(paths).forEach(function (p) {
+      var d = FL.normalizePath(p.getAttribute("d"));
+      var a = FL.svgEl("path", { d: FL.jitterPath(d, rng, amount), class: o.mainClass || null }, parent);
+      a.__precise = d;
+      main.push(a);
+      if (overdraw > 0) {
+        var b = FL.svgEl("path", { d: FL.jitterPath(d, rng, overdraw), class: o.overClass || null }, parent);
+        b.__precise = d;
+        over.push(b);
+      }
+    });
+    return { main: main, over: over };
   };
 
   W.FL = FL;

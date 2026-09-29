@@ -160,21 +160,12 @@
         var wobble = FL.wobbleFilter(defs, "zz-proto-wobble", { seed: 11, baseFrequency: 0.018, octaves: 2, scale: 2 });
 
         // ---- rough twin: same geometry, jittered, same command structure
-        var rng = FL.prng("zz-proto-rough");
         var srcPaths = FL.$$(site, '[data-draw="stroke"]').filter(function (p) {
           return p.tagName.toLowerCase() === "path";
         });
-        var main = [],
-          over = [];
-        srcPaths.forEach(function (p) {
-          var d = FL.normalizePath(p.getAttribute("d"));
-          var a = FL.svgEl("path", { d: FL.jitterPath(d, rng, 0.16) }, roughG);
-          a.__precise = d;
-          main.push(a);
-          var b = FL.svgEl("path", { d: FL.jitterPath(d, rng, 0.22), class: "zz-proto-over" }, roughG);
-          b.__precise = d;
-          over.push(b);
-        });
+        var twin = FL.roughen(srcPaths, roughG, { seed: "zz-proto-rough", amount: 0.16, overdraw: 0.22, overClass: "zz-proto-over" });
+        var main = twin.main,
+          over = twin.over;
         // Sprinkler heads of zone 3 as graphite dots in the rough drawing.
         var heads = FL.$$(site, "[id^='zz-proto-sz3-head-']")
           .map(function (h) {
@@ -259,6 +250,7 @@
         ["chainRecord", "chainTrust", "chainDecision", "chainPrice", "chainCapacity"].forEach(function (c, i) {
           tl.fromTo(chain[i], { opacity: 0, y: 8 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, T(c));
         });
+        tl.to(["#zz-proto-hud", "#zz-proto-chain"], { opacity: 0, duration: 0.5, ease: "power1.in" }, T("priora", -0.6));
         tl.fromTo("#zz-proto-mark-bg", { opacity: 0 }, { opacity: 0.94, duration: 0.8, ease: "power1.inOut" }, T("priora", -0.4));
         tl.fromTo("#zz-proto-mark", { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 1.0, ease: "power3.out" }, T("priora"));
 

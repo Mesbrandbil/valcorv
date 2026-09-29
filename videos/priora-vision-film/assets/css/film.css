@@ -20,6 +20,10 @@
   --paper-2: #efece5;
   --paper-3: #eae6dd;
   --paper-hi: #fbfaf7;
+  /* Base under the grain layer. The grain (assets/textures/paper-grain.png, mean alpha 2.2 %
+     graphite) darkens the ground by about 4 levels, so the base is lifted to #F9F7F2 and the
+     composite averages #F5F3EE: paper-filled shapes (occluding faces, plates) then match. */
+  --paper-ground: #f9f7f2;
   --ink: #111111;
   --ink-2: #2a2a2a;
   --charcoal: #34332f;
@@ -64,7 +68,7 @@
   --track-label: 0.12em;
   --track-label-wide: 0.14em;
 
-  /* Lines (screen px at 1080p) */
+  /* Lines (screen px at 1080p; inside SVGs multiply by var(--sw), see .fl-pencil) */
   --lw-pencil: 1.5px;
   --lw-pencil-fine: 1px;
   --lw-precise: 1.25px;
@@ -231,29 +235,36 @@ body {
   overflow: hidden;
 }
 
-/* Pencil and precise strokes. Stroke widths stay constant on screen under the camera. */
+/* Pencil and precise strokes inside a camera-framed SVG. Widths are in screen px through --sw
+   (world units per screen px, written by FL.camera on every frame), exactly like the site SVG,
+   so they stay constant under any zoom AND stay measurable in user units for draw-on.
+   Do not use vector-effect: non-scaling-stroke on paths you draw on (see docs/pipeline.md). */
 .fl-stroke,
 .fl-stroke * {
   fill: none;
   stroke-linecap: round;
   stroke-linejoin: round;
-  vector-effect: non-scaling-stroke;
 }
 .fl-pencil {
   stroke: var(--graphite);
-  stroke-width: var(--lw-pencil);
+  stroke-width: calc(var(--sw, 1) * 1.5px);
 }
 .fl-pencil-fine {
   stroke: var(--graphite-light);
-  stroke-width: var(--lw-pencil-fine);
+  stroke-width: calc(var(--sw, 1) * 1px);
 }
 .fl-precise {
   stroke: var(--grey-1);
-  stroke-width: var(--lw-precise);
+  stroke-width: calc(var(--sw, 1) * 1.25px);
 }
 .fl-signal-stroke {
   stroke: var(--signal);
-  stroke-width: var(--lw-signal);
+  stroke-width: calc(var(--sw, 1) * 2px);
+}
+/* Static strokes in an SVG that never zooms and is never drawn on may use this instead. */
+.fl-nss,
+.fl-nss * {
+  vector-effect: non-scaling-stroke;
 }
 
 /* Hairline rules for frame furniture. */

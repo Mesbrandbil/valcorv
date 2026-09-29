@@ -7,3 +7,4 @@ audio-engine/__pycache__/
 renders/tmp/
 __pycache__/
 narration/takes/guide/*.wav
+.hyperframes/preview/
