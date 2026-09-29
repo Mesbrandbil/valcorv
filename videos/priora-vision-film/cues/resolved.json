@@ -1894,42 +1894,72 @@
       "at": "cue:keepsRecord+0.5"
     },
     {
+      "name": "cut-in",
+      "kind": "cut",
+      "material": "paper",
+      "gain_db": -14,
+      "scene": "a3-change",
+      "t": 81.22,
+      "local": 0.02,
+      "at": "cue:l16+0.024"
+    },
+    {
       "name": "system-event",
       "kind": "system-event",
       "gain_db": -8,
-      "dur": 0.75,
+      "dur": 0.6,
       "scene": "a3-change",
-      "t": 82.156,
-      "local": 0.956,
-      "at": "cue:offline2"
+      "t": 82.174,
+      "local": 0.974,
+      "at": "cue:offline2+0.018"
     },
     {
-      "name": "record-system",
-      "kind": "record-append",
+      "name": "cut-card",
+      "kind": "cut",
+      "material": "felt",
+      "gain_db": -14,
+      "scene": "a3-change",
+      "t": 83.478,
+      "local": 2.278,
+      "at": "cue:thisTime-0.188"
+    },
+    {
+      "name": "focus-row",
+      "kind": "focus",
       "gain_db": -16,
       "scene": "a3-change",
-      "t": 82.416,
-      "local": 1.216,
-      "at": "cue:offline2+0.26"
+      "t": 83.498,
+      "local": 2.298,
+      "at": "cue:thisTime-0.168"
     },
     {
       "name": "row-unavailable",
       "kind": "row-unavailable",
       "gain_db": -9,
       "scene": "a3-change",
-      "t": 84.666,
-      "local": 3.466,
-      "at": "cue:sees"
+      "t": 84.566,
+      "local": 3.366,
+      "at": "cue:sees-0.1"
+    },
+    {
+      "name": "cut-edge",
+      "kind": "cut",
+      "material": "paper",
+      "gain_db": -16,
+      "scene": "a3-change",
+      "t": 85.761,
+      "local": 4.561,
+      "at": "cue:cross-0.055"
     },
     {
       "name": "node-stretch",
       "kind": "node-stretch",
       "gain_db": -10,
-      "dur": 1,
+      "dur": 0.815,
       "scene": "a3-change",
-      "t": 85.816,
-      "local": 4.616,
-      "at": "cue:cross"
+      "t": 85.761,
+      "local": 4.561,
+      "at": "cue:cross-0.055"
     },
     {
       "name": "node-cross",
@@ -1937,9 +1967,28 @@
       "gain_db": -6,
       "dur": 0.46,
       "scene": "a3-change",
-      "t": 86.956,
-      "local": 5.756,
-      "at": "cue:cross+1.14"
+      "t": 86.739,
+      "local": 5.539,
+      "at": "cue:cross+0.923"
+    },
+    {
+      "name": "crossing-hold",
+      "kind": "hold",
+      "dur": 1.074,
+      "scene": "a3-change",
+      "t": 86.969,
+      "local": 5.769,
+      "at": "cue:cross+1.153"
+    },
+    {
+      "name": "cut-sheet",
+      "kind": "cut",
+      "material": "paper",
+      "gain_db": -14,
+      "scene": "a3-change",
+      "t": 88.043,
+      "local": 6.843,
+      "at": "cue:riskOwner"
     },
     {
       "name": "sheet-in",
@@ -1947,9 +1996,28 @@
       "gain_db": -12,
       "dur": 0.4,
       "scene": "a3-change",
-      "t": 89.433,
-      "local": 8.233,
-      "at": "cue:decides+0.55"
+      "t": 88.043,
+      "local": 6.843,
+      "at": "cue:riskOwner"
+    },
+    {
+      "name": "focus-sheet",
+      "kind": "focus",
+      "gain_db": -16,
+      "scene": "a3-change",
+      "t": 88.063,
+      "local": 6.863,
+      "at": "cue:riskOwner+0.02"
+    },
+    {
+      "name": "pull-choices",
+      "kind": "pull",
+      "gain_db": -14,
+      "dur": 0.652,
+      "scene": "a3-change",
+      "t": 88.696,
+      "local": 7.496,
+      "at": "cue:decides-0.187"
     },
     {
       "name": "choice-01",
@@ -1957,19 +2025,39 @@
       "variant": 1,
       "gain_db": -10,
       "scene": "a3-change",
-      "t": 90.003,
-      "local": 8.803,
-      "at": "cue:change"
+      "t": 90,
+      "local": 8.8,
+      "at": "cue:change-0.003"
+    },
+    {
+      "name": "push-change",
+      "kind": "push",
+      "gain_db": -14,
+      "dur": 0.652,
+      "scene": "a3-change",
+      "t": 90,
+      "local": 8.8,
+      "at": "cue:change-0.003"
     },
     {
       "name": "node-return",
       "kind": "node-return",
       "gain_db": -12,
-      "dur": 0.8,
+      "dur": 0.6,
       "scene": "a3-change",
-      "t": 90.103,
-      "local": 8.903,
-      "at": "cue:change+0.1"
+      "t": 90.3,
+      "local": 9.1,
+      "at": "cue:change+0.297"
+    },
+    {
+      "name": "whip-retain",
+      "kind": "whip",
+      "gain_db": -16,
+      "dur": 0.489,
+      "scene": "a3-change",
+      "t": 91.957,
+      "local": 10.757,
+      "at": "cue:knowingly"
     },
     {
       "name": "choice-02",
@@ -1977,9 +2065,19 @@
       "variant": 2,
       "gain_db": -10,
       "scene": "a3-change",
-      "t": 92.457,
-      "local": 11.257,
-      "at": "cue:retain"
+      "t": 92.407,
+      "local": 11.207,
+      "at": "cue:retain-0.05"
+    },
+    {
+      "name": "whip-transfer",
+      "kind": "whip",
+      "gain_db": -16,
+      "dur": 0.489,
+      "scene": "a3-change",
+      "t": 94.565,
+      "local": 13.365,
+      "at": "cue:inTime"
     },
     {
       "name": "choice-03",
@@ -1987,9 +2085,28 @@
       "variant": 3,
       "gain_db": -10,
       "scene": "a3-change",
-      "t": 96.385,
-      "local": 15.185,
-      "at": "cue:carriers"
+      "t": 94.605,
+      "local": 13.405,
+      "at": "cue:inTime+0.04"
+    },
+    {
+      "name": "cut-packet",
+      "kind": "cut",
+      "material": "paper",
+      "gain_db": -14,
+      "scene": "a3-change",
+      "t": 95.543,
+      "local": 14.343,
+      "at": "cue:ask-0.012"
+    },
+    {
+      "name": "focus-packet",
+      "kind": "focus",
+      "gain_db": -16,
+      "scene": "a3-change",
+      "t": 95.563,
+      "local": 14.363,
+      "at": "cue:ask+0.008"
     },
     {
       "name": "packet-send",
@@ -1997,145 +2114,137 @@
       "gain_db": -12,
       "dur": 0.5,
       "scene": "a3-change",
-      "t": 96.985,
-      "local": 15.785,
-      "at": "cue:carriers+0.6"
+      "t": 95.87,
+      "local": 14.67,
+      "at": "cue:ask+0.315"
     },
     {
       "name": "carrier-response-01",
       "kind": "carrier-response",
       "gain_db": -13,
       "scene": "a3-change",
-      "t": 97.835,
-      "local": 16.635,
-      "at": "cue:carriers+1.45"
+      "t": 96.848,
+      "local": 15.648,
+      "at": "cue:whether-0.037"
     },
     {
       "name": "carrier-response-02",
       "kind": "carrier-response",
       "gain_db": -13,
       "scene": "a3-change",
-      "t": 98.085,
-      "local": 16.885,
-      "at": "cue:carriers+1.45"
-    },
-    {
-      "name": "layer-slice",
-      "kind": "layer-slice",
-      "gain_db": -12,
-      "dur": 0.7,
-      "scene": "a3-change",
-      "t": 98.235,
-      "local": 17.035,
-      "at": "cue:carriers+1.85"
+      "t": 97.5,
+      "local": 16.3,
+      "at": "cue:whether-0.037"
     },
     {
       "name": "carrier-response-03",
       "kind": "carrier-response",
       "gain_db": -13,
       "scene": "a3-change",
-      "t": 98.335,
-      "local": 17.135,
-      "at": "cue:carriers+1.45"
+      "t": 98.152,
+      "local": 16.952,
+      "at": "cue:whether-0.037"
     },
     {
       "name": "carrier-response-04",
       "kind": "carrier-response",
       "gain_db": -13,
       "scene": "a3-change",
-      "t": 98.585,
-      "local": 17.385,
-      "at": "cue:carriers+1.45"
+      "t": 98.805,
+      "local": 17.605,
+      "at": "cue:whether-0.037"
+    },
+    {
+      "name": "layer-slice",
+      "kind": "layer-slice",
+      "gain_db": -12,
+      "dur": 0.55,
+      "scene": "a3-change",
+      "t": 100.435,
+      "local": 19.235,
+      "at": "cue:ordinary-0.794"
+    },
+    {
+      "name": "pull-site",
+      "kind": "pull",
+      "gain_db": -12,
+      "dur": 3.913,
+      "scene": "a3-change",
+      "t": 101.087,
+      "local": 19.887,
+      "at": "cue:ordinary-0.142"
     },
     {
       "name": "node-pass-01",
       "kind": "node-pass",
       "gain_db": -20,
       "scene": "a3-change",
-      "t": 102.829,
-      "local": 21.629,
-      "at": "cue:ordinary+1.6"
+      "t": 102.244,
+      "local": 21.044,
+      "at": "cue:ordinary+1.015"
     },
     {
       "name": "decision-01",
       "kind": "decision-accent",
       "gain_db": -8,
       "scene": "a3-change",
-      "t": 102.989,
-      "local": 21.789,
-      "at": "cue:few+0.5"
+      "t": 102.391,
+      "local": 21.191,
+      "at": "cue:few-0.098"
     },
     {
       "name": "node-pass-02",
       "kind": "node-pass",
       "gain_db": -20,
       "scene": "a3-change",
-      "t": 103.089,
-      "local": 21.889,
-      "at": "cue:ordinary+1.6"
-    },
-    {
-      "name": "decision-02",
-      "kind": "decision-accent",
-      "gain_db": -8,
-      "scene": "a3-change",
-      "t": 103.339,
-      "local": 22.139,
-      "at": "cue:few+0.85"
+      "t": 102.627,
+      "local": 21.427,
+      "at": "cue:ordinary+1.398"
     },
     {
       "name": "node-pass-03",
       "kind": "node-pass",
       "gain_db": -20,
       "scene": "a3-change",
-      "t": 103.349,
-      "local": 22.149,
-      "at": "cue:ordinary+1.6"
+      "t": 102.981,
+      "local": 21.781,
+      "at": "cue:ordinary+1.752"
     },
     {
       "name": "node-pass-04",
       "kind": "node-pass",
       "gain_db": -20,
       "scene": "a3-change",
-      "t": 103.609,
-      "local": 22.409,
-      "at": "cue:ordinary+1.6"
+      "t": 103.329,
+      "local": 22.129,
+      "at": "cue:ordinary+2.1"
     },
     {
       "name": "node-pass-05",
       "kind": "node-pass",
       "gain_db": -20,
       "scene": "a3-change",
-      "t": 103.869,
-      "local": 22.669,
-      "at": "cue:ordinary+1.6"
+      "t": 103.655,
+      "local": 22.455,
+      "at": "cue:ordinary+2.426"
     },
     {
       "name": "node-pass-06",
       "kind": "node-pass",
       "gain_db": -20,
       "scene": "a3-change",
-      "t": 104.129,
-      "local": 22.929,
-      "at": "cue:ordinary+1.6"
+      "t": 104.006,
+      "local": 22.806,
+      "at": "cue:ordinary+2.777"
     },
     {
-      "name": "record-rail-01",
-      "kind": "record-append",
-      "gain_db": -16,
+      "name": "decision-02",
+      "kind": "decision-accent",
+      "gain_db": -8,
       "scene": "a3-change",
-      "t": 104.249,
-      "local": 23.049,
-      "at": "cue:few+1.76"
-    },
-    {
-      "name": "record-rail-02",
-      "kind": "record-append",
-      "gain_db": -16,
-      "scene": "a3-change",
-      "t": 104.629,
-      "local": 23.429,
-      "at": "cue:decisionsL18+0.31"
+      "t": 104.348,
+      "local": 23.148,
+      "at": "cue:decisionsL18+0.029"
     },
     {
       "name": "line-straighten",
