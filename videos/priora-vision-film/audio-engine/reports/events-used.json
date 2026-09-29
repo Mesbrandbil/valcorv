@@ -597,30 +597,15 @@
     "seed": 2295
   },
   {
-    "name": "loto-cut-out",
-    "material": "paper",
-    "gain_db": -12.0,
-    "what": "back to the site on 'Work moves'",
-    "snap": {
-      "mode": "cut",
-      "off": 0.0003
-    },
-    "scene": "a1-inserts",
-    "kind": "cut",
-    "t": 10.109,
-    "index": 0,
-    "seed": 2332
-  },
-  {
     "name": "hse-loop-01",
-    "gain_db": -20.0576,
-    "dur": 0.1125,
+    "gain_db": -22.0695,
+    "dur": 0.2847,
     "scene": "a1-world",
-    "kind": "pencil-stroke",
+    "kind": "pencil-tick",
     "t": 10.159,
     "index": 0,
-    "seed": 229793,
-    "pan": 0.1165
+    "seed": 226204,
+    "pan": -0.1568
   },
   {
     "name": "talk-label",
@@ -631,18 +616,18 @@
     "kind": "technical-pen",
     "t": 10.259,
     "index": 0,
-    "seed": 2406
+    "seed": 2369
   },
   {
     "name": "hse-loop-02",
-    "gain_db": -19.5949,
-    "dur": 0.1493,
+    "gain_db": -18.7174,
+    "dur": 0.1126,
     "scene": "a1-world",
     "kind": "pencil-tick",
     "t": 10.267,
     "index": 1,
-    "seed": 236971,
-    "pan": 0.2272
+    "seed": 233382,
+    "pan": -0.039
   },
   {
     "name": "hse-footsteps",
@@ -653,19 +638,19 @@
     "kind": "footsteps",
     "t": 10.309,
     "index": 0,
-    "seed": 2480,
+    "seed": 2443,
     "count": 22
   },
   {
     "name": "hse-loop-03",
-    "gain_db": -20.7143,
-    "dur": 0.1134,
+    "gain_db": -22.6298,
+    "dur": 0.0929,
     "scene": "a1-world",
     "kind": "pencil-stroke",
     "t": 10.375,
     "index": 2,
-    "seed": 244149,
-    "pan": -0.2827
+    "seed": 240560,
+    "pan": 0.2488
   },
   {
     "name": "markers-01",
@@ -679,40 +664,40 @@
     "kind": "pencil-tick",
     "t": 10.435,
     "index": 0,
-    "seed": 2554
+    "seed": 2517
   },
   {
     "name": "hse-loop-04",
-    "gain_db": -18.0183,
-    "dur": 0.2906,
+    "gain_db": -22.0807,
+    "dur": 0.2754,
     "scene": "a1-world",
     "kind": "pencil-stroke",
     "t": 10.483,
     "index": 3,
-    "seed": 251327,
-    "pan": -0.0363
+    "seed": 247738,
+    "pan": -0.3424
   },
   {
     "name": "hse-loop-05",
-    "gain_db": -21.5672,
-    "dur": 0.2463,
+    "gain_db": -22.2837,
+    "dur": 0.1254,
     "scene": "a1-world",
     "kind": "pencil-stroke",
     "t": 10.591,
     "index": 4,
-    "seed": 254916,
-    "pan": 0.1848
+    "seed": 251327,
+    "pan": 0.269
   },
   {
     "name": "hse-loop-06",
-    "gain_db": -18.332,
-    "dur": 0.1364,
+    "gain_db": -21.3206,
+    "dur": 0.2678,
     "scene": "a1-world",
-    "kind": "pencil-tick",
+    "kind": "pencil-stroke",
     "t": 10.699,
     "index": 5,
-    "seed": 258505,
-    "pan": -0.1692
+    "seed": 254916,
+    "pan": -0.3067
   },
   {
     "name": "markers-02",
@@ -726,51 +711,40 @@
     "kind": "pencil-tick",
     "t": 10.761,
     "index": 1,
-    "seed": 2702
-  },
-  {
-    "name": "hse-loop-06",
-    "gain_db": -18.2895,
-    "dur": 0.1604,
-    "scene": "a1-world",
-    "kind": "pencil-stroke",
-    "t": 10.7979,
-    "index": 5,
-    "seed": 258506,
-    "pan": -0.0647
+    "seed": 2665
   },
   {
     "name": "hse-loop-07",
-    "gain_db": -19.9548,
-    "dur": 0.2609,
+    "gain_db": -21.372,
+    "dur": 0.2455,
     "scene": "a1-world",
-    "kind": "pencil-tick",
+    "kind": "pencil-stroke",
     "t": 10.807,
     "index": 6,
-    "seed": 265683,
-    "pan": -0.0056
+    "seed": 262094,
+    "pan": -0.2115
   },
   {
     "name": "hse-loop-08",
-    "gain_db": -18.9424,
-    "dur": 0.1198,
+    "gain_db": -21.2507,
+    "dur": 0.155,
     "scene": "a1-world",
-    "kind": "pencil-tick",
+    "kind": "pencil-stroke",
     "t": 10.915,
     "index": 7,
-    "seed": 269272,
-    "pan": -0.3358
+    "seed": 265683,
+    "pan": 0.2929
   },
   {
     "name": "hse-loop-09",
-    "gain_db": -21.4105,
-    "dur": 0.2129,
+    "gain_db": -22.634,
+    "dur": 0.2788,
     "scene": "a1-world",
-    "kind": "pencil-tick",
+    "kind": "pencil-stroke",
     "t": 11.023,
     "index": 8,
-    "seed": 272861,
-    "pan": 0.3316
+    "seed": 269272,
+    "pan": -0.2034
   },
   {
     "name": "markers-03",
@@ -784,18 +758,18 @@
     "kind": "pencil-tick",
     "t": 11.087,
     "index": 2,
-    "seed": 2850
+    "seed": 2813
   },
   {
     "name": "hse-loop-10",
-    "gain_db": -21.1961,
-    "dur": 0.1294,
+    "gain_db": -19.4893,
+    "dur": 0.1053,
     "scene": "a1-world",
     "kind": "pencil-tick",
     "t": 11.131,
     "index": 9,
-    "seed": 280039,
-    "pan": 0.2563
+    "seed": 276450,
+    "pan": -0.2335
   },
   {
     "t": 11.226,
@@ -805,6 +779,17 @@
     "scene": "a1-world",
     "seed": 7,
     "pan": -0.6
+  },
+  {
+    "name": "hse-loop-10",
+    "gain_db": -19.6434,
+    "dur": 0.2968,
+    "scene": "a1-world",
+    "kind": "pencil-stroke",
+    "t": 11.2306,
+    "index": 9,
+    "seed": 276451,
+    "pan": 0.1528
   },
   {
     "name": "markers-04",
@@ -818,7 +803,7 @@
     "kind": "pencil-tick",
     "t": 11.413,
     "index": 3,
-    "seed": 2924
+    "seed": 2887
   },
   {
     "name": "markers-05",
@@ -832,7 +817,7 @@
     "kind": "pencil-tick",
     "t": 11.739,
     "index": 4,
-    "seed": 2961
+    "seed": 2924
   },
   {
     "name": "envelope-construct",
@@ -843,7 +828,7 @@
     "kind": "pencil-stroke",
     "t": 12.065,
     "index": 0,
-    "seed": 2998
+    "seed": 2961
   },
   {
     "name": "rise",
@@ -854,7 +839,7 @@
     "kind": "pull",
     "t": 12.065,
     "index": 0,
-    "seed": 3035
+    "seed": 2998
   },
   {
     "name": "envelope-firm",
@@ -869,7 +854,7 @@
     "kind": "pencil-stroke",
     "t": 12.391,
     "index": 0,
-    "seed": 3072
+    "seed": 3035
   },
   {
     "name": "envelope-label",
@@ -880,7 +865,7 @@
     "kind": "technical-pen",
     "t": 14.265,
     "index": 0,
-    "seed": 3109
+    "seed": 3072
   },
   {
     "name": "sheet-lay",
@@ -895,7 +880,7 @@
     "kind": "sheet-lay",
     "t": 15.326,
     "index": 0,
-    "seed": 3146
+    "seed": 3109
   },
   {
     "name": "underline",
@@ -910,7 +895,7 @@
     "kind": "ruler-contact",
     "t": 15.978,
     "index": 0,
-    "seed": 3183
+    "seed": 3146
   },
   {
     "name": "underline",
@@ -925,7 +910,7 @@
     "kind": "pencil-stroke",
     "t": 16.018,
     "index": 0,
-    "seed": 3184,
+    "seed": 3147,
     "pressure": 0.75,
     "speed": 1.2
   },
@@ -942,7 +927,7 @@
     "kind": "whip",
     "t": 16.304,
     "index": 0,
-    "seed": 3220
+    "seed": 3183
   },
   {
     "name": "lead-arrow",
@@ -957,7 +942,7 @@
     "kind": "pencil-stroke",
     "t": 16.304,
     "index": 0,
-    "seed": 3257
+    "seed": 3220
   },
   {
     "name": "procedure-line",
@@ -968,7 +953,7 @@
     "kind": "technical-pen",
     "t": 16.704,
     "index": 0,
-    "seed": 3294
+    "seed": 3257
   },
   {
     "name": "arrow-permit",
@@ -979,7 +964,7 @@
     "kind": "pencil-stroke",
     "t": 17.08,
     "index": 0,
-    "seed": 3331
+    "seed": 3294
   },
   {
     "name": "whip-permit",
@@ -989,7 +974,7 @@
     "kind": "whip",
     "t": 17.12,
     "index": 0,
-    "seed": 3368
+    "seed": 3331
   },
   {
     "name": "permit-line",
@@ -999,7 +984,7 @@
     "kind": "technical-pen",
     "t": 17.386,
     "index": 0,
-    "seed": 3405
+    "seed": 3368
   },
   {
     "name": "permit-tick",
@@ -1008,7 +993,7 @@
     "kind": "pencil-tick",
     "t": 17.586,
     "index": 0,
-    "seed": 3442
+    "seed": 3405
   },
   {
     "name": "permit-stamp",
@@ -1022,31 +1007,31 @@
     "kind": "stamp",
     "t": 17.609,
     "index": 0,
-    "seed": 3479
+    "seed": 3442
   },
   {
     "name": "arrow-briefing-01",
-    "gain_db": -22.0957,
-    "dur": 0.1525,
+    "gain_db": -18.7826,
+    "dur": 0.2937,
     "what": "dashed arrow permit to briefing",
     "scene": "a1-paper",
-    "kind": "pencil-tick",
+    "kind": "pencil-stroke",
     "t": 17.732,
     "index": 0,
-    "seed": 341052,
-    "pan": -0.2408
+    "seed": 337463,
+    "pan": -0.1681
   },
   {
     "name": "arrow-briefing-02",
-    "gain_db": -19.6356,
-    "dur": 0.2161,
+    "gain_db": -20.2623,
+    "dur": 0.0954,
     "what": "dashed arrow permit to briefing",
     "scene": "a1-paper",
     "kind": "pencil-stroke",
     "t": 17.765,
     "index": 1,
-    "seed": 344641,
-    "pan": -0.0397
+    "seed": 341052,
+    "pan": 0.3976
   },
   {
     "name": "whip-briefing",
@@ -1056,103 +1041,103 @@
     "kind": "whip",
     "t": 17.772,
     "index": 0,
-    "seed": 3590
+    "seed": 3553
   },
   {
     "name": "arrow-briefing-03",
-    "gain_db": -22.9145,
-    "dur": 0.2727,
+    "gain_db": -22.9014,
+    "dur": 0.2663,
     "what": "dashed arrow permit to briefing",
     "scene": "a1-paper",
     "kind": "pencil-stroke",
     "t": 17.798,
     "index": 2,
-    "seed": 351819,
-    "pan": -0.0506
+    "seed": 348230,
+    "pan": 0.2902
   },
   {
     "name": "arrow-briefing-04",
-    "gain_db": -22.1504,
-    "dur": 0.1589,
+    "gain_db": -19.2764,
+    "dur": 0.0822,
     "what": "dashed arrow permit to briefing",
     "scene": "a1-paper",
-    "kind": "pencil-tick",
+    "kind": "pencil-stroke",
     "t": 17.831,
     "index": 3,
-    "seed": 355408,
-    "pan": -0.0626
+    "seed": 351819,
+    "pan": -0.0638
   },
   {
     "name": "arrow-briefing-05",
-    "gain_db": -18.7627,
-    "dur": 0.1495,
+    "gain_db": -22.2003,
+    "dur": 0.1924,
     "what": "dashed arrow permit to briefing",
     "scene": "a1-paper",
-    "kind": "pencil-tick",
+    "kind": "pencil-stroke",
     "t": 17.864,
     "index": 4,
-    "seed": 358997,
-    "pan": -0.2833
+    "seed": 355408,
+    "pan": 0.2548
   },
   {
     "name": "arrow-briefing-06",
-    "gain_db": -18.4973,
-    "dur": 0.2442,
+    "gain_db": -19.0421,
+    "dur": 0.2687,
     "what": "dashed arrow permit to briefing",
     "scene": "a1-paper",
     "kind": "pencil-stroke",
     "t": 17.897,
     "index": 5,
-    "seed": 362586,
-    "pan": -0.0606
+    "seed": 358997,
+    "pan": 0.144
   },
   {
     "name": "arrow-briefing-07",
-    "gain_db": -20.9351,
-    "dur": 0.2241,
-    "what": "dashed arrow permit to briefing",
-    "scene": "a1-paper",
-    "kind": "pencil-tick",
-    "t": 17.93,
-    "index": 6,
-    "seed": 366175,
-    "pan": 0.2646
-  },
-  {
-    "name": "arrow-briefing-08",
-    "gain_db": -20.0007,
-    "dur": 0.1756,
+    "gain_db": -20.3632,
+    "dur": 0.2159,
     "what": "dashed arrow permit to briefing",
     "scene": "a1-paper",
     "kind": "pencil-stroke",
+    "t": 17.93,
+    "index": 6,
+    "seed": 362586,
+    "pan": 0.3758
+  },
+  {
+    "name": "arrow-briefing-08",
+    "gain_db": -19.4448,
+    "dur": 0.1386,
+    "what": "dashed arrow permit to briefing",
+    "scene": "a1-paper",
+    "kind": "pencil-tick",
     "t": 17.963,
     "index": 7,
-    "seed": 369764,
-    "pan": -0.1549
+    "seed": 366175,
+    "pan": 0.3142
   },
   {
     "name": "arrow-briefing-09",
-    "gain_db": -18.6257,
-    "dur": 0.2958,
+    "gain_db": -18.129,
+    "dur": 0.1217,
     "what": "dashed arrow permit to briefing",
     "scene": "a1-paper",
     "kind": "pencil-tick",
     "t": 17.996,
     "index": 8,
-    "seed": 373353,
-    "pan": -0.3389
+    "seed": 369764,
+    "pan": 0.1183
   },
   {
     "name": "arrow-briefing-10",
-    "gain_db": -18.5261,
-    "dur": 0.2598,
+    "gain_db": -18.4167,
+    "dur": 0.0855,
     "what": "dashed arrow permit to briefing",
     "scene": "a1-paper",
     "kind": "pencil-stroke",
     "t": 18.029,
     "index": 9,
-    "seed": 376942,
-    "pan": -0.2454
+    "seed": 373353,
+    "pan": 0.1816
   },
   {
     "name": "briefing-note",
@@ -1163,7 +1148,7 @@
     "kind": "pencil-stroke",
     "t": 18.058,
     "index": 0,
-    "seed": 3923
+    "seed": 3886
   },
   {
     "name": "briefing-line",
@@ -1174,31 +1159,31 @@
     "kind": "technical-pen",
     "t": 18.198,
     "index": 0,
-    "seed": 3960
+    "seed": 3923
   },
   {
     "name": "arrow-checklist-01",
-    "gain_db": -23.7035,
-    "dur": 0.1196,
+    "gain_db": -23.4327,
+    "dur": 0.1264,
     "what": "dotted arrow briefing to checklist",
     "scene": "a1-paper",
-    "kind": "pencil-stroke",
+    "kind": "pencil-tick",
     "t": 18.384,
     "index": 0,
-    "seed": 387709,
-    "pan": -0.0266
+    "seed": 384120,
+    "pan": 0.0667
   },
   {
     "name": "arrow-checklist-02",
-    "gain_db": -22.1664,
-    "dur": 0.2484,
+    "gain_db": -20.7182,
+    "dur": 0.096,
     "what": "dotted arrow briefing to checklist",
     "scene": "a1-paper",
     "kind": "pencil-tick",
     "t": 18.409,
     "index": 1,
-    "seed": 391298,
-    "pan": 0.1278
+    "seed": 387709,
+    "pan": 0.394
   },
   {
     "name": "whip-checklist",
@@ -1208,139 +1193,139 @@
     "kind": "whip",
     "t": 18.424,
     "index": 0,
-    "seed": 4071
+    "seed": 4034
   },
   {
     "name": "arrow-checklist-03",
-    "gain_db": -24.4178,
-    "dur": 0.1624,
+    "gain_db": -24.82,
+    "dur": 0.2612,
     "what": "dotted arrow briefing to checklist",
     "scene": "a1-paper",
     "kind": "pencil-stroke",
     "t": 18.434,
     "index": 2,
-    "seed": 398476,
-    "pan": 0.0961
+    "seed": 394887,
+    "pan": 0.0931
   },
   {
     "name": "arrow-checklist-04",
-    "gain_db": -22.831,
-    "dur": 0.2374,
+    "gain_db": -20.1838,
+    "dur": 0.2642,
     "what": "dotted arrow briefing to checklist",
     "scene": "a1-paper",
     "kind": "pencil-tick",
     "t": 18.459,
     "index": 3,
-    "seed": 402065,
-    "pan": 0.1926
+    "seed": 398476,
+    "pan": 0.1088
   },
   {
     "name": "arrow-checklist-05",
-    "gain_db": -20.3425,
-    "dur": 0.1531,
+    "gain_db": -20.2103,
+    "dur": 0.1297,
     "what": "dotted arrow briefing to checklist",
     "scene": "a1-paper",
     "kind": "pencil-stroke",
     "t": 18.484,
     "index": 4,
-    "seed": 405654,
-    "pan": 0.3167
+    "seed": 402065,
+    "pan": 0.202
   },
   {
     "name": "arrow-checklist-06",
-    "gain_db": -24.0073,
-    "dur": 0.1934,
+    "gain_db": -20.7276,
+    "dur": 0.1301,
     "what": "dotted arrow briefing to checklist",
     "scene": "a1-paper",
-    "kind": "pencil-stroke",
+    "kind": "pencil-tick",
     "t": 18.509,
     "index": 5,
-    "seed": 409243,
-    "pan": -0.3651
+    "seed": 405654,
+    "pan": -0.0137
   },
   {
     "name": "arrow-checklist-07",
-    "gain_db": -21.2751,
-    "dur": 0.2271,
+    "gain_db": -23.5046,
+    "dur": 0.192,
     "what": "dotted arrow briefing to checklist",
     "scene": "a1-paper",
     "kind": "pencil-stroke",
     "t": 18.534,
     "index": 6,
-    "seed": 412832,
-    "pan": -0.3187
+    "seed": 409243,
+    "pan": -0.2933
   },
   {
     "name": "arrow-checklist-08",
-    "gain_db": -23.6038,
-    "dur": 0.2636,
+    "gain_db": -24.8732,
+    "dur": 0.2771,
     "what": "dotted arrow briefing to checklist",
     "scene": "a1-paper",
-    "kind": "pencil-tick",
+    "kind": "pencil-stroke",
     "t": 18.559,
     "index": 7,
-    "seed": 416421,
-    "pan": 0.3836
+    "seed": 412832,
+    "pan": 0.1419
   },
   {
     "name": "arrow-checklist-09",
-    "gain_db": -22.6318,
-    "dur": 0.2192,
+    "gain_db": -22.7404,
+    "dur": 0.1528,
     "what": "dotted arrow briefing to checklist",
     "scene": "a1-paper",
     "kind": "pencil-stroke",
     "t": 18.584,
     "index": 8,
-    "seed": 420010,
-    "pan": -0.1228
+    "seed": 416421,
+    "pan": -0.0135
   },
   {
     "name": "arrow-checklist-10",
-    "gain_db": -21.6507,
-    "dur": 0.2033,
+    "gain_db": -23.8782,
+    "dur": 0.0826,
     "what": "dotted arrow briefing to checklist",
     "scene": "a1-paper",
-    "kind": "pencil-stroke",
+    "kind": "pencil-tick",
     "t": 18.609,
     "index": 9,
-    "seed": 423599,
-    "pan": 0.3296
+    "seed": 420010,
+    "pan": -0.3264
   },
   {
     "name": "arrow-checklist-11",
-    "gain_db": -24.3376,
-    "dur": 0.2341,
+    "gain_db": -24.7392,
+    "dur": 0.2144,
     "what": "dotted arrow briefing to checklist",
     "scene": "a1-paper",
     "kind": "pencil-tick",
     "t": 18.634,
     "index": 10,
-    "seed": 427188,
-    "pan": 0.2649
+    "seed": 423599,
+    "pan": -0.1437
   },
   {
     "name": "arrow-checklist-12",
-    "gain_db": -21.1385,
-    "dur": 0.2358,
+    "gain_db": -20.5946,
+    "dur": 0.2209,
     "what": "dotted arrow briefing to checklist",
     "scene": "a1-paper",
     "kind": "pencil-tick",
     "t": 18.659,
     "index": 11,
-    "seed": 430777,
-    "pan": -0.0556
+    "seed": 427188,
+    "pan": 0.3865
   },
   {
     "name": "arrow-checklist-13",
-    "gain_db": -21.2428,
-    "dur": 0.2469,
+    "gain_db": -21.8789,
+    "dur": 0.1494,
     "what": "dotted arrow briefing to checklist",
     "scene": "a1-paper",
-    "kind": "pencil-stroke",
+    "kind": "pencil-tick",
     "t": 18.684,
     "index": 12,
-    "seed": 434366,
-    "pan": -0.0164
+    "seed": 430777,
+    "pan": -0.0712
   },
   {
     "name": "checklist-line",
@@ -1351,19 +1336,19 @@
     "kind": "technical-pen",
     "t": 18.69,
     "index": 0,
-    "seed": 4515
+    "seed": 4478
   },
   {
     "name": "arrow-checklist-14",
-    "gain_db": -21.9541,
-    "dur": 0.1724,
+    "gain_db": -22.5449,
+    "dur": 0.225,
     "what": "dotted arrow briefing to checklist",
     "scene": "a1-paper",
-    "kind": "pencil-stroke",
+    "kind": "pencil-tick",
     "t": 18.709,
     "index": 13,
-    "seed": 441544,
-    "pan": 0.358
+    "seed": 437955,
+    "pan": -0.3388
   },
   {
     "name": "question-mark",
@@ -1373,7 +1358,7 @@
     "kind": "pencil-stroke",
     "t": 18.89,
     "index": 0,
-    "seed": 4589
+    "seed": 4552
   },
   {
     "name": "pull-back",
@@ -1384,12 +1369,28 @@
     "kind": "pull",
     "t": 19.076,
     "index": 0,
-    "seed": 4626
+    "seed": 4589
   },
   {
     "name": "field-01",
-    "gain_db": -13.2192,
-    "dur": 0.1669,
+    "gain_db": -12.3378,
+    "dur": 0.2849,
+    "what": "S6: the accumulation arrives in waves on half beats (the first three under the sheet)",
+    "snap": {
+      "mode": "prev",
+      "off": -0.6524
+    },
+    "scene": "a1-world",
+    "kind": "pencil-stroke",
+    "t": 19.565,
+    "index": 0,
+    "seed": 448722,
+    "pan": -0.1519
+  },
+  {
+    "name": "field-02",
+    "gain_db": -14.9631,
+    "dur": 0.1909,
     "what": "S6: the accumulation arrives in waves on half beats (the first three under the sheet)",
     "snap": {
       "mode": "prev",
@@ -1397,42 +1398,10 @@
     },
     "scene": "a1-world",
     "kind": "pencil-tick",
-    "t": 19.565,
-    "index": 0,
-    "seed": 452311,
-    "pan": 0.2412
-  },
-  {
-    "name": "field-02",
-    "gain_db": -12.2235,
-    "dur": 0.1907,
-    "what": "S6: the accumulation arrives in waves on half beats (the first three under the sheet)",
-    "snap": {
-      "mode": "prev",
-      "off": -0.6524
-    },
-    "scene": "a1-world",
-    "kind": "pencil-stroke",
     "t": 19.891,
     "index": 1,
-    "seed": 455900,
-    "pan": -0.0719
-  },
-  {
-    "name": "field-02",
-    "gain_db": -15.9146,
-    "dur": 0.1216,
-    "what": "S6: the accumulation arrives in waves on half beats (the first three under the sheet)",
-    "snap": {
-      "mode": "prev",
-      "off": -0.6524
-    },
-    "scene": "a1-world",
-    "kind": "pencil-stroke",
-    "t": 20.0052,
-    "index": 1,
-    "seed": 455901,
-    "pan": 0.1379
+    "seed": 452311,
+    "pan": -0.2048
   },
   {
     "name": "circle-question",
@@ -1443,44 +1412,12 @@
     "kind": "pencil-stroke",
     "t": 20.076,
     "index": 0,
-    "seed": 4737
+    "seed": 4700
   },
   {
     "name": "field-03",
-    "gain_db": -12.7509,
-    "dur": 0.216,
-    "what": "S6: the accumulation arrives in waves on half beats (the first three under the sheet)",
-    "snap": {
-      "mode": "prev",
-      "off": -0.6524
-    },
-    "scene": "a1-world",
-    "kind": "pencil-stroke",
-    "t": 20.217,
-    "index": 2,
-    "seed": 463078,
-    "pan": 0.2179
-  },
-  {
-    "name": "field-03",
-    "gain_db": -12.8341,
-    "dur": 0.1489,
-    "what": "S6: the accumulation arrives in waves on half beats (the first three under the sheet)",
-    "snap": {
-      "mode": "prev",
-      "off": -0.6524
-    },
-    "scene": "a1-world",
-    "kind": "pencil-stroke",
-    "t": 20.3047,
-    "index": 2,
-    "seed": 463079,
-    "pan": 0.0409
-  },
-  {
-    "name": "field-04",
-    "gain_db": -16.2402,
-    "dur": 0.1841,
+    "gain_db": -14.6333,
+    "dur": 0.1633,
     "what": "S6: the accumulation arrives in waves on half beats (the first three under the sheet)",
     "snap": {
       "mode": "prev",
@@ -1488,10 +1425,26 @@
     },
     "scene": "a1-world",
     "kind": "pencil-tick",
+    "t": 20.217,
+    "index": 2,
+    "seed": 459489,
+    "pan": -0.0736
+  },
+  {
+    "name": "field-04",
+    "gain_db": -13.4968,
+    "dur": 0.1004,
+    "what": "S6: the accumulation arrives in waves on half beats (the first three under the sheet)",
+    "snap": {
+      "mode": "prev",
+      "off": -0.6524
+    },
+    "scene": "a1-world",
+    "kind": "pencil-stroke",
     "t": 20.543,
     "index": 3,
-    "seed": 466667,
-    "pan": -0.2415
+    "seed": 463078,
+    "pan": -0.063
   },
   {
     "name": "sheet-lift",
@@ -1502,12 +1455,28 @@
     "kind": "paper-lift",
     "t": 20.543,
     "index": 0,
-    "seed": 4848
+    "seed": 4811
+  },
+  {
+    "name": "field-04",
+    "gain_db": -13.6166,
+    "dur": 0.2652,
+    "what": "S6: the accumulation arrives in waves on half beats (the first three under the sheet)",
+    "snap": {
+      "mode": "prev",
+      "off": -0.6524
+    },
+    "scene": "a1-world",
+    "kind": "pencil-tick",
+    "t": 20.6314,
+    "index": 3,
+    "seed": 463079,
+    "pan": 0.1143
   },
   {
     "name": "field-05",
-    "gain_db": -15.9684,
-    "dur": 0.139,
+    "gain_db": -16.6653,
+    "dur": 0.1984,
     "what": "S6: the accumulation arrives in waves on half beats (the first three under the sheet)",
     "snap": {
       "mode": "prev",
@@ -1517,8 +1486,8 @@
     "kind": "pencil-tick",
     "t": 20.869,
     "index": 4,
-    "seed": 473845,
-    "pan": -0.3342
+    "seed": 470256,
+    "pan": -0.2143
   },
   {
     "name": "containment-01",
@@ -1532,12 +1501,12 @@
     "kind": "pencil-stroke",
     "t": 20.87,
     "index": 0,
-    "seed": 4922
+    "seed": 4885
   },
   {
-    "name": "field-05",
-    "gain_db": -16.8659,
-    "dur": 0.1319,
+    "name": "field-06",
+    "gain_db": -12.2102,
+    "dur": 0.0892,
     "what": "S6: the accumulation arrives in waves on half beats (the first three under the sheet)",
     "snap": {
       "mode": "prev",
@@ -1545,26 +1514,10 @@
     },
     "scene": "a1-world",
     "kind": "pencil-tick",
-    "t": 20.9818,
-    "index": 4,
-    "seed": 473846,
-    "pan": 0.1826
-  },
-  {
-    "name": "field-06",
-    "gain_db": -16.8174,
-    "dur": 0.0907,
-    "what": "S6: the accumulation arrives in waves on half beats (the first three under the sheet)",
-    "snap": {
-      "mode": "prev",
-      "off": -0.6524
-    },
-    "scene": "a1-world",
-    "kind": "pencil-stroke",
     "t": 21.195,
     "index": 5,
-    "seed": 481023,
-    "pan": -0.339
+    "seed": 477434,
+    "pan": -0.3899
   },
   {
     "name": "containment-02",
@@ -1578,12 +1531,12 @@
     "kind": "pencil-stroke",
     "t": 21.196,
     "index": 1,
-    "seed": 4996
+    "seed": 4959
   },
   {
     "name": "field-07",
-    "gain_db": -12.4644,
-    "dur": 0.1773,
+    "gain_db": -13.4458,
+    "dur": 0.2042,
     "what": "S6: the accumulation arrives in waves on half beats (the first three under the sheet)",
     "snap": {
       "mode": "prev",
@@ -1593,8 +1546,8 @@
     "kind": "pencil-stroke",
     "t": 21.521,
     "index": 6,
-    "seed": 488201,
-    "pan": 0.0628
+    "seed": 484612,
+    "pan": 0.1632
   },
   {
     "name": "roof-marker",
@@ -1609,12 +1562,28 @@
     "kind": "pencil-stroke",
     "t": 21.522,
     "index": 0,
-    "seed": 5070
+    "seed": 5033
+  },
+  {
+    "name": "field-07",
+    "gain_db": -12.5075,
+    "dur": 0.1217,
+    "what": "S6: the accumulation arrives in waves on half beats (the first three under the sheet)",
+    "snap": {
+      "mode": "prev",
+      "off": -0.6524
+    },
+    "scene": "a1-world",
+    "kind": "pencil-stroke",
+    "t": 21.61,
+    "index": 6,
+    "seed": 484613,
+    "pan": -0.2164
   },
   {
     "name": "field-08",
-    "gain_db": -16.1268,
-    "dur": 0.0812,
+    "gain_db": -12.9262,
+    "dur": 0.1338,
     "what": "S6: the accumulation arrives in waves on half beats (the first three under the sheet)",
     "snap": {
       "mode": "prev",
@@ -1624,8 +1593,8 @@
     "kind": "pencil-tick",
     "t": 21.847,
     "index": 7,
-    "seed": 495379,
-    "pan": -0.0642
+    "seed": 491790,
+    "pan": 0.3337
   },
   {
     "name": "containment-03",
@@ -1639,12 +1608,28 @@
     "kind": "pencil-stroke",
     "t": 21.848,
     "index": 2,
-    "seed": 5144
+    "seed": 5107
   },
   {
     "name": "field-09",
-    "gain_db": -13.2998,
-    "dur": 0.2888,
+    "gain_db": -13.1794,
+    "dur": 0.2388,
+    "what": "S6: the accumulation arrives in waves on half beats (the first three under the sheet)",
+    "snap": {
+      "mode": "prev",
+      "off": -0.6524
+    },
+    "scene": "a1-world",
+    "kind": "pencil-stroke",
+    "t": 22.173,
+    "index": 8,
+    "seed": 498968,
+    "pan": -0.1049
+  },
+  {
+    "name": "field-09",
+    "gain_db": -12.9711,
+    "dur": 0.2936,
     "what": "S6: the accumulation arrives in waves on half beats (the first three under the sheet)",
     "snap": {
       "mode": "prev",
@@ -1652,10 +1637,10 @@
     },
     "scene": "a1-world",
     "kind": "pencil-tick",
-    "t": 22.173,
+    "t": 22.293,
     "index": 8,
-    "seed": 502557,
-    "pan": 0.1124
+    "seed": 498969,
+    "pan": -0.16
   },
   {
     "t": 23.463,
@@ -1684,7 +1669,7 @@
     "kind": "push",
     "t": 24.13,
     "index": 0,
-    "seed": 5218
+    "seed": 5181
   },
   {
     "name": "hot-marker",
@@ -1695,7 +1680,7 @@
     "kind": "pencil-stroke",
     "t": 24.21,
     "index": 0,
-    "seed": 5255
+    "seed": 5218
   },
   {
     "name": "weld-arc",
@@ -1710,7 +1695,7 @@
     "kind": "arc",
     "t": 24.783,
     "index": 0,
-    "seed": 5292
+    "seed": 5255
   },
   {
     "name": "weld-cut-in",
@@ -1725,7 +1710,7 @@
     "kind": "cut",
     "t": 24.783,
     "index": 0,
-    "seed": 5329
+    "seed": 5292
   },
   {
     "name": "safeguards-draw-01",
@@ -1737,7 +1722,7 @@
     "kind": "pencil-stroke",
     "t": 25.663,
     "index": 0,
-    "seed": 5366
+    "seed": 5329
   },
   {
     "name": "safeguards-draw-02",
@@ -1749,7 +1734,7 @@
     "kind": "pencil-stroke",
     "t": 25.989,
     "index": 1,
-    "seed": 5403
+    "seed": 5366
   },
   {
     "name": "cut-roof03",
@@ -1761,19 +1746,7 @@
     "kind": "cut",
     "t": 26.087,
     "index": 0,
-    "seed": 5440
-  },
-  {
-    "name": "weld-cut-out",
-    "material": "felt",
-    "gain_db": -12.0,
-    "what": "back to Roof 03 on 'every'",
-    "snap": "cut",
-    "scene": "a1-inserts",
-    "kind": "cut",
-    "t": 26.087,
-    "index": 0,
-    "seed": 5477
+    "seed": 5403
   },
   {
     "name": "safeguards-draw-03",
@@ -1785,7 +1758,7 @@
     "kind": "pencil-stroke",
     "t": 26.315,
     "index": 2,
-    "seed": 5514
+    "seed": 5440
   },
   {
     "name": "ticks-01",
@@ -1798,7 +1771,7 @@
     "kind": "pencil-tick",
     "t": 26.413,
     "index": 0,
-    "seed": 5551
+    "seed": 5477
   },
   {
     "name": "safeguards-draw-04",
@@ -1810,7 +1783,7 @@
     "kind": "pencil-stroke",
     "t": 26.641,
     "index": 3,
-    "seed": 5588
+    "seed": 5514
   },
   {
     "name": "ticks-02",
@@ -1823,7 +1796,7 @@
     "kind": "pencil-tick",
     "t": 26.739,
     "index": 1,
-    "seed": 5625
+    "seed": 5551
   },
   {
     "name": "safeguards-draw-05",
@@ -1835,7 +1808,7 @@
     "kind": "pencil-stroke",
     "t": 26.967,
     "index": 4,
-    "seed": 5662
+    "seed": 5588
   },
   {
     "name": "ticks-03",
@@ -1848,7 +1821,7 @@
     "kind": "pencil-tick",
     "t": 27.065,
     "index": 2,
-    "seed": 5699
+    "seed": 5625
   },
   {
     "name": "ticks-04",
@@ -1861,7 +1834,7 @@
     "kind": "pencil-tick",
     "t": 27.391,
     "index": 3,
-    "seed": 5736
+    "seed": 5662
   },
   {
     "name": "ticks-05",
@@ -1874,7 +1847,7 @@
     "kind": "pencil-tick",
     "t": 27.717,
     "index": 4,
-    "seed": 5773
+    "seed": 5699
   },
   {
     "name": "sz3-cut-in",
@@ -1885,7 +1858,7 @@
     "kind": "cut",
     "t": 29.022,
     "index": 0,
-    "seed": 5810
+    "seed": 5736
   },
   {
     "name": "sz3-handwheel",
@@ -1896,7 +1869,7 @@
     "kind": "handwheel",
     "t": 29.222,
     "index": 0,
-    "seed": 5847
+    "seed": 5773
   },
   {
     "name": "sz3-valve-clunk",
@@ -1906,7 +1879,7 @@
     "kind": "valve-clunk",
     "t": 30.532,
     "index": 0,
-    "seed": 5921
+    "seed": 5847
   },
   {
     "name": "sz3-gauge",
@@ -1917,7 +1890,7 @@
     "kind": "gauge",
     "t": 30.832,
     "index": 0,
-    "seed": 5958
+    "seed": 5884
   },
   {
     "name": "cut-sz3",
@@ -1932,22 +1905,7 @@
     "kind": "cut",
     "t": 31.304,
     "index": 0,
-    "seed": 5995
-  },
-  {
-    "name": "sz3-cut-out",
-    "material": "paper",
-    "gain_db": -14.0,
-    "what": "to the zone 3 roof (S8b)",
-    "snap": {
-      "mode": "next",
-      "off": -0.0003
-    },
-    "scene": "a1-inserts",
-    "kind": "cut",
-    "t": 31.304,
-    "index": 0,
-    "seed": 6069
+    "seed": 5921
   },
   {
     "name": "cut-nothing",
@@ -1958,40 +1916,26 @@
     "kind": "cut",
     "t": 33.587,
     "index": 0,
-    "seed": 6106
+    "seed": 5995
   },
   {
     "name": "connection-01",
-    "gain_db": -23.9141,
-    "dur": 0.2338,
+    "gain_db": -25.9985,
+    "dur": 0.2575,
     "snap": {
       "mode": "next"
     },
     "scene": "a1-world",
-    "kind": "pencil-stroke",
+    "kind": "pencil-tick",
     "t": 33.913,
     "index": 0,
-    "seed": 595871,
-    "pan": 0.396
-  },
-  {
-    "name": "connection-01",
-    "gain_db": -23.9733,
-    "dur": 0.1075,
-    "snap": {
-      "mode": "next"
-    },
-    "scene": "a1-world",
-    "kind": "pencil-stroke",
-    "t": 33.9987,
-    "index": 0,
-    "seed": 595872,
-    "pan": 0.2644
+    "seed": 585104,
+    "pan": -0.2812
   },
   {
     "name": "connection-02",
-    "gain_db": -23.3596,
-    "dur": 0.1531,
+    "gain_db": -22.8818,
+    "dur": 0.1017,
     "snap": {
       "mode": "next"
     },
@@ -1999,13 +1943,27 @@
     "kind": "pencil-stroke",
     "t": 34.013,
     "index": 1,
-    "seed": 599460,
-    "pan": 0.3805
+    "seed": 588693,
+    "pan": -0.0705
+  },
+  {
+    "name": "connection-02",
+    "gain_db": -26.2368,
+    "dur": 0.2201,
+    "snap": {
+      "mode": "next"
+    },
+    "scene": "a1-world",
+    "kind": "pencil-stroke",
+    "t": 34.0996,
+    "index": 1,
+    "seed": 588694,
+    "pan": 0.3192
   },
   {
     "name": "connection-03",
-    "gain_db": -26.8664,
-    "dur": 0.2321,
+    "gain_db": -24.0278,
+    "dur": 0.2267,
     "snap": {
       "mode": "next"
     },
@@ -2013,13 +1971,27 @@
     "kind": "pencil-tick",
     "t": 34.113,
     "index": 2,
-    "seed": 603049,
-    "pan": 0.1668
+    "seed": 592282,
+    "pan": -0.2733
+  },
+  {
+    "name": "connection-03",
+    "gain_db": -22.9167,
+    "dur": 0.1275,
+    "snap": {
+      "mode": "next"
+    },
+    "scene": "a1-world",
+    "kind": "pencil-tick",
+    "t": 34.2054,
+    "index": 2,
+    "seed": 592283,
+    "pan": 0.1898
   },
   {
     "name": "connection-04",
-    "gain_db": -22.8357,
-    "dur": 0.2667,
+    "gain_db": -22.155,
+    "dur": 0.2746,
     "snap": {
       "mode": "next"
     },
@@ -2027,13 +1999,13 @@
     "kind": "pencil-stroke",
     "t": 34.213,
     "index": 3,
-    "seed": 606638,
-    "pan": 0.1985
+    "seed": 595871,
+    "pan": 0.3642
   },
   {
     "name": "connection-05",
-    "gain_db": -24.2381,
-    "dur": 0.1042,
+    "gain_db": -25.0457,
+    "dur": 0.1676,
     "snap": {
       "mode": "next"
     },
@@ -2041,13 +2013,13 @@
     "kind": "pencil-stroke",
     "t": 34.313,
     "index": 4,
-    "seed": 610227,
-    "pan": -0.0356
+    "seed": 599460,
+    "pan": 0.3587
   },
   {
     "name": "connection-06",
-    "gain_db": -25.8752,
-    "dur": 0.0953,
+    "gain_db": -24.486,
+    "dur": 0.1702,
     "snap": {
       "mode": "next"
     },
@@ -2055,13 +2027,13 @@
     "kind": "pencil-tick",
     "t": 34.413,
     "index": 5,
-    "seed": 613816,
-    "pan": -0.1795
+    "seed": 603049,
+    "pan": -0.1517
   },
   {
     "name": "connection-07",
-    "gain_db": -26.2836,
-    "dur": 0.1968,
+    "gain_db": -25.7123,
+    "dur": 0.1509,
     "snap": {
       "mode": "next"
     },
@@ -2069,64 +2041,50 @@
     "kind": "pencil-stroke",
     "t": 34.513,
     "index": 6,
-    "seed": 617405,
-    "pan": 0.1866
+    "seed": 606638,
+    "pan": -0.3685
   },
   {
     "name": "connection-08",
-    "gain_db": -23.9357,
-    "dur": 0.2353,
+    "gain_db": -26.0964,
+    "dur": 0.2642,
     "snap": {
       "mode": "next"
     },
     "scene": "a1-world",
-    "kind": "pencil-tick",
+    "kind": "pencil-stroke",
     "t": 34.613,
     "index": 7,
-    "seed": 620994,
-    "pan": 0.2472
+    "seed": 610227,
+    "pan": 0.0898
   },
   {
     "name": "connection-09",
-    "gain_db": -22.8276,
-    "dur": 0.2051,
-    "snap": {
-      "mode": "next"
-    },
-    "scene": "a1-world",
-    "kind": "pencil-stroke",
-    "t": 34.713,
-    "index": 8,
-    "seed": 624583,
-    "pan": 0.0351
-  },
-  {
-    "name": "connection-10",
-    "gain_db": -26.0631,
-    "dur": 0.2538,
-    "snap": {
-      "mode": "next"
-    },
-    "scene": "a1-world",
-    "kind": "pencil-stroke",
-    "t": 34.813,
-    "index": 9,
-    "seed": 628172,
-    "pan": -0.0881
-  },
-  {
-    "name": "connection-10",
-    "gain_db": -23.8401,
-    "dur": 0.1604,
+    "gain_db": -26.024,
+    "dur": 0.0809,
     "snap": {
       "mode": "next"
     },
     "scene": "a1-world",
     "kind": "pencil-tick",
-    "t": 34.9015,
+    "t": 34.713,
+    "index": 8,
+    "seed": 613816,
+    "pan": 0.0676
+  },
+  {
+    "name": "connection-10",
+    "gain_db": -25.169,
+    "dur": 0.214,
+    "snap": {
+      "mode": "next"
+    },
+    "scene": "a1-world",
+    "kind": "pencil-tick",
+    "t": 34.813,
     "index": 9,
-    "seed": 628173,
-    "pan": -0.2971
+    "seed": 617405,
+    "pan": -0.0698
   },
   {
     "name": "push-edge",
@@ -2141,7 +2099,7 @@
     "kind": "push",
     "t": 35.543,
     "index": 0,
-    "seed": 6513
+    "seed": 6402
   },
   {
     "name": "envelope-redraw",
@@ -2157,7 +2115,7 @@
     "kind": "pencil-stroke",
     "t": 36.196,
     "index": 0,
-    "seed": 6550
+    "seed": 6439
   },
   {
     "name": "fray",
@@ -2171,7 +2129,7 @@
     "kind": "fray",
     "t": 37.174,
     "index": 0,
-    "seed": 6587
+    "seed": 6476
   },
   {
     "name": "pull-back",
@@ -2186,7 +2144,7 @@
     "kind": "pull",
     "t": 38.152,
     "index": 0,
-    "seed": 6624
+    "seed": 6513
   },
   {
     "name": "cut-after",
@@ -2197,7 +2155,7 @@
     "kind": "cut",
     "t": 40.435,
     "index": 0,
-    "seed": 6698
+    "seed": 6587
   },
   {
     "name": "incident",
@@ -2208,7 +2166,7 @@
     "kind": "incident",
     "t": 40.485,
     "index": 0,
-    "seed": 6735
+    "seed": 6624
   },
   {
     "name": "incident-hatch",
@@ -2218,7 +2176,7 @@
     "kind": "pencil-hatch",
     "t": 40.815,
     "index": 0,
-    "seed": 6772
+    "seed": 6661
   },
   {
     "name": "pull-after",
@@ -2229,7 +2187,7 @@
     "kind": "pull",
     "t": 41.705,
     "index": 0,
-    "seed": 6809
+    "seed": 6698
   },
   {
     "name": "pin-wave-01",
@@ -2243,7 +2201,7 @@
     "kind": "pin",
     "t": 42.391,
     "index": 0,
-    "seed": 6846
+    "seed": 6735
   },
   {
     "name": "pin-wave-02",
@@ -2257,7 +2215,7 @@
     "kind": "pin",
     "t": 42.717,
     "index": 1,
-    "seed": 6883
+    "seed": 6772
   },
   {
     "name": "pin-wave-03",
@@ -2271,7 +2229,7 @@
     "kind": "pin",
     "t": 43.043,
     "index": 2,
-    "seed": 6920
+    "seed": 6809
   },
   {
     "name": "pin-wave-04",
@@ -2285,7 +2243,7 @@
     "kind": "pin",
     "t": 43.369,
     "index": 3,
-    "seed": 6957
+    "seed": 6846
   },
   {
     "name": "question-1",
@@ -2295,7 +2253,7 @@
     "kind": "paper-slide",
     "t": 43.696,
     "index": 0,
-    "seed": 6994,
+    "seed": 6883,
     "dur": 0.18
   },
   {
@@ -2306,7 +2264,7 @@
     "kind": "pin",
     "t": 44.348,
     "index": 0,
-    "seed": 7031
+    "seed": 6920
   },
   {
     "name": "pin-crowd-1-02",
@@ -2316,7 +2274,7 @@
     "kind": "pin",
     "t": 44.674,
     "index": 1,
-    "seed": 7068
+    "seed": 6957
   },
   {
     "name": "pin-crowd-1-03",
@@ -2326,7 +2284,7 @@
     "kind": "pin",
     "t": 45.0,
     "index": 2,
-    "seed": 7105
+    "seed": 6994
   },
   {
     "name": "whip-1",
@@ -2337,7 +2295,7 @@
     "kind": "whip",
     "t": 45.326,
     "index": 0,
-    "seed": 7142
+    "seed": 7031
   },
   {
     "name": "question-2",
@@ -2347,7 +2305,7 @@
     "kind": "paper-slide",
     "t": 45.536,
     "index": 1,
-    "seed": 7179,
+    "seed": 7068,
     "dur": 0.18
   },
   {
@@ -2358,7 +2316,7 @@
     "kind": "pin",
     "t": 45.978,
     "index": 0,
-    "seed": 7216
+    "seed": 7105
   },
   {
     "name": "pin-crowd-2-01",
@@ -2368,7 +2326,7 @@
     "kind": "pin",
     "t": 46.304,
     "index": 0,
-    "seed": 7253
+    "seed": 7142
   },
   {
     "name": "pin-crowd-2-02",
@@ -2378,7 +2336,7 @@
     "kind": "pin",
     "t": 46.63,
     "index": 1,
-    "seed": 7290
+    "seed": 7179
   },
   {
     "name": "whip-2",
@@ -2389,7 +2347,7 @@
     "kind": "whip",
     "t": 47.609,
     "index": 1,
-    "seed": 7327
+    "seed": 7216
   },
   {
     "name": "question-3",
@@ -2399,7 +2357,7 @@
     "kind": "paper-slide",
     "t": 47.676,
     "index": 2,
-    "seed": 7364,
+    "seed": 7253,
     "dur": 0.18
   },
   {
@@ -2410,7 +2368,7 @@
     "kind": "pin",
     "t": 48.261,
     "index": 0,
-    "seed": 7401
+    "seed": 7290
   },
   {
     "name": "permit-loop",
@@ -2421,7 +2379,7 @@
     "kind": "pencil-stroke",
     "t": 48.606,
     "index": 0,
-    "seed": 7438
+    "seed": 7327
   },
   {
     "name": "pin-crowd-3-01",
@@ -2431,7 +2389,7 @@
     "kind": "pin",
     "t": 49.239,
     "index": 0,
-    "seed": 7475
+    "seed": 7364
   },
   {
     "name": "pin-crowd-3-02",
@@ -2441,7 +2399,7 @@
     "kind": "pin",
     "t": 49.565,
     "index": 1,
-    "seed": 7512
+    "seed": 7401
   },
   {
     "name": "pull-wide",
@@ -2456,7 +2414,7 @@
     "kind": "pull",
     "t": 50.543,
     "index": 0,
-    "seed": 7549
+    "seed": 7438
   },
   {
     "name": "gap-rule",
@@ -2466,7 +2424,7 @@
     "kind": "ruler-contact",
     "t": 50.807,
     "index": 0,
-    "seed": 7586
+    "seed": 7475
   },
   {
     "name": "gap-rule",
@@ -2476,7 +2434,7 @@
     "kind": "technical-pen",
     "t": 50.847,
     "index": 0,
-    "seed": 7587
+    "seed": 7476
   },
   {
     "name": "latch",
@@ -2486,180 +2444,208 @@
     "kind": "latch-soft",
     "t": 58.722,
     "index": 0,
-    "seed": 7697
+    "seed": 7586
   },
   {
     "name": "precision-snap",
     "gain_db": -10.0,
-    "dur": 1.9,
+    "dur": 2.36,
     "scene": "a2-resolve",
     "kind": "align-snap",
-    "t": 59.1879,
+    "t": 59.0112,
     "index": 0,
-    "seed": 239754,
-    "pan": -0.451
+    "seed": 236313,
+    "pan": -0.3776
   },
   {
     "name": "precision-snap",
     "gain_db": -12.0,
-    "dur": 1.9,
+    "dur": 2.36,
     "scene": "a2-resolve",
     "kind": "align-snap",
-    "t": 59.3154,
+    "t": 59.1739,
     "index": 0,
-    "seed": 239755,
-    "pan": -0.5952
+    "seed": 236314,
+    "pan": 0.0578
   },
   {
     "name": "precision-snap",
     "gain_db": -14.0,
-    "dur": 1.9,
+    "dur": 2.36,
     "scene": "a2-resolve",
     "kind": "align-snap",
-    "t": 59.4648,
+    "t": 59.3287,
     "index": 0,
-    "seed": 239756,
-    "pan": -0.4091
+    "seed": 236315,
+    "pan": -0.4717
   },
   {
     "name": "precision-snap",
     "gain_db": -10.0,
-    "dur": 1.9,
+    "dur": 2.36,
     "scene": "a2-resolve",
     "kind": "align-snap",
-    "t": 59.5935,
+    "t": 59.4618,
     "index": 0,
-    "seed": 239757,
-    "pan": -0.1685
+    "seed": 236316,
+    "pan": -0.3229
   },
   {
     "name": "precision-snap",
     "gain_db": -12.0,
-    "dur": 1.9,
+    "dur": 2.36,
     "scene": "a2-resolve",
     "kind": "align-snap",
-    "t": 59.7417,
+    "t": 59.603,
     "index": 0,
-    "seed": 239758,
-    "pan": 0.1889
+    "seed": 236317,
+    "pan": 0.456
   },
   {
     "name": "precision-snap",
     "gain_db": -14.0,
-    "dur": 1.9,
+    "dur": 2.36,
     "scene": "a2-resolve",
     "kind": "align-snap",
-    "t": 59.9079,
+    "t": 59.749,
     "index": 0,
-    "seed": 239759,
-    "pan": -0.2358
+    "seed": 236318,
+    "pan": -0.5411
   },
   {
     "name": "precision-snap",
     "gain_db": -10.0,
-    "dur": 1.9,
+    "dur": 2.36,
     "scene": "a2-resolve",
     "kind": "align-snap",
-    "t": 60.0311,
+    "t": 59.92,
     "index": 0,
-    "seed": 239760,
-    "pan": -0.2833
+    "seed": 236319,
+    "pan": 0.1958
   },
   {
     "name": "precision-snap",
     "gain_db": -12.0,
-    "dur": 1.9,
+    "dur": 2.36,
     "scene": "a2-resolve",
     "kind": "align-snap",
-    "t": 60.179,
+    "t": 60.0584,
     "index": 0,
-    "seed": 239761,
-    "pan": -0.3266
+    "seed": 236320,
+    "pan": 0.5072
   },
   {
     "name": "precision-snap",
     "gain_db": -14.0,
-    "dur": 1.9,
+    "dur": 2.36,
     "scene": "a2-resolve",
     "kind": "align-snap",
-    "t": 60.344,
+    "t": 60.2119,
     "index": 0,
-    "seed": 239762,
-    "pan": -0.1386
-  },
-  {
-    "name": "header-in",
-    "gain_db": -17.0,
-    "dur": 1.1,
-    "scene": "a2-resolve",
-    "kind": "sheet-in",
-    "t": 60.352,
-    "index": 0,
-    "seed": 7771
+    "seed": 236321,
+    "pan": -0.1132
   },
   {
     "name": "precision-snap",
     "gain_db": -10.0,
-    "dur": 1.9,
+    "dur": 2.36,
     "scene": "a2-resolve",
     "kind": "align-snap",
-    "t": 60.4695,
+    "t": 60.3525,
     "index": 0,
-    "seed": 239763,
-    "pan": 0.2254
-  },
-  {
-    "name": "header-in",
-    "gain_db": -14.0,
-    "dur": 1.1,
-    "scene": "a2-resolve",
-    "kind": "align-snap",
-    "t": 60.602,
-    "index": 0,
-    "seed": 7772
+    "seed": 236322,
+    "pan": -0.3877
   },
   {
     "name": "precision-snap",
     "gain_db": -12.0,
-    "dur": 1.9,
+    "dur": 2.36,
     "scene": "a2-resolve",
     "kind": "align-snap",
-    "t": 60.6246,
+    "t": 60.5091,
     "index": 0,
-    "seed": 239764,
-    "pan": 0.2634
-  },
-  {
-    "name": "header-in",
-    "gain_db": -14.0,
-    "dur": 1.1,
-    "scene": "a2-resolve",
-    "kind": "align-snap",
-    "t": 60.752,
-    "index": 0,
-    "seed": 7773
+    "seed": 236323,
+    "pan": 0.0088
   },
   {
     "name": "precision-snap",
     "gain_db": -14.0,
-    "dur": 1.9,
+    "dur": 2.36,
     "scene": "a2-resolve",
     "kind": "align-snap",
-    "t": 60.769,
+    "t": 60.628,
     "index": 0,
-    "seed": 239765,
-    "pan": 0.258
+    "seed": 236324,
+    "pan": 0.3627
   },
   {
     "name": "precision-snap",
     "gain_db": -10.0,
-    "dur": 1.9,
+    "dur": 2.36,
+    "scene": "a2-resolve",
+    "kind": "align-snap",
+    "t": 60.8111,
+    "index": 0,
+    "seed": 236325,
+    "pan": -0.3287
+  },
+  {
+    "name": "precision-snap",
+    "gain_db": -12.0,
+    "dur": 2.36,
     "scene": "a2-resolve",
     "kind": "align-snap",
     "t": 60.9229,
     "index": 0,
-    "seed": 239766,
-    "pan": -0.2121
+    "seed": 236326,
+    "pan": -0.1549
+  },
+  {
+    "name": "precision-snap",
+    "gain_db": -14.0,
+    "dur": 2.36,
+    "scene": "a2-resolve",
+    "kind": "align-snap",
+    "t": 61.0942,
+    "index": 0,
+    "seed": 236327,
+    "pan": 0.2944
+  },
+  {
+    "name": "precision-snap",
+    "gain_db": -10.0,
+    "dur": 2.36,
+    "scene": "a2-resolve",
+    "kind": "align-snap",
+    "t": 61.2471,
+    "index": 0,
+    "seed": 236328,
+    "pan": -0.0182
+  },
+  {
+    "name": "push-worker",
+    "gain_db": -14.0,
+    "dur": 0.978,
+    "snap": {
+      "mode": "cut",
+      "off": -0.9779
+    },
+    "scene": "a2-resolve",
+    "kind": "push",
+    "t": 62.283,
+    "index": 0,
+    "seed": 7660
+  },
+  {
+    "name": "cut-capture",
+    "material": "paper",
+    "gain_db": -16.0,
+    "dur": 0.1,
+    "scene": "a2-resolve",
+    "kind": "cut",
+    "t": 63.261,
+    "index": 0,
+    "seed": 7697
   },
   {
     "name": "capture-start",
@@ -2667,79 +2653,138 @@
     "dur": 0.6,
     "scene": "a2-resolve",
     "kind": "capture-start",
-    "t": 62.911,
+    "t": 63.281,
     "index": 0,
-    "seed": 7808
+    "seed": 7734
   },
   {
     "name": "word-token-01",
     "gain_db": -22.0,
-    "dur": 0.5,
+    "dur": 0.4,
+    "snap": {
+      "mode": "near",
+      "off": -0.0004
+    },
     "scene": "a2-resolve",
     "kind": "align-snap",
-    "t": 66.051,
+    "t": 65.217,
     "index": 0,
-    "seed": 7845
+    "seed": 7771
   },
   {
     "name": "word-token-02",
     "gain_db": -22.0,
-    "dur": 0.5,
+    "dur": 0.4,
+    "snap": {
+      "mode": "near",
+      "off": -0.0004
+    },
     "scene": "a2-resolve",
     "kind": "align-snap",
-    "t": 66.251,
+    "t": 65.543,
     "index": 1,
-    "seed": 7882
+    "seed": 7808
   },
   {
     "name": "word-token-03",
     "gain_db": -22.0,
-    "dur": 0.5,
+    "dur": 0.4,
+    "snap": {
+      "mode": "near",
+      "off": -0.0004
+    },
     "scene": "a2-resolve",
     "kind": "align-snap",
-    "t": 66.451,
+    "t": 65.869,
     "index": 2,
-    "seed": 7919
+    "seed": 7845
   },
   {
     "name": "word-token-04",
     "gain_db": -22.0,
-    "dur": 0.5,
+    "dur": 0.4,
+    "snap": {
+      "mode": "near",
+      "off": -0.0004
+    },
     "scene": "a2-resolve",
     "kind": "align-snap",
-    "t": 66.651,
+    "t": 66.195,
     "index": 3,
+    "seed": 7882
+  },
+  {
+    "name": "connect-activity",
+    "gain_db": -12.0,
+    "dur": 1.304,
+    "scene": "a2-resolve",
+    "kind": "connect-line",
+    "t": 66.848,
+    "index": 0,
+    "seed": 7919
+  },
+  {
+    "name": "focus-clause",
+    "gain_db": -16.0,
+    "dur": 0.1,
+    "snap": {
+      "mode": "next",
+      "off": 0.9781
+    },
+    "scene": "a2-resolve",
+    "kind": "focus",
+    "t": 68.152,
+    "index": 0,
     "seed": 7956
   },
   {
-    "name": "connect-4-2",
-    "gain_db": -12.0,
-    "dur": 0.9,
+    "name": "connect-zone",
+    "gain_db": -13.0,
+    "dur": 0.652,
+    "snap": {
+      "mode": "near",
+      "off": -0.0003
+    },
     "scene": "a2-resolve",
     "kind": "connect-line",
-    "t": 67.298,
-    "index": 1,
+    "t": 68.478,
+    "index": 0,
     "seed": 7993
   },
   {
-    "name": "connect-sz3",
+    "name": "pull-connection",
     "gain_db": -13.0,
-    "dur": 0.5,
+    "dur": 0.978,
+    "snap": {
+      "mode": "cut",
+      "off": -0.0004
+    },
     "scene": "a2-resolve",
-    "kind": "connect-line",
-    "t": 68.338,
+    "kind": "pull",
+    "t": 69.13,
     "index": 0,
     "seed": 8030
   },
   {
-    "name": "connect-4-3",
-    "gain_db": -13.0,
-    "dur": 0.6,
+    "name": "cut-card",
+    "material": "paper",
+    "gain_db": -16.0,
+    "dur": 0.1,
     "scene": "a2-resolve",
-    "kind": "connect-line",
-    "t": 68.758,
-    "index": 2,
-    "seed": 8067
+    "kind": "cut",
+    "t": 71.739,
+    "index": 0,
+    "seed": 8104
+  },
+  {
+    "name": "focus-card",
+    "gain_db": -17.0,
+    "dur": 0.1,
+    "scene": "a2-resolve",
+    "kind": "focus",
+    "t": 71.769,
+    "index": 0,
+    "seed": 8141
   },
   {
     "name": "verify-tick-01",
@@ -2747,9 +2792,9 @@
     "dur": 0.36,
     "scene": "a2-resolve",
     "kind": "confirm",
-    "t": 72.319,
+    "t": 72.391,
     "index": 0,
-    "seed": 8104,
+    "seed": 8178,
     "variant": 0
   },
   {
@@ -2758,9 +2803,9 @@
     "dur": 0.36,
     "scene": "a2-resolve",
     "kind": "confirm",
-    "t": 72.739,
+    "t": 72.717,
     "index": 1,
-    "seed": 8141,
+    "seed": 8215,
     "variant": 1
   },
   {
@@ -2769,9 +2814,9 @@
     "dur": 0.36,
     "scene": "a2-resolve",
     "kind": "confirm",
-    "t": 73.159,
+    "t": 73.043,
     "index": 2,
-    "seed": 8178,
+    "seed": 8252,
     "variant": 2
   },
   {
@@ -2780,9 +2825,9 @@
     "dur": 0.36,
     "scene": "a2-resolve",
     "kind": "confirm",
-    "t": 73.579,
+    "t": 73.369,
     "index": 3,
-    "seed": 8215,
+    "seed": 8289,
     "variant": 3
   },
   {
@@ -2791,30 +2836,66 @@
     "dur": 0.36,
     "scene": "a2-resolve",
     "kind": "confirm",
-    "t": 73.999,
+    "t": 73.695,
     "index": 4,
-    "seed": 8252,
+    "seed": 8326,
     "variant": 4
+  },
+  {
+    "name": "whip-record",
+    "gain_db": -16.0,
+    "dur": 0.652,
+    "snap": {
+      "mode": "cut",
+      "off": 0.0003
+    },
+    "scene": "a2-resolve",
+    "kind": "whip",
+    "t": 74.022,
+    "index": 0,
+    "seed": 8363
   },
   {
     "name": "record-append-1",
     "gain_db": -13.0,
     "dur": 0.75,
+    "snap": {
+      "mode": "next",
+      "off": 0.0001
+    },
     "scene": "a2-resolve",
     "kind": "record-append",
-    "t": 74.589,
+    "t": 74.674,
     "index": 0,
-    "seed": 8289
+    "seed": 8400
   },
   {
     "name": "record-append-2",
     "gain_db": -14.0,
     "dur": 0.75,
+    "snap": {
+      "mode": "next",
+      "off": 0.3261
+    },
     "scene": "a2-resolve",
     "kind": "record-append",
-    "t": 74.989,
+    "t": 75.0,
     "index": 1,
-    "seed": 8326
+    "seed": 8437
+  },
+  {
+    "name": "pull-twoup",
+    "gain_db": -15.0,
+    "dur": 0.652,
+    "snap": {
+      "mode": "prev",
+      "off": -0.0002
+    },
+    "scene": "a2-resolve",
+    "kind": "pull",
+    "t": 75.652,
+    "index": 0,
+    "seed": 8474
   },
   {
     "name": "cut-in",
@@ -2824,7 +2905,7 @@
     "kind": "cut",
     "t": 81.22,
     "index": 0,
-    "seed": 8363
+    "seed": 8511
   },
   {
     "t": 82.006,
@@ -2844,7 +2925,7 @@
     "kind": "record-append",
     "t": 82.174,
     "index": 0,
-    "seed": 8400
+    "seed": 8548
   },
   {
     "name": "system-event",
@@ -2854,7 +2935,7 @@
     "kind": "relay-click",
     "t": 82.184,
     "index": 0,
-    "seed": 8401
+    "seed": 8549
   },
   {
     "name": "cut-card",
@@ -2868,7 +2949,7 @@
     "kind": "cut",
     "t": 83.478,
     "index": 0,
-    "seed": 8437
+    "seed": 8585
   },
   {
     "name": "focus-row",
@@ -2877,7 +2958,7 @@
     "kind": "focus",
     "t": 83.498,
     "index": 0,
-    "seed": 8474
+    "seed": 8622
   },
   {
     "name": "row-unavailable",
@@ -2886,7 +2967,7 @@
     "kind": "row-unavailable",
     "t": 84.566,
     "index": 0,
-    "seed": 8511
+    "seed": 8659
   },
   {
     "t": 84.666,
@@ -2908,7 +2989,7 @@
     "kind": "cut",
     "t": 85.761,
     "index": 0,
-    "seed": 8548
+    "seed": 8696
   },
   {
     "name": "node-stretch",
@@ -2922,7 +3003,7 @@
     "kind": "stretch",
     "t": 85.761,
     "index": 0,
-    "seed": 8585
+    "seed": 8733
   },
   {
     "name": "node-cross",
@@ -2936,7 +3017,7 @@
     "kind": "cross-snap",
     "t": 86.739,
     "index": 0,
-    "seed": 8622
+    "seed": 8770
   },
   {
     "name": "cut-sheet",
@@ -2946,7 +3027,7 @@
     "kind": "cut",
     "t": 88.696,
     "index": 0,
-    "seed": 8696
+    "seed": 8844
   },
   {
     "name": "sheet-in",
@@ -2956,7 +3037,7 @@
     "kind": "sheet-in",
     "t": 88.696,
     "index": 0,
-    "seed": 8733
+    "seed": 8881
   },
   {
     "name": "focus-sheet",
@@ -2965,7 +3046,7 @@
     "kind": "focus",
     "t": 88.716,
     "index": 0,
-    "seed": 8770
+    "seed": 8918
   },
   {
     "name": "pull-choices",
@@ -2979,7 +3060,7 @@
     "kind": "pull",
     "t": 89.348,
     "index": 0,
-    "seed": 8807
+    "seed": 8955
   },
   {
     "name": "choice-01",
@@ -2990,7 +3071,7 @@
     "kind": "choice-accent",
     "t": 90.652,
     "index": 0,
-    "seed": 8844
+    "seed": 8992
   },
   {
     "name": "push-change",
@@ -3001,7 +3082,7 @@
     "kind": "push",
     "t": 90.652,
     "index": 0,
-    "seed": 8881
+    "seed": 9029
   },
   {
     "name": "node-return",
@@ -3011,7 +3092,7 @@
     "kind": "align-snap",
     "t": 90.953,
     "index": 0,
-    "seed": 8918
+    "seed": 9066
   },
   {
     "name": "node-return",
@@ -3021,7 +3102,7 @@
     "kind": "confirm",
     "t": 90.973,
     "index": 0,
-    "seed": 8919,
+    "seed": 9067,
     "variant": 0
   },
   {
@@ -3032,7 +3113,7 @@
     "kind": "whip",
     "t": 93.261,
     "index": 0,
-    "seed": 8955
+    "seed": 9103
   },
   {
     "name": "choice-02",
@@ -3042,7 +3123,7 @@
     "kind": "choice-accent",
     "t": 93.711,
     "index": 1,
-    "seed": 8992
+    "seed": 9140
   },
   {
     "name": "whip-transfer",
@@ -3052,7 +3133,7 @@
     "kind": "whip",
     "t": 96.196,
     "index": 0,
-    "seed": 9029
+    "seed": 9177
   },
   {
     "name": "choice-03",
@@ -3062,7 +3143,7 @@
     "kind": "choice-accent",
     "t": 96.236,
     "index": 2,
-    "seed": 9066
+    "seed": 9214
   },
   {
     "name": "cut-packet",
@@ -3076,7 +3157,7 @@
     "kind": "cut",
     "t": 97.173,
     "index": 0,
-    "seed": 9103
+    "seed": 9251
   },
   {
     "name": "focus-packet",
@@ -3085,7 +3166,7 @@
     "kind": "focus",
     "t": 97.194,
     "index": 0,
-    "seed": 9140
+    "seed": 9288
   },
   {
     "name": "packet-send",
@@ -3099,7 +3180,7 @@
     "kind": "packet",
     "t": 97.5,
     "index": 0,
-    "seed": 9177
+    "seed": 9325
   },
   {
     "name": "carrier-response-01",
@@ -3112,7 +3193,7 @@
     "kind": "response-tick",
     "t": 98.478,
     "index": 0,
-    "seed": 9214
+    "seed": 9362
   },
   {
     "name": "carrier-response-02",
@@ -3125,7 +3206,7 @@
     "kind": "response-tick",
     "t": 99.131,
     "index": 1,
-    "seed": 9251
+    "seed": 9399
   },
   {
     "name": "carrier-response-03",
@@ -3138,7 +3219,7 @@
     "kind": "response-tick",
     "t": 99.783,
     "index": 2,
-    "seed": 9288
+    "seed": 9436
   },
   {
     "name": "carrier-response-04",
@@ -3151,7 +3232,7 @@
     "kind": "response-tick",
     "t": 100.435,
     "index": 3,
-    "seed": 9325
+    "seed": 9473
   },
   {
     "name": "layer-slice",
@@ -3165,7 +3246,7 @@
     "kind": "connect-line",
     "t": 102.065,
     "index": 0,
-    "seed": 9362
+    "seed": 9510
   },
   {
     "name": "pull-site",
@@ -3176,7 +3257,7 @@
     "kind": "pull",
     "t": 102.717,
     "index": 0,
-    "seed": 9399
+    "seed": 9547
   },
   {
     "name": "node-pass-01",
@@ -3185,7 +3266,7 @@
     "kind": "node-pass",
     "t": 103.874,
     "index": 0,
-    "seed": 9436
+    "seed": 9584
   },
   {
     "name": "decision-01",
@@ -3198,7 +3279,7 @@
     "kind": "decision-accent",
     "t": 104.021,
     "index": 0,
-    "seed": 9473
+    "seed": 9621
   },
   {
     "name": "node-pass-02",
@@ -3207,7 +3288,7 @@
     "kind": "node-pass",
     "t": 104.257,
     "index": 1,
-    "seed": 9510
+    "seed": 9658
   },
   {
     "name": "node-pass-03",
@@ -3216,7 +3297,7 @@
     "kind": "node-pass",
     "t": 104.611,
     "index": 2,
-    "seed": 9547
+    "seed": 9695
   },
   {
     "name": "node-pass-04",
@@ -3225,7 +3306,7 @@
     "kind": "node-pass",
     "t": 104.959,
     "index": 3,
-    "seed": 9584
+    "seed": 9732
   },
   {
     "name": "node-pass-05",
@@ -3234,7 +3315,7 @@
     "kind": "node-pass",
     "t": 105.285,
     "index": 4,
-    "seed": 9621
+    "seed": 9769
   },
   {
     "name": "node-pass-06",
@@ -3243,7 +3324,7 @@
     "kind": "node-pass",
     "t": 105.636,
     "index": 5,
-    "seed": 9658
+    "seed": 9806
   },
   {
     "name": "decision-02",
@@ -3252,7 +3333,7 @@
     "kind": "decision-accent",
     "t": 105.978,
     "index": 1,
-    "seed": 9695
+    "seed": 9843
   },
   {
     "name": "line-straighten",
@@ -3262,7 +3343,7 @@
     "kind": "ruler-contact",
     "t": 107.133,
     "index": 0,
-    "seed": 9732
+    "seed": 9880
   },
   {
     "name": "site-recede",
@@ -3272,7 +3353,7 @@
     "kind": "pull",
     "t": 107.133,
     "index": 0,
-    "seed": 9769
+    "seed": 9917
   },
   {
     "name": "line-straighten",
@@ -3282,7 +3363,7 @@
     "kind": "pencil-stroke",
     "t": 107.173,
     "index": 0,
-    "seed": 9733,
+    "seed": 9881,
     "pressure": 0.75,
     "speed": 1.2
   },
@@ -3294,7 +3375,7 @@
     "gain_db": 0.0,
     "t": 107.895,
     "index": 0,
-    "seed": 9806
+    "seed": 9954
   },
   {
     "name": "ride-trust",
@@ -3308,7 +3389,7 @@
     "kind": "whip",
     "t": 108.26,
     "index": 0,
-    "seed": 9843
+    "seed": 9991
   },
   {
     "name": "confirm-trust",
@@ -3318,7 +3399,7 @@
     "gain_db": 0.0,
     "t": 108.855,
     "index": 0,
-    "seed": 9880
+    "seed": 10028
   },
   {
     "name": "ride-decision",
@@ -3332,7 +3413,7 @@
     "kind": "whip",
     "t": 110.543,
     "index": 0,
-    "seed": 9917
+    "seed": 10065
   },
   {
     "name": "confirm-decision",
@@ -3342,7 +3423,7 @@
     "gain_db": 0.0,
     "t": 111.137,
     "index": 0,
-    "seed": 9954
+    "seed": 10102
   },
   {
     "name": "ride-price",
@@ -3356,7 +3437,7 @@
     "kind": "whip",
     "t": 112.826,
     "index": 0,
-    "seed": 9991
+    "seed": 10139
   },
   {
     "name": "confirm-price",
@@ -3366,7 +3447,7 @@
     "gain_db": 0.0,
     "t": 113.56,
     "index": 0,
-    "seed": 10028
+    "seed": 10176
   },
   {
     "name": "ride-capacity",
@@ -3380,7 +3461,7 @@
     "kind": "whip",
     "t": 115.108,
     "index": 0,
-    "seed": 10065
+    "seed": 10213
   },
   {
     "name": "chain-reveal",
@@ -3394,7 +3475,7 @@
     "kind": "pull",
     "t": 115.76,
     "index": 0,
-    "seed": 10102
+    "seed": 10250
   },
   {
     "name": "confirm-capacity",
@@ -3404,7 +3485,7 @@
     "gain_db": 0.0,
     "t": 115.843,
     "index": 0,
-    "seed": 10139
+    "seed": 10287
   },
   {
     "name": "wordmark-latch",
@@ -3414,6 +3495,6 @@
     "gain_db": 0.0,
     "t": 119.748,
     "index": 0,
-    "seed": 10213
+    "seed": 10361
   }
 ]
