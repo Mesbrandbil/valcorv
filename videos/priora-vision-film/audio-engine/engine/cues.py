@@ -33,6 +33,8 @@ SPEC = {
     "l01": (["l01", "siteWakes"], [(W, ["every"], None, "start"), ("expr", lambda C: C.first_line_start())]),
     "hour": (["hour"], [(W, ["hour"], None, "start"), ("line_end_of", "l01", -0.3)]),
     "contractors": (["contractors"], [(W, ["contractors"], None, "start"), ("line_after", "l01", "start")]),
+    "equipment": (["equipment"], [(W, ["equipment"], "contractors", "start"),
+                                  ("expr", lambda C: C["isolated"] - 0.8)]),
     "isolated": (["isolated"], [(W, ["isolated", "equipment"], "contractors", "start"),
                                 ("expr", lambda C: C["contractors"] + 1.6)]),
     "workMoves": (["workMoves"], [(W, ["moves"], "contractors", "start"), ("line_end_of", "contractors", -0.4)]),
@@ -52,12 +54,14 @@ SPEC = {
     "inPlace": (["inPlace"], [(W, ["place"], "hotWork", "end"), ("line_end_of", "hotWork", 0.0)]),
     "landing": (["landing"], [("expr", lambda C: C.word_time(["then", "sprinkler"], "inPlace", "start") - 0.25),
                               ("expr", lambda C: C.line_after("inPlace") - 0.25)]),
+    "then": (["then"], [(W, ["then"], "inPlace", "start"), ("expr", lambda C: C["landing"] + 0.25)]),
     "offline": (["offline", "sz3Offline"], [(W, ["offline"], "inPlace", "start"), ("line_end_of", "landing", -0.5)]),
     "nothingLooks": (["nothingLooks", "l08"], [(W, ["nothing"], "offline", "start"), ("line_after", "offline", "start")]),
     "changed": (["changed", "conditionsChanged"], [(W, ["changed"], "nothingLooks", "start"),
                                                    ("line_end_of", "nothingLooks", -1.6)]),
     "nobody": (["nobody", "nobodySees"], [(W, ["nobody"], "nothingLooks", "start"),
                                           ("line_end_of", "nothingLooks", -0.8)]),
+    "nobodyEnd": (["nobodyEnd"], [("line_end_of", "nobody", 0.0)]),
     "afterwards": (["afterwards", "l09"], [(W, ["if"], "nobody", "start"), ("line_after", "nobody", "start")]),
     "q1": (["q1", "questions"], [(W, ["what"], "afterwards", "start"), ("line_after", "afterwards", "start")]),
     "q3": (["q3"], [(W, ["can"], "q1", "start"), ("line_end_of", "q1", -1.2)]),
@@ -67,6 +71,7 @@ SPEC = {
     "rewindEnd": (["rewindEnd", "resolve"], [("expr", lambda C: C.line_after("rewindStart") - 0.3)]),
     "l12": (["l12"], [("line_after", "rewindStart", "start")]),
     "decisionWord": (["decisionWord"], [(W, ["decision"], "rewindStart", "start"), ("expr", lambda C: C["l12"] + 0.4)]),
+    "riskChanged": (["riskChanged"], [("line_end_of", "l12", 0.0)]),
     "worker": (["worker", "welding"], [("line_after", "l12", "start")]),
     "workerEnd": (["six", "workerEnd"], [(W, ["six"], "worker", "end"), ("line_end_of", "worker", 0.0)]),
     "connects": (["connects"], [(W, ["connects", "priora"], "worker", "start"), ("line_after", "worker", "start")]),
@@ -86,12 +91,14 @@ SPEC = {
                                             ("line_end_of", "retain", -1.0)]),
     "ordinary": (["ordinary"], [(W, ["ordinary"], "carriers", "start"), ("line_after", "carriers", "start")]),
     "decisionsL18": (["decisionsL18"], [(W, ["decisions"], "ordinary", "start"), ("line_end_of", "ordinary", -0.6)]),
+    "closeIn": (["closeIn"], [("line_end_of", "decisionsL18", 0.1)]),
     "chainRecord": (["chainRecord"], [(W, ["record"], "decisionsL18", "start"), ("line_after", "decisionsL18", "start")]),
     "chainTrust": (["chainTrust"], [(W, ["trust"], "chainRecord", "start"), ("line_end_of", "chainRecord", -0.4)]),
     "chainDecision": (["chainDecision"], [(W, ["decisions"], "chainTrust", "start"), ("line_after", "chainTrust", "end")]),
     "chainPrice": (["chainPrice"], [(W, ["price"], "chainDecision", "start"), ("expr", lambda C: C["chainDecision"] + 1.7)]),
     "chainCapacity": (["chainCapacity"], [(W, ["capacity"], "chainPrice", "start"),
                                           ("expr", lambda C: C["chainPrice"] + 1.7)]),
+    "chainHold": (["chainHold"], [("line_end_of", "chainCapacity", 0.0)]),
     "priora": (["priora", "mark", "wordmark", "latch"], [(W, ["priora"], "chainCapacity", "start"),
                                                          ("line_after", "chainCapacity", "start")]),
     "infrastructure": (["infrastructure", "descriptor"], [(W, ["infrastructure"], "priora", "start"),
@@ -115,6 +122,10 @@ class Cues:
         if dur is None:
             raise ValueError("resolved.json has no duration (top-level 'duration' or film.duration)")
         self.duration = float(dur)
+        # the musical and editing grid: narration/timing.json "grid" (92 BPM
+        # from film time 0 in cut 2), else resolved.json, else 92 BPM at 0
+        gr = (timing or {}).get("grid") or resolved.get("grid") or (resolved.get("film") or {}).get("grid") or {}
+        self.grid = {"bpm": float(gr.get("bpm", 92.0) or 92.0), "offset": float(gr.get("offset", 0.0) or 0.0)}
         # lines: prefer resolved.json, take words from timing.json when missing
         lines = {k: dict(v) for k, v in (resolved.get("lines") or {}).items()}
         tl = (timing or {}).get("lines") or {}

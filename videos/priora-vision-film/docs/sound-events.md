@@ -69,3 +69,11 @@ Cut 2 editorial accents (any act; the audio engine renders them on the 92 BPM gr
 | `arc` | the welding arc: a very quiet dry crackle (dur); never an alarm, never a flame roar |
 | `handwheel` | a valve handwheel turning (dur): metal ratchet-free friction, low |
 | `gauge` | a pressure-gauge needle falling or rising: a small sprung-metal tick |
+
+Optional fields on the cut 2 kinds (the engine reads them):
+
+- `cut`: `material` (`paper`, `felt`, `graphite`, `wood`); default paper in Act I, felt after the rewind.
+- `whip`: `direction` (+1 left to right, -1 right to left). `gauge`: `direction` (-1 falling, +1 rising).
+- `hold`: `gain_db` is the dip (negative, default -8 dB; above -6 dB the pulse keeps going, only quieter); `dur` defaults to one bar.
+- Where the audible moment sits: the `push` bloom, the `sheet-lay` settle and the `gauge` tick land at the end of `dur`; put `at` at the start of the gesture.
+- Grid: events land exactly where `at` says. Anchor them with the same beat-snapped times the picture uses (an event generator per scene, as in scripts/event-gen/, keeps them on the grid after a narration re-lock).

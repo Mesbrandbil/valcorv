@@ -660,8 +660,8 @@ const INDEX_TEMPLATE = `<!doctype html>
 ${slotHtml}
       <!-- build-cues:slots:end -->
       <div id="film-surface" aria-hidden="true" data-layout-ignore>
-        <div id="film-surface-tooth"></div>
-        <div id="film-surface-light"></div>
+        <div id="film-surface-tooth" data-layout-ignore></div>
+        <div id="film-surface-light" data-layout-ignore></div>
       </div>
       <!-- build-cues:audio:begin -->
 ${audioHtml}

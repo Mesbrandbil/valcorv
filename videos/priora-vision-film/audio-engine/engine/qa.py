@@ -148,9 +148,13 @@ def hf_spikes(x: np.ndarray, thresh_db: float = 24.0) -> list:
 
 
 ONSET_OFFSET = {"valve-clunk": 0.15, "latch": 0.036, "align-snap": 0.028, "packet": 0.19, "sheet-in": 0.3}
+AT_DUR = ("gauge",)  # the transient sits at the event's dur
+LOW = ()  # low-mid transients to be measured through a 60 Hz high-pass instead of 200 Hz
+CONTINUOUS = ("van", "footsteps", "pencil-hatch", "pull", "push", "arc", "handwheel", "paper-slide", "stretch",
+              "technical-pen", "pencil-stroke", "connect-line", "rewind-suction", "rewind-whoosh")
 SHARP = ("valve-clunk", "system-tick", "cross-snap", "choice-accent", "decision-accent", "chain-record",
          "chain-trust", "chain-decision", "chain-price", "chain-capacity", "latch", "stamp", "confirm",
-         "latch-soft", "record-append")
+         "latch-soft", "record-append", "focus", "gauge")
 
 
 def onset_timing(sfx: np.ndarray, events, frame: float = 0.0005) -> dict:
@@ -159,15 +163,24 @@ def onset_timing(sfx: np.ndarray, events, frame: float = 0.0005) -> dict:
     internal onset). The onset is where the level rises fastest (over 2 ms)
     among 0.5 ms frames within 12 dB of the local peak, so a texture that
     leads into a sound does not count as its start."""
-    m = dsp.hp(dsp.mono(sfx), 200, 2)
     h = max(int(frame * SR), 1)
-    k = len(m) // h
-    lv = 20 * np.log10(np.abs(m[: k * h]).reshape(k, h).max(axis=1) + 1e-12)
+
+    def levels(hp_hz):
+        m = dsp.hp(dsp.mono(sfx), hp_hz, 2)
+        k = len(m) // h
+        return 20 * np.log10(np.abs(m[: k * h]).reshape(k, h).max(axis=1) + 1e-12)
+    lv_hi, lv_lo = levels(200), levels(60)
+    k = len(lv_hi)
     rows = []
     for e in events:
         if e["kind"] not in SHARP:
             continue
-        t0 = e["t"] + ONSET_OFFSET.get(e["kind"], 0.0)
+        lv = lv_lo if e["kind"] in LOW else lv_hi
+        t0 = e["t"] + ONSET_OFFSET.get(e["kind"], 0.0) + (float(e.get("dur") or 0.0) if e["kind"] in AT_DUR else 0.0)
+        # another sound starting close by, or a continuous one running through it, masks the reading
+        masked = any(o is not e and ((abs(o["t"] - t0) < 0.08) or
+                                     (o["kind"] in CONTINUOUS and o["t"] < t0 < o["t"] + float(o.get("dur") or 0.5)))
+                     for o in events)
         a, b = int((t0 - 0.04) / frame), int((t0 + 0.06) / frame)
         if a < 0 or b >= k:
             continue
@@ -177,10 +190,153 @@ def onset_timing(sfx: np.ndarray, events, frame: float = 0.0005) -> dict:
         rise[4:] = w[4:] - w[:-4]  # level rise over 2 ms
         rise[w < pk - 12.0] = -np.inf
         on = a + int(np.argmax(rise)) - 3
-        rows.append({"kind": e["kind"], "t": round(t0, 4), "delta_ms": round((on * frame - t0) * 1000, 2)})
-    d = np.array([abs(r["delta_ms"]) for r in rows]) if rows else np.array([0.0])
-    return {"count": len(rows), "max_abs_delta_ms": round(float(d.max()), 2),
-            "median_abs_delta_ms": round(float(np.median(d)), 2), "rows": rows}
+        rows.append({"kind": e["kind"], "t": round(t0, 4), "delta_ms": round((on * frame - t0) * 1000, 2),
+                     "masked": bool(masked)})
+    clear = [abs(r["delta_ms"]) for r in rows if not r["masked"]]
+    d = np.array(clear) if clear else np.array([0.0])
+    dall = np.array([abs(r["delta_ms"]) for r in rows]) if rows else np.array([0.0])
+    return {"count": len(rows), "clear": len(clear),
+            "max_abs_delta_ms": round(float(d.max()), 2), "median_abs_delta_ms": round(float(np.median(d)), 2),
+            "max_abs_delta_ms_including_masked": round(float(dall.max()), 2),
+            "note": "clear rows have no other sound starting within 80 ms and no continuous sound running "
+                    "through them; a masked reading measures its neighbour, not a timing error (placement is "
+                    "sample exact)", "rows": rows}
+
+
+# ---------------------------------------------------------------- the grid, heard
+
+def _energy_onsets(x: np.ndarray, lo_hz: float = 150.0, rise_db: float = 6.0, context_db: float = 18.0,
+                   floor_db: float = -62.0, hop: float = 0.001, win: float = 0.012, span: float = 0.024):
+    """Onset times (s): where the level (above lo_hz, 12 ms windows every 1 ms,
+    longer than one period of any note that passes the high-pass, so a low
+    sustained note does not flicker) rises by rise_db within span, while
+    standing within context_db of the
+    loudest moment in the surrounding 1.5 s. Sustained sounds with vibrato,
+    decaying tails, slow swells and anything 36 dB under the signal's loud
+    level do not trigger it; attacks do. Returns the
+    first frame of each rise (window centre), at least 50 ms apart."""
+    from scipy.ndimage import maximum_filter1d, minimum_filter1d
+    m = dsp.hp(dsp.mono(x), lo_hz, 2)
+    h, w = max(dsp.ns(hop), 1), max(dsp.ns(win), 1)
+    c = np.concatenate([[0.0], np.cumsum(m * m)])
+    k = (len(m) - w) // h
+    if k < 4:
+        return np.zeros(0)
+    st_ = np.arange(k) * h
+    E = 10 * np.log10((c[st_ + w] - c[st_]) / w + 1e-20)
+    L = max(int(round(span / hop)), 1)
+    prev = minimum_filter1d(E, size=L, origin=(L - 1) // 2, mode="nearest")  # min over the L frames before
+    prev = np.concatenate([np.full(1, E[0]), prev[:-1]])
+    ctx = maximum_filter1d(E, size=int(1.5 / hop), mode="nearest")
+    floor = max(floor_db, float(np.percentile(E, 99)) - 36.0)  # quiet stretches never count as attacks
+    cand = np.nonzero((E - prev >= rise_db) & (E >= ctx - context_db) & (E > floor))[0]
+    out, last = [], -10 ** 9
+    for i in cand:
+        if i - last > int(0.05 / hop):
+            out.append((i * h + w / 2) / SR)
+        last = i
+    return np.array(out)
+
+
+def _detector_latency():
+    """The onset detector's own offset, measured on sharp clicks at known times."""
+    from . import library
+    n = dsp.ns(6.0)
+    y = np.zeros((n, 2))
+    at = [0.5 + 0.61 * k for k in range(9)]
+    click_ = dsp.st(library.relay_click(3)) * 0.1
+    for a in at:
+        i = dsp.ns(a)
+        y[i:i + len(click_)] += click_[: n - i]
+    det = _energy_onsets(y)
+    lat = [min(det, key=lambda v: abs(v - a)) - a for a in at] if len(det) else []
+    return float(np.median(lat)) if lat else 0.0
+
+
+def _grid_stats(x, g, lat, C):
+    det = _energy_onsets(x) - lat
+    rs, re_ = C["rewindStart"], C["rewindEnd"]
+    det = det[(det > 0.1) & ((det < rs) | (det > re_ + 0.2)) & (det < C.duration - 0.1)]
+    so = np.array([t - g.q(t, g.six) for t in det])
+    if not len(so):
+        return {"detected_onsets": 0}
+    a = np.abs(so)
+    return {"detected_onsets": int(len(det)),
+            "signed_median_offset_ms": round(float(np.median(so)) * 1000, 2),
+            "median_abs_offset_from_sixteenth_ms": round(float(np.median(a)) * 1000, 2),
+            "p90_abs_offset_ms": round(float(np.percentile(a, 90)) * 1000, 2),
+            "within_5ms_of_grid": round(float(np.mean(a <= 0.005)), 3),
+            "within_10ms_of_grid": round(float(np.mean(a <= 0.010)), 3),
+            "within_20ms_of_grid": round(float(np.mean(a <= 0.020)), 3)}
+
+
+def grid_audio_check(fam: dict, music_stem: np.ndarray, arr, C) -> dict:
+    """Listen for the grid: the attacks heard in the layers that articulate
+    it (the pulse and the felt piano, rendered, before the carve), in each
+    score family, and in the delivered music stem, each against the nearest
+    sixteenth of the film's grid, after removing the detector's own offset
+    (measured on sharp clicks). The rewind (the score backward) is left out.
+    Onsets at random would give a median offset of about 41 ms at 92 BPM (a
+    quarter of a sixteenth); a soft felt-piano attack reads about 5 to 8 ms
+    after its note-on by nature."""
+    g = arr.g
+    lat = _detector_latency()
+    rhythm = sum(fam[k] for k in ("pulse", "piano") if k in fam)
+    per = {k: _grid_stats(v, g, lat, C) for k, v in fam.items()}
+    rs, re_ = C["rewindStart"], C["rewindEnd"]
+    det = _energy_onsets(fam["piano"]) - lat if "piano" in fam else np.zeros(0)
+    sched = sorted({nn[0] for p in arr.parts.values() if p.inst == "piano" for nn in p.notes
+                    if not (rs < nn[0] < re_ + 0.2)})
+    d = np.array([det[np.argmin(np.abs(det - t))] - t for t in sched]) if len(det) and sched else np.zeros(0)
+    return {
+        "detector_offset_ms": round(lat * 1000, 2),
+        "rhythmic_layers_pulse_and_piano": _grid_stats(rhythm, g, lat, C),
+        "piano_note_ons_to_nearest_attack": {
+            "notes": len(sched), "median_ms": round(float(np.median(d)) * 1000, 2) if len(d) else None,
+            "within_15ms": round(float(np.mean(np.abs(d) <= 0.015)), 3) if len(d) else None,
+            "note": "notes that start over their own sustain (repeated ostinato notes, chord tones) show "
+                    "no separate 6 dB rise; they are not late, only unheard as attacks"},
+        "by_family": per,
+        "music_stem": _grid_stats(music_stem, g, lat, C),
+        "note": "a sixteenth is %.0f ms; an attack is a 6 dB rise within 24 ms, prominent within 18 dB of "
+                "its surroundings. Sustained families (pad, strings, reverb returns) have few true attacks; "
+                "their readings are the patches' own slow shimmer and are not a timing measure." % (g.six * 1000),
+        "scheduled": arr.grid_check(),
+    }
+
+
+def silence_windows(bed: np.ndarray, C, arr, holds) -> dict:
+    """Music plus SFX in the moments that must be quiet (momentary, 400 ms)."""
+    tt, lm = loudness_curve(bed, 0.4, 0.05)
+    mk = arr.marks
+    B = arr.g.beat
+
+    def win(a, b):
+        sel = (tt >= a) & (tt <= b)
+        if b - a < 0.2 or not np.any(sel):
+            return None
+        v = lm[sel]
+        return {"from": round(a, 2), "to": round(b, 2), "median_lufs_m": round(float(np.median(v)), 1),
+                "max_lufs_m": round(float(np.max(v)), 1)}
+    out = {
+        "unnoticed_change (offline + 1 beat to L08 end)": win(C["offline"] + B, C["nobodyEnd"]),
+        "after_L08 (to afterwards)": win(C["nobodyEnd"] + 0.3, C["afterwards"] - 0.05),
+        "landing (rewindEnd to first note)": win(C["rewindEnd"] + 0.05, mk["bE"]),
+        "crossing (cross to riskOwner)": win(C["cross"], C["riskOwner"]),
+        "full_chain_hold (chainHold to priora)": win(C["chainHold"], C["priora"] - 0.05),
+        "final_2s": win(C.duration - 2.0, C.duration),
+        "reference_act2_ostinato (bar near connects + 4 bars)": win(mk["bF"], mk["bF"] + 4 * arr.g.bar),
+    }
+    hl = []
+    for h in holds or []:
+        a, b = h["t"] + min(0.25, h["dur"] / 3), h["t"] + h["dur"]
+        before = win(max(h["t"] - 2.0, 0), h["t"] - 0.05)
+        inside = win(a, b)
+        hl.append({"t": round(h["t"], 2), "dur": round(h["dur"], 2), "gain_db": h["gain_db"],
+                   "before_median": before["median_lufs_m"] if before else None,
+                   "inside_median": inside["median_lufs_m"] if inside else None})
+    out["holds"] = hl
+    return out
 
 
 # ---------------------------------------------------------------- pictures

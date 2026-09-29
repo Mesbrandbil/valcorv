@@ -655,6 +655,259 @@ def sheet_in(seed=0) -> np.ndarray:
     return _out(y, r, 0)
 
 
+# ================================================================ cut 2 editorial accents
+#
+# The edit's own sounds: cuts, camera moves, a sheet laid down, a hero
+# isolation, and three physical close-ups (the arc, the handwheel, the
+# gauge). Restrained by construction: short, low-mid, no bright attacks, no
+# risers, no booms. The air of a camera move stays under 3 kHz and is carved
+# under the voice like the beds (pipeline.MOTION).
+
+def _soft_contact(x: np.ndarray, ms: float) -> np.ndarray:
+    """Round an impact by a half-sine contact pulse of `ms` (felt, cushion)."""
+    m = max(ns(ms / 1000.0), 2)
+    p = np.sin(np.linspace(0, np.pi, m))
+    from scipy.signal import fftconvolve
+    return fftconvolve(x, p / p.sum())[: len(x)]
+
+
+def _rise(n: int, t: float) -> np.ndarray:
+    """Raised-cosine attack of t seconds, then flat (for a bloom or a settle)."""
+    u = np.clip(tvec(n) / max(t, 1e-4), 0, 1)
+    return 0.5 - 0.5 * np.cos(np.pi * u)
+
+
+def _pan_path(y: np.ndarray, p0: float, p1: float) -> np.ndarray:
+    """Constant-power pan moving linearly from p0 to p1 (mono in, stereo out)."""
+    p = np.clip(np.linspace(p0, p1, len(y)), -1, 1)
+    th = (p + 1) * np.pi / 4
+    return np.stack([y * np.cos(th), y * np.sin(th)], 1)
+
+
+def _image(a: np.ndarray, b: np.ndarray, w0: float, w1: float) -> np.ndarray:
+    """Two decorrelated takes as mid/side with a width moving from w0 to w1."""
+    w = np.linspace(w0, w1, len(a))
+    mid, side = (a + b) * 0.5, (a - b) * 0.5 * w
+    return np.stack([mid + side, mid - side], 1)
+
+
+CUT_MATERIALS = ("paper", "felt", "graphite", "wood")
+
+
+def cut(seed=0, material="paper") -> np.ndarray:
+    """A hard picture cut: a very short, soft transient, felt more than heard.
+
+    paper: a card edge meeting the desk through a cushion of air; felt: a felt
+    mallet on a padded surface (long contact, dark and round); graphite: a
+    pencil point set down on paper over the desk; wood: a soft knock on a
+    small block. All under a quarter of a second with the energy in the low
+    mids; the attack is rounded so it never clicks.
+    """
+    mat = str(material or "paper").lower()
+    mat = mat if mat in CUT_MATERIALS else "paper"
+    r = rng(seed, "cut", mat)
+    if mat == "felt":
+        body = thump(r.uniform(126, 144), r.uniform(90, 102), 0.075, 0.16)
+        body = _soft_contact(body, 3.5)
+        n = ns(0.06)
+        brush = lp(white(n, r), 650, 2) * perc(n, 0.004, 0.045) * 0.1
+        y = lp(mix(body, brush), 1500, 2)
+    elif mat == "graphite":
+        n = ns(0.04)
+        y = mix(click(r, 1100, 4800, 0.004, 0.001) * 0.4, thump(172, 126, 0.045, 0.08) * 0.7,
+                bp(white(n, r), 650, 2800, 2) * perc(n, 0.002, 0.025) * 0.1)
+        y = lp(_soft_contact(y, 0.6), 4600, 2)
+    elif mat == "wood":
+        f = r.uniform(340, 400)
+        y = mix(modal([f, f * 2.57, f * 4.1], [0.05, 0.025, 0.012], [1, 0.3, 0.1], 0.12, mallet_ms=1.6,
+                      r=r, jitter_cents=20) * 0.8, thump(150, 108, 0.045, 0.09) * 0.45)
+        y = lp(y, 3000, 2)
+    else:
+        n = ns(0.1)
+        cushion = lp(hp(white(n, r), 70, 2), 320, 2) * perc(n, 0.006, 0.06) * 0.7
+        body = thump(128, 94, 0.055, 0.1) * 0.55
+        tap = bp(white(n, r), 450, 3000, 2) * perc(n, 0.0025, 0.03) * 0.3
+        y = lp(mix(cushion, body, tap), 3800, 2)
+    y = verb(y, "room", 0.05, seed=151)[: ns(0.25)]
+    return _out(y, r, 0.1)
+
+
+def push(seed=0, dur=0.65) -> np.ndarray:
+    """A push-in to a closer shot (dur = the move): a short rising air, low
+    and narrow, the image closing to centre, landing in a soft low bloom at
+    dur. The bloom is the only weight; nothing bright, no riser."""
+    D = float(np.clip(dur or 0.65, 0.2, 3.0))
+    r = rng(seed, "push", round(D, 4))
+    n = ns(D)
+    cen = np.geomspace(230, 1250, 16)
+    wid = np.linspace(1.15, 0.55, 16)
+    a = band_sweep(n, r, cen, wid)
+    b = band_sweep(n, r, cen * 1.04, wid)
+    env = curve([(0, 0.0), (D * 0.4, 0.2), (D * 0.84, 0.85), (D, 0.45)], n, "cos")
+    air = _image(a, b, 1.0, 0.2) * env[:, None]
+    air = lp(fade(air, 0.0, 0.035), 2400, 2)
+    air *= 0.16 / (dsp.rms(air[-ns(min(0.25, D * 0.4)):]) + 1e-12)
+    bn = ns(0.95)
+    bloom = thump(86, 62, 0.55, 0.95) * _rise(bn, 0.02)
+    bloom += lp(hp(white(bn, r), 45, 2), 200, 2) * perc(bn, 0.03, 0.45) * 0.12
+    bloom = lp(bloom, 250, 2)
+    bloom /= dsp.peak(bloom) + 1e-12
+    y = mix(air, delay(dsp.st(bloom), D - 0.012))
+    y = verb(y, "room", 0.07, seed=153)[: ns(D + 1.1)]
+    return _out(y, r, 0)
+
+
+def pull(seed=0, dur=1.3) -> np.ndarray:
+    """A pull-back reveal (dur = the move): a soft descending air, the image
+    opening from centre to wide, over a gentle low swell. A long pull is
+    spread thinner (lower peak), so a two-bar move stays under the voice."""
+    D = float(np.clip(dur or 1.3, 0.3, 8.0))
+    r = rng(seed, "pull", round(D, 4))
+    tail = min(0.45, 0.3 * D)
+    Tn = D + tail
+    n = ns(Tn)
+    cen = np.geomspace(1450, 290, 16)
+    wid = np.linspace(0.6, 1.25, 16)
+    a = band_sweep(n, r, cen, wid, nper=2048, hop=512)
+    b = band_sweep(n, r, cen * 0.97, wid, nper=2048, hop=512)
+    env = curve([(0, 0.0), (min(0.3 * D, 0.5), 0.75), (0.45 * D, 1.0), (D, 0.3), (Tn, 0.0)], n, "cos")
+    air = lp(_image(a, b, 0.25, 1.0) * env[:, None], 2800, 2)
+    air /= dsp.rms(air) + 1e-12
+    sw = colored(n, r, -6.0, lo=40, hi=320)
+    sw = lp(hp(sw, 40, 2), 150, 2) * curve([(0, 0.0), (0.55 * D, 1.0), (Tn, 0.0)], n, "cos")
+    sw /= dsp.rms(sw) + 1e-12
+    y = mix(air * 0.5, dsp.st(sw) * 0.62)
+    y = verb(y, "room", 0.06, seed=157)[: n + ns(0.3)]
+    return _out(y, r, 0, -1.0 - max(0.0, 10 * np.log10(D / 1.3)))
+
+
+def whip(seed=0, dur=0.33, direction=1.0) -> np.ndarray:
+    """A snappy lateral move (half a second or less): brief, filtered, very
+    quiet air crossing the image in the move's direction (+1 left to right)."""
+    D = float(np.clip(dur or 0.33, 0.12, 0.6))
+    d = 1.0 if float(direction or 1.0) >= 0 else -1.0
+    r = rng(seed, "whip", round(D, 4), d)
+    n = ns(D)
+    a = band_sweep(n, r, [620, 1650, 900], [0.85, 0.5, 0.75], nper=512, hop=128)
+    env = curve([(0, 0.0), (0.45 * D, 1.0), (D, 0.0)], n, "cos") ** 1.6
+    y = lp(a * env, 3600, 2)
+    return _out(_pan_path(y, -0.55 * d, 0.55 * d), r, 0)
+
+
+def sheet_lay(seed=0, dur=0.5, pan0=0.5, pan1=0.05) -> np.ndarray:
+    """A paper sheet laid flat over the drawing: it slides in (from the right
+    by default), then settles at dur as its air cushion lets go."""
+    D = float(np.clip(dur or 0.5, 0.2, 2.0))
+    r = rng(seed, "sheetlay", round(D, 4))
+    slide = paper_slide(seed * 5 + 3, D, pan0, pan1)
+    sn = ns(0.28)
+    puff = lp(hp(white(sn, r), 60, 2), 340, 2) * ar(sn, 0.01, 0.24, hold=0.0)
+    touch = bp(white(sn, r), 800, 3000, 2) * perc(sn, 0.002, 0.035) * 0.22
+    crack = _crinkle(r, sn, 35) * perc(sn, 0.004, 0.08) * 0.02
+    settle = mix(puff / (dsp.peak(puff) + 1e-12), touch, crack)
+    settle /= dsp.peak(settle) + 1e-12
+    y = mix(slide * 0.62, delay(pan(settle, pan1) * 0.8, D - 0.03))
+    y = verb(y, "room", 0.07, seed=159)[: ns(D + 0.55)]
+    return _out(y, r, 0)
+
+
+def focus(seed=0) -> np.ndarray:
+    """An interface element isolated to a hero shot: a tiny precise click, a
+    detent seating (a click, a smaller one 6 ms later, a faint small body)."""
+    r = rng(seed, "focus")
+    a = mix(click(r, 2600, 9000, 0.0025, 0.0004) * 0.5,
+            modal([r.uniform(3300, 3600), r.uniform(5500, 5900)], [0.016, 0.009], [1, 0.35], 0.04,
+                  mallet_ms=0.08, r=r) * 0.3,
+            modal([NOTE["A5"]], [0.03], [0.25], 0.05, mallet_ms=0.5))
+    y = mix(a, delay(click(r, 2400, 8000, 0.002, 0.0003) * 0.22, 0.006))
+    return _out(lp(y, 10000, 2), r, 0.05)
+
+
+def arc(seed=0, dur=1.3) -> np.ndarray:
+    """The welding arc: a very quiet, dry crackle that flickers (dur). Sparse
+    sharp cracks in bursts over a faint sizzle; no hum, no roar, no alarm."""
+    D = float(np.clip(dur or 1.3, 0.2, 20.0))
+    r = rng(seed, "arc", round(D, 4))
+    n = ns(D)
+    t = tvec(n)
+    flick = np.clip(0.5 + 0.5 * smooth_noise(n, r, 7.0), 0, 1) ** 2
+    rate = 70.0 + 190.0 * flick
+    u = r.random(n)
+    hits = u < rate / SR
+    imp = np.zeros(n)
+    k = int(hits.sum())
+    imp[hits] = r.lognormal(0, 0.7, k) * r.choice([-1.0, 1.0], k)
+    crack = bp(imp, 1800, 8500, 2) + reson(imp, r.uniform(3000, 3500), 4) * 0.35
+    crack /= dsp.rms(crack) + 1e-12
+    sizzle = bp(white(n, r), 2400, 7500, 2) * (0.65 + 0.35 * np.abs(np.sin(2 * np.pi * 50.0 * t)))
+    sizzle *= (0.5 + 0.5 * flick) / (dsp.rms(sizzle) + 1e-12)
+    y = (crack * 0.6 + sizzle * 0.16) * ar(n, 0.06, min(0.14, D * 0.3))
+    y = lp(eq(y, "peak", 3300, -3.0, 0.9), 8500, 2)
+    return _out(spread(y, r, 0.3), r, 0)
+
+
+def handwheel(seed=0, dur=0.9) -> np.ndarray:
+    """A valve handwheel turning (dur): low metal friction of the stem in its
+    packing and thread, one effort swell per hand push, the pipe body
+    answering faintly. No ratchet, nothing bright."""
+    D = float(np.clip(dur or 0.9, 0.2, 6.0))
+    r = rng(seed, "wheel", round(D, 4))
+    n = ns(D + 0.2)
+    pushes = max(1, int(round(D / 0.6)))
+    env = np.zeros(n)
+    span = D / pushes
+    for k in range(pushes):
+        a, b = k * span, min((k + 1) * span + 0.12, D + 0.18)
+        seg = curve([(0, 0.0), (0.3 * (b - a), 1.0 - 0.12 * k), (b - a, 0.0)], ns(b - a), "cos")
+        i = ns(a)
+        env[i:i + len(seg)] = np.maximum(env[i:i + len(seg)], seg[: n - i])
+    fric = colored(n, r, -4.5, lo=90, hi=1300)
+    grit = bp(poisson_impulses(n, 380, r, 0.8), 260, 1900, 2)
+    grit /= dsp.rms(grit) + 1e-12
+    body = reson(fric, r.uniform(225, 255), 9) + reson(fric, r.uniform(590, 650), 11) * 0.6 + \
+        reson(fric, r.uniform(1080, 1180), 14) * 0.25
+    body /= dsp.rms(body) + 1e-12
+    y = (fric * 0.45 + grit * 0.22 + body * 0.5) * env
+    y = hp(lp(y, 2200, 2), 60, 2)
+    y = verb(y, "room", 0.12, seed=161)[: n + ns(0.25)]
+    return _out(y, r, 0.12)
+
+
+def gauge(seed=0, dur=0.0, direction=-1.0) -> np.ndarray:
+    """A pressure-gauge needle (dur = its travel): a faint gear-train whirr,
+    then a small sprung-metal tick at dur. Falling (-1) the needle meets its
+    stop pin and bounces once; rising (+1) it settles on a reading, lighter."""
+    D = float(np.clip(dur or 0.0, 0.0, 3.0))
+    falling = float(direction if direction is not None else -1.0) < 0
+    r = rng(seed, "gauge", round(D, 4), falling)
+    parts = []
+    if D > 0.08:
+        n = ns(D)
+        speed = curve([(0, 0.2), (0.6 * D, 1.0), (D, 1.0 if falling else 0.3)], n, "cos")
+        ph = np.cumsum(90.0 * speed) / SR
+        teeth = np.zeros(n)
+        idx = np.nonzero(np.diff(np.floor(ph)) > 0)[0]
+        teeth[idx] = r.uniform(0.6, 1.0, len(idx))
+        whirr = bp(teeth, 2500, 7000, 2) + bp(white(n, r), 3000, 8000, 2) * 0.02
+        whirr *= speed * ar(n, 0.02, 0.02) * 0.08
+        parts.append(whirr)
+
+    def tick(g, s):
+        return mix(click(s, 2400, 9000, 0.003, 0.0005) * 0.6,
+                   modal([s.uniform(2900, 3200), s.uniform(4700, 5100), s.uniform(7300, 7800)],
+                         [0.05, 0.035, 0.02], [1, 0.55, 0.28], 0.09, mallet_ms=0.1, r=s) * 0.35,
+                   modal([s.uniform(1050, 1150)], [0.12], [0.12], 0.14, mallet_ms=0.3),
+                   modal([s.uniform(420, 480)], [0.03], [0.3], 0.05, mallet_ms=0.5)) * g
+    if falling:
+        stop = mix(tick(1.0, r), delay(tick(0.3, rng(seed, "gauge2")), r.uniform(0.03, 0.04)))
+    else:
+        stop = tick(1.0, r)
+    parts.append(delay(stop, max(D - 0.001, 0.0)))
+    y = mix(*parts)
+    y = verb(lp(y, 11000, 2), "room", 0.06, seed=163)[: ns(D + 0.35)]
+    return _out(y, r, 0.05, -1.0 if falling else -5.0)
+
+
 # ================================================================ beds (long)
 
 def _decorrelated_pair(n, r, corr=0.4, **kw):
@@ -790,6 +1043,16 @@ KINDS = {
     "connect-line": (connect_line, -26.0, ("dur",)),
     "sheet-in": (sheet_in, -26.0, ()),
     "pump-thud": (pump_thud, -23.0, ()),
+    # cut 2 editorial accents (felt more than heard)
+    "cut": (cut, -26.0, ("material",)),
+    "push": (push, -30.0, ("dur",)),
+    "pull": (pull, -30.0, ("dur",)),
+    "whip": (whip, -35.0, ("dur", "direction")),
+    "sheet-lay": (sheet_lay, -25.0, ("dur", "pan0", "pan1")),
+    "focus": (focus, -27.0, ()),
+    "arc": (arc, -30.0, ("dur",)),
+    "handwheel": (handwheel, -28.0, ("dur",)),
+    "gauge": (gauge, -25.0, ("dur", "direction")),
 }
 
 

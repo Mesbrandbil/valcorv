@@ -12,10 +12,13 @@ Three sources of one-shots end up in the SFX stem:
   auto      a plausible default set of drawing and interface events, tagged by
             scene. For each scene, auto events are used only while that scene
             publishes no events of its own.
+
+Holds (`hold` events) draw every bed down by 0.6 of the hold's depth over the
+hold, so the room thins with the score (never the voice).
 """
 from __future__ import annotations
 
-from . import dsp, library
+from . import dsp, library, score
 from .dsp import ns, rng
 
 
@@ -29,8 +32,12 @@ def _cal(x, target):
     return x * dsp.undb(target - L) if L > -100 else x
 
 
-def beds(C, subtract_at=None, subtract_fade=0.35) -> dict:
-    """Continuous ambience layers, each the film's length, automated by cues."""
+HOLD_BED_SCALE = 0.6  # beds dip by this fraction of a hold's depth (-8 dB hold: -4.8 dB)
+
+
+def beds(C, subtract_at=None, subtract_fade=0.35, holds=None) -> dict:
+    """Continuous ambience layers, each the film's length, automated by cues
+    (and drawn down under holds)."""
     n = ns(C.duration)
     end = C.duration
     rs, re_ = C["rewindStart"], C["rewindEnd"]
@@ -62,6 +69,10 @@ def beds(C, subtract_at=None, subtract_fade=0.35) -> dict:
     sae = dsp.curve([(0, -80), (re_ + 0.8, -80), (C["worker"] + 0.5, 0), (cr - 0.5, 0), (cr + 2.5, -80),
                      (end, -80)], n, "db")
     out["siteair"] = sa * sae[:, None]
+    if holds:
+        hg = score.hold_gain(holds, n, score.cue_grid(C).beat, HOLD_BED_SCALE)
+        for k in out:
+            out[k] = out[k] * hg[:, None]
     return out
 
 
@@ -80,8 +91,9 @@ def designed(C) -> list:
     add(C.nearest_gap(C["contractors"] + 0.9, need=0.35), "radio-squelch", 0.0, seed=3, pan=0.45)
     add(C["contractors"] + 0.05, "footsteps", -2.0, seed=4, count=6, interval=0.55, surface="gravel",
         pan0=-0.5, pan1=-0.1)
-    add(C["isolated"] + 0.3, "solenoid-click", -2.0, seed=5, pan=0.3)
-    add(C["isolated"] + 0.36, "relay-click", -6.0, seed=6, pan=0.3)
+    # the lockout (dropped when a scene turns a handwheel there: cut 2's valve insert)
+    add(C["isolated"] + 0.3, "solenoid-click", -2.0, seed=5, pan=0.3, suppress=("handwheel", 1.5))
+    add(C["isolated"] + 0.36, "relay-click", -6.0, seed=6, pan=0.3, suppress=("handwheel", 1.5))
     add(C.nearest_gap(C["workMoves"] + 1.0, need=0.3), "distant-clank", 0.0, seed=7, pan=-0.6)
     add(C["noOne"] + 3.4, "distant-clank", -3.0, seed=8, pan=0.55)
     add(C.nearest_gap(C["head"] + 1.0, need=0.3), "radio-click", -2.0, seed=9, pan=-0.4)
@@ -228,8 +240,11 @@ def merge(designed_ev, scene_ev, auto_ev, window=0.3):
     for d in designed_ev:
         if (d.get("scene"), d["kind"]) in owned:
             continue
+        sup = d.get("suppress")
+        if sup and any(e["kind"] == sup[0] and abs(e["t"] - d["t"]) < sup[1] for e in scene_ev):
+            continue
         if not any(e["kind"] == d["kind"] and abs(e["t"] - d["t"]) < window for e in scene_ev):
-            out.append(d)
+            out.append({k: v for k, v in d.items() if k != "suppress"})
     for a in auto_ev:
         if a["scene"] in covered or has_unscoped:
             continue

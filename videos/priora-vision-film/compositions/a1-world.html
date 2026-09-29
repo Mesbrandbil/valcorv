@@ -2,7 +2,7 @@
 <html lang="en-GB">
   <head>
     <meta charset="UTF-8" />
-    <title>a1-world: the graphite site today, the invisible crossing, the rewind (Frame 1)</title>
+    <title>a1-world: the graphite site today, the unnoticed change, the rewind (cut 2)</title>
     <!-- Ignored by the assembler. Everything that must exist at render time is inside <template>. -->
   </head>
   <body>
@@ -38,18 +38,30 @@
                    SketchKit.label(W, 'sprinklerZone3Label', 'SPRINKLER ZONE 3', { leader: [22, 30], size: 18 })
                    (screen-constant lettering, the kit's default annotations 'screen').
                    At the landing scale the hot-work label and the five safeguard labels are 18 px.
-          At 0     everything else a1-world draws: contractors, van, gate, routes, LOTO tag, the five morning
-                   markers, the toolbox talk, the HSE walk, the accumulation field, containment lines, the ROOF 03
-                   marker, the three opening construction strokes, the SZ3 valve tag, the condition connection
-                   (drawn after the landing, on 'nothingLooks'), the envelope redraw, the incident box. No blue.
+          At 0     everything else a1-world draws: the opening graphite strokes (S1), contractors, van, gate,
+                   routes and their tag, the LOTO tag, the five morning markers, the toolbox talk, the HSE walk,
+                   the accumulation field, containment lines, the ROOF 03 marker, the SZ3 valve tag, the small
+                   welder and its arc (drawn after the landing), the condition connection (drawn after the
+                   landing, in S9a), the envelope redraw, the incident box. No blue.
+          Motion   nothing breathes at the landing: the hot-work ring is never scaled (cut 2 dropped the breathing).
 
-          CAMERA PATH (FL.camera layer "story" on both svgs), for overlays that pin to site points:
-            siteOverview -> siteLeft over [insurance, insurance + 2.2] (power2.inOut), then a 1.2 % push-in drift
-            (sine.inOut) to noOne; siteLeft drift -> siteWide from noOne over 1.9 s.
-            Afterwards: SiteKit.CAMERAS.roof03AndSz3 held exactly from nothingLooks + 2.0 to afterwards, then
-            roof03AndSz3 -> afterwardsWide over [afterwards, tooLate - 0.8] (sine.inOut), then afterwardsWide
-            held exactly to rewindStart (SketchKit.followPin(tl, frag, pt, roof03AndSz3, afterwardsWide,
-            T('afterwards'), T('tooLate', -0.8) - T('afterwards'), 'sine.inOut') keeps a pin on its point).
+          CAMERA PATH (FL.camera layer "story" on both svgs; SiteKit rects; the only camera on the site svg).
+          Hard cuts are 1 ms moves with ease steps(1) from the previous rect, so the rewind passes back through them.
+            macro (S1) -> siteOverview pull from l01 (4.5 beats) -> cut gateRoad at c(contractors), drift west
+            -> hidden cut siteMorning under the LOTO insert -> rise to siteOverview at b(insurance) (2 beats)
+            -> siteWide under the a1-paper sheet -> push roof03 at c(roof03) (1 beat) -> hidden cut roof03Tight
+            under the worker insert -> settle to landing (ends on the half beat before 'landing', then still)
+            -> hidden cut sz3Roof under the SZ3 insert -> cut roof03AndSz3 at c(nothingLooks) (0.5 % drift)
+            -> push envEdge at b(L08:conditions, near) (1 beat) -> pull back to roof03AndSz3 at b(nobodyEnd, near)
+            (3 beats) -> cut roof03Close at c(afterwards) -> pull to SiteKit.CAMERAS.afterwardsWide from
+            T('L09:questions.start') over 2 beats -> afterwardsWide held exactly to rewindStart.
+            Zoom moves interpolate the width geometrically, EXCEPT the afterwards segment, which a1-after pins to:
+              roof03Close = SiteKit.rect(39.5, 29.5, 20.5), held exactly from clk.c('afterwards') to T('L09:questions.start');
+              roof03Close -> afterwardsWide over 2 * FL.BEAT from T('L09:questions.start'), ease 'sine.inOut' on a plain
+              rect lerp, so SketchKit.followPin(tl, frag, pt, roof03Close, afterwardsWide, T('L09:questions.start'),
+              2 * FL.BEAT, 'sine.inOut') keeps a pin on its site point; afterwardsWide held exactly to rewindStart.
+            The site steps back to 72 percent on the afterwards cut and recedes to 35 percent with a 1.1 px blur over the
+            pull (the overlay svg with the incident box to 50 percent).
 
           The Sprinkler Zone 3 outline rule (a2-resolve must apply the same to its own twin):
         */
@@ -81,6 +93,29 @@
           height: 1080px;
           display: block;
         }
+        /* S1: the first graphite strokes at macro scale (pressure ribbons, grain by filter) */
+        #a1-world-site .a1-world-lead {
+          fill: #3b3a36;
+          fill-opacity: 0.94;
+          stroke: none;
+        }
+        #a1-world-site .a1-world-lead-halo {
+          fill: #3b3a36;
+          fill-opacity: 0.5;
+          stroke: none;
+        }
+        /* the small welder's arc: a paper-bright point in a graphite ring */
+        #a1-world-site .a1-world-arcpt {
+          fill: #fbfaf7;
+          stroke: #3b3a36;
+          stroke-width: calc(var(--sw) * 0.9px);
+        }
+        #a1-world-site .a1-world-arcray {
+          fill: none;
+          stroke: #3b3a36;
+          stroke-linecap: round;
+          stroke-width: calc(var(--sw) * 1.2px);
+        }
       </style>
 
       <div id="root" data-composition-id="a1-world" data-width="1920" data-height="1080">
@@ -103,11 +138,17 @@
           var T = function (a, off) {
             return clk.t(a, off);
           };
-          var EV = function (name) {
-            return clk.ev(name);
+          // grid helpers (cut 2): half-beat grid unless stated; C = the shared picture cut for a word
+          var BEAT = FL.BEAT,
+            HB = BEAT / 2;
+          var B = function (a, off, mode, sub) {
+            return clk.b(a, off || 0, mode || "next", sub || 2);
           };
-          var EVD = function (name) {
-            return FL.events(ID)[name].dur;
+          var C = function (a, off) {
+            return clk.c(a, off);
+          };
+          var snapAt = function (a, mode, sub) {
+            return FL.snapBeat(FL.at(ID, a) + clk.start, mode, sub) - clk.start;
           };
           var SK = window.SiteKit,
             K = window.SketchKit,
@@ -118,6 +159,35 @@
           var RS = T("rewindStart"),
             RE = T("rewindEnd"),
             LAND = T("landing");
+
+          // ---------------------------------------------------------------- the shot clock (scene-local)
+          var S = {
+            beat4: B("l01", -0.05, "prev", 1), // the last beat before L01 (S1 overshoot)
+            l01: T("l01"),
+            gateCut: C("contractors"),
+            lotoIn: C("equipment"), // a1-inserts covers the frame from here ...
+            lotoOut: C("workMoves"), // ... to here (lands on siteMorning, S3c)
+            insurance: B("insurance"),
+            accepted: T("accepted"),
+            sheetIn: snapAt("L03:accepted.end", "next", 2), // a1-paper's sheet starts to slide in
+            sheetOut: C("noOne"), // and lifts off here
+            mind: B("head"),
+            roofCut: C("roof03"),
+            workerIn: C("hotWork"),
+            workerOut: C("certificate"),
+            tick1: B("certificate", 0, "near"),
+            settleEnd: B("landing", -0.3, "prev"),
+            sz3In: C("then"),
+            sz3Out: C("L07.end", 0.25),
+            nothingCut: C("nothingLooks"),
+            push9b: B("L08:conditions.start", 0, "near"),
+            fray: C("nobody"),
+            pull9c: B("nobodyEnd", 0, "near"),
+            after: C("afterwards"),
+            questions: T("L09:questions.start"),
+          };
+          S.beat1 = Math.max(0, S.beat4 - 3 * BEAT);
+          S.beat3 = S.beat4 - BEAT;
 
           var siteWrap = el(ID + "-sitewrap"),
             ovWrap = el(ID + "-ovwrap"),
@@ -131,100 +201,217 @@
           var wobbleFilter = site.disp.parentNode;
           var blur = FL.svgEl("feGaussianBlur", { stdDeviation: "0" }, wobbleFilter);
 
-          // overlay world (same camera, no tremor, no recede): the incident annotation
+          // overlay world (same camera, no tremor): the incident annotation
           ov.setAttribute("preserveAspectRatio", "xMidYMid slice");
           ov.style.overflow = "hidden";
 
-          // one camera system for both svgs: FL.camera, layer "story" (only the story timeline moves it)
-          var cam = FL.camera([svg, ov], {
-            layer: "story",
-            rects: {
-              roofEdgeMacro: CAM.roofEdgeMacro,
-              siteOverview: CAM.siteOverview,
-              siteLeft: CAM.siteLeft,
-              siteWide: CAM.siteWide,
-              roof03: CAM.roof03,
-              landing: CAM.landing,
-              sz3: CAM.sz3,
-              roof03AndSz3: CAM.roof03AndSz3,
-              afterwardsWide: CAM.afterwardsWide,
-            },
-          });
-          cam.apply("roofEdgeMacro");
-
           var W = K.world(site, { prefix: ID, scene: ID, refScale: 7.1 });
           var Wov = K.world({ svg: ov, prefix: ID + "-ov", view: CAM.afterwardsWide }, { prefix: ID + "-ov", scene: ID, refScale: 7.4 });
+
+          // ---------------------------------------------------------------- framings (SiteKit rects)
+          // named cut 2 framings: the macro corner, the gate road, the morning wide, a tighter Roof 03,
+          // a tighter zone 3 roof, the envelope edge beside Roof 03 (computed from the redraw below), Roof 03 medium-close
+          var R = {
+            macro: SK.rect(24, 12, 40),
+            siteOverview: CAM.siteOverview,
+            gateRoad: SK.rect(52, 73.5, 23),
+            gateRoadDrift: SK.rect(49, 73.3, 23.5),
+            siteMorning: SK.rect(13.5, 46.5, 7.9),
+            siteWide: CAM.siteWide,
+            roof03: CAM.roof03,
+            roof03Tight: SK.rect(48.5, 30.5, 18.5),
+            landing: CAM.landing,
+            sz3Roof: SK.rect(47.5, 36.5, 19),
+            roof03AndSz3: CAM.roof03AndSz3,
+            roof03Close: SK.rect(39.5, 29.5, 20.5),
+            afterwardsWide: CAM.afterwardsWide,
+          };
 
           // annotation groups (each group's opacity has one owner: the story)
           var g = function (name, parent) {
             return FL.svgEl("g", { id: ID + "-" + name }, parent);
           };
-          var gCons = g("cons", W.top);
+          var gLead = g("lead", W.top);
           var gMornGround = g("morn-ground", W.ground);
           var gMorn = g("morn", W.top);
           var gField = g("field", W.top);
           var gRoofMk = g("roofmk", W.top);
           var gRoof03 = g("roof03", W.top);
           var gLater = g("later", W.top);
+          var gWelder = g("welder", W.top);
 
           var story = FL.story();
-          cam.set(story, "roofEdgeMacro", 0);
 
-          // ================================================================ 1.1 lead-in: three construction strokes
-          // The production hall's north roof corner, set out with a set square before the drawing begins.
-          var uMacro = 1 / 30;
-          var consLines = [
-            [[22.52, 9.0], [57.16, 29.0]], // north-east roof edge, from the corner
-            [[22.52, 9.0], [-1.73, 23.0]], // north-west roof edge
-            [[33.77, 15.5], [9.53, 29.5]], // the division between roofs 01 and 02
-          ];
-          var consRecs = consLines.map(function (seg, i) {
-            return HU.hand(W, gCons, HU.lineCmds(seg, false), { u: uMacro, seed: ID + "cons" + i, jit: 0.8, ext: true, extMin: 10, cls: i === 2 ? "skt-lite" : "" });
-          });
+          // ---------------------------------------------------------------- helpers
           var drawRec = function (tl, rec, t, d, ease) {
+            if (rec.occ) tl.fromTo(rec.occ, { opacity: 0 }, { opacity: 1, duration: 0.01, immediateRender: true }, t);
             tl.fromTo(rec.main, { drawSVG: "0%" }, { drawSVG: "100%", duration: d, ease: ease || "power1.inOut", immediateRender: true }, t);
             if (rec.over) tl.fromTo(rec.over, { drawSVG: "0%" }, { drawSVG: "100%", duration: d * 0.8, ease: "power1.inOut", immediateRender: true }, t + d * 0.45);
             if (rec.ext) tl.fromTo(rec.ext, { drawSVG: "0%" }, { drawSVG: "100%", duration: Math.min(0.22, d * 0.6), ease: "power1.out", immediateRender: true }, t + d * 0.9);
           };
-          drawRec(story, consRecs[0], EV("cons-1"), EVD("cons-1"), "power2.inOut");
-          drawRec(story, consRecs[1], EV("cons-2"), EVD("cons-2"), "power2.inOut");
-          drawRec(story, consRecs[2], EV("cons-3"), EVD("cons-3"), "power1.inOut");
-          // they merge into the building's own edges, then lift away (not part of the landing frame)
-          story.fromTo(gCons, { opacity: 1 }, { opacity: 0, duration: 1.2, ease: "power1.inOut", immediateRender: false }, T("hour", 0.2));
+          var fade = function (els, from, to, t, d, ease, ir) {
+            story.fromTo(els, { opacity: from }, { opacity: to, duration: d, ease: ease || "power1.inOut", immediateRender: !!ir }, t);
+          };
+          var polyD = function (pts, closed) {
+            return "M" + pts.map(function (p) { return p[0].toFixed(3) + " " + p[1].toFixed(3); }).join("L") + (closed ? "Z" : "");
+          };
+          var smooth = function (x0, x1, t) {
+            var u = Math.max(0, Math.min(1, (t - x0) / (x1 - x0)));
+            return u * u * (3 - 2 * u);
+          };
 
-          // ================================================================ 1.2 the site draws itself (L01)
-          cam.to(story, "siteOverview", T("l01"), 4.0, "power2.inOut");
+          // ---------------------------------------------------------------- the camera
+          // one camera system for both svgs: FL.camera, layer "story" (only the story timeline moves it)
+          var cam = FL.camera([svg, ov], { layer: "story", rects: R });
+          cam.apply("macro");
+          cam.set(story, "macro", 0);
+          // zooms interpolate the width geometrically (an even feel) under the given base ease
+          var zoomEase = function (a, b, base) {
+            var e = gsap.parseEase(base || "power2.inOut"),
+              r = b.w / a.w;
+            if (Math.abs(r - 1) < 1e-4) return e;
+            return function (p) {
+              return (Math.pow(r, e(p)) - 1) / (r - 1);
+            };
+          };
+          var move = function (name, t, d, base) {
+            cam.to(story, name, t, d, zoomEase(cam.last.story, cam.rect(name), base));
+          };
+          // a hard cut: a 1 ms move with steps(1) from the previous framing (reverses exactly in the rewind)
+          var cut = function (name, t) {
+            cam.to(story, name, t, 0.001, "steps(1)");
+          };
+          var still = function (t, d, pct) {
+            cam.drift(story, null, t, d, pct, "sine.inOut");
+          };
+
+          // ================================================================ S1 macro stroke (0 to l01)
+          // Extreme close on the paper at the Production Hall's north roof corner. On the downbeat one graphite
+          // stroke crosses the frame (the north-east roof edge, landing at the corner and running out of frame);
+          // on beat 3 the north-west edge comes in from the left and meets it at the corner; on beat 4 both
+          // overshoot the corner (construction). Pressure is drawn as a ribbon of varying width, the grain is the
+          // paper's tooth breaking the graphite (fixed-seed turbulence filters on these strokes only, world scaled,
+          // so the grain recedes with the drawing), and the width is world scaled so the line thins into the site's
+          // own 1.5 px edge as the camera pulls back.
+          var corner = FL.iso(34, 8, 12),
+            neEnd = FL.iso(74, 8, 12),
+            nwEnd = FL.iso(34, 36, 12);
+          // Each stroke is authored in its own stroke space (x along the drag, y across) inside a rotated group,
+          // so the tooth filter streaks along the pencil's direction. Core: graphite broken by the paper's tooth
+          // (thresholded fractal noise, mostly covered); dust: a wider, sparse pass of specks beside the line.
+          var mkGrain = function (id, freq, slope, bias, seed) {
+            var f = FL.svgEl("filter", { id: id, x: "-2%", y: "-60%", width: "104%", height: "220%", "color-interpolation-filters": "sRGB" }, W.defs);
+            FL.svgEl("feTurbulence", { type: "fractalNoise", baseFrequency: freq, numOctaves: "3", seed: seed, result: "n" }, f);
+            FL.svgEl("feColorMatrix", { in: "n", type: "matrix", values: "0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 " + slope + " " + bias, result: "g" }, f);
+            FL.svgEl("feComposite", { in: "SourceGraphic", in2: "g", operator: "in" }, f);
+            return "url(#" + id + ")";
+          };
+          var GRAIN = mkGrain(ID + "-grain", "2.4 26", -4.6, 3.05, "23"),
+            DUST = mkGrain(ID + "-dust", "5 30", -10, 4.2, "31");
+          var LEAD_W = 0.2; // world units: 8 px at the macro, 1.4 px at the overview
+          // a pressure ribbon from x 0 to L along the local x axis
+          function ribbon(L, o) {
+            var n = Math.max(40, Math.round(L * 5)),
+              rr = FL.prng(o.seed),
+              p1 = rr() * 6.283,
+              p2 = rr() * 6.283,
+              p3 = rr() * 6.283,
+              w = o.w,
+              top = [],
+              bot = [],
+              mid = [];
+            for (var i = 0; i <= n; i++) {
+              var t = i / n,
+                x = t * L,
+                s = x * 40; // px along the stroke at the macro
+              var pr = o.press(t) * (1 + 0.08 * Math.sin(s / 23 + p1) + 0.05 * Math.sin(s / 7.3 + p2));
+              var hw = 0.5 * w * Math.max(0.06, pr);
+              var yc = (o.bow || 0) * Math.sin(Math.PI * t) + w * 0.07 * Math.sin(s / 47 + p3);
+              mid.push([x, yc]);
+              top.push([x, yc - hw * (1 + 0.2 * (rr() - 0.5))]);
+              bot.push([x, yc + hw * (1 + 0.2 * (rr() - 0.5))]);
+            }
+            var he = 0.5 * w * Math.max(0.06, o.press(1)),
+              hs = 0.5 * w * Math.max(0.06, o.press(0));
+            var poly = top.concat([[L + he * 0.9, mid[n][1]]], bot.reverse(), [[-hs * 0.9, mid[0][1]]]);
+            return { fill: polyD(poly, true), centre: polyD([[-w, mid[0][1]]].concat(mid, [[L + w, mid[n][1]]]), false) };
+          }
+          var leadN = 0;
+          function leadStroke(a, b, o) {
+            var L = Math.hypot(b[0] - a[0], b[1] - a[1]),
+              deg = (Math.atan2(b[1] - a[1], b[0] - a[0]) * 180) / Math.PI;
+            var gg = FL.svgEl("g", { transform: "translate(" + a[0].toFixed(4) + " " + a[1].toFixed(4) + ") rotate(" + deg.toFixed(4) + ")" }, gLead);
+            var core = ribbon(L, { w: o.w, press: o.press, seed: o.seed, bow: o.bow });
+            var dust = ribbon(L, { w: o.w * 1.7, press: o.press, seed: o.seed + "d", bow: o.bow });
+            FL.svgEl("path", { class: ID + "-lead-halo", d: dust.fill, filter: DUST }, gg);
+            FL.svgEl("path", { class: ID + "-lead", d: core.fill, filter: GRAIN }, gg);
+            var mid = ID + "-leadmask-" + leadN++;
+            var m = FL.svgEl("mask", { id: mid, maskUnits: "userSpaceOnUse", x: (-2 * o.w).toFixed(3), y: (-3 * o.w - 0.5).toFixed(3), width: (L + 4 * o.w).toFixed(3), height: (6 * o.w + 1).toFixed(3) }, W.defs);
+            var mp = FL.svgEl("path", { d: core.centre, fill: "none", stroke: "#fff", "stroke-width": (o.w * 2.6).toFixed(3), "stroke-linecap": "butt" }, m);
+            gg.setAttribute("mask", "url(#" + mid + ")");
+            return {
+              g: gg,
+              draw: function (t, d, ease) {
+                story.fromTo(mp, { drawSVG: "0%" }, { drawSVG: "100%", duration: d, ease: ease || "power1.inOut", immediateRender: true }, t);
+              },
+            };
+          }
+          var landingPress = function (t) {
+            return (0.45 + 0.55 * smooth(0, 0.09, t)) * (1 - 0.4 * smooth(0.72, 1, t));
+          };
+          var arrivePress = function (t) {
+            return (0.62 + 0.38 * smooth(0, 0.25, t)) * (1 + 0.14 * smooth(0.82, 1, t));
+          };
+          var flickPress = function (t) {
+            return 0.12 + 0.78 * Math.pow(1 - t, 0.85);
+          };
+          var ux1 = [(neEnd[0] - corner[0]) / Math.hypot(neEnd[0] - corner[0], neEnd[1] - corner[1]), (neEnd[1] - corner[1]) / Math.hypot(neEnd[0] - corner[0], neEnd[1] - corner[1])];
+          var ux2 = [(corner[0] - nwEnd[0]) / Math.hypot(corner[0] - nwEnd[0], corner[1] - nwEnd[1]), (corner[1] - nwEnd[1]) / Math.hypot(corner[0] - nwEnd[0], corner[1] - nwEnd[1])];
+          // stroke 1: lands just past the corner, runs down the north-east edge and out of frame
+          var st1 = leadStroke([corner[0] + ux1[0] * 0.15, corner[1] + ux1[1] * 0.15], [corner[0] + ux1[0] * 34, corner[1] + ux1[1] * 34], { w: LEAD_W, press: landingPress, seed: "lead-ne", bow: -0.06 });
+          // stroke 2: enters from the left along the north-west edge and presses into the corner
+          var st2 = leadStroke([corner[0] - ux2[0] * 27, corner[1] - ux2[1] * 27], [corner[0] + ux2[0] * 0.05, corner[1] + ux2[1] * 0.05], { w: LEAD_W * 1.05, press: arrivePress, seed: "lead-nw", bow: 0.05 });
+          // construction overshoot: each edge runs on past the corner
+          var ov2 = leadStroke([corner[0] + ux2[0] * 0.05, corner[1] + ux2[1] * 0.05], [corner[0] + ux2[0] * 1.35, corner[1] + ux2[1] * 1.35], { w: LEAD_W * 0.9, press: flickPress, seed: "lead-ov2" });
+          var ov1 = leadStroke([corner[0] + ux1[0] * 0.1, corner[1] + ux1[1] * 0.1], [corner[0] - ux1[0] * 1.05, corner[1] - ux1[1] * 1.05], { w: LEAD_W * 0.75, press: flickPress, seed: "lead-ov1" });
+          st1.draw(S.beat1, 0.95, "power2.in");
+          st2.draw(S.beat3, 0.5, "power2.out");
+          ov2.draw(S.beat4, 0.2, "power2.out");
+          ov1.draw(S.beat4 + 0.1, 0.16, "power2.out");
+          still(0, S.l01, 0.01);
+          // the strokes become the building's own edges as the site draws, then lift away (the grain filter region
+          // is the group's bounding box, which shrinks with the pull, so it costs little after the macro)
+          fade(gLead, 1, 0, T("l01", 1.1), 1.4, "power1.inOut");
+
+          // ================================================================ S2 the site appears (l01 to contractors)
+          move("siteOverview", S.l01, 4.5 * BEAT, "power2.inOut");
           var ORDER = ["production-hall", "production-hall-2", "pipe-bridge", "utilities", "loading-area-containers", "roads", "tanks", "warehouse", "loading-area", "laboratory", "ground-crosses"];
-          var drawEnd = site.drawOn(story, EV("site-draw-01"), { order: ORDER, perBuilding: 0.8, stagger: 0.26, scene: ID });
-          // sprinkler heads (zone 3) arrive with the production hall roofs; the zone outline waits for 1.7
+          site.drawOn(story, S.l01, { order: ORDER, perBuilding: 0.62, stagger: 0.17, scene: ID });
+          // sprinkler heads (zone 3) arrive with the production hall roofs; the zone outline waits for Roof 03
           var heads = site.rough.heads.slice().sort(function (a, b) {
             return (+a.getAttribute("data-i") || 0) - (+b.getAttribute("data-i") || 0);
           });
-          story.fromTo(heads, { opacity: 0 }, { opacity: 1, duration: 0.22, stagger: 0.018, ease: "power1.out", immediateRender: true }, T("l01", 0.75));
+          story.fromTo(heads, { opacity: 0 }, { opacity: 1, duration: 0.2, stagger: 0.012, ease: "power1.out", immediateRender: true }, T("l01", 0.6));
           var szUnit = (site.rough.byBuilding["sprinkler-zone-3"] || [])[0];
           var szOutline = szUnit && szUnit.main;
-          // the site kit's own zone-3 label stays hidden (drawOn sets it); Act I letters its own
-          cam.drift(story, null, T("l01", 4.0), T("insurance") - T("l01", 4.0), 0.012);
 
-          // ================================================================ 1.3 people and work (L02)
+          // ================================================================ S3a contractors arrive (gate road)
           var PL = K.PLACES;
           var gate = K.gate(W, "gate", { label: false, layer: gMorn });
-          gate.drawOn(story, T("contractors", -0.4), { events: false });
+          gate.drawOn(story, S.gateCut - 1.1, { events: false });
           var ROUTE = [{ plan: PL.gateOutside.plan }, "gate", { plan: [104, 41.4, 0] }, { plan: [99, 48, 0] }, "contractorsStop"];
-          var route = K.dottedPath(W, ROUTE, {
-            layer: gMornGround,
-            labelLayer: gMorn,
-            label: "CONTRACTORS · GATE 2 · 07:10",
-            labelFrac: 0.05,
-            labelLeader: [26, -58],
-            labelSize: 18,
-            spacingPx: 6.5,
-          });
-          route.drawOn(story, EV("route-01"), { events: false });
+          var route = K.dottedPath(W, ROUTE, { layer: gMornGround, spacingPx: 6.5, refScale: 7.1, dur: 1.1, sound: false });
+          route.drawOn(story, S.gateCut - 0.2, { events: false });
+          // the tag reads in the medium-close (world scaled: 28 px here), and lifts under the LOTO insert
+          var routeTag = K.label(W, { plan: [111, 37.8, 0] }, "CONTRACTORS · GATE 2 · 07:10", { leader: [-26, -84], size: 18, scale: "world", refScale: 15, layer: gMorn });
+          routeTag.drawOn(story, S.gateCut + 0.12, { speed: 2.6, events: false });
+          fade(routeTag.root, 1, 0, S.lotoIn + 0.3, 0.3);
 
-          var van = K.van(W, { plan: [108.5, 46.5, 0] }, { heading: 180, size: 1.15, layer: gMorn }); // beside the route, not on it
-          van.drawOn(story, EV("van"), { speed: 2.4, events: false });
-          van.drive(story, EV("van"), { dur: EVD("van"), events: false });
+          // the van pulls up outside the gate (it arrives at the end of the pull back and stops in the shot)
+          var VAN_AT = [123.5, 47.5, 0];
+          var van = K.van(W, { plan: VAN_AT }, { heading: 180, size: 1.15, layer: gMorn });
+          van.drawOn(story, S.gateCut - 1.7, { speed: 2.6, events: false });
+          van.drive(story, S.gateCut - 1.3, { from: { plan: [VAN_AT[0] + 16, VAN_AT[1], 0] }, dur: 1.9, events: false });
 
           // ---------------------------------------------------------------- walkers (in-scene gait)
           // An architect's entourage figure (the kit's side-view silhouette), animated with a real
@@ -233,39 +420,58 @@
           // body rises at mid-stance and settles at double support. Eight poses per stride, all the
           // same command structure, so every pose is a plain attribute tween (seek-safe).
           function armShape(pts, w) {
-            var left = [], right = [];
+            var left = [],
+              right = [];
             for (var i = 0; i < pts.length; i++) {
-              var a = pts[Math.max(0, i - 1)], b = pts[Math.min(pts.length - 1, i + 1)];
-              var tx = b[0] - a[0], ty = b[1] - a[1], L = Math.hypot(tx, ty) || 1;
-              tx /= L; ty /= L;
+              var a = pts[Math.max(0, i - 1)],
+                b = pts[Math.min(pts.length - 1, i + 1)];
+              var tx = b[0] - a[0],
+                ty = b[1] - a[1],
+                L = Math.hypot(tx, ty) || 1;
+              tx /= L;
+              ty /= L;
               var ww = w * (i === pts.length - 1 ? 0.82 : 1);
               left.push([pts[i][0] - ty * ww, pts[i][1] + tx * ww]);
               right.push([pts[i][0] + ty * ww, pts[i][1] - tx * ww]);
             }
-            var e = pts[pts.length - 1], p = pts[pts.length - 2];
-            var ex = e[0] - p[0], ey = e[1] - p[1], EL = Math.hypot(ex, ey) || 1;
+            var e = pts[pts.length - 1],
+              p = pts[pts.length - 2];
+            var ex = e[0] - p[0],
+              ey = e[1] - p[1],
+              EL = Math.hypot(ex, ey) || 1;
             return left.concat([[e[0] + (ex / EL) * w * 0.95, e[1] + (ey / EL) * w * 0.95]], right.reverse());
           }
           // pose in figure units (height 1, feet at y 0, facing +x)
           function walkPose(q) {
-            var bob = q.bob || 0, hipY = -0.465 - bob;
+            var bob = q.bob || 0,
+              hipY = -0.465 - bob;
             var leg = function (hx, f, lift, knee) {
               var fy = -0.04 - lift;
-              var ax = function (t) { return hx + (f - hx) * t + knee * Math.sin(Math.PI * t); };
-              var ay = function (t) { return hipY + (fy - hipY) * t; };
+              var ax = function (t) {
+                return hx + (f - hx) * t + knee * Math.sin(Math.PI * t);
+              };
+              var ay = function (t) {
+                return hipY + (fy - hipY) * t;
+              };
               return {
                 back: [[ax(0.28) - 0.045, ay(0.28)], [ax(0.55) - 0.036, ay(0.55)], [ax(0.8) - 0.03, ay(0.8)], [f - 0.026, fy - 0.006]],
                 foot: [[f - 0.033, -0.005 - lift], [f + 0.058, -0.005 - lift], [f + 0.052, -0.027 - lift]],
                 fr: [[f + 0.016, fy - 0.016], [ax(0.8) + 0.02, ay(0.8)], [ax(0.55) + 0.03, ay(0.55)], [ax(0.28) + 0.036, ay(0.28)]],
               };
             };
-            var l1 = leg(-0.012, q.f1, q.l1 || 0, q.k1 || 0), l2 = leg(0.012, q.f2, q.l2 || 0, q.k2 || 0);
-            var up = function (pts) { return pts.map(function (p) { return [p[0], p[1] - bob]; }); };
+            var l1 = leg(-0.012, q.f1, q.l1 || 0, q.k1 || 0),
+              l2 = leg(0.012, q.f2, q.l2 || 0, q.k2 || 0);
+            var up = function (pts) {
+              return pts.map(function (p) {
+                return [p[0], p[1] - bob];
+              });
+            };
             var body = up([[-0.024, -0.84], [-0.056, -0.809], [-0.066, -0.733], [-0.064, -0.62], [-0.058, -0.505]])
-              .concat(l1.back, l1.foot, l1.fr, [[0.004, -0.43 - bob]], l2.back, l2.foot, l2.fr,
-                up([[0.052, -0.49], [0.058, -0.602], [0.062, -0.716], [0.05, -0.801], [0.018, -0.84]]));
+              .concat(l1.back, l1.foot, l1.fr, [[0.004, -0.43 - bob]], l2.back, l2.foot, l2.fr, up([[0.052, -0.49], [0.058, -0.602], [0.062, -0.716], [0.05, -0.801], [0.018, -0.84]]));
             var sw = q.sw || 0;
-            var sh = [0.0, -0.792 - bob], elb = [sw * 0.052, -0.645 - bob], hd = [0.004 + sw * 0.112, -0.508 - bob];
+            var sh = [0.0, -0.792 - bob],
+              elb = [sw * 0.052, -0.645 - bob],
+              hd = [0.004 + sw * 0.112, -0.508 - bob];
             return { body: body, arm: armShape([sh, elb, hd], 0.023), hand: hd, bob: bob };
           }
           var GAIT = { A: 0.2, lift: 0.045, knee: 0.035, bob: 0.028 };
@@ -273,10 +479,12 @@
             var legAt = function (ph) {
               ph = ((ph % 1) + 1) % 1;
               if (ph < 0.5) return { f: A - (2 * A * ph) / 0.5, lift: 0, knee: 0 }; // stance: planted
-              var u = (ph - 0.5) / 0.5, s = 0.5 - 0.5 * Math.cos(Math.PI * u);
+              var u = (ph - 0.5) / 0.5,
+                s = 0.5 - 0.5 * Math.cos(Math.PI * u);
               return { f: -A + 2 * A * s, lift: GAIT.lift * Math.sin(Math.PI * u), knee: GAIT.knee * Math.sin(Math.PI * u) };
             };
-            var a = legAt(phi), b = legAt(phi + 0.5);
+            var a = legAt(phi),
+              b = legAt(phi + 0.5);
             var bob = GAIT.bob * 0.5 * (1 - Math.cos(4 * Math.PI * phi));
             var sw = (carrying ? 0.08 : 0.75) * (a.f / A);
             return walkPose({ f1: a.f, f2: b.f, l1: a.lift, l2: b.lift, k1: a.knee, k2: b.knee, bob: bob, sw: sw });
@@ -286,28 +494,52 @@
           };
           function ellipseCmds(cx, cy, rx, ry) {
             var k = 0.5523;
-            return [["M", [cx + rx, cy]], ["C", [cx + rx, cy + ry * k, cx + rx * k, cy + ry, cx, cy + ry]], ["C", [cx - rx * k, cy + ry, cx - rx, cy + ry * k, cx - rx, cy]],
-              ["C", [cx - rx, cy - ry * k, cx - rx * k, cy - ry, cx, cy - ry]], ["C", [cx + rx * k, cy - ry, cx + rx, cy - ry * k, cx + rx, cy]], ["Z", []]];
+            return [
+              ["M", [cx + rx, cy]],
+              ["C", [cx + rx, cy + ry * k, cx + rx * k, cy + ry, cx, cy + ry]],
+              ["C", [cx - rx * k, cy + ry, cx - rx, cy + ry * k, cx - rx, cy]],
+              ["C", [cx - rx, cy - ry * k, cx - rx * k, cy - ry, cx, cy - ry]],
+              ["C", [cx + rx * k, cy - ry, cx + rx, cy - ry * k, cx + rx, cy]],
+              ["Z", []],
+            ];
           }
           var wn = 0;
           function makeWalker(ctx, layer, o) {
-            var u = 1 / o.refScale, h = o.heightPx * u, carrying = !!o.carry;
+            var u = 1 / o.refScale,
+              h = o.heightPx * u,
+              carrying = !!o.carry;
             var root = FL.svgEl("g", { id: ID + "-walker-" + wn++, class: "skt-item" }, layer);
             var face = FL.svgEl("g", { transform: "scale(1 1)" }, root);
             var headG = FL.svgEl("g", { transform: "translate(0 0)" }, face);
-            var sc = function (pts) { return pts.map(function (p) { return [p[0] * h, p[1] * h]; }); };
-            var dBody = function (P) { return SK.fmt(HU.smoothCmds(sc(P.body), true)); };
-            var dArm = function (P) { return SK.fmt(HU.smoothCmds(sc(P.arm), true)); };
+            var sc = function (pts) {
+              return pts.map(function (p) {
+                return [p[0] * h, p[1] * h];
+              });
+            };
+            var dBody = function (P) {
+              return SK.fmt(HU.smoothCmds(sc(P.body), true));
+            };
+            var dArm = function (P) {
+              return SK.fmt(HU.smoothCmds(sc(P.arm), true));
+            };
             var dBox = function (P) {
-              var x = P.hand[0] * h, y = P.hand[1] * h + 0.02 * h, bw = 0.15 * h, bh = 0.1 * h;
+              var x = P.hand[0] * h,
+                y = P.hand[1] * h + 0.02 * h,
+                bw = 0.15 * h,
+                bh = 0.1 * h;
               return SK.fmt(HU.lineCmds([[x - bw * 0.35, y], [x + bw * 0.65, y], [x + bw * 0.65, y + bh], [x - bw * 0.35, y + bh]], true));
             };
             var P0 = gaitPose(0, GAIT.A, carrying);
             var opt = { u: u, jit: 0, occ: true, over: false, cls: "skt-fine" };
-            var head = HU.hand(ctx, headG, ellipseCmds(0.012 * h, -0.905 * h, 0.051 * h, 0.06 * h), opt);
+            HU.hand(ctx, headG, ellipseCmds(0.012 * h, -0.905 * h, 0.051 * h, 0.06 * h), opt);
             var body = HU.hand(ctx, face, dBody(P0), opt);
             var arm = HU.hand(ctx, face, dArm(P0), { u: u, jit: 0, occ: true, over: false, cls: "skt-lite" });
-            var keyed = [[body.main, dBody], [body.occ, dBody], [arm.main, dArm], [arm.occ, dArm]];
+            var keyed = [
+              [body.main, dBody],
+              [body.occ, dBody],
+              [arm.main, dArm],
+              [arm.occ, dArm],
+            ];
             if (o.carry === "box") {
               var box = HU.hand(ctx, face, dBox(P0), { u: u, jit: 0, occ: true, over: false, cls: "skt-fine" });
               keyed.push([box.main, dBox], [box.occ, dBox]);
@@ -318,25 +550,34 @@
           function walk(tl, wk, route, o) {
             var pl = HU.flatten(HU.smoothCmds(route, false), 12)[0];
             var L = HU.plLen(pl);
-            var s0 = Math.min(L, (o.startPx || 0) * wk.u), s1 = Math.max(s0, L - (o.stopShortPx || 0) * wk.u);
+            var s0 = Math.min(L, (o.startPx || 0) * wk.u),
+              s1 = Math.max(s0, L - (o.stopShortPx || 0) * wk.u);
             if (o.maxLen != null) s1 = Math.min(s1, s0 + o.maxLen);
             var speed = o.speed; // world units per second
             var dur = (s1 - s0) / speed;
             var P0 = o.period || 0.92;
-            var n = Math.max(1, Math.round(dur / P0)), P = dur / n;
+            var n = Math.max(1, Math.round(dur / P0)),
+              P = dur / n;
             // stride matched to the ground speed so the stance foot stays planted (horizontal component)
             var hx = Math.abs(HU.pointAt(pl, s1).p[0] - HU.pointAt(pl, s0).p[0]) / Math.max(1e-6, s1 - s0);
             var A = Math.min(0.24, Math.max(0.12, (speed * Math.max(0.6, hx) * P) / (4 * wk.h)));
             var t = o.t;
-            var pos = function (s) { return HU.pointAt(pl, Math.max(0, Math.min(L, s))).p; };
-            var tr = function (q) { return "translate(" + q[0].toFixed(3) + " " + q[1].toFixed(3) + ")"; };
+            var pos = function (s) {
+              return HU.pointAt(pl, Math.max(0, Math.min(L, s))).p;
+            };
+            var tr = function (q) {
+              return "translate(" + q[0].toFixed(3) + " " + q[1].toFixed(3) + ")";
+            };
             var N = Math.max(2, Math.ceil(dur / 0.2));
             wk.root.setAttribute("transform", tr(pos(s0)));
             var facing = null;
             for (var i = 0; i < N; i++) {
-              var a = pos(s0 + ((s1 - s0) * i) / N), b = pos(s0 + ((s1 - s0) * (i + 1)) / N), ti = t + (i * dur) / N;
+              var a = pos(s0 + ((s1 - s0) * i) / N),
+                b = pos(s0 + ((s1 - s0) * (i + 1)) / N),
+                ti = t + (i * dur) / N;
               tl.fromTo(wk.root, { attr: { transform: tr(a) } }, { attr: { transform: tr(b) }, duration: dur / N, ease: "none", immediateRender: false }, ti);
-              var dx = b[0] - a[0], seg = Math.hypot(dx, b[1] - a[1]);
+              var dx = b[0] - a[0],
+                seg = Math.hypot(dx, b[1] - a[1]);
               if (seg < 1e-6) continue;
               var dir = dx >= 0 ? 1 : -1;
               if (facing === null) {
@@ -348,14 +589,16 @@
               }
             }
             // stride cycle: eight poses, repeated a whole number of times
-            var KP = 8, poses = [];
+            var KP = 8,
+              poses = [];
             for (var k = 0; k <= KP; k++) poses.push(gaitPose((k % KP) / KP, A, wk.carrying));
             var cyc = gsap.timeline({ repeat: n - 1 });
             for (var k2 = 0; k2 < KP; k2++) {
               wk.keyed.forEach(function (kv) {
                 cyc.fromTo(kv[0], { attr: { d: kv[1](poses[k2]) } }, { attr: { d: kv[1](poses[k2 + 1]) }, duration: P / KP, ease: "none", immediateRender: false }, (k2 * P) / KP);
               });
-              var hb0 = -poses[k2].bob * wk.h, hb1 = -poses[k2 + 1].bob * wk.h;
+              var hb0 = -poses[k2].bob * wk.h,
+                hb1 = -poses[k2 + 1].bob * wk.h;
               cyc.fromTo(wk.headG, { attr: { transform: "translate(0 " + hb0.toFixed(4) + ")" } }, { attr: { transform: "translate(0 " + hb1.toFixed(4) + ")" }, duration: P / KP, ease: "none", immediateRender: false }, (k2 * P) / KP);
             }
             tl.add(cyc, t);
@@ -370,26 +613,37 @@
             return end;
           }
 
-          // contractors in file from the gate to the loading-area apron
-          var FIG_PX = 28, REF_OV = 7.1;
-          var fileRoute = ["gate", { plan: [104, 41.4, 0] }, { plan: [99, 48, 0] }, "contractorsStop"].map(W.pt);
-          var carries = [null, "box", null, null, "box"];
-          var WALK_SPEED = 3.5; // world units per second (about 25 px/s at the overview)
-          var GAP_PX = 14;
-          var walkEnd = 0;
-          for (var fi = 0; fi < 5; fi++) {
+          // four contractors in file from the gate to the loading-area apron; about 2.4 units tall
+          // (50 px in the gate-road medium-close, 17 px at the overview: understated entourage)
+          var FIG_PX = 17,
+            REF_OV = 7.1;
+          var fileRoute = [{ plan: PL.gateOutside.plan }, "gate", { plan: [104, 41.4, 0] }, { plan: [99, 48, 0] }, "contractorsStop"].map(W.pt);
+          var carries = [null, "box", null, "box"];
+          var WALK_SPEED = 2.6; // world units per second (55 px/s in the medium-close)
+          var GAP_PX = 9;
+          for (var fi = 0; fi < 4; fi++) {
             var wk = makeWalker(W, gMorn, { refScale: REF_OV, heightPx: FIG_PX, carry: carries[fi] });
             var delay = (fi * GAP_PX) / REF_OV / WALK_SPEED;
-            walkEnd = Math.max(walkEnd, walk(story, wk, fileRoute, { t: EV("footsteps") + delay, speed: WALK_SPEED, stopShortPx: fi * GAP_PX, fadeIn: 0.35, period: 0.9 + fi * 0.02 }));
+            walk(story, wk, fileRoute, { t: S.gateCut - 0.45 + delay, speed: WALK_SPEED, stopShortPx: fi * GAP_PX, fadeIn: 0.3, period: 0.86 + fi * 0.03 });
           }
+          // the camera drifts west with them until the LOTO insert covers the frame
+          cut("gateRoad", S.gateCut);
+          move("gateRoadDrift", S.gateCut + 0.002, S.lotoIn + 0.2 - S.gateCut, "sine.inOut");
 
-          // isolation: a small lockout tag at Utilities, and the lettering on a leader beside it
+          // ================================================================ under the LOTO insert (lotoIn to lotoOut)
+          // the world moves to the morning wide; the small lockout tag hangs at Utilities; the toolbox talk stands
+          cut("siteMorning", S.lotoIn + 0.6);
           var loto = K.valveTag(W, "lotoValve", { lines: ["LOTO"], size: 11, side: "left", drop: 20, reach: 14, valveSize: 7, layer: gMorn });
-          loto.drawOn(story, T("isolated", -0.2), { speed: 1.6, events: false });
-          var lotoLab = K.label(W, "lotoValve", "ISOLATED · LOTO · 07:40", { leader: [-70, -170], size: 18, layer: gMorn });
-          lotoLab.drawOn(story, T("isolated", 0.35), { events: false });
+          loto.drawOn(story, S.lotoIn + 0.7, { speed: 2, events: false });
+          var talk = K.groupFigures(W, { kind: "semicircle", centre: "toolboxTalk", n: 5, label: ["TOOLBOX TALK · 07:15", "11 PEOPLE"], labelLeader: [-44, 26], labelSize: 18, layer: gMorn });
+          // the figures stand before the cut; the label letters in the shot
+          talk.children.forEach(function (c, i) {
+            if (c === talk.labelItem) return;
+            c.drawOn(story, S.lotoIn + 0.9 + i * 0.12, { events: false, speed: 1.4 });
+          });
 
-          // work moves: five markers, the HSE site walk, the toolbox talk
+          // ================================================================ S3c work moves (lotoOut to insurance)
+          // five markers pop in on consecutive half beats; the HSE walk loop draws; the talk is lettered
           var MK = [
             [{ plan: [96, 64, 0] }, "LIFT · LOADING AREA", "se"],
             [{ plan: [16, 12, 9] }, "ELECTRICAL · UTILITIES", "w"],
@@ -399,11 +653,7 @@
           ];
           var marks = MK.map(function (m, i) {
             var mk = K.activityMarker(W, m[0], { label: m[1], dir: m[2], leadPx: i === 1 ? 22 : undefined, size: 18, layer: gMorn });
-            var t0 = EV("markers-0" + (i + 1));
-            var e = mk.drawOn(story, t0, { speed: 2.0, events: false });
-            // breathing: a finite drift that comes to rest before Frame 1 pulls wide
-            var bd = T("noOne") - e - 0.1, nHalf = Math.max(2, 2 * Math.floor(bd / 2.6));
-            mk.breathe(story, e + 0.05, bd, { amp: 0.06, period: ((2 * bd) / nHalf) * 0.999 });
+            mk.drawOn(story, S.lotoOut + (i + 1) * HB, { speed: 2.3, events: false });
             return mk;
           });
           var hse = K.dottedPath(W, PL.hseWalkLoop.plan, {
@@ -419,123 +669,269 @@
             arrowAt: 0.8,
             dur: 1.3,
           });
-          hse.drawOn(story, EV("hse-loop-01"), { speed: 1.5, events: false });
+          hse.drawOn(story, S.lotoOut + 0.05, { speed: 1.2, events: false });
+          talk.labelItem.drawOn(story, S.lotoOut + 0.15, { events: false });
           var hseWalker = makeWalker(W, gMorn, { refScale: REF_OV, heightPx: FIG_PX, carry: null });
-          var hsePts = [[71.6, 74.8, 0], [51.5, 75.6, 0], [31.6, 74.6, 0], [30.6, 58.5, 0]].map(function (p) { return K.iso(p[0], p[1], p[2]); });
-          walk(story, hseWalker, hsePts, { t: EV("hse-footsteps"), speed: 2.9, period: 0.98, fadeIn: 0.4, settle: false, maxLen: 2.9 * (T("roof03", 1.4) - EV("hse-footsteps")) });
+          var hsePts = [[71.6, 74.8, 0], [51.5, 75.6, 0], [31.6, 74.6, 0], [30.6, 58.5, 0]].map(function (p) {
+            return K.iso(p[0], p[1], p[2]);
+          });
+          walk(story, hseWalker, hsePts, { t: S.lotoOut + 0.2, speed: 2.4, period: 0.98, fadeIn: 0.4, settle: false, maxLen: 2.4 * (S.mind - 0.2 - S.lotoOut - 0.2) });
 
-          var talk = K.groupFigures(W, { kind: "semicircle", centre: "toolboxTalk", n: 5, label: ["TOOLBOX TALK · 07:15", "11 PEOPLE"], labelLeader: [-44, 26], labelSize: 18, layer: gMorn });
-          talk.drawOn(story, EV("toolbox"), { events: false });
-
-          // once Frame 2 leads, the morning lettering lifts (it would sit off the safe area at siteLeft and
-          // under the detail sheet); the drawn people, van, marks and routes stay
-          var mornLetters = [route.parts.label.root, hse.parts.label.root, talk.labelItem.root, lotoLab.root];
+          // ================================================================ S4 the accepted envelope (L03)
+          // the camera rises to a clean overview; the morning lettering lifts so the envelope is the one thing
+          move("siteOverview", S.insurance, 2 * BEAT, "power2.inOut");
+          var mornLetters = [hse.parts.label.root, talk.labelItem.root];
           marks.forEach(function (mk) {
-            (mk.lines || []).forEach(function (ln) { mornLetters.push(ln.wrap); });
+            (mk.lines || []).forEach(function (ln) {
+              mornLetters.push(ln.wrap);
+            });
             if (mk.parts.leader) mornLetters.push(mk.parts.leader.main);
           });
-          story.fromTo(mornLetters, { opacity: 1 }, { opacity: 0, duration: 0.55, ease: "power1.inOut", immediateRender: false }, T("insurance", 0.68));
-
-          // ================================================================ 1.4 the accepted envelope (L03)
-          cam.to(story, "siteLeft", T("insurance"), 2.2, "power2.inOut");
-          cam.drift(story, null, T("insurance", 2.2), T("noOne") - T("insurance", 2.2), 0.012);
+          fade(mornLetters, 1, 0, S.insurance + HB, BEAT);
           var env = site.rough.envelope;
-          // the envelope's hand lettering at a legible size (18 px at siteWide, 17.8 px at siteLeft)
+          // the envelope's hand lettering at a legible size (18 px at siteWide)
           if (env.label) env.label.setAttribute("font-size", "3.3");
-          story.fromTo(env.construct, { drawSVG: "0%" }, { drawSVG: "100%", duration: EVD("envelope-construct"), ease: "power1.inOut", immediateRender: true }, EV("envelope-construct"));
-          story.fromTo(env.firm, { drawSVG: "0%" }, { drawSVG: "100%", duration: T("accepted") - EV("envelope-firm"), ease: "power1.inOut", immediateRender: true }, EV("envelope-firm"));
-          story.fromTo(env.label, { opacity: 0 }, { opacity: 1, duration: 0.7, ease: "power1.out", immediateRender: true }, EV("envelope-label"));
-          // Frame 2 leads: the drawing steps back to 80 percent while the detail sheet works
-          story.fromTo(siteWrap, { opacity: 1 }, { opacity: 0.8, duration: 1.0, ease: "power1.inOut", immediateRender: false }, T("insurance", 0.4));
-          story.fromTo(siteWrap, { opacity: 0.8 }, { opacity: 1, duration: 0.8, ease: "power1.inOut", immediateRender: false }, T("noOne", -0.3));
+          story.fromTo(env.construct, { drawSVG: "0%" }, { drawSVG: "100%", duration: 1.3, ease: "power1.inOut", immediateRender: true }, S.insurance);
+          story.fromTo(env.firm, { drawSVG: "0%" }, { drawSVG: "100%", duration: S.accepted - (S.insurance + HB), ease: "power1.inOut", immediateRender: true }, S.insurance + HB);
+          story.fromTo(env.label, { opacity: 0 }, { opacity: 1, duration: 0.7, ease: "power1.out", immediateRender: true }, S.accepted - 0.35);
 
-          // ================================================================ 1.6 no one can hold a moving site in mind (L05)
-          cam.to(story, "siteWide", T("noOne"), 1.9, "power2.inOut");
-          cam.drift(story, null, T("noOne", 1.9), T("roof03") - T("noOne", 1.9), 0.006);
+          // ================================================================ S5 the sheet is down (a1-paper): the world dims to 40 %
+          fade(siteWrap, 1, 0.4, S.sheetIn, BEAT, "power2.inOut");
+          fade(siteWrap, 0.4, 1, S.sheetOut, 0.45, "power2.out");
+          // under the sheet the camera goes to the extreme wide
+          move("siteWide", S.sheetIn + BEAT, 4 * BEAT, "sine.inOut");
+
+          // ================================================================ S6 no one can hold a moving site in mind (L05)
+          // about 36 markers, tags and trails arrive in waves on half beats (the first waves under the sheet);
+          // three containment lines are overtaken; on "mind" everything but ROOF 03 steps back to 25 %.
           var field = K.activityField(W, { count: 36, seed: "a1-world", layer: gField, refScale: 5.5, labelCount: 8, labelSize: 16, tagSize: 13, trailFrac: 0.6, minDist: 3.1, columnPx: 560 });
-          field.drawOn(story, EV("field-01"), { span: T("head", -0.1) - EV("field-01"), accel: 0.8, speed: 2.2, events: false });
+          var fm = field.markers,
+            fpts = field.points;
+          var trailOf = fm.map(function () {
+            return null;
+          });
+          field.trails.forEach(function (tr) {
+            var e = tr.polyline[tr.polyline.length - 1],
+              best = -1,
+              bd = 1e9;
+            fpts.forEach(function (p, i) {
+              var d = Math.hypot(p[0] - e[0], p[1] - e[1]);
+              if (d < bd && !trailOf[i]) {
+                bd = d;
+                best = i;
+              }
+            });
+            if (best >= 0) trailOf[best] = tr;
+          });
+          var WAVES = [2, 3, 3, 4, 4, 4, 5, 5, 6];
+          var wave0 = S.sheetOut - 3 * HB,
+            idx = 0;
+          WAVES.forEach(function (nw, w) {
+            var tw = wave0 + w * HB;
+            for (var j = 0; j < nw && idx < fm.length; j++, idx++) {
+              var tj = tw + j * 0.035;
+              if (trailOf[idx]) trailOf[idx].drawOn(story, Math.max(0, tj - 0.3), { speed: 1.6, events: false });
+              fm[idx].drawOn(story, tj, { speed: 2.4, events: false });
+            }
+          });
           var roofMk = K.activityMarker(W, "roof03Centre", { label: "ROOF 03", angle: -62, leadPx: 46, size: 18, layer: gRoofMk });
-          roofMk.drawOn(story, T("noOne", 0.3), { speed: 1.4, events: false });
+          roofMk.drawOn(story, S.sheetOut + 3 * HB, { speed: 1.6, events: false });
           var near = function (c, r) {
-            return field.points.filter(function (p) { return Math.hypot(p[0] - c[0], p[1] - c[1]) < r; });
+            return fpts.filter(function (p) {
+              return Math.hypot(p[0] - c[0], p[1] - c[1]) < r;
+            });
           };
-          var CONT = [[[-14, 26], 13, "c1", false], [[34, 70], 12, "c2", false], [[6, 44], 11, "c3", true]];
-          CONT.forEach(function (c, i) {
+          var CONT = [
+            [[-14, 26], 13, "c1", false, S.sheetOut + HB],
+            [[34, 70], 12, "c2", false, S.sheetOut + 2 * HB],
+            [[6, 44], 11, "c3", true, S.sheetOut + 4 * HB],
+          ];
+          CONT.forEach(function (c) {
             var pts = near(c[0], c[1]);
             if (pts.length < 2) pts = [c[0], [c[0][0] + 6, c[0][1] + 3]];
-            var lasso = K.containment(W, pts, { padPx: 16, seed: c[2], lite: c[3], layer: gField, refScale: 5.5, dur: 0.62 });
-            lasso.drawOn(story, EV("containment-0" + (i + 1)), { events: false });
+            var lasso = K.containment(W, pts, { padPx: 16, seed: c[2], lite: c[3], layer: gField, refScale: 5.5, dur: 0.6 });
+            lasso.drawOn(story, c[4], { events: false });
           });
-          // on "mind": everything but Roof 03 steps back
-          var dimT = T("head"), dimD = 0.6;
-          [gField, gMorn, gMornGround].forEach(function (grp) {
-            story.fromTo(grp, { opacity: 1 }, { opacity: 0.25, duration: dimD, ease: "power1.inOut", immediateRender: false }, dimT);
-          });
-          story.fromTo(site.rough.root, { opacity: 1 }, { opacity: 0.3, duration: dimD, ease: "power1.inOut", immediateRender: false }, dimT);
+          // on "mind": everything but Roof 03 steps back; then one beat (and more) of stillness
+          fade([gField, gMorn, gMornGround], 1, 0.25, S.mind, HB);
+          fade(site.rough.root, 1, 0.25, S.mind, HB);
 
-          // ================================================================ 1.7 Roof 03: hot work, every safeguard in place (L06)
-          cam.to(story, "roof03", T("roof03"), 2.2, "power2.inOut");
-          story.fromTo(site.rough.root, { opacity: 0.3 }, { opacity: 1, duration: 1.6, ease: "power1.inOut", immediateRender: false }, T("roof03", 0.2));
-          [gField, gMorn, gMornGround].forEach(function (grp) {
-            story.fromTo(grp, { opacity: 0.25 }, { opacity: 0, duration: 1.1, ease: "power1.in", immediateRender: false }, T("roof03"));
+          // ================================================================ S7a Roof 03 (L06): a one-beat push
+          move("roof03", S.roofCut, BEAT, "power3.inOut");
+          fade(site.rough.root, 0.25, 1, S.roofCut, BEAT);
+          fade([gField, gMorn, gMornGround], 0.25, 0, S.roofCut, BEAT * 0.9);
+          // the ROOF 03 marker becomes the hot-work marker: its lettering lifts as the hot rings draw over it
+          var roofLetters = (roofMk.lines || []).map(function (ln) {
+            return ln.wrap;
           });
-          story.fromTo(gRoofMk, { opacity: 1 }, { opacity: 0, duration: 0.35, ease: "power1.inOut", immediateRender: false }, T("hotWork", -0.15));
-
+          if (roofMk.parts.leader) roofLetters.push(roofMk.parts.leader.main);
+          fade(roofLetters, 1, 0, S.roofCut, HB);
+          fade(gRoofMk, 1, 0, S.workerIn + 0.3, 0.2);
           var REF_R = 14.5; // world-scaled lettering authored at the landing scale: 18 px at the handoff
           var hot = K.activityMarker(W, "roof03Centre", { variant: "hot", label: "HOT WORK · ROOF 03 · 14:18", scale: "world", refScale: REF_R, layer: gRoof03 });
-          var hotEnd = hot.drawOn(story, EV("hot-marker"), { speed: 1.8, events: false });
-          // the reviewed kit's safeguard schedule (default layout); a2-resolve builds the same at the landing
+          hot.drawOn(story, S.roofCut + 0.08, { speed: 1.5, events: false });
+
+          // ================================================================ under the worker insert (workerIn to workerOut)
+          cut("roof03Tight", S.workerIn + 0.4);
+          if (szOutline) story.fromTo(szOutline, { opacity: 0 }, { opacity: 1, duration: 0.4, ease: "power1.inOut", immediateRender: true }, S.workerIn + 0.45);
+          var szLab = K.label(W, "sprinklerZone3Label", "SPRINKLER ZONE 3", { leader: [22, 30], size: 18, layer: gRoof03 });
+          szLab.drawOn(story, S.workerIn + 0.5, { speed: 1.6, events: false });
+
+          // ================================================================ S7c every safeguard in place: ticks on half beats
           var sg = K.safeguardItems(W, "roof03Centre", { refScale: REF_R, size: 18, layer: gRoof03 });
           var SG_KEYS = ["certificate", "fireWatch", "extinguisher", "areaCleared", "sprinklers"];
-          SG_KEYS.forEach(function (k, i) {
-            var it = sg.items[k];
-            var tickAt = EV("tick-0" + (i + 1));
-            it.drawOn(story, tickAt + 0.16 - it.duration, { events: false });
+          var tickAt = SG_KEYS.map(function (k, i) {
+            return S.tick1 + i * HB;
           });
-          // Sprinkler Zone 3: the dashed outline and its lettering
-          if (szOutline) story.fromTo(szOutline, { opacity: 0 }, { opacity: 1, duration: 0.9, ease: "power1.inOut", immediateRender: true }, T("hotWork", 0.8));
-          var szLab = K.label(W, "sprinklerZone3Label", "SPRINKLER ZONE 3", { leader: [22, 30], size: 18, layer: gRoof03 });
-          szLab.drawOn(story, EV("sz3-label"), { speed: 1.5, events: false });
-          // the marker's quiet life, resting exactly at the landing
-          var breatheTo = function (t0, t1) {
-            var bd = t1 - t0, nHalf = Math.max(2, 2 * Math.floor(bd / 2.6));
-            hot.breathe(story, t0, bd, { amp: 0.05, period: ((2 * bd) / nHalf) * 0.999 });
-          };
-          breatheTo(hotEnd + 0.05, LAND);
+          SG_KEYS.forEach(function (k, i) {
+            var it = sg.items[k],
+              sp = 1.5;
+            // each item draws where it stands and lands its tick on its half beat (the tick is the last step)
+            it.drawOn(story, tickAt[i] + 0.16 / sp - it.duration / sp, { speed: sp, events: false });
+          });
+          // the camera settles on the landing framing and is still before 'landing'
+          move("landing", S.tick1 + HB, S.settleEnd - (S.tick1 + HB), "sine.inOut");
 
-          // ================================================================ 1.8 the landing, 1.9 the unnoticed change (L07)
-          cam.to(story, "landing", T("roof03", 2.2), LAND - T("roof03", 2.2), "sine.inOut");
-          cam.to(story, "sz3", T("sprinkler", -0.3), 1.6, "power2.inOut");
-          cam.drift(story, null, T("sprinkler", 1.3), T("nothingLooks") - T("sprinkler", 1.3), 0.006);
+          // ================================================================ under the SZ3 insert (sz3In to sz3Out)
+          cut("sz3Roof", S.sz3In + 0.4);
           var szTag = K.valveTag(W, "sprinklerZone3Valve", { text: "SZ3 ISOLATED · MAINTENANCE · 14:42", hand: "b", side: "left", drop: 110, reach: 60, size: 18, layer: gLater });
-          var tagT0 = T("sprinkler", -0.2);
-          szTag.drawOn(story, tagT0, { speed: szTag.duration / (EV("valve-clunk") - 0.05 - tagT0), events: false });
-          K.sprinklerHeadsFade(story, site, EV("heads-off"), { to: 0.2, step: 0.055, dur: 0.45, events: false });
-          breatheTo(LAND, T("afterwards"));
+          szTag.drawOn(story, S.sz3In + 0.45, { speed: 3, events: false });
 
-          // ================================================================ 1.10 nothing looks different; the conditions have changed (L08)
-          // held exactly (the redraw and the fray are the motion), so Frame 3 can pin evidence to site points:
-          // roof03AndSz3 from nothingLooks + 2.0 to afterwards, then roof03AndSz3 -> afterwardsWide (sine.inOut)
-          // from afterwards to tooLate - 0.8, then afterwardsWide held to rewindStart
-          cam.to(story, "roof03AndSz3", T("nothingLooks"), 2.0, "power2.inOut");
-          var red = K.envelopeRedraw(W, { target: "roof03Centre", refScale: 10.5, marginPx: 22, span: 10, shoulder: 0.45, layer: gLater });
-          var cross = red.crossing("heroExitPoint", "roof03Centre");
-          var conn = K.conditionConnection(W, "heroExitPoint", "roof03Centre", { refScale: 10.5, breakAt: cross != null ? cross : 0.5, labelSize: 18, layer: gLater });
-          conn.drawOn(story, EV("connection-01"), { events: false });
-          red.drawOn(story, EV("envelope-redraw"), { events: false });
-          conn.fray(story, EV("fray"), { dur: EVD("fray"), events: false });
+          // the small welder on Roof 03 (kneeling, mask down, torch to the seam; arc: a bright point in a ring
+          // with five short radial graphite ticks). Hidden at the landing; it appears under the SZ3 insert.
+          var welderAt = W.pt({ anchor: "roof03Centre", plan: [2.3, -0.7, 0] });
+          (function buildWelder() {
+            var h = 2.0; // world units (standing height 2.4; kneeling)
+            var root = FL.svgEl("g", { transform: "translate(" + welderAt[0].toFixed(3) + " " + welderAt[1].toFixed(3) + ") scale(-1 1)" }, gWelder);
+            var u = 1 / 14.5;
+            var sc = function (pts) {
+              return pts.map(function (p) {
+                return [p[0] * h, p[1] * h];
+              });
+            };
+            // silhouette, facing +x (flipped to face the hot point, west): kneeling on the back knee, torso leaning in
+            var body = [
+              [-0.03, -0.78], [-0.1, -0.74], [-0.15, -0.62], [-0.17, -0.47], [-0.16, -0.36], [-0.2, -0.28], [-0.33, -0.08], [-0.36, -0.02], [-0.31, 0],
+              [-0.05, -0.01], [0.02, -0.04], [0.03, -0.12], [-0.02, -0.2], [0.06, -0.26], [0.2, -0.27], [0.22, -0.2], [0.21, -0.02], [0.28, -0.01], [0.29, 0.0],
+              [0.3, -0.04], [0.29, -0.09], [0.29, -0.3], [0.2, -0.36], [0.08, -0.38], [0.07, -0.5], [0.06, -0.66], [0.04, -0.75],
+            ];
+            var helmet = [[-0.06, -0.8], [-0.11, -0.9], [-0.06, -1.0], [0.04, -1.02], [0.12, -0.96], [0.14, -0.86], [0.13, -0.78], [0.05, -0.76]];
+            var arm = [[0.0, -0.66], [0.14, -0.55], [0.3, -0.5], [0.4, -0.47]];
+            var torch = [[0.38, -0.49], [0.52, -0.4]];
+            var hose = [[0.36, -0.46], [0.2, -0.3], [-0.05, -0.12], [-0.3, -0.05], [-0.5, -0.02], [-0.62, 0.02]];
+            var o1 = { u: u, jit: 0.25, occ: true, over: false, cls: "skt-fine", seed: "welder-b" };
+            var rb = HU.hand(W, root, HU.smoothCmds(sc(body), true), o1);
+            var rh = HU.hand(W, root, HU.smoothCmds(sc(helmet), true), { u: u, jit: 0.2, occ: true, over: false, cls: "skt-fine", seed: "welder-h" });
+            var rv = HU.hand(W, root, HU.lineCmds(sc([[0.12, -0.95], [0.155, -0.8]]), false), { u: u, jit: 0.1, over: false, cls: "skt-heavy", seed: "welder-v" });
+            var ra = HU.hand(W, root, HU.smoothCmds(sc(arm), false), { u: u, jit: 0.2, over: false, cls: "skt-fine", seed: "welder-a" });
+            var rt = HU.hand(W, root, HU.lineCmds(sc(torch), false), { u: u, jit: 0.1, over: false, cls: "skt-heavy", seed: "welder-t" });
+            var rhs = HU.hand(W, root, HU.smoothCmds(sc(hose), false), { u: u, jit: 0.2, over: false, cls: "skt-lite", seed: "welder-hose" });
+            // the arc at the torch tip
+            var tip = [0.56 * h, -0.37 * h];
+            var arcG = FL.svgEl("g", { transform: "translate(" + tip[0].toFixed(3) + " " + tip[1].toFixed(3) + ")" }, root);
+            var rays = [];
+            for (var k = 0; k < 5; k++) {
+              var a = -1.9 + k * 0.78,
+                r0 = 0.2,
+                r1 = 0.5 + (k % 2) * 0.16;
+              rays.push(FL.svgEl("path", { class: ID + "-arcray", d: "M" + (Math.cos(a) * r0).toFixed(3) + " " + (Math.sin(a) * r0).toFixed(3) + "L" + (Math.cos(a) * r1).toFixed(3) + " " + (Math.sin(a) * r1).toFixed(3) }, arcG));
+            }
+            FL.svgEl("circle", { class: ID + "-arcpt", r: "0.12" }, arcG);
+            // it appears (fully drawn) under the SZ3 insert and leaves on the cut to 'afterwards'
+            fade(gWelder, 0, 1, S.sz3In + 0.6, 0.3, "power1.out", true);
+            story.fromTo(gWelder, { opacity: 1 }, { opacity: 0, duration: 0.001, ease: "steps(1)", immediateRender: false }, S.after);
+            // the arc flickers deterministically while the work continues (S9a to afterwards): each ray on its own
+            // stepped period, so together they never repeat within the shot
+            var t0 = S.nothingCut,
+              span = S.after - t0;
+            // a square wave per ray (off for the first part of each period, on for the rest); rays are off before
+            var PER = [0.13, 0.19, 0.11, 0.23, 0.17],
+              DUTY = [0.45, 0.6, 0.35, 0.55, 0.5];
+            rays.forEach(function (ry, k) {
+              var per = PER[k],
+                duty = DUTY[k],
+                n = Math.max(1, Math.floor((span - k * 0.03) / per));
+              var sq = function (p) {
+                return p < 1 - duty ? 0 : 1;
+              };
+              story.fromTo(ry, { opacity: 0 }, { opacity: 1, duration: per, ease: sq, repeat: n - 1, immediateRender: true }, t0 + k * 0.03);
+            });
+          })();
 
-          // ================================================================ 1.11 afterwards (L09 to L11)
-          // a slow, continuous pull under the evidence; the rewind reverses it from its first frame
-          var PULL = T("tooLate", -0.8) - T("afterwards");
-          cam.to(story, "afterwardsWide", T("afterwards"), PULL, "sine.inOut");
+          // ================================================================ S8b the unnoticed change: heads go grey on half beats
+          // ripple order from the valve (data-i), three waves on consecutive half beats from the cut, then stillness
+          var NWAVE = 3,
+            perWave = Math.ceil(heads.length / NWAVE);
+          heads.forEach(function (hd, i) {
+            var w = Math.floor(i / perWave),
+              j = i - w * perWave;
+            story.fromTo(hd, { opacity: 1 }, { opacity: 0.2, duration: 0.26, ease: "power1.inOut", immediateRender: false }, S.sz3Out + w * HB + j * 0.012);
+          });
 
-          story.fromTo(siteWrap, { opacity: 1 }, { opacity: 0.35, duration: 1.8, ease: "power1.inOut", immediateRender: false }, T("afterwards", 0.1));
-          story.fromTo(blur, { attr: { stdDeviation: 0 } }, { attr: { stdDeviation: 1.1 }, duration: 1.8, ease: "power1.inOut", immediateRender: false }, T("afterwards", 0.1));
-          story.fromTo(szTag.root, { opacity: 1 }, { opacity: 0, duration: 1.2, ease: "power1.inOut", immediateRender: false }, T("afterwards", 0.2));
-          var inc = K.incidentBox(Wov, "roof03Centre", { offset: [40, -96] });
-          inc.drawOn(story, EV("incident"), { speed: 1.8, events: false });
-          story.fromTo(ovWrap, { opacity: 1 }, { opacity: 0.55, duration: 1.0, ease: "power1.inOut", immediateRender: false }, T("q1", -0.5));
+          // ================================================================ S9 nothing looks different; the conditions have changed
+          // 9a: Roof 03 and zone 3 together, camera almost still; the condition connection is quietly there
+          cut("roof03AndSz3", S.nothingCut);
+          still(S.nothingCut + 0.002, S.push9b - S.nothingCut - 0.002, 0.005);
+          var red = K.envelopeRedraw(W, { target: "roof03Centre", refScale: 10.5, layer: gLater });
+          var conn = K.conditionConnection(W, "heroExitPoint", sg.items.sprinklers.centre, { refScale: 10.5, breakAt: 0.42, labelSize: 18, layer: gLater });
+          conn.drawOn(story, S.nothingCut + HB, { events: false });
+          // 9b: a gentle one-beat push to the envelope edge beside Roof 03; the line is redrawn inward
+          (function framingEnvEdge() {
+            // frame the hot-work point and the nearest stretch of the redrawn line
+            var P0 = W.pt("roof03Centre"),
+              best = null,
+              bd = 1e9;
+            red.newPoints.forEach(function (p) {
+              var d = Math.hypot(p[0] - P0[0], p[1] - P0[1]);
+              if (d < bd) {
+                bd = d;
+                best = p;
+              }
+            });
+            var cx = P0[0] + (best[0] - P0[0]) * 0.42 + 3.2,
+              cy = P0[1] + (best[1] - P0[1]) * 0.42 - 1.2;
+            R.envEdge = SK.rect(cx, cy, 24);
+            cam.rects.envEdge = R.envEdge;
+          })();
+          move("envEdge", S.push9b, BEAT, "power2.inOut");
+          still(S.push9b + BEAT, S.pull9c - (S.push9b + BEAT), 0.004);
+          // the zone 3 lettering would be cut by the frame edge in the close framing: it steps out and back
+          fade(szLab.root, 1, 0, S.push9b, HB);
+          fade(szLab.root, 0, 1, S.pull9c + BEAT, BEAT);
+          red.drawOn(story, S.push9b + BEAT, { speed: 1.3, events: false });
+          // 9c: the connection frays and parts in the close framing, then a slow pull back
+          conn.fray(story, S.fray, { dur: 1.1, events: false });
+          move("roof03AndSz3", S.pull9c, 3 * BEAT, "sine.inOut");
+
+          // ================================================================ S10 afterwards (L09 to L11)
+          // 10a: cut to Roof 03 medium-close; the incident annotation draws
+          // held exactly (no drift) so a1-after can pin fragments to site points from here on
+          cut("roof03Close", S.after);
+          var inc = K.incidentBox(Wov, "roof03Centre", { offset: [-470, -176], size: 26, scale: "world", refScale: 20.5 });
+          inc.drawOn(story, S.after + 0.05, { speed: 3.2, events: false });
+          // on the cut the drawing steps back a little behind the annotation (the box is the one thing)
+          story.fromTo(siteWrap, { opacity: 1 }, { opacity: 0.72, duration: 0.001, ease: "steps(1)", immediateRender: false }, S.after);
+          // 10b: the site recedes while the camera pulls back to afterwardsWide, then holds still to rewindStart
+          // a plain eased rect interpolation (not the geometric zoom ease) so SketchKit.followPin matches it exactly
+          cam.to(story, "afterwardsWide", S.questions, 2 * BEAT, "sine.inOut");
+          fade(siteWrap, 0.72, 0.35, S.questions, 2 * BEAT);
+          story.fromTo(blur, { attr: { stdDeviation: 0 } }, { attr: { stdDeviation: 1.1 }, duration: 2 * BEAT, ease: "power1.inOut", immediateRender: false }, S.questions);
+          fade(ovWrap, 1, 0.5, S.questions, 2 * BEAT);
+          fade(szTag.root, 1, 0, S.questions, 2 * BEAT);
+
+          // ================================================================ dev check: picture and sound share the grid
+          (function () {
+            var chk = {
+              "lead-1": S.beat1, "lead-2": S.beat3, "lead-over": S.beat4, pull: S.l01, "cut-gate": S.gateCut, "cut-morning": S.lotoOut,
+              "markers-01": S.lotoOut + HB, "envelope-firm": S.insurance + HB, "push-roof03": S.roofCut, "cut-roof03": S.workerOut,
+              "ticks-01": tickAt[0], "ticks-05": tickAt[4], "cut-sz3": S.sz3Out, "cut-nothing": S.nothingCut, "push-edge": S.push9b,
+              fray: S.fray, "pull-back": S.pull9c, "cut-after": S.after, "pull-after": S.questions,
+            };
+            var ev = FL.events(ID);
+            Object.keys(chk).forEach(function (k) {
+              if (ev[k] && Math.abs(ev[k].local - chk[k]) > 0.02) console.warn("a1-world: event '" + k + "' at " + ev[k].local + " but the picture is at " + chk[k].toFixed(3) + " (update compositions/a1-world.events.json)");
+            });
+          })();
 
           // ================================================================ REGISTERED TIMELINE: forward, then the rewind
           var tl = gsap.timeline({ paused: true });

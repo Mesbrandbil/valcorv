@@ -1,45 +1,399 @@
 {
-  "note": "Frame 1 (a1-world): the sounds the graphite site makes. The scene reads its sync times from these events (FL.clock('a1-world').ev), so picture and sound share one source. Kinds from docs/sound-events.md only. A dur marked with 'until' is the distance to that cue under the current narration; the audio engine may recompute it.",
+  "note": "a1-world (cut 2): the sounds the graphite site makes. Every event is anchored to a narration cue or word; the offsets put it on the scene's 92 BPM grid time under the current narration (the scene computes the same times with FL.clock().b/.c and warns in the console when an event drifts more than 20 ms from its picture). After a narration re-lock, regenerate the offsets. Kinds from docs/sound-events.md only. a1-inserts owns handwheel, gauge, valve-clunk and arc; a1-paper owns the sheet-lay and paper-lift.",
   "events": [
-    { "name": "cons-1", "at": "local:0.12", "kind": "set-square", "gain_db": -6, "dur": 0.4, "what": "first stroke: the production hall's north roof edge, set square" },
-    { "name": "cons-2", "at": "local:0.44", "kind": "ruler", "gain_db": -9, "dur": 0.3, "what": "second roof edge" },
-    { "name": "cons-3", "at": "local:0.66", "kind": "pencil", "gain_db": -11, "dur": 0.2, "what": "roof division" },
-    { "name": "site-draw", "at": "cue:l01+0.05", "kind": "pencil-scatter", "gain_db": -12, "dur": 0.2, "series": { "count": 16, "every": 0.22 }, "what": "the site draws itself, radiating from Roof 03" },
-    { "name": "site-hatch", "at": "cue:l01+0.7", "kind": "hatch", "gain_db": -16, "dur": 3.2 },
-    { "name": "gate", "at": "cue:contractors-0.4", "kind": "pencil", "gain_db": -13, "dur": 0.6 },
-    { "name": "route", "at": "cue:contractors-0.1", "kind": "pencil-scatter", "gain_db": -15, "dur": 0.08, "series": { "count": 8, "every": 0.09 } },
-    { "name": "van", "at": "cue:contractors", "kind": "van", "gain_db": -10, "dur": 2.4 },
-    { "name": "footsteps", "at": "cue:contractors+0.4", "kind": "footsteps", "gain_db": -12, "dur": 7.5, "what": "five contractors in file from the gate to the loading-area apron" },
-    { "name": "radio-click", "at": "cue:isolated-0.45", "kind": "radio-click", "gain_db": -10 },
-    { "name": "loto", "at": "cue:isolated-0.2", "kind": "pencil", "gain_db": -12, "dur": 0.7, "what": "valve and lockout tag at Utilities" },
-    { "name": "loto-label", "at": "cue:isolated+0.35", "kind": "pen", "gain_db": -15, "dur": 0.9 },
-    { "name": "markers", "at": "cue:workMoves", "kind": "pencil", "gain_db": -12, "dur": 0.3, "series": { "count": 5, "every": 0.2 } },
-    { "name": "hse-loop", "at": "cue:workMoves-0.9", "kind": "pencil-scatter", "gain_db": -15, "dur": 0.1, "series": { "count": 11, "every": 0.12 } },
-    { "name": "hse-footsteps", "at": "cue:workMoves+0.2", "kind": "footsteps", "gain_db": -18, "dur": 6.0, "what": "the HSE site walk" },
-    { "name": "toolbox", "at": "cue:contractors+1.0", "kind": "pencil", "gain_db": -14, "dur": 1.2 },
-    { "name": "envelope-construct", "at": "cue:insurance+0.1", "kind": "pencil", "gain_db": -14, "dur": 1.3, "light": true },
-    { "name": "envelope-firm", "at": "cue:insurance+0.55", "kind": "pencil", "gain_db": -9, "dur": 1.77, "until": "cue:accepted", "what": "the firm pass closes on 'accepted'" },
-    { "name": "envelope-label", "at": "cue:accepted-0.35", "kind": "pen", "gain_db": -15, "dur": 0.7 },
-    { "name": "field", "at": "cue:noOne+0.05", "kind": "pencil-scatter", "gain_db": -11, "dur": 0.09, "series": { "count": 16, "every": 0.1 }, "what": "the accumulation" },
-    { "name": "containment-01", "at": "cue:noOne+0.35", "kind": "pencil", "gain_db": -12, "dur": 0.62 },
-    { "name": "containment-02", "at": "cue:moving+0.05", "kind": "pencil", "gain_db": -12, "dur": 0.62 },
-    { "name": "containment-03", "at": "cue:moving+0.45", "kind": "pencil", "gain_db": -13, "dur": 0.62 },
-    { "name": "hot-marker", "at": "cue:hotWork-0.2", "kind": "pencil", "gain_db": -9, "dur": 0.6 },
-    { "name": "safeguards-draw", "at": "cue:hotWork+0.1", "kind": "pencil", "gain_db": -15, "dur": 0.3, "series": { "count": 5, "every": 0.13 }, "what": "the five safeguard items start drawing (each ticks later on its word)" },
-    { "name": "tick-01", "at": "cue:certificate+0.15", "kind": "tick", "gain_db": -8, "what": "CERTIFICATE" },
-    { "name": "tick-02", "at": "cue:safeguards+0.19", "kind": "tick", "gain_db": -8, "what": "FIRE WATCH" },
-    { "name": "tick-03", "at": "cue:safeguards+0.45", "kind": "tick", "gain_db": -8, "what": "EXTINGUISHER" },
-    { "name": "tick-04", "at": "cue:inPlace-0.36", "kind": "tick", "gain_db": -8, "what": "AREA CLEARED" },
-    { "name": "tick-05", "at": "cue:inPlace-0.1", "kind": "tick", "gain_db": -7, "what": "SPRINKLERS" },
-    { "name": "sz3-label", "at": "cue:hotWork+1.0", "kind": "pen", "gain_db": -16, "dur": 0.6 },
-    { "name": "valve-tag", "at": "cue:sprinkler-0.2", "kind": "pen", "gain_db": -12, "dur": 1.1, "what": "another hand tags the zone 3 valve" },
-    { "name": "valve-clunk", "at": "cue:offline-0.08", "kind": "valve-clunk", "gain_db": -9 },
-    { "name": "heads-off", "at": "cue:offline", "kind": "subtract-bed", "dur": 2.1, "what": "zone 3 heads fade one by one; part of the bed is removed" },
-    { "name": "connection", "at": "cue:nothingLooks+0.55", "kind": "pencil-scatter", "gain_db": -18, "dur": 0.1, "series": { "count": 10, "every": 0.11 } },
-    { "name": "envelope-redraw", "at": "cue:changed", "kind": "pencil", "gain_db": -16, "dur": 1.9, "light": true, "what": "the envelope quietly redrawn inward" },
-    { "name": "fray", "at": "cue:nobody+0.1", "kind": "fray", "gain_db": -24, "dur": 1.8 },
-    { "name": "incident", "at": "cue:afterwards+0.3", "kind": "incident", "gain_db": -8, "dur": 1.6 },
-    { "name": "rewind", "at": "cue:rewindStart", "kind": "rewind", "dur": 3.35, "until": "cue:rewindEnd" },
-    { "name": "latch", "at": "cue:rewindEnd", "kind": "latch-soft", "gain_db": -6 }
+    {
+      "name": "lead-1",
+      "at": "cue:l01-2.283",
+      "kind": "set-square",
+      "gain_db": -7,
+      "dur": 0.95,
+      "what": "S1: the first graphite stroke lands at the roof corner and crosses the frame (downbeat)"
+    },
+    {
+      "name": "lead-2",
+      "at": "cue:l01-0.978",
+      "kind": "pencil",
+      "gain_db": -9,
+      "dur": 0.5,
+      "what": "S1: the second edge meets it at the corner (beat 3)"
+    },
+    {
+      "name": "lead-over",
+      "at": "cue:l01-0.326",
+      "kind": "pencil",
+      "gain_db": -15,
+      "dur": 0.26,
+      "light": true,
+      "what": "S1: construction overshoot past the corner (beat 4)"
+    },
+    {
+      "name": "pull",
+      "at": "cue:l01",
+      "kind": "pull",
+      "gain_db": -14,
+      "dur": 2.935,
+      "what": "S2: continuous pull back from the corner to the whole site"
+    },
+    {
+      "name": "site-draw",
+      "at": "cue:l01+0.050",
+      "kind": "pencil-scatter",
+      "gain_db": -13,
+      "dur": 0.16,
+      "series": {
+        "count": 14,
+        "every": 0.17
+      },
+      "what": "S2: the site draws itself, radiating from Roof 03"
+    },
+    {
+      "name": "site-hatch",
+      "at": "cue:l01+0.600",
+      "kind": "hatch",
+      "gain_db": -17,
+      "dur": 2.4
+    },
+    {
+      "name": "gate",
+      "at": "cue:contractors-1.100",
+      "kind": "pencil",
+      "gain_db": -16,
+      "dur": 0.5
+    },
+    {
+      "name": "van",
+      "at": "cue:contractors-1.300",
+      "kind": "van",
+      "gain_db": -10,
+      "dur": 1.9
+    },
+    {
+      "name": "cut-gate",
+      "at": "cue:contractors",
+      "kind": "cut",
+      "gain_db": -12,
+      "material": "paper",
+      "what": "S3a: cut to the gate road medium-close"
+    },
+    {
+      "name": "route",
+      "at": "cue:contractors-0.200",
+      "kind": "pencil-scatter",
+      "gain_db": -17,
+      "dur": 0.1,
+      "series": {
+        "count": 8,
+        "every": 0.13
+      }
+    },
+    {
+      "name": "footsteps",
+      "at": "cue:contractors-0.450",
+      "kind": "footsteps",
+      "gain_db": -13,
+      "dur": 13.5,
+      "what": "four contractors in file from the gate to the loading-area apron"
+    },
+    {
+      "name": "route-tag",
+      "at": "cue:contractors+0.326",
+      "kind": "pen",
+      "gain_db": -15,
+      "dur": 0.9,
+      "lettering": true,
+      "what": "CONTRACTORS · GATE 2 · 07:10"
+    },
+    {
+      "name": "cut-morning",
+      "at": "cue:workMoves-0.117",
+      "kind": "cut",
+      "gain_db": -12,
+      "material": "paper",
+      "what": "S3c: cut back to the wide site from the LOTO insert"
+    },
+    {
+      "name": "markers",
+      "at": "cue:workMoves+0.209",
+      "kind": "tick",
+      "gain_db": -11,
+      "series": {
+        "count": 5,
+        "every": 0.326
+      },
+      "what": "S3c: five activity markers pop in on consecutive half beats"
+    },
+    {
+      "name": "hse-loop",
+      "at": "cue:workMoves-0.067",
+      "kind": "pencil-scatter",
+      "gain_db": -17,
+      "dur": 0.1,
+      "series": {
+        "count": 10,
+        "every": 0.108
+      }
+    },
+    {
+      "name": "talk-label",
+      "at": "cue:workMoves+0.033",
+      "kind": "pen",
+      "gain_db": -17,
+      "dur": 0.8,
+      "lettering": true
+    },
+    {
+      "name": "hse-footsteps",
+      "at": "cue:workMoves+0.083",
+      "kind": "footsteps",
+      "gain_db": -20,
+      "dur": 11.991,
+      "what": "the HSE site walk"
+    },
+    {
+      "name": "rise",
+      "at": "cue:insurance",
+      "kind": "pull",
+      "gain_db": -20,
+      "dur": 1.304,
+      "what": "S4: the camera rises to a clean overview"
+    },
+    {
+      "name": "envelope-construct",
+      "at": "cue:insurance",
+      "kind": "pencil",
+      "gain_db": -14,
+      "dur": 1.3,
+      "light": true
+    },
+    {
+      "name": "envelope-firm",
+      "at": "cue:insurance+0.326",
+      "kind": "pencil",
+      "gain_db": -9,
+      "dur": 2.224,
+      "what": "the firm pass closes on 'accepted'"
+    },
+    {
+      "name": "envelope-label",
+      "at": "cue:accepted-0.350",
+      "kind": "pen",
+      "gain_db": -15,
+      "dur": 0.7,
+      "lettering": true
+    },
+    {
+      "name": "field",
+      "at": "cue:noOne-0.978",
+      "kind": "pencil-scatter",
+      "gain_db": -11,
+      "dur": 0.12,
+      "series": {
+        "count": 9,
+        "every": 0.326
+      },
+      "what": "S6: the accumulation arrives in waves on half beats (the first three under the sheet)"
+    },
+    {
+      "name": "containment-01",
+      "at": "cue:noOne+0.327",
+      "kind": "pencil",
+      "gain_db": -12,
+      "dur": 0.6
+    },
+    {
+      "name": "containment-02",
+      "at": "cue:noOne+0.653",
+      "kind": "pencil",
+      "gain_db": -12,
+      "dur": 0.6
+    },
+    {
+      "name": "roof-marker",
+      "at": "cue:noOne+0.979",
+      "kind": "pencil",
+      "gain_db": -12,
+      "dur": 0.5,
+      "what": "the ROOF 03 marker"
+    },
+    {
+      "name": "containment-03",
+      "at": "cue:noOne+1.305",
+      "kind": "pencil",
+      "gain_db": -13,
+      "dur": 0.6
+    },
+    {
+      "name": "push-roof03",
+      "at": "cue:roof03-0.130",
+      "kind": "push",
+      "gain_db": -10,
+      "dur": 0.652,
+      "what": "S7a: one-beat push from the extreme wide to Roof 03"
+    },
+    {
+      "name": "hot-marker",
+      "at": "cue:roof03-0.050",
+      "kind": "pencil",
+      "gain_db": -10,
+      "dur": 0.6,
+      "what": "the ROOF 03 marker becomes the hot-work marker"
+    },
+    {
+      "name": "cut-roof03",
+      "at": "cue:certificate-0.183",
+      "kind": "cut",
+      "gain_db": -12,
+      "material": "paper",
+      "what": "S7c: cut back to Roof 03 from the worker insert"
+    },
+    {
+      "name": "safeguards-draw",
+      "at": "cue:certificate-0.607",
+      "kind": "pencil",
+      "gain_db": -16,
+      "dur": 0.3,
+      "light": true,
+      "series": {
+        "count": 5,
+        "every": 0.326
+      },
+      "what": "each safeguard draws where it stands before its tick"
+    },
+    {
+      "name": "ticks",
+      "at": "cue:certificate+0.143",
+      "kind": "tick",
+      "gain_db": -8,
+      "series": {
+        "count": 5,
+        "every": 0.326
+      },
+      "what": "CERTIFICATE, FIRE WATCH, EXTINGUISHER, AREA CLEARED, SPRINKLERS on consecutive half beats"
+    },
+    {
+      "name": "subtract",
+      "at": "cue:offline",
+      "kind": "subtract-bed",
+      "dur": 3.055,
+      "what": "the valve closes (a1-inserts): part of the bed is removed"
+    },
+    {
+      "name": "cut-sz3",
+      "at": "L07.end+0.242",
+      "kind": "cut",
+      "gain_db": -16,
+      "material": "felt",
+      "what": "S8b: cut to the zone 3 roof; the heads go grey on half beats"
+    },
+    {
+      "name": "hold-sz3",
+      "at": "L07.end+0.242",
+      "kind": "hold",
+      "dur": 2.283,
+      "what": "S8b: the silence after 'offline'"
+    },
+    {
+      "name": "cut-nothing",
+      "at": "cue:nothingLooks",
+      "kind": "cut",
+      "gain_db": -16,
+      "material": "felt",
+      "what": "S9a: Roof 03 and zone 3 together"
+    },
+    {
+      "name": "connection",
+      "at": "cue:nothingLooks+0.326",
+      "kind": "pencil-scatter",
+      "gain_db": -21,
+      "dur": 0.1,
+      "series": {
+        "count": 10,
+        "every": 0.1
+      }
+    },
+    {
+      "name": "push-edge",
+      "at": "L08:conditions.start-0.024",
+      "kind": "push",
+      "gain_db": -17,
+      "dur": 0.652,
+      "what": "S9b: a gentle push to the envelope edge beside Roof 03"
+    },
+    {
+      "name": "envelope-redraw",
+      "at": "cue:changed-0.101",
+      "kind": "pencil",
+      "gain_db": -17,
+      "dur": 1.5,
+      "light": true,
+      "what": "the envelope quietly redrawn inward"
+    },
+    {
+      "name": "fray",
+      "at": "cue:nobody-0.053",
+      "kind": "fray",
+      "gain_db": -24,
+      "dur": 1.1
+    },
+    {
+      "name": "pull-back",
+      "at": "cue:nobodyEnd-0.075",
+      "kind": "pull",
+      "gain_db": -18,
+      "dur": 1.957,
+      "what": "S9c: slow pull back to Roof 03 and zone 3"
+    },
+    {
+      "name": "hold-9c",
+      "at": "cue:nobodyEnd",
+      "kind": "hold",
+      "dur": 2.208,
+      "what": "S9c: hold into the silence before 'If'"
+    },
+    {
+      "name": "cut-after",
+      "at": "cue:afterwards",
+      "kind": "cut",
+      "gain_db": -12,
+      "material": "graphite",
+      "what": "S10a: cut to Roof 03 medium-close"
+    },
+    {
+      "name": "incident",
+      "at": "cue:afterwards+0.050",
+      "kind": "incident",
+      "gain_db": -8,
+      "dur": 0.75,
+      "text": "INCIDENT · ROOF 03 · 16:07"
+    },
+    {
+      "name": "incident-hatch",
+      "at": "cue:afterwards+0.380",
+      "kind": "hatch",
+      "gain_db": -18,
+      "dur": 0.16
+    },
+    {
+      "name": "pull-after",
+      "at": "L09:questions.start",
+      "kind": "pull",
+      "gain_db": -14,
+      "dur": 1.304,
+      "what": "S10b: the site recedes as the camera pulls back to afterwardsWide"
+    },
+    {
+      "name": "rewind",
+      "at": "cue:rewindStart",
+      "kind": "rewind",
+      "dur": 5.615,
+      "what": "the signature rewind: the story scrubs back to the landing"
+    },
+    {
+      "name": "latch",
+      "at": "cue:rewindEnd",
+      "kind": "latch-soft",
+      "gain_db": -6,
+      "what": "the rewind lands on the landing frame"
+    }
   ]
 }

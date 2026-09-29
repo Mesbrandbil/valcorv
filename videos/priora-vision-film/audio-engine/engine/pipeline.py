@@ -13,8 +13,13 @@ from .dsp import SR, ns, rng
 
 MACROS = {"pencil-scatter", "snap-cluster", "chain", "pencil-set-square", "draw", "subtract-bed", "rewind",
           "ruler-line", "gap-rule", "question", "header-in", "node-return", "layer-slice", "word-token",
-          "system-event"}
+          "system-event", "hold"}
 CHAIN_ORDER = ["record", "trust", "decision", "price", "capacity"]
+# camera-move air (push, pull, whip): a texture, so it is carved under the
+# voice like the beds; every other one-shot stays uncarved (sync sounds)
+MOTION = {"push", "pull", "whip"}
+# the cut 2 editorial vocabulary, reported against the grid
+EDITORIAL = ("cut", "push", "pull", "whip", "sheet-lay", "focus", "hold")
 
 
 def known_kinds():
@@ -33,6 +38,11 @@ def expand_macros(events):
             continue
         if k == "rewind":
             control["rewind_event"] = e["t"]
+            continue
+        if k == "hold":  # control: thins the score and the beds (score.py, design.beds)
+            control.setdefault("holds", []).append(
+                {"t": e["t"], "dur": e.get("dur"), "gain_db": float(e.get("gain_db", 0.0) or 0.0),
+                 "scene": e.get("scene"), "name": e.get("name")})
             continue
         if k == "chain":
             i = int(e.get("index", 0)) % 5
@@ -113,7 +123,7 @@ def render_event(e):
     k = e["kind"]
     seed = int(e.get("seed", 0))
     params = {kk: e[kk] for kk in ("dur", "pressure", "speed", "rate", "pan0", "pan1", "direction", "count",
-                                   "interval", "surface", "variant", "muted", "flow") if kk in e}
+                                   "interval", "surface", "variant", "muted", "flow", "material") if kk in e}
     if k in library.KINDS:
         return library.render_kind(k, seed, **params), library.KINDS[k][1]
     fn, lvl, acc = rewind.KIT[k]
@@ -123,6 +133,42 @@ def render_event(e):
 
 def place(buf, snd, t, gain_db=0.0, pan=0.0):
     score.dsp_place(buf, snd, t, gain_db, pan)
+
+
+def _key(e):
+    return (e["kind"], e.get("seed"), e.get("dur"), e.get("variant"), e.get("pressure"), e.get("count"),
+            e.get("material"), e.get("direction"), e.get("pan0"), e.get("pan1"))
+
+
+def resolve_holds(holds, C, rs, re_, warns):
+    """Holds get a duration (default one bar) and a depth (gain_db below 0,
+    default score.HOLD_DEFAULT_DB); inside the rewind they have no effect."""
+    beat = score.cue_grid(C).beat
+    out = []
+    for h in holds or []:
+        d = h.get("dur")
+        d = float(d) if d not in (None, 0, "") else 4 * beat
+        g = float(h.get("gain_db", 0.0) or 0.0)
+        g = score.HOLD_DEFAULT_DB if g >= 0 else max(g, -60.0)
+        if rs - 0.01 <= h["t"] < re_:
+            warns.append(f"hold '{h.get('name') or 'hold'}' at {h['t']:.2f}s lies inside the rewind and is ignored")
+            continue
+        out.append(dict(h, dur=d, gain_db=g))
+    return sorted(out, key=lambda x: x["t"])
+
+
+def editorial_grid(events, holds, C):
+    """Where each editorial accent sits against the grid (half beats)."""
+    g = score.cue_grid(C)
+    rows = [(e["t"], e["kind"], e.get("scene"), e.get("name")) for e in events if e["kind"] in EDITORIAL]
+    rows += [(h["t"], "hold", h.get("scene"), h.get("name")) for h in holds]
+    rows.sort()
+    offs = [abs(t - g.q(t, g.half)) for t, *_ in rows]
+    return {"count": len(rows),
+            "on_half_beat_within_20ms": int(sum(o <= 0.02 for o in offs)),
+            "max_offset_from_half_beat_ms": round(1000 * max(offs), 1) if offs else 0.0,
+            "rows": [{"t": round(t, 3), "kind": k, "scene": sc, "name": nm, "at": g.label(g.q(t, g.half)),
+                      "offset_ms": round(1000 * (t - g.q(t, g.half)), 1)} for (t, k, sc, nm) in rows]}
 
 
 def run(project: str, resolved_path: str, timing_path: str | None, voice_path: str, out_dir: str,
@@ -165,6 +211,9 @@ def run(project: str, resolved_path: str, timing_path: str | None, voice_path: s
         raw += d.get("events", d) if isinstance(d, dict) else d
     scene_ev, warns = cuesmod.normalize_events({"events": raw}, C, known_kinds())
     scene_ev, control = expand_macros(scene_ev)
+    for e in scene_ev:  # a cut sounds of paper in Act I and of felt in the product acts
+        if e["kind"] == "cut" and not e.get("material"):
+            e["material"] = "paper" if e["t"] < C["rewindEnd"] else "felt"
     auto_ev = design.auto(C) if use_auto else []
     events = design.merge(design.designed(C), scene_ev, auto_ev)
     events, control2 = expand_macros(events)
@@ -176,31 +225,36 @@ def run(project: str, resolved_path: str, timing_path: str | None, voice_path: s
             warns.append(f"scene event '{e.get('name', e['kind'])}' ({e['kind']}) at {e['t']:.2f}s lies inside the "
                          f"rewind ({C['rewindStart']:.2f} to {C['rewindEnd']:.2f}s) and is faded out or muted; "
                          f"only rewind-* kinds play there")
+    holds = resolve_holds(control.get("holds"), C, C["rewindStart"], C["rewindEnd"], warns)
     if warns:
         report.setdefault("warnings", []).extend(warns)
     counts = {}
     for e in events:
         key = f"{e.get('source', 'scene')}:{e['kind']}"
         counts[key] = counts.get(key, 0) + 1
-    report["events"] = {"total": len(events), "by_source_kind": dict(sorted(counts.items())), "control": control}
+    report["events"] = {"total": len(events), "by_source_kind": dict(sorted(counts.items())),
+                        "control": {k: v for k, v in control.items() if k != "holds"}, "holds": len(holds)}
+    report["editorial_grid"] = editorial_grid(events, holds, C)
     log(f"cues ok, {len(events)} events ({len(scene_ev)} from scenes)")
 
     # ---------------- music
-    fam, arr = score.render(C, report)
+    fam, arr = score.render(C, report, holds)
     log("score rendered")
     music_pre = sum(fam.values())
 
     # ---------------- sfx: beds and one-shots
-    bed = design.beds(C, control.get("subtract_at"), control.get("subtract_fade", 0.35))
+    bed = design.beds(C, control.get("subtract_at"), control.get("subtract_fade", 0.35), holds)
     beds_sum = sum(bed.values())
     shots = np.zeros((n, 2))
+    motion = np.zeros((n, 2))
     cache = {}
     for e in events:
-        key = (e["kind"], e.get("seed"), e.get("dur"), e.get("variant"), e.get("pressure"), e.get("count"))
+        key = _key(e)
         if key not in cache:
             cache[key] = render_event(e)
         snd, lvl = cache[key]
-        place(shots, snd, e["t"], lvl + float(e.get("gain_db", 0.0)), float(e.get("pan", 0.0) or 0.0))
+        place(motion if e["kind"] in MOTION else shots, snd, e["t"], lvl + float(e.get("gain_db", 0.0)),
+              float(e.get("pan", 0.0) or 0.0))
     log(f"sfx rendered ({len(cache)} unique one-shots)")
 
     # one-shots of Act I fall away with the rest at the rewind
@@ -209,12 +263,13 @@ def run(project: str, resolved_path: str, timing_path: str | None, voice_path: s
     rew_shots = np.zeros((n, 2))
     for e in events:  # scene-published rewind kit sounds play inside the window
         if e["kind"].startswith("rewind-"):
-            snd, lvl = cache[(e["kind"], e.get("seed"), e.get("dur"), e.get("variant"), e.get("pressure"), e.get("count"))]
+            snd, lvl = cache[_key(e)]
             place(rew_shots, snd, e["t"], lvl + float(e.get("gain_db", 0.0)), float(e.get("pan", 0.0) or 0.0))
     shots_fwd = (shots - rew_shots) * fall[:, None]
+    motion_fwd = motion * fall[:, None]
 
     # ---------------- rewind (built from Act I as heard)
-    sfx_pre = beds_sum + shots_fwd
+    sfx_pre = beds_sum + shots_fwd + motion_fwd
     m_add, s_add = rewind.render(C, music_pre, sfx_pre, events, report)
     log("rewind built")
 
@@ -222,7 +277,8 @@ def run(project: str, resolved_path: str, timing_path: str | None, voice_path: s
     at, act = mixer.voice_activity(voice)
     music = mixer.carve(music_pre, at, act, 4.5, 6.0, 2.5) + m_add
     beds_c = mixer.carve(beds_sum, at, act, 2.5, 4.0, 1.5)
-    sfx = beds_c + shots_fwd + rew_shots + s_add
+    motion_c = mixer.carve(motion_fwd, at, act, 2.5, 4.0, 1.5) if np.any(motion_fwd) else motion_fwd
+    sfx = beds_c + motion_c + shots_fwd + rew_shots + s_add
     # bus hygiene: no sub rumble, no DC, clean head and tail
     music = dsp.hp(music, 32, 4)
     music = dsp.eq(music, "lowshelf", 110, -4.0, 0.7)  # a lighter low end for a restrained score
@@ -258,6 +314,8 @@ def run(project: str, resolved_path: str, timing_path: str | None, voice_path: s
                                 "note": "24-bit quantisation of three stems bounds this at about -132 dBFS"}
     tonal = sum(v for k, v in fam.items() if k != "pulse")
     report["qa"] = qa_block(C, rd, vv, voice, qa_dir, pngs, events, tonal)
+    report["qa"]["grid"] = qa.grid_audio_check(fam, rd["music"], arr, C)
+    report["qa"]["silences"] = qa.silence_windows(rd["music"] + rd["sfx"], C, arr, holds)
     report["seconds"] = round(time.time() - t_start, 1)
     if qa_dir:
         os.makedirs(qa_dir, exist_ok=True)
