@@ -1,10 +1,12 @@
 """The mix: voice-aware carve, stems, master and the true-peak ceiling.
 
-Voice passthrough: assets/audio/voice.wav is never processed. It is played as
-dual mono (the same signal on both channels, exactly as a browser or ffmpeg
-up-mixes a mono file), so master = voice + music + sfx sample for sample, and
-the composition can place voice.wav, music.wav and sfx.wav at volume 1 and get
-the master.
+Voice stem: the master's voice is written as master-voice.wav (dual mono), so
+master = master-voice + music + sfx sample for sample, and the composition
+places master-voice.wav, music.wav and sfx.wav at volume 1 (or master.wav
+alone). In the default (loudness target) mode the voice gets one gain, a DC
+block and a transparent true-peak limiter, so voice.wav + music + sfx is NOT
+the master. Only with --voice-passthrough (target_lufs None) is voice.wav left
+untouched, and then voice.wav + music.wav + sfx.wav equals the master.
 
 Carve (music and the ambience beds, never the voice, never the sync one-shots):
   * voice activity: the voice's own band-limited level, 10 ms frames, 60 ms

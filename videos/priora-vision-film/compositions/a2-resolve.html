@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+  <head>
+    <meta charset="UTF-8">
+    <title>a2-resolve: Priora today, prevention and proof (Frame 4)</title>
+    <!-- Ignored by the assembler. Everything the render needs is inside the template.
+
+      HANDOFF IN (from a1-world, identical frame at cue rewindEnd; this scene crossfades in over 0.4 s):
+        Mirrors the handoff contract written at the top of a1-world (its landing frame, site clock 14:41:59).
+        SiteKit.mount(show 'rough', wobble 2) at SiteKit.CAMERAS.landing (rect 43.5, 33.5, s 14.5), graphite
+        site fully drawn, rough zone labels at their default size (no --fui-lab scaling), the rough sprinkler
+        zone label (.szl) hidden, paint numbers at 0.85, rough envelope (construct + firm) with its hand label,
+        sprinkler heads in ink, the Sprinkler Zone 3 outline dashed (the rule in the style block below).
+        SketchKit world context at refScale 14.5 (the landing scale) with the hot-work marker
+        (activityMarker 'roof03Centre', variant 'hot', label 'HOT WORK · ROOF 03 · 14:18', scale 'world',
+        refScale 14.5, ring at rest), safeguardItems('roof03Centre', { refScale: 14.5, size: 18 }) and the
+        hand label 'SPRINKLER ZONE 3' (label at 'sprinklerZone3Label', leader [22, 30], size 18), all fully
+        drawn. Nothing else visible. The chrome clock reads 14:41:59. The LANDING block in the script holds
+        these settings in one place: if a1-world changes its Roof 03 items, change them there too.
+
+      BEATS (all times from cues, see compositions/a2-resolve.events.json):
+        4.1 l12: resolve radiating from Roof 03 (precision-snap), ticks then hand items lift, labels grow to
+            18 px, camera pulls back to the demo overview, header assembles (header-in), chip END-STATE CONCEPT on.
+        4.2 worker: push to Roof 03 (UIKit.CAMERAS.roof03Product), capture strip (capture-start) with the take's
+            real amplitude, words on their own times, four fields underlined on word-token-01..04, node checking.
+        4.3 connects: cobalt lines node to 4.2 and node to Sprinkler Zone 3 to 4.3, complete by connectionHold,
+            still through the whole pause (nothing enters or leaves until L14b begins); verifies: card at 1.8x
+            verifies on verify-tick-01..05 (certificate first on certificate2), node inside; keepsRecord: the
+            record enters on "keeps" and appends on record-append-1 and -2, both inside the word "record".
+        4.4 prevention / proof: the two statements on their words with rules to the card and the record.
+
+      HANDOFF OUT (at cue l16 - 0.3, under a3-change's 0.3 s crossfade):
+        camera: roof03Product drifted about 2.1 percent in, centred on the hot-work node (screen 871.7, 567.5);
+        site svg at opacity 0.32, precise layer only, labels at 18 px; node 'inside' at k 1.5 with reticle;
+        header (UIKit.header, inset 36, chip on, no clock, status 'All activity inside'); activity card at
+        left 96, top 190 moved down 172 px (5 OF 5 VERIFIED · INSIDE ENVELOPE); record panel at left 1204,
+        top 370, width 620, scale 1.7, entries open, hotStart, verified; statements and their rules visible.
+    -->
+  </head>
+  <body>
+    <template id="a2-resolve-template">
+      <link rel="stylesheet" href="assets/css/film.css">
+      <link rel="stylesheet" href="assets/css/film-sketch.css">
+      <link rel="stylesheet" href="assets/css/product.css">
+      <link rel="stylesheet" href="assets/css/film-ui.css">
+      <style>
+        #root {
+          position: absolute;
+          inset: 0;
+          overflow: hidden;
+        }
+        #a2-resolve-fade,
+        #a2-resolve-site-wrap,
+        #a2-resolve-ui {
+          position: absolute;
+          left: 0;
+          top: 0;
+          width: 1920px;
+          height: 1080px;
+        }
+        #a2-resolve-site {
+          position: absolute;
+          left: 0;
+          top: 0;
+          width: 1920px;
+          height: 1080px;
+          display: block;
+        }
+        #a2-resolve-ui {
+          pointer-events: none;
+        }
+        /* The header arrives as a whole (its paper ground included), after the drawing has resolved.
+           UIKit.header with inset 36: a 109 px band below the registration-mark line, 145 px in all. */
+        #a2-resolve-hdr-wrap {
+          position: absolute;
+          left: 0;
+          top: 0;
+          width: 1920px;
+          height: 145px;
+          opacity: 0;
+        }
+        /* Act I's Sprinkler Zone 3 outline (a1-world applies the same rule to its twin): dashed, a little
+           firmer than the other light lines, so the handoff frame is identical. */
+        #a2-resolve-site .sk-rough path.sk-main[data-src="sz3-outline"] {
+          stroke: #5e5d59;
+          stroke-width: calc(var(--sw) * 1.2px);
+          stroke-dasharray: calc(var(--sw) * 5px) calc(var(--sw) * 3.5px);
+        }
+        /* The chrome scene owns the site clock (it rolls back to 14:18 there): the header is built without
+           its own clock (UIKit.header clock: false), and its hairline stops short of the chrome clock. */
+        /* The header hairline stops short of the chrome clock so the two never cross. */
+        #a2-resolve-ui .fui-header .fui-hrule {
+          right: 440px;
+        }
+        /* Legibility at video scale: the header's secondary texts in grey-2 instead of the demo's 47 percent ink. */
+        #a2-resolve-ui .fui-header .brand .tag,
+        #a2-resolve-ui .fui-header .siteid .sb {
+          color: #6a6863;
+        }
+        /* The record panel sits over the drawing: fully opaque so no site label ghosts through it. */
+        #a2-resolve-ui .fui-record.fui-panel {
+          background: #fbfaf7;
+        }
+        /* Capture strip: four fields in a 940 px strip (clear of the 4.3 connection at x 1110). */
+        #a2-resolve-ui .fui-cap-fields {
+          gap: 24px;
+        }
+      </style>
+
+      <div id="root" data-composition-id="a2-resolve" data-width="1920" data-height="1080">
+        <div id="a2-resolve-fade">
+          <div id="a2-resolve-site-wrap" data-layout-ignore>
+            <svg id="a2-resolve-site" xmlns="http://www.w3.org/2000/svg"></svg>
+          </div>
+          <div id="a2-resolve-ui">
+            <div id="a2-resolve-hdr-wrap"></div>
+          </div>
+        </div>
+      </div>
+
+      <script>
+        (function () {
+          // Globals from index.html <head>: gsap (+ plugins), FL, CUES, SCENES, NARRATION, FL_EVENTS,
+          // SITE_MODEL, SiteKit, UIKit, SketchKit. Nothing is loaded again here.
+          var ID = "a2-resolve";
+          var clk = FL.clock(ID);
+          var T = function (a, off) {
+            return clk.t(a, off);
+          };
+          var EV = function (name) {
+            return clk.ev(name);
+          };
+          var EVD = function (name) {
+            return FL.events(ID)[name].dur;
+          };
+          var DUR = clk.duration;
+          var K = window.UIKit,
+            SK = window.SiteKit,
+            SKT = window.SketchKit,
+            M = window.SITE_MODEL;
+          var el = function (id) {
+            return document.getElementById(id);
+          };
+          var fade = el(ID + "-fade"),
+            svg = el(ID + "-site"),
+            ui = el(ID + "-ui"),
+            hdrWrap = el(ID + "-hdr-wrap");
+          var O = { prefix: ID, scene: ID };
+          var opts = function (extra) {
+            return Object.assign({}, O, extra || {});
+          };
+
+          var tl = gsap.timeline({ paused: true });
+          FL.sceneFade(tl, fade, ID); // 0.4 s in over Frame 1's identical landing frame, 0.3 s out under Frame 5
+
+          // ================================================================ the Frame 1 handoff frame
+          // SiteKit graphite twin at CAMERAS.landing, fully drawn, with the precise layer beneath it.
+          var site = SK.mount(svg, { prefix: ID + "-site", show: "rough", rough: true, wobble: 2 });
+          var CAM = SK.CAMERAS;
+          site.setView(CAM.landing);
+          // Act I conventions at the landing: the zone 3 label is left to the scene (hidden), paint numbers at .85
+          var szlRough = site.rough.labels ? site.rough.labels.querySelector(".szl") : null;
+          if (szlRough) szlRough.style.opacity = 0;
+          site.rough.zoneText.forEach(function (z) {
+            z.style.opacity = 0.85;
+          });
+          // zone labels at their Act I size; they grow to 18 px as they become precise
+          svg.classList.add("fui-labels");
+          svg.style.setProperty("--fui-lab", 1);
+          svg.__fuiLab = 1;
+
+          // LANDING: the Roof 03 items of a1-world's landing frame, built with a1-world's own settings (its
+          // handoff contract). SketchKit seeds by content, so the same calls draw the same lines. Drawn to
+          // completion on a throwaway timeline at build time.
+          var LANDING = {
+            refScale: 14.5, // SiteKit.CAMERAS.landing: world-scaled lettering is 18 px here
+            hot: { variant: "hot", label: "HOT WORK · ROOF 03 · 14:18", scale: "world" },
+            safeguards: { size: 18 },
+            szLabel: { text: "SPRINKLER ZONE 3", leader: [22, 30], size: 18 },
+          };
+          var W = SKT.world(site, { prefix: ID + "-sk", scene: ID, refScale: LANDING.refScale });
+          var hot = SKT.activityMarker(W, "roof03Centre", Object.assign({ refScale: LANDING.refScale }, LANDING.hot));
+          var sg = SKT.safeguardItems(W, "roof03Centre", Object.assign({ refScale: LANDING.refScale }, LANDING.safeguards));
+          var szLab = SKT.label(W, "sprinklerZone3Label", LANDING.szLabel.text, { leader: LANDING.szLabel.leader, size: LANDING.szLabel.size });
+          var pre = gsap.timeline({ paused: true });
+          hot.drawOn(pre, 0, { events: false });
+          sg.drawOn(pre, 0, { events: false });
+          szLab.drawOn(pre, 0, { events: false });
+          pre.progress(1);
+          pre.kill();
+
+          // ================================================================ 4.1 the resolve (L12)
+          var RES0 = EV("precision-snap"),
+            RESD = EVD("precision-snap");
+          // radiate from Roof 03 outward, so the snap starts where the eye already is
+          site.resolve(tl, RES0, RESD, {
+            scene: ID,
+            order: ["production-hall", "sprinkler-zone-3", "production-hall-2", "pipe-bridge", "utilities", "tanks", "laboratory", "loading-area-containers", "loading-area", "warehouse", "roads", "ground-crosses"],
+          });
+          K.siteLabels(site, 1.8, tl, RES0 + RESD * 0.45, RESD * 0.55);
+          // Priora will verify for itself: the pencil ticks lift first, then the hand-drawn items and the marker
+          var ticks = FL.$$(sg.root, ".skt-heavy");
+          tl.fromTo(ticks, { opacity: 1 }, { opacity: 0, duration: 0.3, stagger: 0.07, ease: "power1.in", immediateRender: false }, RES0 + 0.1);
+          sg.children.forEach(function (c, i) {
+            c.fade(tl, RES0 + 0.35 + i * 0.1, 1, 0, 0.55, "power1.inOut");
+          });
+          hot.fade(tl, RES0 + 0.7, 1, 0, 0.6, "power1.inOut");
+          // the hand lettering of the zone gives way to the precise "SPRINKLER ZONE 3 · ACTIVE" beside it
+          szLab.fade(tl, RES0 + RESD * 0.45, 1, 0, RESD * 0.35, "power1.inOut");
+
+          // the drawing is revealed as the interface: the header assembles along the top
+          var HDR = EV("header-in");
+          tl.fromTo(hdrWrap, { opacity: 0 }, { opacity: 1, duration: 0.45, ease: "power1.out", immediateRender: false }, HDR - 0.05);
+          var hdr = K.header(opts({ parent: hdrWrap, chip: "End-state concept", chipVisible: true, status: "inside", clock: false, inset: 36, left: 0, top: 0 }));
+          hdr.hideForEnter();
+          hdr.enter(tl, HDR, EVD("header-in"));
+
+          // ================================================================ camera (SiteKit camera only)
+          var A = M.outsideState.heroOriginWorld; // the hot-work node on Roof 03
+          var R03 = K.CAMERAS.roof03Product;
+          var nodeScr = site.worldToScreen(A, R03);
+          var OVER = K.cam(16.454, 46.5, 6.01038, 960, 590); // the demo's overview, below the header
+          var OVER_D = K.cam(16.454, 46.5, 6.01038 * 1.006, 960, 590);
+          var R03_D1 = K.cam(A[0], A[1], 11 * 1.008, nodeScr[0], nodeScr[1]);
+          var R03_D2 = K.cam(A[0], A[1], 11 * 1.008 * 1.013, nodeScr[0], nodeScr[1]);
+          var PULL0 = T("decisionWord", 0.25),
+            PUSH0 = T("worker", 0.05),
+            PUSHD = 1.9,
+            P4 = T("prevention", -0.4); // after the second record entry has landed
+          site.camera(tl, CAM.landing, 0, PULL0, "none"); // hold the landing frame through the crossfade
+          var PULLD = Math.max(1.2, Math.min(2.0, PUSH0 - PULL0 - 0.3)); // adapts if a re-lock tightens L12
+          site.camera(tl, OVER, PULL0, PULLD, "power2.inOut"); // pull back as the lines snap into precision
+          site.camera(tl, OVER_D, PULL0 + PULLD, Math.max(0.05, PUSH0 - PULL0 - PULLD), "sine.inOut");
+          site.camera(tl, R03, PUSH0, PUSHD, "power2.inOut"); // the worker: to Roof 03
+          site.camera(tl, R03_D1, PUSH0 + PUSHD, P4 - PUSH0 - PUSHD, "sine.inOut"); // the connection breathes
+          site.camera(tl, R03_D2, P4, DUR - P4 - 0.05, "sine.inOut"); // prevention and proof: slow drift to the end
+
+          // ================================================================ 4.2 the worker speaks (L13)
+          var L13 = FL.words("L13");
+          // amplitude envelope of the worker take (RMS of assets/audio/voice.wav over L13.start-0.05 .. L13.end+0.1,
+          // 200 bins, normalised to the 98th percentile, gamma 0.8); re-derive after the ElevenLabs re-lock
+          var ENV = [0,0,0,0,0.12,0.29,0.95,0.94,1,1,0.95,0.9,0.79,0.81,0.74,0.75,0.65,0.7,0.57,0.52,0.48,0.49,0.63,0.92,0.96,0.88,0.79,0.88,0.85,0.85,0.85,0.79,0.81,0.84,0.68,0.48,0.38,0.33,0.39,0.72,0.72,0.75,0.67,0.57,0.67,0.63,0.69,0.59,0.67,0.65,0.55,0.66,0.55,0.67,0.58,0.61,0.52,0.61,0.65,0.57,0.66,0.58,0.6,0.45,0.4,0.47,0.62,0.69,0.87,1,1,0.92,0.73,0.75,0.79,0.95,0.76,0.34,0.26,0.23,0.15,0.18,0.13,0.24,0.19,0.23,0.14,0.38,0.6,0.72,0.65,0.64,0.69,0.67,0.6,0.6,0.58,0.38,0.23,0.14,0.17,0.17,0.22,0.37,0.23,0.2,0.15,0.18,0.61,0.83,0.91,0.97,0.9,0.63,0.67,0.64,0.62,0.44,0.33,0.41,0.39,0.41,0.29,0.15,0.1,0.06,0.1,0.16,0.25,0.52,0.45,0.65,0.65,0.69,0.55,0.46,0.16,0.16,0.37,0.54,0.43,0.25,0.28,0.7,0.69,0.6,0.71,0.48,0.4,0.36,0.34,0.31,0.3,0.35,0.38,0.34,0.33,0.33,0.36,0.34,0.36,0.35,0.2,0.32,1,0.98,1,0.71,0.6,0.52,0.37,0.28,0.16,0.1,0.08,0.06,0.04,0.03,0.28,0.19,0.36,0.42,0.36,0.38,0.35,0.34,0.29,0.33,0.27,0.21,0.14,0.08,0.05,0.04,0.03,0.02,0.01,0.01,0.01,0];
+          var cap = K.captureStrip(opts({ parent: ui, left: 96, top: 664, width: 940, words: L13, envelope: ENV }));
+          cap.hideForEnter();
+          cap.enter(tl, EV("capture-start"), EVD("capture-start"));
+          cap.play(tl, -clk.start, L13); // waveform with the take, each word on the worker's own time
+          var TOK0 = EV("word-token-01"),
+            TOKS = EV("word-token-02") - TOK0;
+          cap.resolve(tl, TOK0 - 0.35, TOKS); // each field's cobalt underline lands on its word-token event
+
+          // the node appears on Roof 03, checking
+          var ov = K.overlay(site, ID);
+          var node = K.nodeGlyph(ov, A, "checking", opts({ name: "hero", k: 1.5, reticle: false, visible: false }));
+          var NODE_T = T("six", 0.3);
+          node.show(tl, NODE_T, true, 0.25);
+          node.pulse(tl, NODE_T, 1.5);
+          node.reticle(tl, NODE_T + 0.1, true, 0.45);
+          hdr.setStatus(tl, NODE_T + 0.2, "checking", 0.3);
+
+          // ================================================================ 4.3 THE CONNECTION (L14a), then verify and record (L14b)
+          var W2 = function (sx, sy) {
+            return [R03.x + sx / R03.s, R03.y + sy / R03.s];
+          };
+          var l42 = K.conditionLabel(ov, opts({ num: "4.2", at: W2(1150, 250), s: R03.s }));
+          var l43 = K.conditionLabel(ov, opts({ num: "4.3", at: W2(1110, 872), s: R03.s }));
+          var valve = M.anchors.sprinklerZone3Valve.world;
+          // node to 4.2 HOT WORK · PERMIT · CERTIFIED OPERATOR · FIRE WATCH
+          var C1 = EV("connect-4-2"),
+            C1D = EVD("connect-4-2");
+          var c1 = K.connect(tl, C1, ov, A, l42.at, opts({ shape: "elbow-v", bend: 1, dur: C1D, name: "clause-4.2", fromTerminal: false, toTerminal: false }));
+          l42.reveal(tl, C1 + C1D * 0.6, 0.9);
+          l42.live(tl, C1 + C1D);
+          // node to Sprinkler Zone 3 (the valve), then through the zone to 4.3 SPRINKLER PROTECTION IN SERVICE
+          var C2 = EV("connect-sz3"),
+            C2D = EVD("connect-sz3");
+          var c2 = K.connect(tl, C2, ov, A, valve, opts({ shape: "straight", dur: C2D, name: "sprinkler-zone-3", fromTerminal: false }));
+          var C3 = EV("connect-4-3"),
+            C3D = EVD("connect-4-3");
+          var c3 = K.connect(tl, C3, ov, valve, l43.at, opts({ shape: "elbow", bend: 1, dur: C3D, name: "clause-4.3", fromTerminal: false, toTerminal: false }));
+          l43.reveal(tl, C3 + C3D * 0.2, Math.max(0.5, T("connectionHold") - C3 - C3D * 0.2));
+          l43.live(tl, C3 + C3D);
+          // (the lines are complete by the end of L14a and hold still through the pause)
+
+          // L14b: the spoken activity becomes the activity card, which verifies its five conditions
+          var VT = [1, 2, 3, 4, 5].map(function (i) {
+            return EV("verify-tick-0" + i);
+          });
+          // The connection holds still through the whole pause after L14a: nothing enters or leaves until the
+          // narrator speaks again ("It checks"), and the card is settled before the first tick.
+          // The strip clears first (quickly), then the card arrives, so the two panels never stack half-seen.
+          var CAP_OUT = Math.max(T("connectionHold", 0.4), T("verifies", -0.1));
+          var CARD_IN = Math.min(CAP_OUT + 0.12, VT[0] - 0.45);
+          tl.fromTo(cap.el, { opacity: 1, y: 0 }, { opacity: 0, y: 14, duration: 0.28, ease: "power1.out", immediateRender: false }, CAP_OUT);
+          var card = K.activityCard(opts({ parent: ui, left: 96, top: 190 }));
+          card.hideForEnter();
+          card.enter(tl, CARD_IN, 0.45);
+          VT.forEach(function (tv, i) {
+            var ti = tv - 0.054; // setRowState starts the check stroke at t + 0.15 x 0.36 s: on the tick
+            card.setRowState(tl, i, "verified", ti);
+            card.footL.to(tl, ti + 0.18, i < VT.length - 1 ? "c" + (i + 1) : "v5", 0.24);
+          });
+          var VERIFIED_T = VT[4] + 0.3;
+          card.footR.to(tl, VERIFIED_T, "inside", 0.3); // 5 OF 5 VERIFIED · INSIDE ENVELOPE
+          card.setGlyph(tl, VERIFIED_T, "inside");
+          node.spin(tl, NODE_T, VERIFIED_T);
+          node.state(tl, VERIFIED_T, "inside", 0.4); // the node settles inside
+          hdr.setStatus(tl, VERIFIED_T + 0.1, "inside", 0.3);
+
+          // the trusted record ("and keeps the record"): it enters on "keeps", both entries land inside "record"
+          var RA1 = EV("record-append-1") - 0.2625,
+            RA2 = EV("record-append-2") - 0.2625; // append() lands its marker at t + 0.35 x 0.75 s
+          var rec = K.recordColumn(opts({ parent: ui, left: 1204, top: 370, width: 620, scale: 1.7, panel: true, entries: ["open"] }));
+          rec.hideForEnter();
+          rec.enter(tl, RA1 - 0.2, 0.5);
+          rec.append(tl, RA1, "hotStart", 0.75);
+          rec.append(tl, RA2, "verified", 0.75);
+          // the kit always prints "N ENTRIES": the count shows only once it reads 2, so "1 ENTRIES" never appears
+          var recCount = FL.$(rec.el, ".fui-rec-n");
+          if (recCount) {
+            tl.fromTo(recCount, { opacity: 0 }, { opacity: 1, duration: 0.3, ease: "power1.out", immediateRender: true }, RA1 + 0.2625 + 0.3);
+          }
+          // odometer digit strips roll inside one-line windows (the kit's counters): the clipping is intentional
+          // and each appended record row opens from zero height inside its clipping wrapper (grid 0fr to 1fr)
+          FL.$$(ui, ".fui-odo-w, .fui-odo-s, .fui-rr-wrap *").forEach(function (n) {
+            n.setAttribute("data-layout-allow-overflow", "");
+          });
+
+          // ================================================================ 4.4 prevention and proof (L15)
+          [l42, l43].forEach(function (l) {
+            l.fade(tl, P4, 0, 0.6);
+          });
+          [c1, c2, c3].forEach(function (c) {
+            c.fade(tl, P4, 0.6);
+          });
+          tl.fromTo(svg, { opacity: 1 }, { opacity: 0.32, duration: 1.2, ease: "power1.inOut", immediateRender: false }, P4);
+          tl.fromTo(card.el, { y: 0 }, { y: 172, duration: 0.9, ease: "power2.inOut", immediateRender: false }, P4);
+          var st = K.statements(
+            opts({
+              parent: ui,
+              label: "Today · prevention and proof",
+              labelAt: [96, 182],
+              items: [
+                { text: "Prevention before the work.", at: [96, 222], link: "M120 304V354" },
+                { text: "Proof as it happens.", at: [1824, 222], align: "right", link: "M1800 304V362" },
+              ],
+            })
+          );
+          st.reveal(tl, T("prevention"), 0);
+          st.reveal(tl, T("proof"), 1);
+
+          window.__timelines["a2-resolve"] = tl;
+        })();
+      </script>
+    </template>
+  </body>
+</html>

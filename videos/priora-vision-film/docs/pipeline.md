@@ -16,7 +16,7 @@ compositions/<id>.events.json  --+                                +-> cues/resol
 
 `index.html` is a thin orchestrator:
 
-- `<head>` loads, in order: `assets/vendor/gsap/gsap.min.js`, `DrawSVGPlugin`, `CustomEase`, `MorphSVGPlugin`, `MotionPathPlugin`, then `assets/js/film-lib.js` (window.FL, registers the plugins), `assets/js/cues.js`, `assets/js/film-assets.js`, and `assets/css/film.css` (which imports `fonts.css`).
+- `<head>` loads, in order: `assets/vendor/gsap/gsap.min.js`, `DrawSVGPlugin`, `CustomEase`, `MorphSVGPlugin`, `MotionPathPlugin`, then `assets/js/film-lib.js` (window.FL, registers the plugins), `assets/js/cues.js`, `assets/js/film-assets.js`, the shared kits `assets/js/site-data.js`, `site-kit.js`, `ui-kit.js`, `sketch-kit.js` (window.SITE_MODEL / SITE_SVG, SiteKit, UIKit, SketchKit; see docs/ui-kit.md and docs/sketch-kit.md), and `assets/css/film.css` (which imports `fonts.css`). Scenes use these globals and never load them again with `<script src>`.
 - An untimed full-bleed paper layer `#film-paper` (base `--paper-ground` #F9F7F2, static grain `assets/textures/paper-grain.png`, faint vignette). The grain darkens the base by about 4 levels, so the composite averages #F5F3EE (**verified**: centre mean 244.6, 242.6, 237.5). Paper-filled shapes in scenes therefore match the ground.
 - One slot per scene, `<div id="el-<scene>" class="clip fl-slot" data-composition-id="<scene>" data-composition-src="compositions/<scene>.html" ...>`, with `data-start`, `data-duration`, `data-track-index` and `z-index` written by the compiler.
 - Three stems on tracks 20, 21, 22: `stem-voice`, `stem-music`, `stem-sfx` (`assets/audio/voice.wav`, `music.wav`, `sfx.wav`). A stem file that does not exist yet is left out as an HTML comment.
@@ -32,7 +32,7 @@ Run everything from `/home/user/valcorv/videos/priora-vision-film`.
 | --- | --- | --- |
 | Rebuild cues and index after any change to timing, cue sheet or events | `node scripts/build-cues.mjs` | < 1 s |
 | Validate the cue sheet without writing | `node scripts/build-cues.mjs --check` (add `--allow-missing` while scenes do not exist) | < 1 s |
-| Pre-render gate: are cues.js and index current? | `node scripts/build-cues.mjs --verify-fresh` (exit 1 when stale) | < 1 s |
+| Pre-render gate: are cues.js, resolved.json, film-assets.js and index current? | `node scripts/build-cues.mjs --verify-fresh` (exit 1 when any generated file differs from a fresh build: timing, cue sheet, events, stems, inline SVGs; pass the same `--cuesheet`) | < 1 s |
 | Static lint | `npx --yes hyperframes@0.8.92 lint` | 2 s |
 | Full gate (lint, runtime, layout, motion, contrast) | `npx --yes hyperframes@0.8.92 check` (`--json` for machines) | 15 s |
 | Look at frames of a time range | `npx --yes hyperframes@0.8.92 snapshot --at 40.2,40.8,41.4,42.0 --no-end -o /tmp/<you>/snaps` | 10 s for 9 frames |
@@ -161,6 +161,7 @@ Never:
 
 - `<script src>` for GSAP, plugins or film-lib inside a template. It executes again and replaces `window.gsap` with a second instance (**verified**: `window.gsap` changed identity); timelines built on the first instance are no longer driven by the runtime's copy.
 - A named fallback font in a font stack (`Helvetica Neue`, `Arial`, `Menlo`, `Consolas`). The compiler "helpfully" injects `@font-face` rules for any named family it cannot see declared and fetched Inter and JetBrains Mono from Google Fonts (**hit**, fixed in film.css: stacks end in `sans-serif` / `monospace`).
+- Any family name written literally in a template `<style>` or a `style=""` attribute, not even `"IBM Plex Sans"` or `"IBM Plex Mono"`. The render compiler reads only the HTML text, not linked stylesheets, so it does not see the `@font-face` rules in `fonts.css`: it fetches the named family from Google Fonts and injects its own `@font-face` rules after every stylesheet, where they override the self-hosted demo fonts (**verified** with `render --debug`: `font-family: "IBM Plex Sans", "Helvetica Neue", Arial, sans-serif` in a template style injected 9 Google faces for IBM Plex Sans plus Inter under the other two names). Always write `var(--sans)` / `var(--mono)`. Names inside linked stylesheets (`film-sketch.css`, `product.css`) are not read by the render compiler (**verified**: nothing injected), and runtime-generated SVG attributes are never seen.
 - Functions directly inside a GSAP plugin's vars object. GSAP treats them as function-based values and calls them with `(index, target)` (**hit** in flText; FL wraps formatters as `{ fn }`).
 - `vector-effect: non-scaling-stroke` on a path you draw on. As a CSS property, DrawSVG measures user units while the browser dashes in screen units: at 50 % the whole line is drawn (**verified**). As an attribute, DrawSVG measures with the screen CTM at the tween's first render, which depends on where the camera was at that moment. Use `--sw` widths (film.css `.fl-pencil` etc.).
 - DrawSVG on a dashed path: it overwrites `stroke-dasharray`, so the dash pattern disappears. Reveal dashed lines with opacity or a clip.
@@ -170,6 +171,7 @@ Never:
 - A filter per path, or a filter on a group inside a zooming SVG (cost in section 11, and the wobble would scale with the camera).
 - `will-change: transform` on anything that zooms (it freezes the raster and blurs). Zoom with the viewBox camera.
 - Hard-coded seconds for anything that should sync with the voice. Every such time is a cue.
+- A tween at a negative position (a time before the scene's own start). GSAP does not clip it: it shifts every child of that timeline later by that amount, so the whole scene drifts off its cues (**verified**: one tween at -0.0067 moved a tween authored at 2.0 to 2.0067). Scene starts are frame-snapped and cues are not, so `clk.t()` returns 0 for the scene's own start cue when it lands less than half a frame below 0; anything earlier is an authoring bug. For a pre-roll, start at 0 with a `fromTo` whose from-state is already part way.
 
 Check-time findings you may meet:
 
@@ -219,12 +221,12 @@ Sound events (single source for picture and sound): `compositions/<scene>.events
 
 ```json
 { "events": [
-  { "name": "roof-edge", "at": "local:0.40", "kind": "pencil-set-square", "gain_db": -10, "dur": 0.5 },
-  { "name": "ticks", "at": "L06:safeguard.start", "kind": "graphite-tick", "series": { "count": 5, "every": 0.18 } }
+  { "name": "roof-edge", "at": "local:0.40", "kind": "set-square", "gain_db": -10, "dur": 0.5 },
+  { "name": "ticks", "at": "L06:safeguard.start", "kind": "tick", "series": { "count": 5, "every": 0.18 } }
 ] }
 ```
 
-`series` expands to `ticks-01` .. `ticks-05`. Resolved events land in `cues/resolved.json` (`events`, a flat list sorted by absolute time with scene, name, t, local and your fields) for the audio engine, and in `window.FL_EVENTS` so the scene animates on exactly the same times (`clk.ev("ticks-03")`).
+`kind` must be one of the shared vocabulary in `docs/sound-events.md`. `series` expands to `ticks-01` .. `ticks-05`. Resolved events land in `cues/resolved.json` (`events`, a flat list sorted by absolute time with scene, name, t, local and your fields) for the audio engine, and in `window.FL_EVENTS` so the scene animates on exactly the same times (`clk.ev("ticks-03")`).
 
 ## 6. Camera
 
@@ -263,7 +265,7 @@ FL.scrub(tl, story, { at: RS, from: RS, to: LAND, duration: RE - RS, ease: FL.re
 window.__timelines["a1-world"] = tl;
 ```
 
-`FL.rewindEase()` is a CustomEase: 0, .008, .044, .134, .294, .51, .737, .916, .982, .999, 1 at tenths (slow catch, fast middle, very hard stop, no overshoot, so story time never passes the landing). Everything inside the story reverses by construction: draws un-draw, heads re-ink, the clock runs back (`FL.textTo` inside the story), the camera returns.
+`FL.rewindEase()` is a CustomEase: 0, .008, .044, .134, .294, .51, .737, .916, .979, .997, 1 at tenths (slow catch, fast middle, very hard stop, no overshoot, so story time never passes the landing). Everything inside the story reverses by construction: draws un-draw, heads re-ink, the clock runs back (`FL.textTo` inside the story), the camera returns.
 
 Seek safety (**verified**, all at 1920x1080):
 
@@ -313,9 +315,9 @@ Heavy Act I test scene: precise site (about 170 shapes) plus 218 rough paths (ma
 | 4 workers, draft, filter | 11.2 s | 62 ms |
 | 2 workers, `--quality looks` (CRF 16, High) | 16.8 s | 93 ms |
 | 2 workers, `--quality delivery` (High) | 22.6 s | 126 ms |
-| Full 90 s prototype, draft, auto (2 workers) | 170.8 s capture, 3 min 1 s total | 63 ms |
+| Full 90 s prototype, draft, auto (resolved to 1 worker: calibration p95 118 ms) | 170.8 s capture, 3 min 1 s total | 63 ms |
 
-Workers: `auto` picks 2 on this 4-core box; 3 or 4 gain at most 6 % because capture and x264 compete for the same cores. Use the default. Projected full film with scenes as heavy as the test: draft about 3 min, looks about 4.5 min, delivery about 6 min.
+Workers: `auto` calibrates per render. It picked 2 for the heavy 6 s test (calibration p95 156 ms) but only 1 for the full prototype (p95 118 ms; `worker_resolution` in the render log). On the heavy test 2 workers took 37 % less time per frame than 1 (66 against 104 ms); 3 or 4 gain at most 6 % more because capture and x264 compete for the same cores. For full-film renders pass `--workers 2` explicitly and check the log line `worker_resolution ... workerCount`. Projected full film with scenes as heavy as the test at 2 workers: draft about 3 min, looks about 4.5 min, delivery about 6 min; at 1 worker expect about 1.5x that.
 
 Budgets per scene (keep a whole-film delivery render under 10 minutes):
 

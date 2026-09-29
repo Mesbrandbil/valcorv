@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+  <head>
+    <meta charset="UTF-8">
+    <title>a1-after: afterwards, the gap found too late (Frame 3)</title>
+    <!-- Ignored by the assembler. Everything the render needs is inside <template>. -->
+  </head>
+  <body>
+    <template id="a1-after-template">
+      <link rel="stylesheet" href="assets/css/film.css">
+      <link rel="stylesheet" href="assets/css/film-sketch.css">
+      <style>
+        /* An overlay above a1-world (camera afterwardsWide during this beat): transparent, no
+           full-bleed paper. Only the evidence fragments carry paper fills. */
+        #root {
+          position: absolute;
+          inset: 0;
+          overflow: hidden;
+          pointer-events: none;
+        }
+        #a1-after-board {
+          position: absolute;
+          left: 0;
+          top: 0;
+          width: 1920px;
+          height: 1080px;
+          overflow: visible;
+        }
+        /* IBM Plex only (film-sketch.css names system fallbacks in its stacks). */
+        #a1-after-board .skt-lab {
+          font-family: var(--mono);
+        }
+        #a1-after-board .skt-sans {
+          font-family: var(--sans);
+        }
+      </style>
+
+      <div id="root" data-composition-id="a1-after" data-width="1920" data-height="1080">
+        <svg id="a1-after-board" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" data-layout-ignore=""></svg>
+      </div>
+
+      <script>
+        // Frame 3: afterwards. Evidence is pinned to places on the site, three questions stack at
+        // left, then everything falls back and the gap is drawn as a distance in time. Built as a
+        // story timeline whose time equals a1-world's story time (minus the landing), so the
+        // rewind un-draws it in step with the site and it has cleared by rewindEnd.
+        // Globals from index.html: gsap (+ DrawSVG, CustomEase), FL, CUES, SCENES, SiteKit, SketchKit.
+        var ID = "a1-after";
+        var clk = FL.clock(ID);
+        var T = function (a, off) {
+          return clk.t(a, off);
+        };
+        var RS = T("rewindStart"),
+          RE = T("rewindEnd"),
+          LANDL = T("landing"); // negative: the landing is before this scene starts
+        // story time for a cue: story 0 is the landing, exactly as in a1-world's story
+        var S = function (a, off) {
+          return T(a, off) - LANDL;
+        };
+
+        var board = document.getElementById("a1-after-board");
+        var P = SketchKit.paper(board, { prefix: ID, scene: ID });
+        var story = FL.story();
+        var g = function (parent, attrs) {
+          return FL.svgEl("g", attrs || {}, parent);
+        };
+        var gFrags = g(P.top, { id: ID + "-frags" }); // fragments, leaders, question marks
+        var gKeep = g(P.top, { id: ID + "-keep" }); // the work order: the change itself, falls back less
+        var gQs = g(P.top, { id: ID + "-questions" });
+        var gGap = g(P.top, { id: ID + "-gap" });
+
+        // ---------------------------------------------------------------- pins on the site
+        // a1-world sits at SiteKit.CAMERAS.afterwardsWide during this beat.
+        var cam = SiteKit.CAMERAS.afterwardsWide;
+        var A = (window.SITE_MODEL && SITE_MODEL.anchors) || {};
+        var iso = SketchKit.iso;
+        var scr = function (w) {
+          var s = FL.worldToScreen(w, cam);
+          return [+s[0].toFixed(2), +s[1].toFixed(2)];
+        };
+        var aw = function (name, fallback) {
+          return A[name] && A[name].world ? A[name].world : fallback;
+        };
+        var PIN = {
+          photo: scr(iso(66, 17, 12)), // Roof 03, north-east part of the roof
+          permit: scr(aw("roof03Centre", [38.971, 32.5])), // the hot-work point on Roof 03
+          statement: scr(iso(66.5, 29, 12)), // where the fire watch stood on Roof 03
+          call: scr(aw("sprinklerZone3Valve", [46.765, 35])), // the valve room
+          workorder: scr(aw("sprinklerZone3Label", [74.478, 42])), // Sprinkler Zone 3
+          programme: scr(aw("heroExitPoint", [66.489, 15.39])), // the accepted envelope's condition
+          email: scr(iso(66, 8, 12)), // Production Hall, the building under Roof 03
+        };
+
+        // ---------------------------------------------------------------- fragments
+        // Every named fragment sits fully inside the 96 px safe area, clear of the clock corner, the
+        // question block (x 96 to 1067, y 209 to 457) and the gap band; leaders avoid the questions.
+        var FR = {
+          photo: { x: 560, y: 500 },
+          programme: { x: 1150, y: 118 },
+          call: { x: 1548, y: 170 },
+          permit: { x: 1548, y: 338 },
+          workorder: { x: 1520, y: 540 },
+          statement: { x: 1290, y: 840 },
+          email: { x: 836, y: 148, h: 108 }, // below the rewind counter (top centre, y 58 to 123)
+        };
+        var frag = {};
+        Object.keys(FR).forEach(function (k) {
+          var o = Object.assign({ layer: k === "workorder" ? gKeep : gFrags, titleSize: 18, size: 18, pin: PIN[k] }, FR[k]);
+          frag[k] = SketchKit.evidence(P, k, o);
+        });
+        // background extras for the crowding: cut by the frame edge, texture only
+        var EXTRAS = [
+          { title: "SHIFT NOTE · 15:30", lines: ["ROOF 03 · ONGOING"], x: -64, y: 560, w: 292, h: 104 },
+          { title: "PHOTO · ROOF 03 · 16:12", lines: ["NORTH EDGE"], x: 330, y: -58, w: 300, h: 104 },
+          { title: "CALL LOG · 16:08", lines: ["SITE OFFICE"], x: 1742, y: 706, w: 262, h: 104 },
+          { title: "WITNESS NOTE · 16:20", lines: ["ROOF ACCESS"], x: -150, y: 866, w: 300, h: 104 },
+        ];
+        var extras = EXTRAS.map(function (ex) {
+          return SketchKit.evidence(P, "note", Object.assign({ layer: gFrags, titleSize: 18, size: 18 }, ex));
+        });
+        // dashed investigation lines between fragments, and hand question marks
+        var edge = function (f, sx, sy) {
+          return [f.box.x + f.box.w * sx, f.box.y + f.box.h * sy];
+        };
+        var inv = [
+          [frag.email, 1, 0.4, frag.programme, 0, 0.7, -0.1],
+          [frag.programme, 1, 0.6, frag.call, 0, 0.35, 0.1],
+          [frag.call, 0.3, 1, frag.permit, 0.3, 0, 0.14],
+          [frag.permit, 0.6, 1, frag.workorder, 0.6, 0, -0.12],
+          [frag.workorder, 0.1, 1, frag.statement, 0.85, 0, 0.1],
+        ].map(function (L) {
+          return SketchKit.investigationLine(P, edge(L[0], L[1], L[2]), edge(L[3], L[4], L[5]), { layer: gFrags, bend: L[6] });
+        });
+        var qm = [
+          [1500, 306, 44],
+          [760, 168, 36],
+          [1170, 650, 40],
+          [1706, 690, 34],
+        ].map(function (q) {
+          return SketchKit.questionMark(P, [q[0], q[1]], { layer: gFrags, size: q[2] });
+        });
+
+        // ---------------------------------------------------------------- the three questions
+        var qs = SketchKit.typeStack(P, [96, 262], ["What was happening?", "Which condition applied?", "Can you prove what was true?"], { layer: gQs, size: 76, weight: 300 });
+        // a paper halo so the type reads over the receded site and any leader beneath it
+        qs.lines.forEach(function (ln) {
+          ln.text.el.classList.add("skt-halo");
+        });
+
+        // ---------------------------------------------------------------- the gap
+        var gap = SketchKit.gapTimeline(P, { layer: gGap, y: 772, x0: 180, x1: 1740, leftX: 330, rightX: 1590 });
+
+        // ================================================================ STORY (story 0 = landing)
+        var SP = 2.0; // fragments draw quickly: frame, lettering, then the leader lands on the site
+        var at = {
+          photo: S("afterwards", -0.35),
+          programme: S("afterwards", 0.05),
+          call: S("afterwards", 0.45),
+          permit: S("wrong", -0.05),
+          workorder: S("wrong", 0.35),
+          statement: S("wrong", 0.75),
+          email: S("wrong", 1.15),
+        };
+        var pinAt = {};
+        Object.keys(at).forEach(function (k) {
+          frag[k].drawOn(story, at[k], { speed: SP, events: false });
+          var ps = frag[k].steps.filter(function (s) {
+            return s.type === "pin";
+          })[0];
+          pinAt[k] = +(at[k] + (ps ? ps.at / SP : 0) + LANDL).toFixed(3); // scene-local, for the events sidecar
+        });
+        // the crowding keeps accumulating at the edges while the questions set
+        extras[0].drawOn(story, S("q1", -0.45), { speed: SP, events: false });
+        extras[1].drawOn(story, S("q1", 0.55), { speed: SP, events: false });
+        extras[2].drawOn(story, S("q2", 0.2), { speed: SP, events: false });
+        extras[3].drawOn(story, S("q3", -0.5), { speed: SP, events: false });
+        [S("q1", 0.9), S("q2", -0.4), S("q2", 0.7), S("q3", -0.9), S("q3", 0.4)].forEach(function (t, i) {
+          inv[i].drawOn(story, t, { events: false });
+        });
+        [S("q2", -0.25), S("q2", 1.0), S("q3", -0.2), S("q3", 0.85)].forEach(function (t, i) {
+          qm[i].drawOn(story, t, { events: false });
+        });
+        // the questions, each on its first word
+        qs.lines[0].drawOn(story, S("q1"), { events: false });
+        qs.lines[1].drawOn(story, S("q2"), { events: false });
+        qs.lines[2].drawOn(story, S("q3"), { events: false });
+
+        // L11: questions and fragments fall back; the gap timeline draws; THE GAP on "gap"
+        story.fromTo([gFrags, gQs], { opacity: 1 }, { opacity: 0.3, duration: 0.9, ease: "power1.inOut", immediateRender: false }, S("gap", -0.9));
+        story.fromTo(gKeep, { opacity: 1 }, { opacity: 0.5, duration: 0.9, ease: "power1.inOut", immediateRender: false }, S("gap", -0.9));
+        gap.children[0].drawOn(story, S("gap", -0.85), { speed: 1.1, events: false });
+        gap.left.drawOn(story, S("gap", -0.45), { speed: 1.3, events: false });
+        gap.right.drawOn(story, S("gap", -0.12), { speed: 1.3, events: false });
+        gap.bracket.drawOn(story, S("gap"), { speed: 1.0, events: false });
+        gap.note.drawOn(story, S("tooLate", -0.35), { speed: 1.0, events: false });
+        // then hold, still, until the rewind
+
+        // ================================================================ REGISTERED TIMELINE
+        // Forward: story time follows film time. Rewind: the same curve as a1-world, from
+        // rewindStart back to the landing (story 0), so the board clears as the tape runs back.
+        var tl = gsap.timeline({ paused: true });
+        FL.scrub(tl, story, { at: 0, from: -LANDL, to: RS - LANDL, duration: RS, ease: "none" });
+        FL.scrub(tl, story, { at: RS, from: RS - LANDL, to: 0, duration: RE - RS, ease: FL.rewindEase() });
+        tl.data = { pinAt: pinAt }; // metadata only (sound-event authoring); no visual state
+
+        window.__timelines["a1-after"] = tl;
+      </script>
+    </template>
+  </body>
+</html>

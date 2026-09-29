@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+  <head>
+    <meta charset="UTF-8">
+    <title>a3-change: what trusted state makes possible (Frame 5)</title>
+    <!-- Ignored by the assembler. Everything that must exist at render time is inside <template>. -->
+  </head>
+  <body>
+    <template id="a3-change-template">
+      <link rel="stylesheet" href="assets/css/film.css">
+      <link rel="stylesheet" href="assets/css/product.css">
+      <link rel="stylesheet" href="assets/css/film-ui.css">
+      <style>
+        #root {
+          position: absolute;
+          inset: 0;
+          overflow: hidden;
+        }
+        #a3-change-fade,
+        #a3-change-sys-wrap,
+        #a3-change-ui,
+        #a3-change-tr {
+          position: absolute;
+          inset: 0;
+        }
+        /* The system view is the one drawing for the whole scene; the film paper (with its grain)
+           shows through instead of the kit's flat paper fill. */
+        #a3-change-system {
+          background: transparent;
+        }
+        /* The header continues from Frame 4 exactly as it left it (paper ground, chip, no clock). Header and
+           rail sit on their own layers at all times, so their text rasterises the same way after any seek history. */
+        #a3-change-system .fui-header,
+        #a3-change-system .fui-sys-rail {
+          will-change: opacity;
+        }
+        #a3-change-system .fui-header .brand .tag,
+        #a3-change-system .fui-header .siteid .sb {
+          color: #6a6863;
+        }
+        /* Appended record rows open and fade in without the kit's 12 px rise: a transform mid-append leaves
+           the row's text rasterised differently depending on seek history (seek-order snapshots differed). */
+        #a3-change-system .fui-record .rr,
+        #a3-change-ui .fui-record .rr {
+          transform: none !important;
+        }
+        /* The record panel sits over the drawing: opaque, as in Frame 4. */
+        #a3-change-ui .fui-record.fui-panel {
+          background: #fbfaf7;
+        }
+        /* The site clock belongs to the chrome scene (top right): the header is built without one,
+           and its hairline stops short of the clock. */
+        #a3-change-system .fui-hrule {
+          right: 440px;
+        }
+        /* The transfer view sets its own note (placed under the packet, on its own time). */
+        #a3-change-tr .fui-tr-note {
+          display: none;
+        }
+        #a3-change-note {
+          position: absolute;
+          left: 96px;
+          width: 560px;
+          font: 400 24px/1.4 var(--sans);
+          color: var(--ink);
+          opacity: 0;
+        }
+      </style>
+
+      <div id="root" data-composition-id="a3-change" data-width="1920" data-height="1080">
+        <div id="a3-change-fade">
+          <div id="a3-change-sys-wrap" data-layout-ignore></div>
+          <div id="a3-change-ui"></div>
+          <div id="a3-change-tr">
+            <p id="a3-change-note">Carriers set appetite and price. The risk owner chooses.</p>
+          </div>
+        </div>
+      </div>
+
+      <script>
+        // Globals from index.html <head>: gsap (+ plugins), FL, CUES, SCENES, FL_EVENTS, SiteKit, UIKit.
+        var ID = "a3-change";
+        var clk = FL.clock(ID);
+        var T = function (a, off) {
+          return clk.t(a, off);
+        };
+        var EV = FL.events(ID);
+        var E = function (n) {
+          return clk.ev(n);
+        };
+        var END = clk.duration;
+        var el = function (id) {
+          return document.getElementById(id);
+        };
+        var fade = el("a3-change-fade"),
+          sysWrap = el("a3-change-sys-wrap"),
+          ui = el("a3-change-ui"),
+          trWrap = el("a3-change-tr"),
+          noteEl = el("a3-change-note");
+        var M = window.SITE_MODEL;
+        var HERO = M.outsideState.heroOriginWorld;
+        var VALVE = M.anchors.sprinklerZone3Valve.world;
+        var CAM = UIKit.CAMERAS;
+        var U = { prefix: ID, scene: ID };
+        var o = function (x) {
+          return Object.assign({}, U, x);
+        };
+
+        // ------------------------------------------------------------ key times (all from cues/events)
+        var tFrame = 1.5; // the opening reframing (scene-local; the crossfade covers its start)
+        var tSys = E("system-event");
+        var t0 = E("node-stretch");
+        var stretch = EV["node-stretch"].dur;
+        var tSnap = E("node-cross");
+        var tDec = T("decides", 0.3); // the product reveal holds until here, then the decision view opens
+        var tSheet = E("sheet-in");
+        var tChange = E("choice-01"),
+          tRetain = E("choice-02"),
+          tTransfer = E("choice-03");
+        var tTr = T("carriers", 0.35); // decision view hands over to the transfer view
+        var tHidden = tTr + 0.5; // site fully hidden: reset it for the pull back
+        var tPB = T("ordinary", 0.7); // 5.4: the pull back begins
+        var tPBEnd = Math.min(END - 0.7, T("decisionsL18", 0.35));
+
+        // ------------------------------------------------------------ the system view: its site is the one drawing
+        var SYS_ENTRY = { t: "14:42", kind: "dev", x: "Sprinkler Zone 3 offline\u00a0· Production\u00a0Hall\u00a02\u00a0·\u00a0SYSTEM", i: "REC-0405-0AF1 · 0d9b 70f9" };
+        var V = UIKit.systemView(
+          o({
+            parent: sysWrap,
+            status: "inside",
+            clock: false,
+            entries: ["open", "hotStart", "verified", SYS_ENTRY, "outside", "requested", "restored", "changed"],
+          })
+        );
+        var site = V.site,
+          ov = V.overlay;
+        // SiteKit's <style> rules are page-wide, so the zone hatch rule of whichever site mount comes last
+        // in the page wins for every mount (url(#<that prefix>-sz-hatch)). Pin this mount to its own pattern.
+        site.el("sz3-hatch").style.fill = "url(#" + site.prefix + "-sz-hatch)";
+        var RSYS = V.camera; // the whole-site framing (computed by the kit)
+
+        // the header continues from Frame 4; the rail arrives only in 5.4
+        V.rail.style.opacity = 0;
+
+        // the hot-work node, as Frame 4 left it: inside, hero size
+        var hero = UIKit.nodeGlyph(ov, HERO, "inside", o({ name: "hero", k: 1.5, reticle: true }));
+
+        // ------------------------------------------------------------ HTML panels over the drawing
+        var card = UIKit.activityCard(o({ parent: ui, left: 96, top: 190, state: "verified" }));
+        // the record starts where Frame 4 left it and settles bottom right (tail mode: the latest entries),
+        // clear of the Zone 3 label and of the crossing's landing point
+        var REC_Y = 316;
+        var rec = UIKit.recordColumn(o({ parent: ui, panel: true, scale: 1.7, width: 620, tail: true, height: 200, entries: ["open", "hotStart", "verified"], left: 1204, top: 370 }));
+
+        // camera and landing geometry for placing the tooltip beside the landed node
+        // R0 = Frame 4's last framing (roof03Product pushed 2.1 % about the node, its two drifts), R1 = the system view of Roof 03
+        var nodeScr0 = site.worldToScreen(HERO, CAM.roof03Product);
+        var R0 = UIKit.cam(HERO[0], HERO[1], 11 * 1.008 * 1.013, nodeScr0[0], nodeScr0[1]),
+          R1 = CAM.systemRoof;
+        // a slow drift: the same framing pushed in by pct, about a fixed screen point (default the centre)
+        var drift = function (r, pct, fx, fy) {
+          fx = fx == null ? 960 : fx;
+          fy = fy == null ? 540 : fy;
+          var wx = r.x + (fx * r.w) / 1920,
+            wy = r.y + (fy * r.h) / 1080,
+            w = r.w / (1 + pct),
+            h = r.h / (1 + pct);
+          return { x: wx - (fx * w) / 1920, y: wy - (fy * h) / 1080, w: w, h: h };
+        };
+        var R1d = drift(CAM.systemRoof, 0.012);
+        var ro = UIKit.readout(o({ parent: ui, state: "outside" }));
+
+        var sheet = UIKit.decisionSheet(o({ parent: ui, left: 844, top: 150 }));
+        sheet.hideForEnter();
+
+        // ------------------------------------------------------------ transfer view (future state): data in arrival order
+        var D = UIKit.DATA,
+          savedCarriers = D.carriers,
+          savedPacket = D.packet,
+          tp;
+        D.carriers = [
+          { key: "northstar", name: "Northstar Commercial", kind: "Existing carrier", declined: true, dec: "Outside appetite", decS: "No quote" },
+          { key: "boreal", name: "Boreal Risk", kind: "Temporary activity cover", stat: "Quote · 14:45", price: "1,240", ded: "DKK 50,000", cap: "DKK 25m" },
+          { key: "atlas", name: "Atlas Specialty", kind: "Temporary activity cover", stat: "Quote · 14:46", price: "980", ded: "DKK 100,000", cap: "DKK 25m" },
+          { key: "helvetic", name: "Helvetic Industrial", kind: "Temporary activity cover", stat: "Quote · 14:47", price: "1,680", ded: "DKK 25,000", cap: "DKK 25m" },
+        ];
+        D.packet = [
+          ["Activity", "Hot work"],
+          ["Location", "Roof 03"],
+          ["Duration", "3h 18m"],
+          ["Current protection", "Sprinkler Zone 3 offline", true],
+          ["Existing programme", "Outside accepted conditions", true],
+        ];
+        try {
+          // arrival order, passed explicitly: not the price order (980 would otherwise lead, reading as a ranking)
+          tp = UIKit.transferPanel(o({ parent: trWrap, left: 96, top: 150, rowH: 104, rowGap: 12, order: ["northstar", "boreal", "atlas", "helvetic"] }));
+        } finally {
+          D.carriers = savedCarriers;
+          D.packet = savedPacket;
+        }
+        tp.rows[0].st.nodes.done.textContent = "Declined · 14:44";
+        tp.hideForEnter();
+        var pg = UIKit.programmeLayer(o({ parent: trWrap, left: 96, top: 790, width: 1728 }));
+        noteEl.style.top = "628px";
+        trWrap.style.opacity = 0;
+
+        // ============================================================ TIMELINE
+        var tl = gsap.timeline({ paused: true });
+        FL.sceneFade(tl, fade, ID);
+
+        // ---- camera (SiteKit camera only: viewBox + --sw on the one site SVG)
+        site.setView(R0);
+        site.camera(tl, R1, 0, tFrame, "power2.inOut");
+        site.camera(tl, R1d, tFrame, tDec - tFrame, "sine.inOut"); // slow drift through the event and the crossing
+
+        // ---- the opening reframing: Frame 4's panels settle into the system view, the drawing returns to full strength
+        tl.fromTo(site.svg, { opacity: 0.32 }, { opacity: 1, duration: 1.25, ease: "power1.inOut", immediateRender: false }, 0);
+        tl.fromTo(card.el, { y: 140 }, { y: 0, duration: 1.4, ease: "power2.inOut", immediateRender: false }, 0);
+        tl.fromTo(rec.el, { y: 0 }, { y: REC_Y, duration: 1.4, ease: "power2.inOut", immediateRender: false }, 0);
+
+        // ---- 5.1 the sprinkler goes offline again; Priora sees it
+        rec.append(tl, tSys, SYS_ENTRY, 0.75);
+        UIKit.sprinkler(tl, site, T("offline2"), "offline", o({}));
+        var zoneName = site.el("sz3-label-name");
+        tl.fromTo(zoneName, { fill: "rgba(17,17,17,0.68)" }, { fill: "#1F47D6", duration: 0.35, ease: "power2.out", immediateRender: false }, T("offline2", 0.15));
+        var link = UIKit.connect(tl, T("thisTime"), ov, HERO, VALVE, o({ dur: 0.75, name: "zone-3" }));
+        card.conditionLost(tl, E("row-unavailable"));
+        hero.state(tl, T("sees", 0.15), "checking", 0.3);
+        V.header.setStatus(tl, T("sees", 0.15), "checking", 0.3);
+        hero.spin(tl, T("sees", 0.15), t0);
+
+        // ---- 5.2 the crossing (the primary product reveal)
+        link.fade(tl, t0, 0.35);
+        var X = UIKit.crossing(tl, t0, hero, site, o({ s: 8.83133, stretch: stretch, hold: tSnap - t0 - stretch, snap: 0.46 }));
+        card.setFooter(tl, X.tCross, null, "outside");
+        card.setGlyph(tl, X.tCross, "outside");
+        V.header.setStatus(tl, X.tCross, "outside", 0.3);
+        var land = site.worldToScreen(X.T, R1);
+        ro.el.style.left = Math.round(land[0] + 70) + "px";
+        ro.el.style.top = Math.round(land[1] - 170) + "px";
+        ro.hideForEnter();
+        ro.enter(tl, X.tLand + 0.05, 0.45);
+
+        // ---- 5.3 the risk owner decides
+        tl.fromTo(ro.el, { opacity: 1 }, { opacity: 0, duration: 0.25, ease: "power1.in", immediateRender: false }, tDec);
+        tl.fromTo(card.el, { opacity: 1, x: 0 }, { opacity: 0, x: -40, duration: 0.3, ease: "power2.in", immediateRender: false }, tDec);
+        tl.fromTo(rec.el, { opacity: 1, x: 0 }, { opacity: 0, x: 40, duration: 0.25, ease: "power2.in", immediateRender: false }, tDec);
+        site.camera(tl, CAM.decision, tDec, 1.5, "power2.inOut");
+        site.camera(tl, drift(CAM.decision, 0.01, 480, 560), tDec + 1.5, tTr + 0.4 - (tDec + 1.5), "sine.inOut");
+        tl.fromTo(site.precise, { opacity: 1 }, { opacity: 0.6, duration: 1.2, ease: "power1.inOut", immediateRender: false }, tDec);
+        UIKit.siteLabels(site, 1.25, tl, tDec, 1.2);
+        sheet.focus(tl, 0, true, 0.001); // compact sheet: the facts were just shown in the tooltip
+        sheet.enter(tl, tSheet, EV["sheet-in"].dur);
+
+        // change the work: protection restored, the node returns inside in ink, DKK 0
+        sheet.highlight(tl, tChange, "change");
+        sheet.outcome(tl, tChange + 0.05, "change", 0.5);
+        sheet.resolveChange(tl, tChange + 0.45);
+        UIKit.sprinkler(tl, site, tChange + 0.05, "restored", o({ step: 0.02 }));
+        tl.fromTo(zoneName, { fill: "#1F47D6" }, { fill: "rgba(17,17,17,0.68)", duration: 0.35, ease: "power1.out", immediateRender: false }, tChange + 0.1);
+        X.back(tl, E("node-return"), EV["node-return"].dur, "power2.inOut");
+        hero.state(tl, E("node-return") + EV["node-return"].dur - 0.15, "changed", 0.3);
+        V.header.setStatus(tl, E("node-return") + EV["node-return"].dur - 0.15, "changed", 0.3);
+
+        // knowingly retain: the node is shown outside for this branch; owned, time-bound, recorded
+        sheet.highlight(tl, tRetain, "retain");
+        sheet.outcome(tl, tRetain + 0.05, "retain", 0.5);
+        X.outside(tl, tRetain + 0.05);
+        hero.state(tl, tRetain + 0.05, "outside", 0.001);
+        UIKit.sprinkler(tl, site, tRetain + 0.05, "offline", o({ step: 0.004 }));
+        tl.fromTo(zoneName, { fill: "rgba(17,17,17,0.68)" }, { fill: "#1F47D6", duration: 0.2, ease: "power1.out", immediateRender: false }, tRetain + 0.05);
+        sheet.resolveRetain(tl, tRetain + 0.5);
+        hero.state(tl, tRetain + 0.55, "retained", 0.35);
+        V.header.setStatus(tl, tRetain + 0.55, "retained", 0.3);
+
+        // or, in time, ask selected carriers (future state)
+        sheet.highlight(tl, tTransfer, "transfer");
+        sheet.outcome(tl, tTransfer + 0.05, "transfer", 0.45);
+        hero.state(tl, tTransfer + 0.05, "outside", 0.3);
+        V.header.setStatus(tl, tTransfer + 0.05, "outside", 0.3);
+
+        // hand over to the transfer view
+        // the header stays; the drawing and the decision panels give way to the transfer view
+        tl.fromTo([site.svg, ui], { opacity: 1 }, { opacity: 0, duration: 0.3, ease: "power1.in", immediateRender: false }, tTr);
+        tl.fromTo(trWrap, { opacity: 0 }, { opacity: 1, duration: 0.2, ease: "none", immediateRender: false }, tTr + 0.2);
+        tp.enter(tl, tTr + 0.2, 0.7);
+        tp.send(tl, E("packet-send"), 0.05, EV["packet-send"].dur);
+        // each answer lands only after that row's WAITING to EVALUATING swap has finished (send + 0.9 dur + 0.33),
+        // otherwise the kit's two status swaps overlap and both texts stay visible
+        var respT = [1, 2, 3, 4].map(function (k) {
+          var i = k - 1;
+          return Math.max(E("carrier-response-0" + k), E("packet-send") + i * 0.05 + EV["packet-send"].dur * 0.9 + 0.34);
+        });
+        tp.respond(tl, respT);
+        pg.reveal(tl, E("layer-slice") - 1.2);
+        tl.fromTo(noteEl, { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out", immediateRender: false }, respT[3] + 0.35);
+
+        // behind the transfer view: the site is reset to its calm resolved state for the pull back
+        X.back(tl, tHidden, 0.001);
+        hero.state(tl, tHidden, "changed", 0.001);
+        hero.reticle(tl, tHidden, false, 0.001);
+        UIKit.sprinkler(tl, site, tHidden, "restored", o({ step: 0.001 }));
+        tl.fromTo(zoneName, { fill: "#1F47D6" }, { fill: "rgba(17,17,17,0.68)", duration: 0.001, ease: "none", immediateRender: false }, tHidden);
+        tl.fromTo(site.precise, { opacity: 0.6 }, { opacity: 1, duration: 0.001, ease: "none", immediateRender: false }, tHidden);
+        UIKit.siteLabels(site, 1.8, tl, tHidden, 0.001);
+        // start of the pull back: close on the resolved node, placed where the wide view will hold it
+        var heroEnd = site.worldToScreen(HERO, RSYS);
+        var RP = UIKit.cam(HERO[0], HERO[1], 11, heroEnd[0], heroEnd[1]);
+        site.camera(tl, RP, tHidden, 0.001, "none");
+
+        // ---- 5.4 most work remains ordinary: one continuous decelerating pull back
+        tl.fromTo(trWrap, { opacity: 1 }, { opacity: 0, duration: 0.35, ease: "power1.in", immediateRender: false }, tPB);
+        tl.fromTo(site.svg, { opacity: 0 }, { opacity: 1, duration: 0.45, ease: "power1.out", immediateRender: false }, tPB + 0.3);
+        V.header.setStatus(tl, tPB + 0.35, "changed", 0.3);
+        site.camera(tl, RSYS, tPB + 0.25, tPBEnd - tPB - 0.25, "power2.out");
+        tl.fromTo(V.rail, { opacity: 0, x: 60 }, { opacity: 1, x: 0, duration: 0.9, ease: "power3.out", immediateRender: false }, tPB + 0.6);
+        V.scatter(tl, tPB + 0.4, 1.5, { check: 0.45, quietAfter: 0.9, quiet: 0.55 });
+        // a few changes become explicit decisions (one changed, one retained)
+        var tD1 = E("decision-01"),
+          tD2 = E("decision-02");
+        V.decide(tl, tD1 - 0.5, "changed", { hold: 0.8, side: "right", dy: 80 });
+        var tR2 = V.decide(tl, tD2 - 0.5, "retained", { hold: Math.max(0.5, T("decisionsL18", -0.15) - tD2), side: "right", dy: -40 }) - 0.8;
+        V.header.setStatus(tl, tR2, UIKit.DATA.statuses.today ? "today" : "retained", 0.4);
+
+        // intentional clipping (checked by the layout audit): the records' tail windows and the odometer digit strips
+        [rec.el, V.rail].forEach(function (root) {
+          FL.$$(root, ".fui-rr-wrap, .fui-rr-in, .rr, .fui-odo-w, .fui-odo-s").forEach(function (n) {
+            n.setAttribute("data-layout-allow-overflow", "");
+          });
+        });
+
+        window.__timelines["a3-change"] = tl;
+      </script>
+    </template>
+  </body>
+</html>

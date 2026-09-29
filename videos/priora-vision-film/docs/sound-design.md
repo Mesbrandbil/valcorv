@@ -141,6 +141,24 @@ Every kind in docs/sound-events.md is supported and mapped as follows:
 
 Engine kinds can also be used directly: `pencil-stroke`, `pencil-tick`, `pencil-hatch`, `technical-pen`, `ruler-contact`, `set-square-tap`, `page-turn`, `paper-stack`, `radio-squelch`, `footstep`, `relay-click`, `solenoid-click`, `confirm`, `system-tick`, `response-tick`, `packet`, `align-snap`, `stretch`, `cross-snap`, `distant-clank`, `pump-thud`, the chain links `chain-record` to `chain-capacity`, and the rewind kit `rewind-paper`, `rewind-pencil`, `rewind-mechanism`, `rewind-whoosh`, `rewind-suction` (placed inside the rewind window they play backward with it). Unknown kinds are skipped and listed in the report's warnings.
 
+Between `rewindStart` and `rewindEnd` every one-shot falls away (0.3 s) and stays muted, because the rewind replaces the forward sound; only the `rewind-*` kinds play there. A scene event of any other kind inside that window is faded or silent and the report lists it under warnings. Place the landing sound (`latch-soft`) at `cue:rewindEnd` or later.
+
+Where the audible transient sits inside a sound, for syncing picture to it (the event's time is the start of the sound):
+
+| Kind | Transient |
+| --- | --- |
+| `valve-clunk` | impact at +0.15 s (handle turn and ratchet before it) |
+| `packet-send` (`packet`) | tick at +0.19 s |
+| `sheet-in` | tick at +0.30 s |
+| `header-in` | snaps at +0.25 and +0.40 s (each locks 0.028 s after it starts), tick at +0.30 s |
+| `connect-line`, `layer-slice` | tick at `dur` (air rising before it) |
+| `precision-snap`, `word-token` (`align-snap`) | each lock at +0.028 s |
+| `latch` | catch at +0.036 s |
+| `pin` | pin seats at +0.06 s |
+| `row-unavailable` | second note at +0.09 s |
+| `ruler`, `gap-rule`, `set-square` | contact at +0, the stroke or pen line from +0.03 to +0.04 s |
+| `node-stretch` | ends abruptly at `dur` (place `node-cross` there) |
+
 ### Who owns a sound
 
 Three sources are merged:
@@ -175,7 +193,7 @@ Material sounds (all in `engine/library.py`): graphite is dense heavy-tailed mic
 
 ### The rewind
 
-The picture scrubs the story backward from `rewindStart` to `landing` over the rewind window with a slow start, a fast middle and a very hard deceleration (`ease(u) = 1 - (1 - u^1.7)^4.5`); the sound does the same from the film's own Act I audio:
+The picture scrubs the story backward from `rewindStart` to `landing` over the rewind window with a slow start, a fast middle and a very hard deceleration: `FL.rewindEase()` in `assets/js/film-lib.js`, the CustomEase path `M0,0 C0.18,0 0.26,0.06 0.36,0.22 0.5,0.46 0.62,0.86 0.74,0.96 0.84,0.995 0.9,1 1,1` (0, .008, .044, .134, .294, .51, .737, .916, .979, .997, 1 at tenths). The sound reads story time through the same path (`EASE_PATH` in `engine/rewind.py`, within 0.0013 of GSAP's own values at 201 points), so if one changes, change both. The sound is built from the film's own Act I audio:
 
 1. The forward sound falls away in 0.3 s.
 2. Granular reverse: 75 ms Hann grains, each played backward, read from the story time the picture is showing (four-way overlap, small jitter against combing). Pitch is preserved, there is no varispeed and no tape-stop. The music stem reverses the music, the SFX stem reverses the ambience and effects. The texture follows a designed loudness arc relative to the Act I bed (peak in the fast middle, then -15 dB and -32 dB), whatever material lies under the scrub, and in the deceleration it is drawn thin from both ends (top closing from 14 kHz to 900 Hz, bottom rising from 40 to 300 Hz).
@@ -209,19 +227,20 @@ Cues: `cues/cuesheet.json` evaluated against the current `narration/timing.json`
 | Bed under speech / voice | -29.8 / -16.0 LUFS momentary medians |
 | DC offset | 2e-7 or less on every stem |
 | Energy below 30 Hz | -44.3 dB (master), -48.9 dB (music), -42.0 dB (SFX), relative to the full band |
-| 2 to 5 kHz against 200 Hz to 2 kHz (music plus SFX) | Act I -15.9 dB, rewind -10.9, Act II -19.9, Act III -22.1, close -20.0: no build-up in the harsh band |
+| 2 to 5 kHz against 200 Hz to 2 kHz (music plus SFX) | Act I -15.9 dB, rewind -12.0, Act II -19.9, Act III -22.1, close -20.0: no build-up in the harsh band |
 | Stereo | master L/R correlation 0.97, mono fold-down loss 0.05 dB; music plus SFX correlation 0.39 to 0.70 per section, fold-down loss at most 1.6 dB (rewind) |
 | Sync onsets | 27 sharp sync sounds measured in the rendered SFX stem: all within 1.5 ms of their cue (0.5 ms frames), median 1.0 ms |
 | Discontinuities | no step at any edit point in music or master; the one flagged step in SFX (76.49 s) is the intended onset of the RECORD confirmation; no sound starts abruptly out of silence; no high-frequency clicks in the pitched music layers (fluidsynth note-offs included) |
 | Head and tail | first and last samples exactly 0; last 50 ms peak -100.6 dBFS |
-| Determinism | two independent builds: identical PCM in all four files |
+| Determinism | independent builds (separate caches): identical PCM in all four files |
 
-Per section (music plus SFX, integrated): Act I -28.3 LUFS, rewind -30.9, Act II -26.7, Act III -26.9, close -29.8.
+Per section (music plus SFX, integrated): Act I -28.3 LUFS, rewind -29.9, Act II -26.7, Act III -26.9, close -29.8.
 
 Pictures of the demo build (spectrograms of the whole film, of each section, long-term spectra, and spectrogram sheets of every library sound) were inspected during development; re-create them with `--pngs --library DIR`.
 
 ## Open points
 
 - Re-run after the real `cues/resolved.json` lands, after scenes publish their events, and after the ElevenLabs voice is assembled; review `reports/report.json` (cue sources, warnings, onset timing, loudness) each time.
-- The cue compiler's index currently places `voice.wav` as the voice stem; for the review mix to equal the master it should place `master-voice.wav` (or `master.wav` alone).
+- `cues/cuesheet.json` now places `master-voice.wav` as the voice stem, but `index.html` and the live `cues/resolved.json` were last compiled from the prototype sheet and still place `voice.wav`; the review mix equals the master only after `node scripts/build-cues.mjs` has been run with the real sheet.
+- The film's last 2 s (after the final word) sit near -47 LUFS momentary: the D add9 chord is drawn down under the descriptor and decays to silence. This is deliberate; judge it in the full-film review and, if it reads as the sound dropping out, raise the `s4`, `d4` and `b4` expression points before `end` in `engine/score.py`.
 - The score's low end is deliberately warm (a distant pump and a sine sub in Act I); if the film is judged on small speakers only, `TARGET_LUFS` in `engine/score.py` and the 110 Hz shelf in `engine/pipeline.py` are the two controls.

@@ -39,6 +39,10 @@ svg.skt-paper {
 /* screen-constant groups inside the zooming site svg */
 .skt .skt-px { transform: scale(var(--sw)); }
 .skt .skt-u { --sw: 1; }
+/* world-scaled annotation groups: authored in px at a reference scale (--skt-k px per world unit),
+   scaled with the drawing; strokes inside stay screen-constant */
+.skt-world { --skt-sw: var(--sw); }
+.skt .skt-wu { --sw: calc(var(--skt-sw) * var(--skt-k)); }
 
 /* strokes: main pass, overdraw pass, construction overshoot, hatching, dots, leaders */
 .skt .skt-m,
@@ -68,6 +72,7 @@ svg.skt-paper {
 .skt .skt-d { stroke-width: calc(var(--sw) * 2.1px); }
 .skt .skt-d.skt-lite { stroke: var(--skt-l); stroke-width: calc(var(--sw) * 1.8px); }
 .skt .skt-d.skt-dash { stroke-width: calc(var(--sw) * 1.3px); }
+.skt .skt-d.skt-thin { stroke-width: calc(var(--sw) * 1.7px); }
 .skt .skt-lead { stroke-opacity: 0.62; stroke-width: calc(var(--sw) * 1px); }
 .skt .skt-rule { stroke-width: calc(var(--sw) * 1.25px); }
 .skt .skt-rule.skt-lite { stroke: var(--skt-l); stroke-width: calc(var(--sw) * 1px); }
@@ -79,16 +84,19 @@ svg.skt-paper {
 
 /* hand lettering: Plex Mono uppercase, graphite (size and spacing set per element) */
 .skt .skt-lab {
-  font-family: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+  font-family: "IBM Plex Mono"; /* no fallbacks: the HyperFrames compiler would fetch a substitute font for them */
   font-weight: 400;
   fill: var(--skt-c);
 }
 .skt .skt-lab.skt-w5 { font-weight: 500; }
 .skt .skt-lab.skt-w6 { font-weight: 600; }
+/* paper halo behind lettering that sits over linework (as the site's own labels) */
+.skt .skt-halo { paint-order: stroke; stroke: var(--skt-p); stroke-width: 3.5px; stroke-linejoin: round; }
+.skt .skt-sans.skt-halo { stroke-width: 6px; }
 
 /* typeset text: Plex Sans (clauses, statements) */
 .skt .skt-sans {
-  font-family: "IBM Plex Sans", "Helvetica Neue", Arial, sans-serif;
+  font-family: "IBM Plex Sans";
   font-weight: 400;
   fill: var(--skt-c);
 }

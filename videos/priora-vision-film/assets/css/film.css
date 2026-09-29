@@ -3,8 +3,9 @@
 
   Load order: index.html links this file in <head>. It imports fonts.css, so every
   composition gets IBM Plex without its own @font-face. Sub-compositions may also
-  link it (<link rel="stylesheet" href="../assets/css/film.css">); the assembler
-  hoists the link into the page head and de-duplicates it, so that is harmless.
+  link it (<link rel="stylesheet" href="assets/css/film.css">, root-relative: a
+  "../" path is a lint error); the assembler hoists the link into the page head and
+  de-duplicates it, so that is harmless.
 
   Rules of use (see docs/pipeline.md):
   - Colours only through the tokens below. Blue (--signal*) never appears in Act I.

@@ -71,6 +71,8 @@
     walk(root);
     return root;
   }
+  /** merge options over defaults, ignoring undefined values (so callers can pass through optional fields) */
+  function opt(def, o) { const r = Object.assign({}, def); if (o) for (const k in o) if (o[k] !== undefined) r[k] = o[k]; return r; }
   function ctx(opts, comp) {
     if (!opts || !opts.prefix) throw new Error('UIKit.' + comp + ': opts.prefix is required');
     const base = nextId(opts.prefix, comp);
@@ -80,8 +82,23 @@
       ev(type, t, dur, meta) { return pushEvent(this.scene, type, t + this.off, dur, meta); },
     };
   }
+  /**
+   * Kit event type -> the shared sound vocabulary kind (docs/sound-events.md), copied into
+   * meta.kind so a scene can write compositions/<scene>.events.json straight from the log.
+   * Types with no entry (null) are timing marks the engine may ignore or map itself.
+   */
+  const KIND = {
+    'header-assemble': 'header-in', 'stretch': 'node-stretch', 'snap': 'node-cross', 'return-inside': 'node-return',
+    'zone-offline': 'valve-clunk', 'verify': 'verify-tick', 'row-unavailable': 'row-unavailable',
+    'voice-in': 'capture-start', 'field': 'word-token', 'connect': 'connect-line', 'append': 'record-append',
+    'sheet-enter': 'sheet-in', 'choice': 'choice-accent', 'send': 'packet-send', 'response': 'carrier-response',
+    'layer': 'layer-slice', 'node-pass': 'node-pass', 'decision-flip': 'decision-accent', 'latch': 'latch',
+    'confirm-1': 'chain-confirm-1', 'confirm-2': 'chain-confirm-2', 'confirm-3': 'chain-confirm-3', 'confirm-4': 'chain-confirm-4', 'confirm-5': 'chain-confirm-5',
+  };
   function pushEvent(scene, type, t, dur, meta) {
-    const e = { scene, type, t: +(+t).toFixed(3), dur: +(+(dur || 0)).toFixed(3), meta: meta || {} };
+    meta = meta || {};
+    if (meta.kind === undefined) meta.kind = KIND[type] || null;
+    const e = { scene, type, t: +(+t).toFixed(3), dur: +(+(dur || 0)).toFixed(3), meta };
     window.__filmEvents.push(e);
     return e;
   }
@@ -98,10 +115,31 @@
     if (parent) parent.appendChild(e);
     return e;
   }
+  /**
+   * Transform priming. An HTML element GSAP has never transformed has transform: none; once any
+   * transform tween has rendered it (even reverted to its start) it keeps an identity
+   * translate(0, 0). The two render differently (a layer boundary moves text and hairlines by a
+   * sub-pixel), so a frame would depend on seek history. Every element the kit transforms is given
+   * its identity transform at build time, before any render, so both paths paint the same.
+   */
+  const TRANSFORM_KEYS = ['x', 'y', 'xPercent', 'yPercent', 'scale', 'scaleX', 'scaleY', 'rotation', 'rotate', 'skewX', 'skewY'];
+  const primed = new WeakSet();
+  function prime(target) {
+    if (!window.gsap || !target) return;
+    const list = Array.isArray(target) ? target : [target];
+    for (const el of list) {
+      if (!el || primed.has(el) || (el.ownerSVGElement)) continue;   // SVG children use attribute transforms
+      primed.add(el);
+      window.gsap.set(el, { x: '+=0' });
+    }
+  }
   /** seek-safe fromTo: explicit from-state, never rendered at build time */
   function ft(tl, target, from, to, t) {
+    if (TRANSFORM_KEYS.some(k => k in from || k in to)) prime(target);
     return tl.fromTo(target, from, Object.assign({ immediateRender: false }, to), t);
   }
+  /** SVG scale about a fixed point as a transform attribute string (never GSAP's SVG transform cache, whose smoothOrigin depends on history) */
+  function sc(sx, sy, ox, oy) { return `translate(${f3(ox)} ${f3(oy)}) scale(${f3(sx)} ${f3(sy)}) translate(${f3(-ox)} ${f3(-oy)})`; }
   /** instant, seek-safe switch (a 1 ms fromTo) */
   function cut(tl, target, from, to, t) { return ft(tl, target, from, Object.assign({ duration: 0.001, ease: 'none' }, to), t); }
   function place(el, o) {
@@ -111,7 +149,8 @@
     for (const k of ['left', 'top', 'right', 'bottom', 'width', 'height']) if (o[k] != null) st[k] = typeof o[k] === 'number' ? o[k] + 'px' : o[k];
     if (o.style) for (const k in o.style) st.setProperty(k, o.style[k]);
   }
-  function mountTo(el, opts) { place(el, opts); if (opts && opts.parent) opts.parent.appendChild(el); return el; }
+  // component roots are primed too: scenes move them (card down, record out) with their own tweens
+  function mountTo(el, opts) { place(el, opts); if (opts && opts.parent) opts.parent.appendChild(el); prime(el); return el; }
   function drawFrom(tl, el, t, dur, ease, from, to) {
     if (hasDraw()) return ft(tl, el, { drawSVG: from || '0%' }, { drawSVG: to || '100%', duration: dur, ease: ease || 'power2.inOut' }, t);
     const L = el.getTotalLength ? el.getTotalLength() : 1000;
@@ -166,8 +205,8 @@
           if (a) cut(tl, a, { opacity: 1 }, { opacity: 0 }, t);
           cut(tl, b, { opacity: 0 }, { opacity: 1 }, t);
         } else {
-          if (a) ft(tl, a, { opacity: 1, y: 0 }, { opacity: 0, y: -this.dy, duration: dur * 0.55, ease: 'power2.in' }, t);
-          ft(tl, b, { opacity: 0, y: this.dy }, { opacity: 1, y: 0, duration: dur, ease: 'power3.out' }, t + dur * 0.3);
+          if (a) ft(tl, a, { opacity: 1, y: 0 }, { opacity: 0, y: -this.dy, duration: dur * 0.4, ease: 'power2.in' }, t);
+          ft(tl, b, { opacity: 0, y: this.dy }, { opacity: 1, y: 0, duration: dur, ease: 'power3.out' }, t + dur * 0.36);
         }
         this.cur = key;
         return t + dur * 1.3;
@@ -270,6 +309,9 @@
     };
     // initial state
     const us = od.pos(od.v), vs = od.visible(od.v);
+    const v0 = od.v;
+    /** back to the build-time value and bookkeeping (a rebuilt schedule starts from here) */
+    od.reset = function () { const u0 = this.pos(v0), s0 = this.visible(v0); digits.forEach((d, i) => { d.u = u0[i]; d.y = -this._loc(u0[i], d.c) * lh; d.vis = s0[i]; }); this.v = v0; this.lastEnd = -1e9; return this; };
     digits.forEach((d, i) => {
       d.u = us[i]; d.y = -od._loc(us[i], d.c) * lh; d.vis = vs[i];
       if (window.gsap) window.gsap.set(d.strip, { y: d.y }); else d.strip.style.transform = `translateY(${d.y}px)`;
@@ -277,6 +319,7 @@
     });
     return od;
   }
+  const CLOCK_LH = 49;   // the chrome clock's digits: IBM Plex Mono 38 px at line-height normal (1.3 em, measured)
   const hhmm = s => { const [a, b, c] = String(s).split(':').map(Number); return c == null ? a * 60 + b : a * 3600 + b * 60 + c; };
   function clockOdo(parent, time, lh, seconds) {
     const units = seconds ? [[36000, 10], [3600, 10], [600, 6], [60, 10], [10, 6], [1, 10]] : [[600, 10], [60, 10], [10, 6], [1, 10]];
@@ -299,6 +342,7 @@
       retained: ['g-retained', '1 increment retained'],
       cover: ['g-cover', '1 slice on temporary cover'],
       changed: ['g-changed', '1 decision recorded · back inside'],
+      today: ['g-inside', '3 explicit decisions today'],   // the system view's end state (DECISIONS 3)
     },
     card: {
       ref: 'Activity · ACT-1418-R03', title: 'Hot work', sub: 'ROOF 03 · 14:18–18:00', meta: 'Contractor · certified operator',
@@ -325,7 +369,7 @@
       outside: { t: '14:42', kind: 'dev', sig: true, x: 'Risk state moved outside annual programme conditions', s: 'Hot work · Roof 03 · incremental exposure temporary, 3h 18m', i: 'REC-0406-EFBE · a74b ec1f' },
       requested: { t: '14:43', kind: 'event', x: 'Decision requested · Site Risk Manager', i: 'REC-0407-A4EE · fe32 ac67' },
       restored: { t: '14:47', kind: 'event', x: 'Sprinkler Zone 3 restored', i: 'REC-0408-83D9 · efd1 8ae7' },
-      changed: { t: '14:48', kind: 'decision', x: 'Risk state returned inside annual programme · Incremental price DKK 0', s: 'Decision: change activity · Restore sprinkler protection · Anna Møller', i: 'REC-0409-CE15 · 9c21 55fb' },
+      changed: { t: '14:48', kind: 'decision', x: 'Risk state returned inside accepted conditions · Incremental DKK 0', s: 'Decision: change activity · Restore sprinkler protection · Anna Møller', i: 'REC-0409-CE15 · 9c21 55fb' },
       retained: { t: '14:46', kind: 'decision', x: 'Incremental risk retained by Nordhavn Bioprocessing', s: 'Decision: Anna Møller · Site Risk Manager · 3h 18m · until 18:00 · no additional insurance purchased', i: 'REC-0408-48F6 · aaf8 08c5' },
       requestedCapacity: { t: '14:47', kind: 'event', x: 'Capacity requested · risk packet sent to 4 carriers', s: 'PKT-0412 · 9 fields of observed state', i: 'REC-0408-D0B4 · f230 b4aa' },
       responses: { t: '14:47', kind: 'event', x: '4 carrier responses · 3 quotes', s: 'Northstar Commercial declined · outside appetite', i: 'REC-0409-4115 · 23a5 546e' },
@@ -337,7 +381,7 @@
       text: 'Roof hot work is continuing while sprinkler protection in the affected zone is unavailable.',
       facts: [['Existing programme', 'Outside agreed conditions'], ['Incremental exposure', 'TEMPORARY', true], ['Expected duration', '3h 18m', true, '14:42–18:00']],
       obs: [['14:18 · observed', 'g-inside', 'Inside · 5 of 5 verified'], ['14:42 · changed', 'g-system', 'Sprinkler Zone 3 offline'], ['14:43 · now', 'g-outside', 'Outside · your decision', true]],
-      ask: 'What do you want to do?',
+      ask: 'WHAT DO YOU WANT TO DO?',
       choices: [
         { key: 'change', g: 'g-changed', b: 'Change activity', d: 'Modify the work or restore a safeguard until it returns inside the envelope.', o: 'Incremental DKK 0' },
         { key: 'retain', g: 'g-retained', b: 'Retain risk', d: 'Knowingly carry the incremental exposure. Priora records who, what and for how long.', o: 'Owned and recorded' },
@@ -347,12 +391,15 @@
     },
     packet: [['Activity', 'Hot work'], ['Location', 'Roof 03'], ['Duration', '3h 18m'], ['Current protection', 'Sprinkler Zone 3 offline', true], ['Operator', 'Certified'], ['Fire watch', 'Active'], ['Extinguishing equipment', 'Confirmed'], ['Asset exposure', 'Production Hall 2'], ['Existing programme', 'Outside accepted conditions', true]],
     carriers: [
-      { key: 'northstar', name: 'Northstar Commercial', kind: 'Existing carrier', declined: true, dec: 'Outside appetite', decS: 'Declined · no quote' },
+      { key: 'northstar', name: 'Northstar Commercial', kind: 'Existing carrier', declined: true, dec: 'Outside appetite', decS: 'No quote' },
       { key: 'atlas', name: 'Atlas Specialty', kind: 'Temporary activity cover', stat: 'Quote · 14:47', price: '980', ded: 'DKK 100,000', cap: 'DKK 25m' },
       { key: 'boreal', name: 'Boreal Risk', kind: 'Temporary activity cover', stat: 'Quote · 14:47', price: '1,240', ded: 'DKK 50,000', cap: 'DKK 25m' },
       { key: 'helvetic', name: 'Helvetic Industrial', kind: 'Temporary activity cover', stat: 'Quote · 14:47', price: '1,680', ded: 'DKK 25,000', cap: 'DKK 25m' },
     ],
     carrierNote: 'Carriers set appetite and price. The risk owner chooses.',
+    // arrival order in the film: the demo's order happens to be ascending price, which reads as a
+    // ranking, so the film's (fictional) answers arrive in an order that is not sorted by anything
+    carrierOrder: ['northstar', 'boreal', 'atlas', 'helvetic'],
     chain: [['Record', 'what was true'], ['Trust', 'shared observed state'], ['Decision', 'owned and explicit'], ['Price', "the carrier's own terms"], ['Capacity', 'a layer alongside the programme']],
     end: {
       descriptor: 'Infrastructure for activity-level physical risk',
@@ -364,11 +411,19 @@
 
   // ================================================================== 1. header
   function header(opts) {
-    opts = Object.assign({ scale: 1.6, chip: 'End-state concept', chipVisible: true, status: 'inside', time: '14:18', seconds: false }, opts);
+    // inset: the band keeps its full height below a top margin (default 36 px, the registration-mark
+    // line), so its reading sits near the safe area and the chrome clock's line. clockStyle 'chrome'
+    // sets the clock exactly where and how the chrome scene sets its own (right 96, label top 60,
+    // digits 38 px top 86 at inset 36), so the two can hand over invisibly; 'inline' is the demo's.
+    opts = opt({ scale: 1.6, chip: 'End-state concept', chipVisible: true, status: 'inside', time: '14:18', seconds: true, clock: true, inset: 36, clockStyle: 'chrome' }, opts);
     const c = ctx(opts, 'header');
     const root = h('header', 'pui pui-top fui fui-header');
     root.id = c.id();
     root.style.setProperty('--pui-scale', opts.scale);
+    const bandH = +(68 * opts.scale).toFixed(1);
+    root.style.boxSizing = 'border-box';
+    root.style.height = (bandH + opts.inset) + 'px';
+    root.style.paddingTop = opts.inset + 'px';
     const brand = h('div', 'brand', root);
     glyph('g-mark', 'mk', brand);
     h('span', 'wm', brand, 'Priora');
@@ -390,19 +445,28 @@
     }
     const status = Swap(pb, vars, opts.status, { dy: 5 });
     h('div', 'spacer', root);
-    const clockEl = h('div', 'clock', root);
-    h('span', 'lab', clockEl, 'Site time');
-    const cb = h('b', 'fui-clock', clockEl);
-    const fs = 22 * opts.scale;
-    const clock = clockOdo(cb, opts.time, Math.round(fs * 1.12), opts.seconds);
+    // the clock can be left to the chrome scene (opts.clock false): the right of the strip stays empty
+    let clockEl = null, clock = null;
+    if (opts.clock) {
+      const chromeClock = opts.clockStyle === 'chrome';
+      clockEl = h('div', 'clock' + (chromeClock ? ' fui-clock-chrome' : ''), root);
+      if (chromeClock) clockEl.style.top = (opts.inset + 24) + 'px';
+      h('span', 'lab', clockEl, 'Site time');
+      const cb = h('b', 'fui-clock', clockEl);
+      const fs = chromeClock ? 38 : 22 * opts.scale;
+      clock = clockOdo(cb, opts.time, chromeClock ? CLOCK_LH : Math.round(fs * 1.12), opts.seconds);
+    }
     const rule = h('i', 'fui-hrule', root);
     idAll(root, c.base);
     mountTo(root, opts);
-    const items = [brand, site, pill, clockEl];
+    const items = [brand, site, pill, clockEl].filter(Boolean);
+    const height = bandH + opts.inset;
+    const noClock = () => { throw new Error('UIKit.header: built with clock: false'); };
     return {
-      el: root, clock, status, chip, items, ctx: c,
-      setClock(tl, t, time) { return clock.set(tl, t, hhmm(time)); },
-      rollClock(tl, t, time, dur, ease) { c.ev('clock-roll', t, dur, { to: time }); return clock.roll(tl, t, hhmm(time), dur, ease); },
+      el: root, clock, status, chip, items, ctx: c, height,
+      setClock(tl, t, time) { if (!clock) noClock(); return clock.set(tl, t, hhmm(time)); },
+      /** rollClock(tl, t, to, dur, ease, from): odometer roll from the current value (or from 'from', set at t) to 'to' */
+      rollClock(tl, t, time, dur, ease, from) { if (!clock) noClock(); if (from != null) clock.set(tl, t, hhmm(from)); c.ev('clock-roll', t, dur, { from: from || null, to: time }); return clock.roll(tl, t, hhmm(time), dur, ease); },
       setStatus(tl, t, key, dur) {
         const end = status.to(tl, t, key, dur);
         c.ev('status', t, dur || 0.3, { status: key });
@@ -434,7 +498,7 @@
   };
   const NODE_PARTS = ['ring', 'chk', 'out', 'own', 'cap', 'dot', 'sq'];
   function nodeGlyph(svgParent, xy, state, opts) {
-    opts = Object.assign({ k: 1, reticle: false, visible: true, events: true }, opts);
+    opts = opt({ k: 1, reticle: false, visible: true, events: true }, opts);
     state = state || 'inside';
     const c = ctx(opts, 'node' + (opts.name ? '-' + opts.name : ''));
     const g = sv('g', { class: 'fui-node', transform: `translate(${f3(xy[0])} ${f3(xy[1])})` }, svgParent);
@@ -453,14 +517,14 @@
     sv('path', { class: 'ck', d: 'M15.5 -2V0H17.2' }, P.cap);
     P.ring = sv('circle', { class: 'fui-n-ring', r: 6.6 }, px);
     P.chk = sv('circle', { class: 'fui-n-chk', r: 9, transform: 'rotate(0)' }, px);
-    P.out = sv('g', { class: 'fui-n-out' }, px);
+    P.out = sv('g', { class: 'fui-n-out', transform: sc(1, 1, 0, 0) }, px);
     sv('circle', { r: 8.5 }, P.out);
     sv('path', { d: 'M0 -11.5V-16M0 11.5V16M-11.5 0H-16M11.5 0H16' }, P.out);
     P.dot = sv('circle', { class: 'fui-n-dot', r: 3.1 }, px);
     P.sq = sv('rect', { class: 'fui-n-sq', x: -3.4, y: -3.4, width: 6.8, height: 6.8 }, px);
     const retG = sv('g', { class: 'fui-nret' }, g);
     const ret = sv('path', { class: 'fui-nret-p', d: 'M-22 -14V-22H-14M14 -22H22V-14M22 14V22H14M-14 22H-22V14', transform: 'scale(1)' }, retG);
-    retG.style.setProperty('--kr', opts.kr || 1);
+    retG.style.setProperty('--kr', opts.kr || Math.max(1, opts.k * 0.88));
     // initial state
     const S = NODE_STATES[state];
     NODE_PARTS.forEach((p, i) => { P[p].style.opacity = S[i]; });
@@ -487,7 +551,7 @@
           if (dur <= 0.002) cut(tl, P.dot, f, e, t); else ft(tl, P.dot, f, Object.assign(e, { duration: dur, ease: 'power2.out' }), t);
         }
         // outside and resolved states land with a small settle of the ring
-        if (to === 'outside' && dur > 0.002) ft(tl, P.out, { scale: 1.35, transformOrigin: '50% 50%' }, { scale: 1, duration: Math.max(dur, 0.45), ease: 'expo.out' }, t);
+        if (to === 'outside' && dur > 0.002) ft(tl, P.out, { attr: { transform: sc(1.35, 1.35, 0, 0) } }, { attr: { transform: sc(1, 1, 0, 0) }, duration: Math.max(dur, 0.45), ease: 'expo.out' }, t);
         if (opts.events && ['outside', 'changed', 'retained', 'cover'].includes(to)) c.ev('node-' + to, t, dur, { from: this.cur });
         this.cur = to;
         return t + dur;
@@ -602,6 +666,21 @@
     return `M${f3(a[0])} ${f3(a[1])}L${f3(b[0])} ${f3(b[1])}A${R} ${R} 0 0 0 ${f3(cc[0])} ${f3(cc[1])}L${f3(d[0])} ${f3(d[1])}A${R} ${R} 0 0 0 ${f3(a[0])} ${f3(a[1])}Z`;
   }
 
+  /**
+   * siteLabels(site, k): the demo's zone labels are 10 screen px; at video scale they are
+   * drawn k times larger (default 1.8, i.e. 18 px). Use a smaller k (1.2 to 1.4) in wide
+   * views where the labels are context, not reading. Returns the svg. tl/t optional:
+   * siteLabels(site, k, tl, t, dur) tweens the scale seek-safely from the current value.
+   */
+  function siteLabels(site, k, tl, t, dur) {
+    const svg = site.svg || site;
+    svg.classList.add('fui-labels');
+    const cur = svg.__fuiLab == null ? 1.8 : svg.__fuiLab;
+    if (tl) ft(tl, svg, { '--fui-lab': cur }, { '--fui-lab': k, duration: dur || 0.6, ease: 'power2.inOut' }, t);
+    else svg.style.setProperty('--fui-lab', k);
+    svg.__fuiLab = k;
+    return svg;
+  }
   /** overlay layer on a SiteKit site (or any svg): nodes, connections and labels live here */
   function overlay(siteOrSvg, prefix) {
     const svg = siteOrSvg.svg || siteOrSvg;
@@ -615,33 +694,45 @@
   // ------------------------------------------------------------------ the crossing: stretch across the envelope, then snap outside
   /**
    * crossing(tl, t0, node, site, opts) -> handle
-   * The hot-work node elongates as a capsule from its roof position (heroOriginWorld) to
-   * just outside the envelope; the membrane flexes with the demo's own deformation driven by
-   * the capsule head; at the edge the capsule turns cobalt; after a short hold it snaps:
-   * the tail retracts to the head (leaving the dashed tether), the node lands in the outside
-   * state with reticle, slice ring and exit ticks. End geometry is the demo's exactly.
-   *   opts: s (camera px per world unit, default 8.83133 = demo 'somethingChanges'),
-   *         stretch (1.5 s), hold (0.14 s), snap (0.42 s), ease (stretch, 'inOutCubic')
+   * The film's primary product reveal. The hot-work node (in its checking state, at
+   * outsideState.heroOriginWorld) elongates as a capsule: its dashed checking ring
+   * stretches into a stadium with a hairline spine, the dot rides the head along the
+   * demo's exit path (heroDeviation P(v), with its 16 px arc) to the settle point just
+   * outside the envelope. The membrane flexes with the demo's own deformation, driven by
+   * the head until the pinch point (44 px past the edge), and holds that tension while
+   * the head travels on. When the head crosses the edge the capsule turns cobalt. After a
+   * short hold it snaps (expo.out): the tail retracts to the head, the dashed tether is
+   * left behind it, the membrane relaxes to the demo's notch and exit ticks, and the node
+   * lands in the outside state with reticle and slice ring. The landed geometry equals
+   * the demo's (heroDeviation at v = 1) exactly.
+   *   opts: s (camera px per world unit the shot holds, default 8.83133, the demo's
+   *         'somethingChanges'), stretch (1.5 s), hold (0.16 s), snap (0.46 s),
+   *         ease (stretch easing, default 'inOutCubic' as the demo), tether, ring
    */
   function crossing(tl, t0, node, site, opts) {
-    opts = Object.assign({ s: 8.83133, stretch: 1.5, hold: 0.14, snap: 0.42, ease: 'inOutCubic', tether: true, ring: true }, opts);
+    opts = opt({ s: 8.83133, stretch: 1.5, hold: 0.16, snap: 0.46, ease: 'inOutCubic', tether: true, ring: true }, opts);
     const c = ctx(Object.assign({ prefix: opts.prefix || node.ctx.prefix, scene: opts.scene || node.ctx.scene, eventOffset: opts.eventOffset }), 'crossing');
     const M = window.SITE_MODEL, E = M.envelope, OS = M.outsideState;
     const A = OS.heroOriginWorld, s = opts.s, K = node.k, px = 1 / s;
     const dev = (v, nk) => heroDeviation(E.pointsWorld, E.normalsWorld, E.centreWorld, A, s, v, nk);
     const r1 = dev(1, 1), r0 = dev(0, 1), T = r1.P, dir = r1.dir;
+    const vPinch = clamp((44 - r0.uPx) / (r1.offPx - r0.uPx), 0, 1);   // head 44 px past the edge
     const ov = node.el.parentNode;
     const outlineEl = site.el('envelope-outline'), outerEl = site.el('envelope-outer'), fillEl = site.el('envelope-fill');
     const fillMatches = fillEl && outlineEl && fillEl.getAttribute('d') === outlineEl.getAttribute('d');
-    // capsule + trail elements (under the node glyph)
+    const RO = 9 * K * px, RD = 3.1 * K * px, RT = 1.9 * K * px;         // ring, head dot, tail dot (world units)
+    // capsule (under the node glyph) and what it leaves behind
+    const trail = sv('g', { class: 'fui-trail' }, ov);
+    ov.insertBefore(trail, node.el);
     const g = sv('g', { class: 'fui-caps' }, ov);
     ov.insertBefore(g, node.el);
     g.style.setProperty('--k', K);
     g.style.opacity = 0;
-    const capRing = sv('path', { class: 'fui-caps-ring', d: stadium(A, A, 9 * K * px, dir) }, g);
-    const capCore = sv('path', { class: 'fui-caps-core', d: stadium(A, A, 3.1 * K * px, dir) }, g);
-    const trail = sv('g', { class: 'fui-trail' }, ov);
-    ov.insertBefore(trail, g);
+    const capFill = sv('path', { class: 'fui-caps-fill', d: stadium(A, A, RO, dir) }, g);
+    const capRing = sv('path', { class: 'fui-caps-ring', d: stadium(A, A, RO, dir) }, g);
+    const spine = sv('line', { class: 'fui-caps-spine', x1: f3(A[0]), y1: f3(A[1]), x2: f3(A[0]), y2: f3(A[1]) }, g);
+    const tailDot = sv('circle', { class: 'fui-caps-tail', cx: f3(A[0]), cy: f3(A[1]), r: f3(RT) }, g);
+    const headDot = sv('circle', { class: 'fui-caps-head', cx: f3(A[0]), cy: f3(A[1]), r: f3(RD) }, g);
     const ticks = sv('path', { class: 'fui-exit-ticks', d: r1.notchTicks }, trail);
     ticks.style.opacity = 0;
     const tether = sv('line', { class: 'fui-tether', x1: f3(A[0]), y1: f3(A[1]), x2: f3(A[0]), y2: f3(A[1]) }, trail);
@@ -654,72 +745,80 @@
     ringG.style.opacity = 0;
     idAll(g, c.base + '-caps'); idAll(trail, c.base + '-trail');
 
-    // ---- stretch keyframes (one per frame)
+    const env = r => ({ o: polyD(r.outline), u: polyD(r.outer), tick: r.notchOpacity });
+    const cap = (tail, head) => ({ st: stadium(tail, head, RO, dir), tail, head });
+    const step = (ta, tb, E0, E1, C0, C1) => {
+      const d = { duration: Math.max(0.001, tb - ta), ease: 'none' };
+      if (E0.o !== E1.o) {
+        if (outlineEl) ft(tl, outlineEl, { attr: { d: E0.o } }, Object.assign({ attr: { d: E1.o } }, d), ta);
+        if (outerEl) ft(tl, outerEl, { attr: { d: E0.u } }, Object.assign({ attr: { d: E1.u } }, d), ta);
+        if (fillMatches) ft(tl, fillEl, { attr: { d: E0.o } }, Object.assign({ attr: { d: E1.o } }, d), ta);
+      }
+      if (E0.tick !== E1.tick) ft(tl, ticks, { opacity: E0.tick }, Object.assign({ opacity: E1.tick }, d), ta);
+      if (C0.st !== C1.st) {
+        ft(tl, [capFill, capRing], { attr: { d: C0.st } }, Object.assign({ attr: { d: C1.st } }, d), ta);
+        ft(tl, spine, { attr: { x1: f3(C0.tail[0]), y1: f3(C0.tail[1]), x2: f3(C0.head[0]), y2: f3(C0.head[1]) } }, Object.assign({ attr: { x1: f3(C1.tail[0]), y1: f3(C1.tail[1]), x2: f3(C1.head[0]), y2: f3(C1.head[1]) } }, d), ta);
+        if (C0.head !== C1.head) ft(tl, headDot, { attr: { cx: f3(C0.head[0]), cy: f3(C0.head[1]) } }, Object.assign({ attr: { cx: f3(C1.head[0]), cy: f3(C1.head[1]) } }, d), ta);
+        if (C0.tail !== C1.tail) ft(tl, tailDot, { attr: { cx: f3(C0.tail[0]), cy: f3(C0.tail[1]) } }, Object.assign({ attr: { cx: f3(C1.tail[0]), cy: f3(C1.tail[1]) } }, d), ta);
+      }
+    };
+    // ---- stretch: one keyframe per frame
     const e = easeFn(opts.ease);
     const Ns = Math.max(8, Math.round(opts.stretch * FPS));
-    let prev = { v: 0, r: r0 };
-    const outlineD = r => polyD(r.outline), outerD = r => polyD(r.outer);
-    const st = (r, tail) => ({ ring: stadium(tail, r.P, 9 * K * px, dir), core: stadium(tail, r.P, 3.1 * K * px, dir) });
-    let prevD = { o: outlineD(r0), u: outerD(r0), s: st(r0, A), tick: 0 };
-    cut(tl, node.el, { opacity: node.vis }, { opacity: 0 }, t0);
-    cut(tl, g, { opacity: 0 }, { opacity: 1 }, t0);
     const nodeVis0 = node.vis;
-    // find the time the head crosses the edge
-    let tCross = t0;
+    cut(tl, node.el, { opacity: nodeVis0 }, { opacity: 0 }, t0);
+    cut(tl, g, { opacity: 0 }, { opacity: 1 }, t0);
+    let pv = 0, pE = env(r0), pC = cap(A, A), tCross = t0;
     for (let k = 1; k <= Ns; k++) {
       const ta = t0 + (k - 1) * opts.stretch / Ns, tb = t0 + k * opts.stretch / Ns;
-      const v = e(k / Ns), r = dev(v, 1);
-      const D = { o: outlineD(r), u: outerD(r), s: st(r, A), tick: r.notchOpacity };
-      const d = tb - ta;
-      if (outlineEl) ft(tl, outlineEl, { attr: { d: prevD.o } }, { attr: { d: D.o }, duration: d, ease: 'none' }, ta);
-      if (outerEl) ft(tl, outerEl, { attr: { d: prevD.u } }, { attr: { d: D.u }, duration: d, ease: 'none' }, ta);
-      if (fillMatches) ft(tl, fillEl, { attr: { d: prevD.o } }, { attr: { d: D.o }, duration: d, ease: 'none' }, ta);
-      ft(tl, capRing, { attr: { d: prevD.s.ring } }, { attr: { d: D.s.ring }, duration: d, ease: 'none' }, ta);
-      ft(tl, capCore, { attr: { d: prevD.s.core } }, { attr: { d: D.s.core }, duration: d, ease: 'none' }, ta);
-      if (D.tick !== prevD.tick) ft(tl, ticks, { opacity: prevD.tick }, { opacity: D.tick, duration: d, ease: 'none' }, ta);
-      if (prev.v < r0.crossV && v >= r0.crossV) tCross = ta + d * (r0.crossV - prev.v) / Math.max(1e-6, v - prev.v);
-      prev = { v, r }; prevD = D;
+      const v = e(k / Ns);
+      const head = dev(v, 1).P;                       // the demo's exit path, arc included
+      const mem = v <= vPinch ? dev(v, 1) : dev(vPinch, 1);   // the membrane holds its tension
+      const E1 = env(mem), C1 = cap(A, head);
+      step(ta, tb, pE, E1, pC, C1);
+      if (pv < r0.crossV && v >= r0.crossV) tCross = ta + (tb - ta) * (r0.crossV - pv) / Math.max(1e-6, v - pv);
+      pv = v; pE = E1; pC = C1;
     }
     // colour: ink to cobalt as the head passes the edge
-    ft(tl, [capCore], { fill: C.ink }, { fill: C.signal, duration: 0.22, ease: 'power2.out' }, tCross);
-    ft(tl, [capRing], { stroke: C.ink }, { stroke: C.signal, duration: 0.22, ease: 'power2.out' }, tCross);
-    c.ev('stretch', t0, opts.stretch, { from: A, to: T });
+    ft(tl, capRing, { stroke: C.ink }, { stroke: C.signal, duration: 0.24, ease: 'power2.out' }, tCross);
+    ft(tl, spine, { stroke: C.ink }, { stroke: C.signal, duration: 0.24, ease: 'power2.out' }, tCross);
+    ft(tl, headDot, { fill: C.ink }, { fill: C.signal, duration: 0.24, ease: 'power2.out' }, tCross);
+    c.ev('stretch', t0, opts.stretch, { from: A, to: T, pinchAt: +(t0 + opts.stretch * 0.5).toFixed(3) });
     c.ev('cross-edge', tCross, 0.2, {});
-    // ---- snap: the tail retracts to the head, the tether follows it
+    // ---- snap: tail retracts to the head, membrane relaxes to the notch, tether follows the tail
     const tS = t0 + opts.stretch + opts.hold;
     const Nn = Math.max(6, Math.round(opts.snap * FPS));
-    let prevTail = A;
     if (opts.tether) cut(tl, tether, { opacity: 0 }, { opacity: 1 }, tS);
+    let pTail = A;
     for (let k = 1; k <= Nn; k++) {
       const ta = tS + (k - 1) * opts.snap / Nn, tb = tS + k * opts.snap / Nn;
       const w = EASE.outExpo(k / Nn);
       const tail = lerp2(A, T, w);
-      const S1 = st(r1, prevTail), S2 = st(r1, tail);
-      ft(tl, capRing, { attr: { d: S1.ring } }, { attr: { d: S2.ring }, duration: tb - ta, ease: 'none' }, ta);
-      ft(tl, capCore, { attr: { d: S1.core } }, { attr: { d: S2.core }, duration: tb - ta, ease: 'none' }, ta);
-      if (opts.tether) ft(tl, tether, { attr: { x2: f3(prevTail[0]), y2: f3(prevTail[1]) } }, { attr: { x2: f3(tail[0]), y2: f3(tail[1]) }, duration: tb - ta, ease: 'none' }, ta);
-      prevTail = tail;
+      const E1 = env(dev(lerp(vPinch, 1, w), 1));
+      const C0 = cap(pTail, T), C1 = cap(tail, T);
+      C0.head = C1.head;   // the head is parked on T: no head tween
+      step(ta, tb, pE, E1, Object.assign(C0, { st: pC.st }), C1);
+      if (opts.tether) ft(tl, tether, { attr: { x2: f3(pTail[0]), y2: f3(pTail[1]) } }, { attr: { x2: f3(tail[0]), y2: f3(tail[1]) }, duration: tb - ta, ease: 'none' }, ta);
+      pTail = tail; pE = E1; pC = C1;
     }
-    const tLand = tS + opts.snap * 0.55;
-    // node lands outside
+    const tLand = tS + opts.snap * 0.5;
     node.moveTo(tl, tS, T, 0.001);
     node.state(tl, tS, 'outside', 0.001);
     cut(tl, node.el, { opacity: 0 }, { opacity: 1 }, tLand);
     node.vis = 1;
-    ft(tl, node.parts.out, { scale: 1.45, transformOrigin: '50% 50%' }, { scale: 1, duration: 0.5, ease: 'expo.out' }, tLand);
-    ft(tl, g, { opacity: 1 }, { opacity: 0, duration: 0.12, ease: 'power1.out' }, tLand);
-    node.reticle(tl, tLand, true, 0.55);
+    ft(tl, node.parts.out, { attr: { transform: sc(1.5, 1.5, 0, 0) } }, { attr: { transform: sc(1, 1, 0, 0) }, duration: 0.55, ease: 'expo.out' }, tLand);
+    ft(tl, g, { opacity: 1 }, { opacity: 0, duration: 0.1, ease: 'power1.out' }, tLand);
+    node.reticle(tl, tLand, true, 0.6);
     ft(tl, anc, { opacity: 0 }, { opacity: 1, duration: 0.35, ease: 'power2.out' }, tS + 0.05);
     if (opts.ring) {
       ft(tl, ringG, { opacity: 0 }, { opacity: 1, duration: 0.2, ease: 'power1.out' }, tLand);
-      ft(tl, sliceRing, { attr: { r: 8 } }, { attr: { r: 28 }, duration: 0.7, ease: 'expo.out' }, tLand);
+      ft(tl, sliceRing, { attr: { r: 8 } }, { attr: { r: 28 }, duration: 0.8, ease: 'expo.out' }, tLand);
     }
     const tEnd = tS + opts.snap + 0.3;
     c.ev('snap', tS, opts.snap, { latch: +tLand.toFixed(3) });
     const X = {
-      t0, tCross, tSnap: tS, tLand, tEnd, A, T, E: r1.E, dir, node, capsule: g, tether, anchor: anc, ringEl: ringG, ticks,
+      t0, tCross, tSnap: tS, tLand, tEnd, A, T, E: r1.E, dir, vPinch, node, capsule: g, tether, anchor: anc, ringEl: ringG, ticks,
       where: 'outside', notchK: 1, ctx: c,
-      _nodeVis0: nodeVis0,
       /** the change branch: the node travels back inside to its roof position, the notch heals */
       back(tl, t, dur, ease) {
         dur = dur || 1.2; ease = ease || 'power2.inOut';
@@ -762,7 +861,7 @@
 
   // ------------------------------------------------------------------ Sprinkler Zone 3 states on a SiteKit site
   function sprinkler(tl, site, t, to, opts) {
-    opts = Object.assign({ step: 0.055, labelSignal: true }, opts);
+    opts = opt({ step: 0.055, labelSignal: true }, opts);
     const c = ctx({ prefix: opts.prefix || site.prefix, scene: opts.scene, eventOffset: opts.eventOffset }, 'sz3');
     let S = site.__fuiSz;
     if (!S) {
@@ -808,7 +907,7 @@
     unavailable: { color: C.ink, cw: 0, cp: 1, cx: 1, em: 'unavailable' },
   };
   function activityCard(opts) {
-    opts = Object.assign({ scale: 1.8, state: 'waiting' }, opts);
+    opts = opt({ scale: 1.8, state: 'waiting' }, opts);
     const c = ctx(opts, 'card');
     const D = Object.assign({}, DATA.card, opts.data || {});
     const root = h('div', 'pui pui-herocard fui fui-card');
@@ -828,10 +927,10 @@
       const ck = sv('svg', { class: 'ck', viewBox: '0 0 16 16' }, li);
       const cw = sv('circle', { class: 'c-w', cx: 8, cy: 8, r: 6 }, ck);
       const cp = sv('path', { class: 'c-p', pathLength: 1, d: 'M3.4 8.4L6.6 11.4L12.8 4.6' }, ck);
-      const cx = sv('g', { class: 'c-x fui-cx' }, ck);
+      const cx = sv('g', { class: 'c-x fui-cx', transform: sc(1, 1, 8, 8) }, ck);
       sv('circle', { cx: 8, cy: 8, r: 6 }, cx); sv('path', { d: 'M4 12L12 4' }, cx);
       h('span', '', li, label);
-      const em = Swap(li, { none: '', verified: 'Verified', unavailable: n => { n.textContent = 'Unavailable'; n.classList.add('fui-sig-t'); } }, ROW[initRow].em, { tag: 'em', dy: 4 });
+      const em = Swap(li, { none: '', verified: 'VERIFIED', unavailable: n => { n.textContent = 'UNAVAILABLE'; n.classList.add('fui-sig-t'); } }, ROW[initRow].em, { tag: 'em', dy: 4 });
       const R = ROW[initRow];
       li.style.color = R.color; cw.style.opacity = R.cw; cp.style.strokeDashoffset = R.cp; cx.style.opacity = R.cx;
       return { li, cw, cp, cx, em, label, cur: initRow };
@@ -863,7 +962,7 @@
         if (A.cp !== B.cp) ft(tl, r.cp, { strokeDashoffset: A.cp }, { strokeDashoffset: B.cp, duration: B.cp === 0 ? dur : dur * 0.4, ease: B.cp === 0 ? 'power2.out' : 'power1.in' }, t + (B.cp === 0 ? dur * 0.15 : 0));
         if (A.cx !== B.cx) {
           ft(tl, r.cx, { opacity: A.cx }, { opacity: B.cx, duration: dur * 0.6, ease: 'power2.out' }, t + dur * 0.2);
-          if (B.cx) ft(tl, r.cx, { scale: 0.6, transformOrigin: '50% 50%' }, { scale: 1, duration: dur * 1.4, ease: 'expo.out' }, t + dur * 0.2);
+          if (B.cx) ft(tl, r.cx, { attr: { transform: sc(0.6, 0.6, 8, 8) } }, { attr: { transform: sc(1, 1, 8, 8) }, duration: dur * 1.4, ease: 'expo.out' }, t + dur * 0.2);
         }
         r.em.to(tl, t + dur * 0.45, B.em, 0.28);
         if (state === 'verified') c.ev('verify', t + dur * 0.15, dur, { row: i, label: r.label });
@@ -918,7 +1017,7 @@
     return out;
   }
   function captureStrip(opts) {
-    opts = Object.assign({ width: 1040, waveH: 64 }, opts);
+    opts = opt({ width: 1040, waveH: 64 }, opts);
     const c = ctx(opts, 'capture');
     const D = DATA.capture;
     const text = opts.text || D.text;
@@ -929,21 +1028,27 @@
     h('i', 'fui-cap-dot', head);
     h('span', 'fui-cap-lab', head, opts.label || D.label);
     const state = Swap(head, { listening: 'Listening', resolved: 'Structured' }, 'listening', { cls: 'fui-cap-state', dy: 4 });
-    // waveform
+    // waveform: mirrored hairline bars from the amplitude envelope (one bar per opts.barPitch px,
+    // each the peak of its slice), revealed by a clip whose edge is the playhead
     const ww = opts.width - 72, wh = opts.waveH;
     const wave = sv('svg', { class: 'fui-cap-wave', viewBox: `0 0 ${ww} ${wh}`, width: ww, height: wh }, root);
     sv('line', { class: 'ax', x1: 0, y1: wh / 2, x2: ww, y2: wh / 2 }, wave);
     const env = opts.envelope || (opts.words ? envelopeFromWords(opts.words, opts.duration || (opts.words[opts.words.length - 1].end - opts.words[0].start + 0.3)) : new Array(200).fill(0.3));
-    const rr = rng(c.base + 'wave');
-    let d = 'M0 ' + f3(wh / 2);
-    const n = env.length;
-    for (let i = 0; i < n; i++) {
-      const x = (i + 0.5) * ww / n, a = clamp(env[i], 0, 1) * (wh / 2 - 3) * (0.6 + 0.4 * rr());
-      d += 'L' + f3(x) + ' ' + f3(wh / 2 + (i % 2 ? a : -a));
+    const n = env.length, pitch = opts.barPitch || 5, nb = Math.max(8, Math.floor(ww / pitch));
+    const peak = env.reduce((m, v) => Math.max(m, v), 1e-6);
+    let d = '';
+    for (let j = 0; j < nb; j++) {
+      const i0 = Math.floor(j * n / nb), i1 = Math.max(i0 + 1, Math.floor((j + 1) * n / nb));
+      let a = 0; for (let i = i0; i < i1 && i < n; i++) a = Math.max(a, env[i]);
+      const hh = Math.max(0.8, Math.pow(clamp(a / peak, 0, 1), 0.85) * (wh / 2 - 4));
+      const x = (j + 0.5) * ww / nb;
+      d += 'M' + f3(x) + ' ' + f3(wh / 2 - hh) + 'V' + f3(wh / 2 + hh);
     }
-    d += 'L' + ww + ' ' + f3(wh / 2);
-    const wpath = sv('path', { class: 'wv', d }, wave);
-    const headLine = sv('line', { class: 'hd', x1: 0, y1: 4, x2: 0, y2: wh - 4 }, wave);
+    const clipId = c.id('wclip');
+    const clip = sv('clipPath', { id: clipId }, sv('defs', {}, wave));
+    const clipR = sv('rect', { x: -2, y: 0, width: 0, height: wh }, clip);
+    const wpath = sv('path', { class: 'wv', d, 'clip-path': `url(#${clipId})` }, wave);
+    const headLine = sv('line', { class: 'hd', x1: 0, y1: 2, x2: 0, y2: wh - 2 }, wave);
     headLine.style.opacity = 0;
     // transcript
     const tx = h('div', 'fui-cap-tx', root);
@@ -969,9 +1074,12 @@
       play(tl, offset, words, dur) {
         words = words || opts.words;
         offset = offset || 0;
-        const ta = words[0].start + offset - 0.05, tb = words[words.length - 1].end + offset + 0.1;
+        // the envelope spans the reveal window: opts.envelopeSpan [t0, t1] in take seconds when the
+        // envelope was cut to a known window, else the words' window (first start - 0.05 to last end + 0.1)
+        const sp = opts.envelopeSpan;
+        const ta = (sp ? sp[0] : words[0].start - 0.05) + offset, tb = (sp ? sp[1] : words[words.length - 1].end + 0.1) + offset;
         dur = dur || (tb - ta);
-        drawFrom(tl, wpath, ta, dur, 'none');
+        ft(tl, clipR, { attr: { width: 0 } }, { attr: { width: ww + 4 }, duration: dur, ease: 'none' }, ta);
         ft(tl, headLine, { opacity: 0 }, { opacity: 1, duration: 0.15 }, ta);
         ft(tl, headLine, { attr: { x1: 0, x2: 0 } }, { attr: { x1: ww, x2: ww }, duration: dur, ease: 'none' }, ta);
         ft(tl, headLine, { opacity: 1 }, { opacity: 0, duration: 0.3 }, ta + dur);
@@ -999,17 +1107,28 @@
 
   // ================================================================== 5. clause labels and live connections (site SVG, world units)
   function conditionLabel(svgParent, opts) {
-    opts = Object.assign({ num: '4.2', s: 11, size: 21, align: 'left', lead: 22 }, opts);
+    opts = opt({ num: '4.2', s: 11, size: 21, align: 'left', lead: 22, maxChars: 32 }, opts);
     const c = ctx(opts, 'clause-' + opts.num.replace('.', '-'));
     const text = (opts.text || DATA.clauses[opts.num] || '').toUpperCase();
+    // wrap on the middle dots, never inside a phrase
+    const lines = [];
+    const push = (piece, sep) => {
+      const last = lines.length ? lines[lines.length - 1] : null;
+      if (last != null && (last + sep + piece).length <= opts.maxChars) lines[lines.length - 1] = last + sep + piece;
+      else lines.push(piece);
+    };
+    text.split(' · ').forEach(ph => {
+      if (ph.length <= opts.maxChars) push(ph, ' · ');
+      else ph.split(' ').forEach((wd, j) => (j ? push(wd, ' ') : push(wd, ' · ')));   // a long phrase wraps on spaces
+    });
     const k = 1 / opts.s;
     const at = opts.at;
     const g = sv('g', { class: 'fui-clause', transform: `translate(${f3(at[0])} ${f3(at[1])}) scale(${f3(k)})` }, svgParent);
     g.style.setProperty('--fui-s', opts.s);
-    const fs = opts.size, cw = fs * (0.6 + 0.12);
+    const fs = opts.size, cw = fs * (0.6 + 0.12), lh = fs * 1.5;
     const numW = opts.num.length * cw + 22, boxH = fs + 18;
     const dirx = opts.align === 'left' ? 1 : -1;
-    const textW = text.length * cw;
+    const textW = Math.max(...lines.map(l => l.length)) * cw;
     const x0 = dirx * opts.lead;
     const boxX = dirx > 0 ? x0 : x0 - numW;
     const txX = dirx > 0 ? boxX + numW + 14 : boxX - 14 - textW;
@@ -1019,23 +1138,27 @@
     const num = sv('text', { class: 'fui-clause-num', x: f3(boxX + numW / 2), y: f3(fs * 0.36), 'font-size': fs, 'text-anchor': 'middle' }, g);
     num.textContent = opts.num;
     const tx = sv('text', { class: 'fui-clause-tx', x: f3(txX), y: f3(fs * 0.36), 'font-size': fs }, g);
-    tx.textContent = text;
-    const rule = sv('path', { class: 'fui-clause-rule', d: `M${f3(Math.min(boxX, txX))} ${f3(boxH / 2 + 10)}H${f3(Math.max(boxX + numW, txX + textW))}` }, g);
-    const parts = [term, lead, box, num, tx, rule];
-    parts.forEach(p => { p.style.opacity = 0; });
+    lines.forEach((l, i) => { const ts = sv('tspan', { x: f3(txX), dy: i ? f3(lh) : 0 }, tx); ts.textContent = l; });
+    const ruleY = boxH / 2 + 10 + (lines.length - 1) * lh;
+    const rule = sv('path', { class: 'fui-clause-rule', d: `M${f3(Math.min(boxX, txX))} ${f3(ruleY)}H${f3(Math.max(boxX + numW, txX + textW))}` }, g);
+    const parts2 = [term, lead, box, num, tx, rule];
+    parts2.forEach(p => { p.style.opacity = 0; });
+    box.style.fillOpacity = 0;
     idAll(g, c.base);
     const L = {
-      el: g, at, parts, ctx: c, on: false,
+      el: g, at, lines, ctx: c, on: false,
       reveal(tl, t, dur) {
         dur = dur || 0.9;
         ft(tl, term, { opacity: 0 }, { opacity: 1, duration: 0.2 }, t);
-        ft(tl, lead, { opacity: 0 }, { opacity: 1, duration: 0.01 }, t);
+        cut(tl, lead, { opacity: 0 }, { opacity: 1 }, t);
         drawFrom(tl, lead, t, dur * 0.3, 'power2.out');
-        ft(tl, box, { opacity: 0 }, { opacity: 1, duration: 0.01 }, t + dur * 0.2);
+        cut(tl, box, { opacity: 0 }, { opacity: 1 }, t + dur * 0.2);
         drawFrom(tl, box, t + dur * 0.2, dur * 0.45, 'power2.inOut');
+        // the paper fill arrives once the outline is drawn (never a blank box ahead of its line)
+        ft(tl, box, { fillOpacity: 0 }, { fillOpacity: 1, duration: dur * 0.3, ease: 'power1.out' }, t + dur * 0.55);
         ft(tl, num, { opacity: 0 }, { opacity: 1, duration: dur * 0.35, ease: 'power2.out' }, t + dur * 0.4);
-        ft(tl, tx, { opacity: 0, attr: { x: f3(txX - dirx * 10) } }, { opacity: 1, attr: { x: f3(txX) }, duration: dur * 0.55, ease: 'power3.out' }, t + dur * 0.45);
-        ft(tl, rule, { opacity: 0 }, { opacity: 1, duration: 0.01 }, t + dur * 0.5);
+        ft(tl, tx, { opacity: 0, attr: { transform: `translate(${-dirx * 10} 0)` } }, { opacity: 1, attr: { transform: 'translate(0 0)' }, duration: dur * 0.55, ease: 'power3.out' }, t + dur * 0.45);
+        cut(tl, rule, { opacity: 0 }, { opacity: 1 }, t + dur * 0.5);
         drawFrom(tl, rule, t + dur * 0.5, dur * 0.5, 'power2.inOut');
         c.ev('clause', t, dur, { num: opts.num });
         return t + dur;
@@ -1050,6 +1173,7 @@
         this.on = on;
         return t + 0.3;
       },
+      fade(tl, t, to, dur) { ft(tl, g, { opacity: 1 }, { opacity: to == null ? 0 : to, duration: dur || 0.5, ease: 'power1.inOut' }, t); return t + (dur || 0.5); },
     };
     return L;
   }
@@ -1058,7 +1182,7 @@
    * shape: 'straight' | 'elbow' (horizontal first) | 'elbow-v' (vertical first) | 'arc'
    */
   function connect(tl, t, svgParent, from, to, opts) {
-    opts = Object.assign({ dur: 0.8, shape: 'straight', bend: 0.5, terminals: true, ease: 'power2.inOut' }, opts);
+    opts = opt({ dur: 0.8, shape: 'straight', bend: 0.5, terminals: true, ease: 'power2.inOut' }, opts);
     const c = ctx(opts, 'live');
     const g = sv('g', { class: 'fui-live' }, svgParent);
     let d;
@@ -1078,13 +1202,13 @@
     if (tb) ft(tl, tb, { opacity: 0 }, { opacity: 1, duration: 0.25, ease: 'power2.out' }, t + opts.dur * 0.92);
     c.ev('connect', t, opts.dur, { name: opts.name || '' });
     return { el: g, path, end: t + opts.dur, ctx: c,
-      fade(tl, t2, dur) { ft(tl, g, { opacity: 1 }, { opacity: 0, duration: dur || 0.4 }, t2); return t2 + (dur || 0.4); },
+      fade(tl, t2, dur, to) { ft(tl, g, { opacity: 1 }, { opacity: to == null ? 0 : to, duration: dur || 0.4 }, t2); return t2 + (dur || 0.4); },
       ink(tl, t2, dur) { ft(tl, path, { stroke: C.signal }, { stroke: C.ink, duration: dur || 0.5 }, t2); return t2 + (dur || 0.5); } };
   }
 
   // ================================================================== readout (the node's tooltip)
   function readout(opts) {
-    opts = Object.assign({ scale: 1.8, state: 'outside', slice: true }, opts);
+    opts = opt({ scale: 1.8, state: 'outside', slice: true }, opts);
     const c = ctx(opts, 'readout');
     const root = h('div', 'pui pui-readout fui fui-readout');
     root.style.setProperty('--pui-scale', opts.scale);
@@ -1111,7 +1235,7 @@
       sv('text', { x: 6, y: 9 }, s).textContent = 'EXPOSURE · TEMPORARY · 3H 18M';
       sv('line', { class: 'ax', x1: 6, y1: 20, x2: 228, y2: 20 }, s);
       [6, 55.33, 104.67, 154, 203.33].forEach(x => sv('line', { class: 'ax', x1: x, y1: 17, x2: x, y2: 23 }, s));
-      bar = sv('rect', { class: 'fui-seg', x: 40.5, y: 16, width: 162.8, height: 8, rx: 1, fill: `url(#${pid})` }, s);
+      bar = sv('rect', { class: 'fui-seg', x: 40.5, y: 16, width: 162.8, height: 8, rx: 1, fill: `url(#${pid})`, transform: sc(1, 1, 40.5, 20) }, s);
       sv('text', { x: 40.5, y: 35 }, s).textContent = '14:42';
       sv('text', { x: 173.3, y: 35 }, s).textContent = '18:00';
       if (opts.state !== 'outside') sliceEl.style.opacity = 0;
@@ -1129,7 +1253,7 @@
           const on = key === 'outside' ? 1 : 0;
           if (on !== this.sliceOn) {
             ft(tl, sliceEl, { opacity: this.sliceOn }, { opacity: on, duration: 0.3 }, t + 0.1);
-            if (on) ft(tl, bar, { scaleX: 0, transformOrigin: '0% 50%' }, { scaleX: 1, duration: 0.6, ease: 'expo.out' }, t + 0.15);
+            if (on) ft(tl, bar, { attr: { transform: sc(0, 1, 40.5, 20) } }, { attr: { transform: sc(1, 1, 40.5, 20) }, duration: 0.6, ease: 'expo.out' }, t + 0.15);
             this.sliceOn = on;
           }
         }
@@ -1140,16 +1264,15 @@
 
   // ================================================================== 6. trusted record column
   function recordColumn(opts) {
-    opts = Object.assign({ scale: 1.8, width: 560, height: null, tail: false, title: 'Trusted record', sub: 'Append-only' }, opts);
+    opts = opt({ scale: 1.8, width: 560, height: null, tail: false, title: 'Trusted record', sub: 'Append-only', panel: false }, opts);
     const c = ctx(opts, 'record');
-    const root = h('div', 'pui fui fui-record');
+    const root = h('div', 'pui fui fui-record' + (opts.panel ? ' fui-panel' : ''));
     root.style.setProperty('--pui-scale', opts.scale);
     root.style.width = opts.width + 'px';
     const head = h('div', 'r-head fui-rec-head', root);
     const hl = h('span', 'lab', head);
     h('span', 'fui-rec-t', hl, opts.title);
-    h('i', 'fui-rec-sep', hl, '·');
-    h('span', 'fui-rec-s', hl, opts.sub);
+    if (opts.sub) { h('i', 'fui-rec-sep', hl, '·'); h('span', 'fui-rec-s', hl, opts.sub); }
     const cnt = h('span', 'lab fui-rec-n', head);
     const initial = (opts.entries || []).map(x => (typeof x === 'string' ? DATA.records[x] : x));
     const counter = counterOdo(cnt, initial.length, Math.round(10 * opts.scale * 1.25), 2);
@@ -1165,8 +1288,10 @@
       h('span', 't', rr, x.t);
       h('span', 'm', rr);
       const body = h('div', '', rr);
-      h('div', 'x', body, x.x);
-      if (x.s) h('div', 's', body, x.s);
+      // a middle dot stays at the end of its line, never at the start of the next
+      const nb = str => String(str).replace(/ · /g, '\u00a0· ');
+      h('div', 'x', body, nb(x.x));
+      if (x.s) h('div', 's', body, nb(x.s));
       if (x.i) h('div', 'i', body, x.i);
       if (!visible) { wrap.style.gridTemplateRows = '0fr'; rr.style.opacity = 0; rr.style.setProperty('--fui-rail', 0); rr.style.setProperty('--fui-mk', 0); }
       const e = { x, wrap, rr, body };
@@ -1176,7 +1301,7 @@
     initial.forEach(x => mkEntry(x, true));
     root.id = c.id();
     idAll(root, c.base);
-    mountTo(root, opts);
+    mountTo(root, Object.assign({}, opts, { height: null }));   // opts.height sizes the list, not the column
     let n = initial.length;
     return {
       el: root, list, entries, counter, ctx: c,
@@ -1194,7 +1319,7 @@
         ft(tl, e.rr, { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: dur * 0.7, ease: 'power3.out' }, t + dur * 0.3);
         n += 1;
         counter.roll(tl, t + dur * 0.35, n, 0.3, 'outCubic');
-        c.ev('append', t + dur * 0.35, dur, { id: (x.i || '').split(' ')[0], kind: x.kind || 'event' });
+        c.ev('append', t + dur * 0.35, dur, { id: (x.i || '').split(' ')[0], entry: x.kind || 'event', kind: x.kind === 'dev' ? 'system-event' : 'record-append' });
         return t + dur;
       },
     };
@@ -1202,7 +1327,7 @@
 
   // ================================================================== 7. decision sheet and outcomes
   function decisionSheet(opts) {
-    opts = Object.assign({ scale: 1.5, width: 980 }, opts);
+    opts = opt({ scale: 1.5, width: 980 }, opts);
     const c = ctx(opts, 'sheet');
     const D = DATA.sheet;
     const root = h('div', 'pui pui-sheet fui fui-sheet');
@@ -1357,7 +1482,7 @@
 
   /** the transfer outcome at video scale: packet, hairlines, carriers in arrival order, note */
   function transferPanel(opts) {
-    opts = Object.assign({ width: 1728, packetW: 540, gap: 190, rowH: 118, rowGap: 14 }, opts);
+    opts = opt({ width: 1728, packetW: 560, gap: 170, rowH: 104, rowGap: 12 }, opts);
     const c = ctx(opts, 'transfer');
     const root = h('div', 'pui fui fui-transfer');
     root.style.width = opts.width + 'px';
@@ -1376,15 +1501,18 @@
     const pkRows = DATA.packet.map(([k, v, u]) => { const li = h('li', '', pul); h('span', '', li, k); h('b', u ? 'u' : '', li, v); return li; });
     const pf = h('div', 'fui-pk-f', pk);
     h('span', '', pf, 'Observed state · sealed');
-    h('span', '', pf, 'f230 b4aa');
+    h('span', 'fui-hash', pf, 'f230 b4aa');
     // carriers
     const cx = opts.packetW + opts.gap;
     const cw = opts.width - cx;
     const list = h('div', 'fui-carriers', body);
     list.style.left = cx + 'px'; list.style.width = cw + 'px';
     h('div', 'fui-car-h', list, 'Responses · in order of arrival');
-    const rows = DATA.carriers.map((d, i) => {
+    const order = opts.order || DATA.carrierOrder;
+    const carriers = order.map(k => DATA.carriers.find(x => x.key === k)).filter(Boolean);
+    const rows = carriers.map((d, i) => {
       const r = h('div', 'fui-car' + (d.declined ? ' declined' : ''), list);
+      r.style.marginBottom = opts.rowGap + 'px';
       r.style.height = opts.rowH + 'px';
       const l = h('div', 'fui-car-l', r);
       h('div', 'nm', l, d.name);
@@ -1492,9 +1620,11 @@
 
   // ================================================================== 8. programme layer
   function programmeLayer(opts) {
-    opts = Object.assign({ width: 1728, from: '14:42', to: '18:00', axis: [0, 24] }, opts);
+    opts = opt({ width: 1728, from: '14:42', to: '18:00', axis: [0, 24], today: 'Today' }, opts);
     const c = ctx(opts, 'programme');
-    const Wd = opts.width, Hd = 190;
+    // compact (140 px): label row, the day's slice of the annual programme as a ruled bar (hour marks
+    // set inside it), the temporary layer as a hatched slice alongside it, its label on a short lead
+    const Wd = opts.width, Hd = 140;
     const root = h('div', 'fui fui-programme');
     root.style.width = Wd + 'px'; root.style.height = Hd + 'px';
     const s = sv('svg', { width: Wd, height: Hd, viewBox: `0 0 ${Wd} ${Hd}` }, root);
@@ -1502,39 +1632,41 @@
     const pat = sv('pattern', { id: pid, width: 7, height: 7, patternUnits: 'userSpaceOnUse', patternTransform: 'rotate(45)' }, sv('defs', {}, s));
     sv('rect', { width: 7, height: 7, fill: C.signalSoft }, pat);
     sv('line', { x1: 0, y1: 0, x2: 0, y2: 7, stroke: C.signal, 'stroke-width': 1.6, 'stroke-opacity': 0.8 }, pat);
-    const X = hr => Wd * (hr - opts.axis[0]) / (opts.axis[1] - opts.axis[0]);
+    const IN = 64;
+    const X = hr => IN + (Wd - 2 * IN) * (hr - opts.axis[0]) / (opts.axis[1] - opts.axis[0]);
     const hrOf = str => { const [a, b] = str.split(':').map(Number); return a + b / 60; };
-    const barY = 44, barH = 40, sliceY = barY + barH + 6, sliceH = 16;
-    const lab = sv('text', { class: 'fui-pg-lab', x: 0, y: 24 }, s); lab.textContent = 'ANNUAL PROGRAMME · PROPERTY + BI';
-    const bar = sv('rect', { class: 'fui-pg-bar', x: 0.5, y: barY, width: Wd - 1, height: barH }, s);
-    const ends = sv('path', { class: 'fui-pg-ends', d: `M0.5 ${barY - 8}V${barY + barH + 8}M${Wd - 0.5} ${barY - 8}V${barY + barH + 8}` }, s);
+    const barY = 38, barH = 38, sliceY = barY + barH + 6, sliceH = 14;
+    const lab = sv('text', { class: 'fui-pg-lab', x: IN, y: 22 }, s); lab.textContent = 'ANNUAL PROGRAMME · PROPERTY + BI';
+    const tdy = sv('text', { class: 'fui-pg-today', x: Wd - IN, y: 22, 'text-anchor': 'end' }, s); tdy.textContent = String(opts.today || '').toUpperCase();
+    const bar = sv('rect', { class: 'fui-pg-bar', x: IN, y: barY, width: Wd - 2 * IN, height: barH }, s);
+    const ends = sv('path', { class: 'fui-pg-ends', d: `M0 ${barY}H${IN}M0 ${barY + barH}H${IN}M${Wd - IN} ${barY}H${Wd}M${Wd - IN} ${barY + barH}H${Wd}` }, s);
     const x0 = X(hrOf(opts.from)), x1 = X(hrOf(opts.to));
     const slice = sv('rect', { class: 'fui-pg-slice', x: f3(x0), y: sliceY, width: f3(x1 - x0), height: sliceH, fill: `url(#${pid})` }, s);
-    const lead = sv('path', { class: 'fui-pg-lead', d: `M${f3(x0)} ${sliceY + sliceH}V${sliceY + sliceH + 22}` }, s);
-    const sl = sv('text', { class: 'fui-pg-slab', x: f3(x0 + 10), y: sliceY + sliceH + 30 }, s); sl.textContent = `TEMPORARY LAYER · ROOF 03 HOT WORK · ${opts.from}–${opts.to}`;
+    const lead = sv('path', { class: 'fui-pg-lead', d: `M${f3(x0)} ${sliceY + sliceH}V${sliceY + sliceH + 30}` }, s);
+    const sl = sv('text', { class: 'fui-pg-slab', x: f3(x0 + 12), y: sliceY + sliceH + 28 }, s); sl.textContent = `TEMPORARY LAYER · ROOF 03 HOT WORK · ${opts.from}–${opts.to}`;
     const axis = sv('g', { class: 'fui-pg-axis' }, s);
-    for (let hr = opts.axis[0]; hr <= opts.axis[1]; hr += 6) {
-      const x = Math.min(Wd - 0.5, Math.max(0.5, X(hr)));
-      sv('line', { x1: f3(x), y1: barY + barH, x2: f3(x), y2: barY + barH - 7 }, axis);
-      const tt = sv('text', { x: f3(x), y: Hd - 8, 'text-anchor': hr === opts.axis[0] ? 'start' : hr === opts.axis[1] ? 'end' : 'middle' }, axis);
+    for (let hr = opts.axis[0] + 6; hr < opts.axis[1]; hr += 6) {
+      const x = X(hr);
+      sv('line', { x1: f3(x), y1: barY + 1, x2: f3(x), y2: barY + barH - 1 }, axis);
+      const tt = sv('text', { x: f3(x + 10), y: barY + 25 }, axis);
       tt.textContent = String(hr).padStart(2, '0') + ':00';
     }
-    [lab, lead, sl, axis].forEach(e => { e.style.opacity = 0; });
-    gsap.set(bar, { scaleX: 0, transformOrigin: '0% 50%' });
+    [lab, tdy, lead, sl, axis].forEach(e => { e.style.opacity = 0; });
+    bar.setAttribute('transform', sc(0, 1, IN, barY));
     ends.style.opacity = 0;
-    gsap.set(slice, { scaleX: 0, transformOrigin: '0% 50%' });
+    slice.setAttribute('transform', sc(0, 1, x0, sliceY));
     root.id = c.id();
     idAll(root, c.base);
     mountTo(root, opts);
     return {
-      el: root, ctx: c,
+      el: root, ctx: c, height: Hd,
       reveal(tl, t) {
-        ft(tl, lab, { opacity: 0 }, { opacity: 1, duration: 0.4 }, t);
-        ft(tl, bar, { scaleX: 0 }, { scaleX: 1, duration: 0.9, ease: 'power3.inOut' }, t + 0.1);
-        ft(tl, [ends, axis], { opacity: 0 }, { opacity: 1, duration: 0.5 }, t + 0.7);
-        ft(tl, slice, { scaleX: 0 }, { scaleX: 1, duration: 0.7, ease: 'expo.out' }, t + 1.2);
+        ft(tl, [lab, tdy], { opacity: 0 }, { opacity: 1, duration: 0.4 }, t);
+        ft(tl, bar, { attr: { transform: sc(0, 1, IN, barY) } }, { attr: { transform: sc(1, 1, IN, barY) }, duration: 0.9, ease: 'power3.inOut' }, t + 0.1);
+        ft(tl, [ends, axis], { opacity: 0 }, { opacity: 1, duration: 0.5 }, t + 0.95);
+        ft(tl, slice, { attr: { transform: sc(0, 1, x0, sliceY) } }, { attr: { transform: sc(1, 1, x0, sliceY) }, duration: 0.7, ease: 'expo.out' }, t + 1.2);
         ft(tl, lead, { opacity: 0 }, { opacity: 1, duration: 0.3 }, t + 1.5);
-        ft(tl, sl, { opacity: 0, x: -8 }, { opacity: 1, x: 0, duration: 0.5, ease: 'power3.out' }, t + 1.55);
+        ft(tl, sl, { opacity: 0, attr: { transform: 'translate(-8 0)' } }, { opacity: 1, attr: { transform: 'translate(0 0)' }, duration: 0.5, ease: 'power3.out' }, t + 1.55);
         c.ev('programme-bar', t + 0.1, 0.9, {});
         c.ev('layer', t + 1.2, 0.7, { from: opts.from, to: opts.to });
         return t + 2.05;
@@ -1544,7 +1676,8 @@
 
   // ================================================================== 9. system view (whole site product composition)
   function systemView(opts) {
-    opts = Object.assign({ railW: 560, headerScale: 1.6, railScale: 1.7, status: 'inside', time: '15:02', counts: [190, 189, 0], chip: 'End-state concept', labels: 1.8 }, opts);
+    // counts at the start of the pull back: the hero's change is decided and back inside (1 decision)
+    opts = opt({ railW: 600, headerScale: 1.6, railScale: 1.6, status: 'inside', time: '15:02', counts: [190, 190, 1], chip: 'End-state concept', labels: 1.8 }, opts);
     const c = ctx(opts, 'system');
     const root = h('div', 'fui fui-system');
     root.id = c.id();
@@ -1552,9 +1685,9 @@
     const site = opts.site || window.SiteKit.mount(svg, { prefix: c.base + '-site', show: 'precise', rough: false });
     svg.classList.add('fui-labels');
     svg.style.setProperty('--fui-lab', opts.labels);
-    const hdr = header({ prefix: opts.prefix, scene: opts.scene, eventOffset: opts.eventOffset, scale: opts.headerScale, status: opts.status, time: opts.time, chip: opts.chip, parent: root });
+    const hdr = header({ prefix: opts.prefix, scene: opts.scene, eventOffset: opts.eventOffset, scale: opts.headerScale, status: opts.status, statuses: opts.statuses, time: opts.time, seconds: opts.seconds, clock: opts.clock, chip: opts.chip, parent: root });
     hdr.el.classList.add('fui-sys-header');
-    const headerH = Math.round(68 * opts.headerScale);
+    const headerH = Math.round(hdr.height);
     // rail
     const rail = h('aside', 'pui pui-rail fui fui-sys-rail', root);
     rail.style.setProperty('--pui-scale', opts.railScale);
@@ -1566,7 +1699,7 @@
     const stats = h('div', 'stats', live);
     const counters = ['Observed', 'Inside', 'Decisions'].map((k, i) => { const d = h('div', '', stats); h('em', '', d, k); const b = h('b', '', d); return counterOdo(b, opts.counts[i], Math.round(22 * opts.railScale * 1.1), 3); });
     const recWrap = h('section', 'pui-r-rec fui-sys-rec', rail);
-    const record = recordColumn({ prefix: opts.prefix, scene: opts.scene, eventOffset: opts.eventOffset, parent: recWrap, scale: opts.railScale, width: opts.railW, entries: opts.entries || [], tail: true, height: opts.recordH || 1080 - headerH - 300 });
+    const record = recordColumn({ prefix: opts.prefix, scene: opts.scene, eventOffset: opts.eventOffset, parent: recWrap, scale: opts.railScale, width: opts.railW, entries: opts.entries || [], tail: true, sub: false, height: opts.recordH || 1080 - headerH - 330 });
     // camera: the envelope centred in the free region
     const eb = window.SITE_MODEL.envelope.boundsWorld, ec = window.SITE_MODEL.envelope.centreWorld;
     const fx = (W - opts.railW) / 2, fy = headerH + (H - headerH) / 2 + (opts.dy || 10);
@@ -1590,11 +1723,29 @@
     for (const k in decisions) decNodes[k] = nodeGlyph(ov, decisions[k].world, 'checking', { prefix: opts.prefix, scene: opts.scene, eventOffset: opts.eventOffset, name: 'dec-' + k, visible: false, k: 1.2 });
     idAll(root, c.base);
     mountTo(root, opts);
+    // Counters: one schedule of steps for all three (arrivals, passes, decisions), rebuilt on its own
+    // sub-timeline whenever scatter() or decide() adds steps, so they can be called in any order and
+    // overlapping windows never fight over the same digit strip.
+    const steps = [];            // { k: counter index, t, dur, ease }
+    let sub = null, subOwner = null;
+    const rebuild = tl => {
+      if (!sub) { sub = gsap.timeline(); tl.add(sub, 0); subOwner = tl; }
+      else if (subOwner !== tl) throw new Error('UIKit.systemView: scatter() and decide() must use the same timeline');
+      sub.clear();
+      counters.forEach((od, k) => {
+        const mine = steps.filter(x => x.k === k);
+        od.reset();
+        if (!mine.length) return;
+        const base = od.v;
+        const t0 = Math.min(...mine.map(x => x.t)), t1 = Math.max(...mine.map(x => x.t + x.dur));
+        od.track(sub, t0, t1, tt => { let v = base; for (const x of mine) v += easeFn(x.ease)(clamp((tt - x.t) / x.dur, 0, 1)); return v; });
+      });
+    };
     const V = {
-      el: root, site, header: hdr, rail, counters, record, nodes, decNodes, camera: cam, overlay: ov, ctx: c,
+      el: root, site, header: hdr, rail, counters, record, nodes, decNodes, camera: cam, overlay: ov, ctx: c, steps,
       /** scatter(tl, t0, dur): ~30 activities arrive, are checked and pass quietly inside */
       scatter(tl, t0, dur, o) {
-        o = Object.assign({ check: 0.7, quietAfter: 2.2, quiet: 0.55 }, o);
+        o = opt({ check: 0.7, quietAfter: 2.2, quiet: 0.55 }, o);
         const r = rng(c.base + 'scatter');
         const order = nodes.map((n, i) => ({ n, i, k: r() })).sort((a, b) => a.k - b.k);
         const arrivals = [], passes = [];
@@ -1609,16 +1760,14 @@
           arrivals.push(ti); passes.push(ti + o.check);
           if (j % 3 === 0) c.ev('node-pass', ti + o.check, 0.2, { i: x.i });
         });
-        const step = (times, tt) => { let v = 0; for (const a of times) v += EASE.smooth(clamp((tt - a) / 0.16, 0, 1)); return v; };
-        const b0 = counters[0].v, b1 = counters[1].v;
-        const tEnd = t0 + dur + o.check + 0.4;
-        counters[0].track(tl, t0, tEnd, tt => b0 + step(arrivals, tt));
-        counters[1].track(tl, t0, tEnd, tt => b1 + step(passes, tt));
-        return tEnd;
+        arrivals.forEach(a => steps.push({ k: 0, t: a, dur: 0.16, ease: 'smooth' }));
+        passes.forEach(a => steps.push({ k: 1, t: a, dur: 0.16, ease: 'smooth' }));
+        rebuild(tl);
+        return t0 + dur + o.check + 0.4;
       },
       /** decide(tl, t, 'changed' | 'retained'): a node turns cobalt (outside), then resolves */
       decide(tl, t, outcome, o) {
-        o = Object.assign({ hold: 1.0, record: true, plate: true }, o);
+        o = opt({ hold: 1.0, record: true, plate: true }, o);
         const n = decNodes[outcome], d = decisions[outcome];
         n.show(tl, t, true, 0.2);
         n.pulse(tl, t, 1.2);
@@ -1626,9 +1775,11 @@
         n.state(tl, t + 0.5, 'outside', 0.35);
         n.state(tl, t + 0.5 + o.hold, outcome, 0.35);
         const tr = t + 0.5 + o.hold;
-        counters[2].roll(tl, tr, counters[2].v + 1, 0.3, 'outCubic');
-        counters[0].roll(tl, t, counters[0].v + 1, 0.25, 'outCubic');
-        if (o.plate) plate(ov, d.world, outcome === 'changed' ? ['DECISION MADE · CHANGED', d.name.toUpperCase(), (d.note || '').toUpperCase()] : ['RISK RETAINED · NORDHAVN', d.name.toUpperCase(), (d.note || '').toUpperCase()], { prefix: opts.prefix, side: o.side || 'right', dy: o.dy || 0 }).reveal(tl, tr + 0.1);
+        // observed on arrival; DECISIONS on the resolve; a changed activity is back inside, a retained one is not
+        steps.push({ k: 0, t, dur: 0.16, ease: 'smooth' }, { k: 2, t: tr, dur: 0.3, ease: 'outCubic' });
+        if (outcome === 'changed') steps.push({ k: 1, t: tr, dur: 0.3, ease: 'outCubic' });
+        rebuild(tl);
+        if (o.plate) plate(ov, d.world, outcome === 'changed' ? ['DECISION MADE · CHANGED', d.name.toUpperCase(), (d.note || '').toUpperCase()] : ['RISK RETAINED · NORDHAVN', d.name.toUpperCase(), (d.note || '').toUpperCase()], { prefix: opts.prefix, side: o.side || 'right', dy: o.dy || 0, gap: o.gap }).reveal(tl, tr + 0.1);
         if (o.record) record.append(tl, tr + 0.2, outcome === 'changed' ? 'craneLift' : 'gasBypass');
         c.ev('decision-flip', t + 0.5, 0.35, { outcome });
         c.ev('decision-resolve', tr, 0.35, { outcome });
@@ -1637,18 +1788,21 @@
     };
     return V;
   }
-  /** a node plate (demo .nlab) in the site's screen-constant px space */
+  /** a node plate (demo .nlab) in the site's screen-constant px space, with a hairline leader */
   function plate(svgParent, world, lines, opts) {
-    opts = Object.assign({ side: 'right', size: 18, dy: 0 }, opts);
+    opts = opt({ side: 'right', size: 18, gap: 26, dy: 0 }, opts);
     const c = ctx(opts, 'plate');
     const g = sv('g', { class: 'fui-plate', transform: `translate(${f3(world[0])} ${f3(world[1])})` }, svgParent);
     const px = sv('g', { class: 'fui-px1' }, g);
-    const cw = opts.size * 0.6 + opts.size * 0.1;
-    const wMax = Math.max(...lines.map(l => l.length)) * cw + 28;
-    const hh = lines.length * (opts.size * 1.35) + 18;
-    const x0 = opts.side === 'right' ? 22 : -22 - wMax, y0 = -hh / 2 + opts.dy;
+    const cw = opts.size * 0.7;
+    const wMax = Math.max(...lines.map(l => l.length)) * cw + 26;
+    const hh = lines.length * (opts.size * 1.4) + 18;
+    const right = opts.side === 'right';
+    const x0 = right ? opts.gap : -opts.gap - wMax, y0 = -hh / 2 + opts.dy;
+    const ax = right ? x0 : x0 + wMax, ay = clamp(0, y0 + 10, y0 + hh - 10);
+    sv('path', { class: 'fui-plate-lead', d: `M${right ? 9 : -9} 0L${f3(ax)} ${f3(ay)}` }, px);
     sv('rect', { class: 'fui-plate-bg', x: f3(x0), y: f3(y0), width: f3(wMax), height: f3(hh), rx: 8 }, px);
-    lines.forEach((l, i) => { const tt = sv('text', { class: 'fui-plate-t' + i, x: f3(x0 + 14), y: f3(y0 + 12 + opts.size * 0.95 + i * opts.size * 1.35), 'font-size': opts.size }, px); tt.textContent = l; });
+    lines.forEach((l, i) => { const tt = sv('text', { class: 'fui-plate-t' + i, x: f3(x0 + 13), y: f3(y0 + 11 + opts.size * 0.95 + i * opts.size * 1.4), 'font-size': opts.size }, px); tt.textContent = l; });
     g.style.opacity = 0;
     idAll(g, c.base);
     return { el: g, reveal(tl, t) { ft(tl, g, { opacity: 0 }, { opacity: 1, duration: 0.45, ease: 'power2.out' }, t); return t + 0.45; } };
@@ -1656,33 +1810,45 @@
 
   // ================================================================== 10. the chain
   function chain(opts) {
-    opts = Object.assign({ width: 1728, colW: 272, top: 380, size: 44 }, opts);
+    opts = opt({ width: 1728, size: 44, bracketY: 176 }, opts);
     const c = ctx(opts, 'chain');
-    const n = DATA.chain.length;
-    const gapW = (opts.width - n * opts.colW) / (n - 1);
+    const n = DATA.chain.length, fs = opts.size;
+    const vis = DATA.chain.map(([w]) => w.length * fs * 0.76 - fs * 0.16);   // IBM Plex Mono: 0.6em advance + 0.16em tracking
+    // each column is as wide as its word or its one-line descriptor (Plex Sans 22 px runs at most
+    // 0.5 em per character on these strings, measured 0.455 to 0.493), so no descriptor wraps
+    // words sit at one even rhythm (equal gaps, equal arrows); the last column is as wide as its
+    // word or its descriptor, and every other descriptor must end 24 px before the next word
+    const dfs = opts.descSize || 22;
+    const dW = DATA.chain.map(([w, d]) => d.length * dfs * 0.5);
+    const colW = DATA.chain.map((x, i) => Math.max(vis[i], dW[i]));
+    let gapW = (opts.width - vis.slice(0, n - 1).reduce((a, b) => a + b, 0) - colW[n - 1]) / (n - 1);
+    const fits = dW.every((w, i) => i === n - 1 || w + 24 <= vis[i] + gapW);
+    const xs = []; let acc = 0;
+    if (fits) vis.forEach(v => { xs.push(acc); acc += v + gapW; });
+    else { gapW = (opts.width - colW.reduce((a, b) => a + b, 0)) / (n - 1); colW.forEach(v => { xs.push(acc); acc += v + gapW; }); }
     const root = h('div', 'fui fui-chain');
     root.style.width = opts.width + 'px';
-    root.style.setProperty('--fui-chain-size', opts.size + 'px');
-    const words = [], descs = [], xs = [];
+    root.style.setProperty('--fui-chain-size', fs + 'px');
+    const words = [], descs = [];
     DATA.chain.forEach(([w, d], i) => {
-      const x = i * (opts.colW + gapW); xs.push(x);
       const col = h('div', 'fui-ch-col', root);
-      col.style.left = x + 'px'; col.style.width = opts.colW + 'px';
+      col.style.left = f3(xs[i]) + 'px';
       const b = h('b', 'fui-ch-w', col, w.toUpperCase());
-      const s = h('span', 'fui-ch-d', col, d);
-      b.style.opacity = 0; s.style.opacity = 0;
-      words.push(b); descs.push(s);
+      const sp = h('span', 'fui-ch-d', col, d);
+      sp.style.width = f3(colW[i] + 4) + 'px';
+      b.style.opacity = 0; sp.style.opacity = 0;
+      words.push(b); descs.push(sp);
     });
     const svg = sv('svg', { class: 'fui-ch-svg', width: opts.width, height: 300, viewBox: `0 0 ${opts.width} 300` }, root);
-    const ay = opts.size * 0.52;
+    const ay = fs * 0.5;
     const arrows = [];
     for (let i = 0; i < n - 1; i++) {
-      const x0 = xs[i] + opts.colW - 10 + 4, x1 = xs[i + 1] - 14;
-      const a = sv('path', { class: 'fui-ch-ar', d: `M${f3(x0 + (x1 - x0) * 0.12)} ${f3(ay)}H${f3(x1)}M${f3(x1 - 8)} ${f3(ay - 7)}L${f3(x1)} ${f3(ay)}L${f3(x1 - 8)} ${f3(ay + 7)}` }, svg);
+      const x0 = xs[i] + vis[i] + 28, x1 = xs[i + 1] - 28;
+      const a = sv('path', { class: 'fui-ch-ar', d: `M${f3(x0)} ${f3(ay)}H${f3(x1)}M${f3(x1 - 9)} ${f3(ay - 7)}L${f3(x1)} ${f3(ay)}L${f3(x1 - 9)} ${f3(ay + 7)}` }, svg);
       a.style.opacity = 0;
       arrows.push(a);
     }
-    const by = opts.bracketY || 190;
+    const by = opts.bracketY;
     const br = (x0, x1, dashed, label) => {
       const g = sv('g', { class: 'fui-ch-br' + (dashed ? ' dashed' : '') }, svg);
       let dd = `M${f3(x0)} ${by - 12}V${by}`;
@@ -1694,13 +1860,13 @@
       g.style.opacity = 0;
       return { g, p, tt };
     };
-    const brToday = br(xs[0], xs[1] + opts.colW - 20, false, 'TODAY · PREVENTION AND PROOF');
-    const brLater = br(xs[2], xs[4] + opts.colW - 20, true, 'OVER TIME');
+    const brToday = br(xs[0], xs[1] + colW[1], false, 'TODAY · PREVENTION AND PROOF');
+    const brLater = br(xs[2], xs[4] + colW[4], true, 'OVER TIME');
     root.id = c.id();
     idAll(root, c.base);
     mountTo(root, opts);
     return {
-      el: root, words, descs, arrows, ctx: c,
+      el: root, words, descs, arrows, xs, ctx: c,
       /** reveal(tl, t, i): word i (0 RECORD .. 4 CAPACITY) with its arrow and a confirm-N sound */
       reveal(tl, t, i) {
         if (i > 0) {
@@ -1720,7 +1886,7 @@
         const b = which === 'today' ? brToday : brLater;
         cut(tl, b.g, { opacity: 0 }, { opacity: 1 }, t);
         drawFrom(tl, b.p, t, 0.6, 'power2.inOut');
-        ft(tl, b.tt, { opacity: 0, y: 6 }, { opacity: 1, y: 0, duration: 0.5, ease: 'power3.out' }, t + 0.3);
+        ft(tl, b.tt, { opacity: 0, attr: { transform: 'translate(0 6)' } }, { opacity: 1, attr: { transform: 'translate(0 0)' }, duration: 0.5, ease: 'power3.out' }, t + 0.3);
         c.ev('bracket', t, 0.6, { which });
         return t + 0.8;
       },
@@ -1730,17 +1896,22 @@
 
   // ================================================================== 11. end card
   function endCard(opts) {
-    opts = Object.assign({ wordmarkW: 653 }, opts);
+    opts = opt({ wordmarkW: 653, wordmarkTop: 356 }, opts);
     const c = ctx(opts, 'end');
     const root = h('div', 'fui fui-end');
+    // the wordmark sits in a box that clips at its baseline; it rises out of the hairline drawn there
+    const boxH = +(opts.wordmarkW * 758 / 2617).toFixed(2), left = (W - opts.wordmarkW) / 2;
     const wmBox = h('div', 'fui-end-wm', root);
-    wmBox.style.width = opts.wordmarkW + 'px';
-    const wm = sv('svg', { viewBox: DATA.wordmark.viewBox, width: opts.wordmarkW, height: f3(opts.wordmarkW * 758 / 2617) }, wmBox);
+    place(wmBox, { left, top: opts.wordmarkTop, width: opts.wordmarkW, height: boxH });
+    const wm = sv('svg', { viewBox: DATA.wordmark.viewBox, width: opts.wordmarkW, height: f3(boxH) }, wmBox);
     sv('path', { d: DATA.wordmark.d, fill: C.ink, transform: DATA.wordmark.transform }, wm);
     const rule = h('i', 'fui-end-rule', root);
+    // the letters' baseline is 12 of 758 units above the box bottom (the round letters overshoot it)
+    place(rule, { left: left - 24, top: opts.wordmarkTop + boxH - 12 * boxH / 758, width: opts.wordmarkW + 48 });
     const desc = h('div', 'fui-end-desc', root, opts.descriptor || DATA.end.descriptor);
+    desc.style.top = f3(opts.wordmarkTop + boxH + 64) + 'px';
     const qual = h('p', 'fui-end-q', root, opts.qualifier || DATA.end.qualifier);
-    wmBox.style.clipPath = 'inset(100% 0% 0% 0%)';
+    gsap.set(wm, { y: boxH });
     gsap.set(rule, { scaleX: 0, transformOrigin: '50% 50%' });
     desc.style.opacity = 0; qual.style.opacity = 0;
     root.id = c.id();
@@ -1748,12 +1919,12 @@
     mountTo(root, opts);
     return {
       el: root, wordmark: wmBox, descriptor: desc, qualifier: qual, ctx: c,
-      /** reveal(tl, t, {descriptorAt, qualifierAt}): rule draws, wordmark rises from it and latches */
+      /** reveal(tl, t, {descriptorAt, qualifierAt}): the hairline draws, the wordmark rises out of it and latches */
       reveal(tl, t, o) {
         o = o || {};
         ft(tl, rule, { scaleX: 0, opacity: 1 }, { scaleX: 1, opacity: 1, duration: 0.45, ease: 'power3.inOut' }, t);
-        ft(tl, wmBox, { clipPath: 'inset(100% 0% 0% 0%)', y: 18 }, { clipPath: 'inset(0% 0% 0% 0%)', y: 0, duration: 0.62, ease: 'expo.out' }, t + 0.3);
-        const tLatch = t + 0.3 + 0.18;
+        ft(tl, wm, { y: boxH }, { y: 0, duration: 0.7, ease: 'expo.out' }, t + 0.32);
+        const tLatch = t + 0.32 + 0.16;
         ft(tl, rule, { opacity: 1 }, { opacity: 0, duration: 0.8, ease: 'power1.inOut' }, t + 1.2);
         const td = o.descriptorAt != null ? o.descriptorAt : t + 1.0;
         ft(tl, desc, { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out' }, td);
@@ -1766,8 +1937,26 @@
   }
 
   // ================================================================== statements (Frame 4.4)
+  /** the last point of an SVG path (absolute or relative M L H V C S Q T A Z) */
+  function pathEnd(d) {
+    const ar = { M: 2, L: 2, T: 2, H: 1, V: 1, C: 6, S: 4, Q: 4, A: 7, Z: 0 };
+    let x = 0, y = 0, sx = 0, sy = 0; const re = /([MLHVCSQTAZ])([^MLHVCSQTAZ]*)/gi; let m;
+    while ((m = re.exec(d))) {
+      const cmd = m[1], C0 = cmd.toUpperCase(), rel = cmd !== C0, n = ar[C0];
+      const v = (m[2].match(/-?\d*\.?\d+(?:e[-+]?\d+)?/gi) || []).map(Number);
+      if (!n) { x = sx; y = sy; continue; }
+      for (let i = 0; i + n <= v.length; i += n) {
+        const a = v.slice(i, i + n);
+        if (C0 === 'H') x = rel ? x + a[0] : a[0];
+        else if (C0 === 'V') y = rel ? y + a[0] : a[0];
+        else { const px = a[n - 2], py = a[n - 1]; x = rel ? x + px : px; y = rel ? y + py : py; }
+        if (C0 === 'M' && i === 0) { sx = x; sy = y; }
+      }
+    }
+    return [x, y];
+  }
   function statements(opts) {
-    opts = Object.assign({ label: 'What Priora does today', items: [] }, opts);
+    opts = opt({ label: 'What Priora does today', items: [] }, opts);
     const c = ctx(opts, 'statements');
     const root = h('div', 'fui fui-statements');
     const lab = h('div', 'fui-st-lab', root, opts.label);
@@ -1778,9 +1967,14 @@
       place(el, { left: it.at[0], top: it.at[1] });
       if (it.align === 'right') gsap.set(el, { xPercent: -100 });
       el.style.opacity = 0;
-      let link = null;
-      if (it.link) { link = sv('path', { class: 'fui-st-link', d: it.link }, svg); link.style.opacity = 0; }
-      return { el, link, it };
+      let link = null, dot = null;
+      if (it.link) {
+        link = sv('path', { class: 'fui-st-link', d: it.link }, svg); link.style.opacity = 0;
+        // a small terminal where the leader meets its evidence (the last point of the path)
+        const end = pathEnd(it.link);
+        if (it.dot !== false && end) { dot = sv('circle', { class: 'fui-st-dot', cx: f3(end[0]), cy: f3(end[1]), r: 3.5 }, svg); dot.style.opacity = 0; }
+      }
+      return { el, link, dot, it };
     });
     lab.style.opacity = 0;
     root.id = c.id();
@@ -1793,19 +1987,29 @@
         const x = items[i];
         ft(tl, x.el, { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out' }, t);
         if (x.link) { cut(tl, x.link, { opacity: 0 }, { opacity: 1 }, t + 0.2); drawFrom(tl, x.link, t + 0.2, 0.7, 'power2.inOut'); }
+        if (x.dot) ft(tl, x.dot, { opacity: 0 }, { opacity: 1, duration: 0.2, ease: 'power2.out' }, t + 0.82);
         c.ev('statement', t, 0.8, { i, text: x.it.text });
         return t + 0.9;
       },
     };
   }
 
+  const cam = (cx, cy, s, sx, sy) => ({ x: cx - (sx == null ? W / 2 : sx) / s, y: cy - (sy == null ? H / 2 : sy) / s, w: W / s, h: H / s, s });
+  /** film framings for the interface shots (world rects, 16:9, with s = px per world unit) */
+  const CAMERAS = {
+    roof03Product: cam(47, 30, 11),              // Roof 03 close-up (Frame 4): the node near centre, room for card left and record right
+    systemRoof: cam(50, 30, 8.83133),            // Roof 03 + Zone 3 at the demo's 'somethingChanges' scale (Frame 5.1, 5.2)
+    decision: cam(16.454, 46.5, 3.85, 430, 566), // whole envelope framed left of the decision sheet (Frame 5.3), its label inside the frame
+    wholeSite: cam(16.454, 46.5, 6.01038),       // the demo overview, centred
+  };
+
   window.UIKit = {
-    version: '1.0.0', W, H, FPS, C, DATA, EASE,
+    version: '1.0.0', W, H, FPS, C, DATA, EASE, CAMERAS, cam,
     // components
     header, nodeGlyph, crossing, sprinkler, activityCard, captureStrip, conditionLabel, connect, readout,
     recordColumn, decisionSheet, transferPanel, programmeLayer, systemView, plate, chain, endCard, statements,
     // helpers
-    overlay, glyph, Swap, Odometer, clockOdo, counterOdo, heroDeviation, stadium, envelopeFromWords, event: pushEvent,
+    overlay, siteLabels, glyph, Swap, Odometer, clockOdo, counterOdo, heroDeviation, stadium, envelopeFromWords, event: pushEvent,
     hashStr, mulberry32, rng, hhmm,
   };
 })();

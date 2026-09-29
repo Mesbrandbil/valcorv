@@ -21,12 +21,15 @@
  * Full documentation: docs/sketch-kit.md.
  *
  * CONTEXTS
- *   const W = SketchKit.world(site, { prefix, scene, refScale })   WORLD mode (site = SiteKit.mount(...))
+ *   const W = SketchKit.world(site, { prefix, scene, refScale, annotations })   WORLD mode (site = SiteKit.mount(...))
  *   const P = SketchKit.paper(hostEl, { prefix, scene })          PAPER mode (appends svg.skt-paper, or adopts an <svg>)
  *     prefix    id prefix for every element this context creates (default: site prefix)
  *     scene     scene name written into sound events (default: prefix)
  *     refScale  screen px per world unit used to size screen-px parts at build time (default: the
  *               site camera at build time). Pass SketchKit.scaleOf(site.cameras.roof03) etc. per item.
+ *     annotations 'screen' (default: lettering keeps its screen size at any zoom) or 'world' (lettering
+ *               authored at refScale and scaled with the drawing). Per item: { scale, refScale }.
+ *   Layers: ctx.ground sits under the site's buildings (routes, trails), ctx.top above everything.
  *   Positions (WORLD): [wx, wy] world, { plan: [x, y, z] }, an anchor name from SITE_MODEL.anchors or
  *   SketchKit.PLACES ('roof03Centre', 'sprinklerZone3Valve', 'loadingAreaCentre', 'gate', ...), or
  *   { anchor: name, plan: [dx, dy, dz] } (plan offset). Positions (PAPER): [x, y] screen px.
@@ -49,8 +52,10 @@
  *   gate(ctx, at, { label })
  *   dottedPath(ctx, points, { arrow, closed, plan, spacingPx, lite, dash, label })
  *   valveTag(ctx, at, { text | lines, hand: 'a' | 'b', side, drop })
- *   activityMarker(ctx, at, { variant: 'small' | 'normal' | 'hot', label, dir }); m.breathe(tl, t, dur, o)
- *   activityField(ctx, { count, seed, exclude });       dense accumulation with dotted trails
+ *   activityMarker(ctx, at, { variant: 'small' | 'normal' | 'hot', label, dir | angle, leadPx, labelAt });
+ *     m.breathe(tl, t, dur, { amp, period })            finite yoyo scale drift of the ring
+ *   activityField(ctx, { count, seed, exclude, labelMode });  dense accumulation with trails, callout columns
+ *     field.drawOn(tl, t, { span }); field.dim(tl, t, to, dur, except)
  *   containment(ctx, points, o)                         loose HSE loop around a cluster
  *   safeguardItems(ctx, anchor, { refScale })           the five ticked safeguards around Roof 03
  *   conditionConnection(ctx, from, to, o); c.fray(tl, t, o); c.rejoin(tl, t, o)
@@ -58,17 +63,21 @@
  *   incidentBox(ctx, at, o)                             'INCIDENT · ROOF 03 · 16:07'
  *   detailCallout(ctx, box, { leaderTo })               Frame 2 clause detail D1 (PAPER)
  *   translationChain(ctx, box, o)                       procedure, permit, briefing, checklist + arrows (PAPER)
- *   evidence(ctx, kind, { x, y, pin }); evidenceBoard(ctx, { pins })   Frame 3 fragments (PAPER)
+ *   handArrow(ctx, a, b, { style: 'solid' | 'dashed' | 'dotted' })
+ *   evidence(ctx, kind, { x, y, pin }); evidenceBoard(ctx, { pins, layout, extras })   Frame 3 fragments (PAPER)
  *   questionMark(ctx, at, o); investigationLine(ctx, a, b, o)
  *   gapTimeline(ctx, o)                                 14:42 to DAY +2, THE GAP (PAPER)
  *   typeStack(ctx, at, lines, o)                        typeset Plex Sans statements (the three questions)
  * STATE HELPERS
  *   SketchKit.sprinklerHeadsFade(tl, site, t, { to, step, dur })   heads fade one by one from the valve
- *   SketchKit.followPin(tl, fragment, world, camFrom, camTo, t, dur, ease)   keep an evidence pin on a site point during a camera move
+ *   SketchKit.followPin(tl, fragment, world, camFrom, camTo, t, dur, ease, steps)   keep an evidence pin on a site point during a camera move
+ *   SketchKit.scaleOf(rect) -> screen px per world unit for a camera rect
  *
- * SOUND EVENTS pushed to window.__filmEvents as { scene, type, t, dur, meta }:
- *   pencil, pencil-light, pencil-dots, hatch, letter, pen, ruler, tick, stamp,
- *   paper-slide, pin, footsteps, van, erase, fray (silent by design: a subtraction marker).
+ * SOUND EVENTS pushed to window.__filmEvents as { scene, type, t, dur, meta }. Types are kinds of the
+ * shared vocabulary in docs/sound-events.md: pencil (meta.light for light strokes), pencil-scatter
+ * (dotted routes and trails, meta.series), pen (meta.lettering for hand lettering), ruler, hatch, tick,
+ * stamp, paper-slide, paper-lift, pin, footsteps, van, fray (near silent), incident, question, gap-rule,
+ * subtract-bed (sprinkler heads fading).
  */
 (function () {
   'use strict';
@@ -102,7 +111,9 @@
   const ADV = {};
   for (const w in SANS_ADV) { const a = SANS_ADV[w].split(',').map(Number); ADV[w] = {}; for (let i = 0; i < SANS_CHARS.length; i++) ADV[w][SANS_CHARS[i]] = a[i] / 1000; }
   function sansWidth(text, size, weight) { const t = ADV[weight] || ADV[400]; let w = 0; for (const ch of text) w += (t[ch] != null ? t[ch] : 0.56); return w * size; }
-  function monoWidth(text, size, lsEm) { const n = text.length; return n * 0.6 * size + Math.max(0, n - 1) * (lsEm || 0) * size; }
+  // Chromium on Linux rounds each monospace advance to a whole pixel (16 px Plex Mono advances 10, not 9.6),
+  // so layout uses the rounded advance; wipe clips add a margin for renderers that do not round.
+  function monoWidth(text, size, lsEm) { const n = text.length; return n * Math.round(0.6 * size) + Math.max(0, n - 1) * (lsEm || 0) * size; }
 
   // ------------------------------------------------------------ geometry
   const iso = (x, y, z) => [(x - y) * COS30, (x + y) * 0.5 - (z || 0)];
@@ -211,11 +222,11 @@
   const PLACES = {
     gate: { plan: [112, 40, 0], note: 'East end of the main road (y = 40). The demo draws no gate; site access reads from the road ends.' },
     gateOutside: { plan: [121, 40, 0] },
-    contractorsStop: { plan: [98, 50, 0], note: 'Loading area apron, east of the trailer cabs.' },
-    vanParked: { plan: [101, 44.5, 0] },
-    lotoValve: { plan: [27.4, 19.5, 0], note: 'Foot of the Utilities east face, beside the road x = 29.' },
+    contractorsStop: { plan: [95.5, 53, 0], note: 'Loading area apron, east of the trailer cabs.' },
+    vanParked: { plan: [104.5, 45.5, 0] },
+    lotoValve: { plan: [21, 24.6, 2.4], note: 'On the Utilities south face, between tank 2 and the Production Hall (visible at the overview).' },
     toolboxTalk: { plan: [22, 63.5, 0], note: 'In front of the Laboratory south face.' },
-    hseWalkLoop: { plan: [[31, 42.2, 0], [71.8, 42.2, 0], [72.2, 74.8, 0], [31.2, 75.2, 0]], note: 'Around the Warehouse on its ring roads.' },
+    hseWalkLoop: { plan: [[31.2, 43.6, 0], [51, 42.3, 0], [70.8, 42.9, 0], [72.3, 58, 0], [71.6, 74.8, 0], [51.5, 75.6, 0], [31.6, 74.6, 0], [30.6, 58.5, 0]], note: 'Around the Warehouse on its ring roads, a closed loop.' },
   };
   function anchorWorld(name) {
     const M = window.SITE_MODEL || {};
@@ -247,6 +258,7 @@
     const ctx = baseCtx('world', { prefix, scene: o.scene || prefix });
     ctx.site = site; ctx.svg = site.svg;
     ctx.refScale = o.refScale || (site.view ? FW / site.view.w : 7.1);
+    ctx.annotations = o.annotations || 'screen';
     ctx.ground = mk('g', { id: ctx.id('ground'), class: 'skt skt-world skt-ground-layer' });
     const before = site.rough && site.rough.root;
     if (before && before.parentNode === site.svg) site.svg.insertBefore(ctx.ground, before); else site.svg.appendChild(ctx.ground);
@@ -283,9 +295,19 @@
     return ctx;
   }
   // screen-constant group at a position: world -> translate + scale(--sw) with --sw reset to 1 inside
-  function pxAt(ctx, parent, p) {
+  // Screen-px group at a position. WORLD mode, scale 'screen' (default): lettering and marks keep their
+  // screen size at any zoom (like the site's own labels). Scale 'world': authored in px at o.refScale and
+  // scaled with the drawing, as if lettered on the paper; strokes stay screen-constant either way.
+  function pxAt(ctx, parent, p, o) {
+    o = o || {};
+    const mode = o.scale || ctx.annotations || 'screen';
+    if (ctx.mode !== 'world') return mk('g', { transform: 'translate(' + f2(p[0]) + ' ' + f2(p[1]) + ')' }, parent);
+    if (mode === 'world') {
+      const rs = o.refScale || ctx.refScale;
+      const g = mk('g', { transform: 'translate(' + f2(p[0]) + ' ' + f2(p[1]) + ') scale(' + (1 / rs).toFixed(6) + ')' }, parent);
+      return mk('g', { class: 'skt-wu', style: '--skt-k:' + f2(rs) }, g);
+    }
     const g = mk('g', { transform: 'translate(' + f2(p[0]) + ' ' + f2(p[1]) + ')' }, parent);
-    if (ctx.mode !== 'world') return g;
     return mk('g', { class: 'skt-u' }, mk('g', { class: 'skt-px' }, g));
   }
   function clipRect(ctx, el, x, y, w, h) {
@@ -357,13 +379,13 @@
     const x0 = anchor === 'middle' ? x - w / 2 : anchor === 'end' ? x - w : x;
     const wrap = mk('g', { class: 'skt-tw' }, parent);
     const t = mk('text', {
-      class: 'skt-lab' + (o.weight >= 600 ? ' skt-w6' : o.weight >= 500 ? ' skt-w5' : '') + (o.tone ? ' ' + o.tone : ''),
+      class: 'skt-lab' + (o.weight >= 600 ? ' skt-w6' : o.weight >= 500 ? ' skt-w5' : '') + (o.tone ? ' ' + o.tone : '') + ((o.halo != null ? o.halo : ctx.mode === 'world') ? ' skt-halo' : ''),
       x: f2(x0), y: f2(y), 'font-size': fs, 'letter-spacing': f2(lsEm * fs),
       transform: 'rotate(' + rot.toFixed(2) + ' ' + f2(x0) + ' ' + f2(y) + ')',
     }, wrap);
     if (irr) t.setAttribute('dx', dx.map(f2).join(' '));
     t.textContent = text;
-    const full = w + 8 + lsEm * fs;
+    const full = w + 10 + lsEm * fs + n * 0.45;
     const clip = clipRect(ctx, wrap, x0 - 4, y - fs * 1.2, full, fs * 1.8);
     return { el: t, wrap, clip, w, x0, x1: x0 + w, y, fs, full, text };
   }
@@ -376,7 +398,7 @@
     const x0 = anchor === 'middle' ? x - w / 2 : anchor === 'end' ? x - w : x;
     const wrap = mk('g', { class: 'skt-tw' }, parent);
     const t = mk('text', {
-      class: 'skt-sans' + (wt <= 300 ? ' skt-w3' : wt >= 500 ? ' skt-w5' : '') + (o.tone ? ' ' + o.tone : ''),
+      class: 'skt-sans' + (wt <= 300 ? ' skt-w3' : wt >= 500 ? ' skt-w5' : '') + (o.tone ? ' ' + o.tone : '') + (o.halo ? ' skt-halo' : ''),
       x: f2(x0), y: f2(y), 'font-size': fs, 'letter-spacing': ls ? f2(ls * fs) : null,
     }, wrap);
     t.textContent = text;
@@ -398,17 +420,25 @@
 
   // ------------------------------------------------------------ items and groups
   function strokeDur(lenPx, pace) { return clamp(0.1 + lenPx / (pace || 720), 0.12, 1.4); }
+  // Event kinds are the shared vocabulary of docs/sound-events.md. Internal shorthands map onto it:
+  // a light stroke is a 'pencil' with meta.light, lettering is 'pen' with meta.lettering, dotted
+  // routes are 'pencil-scatter' with a series, and the envelope's ghosting is silent.
+  const KIND_MAP = { 'pencil-light': ['pencil', { light: true }], 'pencil-dots': ['pencil-scatter', {}], letter: ['pen', { lettering: true }], erase: null };
   function emit(ctx, o, type, t, dur, meta) {
     if (o && o.events === false) return;
-    window.__filmEvents.push({ scene: (o && o.scene) || ctx.scene, type, t: +((t + ((o && o.eventOffset) || 0))).toFixed(3), dur: +dur.toFixed(3), meta: meta || {} });
+    meta = Object.assign({}, meta || {});
+    if (type in KIND_MAP) { const k = KIND_MAP[type]; if (!k) return; type = k[0]; Object.assign(meta, k[1]); }
+    if (type === 'pencil-scatter') { const n = meta.dots || meta.count || Math.max(1, Math.round(dur / 0.08)); meta.series = { count: n, every: +(dur / n).toFixed(4) }; }
+    window.__filmEvents.push({ scene: (o && o.scene) || ctx.scene, type, t: +((t + ((o && o.eventOffset) || 0))).toFixed(3), dur: +dur.toFixed(3), meta });
   }
   class Item {
     constructor(ctx, kind, o) {
       o = o || {};
       this.ctx = ctx; this.kind = kind; this.id = ctx.id(kind);
       this.root = mk('g', { id: this.id, class: 'skt-item skt-' + kind }, ctx.layer(o.layer));
-      this.steps = []; this.cur = 0; this.parts = {};
+      this.steps = []; this.cur = 0; this.parts = {}; this.also = [];
     }
+    get roots() { return [this.root].concat(this.also); }
     add(s) { if (s.at == null) s.at = this.cur; this.steps.push(s); this.cur = s.at + s.dur * (s.advance != null ? s.advance : 1); return s; }
     gap(sec) { this.cur += sec; return this; }
     stroke(rec, o) { o = o || {}; return this.add({ kind: 'stroke', rec, dur: o.dur || strokeDur(rec.len, o.pace), at: o.at, advance: o.advance != null ? o.advance : 0.82, type: o.type !== undefined ? o.type : rec.type, meta: o.meta, ease: o.ease }); }
@@ -433,19 +463,19 @@
       o = o || {};
       const dur = o.dur || 0.6, list = this.steps.slice().reverse(), n = Math.max(1, list.length);
       list.forEach((s, i) => { const t0 = t + (i / n) * dur * 0.6, d = dur * 0.4; unrunStep(tl, s, t0, d); });
-      if (o.sound) emit(this.ctx, o, 'erase', t, dur, { item: this.id });
+      if (o.sound) emit(this.ctx, o, 'paper-lift', t, dur, { item: this.id, undraw: true });
       return t + dur;
     }
     fade(tl, t, from, to, dur, ease) {
-      tl.fromTo(this.root, { opacity: from }, { opacity: to, duration: dur || 0.4, ease: ease || 'power1.inOut', immediateRender: false }, t);
+      tl.fromTo(this.roots, { opacity: from }, { opacity: to, duration: dur || 0.4, ease: ease || 'power1.inOut', immediateRender: false }, t);
       return t + (dur || 0.4);
     }
     slide(tl, t, o) {
       o = o || {};
       const dur = o.dur || 0.8, dx = o.dx != null ? o.dx : -140, dy = o.dy || 0;
-      tl.fromTo(this.root, { attr: { transform: 'translate(0 0)' } }, { attr: { transform: 'translate(' + dx + ' ' + dy + ')' }, duration: dur, ease: o.ease || 'power2.in', immediateRender: false }, t);
-      if (o.fade !== false) tl.fromTo(this.root, { opacity: 1 }, { opacity: 0, duration: dur * 0.9, ease: 'power1.in', immediateRender: false }, t + dur * 0.1);
-      emit(this.ctx, o, 'paper-slide', t, dur, { item: this.id, exit: true });
+      tl.fromTo(this.roots, { attr: { transform: 'translate(0 0)' } }, { attr: { transform: 'translate(' + dx + ' ' + dy + ')' }, duration: dur, ease: o.ease || 'power2.in', immediateRender: false }, t);
+      if (o.fade !== false) tl.fromTo(this.roots, { opacity: 1 }, { opacity: 0, duration: dur * 0.9, ease: 'power1.in', immediateRender: false }, t + dur * 0.1);
+      emit(this.ctx, o, 'paper-lift', t, dur, { item: this.id });
       return t + dur;
     }
   }
@@ -518,9 +548,9 @@
   function label(ctx, at, text, o) {
     o = o || {};
     const it = new Item(ctx, 'label', o);
-    const g = pxAt(ctx, it.root, ctx.pt(at));
+    const g = pxAt(ctx, it.root, ctx.pt(at), o);
     const lines = Array.isArray(text) ? text : String(text).split('\n');
-    const fs = o.size || 15, lh = o.lh || fs * 1.32;
+    const fs = o.size || 18, lh = o.lh || fs * 1.32;
     let lx = 0, ly = 0, anchor = o.anchor || 'start';
     const seed = o.seed || ('lb' + lines.join('|'));
     if (o.leader) {
@@ -529,12 +559,9 @@
       const rec = hand(ctx, g, 'M0 0L' + f2(dx) + ' ' + f2(dy), { seed: seed + 'l', cls: 'skt-lite', over: false, jit: 0.45 });
       it.stroke(rec, { dur: 0.22 });
       if (!o.anchor) anchor = dx < 0 ? 'end' : 'start';
+      // lettered at the leader's end, centred on it, the way a draughtsman letters on a leader
       lx = dx + (anchor === 'end' ? -5 : anchor === 'start' ? 5 : 0);
-      ly = dy <= 0 ? dy - 4 - (lines.length - 1) * lh : dy + fs * 0.95;
-      if (o.shelf !== false && Math.abs(dy) > 2) {
-        // label sits on the leader's end, the way a draughtsman letters on a leader
-        ly = dy + fs * 0.34 - (lines.length - 1) * lh * 0.5;
-      }
+      ly = dy + fs * 0.34 - (lines.length - 1) * lh * 0.5;
     }
     it.lines = lines.map((ln, i) => { const lb = letters(ctx, g, ln, lx + (o.dx || 0), ly + (o.dy || 0) + i * lh, { size: fs, weight: o.weight, anchor, seed, ls: o.ls, tone: o.tone, rot: o.rot }); it.wipe(lb, { pace: o.pace }); return lb; });
     it.parts.group = g;
@@ -558,7 +585,7 @@
       [-0.104, -0.585], [-0.099, -0.700], [-0.093, -0.612], [-0.091, -0.492], [-0.086, -0.300], [-0.079, -0.066], [-0.087, -0.006], [-0.031, -0.006],
       [-0.025, -0.212], [-0.011, -0.418], [0, -0.442]];
     const R = L.slice(0, -1).reverse().map(([x, y]) => [-x, y]);
-    return { body: L.concat(R), head: [0, -0.909, 0.055, 0.066], arms: [] };
+    return { body: L.concat(R), head: [0, -0.905, 0.05, 0.06], arms: [] };
   }
   function poseSide(f1, f2v, sw) {
     const hipY = -0.465;
@@ -576,11 +603,11 @@
       .concat(l1.back, l1.foot, l1.fr, [[0.004, -0.43]], l2.back, l2.foot, l2.fr,
         [[0.052, -0.49], [0.058, -0.602], [0.062, -0.716], [0.050, -0.801], [0.018, -0.840]]);
     const sh = [0.0, -0.792], el = [sw * 0.052, -0.645], hd = [0.004 + sw * 0.112, -0.508];
-    return { body, head: [0.012, -0.909, 0.057, 0.066], arms: [armShape([sh, el, hd], 0.023)], hand: hd };
+    return { body, head: [0.012, -0.905, 0.051, 0.06], arms: [armShape([sh, el, hd], 0.023)], hand: hd };
   }
   function poseGeo(pose, phase) {
     if (pose === 'standing' || pose === 'front') return poseFront();
-    if (pose === 'standing-side') return poseSide(-0.02, 0.028, 0.05);
+    if (pose === 'standing-side') return poseSide(-0.05, 0.055, 0.05);
     if (pose === 'carrying') return phase ? poseSide(0.1, -0.11, 0.08) : poseSide(-0.11, 0.1, 0.08);
     // walking: legs scissor, the near arm swings against the near leg
     return phase ? poseSide(0.105, -0.125, 0.75) : poseSide(-0.125, 0.105, -0.75);
@@ -590,7 +617,7 @@
     const it = new Item(ctx, 'figure', o);
     const S = SK();
     const u = ctx.u(o);
-    const h = (o.heightPx || (ctx.mode === 'world' ? 26 : 34)) * u;
+    const h = (o.heightPx || (ctx.mode === 'world' ? 28 : 34)) * u;
     const p = ctx.pt(at);
     it.u = u; it.h = h; it.pos = p;
     it.root.setAttribute('transform', 'translate(' + f2(p[0]) + ' ' + f2(p[1]) + ')');
@@ -598,18 +625,21 @@
     it.face = mk('g', { transform: 'scale(' + facing + ' 1)' }, it.root);
     const pose = o.pose || 'standing';
     const seed = o.seed || ('fig' + pose + f2(p[0]) + f2(p[1]));
-    const jit = o.jit != null ? o.jit : 0.32;
+    const small = (o.heightPx || (ctx.mode === 'world' ? 28 : 34)) < 46;
+    const jit = o.jit != null ? o.jit : (small ? 0.22 : 0.32);
+    const fcls = o.cls || (small ? 'skt-fine' : '');
+    const fover = o.over != null ? o.over : !small;
     const sc = pts => pts.map(([x, y]) => [x * h, y * h]);
     const A = poseGeo(pose, 0);
     const bodyC = smoothCmds(sc(A.body), true);
     const headC = ellipseCmds(A.head[0] * h, A.head[1] * h, A.head[2] * h, A.head[3] * h);
-    const head = hand(ctx, it.face, headC, { u, seed: seed + 'h', jit: jit * 0.5, occ: true, over: o.over });
-    const body = hand(ctx, it.face, bodyC, { u, seed: seed + 'b', jit, occ: true, over: o.over });
+    const head = hand(ctx, it.face, headC, { u, seed: seed + 'h', jit: jit * 0.5, occ: true, over: fover, cls: fcls });
+    const body = hand(ctx, it.face, bodyC, { u, seed: seed + 'b', jit, occ: true, over: fover, cls: fcls });
     if (o.tone) {
       const toneClip = flatten(bodyC)[0];
       it.parts.tone = hatch(ctx, it.face, toneClip.filter(q => q[0] < 0.02 * h), { u, spacing: 2.2, seed: seed + 't', sparse: true });
     }
-    const arms = A.arms.map((a, i) => hand(ctx, it.face, smoothCmds(sc(a), true), { u, seed: seed + 'a' + i, jit: jit * 0.8, occ: true, over: false, cls: 'skt-fine' }));
+    const arms = A.arms.map((a, i) => hand(ctx, it.face, smoothCmds(sc(a), true), { u, seed: seed + 'a' + i, jit: jit * 0.8, occ: true, over: false, cls: small ? 'skt-lite' : 'skt-fine' }));
     const extras = [];
     if (o.carry === 'box' || (pose === 'carrying' && o.carry !== 'pipe' && o.carry !== false)) {
       const hd = A.hand || [0.06, -0.5];
@@ -617,7 +647,7 @@
       const bw = 0.15 * h, bh = 0.1 * h;
       extras.push(hand(ctx, it.face, 'M' + f2(bx - bw * 0.35) + ' ' + f2(by + 0.02 * h) + 'L' + f2(bx + bw * 0.65) + ' ' + f2(by + 0.02 * h) + 'L' + f2(bx + bw * 0.65) + ' ' + f2(by + 0.02 * h + bh) + 'L' + f2(bx - bw * 0.35) + ' ' + f2(by + 0.02 * h + bh) + 'Z', { u, seed: seed + 'bx', jit: jit * 0.6, occ: true, over: false, cls: 'skt-fine' }));
     } else if (o.carry === 'pipe') {
-      extras.push(hand(ctx, it.face, 'M' + f2(-0.34 * h) + ' ' + f2(-0.868 * h) + 'L' + f2(0.4 * h) + ' ' + f2(-0.812 * h), { u, seed: seed + 'pp', jit: jit * 0.6, over: false, cls: 'skt-fine' }));
+      extras.push(hand(ctx, it.face, 'M' + f2(-0.36 * h) + ' ' + f2(-0.83 * h) + 'L' + f2(0.42 * h) + ' ' + f2(-0.772 * h), { u, seed: seed + 'pp', jit: jit * 0.6, over: false, cls: 'skt-fine' }));
     }
     it.stroke(head, { dur: 0.16 }); it.stroke(body, { dur: 0.42 });
     arms.forEach(a => it.stroke(a, { dur: 0.14 }));
@@ -711,7 +741,7 @@
         figs.push(f); grp.child(f, { stagger: 0.12 });
       });
       if (spec.label) {
-        const lab = label(ctx, grp.centreW, spec.label, Object.assign({ layer: grp.root, leader: spec.labelLeader || [-26, 30], size: spec.labelSize || 15, refScale: spec.refScale }, spec.labelOpts || {}));
+        const lab = label(ctx, grp.centreW, spec.label, Object.assign({ layer: grp.root, leader: spec.labelLeader || [-26, 30], size: spec.labelSize || 18, refScale: spec.refScale }, spec.labelOpts || {}));
         grp.child(lab, { gap: 0.1 }); grp.labelItem = lab;
       }
     } else {
@@ -781,7 +811,7 @@
     const vis = faces.map(f => Object.assign(f, view(f.nrm), { depth: f.pts.reduce((a, q) => { const p = toPlan(q); return a + p[0] + p[1] + p[2]; }, 0) / f.pts.length })).filter(f => f.vis);
     vis.sort((a, b) => a.depth - b.depth);
     const g = it.root;
-    const drawn = [];
+    const drawn = [], wheelSides = [];
     vis.forEach((f, i) => {
       const pts = f.pts.map(P);
       const rec = hand(ctx, g, lineCmds(pts, true), { u, seed: seed + f.tag + i, jit: 0.45, occ: true, ext: true, extMin: 10 });
@@ -795,13 +825,7 @@
         const v = f.tag === 'side+' ? wv : -wv;
         const door = hand(ctx, g, lineCmds([P([-0.35, v, zb + 0.12]), P([-0.35, v, zt - 0.14])], false), { u, seed: seed + 'dr', jit: 0.35, over: false, cls: 'skt-lite' });
         drawn.push(door);
-        [[-1.95, 0.44], [1.9, 0.44]].forEach(([wu, r], k) => {
-          const circ = []; for (let a = 0; a < 16; a++) { const th = a / 16 * 6.283; circ.push(P([wu + Math.cos(th) * r, v * 1.001, zb * 0.95 + Math.sin(th) * r])); }
-          const wh = hand(ctx, g, smoothCmds(circ, true), { u, seed: seed + 'w' + k, jit: 0.3, occ: true, over: false });
-          drawn.push(wh);
-          const hub = []; for (let a = 0; a < 10; a++) { const th = a / 10 * 6.283; hub.push(P([wu + Math.cos(th) * r * 0.36, v * 1.002, zb * 0.95 + Math.sin(th) * r * 0.36])); }
-          drawn.push(hand(ctx, g, smoothCmds(hub, true), { u, seed: seed + 'hb' + k, jit: 0.2, over: false, cls: 'skt-lite' }));
-        });
+        wheelSides.push(v);
       }
       if (f.tag === 'cab+' || f.tag === 'cab-') {
         const v = (f.tag === 'cab+' ? cw : -cw) * 1.002;
@@ -809,6 +833,12 @@
         drawn.push(hand(ctx, g, lineCmds(win, true), { u, seed: seed + 'win', jit: 0.3, over: false, cls: 'skt-fine' }));
       }
     });
+    wheelSides.forEach(v => [[-1.95, 0.44], [1.9, 0.44]].forEach(([wu, r], k) => {
+      const circ = []; for (let a = 0; a < 16; a++) { const th = a / 16 * 6.283; circ.push(P([wu + Math.cos(th) * r, v * 1.001, zb * 0.95 + Math.sin(th) * r])); }
+      drawn.push(hand(ctx, g, smoothCmds(circ, true), { u, seed: seed + 'w' + k, jit: 0.3, occ: true, over: false }));
+      const hub = []; for (let a = 0; a < 10; a++) { const th = a / 10 * 6.283; hub.push(P([wu + Math.cos(th) * r * 0.36, v * 1.002, zb * 0.95 + Math.sin(th) * r * 0.36])); }
+      drawn.push(hand(ctx, g, smoothCmds(hub, true), { u, seed: seed + 'hb' + k, jit: 0.2, over: false, cls: 'skt-lite' }));
+    }));
     drawn.forEach(rec => {
       it.stroke(rec, { dur: clamp(0.08 + rec.len / 900, 0.1, 0.4), advance: 0.6 });
       if (rec.hatch) it.draw(rec.hatch, 40, { dur: 0.3, advance: 0.3, type: 'hatch' });
@@ -832,17 +862,21 @@
     const it = new Item(ctx, 'gate', o);
     const u = ctx.u(o);
     const b = ctx.plan(at || 'gate');
-    const half = o.halfWidth || 3.4, hgt = 2.2;
+    const half = o.halfWidth || 3.6, open = (o.open != null ? o.open : 68) * Math.PI / 180, arm = o.arm || 7.4;
     const P = (x, y, z) => iso(x, y, z);
-    const recs = [
-      hand(ctx, it.root, lineCmds([P(b[0], b[1] - half, 0), P(b[0], b[1] - half, hgt)]), { u, seed: 'gp1', jit: 0.35 }),
-      hand(ctx, it.root, lineCmds([P(b[0], b[1] + half, 0), P(b[0], b[1] + half, hgt)]), { u, seed: 'gp2', jit: 0.35 }),
-      hand(ctx, it.root, lineCmds([P(b[0], b[1] - half, 1.7), P(b[0] - 3.1, b[1] - half - 2.1, 1.7)]), { u, seed: 'gb1', jit: 0.35 }),
-      hand(ctx, it.root, lineCmds([P(b[0], b[1] - half, 0.9), P(b[0] - 3.1, b[1] - half - 2.1, 0.9)]), { u, seed: 'gb2', jit: 0.3, cls: 'skt-lite', over: false }),
-    ];
-    recs.forEach(r => it.stroke(r, { dur: 0.18 }));
+    const hx = b[0], hy = b[1] - half;
+    // barrier housing: a small box on the kerb, drawn as its three visible faces
+    const bw = 0.55, bh = 1.25;
+    const box = [[hx - bw, hy - bw, 0], [hx + bw, hy - bw, 0], [hx + bw, hy + bw, 0], [hx - bw, hy + bw, 0]];
+    const top = box.map(q => P(q[0], q[1], bh)), bot = box.map(q => P(q[0], q[1], 0));
+    const housing = hand(ctx, it.root, lineCmds([bot[1], bot[2], bot[3], top[3], top[0], top[1], bot[1]], true).concat(lineCmds([top[1], top[2], top[3]]), lineCmds([top[2], bot[2]])), { u, seed: 'gh', jit: 0.3, occ: true });
+    const boom = hand(ctx, it.root, lineCmds([P(hx, hy, bh * 0.85), P(hx, hy + Math.cos(open) * arm, bh * 0.85 + Math.sin(open) * arm)]), { u, seed: 'gb', jit: 0.3 });
+    const rest = hand(ctx, it.root, lineCmds([P(hx, b[1] + half, 0), P(hx, b[1] + half, bh * 0.85)]), { u, seed: 'gr', jit: 0.3 });
+    const fork = hand(ctx, it.root, lineCmds([P(hx, b[1] + half - 0.35, bh * 0.85 + 0.35), P(hx, b[1] + half, bh * 0.85), P(hx, b[1] + half + 0.35, bh * 0.85 + 0.35)]), { u, seed: 'gf', jit: 0.2, over: false, cls: 'skt-fine' });
+    [housing, boom, rest, fork].forEach(r => it.stroke(r, { dur: 0.2 }));
+    it.parts = { housing, boom, rest };
     if (o.label !== false) {
-      const lab = letters(ctx, pxAt(ctx, it.root, P(b[0], b[1] + half, hgt)), o.label || 'GATE 2', 6, -8, { size: o.labelSize || 14, seed: 'gate' });
+      const lab = letters(ctx, pxAt(ctx, it.root, P(hx, b[1] + half, bh), o), o.label || 'GATE 2', 8, -10, { size: o.labelSize || 16, seed: 'gate' });
       it.wipe(lab);
     }
     return it;
@@ -886,8 +920,8 @@
     }
     if (o.label) {
       const lp = o.labelAt ? ctx.pt(o.labelAt) : pointAt(pl, L * (o.labelFrac != null ? o.labelFrac : 0.5)).p;
-      const lab = label(ctx, lp, o.label, Object.assign({ layer: it.root, leader: o.labelLeader || [18, -22], size: o.labelSize || 14, refScale: o.refScale }, o.labelOpts || {}));
-      it.parts.label = lab;
+      const lab = label(ctx, lp, o.label, Object.assign({ layer: o.labelLayer || 'top', leader: o.labelLeader || [18, -22], size: o.labelSize || 18, refScale: o.refScale }, o.labelOpts || {}));
+      it.parts.label = lab; it.also.push(lab.root);
       it.fn((tl, t0) => lab.drawOn(tl, t0, { events: true }), { dur: lab.duration });
     }
     return it;
@@ -905,7 +939,7 @@
     o = o || {};
     const it = new Item(ctx, 'valve-tag', o);
     const hb = o.hand === 'b';
-    const g = pxAt(ctx, it.root, ctx.pt(at));
+    const g = pxAt(ctx, it.root, ctx.pt(at), o);
     const seed = (o.seed || (hb ? 'hand-b' : 'hand-a')) + (o.text || (o.lines || []).join('|'));
     const cls = hb ? 'skt-heavy' : '';
     const jit = hb ? 1.0 : 0.7;
@@ -921,7 +955,7 @@
     // string from the handwheel to the tag's eyelet
     const side = o.side === 'left' ? -1 : 1;
     const lines = o.lines || splitTag(o.text || 'ISOLATED · LOTO · 07:40', o.maxChars || 14);
-    const fs = o.size || 16, lh = fs * 1.28, ls = hb ? 0.1 : 0.13;
+    const fs = o.size || 18, lh = fs * 1.28, ls = hb ? 0.1 : 0.13;
     const tw = Math.max(...lines.map(l => monoWidth(l, fs, ls))) + 44, th = lines.length * lh + 18;
     const eye = [side * (o.reach || 0.75 * vs + 26), (o.drop != null ? o.drop : 30)];
     const ang = o.angle != null ? o.angle : (hb ? -3.2 : 4.5);
@@ -929,18 +963,19 @@
     const str = hand(ctx, g, [['M', w0], ['C', [w0[0] + side * 10, w0[1] + 2, eye[0] - side * 8, eye[1] - 18, eye[0], eye[1]]]], { seed: seed + 'str', jit: jit * 0.5, cls: hb ? 'skt-fine' : 'skt-fine', over: false });
     it.stroke(str, { dur: 0.3 });
     const tg = mk('g', { transform: 'translate(' + f2(eye[0]) + ' ' + f2(eye[1]) + ') rotate(' + f2(ang) + ')' }, g);
-    // luggage tag: chamfered end with an eyelet, hanging from the string
-    const ex = side === 1 ? 0 : -tw, dir = side;
-    const c = hb ? 12 : 9;
-    const outline = side === 1
-      ? [[0, -c], [c, -c - 6], [tw, -c - 6], [tw, th - c - 6], [c, th - c - 6], [0, th - 2 * c - 6]]
-      : [[0, -c], [-c, -c - 6], [-tw, -c - 6], [-tw, th - c - 6], [-c, th - c - 6], [0, th - 2 * c - 6]];
+    // luggage tag: chamfered end, eyelet at the local origin where the string is tied
+    const c = hb ? 12 : 9, e0 = 11, sx = side;
+    const X = v => sx * v;
+    const outline = [[X(-e0), -th / 2 + c], [X(-e0 + c), -th / 2], [X(tw - e0), -th / 2], [X(tw - e0), th / 2], [X(-e0 + c), th / 2], [X(-e0), th / 2 - c]];
     const tag = hand(ctx, tg, lineCmds(outline, true), { seed: seed + 'tg', jit, cls, occ: true, ext: !hb, extMin: 30 });
-    const eyelet = hand(ctx, tg, handCircleCmds(dir * 11, (th - 2 * c - 6) / 2 - c + 3, 3.4, seed + 'ey', { spiral: 0.02 }), { seed: seed + 'eyl', jit: 0.3, over: false, cls: hb ? '' : 'skt-fine' });
+    const eyelet = hand(ctx, tg, handCircleCmds(0, 0, 3.4, seed + 'ey', { spiral: 0.02 }), { seed: seed + 'eyl', jit: 0.3, over: false, cls: hb ? '' : 'skt-fine' });
     it.stroke(tag, { dur: 0.5 }); it.stroke(eyelet, { dur: 0.14 });
-    if (hb) { const dbl = hand(ctx, tg, lineCmds(side === 1 ? [[c + 6, -c], [tw - 5, -c], [tw - 5, th - c - 11], [c + 6, th - c - 11]] : [[-c - 6, -c], [-tw + 5, -c], [-tw + 5, th - c - 11], [-c - 6, th - c - 11]], true), { seed: seed + 'db', jit: 0.5, over: false, cls: 'skt-lite' }); it.stroke(dbl, { dur: 0.3 }); }
-    const tx = side === 1 ? 28 : -tw + 16;
-    it.lines = lines.map((ln, i) => { const lb = letters(ctx, tg, ln, tx, -c - 6 + 9 + fs * 0.92 + i * lh, { size: fs, weight: hb ? 500 : 400, ls, seed: seed + i, irr: hb ? 0.08 : 0.05, rot: 0 }); it.wipe(lb, { pace: hb ? 170 : 210, type: hb ? 'pen' : 'letter' }); return lb; });
+    if (hb) {
+      const dbl = hand(ctx, tg, lineCmds([[X(-e0 + c + 5), -th / 2 + 5], [X(tw - e0 - 5), -th / 2 + 5], [X(tw - e0 - 5), th / 2 - 5], [X(-e0 + c + 5), th / 2 - 5]], true), { seed: seed + 'db', jit: 0.5, over: false, cls: 'skt-lite' });
+      it.stroke(dbl, { dur: 0.3 });
+    }
+    const tx = sx === 1 ? 16 : -(tw - e0) + 14;
+    it.lines = lines.map((ln, i) => { const lb = letters(ctx, tg, ln, tx, -th / 2 + 9 + fs * 0.9 + i * lh, { size: fs, weight: hb ? 500 : 400, ls, seed: seed + i, irr: hb ? 0.08 : 0.05, rot: 0 }); it.wipe(lb, { pace: hb ? 170 : 210, type: hb ? 'pen' : 'letter' }); return lb; });
     it.parts.tag = tag; it.parts.string = str;
     return it;
   }
@@ -950,22 +985,53 @@
   function activityMarker(ctx, at, o) {
     o = o || {};
     const v = o.variant || 'normal';
-    const V = { small: { r: 4.4, fs: 12, lead: 13, dot: 1.35 }, normal: { r: 7.2, fs: 14, lead: 19, dot: 1.9 }, hot: { r: 11.5, fs: 18, lead: 30, dot: 2.6, ring: 17.5 } }[v] || {};
+    const V = { small: { r: 4.4, fs: 14, lead: 13, dot: 1.35 }, normal: { r: 7.2, fs: 18, lead: 19, dot: 1.9 }, hot: { r: 11.5, fs: 20, lead: 76, dot: 2.6, ring: 17.5, angle: -110, header: true } }[v] || {};
     const it = new Item(ctx, 'marker', o);
     const p = ctx.pt(at);
-    const g = pxAt(ctx, it.root, p);
+    const g = pxAt(ctx, it.root, p, o);
     const seed = o.seed || ('mk' + v + (o.label || '') + f2(p[0]) + f2(p[1]));
     const breath = mk('g', { transform: 'scale(1)' }, g);
-    const circ = hand(ctx, breath, handCircleCmds(0, 0, V.r, seed), { seed: seed + 'c', jit: 0.35, cls: v === 'hot' ? 'skt-heavy' : (v === 'small' ? 'skt-fine' : '') });
+    const circ = hand(ctx, breath, handCircleCmds(0, 0, V.r, seed), { seed: seed + 'c', jit: 0.35, occ: o.occ !== false, cls: v === 'hot' ? 'skt-heavy' : (v === 'small' ? 'skt-fine' : '') });
     const dot = mk('circle', { class: 'skt-fill', r: V.dot }, breath);
     it.stroke(circ, { dur: v === 'small' ? 0.18 : 0.3 });
     it.pop(dot, { dur: 0.08, scale: 1.6 });
     if (V.ring) { const ring = hand(ctx, breath, handCircleCmds(0, 0, V.ring, seed + 'r', { sweep: 5.2, over: 0 }), { seed: seed + 'rr', jit: 0.4, cls: 'skt-lite', over: false }); it.stroke(ring, { dur: 0.3 }); it.parts.ring = ring; }
     it.parts.breath = breath; it.parts.circle = circ; it.parts.dot = dot;
-    if (o.label) {
+    if (o.label && V.header && o.header !== false && o.labelAt == null && o.angle == null && o.dir == null && ctx.mode === 'world') {
+      // hot work: the label is the header of the safeguard schedule (SAFEGUARD_LAYOUT.header), in the open paper
+      // east of Roof 03, on a leader from the ring. Title and place/time on two lines; world-scaled at refScale 16.
+      const rs = o.refScale || 16, uu = 1 / rs, HD = Object.assign({}, SAFEGUARD_LAYOUT.header, o.headerLayout || {});
+      const toks = Array.isArray(o.label) ? o.label : String(o.label).split(/\s*·\s*/);
+      const lines = Array.isArray(o.label) ? o.label : [toks[0], toks.slice(1).join(' · ')].filter(Boolean);
+      const hp = [p[0] + HD.px[0] * uu, p[1] + HD.px[1] * uu];
+      const tgt = [hp[0] - 12 * uu, hp[1] - 7 * uu];
+      const dx = tgt[0] - p[0], dy = tgt[1] - p[1], dd = Math.hypot(dx, dy) || 1, r0 = (V.ring || V.r) + 3;
+      const s0 = [p[0] + dx / dd * r0 * uu, p[1] + dy / dd * r0 * uu];
+      const lead = hand(ctx, it.root, lineCmds([s0, tgt, [tgt[0] + 7 * uu, tgt[1]]]), { u: uu, seed: seed + 'ld', jit: 0.4, cls: 'skt-fine', over: false });
+      it.stroke(lead, { dur: 0.3 });
+      const lg = pxAt(ctx, it.root, hp, { scale: 'world', refScale: rs });
+      // a flat paper plate keeps the site's ground crosses out of the lettering (no outline, no shadow)
+      const plate = mk('rect', { class: 'skt-occ', x: -8, y: -HD.size - 4, width: 12 + Math.max(...lines.map((ln, i) => monoWidth(ln.toUpperCase(), i ? HD.size2 : HD.size, i ? 0.12 : 0.1))), height: HD.size + 12 + (lines.length - 1) * HD.lh }, lg);
+      it.fadeIn(plate, { dur: 0.01 });
+      it.lines = lines.map((ln, i) => { const lb = letters(ctx, lg, ln, 0, i * HD.lh, { size: i ? HD.size2 : HD.size, weight: i ? 500 : 600, seed: seed + i, rot: i ? 0.2 : -0.25, irr: 0.04, ls: i ? 0.12 : 0.1 }); it.wipe(lb, { pace: o.pace }); return lb; });
+      it.parts.leader = lead; it.header = { at: hp, lines: it.lines };
+    } else if (o.label && o.labelAt) {
+      // label set off in the margin: a world-space leader from the marker to a lettered shelf
+      const lines = Array.isArray(o.label) ? o.label : String(o.label).split('\n');
+      const u = ctx.u(o), LA = ctx.pt(o.labelAt), west = LA[0] < p[0];
+      const elbow = o.elbow ? ctx.pt(o.elbow) : [LA[0] + (west ? 1 : -1) * 16 * u, LA[1]];
+      const dx = elbow[0] - p[0], dy = elbow[1] - p[1], dd = Math.hypot(dx, dy) || 1, r0 = (V.ring || V.r) + 2.5;
+      const s0 = [p[0] + dx / dd * r0 * u, p[1] + dy / dd * r0 * u];
+      const lead = hand(ctx, it.root, lineCmds([s0, elbow, LA]), { u, seed: seed + 'ld', jit: 0.4, cls: 'skt-lite', over: false });
+      it.stroke(lead, { dur: 0.3 });
+      const lg = pxAt(ctx, it.root, LA, o);
+      const fs = o.size || V.fs, lh = fs * 1.3, y0 = fs * 0.34 - (lines.length - 1) * lh * 0.5;
+      it.lines = lines.map((ln, i) => { const lb = letters(ctx, lg, ln, west ? -5 : 5, y0 + i * lh, { size: fs, weight: o.weight || 400, anchor: west ? 'end' : 'start', seed: seed + i }); it.wipe(lb, { pace: o.pace }); return lb; });
+      it.parts.leader = lead;
+    } else if (o.label) {
       const lines = Array.isArray(o.label) ? o.label : String(o.label).split('\n');
       const dname = o.dir || 'ne';
-      const a = (DIRS[dname] != null ? DIRS[dname] : -40) * Math.PI / 180;
+      const a = (o.angle != null ? o.angle : (o.dir == null && V.angle != null ? V.angle : (DIRS[dname] != null ? DIRS[dname] : -40))) * Math.PI / 180;
       const r0 = (V.ring || V.r) + 2.5, len = o.leadPx || V.lead;
       const s0 = [Math.cos(a) * r0, Math.sin(a) * r0], k = [Math.cos(a) * (r0 + len), Math.sin(a) * (r0 + len)];
       const west = Math.cos(a) < -0.05;
@@ -976,6 +1042,7 @@
       const y0 = k[1] + fs * 0.34 - (lines.length - 1) * lh * 0.5;
       it.lines = lines.map((ln, i) => { const lb = letters(ctx, g, ln, shelf[0] + (west ? -5 : 5), y0 + i * lh, { size: fs, weight: o.weight || (v === 'hot' ? 500 : 400), anchor: west ? 'end' : 'start', seed: seed + i }); it.wipe(lb, { pace: o.pace }); return lb; });
       it.parts.leader = lead;
+      it.labelBox = [west ? shelf[0] - 5 - Math.max(...it.lines.map(l => l.w)) : shelf[0] + 5, y0 - fs, west ? shelf[0] - 5 : shelf[0] + 5 + Math.max(...it.lines.map(l => l.w)), y0 + (lines.length - 1) * lh + 4];
     }
     it.breathe = (tl, t, dur, bo) => {
       bo = bo || {};
@@ -986,6 +1053,7 @@
     };
     return it;
   }
+  const FIELD_TAGS = ['PTW 0411', 'LOTO', 'LIFT', 'DELIVERY', 'PTW 0407', 'ISOLATION', 'SCAFFOLD', 'PTW 0415', 'CONFINED SPACE', 'PTW 0399', 'INSPECTION', 'PTW 0420'];
   const FIELD_LABELS = ['LIFT · BAY 2', 'ISOLATION · MCC-3', 'DELIVERY · DOCK 3', 'CONFINED SPACE · T2', 'SCAFFOLD · WAREHOUSE', 'PTW 0398', 'EXCAVATION · ROAD 4',
     'LOTO · V-12', 'FORKLIFT · BAY 4', 'WORK AT HEIGHT · ROOF 01', 'CHEMICAL DELIVERY', 'PTW 0402', 'PUMP SWAP · P1', 'FILTER CHANGE · LINE 3', 'DRAIN CLEARING · ROOF 02', 'CRANE LIFT · YARD'];
   function activityField(ctx, o) {
@@ -993,6 +1061,7 @@
     const grp = new Group(ctx, 'field', o);
     const M = window.SITE_MODEL || {};
     const A = M.activities || {};
+    const u = ctx.u(o), rs = 1 / u;
     let cands = [];
     (A.ambientSpots && A.ambientSpots.spots || []).forEach(s => cands.push(s.world));
     (A.routine || []).forEach(s => cands.push(s.world));
@@ -1009,25 +1078,68 @@
       if (chosen.some(q => dist(q, c) < minD)) continue;
       chosen.push(c);
     }
-    const labels = o.labels || FIELD_LABELS;
-    const labelEvery = o.labelEvery || 2.4;
+    // labels: a few markers, spread round the site. 'columns' (default): lettered in the side margins on
+    // leaders, like a drawing's callout schedule; 'radial': lettered outward near the marker.
+    const labels = (o.labels || FIELD_LABELS).slice(0, o.labelCount || 10);
+    const centre = o.centre ? ctx.pt(o.centre) : ((M.envelope && M.envelope.centreWorld) || [16.454, 46.5]);
+    const angOf = c => Math.atan2(c[1] - centre[1], c[0] - centre[0]);
+    const byAng = chosen.map((c, i) => ({ c, i, a: angOf(c) })).sort((p, q) => p.a - q.a);
+    const labelled = {};
+    labels.forEach((t, k) => { const e = byAng[Math.floor((k + 0.5) * byAng.length / labels.length)]; if (e) labelled[e.i] = t; });
+    const fs = o.labelSize || 16, boxes = [];
+    const overl = (b1, b2) => !(b1[2] < b2[0] - 6 || b1[0] > b2[2] + 6 || b1[3] < b2[1] - 4 || b1[1] > b2[3] + 4);
+    const columnAt = {};
+    if ((o.labelMode || 'columns') === 'columns') {
+      const colPx = o.columnPx || 610, slot = (o.slotPx || 34) * u;
+      [-1, 1].forEach(side => {
+        const list = Object.keys(labelled).map(Number).filter(i => (chosen[i][0] < centre[0] ? -1 : 1) === side).sort((a2, b2) => chosen[a2][1] - chosen[b2][1]);
+        if (!list.length) return;
+        const meanY = list.reduce((acc, i) => acc + chosen[i][1], 0) / list.length + (o.columnDy || 0) * u;
+        const y0 = meanY - (list.length - 1) / 2 * slot;
+        list.forEach((i, r) => { columnAt[i] = [centre[0] + side * colPx * u, y0 + r * slot]; });
+      });
+    }
+    const tags = o.tags === false ? [] : (o.tags || FIELD_TAGS);
+    const tagged = {};
+    let ti2 = 0;
+    chosen.forEach((c, i) => { if (!labelled[i] && ti2 < tags.length && i % (o.tagEvery || 3) === 1) tagged[i] = tags[ti2++]; });
     const markers = [], trails = [];
-    let li = 0;
     chosen.forEach((c, i) => {
       const r2 = rng('fm' + i + (o.seed || ''));
-      if (r2() < (o.trailFrac != null ? o.trailFrac : 0.5)) {
-        const a = r2() * 6.283, L = (o.trailMin || 4) + r2() * (o.trailVar || 9), bend = (r2() - 0.5) * 0.9;
-        const st = [c[0] + Math.cos(a) * L, c[1] + Math.sin(a) * L * 0.6];
+      let trail = null;
+      if (r2() < (o.trailFrac != null ? o.trailFrac : 0.55)) {
+        const a = r2() * 6.283, L = (o.trailMin || 5) + r2() * (o.trailVar || 11), bend = (r2() - 0.5) * 0.9;
+        const st = [c[0] + Math.cos(a) * L, c[1] + Math.sin(a) * L * 0.58];
         const mid = [(st[0] + c[0]) / 2 + Math.cos(a + 1.57) * L * bend * 0.4, (st[1] + c[1]) / 2 + Math.sin(a + 1.57) * L * bend * 0.25];
-        const endp = [c[0] + (st[0] - c[0]) * 0.16, c[1] + (st[1] - c[1]) * 0.16];
-        const tr = dottedPath(ctx, [st, mid, endp], { layer: grp.root, lite: true, arrow: false, spacingPx: 5.5, seed: 'tr' + i, refScale: o.refScale, sound: false });
-        trails.push(tr); markers.push({ trail: tr });
-      } else markers.push({});
-      const lab = (i % Math.round(labelEvery) === 0 && li < labels.length) ? labels[li++] : null;
-      const small = !lab && r2() < 0.55;
-      const east = c[0] > (o.flipX != null ? o.flipX : 60);
-      const m = activityMarker(ctx, c, { layer: grp.root, variant: small ? 'small' : 'normal', label: lab, dir: east ? (r2() < 0.5 ? 'nw' : 'w') : (r2() < 0.5 ? 'ne' : 'e'), seed: 'fld' + i + (o.seed || '') });
-      markers[i].marker = m;
+        const endp = [c[0] + (st[0] - c[0]) * 0.14, c[1] + (st[1] - c[1]) * 0.14];
+        trail = dottedPath(ctx, [st, mid, endp], { layer: grp.root, arrow: false, spacingPx: 5.2, seed: 'tr' + i, refScale: o.refScale, sound: false, kind: 'trail' });
+        trail.root.setAttribute('opacity', o.trailOpacity != null ? o.trailOpacity : 0.55);
+        trails.push(trail);
+      }
+      const isTag = !labelled[i] && !!tagged[i];
+      const lab = labelled[i] || tagged[i] || null;
+      let angle = null, leadPx = null;
+      const tfs = isTag ? (o.tagSize || 14) : fs;
+      if (lab && !columnAt[i]) {
+        const base = Math.atan2((c[1] - centre[1]), (c[0] - centre[0])) * 180 / Math.PI;
+        const p0 = [(c[0] - centre[0]) * rs, (c[1] - centre[1]) * rs];
+        const w = monoWidth(lab, tfs, 0.12) + 10;
+        let placed = null;
+        for (let tries = 0; tries < 14 && !placed; tries++) {
+          const ang = base + [0, 14, -14, 28, -28, 42, -42][tries % 7];
+          const len = (isTag ? 12 : 22) + Math.floor(tries / 7) * 20 + (o.leadPx || 0);
+          const ar = ang * Math.PI / 180, r0 = 10;
+          const k = [p0[0] + Math.cos(ar) * (r0 + len), p0[1] + Math.sin(ar) * (r0 + len)];
+          const west = Math.cos(ar) < -0.05;
+          const bx = west ? [k[0] - 12 - w, k[1] - tfs, k[0] - 7, k[1] + 5] : [k[0] + 7, k[1] - tfs, k[0] + 12 + w, k[1] + 5];
+          if (!boxes.some(b => overl(b, bx))) placed = { ang, len, bx };
+        }
+        if (!placed) { const ar = base; placed = { ang: ar, len: 22 + 52, bx: [0, 0, 0, 0] }; }
+        boxes.push(placed.bx); angle = placed.ang; leadPx = placed.len;
+      }
+      const small = (!lab || isTag) && r2() < 0.55;
+      const m = activityMarker(ctx, c, { layer: grp.root, variant: small ? 'small' : 'normal', label: lab, labelAt: columnAt[i], angle, leadPx, size: tfs, weight: isTag ? 400 : undefined, seed: 'fld' + i + (o.seed || ''), scale: o.scale, refScale: o.refScale });
+      markers.push({ marker: m, trail });
     });
     grp.markers = markers.map(x => x.marker); grp.trails = trails; grp.points = chosen;
     grp.drawOn = (tl, t, fo) => {
@@ -1039,32 +1151,65 @@
         const x = rank / Math.max(1, n - 1);
         const ti = t + span * Math.pow(x, fo.accel || 0.82) + (rng('fw' + i)() - 0.5) * 0.12;
         const mk2 = markers[i];
-        if (mk2.trail) end = Math.max(end, mk2.trail.drawOn(tl, Math.max(t, ti - 0.35), { speed: 1.6, events: false }));
+        if (mk2.trail) end = Math.max(end, mk2.trail.drawOn(tl, Math.max(t, ti - 0.4), { speed: 1.4, events: false }));
         end = Math.max(end, mk2.marker.drawOn(tl, ti, { speed: fo.speed || 1.5, scene: fo.scene, eventOffset: fo.eventOffset, events: fo.events }));
       });
       emit(ctx, fo, 'pencil-dots', t, span, { item: grp.id, trails: trails.length, bed: true });
       return end;
     };
-    grp.dim = (tl, t, to, dur, except) => { const ex = new Set((except || []).map(e => e.id || e)); grp.markers.concat(grp.trails).forEach(m => { if (!ex.has(m.id)) m.fade(tl, t, 1, to, dur || 0.6); }); return t + (dur || 0.6); };
+    grp.dim = (tl, t, to, dur, except) => { const ex = new Set((except || []).map(e => e.id || e)); grp.markers.concat(grp.trails).forEach(m => { if (!ex.has(m.id)) m.fade(tl, t, m.kind === 'trail' ? (o.trailOpacity != null ? o.trailOpacity : 0.55) : 1, to, dur || 0.6); }); return t + (dur || 0.6); };
     return grp;
+  }
+  // a loose pencil lasso: the padded convex hull of the points, smoothed, drawn a little past one turn
+  function lassoCmds(P, pad, seed, o) {
+    o = o || {};
+    const R = rng('ls' + seed);
+    let H = hull(P);
+    const c = P.reduce((a, p) => [a[0] + p[0] / P.length, a[1] + p[1] / P.length], [0, 0]);
+    let ring;
+    if (P.length <= (o.ellipseMax || 6)) {
+      // a few points: a loose ellipse along their principal axis
+      let sxx = 0, syy = 0, sxy = 0;
+      P.forEach(p => { const dx = p[0] - c[0], dy = p[1] - c[1]; sxx += dx * dx; syy += dy * dy; sxy += dx * dy; });
+      const th = 0.5 * Math.atan2(2 * sxy, sxx - syy), ct = Math.cos(th), st = Math.sin(th);
+      let ra = 0, rb = 0;
+      P.forEach(p => { const dx = p[0] - c[0], dy = p[1] - c[1]; ra = Math.max(ra, Math.abs(dx * ct + dy * st)); rb = Math.max(rb, Math.abs(-dx * st + dy * ct)); });
+      ra = ra * 1.12 + pad; rb = rb * 1.12 + pad;
+      ring = []; for (let i = 0; i < 16; i++) { const a = i / 16 * 6.283, ex = Math.cos(a) * ra, ey = Math.sin(a) * rb; ring.push([c[0] + ex * ct - ey * st, c[1] + ex * st + ey * ct]); }
+    } else if (H.length < 3) {
+      const r0 = Math.max(0, ...P.map(p => dist(p, c))) + pad;
+      ring = []; for (let i = 0; i < 10; i++) { const a = i / 10 * 6.283; ring.push([c[0] + Math.cos(a) * r0, c[1] + Math.sin(a) * r0 * (o.squash || 1)]); }
+    } else {
+      // rounded offset of the hull: arcs of radius pad round each vertex (a Minkowski sum with a disc)
+      const n = H.length;
+      let area = 0; for (let i = 0; i < n; i++) { const a = H[i], b = H[(i + 1) % n]; area += a[0] * b[1] - b[0] * a[1]; }
+      const sgn = area > 0 ? 1 : -1;
+      const nrm = (a, b) => { const dx = b[0] - a[0], dy = b[1] - a[1], l = Math.hypot(dx, dy) || 1; return [sgn * dy / l, -sgn * dx / l]; };
+      ring = [];
+      for (let i = 0; i < n; i++) {
+        const p = H[i], n1 = nrm(H[(i - 1 + n) % n], p), n2 = nrm(p, H[(i + 1) % n]);
+        let a1 = Math.atan2(n1[1], n1[0]), a2 = Math.atan2(n2[1], n2[0]);
+        let da = a2 - a1; while (da > Math.PI) da -= 2 * Math.PI; while (da < -Math.PI) da += 2 * Math.PI;
+        for (let k = 0; k <= 3; k++) { const a = a1 + da * k / 3; ring.push([p[0] + Math.cos(a) * pad, p[1] + Math.sin(a) * pad * (o.squash || 1)]); }
+      }
+      const cc = ring.reduce((acc, q) => [acc[0] + q[0] / ring.length, acc[1] + q[1] / ring.length], [0, 0]);
+      c[0] = cc[0]; c[1] = cc[1];
+    }
+    const pl = flatten(smoothCmds(ring, true), 10)[0], L = plLen(pl), M = 44;
+    const s0 = R() * L, over = (0.07 + R() * 0.06) * L, pts = [];
+    for (let i = 0; i <= M; i++) {
+      const sArc = s0 + (L + over) * i / M, q = pointAt(pl, sArc % L).p;
+      const g = 1 + (o.spiral != null ? o.spiral : 0.05) * (i / M - 0.5) + (R() - 0.5) * 0.03;
+      pts.push([c[0] + (q[0] - c[0]) * g, c[1] + (q[1] - c[1]) * g]);
+    }
+    return smoothCmds(pts, false);
   }
   function containment(ctx, pts, o) {
     o = o || {};
     const it = new Item(ctx, 'containment', o);
     const u = ctx.u(o);
     const P = pts.map(ctx.pt);
-    const H = hull(P);
-    const c = H.reduce((a, p) => [a[0] + p[0] / H.length, a[1] + p[1] / H.length], [0, 0]);
-    const pad = (o.padPx || 16) * u;
-    const R = rng('ct' + (o.seed || '') + f2(c[0]) + f2(c[1]));
-    const ring = [];
-    const n = Math.max(10, H.length * 3);
-    const angOf = p => Math.atan2(p[1] - c[1], p[0] - c[0]);
-    // sample the padded hull in angle order, a little more than one turn, loosely
-    const radAt = th => { let best = 0; for (const p of H) { const d = Math.hypot(p[0] - c[0], p[1] - c[1]); const da = Math.cos(angOf(p) - th); if (da > 0) best = Math.max(best, d * da); } return best + pad; };
-    const a0 = R() * 6.283, turn = 6.283 * (1.06 + R() * 0.06);
-    for (let i = 0; i <= n; i++) { const th = a0 + turn * i / n; const rr = radAt(th) * (1 + (R() - 0.5) * 0.08) * (1 + 0.05 * i / n); ring.push([c[0] + Math.cos(th) * rr, c[1] + Math.sin(th) * rr * (o.squash || 1)]); }
-    const rec = hand(ctx, it.root, smoothCmds(ring, false), { u, seed: 'ct' + (o.seed || ''), jit: 0.9, cls: o.lite ? 'skt-lite' : '' });
+    const rec = hand(ctx, it.root, lassoCmds(P, (o.padPx || 16) * u, (o.seed || '') + P.length, o), { u, seed: 'ct' + (o.seed || ''), jit: 0.7, cls: o.lite ? 'skt-lite' : (o.cls || '') });
     it.stroke(rec, { dur: o.dur || 1.1, ease: 'power1.inOut' });
     it.parts.loop = rec;
     return it;
@@ -1077,100 +1222,133 @@
     it.stroke(rec, { dur: 0.16, type: 'tick', ease: 'power2.out' });
     return rec;
   }
+  // Layout, in px at refScale 16 relative to the hot-work point on Roof 03 (+x right, +y down on screen).
+  // The drawn items stand on the roof on the side that faces the envelope edge (north-east of the point), so
+  // the south-west side stays clear for the envelope redraw (1.10) and the SZ3 valve at (+125, +40) stays free
+  // for its tag (1.9). The labels are one ticked schedule, lettered in the open paper east of the Production
+  // Hall, below the condition connection's path: it reads as a checklist, the way Act II's card will.
+  const SAFEGUARD_LAYOUT = {
+    header: { px: [360, -172], size: 24, size2: 19, lh: 26 },   // the hot-work label (activityMarker variant 'hot')
+    schedule: { px: [360, -108], pitch: 31, size: 22, textDx: 30 },
+    order: ['certificate', 'fireWatch', 'extinguisher', 'areaCleared', 'sprinklers'],
+    text: { certificate: 'CERTIFICATE', fireWatch: 'FIRE WATCH', extinguisher: 'EXTINGUISHER', areaCleared: 'AREA CLEARED', sprinklers: 'SPRINKLERS' },
+    certificate: { px: [-40, -7] },          // card centre, relative to the start of its schedule row
+    fireWatch: { px: [22, -52] },            // foot of the standing figure
+    extinguisher: { px: [120, 2] },          // foot of the icon
+    areaCleared: { rIn: 2.75, rOut: 3.45 },  // plan radii of the hatched ring round the point
+    sprinklers: { heads: [[62.5, 11.5], [67, 11.5]], padPlan: 1.35, minRatio: 0.5 },
+  };
   function safeguardItems(ctx, anchor, o) {
     o = o || {};
     anchor = anchor || 'roof03Centre';
-    const refScale = o.refScale || 16, u = 1 / refScale;
+    const refScale = o.refScale || 16, u = ctx.mode === 'world' ? 1 / refScale : 1;
+    const sc = { scale: o.scale || 'world', refScale };
+    const L = Object.assign({}, SAFEGUARD_LAYOUT, o.layout || {});
+    const SC = Object.assign({}, SAFEGUARD_LAYOUT.schedule, L.schedule || {});
+    const TX = Object.assign({}, SAFEGUARD_LAYOUT.text, L.text || {});
     const grp = new Group(ctx, 'safeguards', o);
     const A = ctx.plan(anchor);
     const W0 = ctx.pt(anchor);
-    const at = (dxPx, dyPx) => [W0[0] + dxPx * u, W0[1] + dyPx * u];
-    const fs = o.size || 15;
+    const at = px => [W0[0] + px[0] * u, W0[1] + px[1] * u];
+    const onRoof = d => iso(A[0] + d[0], A[1] + d[1], A[2] || 0);
+    const fs = o.size || SC.size;
+    const order = L.order || SAFEGUARD_LAYOUT.order;
+    const rowIndex = k => Math.max(0, order.indexOf(k));
     const items = {};
-    const mkLabel = (it, g, text, x, y, anchorSide) => {
-      const lb = letters(ctx, g, text, anchorSide === 'end' ? x : x + 20, y, { size: fs, weight: 500, anchor: anchorSide || 'start', seed: 'sg' + text });
+    // one schedule row: lettered, then ticked (the tick sits in the column, the text after it)
+    const row = (it, key) => {
+      const i = rowIndex(key);
+      const g = pxAt(ctx, it.root, at([SC.px[0], SC.px[1] + i * SC.pitch]), sc);
+      const r = rng('sgrow' + key);
+      const plate = mk('rect', { class: 'skt-occ', x: -6, y: -fs - 2, width: SC.textDx + monoWidth(TX[key], fs, 0.12) + 14, height: fs + 10 }, g);
+      it.fadeIn(plate, { dur: 0.01 });
+      const lb = letters(ctx, g, TX[key], SC.textDx, 0, { size: fs, weight: 500, seed: 'sg' + TX[key], rot: (r() - 0.5) * 0.5, irr: 0.04 });
       it.wipe(lb);
-      const tx = anchorSide === 'end' ? lb.x0 - 14 : x + 6;
-      tickAfter(ctx, it, g, tx, y - fs * 0.38, { seed: text, s: 1.05 });
-      return lb;
+      tickAfter(ctx, it, g, 6, -fs * 0.36, { seed: TX[key], s: 1.15 });
+      it.label = lb; it.row = g;
+      return g;
     };
-    // 1 CERTIFICATE: a small card with typed lines and a seal
-    {
-      const it = new Item(ctx, 'safeguard-certificate', { layer: grp.root });
-      const lay = (o.layout && o.layout.certificate) || [-250, -118];
-      const g = pxAt(ctx, it.root, at(lay[0], lay[1]));
-      const card = hand(ctx, g, 'M-22 -15L22 -15L22 15L-22 15Z', { seed: 'cert', jit: 0.5, occ: true, ext: true, extMin: 20 });
-      const lines = hand(ctx, g, 'M-15 -7L10 -7M-15 -1L14 -1M-15 5L2 5', { seed: 'certl', jit: 0.4, cls: 'skt-lite', over: false });
-      const seal = hand(ctx, g, handCircleCmds(13, 7, 4, 'certs', { spiral: 0.02 }), { seed: 'certs', jit: 0.3, over: false, cls: 'skt-fine' });
-      it.stroke(card, { dur: 0.3 }); it.stroke(lines, { dur: 0.25 }); it.stroke(seal, { dur: 0.12 });
-      it.label = mkLabel(it, g, 'CERTIFICATE', -24, 38);
-      items.certificate = it; grp.child(it);
-    }
-    // 2 FIRE WATCH: one standing figure on the roof
-    {
-      const it = new Group(ctx, 'safeguard-firewatch', { layer: grp.root });
-      const fp = (o.layout && o.layout.fireWatch) || [-3.6, 5.8];
-      const fw = figure(ctx, { plan: [A[0] + fp[0], A[1] + fp[1], A[2] || 0] }, { layer: it.root, pose: 'standing', heightPx: o.figureHeightPx || 26 * refScale / 7.1, refScale, seed: 'firewatch', tone: true });
-      it.child(fw);
-      const lab = new Item(ctx, 'safeguard-firewatch-label', { layer: it.root });
-      const g = pxAt(ctx, lab.root, iso(A[0] + fp[0], A[1] + fp[1], A[2] || 0));
-      lab.label = mkLabel(lab, g, 'FIRE WATCH', -26, -30, 'end');
-      it.child(lab, { gap: 0.05 });
-      it.figure = fw; items.fireWatch = it; grp.child(it, { stagger: o.stagger || 0.6 });
-    }
-    // 3 EXTINGUISHER: a line icon standing on the roof
-    {
-      const it = new Item(ctx, 'safeguard-extinguisher', { layer: grp.root });
-      const ep = (o.layout && o.layout.extinguisher) || [4.4, -3.2];
-      const g = pxAt(ctx, it.root, iso(A[0] + ep[0], A[1] + ep[1], A[2] || 0));
-      const body = hand(ctx, g, smoothCmds([[-6, 0], [-6.4, -20], [-5, -25], [0, -27], [5, -25], [6.4, -20], [6, 0]], false).concat([['Z', []]]), { seed: 'ext', jit: 0.4, occ: true });
-      const valve = hand(ctx, g, 'M-2 -27L-2 -31L3 -31L3 -27M-3 -33L9 -35M3 -30C10 -29 11 -22 9 -12', { seed: 'extv', jit: 0.3, over: false, cls: 'skt-fine' });
-      const band = hand(ctx, g, 'M-6 -9L6 -9', { seed: 'extb', jit: 0.25, over: false, cls: 'skt-lite' });
-      it.stroke(body, { dur: 0.3 }); it.stroke(valve, { dur: 0.25 }); it.stroke(band, { dur: 0.1 });
-      it.label = mkLabel(it, g, 'EXTINGUISHER', 14, -8);
-      items.extinguisher = it; grp.child(it, { stagger: o.stagger || 0.6 });
-    }
-    // 4 AREA CLEARED: a hatched ring drawn on the roof plane around the hot-work point
-    {
-      const it = new Item(ctx, 'safeguard-area', { layer: grp.root });
-      const rIn = o.ringIn || 2.55, rOut = o.ringOut || 3.35;
-      const ell = r => { const pts = []; for (let i = 0; i < 40; i++) { const a = i / 40 * 6.283; pts.push(iso(A[0] + Math.cos(a) * r, A[1] + Math.sin(a) * r, A[2] || 0)); } return pts; };
-      const outer = ell(rOut), inner = ell(rIn);
-      const clipD = polyD(outer, true) + polyD(inner.slice().reverse(), true);
-      const hc = hatch(ctx, it.root, outer, { u, spacing: 4.2, seed: 'area', clipD, evenodd: true, dir: -1 });
-      const ro = hand(ctx, it.root, handCircleCmds(0, 0, 1, 'areao', { n: 20, spiral: 0.02, over: 0.3 }).map(([c, a]) => [c, a.map((v, i) => i % 2 ? v : v)]), { u, seed: 'x', jit: 0 });
-      ro.main.remove(); if (ro.over) ro.over.remove();
-      // build the rings in the roof plane: unit circle points mapped through iso
-      const ringCmds = (r, sd) => { const R2 = rng('ar' + sd); const a0 = R2() * 6.283, tot = 6.283 + 0.35, pts = []; for (let i = 0; i <= 22; i++) { const a = a0 + tot * i / 22, rr = r * (1 + 0.025 * Math.sin(3 * a) + 0.03 * (i / 22 - 0.5)); pts.push(iso(A[0] + Math.cos(a) * rr, A[1] + Math.sin(a) * rr, A[2] || 0)); } return smoothCmds(pts, false); };
-      const o1 = hand(ctx, it.root, ringCmds(rOut, 'o'), { u, seed: 'areaO', jit: 0.4 });
-      const i1 = hand(ctx, it.root, ringCmds(rIn, 'i'), { u, seed: 'areaI', jit: 0.35, cls: 'skt-fine', over: false });
-      it.stroke(o1, { dur: 0.42 }); it.stroke(i1, { dur: 0.36 }); it.draw(hc, 0, { dur: 0.45, type: 'hatch' });
-      const lp = (o.layout && o.layout.areaLabel) || [3.35, 1.6];
-      const g = pxAt(ctx, it.root, iso(A[0] + lp[0], A[1] + lp[1], A[2] || 0));
-      const lead = hand(ctx, g, 'M0 0L26 30L32 30', { seed: 'areal', jit: 0.4, cls: 'skt-lite', over: false });
-      it.stroke(lead, { dur: 0.18 });
-      it.label = mkLabel(it, g, 'AREA CLEARED', 34, 30 + fs * 0.34);
-      items.areaCleared = it; grp.child(it, { stagger: o.stagger || 0.6 });
-    }
-    // 5 SPRINKLERS: a loose ring round a few of Roof 03's sprinkler heads, ticked
-    {
-      const it = new Item(ctx, 'safeguard-sprinklers', { layer: grp.root });
-      const heads = (o.heads || [[71.5, 11.5], [71.5, 17], [67, 11.5]]).map(h => iso(h[0], h[1], A[2] || 12));
-      const loop = containment(ctx, heads, { layer: it.root, padPx: 11, refScale, seed: 'sprk', squash: 1 });
-      it.fn((tl, t0) => loop.drawOn(tl, t0, { events: false }), { dur: loop.duration, type: 'pencil' });
-      const top = heads.reduce((a, b) => (b[1] < a[1] ? b : a));
-      const g = pxAt(ctx, it.root, top);
-      const lead = hand(ctx, g, 'M12 -12L30 -34L36 -34', { seed: 'sprl', jit: 0.4, cls: 'skt-lite', over: false });
-      it.stroke(lead, { dur: 0.18 });
-      it.label = mkLabel(it, g, 'SPRINKLERS', 38, -34 + fs * 0.34);
-      it.loop = loop;
-      items.sprinklers = it; grp.child(it, { stagger: o.stagger || 0.6 });
-    }
+    const build = {
+      // CERTIFICATE: a small card with typed lines and a seal, in front of its row
+      certificate() {
+        const it = new Item(ctx, 'safeguard-certificate', { layer: grp.root });
+        const i = rowIndex('certificate'), c = L.certificate.px;
+        const g = pxAt(ctx, it.root, at([SC.px[0] + c[0], SC.px[1] + i * SC.pitch + c[1]]), sc);
+        const card = hand(ctx, g, 'M-22 -15L22 -15L22 15L-22 15Z', { seed: 'cert', jit: 0.5, occ: true, ext: true, extMin: 20 });
+        const lines = hand(ctx, g, 'M-15 -7L10 -7M-15 -1L14 -1M-15 5L2 5', { seed: 'certl', jit: 0.4, cls: 'skt-lite', over: false });
+        const seal = hand(ctx, g, handCircleCmds(13, 7, 4, 'certs', { spiral: 0.02 }), { seed: 'certs', jit: 0.3, over: false, cls: 'skt-fine' });
+        it.stroke(card, { dur: 0.3 }); it.stroke(lines, { dur: 0.25 }); it.stroke(seal, { dur: 0.12 });
+        row(it, 'certificate');
+        return it;
+      },
+      // FIRE WATCH: one standing figure on the roof, watching the work
+      fireWatch() {
+        const it = new Group(ctx, 'safeguard-firewatch', { layer: grp.root });
+        const fw = figure(ctx, at(L.fireWatch.px), { layer: it.root, pose: 'standing', heightPx: o.figureHeightPx || 28 * refScale / 7.1, refScale, seed: 'firewatch', tone: true });
+        it.child(fw);
+        const lab = new Item(ctx, 'safeguard-firewatch-label', { layer: it.root });
+        row(lab, 'fireWatch');
+        it.child(lab, { gap: 0.05 });
+        it.figure = fw; it.label = lab.label;
+        return it;
+      },
+      // EXTINGUISHER: a line icon standing on the roof
+      extinguisher() {
+        const it = new Item(ctx, 'safeguard-extinguisher', { layer: grp.root });
+        const g = pxAt(ctx, it.root, at(L.extinguisher.px), sc);
+        const body = hand(ctx, g, smoothCmds([[-6, 0], [-6.4, -20], [-5, -25], [0, -27], [5, -25], [6.4, -20], [6, 0]], false).concat([['Z', []]]), { seed: 'ext', jit: 0.4, occ: true });
+        const valve = hand(ctx, g, 'M-2 -27L-2 -31L3 -31L3 -27M-3 -33L9 -35M3 -30C10 -29 11 -22 9 -12', { seed: 'extv', jit: 0.3, over: false, cls: 'skt-fine' });
+        const band = hand(ctx, g, 'M-6 -9L6 -9', { seed: 'extb', jit: 0.25, over: false, cls: 'skt-lite' });
+        it.stroke(body, { dur: 0.3 }); it.stroke(valve, { dur: 0.25 }); it.stroke(band, { dur: 0.1 });
+        row(it, 'extinguisher');
+        return it;
+      },
+      // AREA CLEARED: a hatched ring drawn on the roof plane around the hot-work point
+      areaCleared() {
+        const it = new Item(ctx, 'safeguard-area', { layer: grp.root });
+        const rIn = L.areaCleared.rIn, rOut = L.areaCleared.rOut;
+        const ell = r => { const pts = []; for (let i = 0; i < 40; i++) { const a = i / 40 * 6.283; pts.push(onRoof([Math.cos(a) * r, Math.sin(a) * r])); } return pts; };
+        const outer = ell(rOut), inner = ell(rIn);
+        const clipD = polyD(outer, true) + polyD(inner.slice().reverse(), true);
+        const hc = hatch(ctx, it.root, outer, { u, spacing: 4.2, seed: 'area', clipD, evenodd: true, dir: -1 });
+        const ringCmds = (r, sd) => { const R2 = rng('ar' + sd); const a0 = R2() * 6.283, tot = 6.283 + 0.35, pts = []; for (let i = 0; i <= 22; i++) { const a = a0 + tot * i / 22, rr = r * (1 + 0.02 * Math.sin(3 * a) + 0.025 * (i / 22 - 0.5)); pts.push(onRoof([Math.cos(a) * rr, Math.sin(a) * rr])); } return smoothCmds(pts, false); };
+        const o1 = hand(ctx, it.root, ringCmds(rOut, 'o'), { u, seed: 'areaO', jit: 0.4, cls: 'skt-fine' });
+        const i1 = hand(ctx, it.root, ringCmds(rIn, 'i'), { u, seed: 'areaI', jit: 0.35, cls: 'skt-lite', over: false });
+        it.stroke(o1, { dur: 0.42 }); it.stroke(i1, { dur: 0.36 }); it.draw(hc, 0, { dur: 0.45, type: 'hatch' });
+        row(it, 'areaCleared');
+        it.parts.ring = { outer: o1, inner: i1, hatch: hc };
+        return it;
+      },
+      // SPRINKLERS: a loose ring round a row of Roof 03's sprinkler heads, ticked
+      // (the loop is drawn on the roof plane, like the area ring, so it sits on the roof grid)
+      sprinklers() {
+        const it = new Item(ctx, 'safeguard-sprinklers', { layer: grp.root });
+        const H = L.sprinklers.heads, z = A[2] || 12;
+        const cx = H.reduce((a, h) => a + h[0], 0) / H.length, cy = H.reduce((a, h) => a + h[1], 0) / H.length;
+        const pad = L.sprinklers.padPlan || 2.1;
+        let ax = Math.max(...H.map(h => Math.abs(h[0] - cx))) + pad, ay = Math.max(...H.map(h => Math.abs(h[1] - cy))) + pad;
+        const minR = L.sprinklers.minRatio || 0.5;
+        if (ay < ax * minR) ay = ax * minR; if (ax < ay * minR) ax = ay * minR;
+        const R2 = rng('sprk'), a0 = 2.2 + R2() * 0.6, tot = 6.283 + 0.45, pts = [];
+        for (let i = 0; i <= 26; i++) { const a = a0 + tot * i / 26, f = 1 + 0.025 * Math.sin(2 * a + 1.3) + 0.04 * (i / 26 - 0.5); pts.push(iso(cx + Math.cos(a) * ax * f, cy + Math.sin(a) * ay * f, z)); }
+        const loop = hand(ctx, it.root, smoothCmds(pts, false), { u, seed: 'sprkloop', jit: 0.45, cls: 'skt-fine' });
+        it.stroke(loop, { dur: 0.6, ease: 'power1.inOut' });
+        row(it, 'sprinklers');
+        it.loop = loop; it.heads = H.map(h => iso(h[0], h[1], z)); it.centre = iso(cx, cy, z);
+        return it;
+      },
+    };
+    order.forEach((k, i) => { const it = build[k](); items[k] = it; grp.child(it, i === 0 ? {} : { stagger: o.stagger || 0.6 }); });
     grp.items = items;
+    grp.ticks = order.map(k => items[k].label);
+    grp.schedule = { origin: at(SC.px), pitch: SC.pitch * u, size: fs };
     return grp;
   }
 
   // ------------------------------------------------------------ 7. the condition connection (and its fray)
+  // Dots are tiny subpaths drawn with DrawSVG from 0 percent only: Chromium drops multi-subpath dash
+  // patterns when the dash offset is negative (a DrawSVG range such as '40% 100%'), so the fray never
+  // uses ranges. The dots at the break are separate elements that drift and fade.
   function conditionConnection(ctx, from, to, o) {
     o = o || {};
     const it = new Item(ctx, 'connection', o);
@@ -1180,121 +1358,179 @@
     const M = [(A[0] + B[0]) / 2 + nx * bow, (A[1] + B[1]) / 2 + ny * bow];
     const pl = flatten(smoothCmds([A, M, B], false), 24)[0], L = plLen(pl);
     const sp = (o.spacingPx || 6.5) * u, k = o.breakAt != null ? o.breakAt : 0.52;
+    const gapHalf = (o.gapPx || 44) * u / 2;
     const R = rng('cc' + f2(A[0]) + f2(B[0]));
     const dl = 0.35 * u, jn = 0.6 * u;
-    const partA = [], partB = [];
+    const partA = [], partB = [], gap = [];
     for (let s = (o.startGapPx || 5) * u; s <= L - (o.endGapPx || 9) * u; s += sp * (0.9 + R() * 0.2)) {
       const q = pointAt(pl, s), j = (R() - 0.5) * 2 * jn;
       const p = [q.p[0] - q.t[1] * j, q.p[1] + q.t[0] * j];
-      (s < k * L ? partA : partB).push({ p, t: q.t, s });
+      const d = { p, t: q.t, s };
+      if (Math.abs(s - k * L) <= gapHalf) gap.push(d); else (s < k * L ? partA : partB).push(d);
     }
     const dOf = arr => arr.map(({ p, t }) => 'M' + f2(p[0]) + ' ' + f2(p[1]) + 'L' + f2(p[0] + t[0] * dl) + ' ' + f2(p[1] + t[1] * dl)).join('');
-    const cls = 'skt-d' + (o.lite !== false ? ' skt-lite' : '');
+    const cls = 'skt-d' + (o.lite ? ' skt-lite' : ' skt-thin');
     const gA = mk('g', {}, it.root), gB = mk('g', { transform: 'rotate(0 ' + f2(B[0]) + ' ' + f2(B[1]) + ')' }, it.root);
     const elA = mk('path', { class: cls, d: dOf(partA) }, gA), elB = mk('path', { class: cls, d: dOf(partB) }, gB);
-    // loose dots at the break: copies of the dots nearest the break, used only by fray()
-    const nLoose = o.loose || 3;
-    const looseSrc = partA.slice(-nLoose).concat(partB.slice(0, nLoose));
-    const loose = looseSrc.map(({ p, t }, i) => mk('path', { class: cls, d: 'M' + f2(p[0]) + ' ' + f2(p[1]) + 'L' + f2(p[0] + t[0] * dl) + ' ' + f2(p[1] + t[1] * dl), opacity: 0, transform: 'translate(0 0)' }, i < nLoose ? gA : gB));
-    // knot at the envelope end, small dot at the activity end
-    const kg = pxAt(ctx, it.root, A);
+    const gapEls = gap.map((d, i) => mk('path', { class: cls, d: dOf([d]), transform: 'translate(0 0)' }, d.s < k * L ? gA : gB));
+    // knot at the envelope end with the condition number
+    const kg = pxAt(ctx, it.root, A, o);
     const knot = hand(ctx, kg, handCircleCmds(0, 0, 3.4, 'knot' + f2(A[0]), { spiral: 0.02 }), { seed: 'knot', jit: 0.3, over: false, cls: 'skt-fine' });
     it.stroke(knot, { dur: 0.14 });
     let lab = null;
-    if (o.label !== false) { lab = letters(ctx, kg, o.label || '4.3', 7, -7, { size: o.labelSize || 13, weight: 500, seed: 'cclab' }); it.wipe(lab, { dur: 0.25 }); }
-    const durA = clamp(L * k / u / (o.pacePx || 340), 0.3, 2.5), durB = clamp(L * (1 - k) / u / (o.pacePx || 340), 0.3, 2.5);
-    it.draw(elA, 0, { dur: durA, type: 'pencil-dots', ease: 'none', advance: 1 });
-    it.draw(elB, 0, { dur: durB, type: null, ease: 'none', advance: 1 });
-    it.parts = { a: elA, b: elB, gA, gB, loose, knot, label: lab };
+    if (o.label !== false) { lab = letters(ctx, kg, o.label || '4.3', 7, -7, { size: o.labelSize || 16, weight: 500, seed: 'cclab' }); it.wipe(lab, { dur: 0.25 }); }
+    const pace = o.pacePx || 340;
+    const dA = clamp((partA.length ? partA[partA.length - 1].s : 0) / u / pace, 0.2, 2.5);
+    const dB = clamp(((partB.length ? partB[partB.length - 1].s - partB[0].s : 0)) / u / pace, 0.2, 2.5);
+    it.draw(elA, 0, { dur: dA, type: 'pencil-dots', ease: 'none', advance: 1 });
+    gapEls.forEach(el => it.draw(el, 0, { dur: 0.04, type: null, ease: 'none', advance: 1, pace }));
+    it.draw(elB, 0, { dur: dB, type: null, ease: 'none', advance: 1 });
+    it.parts = { a: elA, b: elB, gA, gB, gap: gapEls, knot, label: lab };
     it.breakPoint = pointAt(pl, k * L).p; it.polyline = pl;
-    const fracA = partA.length ? partA[partA.length - 1].s : 1, fracB0 = partB.length ? partB[0].s : L;
+    const Lb = Math.max(1e-6, dist(it.breakPoint, B));
+    const frayed = (fo) => {
+      const drift = (fo.driftPx || 6) * u, ang = (drift / Lb) * 180 / Math.PI * (fo.side || 1);
+      return {
+        rot: 'rotate(' + f2(ang) + ' ' + f2(B[0]) + ' ' + f2(B[1]) + ')',
+        dots: gapEls.map((el, i) => { const r = rng('ls' + i + f2(A[0])); return 'translate(' + f2((r() - 0.5) * 8 * u) + ' ' + f2((r() - 0.3) * 7 * u) + ')'; }),
+      };
+    };
     it.fray = (tl, t, fo) => {
       fo = fo || {};
-      const dur = fo.dur || 1.8, gap = (fo.gapPx || 26) * u, drift = (fo.driftPx || 6) * u;
-      const cutA = clamp((k * L - gap / 2 - (partA[0] ? partA[0].s : 0)) / Math.max(1e-6, fracA - (partA[0] ? partA[0].s : 0)), 0, 1);
-      const cutB = clamp((k * L + gap / 2 - fracB0) / Math.max(1e-6, (partB.length ? partB[partB.length - 1].s : L) - fracB0), 0, 1);
-      tl.fromTo(elA, { drawSVG: '0% 100%' }, { drawSVG: '0% ' + (cutA * 100).toFixed(2) + '%', duration: dur, ease: 'power2.inOut', immediateRender: false }, t);
-      tl.fromTo(elB, { drawSVG: '0% 100%' }, { drawSVG: (cutB * 100).toFixed(2) + '% 100%', duration: dur, ease: 'power2.inOut', immediateRender: false }, t);
-      const Lb = Math.max(1e-6, dist(it.breakPoint, B)), ang = (drift / Lb) * 180 / Math.PI * (fo.side || 1);
-      tl.fromTo(gB, { attr: { transform: 'rotate(0 ' + f2(B[0]) + ' ' + f2(B[1]) + ')' } }, { attr: { transform: 'rotate(' + f2(ang) + ' ' + f2(B[0]) + ' ' + f2(B[1]) + ')' }, duration: dur * 1.2, ease: 'sine.inOut', immediateRender: false }, t + dur * 0.2);
-      loose.forEach((el, i) => {
-        const r = rng('ls' + i + f2(A[0]));
-        const dx = (r() - 0.5) * 7 * u, dy = (r() - 0.2) * 6 * u;
-        tl.fromTo(el, { opacity: 0 }, { opacity: 1, duration: 0.01, immediateRender: false }, t + i * 0.04);
-        tl.fromTo(el, { attr: { transform: 'translate(0 0)' } }, { attr: { transform: 'translate(' + f2(dx) + ' ' + f2(dy) + ')' }, duration: dur * 0.9, ease: 'sine.out', immediateRender: false }, t + i * 0.04);
-        tl.fromTo(el, { opacity: 1 }, { opacity: 0, duration: dur * 0.6, ease: 'power1.in', immediateRender: false }, t + dur * 0.35 + i * 0.05);
+      const dur = fo.dur || 1.8, F = frayed(fo), mid = (gapEls.length - 1) / 2;
+      gapEls.forEach((el, i) => {
+        const d0 = t + Math.abs(i - mid) * 0.07;
+        tl.fromTo(el, { attr: { transform: 'translate(0 0)' } }, { attr: { transform: F.dots[i] }, duration: dur * 0.8, ease: 'sine.out', immediateRender: false }, d0);
+        tl.fromTo(el, { opacity: 1 }, { opacity: 0, duration: dur * 0.55, ease: 'power1.in', immediateRender: false }, d0 + dur * 0.25);
       });
+      tl.fromTo(gB, { attr: { transform: 'rotate(0 ' + f2(B[0]) + ' ' + f2(B[1]) + ')' } }, { attr: { transform: F.rot }, duration: dur * 1.2, ease: 'sine.inOut', immediateRender: false }, t + dur * 0.2);
+      it._frayOpts = fo;
       emit(ctx, fo, 'fray', t, dur, { item: it.id, silent: true });
       return t + dur * 1.4;
     };
     it.rejoin = (tl, t, fo) => {
       fo = fo || {};
-      const dur = fo.dur || 1.2;
-      tl.fromTo(elA, { drawSVG: '0% 0%' }, { drawSVG: '0% 100%', duration: dur, ease: 'power2.inOut', immediateRender: false }, t);
-      tl.fromTo(elB, { drawSVG: '100% 100%' }, { drawSVG: '0% 100%', duration: dur, ease: 'power2.inOut', immediateRender: false }, t);
-      tl.fromTo(gB, { attr: { transform: gB.getAttribute('transform') } }, { attr: { transform: 'rotate(0 ' + f2(B[0]) + ' ' + f2(B[1]) + ')' }, duration: dur, ease: 'sine.inOut', immediateRender: false }, t);
+      const dur = fo.dur || 1.2, F = frayed(it._frayOpts || fo);
+      gapEls.forEach((el, i) => {
+        tl.fromTo(el, { attr: { transform: F.dots[i] } }, { attr: { transform: 'translate(0 0)' }, duration: dur, ease: 'sine.inOut', immediateRender: false }, t);
+        tl.fromTo(el, { opacity: 0 }, { opacity: 1, duration: dur * 0.6, ease: 'power1.out', immediateRender: false }, t);
+      });
+      tl.fromTo(gB, { attr: { transform: F.rot } }, { attr: { transform: 'rotate(0 ' + f2(B[0]) + ' ' + f2(B[1]) + ')' }, duration: dur, ease: 'sine.inOut', immediateRender: false }, t);
       return t + dur;
     };
     return it;
   }
 
-  // ------------------------------------------------------------ 8. envelope redrawn inward near Roof 03
+  // The accepted envelope is redrawn locally so the hot-work point ends up just outside it. Roof 03 sits about
+  // 31 world units inside the demo envelope, so a few px inward cannot do it; two modes:
+  //  'zone' (default): the envelope is redrawn to leave out Sprinkler Zone 3, the zone that has just gone
+  //    offline: a rounded offset (marginPx) of the zone's roofs (Roof 03 and Production Hall 2) on the side that
+  //    faces the envelope centre, joined to the envelope edge by two lines along the zone's own sides, with round
+  //    fillets where it meets the old contour. Roof 03, its safeguards, the valve and its tag all fall outside.
+  //  'dent': a smooth membrane dent toward the envelope centre (the demo's Gaussian bulge turned inward), its
+  //    deepest point marginPx inside the target.
+  // Drawn quietly in the envelope's own two passes; the old section fades to a faint ghost through a mask on the
+  // site's graphite envelope.
+  function zoneHull() {
+    const G = (window.SITE_MODEL || {}).planGeometry || {};
+    const ph = G.productionHall || { y0: 8, y1: 36, h: 12 }, rz = (G.roofZones || {})['03'] || { x0: 60, x1: 74 }, p2 = G.productionHall2 || { x0: 74, x1: 94, y0: 8, y1: 30, h: 9 };
+    const pts = [[rz.x0, ph.y0, ph.h], [rz.x1, ph.y0, ph.h], [rz.x1, ph.y1, ph.h], [rz.x0, ph.y1, ph.h], [p2.x0, p2.y0, p2.h], [p2.x1, p2.y0, p2.h], [p2.x1, p2.y1, p2.h], [p2.x0, p2.y1, p2.h]].map(q => iso(q[0], q[1], q[2]));
+    return hull(pts);
+  }
   function envelopeRedraw(ctx, o) {
     o = o || {};
-    const S = SK();
     const it = new Item(ctx, 'envelope-redraw', o);
     const env = (window.SITE_MODEL || {}).envelope;
     if (!env) throw new Error('SketchKit.envelopeRedraw: SITE_MODEL.envelope missing');
-    const P = env.pointsWorld, N = env.normalsWorld, n = P.length;
+    const P = env.pointsWorld, n = P.length;
     const refScale = o.refScale || 10.5, u = 1 / refScale;
     const target = ctx.pt(o.target || 'roof03Centre');
-    const s = [0]; for (let i = 1; i < n; i++) s[i] = s[i - 1] + dist(P[i - 1], P[i]);
-    const Ltot = s[n - 1] + dist(P[n - 1], P[0]);
-    let c = 0, best = Infinity;
-    for (let i = 0; i < n; i++) { const d = dist(P[i], target); if (d < best) { best = d; c = i; } }
-    const inward = [-N[c][0], -N[c][1]];
-    const proj = (target[0] - P[c][0]) * inward[0] + (target[1] - P[c][1]) * inward[1];
-    const depth = o.depth != null ? o.depth : (o.depthPx != null ? o.depthPx * u : proj + (o.marginPx != null ? o.marginPx : 18) * u);
-    const sigma = o.sigma || Math.max(7, depth * (o.width || 0.6));
-    const ds = i => { let d = s[i] - s[c]; if (d > Ltot / 2) d -= Ltot; if (d < -Ltot / 2) d += Ltot; return d; };
-    const win = [];
-    for (let i = 0; i < n; i++) { const d = ds(i); if (Math.abs(d) <= 3.2 * sigma) win.push({ i, d }); }
-    win.sort((a, b) => a.d - b.d);
-    const disp = win.map(({ i, d }) => { const w = Math.exp(-d * d / (2 * sigma * sigma)); return { i, w, p: [P[i][0] - N[i][0] * depth * w, P[i][1] - N[i][1] * depth * w] }; });
-    const newPts = disp.map(q => q.p);
-    const oldPts = disp.filter(q => q.w > 0.03).map(q => P[q.i]);
-    const construct = hand(ctx, it.root, lineCmds(newPts), { u: 1, seed: 'envc2', jit: 0.5, cls: 'skt-env-c', over: false });
-    const firm = hand(ctx, it.root, lineCmds(newPts), { u: 1, seed: 'envf2', jit: 0.2, cls: 'skt-env', over: false });
-    // the old section is not erased away: it stays as a ghost, the way a redrawn pencil line leaves one
+    const C = env.centreWorld || [16.454, 46.5];
+    const dl0 = dist(C, target) || 1, dir = [(target[0] - C[0]) / dl0, (target[1] - C[1]) / dl0];
+    const segL = P.map((q, i) => dist(q, P[(i + 1) % n])), perim = segL.reduce((a, b) => a + b, 0);
+    // first hit of a ray on the contour: { i, t, p } (segment index, fraction, point)
+    const rayHit = (a, d) => { let best = null; for (let i = 0; i < n; i++) { const b0 = P[i], b1 = P[(i + 1) % n]; const t = segX(a, [a[0] + d[0] * 1e4, a[1] + d[1] * 1e4], b0, b1); if (t != null && (!best || t < best.tr)) { const q = [a[0] + d[0] * 1e4 * t, a[1] + d[1] * 1e4 * t]; best = { i, t: dist(b0, q) / (segL[i] || 1), p: q, tr: t }; } } return best; };
+    const E = (rayHit(C, dir) || { p: target }).p;
+    const mode = o.mode || (o.depthPx != null ? 'dent' : 'zone');
+    let newPts, ghostPts, Q;
+    if (mode === 'zone') {
+      // the zone's hull, offset outward by the margin with round corners, walked on the side facing the centre
+      const H = o.zone ? o.zone.map(ctx.pt) : zoneHull();
+      const m = (o.marginPx != null ? o.marginPx : 54) * u, nH = H.length;
+      let area = 0; for (let i = 0; i < nH; i++) { const a = H[i], b = H[(i + 1) % nH]; area += a[0] * b[1] - b[0] * a[1]; }
+      const sgn = area > 0 ? 1 : -1;
+      const nrm = (a, b) => { const dx = b[0] - a[0], dy = b[1] - a[1], l = Math.hypot(dx, dy) || 1; return [sgn * dy / l, -sgn * dx / l]; };
+      // edges facing away from the exit side (outward normal against dir) form the redrawn line
+      const faces = H.map((a, i) => { const b = H[(i + 1) % nH], nn = nrm(a, b); return { i, a, b, nn, back: nn[0] * dir[0] + nn[1] * dir[1] < 0.2 }; });
+      let s0 = faces.findIndex((f, i) => f.back && !faces[(i - 1 + nH) % nH].back);
+      if (s0 < 0) s0 = 0;
+      const chain = []; for (let k = 0; k < nH; k++) { const f = faces[(s0 + k) % nH]; if (!f.back) break; chain.push(f); }
+      const pts = [];
+      chain.forEach((f, k) => {
+        pts.push([f.a[0] + f.nn[0] * m, f.a[1] + f.nn[1] * m], [f.b[0] + f.nn[0] * m, f.b[1] + f.nn[1] * m]);
+        const g = chain[k + 1]; if (!g) return;
+        let a1 = Math.atan2(f.nn[1], f.nn[0]), a2 = Math.atan2(g.nn[1], g.nn[0]), da = a2 - a1;
+        while (da > Math.PI) da -= 2 * Math.PI; while (da < -Math.PI) da += 2 * Math.PI;
+        for (let j = 1; j < 6; j++) { const a = a1 + da * j / 6; pts.push([f.b[0] + Math.cos(a) * m, f.b[1] + Math.sin(a) * m]); }
+      });
+      // the two sides run on to the old contour, parallel to the first and last redrawn edges
+      const first = chain[0], last = chain[chain.length - 1];
+      const d1 = [first.a[0] - first.b[0], first.a[1] - first.b[1]], l1 = Math.hypot(d1[0], d1[1]) || 1;
+      const d2 = [last.b[0] - last.a[0], last.b[1] - last.a[1]], l2 = Math.hypot(d2[0], d2[1]) || 1;
+      const h1 = rayHit(pts[0], [d1[0] / l1, d1[1] / l1]), h2 = rayHit(pts[pts.length - 1], [d2[0] / l2, d2[1] / l2]);
+      if (!h1 || !h2) throw new Error('SketchKit.envelopeRedraw: the zone sides do not meet the envelope');
+      // round fillets where the new line leaves and rejoins the contour
+      const f = (o.filletPx != null ? o.filletPx : 96) * u;
+      const along = (hit, sgnDir, len) => { let i = hit.i, t = hit.t, rem = len, p = hit.p; while (rem > 0) { const a = P[i], b = P[(i + 1) % n], L = segL[i]; if (sgnDir > 0) { const left = (1 - t) * L; if (left >= rem) { t += rem / L; rem = 0; } else { rem -= left; i = (i + 1) % n; t = 0; } } else { const left = t * L; if (left >= rem) { t -= rem / L; rem = 0; } else { rem -= left; i = (i - 1 + n) % n; t = 1; } } p = [lerp(P[i][0], P[(i + 1) % n][0], t), lerp(P[i][1], P[(i + 1) % n][1], t)]; } return { i, t, p }; };
+      // which way round the contour runs from h1 to h2 through the exit point
+      const arcPos = h => { let a = 0; for (let k = 0; k < h.i; k++) a += segL[k]; return a + h.t * segL[h.i]; };
+      const eh = rayHit(C, dir), pe = arcPos(eh), p1 = arcPos(h1), p2 = arcPos(h2);
+      const fwd = ((pe - p1 + perim) % perim) < ((p2 - p1 + perim) % perim);
+      const sd = fwd ? 1 : -1;
+      const A1 = along(h1, -sd, f), B2 = along(h2, sd, f);
+      const quad = (a, c, b, k) => { const out = []; for (let j = 0; j <= k; j++) { const t = j / k, v = 1 - t; out.push([v * v * a[0] + 2 * v * t * c[0] + t * t * b[0], v * v * a[1] + 2 * v * t * c[1] + t * t * b[1]]); } return out; };
+      const toward = (a, b, len) => { const l = dist(a, b) || 1; return [a[0] + (b[0] - a[0]) / l * Math.min(len, l * 0.5), a[1] + (b[1] - a[1]) / l * Math.min(len, l * 0.5)]; };
+      const lead = quad(A1.p, h1.p, toward(h1.p, pts[0], f), 10), tail = quad(toward(h2.p, pts[pts.length - 1], f), h2.p, B2.p, 10);
+      newPts = lead.concat(pts, tail);
+      // the old contour between the two fillets fades to a ghost
+      ghostPts = []; { let i = A1.i; const stop = B2.i; for (let k = 0; k < n; k++) { i = (i + (sd > 0 ? 1 : 0) + n) % n; if (sd < 0) i = (i + n) % n; ghostPts.push(P[i]); if (i === stop) break; if (sd < 0) i = (i - 1 + n) % n; } }
+      if (sd < 0) { ghostPts = []; let i = (A1.i + 1) % n; for (let k = 0; k < n; k++) { ghostPts.push(P[i]); if (i === (B2.i + 1) % n) break; i = (i - 1 + n) % n; } }
+      Q = pts[Math.floor(pts.length / 2)];
+    } else {
+      // dent: every contour point near the exit point moves toward the centre by depth * exp(-s^2 / 2 sigma^2)
+      const eh = rayHit(C, dir) || { i: 0, t: 0 };
+      const marg = (o.marginPx != null ? o.marginPx : 64) * u;
+      const depth = o.depthPx != null ? o.depthPx * u : Math.max(0, dist(E, target) + marg);
+      const sigma = o.sigma != null ? o.sigma : Math.max(6, (o.sigmaK != null ? o.sigmaK : 0.6) * depth);
+      const arc = new Array(n); { let acc = -eh.t * segL[eh.i]; for (let k = 0; k < n; k++) { const i = (eh.i + k) % n; arc[i] = acc; acc += segL[i]; } }
+      const sArc = i => { let v = arc[i]; if (v > perim / 2) v -= perim; return v; };
+      const disp = i => depth * Math.exp(-(sArc(i) * sArc(i)) / (2 * sigma * sigma));
+      const idx = []; for (let k = -Math.floor(n / 2); k < Math.floor(n / 2); k++) { const i = ((eh.i + k) % n + n) % n; if (disp(i) > 0.4 * u || (k >= -1 && k <= 1)) idx.push(i); }
+      newPts = idx.map(i => [P[i][0] - dir[0] * disp(i), P[i][1] - dir[1] * disp(i)]);
+      ghostPts = idx.filter(i => disp(i) > 3 * u).map(i => P[i]);
+      Q = [E[0] - dir[0] * depth, E[1] - dir[1] * depth];
+    }
+    const cmds = smoothCmds(newPts, false, 0.9);
+    const construct = hand(ctx, it.root, cmds, { u: 1, seed: 'envc2', jit: 0.45, cls: 'skt-env-c', over: false });
+    const firm = hand(ctx, it.root, cmds, { u: 1, seed: 'envf2', jit: 0.18, cls: 'skt-env', over: false });
     const env0 = ctx.site && ctx.site.rough && ctx.site.rough.envelope;
     let cut = null;
-    if (env0 && env0.firm) {
+    if (env0 && env0.firm && o.ghost !== false) {
       const mid = ctx.id('envmask');
       const [bx0, by0, bx1, by1] = env.boundsWorld || bbox(P);
       const mask = mk('mask', { id: mid, maskUnits: 'userSpaceOnUse', x: f2(bx0 - 30), y: f2(by0 - 30), width: f2(bx1 - bx0 + 60), height: f2(by1 - by0 + 60) }, ctx.defs);
       mk('rect', { x: f2(bx0 - 30), y: f2(by0 - 30), width: f2(bx1 - bx0 + 60), height: f2(by1 - by0 + 60), fill: '#fff' }, mask);
-      cut = mk('path', { d: polyD(oldPts, false), fill: 'none', stroke: '#000', 'stroke-opacity': 0, 'stroke-linecap': 'round', 'stroke-linejoin': 'round', style: 'stroke-width:calc(var(--sw) * 9px)' }, mask);
+      cut = mk('path', { d: ghostPts.length > 1 ? polyD(ghostPts, false) : 'M0 0', fill: 'none', stroke: '#000', 'stroke-opacity': 0, 'stroke-linecap': 'round', 'stroke-linejoin': 'round', style: 'stroke-width:calc(var(--sw) * 9px)' }, mask);
       [env0.firm, env0.construct].forEach(e => e && e.setAttribute('mask', 'url(#' + mid + ')'));
     }
-    const ghost = o.ghost != null ? o.ghost : 0.2;
+    const ghost = o.ghostOpacity != null ? o.ghostOpacity : 0.22;
     it.stroke(construct, { dur: o.constructDur || 1.1, ease: 'power1.inOut', type: 'pencil-light' });
     it.stroke(firm, { dur: o.firmDur || 1.4, at: 0.55, ease: 'power1.inOut', type: 'pencil' });
-    if (cut) it.fn((tl, t0, d) => { tl.fromTo(cut, { attr: { 'stroke-opacity': 0 } }, { attr: { 'stroke-opacity': f2(1 - ghost) }, duration: d, ease: 'power1.inOut', immediateRender: true }, t0); }, { at: 0.8, dur: 1.3, type: 'erase' });
+    if (cut) it.fn((tl, t0, d) => { tl.fromTo(cut, { attr: { 'stroke-opacity': 0 } }, { attr: { 'stroke-opacity': f2(1 - ghost) }, duration: d, ease: 'power1.inOut', immediateRender: true }, t0); }, { at: 0.9, dur: 1.3, type: 'erase' });
     it.parts = { construct, firm, cut };
-    it.newPoints = newPts; it.depth = depth; it.sigma = sigma; it.closestIndex = c;
-    it.crossing = (a, b) => { a = ctx.pt(a); b = ctx.pt(b); let tBest = null; for (let i = 1; i < newPts.length; i++) { const t = segX(a, b, newPts[i - 1], newPts[i]); if (t != null && (tBest == null || t < tBest)) tBest = t; } return tBest; };
-    if (o.morph) {
-      // alternative: move the site's own firm envelope line inward (same command structure, attr d tween)
-      it.morph = (tl, t, dur) => {
-        const el = env0 && env0.firm; if (!el) return t;
-        const d0 = el.getAttribute('d'), cm = S.parseD(d0);
-        const byI = {}; disp.forEach(q => { byI[q.i] = q.w; });
-        let vi = 0;
-        const cm2 = cm.map(([cc, a]) => { if (cc === 'Z') return [cc, a]; const i = vi++; const w = byI[i] || 0; return [cc, [a[0] - N[i % n][0] * depth * w, a[1] - N[i % n][1] * depth * w]]; });
-        tl.fromTo(el, { attr: { d: d0 } }, { attr: { d: S.fmt(cm2) }, duration: dur || 1.6, ease: 'power2.inOut', immediateRender: false }, t);
-        return t + (dur || 1.6);
-      };
-    }
+    it.mode = mode; it.newPoints = newPts; it.oldPoints = ghostPts; it.inner = Q; it.exitPoint = E;
+    const flat = flatten(cmds, 8)[0];
+    it.crossing = (a, b) => { a = ctx.pt(a); b = ctx.pt(b); let tBest = null; for (let i = 1; i < flat.length; i++) { const t = segX(a, b, flat[i - 1], flat[i]); if (t != null && (tBest == null || t < tBest)) tBest = t; } return tBest; };
     return it;
   }
 
@@ -1302,16 +1538,20 @@
   function incidentBox(ctx, at, o) {
     o = o || {};
     const it = new Item(ctx, 'incident', o);
-    const g = pxAt(ctx, it.root, ctx.pt(at || 'roof03Centre'));
+    const g = pxAt(ctx, it.root, ctx.pt(at || 'roof03Centre'), o);
     const text = o.text || 'INCIDENT · ROOF 03 · 16:07';
-    const fs = o.size || 18, ls = 0.12;
+    const fs = o.size || 20, ls = 0.12;
     const tw = monoWidth(text, fs, ls);
     const band = 8, padX = 22;
     const w = tw + 2 * padX + 2 * band, h = fs * 1.9 + 2 * band;
-    const off = o.offset || [54, -118];
+    // default: up and to the left of the point, over the Roof 01/02 skylights, clear of the safeguard schedule
+    // (north-east), the SZ3 tag (south-east) and the redrawn envelope (south-west); offset is the box's top-left
+    const off = o.offset || [-(w + 40), -128];
     const x0 = off[0], y0 = off[1];
+    it.add({ kind: 'fn', f: () => {}, dur: 0.1, type: 'incident', meta: { text }, advance: 0 });
     const cross = hand(ctx, g, 'M-5 -5L5 5M5 -5L-5 5', { seed: 'incx', jit: 0.3, over: false });
-    const lead = hand(ctx, g, lineCmds([[6, -6], [x0 + 18, y0 + h]]), { seed: 'incl', jit: 0.4, cls: 'skt-lite', over: false });
+    const lx = x0 + w / 2 < 0 ? x0 + w - 18 : x0 + 18;
+    const lead = hand(ctx, g, lineCmds([[lx < 0 ? -6 : 6, -6], [lx, y0 + h]]), { seed: 'incl', jit: 0.4, cls: 'skt-lite', over: false });
     const outerP = [[x0, y0], [x0 + w, y0], [x0 + w, y0 + h], [x0, y0 + h]];
     const innerP = [[x0 + band, y0 + band], [x0 + w - band, y0 + band], [x0 + w - band, y0 + h - band], [x0 + band, y0 + h - band]];
     const outer = hand(ctx, g, lineCmds(outerP, true), { seed: 'inco', jit: 0.5, occ: true, ext: true, extMin: 20 });
@@ -1375,18 +1615,26 @@
   // ------------------------------------------------------------ 9. detail callout (Frame 2)
   function detailCallout(ctx, box, o) {
     o = o || {};
-    box = Object.assign({ x: 858, y: 128, w: 966, h: 318 }, box || {});
+    // default: the right 50 percent of the frame, below the chrome clock (which ends near y 136); the height
+    // fits the clauses unless box.h is given
+    box = Object.assign({ x: 858, y: 172, w: 966 }, box || {});
     const grp = new Group(ctx, 'detail-callout', o);
+    const clauses = o.clauses || [
+      { num: '4.2', lines: ['Hot work requires a permit, a certified operator', 'and a fire watch.'] },
+      { num: '4.3', lines: ['Automatic sprinkler protection must remain in service.'] },
+    ];
+    const fs = o.size || 26, lh = Math.round(fs * 1.42);
+    if (box.h == null) { const nl = clauses.reduce((a, c) => a + c.lines.length, 0); box.h = 138 + (nl - 1) * lh + (clauses.length - 1) * Math.round(fs * 0.55) + 56; }
     const { x, y, w, h } = box;
     // frame, detail bubble D1 / 01, heading, rule
     const head = new Item(ctx, 'detail-head', { layer: grp.root });
     head.add({ kind: 'fn', f: () => {}, dur: 0.3, type: 'paper-slide', meta: { what: 'detail callout' }, advance: 0.2 });
-    frame(ctx, head, head.root, x, y, w, h, { seed: 'd1', dur: 0.8, cls: 'skt-fine' });
+    frame(ctx, head, head.root, x, y, w, h, { seed: 'd1', dur: 0.8, cls: 'skt-fine', occ: true });
     const bub = hand(ctx, head.root, handCircleCmds(x, y, 31, 'bubble', { spiral: 0.015, over: 0.25 }), { seed: 'bub', jit: 0.4, occ: true });
     const bl = hand(ctx, head.root, 'M' + (x - 29) + ' ' + y + 'L' + (x + 29) + ' ' + y, { seed: 'bubl', jit: 0.35, over: false, cls: 'skt-fine' });
     head.stroke(bub, { dur: 0.35 }); head.stroke(bl, { dur: 0.14 });
     const d1 = letters(ctx, head.root, o.tag || 'D1', x, y - 8, { size: 19, weight: 600, anchor: 'middle', seed: 'D1', rot: 0, irr: 0.03, ls: 0.06 });
-    const sh = letters(ctx, head.root, o.sheet || '01', x, y + 19, { size: 13, weight: 500, anchor: 'middle', seed: 'sh', rot: 0, irr: 0.02, ls: 0.1 });
+    const sh = letters(ctx, head.root, o.sheet || '01', x, y + 20, { size: 14, weight: 500, anchor: 'middle', seed: 'sh', rot: 0, irr: 0.02, ls: 0.1 });
     head.wipe(d1, { dur: 0.2 }); head.wipe(sh, { dur: 0.15 });
     const hx = x + 56, hy = y + 62;
     const hd = letters(ctx, head.root, o.heading || 'PROPERTY + BI PROGRAMME · CONDITIONS', hx, hy, { size: 20, weight: 500, ls: 0.14, seed: 'dh', rot: 0.15, irr: 0.03 });
@@ -1395,11 +1643,6 @@
     head.stroke(rule, { dur: 0.45, type: 'ruler' });
     grp.child(head);
     // clauses, typeset in Plex Sans 26, one line at a time
-    const clauses = o.clauses || [
-      { num: '4.2', lines: ['Hot work requires a permit, a certified operator', 'and a fire watch.'] },
-      { num: '4.3', lines: ['Automatic sprinkler protection must remain in service.'] },
-    ];
-    const fs = o.size || 26, lh = Math.round(fs * 1.42);
     let cy = hy + 76;
     grp.clauses = clauses.map((cl, ci) => {
       const it = new Item(ctx, 'clause', { layer: grp.root });
@@ -1414,8 +1657,8 @@
     // leader from the callout to the envelope on the site (screen point)
     if (o.leaderTo) {
       const it = new Item(ctx, 'detail-leader', { layer: grp.root });
-      const a = [x, y + h * 0.66], b = o.leaderTo;
-      const m = [lerp(a[0], b[0], 0.5), lerp(a[1], b[1], 0.5) - 26];
+      const a = o.leaderFrom || [x, y + h * 0.4], b = o.leaderTo;
+      const m = [lerp(a[0], b[0], 0.5), lerp(a[1], b[1], 0.5) - (o.leaderLift != null ? o.leaderLift : 16)];
       const rec = hand(ctx, it.root, smoothCmds([a, m, b], false), { seed: 'dlead', jit: 0.5, cls: 'skt-fine', over: false });
       const ring = hand(ctx, it.root, handCircleCmds(b[0], b[1], 5, 'dlr', { spiral: 0.02 }), { seed: 'dlr', jit: 0.3, over: false, cls: 'skt-fine' });
       it.stroke(rec, { dur: 0.6 }); it.stroke(ring, { dur: 0.15 });
@@ -1431,30 +1674,32 @@
   // ------------------------------------------------------------ 10. translation chain (Frame 2)
   function translationChain(ctx, box, o) {
     o = o || {};
-    box = Object.assign({ x: 858, y: 500, w: 966, h: 336 }, box || {});
+    box = Object.assign({ x: 858, y: 512, w: 966, h: 352 }, box || {});
     const grp = new Group(ctx, 'chain', o);
-    const gapX = o.gap || 54, n = 4, aw = (box.w - gapX * (n - 1)) / n, ah = box.h;
+    const gapX = o.gap || 46, n = 4, aw = (box.w - gapX * (n - 1)) / n;
     const xs = [0, 1, 2, 3].map(i => box.x + i * (aw + gapX)), y = box.y;
-    const ys = y + (o.sprinklerRow || 208); // the sprinkler condition sits on one row across all four
-    const pad = 16;
+    // four different documents, not a card grid: each has its own length (top-aligned, the box height is the longest)
+    const hs = (o.heights || [1, 1, 0.83, 0.93]).map(k => Math.round(box.h * k));
+    const ys = y + (o.sprinklerRow || 212); // the sprinkler condition sits on one row across all four
+    const pad = 15, cfs = o.conditionSize || 20;
     // PROCEDURE: HSE-PR-12 · Hot work, lines of text, one line reads 'Confirm sprinklers in service'
     const proc = new Item(ctx, 'procedure', { layer: grp.root });
     {
       const x = xs[0];
       proc.add({ kind: 'fn', f: () => {}, dur: 0.25, type: 'paper-slide', meta: { what: 'procedure' }, advance: 0.2 });
-      frame(ctx, proc, proc.root, x, y, aw, ah, { seed: 'proc', occ: true });
-      const id = letters(ctx, proc.root, 'HSE-PR-12', x + pad, y + 34, { size: 17, weight: 500, seed: 'pr', rot: 0.2 });
+      frame(ctx, proc, proc.root, x, y, aw, hs[0], { seed: 'proc', occ: true });
+      const id = letters(ctx, proc.root, 'HSE-PR-12', x + pad, y + 34, { size: 18, weight: 500, seed: 'pr', rot: 0.2 });
       proc.wipe(id, { type: 'pen' });
       const tt = sans(ctx, proc.root, 'Hot work', x + pad, y + 64, { size: 22, weight: 500 });
       proc.wipe(tt, { type: 'pen', pace: 600 });
       proc.stroke(hand(ctx, proc.root, 'M' + (x + pad) + ' ' + (y + 80) + 'L' + (x + aw - pad) + ' ' + (y + 80), { seed: 'prr', jit: 0.3, over: false, cls: 'skt-lite' }), { dur: 0.2, type: 'ruler' });
       greek(ctx, proc, proc.root, x + pad, y + 104, aw - 2 * pad, 5, { seed: 'pr1', lh: 17 });
-      const s1 = sans(ctx, proc.root, 'Confirm sprinklers', x + pad, ys, { size: 19 });
-      const s2 = sans(ctx, proc.root, 'in service', x + pad, ys + 24, { size: 19 });
+      const s1 = sans(ctx, proc.root, 'Confirm sprinklers', x + pad, ys, { size: cfs });
+      const s2 = sans(ctx, proc.root, 'in service', x + pad, ys + 26, { size: cfs });
       proc.wipe(s1, { type: 'pen', pace: 500 }); proc.wipe(s2, { type: 'pen', pace: 500 });
-      const ul = hand(ctx, proc.root, 'M' + (x + pad) + ' ' + (ys + 6) + 'L' + f2(s1.x1 + 2) + ' ' + (ys + 6) + 'M' + (x + pad) + ' ' + (ys + 30) + 'L' + f2(s2.x1 + 2) + ' ' + (ys + 30), { seed: 'prul', jit: 0.45, over: false });
+      const ul = hand(ctx, proc.root, 'M' + (x + pad) + ' ' + (ys + 6) + 'L' + f2(s1.x1 + 2) + ' ' + (ys + 6) + 'M' + (x + pad) + ' ' + (ys + 32) + 'L' + f2(s2.x1 + 2) + ' ' + (ys + 32), { seed: 'prul', jit: 0.45, over: false });
       proc.stroke(ul, { dur: 0.3, type: 'pen' });
-      greek(ctx, proc, proc.root, x + pad, ys + 58, aw - 2 * pad, 4, { seed: 'pr2', lh: 17 });
+      greek(ctx, proc, proc.root, x + pad, ys + 62, aw - 2 * pad, 4, { seed: 'pr2', lh: 17 });
       proc.sprinkler = [s1.x1, ys - 6];
       proc.parts.sprinklerText = [s1, s2];
     }
@@ -1463,27 +1708,28 @@
     {
       const x = xs[1];
       perm.add({ kind: 'fn', f: () => {}, dur: 0.25, type: 'paper-slide', meta: { what: 'permit' }, advance: 0.2 });
-      frame(ctx, perm, perm.root, x, y, aw, ah, { seed: 'perm', occ: true });
-      const k = letters(ctx, perm.root, 'PERMIT', x + pad, y + 30, { size: 13, weight: 500, ls: 0.18, seed: 'pk', tone: 'skt-t2', rot: 0.1 });
+      frame(ctx, perm, perm.root, x, y, aw, hs[1], { seed: 'perm', occ: true });
+      const k = letters(ctx, perm.root, 'PERMIT', x + pad, y + 30, { size: 14, weight: 500, ls: 0.18, seed: 'pk', tone: 'skt-t2', rot: 0.1 });
       const id = letters(ctx, perm.root, 'HW-0412', x + pad, y + 58, { size: 21, weight: 500, seed: 'pid', rot: -0.2 });
       perm.wipe(k, { type: 'pen' }); perm.wipe(id, { type: 'pen' });
       [['OPERATOR', y + 92], ['FIRE WATCH', y + 136]].forEach(([f, fy], i) => {
-        const lb = letters(ctx, perm.root, f, x + pad, fy, { size: 12, weight: 500, ls: 0.14, seed: 'pf' + i, tone: 'skt-t2', rot: 0 });
+        const lb = letters(ctx, perm.root, f, x + pad, fy, { size: 14, weight: 500, ls: 0.12, seed: 'pf' + i, tone: 'skt-t2', rot: 0 });
         perm.wipe(lb, { type: null, dur: 0.15 });
         const rl = hand(ctx, perm.root, 'M' + (x + pad) + ' ' + (fy + 20) + 'L' + (x + aw - pad) + ' ' + (fy + 20), { seed: 'pfr' + i, jit: 0.3, over: false, cls: 'skt-lite' });
         perm.stroke(rl, { dur: 0.18, type: 'ruler' });
         const val = hand(ctx, perm.root, scribbleCmds(x + pad + 6, fy + 13, 70 + i * 16, 4, 'pv' + i), { seed: 'pv' + i, jit: 0.3, over: false, cls: 'skt-fine' });
         perm.stroke(val, { dur: 0.3, type: 'pen' });
       });
-      const sp = sans(ctx, perm.root, 'Sprinklers', x + pad, ys, { size: 19 });
+      const sp = sans(ctx, perm.root, 'Sprinklers', x + pad, ys, { size: cfs });
       perm.wipe(sp, { type: 'pen', pace: 500 });
       tickAfter(ctx, perm, perm.root, sp.x1 + 16, ys - 7, { seed: 'permtick', s: 1.15 });
-      const sig = hand(ctx, perm.root, scribbleCmds(x + pad + 4, ys + 54, 118, 11, 'perm-sig'), { seed: 'psig', jit: 0.35, over: false, cls: 'skt-heavy' });
+      const sig = hand(ctx, perm.root, scribbleCmds(x + pad + 4, ys + 50, 118, 11, 'perm-sig'), { seed: 'psig', jit: 0.35, over: false, cls: 'skt-heavy' });
       perm.stroke(sig, { dur: 0.55, type: 'pen', meta: { what: 'signature' } });
-      const sl = letters(ctx, perm.root, 'SIGNED', x + pad, ys + 78, { size: 11, weight: 500, ls: 0.16, seed: 'psl', tone: 'skt-t2', rot: 0 });
+      const sl = letters(ctx, perm.root, 'SIGNED', x + pad, ys + 76, { size: 14, weight: 500, ls: 0.14, seed: 'psl', tone: 'skt-t2', rot: 0 });
       perm.wipe(sl, { type: null, dur: 0.12 });
       // the stamp: a double rule box, set at once (stamp sound), slightly turned as a hand stamp is
-      const sg = mk('g', { transform: 'translate(' + f2(x + aw * 0.5) + ' ' + f2(ys + 104) + ') rotate(-4.5)' }, perm.root);
+      // the stamp lands below the signature, clear of the SIGNED caption, turned as a hand stamp is
+      const sg = mk('g', { transform: 'translate(' + f2(x + aw * 0.56) + ' ' + f2(ys + 110) + ') rotate(-4.5)' }, perm.root);
       const stampInner = mk('g', {}, sg);
       const stw = 146, sth = 36;
       mk('path', { class: 'skt-m skt-heavy', d: 'M' + (-stw / 2) + ' ' + (-sth / 2) + 'h' + stw + 'v' + sth + 'h' + (-stw) + 'Z', opacity: 0.86 }, stampInner);
@@ -1500,15 +1746,15 @@
       const x = xs[2];
       const top = new Item(ctx, 'briefing-sheet', { layer: brief.root });
       top.add({ kind: 'fn', f: () => {}, dur: 0.25, type: 'paper-slide', meta: { what: 'briefing' }, advance: 0.2 });
-      frame(ctx, top, top.root, x, y, aw, ah, { seed: 'brief', occ: true });
-      const t1 = letters(ctx, top.root, '07:15', x + pad, y + 34, { size: 17, weight: 500, seed: 'bt1', rot: -0.2 });
-      const t2 = letters(ctx, top.root, 'TOOLBOX TALK', x + pad, y + 56, { size: 15, weight: 500, ls: 0.12, seed: 'bt2', rot: 0.25 });
+      frame(ctx, top, top.root, x, y, aw, hs[2], { seed: 'brief', occ: true });
+      const t1 = letters(ctx, top.root, '07:15', x + pad, y + 34, { size: 18, weight: 500, seed: 'bt1', rot: -0.2 });
+      const t2 = letters(ctx, top.root, 'TOOLBOX TALK', x + pad, y + 58, { size: 16, weight: 500, ls: 0.1, seed: 'bt2', rot: 0.25 });
       top.wipe(t1, { type: 'pen' }); top.wipe(t2, { type: 'pen' });
       brief.child(top);
-      const figs = groupFigures(ctx, { kind: 'semicircle', centre: [x + aw / 2, y + 148], n: 5, radius: 62, squash: 0.36, heightPx: 40, layer: brief.root, seed: 'brief' });
+      const figs = groupFigures(ctx, { kind: 'semicircle', centre: [x + aw / 2, y + 150], n: 5, radius: 66, squash: 0.34, heightPx: 50, markR: 4, layer: brief.root, seed: 'brief' });
       brief.child(figs, { gap: -0.05 });
       const note = new Item(ctx, 'briefing-note', { layer: brief.root });
-      const nt = sans(ctx, note.root, 'sprinklers on', x + pad + 14, ys, { size: 18, tone: 'skt-t2' });
+      const nt = sans(ctx, note.root, 'sprinklers on', x + pad + 14, ys, { size: cfs, tone: 'skt-t2' });
       const bw = nt.w + 26, bx = x + pad + 2, by = ys - 22, bh = 34;
       const bubble = hand(ctx, note.root, smoothCmds([[bx + 8, by], [bx + bw - 8, by - 1], [bx + bw + 1, by + bh / 2], [bx + bw - 8, by + bh], [bx + 44, by + bh + 1], [bx + 36, by + bh + 12], [bx + 30, by + bh], [bx + 7, by + bh - 1], [bx - 1, by + bh / 2]], true), { seed: 'bnote', jit: 0.5, cls: 'skt-lite', over: false });
       note.stroke(bubble, { dur: 0.4, type: 'pencil-light' });
@@ -1523,8 +1769,8 @@
     {
       const x = xs[3];
       chk.add({ kind: 'fn', f: () => {}, dur: 0.25, type: 'paper-slide', meta: { what: 'checklist' }, advance: 0.2 });
-      frame(ctx, chk, chk.root, x, y, aw, ah, { seed: 'chk', occ: true });
-      const h1 = letters(ctx, chk.root, 'CHECKLIST', x + pad, y + 30, { size: 13, weight: 500, ls: 0.18, seed: 'ch1', tone: 'skt-t2', rot: 0 });
+      frame(ctx, chk, chk.root, x, y, aw, hs[3], { seed: 'chk', occ: true });
+      const h1 = letters(ctx, chk.root, 'CHECKLIST', x + pad, y + 30, { size: 14, weight: 500, ls: 0.16, seed: 'ch1', tone: 'skt-t2', rot: 0 });
       const h2 = letters(ctx, chk.root, 'HOT WORK', x + pad, y + 56, { size: 18, weight: 500, seed: 'ch2', rot: 0.2 });
       chk.wipe(h1, { type: 'pen' }); chk.wipe(h2, { type: 'pen' });
       const rows = [['Fire watch', ys - 88, 'tick'], ['Extinguisher', ys - 44, 'tick'], ['Sprinklers', ys, 'q'], ['', ys + 44, 'empty'], ['', ys + 88, 'empty']];
@@ -1533,7 +1779,7 @@
         const box2 = hand(ctx, chk.root, rectCmds(bx, ry - 14, bs, bs), { seed: 'cb' + i, jit: 0.45, over: false, cls: st === 'empty' ? 'skt-lite' : 'skt-fine' });
         chk.stroke(box2, { dur: 0.16, type: 'pencil-light' });
         if (txt) {
-          const tt = sans(ctx, chk.root, txt, bx + bs + 12, ry, { size: 19, tone: st === 'q' ? 'skt-t3' : null });
+          const tt = sans(ctx, chk.root, txt, bx + bs + 12, ry, { size: cfs, tone: st === 'q' ? 'skt-t3' : null });
           chk.wipe(tt, { type: 'pen', pace: 520 });
           if (st === 'tick') tickAfter(ctx, chk, chk.root, bx + 8, ry - 8, { seed: 'ct' + i, s: 1.05 });
           else {
@@ -1565,13 +1811,20 @@
   }
 
   // ------------------------------------------------------------ 11. evidence fragments (Frame 3)
+  // Extras for crowding (not in the storyboard list; use only as edge texture): see evidenceBoard({ extras }).
+  // (film inventions, opt-in; placed to bleed off the left and top edges, clear of the chrome clock and title block)
+  const EVIDENCE_EXTRAS = [
+    { title: 'SHIFT NOTE · 15:30', lines: ['ROOF 03 · ONGOING'], x: -70, y: 176, w: 300, h: 110 },
+    { title: 'PHOTO · ROOF 03 · 16:12', lines: ['NORTH EDGE'], x: 250, y: -52, w: 280, h: 110 },
+    { title: 'CALL LOG · 16:08', lines: ['SITE OFFICE'], x: -96, y: 664, w: 250, h: 110 },
+  ];
   const EVIDENCE = {
-    photo: { title: 'PHOTO · ROOF 03 · 16:09', w: 236, h: 152 },
+    photo: { title: 'PHOTO · ROOF 03 · 16:09', w: 250, h: 150 },
     call: { title: 'CALL LOG · 14:40', lines: ['VALVE ROOM', '2 MIN 13 S'], w: 262, h: 116 },
     permit: { title: 'PERMIT HW-0412', lines: ['SIGNED 14:12', 'SPRINKLERS'], w: 262, h: 128 },
     workorder: { title: 'WORK ORDER WO-2291', lines: ['SZ3 ISOLATION', '14:42'], w: 290, h: 116 },
-    programme: { title: 'PROGRAMME · 4.3', lines: ['SPRINKLER PROTECTION'], w: 316, h: 112 },
-    statement: { title: 'STATEMENT · FIRE WATCH', lines: ['"I THOUGHT THE', 'SPRINKLERS WERE ON"'], w: 330, h: 124 },
+    programme: { title: 'PROGRAMME · 4.3', lines: ['SPRINKLER PROTECTION'], w: 300, h: 112 },
+    statement: { title: 'STATEMENT · FIRE WATCH', lines: ['"I THOUGHT THE', 'SPRINKLERS WERE ON"'], w: 320, h: 124 },
     email: { title: 'EMAIL · 15:02', lines: ['RE: ROOF WORK'], w: 262, h: 122 },
   };
   function evidence(ctx, kind, o) {
@@ -1580,7 +1833,7 @@
     const it = new Item(ctx, 'evidence-' + kind, o);
     const x = spec.x, y = spec.y, w = spec.w, h = spec.h;
     const g = it.root;
-    const fsT = o.titleSize || 16, fsB = o.size || 17, pad = 14;
+    const fsT = o.titleSize || 18, fsB = o.size || 18, pad = 14;
     const seed = 'ev' + kind;
     it.add({ kind: 'fn', f: () => {}, dur: 0.22, type: 'paper-slide', meta: { what: kind }, advance: 0.3 });
     if (kind === 'photo') {
@@ -1606,12 +1859,11 @@
       it.wipe(t);
       it.stroke(hand(ctx, g, 'M' + (x + pad) + ' ' + (y + 40) + 'L' + (x + w - pad) + ' ' + (y + 40), { seed: seed + 'r', jit: 0.3, over: false, cls: 'skt-lite' }), { dur: 0.16, type: 'pencil-light' });
       const lines = spec.lines || [];
-      const tone = kind === 'statement' ? null : null;
-      it.lines = lines.map((ln, i) => { const lb = letters(ctx, g, ln, x + pad, y + 66 + i * 24, { size: fsB, seed: seed + i, tone }); it.wipe(lb, { type: 'pen' }); return lb; });
+      it.lines = lines.map((ln, i) => { const lb = letters(ctx, g, ln, x + pad, y + 68 + i * 26, { size: fsB, seed: seed + i }); it.wipe(lb, { type: 'pen' }); return lb; });
       const last = it.lines[it.lines.length - 1];
       if (kind === 'permit') {
         tickAfter(ctx, it, g, last.x1 + 18, last.y - 6, { seed: 'evp' });
-        const sig = hand(ctx, g, scribbleCmds(x + w - 108, y + 78, 88, 8, 'ev-sig'), { seed: 'evsig', jit: 0.3, over: false, cls: 'skt-fine' });
+        const sig = hand(ctx, g, scribbleCmds(x + w - 104, y + h - 18, 84, 7, 'ev-sig'), { seed: 'evsig', jit: 0.3, over: false, cls: 'skt-fine' });
         it.stroke(sig, { dur: 0.4, type: 'pen' });
       } else if (kind === 'call') {
         const bx = x + pad, by = y + h - 14, bw = w - 2 * pad;
@@ -1667,8 +1919,13 @@
     o = o || {};
     const grp = new Group(ctx, 'evidence-board', o);
     const pins = o.pins || {};
+    // Default layout, for the Frame 3 camera in docs/sketch-kit.md (Roof 03 near screen (1220, 470), the valve near
+    // (1276, 488), the envelope's exit point near (1422, 343)). The three questions stack at left (x 96 to 1061,
+    // y 344 to 620) and the gap timeline later takes the band y 690 to 920, so the fragments crowd the top and the
+    // right edge in an arc round the pins: every leader runs inward without crossing a fragment or the questions.
+    // All inside the 96 px safe area and clear of the chrome clock (top right, to y 136) and title block (y 1000 on).
     const L = Object.assign({
-      email: [520, 96], photo: [1168, 84], call: [1566, 238], permit: [1472, 452], workorder: [1560, 694], programme: [1140, 868], statement: [560, 860],
+      email: [540, 150], photo: [866, 106], statement: [1180, 150], programme: [1524, 176], call: [1562, 336], permit: [1562, 494], workorder: [1170, 562],
     }, o.layout || {});
     const order = o.order || ['photo', 'call', 'permit', 'workorder', 'programme', 'statement', 'email'];
     grp.fragments = {};
@@ -1676,16 +1933,19 @@
       const f = evidence(ctx, k, { layer: grp.root, x: L[k][0], y: L[k][1], pin: pins[k] });
       grp.fragments[k] = f; grp.child(f, { stagger: o.stagger || 0.42 });
     });
+    // optional extra fragments for the crowding at the frame edges (texture; may bleed off frame)
+    grp.extras = (o.extras || []).map((ex, i) => {
+      const f = evidence(ctx, ex.kind || 'note', Object.assign({ layer: grp.root, w: 250, h: 104, lines: [] }, ex));
+      grp.child(f, { stagger: o.stagger || 0.42 });
+      return f;
+    });
     const F = grp.fragments;
     const edge = (f, sx, sy) => [f.box.x + f.box.w * sx, f.box.y + f.box.h * sy];
-    grp.lines = [
-      investigationLine(ctx, edge(F.permit, 0.5, 1), edge(F.workorder, 0.2, 0), { layer: grp.root, bend: 0.1 }),
-      investigationLine(ctx, edge(F.call, 0, 0.8), edge(F.permit, 0.8, 0), { layer: grp.root, bend: -0.12 }),
-      investigationLine(ctx, edge(F.statement, 1, 0.4), edge(F.programme, 0, 0.5), { layer: grp.root, bend: 0.06 }),
-      investigationLine(ctx, edge(F.photo, 1, 0.7), edge(F.call, 0.3, 0), { layer: grp.root, bend: 0.1 }),
-    ];
+    grp.lines = (o.lines || [['email', 1, 0.3, 'photo', 0, 0.35, -0.08], ['programme', 0.72, 1, 'call', 0.62, 0, -0.2], ['call', 0.35, 1, 'permit', 0.35, 0, 0.18], ['permit', 0, 0.85, 'workorder', 1, 0.3, -0.12]])
+      .filter(([a, , , b]) => F[a] && F[b])
+      .map(([a, ax, ay, b, bx, by, bend]) => investigationLine(ctx, edge(F[a], ax, ay), edge(F[b], bx, by), { layer: grp.root, bend }));
     grp.lines.forEach(l => grp.child(l, { stagger: 0.3 }));
-    grp.questions = (o.questionMarks || [[1440, 390, 48], [1368, 800, 40], [1080, 300, 36], [1010, 960, 44]]).map(([qx, qy, s]) => { const q = questionMark(ctx, [qx, qy], { layer: grp.root, size: s }); grp.child(q, { stagger: 0.25 }); return q; });
+    grp.questions = (o.questionMarks || [[1116, 360, 46], [1488, 690, 38], [1402, 440, 32], [470, 262, 34]]).map(([qx, qy, s]) => { const q = questionMark(ctx, [qx, qy], { layer: grp.root, size: s }); grp.child(q, { stagger: 0.25 }); return q; });
     return grp;
   }
   function followPin(tl, frag, worldPt, camFrom, camTo, t, dur, ease, steps) {
@@ -1707,10 +1967,10 @@
   function gapTimeline(ctx, o) {
     o = o || {};
     const grp = new Group(ctx, 'gap-timeline', o);
-    const y = o.y || 786, x0 = o.x0 || 180, x1 = o.x1 || 1740, lx = o.leftX || 330, rx = o.rightX || 1590;
+    const y = o.y || 772, x0 = o.x0 || 180, x1 = o.x1 || 1740, lx = o.leftX || 330, rx = o.rightX || 1590;
     const rule = new Item(ctx, 'gap-rule', { layer: grp.root });
     const r = hand(ctx, rule.root, 'M' + x0 + ' ' + y + 'L' + x1 + ' ' + y, { seed: 'gaprule', jit: 0.25, over: false, cls: 'skt-rule', ext: true, extMin: 100 });
-    rule.stroke(r, { dur: 0.9, type: 'ruler', ease: 'power2.inOut' });
+    rule.stroke(r, { dur: 0.9, type: 'gap-rule', ease: 'power2.inOut' });
     let td = '';
     for (let x = x0 + 40; x < x1 - 20; x += 60) td += 'M' + x + ' ' + (y - 5) + 'L' + x + ' ' + (y + 5);
     const ticks = hand(ctx, rule.root, td, { seed: 'gapt', jit: 0.25, over: false, cls: 'skt-lite' });
@@ -1722,7 +1982,7 @@
       const dot = mk('circle', { class: 'skt-fill', cx: x, cy: y, r: 3.6 }, it.root);
       it.pop(dot, { dur: 0.08, cx: x, cy: y, scale: 1.6, type: 'tick' });
       it.stroke(m, { dur: 0.2 });
-      const lb = letters(ctx, it.root, text, x + (anchor === 'end' ? 4 : -4), y - 44, { size: o.size || 20, weight: 500, anchor, ls: 0.12, seed: 'gl' + name, rot: 0.1 });
+      const lb = letters(ctx, it.root, text, x + (anchor === 'end' ? 4 : -4), y - 44, { size: o.size || 20, weight: 500, anchor, ls: 0.12, seed: 'gl' + name, rot: 0.1, halo: true });
       it.wipe(lb, { pace: 420 });
       it.label = lb;
       return it;
@@ -1735,11 +1995,11 @@
     const bd = 'M' + lx + ' ' + (by - 8) + 'L' + lx + ' ' + by + 'L' + (mid - 12) + ' ' + by + 'L' + mid + ' ' + (by + 11) + 'L' + (mid + 12) + ' ' + by + 'L' + rx + ' ' + by + 'L' + rx + ' ' + (by - 8);
     const b = hand(ctx, br.root, bd, { seed: 'gapbr', jit: 0.4, cls: '' });
     br.stroke(b, { dur: 0.9, type: 'pencil', ease: 'power1.inOut' });
-    const gl = letters(ctx, br.root, o.gapText || 'THE GAP', mid, by + 50, { size: o.gapSize || 22, weight: 600, anchor: 'middle', ls: 0.24, seed: 'thegap', rot: 0 });
+    const gl = letters(ctx, br.root, o.gapText || 'THE GAP', mid, by + 50, { size: o.gapSize || 22, weight: 600, anchor: 'middle', ls: 0.24, seed: 'thegap', rot: 0, halo: true });
     br.wipe(gl, { pace: 260 });
     grp.bracket = br; grp.child(br, { gap: 0.2 });
     const nt = new Item(ctx, 'gap-note', { layer: grp.root });
-    const line = sans(ctx, nt.root, o.note || 'Insurance position may have changed at 14:42.', mid, by + 100, { size: o.noteSize || 26, anchor: 'middle', tone: 'skt-t2' });
+    const line = sans(ctx, nt.root, o.note || 'Insurance position may have changed at 14:42.', mid, by + 100, { size: o.noteSize || 26, anchor: 'middle', tone: 'skt-t2', halo: true });
     nt.wipe(line, { pace: 1400, type: null });
     grp.note = nt; grp.child(nt, { gap: 0.25 });
     return grp;
@@ -1753,7 +2013,7 @@
     grp.lines = lines.map((ln, i) => {
       const it = new Item(ctx, 'type-line', { layer: grp.root });
       const t = sans(ctx, it.root, ln, p[0], p[1] + i * lh, { size: fs, weight: o.weight || 300, ls: o.ls != null ? o.ls : -0.015 });
-      it.wipe(t, { pace: o.pace || 2600, type: o.sound ? 'set' : null, ease: 'power2.out' });
+      it.wipe(t, { pace: o.pace || 2600, type: o.sound === false ? null : (o.kind || 'question'), ease: 'power2.out' });
       it.text = t;
       grp.child(it, { stagger: o.stagger || 1.2 });
       return it;
@@ -1772,6 +2032,7 @@
       tl.fromTo(h, { opacity: from }, { opacity: to, duration: dur, ease: 'power1.inOut', immediateRender: false }, t + i * step);
       end = Math.max(end, t + i * step + dur);
     });
+    if (o.events !== false) window.__filmEvents.push({ scene: o.scene || site.prefix, type: 'subtract-bed', t: +(t + (o.eventOffset || 0)).toFixed(3), dur: +(end - t).toFixed(3), meta: { what: 'sprinkler heads fade', heads: heads.length } });
     return end;
   }
   const scaleOf = r => FW / r.w;
@@ -1783,7 +2044,7 @@
     safeguardItems, conditionConnection, envelopeRedraw, incidentBox,
     detailCallout, translationChain, handArrow, evidence, evidenceBoard, questionMark, investigationLine, gapTimeline, typeStack,
     sprinklerHeadsFade, followPin, scaleOf,
-    iso, planFromWorld, PLACES, EVIDENCE, FIELD_LABELS,
+    iso, planFromWorld, PLACES, EVIDENCE, EVIDENCE_EXTRAS, FIELD_LABELS, FIELD_TAGS, SAFEGUARD_LAYOUT,
     util: { rng, hashStr, smoothCmds, lineCmds, flatten, pointAt, plLen, hand, letters, sans, hatch, pxAt, monoWidth, sansWidth },
     events: window.__filmEvents,
   };

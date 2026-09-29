@@ -26,8 +26,10 @@
     node scripts/build-cues.mjs --allow-missing         missing composition files become warnings
     node scripts/build-cues.mjs --out-dir DIR           write every output under DIR (tests)
     node scripts/build-cues.mjs --quiet
-    node scripts/build-cues.mjs --verify-fresh          exit 1 if assets/js/cues.js was built from a
-                                                        different timing.json or cuesheet (pre-render gate)
+    node scripts/build-cues.mjs --verify-fresh          exit 1 if any generated output (cues.js, resolved.json,
+                                                        film-assets.js, index.html) differs from what this
+                                                        build would write now (pre-render gate; pass the same
+                                                        --cuesheet the outputs were built with)
 
   Exit code 1 (and nothing written) on any error: unresolved or ambiguous anchor, cue cycle,
   base scenes that leave a gap, overlap that is not a declared crossfade, scene outside the film,
@@ -589,6 +591,11 @@ const INDEX_TEMPLATE = `<!doctype html>
     <script src="assets/js/film-lib.js"></script>
     <script src="assets/js/cues.js"></script>
     <script src="assets/js/film-assets.js"></script>
+    <!-- Shared kits: the site (graphite twin + precise), the interface, the Act I sketch world. -->
+    <script src="assets/js/site-data.js"></script>
+    <script src="assets/js/site-kit.js"></script>
+    <script src="assets/js/ui-kit.js"></script>
+    <script src="assets/js/sketch-kit.js"></script>
     <link rel="stylesheet" href="assets/css/film.css" />
     <style>
       #root {
@@ -665,18 +672,7 @@ const table = scenes
   .join("\n");
 log(`build-cues: film ${r3(END)} s = ${frames} frames at ${fps} fps; ${Object.keys(CUES).length} cues, ${scenes.length} scenes, ${events.length} events, ${audio.filter((a) => a.present).length}/${audio.length} stems${timing.guide ? " (GUIDE timing)" : ""}`);
 log(table);
-if (opt.verifyFresh) {
-  const f = outPath("assets/js/cues.js");
-  const old = fs.existsSync(f) ? fs.readFileSync(f, "utf8") : "";
-  const m = /\(([0-9a-f]{12})\) and .*? \(([0-9a-f]{12})\); do not edit/.exec(old);
-  if (!m || m[1] !== FILM.cuesheet.sha || m[2] !== FILM.timing.sha) {
-    console.error(`build-cues: STALE assets/js/cues.js (built from cuesheet ${m ? m[1] : "?"}, timing ${m ? m[2] : "?"}; current ${FILM.cuesheet.sha}, ${FILM.timing.sha}). Run node scripts/build-cues.mjs.`);
-    process.exit(1);
-  }
-  log("build-cues: cues.js is fresh.");
-  process.exit(0);
-}
-if (opt.check) {
+if (opt.check && !opt.verifyFresh) {
   log("build-cues: --check: valid, nothing written.");
   process.exit(0);
 }
@@ -687,6 +683,24 @@ const writes = [
   [outPath("assets/js/film-assets.js"), assetsJs || `/* assets/js/film-assets.js: ${stamp}. No inline assets declared. */\nwindow.FL_ASSETS = window.FL_ASSETS || {};\n`],
   [opt.outDir ? outPath("index.html") : indexFile, indexHtml],
 ];
+if (opt.verifyFresh) {
+  // Every generated output must equal what this build would write now. This also catches
+  // changes that do not touch the cue sheet or timing: an events.json edit, a stem that
+  // appeared or changed length, an edited inline SVG, a hand edit inside the index markers.
+  // Studio's data-hf-id stamps are ignored.
+  const noHf = (s) => s.replace(/\sdata-hf-id="[^"]*"/g, "");
+  const stale = [];
+  for (const [f, text] of writes) {
+    const old = fs.existsSync(f) ? fs.readFileSync(f, "utf8") : null;
+    if (old == null || noHf(old) !== noHf(text)) stale.push(path.relative(ROOT, f) || f);
+  }
+  if (stale.length) {
+    console.error(`build-cues: STALE ${stale.join(", ")} (current cuesheet ${FILM.cuesheet.sha}, timing ${FILM.timing.sha}). Run node scripts/build-cues.mjs${opt.cuesheet !== "cues/cuesheet.json" ? ` --cuesheet ${opt.cuesheet}` : ""}.`);
+    process.exit(1);
+  }
+  log("build-cues: cues.js, resolved.json, film-assets.js and index.html are fresh.");
+  process.exit(0);
+}
 for (const [f, text] of writes) {
   fs.mkdirSync(path.dirname(f), { recursive: true });
   fs.writeFileSync(f, text);

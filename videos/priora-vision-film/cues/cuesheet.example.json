@@ -1,6 +1,6 @@
 {
   "schema": "priora-cuesheet/1",
-  "note": "EXAMPLE cue sheet showing every feature of scripts/build-cues.mjs, shaped like STORYBOARD.md. Copy to cues/cuesheet.json and edit. Validate with: node scripts/build-cues.mjs --cuesheet cues/cuesheet.example.json --check --allow-missing",
+  "note": "EXAMPLE cue sheet showing every feature of scripts/build-cues.mjs, shaped like STORYBOARD.md. Reference only: the real sheet is cues/cuesheet.json. It no longer validates once scenes ship compositions/<id>.events.json sidecars, because those events anchor to cues that only cues/cuesheet.json defines (every event of a mounted scene must resolve against the sheet that mounts it).",
   "fps": 30,
   "film": { "duration": "END", "compositionId": "film" },
   "cues": {

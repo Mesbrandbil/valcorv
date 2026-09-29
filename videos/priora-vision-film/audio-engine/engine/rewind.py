@@ -29,11 +29,36 @@ from . import dsp, library
 from .dsp import SR, ns, rng
 
 
+# The picture's rewind ease, FL.rewindEase() in assets/js/film-lib.js: the
+# GSAP CustomEase path "M0,0 C0.18,0 0.26,0.06 0.36,0.22 0.5,0.46 0.62,0.86
+# 0.74,0.96 0.84,0.995 0.9,1 1,1". The sound reads story time through the same
+# curve so it travels backward with the image (within 0.0013 of GSAP's own
+# lookup, measured at 201 points). Change both together or neither.
+EASE_PATH = (((0.0, 0.0), (0.18, 0.0), (0.26, 0.06), (0.36, 0.22)),
+             ((0.36, 0.22), (0.5, 0.46), (0.62, 0.86), (0.74, 0.96)),
+             ((0.74, 0.96), (0.84, 0.995), (0.9, 1.0), (1.0, 1.0)))
+
+
+def _ease_table(k: int = 4001):
+    s = np.linspace(0.0, 1.0, k)
+    m = 1.0 - s
+    b = np.stack([m ** 3, 3 * m * m * s, 3 * m * s * s, s ** 3], 1)
+    xs, ys = [], []
+    for seg in EASE_PATH:
+        p = np.asarray(seg, float)
+        xs.append(b @ p[:, 0])
+        ys.append(b @ p[:, 1])
+    return np.concatenate(xs), np.concatenate(ys)
+
+
+_EASE_X, _EASE_Y = _ease_table()
+
+
 def ease(u: np.ndarray | float) -> np.ndarray:
-    """Slow start, fast middle, very hard deceleration into the landing."""
+    """Slow start (the tape catches), fast middle, very hard deceleration into
+    the landing: the same curve the picture uses (EASE_PATH)."""
     u = np.clip(np.asarray(u, float), 0, 1)
-    a = u ** 1.7
-    return 1 - (1 - a) ** 4.5
+    return np.interp(u, _EASE_X, _EASE_Y)
 
 
 def story_time(tau, rs, re_, landing):

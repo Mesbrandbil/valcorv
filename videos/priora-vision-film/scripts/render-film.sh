@@ -53,7 +53,7 @@ for k in ['hour', 'workMoves', 'accepted', 'checklists', 'moving', 'inPlace', 'l
           'proof', 'immediately', 'cross', 'change', 'retain', 'cover', 'decisionsL18', 'chainCapacity',
           'infrastructure']:
     if k in c: ts.add(round(c[k] + 0.4, 2))
-ts.add(round(r['duration'] - 0.5, 2))
+ts.add(round(r['film']['duration'] - 0.5, 2))
 print(','.join(str(t) for t in sorted(ts)))
 EOF
 )"
@@ -63,7 +63,7 @@ fi
 
 echo "== 4. render picture ($QUALITY)"
 PIC="renders/tmp/$NAME-picture.mp4"
-$HF render --quality "$QUALITY" --output "$PIC"
+$HF render --quality "$QUALITY" --workers 2 --output "$PIC"
 
 echo "== 5. audio"
 AUDIO="assets/audio/master.wav"

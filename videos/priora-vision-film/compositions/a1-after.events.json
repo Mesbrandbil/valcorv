@@ -1,0 +1,23 @@
+{
+  "note": "a1-after (Frame 3): fragments land and pin to the site, the questions set, the gap rule draws. Anchored to the same cues and offsets as the scene's story tweens (pin offsets measured from the fragment draw sequence at speed 2). The rewind sound belongs to a1-world.",
+  "events": [
+    { "name": "frag-photo", "at": "cue:afterwards-0.35", "kind": "paper-slide", "gain_db": -16, "dur": 0.22 },
+    { "name": "pin-photo", "at": "cue:afterwards+1.14", "kind": "pin", "gain_db": -12 },
+    { "name": "frag-programme", "at": "cue:afterwards+0.05", "kind": "paper-slide", "gain_db": -16, "dur": 0.22 },
+    { "name": "pin-programme", "at": "cue:afterwards+1.47", "kind": "pin", "gain_db": -12 },
+    { "name": "frag-call", "at": "cue:afterwards+0.45", "kind": "paper-slide", "gain_db": -16, "dur": 0.22 },
+    { "name": "pin-call", "at": "cue:afterwards+1.98", "kind": "pin", "gain_db": -12 },
+    { "name": "frag-permit", "at": "cue:wrong-0.05", "kind": "paper-slide", "gain_db": -16, "dur": 0.22 },
+    { "name": "pin-permit", "at": "cue:wrong+1.58", "kind": "pin", "gain_db": -12 },
+    { "name": "frag-workorder", "at": "cue:wrong+0.35", "kind": "paper-slide", "gain_db": -16, "dur": 0.22 },
+    { "name": "pin-workorder", "at": "cue:wrong+1.84", "kind": "pin", "gain_db": -12 },
+    { "name": "frag-statement", "at": "cue:wrong+0.75", "kind": "paper-slide", "gain_db": -16, "dur": 0.22 },
+    { "name": "pin-email", "at": "cue:wrong+2.42", "kind": "pin", "gain_db": -12 },
+    { "name": "frag-email", "at": "cue:wrong+1.15", "kind": "paper-slide", "gain_db": -16, "dur": 0.22 },
+    { "name": "pin-statement", "at": "cue:wrong+2.56", "kind": "pin", "gain_db": -12 },
+    { "name": "question-1", "at": "cue:q1", "kind": "question", "gain_db": -18 },
+    { "name": "question-2", "at": "cue:q2", "kind": "question", "gain_db": -18 },
+    { "name": "question-3", "at": "cue:q3", "kind": "question", "gain_db": -18 },
+    { "name": "gap-rule", "at": "cue:gap-0.85", "kind": "gap-rule", "gain_db": -10, "dur": 0.82 }
+  ]
+}

@@ -169,6 +169,13 @@ def run(project: str, resolved_path: str, timing_path: str | None, voice_path: s
     events = design.merge(design.designed(C), scene_ev, auto_ev)
     events, control2 = expand_macros(events)
     control.update(control2)
+    # one-shots fall away at rewindStart and stay muted until rewindEnd (the
+    # rewind replaces them); only the rewind-* kit plays there. Say so.
+    for e in scene_ev:
+        if C["rewindStart"] <= e["t"] < C["rewindEnd"] - 0.01 and not e["kind"].startswith("rewind-"):
+            warns.append(f"scene event '{e.get('name', e['kind'])}' ({e['kind']}) at {e['t']:.2f}s lies inside the "
+                         f"rewind ({C['rewindStart']:.2f} to {C['rewindEnd']:.2f}s) and is faded out or muted; "
+                         f"only rewind-* kinds play there")
     if warns:
         report.setdefault("warnings", []).extend(warns)
     counts = {}
