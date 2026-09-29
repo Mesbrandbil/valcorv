@@ -1,0 +1,120 @@
+{
+  "note": "a1-inserts (S3b, S7b, S8a): the sounds the three close-up inserts make, anchored to the cues the tweens use. Shared cut times follow FL.cutAt (the half beat nearest to 0.12 s before the word); offsets here are those cut times relative to the word under the current narration. The inserts are story-scrubbed: in the rewind the SZ3 insert plays backwards (tag lifts, needle rises, handwheel turns back) inside a1-world's rewind sound; no separate events are declared for the reversal.",
+  "events": [
+    {
+      "name": "loto-cut-in",
+      "at": "cue:equipment",
+      "kind": "cut",
+      "material": "paper",
+      "gain_db": -12,
+      "what": "S3b: cut to the LOTO valve close-up",
+      "snap": {
+        "mode": "cut",
+        "off": -0.0001
+      }
+    },
+    {
+      "name": "loto-handwheel",
+      "at": "cue:equipment-0.097",
+      "kind": "handwheel",
+      "gain_db": -10,
+      "dur": 0.489,
+      "what": "a quarter turn, closing"
+    },
+    {
+      "name": "loto-tag",
+      "at": "cue:isolated-0.168",
+      "kind": "tick",
+      "gain_db": -12,
+      "what": "the LOTO tag drops on its string and the string goes taut"
+    },
+    {
+      "name": "loto-cut-out",
+      "at": "cue:workMoves",
+      "kind": "cut",
+      "material": "paper",
+      "gain_db": -12,
+      "what": "back to the site on 'Work moves'",
+      "snap": {
+        "mode": "cut",
+        "off": 0.0003
+      }
+    },
+    {
+      "name": "weld-cut-in",
+      "at": "cue:hotWork",
+      "kind": "cut",
+      "material": "felt",
+      "gain_db": -12,
+      "what": "S7b: cut to the welder close-up",
+      "snap": {
+        "mode": "cut",
+        "off": 0.0004
+      }
+    },
+    {
+      "name": "weld-arc",
+      "at": "cue:hotWork",
+      "kind": "arc",
+      "gain_db": -16,
+      "dur": 1.304,
+      "what": "the arc point flickering while the torch travels along the seam",
+      "snap": {
+        "mode": "cut",
+        "off": 0.0004
+      }
+    },
+    {
+      "name": "weld-cut-out",
+      "at": "cue:certificate",
+      "kind": "cut",
+      "material": "felt",
+      "gain_db": -12,
+      "what": "back to Roof 03 on 'every'",
+      "snap": "cut"
+    },
+    {
+      "name": "sz3-cut-in",
+      "at": "cue:then",
+      "kind": "cut",
+      "material": "paper",
+      "gain_db": -12,
+      "what": "S8a: cut to the Sprinkler Zone 3 control valve"
+    },
+    {
+      "name": "sz3-handwheel",
+      "at": "cue:sprinkler-0.060",
+      "kind": "handwheel",
+      "gain_db": -10,
+      "dur": 1.31,
+      "what": "the handwheel turns closed over 'sprinkler zone', the rising stem runs in"
+    },
+    {
+      "name": "sz3-valve-clunk",
+      "at": "cue:offline",
+      "kind": "valve-clunk",
+      "gain_db": -6,
+      "what": "the gate seats on 'offline': muted, mechanical, no alarm"
+    },
+    {
+      "name": "sz3-gauge",
+      "at": "cue:offline+0.300",
+      "kind": "gauge",
+      "gain_db": -12,
+      "dur": 0.51,
+      "what": "the needle falls from 7.2 bar on 'goes offline' and ticks on the zero stop (the fall began dur seconds earlier)"
+    },
+    {
+      "name": "sz3-cut-out",
+      "at": "L07.end",
+      "kind": "cut",
+      "material": "paper",
+      "gain_db": -14,
+      "what": "to the zone 3 roof (S8b)",
+      "snap": {
+        "mode": "next",
+        "off": -0.0003
+      }
+    }
+  ]
+}

@@ -1485,7 +1485,646 @@ window.FL_EVENTS = {
    "at": "cue:rewindEnd"
   }
  },
- "a1-paper": {},
+ "a1-inserts": {
+  "loto-cut-in": {
+   "name": "loto-cut-in",
+   "kind": "cut",
+   "material": "paper",
+   "gain_db": -12,
+   "what": "S3b: cut to the LOTO valve close-up",
+   "snap": {
+    "mode": "cut",
+    "off": -0.0001
+   },
+   "scene": "a1-inserts",
+   "t": 7.826,
+   "local": 0.326,
+   "at": "cue:equipment"
+  },
+  "loto-handwheel": {
+   "name": "loto-handwheel",
+   "kind": "handwheel",
+   "gain_db": -10,
+   "dur": 0.489,
+   "what": "a quarter turn, closing",
+   "scene": "a1-inserts",
+   "t": 7.989,
+   "local": 0.489,
+   "at": "cue:equipment-0.097"
+  },
+  "loto-tag": {
+   "name": "loto-tag",
+   "kind": "tick",
+   "gain_db": -12,
+   "what": "the LOTO tag drops on its string and the string goes taut",
+   "scene": "a1-inserts",
+   "t": 8.748,
+   "local": 1.248,
+   "at": "cue:isolated-0.168"
+  },
+  "loto-cut-out": {
+   "name": "loto-cut-out",
+   "kind": "cut",
+   "material": "paper",
+   "gain_db": -12,
+   "what": "back to the site on 'Work moves'",
+   "snap": {
+    "mode": "cut",
+    "off": 0.0003
+   },
+   "scene": "a1-inserts",
+   "t": 10.109,
+   "local": 2.609,
+   "at": "cue:workMoves"
+  },
+  "weld-cut-in": {
+   "name": "weld-cut-in",
+   "kind": "cut",
+   "material": "felt",
+   "gain_db": -12,
+   "what": "S7b: cut to the welder close-up",
+   "snap": {
+    "mode": "cut",
+    "off": 0.0004
+   },
+   "scene": "a1-inserts",
+   "t": 24.783,
+   "local": 17.283,
+   "at": "cue:hotWork"
+  },
+  "weld-arc": {
+   "name": "weld-arc",
+   "kind": "arc",
+   "gain_db": -16,
+   "dur": 1.304,
+   "what": "the arc point flickering while the torch travels along the seam",
+   "snap": {
+    "mode": "cut",
+    "off": 0.0004
+   },
+   "scene": "a1-inserts",
+   "t": 24.783,
+   "local": 17.283,
+   "at": "cue:hotWork"
+  },
+  "weld-cut-out": {
+   "name": "weld-cut-out",
+   "kind": "cut",
+   "material": "felt",
+   "gain_db": -12,
+   "what": "back to Roof 03 on 'every'",
+   "snap": "cut",
+   "scene": "a1-inserts",
+   "t": 26.087,
+   "local": 18.587,
+   "at": "cue:certificate"
+  },
+  "sz3-cut-in": {
+   "name": "sz3-cut-in",
+   "kind": "cut",
+   "material": "paper",
+   "gain_db": -12,
+   "what": "S8a: cut to the Sprinkler Zone 3 control valve",
+   "scene": "a1-inserts",
+   "t": 29.022,
+   "local": 21.522,
+   "at": "cue:then"
+  },
+  "sz3-handwheel": {
+   "name": "sz3-handwheel",
+   "kind": "handwheel",
+   "gain_db": -10,
+   "dur": 1.31,
+   "what": "the handwheel turns closed over 'sprinkler zone', the rising stem runs in",
+   "scene": "a1-inserts",
+   "t": 29.222,
+   "local": 21.722,
+   "at": "cue:sprinkler-0.060"
+  },
+  "sz3-valve-clunk": {
+   "name": "sz3-valve-clunk",
+   "kind": "valve-clunk",
+   "gain_db": -6,
+   "what": "the gate seats on 'offline': muted, mechanical, no alarm",
+   "scene": "a1-inserts",
+   "t": 30.532,
+   "local": 23.032,
+   "at": "cue:offline"
+  },
+  "sz3-gauge": {
+   "name": "sz3-gauge",
+   "kind": "gauge",
+   "gain_db": -12,
+   "dur": 0.51,
+   "what": "the needle falls from 7.2 bar on 'goes offline' and ticks on the zero stop (the fall began dur seconds earlier)",
+   "scene": "a1-inserts",
+   "t": 30.832,
+   "local": 23.332,
+   "at": "cue:offline+0.300"
+  },
+  "sz3-cut-out": {
+   "name": "sz3-cut-out",
+   "kind": "cut",
+   "material": "paper",
+   "gain_db": -14,
+   "what": "to the zone 3 roof (S8b)",
+   "snap": {
+    "mode": "next",
+    "off": -0.0003
+   },
+   "scene": "a1-inserts",
+   "t": 31.304,
+   "local": 23.804,
+   "at": "L07.end"
+  }
+ },
+ "a1-paper": {
+  "sheet-lay": {
+   "name": "sheet-lay",
+   "kind": "sheet-lay",
+   "gain_db": -9,
+   "dur": 0.652,
+   "what": "the sheet slides in from the right and lies flat",
+   "snap": {
+    "mode": "near",
+    "off": -0.0001
+   },
+   "scene": "a1-paper",
+   "t": 15.326,
+   "local": 0.359,
+   "at": "L03:accepted.end"
+  },
+  "underline": {
+   "name": "underline",
+   "kind": "ruler",
+   "gain_db": -13,
+   "dur": 0.36,
+   "what": "graphite underline under 'sprinkler protection ... in service'",
+   "snap": {
+    "mode": "near",
+    "off": 0.6519
+   },
+   "scene": "a1-paper",
+   "t": 15.978,
+   "local": 1.011,
+   "at": "L03:accepted.end"
+  },
+  "lead-arrow": {
+   "name": "lead-arrow",
+   "kind": "pencil",
+   "gain_db": -12,
+   "dur": 0.6,
+   "what": "the underline runs on into an arrow down to the procedure",
+   "snap": {
+    "mode": "cut",
+    "off": -0.0003
+   },
+   "scene": "a1-paper",
+   "t": 16.304,
+   "local": 1.337,
+   "at": "cue:translate"
+  },
+  "follow": {
+   "name": "follow",
+   "kind": "whip",
+   "gain_db": -20,
+   "dur": 0.6,
+   "what": "the camera follows the arrow to PROCEDURE",
+   "snap": {
+    "mode": "cut",
+    "off": -0.0003
+   },
+   "scene": "a1-paper",
+   "t": 16.304,
+   "local": 1.337,
+   "at": "cue:translate"
+  },
+  "procedure-line": {
+   "name": "procedure-line",
+   "kind": "pen",
+   "gain_db": -15,
+   "dur": 0.58,
+   "what": "'Confirm sprinklers in service' written and underlined",
+   "scene": "a1-paper",
+   "t": 16.704,
+   "local": 1.737,
+   "at": "cue:translate+0.126"
+  },
+  "whip-permit": {
+   "name": "whip-permit",
+   "kind": "whip",
+   "gain_db": -16,
+   "dur": 0.32608695652173914,
+   "scene": "a1-paper",
+   "t": 17.12,
+   "local": 2.153,
+   "at": "cue:permits-0.248"
+  },
+  "arrow-permit": {
+   "name": "arrow-permit",
+   "kind": "pencil",
+   "gain_db": -15,
+   "dur": 0.376,
+   "what": "solid arrow procedure to permit",
+   "scene": "a1-paper",
+   "t": 17.08,
+   "local": 2.113,
+   "at": "cue:permits-0.288"
+  },
+  "permit-line": {
+   "name": "permit-line",
+   "kind": "pen",
+   "gain_db": -16,
+   "dur": 0.2,
+   "scene": "a1-paper",
+   "t": 17.386,
+   "local": 2.419,
+   "at": "cue:permits+0.018"
+  },
+  "permit-tick": {
+   "name": "permit-tick",
+   "kind": "tick",
+   "gain_db": -11,
+   "scene": "a1-paper",
+   "t": 17.586,
+   "local": 2.619,
+   "at": "cue:permits+0.218"
+  },
+  "permit-stamp": {
+   "name": "permit-stamp",
+   "kind": "stamp",
+   "gain_db": -7,
+   "what": "APPROVED · HSE, on the beat",
+   "snap": {
+    "mode": "next",
+    "off": 0.0003
+   },
+   "scene": "a1-paper",
+   "t": 17.609,
+   "local": 2.642,
+   "at": "cue:permits"
+  },
+  "whip-briefing": {
+   "name": "whip-briefing",
+   "kind": "whip",
+   "gain_db": -16,
+   "dur": 0.32608695652173914,
+   "scene": "a1-paper",
+   "t": 17.772,
+   "local": 2.805,
+   "at": "cue:briefings-0.146"
+  },
+  "arrow-briefing-01": {
+   "name": "arrow-briefing-01",
+   "kind": "pencil-scatter",
+   "gain_db": -17,
+   "dur": 0.03,
+   "what": "dashed arrow permit to briefing",
+   "scene": "a1-paper",
+   "t": 17.732,
+   "local": 2.765,
+   "at": "cue:briefings-0.186"
+  },
+  "arrow-briefing-02": {
+   "name": "arrow-briefing-02",
+   "kind": "pencil-scatter",
+   "gain_db": -17,
+   "dur": 0.03,
+   "what": "dashed arrow permit to briefing",
+   "scene": "a1-paper",
+   "t": 17.765,
+   "local": 2.798,
+   "at": "cue:briefings-0.186"
+  },
+  "arrow-briefing-03": {
+   "name": "arrow-briefing-03",
+   "kind": "pencil-scatter",
+   "gain_db": -17,
+   "dur": 0.03,
+   "what": "dashed arrow permit to briefing",
+   "scene": "a1-paper",
+   "t": 17.798,
+   "local": 2.831,
+   "at": "cue:briefings-0.186"
+  },
+  "arrow-briefing-04": {
+   "name": "arrow-briefing-04",
+   "kind": "pencil-scatter",
+   "gain_db": -17,
+   "dur": 0.03,
+   "what": "dashed arrow permit to briefing",
+   "scene": "a1-paper",
+   "t": 17.831,
+   "local": 2.864,
+   "at": "cue:briefings-0.186"
+  },
+  "arrow-briefing-05": {
+   "name": "arrow-briefing-05",
+   "kind": "pencil-scatter",
+   "gain_db": -17,
+   "dur": 0.03,
+   "what": "dashed arrow permit to briefing",
+   "scene": "a1-paper",
+   "t": 17.864,
+   "local": 2.897,
+   "at": "cue:briefings-0.186"
+  },
+  "arrow-briefing-06": {
+   "name": "arrow-briefing-06",
+   "kind": "pencil-scatter",
+   "gain_db": -17,
+   "dur": 0.03,
+   "what": "dashed arrow permit to briefing",
+   "scene": "a1-paper",
+   "t": 17.897,
+   "local": 2.93,
+   "at": "cue:briefings-0.186"
+  },
+  "arrow-briefing-07": {
+   "name": "arrow-briefing-07",
+   "kind": "pencil-scatter",
+   "gain_db": -17,
+   "dur": 0.03,
+   "what": "dashed arrow permit to briefing",
+   "scene": "a1-paper",
+   "t": 17.93,
+   "local": 2.963,
+   "at": "cue:briefings-0.186"
+  },
+  "arrow-briefing-08": {
+   "name": "arrow-briefing-08",
+   "kind": "pencil-scatter",
+   "gain_db": -17,
+   "dur": 0.03,
+   "what": "dashed arrow permit to briefing",
+   "scene": "a1-paper",
+   "t": 17.963,
+   "local": 2.996,
+   "at": "cue:briefings-0.186"
+  },
+  "arrow-briefing-09": {
+   "name": "arrow-briefing-09",
+   "kind": "pencil-scatter",
+   "gain_db": -17,
+   "dur": 0.03,
+   "what": "dashed arrow permit to briefing",
+   "scene": "a1-paper",
+   "t": 17.996,
+   "local": 3.029,
+   "at": "cue:briefings-0.186"
+  },
+  "arrow-briefing-10": {
+   "name": "arrow-briefing-10",
+   "kind": "pencil-scatter",
+   "gain_db": -17,
+   "dur": 0.03,
+   "what": "dashed arrow permit to briefing",
+   "scene": "a1-paper",
+   "t": 18.029,
+   "local": 3.062,
+   "at": "cue:briefings-0.186"
+  },
+  "briefing-note": {
+   "name": "briefing-note",
+   "kind": "pencil",
+   "gain_db": -16,
+   "dur": 0.24,
+   "what": "the speech outline",
+   "scene": "a1-paper",
+   "t": 18.058,
+   "local": 3.091,
+   "at": "cue:briefings+0.140"
+  },
+  "briefing-line": {
+   "name": "briefing-line",
+   "kind": "pen",
+   "gain_db": -17,
+   "dur": 0.26,
+   "what": "'sprinklers on', grey",
+   "scene": "a1-paper",
+   "t": 18.198,
+   "local": 3.231,
+   "at": "cue:briefings+0.280"
+  },
+  "whip-checklist": {
+   "name": "whip-checklist",
+   "kind": "whip",
+   "gain_db": -16,
+   "dur": 0.32608695652173914,
+   "scene": "a1-paper",
+   "t": 18.424,
+   "local": 3.457,
+   "at": "cue:checklists-0.184"
+  },
+  "arrow-checklist-01": {
+   "name": "arrow-checklist-01",
+   "kind": "pencil-scatter",
+   "gain_db": -19,
+   "dur": 0.02,
+   "what": "dotted arrow briefing to checklist",
+   "scene": "a1-paper",
+   "t": 18.384,
+   "local": 3.417,
+   "at": "cue:checklists-0.224"
+  },
+  "arrow-checklist-02": {
+   "name": "arrow-checklist-02",
+   "kind": "pencil-scatter",
+   "gain_db": -19,
+   "dur": 0.02,
+   "what": "dotted arrow briefing to checklist",
+   "scene": "a1-paper",
+   "t": 18.409,
+   "local": 3.442,
+   "at": "cue:checklists-0.224"
+  },
+  "arrow-checklist-03": {
+   "name": "arrow-checklist-03",
+   "kind": "pencil-scatter",
+   "gain_db": -19,
+   "dur": 0.02,
+   "what": "dotted arrow briefing to checklist",
+   "scene": "a1-paper",
+   "t": 18.434,
+   "local": 3.467,
+   "at": "cue:checklists-0.224"
+  },
+  "arrow-checklist-04": {
+   "name": "arrow-checklist-04",
+   "kind": "pencil-scatter",
+   "gain_db": -19,
+   "dur": 0.02,
+   "what": "dotted arrow briefing to checklist",
+   "scene": "a1-paper",
+   "t": 18.459,
+   "local": 3.492,
+   "at": "cue:checklists-0.224"
+  },
+  "arrow-checklist-05": {
+   "name": "arrow-checklist-05",
+   "kind": "pencil-scatter",
+   "gain_db": -19,
+   "dur": 0.02,
+   "what": "dotted arrow briefing to checklist",
+   "scene": "a1-paper",
+   "t": 18.484,
+   "local": 3.517,
+   "at": "cue:checklists-0.224"
+  },
+  "arrow-checklist-06": {
+   "name": "arrow-checklist-06",
+   "kind": "pencil-scatter",
+   "gain_db": -19,
+   "dur": 0.02,
+   "what": "dotted arrow briefing to checklist",
+   "scene": "a1-paper",
+   "t": 18.509,
+   "local": 3.542,
+   "at": "cue:checklists-0.224"
+  },
+  "arrow-checklist-07": {
+   "name": "arrow-checklist-07",
+   "kind": "pencil-scatter",
+   "gain_db": -19,
+   "dur": 0.02,
+   "what": "dotted arrow briefing to checklist",
+   "scene": "a1-paper",
+   "t": 18.534,
+   "local": 3.567,
+   "at": "cue:checklists-0.224"
+  },
+  "arrow-checklist-08": {
+   "name": "arrow-checklist-08",
+   "kind": "pencil-scatter",
+   "gain_db": -19,
+   "dur": 0.02,
+   "what": "dotted arrow briefing to checklist",
+   "scene": "a1-paper",
+   "t": 18.559,
+   "local": 3.592,
+   "at": "cue:checklists-0.224"
+  },
+  "arrow-checklist-09": {
+   "name": "arrow-checklist-09",
+   "kind": "pencil-scatter",
+   "gain_db": -19,
+   "dur": 0.02,
+   "what": "dotted arrow briefing to checklist",
+   "scene": "a1-paper",
+   "t": 18.584,
+   "local": 3.617,
+   "at": "cue:checklists-0.224"
+  },
+  "arrow-checklist-10": {
+   "name": "arrow-checklist-10",
+   "kind": "pencil-scatter",
+   "gain_db": -19,
+   "dur": 0.02,
+   "what": "dotted arrow briefing to checklist",
+   "scene": "a1-paper",
+   "t": 18.609,
+   "local": 3.642,
+   "at": "cue:checklists-0.224"
+  },
+  "arrow-checklist-11": {
+   "name": "arrow-checklist-11",
+   "kind": "pencil-scatter",
+   "gain_db": -19,
+   "dur": 0.02,
+   "what": "dotted arrow briefing to checklist",
+   "scene": "a1-paper",
+   "t": 18.634,
+   "local": 3.667,
+   "at": "cue:checklists-0.224"
+  },
+  "arrow-checklist-12": {
+   "name": "arrow-checklist-12",
+   "kind": "pencil-scatter",
+   "gain_db": -19,
+   "dur": 0.02,
+   "what": "dotted arrow briefing to checklist",
+   "scene": "a1-paper",
+   "t": 18.659,
+   "local": 3.692,
+   "at": "cue:checklists-0.224"
+  },
+  "arrow-checklist-13": {
+   "name": "arrow-checklist-13",
+   "kind": "pencil-scatter",
+   "gain_db": -19,
+   "dur": 0.02,
+   "what": "dotted arrow briefing to checklist",
+   "scene": "a1-paper",
+   "t": 18.684,
+   "local": 3.717,
+   "at": "cue:checklists-0.224"
+  },
+  "arrow-checklist-14": {
+   "name": "arrow-checklist-14",
+   "kind": "pencil-scatter",
+   "gain_db": -19,
+   "dur": 0.02,
+   "what": "dotted arrow briefing to checklist",
+   "scene": "a1-paper",
+   "t": 18.709,
+   "local": 3.742,
+   "at": "cue:checklists-0.224"
+  },
+  "checklist-line": {
+   "name": "checklist-line",
+   "kind": "pen",
+   "gain_db": -18,
+   "dur": 0.2,
+   "what": "'Sprinklers', pale",
+   "scene": "a1-paper",
+   "t": 18.69,
+   "local": 3.723,
+   "at": "cue:checklists+0.082"
+  },
+  "question-mark": {
+   "name": "question-mark",
+   "kind": "pencil",
+   "gain_db": -13,
+   "dur": 0.18,
+   "scene": "a1-paper",
+   "t": 18.89,
+   "local": 3.923,
+   "at": "cue:checklists+0.282"
+  },
+  "pull-back": {
+   "name": "pull-back",
+   "kind": "pull",
+   "gain_db": -14,
+   "dur": 1,
+   "what": "the whole sheet: the clause and the four artefacts, the thread thinning across them",
+   "scene": "a1-paper",
+   "t": 19.076,
+   "local": 4.109,
+   "at": "cue:checklists+0.468"
+  },
+  "circle-question": {
+   "name": "circle-question",
+   "kind": "pencil",
+   "gain_db": -14,
+   "dur": 0.34,
+   "what": "the question mark circled in the hold",
+   "scene": "a1-paper",
+   "t": 20.076,
+   "local": 5.109,
+   "at": "cue:noOne-0.467"
+  },
+  "sheet-lift": {
+   "name": "sheet-lift",
+   "kind": "paper-lift",
+   "gain_db": -9,
+   "dur": 0.42,
+   "what": "the sheet lifts off to the left, fast and flat, on 'But'",
+   "scene": "a1-paper",
+   "t": 20.543,
+   "local": 5.576,
+   "at": "cue:noOne"
+  }
+ },
  "a1-after": {
   "pin-wave-01": {
    "name": "pin-wave-01",
