@@ -42,8 +42,8 @@ GM = {"piano": 0, "strings": 49, "pad": 89, "cello": 42, "bass": 43}
 
 # loudness each layer is calibrated to (integrated, gated) before the mix
 TARGET_LUFS = {
-    "piano": -31.0, "strings": -32.0, "pad": -37.0, "cello": -35.0, "bass": -37.0,
-    "sub": -40.0, "pulse": -34.0,
+    "piano": -26.5, "strings": -27.5, "pad": -35.0, "cello": -34.0, "bass": -38.0,
+    "sub": -47.0, "pulse": -30.0,
 }
 
 
@@ -294,7 +294,7 @@ class Arrangement:
         p2.note(self.hum(pv) + 0.01, 3.0, "A2", self.vel(38))
         p2.note(self.hum(pf), 3.0, "G2", self.vel(42))
         p2.note(self.hum(pf) + 0.01, 3.0, "D3", self.vel(36))
-        s2.expr([(con, 64), (pv - 0.4, 60), (pv + 0.6, 80), (pf, 72), (pf + 0.8, 82), (off2, 70),
+        s2.expr([(con, 64), (pv - 0.4, 60), (pv + 0.6, 76), (pf, 70), (pf + 0.8, 74), (off2, 66),
                  (C["sees"], 40), (C["cross"] - 0.2, 0)])
         self.auto["piano-a2"] = [(0, 1.0), (off2 - 0.02, 1.0), (off2 + 0.25, 0.0)]
         self.auto["cello-a2"] = [(0, 1.0), (off2 - 0.02, 1.0), (off2 + 0.4, 0.0)]
@@ -367,7 +367,7 @@ class Arrangement:
             p4.note(self.hum(t), dur, n, self.vel(v))
         self.sub.append((cr, cp, "Gadd9", -5.0))
         self.sub.append((cp, pr, "Asus4", -5.0))
-        self.sub.append((pr, end - 1.0, "Dwide", -4.0))
+        self.sub.append((pr, end - 3.2, "Dwide", -4.0, 2.8))
         for key in ("strings-close", "piano-close", "pad-close", "bass-close"):
             self.auto[key] = [(0, 1.0), (end - 1.2, 1.0), (end - 0.15, 0.0)]
 
@@ -377,18 +377,20 @@ class Arrangement:
 def _sub_layer(arr: Arrangement, n: int) -> np.ndarray:
     """Sine sub on each chord root, kept between 45 and 90 Hz, glided."""
     y = np.zeros(n)
-    for (t0, t1, chn, lvl) in arr.sub:
+    for item in arr.sub:
+        t0, t1, chn, lvl = item[:4]
+        rel = item[4] if len(item) > 4 else 0.12
         root = ROOT.get(chn, "D2")
         f = hz(m(root))
         while f < 45:
             f *= 2
         while f >= 90:
             f /= 2
-        a, b = ns(t0), min(ns(t1 + 0.12), n)
+        a, b = ns(t0), min(ns(t1 + rel), n)
         if b <= a:
             continue
         seg = np.sin(2 * np.pi * f * np.arange(b - a) / SR) * dsp.undb(lvl)
-        e = dsp.ar(b - a, 0.09, 0.12)
+        e = dsp.ar(b - a, 0.09, rel)
         y[a:b] += seg * e
     y = dsp.hp(dsp.lp(y, 140, 2), 32, 4)
     return dsp.st(y)
@@ -421,7 +423,7 @@ def _pulse_sound(kind: str, seed: int) -> np.ndarray:
     raise ValueError(kind)
 
 
-PULSE_LEVEL = {"pump": -8.0, "relay": -6.0, "conveyor": -8.0, "breath": -10.0, "tick": -6.0, "soft": -4.0}
+PULSE_LEVEL = {"pump": -9.0, "relay": -6.0, "conveyor": -8.0, "breath": -10.0, "tick": -6.0, "soft": -7.0}
 
 
 def _pulse_layer(arr: Arrangement, n: int) -> np.ndarray:
@@ -451,72 +453,94 @@ def dsp_place(buf, snd, t, gain_db=0.0, pan_=0.0):
     buf[i:i + k] += s[:k]
 
 
-def _felt(piano: np.ndarray, part: Part, n: int) -> np.ndarray:
+def _felt(piano: np.ndarray, part: Part, offset: float = 0.0) -> np.ndarray:
     """Felt piano: darker, closer, with the soft thock of felt hammers."""
+    n = len(piano)
     y = dsp.lp(piano, 2900, 2)
     y = dsp.eq(y, "lowshelf", 260, 1.5, 0.7)
     r = rng(5, "thock", part.name)
     th = np.zeros(n)
+    k = ns(0.035)
     for (on, off, p, v) in part.notes:
-        k = ns(0.035)
-        a = ns(on)
-        if a + k >= n:
+        a = ns(on - offset)
+        if a < 0 or a + k >= n:
             continue
         g = (v / 127.0) ** 1.5 * 0.06
         th[a:a + k] += dsp.lp(dsp.white(k, r), 520, 2) * dsp.perc(k, 0.001, 0.03) * g
     return y + dsp.st(th)
 
 
-FX = {  # per instrument: high-pass, low-pass, reverb kind, wet
+FX = {  # per instrument: high-pass, low-pass, reverb bus, send level
     "piano": (45, 12000, "plate", 0.28),
     "strings": (60, 7500, "hall", 0.32),
     "pad": (50, 3200, "plate", 0.22),
     "cello": (38, 5000, "hall", 0.26),
-    "bass": (32, 3000, "hall", 0.2),
+    "bass": (35, 3000, "hall", 0.2),
 }
+TAIL = 4.0  # seconds of release and room processed after a part's last note
 
 
-def render(C, report: dict | None = None) -> dict:
-    """Render every music layer to stereo arrays of the film's length."""
+def render(C, report: dict | None = None):
+    """Render every music layer to stereo arrays of the film's length.
+
+    Returns ({family: stereo array}, arrangement). Families: piano, strings,
+    pad, cello, bass (fluidsynth), sub, pulse (synthesised), verb-plate and
+    verb-hall (the two shared reverb returns). Each part is processed only
+    over its active span; automation is applied to the dry signal, so reverb
+    tails ring out naturally after a subtraction. The reverb returns are
+    muted through the rewind (the rewind has its own space).
+    """
     arr = Arrangement(C)
     n = ns(C.duration)
-    layers = {}
-    irs = {}
+    fam: dict[str, np.ndarray] = {}
     for key, part in arr.parts.items():
         if not part.notes:
             continue
         y = midi.render(part.program, part.notes, part.ccs, length_s=C.duration + 6.0, gain=0.6)
+        t_a = max(min(nn[0] for nn in part.notes) - 0.05, 0.0)
+        t_b = min(max(nn[1] for nn in part.notes) + TAIL, C.duration)
+        a, b = ns(t_a), ns(t_b)
+        if b <= a:
+            continue
+        seg = y[a:b]
         if part.inst == "piano":
-            y = _felt(y, part, len(y))
-        hp_, lp_, rv, wet = FX[part.inst]
-        y = dsp.lp(dsp.hp(y, hp_, 2), lp_, 2)
-        if rv not in irs:
-            irs[rv] = dsp.make_ir(rv, 71)
-        w = dsp.convolve(dsp.lp(dsp.hp(y, 150, 2), 9000, 2), irs[rv])[: len(y)]
-        y = y + w * wet
-        y = y[:n] if len(y) >= n else dsp.pad_to(y, n)
+            seg = _felt(seg, part, t_a)
+        hp_, lp_, _, _ = FX[part.inst]
+        seg = dsp.lp(dsp.hp(seg, hp_, 2), lp_, 2)
         if key in arr.auto:
-            y = y * dsp.curve(arr.auto[key], n, "cos")[:, None]
-        layers[key] = y
-    layers["sub"] = _sub_layer(arr, n)
-    layers["pulse"] = _pulse_layer(arr, n)
+            pts = [(t - t_a, v) for (t, v) in arr.auto[key]]
+            seg = seg * dsp.curve(pts, len(seg), "cos")[:, None]
+        seg = dsp.fade(seg, 0.0, 0.05)
+        buf = fam.setdefault(part.inst, np.zeros((n, 2)))
+        buf[a:a + len(seg)] += seg[: n - a]
+    fam["sub"] = _sub_layer(arr, n)
+    fam["pulse"] = _pulse_layer(arr, n)
 
-    # calibrate each instrument family to its target loudness (deterministic)
-    fam = {}
-    for key, y in layers.items():
-        fam.setdefault(key.split("-")[0], []).append(key)
+    # calibrate each family to its target loudness (deterministic)
     gains = {}
-    for f, keys in fam.items():
-        tot = sum(layers[k] for k in keys)
-        L = dsp.lufs(tot)
+    for f, y in fam.items():
+        L = dsp.lufs(y)
         g = TARGET_LUFS.get(f, -36.0) - L if L > -100 else 0.0
         gains[f] = round(g, 2)
-        for k in keys:
-            layers[k] = layers[k] * dsp.undb(g)
+        fam[f] = y * dsp.undb(g)
+
+    # two shared reverb sends
+    rs, re_ = C["rewindStart"], C["rewindEnd"]
+    mute = dsp.curve([(0, 1.0), (rs + 0.05, 1.0), (rs + 0.6, 0.0), (re_ - 0.05, 0.0), (re_, 1.0)], n, "cos")
+    for bus, ir_kind in (("plate", "plate"), ("hall", "hall")):
+        send = np.zeros((n, 2))
+        for f, (_, _, rv, wet) in FX.items():
+            if rv == bus and f in fam:
+                send += fam[f] * wet
+        if not np.any(send):
+            continue
+        send = dsp.lp(dsp.hp(send, 150, 2), 9000, 2)
+        w = dsp.convolve(send, dsp.make_ir(ir_kind, 71))[:n]
+        fam["verb-" + bus] = w * mute[:, None]
     if report is not None:
         report["score"] = {
             "bpm": BPM, "grid_anchors": {k: round(v, 3) for k, v in arr.grid_anchors.items()},
             "parts": {k: len(p.notes) for k, p in arr.parts.items()},
             "pulse_events": len(arr.pulse), "family_gain_db": gains,
         }
-    return layers, arr
+    return fam, arr

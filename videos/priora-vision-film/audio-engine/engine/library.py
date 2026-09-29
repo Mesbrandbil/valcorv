@@ -497,7 +497,7 @@ def stretch(seed=0, dur=1.2) -> np.ndarray:
     ph1 = 2 * np.pi * np.cumsum(NOTE["A3"] * glide) / SR
     ph2 = 2 * np.pi * np.cumsum(NOTE["E4"] * glide) / SR
     tone = np.sin(ph1) * 0.6 + np.sin(ph2) * 0.35
-    env = curve([(0, 0.0), (dur * 0.6, 0.45), (dur, 1.0)], n, "cos")
+    env = curve([(0, 0.0), (dur * 0.6, 0.45), (dur * 0.9, 1.0), (dur, 0.55)], n, "cos")
     y = (nz * 0.7 + tone * 0.35) * env
     y = fade(y, 0.02, 0.006)
     return _out(spread(y, r, 0.35), r, 0)
@@ -552,6 +552,109 @@ def chain_link(seed=0, link="record") -> np.ndarray:
     return _out(verb(y, "plate", 0.14, seed=47)[: ns(2.4)], r, 0.12)
 
 
+def pin(seed=0) -> np.ndarray:
+    """An evidence fragment pinned to the board: a sheet settles, a pin seats."""
+    r = rng(seed, "pin")
+    fn = ns(0.08)
+    flutter = band_sweep(fn, r, [900, 1600, 1000], [0.8, 0.7, 0.9]) * ar(fn, 0.01, 0.05) * 0.35
+    seat = mix(click(r, 1200, 6000, 0.003, 0.0006) * 0.5,
+               modal([r.uniform(260, 320), r.uniform(1900, 2300)], [0.03, 0.012], [0.8, 0.25], 0.06,
+                     mallet_ms=0.8, r=r))
+    y = mix(flutter, delay(seat, 0.06))
+    return _out(verb(y, "room", 0.08, seed=97)[: ns(0.3)], r, 0.08)
+
+
+def van(seed=0, dur=3.0) -> np.ndarray:
+    """The contractors' van arriving far off: engine harmonics and tyres on
+    gravel growing out of the distance, then settling. Heard across the site."""
+    r = rng(seed, "van", dur)
+    n = ns(dur)
+    t = tvec(n)
+    rpm = 900 + 250 * np.clip(1 - t / dur, 0, 1) * (1 + 0.1 * smooth_noise(n, r, 0.8))
+    fire = rpm / 60.0 * 2.0  # four-stroke, four cylinders: two firings per revolution
+    ph = 2 * np.pi * np.cumsum(fire) / SR
+    eng = sum(np.sin(k * ph) / k ** 0.8 for k in range(2, 9))
+    eng = lp(eng, 700, 2) * (0.8 + 0.2 * smooth_noise(n, r, 6.0))
+    tyres = bp(poisson_impulses(n, 900, r, 0.7), 700, 4000, 2) * 0.25
+    env = curve([(0, 0.0), (dur * 0.7, 1.0), (dur * 0.85, 0.8), (dur, 0.0)], n, "cos")
+    bright = curve([(0, 600.0), (dur * 0.7, 2600.0), (dur, 1200.0)], n, "lin")
+    y = (eng * 0.6 + tyres) * env
+    y = dsp.stft_shape(y, lambda tt, ff: 1.0 / np.sqrt(1 + (ff[None, :] / np.interp(tt, t, bright)[:, None]) ** 4))
+    y = hp(y, 40, 4)
+    return _out(verb(y, "hall", 0.8, seed=99)[: n + ns(1.5)], r, 0.1)
+
+
+def fray(seed=0, dur=0.5) -> np.ndarray:
+    """The connection parting: fine fibres giving way, near silent."""
+    r = rng(seed, "fray", dur)
+    n = ns(dur)
+    dens = curve([(0, 400.0), (dur * 0.6, 160.0), (dur, 20.0)], n, "lin")
+    imp = np.zeros(n)
+    u = r.random(n)
+    hits = u < dens / SR
+    imp[hits] = r.lognormal(0, 0.5, int(hits.sum())) * r.choice([-1.0, 1.0], int(hits.sum()))
+    y = bp(reson(imp, r.uniform(4200, 5200), 5) + reson(imp, r.uniform(6500, 7800), 6) * 0.6, 2500, 9500, 2)
+    y *= ar(n, 0.02, dur * 0.5)
+    return _out(y, r, 0.3)
+
+
+def incident(seed=0) -> np.ndarray:
+    """The restrained incident mark: a far, muffled low thud and a short low swell."""
+    r = rng(seed, "incident")
+    th = lp(thump(72, 48, 0.5, 1.0), 380, 2)
+    sn = ns(1.6)
+    swell = lp(hp(white(sn, r), 60, 2), 260, 2) * curve([(0, 0.0), (0.3, 1.0), (1.6, 0.0)], sn, "cos") * 0.18
+    y = mix(th, swell)
+    y = hp(y, 38, 4)
+    return _out(verb(y, "hall", 0.5, seed=101, hp_hz=60)[: ns(3.0)], r, 0.05)
+
+
+def latch_soft(seed=0) -> np.ndarray:
+    """The rewind landing: the catch of the latch alone, small and close."""
+    r = rng(seed, "latchsoft")
+    y = mix(click(r, 1500, 8000, 0.003, 0.0005) * 0.5,
+            modal([2300, 3700], [0.03, 0.02], [1, 0.4], 0.06, mallet_ms=0.12, r=r) * 0.4,
+            modal([190, 430], [0.07, 0.04], [0.7, 0.25], 0.12, mallet_ms=0.9))
+    y = hp(y, 45, 2)
+    return _out(verb(y, "room", 0.08, seed=103)[: ns(0.5)], r, 0.05)
+
+
+def capture_start(seed=0) -> np.ndarray:
+    """The voice capture strip opening: a soft felt tick with a tiny click."""
+    r = rng(seed, "capture")
+    y = mix(tuned("felt", NOTE["A5"], r, 0.3) * 0.7, _precise(r, 0.12))
+    return _out(y, r, 0.1)
+
+
+def row_unavailable(seed=0) -> np.ndarray:
+    """A check flipping to UNAVAILABLE: two soft falling felt notes, not an alarm."""
+    r = rng(seed, "unavail")
+    y = mix(tuned("felt", NOTE["A5"], r, 0.3) * 0.7, delay(tuned("felt", NOTE["E5"], r, 0.45) * 0.8, 0.09),
+            _precise(r, 0.15))
+    return _out(verb(y, "room", 0.1, seed=107)[: ns(0.9)], r, 0.1)
+
+
+def connect_line(seed=0, dur=0.6) -> np.ndarray:
+    """A live connection drawing: a fine narrow air rising in pitch, landing on a tick."""
+    r = rng(seed, "connect", dur)
+    n = ns(dur)
+    sw = band_sweep(n, r, np.geomspace(1100, 3000, 12), np.linspace(0.45, 0.3, 12))
+    sw *= curve([(0, 0.0), (dur * 0.3, 0.6), (dur, 1.0)], n, "cos")
+    sw = fade(sw, 0.01, 0.004) * 0.35
+    end = mix(tuned("wood", NOTE["E6"], r, 0.2) * 0.5, _precise(r, 0.3))
+    y = mix(dsp.st(sw), delay(dsp.st(end), dur - 0.004))
+    return _out(y, r, 0.15)
+
+
+def sheet_in(seed=0) -> np.ndarray:
+    """The decision sheet arriving: a soft low-mid air, settling on a tick."""
+    r = rng(seed, "sheet")
+    n = ns(0.32)
+    sw = band_sweep(n, r, [500, 1100, 800], [0.9, 0.7, 0.8]) * ar(n, 0.12, 0.18) * 0.5
+    y = mix(spread(sw, r, 0.5), delay(dsp.st(mix(_precise(r, 0.25), tuned("wood", NOTE["B5"], r, 0.2) * 0.3)), 0.3))
+    return _out(y, r, 0)
+
+
 # ================================================================ beds (long)
 
 def _decorrelated_pair(n, r, corr=0.4, **kw):
@@ -569,7 +672,6 @@ def ventilation(seed=0, dur=10.0) -> np.ndarray:
     n = ns(dur)
     air = _decorrelated_pair(n, r, 0.45, slope_db_oct=-4.5, lo=55, hi=2600)
     duct = np.stack([reson(air[:, c], 185, 5) * 0.6 + reson(air[:, c], 420, 6) * 0.4 for c in range(2)], 1)
-    t = tvec(n)
     wob = 1 + 0.003 * smooth_noise(n, r, 0.3)
     ph = 2 * np.pi * np.cumsum(118.0 * wob) / SR
     fan = (np.sin(ph) + 0.4 * np.sin(2 * ph) + 0.15 * np.sin(3 * ph)) * 0.03 * (1 + 0.3 * smooth_noise(n, r, 0.5))
@@ -642,43 +744,52 @@ def distant_clank(seed=0) -> np.ndarray:
 
 KINDS = {
     # kind: (function, default level dB, parameters taken from the event)
-    "pencil-stroke": (pencil_stroke, -30.0, ("dur", "pressure", "speed")),
-    "pencil-tick": (pencil_tick, -29.0, ()),
-    "pencil-hatch": (pencil_hatch, -33.0, ("dur", "rate")),
-    "technical-pen": (technical_pen, -33.0, ("dur", "speed")),
-    "ruler-contact": (ruler_contact, -28.0, ()),
-    "set-square-tap": (set_square_tap, -29.0, ()),
-    "paper-slide": (paper_slide, -31.0, ("dur", "pan0", "pan1")),
-    "paper-lift": (paper_lift, -31.0, ()),
-    "page-turn": (page_turn, -29.0, ("direction",)),
-    "paper-stack": (paper_stack, -30.0, ()),
-    "stamp": (stamp, -24.0, ()),
-    "radio-click": (radio_click, -33.0, ()),
-    "radio-squelch": (radio_squelch, -34.0, ("dur",)),
-    "footstep": (footstep, -34.0, ("surface",)),
-    "footsteps": (footsteps, -34.0, ("count", "interval", "surface", "pan0", "pan1")),
-    "valve-clunk": (valve_clunk, -24.0, ("muted", "flow")),
-    "relay-click": (relay_click, -32.0, ()),
-    "solenoid-click": (solenoid_click, -30.0, ()),
-    "confirm": (confirm, -27.0, ("variant",)),
-    "record-append": (record_append, -29.0, ()),
-    "system-tick": (system_tick, -26.0, ()),
-    "choice-accent": (choice_accent, -25.0, ("variant",)),
-    "decision-accent": (decision_accent, -25.0, ()),
-    "response-tick": (response_tick, -31.0, ()),
-    "node-pass": (node_pass, -36.0, ()),
-    "packet": (packet, -31.0, ()),
-    "align-snap": (align_snap, -33.0, ()),
-    "stretch": (stretch, -27.0, ("dur",)),
-    "cross-snap": (cross_snap, -24.0, ()),
-    "latch": (latch, -20.0, ()),
-    "chain-record": (lambda seed=0: chain_link(seed, "record"), -24.0, ()),
-    "chain-trust": (lambda seed=0: chain_link(seed, "trust"), -25.0, ()),
-    "chain-decision": (lambda seed=0: chain_link(seed, "decision"), -25.0, ()),
-    "chain-price": (lambda seed=0: chain_link(seed, "price"), -26.0, ()),
-    "chain-capacity": (lambda seed=0: chain_link(seed, "capacity"), -23.0, ()),
-    "distant-clank": (distant_clank, -38.0, ()),
-    "pump-thud": (pump_thud, -30.0, ()),
+    "pencil-stroke": (pencil_stroke, -23.0, ("dur", "pressure", "speed")),
+    "pencil-tick": (pencil_tick, -22.0, ()),
+    "pencil-hatch": (pencil_hatch, -26.0, ("dur", "rate")),
+    "technical-pen": (technical_pen, -26.0, ("dur", "speed")),
+    "ruler-contact": (ruler_contact, -21.0, ()),
+    "set-square-tap": (set_square_tap, -22.0, ()),
+    "paper-slide": (paper_slide, -24.0, ("dur", "pan0", "pan1")),
+    "paper-lift": (paper_lift, -24.0, ()),
+    "page-turn": (page_turn, -22.0, ("direction",)),
+    "paper-stack": (paper_stack, -23.0, ()),
+    "stamp": (stamp, -17.0, ()),
+    "radio-click": (radio_click, -26.0, ()),
+    "radio-squelch": (radio_squelch, -27.0, ("dur",)),
+    "footstep": (footstep, -27.0, ("surface",)),
+    "footsteps": (footsteps, -27.0, ("count", "interval", "surface", "pan0", "pan1")),
+    "valve-clunk": (valve_clunk, -17.0, ("muted", "flow")),
+    "relay-click": (relay_click, -25.0, ()),
+    "solenoid-click": (solenoid_click, -23.0, ()),
+    "confirm": (confirm, -20.0, ("variant",)),
+    "record-append": (record_append, -22.0, ()),
+    "system-tick": (system_tick, -19.0, ()),
+    "choice-accent": (choice_accent, -18.0, ("variant",)),
+    "decision-accent": (decision_accent, -18.0, ()),
+    "response-tick": (response_tick, -24.0, ()),
+    "node-pass": (node_pass, -29.0, ()),
+    "packet": (packet, -24.0, ()),
+    "align-snap": (align_snap, -26.0, ()),
+    "stretch": (stretch, -26.0, ("dur",)),
+    "cross-snap": (cross_snap, -17.0, ()),
+    "latch": (latch, -13.0, ()),
+    "chain-record": (lambda seed=0: chain_link(seed, "record"), -17.0, ()),
+    "chain-trust": (lambda seed=0: chain_link(seed, "trust"), -18.0, ()),
+    "chain-decision": (lambda seed=0: chain_link(seed, "decision"), -18.0, ()),
+    "chain-price": (lambda seed=0: chain_link(seed, "price"), -19.0, ()),
+    "chain-capacity": (lambda seed=0: chain_link(seed, "capacity"), -16.0, ()),
+    "distant-clank": (distant_clank, -33.0, ()),
+    "pin": (pin, -24.0, ()),
+    "van": (van, -30.0, ("dur",)),
+    "fray": (fray, -36.0, ("dur",)),
+    "incident": (incident, -24.0, ()),
+    "latch-soft": (latch_soft, -24.0, ()),
+    "capture-start": (capture_start, -26.0, ()),
+    "row-unavailable": (row_unavailable, -22.0, ()),
+    "connect-line": (connect_line, -26.0, ("dur",)),
+    "sheet-in": (sheet_in, -26.0, ()),
+    "pump-thud": (pump_thud, -23.0, ()),
 }
 
 

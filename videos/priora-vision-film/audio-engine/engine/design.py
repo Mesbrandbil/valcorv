@@ -15,15 +15,13 @@ Three sources of one-shots end up in the SFX stem:
 """
 from __future__ import annotations
 
-import numpy as np
-
 from . import dsp, library
-from .dsp import SR, ns, rng
+from .dsp import ns, rng
 
 
 # ---------------------------------------------------------------- beds
 
-BED_LUFS = {"ventilation": -45.0, "machinery": -47.0, "roof": -47.0, "roomtone": -60.0, "siteair": -52.0}
+BED_LUFS = {"ventilation": -41.0, "machinery": -43.0, "roof": -43.0, "roomtone": -58.0, "siteair": -48.0}
 
 
 def _cal(x, target):
@@ -72,9 +70,11 @@ def beds(C, subtract_at=None, subtract_fade=0.35) -> dict:
 def designed(C) -> list:
     ev = []
 
+    scene = ["a1-world"]
+
     def add(t, kind, gain=0.0, **kw):
         if t is not None:
-            ev.append(dict(t=float(t), kind=kind, gain_db=gain, source="designed", **kw))
+            ev.append(dict(t=float(t), kind=kind, gain_db=gain, source="designed", scene=scene[0], **kw))
 
     # Act I site: a radio in a pause, contractors on gravel, a lockout
     add(C.nearest_gap(C["contractors"] + 0.9, need=0.35), "radio-squelch", 0.0, seed=3, pan=0.45)
@@ -88,6 +88,7 @@ def designed(C) -> list:
     # the condition failure: a muted valve, no alarm (impact lands on the word)
     add(C["offline"] - 0.15, "valve-clunk", 0.0, seed=10, pan=0.35)
     # Act III
+    scene[0] = "a3-change"
     add(C["offline2"] - 0.15, "valve-clunk", -4.0, seed=11, pan=0.35, flow=False)
     add(C["sees"], "system-tick", 0.0, seed=12)
     add(C["cross"], "stretch", 0.0, seed=13, dur=0.9)
@@ -98,6 +99,7 @@ def designed(C) -> list:
     add(C["decisionsL18"], "decision-accent", 0.0, seed=18, pan=-0.25)
     add(C["decisionsL18"] + 0.55, "decision-accent", -3.0, seed=19, pan=0.25)
     # the chain and the mark
+    scene[0] = "a3-close"
     for k, name in enumerate(["Record", "Trust", "Decision", "Price", "Capacity"]):
         add(C[f"chain{name}"], f"chain-{name.lower()}", 0.0, seed=20 + k, pan=-0.3 + 0.15 * k)
     add(C["priora"], "latch", 0.0, seed=30)
@@ -154,7 +156,6 @@ def auto(C) -> list:
     # complexity: overlapping waves of markers and tags, and three containment lines
     t = C["noOne"] + 0.3
     head = C["head"]
-    wave = 0
     while t < head + 0.4:
         add(W, t, "pencil-tick" if r.random() < 0.6 else "pencil-stroke", float(r.uniform(-11, -5)),
             dur=float(r.uniform(0.12, 0.3)), pan=float(r.uniform(-0.7, 0.7)))
@@ -216,12 +217,17 @@ def auto(C) -> list:
 
 
 def merge(designed_ev, scene_ev, auto_ev, window=0.3):
-    """Scene events win over designed events of the same kind nearby; auto
-    events only for scenes that published nothing."""
+    """A scene that publishes a kind owns it: designed events of that kind
+    tagged with that scene are dropped (and any designed event with a scene
+    event of the same kind within `window` seconds). Auto events are used only
+    for scenes that published nothing at all."""
     covered = {e.get("scene") for e in scene_ev if e.get("scene")}
     has_unscoped = any(not e.get("scene") for e in scene_ev)
+    owned = {(e.get("scene"), e["kind"]) for e in scene_ev}
     out = list(scene_ev)
     for d in designed_ev:
+        if (d.get("scene"), d["kind"]) in owned:
+            continue
         if not any(e["kind"] == d["kind"] and abs(e["t"] - d["t"]) < window for e in scene_ev):
             out.append(d)
     for a in auto_ev:

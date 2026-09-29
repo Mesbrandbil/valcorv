@@ -50,7 +50,7 @@ def lra(x: np.ndarray) -> float:
 
 def band_db(x: np.ndarray, lo: float, hi: float) -> float:
     m = dsp.mono(x)
-    f, P = signal.welch(m, SR, nperseg=8192)
+    f, P = signal.welch(m, SR, nperseg=min(32768, len(m)))  # 1.5 Hz bins: no leakage into 'sub'
     sel = (f >= lo) & (f < hi)
     return float(10 * np.log10(np.sum(P[sel]) + 1e-30))
 
@@ -86,7 +86,7 @@ def metrics(x: np.ndarray) -> dict:
 
 # ---------------------------------------------------------------- discontinuities
 
-def edge_check(x: np.ndarray, edges_s, win: float = 0.003) -> list:
+def edge_check(x: np.ndarray, edges_s, win: float = 0.003, onsets=()) -> list:
     """At each edit time, compare the sample step with the local waveform slope.
 
     A click at an edit is a step much larger than the signal's own local
@@ -104,7 +104,9 @@ def edge_check(x: np.ndarray, edges_s, win: float = 0.003) -> list:
         step = float(local.max())
         ref = float(np.median(d[max(i - 20 * w, 0): i - w]) + 1e-9)
         if step > 1e-3 and step / ref > 40:
-            bad.append({"t": round(t, 4), "step": round(step, 5), "ratio": round(step / ref, 1)})
+            near = [o for o in onsets if abs(o - t) < 0.012]
+            bad.append({"t": round(t, 4), "step": round(step, 5), "ratio": round(step / ref, 1),
+                        "explained": f"intended onset of a sound event at {near[0]:.3f}s" if near else None})
     return bad
 
 
@@ -143,6 +145,42 @@ def hf_spikes(x: np.ndarray, thresh_db: float = 24.0) -> list:
             out.append(round(s * h / SR, 4))
         last = s
     return out
+
+
+ONSET_OFFSET = {"valve-clunk": 0.15, "latch": 0.036, "align-snap": 0.028, "packet": 0.19, "sheet-in": 0.3}
+SHARP = ("valve-clunk", "system-tick", "cross-snap", "choice-accent", "decision-accent", "chain-record",
+         "chain-trust", "chain-decision", "chain-price", "chain-capacity", "latch", "stamp", "confirm",
+         "latch-soft", "record-append")
+
+
+def onset_timing(sfx: np.ndarray, events, frame: float = 0.0005) -> dict:
+    """Measure where each sharp sync sound actually starts in the rendered
+    SFX stem, against where it was asked to start (t plus the sound's own
+    internal onset). The onset is where the level rises fastest (over 2 ms)
+    among 0.5 ms frames within 12 dB of the local peak, so a texture that
+    leads into a sound does not count as its start."""
+    m = dsp.hp(dsp.mono(sfx), 200, 2)
+    h = max(int(frame * SR), 1)
+    k = len(m) // h
+    lv = 20 * np.log10(np.abs(m[: k * h]).reshape(k, h).max(axis=1) + 1e-12)
+    rows = []
+    for e in events:
+        if e["kind"] not in SHARP:
+            continue
+        t0 = e["t"] + ONSET_OFFSET.get(e["kind"], 0.0)
+        a, b = int((t0 - 0.04) / frame), int((t0 + 0.06) / frame)
+        if a < 0 or b >= k:
+            continue
+        w = lv[a:b]
+        pk = w.max()
+        rise = np.full(len(w), -np.inf)
+        rise[4:] = w[4:] - w[:-4]  # level rise over 2 ms
+        rise[w < pk - 12.0] = -np.inf
+        on = a + int(np.argmax(rise)) - 3
+        rows.append({"kind": e["kind"], "t": round(t0, 4), "delta_ms": round((on * frame - t0) * 1000, 2)})
+    d = np.array([abs(r["delta_ms"]) for r in rows]) if rows else np.array([0.0])
+    return {"count": len(rows), "max_abs_delta_ms": round(float(d.max()), 2),
+            "median_abs_delta_ms": round(float(np.median(d)), 2), "rows": rows}
 
 
 # ---------------------------------------------------------------- pictures
@@ -213,7 +251,6 @@ def sheet_png(items, path, cols=4, title="", nper=1024):
         aw.set_ylim(-1, 1)
         aw.set_xticks([])
         aw.set_yticks([])
-        pk = dsp.peak(x)
         aw.set_title(f"{name}  {len(m) / SR:.2f}s  tilt2-5k {band_db(x, 2000, 5000) - band_db(x, 200, 2000):+.0f}dB",
                      fontsize=6)
         _spec_ax(asp, x, 0, 20000, nper=nper, vmin=-120, vmax=-25)

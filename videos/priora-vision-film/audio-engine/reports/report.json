@@ -1,0 +1,773 @@
+{
+  "inputs": {
+    "cues": "/tmp/claude-0/-home-user-valcorv/c7fa4510-f680-5243-acaa-510f6d3d895c/scratchpad/audio-engine/demo/resolved.json",
+    "timing": "/home/user/valcorv/videos/priora-vision-film/narration/timing.json",
+    "voice": "/home/user/valcorv/videos/priora-vision-film/assets/audio/voice.wav",
+    "events": []
+  },
+  "duration": 90.0,
+  "cues": {
+    "l01": {
+      "t": 0.8,
+      "source": "cue:l01"
+    },
+    "hour": {
+      "t": 3.02,
+      "source": "cue:hour"
+    },
+    "contractors": {
+      "t": 3.67,
+      "source": "cue:contractors"
+    },
+    "isolated": {
+      "t": 5.9,
+      "source": "cue:isolated"
+    },
+    "workMoves": {
+      "t": 6.99,
+      "source": "cue:workMoves"
+    },
+    "insurance": {
+      "t": 8.17,
+      "source": "cue:insurance"
+    },
+    "accepted": {
+      "t": 10.49,
+      "source": "cue:accepted"
+    },
+    "translate": {
+      "t": 11.82,
+      "source": "cue:translate"
+    },
+    "permits": {
+      "t": 12.58,
+      "source": "cue:permits"
+    },
+    "checklists": {
+      "t": 13.79,
+      "source": "cue:checklists"
+    },
+    "noOne": {
+      "t": 14.76,
+      "source": "cue:noOne"
+    },
+    "moving": {
+      "t": 15.72,
+      "source": "cue:moving"
+    },
+    "head": {
+      "t": 16.51,
+      "source": "cue:head"
+    },
+    "roof03": {
+      "t": 17.39,
+      "source": "cue:roof03"
+    },
+    "hotWork": {
+      "t": 18.09,
+      "source": "cue:hotWork"
+    },
+    "safeguards": {
+      "t": 19.41,
+      "source": "cue:safeguards"
+    },
+    "inPlace": {
+      "t": 20.49,
+      "source": "cue:inPlace"
+    },
+    "landing": {
+      "t": 20.69,
+      "source": "cue:landing"
+    },
+    "offline": {
+      "t": 22.28,
+      "source": "cue:offline"
+    },
+    "nothingLooks": {
+      "t": 23.98,
+      "source": "cue:nothingLooks"
+    },
+    "changed": {
+      "t": 26.2,
+      "source": "cue:changed"
+    },
+    "nobody": {
+      "t": 27.03,
+      "source": "cue:nobody"
+    },
+    "afterwards": {
+      "t": 28.96,
+      "source": "cue:afterwards"
+    },
+    "q1": {
+      "t": 31.6,
+      "source": "cue:q1"
+    },
+    "q3": {
+      "t": 34.57,
+      "source": "cue:q3"
+    },
+    "gap": {
+      "t": 36.85,
+      "source": "cue:gap"
+    },
+    "tooLate": {
+      "t": 38.28,
+      "source": "cue:tooLate"
+    },
+    "rewindStart": {
+      "t": 39.01,
+      "source": "cue:rewindStart"
+    },
+    "rewindEnd": {
+      "t": 42.36,
+      "source": "cue:rewindEnd"
+    },
+    "l12": {
+      "t": 42.66,
+      "source": "cue:l12"
+    },
+    "decisionWord": {
+      "t": 43.02,
+      "source": "cue:decisionWord"
+    },
+    "worker": {
+      "t": 45.81,
+      "source": "cue:worker"
+    },
+    "workerEnd": {
+      "t": 48.2,
+      "source": "cue:six"
+    },
+    "connects": {
+      "t": 49.12,
+      "source": "cue:connects"
+    },
+    "keepsRecord": {
+      "t": 54.76,
+      "source": "cue:keepsRecord"
+    },
+    "prevention": {
+      "t": 55.61,
+      "source": "cue:prevention"
+    },
+    "proof": {
+      "t": 57.34,
+      "source": "cue:proof"
+    },
+    "l16": {
+      "t": 59.55,
+      "source": "cue:l16"
+    },
+    "offline2": {
+      "t": 60.47,
+      "source": "cue:offline2"
+    },
+    "sees": {
+      "t": 62.52,
+      "source": "cue:sees"
+    },
+    "cross": {
+      "t": 63.57,
+      "source": "cue:cross"
+    },
+    "riskOwner": {
+      "t": 64.87,
+      "source": "cue:riskOwner"
+    },
+    "change": {
+      "t": 66.48,
+      "source": "cue:change"
+    },
+    "retain": {
+      "t": 67.61,
+      "source": "cue:retain"
+    },
+    "carriers": {
+      "t": 70.15,
+      "source": "cue:carriers"
+    },
+    "ordinary": {
+      "t": 72.7,
+      "source": "cue:ordinary"
+    },
+    "decisionsL18": {
+      "t": 75.36,
+      "source": "cue:decisionsL18"
+    },
+    "chainRecord": {
+      "t": 76.49,
+      "source": "cue:chainRecord"
+    },
+    "chainTrust": {
+      "t": 77.34,
+      "source": "cue:chainTrust"
+    },
+    "chainDecision": {
+      "t": 78.96,
+      "source": "cue:chainDecision"
+    },
+    "chainPrice": {
+      "t": 81.01,
+      "source": "cue:chainPrice"
+    },
+    "chainCapacity": {
+      "t": 82.78,
+      "source": "cue:chainCapacity"
+    },
+    "priora": {
+      "t": 84.17,
+      "source": "cue:priora"
+    },
+    "infrastructure": {
+      "t": 85.25,
+      "source": "cue:infrastructure"
+    }
+  },
+  "events": {
+    "total": 149,
+    "by_source_kind": {
+      "auto:align-snap": 19,
+      "auto:confirm": 5,
+      "auto:node-pass": 8,
+      "auto:packet": 3,
+      "auto:paper-lift": 1,
+      "auto:paper-slide": 8,
+      "auto:paper-stack": 7,
+      "auto:pencil-hatch": 1,
+      "auto:pencil-stroke": 25,
+      "auto:pencil-tick": 24,
+      "auto:record-append": 6,
+      "auto:relay-click": 1,
+      "auto:response-tick": 4,
+      "auto:ruler-contact": 6,
+      "auto:set-square-tap": 2,
+      "auto:stamp": 1,
+      "auto:technical-pen": 5,
+      "designed:chain-capacity": 1,
+      "designed:chain-decision": 1,
+      "designed:chain-price": 1,
+      "designed:chain-record": 1,
+      "designed:chain-trust": 1,
+      "designed:choice-accent": 3,
+      "designed:cross-snap": 1,
+      "designed:decision-accent": 2,
+      "designed:distant-clank": 2,
+      "designed:footsteps": 1,
+      "designed:latch": 1,
+      "designed:radio-click": 1,
+      "designed:radio-squelch": 1,
+      "designed:relay-click": 1,
+      "designed:solenoid-click": 1,
+      "designed:stretch": 1,
+      "designed:system-tick": 1,
+      "designed:valve-clunk": 2
+    },
+    "control": {}
+  },
+  "score": {
+    "bpm": 96.0,
+    "grid_anchors": {
+      "B": 14.76,
+      "F": 44.12,
+      "H": 66.48
+    },
+    "parts": {
+      "strings-a1": 35,
+      "piano-a1": 22,
+      "pad-a1": 2,
+      "cello-a1": 5,
+      "bass-a1": 1,
+      "strings-held": 2,
+      "strings-a2": 22,
+      "piano-a2": 42,
+      "pad-a2": 2,
+      "cello-a2": 5,
+      "cello-cross": 1,
+      "strings-a3": 16,
+      "piano-a3": 28,
+      "cello-a3": 4,
+      "pad-a3": 2,
+      "strings-close": 12,
+      "piano-close": 5,
+      "pad-close": 2,
+      "bass-close": 1
+    },
+    "pulse_events": 172,
+    "family_gain_db": {
+      "strings": 16.77,
+      "piano": 19.74,
+      "pad": 10.26,
+      "cello": 4.34,
+      "bass": 16.46,
+      "sub": -40.37,
+      "pulse": 7.16
+    }
+  },
+  "rewind": {
+    "start": 39.01,
+    "end": 42.36,
+    "landing_story_time": 20.69,
+    "act1_bed_rms_dbfs": -30.5,
+    "offline_passes_at": 41.019,
+    "scrub_seconds_of_story": 18.32
+  },
+  "voice_activity_seconds": 70.91,
+  "master": {
+    "mode": "target",
+    "iterations": 1,
+    "gain_db": 0.861,
+    "lufs": -16.004,
+    "true_peak_dbtp": -1.05,
+    "voice_limiter_max_db": 1.29,
+    "voice_limited_over_0_5db_seconds": 0.058,
+    "bed_ceiling_max_db": 4.02,
+    "bed_ceiling_seconds": 0.479
+  },
+  "outputs": {
+    "voice": "/home/user/valcorv/videos/priora-vision-film/assets/audio/master-voice.wav",
+    "music": "/home/user/valcorv/videos/priora-vision-film/assets/audio/music.wav",
+    "sfx": "/home/user/valcorv/videos/priora-vision-film/assets/audio/sfx.wav",
+    "master": "/home/user/valcorv/videos/priora-vision-film/assets/audio/master.wav"
+  },
+  "stem_sum_check": {
+    "max_abs_diff": 2.384185791015625e-07,
+    "max_abs_diff_dbfs": -132.5,
+    "note": "24-bit quantisation of three stems bounds this at about -132 dBFS"
+  },
+  "qa": {
+    "stems": {
+      "master": {
+        "lufs_integrated": -16.0,
+        "lra_lu": 2.82,
+        "true_peak_dbtp": -1.05,
+        "sample_peak_dbfs": -1.07,
+        "rms_dbfs": -19.48,
+        "crest_factor_db": 18.4,
+        "dc_offset": [
+          -2.04e-07,
+          -1.24e-07
+        ],
+        "sub30_rel_db": -44.3,
+        "band_2k_5k_vs_200_2k_db": -13.4,
+        "lr_correlation": 0.969,
+        "mono_foldown_loss_db": 0.05,
+        "short_term_max_lufs": -14.83
+      },
+      "music": {
+        "lufs_integrated": -28.1,
+        "lra_lu": 12.9,
+        "true_peak_dbtp": -7.29,
+        "sample_peak_dbfs": -7.29,
+        "rms_dbfs": -31.2,
+        "crest_factor_db": 23.91,
+        "dc_offset": [
+          -2.56e-07,
+          -1.82e-07
+        ],
+        "sub30_rel_db": -48.9,
+        "band_2k_5k_vs_200_2k_db": -19.3,
+        "lr_correlation": 0.559,
+        "mono_foldown_loss_db": 1.13,
+        "short_term_max_lufs": -23.34
+      },
+      "sfx": {
+        "lufs_integrated": -38.11,
+        "lra_lu": 11.77,
+        "true_peak_dbtp": -13.15,
+        "sample_peak_dbfs": -13.39,
+        "rms_dbfs": -41.85,
+        "crest_factor_db": 28.47,
+        "dc_offset": [
+          -7.54e-08,
+          -6.91e-08
+        ],
+        "sub30_rel_db": -42.0,
+        "band_2k_5k_vs_200_2k_db": -12.6,
+        "lr_correlation": 0.781,
+        "mono_foldown_loss_db": 0.21,
+        "short_term_max_lufs": -32.17
+      },
+      "voice": {
+        "lufs_integrated": -15.97,
+        "lra_lu": 2.75,
+        "true_peak_dbtp": -1.4,
+        "sample_peak_dbfs": -1.41,
+        "rms_dbfs": -19.8,
+        "crest_factor_db": 18.4,
+        "dc_offset": [
+          1.73e-08,
+          1.73e-08
+        ],
+        "sub30_rel_db": -44.2,
+        "band_2k_5k_vs_200_2k_db": -13.3,
+        "short_term_max_lufs": -15.14
+      }
+    },
+    "sections": {
+      "act1": {
+        "start": 0.0,
+        "end": 39.01,
+        "master": {
+          "lufs_integrated": -15.82,
+          "lra_lu": 1.87,
+          "true_peak_dbtp": -1.17,
+          "sample_peak_dbfs": -1.18,
+          "rms_dbfs": -19.14,
+          "crest_factor_db": 17.97,
+          "dc_offset": [
+            -1.91e-07,
+            3.59e-07
+          ],
+          "sub30_rel_db": -44.2,
+          "band_2k_5k_vs_200_2k_db": -13.5,
+          "lr_correlation": 0.972,
+          "mono_foldown_loss_db": 0.02,
+          "short_term_max_lufs": -14.83
+        },
+        "music+sfx": {
+          "lufs_integrated": -28.34,
+          "lra_lu": 14.27,
+          "true_peak_dbtp": -12.2,
+          "sample_peak_dbfs": -12.2,
+          "rms_dbfs": -31.44,
+          "crest_factor_db": 19.24,
+          "dc_offset": [
+            -2.76e-07,
+            2.75e-07
+          ],
+          "sub30_rel_db": -46.1,
+          "band_2k_5k_vs_200_2k_db": -15.9,
+          "lr_correlation": 0.522,
+          "mono_foldown_loss_db": 1.27,
+          "short_term_max_lufs": -25.34
+        }
+      },
+      "rewind": {
+        "start": 39.01,
+        "end": 42.36,
+        "master": {
+          "lufs_integrated": -30.91,
+          "lra_lu": 0.15,
+          "true_peak_dbtp": -17.09,
+          "sample_peak_dbfs": -17.1,
+          "rms_dbfs": -33.75,
+          "crest_factor_db": 16.65,
+          "dc_offset": [
+            3.23e-06,
+            -5.18e-06
+          ],
+          "sub30_rel_db": -52.1,
+          "band_2k_5k_vs_200_2k_db": -10.9,
+          "lr_correlation": 0.394,
+          "mono_foldown_loss_db": 1.59,
+          "short_term_max_lufs": -30.8
+        },
+        "music+sfx": {
+          "lufs_integrated": -30.91,
+          "lra_lu": 0.15,
+          "true_peak_dbtp": -17.09,
+          "sample_peak_dbfs": -17.1,
+          "rms_dbfs": -33.75,
+          "crest_factor_db": 16.65,
+          "dc_offset": [
+            3.17e-06,
+            -5.24e-06
+          ],
+          "sub30_rel_db": -52.1,
+          "band_2k_5k_vs_200_2k_db": -10.9,
+          "lr_correlation": 0.394,
+          "mono_foldown_loss_db": 1.59,
+          "short_term_max_lufs": -30.8
+        }
+      },
+      "act2": {
+        "start": 42.36,
+        "end": 59.25,
+        "master": {
+          "lufs_integrated": -16.37,
+          "lra_lu": 2.24,
+          "true_peak_dbtp": -1.05,
+          "sample_peak_dbfs": -1.07,
+          "rms_dbfs": -19.43,
+          "crest_factor_db": 18.35,
+          "dc_offset": [
+            -2.19e-06,
+            -3.42e-06
+          ],
+          "sub30_rel_db": -44.4,
+          "band_2k_5k_vs_200_2k_db": -12.8,
+          "lr_correlation": 0.953,
+          "mono_foldown_loss_db": 0.09,
+          "short_term_max_lufs": -15.51
+        },
+        "music+sfx": {
+          "lufs_integrated": -26.73,
+          "lra_lu": 6.78,
+          "true_peak_dbtp": -7.36,
+          "sample_peak_dbfs": -7.36,
+          "rms_dbfs": -29.09,
+          "crest_factor_db": 21.73,
+          "dc_offset": [
+            -2.22e-06,
+            -3.45e-06
+          ],
+          "sub30_rel_db": -50.1,
+          "band_2k_5k_vs_200_2k_db": -19.9,
+          "lr_correlation": 0.564,
+          "mono_foldown_loss_db": 1.14,
+          "short_term_max_lufs": -23.58
+        }
+      },
+      "act3": {
+        "start": 59.25,
+        "end": 75.99,
+        "master": {
+          "lufs_integrated": -16.23,
+          "lra_lu": 3.39,
+          "true_peak_dbtp": -1.39,
+          "sample_peak_dbfs": -1.39,
+          "rms_dbfs": -19.49,
+          "crest_factor_db": 18.1,
+          "dc_offset": [
+            3.6e-06,
+            5.47e-06
+          ],
+          "sub30_rel_db": -44.9,
+          "band_2k_5k_vs_200_2k_db": -13.6,
+          "lr_correlation": 0.973,
+          "mono_foldown_loss_db": 0.05,
+          "short_term_max_lufs": -14.98
+        },
+        "music+sfx": {
+          "lufs_integrated": -26.87,
+          "lra_lu": 14.11,
+          "true_peak_dbtp": -7.97,
+          "sample_peak_dbfs": -7.98,
+          "rms_dbfs": -29.93,
+          "crest_factor_db": 21.95,
+          "dc_offset": [
+            3.19e-06,
+            5.06e-06
+          ],
+          "sub30_rel_db": -47.8,
+          "band_2k_5k_vs_200_2k_db": -22.1,
+          "lr_correlation": 0.702,
+          "mono_foldown_loss_db": 0.75,
+          "short_term_max_lufs": -24.37
+        }
+      },
+      "close": {
+        "start": 75.99,
+        "end": 90.0,
+        "master": {
+          "lufs_integrated": -15.62,
+          "lra_lu": 2.69,
+          "true_peak_dbtp": -1.92,
+          "sample_peak_dbfs": -1.99,
+          "rms_dbfs": -19.48,
+          "crest_factor_db": 17.48,
+          "dc_offset": [
+            -3.22e-06,
+            -2.97e-06
+          ],
+          "sub30_rel_db": -43.6,
+          "band_2k_5k_vs_200_2k_db": -13.4,
+          "lr_correlation": 0.981,
+          "mono_foldown_loss_db": 0.03,
+          "short_term_max_lufs": -15.12
+        },
+        "music+sfx": {
+          "lufs_integrated": -29.77,
+          "lra_lu": 10.25,
+          "true_peak_dbtp": -14.31,
+          "sample_peak_dbfs": -14.54,
+          "rms_dbfs": -33.01,
+          "crest_factor_db": 18.47,
+          "dc_offset": [
+            -3.25e-06,
+            -3.01e-06
+          ],
+          "sub30_rel_db": -48.5,
+          "band_2k_5k_vs_200_2k_db": -20.0,
+          "lr_correlation": 0.568,
+          "mono_foldown_loss_db": 1.1,
+          "short_term_max_lufs": -28.4
+        }
+      }
+    },
+    "bed_vs_voice": {
+      "voice_momentary_median_lufs": -16.0,
+      "bed_under_speech_median_lufs": -29.8,
+      "bed_in_pauses_median_lufs": -34.3
+    },
+    "edges": {
+      "music": [],
+      "sfx": [
+        {
+          "t": 76.49,
+          "step": 0.01857,
+          "ratio": 337.2,
+          "explained": "intended onset of a sound event at 76.490s"
+        }
+      ],
+      "master": []
+    },
+    "onsets_from_silence": {
+      "music": [],
+      "sfx": []
+    },
+    "onset_timing": {
+      "count": 27,
+      "max_abs_delta_ms": 1.5,
+      "median_abs_delta_ms": 1.0,
+      "rows": [
+        {
+          "kind": "stamp",
+          "t": 12.88,
+          "delta_ms": -1.0
+        },
+        {
+          "kind": "valve-clunk",
+          "t": 22.28,
+          "delta_ms": 0.0
+        },
+        {
+          "kind": "confirm",
+          "t": 52.37,
+          "delta_ms": 0.0
+        },
+        {
+          "kind": "confirm",
+          "t": 52.79,
+          "delta_ms": -0.0
+        },
+        {
+          "kind": "confirm",
+          "t": 53.21,
+          "delta_ms": -1.5
+        },
+        {
+          "kind": "confirm",
+          "t": 53.63,
+          "delta_ms": -0.5
+        },
+        {
+          "kind": "confirm",
+          "t": 54.05,
+          "delta_ms": -1.0
+        },
+        {
+          "kind": "record-append",
+          "t": 54.81,
+          "delta_ms": -1.5
+        },
+        {
+          "kind": "record-append",
+          "t": 55.38,
+          "delta_ms": -1.0
+        },
+        {
+          "kind": "record-append",
+          "t": 59.8,
+          "delta_ms": -1.0
+        },
+        {
+          "kind": "valve-clunk",
+          "t": 60.47,
+          "delta_ms": -1.0
+        },
+        {
+          "kind": "system-tick",
+          "t": 62.52,
+          "delta_ms": -1.0
+        },
+        {
+          "kind": "cross-snap",
+          "t": 64.47,
+          "delta_ms": -1.0
+        },
+        {
+          "kind": "choice-accent",
+          "t": 66.48,
+          "delta_ms": -0.5
+        },
+        {
+          "kind": "choice-accent",
+          "t": 67.61,
+          "delta_ms": -0.5
+        },
+        {
+          "kind": "record-append",
+          "t": 68.56,
+          "delta_ms": -0.5
+        },
+        {
+          "kind": "choice-accent",
+          "t": 70.15,
+          "delta_ms": -0.5
+        },
+        {
+          "kind": "decision-accent",
+          "t": 75.36,
+          "delta_ms": 0.0
+        },
+        {
+          "kind": "decision-accent",
+          "t": 75.91,
+          "delta_ms": -1.0
+        },
+        {
+          "kind": "record-append",
+          "t": 76.31,
+          "delta_ms": -1.0
+        },
+        {
+          "kind": "chain-record",
+          "t": 76.49,
+          "delta_ms": 0.0
+        },
+        {
+          "kind": "record-append",
+          "t": 76.66,
+          "delta_ms": -1.5
+        },
+        {
+          "kind": "chain-trust",
+          "t": 77.34,
+          "delta_ms": -1.5
+        },
+        {
+          "kind": "chain-decision",
+          "t": 78.96,
+          "delta_ms": -1.0
+        },
+        {
+          "kind": "chain-price",
+          "t": 81.01,
+          "delta_ms": -0.5
+        },
+        {
+          "kind": "chain-capacity",
+          "t": 82.78,
+          "delta_ms": 0.0
+        },
+        {
+          "kind": "latch",
+          "t": 84.206,
+          "delta_ms": 0.0
+        }
+      ]
+    },
+    "tonal_music_hf_spikes": {
+      "count": 0,
+      "times": []
+    },
+    "head_tail": {
+      "first_sample_abs": 0.0,
+      "last_sample_abs": 0.0,
+      "last_50ms_peak_dbfs": -100.6
+    }
+  },
+  "seconds": 87.0
+}

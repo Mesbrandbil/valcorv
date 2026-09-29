@@ -170,9 +170,10 @@
   "audio": [
     {
       "id": "voice",
-      "src": "assets/audio/voice.wav",
+      "src": "assets/audio/master-voice.wav",
       "track": 20,
-      "volume": 1
+      "volume": 1,
+      "note": "Processed voice from the audio engine (DC removed, levelled, limited); assets/audio/voice.wav is the raw narration assembly."
     },
     {
       "id": "music",

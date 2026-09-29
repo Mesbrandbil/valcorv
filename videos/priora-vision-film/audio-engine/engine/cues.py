@@ -23,65 +23,79 @@ def _norm(s: str) -> str:
     return re.sub(r"[^a-z0-9]", "", str(s).lower())
 
 
-# name: (accepted names, fallback)
-# fallback forms: ("word", [prefixes], after_cue or None, "start"|"end")
-#                 ("line", line_id_or_None, "start"|"end", after_cue)  # first line starting after a cue
-#                 ("expr", callable(C) -> seconds)
+# name: (accepted names, fallback rules tried in order)
+# rules: ("word", [prefixes], after_cue or None, "start"|"end")   first matching word after a cue
+#        ("line_after", cue, "start"|"end")                     first line starting after a cue
+#        ("line_end_of", cue, offset)                          end of the line that contains a cue
+#        ("expr", callable(C) -> seconds)
+W = "word"
 SPEC = {
-    "l01": (["l01", "siteWakes"], ("word", ["every"], None, "start")),
-    "hour": (["hour"], ("word", ["hour"], None, "start")),
-    "contractors": (["contractors"], ("word", ["contractors"], None, "start")),
-    "isolated": (["isolated"], ("word", ["isolated"], None, "start")),
-    "workMoves": (["workMoves"], ("word", ["moves"], None, "start")),
-    "insurance": (["insurance"], ("word", ["insurance"], None, "start")),
-    "accepted": (["accepted"], ("word", ["accepted"], "insurance", "start")),
-    "translate": (["translate"], ("word", ["translate"], "accepted", "start")),
-    "permits": (["permits"], ("word", ["permits"], "accepted", "start")),
-    "checklists": (["checklists"], ("word", ["checklists"], "accepted", "start")),
-    "noOne": (["noOne", "movingSite", "l05"], ("word", ["but"], "checklists", "start")),
-    "moving": (["moving"], ("word", ["moving"], "checklists", "start")),
-    "head": (["head"], ("word", ["head"], "noOne", "start")),
-    "roof03": (["roof03"], ("word", ["roof"], "head", "start")),
-    "hotWork": (["hotWork"], ("word", ["hot"], "head", "start")),
-    "safeguards": (["safeguards"], ("word", ["safeguards"], "hotWork", "start")),
-    "inPlace": (["inPlace"], ("word", ["place"], "safeguards", "end")),
-    "landing": (["landing"], ("expr", lambda C: C.word_time(["then", "sprinkler"], "inPlace", "start") - 0.25)),
-    "offline": (["offline", "sz3Offline"], ("word", ["offline"], "inPlace", "start")),
-    "nothingLooks": (["nothingLooks", "l08"], ("word", ["nothing"], "offline", "start")),
-    "changed": (["changed", "conditionsChanged"], ("word", ["changed"], "nothingLooks", "start")),
-    "nobody": (["nobody", "nobodySees"], ("word", ["nobody"], "nothingLooks", "start")),
-    "afterwards": (["afterwards", "l09"], ("word", ["if"], "nobody", "start")),
-    "q1": (["q1", "questions"], ("word", ["what"], "afterwards", "start")),
-    "q3": (["q3"], ("word", ["can"], "q1", "start")),
-    "gap": (["gap"], ("word", ["gap"], "afterwards", "start")),
-    "tooLate": (["tooLate"], ("word", ["late"], "gap", "end")),
-    "rewindStart": (["rewindStart"], ("expr", lambda C: C.word_time(["late"], "gap", "end") + 0.35)),
-    "rewindEnd": (["rewindEnd", "resolve"], ("expr", lambda C: C.word_time(["what"], "rewindStart", "start") - 0.3)),
-    "l12": (["l12"], ("word", ["what"], "rewindStart", "start")),
-    "decisionWord": (["decisionWord"], ("word", ["decision"], "rewindStart", "start")),
-    "worker": (["worker", "welding"], ("word", ["im", "i"], "l12", "start")),
-    "workerEnd": (["six", "workerEnd"], ("word", ["six"], "worker", "end")),
-    "connects": (["connects"], ("word", ["connects", "priora"], "worker", "start")),
-    "keepsRecord": (["keepsRecord", "record"], ("word", ["record"], "connects", "start")),
-    "prevention": (["prevention"], ("word", ["prevention"], "connects", "start")),
-    "proof": (["proof"], ("word", ["proof"], "prevention", "start")),
-    "l16": (["l16", "again"], ("line_after", "proof", "start")),
-    "offline2": (["offline2", "offlineAgain"], ("word", ["offline"], "prevention", "start")),
-    "sees": (["sees"], ("word", ["sees"], "offline2", "start")),
-    "cross": (["cross"], ("expr", lambda C: C.line_end_at(C["sees"]) + 0.1)),
-    "riskOwner": (["riskOwner", "l17"], ("line_after", "cross", "start")),
-    "change": (["change"], ("word", ["change"], "cross", "start")),
-    "retain": (["retain"], ("word", ["retain"], "change", "start")),
-    "carriers": (["carriers", "transfer"], ("word", ["carriers"], "retain", "start")),
-    "ordinary": (["ordinary"], ("word", ["ordinary"], "carriers", "start")),
-    "decisionsL18": (["decisionsL18"], ("word", ["decisions"], "ordinary", "start")),
-    "chainRecord": (["chainRecord"], ("word", ["record"], "decisionsL18", "start")),
-    "chainTrust": (["chainTrust"], ("word", ["trust"], "chainRecord", "start")),
-    "chainDecision": (["chainDecision"], ("word", ["decisions"], "chainTrust", "start")),
-    "chainPrice": (["chainPrice"], ("word", ["price"], "chainDecision", "start")),
-    "chainCapacity": (["chainCapacity"], ("word", ["capacity"], "chainPrice", "start")),
-    "priora": (["priora", "mark", "wordmark", "latch"], ("word", ["priora"], "chainCapacity", "start")),
-    "infrastructure": (["infrastructure", "descriptor"], ("word", ["infrastructure"], "priora", "start")),
+    "l01": (["l01", "siteWakes"], [(W, ["every"], None, "start"), ("expr", lambda C: C.first_line_start())]),
+    "hour": (["hour"], [(W, ["hour"], None, "start"), ("line_end_of", "l01", -0.3)]),
+    "contractors": (["contractors"], [(W, ["contractors"], None, "start"), ("line_after", "l01", "start")]),
+    "isolated": (["isolated"], [(W, ["isolated", "equipment"], "contractors", "start"),
+                                ("expr", lambda C: C["contractors"] + 1.6)]),
+    "workMoves": (["workMoves"], [(W, ["moves"], "contractors", "start"), ("line_end_of", "contractors", -0.4)]),
+    "insurance": (["insurance"], [(W, ["insurance"], None, "start"), ("line_after", "workMoves", "start")]),
+    "accepted": (["accepted"], [(W, ["accepted"], "insurance", "start"), ("line_end_of", "insurance", -0.5)]),
+    "translate": (["translate"], [(W, ["translate"], "accepted", "start"), ("line_after", "accepted", "start")]),
+    "permits": (["permits"], [(W, ["permits", "permit"], "accepted", "start"), ("expr", lambda C: C["translate"] + 0.8)]),
+    "checklists": (["checklists"], [(W, ["checklists", "checklist"], "accepted", "start"),
+                                    ("line_end_of", "translate", -0.6)]),
+    "noOne": (["noOne", "movingSite", "l05"], [(W, ["but"], "checklists", "start"), ("line_after", "checklists", "start")]),
+    "moving": (["moving"], [(W, ["moving"], "checklists", "start"), ("expr", lambda C: C["noOne"] + 0.9)]),
+    "head": (["head"], [(W, ["head", "mind"], "noOne", "start"), ("line_end_of", "noOne", -0.3)]),
+    "roof03": (["roof03"], [(W, ["roof"], "noOne", "start"), ("line_after", "noOne", "start")]),
+    "hotWork": (["hotWork"], [(W, ["hot"], "noOne", "start"), ("expr", lambda C: C["roof03"] + 0.6)]),
+    "safeguards": (["safeguards"], [(W, ["safeguard", "certificate"], "hotWork", "start"),
+                                    ("expr", lambda C: C["hotWork"] + 1.5)]),
+    "inPlace": (["inPlace"], [(W, ["place"], "hotWork", "end"), ("line_end_of", "hotWork", 0.0)]),
+    "landing": (["landing"], [("expr", lambda C: C.word_time(["then", "sprinkler"], "inPlace", "start") - 0.25),
+                              ("expr", lambda C: C.line_after("inPlace") - 0.25)]),
+    "offline": (["offline", "sz3Offline"], [(W, ["offline"], "inPlace", "start"), ("line_end_of", "landing", -0.5)]),
+    "nothingLooks": (["nothingLooks", "l08"], [(W, ["nothing"], "offline", "start"), ("line_after", "offline", "start")]),
+    "changed": (["changed", "conditionsChanged"], [(W, ["changed"], "nothingLooks", "start"),
+                                                   ("line_end_of", "nothingLooks", -1.6)]),
+    "nobody": (["nobody", "nobodySees"], [(W, ["nobody"], "nothingLooks", "start"),
+                                          ("line_end_of", "nothingLooks", -0.8)]),
+    "afterwards": (["afterwards", "l09"], [(W, ["if"], "nobody", "start"), ("line_after", "nobody", "start")]),
+    "q1": (["q1", "questions"], [(W, ["what"], "afterwards", "start"), ("line_after", "afterwards", "start")]),
+    "q3": (["q3"], [(W, ["can"], "q1", "start"), ("line_end_of", "q1", -1.2)]),
+    "gap": (["gap"], [(W, ["gap"], "afterwards", "start"), ("line_after", "q3", "start")]),
+    "tooLate": (["tooLate"], [(W, ["late"], "gap", "end"), ("line_end_of", "gap", 0.0)]),
+    "rewindStart": (["rewindStart"], [("expr", lambda C: C["tooLate"] + 0.35)]),
+    "rewindEnd": (["rewindEnd", "resolve"], [("expr", lambda C: C.line_after("rewindStart") - 0.3)]),
+    "l12": (["l12"], [("line_after", "rewindStart", "start")]),
+    "decisionWord": (["decisionWord"], [(W, ["decision"], "rewindStart", "start"), ("expr", lambda C: C["l12"] + 0.4)]),
+    "worker": (["worker", "welding"], [("line_after", "l12", "start")]),
+    "workerEnd": (["six", "workerEnd"], [(W, ["six"], "worker", "end"), ("line_end_of", "worker", 0.0)]),
+    "connects": (["connects"], [(W, ["connects", "priora"], "worker", "start"), ("line_after", "worker", "start")]),
+    "keepsRecord": (["keepsRecord", "record"], [(W, ["record"], "connects", "start"),
+                                                ("expr", lambda C: C["connects"] + 5.0)]),
+    "prevention": (["prevention"], [(W, ["prevention"], "connects", "start"), ("line_after", "keepsRecord", "start")]),
+    "proof": (["proof"], [(W, ["proof"], "prevention", "start"), ("expr", lambda C: C["prevention"] + 1.6)]),
+    "l16": (["l16", "again"], [("line_after", "proof", "start")]),
+    "offline2": (["offline2", "offlineAgain"], [(W, ["offline"], "prevention", "start"),
+                                                ("expr", lambda C: C["l16"] + 0.8)]),
+    "sees": (["sees"], [(W, ["sees", "sees"], "offline2", "start"), ("expr", lambda C: C["offline2"] + 1.8)]),
+    "cross": (["cross"], [("expr", lambda C: C.line_end_at(C["sees"]) + 0.1)]),
+    "riskOwner": (["riskOwner", "l17"], [("line_after", "cross", "start")]),
+    "change": (["change"], [(W, ["change"], "cross", "start"), ("expr", lambda C: C["riskOwner"] + 1.2)]),
+    "retain": (["retain"], [(W, ["retain", "keep"], "change", "start"), ("expr", lambda C: C["change"] + 1.2)]),
+    "carriers": (["carriers", "transfer"], [(W, ["carriers", "insurers"], "retain", "start"),
+                                            ("line_end_of", "retain", -1.0)]),
+    "ordinary": (["ordinary"], [(W, ["ordinary"], "carriers", "start"), ("line_after", "carriers", "start")]),
+    "decisionsL18": (["decisionsL18"], [(W, ["decisions"], "ordinary", "start"), ("line_end_of", "ordinary", -0.6)]),
+    "chainRecord": (["chainRecord"], [(W, ["record"], "decisionsL18", "start"), ("line_after", "decisionsL18", "start")]),
+    "chainTrust": (["chainTrust"], [(W, ["trust"], "chainRecord", "start"), ("line_end_of", "chainRecord", -0.4)]),
+    "chainDecision": (["chainDecision"], [(W, ["decisions"], "chainTrust", "start"), ("line_after", "chainTrust", "end")]),
+    "chainPrice": (["chainPrice"], [(W, ["price"], "chainDecision", "start"), ("expr", lambda C: C["chainDecision"] + 1.7)]),
+    "chainCapacity": (["chainCapacity"], [(W, ["capacity"], "chainPrice", "start"),
+                                          ("expr", lambda C: C["chainPrice"] + 1.7)]),
+    "priora": (["priora", "mark", "wordmark", "latch"], [(W, ["priora"], "chainCapacity", "start"),
+                                                         ("line_after", "chainCapacity", "start")]),
+    "infrastructure": (["infrastructure", "descriptor"], [(W, ["infrastructure"], "priora", "start"),
+                                                          ("expr", lambda C: C["priora"] + 1.0)]),
 }
 
 
@@ -139,6 +153,9 @@ class Cues:
                 return float(ln["end"])
         raise KeyError(f"no line at {t}")
 
+    def first_line_start(self):
+        return float(next(iter(self.lines.values()))["start"])
+
     def line_after(self, after, which="start"):
         t0 = self[after]
         for lid, ln in self.lines.items():
@@ -149,26 +166,31 @@ class Cues:
     def _resolve(self, name):
         if name in self.times:
             return self.times[name]
-        names, fb = SPEC[name]
+        names, rules = SPEC[name]
         for n in names:
             if _norm(n) in self._by_norm:
                 self.times[name] = self._by_norm[_norm(n)]
                 self.source[name] = f"cue:{n}"
                 return self.times[name]
-        try:
-            if fb[0] == "word":
-                _, prefixes, after, which = fb
-                t = self.word_time(prefixes, after, which)
-            elif fb[0] == "line_after":
-                t = self.line_after(fb[1], fb[2])
-            else:
-                t = fb[1](self)
-            self.times[name] = float(t)
-            self.source[name] = f"derived:{fb[0]}"
-        except Exception as exc:  # noqa: BLE001
-            self.times[name] = None
-            msg = str(exc).strip("'\"")
-            self.source[name] = "missing: " + (msg if "unresolved" not in msg else "depends on an unresolved cue")
+        errors = []
+        for k, fb in enumerate(rules):
+            try:
+                if fb[0] == "word":
+                    _, prefixes, after, which = fb
+                    t = self.word_time(prefixes, after, which)
+                elif fb[0] == "line_after":
+                    t = self.line_after(fb[1], fb[2])
+                elif fb[0] == "line_end_of":
+                    t = self.line_end_at(self[fb[1]]) + fb[2]
+                else:
+                    t = fb[1](self)
+                self.times[name] = float(t)
+                self.source[name] = f"derived:{fb[0]}" + (f" (fallback {k + 1})" if k else "")
+                return self.times[name]
+            except Exception as exc:  # noqa: BLE001
+                errors.append(str(exc).strip("'\""))
+        self.times[name] = None
+        self.source[name] = "missing: " + "; ".join(errors)
         return self.times[name]
 
     def __getitem__(self, name) -> float:
@@ -205,7 +227,7 @@ class Cues:
 
     def nearest_gap(self, t, need=0.25, window=0.8):
         """Nudge a non-sync sound into the nearest pause in the narration."""
-        best, bd = t, None
+        best = t
         for dt in [k * 0.02 for k in range(0, int(window / 0.02) + 1)]:
             for c in (t + dt, t - dt):
                 if all(not self.speaking(c + u) for u in (0.0, need * 0.5, need)):
@@ -231,14 +253,20 @@ def load(resolved_path: str, timing_path: str | None = None) -> Cues:
 
 # Accepted synonyms for event kinds used by the scenes
 ALIASES = {
-    "pencil": "pencil-stroke", "graphite": "pencil-stroke", "stroke": "pencil-stroke",
-    "pen": "technical-pen", "tick": "pencil-tick", "check": "pencil-tick",
-    "ruler": "ruler-contact", "set-square": "set-square-tap", "square": "set-square-tap",
+    # docs/sound-events.md vocabulary -> engine kinds (library, rewind kit or macro)
+    "pencil": "pencil-stroke", "pen": "technical-pen", "ruler": "ruler-line", "set-square": "pencil-set-square",
+    "hatch": "pencil-hatch", "tick": "pencil-tick", "latch-soft": "latch-soft",
+    "precision-snap": "snap-cluster", "verify-tick": "confirm", "system-event": "system-event",
+    "node-stretch": "stretch", "node-cross": "cross-snap", "packet-send": "packet",
+    "carrier-response": "response-tick", "word-token": "word-token", "gap-rule": "gap-rule",
+    "question": "question", "header-in": "header-in", "node-return": "node-return", "layer-slice": "layer-slice",
+    "chain-confirm-1": "chain-record", "chain-confirm-2": "chain-trust", "chain-confirm-3": "chain-decision",
+    "chain-confirm-4": "chain-price", "chain-confirm-5": "chain-capacity", "chain-tick": "chain",
+    # other accepted synonyms
+    "graphite": "pencil-stroke", "stroke": "pencil-stroke", "check": "pencil-tick", "square": "set-square-tap",
     "slide": "paper-slide", "lift": "paper-lift", "page": "page-turn", "stack": "paper-stack",
-    "relay": "relay-click", "solenoid": "solenoid-click", "valve": "valve-clunk",
-    "verify": "confirm", "verified": "confirm", "append": "record-append",
-    "snap": "align-snap", "latch-soft": "cross-snap", "pin": "paper-stack",
-    "precision-snap": "snap-cluster", "chain-tick": "chain", "node": "node-pass",
+    "relay": "relay-click", "solenoid": "solenoid-click", "valve": "valve-clunk", "verify": "confirm",
+    "verified": "confirm", "append": "record-append", "snap": "align-snap", "node": "node-pass",
 }
 
 
@@ -292,10 +320,12 @@ def normalize_events(raw, cues: Cues, known_kinds) -> tuple[list, list]:
         ser = ev.get("series")
         count = int(ser.get("count", 1)) if isinstance(ser, dict) else 1
         every = float(ser.get("every", 0.5)) if isinstance(ser, dict) else 0.0
+        m_idx = re.search(r"-(\d+)$", str(ev.get("name", "")))
         for i in range(count):
             e = dict(base)
             e["t"] = t + i * every
-            e.setdefault("index", i)
+            if "index" not in e:  # series position: expanded here, or by the cue compiler (name-03)
+                e["index"] = (int(m_idx.group(1)) - 1) if (m_idx and count == 1) else i
             e.setdefault("seed", 1000 + k * 37 + i)
             out.append(e)
     out.sort(key=lambda e: e["t"])

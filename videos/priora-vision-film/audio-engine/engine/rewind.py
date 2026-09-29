@@ -23,6 +23,7 @@ Also exported as a kit of one-shots for the events API (rewind-* kinds).
 from __future__ import annotations
 
 import numpy as np
+from scipy.ndimage import uniform_filter1d
 
 from . import dsp, library
 from .dsp import SR, ns, rng
@@ -112,7 +113,7 @@ def rewind_suction(seed=0, dur=1.8, source: np.ndarray | None = None) -> np.ndar
 KIT = {
     "rewind-paper": (rewind_paper, -30.0, ()),
     "rewind-pencil": (rewind_pencil, -32.0, ("dur",)),
-    "rewind-mechanism": (rewind_mechanism, -26.0, ()),
+    "rewind-mechanism": (rewind_mechanism, -31.0, ()),
     "rewind-whoosh": (rewind_whoosh, -27.0, ("dur",)),
     "rewind-suction": (rewind_suction, -26.0, ("dur",)),
 }
@@ -171,14 +172,31 @@ def render(C, music_pre: np.ndarray, sfx_pre: np.ndarray, events: list | None = 
 
     def shape(times, freqs):
         u = np.clip(times / dur, 0, 1)[:, None]
-        # open until the deceleration, then close from 14 kHz to 700 Hz
-        c = np.where(u < 0.55, 14000.0, 14000.0 * (700 / 14000.0) ** ((u - 0.55) / 0.45))
-        return 1.0 / np.sqrt(1 + (freqs[None, :] / c) ** 4)
+        # open until the deceleration, then drawn thin from both ends:
+        # the top closes from 14 kHz to 900 Hz, the bottom rises 40 to 300 Hz
+        c = np.where(u < 0.55, 14000.0, 14000.0 * (900 / 14000.0) ** ((u - 0.55) / 0.45))
+        h = np.where(u < 0.55, 40.0, 40.0 * (300 / 40.0) ** ((u - 0.55) / 0.45))
+        f = freqs[None, :]
+        return 1.0 / np.sqrt(1 + (f / c) ** 4) / np.sqrt(1 + (h / np.maximum(f, 1.0)) ** 4)
 
-    env = dsp.curve([(0.0, 0.0), (0.12, 0.0), (0.2 * dur, 0.75), (0.45 * dur, 1.1), (0.7 * dur, 0.9),
-                     (0.93 * dur, 0.22), (dur - 0.012, 0.05), (dur, 0.0)], m_, "cos")
-    gm = dsp.stft_shape(gm, shape, 2048, 256) * env[:, None]
-    gs = dsp.stft_shape(gs, shape, 2048, 256) * env[:, None]
+    gm = dsp.stft_shape(gm, shape, 2048, 256)
+    gs = dsp.stft_shape(gs, shape, 2048, 256)
+    # the texture follows a designed loudness arc relative to the Act I bed,
+    # whatever the story material under the scrub happens to be
+    ref = music_pre[max(ns(rs - 10.0), 0):ns(rs)] + sfx_pre[max(ns(rs - 10.0), 0):ns(rs)]
+    Lb = dsp.db(dsp.rms(ref) + 1e-9)
+    arc = [(0.0, -60.0), (0.1, -30.0), (0.25 * dur, -2.0), (0.5 * dur, 0.0), (0.72 * dur, -5.0),
+           (0.9 * dur, -15.0), (dur, -32.0)]
+    tgt = Lb + dsp.curve(arc, m_, "lin")
+    tot = dsp.mono(gm + gs)
+    win = ns(0.12)
+    pw = uniform_filter1d(tot * tot, win, mode="nearest")
+    cur = 10 * np.log10(pw + 1e-14)
+    gdb = np.clip(tgt - cur, -40.0, 12.0)
+    gdb = uniform_filter1d(gdb, ns(0.06), mode="nearest")
+    env = dsp.undb(gdb) * dsp.curve([(0, 0.0), (0.1, 0.0), (0.2, 1.0), (dur - 0.012, 1.0), (dur, 0.0)], m_, "cos")
+    gm = gm * env[:, None]
+    gs = gs * env[:, None]
     a = ns(rs)
     music_add[a:a + m_] += gm[: max(min(m_, n - a), 0)]
     sfx_add[a:a + m_] += gs[: max(min(m_, n - a), 0)]
@@ -188,15 +206,15 @@ def render(C, music_pre: np.ndarray, sfx_pre: np.ndarray, events: list | None = 
     src = (music_pre + sfx_pre)[src_a:ns(rs)]
     sdur = min(1.9, dur * 0.6)
     su = rewind_suction(41, sdur, source=src)
-    lvl = dsp.db(dsp.rms(src) + 1e-9)
-    su = su * (dsp.undb(lvl + 3.0) / (dsp.rms(su) + 1e-12))
+    # controlled: the swell's last 150 ms peaks at the Act I bed's own level
+    su = su * (dsp.undb(Lb - 4.0) / (dsp.rms(su[-ns(0.15):]) + 1e-12))
     b = ns(re_) - len(su)
     music_add[b:b + len(su)] += su * 0.6
     sfx_add[b:b + len(su)] += su * 0.4
 
     # 4. reverse whoosh ending at the landing
     wd = min(1.3, dur * 0.45)
-    wh = rewind_whoosh(43, wd) * dsp.undb(KIT["rewind-whoosh"][1])
+    wh = rewind_whoosh(43, wd) * dsp.undb(KIT["rewind-whoosh"][1] - 3.0)
     b = ns(re_) - len(wh)
     sfx_add[b:b + len(wh)] += wh
 
@@ -227,6 +245,7 @@ def render(C, music_pre: np.ndarray, sfx_pre: np.ndarray, events: list | None = 
         buf *= e[:, None]
     if report is not None:
         report["rewind"] = {"start": round(rs, 3), "end": round(re_, 3), "landing_story_time": round(landing, 3),
+                            "act1_bed_rms_dbfs": round(Lb, 1),
                             "offline_passes_at": round(t_off, 3), "scrub_seconds_of_story": round(rs - landing, 2)}
     return music_add, sfx_add
 

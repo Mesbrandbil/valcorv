@@ -11,7 +11,6 @@ import hashlib
 
 import numpy as np
 from scipy import signal
-from scipy.ndimage import minimum_filter1d, uniform_filter1d
 
 SR = 48000
 LN1000 = np.log(1000.0)  # T60 constant: amplitude falls 60 dB = factor 1000
@@ -260,9 +259,16 @@ def curve(points, n: int, kind: str = "lin") -> np.ndarray:
     no corners), 'db' interpolates values given in dB and returns linear gain.
     """
     pts = sorted(points)
+    if n > 200000:  # evaluate at a 2 kHz control rate, then interpolate
+        k = int(n / SR * 2000) + 2
+        ctl = _curve_at(pts, np.arange(k) / 2000.0, kind)
+        return np.interp(tvec(n), np.arange(k) / 2000.0, ctl)
+    return _curve_at(pts, tvec(n), kind)
+
+
+def _curve_at(pts, t, kind):
     ts = np.array([p[0] for p in pts], float)
     vs = np.array([p[1] for p in pts], float)
-    t = tvec(n)
     if kind == "cos":
         idx = np.clip(np.searchsorted(ts, t, side="right") - 1, 0, len(ts) - 1)
         nxt = np.clip(idx + 1, 0, len(ts) - 1)
@@ -474,14 +480,15 @@ def make_ir(kind: str = "room", seed: int = 11, t60: float | None = None) -> np.
 
 
 def convolve(x: np.ndarray, ir: np.ndarray, keep_tail: bool = True) -> np.ndarray:
-    """Convolve mono or stereo x with a stereo IR, returns stereo (wet only)."""
+    """Convolve mono or stereo x with a stereo IR, returns stereo (wet only).
+
+    One FFT convolution per channel (fftconvolve along axis 0), which is far
+    faster than overlap-add for film-length signals.
+    """
     xs = st(x)
     n = len(xs) + (len(ir) - 1 if keep_tail else 0)
-    out = np.zeros((n, 2))
-    for c in range(2):
-        y = signal.oaconvolve(xs[:, c], ir[:, c])
-        out[:, c] = y[:n]
-    return out
+    y = signal.fftconvolve(xs, ir, axes=0)
+    return y[:n]
 
 
 def verb(x: np.ndarray, kind: str = "room", wet: float = 0.2, seed: int = 11,
@@ -515,12 +522,34 @@ def true_peak_db(x: np.ndarray) -> float:
     return db(true_peak(x))
 
 
+# ITU-R BS.1770-4 K-weighting at 48 kHz as one second-order-sections filter
+_KSOS = np.array([[1.53512485958697, -2.69169618940638, 1.19839281085285,
+                   1.0, -1.69065929318241, 0.73248077421585],
+                  [1.0, -2.0, 1.0, 1.0, -1.99004745483398, 0.99007225036621]])
+
+
 def lufs(x: np.ndarray) -> float:
-    import pyloudnorm as pyln
-    if len(x) < ns(0.45):
-        x = pad_to(x, ns(0.45))
-    v = pyln.Meter(SR).integrated_loudness(x)
-    return float(v) if np.isfinite(v) else -120.0
+    """Integrated loudness (ITU-R BS.1770-4 / EBU R128): K-weighting, 400 ms
+    blocks at 75 percent overlap, absolute gate -70 LUFS, relative gate -10 LU.
+    Matches pyloudnorm to within 0.01 LU (checked in qa)."""
+    xs = st(x)
+    if len(xs) < ns(0.4):
+        xs = pad_to(xs, ns(0.4))
+    z = signal.sosfilt(_KSOS, xs, axis=0)
+    p = np.sum(z * z, axis=1)
+    c = np.concatenate([[0.0], np.cumsum(p)])
+    w, h = ns(0.4), ns(0.1)
+    starts = np.arange(0, len(p) - w + 1, h)
+    ms = (c[starts + w] - c[starts]) / w
+    lk = -0.691 + 10 * np.log10(ms + 1e-30)
+    g = ms[lk > -70.0]
+    if len(g) == 0:
+        return -120.0
+    rel = -0.691 + 10 * np.log10(np.mean(g)) - 10.0
+    g2 = ms[(lk > -70.0) & (lk > rel)]
+    if len(g2) == 0:
+        return -120.0
+    return float(-0.691 + 10 * np.log10(np.mean(g2)))
 
 
 def env_follow(x: np.ndarray, attack: float, release: float, frame: float = 0.005):

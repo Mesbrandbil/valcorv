@@ -1,0 +1,1429 @@
+[
+  {
+    "t": 0.3,
+    "kind": "set-square-tap",
+    "gain_db": 0.0,
+    "scene": "a1-world",
+    "source": "auto",
+    "seed": 845024,
+    "pan": -0.1
+  },
+  {
+    "t": 0.34,
+    "kind": "pencil-stroke",
+    "gain_db": 0.0,
+    "scene": "a1-world",
+    "source": "auto",
+    "seed": 929042,
+    "dur": 0.9,
+    "pressure": 0.8,
+    "pan": -0.1
+  },
+  {
+    "t": 1.35,
+    "kind": "pencil-stroke",
+    "gain_db": -2.0,
+    "scene": "a1-world",
+    "source": "auto",
+    "seed": 548453,
+    "dur": 0.6,
+    "pan": 0.1
+  },
+  {
+    "t": 2.05,
+    "kind": "ruler-contact",
+    "gain_db": -2.0,
+    "scene": "a1-world",
+    "source": "auto",
+    "seed": 607338,
+    "pan": 0.15
+  },
+  {
+    "t": 2.1,
+    "kind": "pencil-stroke",
+    "gain_db": -2.0,
+    "scene": "a1-world",
+    "source": "auto",
+    "seed": 662571,
+    "dur": 0.7,
+    "pan": 0.15
+  },
+  {
+    "t": 2.87,
+    "kind": "ruler-contact",
+    "gain_db": -5.0,
+    "scene": "a1-world",
+    "source": "auto",
+    "seed": 891678,
+    "pan": -0.3678
+  },
+  {
+    "t": 2.9,
+    "kind": "pencil-stroke",
+    "gain_db": -5.0521,
+    "scene": "a1-world",
+    "source": "auto",
+    "seed": 970219,
+    "dur": 0.5388,
+    "pressure": 0.8308,
+    "pan": -0.4259
+  },
+  {
+    "t": 3.1396,
+    "kind": "pencil-stroke",
+    "gain_db": -5.8116,
+    "scene": "a1-world",
+    "source": "auto",
+    "seed": 554170,
+    "dur": 0.2822,
+    "pressure": 0.5415,
+    "pan": -0.4693
+  },
+  {
+    "t": 3.3881,
+    "kind": "pencil-stroke",
+    "gain_db": -4.4934,
+    "scene": "a1-world",
+    "source": "auto",
+    "seed": 571401,
+    "dur": 0.1811,
+    "pressure": 0.6306,
+    "pan": 0.3088
+  },
+  {
+    "t": 3.72,
+    "kind": "footsteps",
+    "gain_db": -2.0,
+    "source": "designed",
+    "scene": "a1-world",
+    "seed": 4,
+    "count": 6,
+    "interval": 0.55,
+    "surface": "gravel",
+    "pan0": -0.5,
+    "pan1": -0.1
+  },
+  {
+    "t": 3.832,
+    "kind": "pencil-stroke",
+    "gain_db": -5.5164,
+    "scene": "a1-world",
+    "source": "auto",
+    "seed": 488437,
+    "dur": 0.439,
+    "pressure": 0.7493,
+    "pan": 0.3437
+  },
+  {
+    "t": 3.87,
+    "kind": "technical-pen",
+    "gain_db": -3.0,
+    "scene": "a1-world",
+    "source": "auto",
+    "seed": 313152,
+    "dur": 0.9,
+    "pan": -0.35
+  },
+  {
+    "t": 4.1011,
+    "kind": "ruler-contact",
+    "gain_db": -5.0,
+    "scene": "a1-world",
+    "source": "auto",
+    "seed": 896508,
+    "pan": -0.3822
+  },
+  {
+    "t": 4.1311,
+    "kind": "pencil-stroke",
+    "gain_db": -3.5144,
+    "scene": "a1-world",
+    "source": "auto",
+    "seed": 375828,
+    "dur": 0.2504,
+    "pressure": 0.7889,
+    "pan": -0.1829
+  },
+  {
+    "t": 4.4361,
+    "kind": "pencil-stroke",
+    "gain_db": -4.5193,
+    "scene": "a1-world",
+    "source": "auto",
+    "seed": 819106,
+    "dur": 0.3079,
+    "pressure": 0.7159,
+    "pan": 0.4938
+  },
+  {
+    "t": 4.57,
+    "kind": "radio-squelch",
+    "gain_db": 0.0,
+    "source": "designed",
+    "scene": "a1-world",
+    "seed": 3,
+    "pan": 0.45
+  },
+  {
+    "t": 4.8011,
+    "kind": "pencil-stroke",
+    "gain_db": -6.2513,
+    "scene": "a1-world",
+    "source": "auto",
+    "seed": 356140,
+    "dur": 0.5363,
+    "pressure": 0.5101,
+    "pan": -0.0099
+  },
+  {
+    "t": 5.0601,
+    "kind": "pencil-stroke",
+    "gain_db": -3.931,
+    "scene": "a1-world",
+    "source": "auto",
+    "seed": 273333,
+    "dur": 0.2092,
+    "pressure": 0.8029,
+    "pan": -0.2285
+  },
+  {
+    "t": 5.4429,
+    "kind": "ruler-contact",
+    "gain_db": -5.0,
+    "scene": "a1-world",
+    "source": "auto",
+    "seed": 370406,
+    "pan": -0.0951
+  },
+  {
+    "t": 5.4729,
+    "kind": "pencil-stroke",
+    "gain_db": -3.8345,
+    "scene": "a1-world",
+    "source": "auto",
+    "seed": 870270,
+    "dur": 0.3384,
+    "pressure": 0.7405,
+    "pan": 0.4851
+  },
+  {
+    "t": 5.7032,
+    "kind": "ruler-contact",
+    "gain_db": -5.0,
+    "scene": "a1-world",
+    "source": "auto",
+    "seed": 906412,
+    "pan": -0.2711
+  },
+  {
+    "t": 5.7332,
+    "kind": "pencil-stroke",
+    "gain_db": -5.9084,
+    "scene": "a1-world",
+    "source": "auto",
+    "seed": 598515,
+    "dur": 0.3055,
+    "pressure": 0.769,
+    "pan": 0.2758
+  },
+  {
+    "t": 6.2,
+    "kind": "solenoid-click",
+    "gain_db": -2.0,
+    "source": "designed",
+    "scene": "a1-world",
+    "seed": 5,
+    "pan": 0.3
+  },
+  {
+    "t": 6.26,
+    "kind": "relay-click",
+    "gain_db": -6.0,
+    "source": "designed",
+    "scene": "a1-world",
+    "seed": 6,
+    "pan": 0.3
+  },
+  {
+    "t": 6.35,
+    "kind": "pencil-tick",
+    "gain_db": -3.0,
+    "scene": "a1-world",
+    "source": "auto",
+    "seed": 258260,
+    "pan": 0.3
+  },
+  {
+    "t": 7.04,
+    "kind": "pencil-tick",
+    "gain_db": -4.0,
+    "scene": "a1-world",
+    "source": "auto",
+    "seed": 489279,
+    "pan": -0.2199
+  },
+  {
+    "t": 7.24,
+    "kind": "pencil-tick",
+    "gain_db": -5.0,
+    "scene": "a1-world",
+    "source": "auto",
+    "seed": 123734,
+    "pan": 0.4526
+  },
+  {
+    "t": 7.44,
+    "kind": "pencil-tick",
+    "gain_db": -6.0,
+    "scene": "a1-world",
+    "source": "auto",
+    "seed": 752849,
+    "pan": -0.2622
+  },
+  {
+    "t": 7.64,
+    "kind": "pencil-tick",
+    "gain_db": -7.0,
+    "scene": "a1-world",
+    "source": "auto",
+    "seed": 689074,
+    "pan": 0.3987
+  },
+  {
+    "t": 7.84,
+    "kind": "pencil-tick",
+    "gain_db": -8.0,
+    "scene": "a1-world",
+    "source": "auto",
+    "seed": 431768,
+    "pan": 0.4507
+  },
+  {
+    "t": 7.87,
+    "kind": "paper-slide",
+    "gain_db": -1.0,
+    "scene": "a1-paper",
+    "source": "auto",
+    "seed": 828873,
+    "dur": 0.7,
+    "pan0": 0.6,
+    "pan1": 0.25
+  },
+  {
+    "t": 7.99,
+    "kind": "distant-clank",
+    "gain_db": 0.0,
+    "source": "designed",
+    "scene": "a1-world",
+    "seed": 7,
+    "pan": -0.6
+  },
+  {
+    "t": 8.62,
+    "kind": "technical-pen",
+    "gain_db": -4.0,
+    "scene": "a1-paper",
+    "source": "auto",
+    "seed": 936003,
+    "dur": 1.3,
+    "pan": 0.3
+  },
+  {
+    "t": 8.67,
+    "kind": "pencil-stroke",
+    "gain_db": -5.0,
+    "scene": "a1-world",
+    "source": "auto",
+    "seed": 886168,
+    "dur": 1.5,
+    "pressure": 0.35,
+    "speed": 1.2,
+    "pan": -0.2
+  },
+  {
+    "t": 9.44,
+    "kind": "pencil-stroke",
+    "gain_db": -2.0,
+    "scene": "a1-world",
+    "source": "auto",
+    "seed": 7233,
+    "dur": 1.05,
+    "pressure": 0.85,
+    "pan": -0.1
+  },
+  {
+    "t": 10.64,
+    "kind": "technical-pen",
+    "gain_db": -4.0,
+    "scene": "a1-paper",
+    "source": "auto",
+    "seed": 810015,
+    "dur": 1.0,
+    "pan": 0.35
+  },
+  {
+    "t": 11.82,
+    "kind": "pencil-stroke",
+    "gain_db": -4.0,
+    "scene": "a1-paper",
+    "source": "auto",
+    "seed": 630308,
+    "dur": 0.5,
+    "pan": 0.2
+  },
+  {
+    "t": 12.88,
+    "kind": "stamp",
+    "gain_db": 0.0,
+    "scene": "a1-paper",
+    "source": "auto",
+    "seed": 968971,
+    "pan": 0.3
+  },
+  {
+    "t": 13.48,
+    "kind": "pencil-stroke",
+    "gain_db": -6.0,
+    "scene": "a1-paper",
+    "source": "auto",
+    "seed": 254934,
+    "dur": 0.35,
+    "pan": 0.35
+  },
+  {
+    "t": 14.04,
+    "kind": "pencil-tick",
+    "gain_db": -3.0,
+    "scene": "a1-paper",
+    "source": "auto",
+    "seed": 429375,
+    "pan": 0.45
+  },
+  {
+    "t": 14.28,
+    "kind": "pencil-tick",
+    "gain_db": -4.0,
+    "scene": "a1-paper",
+    "source": "auto",
+    "seed": 634997,
+    "pan": 0.45
+  },
+  {
+    "t": 14.52,
+    "kind": "pencil-tick",
+    "gain_db": -5.0,
+    "scene": "a1-paper",
+    "source": "auto",
+    "seed": 198941,
+    "pan": 0.45
+  },
+  {
+    "t": 15.06,
+    "kind": "pencil-tick",
+    "gain_db": -8.2563,
+    "scene": "a1-world",
+    "source": "auto",
+    "seed": 616037,
+    "dur": 0.2948,
+    "pan": 0.2454
+  },
+  {
+    "t": 15.11,
+    "kind": "paper-lift",
+    "gain_db": -2.0,
+    "scene": "a1-paper",
+    "source": "auto",
+    "seed": 657083,
+    "pan": 0.4
+  },
+  {
+    "t": 15.16,
+    "kind": "pencil-stroke",
+    "gain_db": -6.0,
+    "scene": "a1-world",
+    "source": "auto",
+    "seed": 227706,
+    "dur": 0.9,
+    "pressure": 0.5,
+    "pan": -0.3
+  },
+  {
+    "t": 15.2148,
+    "kind": "pencil-tick",
+    "gain_db": -8.0012,
+    "scene": "a1-world",
+    "source": "auto",
+    "seed": 413291,
+    "dur": 0.2739,
+    "pan": -0.3277
+  },
+  {
+    "t": 15.295,
+    "kind": "pencil-tick",
+    "gain_db": -7.4727,
+    "scene": "a1-world",
+    "source": "auto",
+    "seed": 5900,
+    "dur": 0.2367,
+    "pan": 0.499
+  },
+  {
+    "t": 15.4458,
+    "kind": "pencil-tick",
+    "gain_db": -5.2507,
+    "scene": "a1-world",
+    "source": "auto",
+    "seed": 62626,
+    "dur": 0.2675,
+    "pan": -0.684
+  },
+  {
+    "t": 15.605,
+    "kind": "pencil-stroke",
+    "gain_db": -6.8682,
+    "scene": "a1-world",
+    "source": "auto",
+    "seed": 625422,
+    "dur": 0.2518,
+    "pan": 0.5171
+  },
+  {
+    "t": 15.71,
+    "kind": "pencil-stroke",
+    "gain_db": -6.0,
+    "scene": "a1-world",
+    "source": "auto",
+    "seed": 49796,
+    "dur": 0.9,
+    "pressure": 0.5,
+    "pan": 0.0
+  },
+  {
+    "t": 15.7452,
+    "kind": "pencil-tick",
+    "gain_db": -5.8685,
+    "scene": "a1-world",
+    "source": "auto",
+    "seed": 328229,
+    "dur": 0.2173,
+    "pan": -0.5716
+  },
+  {
+    "t": 15.9129,
+    "kind": "pencil-tick",
+    "gain_db": -8.5542,
+    "scene": "a1-world",
+    "source": "auto",
+    "seed": 921341,
+    "dur": 0.2595,
+    "pan": 0.4224
+  },
+  {
+    "t": 16.1001,
+    "kind": "pencil-tick",
+    "gain_db": -5.5214,
+    "scene": "a1-world",
+    "source": "auto",
+    "seed": 636281,
+    "dur": 0.193,
+    "pan": 0.3477
+  },
+  {
+    "t": 16.2322,
+    "kind": "pencil-stroke",
+    "gain_db": -8.2157,
+    "scene": "a1-world",
+    "source": "auto",
+    "seed": 103580,
+    "dur": 0.2756,
+    "pan": 0.593
+  },
+  {
+    "t": 16.26,
+    "kind": "pencil-stroke",
+    "gain_db": -6.0,
+    "scene": "a1-world",
+    "source": "auto",
+    "seed": 3145,
+    "dur": 0.9,
+    "pressure": 0.5,
+    "pan": 0.3
+  },
+  {
+    "t": 16.398,
+    "kind": "pencil-tick",
+    "gain_db": -8.8551,
+    "scene": "a1-world",
+    "source": "auto",
+    "seed": 632070,
+    "dur": 0.2626,
+    "pan": -0.3352
+  },
+  {
+    "t": 16.5335,
+    "kind": "pencil-tick",
+    "gain_db": -10.344,
+    "scene": "a1-world",
+    "source": "auto",
+    "seed": 941412,
+    "dur": 0.2526,
+    "pan": 0.2913
+  },
+  {
+    "t": 16.7145,
+    "kind": "pencil-tick",
+    "gain_db": -10.3628,
+    "scene": "a1-world",
+    "source": "auto",
+    "seed": 372253,
+    "dur": 0.1662,
+    "pan": 0.0195
+  },
+  {
+    "t": 16.8691,
+    "kind": "pencil-stroke",
+    "gain_db": -7.1681,
+    "scene": "a1-world",
+    "source": "auto",
+    "seed": 985651,
+    "dur": 0.2825,
+    "pan": -0.3828
+  },
+  {
+    "t": 17.51,
+    "kind": "radio-click",
+    "gain_db": -2.0,
+    "source": "designed",
+    "scene": "a1-world",
+    "seed": 9,
+    "pan": -0.4
+  },
+  {
+    "t": 18.16,
+    "kind": "distant-clank",
+    "gain_db": -3.0,
+    "source": "designed",
+    "scene": "a1-world",
+    "seed": 8,
+    "pan": 0.55
+  },
+  {
+    "t": 18.29,
+    "kind": "pencil-stroke",
+    "gain_db": -3.0,
+    "scene": "a1-world",
+    "source": "auto",
+    "seed": 24951,
+    "dur": 0.45,
+    "pan": 0.1
+  },
+  {
+    "t": 19.46,
+    "kind": "pencil-tick",
+    "gain_db": -2.0,
+    "scene": "a1-world",
+    "source": "auto",
+    "seed": 680484,
+    "pan": -0.3
+  },
+  {
+    "t": 19.68,
+    "kind": "pencil-tick",
+    "gain_db": -2.5,
+    "scene": "a1-world",
+    "source": "auto",
+    "seed": 895907,
+    "pan": -0.15
+  },
+  {
+    "t": 19.9,
+    "kind": "pencil-tick",
+    "gain_db": -3.0,
+    "scene": "a1-world",
+    "source": "auto",
+    "seed": 927786,
+    "pan": 0.0
+  },
+  {
+    "t": 20.12,
+    "kind": "pencil-tick",
+    "gain_db": -3.5,
+    "scene": "a1-world",
+    "source": "auto",
+    "seed": 863354,
+    "pan": 0.15
+  },
+  {
+    "t": 20.34,
+    "kind": "pencil-tick",
+    "gain_db": -4.0,
+    "scene": "a1-world",
+    "source": "auto",
+    "seed": 11921,
+    "pan": 0.3
+  },
+  {
+    "t": 20.59,
+    "kind": "pencil-hatch",
+    "gain_db": -8.0,
+    "scene": "a1-world",
+    "source": "auto",
+    "seed": 261675,
+    "dur": 0.6,
+    "rate": 9.0,
+    "pan": 0.3
+  },
+  {
+    "t": 21.16,
+    "kind": "technical-pen",
+    "gain_db": -5.0,
+    "scene": "a1-world",
+    "source": "auto",
+    "seed": 657257,
+    "dur": 0.7,
+    "speed": 0.8,
+    "pan": 0.35
+  },
+  {
+    "t": 22.13,
+    "kind": "valve-clunk",
+    "gain_db": 0.0,
+    "source": "designed",
+    "scene": "a1-world",
+    "seed": 10,
+    "pan": 0.35
+  },
+  {
+    "t": 26.2,
+    "kind": "pencil-stroke",
+    "gain_db": -7.0,
+    "scene": "a1-world",
+    "source": "auto",
+    "seed": 386715,
+    "dur": 0.8,
+    "pressure": 0.4,
+    "pan": 0.05
+  },
+  {
+    "t": 28.66,
+    "kind": "paper-slide",
+    "gain_db": -5.0,
+    "scene": "a1-after",
+    "source": "auto",
+    "seed": 16236,
+    "dur": 0.3216,
+    "pan0": 0.381,
+    "pan1": 0.2619
+  },
+  {
+    "t": 28.88,
+    "kind": "paper-stack",
+    "gain_db": -7.0,
+    "scene": "a1-after",
+    "source": "auto",
+    "seed": 368740,
+    "pan": -0.1997
+  },
+  {
+    "t": 29.3556,
+    "kind": "paper-slide",
+    "gain_db": -5.6,
+    "scene": "a1-after",
+    "source": "auto",
+    "seed": 967134,
+    "dur": 0.3714,
+    "pan0": -0.0924,
+    "pan1": -0.2989
+  },
+  {
+    "t": 29.5756,
+    "kind": "paper-stack",
+    "gain_db": -7.0,
+    "scene": "a1-after",
+    "source": "auto",
+    "seed": 130221,
+    "pan": 0.343
+  },
+  {
+    "t": 29.8062,
+    "kind": "paper-slide",
+    "gain_db": -6.2,
+    "scene": "a1-after",
+    "source": "auto",
+    "seed": 265702,
+    "dur": 0.2594,
+    "pan0": -0.3991,
+    "pan1": 0.1254
+  },
+  {
+    "t": 30.0262,
+    "kind": "paper-stack",
+    "gain_db": -7.0,
+    "scene": "a1-after",
+    "source": "auto",
+    "seed": 885193,
+    "pan": 0.1382
+  },
+  {
+    "t": 30.4741,
+    "kind": "paper-slide",
+    "gain_db": -6.8,
+    "scene": "a1-after",
+    "source": "auto",
+    "seed": 967721,
+    "dur": 0.2901,
+    "pan0": -0.4492,
+    "pan1": -0.2469
+  },
+  {
+    "t": 30.6941,
+    "kind": "paper-stack",
+    "gain_db": -7.0,
+    "scene": "a1-after",
+    "source": "auto",
+    "seed": 686865,
+    "pan": 0.1113
+  },
+  {
+    "t": 31.2984,
+    "kind": "paper-slide",
+    "gain_db": -7.4,
+    "scene": "a1-after",
+    "source": "auto",
+    "seed": 212091,
+    "dur": 0.3821,
+    "pan0": -0.6919,
+    "pan1": -0.2629
+  },
+  {
+    "t": 31.5184,
+    "kind": "paper-stack",
+    "gain_db": -7.0,
+    "scene": "a1-after",
+    "source": "auto",
+    "seed": 567929,
+    "pan": 0.2198
+  },
+  {
+    "t": 32.265,
+    "kind": "paper-slide",
+    "gain_db": -8.0,
+    "scene": "a1-after",
+    "source": "auto",
+    "seed": 126756,
+    "dur": 0.3527,
+    "pan0": -0.0658,
+    "pan1": -0.0569
+  },
+  {
+    "t": 32.485,
+    "kind": "paper-stack",
+    "gain_db": -7.0,
+    "scene": "a1-after",
+    "source": "auto",
+    "seed": 408907,
+    "pan": -0.3181
+  },
+  {
+    "t": 33.1916,
+    "kind": "paper-slide",
+    "gain_db": -8.6,
+    "scene": "a1-after",
+    "source": "auto",
+    "seed": 452884,
+    "dur": 0.3042,
+    "pan0": -0.205,
+    "pan1": 0.2747
+  },
+  {
+    "t": 33.4116,
+    "kind": "paper-stack",
+    "gain_db": -7.0,
+    "scene": "a1-after",
+    "source": "auto",
+    "seed": 256484,
+    "pan": -0.1697
+  },
+  {
+    "t": 36.13,
+    "kind": "ruler-contact",
+    "gain_db": -3.0,
+    "scene": "a1-after",
+    "source": "auto",
+    "seed": 770829,
+    "pan": 0.0
+  },
+  {
+    "t": 36.15,
+    "kind": "technical-pen",
+    "gain_db": -4.0,
+    "scene": "a1-after",
+    "source": "auto",
+    "seed": 200700,
+    "dur": 1.1,
+    "pan": 0.0
+  },
+  {
+    "t": 36.9,
+    "kind": "set-square-tap",
+    "gain_db": -4.0,
+    "scene": "a1-after",
+    "source": "auto",
+    "seed": 416166,
+    "pan": 0.1
+  },
+  {
+    "t": 42.7777,
+    "kind": "align-snap",
+    "gain_db": -3.0,
+    "scene": "a2-resolve",
+    "source": "auto",
+    "seed": 351477,
+    "pan": -0.0111
+  },
+  {
+    "t": 42.9664,
+    "kind": "align-snap",
+    "gain_db": -5.0,
+    "scene": "a2-resolve",
+    "source": "auto",
+    "seed": 78836,
+    "pan": -0.0036
+  },
+  {
+    "t": 43.0715,
+    "kind": "align-snap",
+    "gain_db": -7.0,
+    "scene": "a2-resolve",
+    "source": "auto",
+    "seed": 994672,
+    "pan": -0.0613
+  },
+  {
+    "t": 43.2544,
+    "kind": "align-snap",
+    "gain_db": -3.0,
+    "scene": "a2-resolve",
+    "source": "auto",
+    "seed": 556769,
+    "pan": 0.1655
+  },
+  {
+    "t": 43.407,
+    "kind": "align-snap",
+    "gain_db": -5.0,
+    "scene": "a2-resolve",
+    "source": "auto",
+    "seed": 611596,
+    "pan": 0.0225
+  },
+  {
+    "t": 43.5535,
+    "kind": "align-snap",
+    "gain_db": -7.0,
+    "scene": "a2-resolve",
+    "source": "auto",
+    "seed": 636975,
+    "pan": -0.5064
+  },
+  {
+    "t": 43.7413,
+    "kind": "align-snap",
+    "gain_db": -3.0,
+    "scene": "a2-resolve",
+    "source": "auto",
+    "seed": 586881,
+    "pan": -0.0139
+  },
+  {
+    "t": 43.9171,
+    "kind": "align-snap",
+    "gain_db": -5.0,
+    "scene": "a2-resolve",
+    "source": "auto",
+    "seed": 467590,
+    "pan": -0.0289
+  },
+  {
+    "t": 44.0482,
+    "kind": "align-snap",
+    "gain_db": -7.0,
+    "scene": "a2-resolve",
+    "source": "auto",
+    "seed": 967859,
+    "pan": 0.2369
+  },
+  {
+    "t": 44.2294,
+    "kind": "align-snap",
+    "gain_db": -3.0,
+    "scene": "a2-resolve",
+    "source": "auto",
+    "seed": 23975,
+    "pan": -0.3644
+  },
+  {
+    "t": 44.3562,
+    "kind": "align-snap",
+    "gain_db": -5.0,
+    "scene": "a2-resolve",
+    "source": "auto",
+    "seed": 681438,
+    "pan": -0.1677
+  },
+  {
+    "t": 44.5238,
+    "kind": "align-snap",
+    "gain_db": -7.0,
+    "scene": "a2-resolve",
+    "source": "auto",
+    "seed": 269376,
+    "pan": 0.5485
+  },
+  {
+    "t": 44.7196,
+    "kind": "align-snap",
+    "gain_db": -3.0,
+    "scene": "a2-resolve",
+    "source": "auto",
+    "seed": 638709,
+    "pan": 0.2463
+  },
+  {
+    "t": 44.8393,
+    "kind": "align-snap",
+    "gain_db": -5.0,
+    "scene": "a2-resolve",
+    "source": "auto",
+    "seed": 7625,
+    "pan": 0.4783
+  },
+  {
+    "t": 48.32,
+    "kind": "align-snap",
+    "gain_db": -1.0,
+    "scene": "a2-resolve",
+    "source": "auto",
+    "seed": 774935,
+    "pan": -0.4
+  },
+  {
+    "t": 48.52,
+    "kind": "align-snap",
+    "gain_db": -1.0,
+    "scene": "a2-resolve",
+    "source": "auto",
+    "seed": 680419,
+    "pan": -0.3
+  },
+  {
+    "t": 48.72,
+    "kind": "align-snap",
+    "gain_db": -1.0,
+    "scene": "a2-resolve",
+    "source": "auto",
+    "seed": 175926,
+    "pan": -0.2
+  },
+  {
+    "t": 48.92,
+    "kind": "align-snap",
+    "gain_db": -1.0,
+    "scene": "a2-resolve",
+    "source": "auto",
+    "seed": 726782,
+    "pan": -0.1
+  },
+  {
+    "t": 49.27,
+    "kind": "packet",
+    "gain_db": -2.0,
+    "scene": "a2-resolve",
+    "source": "auto",
+    "seed": 720012,
+    "pan": -0.2
+  },
+  {
+    "t": 49.97,
+    "kind": "packet",
+    "gain_db": -4.0,
+    "scene": "a2-resolve",
+    "source": "auto",
+    "seed": 643625,
+    "pan": 0.25
+  },
+  {
+    "t": 52.37,
+    "kind": "confirm",
+    "gain_db": 0.0,
+    "scene": "a2-resolve",
+    "source": "auto",
+    "seed": 291076,
+    "variant": 0,
+    "pan": -0.35
+  },
+  {
+    "t": 52.79,
+    "kind": "confirm",
+    "gain_db": 0.0,
+    "scene": "a2-resolve",
+    "source": "auto",
+    "seed": 240232,
+    "variant": 1,
+    "pan": -0.35
+  },
+  {
+    "t": 53.21,
+    "kind": "confirm",
+    "gain_db": 0.0,
+    "scene": "a2-resolve",
+    "source": "auto",
+    "seed": 290559,
+    "variant": 2,
+    "pan": -0.35
+  },
+  {
+    "t": 53.63,
+    "kind": "confirm",
+    "gain_db": 0.0,
+    "scene": "a2-resolve",
+    "source": "auto",
+    "seed": 565618,
+    "variant": 3,
+    "pan": -0.35
+  },
+  {
+    "t": 54.05,
+    "kind": "confirm",
+    "gain_db": 0.0,
+    "scene": "a2-resolve",
+    "source": "auto",
+    "seed": 457607,
+    "variant": 4,
+    "pan": -0.35
+  },
+  {
+    "t": 54.81,
+    "kind": "record-append",
+    "gain_db": 0.0,
+    "scene": "a2-resolve",
+    "source": "auto",
+    "seed": 992990,
+    "pan": 0.4
+  },
+  {
+    "t": 55.38,
+    "kind": "record-append",
+    "gain_db": -2.0,
+    "scene": "a2-resolve",
+    "source": "auto",
+    "seed": 361588,
+    "pan": 0.4
+  },
+  {
+    "t": 59.8,
+    "kind": "record-append",
+    "gain_db": -2.0,
+    "scene": "a3-change",
+    "source": "auto",
+    "seed": 932647,
+    "pan": 0.4
+  },
+  {
+    "t": 60.32,
+    "kind": "valve-clunk",
+    "gain_db": -4.0,
+    "source": "designed",
+    "scene": "a3-change",
+    "seed": 11,
+    "pan": 0.35,
+    "flow": false
+  },
+  {
+    "t": 62.52,
+    "kind": "system-tick",
+    "gain_db": 0.0,
+    "source": "designed",
+    "scene": "a3-change",
+    "seed": 12
+  },
+  {
+    "t": 62.92,
+    "kind": "relay-click",
+    "gain_db": -4.0,
+    "scene": "a3-change",
+    "source": "auto",
+    "seed": 798526,
+    "pan": -0.35
+  },
+  {
+    "t": 63.57,
+    "kind": "stretch",
+    "gain_db": 0.0,
+    "source": "designed",
+    "scene": "a3-change",
+    "seed": 13,
+    "dur": 0.9
+  },
+  {
+    "t": 64.47,
+    "kind": "cross-snap",
+    "gain_db": 0.0,
+    "source": "designed",
+    "scene": "a3-change",
+    "seed": 14
+  },
+  {
+    "t": 66.48,
+    "kind": "choice-accent",
+    "gain_db": 0.0,
+    "source": "designed",
+    "scene": "a3-change",
+    "seed": 15,
+    "variant": 0,
+    "pan": -0.2
+  },
+  {
+    "t": 67.33,
+    "kind": "align-snap",
+    "gain_db": 0.0,
+    "scene": "a3-change",
+    "source": "auto",
+    "seed": 122267,
+    "pan": 0.0
+  },
+  {
+    "t": 67.61,
+    "kind": "choice-accent",
+    "gain_db": 0.0,
+    "source": "designed",
+    "scene": "a3-change",
+    "seed": 16,
+    "variant": 1
+  },
+  {
+    "t": 68.56,
+    "kind": "record-append",
+    "gain_db": -1.0,
+    "scene": "a3-change",
+    "source": "auto",
+    "seed": 478752,
+    "pan": 0.35
+  },
+  {
+    "t": 70.15,
+    "kind": "choice-accent",
+    "gain_db": 0.0,
+    "source": "designed",
+    "scene": "a3-change",
+    "seed": 17,
+    "variant": 2,
+    "pan": 0.2
+  },
+  {
+    "t": 70.4,
+    "kind": "packet",
+    "gain_db": -2.0,
+    "scene": "a3-change",
+    "source": "auto",
+    "seed": 849743,
+    "pan": 0.3
+  },
+  {
+    "t": 70.9152,
+    "kind": "response-tick",
+    "gain_db": -2.0,
+    "scene": "a3-change",
+    "source": "auto",
+    "seed": 531792,
+    "pan": 0.15
+  },
+  {
+    "t": 71.2943,
+    "kind": "response-tick",
+    "gain_db": -3.0,
+    "scene": "a3-change",
+    "source": "auto",
+    "seed": 246640,
+    "pan": 0.27
+  },
+  {
+    "t": 71.5801,
+    "kind": "response-tick",
+    "gain_db": -4.0,
+    "scene": "a3-change",
+    "source": "auto",
+    "seed": 333041,
+    "pan": 0.39
+  },
+  {
+    "t": 71.9154,
+    "kind": "response-tick",
+    "gain_db": -5.0,
+    "scene": "a3-change",
+    "source": "auto",
+    "seed": 394808,
+    "pan": 0.51
+  },
+  {
+    "t": 72.1,
+    "kind": "node-pass",
+    "gain_db": -7.4095,
+    "scene": "a3-change",
+    "source": "auto",
+    "seed": 11112,
+    "pan": -0.5831
+  },
+  {
+    "t": 72.5796,
+    "kind": "node-pass",
+    "gain_db": -4.412,
+    "scene": "a3-change",
+    "source": "auto",
+    "seed": 32973,
+    "pan": -0.0143
+  },
+  {
+    "t": 73.0667,
+    "kind": "node-pass",
+    "gain_db": -5.2661,
+    "scene": "a3-change",
+    "source": "auto",
+    "seed": 132125,
+    "pan": -0.5842
+  },
+  {
+    "t": 73.439,
+    "kind": "node-pass",
+    "gain_db": -7.0806,
+    "scene": "a3-change",
+    "source": "auto",
+    "seed": 549011,
+    "pan": -0.0901
+  },
+  {
+    "t": 73.8845,
+    "kind": "node-pass",
+    "gain_db": -7.8371,
+    "scene": "a3-change",
+    "source": "auto",
+    "seed": 693891,
+    "pan": -0.0006
+  },
+  {
+    "t": 74.216,
+    "kind": "node-pass",
+    "gain_db": -6.723,
+    "scene": "a3-change",
+    "source": "auto",
+    "seed": 766060,
+    "pan": -0.4351
+  },
+  {
+    "t": 74.592,
+    "kind": "node-pass",
+    "gain_db": -8.8341,
+    "scene": "a3-change",
+    "source": "auto",
+    "seed": 668432,
+    "pan": 0.2785
+  },
+  {
+    "t": 75.0385,
+    "kind": "node-pass",
+    "gain_db": -7.551,
+    "scene": "a3-change",
+    "source": "auto",
+    "seed": 95788,
+    "pan": 0.0189
+  },
+  {
+    "t": 75.36,
+    "kind": "decision-accent",
+    "gain_db": 0.0,
+    "source": "designed",
+    "scene": "a3-change",
+    "seed": 18,
+    "pan": -0.25
+  },
+  {
+    "t": 75.91,
+    "kind": "decision-accent",
+    "gain_db": -3.0,
+    "source": "designed",
+    "scene": "a3-change",
+    "seed": 19,
+    "pan": 0.25
+  },
+  {
+    "t": 76.31,
+    "kind": "record-append",
+    "gain_db": -3.0,
+    "scene": "a3-change",
+    "source": "auto",
+    "seed": 880670,
+    "pan": 0.45
+  },
+  {
+    "t": 76.49,
+    "kind": "chain-record",
+    "gain_db": 0.0,
+    "source": "designed",
+    "scene": "a3-close",
+    "seed": 20,
+    "pan": -0.3
+  },
+  {
+    "t": 76.66,
+    "kind": "record-append",
+    "gain_db": -5.0,
+    "scene": "a3-change",
+    "source": "auto",
+    "seed": 696998,
+    "pan": 0.45
+  },
+  {
+    "t": 77.34,
+    "kind": "chain-trust",
+    "gain_db": 0.0,
+    "source": "designed",
+    "scene": "a3-close",
+    "seed": 21,
+    "pan": -0.15
+  },
+  {
+    "t": 78.96,
+    "kind": "chain-decision",
+    "gain_db": 0.0,
+    "source": "designed",
+    "scene": "a3-close",
+    "seed": 22,
+    "pan": 0.0
+  },
+  {
+    "t": 81.01,
+    "kind": "chain-price",
+    "gain_db": 0.0,
+    "source": "designed",
+    "scene": "a3-close",
+    "seed": 23,
+    "pan": 0.15
+  },
+  {
+    "t": 82.78,
+    "kind": "chain-capacity",
+    "gain_db": 0.0,
+    "source": "designed",
+    "scene": "a3-close",
+    "seed": 24,
+    "pan": 0.3
+  },
+  {
+    "t": 84.17,
+    "kind": "latch",
+    "gain_db": 0.0,
+    "source": "designed",
+    "scene": "a3-close",
+    "seed": 30
+  }
+]

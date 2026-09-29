@@ -8,3 +8,7 @@ renders/tmp/
 __pycache__/
 narration/takes/guide/*.wav
 .hyperframes/preview/
+assets/audio/master.wav
+assets/audio/master-voice.wav
+assets/audio/music.wav
+assets/audio/sfx.wav
