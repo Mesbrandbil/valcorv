@@ -1,13 +1,13 @@
 <svg xmlns="http://www.w3.org/2000/svg" id="priora-glyphs" width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
   <!--
     Priora glyph sprite for the film, copied from priora-end-state-demo.html (read-only source).
-    g-*    : every <symbol> the demo defines, unchanged except that the paper fill reads var(--pui-paper, #F5F3EE).
-    node-* : the demo's on-site activity node (nodeMarkup()) baked per state. viewBox -30 -30 60 60 in screen px:
+    g-*    : every symbol the demo defines, unchanged except that the paper fill reads the pui-paper custom property (fallback F5F3EE).
+    node-* : the demo's on-site activity node (nodeMarkup) baked per state. viewBox -30 -30 60 60 in screen px:
              draw at 60x60 centred on the node for the demo's 1:1 size, 90x90 for the hero in focus stages (k 1.5).
-    others : reticle, anchor ellipse, packet token, condition check states.
-    Signal: the demo's orange (#C4441C) appears only in the 'hatch' pattern, now var(--signal, #1F47D6).
-    Every other glyph uses currentColor, so outside-state glyphs take the signal via style="color:var(--signal)",
-    as the demo does with style="color:var(--signal)".
+    others : reticle, anchor ellipse, slice ring, packet token, condition check states.
+    Signal : the demo's orange (C4441C) appeared only in the 'hatch' pattern, now the signal custom property (fallback cobalt 1F47D6).
+             Every other glyph uses currentColor, so outside-state glyphs take the signal via a colour style on the use element,
+             as the demo did.
   -->
   <defs>
     <pattern id="hatch-ink" width="4" height="4" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="4" height="4" style="fill:var(--pui-paper, #F5F3EE)"/><line x1="0" y1="0" x2="0" y2="4" stroke="#111" stroke-width="1" stroke-opacity=".35"/></pattern>

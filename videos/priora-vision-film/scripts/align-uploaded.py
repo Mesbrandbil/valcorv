@@ -72,10 +72,32 @@ def global_alignment(y: np.ndarray, lines: list[dict], data: dict, engine: str) 
     return spans
 
 
-def silence_split(y: np.ndarray, lines: list[dict], engine: str) -> list[tuple[float, float]]:
-    """Fallback: pick len(lines)-1 silences as line boundaries by dynamic
-    programming so each line's share of the speech matches its share of the
-    text (syllable weight), preferring longer silences."""
+def _line_aligns(y: np.ndarray, span: tuple[float, float], line: dict, data: dict, engine: str) -> bool:
+    i0, i1 = int(max(0.0, span[0] - 0.05) * SR), int((span[1] + 0.05) * SR)
+    clip = y[i0:i1]
+    if len(clip) < SR * 0.2:
+        return False
+    y16 = nc.resample(clip, SR, nc.ALIGN_SR)
+    try:
+        res = nc.refine_with_energy(nc.forced_align(y16, nc.tokens(nc.spoken_text(line, engine)), data), y16)
+    except nc.AlignmentError:
+        return False
+    q = nc.verify_alignment([(t["start"], t["end"]) for t in res["tokens"]], y16, nc.ALIGN_SR)
+    return q["pause_agreement"] >= 0.99 and q["onset_error_ms"] <= 120 and q["offset_error_ms"] <= 200
+
+
+def silence_split(y: np.ndarray, lines: list[dict], data: dict, engine: str) -> list[tuple[float, float]]:
+    """Fallback when the whole-file alignment fails.
+
+    1. Candidate boundaries are the file's silences of 0.2 s or more.
+    2. Dynamic programming picks len(lines)-1 of them so every line's length
+       best matches its expected length (syllable weight of its words plus
+       0.35 s for each sentence break inside the line), preferring longer
+       silences.
+    3. Repair: each line is force-aligned inside its span; where a line fails
+       (a boundary landed on a pause inside a line), the boundary moves to a
+       neighbouring silence until both lines on either side align.
+    """
     db = nc.frame_db(y, SR)
     quiet = nc.silence_mask(db, 38.0)
     on, off = nc.energy_bounds(y, SR, 40.0)
@@ -84,14 +106,16 @@ def silence_split(y: np.ndarray, lines: list[dict], engine: str) -> list[tuple[f
     if len(pauses) < k:
         raise SystemExit(f"cannot split: found {len(pauses)} silences of 0.2 s or more, need {k}. "
                          "Is every line in the file, with a pause between lines?")
+    inner = np.array([len(nc.split_sentences(nc.tokens(nc.spoken_text(l, engine)), True)) - 1 for l in lines])
     w = np.array([sum(nc._weight(t) for t in nc.tokens(nc.spoken_text(l, engine))) for l in lines])
-    share = w / w.sum()
     total = off - on
+    between = sum(b - a for a, b in pauses) * 0.5
+    rate = max(1e-3, (total - between - 0.35 * inner.sum()) / w.sum())
+    share = (w * rate + 0.35 * inner) / total
     P = len(pauses)
     mids = [(a + b) / 2 for a, b in pauses]
     lens = [b - a for a, b in pauses]
     INF = 1e18
-    # cost[j][p]: best cost placing boundary j (0-based) at pause p
     cost = np.full((k, P), INF)
     back = np.full((k, P), -1, dtype=int)
     for p in range(P):
@@ -105,19 +129,53 @@ def silence_split(y: np.ndarray, lines: list[dict], engine: str) -> list[tuple[f
                     best, arg = c, q
             cost[j][p] = best - 0.002 * lens[p]
             back[j][p] = arg
-    final = [cost[k - 1][p] + ((off - mids[p]) / total - share[k]) ** 2 for p in range(P)]
+    final = [cost[k - 1][p] + ((off - mids[p]) / total - share[k]) ** 2 if cost[k - 1][p] < INF else INF
+             for p in range(P)]
     p = int(np.argmin(final))
     chosen = [p]
     for j in range(k - 1, 0, -1):
         p = back[j][p]
         chosen.append(p)
     chosen = sorted(chosen)
-    spans, start = [], on
-    for p in chosen:
-        spans.append((start, pauses[p][0]))
-        start = pauses[p][1]
-    spans.append((start, off))
-    return spans
+
+    def spans_of(ch):
+        out, start = [], on
+        for q in ch:
+            out.append((start, pauses[q][0]))
+            start = pauses[q][1]
+        out.append((start, off))
+        return out
+
+    ok = [None] * len(lines)
+
+    def line_ok(i, sp):
+        return _line_aligns(y, sp[i], lines[i], data, engine)
+
+    for sweep in range(3):
+        changed = False
+        sp = spans_of(chosen)
+        ok = [line_ok(i, sp) for i in range(len(lines))]
+        for j in range(k):
+            if ok[j] and ok[j + 1]:
+                continue
+            lo = chosen[j - 1] + 1 if j else 0
+            hi = chosen[j + 1] - 1 if j + 1 < k else P - 1
+            for cand in sorted(range(lo, hi + 1), key=lambda q: abs(q - chosen[j])):
+                if cand == chosen[j]:
+                    continue
+                trial = chosen[:j] + [cand] + chosen[j + 1:]
+                tsp = spans_of(trial)
+                if line_ok(j, tsp) and line_ok(j + 1, tsp):
+                    log(f"  repair: boundary {j + 1} moved from silence {chosen[j]} to {cand}")
+                    chosen, changed = trial, True
+                    ok[j] = ok[j + 1] = True
+                    break
+        if not changed:
+            break
+    failed = [lines[i]["id"] for i in range(len(lines)) if not ok[i]]
+    if failed:
+        log(f"  WARNING: silence split could not verify lines {failed}; check the file order and content")
+    return spans_of(chosen)
 
 
 def cut_points(y: np.ndarray, spans: list[tuple[float, float]]) -> list[float]:
@@ -140,7 +198,7 @@ def process_file(path: Path, lines: list[dict], data: dict, engine: str, out_dir
     spans = global_alignment(y, lines, data, engine)
     method = "global pocketsphinx alignment"
     if spans is None:
-        spans = silence_split(y, lines, engine)
+        spans = silence_split(y, lines, data, engine)
         method = "silence split (dynamic programming)"
     cuts = cut_points(y, spans) if len(lines) > 1 else []
     bounds = [0.0] + cuts + [len(y) / SR]

@@ -8,7 +8,7 @@ aspect: 1920x1080
 fps: 30
 language: en-GB
 audience: "Industrial site owners, HSE teams, risk owners, operations leaders, carriers, partners, investors and prospective team members. No prior knowledge of Valcorv, Priora, industrial insurance or hot work."
-length: 90s (88 to 94s acceptable when the natural voice performance requires it)
+length: 90s (confirmed by the user on 2026-09-29: keep the final cut at 90 seconds)
 angle: "The same site twice: Nordhavn Bioprocessing without Priora, a rewind, then the same moment with Priora."
 narration: yes
 voice: "ElevenLabs, female, clear international British English, warm, composed, credible"
@@ -30,7 +30,10 @@ The full production prompt is the governing brief: `docs/production-prompt.md` (
 ## Customizations
 
 - HyperFrames is the production framework (user's explicit choice).
-- ElevenLabs narration with word or character timing driving the edit. A local guide voice is used only to lock the build while ElevenLabs is unreachable from this environment; the final film must be re-locked to the ElevenLabs performance.
+- ElevenLabs narration with word timing driving the edit. A local guide voice is used only to build and review while ElevenLabs is unreachable from this environment; the final film must be re-locked to the ElevenLabs performance.
+- Voice route (user decision, 2026-09-29): generate the narrator and worker audio in the ElevenLabs WEB APP using the agent's own browser (Playwright Chromium in the container). Retry as soon as network access to ElevenLabs is enabled. Pause only if sign-in needs the user. Do NOT use the ElevenLabs API (scripts/elevenlabs-voice.py) unless the user approves that change. Word timings for web-app audio come from local forced alignment (scripts/align-uploaded.py).
+- Definition of done (user, 2026-09-29): the film is complete only after the ElevenLabs audio is generated, synchronised, mixed, and the final render checked. The guide voice is temporary.
+- Record the selected voices and every generation setting in narration/README.md.
 - Signature rewind: picture and sound reverse to the instant before Sprinkler Zone 3 goes offline.
 - Cobalt blue signal colour replaces the demo's orange in the film adaptation only.
 - Deliverables: H.264 MP4, WebM, source project, narration script and audio, timing data, master and stems (voice, music, SFX), storyboard, contact sheet.

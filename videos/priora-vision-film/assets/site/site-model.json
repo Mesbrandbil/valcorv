@@ -6926,6 +6926,18 @@
    15.39
   ],
   "settleOffsetPx": "clamp(34 + 6.2 * s, 58, 118) screen px beyond the edge, measured along the exit ray",
+  "leadLine": {
+   "what": "Solid leader from the activity card to the hero node, shown in the hero stage and hidden as soon as the node starts to leave (dev > 0.04). The dashed line after that is the tether.",
+   "pathPx": "M{cardRight} {cardTop + 58}H{cardRight + 0.45 * (node.x - cardRight)}L{node.x - 22} {node.y}",
+   "style": "ink, 1 px, stroke-opacity .35",
+   "observedAtRoof03CloseUpPx": "M392 308H594.4L819.7 533.1",
+   "cardPx": {
+    "left": 52,
+    "top": 250,
+    "width": 340,
+    "note": "demo layout at 1920 wide, canvas coordinates"
+   }
+  },
   "atSomethingChanges": {
    "camera": {
     "s": 8.83133,
