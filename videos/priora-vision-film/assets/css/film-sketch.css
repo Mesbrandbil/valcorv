@@ -1,0 +1,101 @@
+/*
+  film-sketch.css: styles for SketchKit (assets/js/sketch-kit.js), the hand-drawn
+  graphite world of Act I: figures, van, routes, tags, markers, safeguards, the
+  detail sheet, the translation chain, evidence fragments and the gap timeline.
+
+  Load it in every composition that uses SketchKit (after fonts.css / film.css).
+  Every rule is scoped under .skt, and every class starts with skt- so nothing
+  collides with the site SVG (.priora-site, .sk-rough) or with product.css (.pui).
+
+  Stroke widths are screen constants through --sw, exactly like the site:
+  - WORLD layers sit inside the site <svg>, where site-kit sets --sw (world units
+    per screen px) on the camera. calc(var(--sw) * 1.5px) is always 1.5 screen px.
+  - Screen-constant groups inside the world (.skt-px) scale by --sw and reset it to
+    1 for their children (.skt-u), so their geometry is authored in screen px.
+  - PAPER overlays (svg.skt-paper) are 1920x1080 in screen px with --sw: 1.
+
+  Act I is graphite only: #3B3A36 and the lighter #8F8C86, plus paper. No blue.
+*/
+
+.skt {
+  --skt-c: #3b3a36;   /* graphite */
+  --skt-l: #8f8c86;   /* lighter graphite */
+  --skt-p: #f5f3ee;   /* paper */
+  --skt-g2: #6a6863;  /* grey-2, thinned text */
+  --skt-g3: #9c9994;  /* grey-3, faintest text */
+}
+
+svg.skt-paper {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 1920px;
+  height: 1080px;
+  overflow: visible;
+  pointer-events: none;
+  --sw: 1;
+}
+
+/* screen-constant groups inside the zooming site svg */
+.skt .skt-px { transform: scale(var(--sw)); }
+.skt .skt-u { --sw: 1; }
+
+/* strokes: main pass, overdraw pass, construction overshoot, hatching, dots, leaders */
+.skt .skt-m,
+.skt .skt-o,
+.skt .skt-x,
+.skt .skt-h,
+.skt .skt-d,
+.skt .skt-lead,
+.skt .skt-rule {
+  fill: none;
+  stroke: var(--skt-c);
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.skt .skt-m { stroke-width: calc(var(--sw) * 1.5px); }
+.skt .skt-m.skt-lite { stroke: var(--skt-l); stroke-width: calc(var(--sw) * 1px); }
+.skt .skt-m.skt-fine { stroke-width: calc(var(--sw) * 1.15px); }
+.skt .skt-m.skt-heavy { stroke-width: calc(var(--sw) * 1.9px); }
+.skt .skt-m.skt-grey { stroke: var(--skt-g2); stroke-width: calc(var(--sw) * 1.2px); }
+.skt .skt-m.skt-pale { stroke: var(--skt-g3); stroke-width: calc(var(--sw) * 1.1px); }
+.skt .skt-m.skt-env { stroke-width: calc(var(--sw) * 1.4px); }
+.skt .skt-m.skt-env-c { stroke-opacity: 0.35; stroke-width: calc(var(--sw) * 0.9px); }
+.skt .skt-o { stroke-opacity: 0.32; stroke-width: calc(var(--sw) * 1.1px); }
+.skt .skt-x { stroke-opacity: 0.28; stroke-width: calc(var(--sw) * 0.9px); }
+.skt .skt-h { stroke-opacity: 0.34; stroke-width: calc(var(--sw) * 0.7px); }
+.skt .skt-h.skt-sparse { stroke-opacity: 0.2; }
+.skt .skt-d { stroke-width: calc(var(--sw) * 2.1px); }
+.skt .skt-d.skt-lite { stroke: var(--skt-l); stroke-width: calc(var(--sw) * 1.8px); }
+.skt .skt-d.skt-dash { stroke-width: calc(var(--sw) * 1.3px); }
+.skt .skt-lead { stroke-opacity: 0.62; stroke-width: calc(var(--sw) * 1px); }
+.skt .skt-rule { stroke-width: calc(var(--sw) * 1.25px); }
+.skt .skt-rule.skt-lite { stroke: var(--skt-l); stroke-width: calc(var(--sw) * 1px); }
+
+/* fills: paper occlusion behind drawn solids, graphite dots */
+.skt .skt-occ { fill: var(--skt-p); stroke: none; }
+.skt .skt-fill { fill: var(--skt-c); stroke: none; }
+.skt .skt-fill.skt-lite { fill: var(--skt-l); }
+
+/* hand lettering: Plex Mono uppercase, graphite (size and spacing set per element) */
+.skt .skt-lab {
+  font-family: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+  font-weight: 400;
+  fill: var(--skt-c);
+}
+.skt .skt-lab.skt-w5 { font-weight: 500; }
+.skt .skt-lab.skt-w6 { font-weight: 600; }
+
+/* typeset text: Plex Sans (clauses, statements) */
+.skt .skt-sans {
+  font-family: "IBM Plex Sans", "Helvetica Neue", Arial, sans-serif;
+  font-weight: 400;
+  fill: var(--skt-c);
+}
+.skt .skt-sans.skt-w3 { font-weight: 300; }
+.skt .skt-sans.skt-w5 { font-weight: 500; }
+
+/* text tones for the thinning sprinkler condition */
+.skt .skt-t2 { fill: var(--skt-g2); }
+.skt .skt-t3 { fill: var(--skt-g3); }
+.skt .skt-tl { fill: var(--skt-l); }

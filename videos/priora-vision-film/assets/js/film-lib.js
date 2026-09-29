@@ -51,18 +51,29 @@
       rects: { name: rect|string } named framings; frame: {w, h} (default 1920x1080);
       sw: true (default) also writes --sw = world units per screen px on the <svg>, which the
           site SVG uses for every hairline (stroke-width: calc(var(--sw) * 1px)).
+      layer: default camera layer name for this helper (default "main").
       cam.rect(nameOrRect)       -> resolved rect
-      cam.apply(nameOrRect)      -> set immediately (build time, for the static first frame)
-      cam.set(tl, to, at)        -> zero-length jump on the timeline
-      cam.move(tl, from, to, at, duration, ease) -> seek-safe move (flCamera plugin; both ends explicit)
-      cam.drift(tl, name, at, duration, pct, ease) -> slow push-in around the rect centre (pct 0.012 = 1.2%)
+      cam.apply(nameOrRect, layer) -> set immediately (build time, for the static first frame)
+      cam.set(tl, to, at, layer) -> zero-length jump on the timeline
+      cam.move(tl, from, to, at, duration, ease, layer) -> seek-safe move (flCamera plugin; both ends
+                                   explicit; from null = continue from the previous end on that layer)
+      cam.to(tl, to, at, duration, ease, layer) -> chained move from wherever the layer last ended
+                                   (preferred: chained moves stay continuous under backward seeks)
+      cam.drift(tl, name|null, at, duration, pct, ease, layer) -> slow push-in around the rect centre
+                                   (pct 0.012 = 1.2%); null = drift from the previous end
+      cam.mix(tl, layerA, layerB, at, duration, ease) -> hand the camera from one layer to another.
+      RULE: one timeline owns one layer. A scrubbed story moves layer "story"; the registered
+      timeline moves layer "main" and hands over with cam.mix(tl, "story", "main", at, d).
 
   Drawing
     FL.pathLength(el)            -> measured length in user units (getTotalLength, with fallbacks).
     FL.prepDraw(els)             -> dasharray fallback setup when DrawSVGPlugin is not registered.
-    FL.drawOn(tl, els, { at, duration, stagger, ease, from, to }) -> stroke draw-on (DrawSVG if
-                                   registered, else dashoffset). from/to are fractions 0..1.
-    FL.drawOff(tl, els, opts)    -> reverse of drawOn (un-draw towards the start).
+    FL.drawOn(tl, els, { at, duration, stagger, ease, from, to, immediateRender }) -> stroke draw-on
+                                   (DrawSVG if registered, else dashoffset). from/to are fractions 0..1.
+                                   Renders the undrawn state at build time (immediateRender true) so
+                                   paths are hidden before their draw; pass false for a second drawOn
+                                   of the same paths.
+    FL.drawOff(tl, els, opts)    -> reverse of drawOn (un-draw towards the start); immediateRender false.
     FL.sortByDistance(els, [wx, wy]) -> elements sorted by bbox-centre distance (radiating draws).
     FL.jitterPath(d, rng, amount) -> same command structure, coordinates jittered (arc radii and
                                    flags kept). Output feeds a plain attr d tween back to precise.
@@ -84,14 +95,15 @@
   Text
     FL.hhmm(seconds, withSeconds) -> "14:41:59" style site clock text from seconds after midnight.
     FL.textTo(tl, el, { from, to, format, at, duration, ease }) -> seek-safe numeric text tween
-                                   (flText plugin). format(value) -> string.
+                                   (flText plugin). format: function(value) -> string, or a name in
+                                   FL.formats ("int", "hhmm", "hhmmss").
     FL.textSet(tl, el, text, at)  -> seek-safe discrete text change (flText with a fixed string).
 
   Sound events
     FL.events(sceneId)           -> { name: { t, local, ...meta } } resolved from the scene's
                                    compositions/<scene>.events.json via scripts/build-cues.mjs.
 
-  Plugins registered here: flCamera, flScrub, flText. Nothing else in the page is modified.
+  Plugins registered here: flCamera, flCamMix, flScrub, flText. Nothing else in the page is modified.
 */
 (function () {
   "use strict";
@@ -292,6 +304,21 @@
     if (sw) svg.style.setProperty("--sw", (1 / Math.min(frame.w / r.w, frame.h / r.h)).toFixed(6));
   }
   FL._applyCamera = applyCamera;
+  // Camera layers. Every flCamera render stores its rect under its layer name on the <svg>;
+  // flCamMix stores which two layers are blended and the weight. The viewBox is always the
+  // composite of the last value of each layer, so a story timeline (scrubbed) and the registered
+  // timeline can both move one camera without fighting: each timeline owns one layer.
+  function camState(svg) {
+    return svg.__flCam || (svg.__flCam = { layers: {}, a: "main", b: null, w: 0, frame: FL.FRAME, sw: true });
+  }
+  function applyComposite(svg) {
+    var st = camState(svg);
+    var A = st.layers[st.a],
+      B = st.b ? st.layers[st.b] : null;
+    var r = A && B ? vb.lerp(A, B, st.w) : A || B;
+    if (!r) for (var k in st.layers) r = st.layers[k];
+    if (r) applyCamera(svg, r, st.frame, st.sw);
+  }
 
   if (gsap && gsap.registerPlugin) {
     // Register the vendored GreenSock plugins that index.html loaded (no-op when absent).
@@ -305,11 +332,32 @@
         this.t = target;
         this.a = vb.parse(v.from);
         this.b = vb.parse(v.to);
-        this.frame = v.frame || FL.FRAME;
-        this.sw = v.sw !== false;
+        this.layer = v.layer || "main";
+        var st = camState(target);
+        if (v.frame) st.frame = v.frame;
+        if (v.sw === false) st.sw = false;
       },
       render: function (ratio, d) {
-        applyCamera(d.t, vb.lerp(d.a, d.b, ratio), d.frame, d.sw);
+        camState(d.t).layers[d.layer] = vb.lerp(d.a, d.b, ratio);
+        applyComposite(d.t);
+      },
+    });
+    // flCamMix: { a: "story", b: "main", from: 0, to: 1 } hands the camera from layer a to layer b.
+    gsap.registerPlugin({
+      name: "flCamMix",
+      init: function (target, v) {
+        this.t = target;
+        this.la = v.a;
+        this.lb = v.b;
+        this.w0 = v.from == null ? 0 : +v.from;
+        this.w1 = v.to == null ? 1 : +v.to;
+      },
+      render: function (ratio, d) {
+        var st = camState(d.t);
+        st.a = d.la;
+        st.b = d.lb;
+        st.w = d.w0 + (d.w1 - d.w0) * ratio;
+        applyComposite(d.t);
       },
     });
     // flScrub: { story: timeline, from: s, to: s }. Drives a paused, unregistered story timeline.
@@ -332,8 +380,12 @@
         this.text = v.text;
         this.a = +v.from;
         this.b = +v.to;
+        // GSAP calls a function found directly in plugin vars as a function-based value
+        // (format(index, target) -> string), so the formatter travels wrapped: { fn }.
+        var f = v.format;
         this.format =
-          v.format ||
+          (f && typeof f.fn === "function" && f.fn) ||
+          (typeof f === "string" && FL.formats[f]) ||
           function (x) {
             return String(Math.round(x));
           };
@@ -351,8 +403,15 @@
     var rects = {};
     var frame = opts.frame || FL.FRAME;
     var sw = opts.sw !== false;
+    var defLayer = opts.layer || "main";
     for (var k in opts.rects || {}) rects[k] = vb.parse(opts.rects[k]);
     var targets = [].concat(svg);
+    targets.forEach(function (t) {
+      var st = camState(t);
+      st.frame = frame;
+      st.sw = sw;
+      st.a = defLayer;
+    });
     var cam = {
       svg: svg,
       rects: rects,
@@ -361,31 +420,50 @@
         if (typeof x === "string" && /^[a-zA-Z_]/.test(x)) throw new Error("FL.camera: unknown camera rect '" + x + "'");
         return vb.parse(x);
       },
-      apply: function (x) {
+      apply: function (x, layer) {
         var r = cam.rect(x);
         targets.forEach(function (t) {
-          applyCamera(t, r, frame, sw);
+          camState(t).layers[layer || defLayer] = r;
+          applyComposite(t);
         });
         return cam;
       },
-      set: function (tl, to, at) {
+      set: function (tl, to, at, layer) {
         var r = cam.rect(to);
-        tl.to(targets, { flCamera: { from: r, to: r, frame: frame, sw: sw }, duration: 0, immediateRender: false }, at);
+        tl.to(targets, { flCamera: { from: r, to: r, layer: layer || defLayer }, duration: 0, immediateRender: false }, at);
+        cam.last[layer || defLayer] = r;
         return cam;
       },
-      move: function (tl, from, to, at, duration, ease) {
-        tl.to(
-          targets,
-          { flCamera: { from: cam.rect(from), to: cam.rect(to), frame: frame, sw: sw }, duration: duration, ease: ease || "power2.inOut", immediateRender: false },
-          at,
-        );
+      // Chained moves on one layer must be continuous (each move starts where the previous one
+      // ended), otherwise a backward seek shows the later move's start rect instead of the
+      // earlier move's end. cam.to() chains automatically; cam.move() warns on a jump.
+      last: {},
+      move: function (tl, from, to, at, duration, ease, layer) {
+        var L = layer || defLayer;
+        var a = from == null ? cam.last[L] : cam.rect(from);
+        if (!a) throw new Error("FL.camera: first move on layer '" + L + "' needs an explicit from rect");
+        var prev = cam.last[L];
+        if (prev && from != null && (Math.abs(prev.x - a.x) + Math.abs(prev.y - a.y) + Math.abs(prev.w - a.w) + Math.abs(prev.h - a.h)) > 1e-6 * (prev.w + 1))
+          console.warn("FL.camera: move on layer '" + L + "' at " + at + " starts away from the previous end (a jump). Use cam.to() to chain, or cam.set() for a deliberate cut.");
+        var b = cam.rect(to);
+        tl.to(targets, { flCamera: { from: a, to: b, layer: L }, duration: duration, ease: ease || "power2.inOut", immediateRender: false }, at);
+        cam.last[L] = b;
         return cam;
       },
-      drift: function (tl, name, at, duration, pct, ease) {
-        var a = cam.rect(name);
+      to: function (tl, to, at, duration, ease, layer) {
+        return cam.move(tl, null, to, at, duration, ease, layer);
+      },
+      drift: function (tl, name, at, duration, pct, ease, layer) {
+        var L = layer || defLayer;
+        var a = name == null ? cam.last[L] : cam.rect(name);
         var k = 1 - (pct == null ? 0.012 : pct);
         var b = { x: a.x + (a.w * (1 - k)) / 2, y: a.y + (a.h * (1 - k)) / 2, w: a.w * k, h: a.h * k };
-        return cam.move(tl, a, b, at, duration, ease || "sine.inOut");
+        return cam.move(tl, name == null ? null : a, b, at, duration, ease || "sine.inOut", L);
+      },
+      // Hand the camera from layer a to layer b (duration 0 = cut). Both layers keep their own values.
+      mix: function (tl, a, b, at, duration, ease) {
+        tl.to(targets, { flCamMix: { a: a, b: b, from: 0, to: 1 }, duration: duration || 0, ease: ease || "power2.inOut", immediateRender: false }, at);
+        return cam;
       },
     };
     return cam;
@@ -426,7 +504,10 @@
       from = to;
       to = tmp;
     }
-    var vars = { duration: o.duration == null ? 0.8 : o.duration, ease: o.ease || "power2.out", stagger: o.stagger || 0, immediateRender: !!o.immediateRender };
+    // drawOn renders its start state at build time by default (lines hidden until drawn);
+    // drawOff and any later tween on the same paths must not (it would overwrite that state).
+    var ir = o.immediateRender != null ? !!o.immediateRender : dir > 0;
+    var vars = { duration: o.duration == null ? 0.8 : o.duration, ease: o.ease || "power2.out", stagger: o.stagger || 0, immediateRender: ir };
     if (hasDrawSVG()) {
       var pct = function (f) {
         return "0% " + (f * 100).toFixed(3) + "%";
@@ -590,7 +671,7 @@
       var existing = W.CustomEase.get && W.CustomEase.get(name);
       if (existing) return name;
       // Slow start (the tape catches), fast middle, very hard deceleration into the landing.
-      W.CustomEase.create(name, "M0,0 C0.18,0 0.26,0.06 0.36,0.22 0.5,0.46 0.62,0.86 0.74,0.96 0.84,1.004 0.9,1 1,1");
+      W.CustomEase.create(name, "M0,0 C0.18,0 0.26,0.06 0.36,0.22 0.5,0.46 0.62,0.86 0.74,0.96 0.84,0.995 0.9,1 1,1");
       return name;
     }
     return "power4.inOut";
@@ -607,8 +688,20 @@
     };
     return p(h) + ":" + p(m) + (withSeconds ? ":" + p(s) : "");
   };
+  FL.formats = {
+    int: function (x) {
+      return String(Math.round(x));
+    },
+    hhmm: function (x) {
+      return FL.hhmm(x);
+    },
+    hhmmss: function (x) {
+      return FL.hhmm(x, true);
+    },
+  };
   FL.textTo = function (tl, el, o) {
-    tl.to(el, { flText: { from: o.from, to: o.to, format: o.format }, duration: o.duration || 0, ease: o.ease || "none", immediateRender: false }, o.at || 0);
+    var f = typeof o.format === "function" ? { fn: o.format } : o.format;
+    tl.to(el, { flText: { from: o.from, to: o.to, format: f }, duration: o.duration || 0, ease: o.ease || "none", immediateRender: false }, o.at || 0);
     return tl;
   };
   FL.textSet = function (tl, el, text, at) {

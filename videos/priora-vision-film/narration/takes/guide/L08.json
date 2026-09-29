@@ -5,145 +5,110 @@
   "guide": true,
   "label": "GUIDE VOICE (local Kokoro). Not the final ElevenLabs performance.",
   "speaker": "narrator",
-  "text": "Nothing looks different. Work continues. The conditions have changed, and nobody sees it.",
-  "spoken_text": "Nothing looks different. Work continues. The conditions have changed, and nobody sees it.",
+  "text": "Nothing looks different. The conditions have changed, and nobody sees it.",
+  "spoken_text": "Nothing looks different. The conditions have changed, and nobody sees it.",
   "sample_rate": 48000,
-  "duration": 5.68,
+  "duration": 4.34,
   "speech_start": 0.13,
-  "speech_end": 5.45,
+  "speech_end": 4.11,
   "words": [
     {
       "w": "Nothing",
       "start": 0.13,
-      "end": 0.5
+      "end": 0.52
     },
     {
       "w": "looks",
-      "start": 0.5,
-      "end": 0.76
+      "start": 0.52,
+      "end": 0.78
     },
     {
       "w": "different",
-      "start": 0.76,
-      "end": 1.31
-    },
-    {
-      "w": "Work",
-      "start": 1.65,
-      "end": 1.91
-    },
-    {
-      "w": "continues",
-      "start": 1.91,
-      "end": 2.66
+      "start": 0.78,
+      "end": 1.34
     },
     {
       "w": "The",
-      "start": 3.09,
-      "end": 3.14
+      "start": 1.65,
+      "end": 1.7
     },
     {
       "w": "conditions",
-      "start": 3.14,
-      "end": 3.65
+      "start": 1.7,
+      "end": 2.22
     },
     {
       "w": "have",
-      "start": 3.65,
-      "end": 3.75
+      "start": 2.22,
+      "end": 2.35
     },
     {
       "w": "changed",
-      "start": 3.75,
-      "end": 4.29
+      "start": 2.35,
+      "end": 2.92
     },
     {
       "w": "and",
-      "start": 4.29,
-      "end": 4.55
+      "start": 2.92,
+      "end": 3.18
     },
     {
       "w": "nobody",
-      "start": 4.55,
-      "end": 4.91
+      "start": 3.18,
+      "end": 3.57
     },
     {
       "w": "sees",
-      "start": 4.91,
-      "end": 5.23
+      "start": 3.57,
+      "end": 3.89
     },
     {
       "w": "it",
-      "start": 5.23,
-      "end": 5.45
+      "start": 3.89,
+      "end": 4.11
     }
   ],
   "sentences": [
     {
       "text": "Nothing looks different.",
       "start": 0.13,
-      "end": 1.31,
+      "end": 1.34,
       "word_range": [
         0,
         3
       ]
     },
     {
-      "text": "Work continues.",
+      "text": "The conditions have changed, and nobody sees it.",
       "start": 1.65,
-      "end": 2.66,
+      "end": 4.11,
       "word_range": [
         3,
-        5
-      ]
-    },
-    {
-      "text": "The conditions have changed, and nobody sees it.",
-      "start": 3.09,
-      "end": 5.45,
-      "word_range": [
-        5,
-        13
+        11
       ]
     }
   ],
-  "created": "2026-09-29T19:29:47+00:00",
+  "created": "2026-09-29T19:43:50+00:00",
   "provider": "kokoro-onnx 0.6.1, kokoro-v1.0.onnx (local guide)",
   "voice": {
     "id": "bf_isabella",
     "lang": "en-gb"
   },
-  "speed": 1.1649,
+  "speed": 1.1569,
   "inner_pauses": [
-    0.34,
-    0.34
+    0.3
   ],
   "segments_synth": [
     {
       "text": "Nothing looks different.",
       "start": 0.12,
-      "end": 1.34,
+      "end": 1.38,
       "alignment_quality": {
         "energy_pauses": 0,
         "pause_agreement": 1.0,
         "pauses_inside_words": [],
         "onset_error_ms": 0.0,
-        "offset_error_ms": 0.0,
-        "pause_onset_error_ms_mean": null,
-        "pause_onset_error_ms_max": null
-      },
-      "fallback": false
-    },
-    {
-      "text": "Work continues.",
-      "start": 1.64,
-      "end": 2.78,
-      "alignment_quality": {
-        "energy_pauses": 0,
-        "pause_agreement": 1.0,
-        "pauses_inside_words": [],
-        "onset_error_ms": 0.0,
-        "offset_error_ms": 90.0,
+        "offset_error_ms": 10.0,
         "pause_onset_error_ms_mean": null,
         "pause_onset_error_ms_max": null
       },
@@ -151,8 +116,8 @@
     },
     {
       "text": "The conditions have changed, and nobody sees it.",
-      "start": 3.08,
-      "end": 5.48,
+      "start": 1.64,
+      "end": 4.14,
       "alignment_quality": {
         "energy_pauses": 0,
         "pause_agreement": 1.0,
@@ -169,7 +134,7 @@
     "method": "pocketsphinx-5-forced-alignment+energy-refine",
     "fallback": false,
     "quality": {
-      "energy_pauses": 2,
+      "energy_pauses": 1,
       "pause_agreement": 1.0,
       "pauses_inside_words": [],
       "onset_error_ms": 0.0,

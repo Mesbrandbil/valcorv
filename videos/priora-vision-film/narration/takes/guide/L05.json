@@ -5,12 +5,12 @@
   "guide": true,
   "label": "GUIDE VOICE (local Kokoro). Not the final ElevenLabs performance.",
   "speaker": "narrator",
-  "text": "But no one can hold a moving site in their head.",
-  "spoken_text": "But no one can hold a moving site in their head.",
+  "text": "But no one can hold a moving site in mind.",
+  "spoken_text": "But no one can hold a moving site in mind.",
   "sample_rate": 48000,
-  "duration": 2.53,
+  "duration": 2.49,
   "speech_start": 0.13,
-  "speech_end": 2.3,
+  "speech_end": 2.26,
   "words": [
     {
       "w": "But",
@@ -50,48 +50,43 @@
     {
       "w": "site",
       "start": 1.43,
-      "end": 1.77
+      "end": 1.8
     },
     {
       "w": "in",
-      "start": 1.77,
-      "end": 1.83
+      "start": 1.8,
+      "end": 1.88
     },
     {
-      "w": "their",
-      "start": 1.83,
-      "end": 1.96
-    },
-    {
-      "w": "head",
-      "start": 1.96,
-      "end": 2.3
+      "w": "mind",
+      "start": 1.88,
+      "end": 2.26
     }
   ],
   "sentences": [
     {
-      "text": "But no one can hold a moving site in their head.",
+      "text": "But no one can hold a moving site in mind.",
       "start": 0.13,
-      "end": 2.3,
+      "end": 2.26,
       "word_range": [
         0,
-        11
+        10
       ]
     }
   ],
-  "created": "2026-09-29T19:29:46+00:00",
+  "created": "2026-09-29T19:43:50+00:00",
   "provider": "kokoro-onnx 0.6.1, kokoro-v1.0.onnx (local guide)",
   "voice": {
     "id": "bf_isabella",
     "lang": "en-gb"
   },
-  "speed": 1.1649,
+  "speed": 1.1569,
   "inner_pauses": [],
   "segments_synth": [
     {
-      "text": "But no one can hold a moving site in their head.",
+      "text": "But no one can hold a moving site in mind.",
       "start": 0.12,
-      "end": 2.33,
+      "end": 2.29,
       "alignment_quality": {
         "energy_pauses": 0,
         "pause_agreement": 1.0,

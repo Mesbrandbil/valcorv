@@ -164,6 +164,9 @@ def render_line(line: dict, data: dict, voice: str, speed: float, lang: str) -> 
     parts, times, seg_meta, synth_dur = [np.zeros(int(HEAD_PAD * KSR), np.float32)], [], [], 0.0
     cursor = HEAD_PAD
     methods, fallbacks, prons = set(), 0, []
+    # Optional per-line delivery pace (lines.json "pace", default 1.0): lets the
+    # opening, the key beats and the close run slower than the global speed.
+    speed = speed * float(line.get("pace", 1.0))
     for si, (text, toks) in enumerate(segs):
         y = synth_segment(text, voice, speed, data, lang)
         al = nc.align_clip(y, KSR, text, data)

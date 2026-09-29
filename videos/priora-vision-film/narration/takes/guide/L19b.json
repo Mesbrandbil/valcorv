@@ -8,50 +8,50 @@
   "text": "Trust enables decisions.",
   "spoken_text": "Trust enables decisions.",
   "sample_rate": 48000,
-  "duration": 1.84,
+  "duration": 1.85,
   "speech_start": 0.13,
-  "speech_end": 1.61,
+  "speech_end": 1.62,
   "words": [
     {
       "w": "Trust",
       "start": 0.13,
-      "end": 0.44
+      "end": 0.45
     },
     {
       "w": "enables",
-      "start": 0.44,
+      "start": 0.45,
       "end": 0.96
     },
     {
       "w": "decisions",
       "start": 0.96,
-      "end": 1.61
+      "end": 1.62
     }
   ],
   "sentences": [
     {
       "text": "Trust enables decisions.",
       "start": 0.13,
-      "end": 1.61,
+      "end": 1.62,
       "word_range": [
         0,
         3
       ]
     }
   ],
-  "created": "2026-09-29T19:29:47+00:00",
+  "created": "2026-09-29T19:43:50+00:00",
   "provider": "kokoro-onnx 0.6.1, kokoro-v1.0.onnx (local guide)",
   "voice": {
     "id": "bf_isabella",
     "lang": "en-gb"
   },
-  "speed": 1.1649,
+  "speed": 1.1569,
   "inner_pauses": [],
   "segments_synth": [
     {
       "text": "Trust enables decisions.",
       "start": 0.12,
-      "end": 1.64,
+      "end": 1.65,
       "alignment_quality": {
         "energy_pauses": 0,
         "pause_agreement": 1.0,

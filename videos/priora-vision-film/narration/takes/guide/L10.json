@@ -102,13 +102,13 @@
       ]
     }
   ],
-  "created": "2026-09-29T19:29:47+00:00",
+  "created": "2026-09-29T19:43:50+00:00",
   "provider": "kokoro-onnx 0.6.1, kokoro-v1.0.onnx (local guide)",
   "voice": {
     "id": "bf_isabella",
     "lang": "en-gb"
   },
-  "speed": 1.1649,
+  "speed": 1.1569,
   "inner_pauses": [
     0.34,
     0.34

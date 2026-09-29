@@ -20,11 +20,11 @@
     "checklists": "L04:checklists.start",
     "noOne": "L05.start",
     "moving": "L05:moving.start",
-    "head": "L05:head.start",
+    "head": "L05:mind.start",
     "roof03": "L06:Roof.start",
     "hotWork": "L06:hot.start",
-    "certificate": "L06:certificate.start",
-    "safeguards": "L06:safeguards.start",
+    "certificate": "L06:every.start",
+    "safeguards": "L06:safeguard.start",
     "inPlace": "L06:place.end",
     "landing": {
       "at": "L07.start-0.25",
@@ -33,7 +33,10 @@
     "sprinkler": "L07:sprinkler.start",
     "offline": "L07:offline.start",
     "nothingLooks": "L08.start",
-    "workContinues": "L08:Work.start",
+    "workContinues": {
+      "at": "L08:different.end+0.2",
+      "note": "The hot-work marker keeps its quiet life (the words no longer say it; the drawing does)."
+    },
     "changed": "L08:changed.start",
     "nobody": "L08:nobody.start",
     "afterwards": "L09.start",
@@ -58,18 +61,21 @@
     "welding": "L13:welding.start",
     "roofWord": "L13:Roof.start",
     "six": "L13:six.end",
-    "connects": "L14:connects.start",
-    "conditionsMatter": "L14:conditions.start",
-    "verifies": "L14:verifies.start",
-    "certificate2": "L14:certificate.start",
-    "safeguards2": "L14:safeguards.start",
-    "keepsRecord": "L14:record.start",
+    "connects": "L14a:connects.start",
+    "conditionsMatter": "L14a:conditions.start",
+    "verifies": "L14b:checks.start",
+    "certificate2": "L14b:certificate.start",
+    "safeguards2": "L14b:safeguards.start",
+    "keepsRecord": "L14b:record.start",
     "prevention": "L15:Prevention.start",
     "proof": "L15:Proof.start",
     "l16": "L16.start",
     "offline2": "L16:offline.start",
     "sees": "L16:sees.start",
-    "immediately": "L16:immediately.end",
+    "immediately": {
+      "at": "L16:once.end",
+      "note": "Priora sees it at once."
+    },
     "cross": {
       "at": "L16.end+0.1",
       "note": "The hot-work node stretches across the envelope in the silence after L16."
@@ -89,7 +95,12 @@
     "chainPrice": "L19c:price.start",
     "chainCapacity": "L19d:capacity.start",
     "priora": "L20:Priora.start",
-    "infrastructure": "L20:Infrastructure.start"
+    "infrastructure": "L20:Infrastructure.start",
+    "connectionHold": {
+      "at": "L14a.end",
+      "note": "The connection registers: 0.8 s of room before L14b."
+    },
+    "thisTime": "L16:This.start"
   },
   "scenes": [
     {

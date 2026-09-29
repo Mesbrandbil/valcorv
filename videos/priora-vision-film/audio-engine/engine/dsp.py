@@ -72,11 +72,13 @@ def pad_to(x: np.ndarray, n: int) -> np.ndarray:
 
 
 def mix(*parts) -> np.ndarray:
-    """Sum arrays of different lengths (all mono or all stereo), aligned at 0."""
+    """Sum arrays of different lengths aligned at 0. If any part is stereo the
+    result is stereo (mono parts are added to both channels)."""
     n = max(len(p) for p in parts)
-    out = np.zeros((n,) + parts[0].shape[1:])
+    stereo_ = any(p.ndim == 2 for p in parts)
+    out = np.zeros((n, 2) if stereo_ else n)
     for p in parts:
-        out[: len(p)] += p
+        out[: len(p)] += (p if p.ndim == out.ndim else p[:, None])
     return out
 
 
@@ -293,6 +295,16 @@ def ar(n: int, attack: float, release: float, hold: float | None = None,
     return pad_to(e ** shape, n)
 
 
+def perc(n: int, attack: float, t60: float) -> np.ndarray:
+    """Percussive envelope: raised-cosine attack, exponential decay (T60)."""
+    a = max(ns(attack), 1)
+    e = np.exp(-LN1000 * np.maximum(tvec(n) - attack, 0) / max(t60, 1e-4))
+    e[:a] = 0.5 - 0.5 * np.cos(np.linspace(0, np.pi, a))
+    k = min(ns(0.01), max(n // 5, 2))
+    e[-k:] *= 0.5 + 0.5 * np.cos(np.linspace(0, np.pi, k))
+    return e
+
+
 def fade(x: np.ndarray, fin: float = 0.002, fout: float = 0.005) -> np.ndarray:
     """Raised-cosine fade in and out (click-free edges)."""
     y = x.copy()
@@ -340,6 +352,9 @@ def modal(freqs, t60s, amps, dur: float, mallet_ms: float = 0.0,
         m = max(ns(mallet_ms / 1000.0), 2)
         pulse = np.sin(np.linspace(0, np.pi, m))
         y = signal.fftconvolve(y, pulse / pulse.sum())[:n]
+    # never truncate a ringing mode: raised-cosine tail over the last 20 percent
+    k = min(ns(0.25), max(n // 5, 2))
+    y[-k:] *= 0.5 + 0.5 * np.cos(np.linspace(0, np.pi, k))
     return y
 
 
@@ -348,7 +363,8 @@ def click(r: np.random.Generator, lo=1500.0, hi=9000.0, dur=0.004, decay_s=0.001
     n = ns(dur)
     e = np.exp(-tvec(n) / decay_s)
     y = bp(white(n, r) * e, lo, hi, 2)
-    return fade(y, 0.0002, 0.001)
+    y = fade(y, 0.0002, 0.001)
+    return y / (np.max(np.abs(y)) + 1e-12)  # unit peak
 
 
 def thump(freq0: float, freq1: float, t60: float, dur: float) -> np.ndarray:

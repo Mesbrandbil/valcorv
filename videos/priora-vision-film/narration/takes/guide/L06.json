@@ -5,130 +5,89 @@
   "guide": true,
   "label": "GUIDE VOICE (local Kokoro). Not the final ElevenLabs performance.",
   "speaker": "narrator",
-  "text": "On Roof 03, hot work begins. The certificate and safeguards are in place.",
-  "spoken_text": "On Roof oh-three, hot work begins. The certificate and safeguards are in place.",
+  "text": "On Roof 03, hot work begins, every safeguard in place.",
+  "spoken_text": "On Roof oh-three, hot work begins, every safeguard in place.",
   "sample_rate": 48000,
-  "duration": 4.62,
+  "duration": 3.56,
   "speech_start": 0.13,
-  "speech_end": 4.39,
+  "speech_end": 3.33,
   "words": [
     {
       "w": "On",
       "start": 0.13,
-      "end": 0.25
+      "end": 0.23
     },
     {
       "w": "Roof",
-      "start": 0.25,
-      "end": 0.49
+      "start": 0.23,
+      "end": 0.48
     },
     {
       "w": "03",
-      "start": 0.49,
-      "end": 0.99,
+      "start": 0.48,
+      "end": 0.93,
       "spoken": "oh-three"
     },
     {
       "w": "hot",
-      "start": 0.99,
-      "end": 1.28
+      "start": 0.93,
+      "end": 1.16
     },
     {
       "w": "work",
-      "start": 1.28,
-      "end": 1.5
+      "start": 1.16,
+      "end": 1.36
     },
     {
       "w": "begins",
-      "start": 1.5,
-      "end": 1.97
+      "start": 1.36,
+      "end": 1.82
     },
     {
-      "w": "The",
-      "start": 2.31,
-      "end": 2.35
+      "w": "every",
+      "start": 2.02,
+      "end": 2.25
     },
     {
-      "w": "certificate",
-      "start": 2.35,
-      "end": 2.99
-    },
-    {
-      "w": "and",
-      "start": 2.99,
-      "end": 3.12
-    },
-    {
-      "w": "safeguards",
-      "start": 3.12,
-      "end": 3.76
-    },
-    {
-      "w": "are",
-      "start": 3.76,
-      "end": 3.88
+      "w": "safeguard",
+      "start": 2.25,
+      "end": 2.84
     },
     {
       "w": "in",
-      "start": 3.88,
-      "end": 3.99
+      "start": 2.84,
+      "end": 2.94
     },
     {
       "w": "place",
-      "start": 3.99,
-      "end": 4.39
+      "start": 2.94,
+      "end": 3.33
     }
   ],
   "sentences": [
     {
-      "text": "On Roof 03, hot work begins.",
+      "text": "On Roof 03, hot work begins, every safeguard in place.",
       "start": 0.13,
-      "end": 1.97,
+      "end": 3.33,
       "word_range": [
         0,
-        6
-      ]
-    },
-    {
-      "text": "The certificate and safeguards are in place.",
-      "start": 2.31,
-      "end": 4.39,
-      "word_range": [
-        6,
-        13
+        10
       ]
     }
   ],
-  "created": "2026-09-29T19:29:47+00:00",
+  "created": "2026-09-29T19:43:50+00:00",
   "provider": "kokoro-onnx 0.6.1, kokoro-v1.0.onnx (local guide)",
   "voice": {
     "id": "bf_isabella",
     "lang": "en-gb"
   },
-  "speed": 1.1649,
-  "inner_pauses": [
-    0.34
-  ],
+  "speed": 1.1569,
+  "inner_pauses": [],
   "segments_synth": [
     {
-      "text": "On Roof oh-three, hot work begins.",
+      "text": "On Roof oh-three, hot work begins, every safeguard in place.",
       "start": 0.12,
-      "end": 2.0,
-      "alignment_quality": {
-        "energy_pauses": 0,
-        "pause_agreement": 1.0,
-        "pauses_inside_words": [],
-        "onset_error_ms": 0.0,
-        "offset_error_ms": 0.0,
-        "pause_onset_error_ms_mean": null,
-        "pause_onset_error_ms_max": null
-      },
-      "fallback": false
-    },
-    {
-      "text": "The certificate and safeguards are in place.",
-      "start": 2.3,
-      "end": 4.42,
+      "end": 3.36,
       "alignment_quality": {
         "energy_pauses": 0,
         "pause_agreement": 1.0,
@@ -145,13 +104,13 @@
     "method": "pocketsphinx-5-forced-alignment+energy-refine",
     "fallback": false,
     "quality": {
-      "energy_pauses": 1,
+      "energy_pauses": 0,
       "pause_agreement": 1.0,
       "pauses_inside_words": [],
       "onset_error_ms": 0.0,
       "offset_error_ms": 0.0,
-      "pause_onset_error_ms_mean": 0.0,
-      "pause_onset_error_ms_max": 0.0
+      "pause_onset_error_ms_mean": null,
+      "pause_onset_error_ms_max": null
     },
     "quality_ok": true
   },

@@ -8,9 +8,9 @@
   "text": "Record becomes trust.",
   "spoken_text": "Record becomes trust.",
   "sample_rate": 48000,
-  "duration": 1.67,
+  "duration": 1.7,
   "speech_start": 0.13,
-  "speech_end": 1.44,
+  "speech_end": 1.47,
   "words": [
     {
       "w": "Record",
@@ -25,33 +25,33 @@
     {
       "w": "trust",
       "start": 0.98,
-      "end": 1.44
+      "end": 1.47
     }
   ],
   "sentences": [
     {
       "text": "Record becomes trust.",
       "start": 0.13,
-      "end": 1.44,
+      "end": 1.47,
       "word_range": [
         0,
         3
       ]
     }
   ],
-  "created": "2026-09-29T19:29:47+00:00",
+  "created": "2026-09-29T19:43:50+00:00",
   "provider": "kokoro-onnx 0.6.1, kokoro-v1.0.onnx (local guide)",
   "voice": {
     "id": "bf_isabella",
     "lang": "en-gb"
   },
-  "speed": 1.1649,
+  "speed": 1.1569,
   "inner_pauses": [],
   "segments_synth": [
     {
       "text": "Record becomes trust.",
       "start": 0.12,
-      "end": 1.47,
+      "end": 1.5,
       "alignment_quality": {
         "energy_pauses": 0,
         "pause_agreement": 1.0,

@@ -1,7 +1,7 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en-GB">
   <head>
-    <meta charset="UTF-8" />
+    <meta charset="UTF-8">
     <title>zz-proto: pipeline prototype (temporary, delete before the final build)</title>
     <!-- The head of a templated sub-composition is discarded by the assembler. Everything the
          render needs is inside <template>. -->
@@ -9,7 +9,7 @@
   <body>
     <template id="zz-proto-template">
       <!-- Hoisted to the page head and de-duplicated against index.html's own link. -->
-      <link rel="stylesheet" href="assets/css/film.css" />
+      <link rel="stylesheet" href="assets/css/film.css">
       <style>
         #root {
           position: absolute;
@@ -106,29 +106,29 @@
         }
       </style>
 
-      <div id="root" data-composition-id="zz-proto" data-width="1920" data-height="1080">
+      <div data-hf-id="hf-6tkg" id="root" data-composition-id="zz-proto" data-width="1920" data-height="1080">
         <!-- Filter definitions: an invisible SVG inside the root (anything outside the root is dropped). -->
-        <svg id="zz-proto-defs" width="0" height="0" style="position: absolute" aria-hidden="true"><defs></defs></svg>
-        <div id="zz-proto-precise-wrap" data-layout-ignore></div>
-        <div id="zz-proto-rough-wrap" data-layout-ignore>
-          <svg id="zz-proto-rough" class="fl-stage" xmlns="http://www.w3.org/2000/svg" viewBox="-143.269 -56.345 319.447 179.689" preserveAspectRatio="xMidYMid meet">
-            <g id="zz-proto-rough-g"></g>
+        <svg data-hf-id="hf-dgzg" id="zz-proto-defs" width="0" height="0" style="position: absolute" aria-hidden="true"><defs data-hf-id="hf-mh0t" /></svg>
+        <div data-hf-id="hf-q8tu" id="zz-proto-precise-wrap" data-layout-ignore=""></div>
+        <div data-hf-id="hf-4b2a" id="zz-proto-rough-wrap" data-layout-ignore="">
+          <svg data-hf-id="hf-uv48" id="zz-proto-rough" class="fl-stage" xmlns="http://www.w3.org/2000/svg" viewBox="-143.269 -56.345 319.447 179.689" preserveAspectRatio="xMidYMid meet">
+            <g data-hf-id="hf-jssa" id="zz-proto-rough-g" />
           </svg>
         </div>
-        <div id="zz-proto-hud">
-          <span class="fl-label fl-muted">Site time</span>
-          <span id="zz-proto-clock" class="fl-num">06:00</span>
-          <span id="zz-proto-film-t" class="fl-label">T 0.000</span>
-          <span id="zz-proto-story-t" class="fl-label">S 0.000</span>
+        <div data-hf-id="hf-qsm0" id="zz-proto-hud">
+          <span data-hf-id="hf-gvdu" class="fl-label fl-muted">Site time</span>
+          <span data-hf-id="hf-fsti" id="zz-proto-clock" class="fl-num">06:00</span>
+          <span data-hf-id="hf-fc1v" id="zz-proto-film-t" class="fl-label">T 0.000</span>
+          <span data-hf-id="hf-1ynl" id="zz-proto-story-t" class="fl-label">S 0.000</span>
         </div>
-        <p id="zz-proto-statement" class="fl-display">Prevention before the work. Proof as it happens.</p>
-        <div id="zz-proto-chain" class="fl-label-lg">
-          <span>Record</span><span>&#8594; Trust</span><span>&#8594; Decision</span><span>&#8594; Price</span><span>&#8594; Capacity &#10003;</span>
+        <p data-hf-id="hf-gmmw" id="zz-proto-statement" class="fl-display">Prevention before the work. Proof as it happens.</p>
+        <div data-hf-id="hf-rkz4" id="zz-proto-chain" class="fl-label-lg">
+          <span data-hf-id="hf-ti80">Record</span><span data-hf-id="hf-sbtb">→ Trust</span><span data-hf-id="hf-xav5">→ Decision</span><span data-hf-id="hf-hwr8">→ Price</span><span data-hf-id="hf-a10a">→ Capacity ✓</span>
         </div>
-        <div id="zz-proto-mark-bg"></div>
-        <div id="zz-proto-mark">
-          <span class="zz-proto-word">Priora</span>
-          <span class="fl-body-lg">Infrastructure for activity-level physical risk</span>
+        <div data-hf-id="hf-k2k6" id="zz-proto-mark-bg"></div>
+        <div data-hf-id="hf-av3e" id="zz-proto-mark">
+          <span data-hf-id="hf-eryy" class="zz-proto-word">Priora</span>
+          <span data-hf-id="hf-ewiw" class="fl-body-lg">Infrastructure for activity-level physical risk</span>
         </div>
       </div>
 
@@ -190,7 +190,10 @@
 
         // ---- cameras (world rects; from assets/site/site-model.json cameras)
         var roof = FL.iso(67, 22, 12); // hot-work node, Roof 03 centre
+        // Two camera layers: "story" is moved only by the story (so the rewind reverses it),
+        // "main" only by the registered timeline after the rewind; cam.mix hands over.
         var cam = FL.camera([rough, site], {
+          layer: "story",
           rects: {
             overview: "-143.269 -56.345 319.447 179.689",
             roofEdgeMacro: FL.vb.around(roof[0] - 6, roof[1] - 2, 6.01038 * 4.5),
@@ -223,7 +226,9 @@
         FL.textTo(story, clockEl, { from: 6 * 3600, to: 7 * 3600, at: T("hour"), duration: 0.8, format: FL.hhmm });
         FL.textTo(story, clockEl, { from: 7 * 3600, to: 14 * 3600 + 18 * 60, at: T("l01", 3), duration: T("roof03") - T("l01", 3), ease: "power1.inOut", format: FL.hhmm });
         FL.textTo(story, clockEl, { from: 14 * 3600 + 18 * 60, to: 14 * 3600 + 41 * 60 + 59, at: T("roof03"), duration: LAND - T("roof03"), format: function (v) { return FL.hhmm(v, true); } });
-        FL.textTo(story, clockEl, { from: 14 * 3600 + 41 * 60 + 59, to: 16 * 3600 + 7 * 60, at: T("offline"), duration: T("afterwards") - T("offline"), format: FL.hhmm });
+        // Chained text tweens on one element must agree at every boundary (same value, same format):
+        // when the story runs backward, the later tween renders its start value last.
+        FL.textTo(story, clockEl, { from: 14 * 3600 + 41 * 60 + 59, to: 16 * 3600 + 7 * 60, at: T("offline"), duration: T("afterwards") - T("offline"), format: function (v) { return v < 14 * 3600 + 42 * 60 ? FL.hhmm(v, true) : FL.hhmm(v); } });
         FL.textTo(story, document.getElementById("zz-proto-story-t"), { from: 0, to: RS, at: 0, duration: RS, format: function (v) { return "S " + v.toFixed(3); } });
 
         // ================= REGISTERED TIMELINE
@@ -242,12 +247,14 @@
         tl.fromTo(site, { opacity: 0 }, { opacity: 1, duration: 0.8, ease: "power1.inOut", immediateRender: false }, R + 1.2);
         tl.fromTo(roughWrap, { opacity: 1 }, { opacity: 0, duration: 0.6, ease: "power1.in", immediateRender: false }, R + 1.7);
         tl.set(roughWrap, { filter: "none" }, R + 1.25); // drop the filter once it is inert (render cost)
-        cam.move(tl, "afterwardsWide", "overview", R, 2.4, "power2.inOut");
-        cam.move(tl, "overview", "macro6x", T("welding"), 3.0, "power2.inOut");
-        cam.drift(tl, "macro6x", T("welding", 3.0), 4.0, 0.012);
+        cam.set(tl, "roof03", 0, "main"); // the story camera at story time LAND is exactly roof03
+        cam.mix(tl, "story", "main", RE, 0); // cut: at the landing both layers show the same rect
+        cam.to(tl, "overview", R, 2.4, "power2.inOut", "main");
+        cam.to(tl, "macro6x", T("welding"), 3.0, "power2.inOut", "main");
+        cam.drift(tl, null, T("welding", 3.0), 4.0, 0.012, null, "main");
         tl.fromTo("#zz-proto-statement", { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.9, ease: "power3.out" }, T("prevention"));
         tl.to("#zz-proto-statement", { opacity: 0, duration: 0.5, ease: "power1.in" }, T("again", -0.6));
-        cam.move(tl, "macro6x", "decision", T("again"), 2.6, "power2.inOut");
+        cam.to(tl, "decision", T("again"), 2.6, "power2.inOut", "main");
         var chain = FL.$$(document.getElementById("zz-proto-chain"), "span");
         ["chainRecord", "chainTrust", "chainDecision", "chainPrice", "chainCapacity"].forEach(function (c, i) {
           tl.fromTo(chain[i], { opacity: 0, y: 8 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, T(c));

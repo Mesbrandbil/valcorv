@@ -8,46 +8,46 @@
   "text": "Priora. Infrastructure for activity-level physical risk.",
   "spoken_text": "Priora. Infrastructure for activity-level physical risk.",
   "sample_rate": 48000,
-  "duration": 3.98,
+  "duration": 4.21,
   "speech_start": 0.13,
-  "speech_end": 3.75,
+  "speech_end": 3.98,
   "words": [
     {
       "w": "Priora",
       "start": 0.13,
-      "end": 0.68
+      "end": 0.67
     },
     {
       "w": "Infrastructure",
-      "start": 1.16,
-      "end": 1.94
+      "start": 1.21,
+      "end": 2.01
     },
     {
       "w": "for",
-      "start": 1.97,
-      "end": 2.1
+      "start": 2.09,
+      "end": 2.2
     },
     {
       "w": "activity-level",
-      "start": 2.1,
-      "end": 2.95
+      "start": 2.2,
+      "end": 3.1
     },
     {
       "w": "physical",
-      "start": 2.95,
-      "end": 3.39
+      "start": 3.1,
+      "end": 3.57
     },
     {
       "w": "risk",
-      "start": 3.39,
-      "end": 3.75
+      "start": 3.57,
+      "end": 3.98
     }
   ],
   "sentences": [
     {
       "text": "Priora.",
       "start": 0.13,
-      "end": 0.68,
+      "end": 0.67,
       "word_range": [
         0,
         1
@@ -55,21 +55,21 @@
     },
     {
       "text": "Infrastructure for activity-level physical risk.",
-      "start": 1.16,
-      "end": 3.75,
+      "start": 1.21,
+      "end": 3.98,
       "word_range": [
         1,
         6
       ]
     }
   ],
-  "created": "2026-09-29T19:29:47+00:00",
+  "created": "2026-09-29T19:43:50+00:00",
   "provider": "kokoro-onnx 0.6.1, kokoro-v1.0.onnx (local guide)",
   "voice": {
     "id": "bf_isabella",
     "lang": "en-gb"
   },
-  "speed": 1.1649,
+  "speed": 1.1569,
   "inner_pauses": [
     0.34
   ],
@@ -77,13 +77,13 @@
     {
       "text": "Priora.",
       "start": 0.12,
-      "end": 0.85,
+      "end": 0.9,
       "alignment_quality": {
         "energy_pauses": 0,
         "pause_agreement": 1.0,
         "pauses_inside_words": [],
         "onset_error_ms": 0.0,
-        "offset_error_ms": 140.0,
+        "offset_error_ms": 200.0,
         "pause_onset_error_ms_mean": null,
         "pause_onset_error_ms_max": null
       },
@@ -91,8 +91,8 @@
     },
     {
       "text": "Infrastructure for activity-level physical risk.",
-      "start": 1.15,
-      "end": 3.78,
+      "start": 1.2,
+      "end": 4.01,
       "alignment_quality": {
         "energy_pauses": 0,
         "pause_agreement": 1.0,
@@ -114,8 +114,8 @@
       "pauses_inside_words": [],
       "onset_error_ms": 0.0,
       "offset_error_ms": 0.0,
-      "pause_onset_error_ms_mean": 10.0,
-      "pause_onset_error_ms_max": 10.0
+      "pause_onset_error_ms_mean": 0.0,
+      "pause_onset_error_ms_max": 0.0
     },
     "quality_ok": true
   },
@@ -129,13 +129,13 @@
       "phone_durations": {
         "P#0": 0.05,
         "R#1": 0.05,
-        "IY#2": 0.12,
+        "IY#2": 0.13,
         "AO#3": 0.14,
         "R#4": 0.07,
-        "AH#5": 0.15
+        "AH#5": 0.13
       },
-      "longest_vowel": "AH",
-      "stress_on_middle_syllable": false,
+      "longest_vowel": "AO",
+      "stress_on_middle_syllable": true,
       "segment": 0
     }
   ]

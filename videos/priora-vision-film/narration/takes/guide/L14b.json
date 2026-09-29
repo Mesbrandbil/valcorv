@@ -1,71 +1,76 @@
 {
   "schema": "priora-narration-take/1",
-  "id": "L04",
+  "id": "L14b",
   "engine": "guide",
   "guide": true,
   "label": "GUIDE VOICE (local Kokoro). Not the final ElevenLabs performance.",
   "speaker": "narrator",
-  "text": "Good teams translate them into permits, briefings and checklists.",
-  "spoken_text": "Good teams translate them into permits, briefings and checklists.",
+  "text": "It checks the certificate and safeguards, and keeps the record.",
+  "spoken_text": "It checks the certificate and safeguards, and keeps the record.",
   "sample_rate": 48000,
-  "duration": 3.47,
+  "duration": 3.44,
   "speech_start": 0.13,
-  "speech_end": 3.24,
+  "speech_end": 3.21,
   "words": [
     {
-      "w": "Good",
+      "w": "It",
       "start": 0.13,
-      "end": 0.3
+      "end": 0.22
     },
     {
-      "w": "teams",
-      "start": 0.3,
-      "end": 0.65
+      "w": "checks",
+      "start": 0.22,
+      "end": 0.52
     },
     {
-      "w": "translate",
-      "start": 0.65,
-      "end": 1.12
+      "w": "the",
+      "start": 0.52,
+      "end": 0.61
     },
     {
-      "w": "them",
-      "start": 1.12,
-      "end": 1.24
-    },
-    {
-      "w": "into",
-      "start": 1.24,
-      "end": 1.41
-    },
-    {
-      "w": "permits",
-      "start": 1.41,
-      "end": 1.95
-    },
-    {
-      "w": "briefings",
-      "start": 1.95,
-      "end": 2.51
+      "w": "certificate",
+      "start": 0.61,
+      "end": 1.22
     },
     {
       "w": "and",
-      "start": 2.51,
-      "end": 2.62
+      "start": 1.22,
+      "end": 1.35
     },
     {
-      "w": "checklists",
-      "start": 2.62,
-      "end": 3.24
+      "w": "safeguards",
+      "start": 1.35,
+      "end": 2.0
+    },
+    {
+      "w": "and",
+      "start": 2.21,
+      "end": 2.34
+    },
+    {
+      "w": "keeps",
+      "start": 2.34,
+      "end": 2.6
+    },
+    {
+      "w": "the",
+      "start": 2.6,
+      "end": 2.71
+    },
+    {
+      "w": "record",
+      "start": 2.71,
+      "end": 3.21
     }
   ],
   "sentences": [
     {
-      "text": "Good teams translate them into permits, briefings and checklists.",
+      "text": "It checks the certificate and safeguards, and keeps the record.",
       "start": 0.13,
-      "end": 3.24,
+      "end": 3.21,
       "word_range": [
         0,
-        9
+        10
       ]
     }
   ],
@@ -79,9 +84,9 @@
   "inner_pauses": [],
   "segments_synth": [
     {
-      "text": "Good teams translate them into permits, briefings and checklists.",
+      "text": "It checks the certificate and safeguards, and keeps the record.",
       "start": 0.12,
-      "end": 3.27,
+      "end": 3.24,
       "alignment_quality": {
         "energy_pauses": 0,
         "pause_agreement": 1.0,

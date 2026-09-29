@@ -5,12 +5,12 @@
   "guide": true,
   "label": "GUIDE VOICE (local Kokoro). Not the final ElevenLabs performance.",
   "speaker": "narrator",
-  "text": "The risk owner decides: change the activity, knowingly retain the exposure, or eventually ask selected carriers to cover it.",
-  "spoken_text": "The risk owner decides: change the activity, knowingly retain the exposure, or eventually ask selected carriers to cover it.",
+  "text": "The risk owner decides: change the work, knowingly retain the risk, or, in time, ask selected carriers to cover it.",
+  "spoken_text": "The risk owner decides: change the work, knowingly retain the risk, or, in time, ask selected carriers to cover it.",
   "sample_rate": 48000,
-  "duration": 7.43,
+  "duration": 6.67,
   "speech_start": 0.13,
-  "speech_end": 7.2,
+  "speech_end": 6.44,
   "words": [
     {
       "w": "The",
@@ -35,77 +35,82 @@
     {
       "w": "change",
       "start": 1.74,
-      "end": 2.05
+      "end": 2.03
     },
     {
       "w": "the",
-      "start": 2.05,
-      "end": 2.15
+      "start": 2.03,
+      "end": 2.11
     },
     {
-      "w": "activity",
-      "start": 2.15,
-      "end": 2.75
+      "w": "work",
+      "start": 2.11,
+      "end": 2.42
     },
     {
       "w": "knowingly",
-      "start": 2.95,
-      "end": 3.36
+      "start": 2.42,
+      "end": 2.87
     },
     {
       "w": "retain",
-      "start": 3.36,
-      "end": 3.74
+      "start": 2.87,
+      "end": 3.23
     },
     {
       "w": "the",
-      "start": 3.74,
-      "end": 3.83
+      "start": 3.23,
+      "end": 3.32
     },
     {
-      "w": "exposure",
-      "start": 3.83,
-      "end": 4.38
+      "w": "risk",
+      "start": 3.32,
+      "end": 3.64
     },
     {
       "w": "or",
-      "start": 4.71,
-      "end": 4.88
+      "start": 4.0,
+      "end": 4.15
     },
     {
-      "w": "eventually",
-      "start": 4.88,
-      "end": 5.4
+      "w": "in",
+      "start": 4.15,
+      "end": 4.27
+    },
+    {
+      "w": "time",
+      "start": 4.27,
+      "end": 4.62
     },
     {
       "w": "ask",
-      "start": 5.4,
-      "end": 5.73
+      "start": 4.62,
+      "end": 4.93
     },
     {
       "w": "selected",
-      "start": 5.73,
-      "end": 6.18
+      "start": 4.93,
+      "end": 5.41
     },
     {
       "w": "carriers",
-      "start": 6.18,
-      "end": 6.59
+      "start": 5.41,
+      "end": 5.83
     },
     {
       "w": "to",
-      "start": 6.59,
-      "end": 6.69
+      "start": 5.83,
+      "end": 5.92
     },
     {
       "w": "cover",
-      "start": 6.69,
-      "end": 7.02
+      "start": 5.92,
+      "end": 6.25
     },
     {
       "w": "it",
-      "start": 7.02,
-      "end": 7.2
+      "start": 6.25,
+      "end": 6.44
     }
   ],
   "sentences": [
@@ -119,22 +124,22 @@
       ]
     },
     {
-      "text": "change the activity, knowingly retain the exposure, or eventually ask selected carriers to cover it.",
+      "text": "change the work, knowingly retain the risk, or, in time, ask selected carriers to cover it.",
       "start": 1.74,
-      "end": 7.2,
+      "end": 6.44,
       "word_range": [
         4,
-        19
+        20
       ]
     }
   ],
-  "created": "2026-09-29T19:29:47+00:00",
+  "created": "2026-09-29T19:43:50+00:00",
   "provider": "kokoro-onnx 0.6.1, kokoro-v1.0.onnx (local guide)",
   "voice": {
     "id": "bf_isabella",
     "lang": "en-gb"
   },
-  "speed": 1.1649,
+  "speed": 1.1569,
   "inner_pauses": [
     0.25
   ],
@@ -155,17 +160,17 @@
       "fallback": false
     },
     {
-      "text": "change the activity, knowingly retain the exposure, or eventually ask selected carriers to cover it.",
+      "text": "change the work, knowingly retain the risk, or, in time, ask selected carriers to cover it.",
       "start": 1.73,
-      "end": 7.23,
+      "end": 6.47,
       "alignment_quality": {
-        "energy_pauses": 2,
+        "energy_pauses": 1,
         "pause_agreement": 1.0,
         "pauses_inside_words": [],
         "onset_error_ms": 0.0,
         "offset_error_ms": 0.0,
-        "pause_onset_error_ms_mean": 5.0,
-        "pause_onset_error_ms_max": 10.0
+        "pause_onset_error_ms_mean": 0.0,
+        "pause_onset_error_ms_max": 0.0
       },
       "fallback": false
     }
@@ -174,13 +179,13 @@
     "method": "pocketsphinx-5-forced-alignment+energy-refine",
     "fallback": false,
     "quality": {
-      "energy_pauses": 3,
+      "energy_pauses": 2,
       "pause_agreement": 1.0,
       "pauses_inside_words": [],
       "onset_error_ms": 0.0,
       "offset_error_ms": 0.0,
-      "pause_onset_error_ms_mean": 3.3,
-      "pause_onset_error_ms_max": 10.0
+      "pause_onset_error_ms_mean": 0.0,
+      "pause_onset_error_ms_max": 0.0
     },
     "quality_ok": true
   },

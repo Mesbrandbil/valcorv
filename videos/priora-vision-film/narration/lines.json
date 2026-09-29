@@ -4,11 +4,14 @@
  "language": "en-GB",
  "notes": [
   "Locked narration for the Priora vision film. `text` is the displayed text (captions, SCRIPT.md). `tts_text` holds the spoken form per engine when it differs; every spoken form keeps exactly one whitespace token per displayed token so word timings map back one to one. `gap_after` is designed silence after the line, `pre_gap` designed silence before it, both measured speech to speech. `guide_inner_pauses` are the pauses the local guide voice inserts between the sentences of a line (the ElevenLabs performance supplies its own).",
-  "2026-09-29: copy trimmed for a natural pace inside the 90 s edit (user direction: trim copy or adjust pauses rather than rushing the voice). L08 drops 'But'; L14 ends 'and keeps the record' (L15 carries 'as it happens'); L17 reads 'The risk owner decides: ... ask selected carriers to cover it.' Pauses tightened; rewind silence and the crossing hold protected."
+  "2026-09-29: copy trimmed for a natural pace inside the 90 s edit (user direction: trim copy or adjust pauses rather than rushing the voice). L08 drops 'But'; L14 ends 'and keeps the record' (L15 carries 'as it happens'); L17 reads 'The risk owner decides: ... ask selected carriers to cover it.' Pauses tightened; rewind silence and the crossing hold protected.",
+  "2026-09-29 (second pass): measured articulation rates showed L14, L16 and L17 running over 6 syllables per second. L14 is split so the connection gets its own sentence and a 0.8 s pause; L16 becomes 'The sprinkler goes offline again. This time, Priora sees it at once.'; L17 simplified to 'change the work, knowingly retain the risk, or, in time, ask selected carriers to cover it.' Room added after 'offline' (1.2 s), 'nobody sees it' (1.0 s), the rewind (4.2 s of silence), the connection (0.8 s) and the crossing (1.4 s). Per-line pace slows the opening, key beats and close.",
+  "2026-09-29 (third pass): L05 'in mind', L06 'hot work begins, every safeguard in place' (the certificate is named in L14b and shown on screen), L08 drops 'Work continues' (the drawing shows it). Lead-in 0.8 s, end hold 2.0 s before the final fit.",
+  "2026-09-29 (fourth pass): L14a 'connects the work to the conditions that matter' (matches 'change the work' in L17); slower delivery on L01, L14a and L20."
  ],
  "pacing": {
-  "lead_in": 1.0,
-  "end_hold": 2.39,
+  "lead_in": 0.8,
+  "end_hold": 1.98,
   "target_total": 90.0,
   "min_total": 89.8,
   "max_total": 90.2,
@@ -66,7 +69,7 @@
    ],
    "narrator_voice": "bf_isabella",
    "worker_voice": "bm_daniel",
-   "narrator_speed": 1.1649,
+   "narrator_speed": 1.1569,
    "worker_speed": 1.0,
    "default_inner_pause": {
     ".": 0.3,
@@ -103,7 +106,8 @@
    "text": "Every industrial site changes by the hour.",
    "delivery": "Quiet, observational opening. Unhurried, no announcer lift.",
    "pre_gap": 0.0,
-   "gap_after": 0.3
+   "gap_after": 0.3,
+   "pace": 0.88
   },
   {
    "id": "L02",
@@ -112,7 +116,7 @@
    "text": "Contractors arrive. Equipment is isolated. Work moves.",
    "delivery": "Three plain observations, even weight, the site coming alive.",
    "pre_gap": 0.0,
-   "gap_after": 0.45,
+   "gap_after": 0.35,
    "guide_inner_pauses": [
     0.3,
     0.3
@@ -134,32 +138,33 @@
    "text": "Good teams translate them into permits, briefings and checklists.",
    "delivery": "Respectful of the teams. The list is competent, not tired.",
    "pre_gap": 0.0,
-   "gap_after": 0.4
+   "gap_after": 0.35
   },
   {
    "id": "L05",
    "speaker": "narrator",
    "section": "b03-complexity-outruns-translation",
-   "text": "But no one can hold a moving site in their head.",
+   "text": "But no one can hold a moving site in mind.",
    "delivery": "The turn. Human and understanding, not critical.",
    "pre_gap": 0.0,
-   "gap_after": 0.5
+   "gap_after": 0.4,
+   "tts_text": {
+    "guide": "But no one can hold a moving site in mind.",
+    "elevenlabs": "But no one can hold a moving site in mind."
+   }
   },
   {
    "id": "L06",
    "speaker": "narrator",
    "section": "b03-complexity-outruns-translation",
-   "text": "On Roof 03, hot work begins. The certificate and safeguards are in place.",
+   "text": "On Roof 03, hot work begins, every safeguard in place.",
    "tts_text": {
-    "guide": "On Roof oh-three, hot work begins. The certificate and safeguards are in place.",
-    "elevenlabs": "On Roof oh-three, hot work begins. The certificate and safeguards are in place."
+    "guide": "On Roof oh-three, hot work begins, every safeguard in place.",
+    "elevenlabs": "On Roof oh-three, hot work begins, every safeguard in place."
    },
    "delivery": "Specific and calm. Everything is correct at this point.",
    "pre_gap": 0.0,
-   "gap_after": 0.4,
-   "guide_inner_pauses": [
-    0.34
-   ]
+   "gap_after": 0.45
   },
   {
    "id": "L07",
@@ -168,20 +173,22 @@
    "text": "Then a sprinkler zone goes offline.",
    "delivery": "Understated. No drama in the voice; the silence after it does the work.",
    "pre_gap": 0.0,
-   "gap_after": 0.8
+   "gap_after": 1.2,
+   "pace": 0.96
   },
   {
    "id": "L08",
    "speaker": "narrator",
    "section": "b04-invisible-crossing",
-   "text": "Nothing looks different. Work continues. The conditions have changed, and nobody sees it.",
+   "text": "Nothing looks different. The conditions have changed, and nobody sees it.",
    "delivery": "Controlled tension. Short beats, then the quiet realisation on nobody sees it.",
    "pre_gap": 0.0,
-   "gap_after": 0.6,
-   "guide_inner_pauses": [
-    0.34,
-    0.34
-   ]
+   "gap_after": 1.0,
+   "pace": 0.97,
+   "tts_text": {
+    "guide": "Nothing looks different. The conditions have changed, and nobody sees it.",
+    "elevenlabs": "Nothing looks different. The conditions have changed, and nobody sees it."
+   }
   },
   {
    "id": "L09",
@@ -190,7 +197,7 @@
    "text": "If something goes wrong, questions begin afterwards:",
    "delivery": "Restrained. Leads straight into the questions.",
    "pre_gap": 0.0,
-   "gap_after": 0.15
+   "gap_after": 0.2
   },
   {
    "id": "L10",
@@ -212,7 +219,8 @@
    "text": "Today, the gap is often discovered too late.",
    "delivery": "Land the idea. Plain, final, no sigh.",
    "pre_gap": 0.0,
-   "gap_after": 0.6
+   "gap_after": 0.9,
+   "pace": 0.95
   },
   {
    "id": "L12",
@@ -220,9 +228,10 @@
    "section": "b06-rewind",
    "text": "What if the decision existed when the risk changed?",
    "delivery": "After the rewind silence. Open, curious, forward looking.",
-   "pre_gap": 3.0,
+   "pre_gap": 3.1,
    "pre_gap_note": "REWIND SILENCE: picture and sound reverse here",
-   "gap_after": 0.6
+   "gap_after": 0.6,
+   "pace": 0.95
   },
   {
    "id": "L13",
@@ -235,20 +244,34 @@
    },
    "delivery": "A real worker speaking into a phone on site. Natural, close-mic, practical, not a slogan.",
    "pre_gap": 0.0,
-   "gap_after": 0.45
+   "gap_after": 0.5
   },
   {
-   "id": "L14",
+   "id": "L14a",
    "speaker": "narrator",
    "section": "b07-speak-the-activity",
-   "text": "Priora connects the activity to the conditions that matter, verifies the certificate and safeguards, and keeps the record.",
+   "text": "Priora connects the work to the conditions that matter.",
    "tts_text": {
-    "guide": "Priora connects the activity to the conditions that matter, verifies the certificate and safeguards, and keeps the record.",
-    "elevenlabs": "Pree-OR-uh connects the activity to the conditions that matter, verifies the certificate and safeguards, and keeps the record."
+    "guide": "Priora connects the work to the conditions that matter.",
+    "elevenlabs": "Pree-OR-uh connects the work to the conditions that matter."
    },
-   "delivery": "Clarity arrives. Precise, even, three clauses with light separation.",
+   "delivery": "Clear and unhurried; this is the moment the connection becomes visible. Let it land.",
    "pre_gap": 0.0,
-   "gap_after": 0.3
+   "gap_after": 0.8,
+   "pace": 0.9
+  },
+  {
+   "id": "L14b",
+   "speaker": "narrator",
+   "section": "b07-speak-the-activity",
+   "text": "It checks the certificate and safeguards, and keeps the record.",
+   "tts_text": {
+    "guide": "It checks the certificate and safeguards, and keeps the record.",
+    "elevenlabs": "It checks the certificate and safeguards, and keeps the record."
+   },
+   "delivery": "Plain, factual, confident.",
+   "pre_gap": 0.0,
+   "gap_after": 0.35
   },
   {
    "id": "L15",
@@ -257,32 +280,38 @@
    "text": "Prevention before the work. Proof as it happens.",
    "delivery": "Let each half stand. Confident through precision, not emphasis.",
    "pre_gap": 0.0,
-   "gap_after": 0.9,
+   "gap_after": 1.0,
    "guide_inner_pauses": [
     0.34
-   ]
+   ],
+   "pace": 0.96
   },
   {
    "id": "L16",
    "speaker": "narrator",
    "section": "b09-priora-sees-the-change",
-   "text": "When the sprinkler goes offline again, Priora sees it immediately.",
+   "text": "The sprinkler goes offline again. This time, Priora sees it at once.",
    "tts_text": {
-    "guide": "When the sprinkler goes offline again, Priora sees it immediately.",
-    "elevenlabs": "When the sprinkler goes offline again, Pree-OR-uh sees it immediately."
+    "guide": "The sprinkler goes offline again. This time, Priora sees it at once.",
+    "elevenlabs": "The sprinkler goes offline again. This time, Pree-OR-uh sees it at once."
    },
-   "delivery": "Calm certainty. Immediately is quiet, not triumphant.",
+   "delivery": "Two beats: the event, then the contrast with Act I. 'This time' carries it.",
    "pre_gap": 0.0,
-   "gap_after": 1.1
+   "gap_after": 1.4,
+   "pace": 0.95
   },
   {
    "id": "L17",
    "speaker": "narrator",
    "section": "b10-change-retain-transfer",
-   "text": "The risk owner decides: change the activity, knowingly retain the exposure, or eventually ask selected carriers to cover it.",
+   "text": "The risk owner decides: change the work, knowingly retain the risk, or, in time, ask selected carriers to cover it.",
    "delivery": "Three options with momentum. Eventually is honest and unhurried.",
    "pre_gap": 0.0,
-   "gap_after": 0.5
+   "gap_after": 0.5,
+   "tts_text": {
+    "guide": "The risk owner decides: change the work, knowingly retain the risk, or, in time, ask selected carriers to cover it.",
+    "elevenlabs": "The risk owner decides: change the work, knowingly retain the risk, or, in time, ask selected carriers to cover it."
+   }
   },
   {
    "id": "L18",
@@ -303,7 +332,8 @@
    "text": "Record becomes trust.",
    "delivery": "Chain link one. Even, deliberate.",
    "pre_gap": 0.0,
-   "gap_after": 0.3
+   "gap_after": 0.3,
+   "pace": 0.97
   },
   {
    "id": "L19b",
@@ -312,7 +342,8 @@
    "text": "Trust enables decisions.",
    "delivery": "Chain link two.",
    "pre_gap": 0.0,
-   "gap_after": 0.3
+   "gap_after": 0.3,
+   "pace": 0.97
   },
   {
    "id": "L19c",
@@ -321,7 +352,8 @@
    "text": "Decisions can carry price.",
    "delivery": "Chain link three. Can is conditional, not a promise.",
    "pre_gap": 0.0,
-   "gap_after": 0.3
+   "gap_after": 0.3,
+   "pace": 0.97
   },
   {
    "id": "L19d",
@@ -330,7 +362,8 @@
    "text": "Price can connect to capacity.",
    "delivery": "Chain link four. Resolve downward.",
    "pre_gap": 0.0,
-   "gap_after": 0.7
+   "gap_after": 0.7,
+   "pace": 0.97
   },
   {
    "id": "L20",
@@ -346,7 +379,8 @@
    "gap_after": 0.0,
    "guide_inner_pauses": [
     0.34
-   ]
+   ],
+   "pace": 0.88
   }
  ]
 }
