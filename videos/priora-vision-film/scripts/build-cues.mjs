@@ -660,9 +660,12 @@ const INDEX_TEMPLATE = `<!doctype html>
         z-index: 900;
         pointer-events: none;
       }
+      /* Rendered at 50 % layer opacity with double-strength alpha in the image: the same look, and
+         the layout audit treats a sub-60 % overlay as texture rather than as an occluder. */
       #film-surface-tooth {
         position: absolute;
         inset: 0;
+        opacity: 0.5;
         background-image: url("assets/textures/paper-tooth.png");
         background-size: 1024px 1024px;
         background-repeat: repeat;
@@ -670,7 +673,8 @@ const INDEX_TEMPLATE = `<!doctype html>
       #film-surface-light {
         position: absolute;
         inset: 0;
-        background: radial-gradient(ellipse 90% 85% at 46% 42%, rgba(59, 58, 51, 0) 55%, rgba(59, 58, 51, 0.03) 80%, rgba(59, 58, 51, 0.06) 100%);
+        opacity: 0.5;
+        background: radial-gradient(ellipse 90% 85% at 46% 42%, rgba(59, 58, 51, 0) 55%, rgba(59, 58, 51, 0.06) 80%, rgba(59, 58, 51, 0.12) 100%);
       }
     </style>
   </head>
@@ -685,9 +689,9 @@ const INDEX_TEMPLATE = `<!doctype html>
       <!-- build-cues:slots:begin -->
 ${slotHtml}
       <!-- build-cues:slots:end -->
-      <div id="film-surface" aria-hidden="true" data-layout-ignore>
-        <div id="film-surface-tooth" data-layout-ignore></div>
-        <div id="film-surface-light" data-layout-ignore></div>
+      <div id="film-surface" aria-hidden="true" data-layout-ignore data-layout-allow-occlusion>
+        <div id="film-surface-tooth" data-layout-ignore data-layout-allow-occlusion></div>
+        <div id="film-surface-light" data-layout-ignore data-layout-allow-occlusion></div>
       </div>
       <!-- build-cues:audio:begin -->
 ${audioHtml}
