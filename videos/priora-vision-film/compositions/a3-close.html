@@ -2,7 +2,7 @@
 <html lang="en-GB">
   <head>
     <meta charset="UTF-8" />
-    <title>a3-close: record to capacity, then Priora (Frame 6)</title>
+    <title>a3-close: the envelope becomes the chain, then Priora (S21, S22)</title>
     <!-- Ignored by the assembler. Everything that must exist at render time is inside <template>. -->
   </head>
   <body>
@@ -17,13 +17,13 @@
           overflow: hidden;
         }
         /* One wrapper owns the crossfade in (FL.sceneFade). It carries its own paper, identical to
-           the film's paper layer (same base, grain tile and vignette, same origin), so the product
-           frame of a3-change is covered by clean paper once the crossfade completes, whether or
-           not a3-change fades itself out. */
+           the film's paper layer (same base, grain tile and vignette, same origin), so a3-change is
+           covered by clean paper once the crossfade completes, whether or not it fades itself out. */
         #a3-close-fade,
         #a3-close-paper,
         #a3-close-paper-grain,
         #a3-close-paper-vignette,
+        #a3-close-site-wrap,
         #a3-close-end-wrap {
           position: absolute;
           inset: 0;
@@ -39,13 +39,68 @@
         #a3-close-paper-vignette {
           background: radial-gradient(ellipse 75% 70% at 50% 48%, rgba(59, 58, 51, 0) 58%, rgba(59, 58, 51, 0.035) 82%, rgba(59, 58, 51, 0.07) 100%);
         }
-        /* The chain lifts as one piece: this wrapper owns its opacity and y. */
-        #a3-close-chain-wrap {
+        /* The handoff frame: a full-frame SiteKit mount, precise, at SiteKit.CAMERAS.wholeSite. */
+        #a3-close-site,
+        #a3-close-chain {
           position: absolute;
           left: 0;
           top: 0;
-          width: 1920px;
-          height: 1080px;
+          width: 100%;
+          height: 100%;
+          display: block;
+        }
+        /* The chain: one full-frame SVG in board units (= frame px at the full-chain framing), framed
+           by FL.camera (viewBox). SVG throughout, so every frame rasterises the same after any seek. */
+        #a3-close-chain path {
+          fill: none;
+        }
+        /* The hairline the envelope becomes, and the pieces it splits into. Opaque (ink at .62 over
+           paper, the envelope's own tone) so abutting pieces never darken where they meet. */
+        #a3-close-chain .a3-close-hair {
+          stroke: #676765;
+          stroke-width: 0.9px;
+          stroke-linecap: butt;
+        }
+        #a3-close-chain .a3-close-ar {
+          stroke-width: 1.25px;
+          stroke-linecap: butt;
+          stroke-linejoin: miter;
+        }
+        #a3-close-chain .a3-close-br {
+          stroke: #111111;
+          stroke-width: 1.25px;
+          stroke-linecap: butt;
+        }
+        #a3-close-chain .a3-close-br.dashed {
+          stroke: rgba(17, 17, 17, 0.62);
+        }
+        #a3-close-chain .a3-close-br.dash {
+          stroke-dasharray: 6 6;
+        }
+        /* chain words: Plex Mono 500 at 44 board px (88 px when a word is framed alone), set glyph by
+           glyph at the kit's pitch (0.6 em advance + 0.16 em tracking) */
+        #a3-close-chain .a3-close-wg {
+          font-family: var(--mono);
+          font-weight: 500;
+          font-size: 44px;
+          fill: #111111;
+        }
+        /* descriptors: Plex Sans 22 px grey (the kit's), 44 px when framed alone */
+        #a3-close-chain .a3-close-desc {
+          font-family: var(--sans);
+          font-weight: 400;
+          font-size: 22px;
+          fill: #6a6863;
+        }
+        #a3-close-chain .a3-close-brl {
+          font-family: var(--mono);
+          font-weight: 500;
+          font-size: 18px;
+          letter-spacing: 0.14em;
+          fill: #111111;
+        }
+        #a3-close-chain .a3-close-brl.dashed {
+          fill: rgba(17, 17, 17, 0.62);
         }
         /* The qualifier is required reading: raised from the kit's 17 px to the film's 18 px floor. */
         #a3-close-end-wrap .fui-end-q {
@@ -60,14 +115,46 @@
             <div id="a3-close-paper-grain"></div>
             <div id="a3-close-paper-vignette"></div>
           </div>
-          <div id="a3-close-chain-wrap"></div>
+          <div id="a3-close-site-wrap" aria-hidden="true" data-layout-ignore>
+            <svg id="a3-close-site" width="1920" height="1080"></svg>
+          </div>
+          <svg id="a3-close-chain" width="1920" height="1080" viewBox="0 0 1920 1080">
+            <g id="a3-close-lift"></g>
+          </svg>
           <div id="a3-close-end-wrap"></div>
         </div>
       </div>
 
       <script>
-        // Frame 6. Globals from index.html <head>: gsap (+ DrawSVG), FL, CUES, SCENES, UIKit.
-        // Every sync time is a cue from cues/cuesheet.json; nothing is hard-coded in seconds.
+        /*
+          a3-close (cut 2): S21 the chain, S22 the end card.
+          Globals from index.html <head>: gsap (+ plugins), FL, CUES, SCENES, SiteKit, UIKit.
+
+          HANDOFF IN (from a3-change, 0.4 s crossfade from cue closeIn): the bare precise site,
+          a full-frame 1920 x 1080 SiteKit mount (show 'precise') at SiteKit.CAMERAS.wholeSite.
+          This scene mounts exactly that and crossfades in over it; nothing moves until the
+          crossfade has completed.
+
+          S21. After the crossfade the site recedes (its camera pulls back while the drawing fades)
+          and its envelope outline, the one continuous line of accepted conditions, is pulled taut
+          into one horizontal hairline (a plain d tween over the outline's own vertices: both halves
+          of the loop run from its leftmost to its rightmost point and land on the line, so the loop
+          flattens and stretches). The straight line hands over, on the same pixels, to the hairline
+          on the chain SVG. RECORD sets at the left of the line on its word; the line parts to let
+          each word in. On each following word the arrow draws right in blue and the camera
+          (FL.camera, viewBox) rides it for one beat, arriving on the shared cut for that word
+          (FL.clock().c), to the next word framed alone at 88 px. Finished arrows turn ink; the word
+          the camera leaves lets its descriptor go. After CAPACITY a 1.5 beat pull back reveals the
+          full chain at 44 px (descriptors 22 px, bracket labels 18 px): the descriptors return and
+          the two brackets draw in as it lands. The full chain then holds perfectly still until the
+          lift at priora - 0.22 (at least 2.2 s).
+
+          S22. The chain lifts and fades; the wordmark rises out of its hairline and latches at
+          priora + 0.40; the descriptor sets on "Infrastructure"; the qualifier (18 px) fades in
+          one second later. Everything is still well before the last two seconds.
+
+          Word anchors: word start - 0.04 (as cut 1). Sound: compositions/a3-close.events.json.
+        */
         var ID = "a3-close";
         var clk = FL.clock(ID);
         var T = function (anchor, off) {
@@ -77,110 +164,368 @@
           return document.getElementById(id);
         };
         var fade = el("a3-close-fade");
-        var chainWrap = el("a3-close-chain-wrap");
+        var siteSvg = el("a3-close-site");
+        var chainSvg = el("a3-close-chain");
+        var liftG = el("a3-close-lift");
         var endWrap = el("a3-close-end-wrap");
 
-        // A word lands a hair ahead of its spoken onset, so picture and voice read as one event.
-        var LEAD = -0.04;
+        var BEAT = FL.BEAT;
+        var LEAD = -0.04; // a word lands a hair ahead of its spoken onset
+        var SIGNAL = "#1F47D6",
+          INK2 = "#2A2A2A";
+        var f3 = function (v) {
+          return (Math.round(v * 1000) / 1000).toString();
+        };
 
-        // ---------------------------------------------------------------- build (state at time 0)
-        var FS = 44, BY = 176; // chain word size and bracket baseline (UIKit.chain defaults, passed explicitly)
-        var chain = UIKit.chain({ prefix: ID, scene: ID, parent: chainWrap, left: 96, top: 428, size: FS, bracketY: BY });
-        var card = UIKit.endCard({ prefix: ID, scene: ID, parent: endWrap });
-        // Typographic apostrophe (the kit's DATA has a straight one; Plex Sans has U+2019).
-        chain.descs[3].textContent = chain.descs[3].textContent.replace("'", "’");
+        // ================================================================ the handoff site
+        var SK = window.SiteKit;
+        var site = SK.mount(siteSvg, { prefix: ID + "-site", show: "precise", rough: false });
+        // SiteKit's <style> is page-wide: its sprinkler-hatch rule (url(#<prefix>-sz-hatch)) would win
+        // for every site mount in the film, since this scene comes last. Scope this mount's copy to
+        // this SVG (same rules, higher specificity), so it styles only this drawing.
+        var siteStyle = siteSvg.querySelector("defs > style");
+        if (siteStyle) siteStyle.textContent = siteStyle.textContent.replace(/\.priora-site/g, "#a3-close-site.priora-site");
+        var R_SITE = SK.CAMERAS.wholeSite;
+        site.setView(R_SITE);
+        var envOutline = site.el("envelope-outline");
 
-        // Chain geometry, recomputed exactly as UIKit.chain lays it out (Plex Mono advance 0.6 em
-        // plus 0.16 em tracking), so nothing is measured from the DOM.
-        var vis = UIKit.DATA.chain.map(function (c) {
+        // ================================================================ the chain (board units)
+        // Layout exactly as UIKit.chain computes it: Plex Mono 44 px, 0.6 em advance + 0.16 em
+        // tracking, descriptors Plex Sans 22 px (at most 0.5 em per character), width 1728 from x 96.
+        var FS = 44,
+          CX = 96,
+          CY = 428,
+          BY = 176,
+          WIDTH = 1728,
+          DFS = 22;
+        var DATA = UIKit.DATA.chain.map(function (c) {
+          return [c[0].toUpperCase(), c[1].replace("'", "’")]; // typographic apostrophe
+        });
+        var N = DATA.length;
+        var vis = DATA.map(function (c) {
           return c[0].length * FS * 0.76 - FS * 0.16;
         });
-        var xs = chain.xs;
-        var chainSvg = chain.el.querySelector("svg.fui-ch-svg");
-        var defs = FL.svgEl("defs", { id: "a3-close-chain-defs" }, chainSvg);
-        var clipRect = function (name, x, y, h) {
-          var cp = FL.svgEl("clipPath", { id: "a3-close-clip-" + name, clipPathUnits: "userSpaceOnUse" }, defs);
-          return FL.svgEl("rect", { id: "a3-close-clip-" + name + "-r", x: x.toFixed(2), y: y.toFixed(2), width: 0, height: h }, cp);
-        };
-
-        // Arrows. Each arrow is one path with two subpaths (shaft, head), and Chrome restarts the
-        // dash pattern per subpath, so a DrawSVG draw alone shows the head before the shaft reaches
-        // it. A clip that sweeps left to right with the same timing makes the arrow grow cleanly.
-        var AR_LEAD = 0.32, AR_DUR = 0.42; // UIKit.chain.reveal: the arrow draws at t - 0.32 for 0.42 s
-        var arrowClips = chain.arrows.map(function (a, i) {
-          var x0 = xs[i] + vis[i] + 28 - 3,
-            x1 = xs[i + 1] - 28 + 3;
-          a.setAttribute("clip-path", "url(#a3-close-clip-arrow-" + i + ")");
-          return { r: clipRect("arrow-" + i, x0, FS * 0.5 - 10, 20), w: x1 - x0 };
+        var dW = UIKit.DATA.chain.map(function (c) {
+          return c[1].length * DFS * 0.5;
         });
-        var revealWord = function (t, i) {
-          chain.reveal(tl, t, i);
-          if (i > 0) {
-            var c = arrowClips[i - 1];
-            tl.fromTo(c.r, { attr: { width: 0 } }, { attr: { width: c.w }, duration: AR_DUR, ease: "power2.inOut", immediateRender: false }, t - AR_LEAD);
+        var colW = vis.map(function (v, i) {
+          return Math.max(v, dW[i]);
+        });
+        var gapW = (WIDTH - vis.slice(0, N - 1).reduce(function (a, b) { return a + b; }, 0) - colW[N - 1]) / (N - 1);
+        var fits = dW.every(function (w, i) {
+          return i === N - 1 || w + 24 <= vis[i] + gapW;
+        });
+        var xs = [],
+          acc = 0;
+        if (fits)
+          vis.forEach(function (v) {
+            xs.push(acc);
+            acc += v + gapW;
+          });
+        else {
+          gapW = (WIDTH - colW.reduce(function (a, b) { return a + b; }, 0)) / (N - 1);
+          colW.forEach(function (v) {
+            xs.push(acc);
+            acc += v + gapW;
+          });
+        }
+        var wx = xs.map(function (x) {
+          return CX + x;
+        }); // word left edges
+        var wr = wx.map(function (x, i) {
+          return x + vis[i];
+        }); // word right edges
+        var PAD = 28; // arrow clearance either side of a word (kit value)
+        var CAP = 0.698 * FS; // Plex cap height
+        var AY = CY + Math.round(FS * 0.52); // arrow and hairline height: the middle of the capitals
+        var BASE = AY + CAP / 2; // word baseline
+        var DBASE = CY + 87.6; // descriptor baseline (the kit's column: word line 44, gap 20, 22 px at 1.4)
+
+        var svgEl = function (tag, attrs, parent) {
+          return FL.svgEl(tag, attrs, parent || liftG);
+        };
+        var hLine = function (x0, x1) {
+          return "M" + f3(x0) + " " + f3(AY) + "H" + f3(x1);
+        };
+
+        // ---------------------------------------------------------------- the hairline
+        // two halves of a bridge over every word slot (they part when the word lands) and a segment
+        // under every arrow; they appear together when the envelope line lands on them
+        var hairG = svgEl("g", { id: "a3-close-hair" });
+        hairG.style.opacity = 0;
+        var bridges = [],
+          segs = [];
+        for (var i = 0; i < N; i++) {
+          var a = wx[i] - PAD,
+            m = wx[i] + vis[i] / 2,
+            b = wr[i] + PAD;
+          var bl = svgEl("path", { id: "a3-close-br-l" + i, class: "a3-close-hair", d: hLine(a, m) }, hairG);
+          var br = svgEl("path", { id: "a3-close-br-r" + i, class: "a3-close-hair", d: hLine(m, b) }, hairG);
+          bridges.push({ l: bl, r: br, a: a, m: m, b: b });
+          if (i < N - 1) segs.push(svgEl("path", { id: "a3-close-seg" + i, class: "a3-close-hair", d: hLine(wr[i] + PAD, wx[i + 1] - PAD) }, hairG));
+        }
+
+        // ---------------------------------------------------------------- arrows
+        // shaft and head as separate single-subpath paths, grown by d tweens (no DrawSVG on a
+        // multi-subpath path, so the head never shows before the shaft reaches it)
+        var arrows = [];
+        for (var j = 0; j < N - 1; j++) {
+          var x0 = wr[j] + PAD,
+            x1 = wx[j + 1] - PAD;
+          var pt = function (x, y) {
+            return f3(x) + " " + f3(y);
+          };
+          var headD0 = "M" + pt(x1, AY) + "L" + pt(x1, AY) + "L" + pt(x1, AY);
+          var shaft = svgEl("path", { id: "a3-close-ar" + j, class: "a3-close-ar", d: hLine(x0, x0) });
+          var head = svgEl("path", { id: "a3-close-ah" + j, class: "a3-close-ar", d: headD0 });
+          shaft.style.stroke = SIGNAL;
+          head.style.stroke = SIGNAL;
+          arrows.push({ shaft: shaft, head: head, x0: x0, x1: x1, headD0: headD0, headD: "M" + pt(x1 - 9, AY - 7) + "L" + pt(x1, AY) + "L" + pt(x1 - 9, AY + 7) });
+        }
+
+        // ---------------------------------------------------------------- words and descriptors
+        // A word lands as the kit's does: it rises 14 units and its tracking closes from 0.3 em to
+        // 0.16 em, done here with transforms (glyph k starts k * 0.14 em to the right of its place).
+        var words = [],
+          glyphs = [],
+          descs = [];
+        DATA.forEach(function (c, i) {
+          var g = svgEl("g", { id: "a3-close-w" + i, transform: "translate(0 14)" });
+          g.style.opacity = 0;
+          glyphs.push(
+            c[0].split("").map(function (ch, k) {
+              var t = svgEl("text", { id: "a3-close-w" + i + "-g" + k, class: "a3-close-wg", x: f3(wx[i] + k * 0.76 * FS), y: f3(BASE), transform: k ? "translate(" + f3(k * 0.14 * FS) + " 0)" : null }, g);
+              t.textContent = ch;
+              return t;
+            })
+          );
+          words.push(g);
+          var d = svgEl("text", { id: "a3-close-d" + i, class: "a3-close-desc", x: f3(wx[i]), y: f3(DBASE), transform: "translate(0 8)" });
+          d.textContent = c[1];
+          d.style.opacity = 0;
+          descs.push(d);
+        });
+
+        // ---------------------------------------------------------------- brackets
+        // TODAY (solid, under RECORD and TRUST), OVER TIME (dashed, under DECISION to CAPACITY)
+        var by = CY + BY;
+        var tA = wx[0],
+          tB = CX + xs[1] + colW[1];
+        var oA = wx[2],
+          oB = CX + xs[4] + colW[4];
+        var brToday = svgEl("path", { id: "a3-close-today", class: "a3-close-br", d: "M" + f3(tA) + " " + (by - 12) + "V" + by + "H" + f3(tB) + "V" + (by - 12) });
+        var brTodayL = svgEl("text", { id: "a3-close-today-l", class: "a3-close-brl", x: f3((tA + tB) / 2), y: by + 36, "text-anchor": "middle" });
+        brTodayL.textContent = "TODAY · PREVENTION AND PROOF";
+        var overTickL = svgEl("path", { id: "a3-close-over-t0", class: "a3-close-br dashed", d: "M" + f3(oA) + " " + by + "V" + by });
+        var overSpan = svgEl("path", { id: "a3-close-over-span", class: "a3-close-br dashed dash", d: "M" + f3(oA) + " " + by + "H" + f3(oA) });
+        var overTickR = svgEl("path", { id: "a3-close-over-t1", class: "a3-close-br dashed", d: "M" + f3(oB) + " " + by + "V" + by });
+        var brOverL = svgEl("text", { id: "a3-close-over-l", class: "a3-close-brl dashed", x: f3((oA + oB) / 2), y: by + 36, "text-anchor": "middle" });
+        brOverL.textContent = "OVER TIME";
+        [brToday, brTodayL, brOverL].forEach(function (e) {
+          e.style.opacity = 0;
+        });
+
+        // ---------------------------------------------------------------- camera
+        // each word framed alone at 2x (88 px), its left edge at frame x 306, the hairline at frame
+        // y 490; the full chain at 1x (board = frame)
+        var RIDE = 2,
+          RW = 1920 / RIDE;
+        var WORD_X = 306,
+          LINE_Y = 490;
+        var rideRect = function (i) {
+          return { x: wx[i] - WORD_X / RIDE, y: AY - LINE_Y / RIDE, w: RW, h: (RW * 9) / 16 };
+        };
+        var cam = FL.camera(chainSvg, { rects: { full: { x: 0, y: 0, w: 1920, h: 1080 } }, sw: false });
+        cam.apply(rideRect(0));
+
+        // ---------------------------------------------------------------- the envelope becomes the line
+        // The site's own envelope outline is the line that straightens: its d is tweened, in world
+        // units, from the loop to a horizontal line that lands, under the site camera's receded end
+        // framing, on the hairline's exact frame row (from RECORD's slot to past the right edge of the
+        // first ride framing). Everything else in the drawing fades group by group, so the outline
+        // never changes element or stacking (no swap at the start), and at the end it hands over to
+        // the chain's hairline on the same pixels.
+        var R0 = rideRect(0);
+        var toFrame = function (bx, by) {
+          return [((bx - R0.x) * 1920) / R0.w, ((by - R0.y) * 1920) / R0.w];
+        };
+        var r3 = function (v) {
+          return Math.round(v * 1000) / 1000; // SiteKit writes the viewBox at 3 decimals
+        };
+        var kW = 1920 / R_SITE.w;
+        var RE0 = SK.rect(R_SITE.x + R_SITE.w / 2, R_SITE.y + R_SITE.h / 2, kW * 0.86); // the receded framing
+        var RE = { x: r3(RE0.x), y: r3(RE0.y), w: r3(RE0.w), h: r3(RE0.h) };
+        var kE = Math.max(1920 / RE.w, 1080 / RE.h); // preserveAspectRatio xMidYMid slice
+        var offX = (1920 - RE.w * kE) / 2,
+          offY = (1080 - RE.h * kE) / 2;
+        var toWorldE = function (fx, fy) {
+          return [RE.x + (fx - offX) / kE, RE.y + (fy - offY) / kE];
+        };
+        var envD = envOutline.getAttribute("d");
+        var verts = SK.parseD(envD)
+          .filter(function (c) {
+            return c[0] === "M" || c[0] === "L";
+          })
+          .map(function (c) {
+            return c[1];
+          });
+        var nv = verts.length;
+        var iL = 0,
+          iR = 0;
+        verts.forEach(function (p, k) {
+          if (p[0] < verts[iL][0]) iL = k;
+          if (p[0] > verts[iR][0]) iR = k;
+        });
+        // arc fraction of every vertex along its half of the loop (forward half: iL -> iR increasing
+        // index; backward half: iL -> iR decreasing index); both halves land on the same line
+        var halfFrac = function (dir) {
+          var out = {},
+            s = 0,
+            k = iL,
+            list = [[iL, 0]];
+          while (k !== iR) {
+            var nk = (k + dir + nv) % nv;
+            s += Math.hypot(verts[nk][0] - verts[k][0], verts[nk][1] - verts[k][1]);
+            list.push([nk, s]);
+            k = nk;
           }
+          list.forEach(function (e) {
+            out[e[0]] = e[1] / s;
+          });
+          return out;
         };
+        var fwd = halfFrac(1),
+          bwd = halfFrac(-1);
+        var lineL = toFrame(bridges[0].a, AY); // frame px: the left end of the hairline, on its row
+        var pL = toWorldE(lineL[0], lineL[1]),
+          pR = toWorldE(1920 + 80, lineL[1]);
+        var dTo = "";
+        verts.forEach(function (p, k) {
+          var u = fwd[k] != null ? fwd[k] : bwd[k];
+          dTo += (k === 0 ? "M" : "L") + (pL[0] + u * (pR[0] - pL[0])).toFixed(4) + " " + pL[1].toFixed(4);
+        });
+        dTo += "Z";
+        var SW0 = +(R_SITE.w / 1920).toFixed(6) * 1.15, // the outline's stroke as the site computes it (--sw * 1.15px)
+          SW1 = (0.9 * 1920) / R0.w / kE; // the chain hairline's stroke on the frame, in world units at the end framing
+        // the outline's width as the site draws it, now through a property the timeline can own
+        envOutline.style.setProperty("--a3-close-w", String(SW0));
+        envOutline.style.strokeWidth = "calc(var(--a3-close-w) * 1px)";
+        // the rest of the drawing, as composited groups (so faces keep occluding while they fade)
+        var siteRest = [];
+        Array.prototype.forEach.call(site.precise.children, function (c) {
+          if (c !== envOutline.parentNode) siteRest.push(c);
+        });
+        Array.prototype.forEach.call(envOutline.parentNode.children, function (c) {
+          if (c !== envOutline) siteRest.push(c);
+        });
 
-        // OVER TIME: the dashed bracket is a run of short subpaths, so DrawSVG cannot draw it on
-        // (every dash restarts the pattern). It is revealed by a clip that grows under each future
-        // word as it arrives, instead of appearing at once after CAPACITY (no room for that).
-        var over = chain.el.querySelector("g.fui-ch-br.dashed");
-        var overPath = over.querySelector("path");
-        var overText = over.querySelector("text");
-        overText.style.opacity = "0"; // the label waits for the second step
-        var bx0 = xs[2] - 3,
-          bx1 = xs[4] + vis[4] + 3;
-        var gapMid = function (i) {
-          return (xs[i] + vis[i] + xs[i + 1]) / 2;
-        };
-        // TODAY: UIKit.chain.bracket shows the group at t but fades the label only from t + 0.3, and
-        // the label has no hidden start state, so it would flash on for 0.3 s, vanish, then fade in.
-        // Start it hidden so the kit's own fade is the only thing that shows it.
-        chain.el.querySelector("g.fui-ch-br:not(.dashed) text").style.opacity = "0";
-        var overClip = clipRect("over", bx0, BY - 16, 20);
-        overPath.setAttribute("clip-path", "url(#a3-close-clip-over)");
-        var ow1 = gapMid(2) - bx0, // under DECISION, reaching into the gap towards PRICE
-          ow2 = gapMid(3) - bx0, // under PRICE, reaching towards CAPACITY
-          ow3 = bx1 - bx0; // the whole span, closing tick included
+        // ================================================================ the end card
+        var card = UIKit.endCard({ prefix: ID, scene: ID, parent: endWrap });
 
+        // ================================================================ TIMELINE
         var tl = gsap.timeline({ paused: true });
+        FL.sceneFade(tl, fade, ID); // crossfade in over a3-change's identical last frame
 
-        // ---------------------------------------------------------------- crossfade in to clean paper
-        FL.sceneFade(tl, fade, ID);
+        // ---------------------------------------------------------------- S21a: the site recedes, the envelope straightens
+        var tS = (SCENES[ID] && SCENES[ID].xfadeIn) || 0.4; // nothing moves until the crossfade is complete
+        var wRec = T("chainRecord", LEAD);
+        var tSEnd = Math.min(tS + 0.62, wRec - 0.12);
+        var dS = tSEnd - tS;
+        // the site recedes: its camera pulls back about its centre while the drawing fades to paper
+        site.camera(tl, RE, tS, dS, "power2.out", R_SITE);
+        tl.fromTo(siteRest, { opacity: 1 }, { opacity: 0, duration: dS * 0.85, ease: "power1.inOut", immediateRender: false }, tS);
+        // the loop is pulled taut into the hairline, firming from the envelope's tone to the line's.
+        // The width is a custom property (a plain number): a CSS px tween on an SVG stroke rounds it
+        // (autoRound) and converts its start through the camera state at first render.
+        tl.fromTo(envOutline, { attr: { d: envD } }, { attr: { d: dTo }, duration: dS, ease: "power3.inOut", immediateRender: false }, tS);
+        tl.fromTo(
+          envOutline,
+          { stroke: "#111111", strokeOpacity: 0.62, "--a3-close-w": SW0 },
+          { stroke: "#676765", strokeOpacity: 1, "--a3-close-w": SW1, duration: dS, ease: "power2.inOut", immediateRender: false },
+          tS
+        );
+        // the straight line hands over to the chain's hairline (same row, same stroke), which can part for the words
+        tl.fromTo(envOutline, { opacity: 1 }, { opacity: 0, duration: 0.001, ease: "none", immediateRender: false }, tSEnd);
+        tl.fromTo(hairG, { opacity: 0 }, { opacity: 1, duration: 0.001, ease: "none", immediateRender: false }, tSEnd);
 
-        // ---------------------------------------------------------------- 6.1 the chain
-        // Each word on its cue; only the arrow that is drawing is cobalt, the finished chain is ink.
-        revealWord(T("chainRecord", LEAD), 0);
-        revealWord(T("chainTrust", LEAD), 1);
-        chain.bracket(tl, T("chainTrust", 0.55), "today"); // TODAY · PREVENTION AND PROOF (one solid path)
-        revealWord(T("chainDecision", LEAD), 2);
+        // ---------------------------------------------------------------- S21b: the words and the ride
+        var CUE = ["chainRecord", "chainTrust", "chainDecision", "chainPrice", "chainCapacity"];
+        var wT = CUE.map(function (c) {
+          return T(c, LEAD);
+        });
+        var rideEnd = CUE.map(function (c) {
+          return clk.c(c);
+        }); // the shared cut for the word: the camera arrives on it
+        var rideStart = rideEnd.map(function (t) {
+          return t - BEAT;
+        });
 
-        var tOver1 = T("chainDecision", 0.45),
-          tOver2 = T("chainPrice", 0.45),
-          tOver3 = T("chainCapacity", 0.2); // closes with CAPACITY's descriptor, so the whole chain settles together
-        tl.fromTo(over, { opacity: 0 }, { opacity: 1, duration: 0.001, ease: "none", immediateRender: false }, tOver1);
-        tl.fromTo(overClip, { attr: { width: 0 } }, { attr: { width: ow1 }, duration: 0.55, ease: "power2.inOut", immediateRender: false }, tOver1);
-        revealWord(T("chainPrice", LEAD), 3);
-        tl.fromTo(overClip, { attr: { width: ow1 } }, { attr: { width: ow2 }, duration: 0.5, ease: "power2.inOut", immediateRender: false }, tOver2);
-        tl.fromTo(overText, { opacity: 0, attr: { transform: "translate(0 6)" } }, { opacity: 1, attr: { transform: "translate(0 0)" }, duration: 0.5, ease: "power3.out", immediateRender: false }, tOver2 + 0.2);
-        revealWord(T("chainCapacity", LEAD), 4);
-        tl.fromTo(overClip, { attr: { width: ow2 } }, { attr: { width: ow3 }, duration: 0.4, ease: "power2.inOut", immediateRender: false }, tOver3);
-
-        // ---------------------------------------------------------------- 6.2 Priora
-        // The finished chain holds still through the silence after "capacity" (frame.md: the final
-        // chain gets silence and screen time), then lifts and fades as "Priora" begins; the
-        // wordmark rises out of its rule as the chain clears and latches during the word; the
-        // descriptor sets on "Infrastructure"; the qualifier follows. Everything is still well
-        // before the last two seconds.
+        // the full-chain reveal: a 1.5 beat pull back from the arrival on CAPACITY, settled at least
+        // 2.2 s before the lift (the complete chain needs its reading time)
         var tLift = T("priora", -0.22);
-        tl.fromTo(chainWrap, { opacity: 1 }, { opacity: 0, duration: 0.45, ease: "power1.inOut", immediateRender: false }, tLift);
-        tl.fromTo(chainWrap, { y: 0 }, { y: -22, duration: 0.45, ease: "power2.in", immediateRender: false }, tLift);
+        var tPull = rideEnd[N - 1];
+        var dPull = Math.max(BEAT, Math.min(1.5 * BEAT, tLift - 2.2 - tPull));
+        var tSettle = tPull + dPull;
 
+        var landWord = function (i) {
+          var t = wT[i];
+          tl.fromTo(words[i], { opacity: 0 }, { opacity: 1, duration: 0.7, ease: "expo.out", immediateRender: false }, t);
+          tl.fromTo(words[i], { attr: { transform: "translate(0 14)" } }, { attr: { transform: "translate(0 0)" }, duration: 0.7, ease: "expo.out", immediateRender: false }, t);
+          glyphs[i].forEach(function (g, k) {
+            if (k) tl.fromTo(g, { attr: { transform: "translate(" + f3(k * 0.14 * FS) + " 0)" } }, { attr: { transform: "translate(0 0)" }, duration: 0.7, ease: "expo.out", immediateRender: false }, t);
+          });
+          tl.fromTo(descs[i], { opacity: 0 }, { opacity: 1, duration: 0.5, ease: "power3.out", immediateRender: false }, t + 0.22);
+          tl.fromTo(descs[i], { attr: { transform: "translate(0 8)" } }, { attr: { transform: "translate(0 0)" }, duration: 0.5, ease: "power3.out", immediateRender: false }, t + 0.22);
+          // the line parts at the word's centre and opens to its clearance
+          var B = bridges[i];
+          tl.fromTo(B.l, { attr: { d: hLine(B.a, B.m) } }, { attr: { d: hLine(B.a, B.a) }, duration: 0.32, ease: "power2.out", immediateRender: false }, t - 0.06);
+          tl.fromTo(B.r, { attr: { d: hLine(B.m, B.b) } }, { attr: { d: hLine(B.b, B.b) }, duration: 0.32, ease: "power2.out", immediateRender: false }, t - 0.06);
+        };
+        landWord(0);
+        for (var r = 1; r < N; r++) {
+          var A = arrows[r - 1],
+            r0 = rideStart[r],
+            r1 = rideEnd[r];
+          // the arrow draws right in blue while the camera rides it (one beat) to the next word
+          tl.fromTo(A.shaft, { attr: { d: hLine(A.x0, A.x0) } }, { attr: { d: hLine(A.x0, A.x1) }, duration: BEAT - 0.1, ease: "power2.inOut", immediateRender: false }, r0 + 0.03);
+          tl.fromTo(A.head, { attr: { d: A.headD0 } }, { attr: { d: A.headD }, duration: 0.14, ease: "power2.out", immediateRender: false }, r1 - 0.1);
+          cam.move(tl, rideRect(r - 1), rideRect(r), r0, BEAT, "power3.inOut");
+          // the word the camera leaves lets its descriptor go (several run wider than their word and
+          // would otherwise sit cropped at the frame edge); all return with the full chain
+          tl.fromTo(descs[r - 1], { opacity: 1 }, { opacity: 0, duration: 0.3, ease: "power1.in", immediateRender: false }, Math.max(r0, wT[r - 1] + 0.22 + 0.5 + 0.01));
+          landWord(r);
+          // finished: the arrow turns ink (only the drawing arrow is blue); its hairline goes with it
+          var nextRide = r < N - 1 ? rideStart[r + 1] : Infinity;
+          var tInk = Math.min(wT[r] + 0.45, nextRide - 0.6, tSettle - 0.5);
+          tl.fromTo([A.shaft, A.head], { stroke: SIGNAL }, { stroke: INK2, duration: 0.5, ease: "power1.inOut", immediateRender: false }, tInk);
+          tl.fromTo(segs[r - 1], { opacity: 1 }, { opacity: 0, duration: 0.5, ease: "none", immediateRender: false }, tInk);
+        }
+
+        // ---------------------------------------------------------------- S21c: pull back to the full chain, brackets, still hold
+        cam.move(tl, rideRect(N - 1), "full", tPull, dPull, "power2.inOut");
+        // the earlier descriptors come back as the frame widens onto them
+        for (var dI = 0; dI < N - 1; dI++) {
+          tl.fromTo(descs[dI], { opacity: 0 }, { opacity: 1, duration: 0.4, ease: "power1.out", immediateRender: false }, tSettle - 0.62 + dI * 0.04);
+        }
+        // TODAY: one solid path, drawn on as the frame widens
+        tl.fromTo(brToday, { opacity: 0 }, { opacity: 1, duration: 0.001, ease: "none", immediateRender: false }, tSettle - 0.55);
+        tl.fromTo(brToday, { drawSVG: "0%" }, { drawSVG: "100%", duration: 0.45, ease: "power2.inOut", immediateRender: false }, tSettle - 0.55);
+        tl.fromTo(brTodayL, { opacity: 0, attr: { transform: "translate(0 6)" } }, { opacity: 1, attr: { transform: "translate(0 0)" }, duration: 0.35, ease: "power3.out", immediateRender: false }, tSettle - 0.4);
+        // OVER TIME: solid end ticks, dashed span grown by its d (the dash pattern stays in place)
+        tl.fromTo(overTickL, { attr: { d: "M" + f3(oA) + " " + by + "V" + by } }, { attr: { d: "M" + f3(oA) + " " + by + "V" + (by - 12) }, duration: 0.1, ease: "power2.out", immediateRender: false }, tSettle - 0.5);
+        tl.fromTo(overSpan, { attr: { d: "M" + f3(oA) + " " + by + "H" + f3(oA) } }, { attr: { d: "M" + f3(oA) + " " + by + "H" + f3(oB) }, duration: 0.4, ease: "power2.inOut", immediateRender: false }, tSettle - 0.5);
+        tl.fromTo(overTickR, { attr: { d: "M" + f3(oB) + " " + by + "V" + by } }, { attr: { d: "M" + f3(oB) + " " + by + "V" + (by - 12) }, duration: 0.1, ease: "power2.out", immediateRender: false }, tSettle - 0.12);
+        tl.fromTo(brOverL, { opacity: 0, attr: { transform: "translate(0 6)" } }, { opacity: 1, attr: { transform: "translate(0 0)" }, duration: 0.33, ease: "power3.out", immediateRender: false }, tSettle - 0.35);
+        // from tSettle to tLift nothing moves: the complete chain holds perfectly still
+
+        // ---------------------------------------------------------------- S22: Priora
+        tl.fromTo(liftG, { opacity: 1 }, { opacity: 0, duration: 0.45, ease: "power1.inOut", immediateRender: false }, tLift);
+        tl.fromTo(liftG, { attr: { transform: "translate(0 0)" } }, { attr: { transform: "translate(0 -22)" }, duration: 0.45, ease: "power2.in", immediateRender: false }, tLift);
         var tMark = T("priora", -0.08); // rule draws; the latch lands at tMark + 0.48 = priora + 0.40
         var tDesc = T("infrastructure", -0.05);
-        // The qualifier fades for 1.0 s; it must be complete at least 2 s before END (the end hold
-        // is perfectly still), whatever the re-locked narration does to the gap after L20.
-        var tQual = Math.max(tDesc + 0.4, Math.min(T("infrastructure", 0.6), clk.duration - 2.0 - 1.0 - 0.15));
+        // the qualifier fades in (1.0 s) about a second after the descriptor, and is complete at least
+        // 2 s before END (the end hold is perfectly still)
+        var tQual = Math.max(tDesc + 0.4, Math.min(tDesc + 1.0, clk.duration - 2.0 - 1.0 - 0.15));
         card.reveal(tl, tMark, { descriptorAt: tDesc, qualifierAt: tQual });
 
         window.__timelines["a3-close"] = tl;

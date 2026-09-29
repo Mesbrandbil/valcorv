@@ -1978,6 +1978,26 @@ window.FL_EVENTS = {
   }
  },
  "a3-close": {
+  "site-recede": {
+   "name": "site-recede",
+   "kind": "pull",
+   "gain_db": -16,
+   "dur": 0.62,
+   "scene": "a3-close",
+   "t": 105.5,
+   "local": 0.4,
+   "at": "local:0.4"
+  },
+  "line-straighten": {
+   "name": "line-straighten",
+   "kind": "ruler",
+   "gain_db": -18,
+   "dur": 0.62,
+   "scene": "a3-close",
+   "t": 105.5,
+   "local": 0.4,
+   "at": "local:0.4"
+  },
   "confirm-record": {
    "name": "confirm-record",
    "kind": "chain-confirm-1",
@@ -1986,6 +2006,16 @@ window.FL_EVENTS = {
    "t": 106.264,
    "local": 1.164,
    "at": "cue:chainRecord-0.04"
+  },
+  "ride-trust": {
+   "name": "ride-trust",
+   "kind": "whip",
+   "gain_db": -22,
+   "dur": 0.652,
+   "scene": "a3-close",
+   "t": 106.63,
+   "local": 1.53,
+   "at": "cue:chainTrust-0.634"
   },
   "confirm-trust": {
    "name": "confirm-trust",
@@ -1996,6 +2026,16 @@ window.FL_EVENTS = {
    "local": 2.124,
    "at": "cue:chainTrust-0.04"
   },
+  "ride-decision": {
+   "name": "ride-decision",
+   "kind": "whip",
+   "gain_db": -22,
+   "dur": 0.652,
+   "scene": "a3-close",
+   "t": 108.913,
+   "local": 3.813,
+   "at": "cue:chainDecision-0.634"
+  },
   "confirm-decision": {
    "name": "confirm-decision",
    "kind": "chain-confirm-3",
@@ -2004,6 +2044,16 @@ window.FL_EVENTS = {
    "t": 109.507,
    "local": 4.407,
    "at": "cue:chainDecision-0.04"
+  },
+  "ride-price": {
+   "name": "ride-price",
+   "kind": "whip",
+   "gain_db": -22,
+   "dur": 0.652,
+   "scene": "a3-close",
+   "t": 111.196,
+   "local": 6.096,
+   "at": "cue:chainPrice-0.774"
   },
   "confirm-price": {
    "name": "confirm-price",
@@ -2014,6 +2064,16 @@ window.FL_EVENTS = {
    "local": 6.83,
    "at": "cue:chainPrice-0.04"
   },
+  "ride-capacity": {
+   "name": "ride-capacity",
+   "kind": "whip",
+   "gain_db": -22,
+   "dur": 0.652,
+   "scene": "a3-close",
+   "t": 113.478,
+   "local": 8.378,
+   "at": "cue:chainCapacity-0.774"
+  },
   "confirm-capacity": {
    "name": "confirm-capacity",
    "kind": "chain-confirm-5",
@@ -2022,6 +2082,25 @@ window.FL_EVENTS = {
    "t": 114.212,
    "local": 9.112,
    "at": "cue:chainCapacity-0.04"
+  },
+  "chain-reveal": {
+   "name": "chain-reveal",
+   "kind": "pull",
+   "gain_db": -14,
+   "dur": 0.978,
+   "scene": "a3-close",
+   "t": 114.13,
+   "local": 9.03,
+   "at": "cue:chainCapacity-0.122"
+  },
+  "chain-hold": {
+   "name": "chain-hold",
+   "kind": "hold",
+   "dur": 2.388,
+   "scene": "a3-close",
+   "t": 115.109,
+   "local": 10.009,
+   "at": "cue:chainCapacity+0.857"
   },
   "wordmark-latch": {
    "name": "wordmark-latch",
