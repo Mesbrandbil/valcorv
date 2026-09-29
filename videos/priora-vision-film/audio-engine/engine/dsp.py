@@ -527,5 +527,3 @@ def env_follow(x: np.ndarray, attack: float, release: float, frame: float = 0.00
         out[i] = s
     return (np.arange(k) + 0.5) * frame, out
 
-
-__all__ = [n for n in dir() if not n.startswith("_")]

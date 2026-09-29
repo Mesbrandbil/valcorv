@@ -47,7 +47,7 @@
                                  -> map between world units and frame px (xMidYMid meet, as SVG does).
 
   Camera (SVG viewBox framing; crisp at any zoom because the browser re-rasterises vectors)
-    FL.camera(svg, { rects, frame, sw }) -> cam
+    FL.camera(svgOrArray, { rects, frame, sw }) -> cam   (several SVGs share one camera)
       rects: { name: rect|string } named framings; frame: {w, h} (default 1920x1080);
       sw: true (default) also writes --sw = world units per screen px on the <svg>, which the
           site SVG uses for every hairline (stroke-width: calc(var(--sw) * 1px)).
@@ -352,6 +352,7 @@
     var frame = opts.frame || FL.FRAME;
     var sw = opts.sw !== false;
     for (var k in opts.rects || {}) rects[k] = vb.parse(opts.rects[k]);
+    var targets = [].concat(svg);
     var cam = {
       svg: svg,
       rects: rects,
@@ -361,17 +362,20 @@
         return vb.parse(x);
       },
       apply: function (x) {
-        applyCamera(svg, cam.rect(x), frame, sw);
+        var r = cam.rect(x);
+        targets.forEach(function (t) {
+          applyCamera(t, r, frame, sw);
+        });
         return cam;
       },
       set: function (tl, to, at) {
         var r = cam.rect(to);
-        tl.to(svg, { flCamera: { from: r, to: r, frame: frame, sw: sw }, duration: 0, immediateRender: false }, at);
+        tl.to(targets, { flCamera: { from: r, to: r, frame: frame, sw: sw }, duration: 0, immediateRender: false }, at);
         return cam;
       },
       move: function (tl, from, to, at, duration, ease) {
         tl.to(
-          svg,
+          targets,
           { flCamera: { from: cam.rect(from), to: cam.rect(to), frame: frame, sw: sw }, duration: duration, ease: ease || "power2.inOut", immediateRender: false },
           at,
         );
@@ -516,7 +520,16 @@
   function serialize(segs) {
     return segs
       .map(function (s) {
-        return s.c + s.a.map(fmt).join(" ");
+        var arc = s.c === "A" || s.c === "a";
+        return (
+          s.c +
+          s.a
+            .map(function (v, i) {
+              // arc flags (large-arc, sweep) must stay the integers 0 or 1
+              return arc && (i === 3 || i === 4) ? (v ? "1" : "0") : fmt(v);
+            })
+            .join(" ")
+        );
       })
       .join("");
   }

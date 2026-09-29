@@ -69,6 +69,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import crypto from "node:crypto";
+import { execFileSync } from "node:child_process";
 import { fileURLToPath } from "node:url";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -429,7 +430,18 @@ for (const a of audioDefs) {
   }
   const exists = fs.existsSync(abs(a.src));
   if (!exists) (a.optional ? warn : err)(`audio '${a.id}': file missing: ${a.src}${a.optional ? " (left out of index.html)" : ""}`);
-  audio.push({ id: a.id, src: a.src, track: a.track ?? 20, volume: a.volume ?? 1, start: r3(start), duration: r3(END - start), present: exists });
+  let media = null;
+  if (exists) {
+    try {
+      media = parseFloat(execFileSync("ffprobe", ["-v", "error", "-show_entries", "format=duration", "-of", "csv=p=0", abs(a.src)], { encoding: "utf8" }).trim());
+    } catch (e) {
+      warn(`audio '${a.id}': ffprobe failed (${e.message.split("\n")[0]}); using the film length`);
+    }
+  }
+  const slot = END - start;
+  if (media != null && Math.abs(media - slot) > 0.5 / fps) warn(`audio '${a.id}': ${a.src} is ${r3(media)} s but its slot from ${r3(start)} s to the film end is ${r3(slot)} s`);
+  const duration = media != null ? Math.min(media, slot) : slot;
+  audio.push({ id: a.id, src: a.src, track: a.track ?? 20, volume: a.volume ?? 1, start: r3(start), duration: Math.floor(duration * 1000) / 1000, media: media != null ? r3(media) : null, present: exists });
 }
 
 // ------------------------------------------------------------------ inline assets

@@ -44,8 +44,8 @@
   --ground: #efece5;
 
   /* Type */
-  --sans: "IBM Plex Sans", "Helvetica Neue", Arial, sans-serif;
-  --mono: "IBM Plex Mono", Menlo, Consolas, monospace;
+  --sans: "IBM Plex Sans", sans-serif;
+  --mono: "IBM Plex Mono", monospace;
 
   --fs-display-xl: 104px;
   --fs-display: 96px;
