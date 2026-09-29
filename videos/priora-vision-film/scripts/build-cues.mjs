@@ -69,6 +69,13 @@
     { "events": [ { "name": "roof-edge-1", "at": "local:0.40", "kind": "pencil", "gain_db": -8,
                     "dur": 0.6, "series": { "count": 5, "every": 0.12 } } ] }
     series expands to name-01 .. name-NN at at + i * every.
+    "snap" (optional) puts the event on the musical grid after the anchor is evaluated, so it
+    stays on the grid when the narration re-locks (the picture uses the same rules in film-lib):
+      "snap": "cut"                          FL.cutAbs: the half beat nearest to (t - 0.12)
+      "snap": { "mode": "next"|"prev"|"near"|"cut", "sub": 2, "off": 0.652 }
+    sub = grid points per beat (default 2, half beats); off = seconds added after snapping
+    (keep it a multiple of the grid step to stay on the grid). The grid is narration/timing.json
+    "grid" (bpm, offset), else 92 BPM from 0.
 */
 import fs from "node:fs";
 import path from "node:path";
@@ -374,6 +381,17 @@ base.forEach((s, i) => (s.zIndex = s.z ?? 10 + i));
 overlays.forEach((s, i) => (s.zIndex = s.z ?? 100 + i));
 
 // ------------------------------------------------------------------ events
+// The musical grid (cut 2): 92 BPM from 0 unless narration/timing.json says otherwise.
+const GRID = timing.grid || { bpm: 92, offset: 0 };
+const BEAT_S = 60 / (GRID.bpm || 92);
+function gridSnap(abs, mode, sub) {
+  if (mode === "cut") return gridSnap(abs - 0.12, "near", 2);
+  const q = BEAT_S / (sub || 2),
+    o = GRID.offset || 0,
+    k = (abs - o) / q;
+  const kk = mode === "prev" ? Math.floor(k + 1e-6) : mode === "near" ? Math.round(k) : Math.ceil(k - 1e-6);
+  return o + kk * q;
+}
 const events = [];
 const eventsByScene = {};
 for (const s of scenes) {
@@ -395,6 +413,14 @@ for (const s of scenes) {
     } catch (e) {
       err(`event '${s.id}/${ev.name}': ${e.message}`);
       continue;
+    }
+    if (ev.snap) {
+      const sn = typeof ev.snap === "string" ? { mode: ev.snap } : ev.snap;
+      if (!["cut", "next", "prev", "near"].includes(sn.mode)) {
+        err(`event '${s.id}/${ev.name}': snap mode must be cut, next, prev or near`);
+        continue;
+      }
+      t0 = gridSnap(t0, sn.mode, sn.sub) + (+sn.off || 0);
     }
     const count = ev.series ? ev.series.count : 1;
     const every = ev.series ? ev.series.every : 0;

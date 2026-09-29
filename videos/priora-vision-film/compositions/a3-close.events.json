@@ -1,19 +1,120 @@
 {
   "note": "a3-close (cut 2: S21 the chain, S22 the end card). Anchored to the same times as the tweens in compositions/a3-close.html. The recede and the straightening start when the crossfade is complete (local 0.4 = SCENES xfadeIn). Each chain word lands 0.04 s ahead of its spoken onset. The camera rides (whip) arrive on the shared cut for their word (FL.clock().c: the half beat nearest 0.12 s before it) and last one beat; their offsets below are those beat-snapped times under the current narration, so the engine should keep them on the 92 BPM grid after a re-lock. The reveal pull starts on the arrival at CAPACITY and lasts 1.5 beats; the full chain then holds perfectly still until the lift (priora - 0.22). The wordmark latches at priora + 0.40.",
   "events": [
-    { "name": "site-recede", "at": "local:0.4", "kind": "pull", "gain_db": -16, "dur": 0.62 },
-    { "name": "line-straighten", "at": "local:0.4", "kind": "ruler", "gain_db": -18, "dur": 0.62 },
-    { "name": "confirm-record", "at": "cue:chainRecord-0.04", "kind": "chain-confirm-1", "dur": 0.4 },
-    { "name": "ride-trust", "at": "cue:chainTrust-0.634", "kind": "whip", "gain_db": -22, "dur": 0.652 },
-    { "name": "confirm-trust", "at": "cue:chainTrust-0.04", "kind": "chain-confirm-2", "dur": 0.4 },
-    { "name": "ride-decision", "at": "cue:chainDecision-0.634", "kind": "whip", "gain_db": -22, "dur": 0.652 },
-    { "name": "confirm-decision", "at": "cue:chainDecision-0.04", "kind": "chain-confirm-3", "dur": 0.4 },
-    { "name": "ride-price", "at": "cue:chainPrice-0.774", "kind": "whip", "gain_db": -22, "dur": 0.652 },
-    { "name": "confirm-price", "at": "cue:chainPrice-0.04", "kind": "chain-confirm-4", "dur": 0.4 },
-    { "name": "ride-capacity", "at": "cue:chainCapacity-0.774", "kind": "whip", "gain_db": -22, "dur": 0.652 },
-    { "name": "confirm-capacity", "at": "cue:chainCapacity-0.04", "kind": "chain-confirm-5", "dur": 0.4 },
-    { "name": "chain-reveal", "at": "cue:chainCapacity-0.122", "kind": "pull", "gain_db": -14, "dur": 0.978 },
-    { "name": "chain-hold", "at": "cue:chainCapacity+0.857", "kind": "hold", "dur": 2.388 },
-    { "name": "wordmark-latch", "at": "cue:priora+0.40", "kind": "latch", "dur": 0.12 }
+    {
+      "name": "site-recede",
+      "at": "local:0.4",
+      "kind": "pull",
+      "gain_db": -16,
+      "dur": 0.62
+    },
+    {
+      "name": "line-straighten",
+      "at": "local:0.4",
+      "kind": "ruler",
+      "gain_db": -18,
+      "dur": 0.62
+    },
+    {
+      "name": "confirm-record",
+      "at": "cue:chainRecord-0.04",
+      "kind": "chain-confirm-1",
+      "dur": 0.4
+    },
+    {
+      "name": "ride-trust",
+      "at": "cue:chainTrust",
+      "kind": "whip",
+      "gain_db": -22,
+      "dur": 0.652,
+      "snap": {
+        "mode": "prev",
+        "off": -0.3265
+      }
+    },
+    {
+      "name": "confirm-trust",
+      "at": "cue:chainTrust-0.04",
+      "kind": "chain-confirm-2",
+      "dur": 0.4
+    },
+    {
+      "name": "ride-decision",
+      "at": "cue:chainDecision",
+      "kind": "whip",
+      "gain_db": -22,
+      "dur": 0.652,
+      "snap": {
+        "mode": "prev",
+        "off": -0.3261
+      }
+    },
+    {
+      "name": "confirm-decision",
+      "at": "cue:chainDecision-0.04",
+      "kind": "chain-confirm-3",
+      "dur": 0.4
+    },
+    {
+      "name": "ride-price",
+      "at": "cue:chainPrice",
+      "kind": "whip",
+      "gain_db": -22,
+      "dur": 0.652,
+      "snap": {
+        "mode": "cut",
+        "off": -0.6518
+      }
+    },
+    {
+      "name": "confirm-price",
+      "at": "cue:chainPrice-0.04",
+      "kind": "chain-confirm-4",
+      "dur": 0.4
+    },
+    {
+      "name": "ride-capacity",
+      "at": "cue:chainCapacity",
+      "kind": "whip",
+      "gain_db": -22,
+      "dur": 0.652,
+      "snap": {
+        "mode": "cut",
+        "off": -0.6524
+      }
+    },
+    {
+      "name": "confirm-capacity",
+      "at": "cue:chainCapacity-0.04",
+      "kind": "chain-confirm-5",
+      "dur": 0.4
+    },
+    {
+      "name": "chain-reveal",
+      "at": "cue:chainCapacity",
+      "kind": "pull",
+      "gain_db": -14,
+      "dur": 0.978,
+      "snap": {
+        "mode": "cut",
+        "off": -0.0004
+      }
+    },
+    {
+      "name": "chain-hold",
+      "at": "cue:chainCapacity",
+      "kind": "hold",
+      "dur": 2.388,
+      "snap": {
+        "mode": "next",
+        "off": 0.6525
+      }
+    },
+    {
+      "name": "wordmark-latch",
+      "at": "cue:priora+0.40",
+      "kind": "latch",
+      "dur": 0.12
+    }
   ]
 }

@@ -96,31 +96,43 @@
     },
     {
       "name": "route-tag",
-      "at": "cue:contractors+0.326",
+      "at": "cue:contractors",
       "kind": "pen",
       "gain_db": -15,
       "dur": 0.9,
       "lettering": true,
-      "what": "CONTRACTORS · GATE 2 · 07:10"
+      "what": "CONTRACTORS · GATE 2 · 07:10",
+      "snap": {
+        "mode": "next",
+        "off": 0.0003
+      }
     },
     {
       "name": "cut-morning",
-      "at": "cue:workMoves-0.117",
+      "at": "cue:workMoves",
       "kind": "cut",
       "gain_db": -12,
       "material": "paper",
-      "what": "S3c: cut back to the wide site from the LOTO insert"
+      "what": "S3c: cut back to the wide site from the LOTO insert",
+      "snap": {
+        "mode": "cut",
+        "off": 0.0003
+      }
     },
     {
       "name": "markers",
-      "at": "cue:workMoves+0.209",
+      "at": "cue:workMoves",
       "kind": "tick",
       "gain_db": -11,
       "series": {
         "count": 5,
         "every": 0.326
       },
-      "what": "S3c: five activity markers pop in on consecutive half beats"
+      "what": "S3c: five activity markers pop in on consecutive half beats",
+      "snap": {
+        "mode": "next",
+        "off": 0.0002
+      }
     },
     {
       "name": "hse-loop",
@@ -167,11 +179,15 @@
     },
     {
       "name": "envelope-firm",
-      "at": "cue:insurance+0.326",
+      "at": "cue:insurance",
       "kind": "pencil",
       "gain_db": -9,
       "dur": 2.224,
-      "what": "the firm pass closes on 'accepted'"
+      "what": "the firm pass closes on 'accepted'",
+      "snap": {
+        "mode": "cut",
+        "off": 0.3258
+      }
     },
     {
       "name": "envelope-label",
@@ -183,7 +199,7 @@
     },
     {
       "name": "field",
-      "at": "cue:noOne-0.978",
+      "at": "cue:noOne",
       "kind": "pencil-scatter",
       "gain_db": -11,
       "dur": 0.12,
@@ -191,36 +207,56 @@
         "count": 9,
         "every": 0.326
       },
-      "what": "S6: the accumulation arrives in waves on half beats (the first three under the sheet)"
+      "what": "S6: the accumulation arrives in waves on half beats (the first three under the sheet)",
+      "snap": {
+        "mode": "prev",
+        "off": -0.6524
+      }
     },
     {
       "name": "containment-01",
-      "at": "cue:noOne+0.327",
+      "at": "cue:noOne",
       "kind": "pencil",
       "gain_db": -12,
-      "dur": 0.6
+      "dur": 0.6,
+      "snap": {
+        "mode": "cut",
+        "off": 0.3265
+      }
     },
     {
       "name": "containment-02",
-      "at": "cue:noOne+0.653",
+      "at": "cue:noOne",
       "kind": "pencil",
       "gain_db": -12,
-      "dur": 0.6
+      "dur": 0.6,
+      "snap": {
+        "mode": "cut",
+        "off": 0.6525
+      }
     },
     {
       "name": "roof-marker",
-      "at": "cue:noOne+0.979",
+      "at": "cue:noOne",
       "kind": "pencil",
       "gain_db": -12,
       "dur": 0.5,
-      "what": "the ROOF 03 marker"
+      "what": "the ROOF 03 marker",
+      "snap": {
+        "mode": "cut",
+        "off": 0.9785
+      }
     },
     {
       "name": "containment-03",
-      "at": "cue:noOne+1.305",
+      "at": "cue:noOne",
       "kind": "pencil",
       "gain_db": -13,
-      "dur": 0.6
+      "dur": 0.6,
+      "snap": {
+        "mode": "cut",
+        "off": 1.3045
+      }
     },
     {
       "name": "push-roof03",
@@ -240,11 +276,12 @@
     },
     {
       "name": "cut-roof03",
-      "at": "cue:certificate-0.183",
+      "at": "cue:certificate",
       "kind": "cut",
       "gain_db": -12,
       "material": "paper",
-      "what": "S7c: cut back to Roof 03 from the worker insert"
+      "what": "S7c: cut back to Roof 03 from the worker insert",
+      "snap": "cut"
     },
     {
       "name": "safeguards-draw",
@@ -261,14 +298,17 @@
     },
     {
       "name": "ticks",
-      "at": "cue:certificate+0.143",
+      "at": "cue:certificate",
       "kind": "tick",
       "gain_db": -8,
       "series": {
         "count": 5,
         "every": 0.326
       },
-      "what": "CERTIFICATE, FIRE WATCH, EXTINGUISHER, AREA CLEARED, SPRINKLERS on consecutive half beats"
+      "what": "CERTIFICATE, FIRE WATCH, EXTINGUISHER, AREA CLEARED, SPRINKLERS on consecutive half beats",
+      "snap": {
+        "mode": "near"
+      }
     },
     {
       "name": "subtract",
@@ -279,18 +319,26 @@
     },
     {
       "name": "cut-sz3",
-      "at": "L07.end+0.242",
+      "at": "L07.end",
       "kind": "cut",
       "gain_db": -16,
       "material": "felt",
-      "what": "S8b: cut to the zone 3 roof; the heads go grey on half beats"
+      "what": "S8b: cut to the zone 3 roof; the heads go grey on half beats",
+      "snap": {
+        "mode": "next",
+        "off": -0.0003
+      }
     },
     {
       "name": "hold-sz3",
-      "at": "L07.end+0.242",
+      "at": "L07.end",
       "kind": "hold",
       "dur": 2.283,
-      "what": "S8b: the silence after 'offline'"
+      "what": "S8b: the silence after 'offline'",
+      "snap": {
+        "mode": "next",
+        "off": -0.0003
+      }
     },
     {
       "name": "cut-nothing",
@@ -302,46 +350,65 @@
     },
     {
       "name": "connection",
-      "at": "cue:nothingLooks+0.326",
+      "at": "cue:nothingLooks",
       "kind": "pencil-scatter",
       "gain_db": -21,
       "dur": 0.1,
       "series": {
         "count": 10,
         "every": 0.1
+      },
+      "snap": {
+        "mode": "next"
       }
     },
     {
       "name": "push-edge",
-      "at": "L08:conditions.start-0.024",
+      "at": "L08:conditions.start",
       "kind": "push",
       "gain_db": -17,
       "dur": 0.652,
-      "what": "S9b: a gentle push to the envelope edge beside Roof 03"
+      "what": "S9b: a gentle push to the envelope edge beside Roof 03",
+      "snap": {
+        "mode": "cut",
+        "off": -0.0005
+      }
     },
     {
       "name": "envelope-redraw",
-      "at": "cue:changed-0.101",
+      "at": "cue:changed",
       "kind": "pencil",
       "gain_db": -17,
       "dur": 1.5,
       "light": true,
-      "what": "the envelope quietly redrawn inward"
+      "what": "the envelope quietly redrawn inward",
+      "snap": {
+        "mode": "cut",
+        "off": 0.0003
+      }
     },
     {
       "name": "fray",
-      "at": "cue:nobody-0.053",
+      "at": "cue:nobody",
       "kind": "fray",
       "gain_db": -24,
-      "dur": 1.1
+      "dur": 1.1,
+      "snap": {
+        "mode": "cut",
+        "off": 0.0001
+      }
     },
     {
       "name": "pull-back",
-      "at": "cue:nobodyEnd-0.075",
+      "at": "cue:nobodyEnd",
       "kind": "pull",
       "gain_db": -18,
       "dur": 1.957,
-      "what": "S9c: slow pull back to Roof 03 and zone 3"
+      "what": "S9c: slow pull back to Roof 03 and zone 3",
+      "snap": {
+        "mode": "cut",
+        "off": -0.0002
+      }
     },
     {
       "name": "hold-9c",

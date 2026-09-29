@@ -1,20 +1,143 @@
 {
   "note": "a1-after (Frame 3, cut 2): the evidence board. Anchored to the same words as the scene's tweens; each offset is the scene's beat-snapped time (clk.b / clk.c on the 92 BPM grid) minus its word under the current narration, so on a narration re-lock these offsets should be re-derived from the scene (tl.data lists the times). Pins land on consecutive half beats. The rewind sound belongs to a1-world.",
   "events": [
-    { "name": "pin-wave", "at": "L09:questions.start+0.686", "kind": "pin", "gain_db": -12, "series": { "count": 4, "every": 0.3261 }, "what": "S10b: photo, call log, statement, work order pin while the site recedes" },
-    { "name": "question-1", "at": "cue:q1", "kind": "question", "gain_db": -18, "what": "What was happening?" },
-    { "name": "pin-crowd-1", "at": "cue:q1+0.652", "kind": "pin", "gain_db": -17, "series": { "count": 3, "every": 0.3261 }, "what": "email, shift note, photo 16:12 crowd in behind (background plane)" },
-    { "name": "whip-1", "at": "cue:q2-0.210", "kind": "whip", "gain_db": -16, "dur": 0.652, "what": "one-beat lateral dolly to shot 2, parallax on three planes" },
-    { "name": "question-2", "at": "cue:q2", "kind": "question", "gain_db": -18, "what": "Which condition applied?" },
-    { "name": "pin-programme", "at": "cue:q2+0.442", "kind": "pin", "gain_db": -12, "what": "PROGRAMME 4.3 pins as the camera lands" },
-    { "name": "pin-crowd-2", "at": "cue:q2+0.768", "kind": "pin", "gain_db": -17, "series": { "count": 2, "every": 0.3261 }, "what": "call log 16:08, witness note (background plane)" },
-    { "name": "whip-2", "at": "cue:q3-0.067", "kind": "whip", "gain_db": -16, "dur": 0.652, "what": "one-beat lateral dolly to shot 3" },
-    { "name": "question-3", "at": "cue:q3", "kind": "question", "gain_db": -18, "what": "Can you prove / what was true?" },
-    { "name": "pin-permit", "at": "cue:q3+0.585", "kind": "pin", "gain_db": -12, "what": "PERMIT HW-0412 pins as the camera lands" },
-    { "name": "permit-loop", "at": "L10:true.start-0.04", "kind": "pencil", "gain_db": -15, "dur": 0.5, "what": "the SPRINKLERS tick circled on 'true'" },
-    { "name": "pin-crowd-3", "at": "cue:q3+1.563", "kind": "pin", "gain_db": -17, "series": { "count": 2, "every": 0.3261 }, "what": "photo 16:14, email 16:40 (background plane)" },
-    { "name": "pull-wide", "at": "cue:gap-0.264", "kind": "pull", "gain_db": -12, "dur": 1.304, "what": "S10d: two-beat pull back to the whole board" },
-    { "name": "gap-rule", "at": "cue:gap", "kind": "gap-rule", "gain_db": -10, "dur": 0.7 },
-    { "name": "gap-hold", "at": "cue:gap+1.041", "kind": "hold", "dur": 1.259, "until": "cue:rewindStart", "what": "the board and the gap still until the rewind" }
+    {
+      "name": "pin-wave",
+      "at": "L09:questions.start",
+      "kind": "pin",
+      "gain_db": -12,
+      "series": {
+        "count": 4,
+        "every": 0.3261
+      },
+      "what": "S10b: photo, call log, statement, work order pin while the site recedes",
+      "snap": {
+        "mode": "cut",
+        "off": 0.6519
+      }
+    },
+    {
+      "name": "question-1",
+      "at": "cue:q1",
+      "kind": "question",
+      "gain_db": -18,
+      "what": "What was happening?"
+    },
+    {
+      "name": "pin-crowd-1",
+      "at": "cue:q1+0.652",
+      "kind": "pin",
+      "gain_db": -17,
+      "series": {
+        "count": 3,
+        "every": 0.3261
+      },
+      "what": "email, shift note, photo 16:12 crowd in behind (background plane)"
+    },
+    {
+      "name": "whip-1",
+      "at": "cue:q2-0.210",
+      "kind": "whip",
+      "gain_db": -16,
+      "dur": 0.652,
+      "what": "one-beat lateral dolly to shot 2, parallax on three planes"
+    },
+    {
+      "name": "question-2",
+      "at": "cue:q2",
+      "kind": "question",
+      "gain_db": -18,
+      "what": "Which condition applied?"
+    },
+    {
+      "name": "pin-programme",
+      "at": "cue:q2+0.442",
+      "kind": "pin",
+      "gain_db": -12,
+      "what": "PROGRAMME 4.3 pins as the camera lands"
+    },
+    {
+      "name": "pin-crowd-2",
+      "at": "cue:q2+0.768",
+      "kind": "pin",
+      "gain_db": -17,
+      "series": {
+        "count": 2,
+        "every": 0.3261
+      },
+      "what": "call log 16:08, witness note (background plane)"
+    },
+    {
+      "name": "whip-2",
+      "at": "cue:q3-0.067",
+      "kind": "whip",
+      "gain_db": -16,
+      "dur": 0.652,
+      "what": "one-beat lateral dolly to shot 3"
+    },
+    {
+      "name": "question-3",
+      "at": "cue:q3",
+      "kind": "question",
+      "gain_db": -18,
+      "what": "Can you prove / what was true?"
+    },
+    {
+      "name": "pin-permit",
+      "at": "cue:q3+0.585",
+      "kind": "pin",
+      "gain_db": -12,
+      "what": "PERMIT HW-0412 pins as the camera lands"
+    },
+    {
+      "name": "permit-loop",
+      "at": "L10:true.start-0.04",
+      "kind": "pencil",
+      "gain_db": -15,
+      "dur": 0.5,
+      "what": "the SPRINKLERS tick circled on 'true'"
+    },
+    {
+      "name": "pin-crowd-3",
+      "at": "cue:q3+1.563",
+      "kind": "pin",
+      "gain_db": -17,
+      "series": {
+        "count": 2,
+        "every": 0.3261
+      },
+      "what": "photo 16:14, email 16:40 (background plane)"
+    },
+    {
+      "name": "pull-wide",
+      "at": "cue:gap",
+      "kind": "pull",
+      "gain_db": -12,
+      "dur": 1.304,
+      "what": "S10d: two-beat pull back to the whole board",
+      "snap": {
+        "mode": "cut",
+        "off": -0.0005
+      }
+    },
+    {
+      "name": "gap-rule",
+      "at": "cue:gap",
+      "kind": "gap-rule",
+      "gain_db": -10,
+      "dur": 0.7
+    },
+    {
+      "name": "gap-hold",
+      "at": "cue:gap",
+      "kind": "hold",
+      "dur": 1.259,
+      "until": "cue:rewindStart",
+      "what": "the board and the gap still until the rewind",
+      "snap": {
+        "mode": "near",
+        "off": 0.9784
+      }
+    }
   ]
 }

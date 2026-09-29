@@ -4,7 +4,7 @@
   "guide": true,
   "label": "GUIDE narration (local Kokoro). Build and review only; re-lock to ElevenLabs before final.",
   "sample_rate": 48000,
-  "duration_total": 126.522,
+  "duration_total": 128.152,
   "lead_in": 2.609,
   "end_hold": 4.2,
   "grid": {
@@ -17,7 +17,7 @@
   "captions": "narration/captions.vtt",
   "time_base": "absolute film seconds from 0.000; word end = end of the word's last phone",
   "loudness": {
-    "integrated_lufs": -19.21,
+    "integrated_lufs": -19.2,
     "true_peak_dbtp": -1.0,
     "target_lufs": -18.0,
     "ceiling_dbtp": -1.0
@@ -108,8 +108,8 @@
       ]
     },
     "b10-change-retain-transfer": {
-      "start": 88.043,
-      "end": 98.135,
+      "start": 88.696,
+      "end": 99.766,
       "lines": [
         "L17a",
         "L17b",
@@ -117,8 +117,8 @@
       ]
     },
     "b11-whole-site-and-close": {
-      "start": 100.109,
-      "end": 122.227,
+      "start": 101.739,
+      "end": 123.858,
       "lines": [
         "L18",
         "L19a",
@@ -1489,7 +1489,7 @@
       "text": "The sprinkler goes offline again. This time, Priora sees it at once.",
       "section": "b09-priora-sees-the-change",
       "pre_gap": 0.0,
-      "gap_after": 2.2,
+      "gap_after": 2.8,
       "clip": {
         "start": 81.156,
         "end": 85.756
@@ -1571,492 +1571,492 @@
       ]
     },
     "L17a": {
-      "start": 88.043,
-      "end": 91.053,
+      "start": 88.696,
+      "end": 91.706,
       "speaker": "narrator",
       "text": "The risk owner decides: change the work,",
       "section": "b10-change-retain-transfer",
       "pre_gap": 0.0,
-      "gap_after": 0.75,
+      "gap_after": 1.3,
       "clip": {
-        "start": 88.003,
-        "end": 91.233
+        "start": 88.656,
+        "end": 91.886
       },
       "gain_db": 0.13,
       "words": [
         {
           "w": "The",
-          "start": 88.043,
-          "end": 88.163
+          "start": 88.696,
+          "end": 88.816
         },
         {
           "w": "risk",
-          "start": 88.163,
-          "end": 88.563
+          "start": 88.816,
+          "end": 89.216
         },
         {
           "w": "owner",
-          "start": 88.633,
-          "end": 88.883
+          "start": 89.286,
+          "end": 89.536
         },
         {
           "w": "decides",
-          "start": 88.883,
-          "end": 89.653
+          "start": 89.536,
+          "end": 90.306
         },
         {
           "w": "change",
-          "start": 90.003,
-          "end": 90.423
+          "start": 90.656,
+          "end": 91.076
         },
         {
           "w": "the",
-          "start": 90.423,
-          "end": 90.543
+          "start": 91.076,
+          "end": 91.196
         },
         {
           "w": "work",
-          "start": 90.543,
-          "end": 91.053
+          "start": 91.196,
+          "end": 91.706
         }
       ],
       "sentences": [
         {
           "text": "The risk owner decides:",
-          "start": 88.043,
-          "end": 89.653
+          "start": 88.696,
+          "end": 90.306
         },
         {
           "text": "change the work,",
-          "start": 90.003,
-          "end": 91.053
+          "start": 90.656,
+          "end": 91.706
         }
       ]
     },
     "L17b": {
-      "start": 91.957,
-      "end": 93.437,
+      "start": 93.261,
+      "end": 94.741,
       "speaker": "narrator",
       "text": "knowingly retain the risk,",
       "section": "b10-change-retain-transfer",
       "pre_gap": 0.0,
-      "gap_after": 0.75,
+      "gap_after": 1.2,
       "clip": {
-        "start": 91.917,
-        "end": 93.567
+        "start": 93.221,
+        "end": 94.871
       },
       "gain_db": -0.41,
       "words": [
         {
           "w": "knowingly",
-          "start": 91.957,
-          "end": 92.457
+          "start": 93.261,
+          "end": 93.761
         },
         {
           "w": "retain",
-          "start": 92.457,
-          "end": 92.867
+          "start": 93.761,
+          "end": 94.171
         },
         {
           "w": "the",
-          "start": 92.867,
-          "end": 92.967
+          "start": 94.171,
+          "end": 94.271
         },
         {
           "w": "risk",
-          "start": 92.967,
-          "end": 93.437
+          "start": 94.271,
+          "end": 94.741
         }
       ],
       "sentences": [
         {
           "text": "knowingly retain the risk,",
-          "start": 91.957,
-          "end": 93.437
+          "start": 93.261,
+          "end": 94.741
         }
       ]
     },
     "L17c": {
-      "start": 94.565,
-      "end": 98.135,
+      "start": 96.196,
+      "end": 99.766,
       "speaker": "narrator",
       "text": "or, in time, ask selected carriers whether they will cover it.",
       "section": "b10-change-retain-transfer",
       "pre_gap": 0.0,
       "gap_after": 1.7,
       "clip": {
-        "start": 94.525,
-        "end": 98.175
+        "start": 96.156,
+        "end": 99.806
       },
       "gain_db": 0.85,
       "words": [
         {
           "w": "or",
-          "start": 94.565,
-          "end": 94.765
+          "start": 96.196,
+          "end": 96.396
         },
         {
           "w": "in",
-          "start": 94.765,
-          "end": 94.915
+          "start": 96.396,
+          "end": 96.546
         },
         {
           "w": "time",
-          "start": 94.915,
-          "end": 95.345
+          "start": 96.546,
+          "end": 96.976
         },
         {
           "w": "ask",
-          "start": 95.555,
-          "end": 95.855
+          "start": 97.186,
+          "end": 97.486
         },
         {
           "w": "selected",
-          "start": 95.855,
-          "end": 96.385
+          "start": 97.486,
+          "end": 98.016
         },
         {
           "w": "carriers",
-          "start": 96.385,
-          "end": 96.885
+          "start": 98.016,
+          "end": 98.516
         },
         {
           "w": "whether",
-          "start": 96.885,
-          "end": 97.135
+          "start": 98.516,
+          "end": 98.766
         },
         {
           "w": "they",
-          "start": 97.135,
-          "end": 97.325
+          "start": 98.766,
+          "end": 98.956
         },
         {
           "w": "will",
-          "start": 97.325,
-          "end": 97.475
+          "start": 98.956,
+          "end": 99.106
         },
         {
           "w": "cover",
-          "start": 97.475,
-          "end": 97.875
+          "start": 99.106,
+          "end": 99.506
         },
         {
           "w": "it",
-          "start": 97.875,
-          "end": 98.135
+          "start": 99.506,
+          "end": 99.766
         }
       ],
       "sentences": [
         {
           "text": "or, in time, ask selected carriers whether they will cover it.",
-          "start": 94.565,
-          "end": 98.135
+          "start": 96.196,
+          "end": 99.766
         }
       ]
     },
     "L18": {
-      "start": 100.109,
-      "end": 104.989,
+      "start": 101.739,
+      "end": 106.619,
       "speaker": "narrator",
       "text": "Most work remains ordinary. A few changes become explicit decisions.",
       "section": "b11-whole-site-and-close",
       "pre_gap": 0.0,
       "gap_after": 1.3,
       "clip": {
-        "start": 100.069,
-        "end": 105.029
+        "start": 101.699,
+        "end": 106.659
       },
       "gain_db": 0.32,
       "words": [
         {
           "w": "Most",
-          "start": 100.109,
-          "end": 100.409
+          "start": 101.739,
+          "end": 102.039
         },
         {
           "w": "work",
-          "start": 100.409,
-          "end": 100.779
+          "start": 102.039,
+          "end": 102.409
         },
         {
           "w": "remains",
-          "start": 100.779,
-          "end": 101.229
+          "start": 102.409,
+          "end": 102.859
         },
         {
           "w": "ordinary",
-          "start": 101.229,
-          "end": 101.839
+          "start": 102.859,
+          "end": 103.469
         },
         {
           "w": "A",
-          "start": 102.439,
-          "end": 102.489
+          "start": 104.069,
+          "end": 104.119
         },
         {
           "w": "few",
-          "start": 102.489,
-          "end": 102.769
+          "start": 104.119,
+          "end": 104.399
         },
         {
           "w": "changes",
-          "start": 102.769,
-          "end": 103.399
+          "start": 104.399,
+          "end": 105.029
         },
         {
           "w": "become",
-          "start": 103.399,
-          "end": 103.729
+          "start": 105.029,
+          "end": 105.359
         },
         {
           "w": "explicit",
-          "start": 103.729,
-          "end": 104.319
+          "start": 105.359,
+          "end": 105.949
         },
         {
           "w": "decisions",
-          "start": 104.319,
-          "end": 104.989
+          "start": 105.949,
+          "end": 106.619
         }
       ],
       "sentences": [
         {
           "text": "Most work remains ordinary.",
-          "start": 100.109,
-          "end": 101.839
+          "start": 101.739,
+          "end": 103.469
         },
         {
           "text": "A few changes become explicit decisions.",
-          "start": 102.439,
-          "end": 104.989
+          "start": 104.069,
+          "end": 106.619
         }
       ]
     },
     "L19a": {
-      "start": 106.304,
-      "end": 107.844,
+      "start": 107.935,
+      "end": 109.475,
       "speaker": "narrator",
       "text": "Record becomes trust.",
       "section": "b11-whole-site-and-close",
       "pre_gap": 0.0,
       "gap_after": 0.45,
       "clip": {
-        "start": 106.264,
-        "end": 107.884
+        "start": 107.895,
+        "end": 109.515
       },
       "gain_db": -0.73,
       "words": [
         {
           "w": "Record",
-          "start": 106.304,
-          "end": 106.834
+          "start": 107.935,
+          "end": 108.465
         },
         {
           "w": "becomes",
-          "start": 106.834,
-          "end": 107.264
+          "start": 108.465,
+          "end": 108.895
         },
         {
           "w": "trust",
-          "start": 107.264,
-          "end": 107.844
+          "start": 108.895,
+          "end": 109.475
         }
       ],
       "sentences": [
         {
           "text": "Record becomes trust.",
-          "start": 106.304,
-          "end": 107.844
+          "start": 107.935,
+          "end": 109.475
         }
       ]
     },
     "L19b": {
-      "start": 108.587,
-      "end": 110.267,
+      "start": 110.217,
+      "end": 111.897,
       "speaker": "narrator",
       "text": "Trust enables decisions.",
       "section": "b11-whole-site-and-close",
       "pre_gap": 0.0,
       "gap_after": 0.45,
       "clip": {
-        "start": 108.547,
-        "end": 110.317
+        "start": 110.177,
+        "end": 111.947
       },
       "gain_db": -0.39,
       "words": [
         {
           "w": "Trust",
-          "start": 108.587,
-          "end": 109.017
+          "start": 110.217,
+          "end": 110.647
         },
         {
           "w": "enables",
-          "start": 109.017,
-          "end": 109.547
+          "start": 110.647,
+          "end": 111.177
         },
         {
           "w": "decisions",
-          "start": 109.547,
-          "end": 110.267
+          "start": 111.177,
+          "end": 111.897
         }
       ],
       "sentences": [
         {
           "text": "Trust enables decisions.",
-          "start": 108.587,
-          "end": 110.267
+          "start": 110.217,
+          "end": 111.897
         }
       ]
     },
     "L19c": {
-      "start": 110.87,
-      "end": 112.55,
+      "start": 112.5,
+      "end": 114.18,
       "speaker": "narrator",
       "text": "Decisions can carry price.",
       "section": "b11-whole-site-and-close",
       "pre_gap": 0.0,
       "gap_after": 0.45,
       "clip": {
-        "start": 110.83,
-        "end": 112.59
+        "start": 112.46,
+        "end": 114.22
       },
       "gain_db": -0.2,
       "words": [
         {
           "w": "Decisions",
-          "start": 110.87,
-          "end": 111.47
+          "start": 112.5,
+          "end": 113.1
         },
         {
           "w": "can",
-          "start": 111.47,
-          "end": 111.67
+          "start": 113.1,
+          "end": 113.3
         },
         {
           "w": "carry",
-          "start": 111.67,
-          "end": 111.97
+          "start": 113.3,
+          "end": 113.6
         },
         {
           "w": "price",
-          "start": 111.97,
-          "end": 112.55
+          "start": 113.6,
+          "end": 114.18
         }
       ],
       "sentences": [
         {
           "text": "Decisions can carry price.",
-          "start": 110.87,
-          "end": 112.55
+          "start": 112.5,
+          "end": 114.18
         }
       ]
     },
     "L19d": {
-      "start": 113.152,
-      "end": 115.062,
+      "start": 114.783,
+      "end": 116.693,
       "speaker": "narrator",
       "text": "Price can connect to capacity.",
       "section": "b11-whole-site-and-close",
       "pre_gap": 0.0,
       "gap_after": 2.4,
       "clip": {
-        "start": 113.112,
-        "end": 115.102
+        "start": 114.743,
+        "end": 116.733
       },
       "gain_db": -0.27,
       "words": [
         {
           "w": "Price",
-          "start": 113.152,
-          "end": 113.512
+          "start": 114.783,
+          "end": 115.143
         },
         {
           "w": "can",
-          "start": 113.512,
-          "end": 113.722
+          "start": 115.143,
+          "end": 115.353
         },
         {
           "w": "connect",
-          "start": 113.722,
-          "end": 114.152
+          "start": 115.353,
+          "end": 115.783
         },
         {
           "w": "to",
-          "start": 114.152,
-          "end": 114.252
+          "start": 115.783,
+          "end": 115.883
         },
         {
           "w": "capacity",
-          "start": 114.252,
-          "end": 115.062
+          "start": 115.883,
+          "end": 116.693
         }
       ],
       "sentences": [
         {
           "text": "Price can connect to capacity.",
-          "start": 113.152,
-          "end": 115.062
+          "start": 114.783,
+          "end": 116.693
         }
       ]
     },
     "L20": {
-      "start": 117.717,
-      "end": 122.227,
+      "start": 119.348,
+      "end": 123.858,
       "speaker": "narrator",
       "text": "Priora. Infrastructure for activity-level physical risk.",
       "section": "b11-whole-site-and-close",
       "pre_gap": 0.0,
       "gap_after": 0.0,
       "clip": {
-        "start": 117.677,
-        "end": 122.267
+        "start": 119.308,
+        "end": 123.898
       },
       "gain_db": -0.29,
       "words": [
         {
           "w": "Priora",
-          "start": 117.717,
-          "end": 118.287
+          "start": 119.348,
+          "end": 119.918
         },
         {
           "w": "Infrastructure",
-          "start": 119.327,
-          "end": 120.167
+          "start": 120.958,
+          "end": 121.798
         },
         {
           "w": "for",
-          "start": 120.247,
-          "end": 120.357
+          "start": 121.878,
+          "end": 121.988
         },
         {
           "w": "activity-level",
-          "start": 120.357,
-          "end": 121.307
+          "start": 121.988,
+          "end": 122.938
         },
         {
           "w": "physical",
-          "start": 121.307,
-          "end": 121.777
+          "start": 122.938,
+          "end": 123.408
         },
         {
           "w": "risk",
-          "start": 121.777,
-          "end": 122.227
+          "start": 123.408,
+          "end": 123.858
         }
       ],
       "sentences": [
         {
           "text": "Priora.",
-          "start": 117.717,
-          "end": 118.287
+          "start": 119.348,
+          "end": 119.918
         },
         {
           "text": "Infrastructure for activity-level physical risk.",
-          "start": 119.327,
-          "end": 122.227
+          "start": 120.958,
+          "end": 123.858
         }
       ]
     }
   },
-  "created": "2026-09-29T21:41:50+00:00"
+  "created": "2026-09-29T22:57:20+00:00"
 }

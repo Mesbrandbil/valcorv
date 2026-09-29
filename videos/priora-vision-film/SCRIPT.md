@@ -10,7 +10,7 @@ Locked narration for the Priora vision film (Priora is the product, Valcorv the 
 **Worker direction:** A real worker on site speaking into a phone. Natural, practical, close-mic. Not an actor performing a slogan.
 **Guide voice (build only, not final):** local Kokoro bf_isabella (narrator) and bm_daniel (worker), narrator speed 1.0 with per-line pace.
 **Pronunciation:** Priora is pri-OR-a (IPA pɹiˈɔːɹə), stress on the middle syllable, never PRY-ora. ElevenLabs text uses the respelling `Pree-OR-uh`. Roof 03 is said Roof oh-three.
-**Pacing:** lead-in 2.609 s, designed silence after each line as listed, rewind silence 6.27 s before L12, end hold 4.2 s. Total 126.52 s, 203 words.
+**Pacing:** lead-in 2.609 s, designed silence after each line as listed, rewind silence 6.27 s before L12, end hold 4.2 s. Total 128.15 s, 203 words.
 
 **Time** values are from the current assembly (engine: guide). After the ElevenLabs take is assembled, `narration/timing.json` is the truth.
 
@@ -178,7 +178,7 @@ Locked narration for the Priora vision film (Priora is the product, Valcorv the 
 **Time:** 81.20 to 85.72 s (guide)  
 **Delivery:** Two beats: the event, then the contrast with Act I. 'This time' carries it.  
 **Pace:** 0.97 of the global speed  
-**Silence after:** 2.2 s  
+**Silence after:** 2.8 s  
 **Spoken as (ElevenLabs):** `The sprinkler goes offline again. This time, Pree-OR-uh sees it at once.`  
 
     The sprinkler goes offline again. This time, Priora sees it at once.
@@ -186,27 +186,27 @@ Locked narration for the Priora vision film (Priora is the product, Valcorv the 
 ## Line 18 (L17a): Change, retain, transfer (Frame 5)
 
 **Speaker:** Narrator  
-**Time:** 88.04 to 91.05 s (guide)  
+**Time:** 88.70 to 91.71 s (guide)  
 **Delivery:** First choice. Measured; a small comma lift, not a full stop.  
 **Pace:** 0.97 of the global speed  
-**Silence after:** 0.75 s  
+**Silence after:** 1.3 s  
 
     The risk owner decides: change the work,
 
 ## Line 19 (L17b): Change, retain, transfer (Frame 5)
 
 **Speaker:** Narrator  
-**Time:** 91.96 to 93.44 s (guide)  
+**Time:** 93.26 to 94.74 s (guide)  
 **Delivery:** Second choice. Its own weight on knowingly.  
 **Pace:** 0.97 of the global speed  
-**Silence after:** 0.75 s  
+**Silence after:** 1.2 s  
 
     knowingly retain the risk,
 
 ## Line 20 (L17c): Change, retain, transfer (Frame 5)
 
 **Speaker:** Narrator  
-**Time:** 94.56 to 98.14 s (guide)  
+**Time:** 96.20 to 99.77 s (guide)  
 **Delivery:** Third choice. Honest and unhurried; carrier acceptance stays conditional.  
 **Pace:** 0.97 of the global speed  
 **Silence after:** 1.7 s  
@@ -216,7 +216,7 @@ Locked narration for the Priora vision film (Priora is the product, Valcorv the 
 ## Line 21 (L18): Whole site and close (Frames 5 and 6)
 
 **Speaker:** Narrator  
-**Time:** 100.11 to 104.99 s (guide)  
+**Time:** 101.74 to 106.62 s (guide)  
 **Delivery:** Pulling back. Reassuring, measured.  
 **Silence after:** 1.3 s  
 
@@ -225,7 +225,7 @@ Locked narration for the Priora vision film (Priora is the product, Valcorv the 
 ## Line 22 (L19a): Whole site and close (Frames 5 and 6)
 
 **Speaker:** Narrator  
-**Time:** 106.30 to 107.84 s (guide)  
+**Time:** 107.94 to 109.47 s (guide)  
 **Delivery:** Chain link one. Even, deliberate.  
 **Pace:** 0.97 of the global speed  
 **Silence after:** 0.45 s  
@@ -235,7 +235,7 @@ Locked narration for the Priora vision film (Priora is the product, Valcorv the 
 ## Line 23 (L19b): Whole site and close (Frames 5 and 6)
 
 **Speaker:** Narrator  
-**Time:** 108.59 to 110.27 s (guide)  
+**Time:** 110.22 to 111.90 s (guide)  
 **Delivery:** Chain link two.  
 **Pace:** 0.97 of the global speed  
 **Silence after:** 0.45 s  
@@ -245,7 +245,7 @@ Locked narration for the Priora vision film (Priora is the product, Valcorv the 
 ## Line 24 (L19c): Whole site and close (Frames 5 and 6)
 
 **Speaker:** Narrator  
-**Time:** 110.87 to 112.55 s (guide)  
+**Time:** 112.50 to 114.18 s (guide)  
 **Delivery:** Chain link three. Can is conditional, not a promise.  
 **Pace:** 0.97 of the global speed  
 **Silence after:** 0.45 s  
@@ -255,7 +255,7 @@ Locked narration for the Priora vision film (Priora is the product, Valcorv the 
 ## Line 25 (L19d): Whole site and close (Frames 5 and 6)
 
 **Speaker:** Narrator  
-**Time:** 113.15 to 115.06 s (guide)  
+**Time:** 114.78 to 116.69 s (guide)  
 **Delivery:** Chain link four. Resolve downward.  
 **Pace:** 0.97 of the global speed  
 **Silence after:** 2.4 s  
@@ -265,7 +265,7 @@ Locked narration for the Priora vision film (Priora is the product, Valcorv the 
 ## Line 26 (L20): Whole site and close (Frames 5 and 6)
 
 **Speaker:** Narrator  
-**Time:** 117.72 to 122.23 s (guide)  
+**Time:** 119.35 to 123.86 s (guide)  
 **Delivery:** Calm, inevitable close. The name, a breath, the descriptor.  
 **Pace:** 0.92 of the global speed  
 **Silence after:** 0.0 s  
