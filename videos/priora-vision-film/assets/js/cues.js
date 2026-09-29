@@ -2339,21 +2339,36 @@ window.FL_EVENTS = {
    "name": "precision-snap",
    "kind": "precision-snap",
    "gain_db": -10,
-   "dur": 1.9,
+   "dur": 2.36,
    "scene": "a2-resolve",
-   "t": 59.172,
-   "local": 0.439,
-   "at": "cue:l12+0.15"
+   "t": 59.022,
+   "local": 0.289,
+   "at": "cue:l12"
   },
-  "header-in": {
-   "name": "header-in",
-   "kind": "header-in",
+  "push-worker": {
+   "name": "push-worker",
+   "kind": "push",
    "gain_db": -14,
-   "dur": 1.1,
+   "dur": 0.978,
+   "snap": {
+    "mode": "cut",
+    "off": -0.9779
+   },
    "scene": "a2-resolve",
-   "t": 60.352,
-   "local": 1.619,
-   "at": "cue:decisionWord+0.9"
+   "t": 62.283,
+   "local": 3.55,
+   "at": "L13.start"
+  },
+  "cut-capture": {
+   "name": "cut-capture",
+   "kind": "cut",
+   "material": "paper",
+   "gain_db": -16,
+   "dur": 0.1,
+   "scene": "a2-resolve",
+   "t": 63.261,
+   "local": 4.528,
+   "at": "L13.start"
   },
   "capture-start": {
    "name": "capture-start",
@@ -2361,79 +2376,148 @@ window.FL_EVENTS = {
    "gain_db": -16,
    "dur": 0.6,
    "scene": "a2-resolve",
-   "t": 62.911,
-   "local": 4.178,
-   "at": "cue:worker-0.35"
+   "t": 63.281,
+   "local": 4.548,
+   "at": "L13.start+0.02"
   },
   "word-token-01": {
    "name": "word-token-01",
    "kind": "word-token",
    "gain_db": -18,
-   "dur": 0.5,
+   "dur": 0.4,
+   "snap": {
+    "mode": "near",
+    "off": -0.0004
+   },
    "scene": "a2-resolve",
-   "t": 66.051,
-   "local": 7.318,
-   "at": "cue:six+0.4"
+   "t": 65.217,
+   "local": 6.484,
+   "at": "L13:six.start"
   },
   "word-token-02": {
    "name": "word-token-02",
    "kind": "word-token",
    "gain_db": -18,
-   "dur": 0.5,
+   "dur": 0.4,
+   "snap": {
+    "mode": "near",
+    "off": -0.0004
+   },
    "scene": "a2-resolve",
-   "t": 66.251,
-   "local": 7.518,
-   "at": "cue:six+0.4"
+   "t": 65.543,
+   "local": 6.81,
+   "at": "L13:six.start"
   },
   "word-token-03": {
    "name": "word-token-03",
    "kind": "word-token",
    "gain_db": -18,
-   "dur": 0.5,
+   "dur": 0.4,
+   "snap": {
+    "mode": "near",
+    "off": -0.0004
+   },
    "scene": "a2-resolve",
-   "t": 66.451,
-   "local": 7.718,
-   "at": "cue:six+0.4"
+   "t": 65.869,
+   "local": 7.136,
+   "at": "L13:six.start"
   },
   "word-token-04": {
    "name": "word-token-04",
    "kind": "word-token",
    "gain_db": -18,
-   "dur": 0.5,
+   "dur": 0.4,
+   "snap": {
+    "mode": "near",
+    "off": -0.0004
+   },
    "scene": "a2-resolve",
-   "t": 66.651,
-   "local": 7.918,
-   "at": "cue:six+0.4"
+   "t": 66.195,
+   "local": 7.462,
+   "at": "L13:six.start"
   },
-  "connect-4-2": {
-   "name": "connect-4-2",
+  "connect-activity": {
+   "name": "connect-activity",
    "kind": "connect-line",
    "gain_db": -12,
-   "dur": 0.9,
+   "dur": 1.304,
    "scene": "a2-resolve",
-   "t": 67.298,
-   "local": 8.565,
-   "at": "cue:connects"
+   "t": 66.848,
+   "local": 8.115,
+   "at": "L14a.start"
   },
-  "connect-sz3": {
-   "name": "connect-sz3",
+  "focus-clause": {
+   "name": "focus-clause",
+   "kind": "focus",
+   "gain_db": -16,
+   "dur": 0.1,
+   "snap": {
+    "mode": "next",
+    "off": 0.9781
+   },
+   "scene": "a2-resolve",
+   "t": 68.152,
+   "local": 9.419,
+   "at": "L14a.start"
+  },
+  "connect-zone": {
+   "name": "connect-zone",
    "kind": "connect-line",
    "gain_db": -13,
-   "dur": 0.5,
+   "dur": 0.652,
+   "snap": {
+    "mode": "near",
+    "off": -0.0003
+   },
    "scene": "a2-resolve",
-   "t": 68.338,
-   "local": 9.605,
+   "t": 68.478,
+   "local": 9.745,
    "at": "cue:conditionsMatter"
   },
-  "connect-4-3": {
-   "name": "connect-4-3",
-   "kind": "connect-line",
+  "pull-connection": {
+   "name": "pull-connection",
+   "kind": "pull",
    "gain_db": -13,
-   "dur": 0.6,
+   "dur": 0.978,
+   "snap": {
+    "mode": "cut",
+    "off": -0.0004
+   },
    "scene": "a2-resolve",
-   "t": 68.758,
-   "local": 10.025,
-   "at": "cue:conditionsMatter+0.42"
+   "t": 69.13,
+   "local": 10.397,
+   "at": "L14a:matter.start"
+  },
+  "hold-connection": {
+   "name": "hold-connection",
+   "kind": "hold",
+   "gain_db": 0,
+   "dur": 2.08,
+   "scene": "a2-resolve",
+   "t": 69.658,
+   "local": 10.925,
+   "at": "cue:connectionHold"
+  },
+  "cut-card": {
+   "name": "cut-card",
+   "kind": "cut",
+   "material": "paper",
+   "gain_db": -16,
+   "dur": 0.1,
+   "scene": "a2-resolve",
+   "t": 71.739,
+   "local": 13.006,
+   "at": "L14b.start"
+  },
+  "focus-card": {
+   "name": "focus-card",
+   "kind": "focus",
+   "gain_db": -17,
+   "dur": 0.1,
+   "scene": "a2-resolve",
+   "t": 71.769,
+   "local": 13.036,
+   "at": "L14b.start+0.03"
   },
   "verify-tick-01": {
    "name": "verify-tick-01",
@@ -2441,9 +2525,9 @@ window.FL_EVENTS = {
    "gain_db": -12,
    "dur": 0.36,
    "scene": "a2-resolve",
-   "t": 72.319,
-   "local": 13.586,
-   "at": "cue:certificate2+0.05"
+   "t": 72.391,
+   "local": 13.658,
+   "at": "cue:certificate2+0.122"
   },
   "verify-tick-02": {
    "name": "verify-tick-02",
@@ -2451,9 +2535,9 @@ window.FL_EVENTS = {
    "gain_db": -12,
    "dur": 0.36,
    "scene": "a2-resolve",
-   "t": 72.739,
-   "local": 14.006,
-   "at": "cue:certificate2+0.05"
+   "t": 72.717,
+   "local": 13.984,
+   "at": "cue:certificate2+0.122"
   },
   "verify-tick-03": {
    "name": "verify-tick-03",
@@ -2461,9 +2545,9 @@ window.FL_EVENTS = {
    "gain_db": -12,
    "dur": 0.36,
    "scene": "a2-resolve",
-   "t": 73.159,
-   "local": 14.426,
-   "at": "cue:certificate2+0.05"
+   "t": 73.043,
+   "local": 14.31,
+   "at": "cue:certificate2+0.122"
   },
   "verify-tick-04": {
    "name": "verify-tick-04",
@@ -2471,9 +2555,9 @@ window.FL_EVENTS = {
    "gain_db": -12,
    "dur": 0.36,
    "scene": "a2-resolve",
-   "t": 73.579,
-   "local": 14.846,
-   "at": "cue:certificate2+0.05"
+   "t": 73.369,
+   "local": 14.636,
+   "at": "cue:certificate2+0.122"
   },
   "verify-tick-05": {
    "name": "verify-tick-05",
@@ -2481,29 +2565,65 @@ window.FL_EVENTS = {
    "gain_db": -12,
    "dur": 0.36,
    "scene": "a2-resolve",
-   "t": 73.999,
-   "local": 15.266,
-   "at": "cue:certificate2+0.05"
+   "t": 73.695,
+   "local": 14.962,
+   "at": "cue:certificate2+0.122"
+  },
+  "whip-record": {
+   "name": "whip-record",
+   "kind": "whip",
+   "gain_db": -16,
+   "dur": 0.652,
+   "snap": {
+    "mode": "cut",
+    "off": 0.0003
+   },
+   "scene": "a2-resolve",
+   "t": 74.022,
+   "local": 15.289,
+   "at": "cue:keeps"
   },
   "record-append-1": {
    "name": "record-append-1",
    "kind": "record-append",
    "gain_db": -13,
    "dur": 0.75,
+   "snap": {
+    "mode": "next",
+    "off": 0.0001
+   },
    "scene": "a2-resolve",
-   "t": 74.589,
-   "local": 15.856,
-   "at": "cue:keepsRecord+0.1"
+   "t": 74.674,
+   "local": 15.941,
+   "at": "cue:keepsRecord"
   },
   "record-append-2": {
    "name": "record-append-2",
    "kind": "record-append",
    "gain_db": -14,
    "dur": 0.75,
+   "snap": {
+    "mode": "next",
+    "off": 0.3261
+   },
    "scene": "a2-resolve",
-   "t": 74.989,
-   "local": 16.256,
-   "at": "cue:keepsRecord+0.5"
+   "t": 75,
+   "local": 16.267,
+   "at": "cue:keepsRecord"
+  },
+  "pull-twoup": {
+   "name": "pull-twoup",
+   "kind": "pull",
+   "gain_db": -15,
+   "dur": 0.652,
+   "snap": {
+    "mode": "prev",
+    "off": -0.0002
+   },
+   "scene": "a2-resolve",
+   "t": 75.652,
+   "local": 16.919,
+   "at": "cue:prevention"
   }
  },
  "a3-change": {
