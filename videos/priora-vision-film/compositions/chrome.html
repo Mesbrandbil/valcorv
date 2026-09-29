@@ -102,11 +102,16 @@
         /* Acts II and III: the product's identity and its honest label, small, top left */
         #chrome-lockup {
           position: absolute;
-          top: 62px;
-          left: 96px;
+          top: 52px;
+          left: 82px;
           display: flex;
           align-items: center;
           gap: 14px;
+          padding: 10px 16px 10px 14px;
+          border-radius: 8px;
+          /* a soft paper backing, so site lines passing behind never cut through the label */
+          background: rgba(248, 246, 241, 0.94);
+          box-shadow: 0 0 8px 3px rgba(248, 246, 241, 0.75);
           opacity: 0;
           white-space: nowrap;
         }

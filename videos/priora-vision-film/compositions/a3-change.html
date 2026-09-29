@@ -398,7 +398,8 @@
           siteA.el("sz3-hatch").style.fill = "url(#" + siteA.prefix + "-sz-hatch)";
           K.siteLabels(siteA, 2.6); // S17: the zone label reads at 26 px
           // labels that would sit under the event line (S17) or be cut by the frame edge (S18b)
-          ["zone-label-production-hall-2", "zone-label-utilities"].forEach(function (k) {
+          // the ROOF label would sit behind the chrome's top-left END-STATE CONCEPT lockup
+          ["zone-label-production-hall-2", "zone-label-utilities", "zone-label-roof"].forEach(function (k) {
             siteA.el(k).style.display = "none";
           });
           var ovA = K.overlay(siteA, ID + "-sa");
