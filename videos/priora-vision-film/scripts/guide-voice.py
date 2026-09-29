@@ -368,6 +368,12 @@ def generate(data: dict, ids: list[str], voices: dict, speeds: dict, lang: str) 
 
 
 def speech_span(r: dict) -> float:
+    """Same measure the assembly uses to place the line (energy edges)."""
+    on, off = nc.take_speech_bounds(r["audio"], KSR, r["times"][0][0], r["times"][-1][1])
+    return off - on
+
+
+def word_span(r: dict) -> float:
     return r["times"][-1][1] - r["times"][0][0]
 
 
@@ -464,7 +470,7 @@ def main() -> int:
     log(f"{'id':5s} {'dur':>6s} {'speech':>6s} {'words':>5s} {'w/s':>5s} {'pause_agree':>11s} {'on_err':>6s} {'off_err':>7s}  method")
     for lid in ids:
         r = rendered[lid]
-        span = speech_span(r)
+        span = word_span(r)
         n = len(r["times"])
         q = r["quality"]
         log(f"{lid:5s} {len(r['audio']) / KSR:6.2f} {span:6.2f} {n:5d} {n / span:5.2f} {q['pause_agreement']:11.2f} "

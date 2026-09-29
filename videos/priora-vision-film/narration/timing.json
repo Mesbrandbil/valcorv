@@ -1,0 +1,1989 @@
+{
+  "schema": "priora-narration-timing/1",
+  "engine": "guide",
+  "guide": true,
+  "label": "GUIDE narration (local Kokoro). Build and review only; re-lock to ElevenLabs before final.",
+  "sample_rate": 48000,
+  "duration_total": 90.9,
+  "lead_in": 1.2,
+  "end_hold": 2.8,
+  "audio": "assets/audio/voice.wav",
+  "captions": "narration/captions.vtt",
+  "time_base": "absolute film seconds from 0.000; word end = end of the word's last phone",
+  "loudness": {
+    "integrated_lufs": -19.48,
+    "true_peak_dbtp": -1.0,
+    "target_lufs": -18.0,
+    "ceiling_dbtp": -1.0
+  },
+  "speech": {
+    "words": 210,
+    "speech_seconds": 70.62,
+    "words_per_second": 2.974
+  },
+  "rewind": {
+    "start": 39.75,
+    "end": 43.85,
+    "designed_pre_gap": 3.2,
+    "after_line": "L11",
+    "before_line": "L12",
+    "note": "Silence from the end of L11 to the start of L12: the signature rewind."
+  },
+  "sections": {
+    "b01-site-wakes": {
+      "start": 1.2,
+      "end": 7.58,
+      "lines": [
+        "L01",
+        "L02"
+      ]
+    },
+    "b02-insurance-becomes-workflow": {
+      "start": 8.22,
+      "end": 13.98,
+      "lines": [
+        "L03",
+        "L04"
+      ]
+    },
+    "b03-complexity-outruns-translation": {
+      "start": 14.48,
+      "end": 21.33,
+      "lines": [
+        "L05",
+        "L06"
+      ]
+    },
+    "b04-invisible-crossing": {
+      "start": 21.78,
+      "end": 29.67,
+      "lines": [
+        "L07",
+        "L08"
+      ]
+    },
+    "b05-afterwards": {
+      "start": 30.37,
+      "end": 39.75,
+      "lines": [
+        "L09",
+        "L10",
+        "L11"
+      ]
+    },
+    "b06-rewind": {
+      "start": 43.85,
+      "end": 46.11,
+      "lines": [
+        "L12"
+      ]
+    },
+    "b07-speak-the-activity": {
+      "start": 46.81,
+      "end": 56.49,
+      "lines": [
+        "L13",
+        "L14"
+      ]
+    },
+    "b08-prevention-and-proof": {
+      "start": 56.84,
+      "end": 59.64,
+      "lines": [
+        "L15"
+      ]
+    },
+    "b09-priora-sees-the-change": {
+      "start": 60.83,
+      "end": 63.89,
+      "lines": [
+        "L16"
+      ]
+    },
+    "b10-change-retain-transfer": {
+      "start": 65.09,
+      "end": 71.99,
+      "lines": [
+        "L17"
+      ]
+    },
+    "b11-whole-site-and-close": {
+      "start": 72.59,
+      "end": 88.1,
+      "lines": [
+        "L18",
+        "L19a",
+        "L19b",
+        "L19c",
+        "L19d",
+        "L20"
+      ]
+    }
+  },
+  "line_order": [
+    "L01",
+    "L02",
+    "L03",
+    "L04",
+    "L05",
+    "L06",
+    "L07",
+    "L08",
+    "L09",
+    "L10",
+    "L11",
+    "L12",
+    "L13",
+    "L14",
+    "L15",
+    "L16",
+    "L17",
+    "L18",
+    "L19a",
+    "L19b",
+    "L19c",
+    "L19d",
+    "L20"
+  ],
+  "takes": {
+    "L01": {
+      "voice": {
+        "id": "bf_isabella",
+        "lang": "en-gb"
+      },
+      "speed": 1.2325,
+      "alignment_method": "pocketsphinx-5-forced-alignment+energy-refine",
+      "alignment_fallback": false
+    },
+    "L02": {
+      "voice": {
+        "id": "bf_isabella",
+        "lang": "en-gb"
+      },
+      "speed": 1.2325,
+      "alignment_method": "pocketsphinx-5-forced-alignment+energy-refine",
+      "alignment_fallback": false
+    },
+    "L03": {
+      "voice": {
+        "id": "bf_isabella",
+        "lang": "en-gb"
+      },
+      "speed": 1.2325,
+      "alignment_method": "pocketsphinx-5-forced-alignment+energy-refine",
+      "alignment_fallback": false
+    },
+    "L04": {
+      "voice": {
+        "id": "bf_isabella",
+        "lang": "en-gb"
+      },
+      "speed": 1.2325,
+      "alignment_method": "pocketsphinx-5-forced-alignment+energy-refine",
+      "alignment_fallback": false
+    },
+    "L05": {
+      "voice": {
+        "id": "bf_isabella",
+        "lang": "en-gb"
+      },
+      "speed": 1.2325,
+      "alignment_method": "pocketsphinx-5-forced-alignment+energy-refine",
+      "alignment_fallback": false
+    },
+    "L06": {
+      "voice": {
+        "id": "bf_isabella",
+        "lang": "en-gb"
+      },
+      "speed": 1.2325,
+      "alignment_method": "pocketsphinx-5-forced-alignment+energy-refine",
+      "alignment_fallback": false
+    },
+    "L07": {
+      "voice": {
+        "id": "bf_isabella",
+        "lang": "en-gb"
+      },
+      "speed": 1.2325,
+      "alignment_method": "pocketsphinx-5-forced-alignment+energy-refine",
+      "alignment_fallback": false
+    },
+    "L08": {
+      "voice": {
+        "id": "bf_isabella",
+        "lang": "en-gb"
+      },
+      "speed": 1.2325,
+      "alignment_method": "pocketsphinx-5-forced-alignment+energy-refine",
+      "alignment_fallback": false
+    },
+    "L09": {
+      "voice": {
+        "id": "bf_isabella",
+        "lang": "en-gb"
+      },
+      "speed": 1.2325,
+      "alignment_method": "pocketsphinx-5-forced-alignment+energy-refine",
+      "alignment_fallback": false
+    },
+    "L10": {
+      "voice": {
+        "id": "bf_isabella",
+        "lang": "en-gb"
+      },
+      "speed": 1.2325,
+      "alignment_method": "pocketsphinx-5-forced-alignment+energy-refine",
+      "alignment_fallback": false
+    },
+    "L11": {
+      "voice": {
+        "id": "bf_isabella",
+        "lang": "en-gb"
+      },
+      "speed": 1.2325,
+      "alignment_method": "pocketsphinx-5-forced-alignment+energy-refine",
+      "alignment_fallback": false
+    },
+    "L12": {
+      "voice": {
+        "id": "bf_isabella",
+        "lang": "en-gb"
+      },
+      "speed": 1.2325,
+      "alignment_method": "pocketsphinx-5-forced-alignment+energy-refine",
+      "alignment_fallback": false
+    },
+    "L13": {
+      "voice": {
+        "id": "bm_daniel",
+        "lang": "en-gb"
+      },
+      "speed": 1.0,
+      "alignment_method": "pocketsphinx-5-forced-alignment+energy-refine",
+      "alignment_fallback": false
+    },
+    "L14": {
+      "voice": {
+        "id": "bf_isabella",
+        "lang": "en-gb"
+      },
+      "speed": 1.2325,
+      "alignment_method": "pocketsphinx-5-forced-alignment+energy-refine",
+      "alignment_fallback": false
+    },
+    "L15": {
+      "voice": {
+        "id": "bf_isabella",
+        "lang": "en-gb"
+      },
+      "speed": 1.2325,
+      "alignment_method": "pocketsphinx-5-forced-alignment+energy-refine",
+      "alignment_fallback": false
+    },
+    "L16": {
+      "voice": {
+        "id": "bf_isabella",
+        "lang": "en-gb"
+      },
+      "speed": 1.2325,
+      "alignment_method": "pocketsphinx-5-forced-alignment+energy-refine",
+      "alignment_fallback": false
+    },
+    "L17": {
+      "voice": {
+        "id": "bf_isabella",
+        "lang": "en-gb"
+      },
+      "speed": 1.2325,
+      "alignment_method": "pocketsphinx-5-forced-alignment+energy-refine",
+      "alignment_fallback": false
+    },
+    "L18": {
+      "voice": {
+        "id": "bf_isabella",
+        "lang": "en-gb"
+      },
+      "speed": 1.2325,
+      "alignment_method": "pocketsphinx-5-forced-alignment+energy-refine",
+      "alignment_fallback": false
+    },
+    "L19a": {
+      "voice": {
+        "id": "bf_isabella",
+        "lang": "en-gb"
+      },
+      "speed": 1.2325,
+      "alignment_method": "pocketsphinx-5-forced-alignment+energy-refine",
+      "alignment_fallback": false
+    },
+    "L19b": {
+      "voice": {
+        "id": "bf_isabella",
+        "lang": "en-gb"
+      },
+      "speed": 1.2325,
+      "alignment_method": "pocketsphinx-5-forced-alignment+energy-refine",
+      "alignment_fallback": false
+    },
+    "L19c": {
+      "voice": {
+        "id": "bf_isabella",
+        "lang": "en-gb"
+      },
+      "speed": 1.2325,
+      "alignment_method": "pocketsphinx-5-forced-alignment+energy-refine",
+      "alignment_fallback": false
+    },
+    "L19d": {
+      "voice": {
+        "id": "bf_isabella",
+        "lang": "en-gb"
+      },
+      "speed": 1.2325,
+      "alignment_method": "pocketsphinx-5-forced-alignment+energy-refine",
+      "alignment_fallback": false
+    },
+    "L20": {
+      "voice": {
+        "id": "bf_isabella",
+        "lang": "en-gb"
+      },
+      "speed": 1.2325,
+      "alignment_method": "pocketsphinx-5-forced-alignment+energy-refine",
+      "alignment_fallback": false
+    }
+  },
+  "lines": {
+    "L01": {
+      "start": 1.2,
+      "end": 3.45,
+      "speaker": "narrator",
+      "text": "Every industrial site changes by the hour.",
+      "section": "b01-site-wakes",
+      "pre_gap": 0.0,
+      "gap_after": 0.35,
+      "clip": {
+        "start": 1.16,
+        "end": 3.53
+      },
+      "gain_db": 0.01,
+      "words": [
+        {
+          "w": "Every",
+          "start": 1.2,
+          "end": 1.44
+        },
+        {
+          "w": "industrial",
+          "start": 1.44,
+          "end": 2.03
+        },
+        {
+          "w": "site",
+          "start": 2.03,
+          "end": 2.35
+        },
+        {
+          "w": "changes",
+          "start": 2.35,
+          "end": 2.9
+        },
+        {
+          "w": "by",
+          "start": 2.9,
+          "end": 3.05
+        },
+        {
+          "w": "the",
+          "start": 3.05,
+          "end": 3.19
+        },
+        {
+          "w": "hour",
+          "start": 3.19,
+          "end": 3.45
+        }
+      ],
+      "sentences": [
+        {
+          "text": "Every industrial site changes by the hour.",
+          "start": 1.2,
+          "end": 3.45
+        }
+      ]
+    },
+    "L02": {
+      "start": 3.84,
+      "end": 7.58,
+      "speaker": "narrator",
+      "text": "Contractors arrive. Equipment is isolated. Work moves.",
+      "section": "b01-site-wakes",
+      "pre_gap": 0.0,
+      "gap_after": 0.55,
+      "clip": {
+        "start": 3.8,
+        "end": 7.71
+      },
+      "gain_db": 0.08,
+      "words": [
+        {
+          "w": "Contractors",
+          "start": 3.84,
+          "end": 4.43
+        },
+        {
+          "w": "arrive",
+          "start": 4.43,
+          "end": 4.9
+        },
+        {
+          "w": "Equipment",
+          "start": 5.2,
+          "end": 5.71
+        },
+        {
+          "w": "is",
+          "start": 5.71,
+          "end": 5.88
+        },
+        {
+          "w": "isolated",
+          "start": 5.88,
+          "end": 6.58
+        },
+        {
+          "w": "Work",
+          "start": 6.88,
+          "end": 7.14
+        },
+        {
+          "w": "moves",
+          "start": 7.14,
+          "end": 7.58
+        }
+      ],
+      "sentences": [
+        {
+          "text": "Contractors arrive.",
+          "start": 3.84,
+          "end": 4.9
+        },
+        {
+          "text": "Equipment is isolated.",
+          "start": 5.2,
+          "end": 6.58
+        },
+        {
+          "text": "Work moves.",
+          "start": 6.88,
+          "end": 7.58
+        }
+      ]
+    },
+    "L03": {
+      "start": 8.22,
+      "end": 10.87,
+      "speaker": "narrator",
+      "text": "Insurance sets conditions under which risk is accepted.",
+      "section": "b02-insurance-becomes-workflow",
+      "pre_gap": 0.0,
+      "gap_after": 0.25,
+      "clip": {
+        "start": 8.18,
+        "end": 10.92
+      },
+      "gain_db": 0.26,
+      "words": [
+        {
+          "w": "Insurance",
+          "start": 8.22,
+          "end": 8.76
+        },
+        {
+          "w": "sets",
+          "start": 8.76,
+          "end": 9.01
+        },
+        {
+          "w": "conditions",
+          "start": 9.01,
+          "end": 9.51
+        },
+        {
+          "w": "under",
+          "start": 9.51,
+          "end": 9.7
+        },
+        {
+          "w": "which",
+          "start": 9.7,
+          "end": 9.96
+        },
+        {
+          "w": "risk",
+          "start": 9.96,
+          "end": 10.23
+        },
+        {
+          "w": "is",
+          "start": 10.23,
+          "end": 10.34
+        },
+        {
+          "w": "accepted",
+          "start": 10.34,
+          "end": 10.87
+        }
+      ],
+      "sentences": [
+        {
+          "text": "Insurance sets conditions under which risk is accepted.",
+          "start": 8.22,
+          "end": 10.87
+        }
+      ]
+    },
+    "L04": {
+      "start": 11.13,
+      "end": 13.98,
+      "speaker": "narrator",
+      "text": "Good teams translate them into permits, briefings and checklists.",
+      "section": "b02-insurance-becomes-workflow",
+      "pre_gap": 0.0,
+      "gap_after": 0.5,
+      "clip": {
+        "start": 11.09,
+        "end": 14.02
+      },
+      "gain_db": 0.15,
+      "words": [
+        {
+          "w": "Good",
+          "start": 11.13,
+          "end": 11.3
+        },
+        {
+          "w": "teams",
+          "start": 11.3,
+          "end": 11.65
+        },
+        {
+          "w": "translate",
+          "start": 11.65,
+          "end": 12.09
+        },
+        {
+          "w": "them",
+          "start": 12.09,
+          "end": 12.22
+        },
+        {
+          "w": "into",
+          "start": 12.22,
+          "end": 12.38
+        },
+        {
+          "w": "permits",
+          "start": 12.38,
+          "end": 12.85
+        },
+        {
+          "w": "briefings",
+          "start": 12.85,
+          "end": 13.34
+        },
+        {
+          "w": "and",
+          "start": 13.34,
+          "end": 13.45
+        },
+        {
+          "w": "checklists",
+          "start": 13.45,
+          "end": 13.98
+        }
+      ],
+      "sentences": [
+        {
+          "text": "Good teams translate them into permits, briefings and checklists.",
+          "start": 11.13,
+          "end": 13.98
+        }
+      ]
+    },
+    "L05": {
+      "start": 14.48,
+      "end": 16.6,
+      "speaker": "narrator",
+      "text": "But no one can hold a moving site in their head.",
+      "section": "b03-complexity-outruns-translation",
+      "pre_gap": 0.0,
+      "gap_after": 0.6,
+      "clip": {
+        "start": 14.44,
+        "end": 16.64
+      },
+      "gain_db": 0.03,
+      "words": [
+        {
+          "w": "But",
+          "start": 14.48,
+          "end": 14.55
+        },
+        {
+          "w": "no",
+          "start": 14.55,
+          "end": 14.74
+        },
+        {
+          "w": "one",
+          "start": 14.74,
+          "end": 14.97
+        },
+        {
+          "w": "can",
+          "start": 14.97,
+          "end": 15.09
+        },
+        {
+          "w": "hold",
+          "start": 15.09,
+          "end": 15.37
+        },
+        {
+          "w": "a",
+          "start": 15.37,
+          "end": 15.42
+        },
+        {
+          "w": "moving",
+          "start": 15.42,
+          "end": 15.75
+        },
+        {
+          "w": "site",
+          "start": 15.75,
+          "end": 16.07
+        },
+        {
+          "w": "in",
+          "start": 16.07,
+          "end": 16.13
+        },
+        {
+          "w": "their",
+          "start": 16.13,
+          "end": 16.26
+        },
+        {
+          "w": "head",
+          "start": 16.26,
+          "end": 16.6
+        }
+      ],
+      "sentences": [
+        {
+          "text": "But no one can hold a moving site in their head.",
+          "start": 14.48,
+          "end": 16.6
+        }
+      ]
+    },
+    "L06": {
+      "start": 17.2,
+      "end": 21.33,
+      "speaker": "narrator",
+      "text": "On Roof 03, hot work begins. The certificate and safeguards are in place.",
+      "section": "b03-complexity-outruns-translation",
+      "pre_gap": 0.0,
+      "gap_after": 0.45,
+      "clip": {
+        "start": 17.16,
+        "end": 21.37
+      },
+      "gain_db": 0.55,
+      "words": [
+        {
+          "w": "On",
+          "start": 17.2,
+          "end": 17.32
+        },
+        {
+          "w": "Roof",
+          "start": 17.32,
+          "end": 17.57
+        },
+        {
+          "w": "03",
+          "start": 17.57,
+          "end": 18.07
+        },
+        {
+          "w": "hot",
+          "start": 18.07,
+          "end": 18.33
+        },
+        {
+          "w": "work",
+          "start": 18.33,
+          "end": 18.55
+        },
+        {
+          "w": "begins",
+          "start": 18.55,
+          "end": 18.99
+        },
+        {
+          "w": "The",
+          "start": 19.34,
+          "end": 19.37
+        },
+        {
+          "w": "certificate",
+          "start": 19.37,
+          "end": 19.98
+        },
+        {
+          "w": "and",
+          "start": 19.98,
+          "end": 20.1
+        },
+        {
+          "w": "safeguards",
+          "start": 20.1,
+          "end": 20.7
+        },
+        {
+          "w": "are",
+          "start": 20.7,
+          "end": 20.82
+        },
+        {
+          "w": "in",
+          "start": 20.82,
+          "end": 20.93
+        },
+        {
+          "w": "place",
+          "start": 20.93,
+          "end": 21.33
+        }
+      ],
+      "sentences": [
+        {
+          "text": "On Roof 03, hot work begins.",
+          "start": 17.2,
+          "end": 18.99
+        },
+        {
+          "text": "The certificate and safeguards are in place.",
+          "start": 19.34,
+          "end": 21.33
+        }
+      ]
+    },
+    "L07": {
+      "start": 21.78,
+      "end": 23.48,
+      "speaker": "narrator",
+      "text": "Then a sprinkler zone goes offline.",
+      "section": "b04-invisible-crossing",
+      "pre_gap": 0.0,
+      "gap_after": 0.9,
+      "clip": {
+        "start": 21.74,
+        "end": 23.52
+      },
+      "gain_db": -0.14,
+      "words": [
+        {
+          "w": "Then",
+          "start": 21.78,
+          "end": 21.94
+        },
+        {
+          "w": "a",
+          "start": 21.94,
+          "end": 21.99
+        },
+        {
+          "w": "sprinkler",
+          "start": 21.99,
+          "end": 22.45
+        },
+        {
+          "w": "zone",
+          "start": 22.45,
+          "end": 22.79
+        },
+        {
+          "w": "goes",
+          "start": 22.79,
+          "end": 23.04
+        },
+        {
+          "w": "offline",
+          "start": 23.04,
+          "end": 23.48
+        }
+      ],
+      "sentences": [
+        {
+          "text": "Then a sprinkler zone goes offline.",
+          "start": 21.78,
+          "end": 23.48
+        }
+      ]
+    },
+    "L08": {
+      "start": 24.38,
+      "end": 29.67,
+      "speaker": "narrator",
+      "text": "Nothing looks different. Work continues. But the conditions have changed, and nobody sees it.",
+      "section": "b04-invisible-crossing",
+      "pre_gap": 0.0,
+      "gap_after": 0.7,
+      "clip": {
+        "start": 24.34,
+        "end": 29.71
+      },
+      "gain_db": 0.22,
+      "words": [
+        {
+          "w": "Nothing",
+          "start": 24.38,
+          "end": 24.73
+        },
+        {
+          "w": "looks",
+          "start": 24.73,
+          "end": 24.98
+        },
+        {
+          "w": "different",
+          "start": 24.98,
+          "end": 25.45
+        },
+        {
+          "w": "Work",
+          "start": 25.93,
+          "end": 26.19
+        },
+        {
+          "w": "continues",
+          "start": 26.19,
+          "end": 26.91
+        },
+        {
+          "w": "But",
+          "start": 27.36,
+          "end": 27.45
+        },
+        {
+          "w": "the",
+          "start": 27.45,
+          "end": 27.51
+        },
+        {
+          "w": "conditions",
+          "start": 27.51,
+          "end": 27.98
+        },
+        {
+          "w": "have",
+          "start": 27.98,
+          "end": 28.08
+        },
+        {
+          "w": "changed",
+          "start": 28.08,
+          "end": 28.6
+        },
+        {
+          "w": "and",
+          "start": 28.6,
+          "end": 28.82
+        },
+        {
+          "w": "nobody",
+          "start": 28.82,
+          "end": 29.19
+        },
+        {
+          "w": "sees",
+          "start": 29.19,
+          "end": 29.48
+        },
+        {
+          "w": "it",
+          "start": 29.48,
+          "end": 29.67
+        }
+      ],
+      "sentences": [
+        {
+          "text": "Nothing looks different.",
+          "start": 24.38,
+          "end": 25.45
+        },
+        {
+          "text": "Work continues.",
+          "start": 25.93,
+          "end": 26.91
+        },
+        {
+          "text": "But the conditions have changed, and nobody sees it.",
+          "start": 27.36,
+          "end": 29.67
+        }
+      ]
+    },
+    "L09": {
+      "start": 30.37,
+      "end": 32.72,
+      "speaker": "narrator",
+      "text": "If something goes wrong, questions begin afterwards:",
+      "section": "b05-afterwards",
+      "pre_gap": 0.0,
+      "gap_after": 0.2,
+      "clip": {
+        "start": 30.33,
+        "end": 32.76
+      },
+      "gain_db": -0.01,
+      "words": [
+        {
+          "w": "If",
+          "start": 30.37,
+          "end": 30.44
+        },
+        {
+          "w": "something",
+          "start": 30.44,
+          "end": 30.77
+        },
+        {
+          "w": "goes",
+          "start": 30.77,
+          "end": 31.02
+        },
+        {
+          "w": "wrong",
+          "start": 31.02,
+          "end": 31.38
+        },
+        {
+          "w": "questions",
+          "start": 31.38,
+          "end": 31.94
+        },
+        {
+          "w": "begin",
+          "start": 31.94,
+          "end": 32.18
+        },
+        {
+          "w": "afterwards",
+          "start": 32.18,
+          "end": 32.72
+        }
+      ],
+      "sentences": [
+        {
+          "text": "If something goes wrong, questions begin afterwards:",
+          "start": 30.37,
+          "end": 32.72
+        }
+      ]
+    },
+    "L10": {
+      "start": 32.92,
+      "end": 37.03,
+      "speaker": "narrator",
+      "text": "What was happening? Which condition applied? Can you prove what was true?",
+      "section": "b05-afterwards",
+      "pre_gap": 0.0,
+      "gap_after": 0.6,
+      "clip": {
+        "start": 32.88,
+        "end": 37.11
+      },
+      "gain_db": -0.3,
+      "words": [
+        {
+          "w": "What",
+          "start": 32.92,
+          "end": 33.05
+        },
+        {
+          "w": "was",
+          "start": 33.05,
+          "end": 33.2
+        },
+        {
+          "w": "happening",
+          "start": 33.2,
+          "end": 33.66
+        },
+        {
+          "w": "Which",
+          "start": 34.23,
+          "end": 34.43
+        },
+        {
+          "w": "condition",
+          "start": 34.43,
+          "end": 34.94
+        },
+        {
+          "w": "applied",
+          "start": 34.94,
+          "end": 35.42
+        },
+        {
+          "w": "Can",
+          "start": 35.82,
+          "end": 35.94
+        },
+        {
+          "w": "you",
+          "start": 35.94,
+          "end": 36.05
+        },
+        {
+          "w": "prove",
+          "start": 36.05,
+          "end": 36.4
+        },
+        {
+          "w": "what",
+          "start": 36.4,
+          "end": 36.55
+        },
+        {
+          "w": "was",
+          "start": 36.55,
+          "end": 36.71
+        },
+        {
+          "w": "true",
+          "start": 36.71,
+          "end": 37.03
+        }
+      ],
+      "sentences": [
+        {
+          "text": "What was happening?",
+          "start": 32.92,
+          "end": 33.66
+        },
+        {
+          "text": "Which condition applied?",
+          "start": 34.23,
+          "end": 35.42
+        },
+        {
+          "text": "Can you prove what was true?",
+          "start": 35.82,
+          "end": 37.03
+        }
+      ]
+    },
+    "L11": {
+      "start": 37.67,
+      "end": 39.75,
+      "speaker": "narrator",
+      "text": "Today, the gap is often discovered too late.",
+      "section": "b05-afterwards",
+      "pre_gap": 0.0,
+      "gap_after": 0.9,
+      "clip": {
+        "start": 37.63,
+        "end": 39.79
+      },
+      "gain_db": -0.09,
+      "words": [
+        {
+          "w": "Today",
+          "start": 37.67,
+          "end": 38.03
+        },
+        {
+          "w": "the",
+          "start": 38.03,
+          "end": 38.12
+        },
+        {
+          "w": "gap",
+          "start": 38.12,
+          "end": 38.39
+        },
+        {
+          "w": "is",
+          "start": 38.39,
+          "end": 38.53
+        },
+        {
+          "w": "often",
+          "start": 38.53,
+          "end": 38.76
+        },
+        {
+          "w": "discovered",
+          "start": 38.76,
+          "end": 39.25
+        },
+        {
+          "w": "too",
+          "start": 39.25,
+          "end": 39.43
+        },
+        {
+          "w": "late",
+          "start": 39.43,
+          "end": 39.75
+        }
+      ],
+      "sentences": [
+        {
+          "text": "Today, the gap is often discovered too late.",
+          "start": 37.67,
+          "end": 39.75
+        }
+      ]
+    },
+    "L12": {
+      "start": 43.85,
+      "end": 46.11,
+      "speaker": "narrator",
+      "text": "What if the decision existed when the risk changed?",
+      "section": "b06-rewind",
+      "pre_gap": 3.2,
+      "gap_after": 0.7,
+      "clip": {
+        "start": 43.81,
+        "end": 46.15
+      },
+      "gain_db": 0.16,
+      "words": [
+        {
+          "w": "What",
+          "start": 43.85,
+          "end": 43.99
+        },
+        {
+          "w": "if",
+          "start": 43.99,
+          "end": 44.1
+        },
+        {
+          "w": "the",
+          "start": 44.1,
+          "end": 44.19
+        },
+        {
+          "w": "decision",
+          "start": 44.19,
+          "end": 44.64
+        },
+        {
+          "w": "existed",
+          "start": 44.64,
+          "end": 45.16
+        },
+        {
+          "w": "when",
+          "start": 45.16,
+          "end": 45.27
+        },
+        {
+          "w": "the",
+          "start": 45.27,
+          "end": 45.36
+        },
+        {
+          "w": "risk",
+          "start": 45.36,
+          "end": 45.62
+        },
+        {
+          "w": "changed",
+          "start": 45.62,
+          "end": 46.11
+        }
+      ],
+      "sentences": [
+        {
+          "text": "What if the decision existed when the risk changed?",
+          "start": 43.85,
+          "end": 46.11
+        }
+      ]
+    },
+    "L13": {
+      "start": 46.81,
+      "end": 49.2,
+      "speaker": "worker",
+      "text": "I'm welding on Roof 03 until six.",
+      "section": "b07-speak-the-activity",
+      "pre_gap": 0.0,
+      "gap_after": 0.55,
+      "clip": {
+        "start": 46.77,
+        "end": 49.47
+      },
+      "gain_db": 2.51,
+      "words": [
+        {
+          "w": "I'm",
+          "start": 46.81,
+          "end": 47.0
+        },
+        {
+          "w": "welding",
+          "start": 47.0,
+          "end": 47.38
+        },
+        {
+          "w": "on",
+          "start": 47.38,
+          "end": 47.54
+        },
+        {
+          "w": "Roof",
+          "start": 47.54,
+          "end": 47.8
+        },
+        {
+          "w": "03",
+          "start": 47.8,
+          "end": 48.33
+        },
+        {
+          "w": "until",
+          "start": 48.33,
+          "end": 48.68
+        },
+        {
+          "w": "six",
+          "start": 48.68,
+          "end": 49.2
+        }
+      ],
+      "sentences": [
+        {
+          "text": "I'm welding on Roof 03 until six.",
+          "start": 46.81,
+          "end": 49.2
+        }
+      ]
+    },
+    "L14": {
+      "start": 49.76,
+      "end": 56.49,
+      "speaker": "narrator",
+      "text": "Priora connects the activity to the conditions that matter, verifies the certificate and safeguards, and creates the record while work happens.",
+      "section": "b07-speak-the-activity",
+      "pre_gap": 0.0,
+      "gap_after": 0.35,
+      "clip": {
+        "start": 49.72,
+        "end": 56.53
+      },
+      "gain_db": 0.48,
+      "words": [
+        {
+          "w": "Priora",
+          "start": 49.76,
+          "end": 50.12
+        },
+        {
+          "w": "connects",
+          "start": 50.12,
+          "end": 50.53
+        },
+        {
+          "w": "the",
+          "start": 50.53,
+          "end": 50.62
+        },
+        {
+          "w": "activity",
+          "start": 50.62,
+          "end": 51.11
+        },
+        {
+          "w": "to",
+          "start": 51.11,
+          "end": 51.2
+        },
+        {
+          "w": "the",
+          "start": 51.2,
+          "end": 51.28
+        },
+        {
+          "w": "conditions",
+          "start": 51.28,
+          "end": 51.73
+        },
+        {
+          "w": "that",
+          "start": 51.73,
+          "end": 51.83
+        },
+        {
+          "w": "matter",
+          "start": 51.83,
+          "end": 52.19
+        },
+        {
+          "w": "verifies",
+          "start": 52.56,
+          "end": 53.02
+        },
+        {
+          "w": "the",
+          "start": 53.02,
+          "end": 53.1
+        },
+        {
+          "w": "certificate",
+          "start": 53.1,
+          "end": 53.65
+        },
+        {
+          "w": "and",
+          "start": 53.65,
+          "end": 53.77
+        },
+        {
+          "w": "safeguards",
+          "start": 53.77,
+          "end": 54.37
+        },
+        {
+          "w": "and",
+          "start": 54.7,
+          "end": 54.8
+        },
+        {
+          "w": "creates",
+          "start": 54.8,
+          "end": 55.18
+        },
+        {
+          "w": "the",
+          "start": 55.18,
+          "end": 55.28
+        },
+        {
+          "w": "record",
+          "start": 55.28,
+          "end": 55.68
+        },
+        {
+          "w": "while",
+          "start": 55.68,
+          "end": 55.83
+        },
+        {
+          "w": "work",
+          "start": 55.83,
+          "end": 56.07
+        },
+        {
+          "w": "happens",
+          "start": 56.07,
+          "end": 56.49
+        }
+      ],
+      "sentences": [
+        {
+          "text": "Priora connects the activity to the conditions that matter, verifies the certificate and safeguards, and creates the record while work happens.",
+          "start": 49.76,
+          "end": 56.49
+        }
+      ]
+    },
+    "L15": {
+      "start": 56.84,
+      "end": 59.64,
+      "speaker": "narrator",
+      "text": "Prevention before the work. Proof as it happens.",
+      "section": "b08-prevention-and-proof",
+      "pre_gap": 0.0,
+      "gap_after": 1.1,
+      "clip": {
+        "start": 56.8,
+        "end": 59.77
+      },
+      "gain_db": -0.25,
+      "words": [
+        {
+          "w": "Prevention",
+          "start": 56.84,
+          "end": 57.41
+        },
+        {
+          "w": "before",
+          "start": 57.41,
+          "end": 57.71
+        },
+        {
+          "w": "the",
+          "start": 57.71,
+          "end": 57.79
+        },
+        {
+          "w": "work",
+          "start": 57.79,
+          "end": 58.16
+        },
+        {
+          "w": "Proof",
+          "start": 58.61,
+          "end": 58.86
+        },
+        {
+          "w": "as",
+          "start": 58.86,
+          "end": 59.02
+        },
+        {
+          "w": "it",
+          "start": 59.02,
+          "end": 59.15
+        },
+        {
+          "w": "happens",
+          "start": 59.15,
+          "end": 59.64
+        }
+      ],
+      "sentences": [
+        {
+          "text": "Prevention before the work.",
+          "start": 56.84,
+          "end": 58.16
+        },
+        {
+          "text": "Proof as it happens.",
+          "start": 58.61,
+          "end": 59.64
+        }
+      ]
+    },
+    "L16": {
+      "start": 60.83,
+      "end": 63.89,
+      "speaker": "narrator",
+      "text": "When the sprinkler goes offline again, Priora sees it immediately.",
+      "section": "b09-priora-sees-the-change",
+      "pre_gap": 0.0,
+      "gap_after": 1.2,
+      "clip": {
+        "start": 60.79,
+        "end": 63.93
+      },
+      "gain_db": 0.07,
+      "words": [
+        {
+          "w": "When",
+          "start": 60.83,
+          "end": 60.91
+        },
+        {
+          "w": "the",
+          "start": 60.91,
+          "end": 60.97
+        },
+        {
+          "w": "sprinkler",
+          "start": 60.97,
+          "end": 61.39
+        },
+        {
+          "w": "goes",
+          "start": 61.39,
+          "end": 61.67
+        },
+        {
+          "w": "offline",
+          "start": 61.67,
+          "end": 62.0
+        },
+        {
+          "w": "again",
+          "start": 62.0,
+          "end": 62.29
+        },
+        {
+          "w": "Priora",
+          "start": 62.51,
+          "end": 62.84
+        },
+        {
+          "w": "sees",
+          "start": 62.84,
+          "end": 63.19
+        },
+        {
+          "w": "it",
+          "start": 63.19,
+          "end": 63.31
+        },
+        {
+          "w": "immediately",
+          "start": 63.31,
+          "end": 63.89
+        }
+      ],
+      "sentences": [
+        {
+          "text": "When the sprinkler goes offline again, Priora sees it immediately.",
+          "start": 60.83,
+          "end": 63.89
+        }
+      ]
+    },
+    "L17": {
+      "start": 65.09,
+      "end": 71.99,
+      "speaker": "narrator",
+      "text": "Now the risk owner can change the activity, knowingly retain the exposure, or eventually ask selected carriers whether they will cover it.",
+      "section": "b10-change-retain-transfer",
+      "pre_gap": 0.0,
+      "gap_after": 0.6,
+      "clip": {
+        "start": 65.05,
+        "end": 72.03
+      },
+      "gain_db": 0.94,
+      "words": [
+        {
+          "w": "Now",
+          "start": 65.09,
+          "end": 65.25
+        },
+        {
+          "w": "the",
+          "start": 65.25,
+          "end": 65.36
+        },
+        {
+          "w": "risk",
+          "start": 65.36,
+          "end": 65.65
+        },
+        {
+          "w": "owner",
+          "start": 65.65,
+          "end": 65.89
+        },
+        {
+          "w": "can",
+          "start": 65.89,
+          "end": 66.05
+        },
+        {
+          "w": "change",
+          "start": 66.05,
+          "end": 66.42
+        },
+        {
+          "w": "the",
+          "start": 66.42,
+          "end": 66.52
+        },
+        {
+          "w": "activity",
+          "start": 66.52,
+          "end": 67.06
+        },
+        {
+          "w": "knowingly",
+          "start": 67.39,
+          "end": 67.8
+        },
+        {
+          "w": "retain",
+          "start": 67.8,
+          "end": 68.16
+        },
+        {
+          "w": "the",
+          "start": 68.16,
+          "end": 68.24
+        },
+        {
+          "w": "exposure",
+          "start": 68.24,
+          "end": 68.8
+        },
+        {
+          "w": "or",
+          "start": 69.13,
+          "end": 69.28
+        },
+        {
+          "w": "eventually",
+          "start": 69.28,
+          "end": 69.79
+        },
+        {
+          "w": "ask",
+          "start": 69.79,
+          "end": 70.07
+        },
+        {
+          "w": "selected",
+          "start": 70.07,
+          "end": 70.52
+        },
+        {
+          "w": "carriers",
+          "start": 70.52,
+          "end": 70.97
+        },
+        {
+          "w": "whether",
+          "start": 70.97,
+          "end": 71.22
+        },
+        {
+          "w": "they",
+          "start": 71.22,
+          "end": 71.38
+        },
+        {
+          "w": "will",
+          "start": 71.38,
+          "end": 71.48
+        },
+        {
+          "w": "cover",
+          "start": 71.48,
+          "end": 71.82
+        },
+        {
+          "w": "it",
+          "start": 71.82,
+          "end": 71.99
+        }
+      ],
+      "sentences": [
+        {
+          "text": "Now the risk owner can change the activity, knowingly retain the exposure, or eventually ask selected carriers whether they will cover it.",
+          "start": 65.09,
+          "end": 71.99
+        }
+      ]
+    },
+    "L18": {
+      "start": 72.59,
+      "end": 76.64,
+      "speaker": "narrator",
+      "text": "Most work remains ordinary. A few changes become explicit decisions.",
+      "section": "b11-whole-site-and-close",
+      "pre_gap": 0.0,
+      "gap_after": 0.6,
+      "clip": {
+        "start": 72.55,
+        "end": 76.68
+      },
+      "gain_db": -0.3,
+      "words": [
+        {
+          "w": "Most",
+          "start": 72.59,
+          "end": 72.85
+        },
+        {
+          "w": "work",
+          "start": 72.85,
+          "end": 73.14
+        },
+        {
+          "w": "remains",
+          "start": 73.14,
+          "end": 73.54
+        },
+        {
+          "w": "ordinary",
+          "start": 73.54,
+          "end": 74.09
+        },
+        {
+          "w": "A",
+          "start": 74.49,
+          "end": 74.52
+        },
+        {
+          "w": "few",
+          "start": 74.52,
+          "end": 74.73
+        },
+        {
+          "w": "changes",
+          "start": 74.73,
+          "end": 75.27
+        },
+        {
+          "w": "become",
+          "start": 75.27,
+          "end": 75.6
+        },
+        {
+          "w": "explicit",
+          "start": 75.6,
+          "end": 76.1
+        },
+        {
+          "w": "decisions",
+          "start": 76.1,
+          "end": 76.64
+        }
+      ],
+      "sentences": [
+        {
+          "text": "Most work remains ordinary.",
+          "start": 72.59,
+          "end": 74.09
+        },
+        {
+          "text": "A few changes become explicit decisions.",
+          "start": 74.49,
+          "end": 76.64
+        }
+      ]
+    },
+    "L19a": {
+      "start": 77.24,
+      "end": 78.52,
+      "speaker": "narrator",
+      "text": "Record becomes trust.",
+      "section": "b11-whole-site-and-close",
+      "pre_gap": 0.0,
+      "gap_after": 0.3,
+      "clip": {
+        "start": 77.2,
+        "end": 78.56
+      },
+      "gain_db": -0.74,
+      "words": [
+        {
+          "w": "Record",
+          "start": 77.24,
+          "end": 77.68
+        },
+        {
+          "w": "becomes",
+          "start": 77.68,
+          "end": 78.07
+        },
+        {
+          "w": "trust",
+          "start": 78.07,
+          "end": 78.52
+        }
+      ],
+      "sentences": [
+        {
+          "text": "Record becomes trust.",
+          "start": 77.24,
+          "end": 78.52
+        }
+      ]
+    },
+    "L19b": {
+      "start": 78.82,
+      "end": 80.18,
+      "speaker": "narrator",
+      "text": "Trust enables decisions.",
+      "section": "b11-whole-site-and-close",
+      "pre_gap": 0.0,
+      "gap_after": 0.3,
+      "clip": {
+        "start": 78.78,
+        "end": 80.22
+      },
+      "gain_db": -0.58,
+      "words": [
+        {
+          "w": "Trust",
+          "start": 78.82,
+          "end": 79.08
+        },
+        {
+          "w": "enables",
+          "start": 79.08,
+          "end": 79.59
+        },
+        {
+          "w": "decisions",
+          "start": 79.59,
+          "end": 80.18
+        }
+      ],
+      "sentences": [
+        {
+          "text": "Trust enables decisions.",
+          "start": 78.82,
+          "end": 80.18
+        }
+      ]
+    },
+    "L19c": {
+      "start": 80.48,
+      "end": 81.89,
+      "speaker": "narrator",
+      "text": "Decisions can carry price.",
+      "section": "b11-whole-site-and-close",
+      "pre_gap": 0.0,
+      "gap_after": 0.3,
+      "clip": {
+        "start": 80.44,
+        "end": 81.93
+      },
+      "gain_db": -0.4,
+      "words": [
+        {
+          "w": "Decisions",
+          "start": 80.48,
+          "end": 80.94
+        },
+        {
+          "w": "can",
+          "start": 80.94,
+          "end": 81.14
+        },
+        {
+          "w": "carry",
+          "start": 81.14,
+          "end": 81.43
+        },
+        {
+          "w": "price",
+          "start": 81.43,
+          "end": 81.89
+        }
+      ],
+      "sentences": [
+        {
+          "text": "Decisions can carry price.",
+          "start": 80.48,
+          "end": 81.89
+        }
+      ]
+    },
+    "L19d": {
+      "start": 82.19,
+      "end": 83.68,
+      "speaker": "narrator",
+      "text": "Price can connect to capacity.",
+      "section": "b11-whole-site-and-close",
+      "pre_gap": 0.0,
+      "gap_after": 0.8,
+      "clip": {
+        "start": 82.15,
+        "end": 83.72
+      },
+      "gain_db": -0.38,
+      "words": [
+        {
+          "w": "Price",
+          "start": 82.19,
+          "end": 82.44
+        },
+        {
+          "w": "can",
+          "start": 82.44,
+          "end": 82.62
+        },
+        {
+          "w": "connect",
+          "start": 82.62,
+          "end": 82.99
+        },
+        {
+          "w": "to",
+          "start": 82.99,
+          "end": 83.09
+        },
+        {
+          "w": "capacity",
+          "start": 83.09,
+          "end": 83.68
+        }
+      ],
+      "sentences": [
+        {
+          "text": "Price can connect to capacity.",
+          "start": 82.19,
+          "end": 83.68
+        }
+      ]
+    },
+    "L20": {
+      "start": 84.48,
+      "end": 88.1,
+      "speaker": "narrator",
+      "text": "Priora. Infrastructure for activity-level physical risk.",
+      "section": "b11-whole-site-and-close",
+      "pre_gap": 0.0,
+      "gap_after": 0.0,
+      "clip": {
+        "start": 84.44,
+        "end": 88.14
+      },
+      "gain_db": -0.01,
+      "words": [
+        {
+          "w": "Priora",
+          "start": 84.48,
+          "end": 84.98
+        },
+        {
+          "w": "Infrastructure",
+          "start": 85.69,
+          "end": 86.37
+        },
+        {
+          "w": "for",
+          "start": 86.37,
+          "end": 86.55
+        },
+        {
+          "w": "activity-level",
+          "start": 86.55,
+          "end": 87.36
+        },
+        {
+          "w": "physical",
+          "start": 87.36,
+          "end": 87.78
+        },
+        {
+          "w": "risk",
+          "start": 87.78,
+          "end": 88.1
+        }
+      ],
+      "sentences": [
+        {
+          "text": "Priora.",
+          "start": 84.48,
+          "end": 84.98
+        },
+        {
+          "text": "Infrastructure for activity-level physical risk.",
+          "start": 85.69,
+          "end": 88.1
+        }
+      ]
+    }
+  },
+  "created": "2026-09-29T19:13:34+00:00"
+}

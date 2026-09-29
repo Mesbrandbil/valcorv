@@ -8,9 +8,9 @@
   "text": "On Roof 03, hot work begins. The certificate and safeguards are in place.",
   "spoken_text": "On Roof oh-three, hot work begins. The certificate and safeguards are in place.",
   "sample_rate": 48000,
-  "duration": 4.53,
+  "duration": 4.49,
   "speech_start": 0.13,
-  "speech_end": 4.3,
+  "speech_end": 4.26,
   "words": [
     {
       "w": "On",
@@ -36,54 +36,54 @@
     {
       "w": "work",
       "start": 1.26,
-      "end": 1.5
+      "end": 1.48
     },
     {
       "w": "begins",
-      "start": 1.5,
-      "end": 1.95
+      "start": 1.48,
+      "end": 1.92
     },
     {
       "w": "The",
-      "start": 2.3,
-      "end": 2.34
+      "start": 2.27,
+      "end": 2.3
     },
     {
       "w": "certificate",
-      "start": 2.34,
-      "end": 2.95
+      "start": 2.3,
+      "end": 2.91
     },
     {
       "w": "and",
-      "start": 2.95,
-      "end": 3.07
+      "start": 2.91,
+      "end": 3.03
     },
     {
       "w": "safeguards",
-      "start": 3.07,
-      "end": 3.67
+      "start": 3.03,
+      "end": 3.63
     },
     {
       "w": "are",
-      "start": 3.67,
-      "end": 3.79
+      "start": 3.63,
+      "end": 3.75
     },
     {
       "w": "in",
-      "start": 3.79,
-      "end": 3.9
+      "start": 3.75,
+      "end": 3.86
     },
     {
       "w": "place",
-      "start": 3.9,
-      "end": 4.3
+      "start": 3.86,
+      "end": 4.26
     }
   ],
   "sentences": [
     {
       "text": "On Roof 03, hot work begins.",
       "start": 0.13,
-      "end": 1.95,
+      "end": 1.92,
       "word_range": [
         0,
         6
@@ -91,21 +91,21 @@
     },
     {
       "text": "The certificate and safeguards are in place.",
-      "start": 2.3,
-      "end": 4.3,
+      "start": 2.27,
+      "end": 4.26,
       "word_range": [
         6,
         13
       ]
     }
   ],
-  "created": "2026-09-29T19:06:18+00:00",
+  "created": "2026-09-29T19:13:29+00:00",
   "provider": "kokoro-onnx 0.6.1, kokoro-v1.0.onnx (local guide)",
   "voice": {
     "id": "bf_isabella",
     "lang": "en-gb"
   },
-  "speed": 1.2262,
+  "speed": 1.2325,
   "inner_pauses": [
     0.35
   ],
@@ -113,7 +113,7 @@
     {
       "text": "On Roof oh-three, hot work begins.",
       "start": 0.12,
-      "end": 1.98,
+      "end": 1.95,
       "alignment_quality": {
         "energy_pauses": 0,
         "pause_agreement": 1.0,
@@ -127,8 +127,8 @@
     },
     {
       "text": "The certificate and safeguards are in place.",
-      "start": 2.29,
-      "end": 4.33,
+      "start": 2.26,
+      "end": 4.29,
       "alignment_quality": {
         "energy_pauses": 0,
         "pause_agreement": 1.0,
@@ -150,8 +150,8 @@
       "pauses_inside_words": [],
       "onset_error_ms": 0.0,
       "offset_error_ms": 0.0,
-      "pause_onset_error_ms_mean": 20.0,
-      "pause_onset_error_ms_max": 20.0
+      "pause_onset_error_ms_mean": 10.0,
+      "pause_onset_error_ms_max": 10.0
     },
     "quality_ok": true
   },

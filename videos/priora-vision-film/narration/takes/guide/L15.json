@@ -8,9 +8,9 @@
   "text": "Prevention before the work. Proof as it happens.",
   "spoken_text": "Prevention before the work. Proof as it happens.",
   "sample_rate": 48000,
-  "duration": 3.27,
+  "duration": 3.25,
   "speech_start": 0.13,
-  "speech_end": 2.95,
+  "speech_end": 2.93,
   "words": [
     {
       "w": "Prevention",
@@ -50,7 +50,7 @@
     {
       "w": "happens",
       "start": 2.44,
-      "end": 2.95
+      "end": 2.93
     }
   ],
   "sentences": [
@@ -66,20 +66,20 @@
     {
       "text": "Proof as it happens.",
       "start": 1.9,
-      "end": 2.95,
+      "end": 2.93,
       "word_range": [
         4,
         8
       ]
     }
   ],
-  "created": "2026-09-29T19:06:18+00:00",
+  "created": "2026-09-29T19:13:30+00:00",
   "provider": "kokoro-onnx 0.6.1, kokoro-v1.0.onnx (local guide)",
   "voice": {
     "id": "bf_isabella",
     "lang": "en-gb"
   },
-  "speed": 1.2262,
+  "speed": 1.2325,
   "inner_pauses": [
     0.45
   ],
@@ -102,7 +102,7 @@
     {
       "text": "Proof as it happens.",
       "start": 1.89,
-      "end": 3.07,
+      "end": 3.05,
       "alignment_quality": {
         "energy_pauses": 0,
         "pause_agreement": 1.0,
@@ -123,7 +123,7 @@
       "pause_agreement": 1.0,
       "pauses_inside_words": [],
       "onset_error_ms": 0.0,
-      "offset_error_ms": 110.0,
+      "offset_error_ms": 90.0,
       "pause_onset_error_ms_mean": 0.0,
       "pause_onset_error_ms_max": 0.0
     },

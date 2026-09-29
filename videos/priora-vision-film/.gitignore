@@ -6,3 +6,4 @@ audio-engine/__pycache__/
 *.pyc
 renders/tmp/
 __pycache__/
+narration/takes/guide/*.wav

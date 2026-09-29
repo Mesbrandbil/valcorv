@@ -63,7 +63,7 @@
       ],
       "narrator_voice": "bf_isabella",
       "worker_voice": "bm_daniel",
-      "narrator_speed": 1.2262,
+      "narrator_speed": 1.2325,
       "worker_speed": 1.0,
       "default_inner_pause": {
         ".": 0.3,

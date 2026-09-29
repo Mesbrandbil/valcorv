@@ -135,8 +135,7 @@ def main() -> int:
             print(f"ERROR: {lid} take text differs from lines.json; regenerate it", file=sys.stderr)
             return 1
         words = doc["words"]
-        on, off = nc.speech_edges(y, SR, words[0]["start"], words[-1]["end"])
-        on, off = min(on, words[0]["start"]), max(off, words[-1]["end"])
+        on, off = nc.take_speech_bounds(y, SR, words[0]["start"], words[-1]["end"])
         a = max(0, int(round((on - pad) * SR)))
         b = min(len(y), int(round((off + pad) * SR)))
         seg = y[a:b].astype(np.float64).copy()

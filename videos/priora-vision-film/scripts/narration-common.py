@@ -272,6 +272,13 @@ def speech_edges(y: np.ndarray, sr: int, first_start: float, last_end: float,
     return max(0.0, onset), min(len(y) / sr, max(offset, onset + 0.05))
 
 
+def take_speech_bounds(y: np.ndarray, sr: int, first_start: float, last_end: float) -> tuple[float, float]:
+    """Speech onset/offset of a take used for placement: the energy edges
+    around the aligned words, never inside the first or last word."""
+    on, off = speech_edges(y, sr, first_start, last_end)
+    return min(on, first_start), max(off, last_end)
+
+
 def lufs(y: np.ndarray, sr: int) -> float:
     import pyloudnorm as pyln
 

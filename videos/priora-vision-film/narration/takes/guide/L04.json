@@ -8,9 +8,9 @@
   "text": "Good teams translate them into permits, briefings and checklists.",
   "spoken_text": "Good teams translate them into permits, briefings and checklists.",
   "sample_rate": 48000,
-  "duration": 3.24,
+  "duration": 3.21,
   "speech_start": 0.13,
-  "speech_end": 3.01,
+  "speech_end": 2.98,
   "words": [
     {
       "w": "Good",
@@ -35,53 +35,53 @@
     {
       "w": "into",
       "start": 1.22,
-      "end": 1.39
+      "end": 1.38
     },
     {
       "w": "permits",
-      "start": 1.39,
-      "end": 1.87
+      "start": 1.38,
+      "end": 1.85
     },
     {
       "w": "briefings",
-      "start": 1.87,
-      "end": 2.36
+      "start": 1.85,
+      "end": 2.34
     },
     {
       "w": "and",
-      "start": 2.36,
-      "end": 2.47
+      "start": 2.34,
+      "end": 2.45
     },
     {
       "w": "checklists",
-      "start": 2.47,
-      "end": 3.01
+      "start": 2.45,
+      "end": 2.98
     }
   ],
   "sentences": [
     {
       "text": "Good teams translate them into permits, briefings and checklists.",
       "start": 0.13,
-      "end": 3.01,
+      "end": 2.98,
       "word_range": [
         0,
         9
       ]
     }
   ],
-  "created": "2026-09-29T19:06:18+00:00",
+  "created": "2026-09-29T19:13:29+00:00",
   "provider": "kokoro-onnx 0.6.1, kokoro-v1.0.onnx (local guide)",
   "voice": {
     "id": "bf_isabella",
     "lang": "en-gb"
   },
-  "speed": 1.2262,
+  "speed": 1.2325,
   "inner_pauses": [],
   "segments_synth": [
     {
       "text": "Good teams translate them into permits, briefings and checklists.",
       "start": 0.12,
-      "end": 3.04,
+      "end": 3.01,
       "alignment_quality": {
         "energy_pauses": 0,
         "pause_agreement": 1.0,

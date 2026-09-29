@@ -18,6 +18,8 @@
            content (ok, bad, on, sig, quoted, selected, folded ...) are kept.
            Hover looks are available as .is-hover.
    Fonts   'IBM Plex Sans' and 'IBM Plex Mono' come from assets/css/fonts.css.
+   SVG     Sizes inside an SVG viewBox (the readout's slice text) stay in user units
+           (written 10px) because the viewBox already scales them.
    Glyphs  <use href="#g-..."> symbols and the #hatch pattern come from
            assets/site/glyphs.svg, which must be inlined in the document.
    Generated: every px of the demo is written as calc(N * var(--u)), --u = --pui-scale x 1px.
@@ -143,7 +145,7 @@
 .pui .slice{margin-top:0;height:0;overflow:hidden;opacity:0}
 .pui-readout.has-slice .slice{opacity:1;height:calc(36 * var(--u));margin-top:calc(9 * var(--u));overflow:visible}
 .pui .slice svg{width:calc(236 * var(--u));height:calc(36 * var(--u));overflow:visible}
-.pui .slice text{font:500 calc(10 * var(--u)) var(--pui-mono);letter-spacing:.05em;fill:var(--pui-ink-2)}
+.pui .slice text{font:500 10px var(--pui-mono);letter-spacing:.05em;fill:var(--pui-ink-2)}
 .pui .slice .ax{stroke:var(--pui-ink);stroke-opacity:.3;stroke-width:1}
 .pui .slice .seg.dev{fill:url(#hatch);stroke:var(--pui-signal);stroke-width:1}
 .pui .slice .seg.dev.hist{fill:url(#hatch-ink);stroke:var(--pui-ink-3)}
@@ -391,6 +393,7 @@
 .pui .srow.hero .n,.pui .srow.sys .n{font-weight:500}
 /* trusted record entries */
 .pui-record{flex:1;overflow:hidden;padding:calc(2 * var(--u)) 0 calc(16 * var(--u));min-height:0;position:relative;-webkit-mask-image:linear-gradient(transparent,#000 calc(5 * var(--u)));mask-image:linear-gradient(transparent,#000 calc(5 * var(--u)))}
+.pui-record.tail{display:flex;flex-direction:column;justify-content:flex-end}
 .pui-record:empty::before{content:"Every important event will be appended here, in order.";display:block;padding:calc(6 * var(--u)) calc(20 * var(--u));font:400 calc(12.5 * var(--u))/1.4 var(--pui-sans);color:var(--pui-ink-3)}
 .pui .rr{display:grid;grid-template-columns:calc(40 * var(--u)) calc(14 * var(--u)) 1fr;gap:0 calc(6 * var(--u));padding:calc(6 * var(--u)) calc(20 * var(--u)) calc(6 * var(--u));position:relative}
 .pui .rr .t{font:500 calc(10.5 * var(--u))/1.45 var(--pui-mono);color:var(--pui-ink-3)}

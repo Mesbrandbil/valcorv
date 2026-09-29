@@ -8,9 +8,9 @@
   "text": "Most work remains ordinary. A few changes become explicit decisions.",
   "spoken_text": "Most work remains ordinary. A few changes become explicit decisions.",
   "sample_rate": 48000,
-  "duration": 4.46,
+  "duration": 4.41,
   "speech_start": 0.13,
-  "speech_end": 4.23,
+  "speech_end": 4.18,
   "words": [
     {
       "w": "Most",
@@ -35,32 +35,32 @@
     {
       "w": "A",
       "start": 2.03,
-      "end": 2.07
+      "end": 2.06
     },
     {
       "w": "few",
-      "start": 2.07,
+      "start": 2.06,
       "end": 2.27
     },
     {
       "w": "changes",
       "start": 2.27,
-      "end": 2.84
+      "end": 2.81
     },
     {
       "w": "become",
-      "start": 2.84,
-      "end": 3.16
+      "start": 2.81,
+      "end": 3.14
     },
     {
       "w": "explicit",
-      "start": 3.16,
-      "end": 3.71
+      "start": 3.14,
+      "end": 3.64
     },
     {
       "w": "decisions",
-      "start": 3.71,
-      "end": 4.23
+      "start": 3.64,
+      "end": 4.18
     }
   ],
   "sentences": [
@@ -76,20 +76,20 @@
     {
       "text": "A few changes become explicit decisions.",
       "start": 2.03,
-      "end": 4.23,
+      "end": 4.18,
       "word_range": [
         4,
         10
       ]
     }
   ],
-  "created": "2026-09-29T19:06:18+00:00",
+  "created": "2026-09-29T19:13:30+00:00",
   "provider": "kokoro-onnx 0.6.1, kokoro-v1.0.onnx (local guide)",
   "voice": {
     "id": "bf_isabella",
     "lang": "en-gb"
   },
-  "speed": 1.2262,
+  "speed": 1.2325,
   "inner_pauses": [
     0.4
   ],
@@ -112,7 +112,7 @@
     {
       "text": "A few changes become explicit decisions.",
       "start": 2.02,
-      "end": 4.26,
+      "end": 4.21,
       "alignment_quality": {
         "energy_pauses": 0,
         "pause_agreement": 1.0,
