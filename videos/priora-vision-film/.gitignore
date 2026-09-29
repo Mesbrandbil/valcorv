@@ -1,0 +1,7 @@
+node_modules/
+.hyperframes/cache/
+snapshots/tmp/
+narration/takes/**/*.raw
+audio-engine/__pycache__/
+*.pyc
+renders/tmp/
