@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+  <head>
+    <meta charset="UTF-8">
+    <title>chrome: frame furniture, sheet, site clock and rewind counter (Frame 7)</title>
+  </head>
+  <body>
+    <template id="chrome-template">
+      <link rel="stylesheet" href="assets/css/film.css">
+      <style>
+        #root {
+          position: absolute;
+          inset: 0;
+          overflow: hidden;
+          pointer-events: none;
+        }
+        #chrome-frame {
+          position: absolute;
+          inset: 0;
+          width: 1920px;
+          height: 1080px;
+        }
+        #chrome-frame .chrome-rule {
+          fill: none;
+          stroke: #111111;
+          stroke-opacity: 0.2;
+          stroke-width: 1;
+        }
+        #chrome-frame .chrome-reg {
+          fill: none;
+          stroke: #111111;
+          stroke-opacity: 0.38;
+          stroke-width: 1;
+        }
+        #chrome-titleblock {
+          position: absolute;
+          right: 36px;
+          bottom: 36px;
+          display: flex;
+          border-top: 1px solid rgba(17, 17, 17, 0.2);
+          border-left: 1px solid rgba(17, 17, 17, 0.2);
+          font-family: var(--mono);
+          font-size: 15px;
+          letter-spacing: 0.12em;
+          text-transform: uppercase;
+          color: #6a6863;
+        }
+        #chrome-titleblock .chrome-cell {
+          padding: 12px 18px 11px;
+          border-right: 1px solid rgba(17, 17, 17, 0.2);
+          white-space: nowrap;
+        }
+        #chrome-titleblock .chrome-cell:last-child {
+          border-right: none;
+        }
+        #chrome-titleblock .chrome-strong {
+          color: #2a2a2a;
+          font-weight: 500;
+        }
+        #chrome-clock {
+          position: absolute;
+          top: 60px;
+          right: 96px;
+          width: 360px;
+          text-align: right;
+        }
+        #chrome-clock .chrome-clock-label {
+          display: block;
+          font-family: var(--mono);
+          font-weight: 500;
+          font-size: 16px;
+          letter-spacing: 0.14em;
+          text-transform: uppercase;
+          color: #6a6863;
+        }
+        #chrome-clock .chrome-digits {
+          position: absolute;
+          right: 0;
+          top: 26px;
+          font-family: var(--mono);
+          font-weight: 500;
+          font-size: 38px;
+          letter-spacing: 0.02em;
+          color: #2a2a2a;
+          font-variant-numeric: tabular-nums;
+          white-space: nowrap;
+        }
+        #chrome-replay {
+          position: absolute;
+          right: 0;
+          top: 80px;
+          font-family: var(--mono);
+          font-weight: 500;
+          font-size: 16px;
+          letter-spacing: 0.14em;
+          text-transform: uppercase;
+          color: #5e5d59;
+          white-space: nowrap;
+          opacity: 0;
+        }
+        #chrome-rewind {
+          position: absolute;
+          top: 58px;
+          left: 0;
+          right: 0;
+          text-align: center;
+          opacity: 0;
+        }
+        #chrome-rewind .chrome-rw-label {
+          display: inline-block;
+          font-family: var(--mono);
+          font-weight: 600;
+          font-size: 18px;
+          letter-spacing: 0.22em;
+          color: #2a2a2a;
+        }
+        #chrome-rewind .chrome-rw-span {
+          display: block;
+          margin-top: 8px;
+          font-family: var(--mono);
+          font-weight: 400;
+          font-size: 18px;
+          letter-spacing: 0.1em;
+          color: #5e5d59;
+        }
+        #chrome-rw-bar {
+          display: block;
+          width: 320px;
+          height: 1px;
+          margin: 12px auto 0;
+          background: #2a2a2a;
+          transform-origin: 0% 50%;
+        }
+      </style>
+
+      <div id="root" data-composition-id="chrome" data-width="1920" data-height="1080">
+        <div id="chrome-all" style="position:absolute;inset:0">
+        <svg id="chrome-frame" viewBox="0 0 1920 1080" xmlns="http://www.w3.org/2000/svg" data-layout-ignore="">
+          <g id="chrome-sheet">
+            <path id="chrome-border" class="chrome-rule" d="M36 36H1884V1044H36Z" />
+          </g>
+          <g id="chrome-regs">
+            <g class="chrome-reg" transform="translate(36 36)"><path d="M-14 0H14M0 -14V14" /><circle r="5.5" /></g>
+            <g class="chrome-reg" transform="translate(1884 36)"><path d="M-14 0H14M0 -14V14" /><circle r="5.5" /></g>
+            <g class="chrome-reg" transform="translate(36 1044)"><path d="M-14 0H14M0 -14V14" /><circle r="5.5" /></g>
+            <g class="chrome-reg" transform="translate(1884 1044)"><path d="M-14 0H14M0 -14V14" /><circle r="5.5" /></g>
+          </g>
+        </svg>
+
+        <div id="chrome-titleblock" data-layout-allow-overflow="">
+          <span class="chrome-cell chrome-strong">Nordhavn Bioprocessing</span>
+          <span class="chrome-cell">Site activity</span>
+          <span class="chrome-cell">Drawn · HSE</span>
+          <span class="chrome-cell">Sheet 01</span>
+          <span class="chrome-cell">Fictional site</span>
+        </div>
+
+        <div id="chrome-clock">
+          <span class="chrome-clock-label">Site time</span>
+          <span id="chrome-hm" class="chrome-digits">06:00</span>
+          <span id="chrome-hms" class="chrome-digits" style="opacity: 0">14:18:00</span>
+          <span id="chrome-day" class="chrome-digits" style="opacity: 0">DAY +2 · 09:15</span>
+          <span id="chrome-act2" class="chrome-digits" style="opacity: 0">14:41:59</span>
+          <span id="chrome-replay">Replay · with Priora</span>
+        </div>
+
+        <div id="chrome-rewind">
+          <span class="chrome-rw-label">◀◀&nbsp;&nbsp;REWIND</span>
+          <span class="chrome-rw-span">16:07&nbsp;&nbsp;→&nbsp;&nbsp;14:41:59</span>
+          <span id="chrome-rw-bar"></span>
+        </div>
+        </div>
+      </div>
+
+      <script>
+        var ID = "chrome";
+        var clk = FL.clock(ID);
+        var T = function (a, off) { return clk.t(a, off); };
+        var RS = T("rewindStart"), RE = T("rewindEnd"), LAND = T("landing"), END = clk.duration;
+        var H = function (h, m, s) { return h * 3600 + m * 60 + (s || 0); };
+        var el = function (id) { return document.getElementById(id); };
+        var hm = el("chrome-hm"), hms = el("chrome-hms"), day = el("chrome-day"), act2 = el("chrome-act2");
+        var fHM = function (v) { return FL.hhmm(v); };
+        var fHMS = function (v) { return FL.hhmm(v, true); };
+
+        // ============ STORY: Act I site time; scrubbed forward, then backward in the rewind
+        var story = FL.story();
+        FL.drawOn(story, [el("chrome-border")], { at: 0.15, duration: 1.3, ease: "power2.inOut" });
+        story.fromTo("#chrome-titleblock", { opacity: 0 }, { opacity: 1, duration: 0.8, ease: "power1.out" }, 0.9);
+        story.fromTo("#chrome-clock", { opacity: 0 }, { opacity: 1, duration: 0.6, ease: "power1.out" }, 0.6);
+        // morning: 06:00, one hour on "hour", then the day accelerates as the site gets busy
+        FL.textTo(story, hm, { from: H(6, 0), to: H(7, 0), at: T("hour"), duration: 0.8, ease: "power2.inOut", format: fHM });
+        FL.textTo(story, hm, { from: H(7, 0), to: H(9, 30), at: T("contractors"), duration: T("noOne") - T("contractors"), ease: "none", format: fHM });
+        FL.textTo(story, hm, { from: H(9, 30), to: H(14, 18), at: T("noOne"), duration: T("roof03") - T("noOne") - 0.2, ease: "power2.in", format: fHM });
+        // on Roof 03 the clock gains seconds: precision rises as we push in
+        story.set(hm, { opacity: 0 }, T("roof03"));
+        story.set(hms, { opacity: 1 }, T("roof03"));
+        FL.textTo(story, hms, { from: H(14, 18, 0), to: H(14, 41, 59), at: T("roof03"), duration: LAND - T("roof03"), ease: "power1.inOut", format: fHMS });
+        FL.textTo(story, hms, { from: H(14, 41, 59), to: H(14, 42, 0), at: T("offline"), duration: 0.2, ease: "none", format: fHMS });
+        FL.textTo(story, hms, { from: H(14, 42, 0), to: H(16, 7, 0), at: T("afterwards"), duration: 1.2, ease: "power2.inOut", format: fHMS });
+        story.set(hms, { opacity: 0 }, T("q1"));
+        story.set(day, { opacity: 1 }, T("q1"));
+
+        // ============ REGISTERED TIMELINE
+        var tl = gsap.timeline({ paused: true });
+        FL.scrub(tl, story, { at: 0, from: 0, to: RS, duration: RS, ease: "none" });
+        FL.scrub(tl, story, { at: RS, from: RS, to: LAND, duration: RE - RS, ease: FL.rewindEase() });
+
+        // rewind counter
+        tl.fromTo("#chrome-rewind", { opacity: 0 }, { opacity: 1, duration: 0.25, ease: "power1.out", immediateRender: false }, RS);
+        tl.fromTo("#chrome-rw-bar", { scaleX: 1 }, { scaleX: 0, duration: RE - RS, ease: FL.rewindEase(), immediateRender: false }, RS);
+        tl.fromTo("#chrome-rewind", { opacity: 1 }, { opacity: 0, duration: 0.4, ease: "power1.in", immediateRender: false }, RE + 0.15);
+
+        // Act II: the drawing sheet dissolves as the lines resolve; the clock hands over to act2
+        tl.fromTo("#chrome-sheet", { opacity: 1 }, { opacity: 0, duration: 1.0, ease: "power1.inOut", immediateRender: false }, RE + 0.4);
+        tl.fromTo("#chrome-titleblock", { opacity: 1 }, { opacity: 0, duration: 0.7, ease: "power1.inOut", immediateRender: false }, RE + 0.3);
+        tl.set(hms, { opacity: 0 }, RE + 0.001);
+        tl.set(act2, { opacity: 1 }, RE + 0.001);
+        // replay from the worker's perspective: the clock rolls back to 14:18
+        FL.textTo(tl, act2, { from: H(14, 41, 59), to: H(14, 18, 0), at: T("riskChanged", -0.6), duration: 1.1, ease: "power2.inOut", format: fHMS });
+        tl.fromTo("#chrome-replay", { opacity: 0 }, { opacity: 1, duration: 0.5, ease: "power1.out", immediateRender: false }, T("riskChanged", -0.4));
+        tl.fromTo("#chrome-replay", { opacity: 1 }, { opacity: 0, duration: 0.6, ease: "power1.in", immediateRender: false }, T("l16", -0.8));
+        // the day moves on quietly during prevention and proof
+        FL.textTo(tl, act2, { from: H(14, 18, 0), to: H(14, 24, 10), at: T("connects"), duration: T("l16") - T("connects") - 0.5, ease: "none", format: fHMS });
+        // Act III: the sprinkler goes offline again at 14:42, the decision is requested at 14:43
+        FL.textTo(tl, act2, { from: H(14, 24, 10), to: H(14, 42, 0), at: T("l16", -0.3), duration: 0.9, ease: "power2.inOut", format: fHMS });
+        FL.textTo(tl, act2, { from: H(14, 42, 0), to: H(14, 43, 0), at: T("decides"), duration: 0.4, ease: "none", format: fHMS });
+        // most work stays ordinary: the rest of the working day passes
+        FL.textTo(tl, act2, { from: H(14, 43, 0), to: H(17, 36, 0), at: T("ordinary"), duration: T("chainRecord") - T("ordinary") - 0.9, ease: "power1.inOut", format: fHMS });
+
+        // everything leaves before the close
+        tl.fromTo("#chrome-all", { opacity: 1 }, { opacity: 0, duration: 0.5, ease: "power1.in", immediateRender: false }, END - 0.55);
+
+        window.__timelines["chrome"] = tl;
+      </script>
+    </template>
+  </body>
+</html>
