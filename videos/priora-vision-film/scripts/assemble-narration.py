@@ -231,6 +231,7 @@ def main() -> int:
         "duration_total": round(total, 3),
         "lead_in": pacing["lead_in"],
         "end_hold": pacing["end_hold"],
+        "grid": pacing.get("grid"),
         "audio": str(Path(args.out_voice).resolve().relative_to(nc.ROOT)) if Path(args.out_voice).resolve().is_relative_to(nc.ROOT) else args.out_voice,
         "captions": str(Path(args.out_vtt).resolve().relative_to(nc.ROOT)) if Path(args.out_vtt).resolve().is_relative_to(nc.ROOT) else args.out_vtt,
         "time_base": "absolute film seconds from 0.000; word end = end of the word's last phone",
@@ -272,12 +273,16 @@ def main() -> int:
     print(f"Speech: {speech_words} words in {speech_time:.2f}s of speech = {speech_words / speech_time:.2f} words/s")
     print(f"Voice stem: {final_lufs:.1f} LUFS integrated, {final_tp:.1f} dBTP true peak -> {args.out_voice}")
     print(f"TOTAL DURATION: {total:.2f}s")
-    ok = pacing["min_total"] <= total <= pacing["max_total"]
-    if not ok:
-        print(f"WARNING: total {total:.2f}s is outside {pacing['min_total']}-{pacing['max_total']}s. "
-              "Adjust the voice speed (not the designed gaps).")
-        if args.strict:
-            return 2
+    if "min_total" in pacing and "max_total" in pacing:
+        ok = pacing["min_total"] <= total <= pacing["max_total"]
+        if not ok:
+            print(f"WARNING: total {total:.2f}s is outside {pacing['min_total']}-{pacing['max_total']}s.")
+            if args.strict:
+                return 2
+    if placement.get("grid_step"):
+        g = pacing["grid"]
+        print(f"Grid: {g['bpm']} BPM, every line starts on a beat ({placement['grid_step']:.4f} s); "
+              f"{total / placement['grid_step']:.0f} beats = {total / placement['grid_step'] / 4:.1f} bars")
     return 0
 
 

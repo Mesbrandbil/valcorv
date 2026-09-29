@@ -8,71 +8,71 @@
   "text": "Nothing looks different. The conditions have changed, and nobody sees it.",
   "spoken_text": "Nothing looks different. The conditions have changed, and nobody sees it.",
   "sample_rate": 48000,
-  "duration": 4.34,
+  "duration": 5.0,
   "speech_start": 0.13,
-  "speech_end": 4.11,
+  "speech_end": 4.77,
   "words": [
     {
       "w": "Nothing",
       "start": 0.13,
-      "end": 0.52
+      "end": 0.56
     },
     {
       "w": "looks",
-      "start": 0.52,
-      "end": 0.78
+      "start": 0.56,
+      "end": 0.82
     },
     {
       "w": "different",
-      "start": 0.78,
-      "end": 1.34
+      "start": 0.82,
+      "end": 1.35
     },
     {
       "w": "The",
-      "start": 1.65,
-      "end": 1.7
+      "start": 2.06,
+      "end": 2.11
     },
     {
       "w": "conditions",
-      "start": 1.7,
-      "end": 2.22
+      "start": 2.11,
+      "end": 2.72
     },
     {
       "w": "have",
-      "start": 2.22,
-      "end": 2.35
+      "start": 2.72,
+      "end": 2.84
     },
     {
       "w": "changed",
-      "start": 2.35,
-      "end": 2.92
+      "start": 2.84,
+      "end": 3.5
     },
     {
       "w": "and",
-      "start": 2.92,
-      "end": 3.18
+      "start": 3.66,
+      "end": 3.77
     },
     {
       "w": "nobody",
-      "start": 3.18,
-      "end": 3.57
+      "start": 3.77,
+      "end": 4.19
     },
     {
       "w": "sees",
-      "start": 3.57,
-      "end": 3.89
+      "start": 4.19,
+      "end": 4.51
     },
     {
       "w": "it",
-      "start": 3.89,
-      "end": 4.11
+      "start": 4.51,
+      "end": 4.77
     }
   ],
   "sentences": [
     {
       "text": "Nothing looks different.",
       "start": 0.13,
-      "end": 1.34,
+      "end": 1.35,
       "word_range": [
         0,
         3
@@ -80,35 +80,35 @@
     },
     {
       "text": "The conditions have changed, and nobody sees it.",
-      "start": 1.65,
-      "end": 4.11,
+      "start": 2.06,
+      "end": 4.77,
       "word_range": [
         3,
         11
       ]
     }
   ],
-  "created": "2026-09-29T19:43:50+00:00",
+  "created": "2026-09-29T21:41:34+00:00",
   "provider": "kokoro-onnx 0.6.1, kokoro-v1.0.onnx (local guide)",
   "voice": {
     "id": "bf_isabella",
     "lang": "en-gb"
   },
-  "speed": 1.1569,
+  "speed": 1.0,
   "inner_pauses": [
-    0.3
+    0.6
   ],
   "segments_synth": [
     {
       "text": "Nothing looks different.",
       "start": 0.12,
-      "end": 1.38,
+      "end": 1.49,
       "alignment_quality": {
         "energy_pauses": 0,
         "pause_agreement": 1.0,
         "pauses_inside_words": [],
         "onset_error_ms": 0.0,
-        "offset_error_ms": 10.0,
+        "offset_error_ms": 110.0,
         "pause_onset_error_ms_mean": null,
         "pause_onset_error_ms_max": null
       },
@@ -116,8 +116,8 @@
     },
     {
       "text": "The conditions have changed, and nobody sees it.",
-      "start": 1.64,
-      "end": 4.14,
+      "start": 2.05,
+      "end": 4.8,
       "alignment_quality": {
         "energy_pauses": 0,
         "pause_agreement": 1.0,

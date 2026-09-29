@@ -106,6 +106,21 @@
                                    FL.formats ("int", "hhmm", "hhmmss").
     FL.textSet(tl, el, text, at)  -> seek-safe discrete text change (flText with a fixed string).
 
+  Beat grid (cut 2: 92 BPM from film time 0)
+    FL.BPM, FL.BEAT (0.6522 s), FL.BAR (4 beats), FL.beats(n)
+    FL.snapBeat(abs, mode, sub)  -> absolute seconds on the grid ("next" default, "prev", "near"; sub 2 = half beats)
+    FL.onBeat(sceneId, anchor, off, mode, sub) -> scene-local grid time at/after an anchor
+    FL.clock(id).b(anchor, off, mode, sub)     -> same, bound to the scene
+    FL.cutAt(sceneId, anchor, off) / FL.cutAbs(abs) / FL.clock(id).c(anchor, off)
+                                 -> the shared picture cut for a word: the half beat nearest to
+                                   0.12 s before it (use for every cut two scenes must agree on)
+
+  Board camera (DOM; cut 2 hero shots)
+    FL.boardCam(boardEl, { rects, frame }) -> cam with apply, cut, to, move, drift, follow, define,
+                                   toScreen, toBoard. Frames rects {x, y, w} (or {cx, cy, w|s}) of a
+                                   large board element by writing its transform (flBoard plugin: centre
+                                   linear, width geometric). Seek-safe; no callbacks.
+
   Sound events
     FL.events(sceneId)           -> { name: { t, local, ...meta } } resolved from the scene's
                                    compositions/<scene>.events.json via scripts/build-cues.mjs.
@@ -266,6 +281,14 @@
         if (!ev[name]) throw new Error("FL.clock(" + sceneId + ").ev: unknown event '" + name + "'");
         return ev[name].local;
       },
+      // grid point at/after the anchor, scene-local (mode "next" | "prev" | "near", sub 2 = half beats)
+      b: function (anchor, off, mode, sub) {
+        return FL.onBeat(sceneId, anchor, off, mode, sub);
+      },
+      // shared picture cut for a word (see FL.cutAt)
+      c: function (anchor, off) {
+        return FL.cutAt(sceneId, anchor, off);
+      },
     };
   };
   FL.words = function (lineId) {
@@ -363,6 +386,22 @@
     if (r) applyCamera(svg, r, st.frame, st.sw);
   }
 
+  // Board camera maths (DOM). A board rect is {x, y, w} in board px; its height follows the frame.
+  function boardLerp(a, b, t, lin) {
+    var ca = [a.x + a.w / 2, a.y + (a.w * 9) / 32],
+      cb = [b.x + b.w / 2, b.y + (b.w * 9) / 32];
+    var w = lin || a.w <= 0 || b.w <= 0 ? a.w + (b.w - a.w) * t : a.w * Math.pow(b.w / a.w, t);
+    var cx = ca[0] + (cb[0] - ca[0]) * t,
+      cy = ca[1] + (cb[1] - ca[1]) * t;
+    return { x: cx - w / 2, y: cy - (w * 9) / 32, w: w };
+  }
+  function applyBoard(el, r, frame) {
+    var k = frame.w / r.w;
+    el.style.transform = "translate(" + (-r.x * k).toFixed(3) + "px," + (-r.y * k).toFixed(3) + "px) scale(" + k.toFixed(6) + ")";
+  }
+  FL._applyBoard = applyBoard;
+  FL._boardLerp = boardLerp;
+
   if (gsap && gsap.registerPlugin) {
     // Register the vendored GreenSock plugins that index.html loaded (no-op when absent).
     ["DrawSVGPlugin", "CustomEase", "MotionPathPlugin", "MorphSVGPlugin", "SplitText"].forEach(function (n) {
@@ -436,6 +475,22 @@
       render: function (ratio, d) {
         var s = d.text != null ? d.text : d.format(d.a + (d.b - d.a) * ratio);
         if (d.t.textContent !== s) d.t.textContent = s;
+      },
+    });
+    // flBoard: { from: rect, to: rect, frame?: {w,h}, zoom?: "log"|"linear" } frames a DOM board
+    // (FL.boardCam). Centre interpolates linearly, width geometrically (a zoom that feels even),
+    // then the board gets translate + scale with origin 0 0. Both ends explicit: seek-safe.
+    gsap.registerPlugin({
+      name: "flBoard",
+      init: function (target, v) {
+        this.t = target;
+        this.a = v.from;
+        this.b = v.to;
+        this.frame = v.frame || FL.FRAME;
+        this.lin = v.zoom === "linear";
+      },
+      render: function (ratio, d) {
+        applyBoard(d.t, boardLerp(d.a, d.b, ratio, d.lin), d.frame);
       },
     });
   }
@@ -798,6 +853,138 @@
       }
     });
     return { main: main, over: over };
+  };
+
+  // ---------------------------------------------------------------- beat grid (cut 2)
+  // The film's musical and editing pulse: 92 BPM from film time 0 (narration lines start on the
+  // half-beat grid, see narration/lines.json pacing.grid). Cut on beats; hold across beats.
+  FL.BPM = 92;
+  FL.BEAT = 60 / FL.BPM;
+  FL.BAR = 4 * FL.BEAT;
+  FL.beats = function (n) {
+    return n * FL.BEAT;
+  };
+  // Absolute film seconds snapped to the grid. mode: "next" (default, at or after), "prev", "near".
+  // sub: subdivisions per beat (2 = half beats).
+  FL.snapBeat = function (abs, mode, sub) {
+    var q = FL.BEAT / (sub || 1),
+      k = abs / q;
+    k = mode === "prev" ? Math.floor(k + 1e-6) : mode === "near" ? Math.round(k) : Math.ceil(k - 1e-6);
+    return k * q;
+  };
+  // Scene-local seconds of the grid point at/after (mode) an anchor: FL.onBeat("a2-resolve", "connects").
+  FL.onBeat = function (sceneId, anchor, off, mode, sub) {
+    var s = (W.SCENES || {})[sceneId];
+    if (!s) throw new Error("FL.onBeat: unknown scene '" + sceneId + "'");
+    return FL.snapBeat(FL.at(sceneId, anchor, off) + s.start, mode, sub) - s.start;
+  };
+
+  // Picture cut for a word: the half-beat nearest to 0.12 s before the anchor (picture leads the
+  // word slightly and lands on the musical grid). Every scene computes a shared cut the same way,
+  // so two builders cutting on the same word agree to the frame. Scene-local seconds.
+  FL.cutAt = function (sceneId, anchor, off) {
+    var s = (W.SCENES || {})[sceneId];
+    if (!s) throw new Error("FL.cutAt: unknown scene '" + sceneId + "'");
+    return FL.cutAbs(FL.at(sceneId, anchor, off) + s.start) - s.start;
+  };
+  FL.cutAbs = function (abs) {
+    return FL.snapBeat(abs - 0.12, "near", 2);
+  };
+
+  // ---------------------------------------------------------------- board camera (DOM)
+  // A "board" is one large absolutely positioned element (e.g. 5760 x 3240 board px) on which the
+  // scene lays out its interface pieces spatially; the camera frames a rect {x, y, w} of it (height
+  // follows 16:9) by writing transform on the board. Text and SVG inside re-rasterise crisply at
+  // every seek (no will-change on the board). Rects: {x, y, w}, [x, y, w], or {cx, cy, w} / {cx, cy, s}
+  // (s = zoom: board px per frame px is 1/s, so s 2 shows a 960-wide region at 2x).
+  //   var cam = FL.boardCam(boardEl, { rects: { wide: {cx: 2880, cy: 1620, w: 5760}, card: [..] } });
+  //   cam.apply("wide")                      static first frame (build time)
+  //   cam.cut(tl, "card", at)                instant cut (zero-length, seek-safe)
+  //   cam.to(tl, "record", at, dur, ease)    chained move from the previous end (log zoom)
+  //   cam.drift(tl, at, dur, pct)            slow push-in about the current centre (pct 0.02 = 2 %)
+  //   cam.follow(tl, [rectA, rectB, ...], at, dur, ease) one continuous move through several rects
+  //   cam.toScreen(p, rect) / cam.toBoard(p, rect)  map board px <-> frame px for a rect
+  FL.boardCam = function (board, o) {
+    o = o || {};
+    var frame = o.frame || FL.FRAME;
+    var rects = {};
+    function R(x) {
+      if (typeof x === "string") {
+        if (!rects[x]) throw new Error("FL.boardCam: unknown rect '" + x + "'");
+        return rects[x];
+      }
+      if (Array.isArray(x)) return { x: +x[0], y: +x[1], w: +x[2] };
+      if (x && x.cx != null) {
+        var w = x.w != null ? x.w : frame.w / (x.s || 1);
+        return { x: x.cx - w / 2, y: x.cy - (w * frame.h) / frame.w / 2, w: w };
+      }
+      return { x: +x.x, y: +x.y, w: +x.w };
+    }
+    for (var k in o.rects || {}) rects[k] = R(o.rects[k]);
+    board.style.transformOrigin = "0 0";
+    var cam = {
+      el: board,
+      rects: rects,
+      last: null,
+      rect: R,
+      define: function (name, r) {
+        rects[name] = R(r);
+        return cam;
+      },
+      apply: function (x) {
+        var r = R(x);
+        applyBoard(board, r, frame);
+        cam.last = r;
+        return cam;
+      },
+      move: function (tl, from, to, at, duration, ease, zoom) {
+        var a = from == null ? cam.last : R(from);
+        if (!a) throw new Error("FL.boardCam: first move needs an explicit from rect (or cam.apply first)");
+        var b = R(to);
+        tl.to(board, { flBoard: { from: a, to: b, frame: frame, zoom: zoom }, duration: duration, ease: ease || "power2.inOut", immediateRender: false }, at);
+        cam.last = b;
+        return cam;
+      },
+      to: function (tl, to, at, duration, ease, zoom) {
+        return cam.move(tl, null, to, at, duration, ease, zoom);
+      },
+      // A cut is a 1 ms move with a steps(1) ease: it renders the previous rect at every time
+      // before `at` (so backward seeks restore it) and the new rect from `at` on.
+      cut: function (tl, to, at) {
+        var b = R(to),
+          a = cam.last || b;
+        tl.to(board, { flBoard: { from: a, to: b, frame: frame }, duration: 0.001, ease: "steps(1)", immediateRender: false }, at);
+        cam.last = b;
+        return cam;
+      },
+      drift: function (tl, at, duration, pct, ease) {
+        var a = cam.last,
+          k = 1 - (pct == null ? 0.015 : pct);
+        var b = { x: a.x + (a.w * (1 - k)) / 2, y: a.y + ((a.w * (1 - k)) * frame.h) / frame.w / 2, w: a.w * k };
+        return cam.move(tl, a, b, at, duration, ease || "sine.inOut");
+      },
+      follow: function (tl, list, at, duration, ease) {
+        // one eased move through several rects: equal shares of the eased progress per leg
+        var pts = [cam.last].concat(list.map(R));
+        var n = pts.length - 1;
+        for (var i = 0; i < n; i++) {
+          tl.to(board, { flBoard: { from: pts[i], to: pts[i + 1], frame: frame }, duration: duration / n, ease: i === 0 ? (ease || "power2.in") : i === n - 1 ? (ease ? ease : "power2.out") : "none", immediateRender: false }, at + (i * duration) / n);
+        }
+        cam.last = pts[n];
+        return cam;
+      },
+      toScreen: function (p, rect) {
+        var r = R(rect || cam.last),
+          k = frame.w / r.w;
+        return [(p[0] - r.x) * k, (p[1] - r.y) * k];
+      },
+      toBoard: function (p, rect) {
+        var r = R(rect || cam.last),
+          k = frame.w / r.w;
+        return [r.x + p[0] / k, r.y + p[1] / k];
+      },
+    };
+    return cam;
   };
 
   W.FL = FL;

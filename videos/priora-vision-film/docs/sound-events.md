@@ -54,3 +54,18 @@ Acts II and III (precise, product):
 | `decision-accent` | a node becoming an explicit decision |
 | `chain-confirm-1` to `chain-confirm-5` | the five chain words, each materially distinct |
 | `latch` | the clean mechanical latch under the Priora mark |
+
+Cut 2 editorial accents (any act; the audio engine renders them on the 92 BPM grid feel, restrained, never a cinematic whoosh):
+
+| kind | use |
+| --- | --- |
+| `cut` | a hard picture cut: a very short, soft transient (paper or felt), felt more than heard. Optional `material`: `paper`, `felt`, `graphite`, `wood` |
+| `push` | a fast push-in or punch-in to a closer shot (dur = the move): a short rising air texture ending in a soft low bloom |
+| `pull` | a pull-back reveal to a wider shot (dur = the move): a soft descending air with a gentle low swell |
+| `whip` | a snappy lateral camera move of half a second or less (dur): brief, filtered, very quiet air |
+| `sheet-lay` | a paper sheet laid flat over the drawing: slide plus a soft settle |
+| `focus` | an interface element isolated to a hero shot: a tiny precise click |
+| `hold` | a held major moment (dur): the engine thins the score and beds for the duration so silence gives it weight |
+| `arc` | the welding arc: a very quiet dry crackle (dur); never an alarm, never a flame roar |
+| `handwheel` | a valve handwheel turning (dur): metal ratchet-free friction, low |
+| `gauge` | a pressure-gauge needle falling or rising: a small sprung-metal tick |

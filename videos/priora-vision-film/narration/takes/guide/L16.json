@@ -8,76 +8,76 @@
   "text": "The sprinkler goes offline again. This time, Priora sees it at once.",
   "spoken_text": "The sprinkler goes offline again. This time, Priora sees it at once.",
   "sample_rate": 48000,
-  "duration": 4.28,
+  "duration": 4.88,
   "speech_start": 0.13,
-  "speech_end": 4.05,
+  "speech_end": 4.65,
   "words": [
     {
       "w": "The",
       "start": 0.13,
-      "end": 0.17
+      "end": 0.18
     },
     {
       "w": "sprinkler",
-      "start": 0.17,
-      "end": 0.73
+      "start": 0.18,
+      "end": 0.74
     },
     {
       "w": "goes",
-      "start": 0.73,
-      "end": 1.05
+      "start": 0.74,
+      "end": 1.09
     },
     {
       "w": "offline",
-      "start": 1.05,
-      "end": 1.5
+      "start": 1.09,
+      "end": 1.57
     },
     {
       "w": "again",
-      "start": 1.5,
-      "end": 1.89
+      "start": 1.57,
+      "end": 1.99
     },
     {
       "w": "This",
-      "start": 2.2,
-      "end": 2.33
+      "start": 2.6,
+      "end": 2.78
     },
     {
       "w": "time",
-      "start": 2.33,
-      "end": 2.71
+      "start": 2.78,
+      "end": 3.21
     },
     {
       "w": "Priora",
-      "start": 2.71,
-      "end": 3.1
+      "start": 3.21,
+      "end": 3.6
     },
     {
       "w": "sees",
-      "start": 3.1,
-      "end": 3.44
+      "start": 3.6,
+      "end": 3.95
     },
     {
       "w": "it",
-      "start": 3.44,
-      "end": 3.54
+      "start": 3.95,
+      "end": 4.08
     },
     {
       "w": "at",
-      "start": 3.54,
-      "end": 3.64
+      "start": 4.08,
+      "end": 4.19
     },
     {
       "w": "once",
-      "start": 3.64,
-      "end": 4.05
+      "start": 4.19,
+      "end": 4.65
     }
   ],
   "sentences": [
     {
       "text": "The sprinkler goes offline again.",
       "start": 0.13,
-      "end": 1.89,
+      "end": 1.99,
       "word_range": [
         0,
         5
@@ -85,29 +85,29 @@
     },
     {
       "text": "This time, Priora sees it at once.",
-      "start": 2.2,
-      "end": 4.05,
+      "start": 2.6,
+      "end": 4.65,
       "word_range": [
         5,
         12
       ]
     }
   ],
-  "created": "2026-09-29T19:43:50+00:00",
+  "created": "2026-09-29T21:41:34+00:00",
   "provider": "kokoro-onnx 0.6.1, kokoro-v1.0.onnx (local guide)",
   "voice": {
     "id": "bf_isabella",
     "lang": "en-gb"
   },
-  "speed": 1.1569,
+  "speed": 1.0,
   "inner_pauses": [
-    0.3
+    0.6
   ],
   "segments_synth": [
     {
       "text": "The sprinkler goes offline again.",
       "start": 0.12,
-      "end": 1.93,
+      "end": 2.03,
       "alignment_quality": {
         "energy_pauses": 0,
         "pause_agreement": 1.0,
@@ -121,8 +121,8 @@
     },
     {
       "text": "This time, Priora sees it at once.",
-      "start": 2.19,
-      "end": 4.08,
+      "start": 2.59,
+      "end": 4.68,
       "alignment_quality": {
         "energy_pauses": 0,
         "pause_agreement": 1.0,
@@ -157,9 +157,9 @@
       "intended": true,
       "phones": "P R IY AO R AH",
       "phone_durations": {
-        "P#0": 0.08,
+        "P#0": 0.07,
         "R#1": 0.05,
-        "IY#2": 0.08,
+        "IY#2": 0.09,
         "AO#3": 0.1,
         "R#4": 0.04,
         "AH#5": 0.04

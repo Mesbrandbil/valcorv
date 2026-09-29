@@ -8,56 +8,56 @@
   "text": "Prevention before the work. Proof as it happens.",
   "spoken_text": "Prevention before the work. Proof as it happens.",
   "sample_rate": 48000,
-  "duration": 3.3,
+  "duration": 3.81,
   "speech_start": 0.13,
-  "speech_end": 3.07,
+  "speech_end": 3.58,
   "words": [
     {
       "w": "Prevention",
       "start": 0.13,
-      "end": 0.7
+      "end": 0.76
     },
     {
       "w": "before",
-      "start": 0.7,
-      "end": 1.0
-    },
-    {
-      "w": "the",
-      "start": 1.0,
+      "start": 0.76,
       "end": 1.09
     },
     {
-      "w": "work",
+      "w": "the",
       "start": 1.09,
-      "end": 1.52
+      "end": 1.18
+    },
+    {
+      "w": "work",
+      "start": 1.18,
+      "end": 1.68
     },
     {
       "w": "Proof",
-      "start": 1.86,
-      "end": 2.18
+      "start": 2.28,
+      "end": 2.62
     },
     {
       "w": "as",
-      "start": 2.18,
-      "end": 2.38
+      "start": 2.62,
+      "end": 2.83
     },
     {
       "w": "it",
-      "start": 2.38,
-      "end": 2.5
+      "start": 2.83,
+      "end": 2.95
     },
     {
       "w": "happens",
-      "start": 2.5,
-      "end": 3.07
+      "start": 2.95,
+      "end": 3.58
     }
   ],
   "sentences": [
     {
       "text": "Prevention before the work.",
       "start": 0.13,
-      "end": 1.52,
+      "end": 1.68,
       "word_range": [
         0,
         4
@@ -65,29 +65,29 @@
     },
     {
       "text": "Proof as it happens.",
-      "start": 1.86,
-      "end": 3.07,
+      "start": 2.28,
+      "end": 3.58,
       "word_range": [
         4,
         8
       ]
     }
   ],
-  "created": "2026-09-29T19:43:50+00:00",
+  "created": "2026-09-29T21:41:34+00:00",
   "provider": "kokoro-onnx 0.6.1, kokoro-v1.0.onnx (local guide)",
   "voice": {
     "id": "bf_isabella",
     "lang": "en-gb"
   },
-  "speed": 1.1569,
+  "speed": 1.0,
   "inner_pauses": [
-    0.34
+    0.6
   ],
   "segments_synth": [
     {
       "text": "Prevention before the work.",
       "start": 0.12,
-      "end": 1.55,
+      "end": 1.71,
       "alignment_quality": {
         "energy_pauses": 0,
         "pause_agreement": 1.0,
@@ -101,8 +101,8 @@
     },
     {
       "text": "Proof as it happens.",
-      "start": 1.85,
-      "end": 3.1,
+      "start": 2.27,
+      "end": 3.61,
       "alignment_quality": {
         "energy_pauses": 0,
         "pause_agreement": 1.0,

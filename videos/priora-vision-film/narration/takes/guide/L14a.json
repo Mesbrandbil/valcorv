@@ -8,86 +8,86 @@
   "text": "Priora connects the work to the conditions that matter.",
   "spoken_text": "Priora connects the work to the conditions that matter.",
   "sample_rate": 48000,
-  "duration": 3.03,
+  "duration": 3.21,
   "speech_start": 0.13,
-  "speech_end": 2.78,
+  "speech_end": 2.94,
   "words": [
     {
       "w": "Priora",
       "start": 0.13,
-      "end": 0.54
+      "end": 0.58
     },
     {
       "w": "connects",
-      "start": 0.54,
-      "end": 1.0
+      "start": 0.58,
+      "end": 1.08
     },
     {
       "w": "the",
-      "start": 1.0,
-      "end": 1.09
+      "start": 1.08,
+      "end": 1.17
     },
     {
       "w": "work",
-      "start": 1.09,
-      "end": 1.35
+      "start": 1.17,
+      "end": 1.43
     },
     {
       "w": "to",
-      "start": 1.35,
-      "end": 1.46
-    },
-    {
-      "w": "the",
-      "start": 1.46,
+      "start": 1.43,
       "end": 1.54
     },
     {
-      "w": "conditions",
+      "w": "the",
       "start": 1.54,
-      "end": 2.17
+      "end": 1.62
+    },
+    {
+      "w": "conditions",
+      "start": 1.62,
+      "end": 2.27
     },
     {
       "w": "that",
-      "start": 2.17,
-      "end": 2.32
+      "start": 2.27,
+      "end": 2.45
     },
     {
       "w": "matter",
-      "start": 2.32,
-      "end": 2.78
+      "start": 2.45,
+      "end": 2.94
     }
   ],
   "sentences": [
     {
       "text": "Priora connects the work to the conditions that matter.",
       "start": 0.13,
-      "end": 2.78,
+      "end": 2.94,
       "word_range": [
         0,
         9
       ]
     }
   ],
-  "created": "2026-09-29T19:43:50+00:00",
+  "created": "2026-09-29T21:41:34+00:00",
   "provider": "kokoro-onnx 0.6.1, kokoro-v1.0.onnx (local guide)",
   "voice": {
     "id": "bf_isabella",
     "lang": "en-gb"
   },
-  "speed": 1.1569,
+  "speed": 1.0,
   "inner_pauses": [],
   "segments_synth": [
     {
       "text": "Priora connects the work to the conditions that matter.",
       "start": 0.12,
-      "end": 2.83,
+      "end": 3.01,
       "alignment_quality": {
         "energy_pauses": 0,
         "pause_agreement": 1.0,
         "pauses_inside_words": [],
         "onset_error_ms": 0.0,
-        "offset_error_ms": 20.0,
+        "offset_error_ms": 40.0,
         "pause_onset_error_ms_mean": null,
         "pause_onset_error_ms_max": null
       },
@@ -102,7 +102,7 @@
       "pause_agreement": 1.0,
       "pauses_inside_words": [],
       "onset_error_ms": 0.0,
-      "offset_error_ms": 20.0,
+      "offset_error_ms": 40.0,
       "pause_onset_error_ms_mean": null,
       "pause_onset_error_ms_max": null
     },
@@ -116,12 +116,12 @@
       "intended": true,
       "phones": "P R IY AO R AH",
       "phone_durations": {
-        "P#0": 0.04,
-        "R#1": 0.04,
-        "IY#2": 0.1,
+        "P#0": 0.06,
+        "R#1": 0.06,
+        "IY#2": 0.11,
         "AO#3": 0.15,
         "R#4": 0.05,
-        "AH#5": 0.05
+        "AH#5": 0.06
       },
       "longest_vowel": "AO",
       "stress_on_middle_syllable": true,

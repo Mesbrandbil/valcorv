@@ -1,56 +1,81 @@
 {
   "schema": "priora-narration-take/1",
-  "id": "L07",
+  "id": "L17c",
   "engine": "guide",
   "guide": true,
   "label": "GUIDE VOICE (local Kokoro). Not the final ElevenLabs performance.",
   "speaker": "narrator",
-  "text": "Then a sprinkler zone goes offline.",
-  "spoken_text": "Then a sprinkler zone goes offline.",
+  "text": "or, in time, ask selected carriers whether they will cover it.",
+  "spoken_text": "or, in time, ask selected carriers whether they will cover it.",
   "sample_rate": 48000,
-  "duration": 2.41,
+  "duration": 3.93,
   "speech_start": 0.13,
-  "speech_end": 2.17,
+  "speech_end": 3.7,
   "words": [
     {
-      "w": "Then",
+      "w": "or",
       "start": 0.13,
-      "end": 0.35
+      "end": 0.33
     },
     {
-      "w": "a",
-      "start": 0.35,
-      "end": 0.39
+      "w": "in",
+      "start": 0.33,
+      "end": 0.48
     },
     {
-      "w": "sprinkler",
-      "start": 0.39,
-      "end": 0.93
+      "w": "time",
+      "start": 0.48,
+      "end": 0.91
     },
     {
-      "w": "zone",
-      "start": 0.93,
-      "end": 1.38
+      "w": "ask",
+      "start": 1.12,
+      "end": 1.42
     },
     {
-      "w": "goes",
-      "start": 1.38,
-      "end": 1.64
+      "w": "selected",
+      "start": 1.42,
+      "end": 1.95
     },
     {
-      "w": "offline",
-      "start": 1.64,
-      "end": 2.17
+      "w": "carriers",
+      "start": 1.95,
+      "end": 2.45
+    },
+    {
+      "w": "whether",
+      "start": 2.45,
+      "end": 2.7
+    },
+    {
+      "w": "they",
+      "start": 2.7,
+      "end": 2.89
+    },
+    {
+      "w": "will",
+      "start": 2.89,
+      "end": 3.04
+    },
+    {
+      "w": "cover",
+      "start": 3.04,
+      "end": 3.44
+    },
+    {
+      "w": "it",
+      "start": 3.44,
+      "end": 3.7
     }
   ],
   "sentences": [
     {
-      "text": "Then a sprinkler zone goes offline.",
+      "text": "or, in time, ask selected carriers whether they will cover it.",
       "start": 0.13,
-      "end": 2.17,
+      "end": 3.7,
       "word_range": [
         0,
-        6
+        11
       ]
     }
   ],
@@ -64,15 +89,15 @@
   "inner_pauses": [],
   "segments_synth": [
     {
-      "text": "Then a sprinkler zone goes offline.",
+      "text": "or, in time, ask selected carriers whether they will cover it.",
       "start": 0.12,
-      "end": 2.21,
+      "end": 3.73,
       "alignment_quality": {
         "energy_pauses": 0,
         "pause_agreement": 1.0,
         "pauses_inside_words": [],
         "onset_error_ms": 0.0,
-        "offset_error_ms": 10.0,
+        "offset_error_ms": 0.0,
         "pause_onset_error_ms_mean": null,
         "pause_onset_error_ms_max": null
       },
@@ -87,7 +112,7 @@
       "pause_agreement": 1.0,
       "pauses_inside_words": [],
       "onset_error_ms": 0.0,
-      "offset_error_ms": 10.0,
+      "offset_error_ms": 0.0,
       "pause_onset_error_ms_mean": null,
       "pause_onset_error_ms_max": null
     },

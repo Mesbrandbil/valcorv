@@ -694,18 +694,34 @@ def place(data: dict, speech_durs: dict[str, float]) -> dict:
     speech_durs: line id -> duration from first word onset to last word offset.
     Designed silence is measured speech to speech (the 40 ms edge pads sit
     inside it), so gap_after is what the listener hears.
+
+    With pacing.grid ({bpm, subdivision, offset}) every line starts on the
+    musical grid: the designed gap is the minimum silence and the line waits
+    for the next grid step (60 / bpm / subdivision s). The film total is the
+    end hold after the last line, rounded up to the next step. There is no
+    fixed runtime: the performance and the pauses set the length.
     """
     pacing = data["pacing"]
+    grid = pacing.get("grid")
+    step = (60.0 / grid["bpm"] / grid.get("subdivision", 1)) if grid else None
+    off = grid.get("offset", 0.0) if grid else 0.0
+
+    def snap(x: float) -> float:
+        if not step:
+            return x
+        k = math.ceil((x - off) / step - 1e-6)
+        return off + k * step
+
     t = pacing["lead_in"]
     out = {}
     for i, line in enumerate(data["lines"]):
         t += line.get("pre_gap", 0.0)
-        s = t
+        s = snap(t)
         e = s + speech_durs[line["id"]]
         out[line["id"]] = (s, e)
         t = e + (line.get("gap_after", 0.0) if i + 1 < len(data["lines"]) else 0.0)
-    total = t + pacing["end_hold"]
-    return {"lines": out, "total": total}
+    total = snap(t + pacing["end_hold"])
+    return {"lines": out, "total": total, "grid_step": step}
 
 
 def designed_silence(data: dict) -> float:

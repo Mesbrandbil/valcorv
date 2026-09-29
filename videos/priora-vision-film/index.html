@@ -47,25 +47,51 @@
         inset: 0;
         background: radial-gradient(ellipse 75% 70% at 50% 48%, rgba(59, 58, 51, 0) 58%, rgba(59, 58, 51, 0.035) 82%, rgba(59, 58, 51, 0.07) 100%);
       }
+      /* Surface above every scene (cut 2): one printed paper tooth and a restrained light falloff,
+         so graphite, ink and interface share the same sheet. Uniform, so paper-filled shapes still
+         match the ground. Untimed and never read by the layout checks. */
+      #film-surface {
+        position: absolute;
+        inset: 0;
+        z-index: 900;
+        pointer-events: none;
+      }
+      #film-surface-tooth {
+        position: absolute;
+        inset: 0;
+        background-image: url("assets/textures/paper-tooth.png");
+        background-size: 1024px 1024px;
+        background-repeat: repeat;
+      }
+      #film-surface-light {
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(ellipse 90% 85% at 46% 42%, rgba(59, 58, 51, 0) 55%, rgba(59, 58, 51, 0.03) 80%, rgba(59, 58, 51, 0.06) 100%);
+      }
     </style>
   </head>
   <body>
     <!-- build-cues:root:begin -->
-    <div id="root" data-composition-id="film" data-start="0" data-duration="90" data-width="1920" data-height="1080" data-fps="30">
+    <div id="root" data-composition-id="film" data-start="0" data-duration="126.533333" data-width="1920" data-height="1080" data-fps="30">
     <!-- build-cues:root:end -->
       <div id="film-paper" aria-hidden="true" data-layout-ignore>
         <div id="film-paper-grain"></div>
         <div id="film-paper-vignette"></div>
       </div>
       <!-- build-cues:slots:begin -->
-      <div id="el-a1-world" class="clip fl-slot" data-composition-id="a1-world" data-composition-src="compositions/a1-world.html" data-start="0" data-duration="42.766666" data-track-index="1" data-width="1920" data-height="1080" style="z-index: 10"></div>
-      <div id="el-a2-resolve" class="clip fl-slot" data-composition-id="a2-resolve" data-composition-src="compositions/a2-resolve.html" data-start="42.366666" data-duration="17.2" data-track-index="1" data-width="1920" data-height="1080" style="z-index: 11"></div>
-      <div id="el-a3-change" class="clip fl-slot" data-composition-id="a3-change" data-composition-src="compositions/a3-change.html" data-start="59.266666" data-duration="17.233333" data-track-index="1" data-width="1920" data-height="1080" style="z-index: 12"></div>
-      <div id="el-a3-close" class="clip fl-slot" data-composition-id="a3-close" data-composition-src="compositions/a3-close.html" data-start="76" data-duration="14" data-track-index="1" data-width="1920" data-height="1080" style="z-index: 13"></div>
-      <div id="el-a1-paper" class="clip fl-slot" data-composition-id="a1-paper" data-composition-src="compositions/a1-paper.html" data-start="7.866666" data-duration="8.466666" data-track-index="2" data-width="1920" data-height="1080" style="z-index: 101"></div>
-      <div id="el-a1-after" class="clip fl-slot" data-composition-id="a1-after" data-composition-src="compositions/a1-after.html" data-start="28.366666" data-duration="14" data-track-index="3" data-width="1920" data-height="1080" style="z-index: 102"></div>
-      <div id="el-chrome" class="clip fl-slot" data-composition-id="chrome" data-composition-src="compositions/chrome.html" data-start="0" data-duration="76" data-track-index="5" data-width="1920" data-height="1080" style="z-index: 200"></div>
+      <div id="el-a1-world" class="clip fl-slot" data-composition-id="a1-world" data-composition-src="compositions/a1-world.html" data-start="0" data-duration="59.133333" data-track-index="1" data-width="1920" data-height="1080" style="z-index: 10"></div>
+      <div id="el-a2-resolve" class="clip fl-slot" data-composition-id="a2-resolve" data-composition-src="compositions/a2-resolve.html" data-start="58.733333" data-duration="22.466666" data-track-index="1" data-width="1920" data-height="1080" style="z-index: 11"></div>
+      <div id="el-a3-change" class="clip fl-slot" data-composition-id="a3-change" data-composition-src="compositions/a3-change.html" data-start="81.2" data-duration="24.3" data-track-index="1" data-width="1920" data-height="1080" style="z-index: 12"></div>
+      <div id="el-a3-close" class="clip fl-slot" data-composition-id="a3-close" data-composition-src="compositions/a3-close.html" data-start="105.1" data-duration="21.433333" data-track-index="1" data-width="1920" data-height="1080" style="z-index: 13"></div>
+      <div id="el-a1-paper" class="clip fl-slot" data-composition-id="a1-paper" data-composition-src="compositions/a1-paper.html" data-start="14.966666" data-duration="6.566666" data-track-index="2" data-width="1920" data-height="1080" style="z-index: 101"></div>
+      <div id="el-a1-after" class="clip fl-slot" data-composition-id="a1-after" data-composition-src="compositions/a1-after.html" data-start="39.833333" data-duration="18.9" data-track-index="3" data-width="1920" data-height="1080" style="z-index: 102"></div>
+      <div id="el-a1-inserts" class="clip fl-slot" data-composition-id="a1-inserts" data-composition-src="compositions/a1-inserts.html" data-start="7.5" data-duration="51.233333" data-track-index="4" data-width="1920" data-height="1080" style="z-index: 104"></div>
+      <div id="el-chrome" class="clip fl-slot" data-composition-id="chrome" data-composition-src="compositions/chrome.html" data-start="0" data-duration="105.5" data-track-index="5" data-width="1920" data-height="1080" style="z-index: 200"></div>
       <!-- build-cues:slots:end -->
+      <div id="film-surface" aria-hidden="true" data-layout-ignore>
+        <div id="film-surface-tooth"></div>
+        <div id="film-surface-light"></div>
+      </div>
       <!-- build-cues:audio:begin -->
       <audio id="stem-voice" src="assets/audio/master-voice.wav" data-start="0" data-duration="90" data-track-index="20" data-volume="1"></audio>
       <audio id="stem-music" src="assets/audio/music.wav" data-start="0" data-duration="90" data-track-index="21" data-volume="1"></audio>

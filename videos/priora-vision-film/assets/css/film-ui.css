@@ -102,7 +102,7 @@ div.fui-swap > .fui-sw { white-space: normal; }
 .fui-plate text { font-family: 'IBM Plex Mono', monospace; font-weight: 500; letter-spacing: .1em; }
 .fui-plate-t0 { fill: rgba(17,17,17,.62); }
 .fui-plate-t1 { fill: #111111; }
-.fui-plate-t2 { fill: rgba(17,17,17,.5); }
+.fui-plate-t2 { fill: rgba(17,17,17,.6); }
 
 /* ---------- 3. activity card (--pui-scale 1.8: every label is 18px or more) ---------- */
 .pui-herocard.fui-card { border-radius: calc(14 * var(--u)); }
@@ -256,9 +256,9 @@ div.fui-swap > .fui-sw { white-space: normal; }
 .fui-pg-slice { stroke: var(--signal, #1F47D6); stroke-width: 1.5; }
 .fui-pg-lead { fill: none; stroke: var(--signal, #1F47D6); stroke-width: 1.25; }
 .fui-pg-slab { font: 500 18px 'IBM Plex Mono', monospace; letter-spacing: .1em; fill: #111111; }
-.fui-pg-today { font: 500 18px 'IBM Plex Mono', monospace; letter-spacing: .12em; fill: rgba(17,17,17,.5); }
+.fui-pg-today { font: 500 18px 'IBM Plex Mono', monospace; letter-spacing: .12em; fill: rgba(17,17,17,.62); }
 .fui-pg-axis line { stroke: #111111; stroke-opacity: .16; stroke-width: 1; }
-.fui-pg-axis text { font: 500 18px 'IBM Plex Mono', monospace; letter-spacing: .04em; fill: rgba(17,17,17,.46); }
+.fui-pg-axis text { font: 500 18px 'IBM Plex Mono', monospace; letter-spacing: .04em; fill: rgba(17,17,17,.6); }
 
 /* ---------- 9. system view ---------- */
 .fui-system { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; overflow: hidden; background: #F5F3EE; }

@@ -8,85 +8,85 @@
   "text": "But no one can hold a moving site in mind.",
   "spoken_text": "But no one can hold a moving site in mind.",
   "sample_rate": 48000,
-  "duration": 2.49,
+  "duration": 2.72,
   "speech_start": 0.13,
-  "speech_end": 2.26,
+  "speech_end": 2.49,
   "words": [
     {
       "w": "But",
       "start": 0.13,
-      "end": 0.2
+      "end": 0.22
     },
     {
       "w": "no",
-      "start": 0.2,
-      "end": 0.4
+      "start": 0.22,
+      "end": 0.47
     },
     {
       "w": "one",
-      "start": 0.4,
-      "end": 0.64
+      "start": 0.47,
+      "end": 0.7
     },
     {
       "w": "can",
-      "start": 0.64,
-      "end": 0.77
+      "start": 0.7,
+      "end": 0.83
     },
     {
       "w": "hold",
-      "start": 0.77,
-      "end": 1.05
+      "start": 0.83,
+      "end": 1.14
     },
     {
       "w": "a",
-      "start": 1.05,
-      "end": 1.09
+      "start": 1.14,
+      "end": 1.19
     },
     {
       "w": "moving",
-      "start": 1.09,
-      "end": 1.43
+      "start": 1.19,
+      "end": 1.52
     },
     {
       "w": "site",
-      "start": 1.43,
-      "end": 1.8
+      "start": 1.52,
+      "end": 1.94
     },
     {
       "w": "in",
-      "start": 1.8,
-      "end": 1.88
+      "start": 1.94,
+      "end": 2.05
     },
     {
       "w": "mind",
-      "start": 1.88,
-      "end": 2.26
+      "start": 2.05,
+      "end": 2.49
     }
   ],
   "sentences": [
     {
       "text": "But no one can hold a moving site in mind.",
       "start": 0.13,
-      "end": 2.26,
+      "end": 2.49,
       "word_range": [
         0,
         10
       ]
     }
   ],
-  "created": "2026-09-29T19:43:50+00:00",
+  "created": "2026-09-29T21:41:34+00:00",
   "provider": "kokoro-onnx 0.6.1, kokoro-v1.0.onnx (local guide)",
   "voice": {
     "id": "bf_isabella",
     "lang": "en-gb"
   },
-  "speed": 1.1569,
+  "speed": 1.0,
   "inner_pauses": [],
   "segments_synth": [
     {
       "text": "But no one can hold a moving site in mind.",
       "start": 0.12,
-      "end": 2.29,
+      "end": 2.52,
       "alignment_quality": {
         "energy_pauses": 0,
         "pause_agreement": 1.0,

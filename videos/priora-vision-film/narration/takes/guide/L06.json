@@ -8,94 +8,94 @@
   "text": "On Roof 03, hot work begins, every safeguard in place.",
   "spoken_text": "On Roof oh-three, hot work begins, every safeguard in place.",
   "sample_rate": 48000,
-  "duration": 3.56,
+  "duration": 3.92,
   "speech_start": 0.13,
-  "speech_end": 3.33,
+  "speech_end": 3.69,
   "words": [
     {
       "w": "On",
       "start": 0.13,
-      "end": 0.23
+      "end": 0.26
     },
     {
       "w": "Roof",
-      "start": 0.23,
-      "end": 0.48
+      "start": 0.26,
+      "end": 0.52
     },
     {
       "w": "03",
-      "start": 0.48,
-      "end": 0.93,
+      "start": 0.52,
+      "end": 1.04,
       "spoken": "oh-three"
     },
     {
       "w": "hot",
-      "start": 0.93,
-      "end": 1.16
+      "start": 1.04,
+      "end": 1.29
     },
     {
       "w": "work",
-      "start": 1.16,
-      "end": 1.36
+      "start": 1.29,
+      "end": 1.54
     },
     {
       "w": "begins",
-      "start": 1.36,
-      "end": 1.82
+      "start": 1.54,
+      "end": 2.03
     },
     {
       "w": "every",
-      "start": 2.02,
-      "end": 2.25
+      "start": 2.27,
+      "end": 2.52
     },
     {
       "w": "safeguard",
-      "start": 2.25,
-      "end": 2.84
+      "start": 2.52,
+      "end": 3.13
     },
     {
       "w": "in",
-      "start": 2.84,
-      "end": 2.94
+      "start": 3.13,
+      "end": 3.24
     },
     {
       "w": "place",
-      "start": 2.94,
-      "end": 3.33
+      "start": 3.24,
+      "end": 3.69
     }
   ],
   "sentences": [
     {
       "text": "On Roof 03, hot work begins, every safeguard in place.",
       "start": 0.13,
-      "end": 3.33,
+      "end": 3.69,
       "word_range": [
         0,
         10
       ]
     }
   ],
-  "created": "2026-09-29T19:43:50+00:00",
+  "created": "2026-09-29T21:41:34+00:00",
   "provider": "kokoro-onnx 0.6.1, kokoro-v1.0.onnx (local guide)",
   "voice": {
     "id": "bf_isabella",
     "lang": "en-gb"
   },
-  "speed": 1.1569,
+  "speed": 1.0,
   "inner_pauses": [],
   "segments_synth": [
     {
       "text": "On Roof oh-three, hot work begins, every safeguard in place.",
       "start": 0.12,
-      "end": 3.36,
+      "end": 3.72,
       "alignment_quality": {
-        "energy_pauses": 0,
+        "energy_pauses": 1,
         "pause_agreement": 1.0,
         "pauses_inside_words": [],
         "onset_error_ms": 0.0,
         "offset_error_ms": 0.0,
-        "pause_onset_error_ms_mean": null,
-        "pause_onset_error_ms_max": null
+        "pause_onset_error_ms_mean": 0.0,
+        "pause_onset_error_ms_max": 0.0
       },
       "fallback": false
     }
@@ -104,13 +104,13 @@
     "method": "pocketsphinx-5-forced-alignment+energy-refine",
     "fallback": false,
     "quality": {
-      "energy_pauses": 0,
+      "energy_pauses": 1,
       "pause_agreement": 1.0,
       "pauses_inside_words": [],
       "onset_error_ms": 0.0,
       "offset_error_ms": 0.0,
-      "pause_onset_error_ms_mean": null,
-      "pause_onset_error_ms_max": null
+      "pause_onset_error_ms_mean": 0.0,
+      "pause_onset_error_ms_max": 0.0
     },
     "quality_ok": true
   },

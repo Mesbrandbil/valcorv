@@ -8,9 +8,9 @@
   "text": "Decisions can carry price.",
   "spoken_text": "Decisions can carry price.",
   "sample_rate": 48000,
-  "duration": 1.94,
+  "duration": 2.04,
   "speech_start": 0.13,
-  "speech_end": 1.71,
+  "speech_end": 1.81,
   "words": [
     {
       "w": "Decisions",
@@ -25,38 +25,38 @@
     {
       "w": "carry",
       "start": 0.93,
-      "end": 1.22
+      "end": 1.23
     },
     {
       "w": "price",
-      "start": 1.22,
-      "end": 1.71
+      "start": 1.23,
+      "end": 1.81
     }
   ],
   "sentences": [
     {
       "text": "Decisions can carry price.",
       "start": 0.13,
-      "end": 1.71,
+      "end": 1.81,
       "word_range": [
         0,
         4
       ]
     }
   ],
-  "created": "2026-09-29T19:43:50+00:00",
+  "created": "2026-09-29T21:41:35+00:00",
   "provider": "kokoro-onnx 0.6.1, kokoro-v1.0.onnx (local guide)",
   "voice": {
     "id": "bf_isabella",
     "lang": "en-gb"
   },
-  "speed": 1.1569,
+  "speed": 1.0,
   "inner_pauses": [],
   "segments_synth": [
     {
       "text": "Decisions can carry price.",
       "start": 0.12,
-      "end": 1.74,
+      "end": 1.84,
       "alignment_quality": {
         "energy_pauses": 0,
         "pause_agreement": 1.0,

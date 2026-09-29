@@ -8,80 +8,80 @@
   "text": "What if the decision existed when the risk changed?",
   "spoken_text": "What if the decision existed when the risk changed?",
   "sample_rate": 48000,
-  "duration": 2.91,
+  "duration": 3.09,
   "speech_start": 0.13,
-  "speech_end": 2.68,
+  "speech_end": 2.86,
   "words": [
     {
       "w": "What",
       "start": 0.13,
-      "end": 0.28
+      "end": 0.32
     },
     {
       "w": "if",
-      "start": 0.28,
-      "end": 0.4
+      "start": 0.32,
+      "end": 0.46
     },
     {
       "w": "the",
-      "start": 0.4,
-      "end": 0.49
+      "start": 0.46,
+      "end": 0.56
     },
     {
       "w": "decision",
-      "start": 0.49,
-      "end": 0.96
+      "start": 0.56,
+      "end": 1.06
     },
     {
       "w": "existed",
-      "start": 0.96,
-      "end": 1.56
+      "start": 1.06,
+      "end": 1.64
     },
     {
       "w": "when",
-      "start": 1.56,
-      "end": 1.69
+      "start": 1.64,
+      "end": 1.81
     },
     {
       "w": "the",
-      "start": 1.69,
-      "end": 1.78
+      "start": 1.81,
+      "end": 1.9
     },
     {
       "w": "risk",
-      "start": 1.78,
-      "end": 2.07
+      "start": 1.9,
+      "end": 2.24
     },
     {
       "w": "changed",
-      "start": 2.07,
-      "end": 2.68
+      "start": 2.24,
+      "end": 2.86
     }
   ],
   "sentences": [
     {
       "text": "What if the decision existed when the risk changed?",
       "start": 0.13,
-      "end": 2.68,
+      "end": 2.86,
       "word_range": [
         0,
         9
       ]
     }
   ],
-  "created": "2026-09-29T19:43:50+00:00",
+  "created": "2026-09-29T21:41:34+00:00",
   "provider": "kokoro-onnx 0.6.1, kokoro-v1.0.onnx (local guide)",
   "voice": {
     "id": "bf_isabella",
     "lang": "en-gb"
   },
-  "speed": 1.1569,
+  "speed": 1.0,
   "inner_pauses": [],
   "segments_synth": [
     {
       "text": "What if the decision existed when the risk changed?",
       "start": 0.12,
-      "end": 2.71,
+      "end": 2.89,
       "alignment_quality": {
         "energy_pauses": 0,
         "pause_agreement": 1.0,

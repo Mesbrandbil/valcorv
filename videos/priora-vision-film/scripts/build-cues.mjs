@@ -625,6 +625,27 @@ const INDEX_TEMPLATE = `<!doctype html>
         inset: 0;
         background: radial-gradient(ellipse 75% 70% at 50% 48%, rgba(59, 58, 51, 0) 58%, rgba(59, 58, 51, 0.035) 82%, rgba(59, 58, 51, 0.07) 100%);
       }
+      /* Surface above every scene (cut 2): one printed paper tooth and a restrained light falloff,
+         so graphite, ink and interface share the same sheet. Uniform, so paper-filled shapes still
+         match the ground. Untimed and never read by the layout checks. */
+      #film-surface {
+        position: absolute;
+        inset: 0;
+        z-index: 900;
+        pointer-events: none;
+      }
+      #film-surface-tooth {
+        position: absolute;
+        inset: 0;
+        background-image: url("assets/textures/paper-tooth.png");
+        background-size: 1024px 1024px;
+        background-repeat: repeat;
+      }
+      #film-surface-light {
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(ellipse 90% 85% at 46% 42%, rgba(59, 58, 51, 0) 55%, rgba(59, 58, 51, 0.03) 80%, rgba(59, 58, 51, 0.06) 100%);
+      }
     </style>
   </head>
   <body>
@@ -638,6 +659,10 @@ const INDEX_TEMPLATE = `<!doctype html>
       <!-- build-cues:slots:begin -->
 ${slotHtml}
       <!-- build-cues:slots:end -->
+      <div id="film-surface" aria-hidden="true" data-layout-ignore>
+        <div id="film-surface-tooth"></div>
+        <div id="film-surface-light"></div>
+      </div>
       <!-- build-cues:audio:begin -->
 ${audioHtml}
       <!-- build-cues:audio:end -->

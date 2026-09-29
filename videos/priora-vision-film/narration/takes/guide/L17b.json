@@ -1,56 +1,46 @@
 {
   "schema": "priora-narration-take/1",
-  "id": "L07",
+  "id": "L17b",
   "engine": "guide",
   "guide": true,
   "label": "GUIDE VOICE (local Kokoro). Not the final ElevenLabs performance.",
   "speaker": "narrator",
-  "text": "Then a sprinkler zone goes offline.",
-  "spoken_text": "Then a sprinkler zone goes offline.",
+  "text": "knowingly retain the risk,",
+  "spoken_text": "knowingly retain the risk,",
   "sample_rate": 48000,
-  "duration": 2.41,
+  "duration": 1.93,
   "speech_start": 0.13,
-  "speech_end": 2.17,
+  "speech_end": 1.61,
   "words": [
     {
-      "w": "Then",
+      "w": "knowingly",
       "start": 0.13,
-      "end": 0.35
+      "end": 0.63
     },
     {
-      "w": "a",
-      "start": 0.35,
-      "end": 0.39
+      "w": "retain",
+      "start": 0.63,
+      "end": 1.04
     },
     {
-      "w": "sprinkler",
-      "start": 0.39,
-      "end": 0.93
+      "w": "the",
+      "start": 1.04,
+      "end": 1.14
     },
     {
-      "w": "zone",
-      "start": 0.93,
-      "end": 1.38
-    },
-    {
-      "w": "goes",
-      "start": 1.38,
-      "end": 1.64
-    },
-    {
-      "w": "offline",
-      "start": 1.64,
-      "end": 2.17
+      "w": "risk",
+      "start": 1.14,
+      "end": 1.61
     }
   ],
   "sentences": [
     {
-      "text": "Then a sprinkler zone goes offline.",
+      "text": "knowingly retain the risk,",
       "start": 0.13,
-      "end": 2.17,
+      "end": 1.61,
       "word_range": [
         0,
-        6
+        4
       ]
     }
   ],
@@ -64,15 +54,15 @@
   "inner_pauses": [],
   "segments_synth": [
     {
-      "text": "Then a sprinkler zone goes offline.",
+      "text": "knowingly retain the risk,",
       "start": 0.12,
-      "end": 2.21,
+      "end": 1.73,
       "alignment_quality": {
         "energy_pauses": 0,
         "pause_agreement": 1.0,
         "pauses_inside_words": [],
         "onset_error_ms": 0.0,
-        "offset_error_ms": 10.0,
+        "offset_error_ms": 90.0,
         "pause_onset_error_ms_mean": null,
         "pause_onset_error_ms_max": null
       },
@@ -87,7 +77,7 @@
       "pause_agreement": 1.0,
       "pauses_inside_words": [],
       "onset_error_ms": 0.0,
-      "offset_error_ms": 10.0,
+      "offset_error_ms": 90.0,
       "pause_onset_error_ms_mean": null,
       "pause_onset_error_ms_max": null
     },

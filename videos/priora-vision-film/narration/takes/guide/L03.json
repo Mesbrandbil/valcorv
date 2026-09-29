@@ -8,75 +8,75 @@
   "text": "Insurance sets conditions under which risk is accepted.",
   "spoken_text": "Insurance sets conditions under which risk is accepted.",
   "sample_rate": 48000,
-  "duration": 3.29,
+  "duration": 3.55,
   "speech_start": 0.13,
-  "speech_end": 3.06,
+  "speech_end": 3.32,
   "words": [
     {
       "w": "Insurance",
       "start": 0.13,
-      "end": 0.7
+      "end": 0.76
     },
     {
       "w": "sets",
-      "start": 0.7,
-      "end": 0.96
+      "start": 0.76,
+      "end": 1.04
     },
     {
       "w": "conditions",
-      "start": 0.96,
-      "end": 1.53
+      "start": 1.04,
+      "end": 1.67
     },
     {
       "w": "under",
-      "start": 1.53,
-      "end": 1.73
+      "start": 1.67,
+      "end": 1.88
     },
     {
       "w": "which",
-      "start": 1.73,
-      "end": 2.01
+      "start": 1.88,
+      "end": 2.19
     },
     {
       "w": "risk",
-      "start": 2.01,
-      "end": 2.32
+      "start": 2.19,
+      "end": 2.53
     },
     {
       "w": "is",
-      "start": 2.32,
-      "end": 2.45
+      "start": 2.53,
+      "end": 2.68
     },
     {
       "w": "accepted",
-      "start": 2.45,
-      "end": 3.06
+      "start": 2.68,
+      "end": 3.32
     }
   ],
   "sentences": [
     {
       "text": "Insurance sets conditions under which risk is accepted.",
       "start": 0.13,
-      "end": 3.06,
+      "end": 3.32,
       "word_range": [
         0,
         8
       ]
     }
   ],
-  "created": "2026-09-29T19:43:50+00:00",
+  "created": "2026-09-29T21:41:34+00:00",
   "provider": "kokoro-onnx 0.6.1, kokoro-v1.0.onnx (local guide)",
   "voice": {
     "id": "bf_isabella",
     "lang": "en-gb"
   },
-  "speed": 1.1569,
+  "speed": 1.0,
   "inner_pauses": [],
   "segments_synth": [
     {
       "text": "Insurance sets conditions under which risk is accepted.",
       "start": 0.12,
-      "end": 3.09,
+      "end": 3.35,
       "alignment_quality": {
         "energy_pauses": 0,
         "pause_agreement": 1.0,

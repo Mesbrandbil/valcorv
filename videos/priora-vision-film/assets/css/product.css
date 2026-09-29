@@ -33,7 +33,7 @@
 }
 .pui{
   --pui-paper:#F5F3EE; --pui-paper-2:#EEEBE4; --pui-card:#FBFAF7; --pui-ink:#111111;
-  --pui-ink-2:rgba(17,17,17,.68); --pui-ink-3:rgba(17,17,17,.47); --pui-ink-4:rgba(17,17,17,.28);
+  --pui-ink-2:rgba(17,17,17,.74); --pui-ink-3:rgba(17,17,17,.60); --pui-ink-4:rgba(17,17,17,.42);
   --pui-hair:rgba(17,17,17,.13); --pui-hair-2:rgba(17,17,17,.07);
   --pui-signal:var(--signal, #1F47D6);
   --pui-signal-deep:var(--signal-deep, #1838A8);

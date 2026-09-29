@@ -8,56 +8,56 @@
   "text": "Trust enables decisions.",
   "spoken_text": "Trust enables decisions.",
   "sample_rate": 48000,
-  "duration": 1.85,
+  "duration": 2.05,
   "speech_start": 0.13,
-  "speech_end": 1.62,
+  "speech_end": 1.81,
   "words": [
     {
       "w": "Trust",
       "start": 0.13,
-      "end": 0.45
+      "end": 0.56
     },
     {
       "w": "enables",
-      "start": 0.45,
-      "end": 0.96
+      "start": 0.56,
+      "end": 1.09
     },
     {
       "w": "decisions",
-      "start": 0.96,
-      "end": 1.62
+      "start": 1.09,
+      "end": 1.81
     }
   ],
   "sentences": [
     {
       "text": "Trust enables decisions.",
       "start": 0.13,
-      "end": 1.62,
+      "end": 1.81,
       "word_range": [
         0,
         3
       ]
     }
   ],
-  "created": "2026-09-29T19:43:50+00:00",
+  "created": "2026-09-29T21:41:34+00:00",
   "provider": "kokoro-onnx 0.6.1, kokoro-v1.0.onnx (local guide)",
   "voice": {
     "id": "bf_isabella",
     "lang": "en-gb"
   },
-  "speed": 1.1569,
+  "speed": 1.0,
   "inner_pauses": [],
   "segments_synth": [
     {
       "text": "Trust enables decisions.",
       "start": 0.12,
-      "end": 1.65,
+      "end": 1.85,
       "alignment_quality": {
         "energy_pauses": 0,
         "pause_agreement": 1.0,
         "pauses_inside_words": [],
         "onset_error_ms": 0.0,
-        "offset_error_ms": 0.0,
+        "offset_error_ms": 10.0,
         "pause_onset_error_ms_mean": null,
         "pause_onset_error_ms_max": null
       },
@@ -72,7 +72,7 @@
       "pause_agreement": 1.0,
       "pauses_inside_words": [],
       "onset_error_ms": 0.0,
-      "offset_error_ms": 0.0,
+      "offset_error_ms": 10.0,
       "pause_onset_error_ms_mean": null,
       "pause_onset_error_ms_max": null
     },

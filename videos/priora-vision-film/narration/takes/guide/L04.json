@@ -8,80 +8,80 @@
   "text": "Good teams translate them into permits, briefings and checklists.",
   "spoken_text": "Good teams translate them into permits, briefings and checklists.",
   "sample_rate": 48000,
-  "duration": 3.47,
+  "duration": 3.67,
   "speech_start": 0.13,
-  "speech_end": 3.24,
+  "speech_end": 3.44,
   "words": [
     {
       "w": "Good",
       "start": 0.13,
-      "end": 0.3
+      "end": 0.32
     },
     {
       "w": "teams",
-      "start": 0.3,
-      "end": 0.65
+      "start": 0.32,
+      "end": 0.73
     },
     {
       "w": "translate",
-      "start": 0.65,
-      "end": 1.12
+      "start": 0.73,
+      "end": 1.23
     },
     {
       "w": "them",
-      "start": 1.12,
-      "end": 1.24
+      "start": 1.23,
+      "end": 1.35
     },
     {
       "w": "into",
-      "start": 1.24,
-      "end": 1.41
+      "start": 1.35,
+      "end": 1.52
     },
     {
       "w": "permits",
-      "start": 1.41,
-      "end": 1.95
+      "start": 1.52,
+      "end": 2.07
     },
     {
       "w": "briefings",
-      "start": 1.95,
-      "end": 2.51
+      "start": 2.07,
+      "end": 2.65
     },
     {
       "w": "and",
-      "start": 2.51,
-      "end": 2.62
+      "start": 2.65,
+      "end": 2.76
     },
     {
       "w": "checklists",
-      "start": 2.62,
-      "end": 3.24
+      "start": 2.76,
+      "end": 3.44
     }
   ],
   "sentences": [
     {
       "text": "Good teams translate them into permits, briefings and checklists.",
       "start": 0.13,
-      "end": 3.24,
+      "end": 3.44,
       "word_range": [
         0,
         9
       ]
     }
   ],
-  "created": "2026-09-29T19:43:50+00:00",
+  "created": "2026-09-29T21:41:34+00:00",
   "provider": "kokoro-onnx 0.6.1, kokoro-v1.0.onnx (local guide)",
   "voice": {
     "id": "bf_isabella",
     "lang": "en-gb"
   },
-  "speed": 1.1569,
+  "speed": 1.0,
   "inner_pauses": [],
   "segments_synth": [
     {
       "text": "Good teams translate them into permits, briefings and checklists.",
       "start": 0.12,
-      "end": 3.27,
+      "end": 3.47,
       "alignment_quality": {
         "energy_pauses": 0,
         "pause_agreement": 1.0,
