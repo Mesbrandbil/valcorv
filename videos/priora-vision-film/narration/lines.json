@@ -1,0 +1,349 @@
+{
+  "schema": "priora-narration-lines/1",
+  "film": "priora-vision-film",
+  "language": "en-GB",
+  "notes": "Locked narration for the Priora vision film. `text` is the displayed text (captions, SCRIPT.md). `tts_text` holds the spoken form per engine when it differs; every spoken form keeps exactly one whitespace token per displayed token so word timings map back one to one. `gap_after` is designed silence after the line, `pre_gap` designed silence before it, both measured speech to speech. `guide_inner_pauses` are the pauses the local guide voice inserts between the sentences of a line (the ElevenLabs performance supplies its own).",
+  "pacing": {
+    "lead_in": 1.2,
+    "end_hold": 2.8,
+    "target_total": 91.0,
+    "min_total": 88.0,
+    "max_total": 94.0,
+    "edge_pad": 0.04
+  },
+  "spoken_forms": {
+    "Roof 03": {
+      "spoken": "Roof oh-three",
+      "note": "Zero is said oh, British usage. Applied in tts_text of L06 and L13 for both engines."
+    },
+    "Priora": {
+      "spoken": "pri-OR-a",
+      "note": "See pronunciations.Priora for the per-engine mechanism."
+    }
+  },
+  "pronunciations": {
+    "Priora": {
+      "intent": "pri-OR-a, stress on the middle syllable, never PRY-ora",
+      "ipa": "pɹiˈɔːɹə",
+      "guide_ipa": "pɹiˈɔːɹə",
+      "guide_espeak_default": "pɹˈaɪɔːɹə",
+      "elevenlabs": "Pree-OR-uh",
+      "elevenlabs_alternates": [
+        "Pree-ora",
+        "Pri-OR-ah",
+        "Pree-AW-ruh"
+      ],
+      "aligner_word": "priora",
+      "aligner_right": [
+        "P R IY AO R AH",
+        "P R IH AO R AH"
+      ],
+      "aligner_wrong": [
+        "P R AY AO R AH",
+        "P R AY ER AH"
+      ],
+      "stressed_vowel": "AO"
+    }
+  },
+  "engines": {
+    "guide": {
+      "provider": "kokoro-onnx (kokoro-v1.0.onnx, voices-v1.0.bin)",
+      "lang": "en-gb",
+      "narrator_candidates": [
+        "bf_emma",
+        "bf_isabella",
+        "bf_alice",
+        "bf_lily"
+      ],
+      "worker_candidates": [
+        "bm_daniel",
+        "bm_fable",
+        "bm_george",
+        "bm_lewis"
+      ],
+      "narrator_voice": null,
+      "worker_voice": null,
+      "narrator_speed": 1.0,
+      "worker_speed": 1.0,
+      "default_inner_pause": {
+        ".": 0.3,
+        "?": 0.36,
+        "!": 0.3,
+        ":": 0.25
+      }
+    },
+    "elevenlabs": {
+      "model_id": "eleven_multilingual_v2",
+      "output_format": "mp3_44100_128",
+      "voice_settings": {
+        "stability": 0.5,
+        "similarity_boost": 0.8,
+        "style": 0.1,
+        "use_speaker_boost": true,
+        "speed": 1.0
+      },
+      "worker_voice_settings": {
+        "stability": 0.45,
+        "similarity_boost": 0.8,
+        "style": 0.0,
+        "use_speaker_boost": true,
+        "speed": 1.0
+      },
+      "seed": 3031
+    }
+  },
+  "lines": [
+    {
+      "id": "L01",
+      "speaker": "narrator",
+      "section": "b01-site-wakes",
+      "text": "Every industrial site changes by the hour.",
+      "delivery": "Quiet, observational opening. Unhurried, no announcer lift.",
+      "pre_gap": 0.0,
+      "gap_after": 0.35
+    },
+    {
+      "id": "L02",
+      "speaker": "narrator",
+      "section": "b01-site-wakes",
+      "text": "Contractors arrive. Equipment is isolated. Work moves.",
+      "delivery": "Three plain observations, even weight, the site coming alive.",
+      "pre_gap": 0.0,
+      "gap_after": 0.55,
+      "guide_inner_pauses": [
+        0.3,
+        0.3
+      ]
+    },
+    {
+      "id": "L03",
+      "speaker": "narrator",
+      "section": "b02-insurance-becomes-workflow",
+      "text": "Insurance sets conditions under which risk is accepted.",
+      "delivery": "Matter of fact. Slight weight on conditions and accepted.",
+      "pre_gap": 0.0,
+      "gap_after": 0.25
+    },
+    {
+      "id": "L04",
+      "speaker": "narrator",
+      "section": "b02-insurance-becomes-workflow",
+      "text": "Good teams translate them into permits, briefings and checklists.",
+      "delivery": "Respectful of the teams. The list is competent, not tired.",
+      "pre_gap": 0.0,
+      "gap_after": 0.5
+    },
+    {
+      "id": "L05",
+      "speaker": "narrator",
+      "section": "b03-complexity-outruns-translation",
+      "text": "But no one can hold a moving site in their head.",
+      "delivery": "The turn. Human and understanding, not critical.",
+      "pre_gap": 0.0,
+      "gap_after": 0.6
+    },
+    {
+      "id": "L06",
+      "speaker": "narrator",
+      "section": "b03-complexity-outruns-translation",
+      "text": "On Roof 03, hot work begins. The certificate and safeguards are in place.",
+      "tts_text": {
+        "guide": "On Roof oh-three, hot work begins. The certificate and safeguards are in place.",
+        "elevenlabs": "On Roof oh-three, hot work begins. The certificate and safeguards are in place."
+      },
+      "delivery": "Specific and calm. Everything is correct at this point.",
+      "pre_gap": 0.0,
+      "gap_after": 0.45,
+      "guide_inner_pauses": [
+        0.35
+      ]
+    },
+    {
+      "id": "L07",
+      "speaker": "narrator",
+      "section": "b04-invisible-crossing",
+      "text": "Then a sprinkler zone goes offline.",
+      "delivery": "Understated. No drama in the voice; the silence after it does the work.",
+      "pre_gap": 0.0,
+      "gap_after": 0.9
+    },
+    {
+      "id": "L08",
+      "speaker": "narrator",
+      "section": "b04-invisible-crossing",
+      "text": "Nothing looks different. Work continues. But the conditions have changed, and nobody sees it.",
+      "delivery": "Controlled tension. Short beats, then the quiet realisation on nobody sees it.",
+      "pre_gap": 0.0,
+      "gap_after": 0.7,
+      "guide_inner_pauses": [
+        0.4,
+        0.45
+      ]
+    },
+    {
+      "id": "L09",
+      "speaker": "narrator",
+      "section": "b05-afterwards",
+      "text": "If something goes wrong, questions begin afterwards:",
+      "delivery": "Restrained. Leads straight into the questions.",
+      "pre_gap": 0.0,
+      "gap_after": 0.2
+    },
+    {
+      "id": "L10",
+      "speaker": "narrator",
+      "section": "b05-afterwards",
+      "text": "What was happening? Which condition applied? Can you prove what was true?",
+      "delivery": "Forensic. Each question stands alone, slightly more pointed each time.",
+      "pre_gap": 0.0,
+      "gap_after": 0.6,
+      "guide_inner_pauses": [
+        0.4,
+        0.4
+      ]
+    },
+    {
+      "id": "L11",
+      "speaker": "narrator",
+      "section": "b05-afterwards",
+      "text": "Today, the gap is often discovered too late.",
+      "delivery": "Land the idea. Plain, final, no sigh.",
+      "pre_gap": 0.0,
+      "gap_after": 0.9
+    },
+    {
+      "id": "L12",
+      "speaker": "narrator",
+      "section": "b06-rewind",
+      "text": "What if the decision existed when the risk changed?",
+      "delivery": "After the rewind silence. Open, curious, forward looking.",
+      "pre_gap": 3.2,
+      "pre_gap_note": "REWIND SILENCE: picture and sound reverse here",
+      "gap_after": 0.7
+    },
+    {
+      "id": "L13",
+      "speaker": "worker",
+      "section": "b07-speak-the-activity",
+      "text": "I'm welding on Roof 03 until six.",
+      "tts_text": {
+        "guide": "I'm welding on Roof oh-three until six.",
+        "elevenlabs": "I'm welding on Roof oh-three until six."
+      },
+      "delivery": "A real worker speaking into a phone on site. Natural, close-mic, practical, not a slogan.",
+      "pre_gap": 0.0,
+      "gap_after": 0.55
+    },
+    {
+      "id": "L14",
+      "speaker": "narrator",
+      "section": "b07-speak-the-activity",
+      "text": "Priora connects the activity to the conditions that matter, verifies the certificate and safeguards, and creates the record while work happens.",
+      "tts_text": {
+        "guide": "Priora connects the activity to the conditions that matter, verifies the certificate and safeguards, and creates the record while work happens.",
+        "elevenlabs": "Pree-OR-uh connects the activity to the conditions that matter, verifies the certificate and safeguards, and creates the record while work happens."
+      },
+      "delivery": "Clarity arrives. Precise, even, three clauses with light separation.",
+      "pre_gap": 0.0,
+      "gap_after": 0.35
+    },
+    {
+      "id": "L15",
+      "speaker": "narrator",
+      "section": "b08-prevention-and-proof",
+      "text": "Prevention before the work. Proof as it happens.",
+      "delivery": "Let each half stand. Confident through precision, not emphasis.",
+      "pre_gap": 0.0,
+      "gap_after": 1.1,
+      "guide_inner_pauses": [
+        0.45
+      ]
+    },
+    {
+      "id": "L16",
+      "speaker": "narrator",
+      "section": "b09-priora-sees-the-change",
+      "text": "When the sprinkler goes offline again, Priora sees it immediately.",
+      "tts_text": {
+        "guide": "When the sprinkler goes offline again, Priora sees it immediately.",
+        "elevenlabs": "When the sprinkler goes offline again, Pree-OR-uh sees it immediately."
+      },
+      "delivery": "Calm certainty. Immediately is quiet, not triumphant.",
+      "pre_gap": 0.0,
+      "gap_after": 1.2
+    },
+    {
+      "id": "L17",
+      "speaker": "narrator",
+      "section": "b10-change-retain-transfer",
+      "text": "Now the risk owner can change the activity, knowingly retain the exposure, or eventually ask selected carriers whether they will cover it.",
+      "delivery": "Three options with momentum. Eventually is honest and unhurried.",
+      "pre_gap": 0.0,
+      "gap_after": 0.6
+    },
+    {
+      "id": "L18",
+      "speaker": "narrator",
+      "section": "b11-whole-site-and-close",
+      "text": "Most work remains ordinary. A few changes become explicit decisions.",
+      "delivery": "Pulling back. Reassuring, measured.",
+      "pre_gap": 0.0,
+      "gap_after": 0.6,
+      "guide_inner_pauses": [
+        0.4
+      ]
+    },
+    {
+      "id": "L19a",
+      "speaker": "narrator",
+      "section": "b11-whole-site-and-close",
+      "text": "Record becomes trust.",
+      "delivery": "Chain link one. Even, deliberate.",
+      "pre_gap": 0.0,
+      "gap_after": 0.3
+    },
+    {
+      "id": "L19b",
+      "speaker": "narrator",
+      "section": "b11-whole-site-and-close",
+      "text": "Trust enables decisions.",
+      "delivery": "Chain link two.",
+      "pre_gap": 0.0,
+      "gap_after": 0.3
+    },
+    {
+      "id": "L19c",
+      "speaker": "narrator",
+      "section": "b11-whole-site-and-close",
+      "text": "Decisions can carry price.",
+      "delivery": "Chain link three. Can is conditional, not a promise.",
+      "pre_gap": 0.0,
+      "gap_after": 0.3
+    },
+    {
+      "id": "L19d",
+      "speaker": "narrator",
+      "section": "b11-whole-site-and-close",
+      "text": "Price can connect to capacity.",
+      "delivery": "Chain link four. Resolve downward.",
+      "pre_gap": 0.0,
+      "gap_after": 0.8
+    },
+    {
+      "id": "L20",
+      "speaker": "narrator",
+      "section": "b11-whole-site-and-close",
+      "text": "Priora. Infrastructure for activity-level physical risk.",
+      "tts_text": {
+        "guide": "Priora. Infrastructure for activity-level physical risk.",
+        "elevenlabs": "Pree-OR-uh. Infrastructure for activity-level physical risk."
+      },
+      "delivery": "Calm, inevitable close. The name, a breath, the descriptor.",
+      "pre_gap": 0.0,
+      "gap_after": 0.0,
+      "guide_inner_pauses": [
+        0.55
+      ]
+    }
+  ]
+}

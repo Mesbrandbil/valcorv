@@ -5,3 +5,4 @@ narration/takes/**/*.raw
 audio-engine/__pycache__/
 *.pyc
 renders/tmp/
+__pycache__/
