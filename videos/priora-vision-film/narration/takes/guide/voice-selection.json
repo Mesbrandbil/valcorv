@@ -1,0 +1,271 @@
+{
+  "created": "2026-09-29T18:54:46+00:00",
+  "method": "objective scoring, nobody can listen in this environment",
+  "weights": {
+    "pitch": 0.22,
+    "stability": 0.18,
+    "clarity": 0.16,
+    "breath": 0.12,
+    "balance": 0.1,
+    "alignment": 0.1,
+    "model_card": 0.12
+  },
+  "targets": {
+    "narrator": {
+      "pitch_std_st": 2.6,
+      "pitch_tol": 1.1,
+      "presence_minus_warmth_db": -11.0,
+      "balance_tol": 6.0
+    },
+    "worker": {
+      "pitch_std_st": 2.4,
+      "pitch_tol": 1.2,
+      "presence_minus_warmth_db": -10.0,
+      "balance_tol": 6.0
+    }
+  },
+  "model_card_grades": {
+    "bf_emma": "B-",
+    "bf_isabella": "C",
+    "bf_alice": "D",
+    "bf_lily": "D",
+    "bm_george": "C",
+    "bm_fable": "C",
+    "bm_lewis": "D+",
+    "bm_daniel": "D"
+  },
+  "narrator": {
+    "ranking": [
+      {
+        "voice": "bf_isabella",
+        "role": "narrator",
+        "f0_median_hz": 204.1,
+        "pitch_std_semitones": 2.42,
+        "pitch_plain_std_semitones": 2.3,
+        "pitch_range_p10_p90_semitones": 6.2,
+        "articulation_rate_syll_per_s": 4.79,
+        "rate_cv": 0.094,
+        "hnr_db": 12.03,
+        "voiced_spectral_flatness": 0.00167,
+        "presence_minus_warmth_db": -15.03,
+        "air_minus_presence_db": -2.42,
+        "alignment_agreement": 1.0,
+        "priora_ok": true,
+        "model_card_grade": "C",
+        "test_segments": 11,
+        "components": {
+          "pitch": 0.974,
+          "stability": 0.624,
+          "clarity": 0.752,
+          "breath": 0.819,
+          "balance": 0.637,
+          "alignment": 1.0,
+          "model_card": 0.6
+        },
+        "score": 0.7809
+      },
+      {
+        "voice": "bf_emma",
+        "role": "narrator",
+        "f0_median_hz": 183.9,
+        "pitch_std_semitones": 2.26,
+        "pitch_plain_std_semitones": 2.11,
+        "pitch_range_p10_p90_semitones": 5.8,
+        "articulation_rate_syll_per_s": 4.79,
+        "rate_cv": 0.111,
+        "hnr_db": 10.43,
+        "voiced_spectral_flatness": 0.00475,
+        "presence_minus_warmth_db": -10.59,
+        "air_minus_presence_db": -5.49,
+        "alignment_agreement": 1.0,
+        "priora_ok": true,
+        "model_card_grade": "B-",
+        "test_segments": 11,
+        "components": {
+          "pitch": 0.909,
+          "stability": 0.556,
+          "clarity": 0.619,
+          "breath": 0.4,
+          "balance": 0.995,
+          "alignment": 1.0,
+          "model_card": 0.75
+        },
+        "score": 0.7366
+      },
+      {
+        "voice": "bf_alice",
+        "role": "narrator",
+        "f0_median_hz": 217.5,
+        "pitch_std_semitones": 4.92,
+        "pitch_plain_std_semitones": 4.88,
+        "pitch_range_p10_p90_semitones": 12.6,
+        "articulation_rate_syll_per_s": 4.38,
+        "rate_cv": 0.129,
+        "hnr_db": 10.23,
+        "voiced_spectral_flatness": 0.00034,
+        "presence_minus_warmth_db": -13.23,
+        "air_minus_presence_db": -5.48,
+        "alignment_agreement": 1.0,
+        "priora_ok": true,
+        "model_card_grade": "D",
+        "test_segments": 11,
+        "components": {
+          "pitch": 0.012,
+          "stability": 0.484,
+          "clarity": 0.603,
+          "breath": 1.0,
+          "balance": 0.871,
+          "alignment": 1.0,
+          "model_card": 0.4
+        },
+        "score": 0.5412
+      },
+      {
+        "voice": "bf_lily",
+        "role": "narrator",
+        "f0_median_hz": 193.7,
+        "pitch_std_semitones": 4.14,
+        "pitch_plain_std_semitones": 4.12,
+        "pitch_range_p10_p90_semitones": 10.6,
+        "articulation_rate_syll_per_s": 4.16,
+        "rate_cv": 0.162,
+        "hnr_db": 12.16,
+        "voiced_spectral_flatness": 0.00043,
+        "presence_minus_warmth_db": -16.53,
+        "air_minus_presence_db": -4.54,
+        "alignment_agreement": 1.0,
+        "priora_ok": true,
+        "model_card_grade": "D",
+        "test_segments": 11,
+        "components": {
+          "pitch": 0.141,
+          "stability": 0.352,
+          "clarity": 0.763,
+          "breath": 0.988,
+          "balance": 0.428,
+          "alignment": 1.0,
+          "model_card": 0.4
+        },
+        "score": 0.5258
+      }
+    ],
+    "chosen": "bf_isabella"
+  },
+  "worker": {
+    "ranking": [
+      {
+        "voice": "bm_daniel",
+        "role": "worker",
+        "f0_median_hz": 125.7,
+        "pitch_std_semitones": 2.61,
+        "pitch_plain_std_semitones": 3.18,
+        "pitch_range_p10_p90_semitones": 6.7,
+        "articulation_rate_syll_per_s": 4.66,
+        "rate_cv": 0.102,
+        "hnr_db": 9.3,
+        "voiced_spectral_flatness": 0.00044,
+        "presence_minus_warmth_db": -15.83,
+        "air_minus_presence_db": -5.41,
+        "alignment_agreement": 1.0,
+        "priora_ok": null,
+        "model_card_grade": "D",
+        "test_segments": 3,
+        "components": {
+          "pitch": 0.97,
+          "stability": 0.592,
+          "clarity": 0.525,
+          "breath": 0.889,
+          "balance": 0.389,
+          "alignment": 1.0,
+          "model_card": 0.4
+        },
+        "score": 0.6975
+      },
+      {
+        "voice": "bm_george",
+        "role": "worker",
+        "f0_median_hz": 147.7,
+        "pitch_std_semitones": 3.28,
+        "pitch_plain_std_semitones": 3.77,
+        "pitch_range_p10_p90_semitones": 8.41,
+        "articulation_rate_syll_per_s": 3.95,
+        "rate_cv": 0.093,
+        "hnr_db": 13.19,
+        "voiced_spectral_flatness": 0.00042,
+        "presence_minus_warmth_db": -16.04,
+        "air_minus_presence_db": -4.72,
+        "alignment_agreement": 1.0,
+        "priora_ok": null,
+        "model_card_grade": "C",
+        "test_segments": 3,
+        "components": {
+          "pitch": 0.584,
+          "stability": 0.628,
+          "clarity": 0.849,
+          "breath": 0.894,
+          "balance": 0.363,
+          "alignment": 1.0,
+          "model_card": 0.6
+        },
+        "score": 0.693
+      },
+      {
+        "voice": "bm_fable",
+        "role": "worker",
+        "f0_median_hz": 100.9,
+        "pitch_std_semitones": 7.41,
+        "pitch_plain_std_semitones": 7.31,
+        "pitch_range_p10_p90_semitones": 19.0,
+        "articulation_rate_syll_per_s": 4.7,
+        "rate_cv": 0.093,
+        "hnr_db": 7.43,
+        "voiced_spectral_flatness": 5e-05,
+        "presence_minus_warmth_db": -12.48,
+        "air_minus_presence_db": -14.3,
+        "alignment_agreement": 1.0,
+        "priora_ok": null,
+        "model_card_grade": "C",
+        "test_segments": 3,
+        "components": {
+          "pitch": 0.0,
+          "stability": 0.628,
+          "clarity": 0.369,
+          "breath": 1.0,
+          "balance": 0.843,
+          "alignment": 1.0,
+          "model_card": 0.6
+        },
+        "score": 0.5484
+      },
+      {
+        "voice": "bm_lewis",
+        "role": "worker",
+        "f0_median_hz": 77.8,
+        "pitch_std_semitones": 4.48,
+        "pitch_plain_std_semitones": 4.38,
+        "pitch_range_p10_p90_semitones": 11.48,
+        "articulation_rate_syll_per_s": 4.16,
+        "rate_cv": 0.1,
+        "hnr_db": 7.69,
+        "voiced_spectral_flatness": 0.00215,
+        "presence_minus_warmth_db": -10.74,
+        "air_minus_presence_db": -12.65,
+        "alignment_agreement": 1.0,
+        "priora_ok": null,
+        "model_card_grade": "D+",
+        "test_segments": 3,
+        "components": {
+          "pitch": 0.05,
+          "stability": 0.6,
+          "clarity": 0.391,
+          "breath": 0.4,
+          "balance": 0.985,
+          "alignment": 1.0,
+          "model_card": 0.45
+        },
+        "score": 0.4819
+      }
+    ],
+    "chosen": "bm_daniel"
+  }
+}

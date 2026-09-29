@@ -1,0 +1,112 @@
+{
+  "schema": "priora-narration-take/1",
+  "id": "L04",
+  "engine": "guide",
+  "guide": true,
+  "label": "GUIDE VOICE (local Kokoro). Not the final ElevenLabs performance.",
+  "speaker": "narrator",
+  "text": "Good teams translate them into permits, briefings and checklists.",
+  "spoken_text": "Good teams translate them into permits, briefings and checklists.",
+  "sample_rate": 48000,
+  "duration": 3.24,
+  "speech_start": 0.13,
+  "speech_end": 3.01,
+  "words": [
+    {
+      "w": "Good",
+      "start": 0.13,
+      "end": 0.3
+    },
+    {
+      "w": "teams",
+      "start": 0.3,
+      "end": 0.65
+    },
+    {
+      "w": "translate",
+      "start": 0.65,
+      "end": 1.09
+    },
+    {
+      "w": "them",
+      "start": 1.09,
+      "end": 1.22
+    },
+    {
+      "w": "into",
+      "start": 1.22,
+      "end": 1.39
+    },
+    {
+      "w": "permits",
+      "start": 1.39,
+      "end": 1.87
+    },
+    {
+      "w": "briefings",
+      "start": 1.87,
+      "end": 2.36
+    },
+    {
+      "w": "and",
+      "start": 2.36,
+      "end": 2.47
+    },
+    {
+      "w": "checklists",
+      "start": 2.47,
+      "end": 3.01
+    }
+  ],
+  "sentences": [
+    {
+      "text": "Good teams translate them into permits, briefings and checklists.",
+      "start": 0.13,
+      "end": 3.01,
+      "word_range": [
+        0,
+        9
+      ]
+    }
+  ],
+  "created": "2026-09-29T19:06:18+00:00",
+  "provider": "kokoro-onnx 0.6.1, kokoro-v1.0.onnx (local guide)",
+  "voice": {
+    "id": "bf_isabella",
+    "lang": "en-gb"
+  },
+  "speed": 1.2262,
+  "inner_pauses": [],
+  "segments_synth": [
+    {
+      "text": "Good teams translate them into permits, briefings and checklists.",
+      "start": 0.12,
+      "end": 3.04,
+      "alignment_quality": {
+        "energy_pauses": 0,
+        "pause_agreement": 1.0,
+        "pauses_inside_words": [],
+        "onset_error_ms": 0.0,
+        "offset_error_ms": 0.0,
+        "pause_onset_error_ms_mean": null,
+        "pause_onset_error_ms_max": null
+      },
+      "fallback": false
+    }
+  ],
+  "alignment": {
+    "method": "pocketsphinx-5-forced-alignment+energy-refine",
+    "fallback": false,
+    "quality": {
+      "energy_pauses": 0,
+      "pause_agreement": 1.0,
+      "pauses_inside_words": [],
+      "onset_error_ms": 0.0,
+      "offset_error_ms": 0.0,
+      "pause_onset_error_ms_mean": null,
+      "pause_onset_error_ms_max": null
+    },
+    "quality_ok": true
+  },
+  "pronunciation_checks": []
+}

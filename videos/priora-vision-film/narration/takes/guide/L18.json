@@ -1,0 +1,143 @@
+{
+  "schema": "priora-narration-take/1",
+  "id": "L18",
+  "engine": "guide",
+  "guide": true,
+  "label": "GUIDE VOICE (local Kokoro). Not the final ElevenLabs performance.",
+  "speaker": "narrator",
+  "text": "Most work remains ordinary. A few changes become explicit decisions.",
+  "spoken_text": "Most work remains ordinary. A few changes become explicit decisions.",
+  "sample_rate": 48000,
+  "duration": 4.46,
+  "speech_start": 0.13,
+  "speech_end": 4.23,
+  "words": [
+    {
+      "w": "Most",
+      "start": 0.13,
+      "end": 0.39
+    },
+    {
+      "w": "work",
+      "start": 0.39,
+      "end": 0.68
+    },
+    {
+      "w": "remains",
+      "start": 0.68,
+      "end": 1.08
+    },
+    {
+      "w": "ordinary",
+      "start": 1.08,
+      "end": 1.63
+    },
+    {
+      "w": "A",
+      "start": 2.03,
+      "end": 2.07
+    },
+    {
+      "w": "few",
+      "start": 2.07,
+      "end": 2.27
+    },
+    {
+      "w": "changes",
+      "start": 2.27,
+      "end": 2.84
+    },
+    {
+      "w": "become",
+      "start": 2.84,
+      "end": 3.16
+    },
+    {
+      "w": "explicit",
+      "start": 3.16,
+      "end": 3.71
+    },
+    {
+      "w": "decisions",
+      "start": 3.71,
+      "end": 4.23
+    }
+  ],
+  "sentences": [
+    {
+      "text": "Most work remains ordinary.",
+      "start": 0.13,
+      "end": 1.63,
+      "word_range": [
+        0,
+        4
+      ]
+    },
+    {
+      "text": "A few changes become explicit decisions.",
+      "start": 2.03,
+      "end": 4.23,
+      "word_range": [
+        4,
+        10
+      ]
+    }
+  ],
+  "created": "2026-09-29T19:06:18+00:00",
+  "provider": "kokoro-onnx 0.6.1, kokoro-v1.0.onnx (local guide)",
+  "voice": {
+    "id": "bf_isabella",
+    "lang": "en-gb"
+  },
+  "speed": 1.2262,
+  "inner_pauses": [
+    0.4
+  ],
+  "segments_synth": [
+    {
+      "text": "Most work remains ordinary.",
+      "start": 0.12,
+      "end": 1.66,
+      "alignment_quality": {
+        "energy_pauses": 0,
+        "pause_agreement": 1.0,
+        "pauses_inside_words": [],
+        "onset_error_ms": 0.0,
+        "offset_error_ms": 0.0,
+        "pause_onset_error_ms_mean": null,
+        "pause_onset_error_ms_max": null
+      },
+      "fallback": false
+    },
+    {
+      "text": "A few changes become explicit decisions.",
+      "start": 2.02,
+      "end": 4.26,
+      "alignment_quality": {
+        "energy_pauses": 0,
+        "pause_agreement": 1.0,
+        "pauses_inside_words": [],
+        "onset_error_ms": 0.0,
+        "offset_error_ms": 0.0,
+        "pause_onset_error_ms_mean": null,
+        "pause_onset_error_ms_max": null
+      },
+      "fallback": false
+    }
+  ],
+  "alignment": {
+    "method": "pocketsphinx-5-forced-alignment+energy-refine",
+    "fallback": false,
+    "quality": {
+      "energy_pauses": 1,
+      "pause_agreement": 1.0,
+      "pauses_inside_words": [],
+      "onset_error_ms": 0.0,
+      "offset_error_ms": 0.0,
+      "pause_onset_error_ms_mean": 0.0,
+      "pause_onset_error_ms_max": 0.0
+    },
+    "quality_ok": true
+  },
+  "pronunciation_checks": []
+}

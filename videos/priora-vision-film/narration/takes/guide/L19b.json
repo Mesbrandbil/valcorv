@@ -1,0 +1,82 @@
+{
+  "schema": "priora-narration-take/1",
+  "id": "L19b",
+  "engine": "guide",
+  "guide": true,
+  "label": "GUIDE VOICE (local Kokoro). Not the final ElevenLabs performance.",
+  "speaker": "narrator",
+  "text": "Trust enables decisions.",
+  "spoken_text": "Trust enables decisions.",
+  "sample_rate": 48000,
+  "duration": 1.76,
+  "speech_start": 0.13,
+  "speech_end": 1.53,
+  "words": [
+    {
+      "w": "Trust",
+      "start": 0.13,
+      "end": 0.43
+    },
+    {
+      "w": "enables",
+      "start": 0.43,
+      "end": 0.93
+    },
+    {
+      "w": "decisions",
+      "start": 0.93,
+      "end": 1.53
+    }
+  ],
+  "sentences": [
+    {
+      "text": "Trust enables decisions.",
+      "start": 0.13,
+      "end": 1.53,
+      "word_range": [
+        0,
+        3
+      ]
+    }
+  ],
+  "created": "2026-09-29T19:06:18+00:00",
+  "provider": "kokoro-onnx 0.6.1, kokoro-v1.0.onnx (local guide)",
+  "voice": {
+    "id": "bf_isabella",
+    "lang": "en-gb"
+  },
+  "speed": 1.2262,
+  "inner_pauses": [],
+  "segments_synth": [
+    {
+      "text": "Trust enables decisions.",
+      "start": 0.12,
+      "end": 1.56,
+      "alignment_quality": {
+        "energy_pauses": 0,
+        "pause_agreement": 1.0,
+        "pauses_inside_words": [],
+        "onset_error_ms": 0.0,
+        "offset_error_ms": 0.0,
+        "pause_onset_error_ms_mean": null,
+        "pause_onset_error_ms_max": null
+      },
+      "fallback": false
+    }
+  ],
+  "alignment": {
+    "method": "pocketsphinx-5-forced-alignment+energy-refine",
+    "fallback": false,
+    "quality": {
+      "energy_pauses": 0,
+      "pause_agreement": 1.0,
+      "pauses_inside_words": [],
+      "onset_error_ms": 0.0,
+      "offset_error_ms": 0.0,
+      "pause_onset_error_ms_mean": null,
+      "pause_onset_error_ms_max": null
+    },
+    "quality_ok": true
+  },
+  "pronunciation_checks": []
+}

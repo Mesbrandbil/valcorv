@@ -1,0 +1,87 @@
+{
+  "schema": "priora-narration-take/1",
+  "id": "L19c",
+  "engine": "guide",
+  "guide": true,
+  "label": "GUIDE VOICE (local Kokoro). Not the final ElevenLabs performance.",
+  "speaker": "narrator",
+  "text": "Decisions can carry price.",
+  "spoken_text": "Decisions can carry price.",
+  "sample_rate": 48000,
+  "duration": 1.77,
+  "speech_start": 0.13,
+  "speech_end": 1.54,
+  "words": [
+    {
+      "w": "Decisions",
+      "start": 0.13,
+      "end": 0.59
+    },
+    {
+      "w": "can",
+      "start": 0.59,
+      "end": 0.79
+    },
+    {
+      "w": "carry",
+      "start": 0.79,
+      "end": 1.08
+    },
+    {
+      "w": "price",
+      "start": 1.08,
+      "end": 1.54
+    }
+  ],
+  "sentences": [
+    {
+      "text": "Decisions can carry price.",
+      "start": 0.13,
+      "end": 1.54,
+      "word_range": [
+        0,
+        4
+      ]
+    }
+  ],
+  "created": "2026-09-29T19:06:18+00:00",
+  "provider": "kokoro-onnx 0.6.1, kokoro-v1.0.onnx (local guide)",
+  "voice": {
+    "id": "bf_isabella",
+    "lang": "en-gb"
+  },
+  "speed": 1.2262,
+  "inner_pauses": [],
+  "segments_synth": [
+    {
+      "text": "Decisions can carry price.",
+      "start": 0.12,
+      "end": 1.57,
+      "alignment_quality": {
+        "energy_pauses": 0,
+        "pause_agreement": 1.0,
+        "pauses_inside_words": [],
+        "onset_error_ms": 0.0,
+        "offset_error_ms": 0.0,
+        "pause_onset_error_ms_mean": null,
+        "pause_onset_error_ms_max": null
+      },
+      "fallback": false
+    }
+  ],
+  "alignment": {
+    "method": "pocketsphinx-5-forced-alignment+energy-refine",
+    "fallback": false,
+    "quality": {
+      "energy_pauses": 0,
+      "pause_agreement": 1.0,
+      "pauses_inside_words": [],
+      "onset_error_ms": 0.0,
+      "offset_error_ms": 0.0,
+      "pause_onset_error_ms_mean": null,
+      "pause_onset_error_ms_max": null
+    },
+    "quality_ok": true
+  },
+  "pronunciation_checks": []
+}

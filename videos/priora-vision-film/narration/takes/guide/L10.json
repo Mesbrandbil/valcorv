@@ -1,0 +1,178 @@
+{
+  "schema": "priora-narration-take/1",
+  "id": "L10",
+  "engine": "guide",
+  "guide": true,
+  "label": "GUIDE VOICE (local Kokoro). Not the final ElevenLabs performance.",
+  "speaker": "narrator",
+  "text": "What was happening? Which condition applied? Can you prove what was true?",
+  "spoken_text": "What was happening? Which condition applied? Can you prove what was true?",
+  "sample_rate": 48000,
+  "duration": 4.52,
+  "speech_start": 0.13,
+  "speech_end": 4.24,
+  "words": [
+    {
+      "w": "What",
+      "start": 0.13,
+      "end": 0.25
+    },
+    {
+      "w": "was",
+      "start": 0.25,
+      "end": 0.41
+    },
+    {
+      "w": "happening",
+      "start": 0.41,
+      "end": 0.85
+    },
+    {
+      "w": "Which",
+      "start": 1.44,
+      "end": 1.64
+    },
+    {
+      "w": "condition",
+      "start": 1.64,
+      "end": 2.15
+    },
+    {
+      "w": "applied",
+      "start": 2.15,
+      "end": 2.63
+    },
+    {
+      "w": "Can",
+      "start": 3.03,
+      "end": 3.15
+    },
+    {
+      "w": "you",
+      "start": 3.15,
+      "end": 3.26
+    },
+    {
+      "w": "prove",
+      "start": 3.26,
+      "end": 3.61
+    },
+    {
+      "w": "what",
+      "start": 3.61,
+      "end": 3.77
+    },
+    {
+      "w": "was",
+      "start": 3.77,
+      "end": 3.92
+    },
+    {
+      "w": "true",
+      "start": 3.92,
+      "end": 4.24
+    }
+  ],
+  "sentences": [
+    {
+      "text": "What was happening?",
+      "start": 0.13,
+      "end": 0.85,
+      "word_range": [
+        0,
+        3
+      ]
+    },
+    {
+      "text": "Which condition applied?",
+      "start": 1.44,
+      "end": 2.63,
+      "word_range": [
+        3,
+        6
+      ]
+    },
+    {
+      "text": "Can you prove what was true?",
+      "start": 3.03,
+      "end": 4.24,
+      "word_range": [
+        6,
+        12
+      ]
+    }
+  ],
+  "created": "2026-09-29T19:06:18+00:00",
+  "provider": "kokoro-onnx 0.6.1, kokoro-v1.0.onnx (local guide)",
+  "voice": {
+    "id": "bf_isabella",
+    "lang": "en-gb"
+  },
+  "speed": 1.2262,
+  "inner_pauses": [
+    0.4,
+    0.4
+  ],
+  "segments_synth": [
+    {
+      "text": "What was happening?",
+      "start": 0.12,
+      "end": 1.07,
+      "alignment_quality": {
+        "energy_pauses": 0,
+        "pause_agreement": 1.0,
+        "pauses_inside_words": [],
+        "onset_error_ms": 0.0,
+        "offset_error_ms": 190.0,
+        "pause_onset_error_ms_mean": null,
+        "pause_onset_error_ms_max": null
+      },
+      "fallback": false
+    },
+    {
+      "text": "Which condition applied?",
+      "start": 1.43,
+      "end": 2.66,
+      "alignment_quality": {
+        "energy_pauses": 0,
+        "pause_agreement": 1.0,
+        "pauses_inside_words": [],
+        "onset_error_ms": 0.0,
+        "offset_error_ms": 0.0,
+        "pause_onset_error_ms_mean": null,
+        "pause_onset_error_ms_max": null
+      },
+      "fallback": false
+    },
+    {
+      "text": "Can you prove what was true?",
+      "start": 3.02,
+      "end": 4.32,
+      "alignment_quality": {
+        "energy_pauses": 0,
+        "pause_agreement": 1.0,
+        "pauses_inside_words": [],
+        "onset_error_ms": 0.0,
+        "offset_error_ms": 50.0,
+        "pause_onset_error_ms_mean": null,
+        "pause_onset_error_ms_max": null
+      },
+      "fallback": false
+    }
+  ],
+  "alignment": {
+    "method": "pocketsphinx-5-forced-alignment+energy-refine",
+    "fallback": false,
+    "quality": {
+      "energy_pauses": 2,
+      "pause_agreement": 1.0,
+      "pauses_inside_words": [],
+      "onset_error_ms": 0.0,
+      "offset_error_ms": 50.0,
+      "pause_onset_error_ms_mean": 0.0,
+      "pause_onset_error_ms_max": 0.0
+    },
+    "quality_ok": true
+  },
+  "pronunciation_checks": []
+}

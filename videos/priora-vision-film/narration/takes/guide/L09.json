@@ -1,0 +1,102 @@
+{
+  "schema": "priora-narration-take/1",
+  "id": "L09",
+  "engine": "guide",
+  "guide": true,
+  "label": "GUIDE VOICE (local Kokoro). Not the final ElevenLabs performance.",
+  "speaker": "narrator",
+  "text": "If something goes wrong, questions begin afterwards:",
+  "spoken_text": "If something goes wrong, questions begin afterwards:",
+  "sample_rate": 48000,
+  "duration": 2.71,
+  "speech_start": 0.13,
+  "speech_end": 2.48,
+  "words": [
+    {
+      "w": "If",
+      "start": 0.13,
+      "end": 0.2
+    },
+    {
+      "w": "something",
+      "start": 0.2,
+      "end": 0.53
+    },
+    {
+      "w": "goes",
+      "start": 0.53,
+      "end": 0.78
+    },
+    {
+      "w": "wrong",
+      "start": 0.78,
+      "end": 1.14
+    },
+    {
+      "w": "questions",
+      "start": 1.14,
+      "end": 1.7
+    },
+    {
+      "w": "begin",
+      "start": 1.7,
+      "end": 1.94
+    },
+    {
+      "w": "afterwards",
+      "start": 1.94,
+      "end": 2.48
+    }
+  ],
+  "sentences": [
+    {
+      "text": "If something goes wrong, questions begin afterwards:",
+      "start": 0.13,
+      "end": 2.48,
+      "word_range": [
+        0,
+        7
+      ]
+    }
+  ],
+  "created": "2026-09-29T19:06:18+00:00",
+  "provider": "kokoro-onnx 0.6.1, kokoro-v1.0.onnx (local guide)",
+  "voice": {
+    "id": "bf_isabella",
+    "lang": "en-gb"
+  },
+  "speed": 1.2262,
+  "inner_pauses": [],
+  "segments_synth": [
+    {
+      "text": "If something goes wrong, questions begin afterwards:",
+      "start": 0.12,
+      "end": 2.51,
+      "alignment_quality": {
+        "energy_pauses": 0,
+        "pause_agreement": 1.0,
+        "pauses_inside_words": [],
+        "onset_error_ms": 0.0,
+        "offset_error_ms": 0.0,
+        "pause_onset_error_ms_mean": null,
+        "pause_onset_error_ms_max": null
+      },
+      "fallback": false
+    }
+  ],
+  "alignment": {
+    "method": "pocketsphinx-5-forced-alignment+energy-refine",
+    "fallback": false,
+    "quality": {
+      "energy_pauses": 0,
+      "pause_agreement": 1.0,
+      "pauses_inside_words": [],
+      "onset_error_ms": 0.0,
+      "offset_error_ms": 0.0,
+      "pause_onset_error_ms_mean": null,
+      "pause_onset_error_ms_max": null
+    },
+    "quality_ok": true
+  },
+  "pronunciation_checks": []
+}

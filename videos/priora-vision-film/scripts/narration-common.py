@@ -442,7 +442,19 @@ def verify_alignment(tok_times: list[tuple[float, float]], y: np.ndarray, sr: in
 
 
 def quality_ok(q: dict) -> bool:
-    return (q["pause_agreement"] >= 0.8 and q["onset_error_ms"] <= 80 and q["offset_error_ms"] <= 150)
+    return bool(q["pause_agreement"] >= 0.8 and q["onset_error_ms"] <= 80 and q["offset_error_ms"] <= 150)
+
+
+def _json_default(o):
+    if isinstance(o, np.generic):
+        return o.item()
+    if isinstance(o, np.ndarray):
+        return o.tolist()
+    raise TypeError(f"not JSON serialisable: {type(o).__name__}")
+
+
+def dump_json(obj) -> str:
+    return json.dumps(obj, indent=2, ensure_ascii=False, default=_json_default) + "\n"
 
 
 # --------------------------------------------------------------------------
@@ -615,7 +627,7 @@ def write_take(dir_: Path, line: dict, engine: str, y48: np.ndarray, words: list
         "created": _dt.datetime.now(_dt.timezone.utc).isoformat(timespec="seconds"),
     }
     doc.update(meta)
-    (dir_ / f"{line['id']}.json").write_text(json.dumps(doc, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+    (dir_ / f"{line['id']}.json").write_text(dump_json(doc), encoding="utf-8")
     return wav
 
 

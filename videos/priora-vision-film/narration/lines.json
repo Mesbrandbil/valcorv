@@ -61,9 +61,9 @@
         "bm_george",
         "bm_lewis"
       ],
-      "narrator_voice": null,
-      "worker_voice": null,
-      "narrator_speed": 1.0,
+      "narrator_voice": "bf_isabella",
+      "worker_voice": "bm_daniel",
+      "narrator_speed": 1.2262,
       "worker_speed": 1.0,
       "default_inner_pause": {
         ".": 0.3,

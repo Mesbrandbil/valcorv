@@ -1,0 +1,191 @@
+{
+  "schema": "priora-narration-take/1",
+  "id": "L14",
+  "engine": "guide",
+  "guide": true,
+  "label": "GUIDE VOICE (local Kokoro). Not the final ElevenLabs performance.",
+  "speaker": "narrator",
+  "text": "Priora connects the activity to the conditions that matter, verifies the certificate and safeguards, and creates the record while work happens.",
+  "spoken_text": "Priora connects the activity to the conditions that matter, verifies the certificate and safeguards, and creates the record while work happens.",
+  "sample_rate": 48000,
+  "duration": 7.11,
+  "speech_start": 0.13,
+  "speech_end": 6.88,
+  "words": [
+    {
+      "w": "Priora",
+      "start": 0.13,
+      "end": 0.49
+    },
+    {
+      "w": "connects",
+      "start": 0.49,
+      "end": 0.9
+    },
+    {
+      "w": "the",
+      "start": 0.9,
+      "end": 0.99
+    },
+    {
+      "w": "activity",
+      "start": 0.99,
+      "end": 1.48
+    },
+    {
+      "w": "to",
+      "start": 1.48,
+      "end": 1.57
+    },
+    {
+      "w": "the",
+      "start": 1.57,
+      "end": 1.64
+    },
+    {
+      "w": "conditions",
+      "start": 1.64,
+      "end": 2.12
+    },
+    {
+      "w": "that",
+      "start": 2.12,
+      "end": 2.22
+    },
+    {
+      "w": "matter",
+      "start": 2.22,
+      "end": 2.58
+    },
+    {
+      "w": "verifies",
+      "start": 2.96,
+      "end": 3.41
+    },
+    {
+      "w": "the",
+      "start": 3.41,
+      "end": 3.49
+    },
+    {
+      "w": "certificate",
+      "start": 3.49,
+      "end": 4.04
+    },
+    {
+      "w": "and",
+      "start": 4.04,
+      "end": 4.16
+    },
+    {
+      "w": "safeguards",
+      "start": 4.16,
+      "end": 4.76
+    },
+    {
+      "w": "and",
+      "start": 5.09,
+      "end": 5.2
+    },
+    {
+      "w": "creates",
+      "start": 5.2,
+      "end": 5.57
+    },
+    {
+      "w": "the",
+      "start": 5.57,
+      "end": 5.67
+    },
+    {
+      "w": "record",
+      "start": 5.67,
+      "end": 6.08
+    },
+    {
+      "w": "while",
+      "start": 6.08,
+      "end": 6.22
+    },
+    {
+      "w": "work",
+      "start": 6.22,
+      "end": 6.46
+    },
+    {
+      "w": "happens",
+      "start": 6.46,
+      "end": 6.88
+    }
+  ],
+  "sentences": [
+    {
+      "text": "Priora connects the activity to the conditions that matter, verifies the certificate and safeguards, and creates the record while work happens.",
+      "start": 0.13,
+      "end": 6.88,
+      "word_range": [
+        0,
+        21
+      ]
+    }
+  ],
+  "created": "2026-09-29T19:06:18+00:00",
+  "provider": "kokoro-onnx 0.6.1, kokoro-v1.0.onnx (local guide)",
+  "voice": {
+    "id": "bf_isabella",
+    "lang": "en-gb"
+  },
+  "speed": 1.2262,
+  "inner_pauses": [],
+  "segments_synth": [
+    {
+      "text": "Priora connects the activity to the conditions that matter, verifies the certificate and safeguards, and creates the record while work happens.",
+      "start": 0.12,
+      "end": 6.91,
+      "alignment_quality": {
+        "energy_pauses": 2,
+        "pause_agreement": 1.0,
+        "pauses_inside_words": [],
+        "onset_error_ms": 0.0,
+        "offset_error_ms": 0.0,
+        "pause_onset_error_ms_mean": 0.0,
+        "pause_onset_error_ms_max": 0.0
+      },
+      "fallback": false
+    }
+  ],
+  "alignment": {
+    "method": "pocketsphinx-5-forced-alignment+energy-refine",
+    "fallback": false,
+    "quality": {
+      "energy_pauses": 2,
+      "pause_agreement": 1.0,
+      "pauses_inside_words": [],
+      "onset_error_ms": 0.0,
+      "offset_error_ms": 0.0,
+      "pause_onset_error_ms_mean": 0.0,
+      "pause_onset_error_ms_max": 0.0
+    },
+    "quality_ok": true
+  },
+  "pronunciation_checks": [
+    {
+      "word": "Priora",
+      "token_index": 0,
+      "chosen_variant": "P R IY AO R AH",
+      "intended": true,
+      "phones": "P R IY AO R AH",
+      "phone_durations": {
+        "P#0": 0.03,
+        "R#1": 0.06,
+        "IY#2": 0.07,
+        "AO#3": 0.12,
+        "R#4": 0.05,
+        "AH#5": 0.06
+      },
+      "longest_vowel": "AO",
+      "stress_on_middle_syllable": true,
+      "segment": 0
+    }
+  ]
+}
