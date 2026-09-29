@@ -64,7 +64,7 @@ Texts are verbatim. The demo writes time ranges with an en dash (14:18–18:00) 
 - Lines: `Every site already has insurance.` then `But risk is not static.` / `It changes with every physical activity.` and `NORDHAVN BIOPROCESSING · COPENHAGEN · A FICTIONAL SITE`.
 - Site draws (strokes 2400 ms staggered by `data-draw-delay`, fills after), envelope draws 1000 ms later (2600 ms).
 - Caption 01: `A site already has insurance.` / `Nordhavn Bioprocessing operates inside an annual property and business interruption programme: the envelope drawn around the site.` Envelope label `ANNUAL PROGRAMME ENVELOPE · PROPERTY + BI`.
-- Rail legend `HOW TO READ THE SITE`: `INSIDE ENVELOPE` Covered by the annual programme. Most activity. / `CHECKING STATE` Priora verifies the conditions it depends on. / `OUTSIDE ENVELOPE` (signal) A material deviation. A decision is required. / `CHANGED` Work modified until it is back inside. DKK 0. / `RISK RETAINED` Owned, explicit and time-bound. / `TEMPORARY COVER` A carrier covers the slice until it expires.
+- Rail legend `HOW TO READ THE SITE`: `INSIDE ENVELOPE` Covered by the annual programme. Most activity. (do not reuse this line, see section 5) / `CHECKING STATE` Priora verifies the conditions it depends on. / `OUTSIDE ENVELOPE` (signal) A material deviation. A decision is required. / `CHANGED` Work modified until it is back inside. DKK 0. / `RISK RETAINED` Owned, explicit and time-bound. / `TEMPORARY COVER` A carrier covers the slice until it expires.
 - CTA: `Play scenario` or press `Space`.
 
 ### 2.2 Operating (stage `operating`, captions 02 and 03, 21 s)
@@ -144,7 +144,7 @@ Texts are verbatim. The demo writes time ranges with an en dash (14:18–18:00) 
 
 - Caption: `Retain the risk.` / `A legitimate economic choice, made explicitly rather than by accident.`
 - Confirm sheet: eyebrow `RETAIN RISK · CONFIRMATION REQUIRED`, heading `Retain incremental risk`, list `TEMPORARY EXPOSURE` `Roof hot work without automatic sprinkler protection` / `DURATION` `3h 18m · 14:42–18:00` / `DECISION OWNER` `Site Risk Manager · Anna Møller` / `ADDITIONAL INSURANCE` `None purchased`.
-- Acknowledgement (dashed box, then solid with a filled check when ticked): `Nordhavn Bioprocessing knowingly carries this incremental exposure until 18:00, outside the annual programme.` Button `ACCEPT RETAINED RISK` (28 % opacity until ticked). `BACK TO THE THREE CHOICES`.
+- Acknowledgement (dashed box, then solid with a filled check when ticked): `Nordhavn Bioprocessing knowingly carries this incremental exposure until 18:00, outside the annual programme.` (do not reuse the closing clause, see section 5) Button `ACCEPT RETAINED RISK` (28 % opacity until ticked). `BACK TO THE THREE CHOICES`.
 - Retained sheet (caption 07 `The decision is recorded.` / `Nordhavn knowingly carries the incremental exposure until 18:00. What, who, when and for how long are preserved.`): eyebrow `14:46 · DECISION RECORDED`, heading `Risk retained`, text `No additional insurance purchased. The exposure is explicit, owned and time-bound, not an accidental gap.`, record block `14:46` `Incremental risk retained by Nordhavn Bioprocessing` / `Decision: Anna Møller, Site Risk Manager` / `Exposure: roof hot work without automatic sprinkler protection · 3h 18m · until 18:00` / `REC-0408-48F6 · aaf8 08c5`, note `The activity continues. The record preserves what changed, who accepted it, when, for how long and what was retained.`
 - Readout: `RISK RETAINED · NORDHAVN` / `14:46 to 18:00 · no insurance purchased` (see section 5), slice `RETAINED 14:46–18:00 · OWNED`. Header `1 increment retained`.
 
@@ -176,7 +176,7 @@ Texts are verbatim. The demo writes time ranges with an en dash (14:18–18:00) 
 
 ### 2.10 End (stage `end`, chapter 09 "From record to capacity.")
 
-- `Physical risk used to be priced from what might happen.` (grey) then `Priora makes more of what is actually happening legible.`
+- `Physical risk used to be priced from what might happen.` (do not reuse, see section 5) (grey) then `Priora makes more of what is actually happening legible.`
 - Chain (steps 520 ms apart), label / line / run figure:
   - `RECORD` / `Physical state observed as it happens` / `214 activities observed today`
   - `TRUST` / `Verified, ordered, fingerprinted` / `13 fingerprinted records` (change), `12` (retain), `16` (transfer)
@@ -230,7 +230,7 @@ Kinds drive the timeline marker: `event` hollow dot, `dev` heavier dot, `decisio
 
 ## 3. The DEMO data object, summarised
 
-- `site`: Nordhavn Bioprocessing, Copenhagen. `programme`: Property + BI programme, DKK 4.2bn insured value, lead carrier Northstar Commercial, renewal 01 JAN 2027.
+- `site`: Nordhavn Bioprocessing, Copenhagen. `programme`: Property + BI programme, DKK 4.2bn insured value, lead carrier Northstar Commercial, renewal 01 JAN 2027 (future date: never on screen, see section 5).
 - `day`: open 08:55, hero start 14:18, hold 14:41, deviation 14:42, decision asked 14:43, retain 14:46, change 14:47, change inside 14:48, transfer request/quotes 14:47, bound 14:48, cover end 18:00, portfolio end 16:40.
 - `counters`: 12 at open, 189 before the hero, 214 observed and 209 inside at the end.
 - `owner`: Anna Møller, Site Risk Manager, Nordhavn Bioprocessing.
@@ -277,6 +277,7 @@ Cautions:
 - `RECOMMENDED` on "Restore sprinkler protection" is a configured control, not Priora deciding; keep the choice visibly with the risk owner.
 - The demo's `<br>` line breaks (retained record block, plaque, economics heading, end disclaimer, intro line) break the HyperFrames layout rule against `<br>` in body text; use block elements.
 - Nothing in the demo states outright that cover is lost; the risky phrasings are the four listed above.
+- Price wording on the change path: `INCREMENTAL PRICE` `DKK 0` (resolved sheet), the record line `Risk state returned inside annual programme · Incremental price DKK 0`, the choice footer `INCREMENTAL DKK 0` and the economics cell `DKK 0 incremental` can read as Priora computing a price. Priora never prices. If these appear, treat them as conceptual economics, keep them out of the "today" half of the film, and prefer wording that does not make Priora the pricer (for example "back inside the accepted conditions"). `CARRIER PRICED` on the transfer choice is correct: carriers price.
 
 Fictional values (all of them): Nordhavn Bioprocessing and its site (Copenhagen is real, the site is not), DKK 4.2bn insured value, Northstar Commercial, Atlas Specialty, Boreal Risk, Helvetic Industrial, Anna Møller, Mikkel Sørensen, every price (980, 1,240, 1,680, 640), deductible, capacity (DKK 25m), counter, clock time, ACT/PKT/REC id and fingerprint.
 

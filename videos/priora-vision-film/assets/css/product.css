@@ -95,7 +95,7 @@
 .pui .pui-pstat.sig svg.g{color:var(--pui-signal)}
 
 /* ---------- chapter caption (#caption) ---------- */
-.pui-caption{position:relative;width:min(calc(600 * var(--u)),42%)}
+.pui-caption{position:relative;width:calc(600 * var(--u));max-width:100%}
 .pui-caption .cn{display:flex;align-items:center;gap:calc(10 * var(--u));font:500 calc(10.5 * var(--u))/1 var(--pui-mono);letter-spacing:.16em;color:var(--pui-ink-3)}
 .pui-caption .cn i{display:block;width:calc(26 * var(--u));height:calc(1 * var(--u));background:var(--pui-ink-4)}
 .pui-caption .layers{display:flex;align-items:center;gap:calc(7 * var(--u));margin-left:calc(18 * var(--u));padding-left:calc(16 * var(--u));border-left:calc(1 * var(--u)) solid var(--pui-hair);letter-spacing:.12em;text-transform:uppercase}
@@ -425,7 +425,7 @@
 
 /* ---------- end screen and the chain (#end, .chain) ---------- */
 .pui-end{position:relative;display:flex;align-items:center;justify-content:center;background:var(--pui-paper)}
-.pui .end-in{width:min(calc(1120 * var(--u)),84%)}
+.pui .end-in{width:calc(1120 * var(--u));max-width:100%}
 .pui .e1,.pui .e2{font:300 calc(56 * var(--u))/1.16 var(--pui-sans);letter-spacing:-.02em}
 .pui .e1{color:var(--pui-ink-3)}
 .pui .e2{margin-top:calc(10 * var(--u))}
