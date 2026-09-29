@@ -62,6 +62,7 @@
           top: 60px;
           right: 96px;
           width: 360px;
+          height: 104px;
           text-align: right;
         }
         #chrome-clock .chrome-clock-label {
@@ -97,6 +98,41 @@
           color: #5e5d59;
           white-space: nowrap;
           opacity: 0;
+        }
+        /* Acts II and III: the product's identity and its honest label, small, top left */
+        #chrome-lockup {
+          position: absolute;
+          top: 62px;
+          left: 96px;
+          display: flex;
+          align-items: center;
+          gap: 14px;
+          opacity: 0;
+          white-space: nowrap;
+        }
+        #chrome-lockup svg {
+          width: 30px;
+          height: 30px;
+          color: #111111;
+        }
+        #chrome-lockup .chrome-wm {
+          font-family: var(--sans);
+          font-weight: 500;
+          font-size: 26px;
+          letter-spacing: -0.01em;
+          color: #111111;
+        }
+        #chrome-lockup .chrome-chip {
+          margin-left: 6px;
+          padding: 7px 10px 6px;
+          border: 1px solid rgba(17, 17, 17, 0.22);
+          border-radius: 5px;
+          font-family: var(--mono);
+          font-weight: 500;
+          font-size: 18px;
+          letter-spacing: 0.12em;
+          text-transform: uppercase;
+          color: rgba(17, 17, 17, 0.74);
         }
         #chrome-rewind {
           position: absolute;
@@ -164,6 +200,12 @@
           <span id="chrome-replay">Replay · with Priora</span>
         </div>
 
+        <div id="chrome-lockup">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.2C19.2 3.2 20.8 4.8 20.8 12S19.2 20.8 12 20.8 3.2 19.2 3.2 12 4.8 3.2 12 3.2Z" fill="none" stroke="currentColor" stroke-width="1.15"/><circle cx="10.2" cy="13.4" r="2.3" fill="currentColor"/></svg>
+          <span class="chrome-wm">Priora</span>
+          <span class="chrome-chip">End-state concept</span>
+        </div>
+
         <div id="chrome-rewind">
           <span class="chrome-rw-label">◀◀&nbsp;&nbsp;REWIND</span>
           <span class="chrome-rw-span">16:07&nbsp;&nbsp;→&nbsp;&nbsp;14:41:59</span>
@@ -198,8 +240,8 @@
         FL.textTo(story, hms, { from: H(14, 18, 0), to: H(14, 41, 59), at: T("roof03"), duration: LAND - T("roof03"), ease: "power1.inOut", format: fHMS });
         FL.textTo(story, hms, { from: H(14, 41, 59), to: H(14, 42, 0), at: T("offline"), duration: 0.2, ease: "none", format: fHMS });
         FL.textTo(story, hms, { from: H(14, 42, 0), to: H(16, 7, 0), at: T("afterwards"), duration: 1.2, ease: "power2.inOut", format: fHMS });
-        story.set(hms, { opacity: 0 }, T("q1"));
-        story.set(day, { opacity: 1 }, T("q1"));
+        story.set(hms, { opacity: 0 }, T("L09:afterwards.start"));
+        story.set(day, { opacity: 1 }, T("L09:afterwards.start"));
 
         // ============ REGISTERED TIMELINE
         var tl = gsap.timeline({ paused: true });
@@ -220,13 +262,15 @@
         FL.textTo(tl, act2, { from: H(14, 41, 59), to: H(14, 18, 0), at: T("riskChanged", -0.6), duration: 1.1, ease: "power2.inOut", format: fHMS });
         tl.fromTo("#chrome-replay", { opacity: 0 }, { opacity: 1, duration: 0.5, ease: "power1.out", immediateRender: false }, T("riskChanged", -0.4));
         tl.fromTo("#chrome-replay", { opacity: 1 }, { opacity: 0, duration: 0.6, ease: "power1.in", immediateRender: false }, T("l16", -0.8));
+        // the product's identity and its honest label, once the drawing has become the interface
+        tl.fromTo("#chrome-lockup", { opacity: 0, x: -10 }, { opacity: 1, x: 0, duration: 0.65, ease: "power2.out", immediateRender: false }, T("riskChanged", 0.2));
         // the day moves on quietly during prevention and proof
         FL.textTo(tl, act2, { from: H(14, 18, 0), to: H(14, 24, 10), at: T("connects"), duration: T("l16") - T("connects") - 0.5, ease: "none", format: fHMS });
         // Act III: the sprinkler goes offline again at 14:42, the decision is requested at 14:43
         FL.textTo(tl, act2, { from: H(14, 24, 10), to: H(14, 42, 0), at: T("l16", -0.3), duration: 0.9, ease: "power2.inOut", format: fHMS });
         FL.textTo(tl, act2, { from: H(14, 42, 0), to: H(14, 43, 0), at: T("decides"), duration: 0.4, ease: "none", format: fHMS });
         // most work stays ordinary: the rest of the working day passes
-        FL.textTo(tl, act2, { from: H(14, 43, 0), to: H(17, 36, 0), at: T("ordinary"), duration: T("chainRecord") - T("ordinary") - 0.9, ease: "power1.inOut", format: fHMS });
+        FL.textTo(tl, act2, { from: H(14, 43, 0), to: H(17, 36, 0), at: T("ordinary"), duration: T("closeIn") - T("ordinary") - 0.6, ease: "power1.inOut", format: fHMS });
 
         // everything leaves before the close
         tl.fromTo("#chrome-all", { opacity: 1 }, { opacity: 0, duration: 0.5, ease: "power1.in", immediateRender: false }, END - 0.55);
