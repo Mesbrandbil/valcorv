@@ -1,5 +1,9 @@
 #!/usr/bin/env python3
-"""FINAL narration generator for the Priora vision film: ElevenLabs TTS with timestamps.
+"""ElevenLabs API narration generator for the Priora vision film (TTS with timestamps).
+
+NOT the agreed route: per BRIEF.md (user decision, 2026-09-29) the final audio
+is made in the ElevenLabs web app and aligned with scripts/align-uploaded.py.
+Do not run this against the API unless the user approves that change.
 
 Runs unchanged once ELEVENLABS_API_KEY is set and api.elevenlabs.io is
 reachable. Writes narration/takes/elevenlabs/<id>.wav (48 kHz, 24-bit, mono)
@@ -39,8 +43,8 @@ Usage
   python3 scripts/elevenlabs-voice.py --self-test           # offline parsing tests
   python3 scripts/elevenlabs-voice.py --dry-run             # show the plan, no network
   python3 scripts/elevenlabs-voice.py                       # select voices, generate all lines
-  python3 scripts/elevenlabs-voice.py --fit-total 91        # also tune voice speed to the target total
-  python3 scripts/elevenlabs-voice.py --lines L14,L20 --speed 1.08
+  python3 scripts/elevenlabs-voice.py --fit-total 90        # also tune voice speed to the target total
+  python3 scripts/elevenlabs-voice.py --lines L14a,L20 --speed 1.08
 """
 
 from __future__ import annotations
@@ -584,11 +588,11 @@ def self_test() -> int:
 
     tmp = Path(tempfile.mkdtemp(prefix="priora-el-selftest-"))
     try:
-        log("1. character alignment -> words -> take files (L14, respelled Priora)")
-        line = L["L14"]
+        log("1. character alignment -> words -> take files (L14a, respelled Priora)")
+        line = L["L14a"]
         resp = _synthetic_response(nc.spoken_text(line, "elevenlabs"))
         summ = process_response(line, resp, data, tmp, {"provider": "elevenlabs", "voice": {"id": "fixture"}})
-        doc = json.loads((tmp / "L14.json").read_text())
+        doc = json.loads((tmp / "L14a.json").read_text())
         disp = [nc.clean_token(t) for t in nc.tokens(line["text"])]
         check(doc["schema"] == nc.TAKE_SCHEMA and doc["engine"] == "elevenlabs", "take JSON schema and engine")
         check([w["w"] for w in doc["words"]] == disp, "words map one to one onto displayed words")
@@ -600,13 +604,13 @@ def self_test() -> int:
         w2 = doc["words"][1]
         exp_end = 0.15 + 10 * 0.065 + 0.02 + 8 * 0.065  # "Pree-OR-uh" (10 chars) + space + "connects"
         check(abs(w2["end"] - exp_end) < 0.002, f"'connects' ends at {exp_end:.3f} (got {w2['end']})")
-        info = nc.read_audio(tmp / "L14.wav")[1]
+        info = nc.read_audio(tmp / "L14a.wav")[1]
         import soundfile as sf
 
-        check(info == 48000 and sf.info(str(tmp / "L14.wav")).subtype == "PCM_24", "take wav is 48 kHz 24-bit")
+        check(info == 48000 and sf.info(str(tmp / "L14a.wav")).subtype == "PCM_24", "take wav is 48 kHz 24-bit")
         check(abs(doc["duration"] - summ["duration"]) < 1e-3, "duration recorded")
         last = doc["words"][-1]
-        check(last["w"] == "happens" and last["end"] < doc["duration"], "trailing full stop excluded from last word")
+        check(last["w"] == "matter" and last["end"] < doc["duration"], "trailing full stop excluded from last word")
 
         log("2. worker line with 'Roof oh-three' displayed as 'Roof 03'")
         line = L["L13"]
@@ -675,12 +679,12 @@ def self_test() -> int:
               "breathy / aristocratic / announcer voices rank below")
 
         log("6. request body")
-        idx = [l["id"] for l in data["lines"]].index("L14")
+        idx = [l["id"] for l in data["lines"]].index("L14a")
         body = request_body(data, idx, "eleven_multilingual_v2", {"narrator": 1.35, "worker": 1.0})
         check(body["voice_settings"]["speed"] == SPEED_MAX, "speed clamped to the API range")
         check(body.get("previous_text") == nc.spoken_text(L["L12"], "elevenlabs"),
               "previous_text skips the worker line and uses the previous narrator line")
-        check(body.get("next_text") == nc.spoken_text(L["L15"], "elevenlabs"), "next_text is the next narrator line")
+        check(body.get("next_text") == nc.spoken_text(L["L14b"], "elevenlabs"), "next_text is the next narrator line")
         check(body["voice_settings"]["stability"] == 0.5 and body["voice_settings"]["similarity_boost"] == 0.8,
               "voice settings from lines.json")
         wb = request_body(data, [l["id"] for l in data["lines"]].index("L13"), "m", {"narrator": 1, "worker": 1})

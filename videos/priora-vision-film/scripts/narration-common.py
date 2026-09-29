@@ -137,6 +137,10 @@ def aligner_words(tok: str, pronunciations: dict | None = None) -> list[str]:
         for k in ("elevenlabs", "guide_text"):
             if entry.get(k):
                 forms.add(entry[k].lower().strip(_EDGE_PUNCT))
+        # Alternate respellings (tried when the main one is misread) must map to
+        # the same aligner word, or the pronunciation check silently skips them.
+        for alt in entry.get("elevenlabs_alternates") or []:
+            forms.add(alt.lower().strip(_EDGE_PUNCT))
         if low in forms:
             return [entry.get("aligner_word", key.lower())]
     out = []
@@ -324,12 +328,26 @@ def custom_prons(data: dict) -> dict[str, list[str]]:
     return out
 
 
-def forced_align(y16: np.ndarray, spoken_tokens: list[str], data: dict) -> dict:
+def gate_silence(y: np.ndarray, sr: int, rel: float = 40.0, min_len: float = 0.06) -> np.ndarray:
+    """Copy of y with every quiet run (>= min_len, below the silence mask) set to
+    digital zero. Used only as aligner input: a low noise floor in pauses (real
+    exports, MP3 decoding) can make pocketsphinx swallow a sentence pause into
+    the next word, while digital silence in the pauses aligns reliably."""
+    db = frame_db(y, sr)
+    quiet = silence_mask(db, rel)
+    out = y.astype(np.float32).copy()
+    for a, b in pauses_from_mask(quiet, min_len):
+        out[int(round(a * sr)):min(len(out), int(round(b * sr)))] = 0.0
+    return out
+
+
+def forced_align(y16: np.ndarray, spoken_tokens: list[str], data: dict, gate: bool = False) -> dict:
     """Word-level forced alignment of known text with pocketsphinx 5.
 
     Returns {"tokens": [{start, end, words:[{name, start, end, phones}]}],
              "sil": [(start, end)], "scores": [...]} in seconds from clip start.
     Raises AlignmentError when the decoder cannot align the text.
+    With gate=True the decoder hears gate_silence(y16) (align_clip retry only).
     """
     prons = data.get("pronunciations") or {}
     words, owner = [], []
@@ -344,7 +362,8 @@ def forced_align(y16: np.ndarray, spoken_tokens: list[str], data: dict) -> dict:
     missing = [w for w in words if d.lookup_word(w) is None]
     if missing:
         raise AlignmentError(f"words missing from the aligner dictionary: {missing}")
-    pcm = (np.clip(y16, -1, 1) * 32767).astype(np.int16).tobytes()
+    y_in = gate_silence(y16, ALIGN_SR) if gate else y16
+    pcm = (np.clip(y_in, -1, 1) * 32767).astype(np.int16).tobytes()
     d.set_align_text(" ".join(words))
     d.start_utt()
     d.process_raw(pcm, full_utt=True)
@@ -535,14 +554,32 @@ def align_clip(y: np.ndarray, sr: int, spoken: str, data: dict) -> dict:
     """
     toks = tokens(spoken)
     y16 = resample(y, sr, ALIGN_SR)
-    try:
-        res = refine_with_energy(forced_align(y16, toks, data), y16)
+    best, errors = None, []
+    # Raw signal first. If that leaves an energy pause inside a word (seen with a
+    # low noise floor in the pauses of real exports), retry on a copy with the
+    # pauses gated to digital silence and keep the better alignment. The raw
+    # pass is kept on clean audio because gating can clip stop releases at
+    # word ends (a closure of 60 ms or more reads as a pause).
+    for gate in (False, True):
+        try:
+            res = refine_with_energy(forced_align(y16, toks, data, gate=gate), y16)
+        except AlignmentError as err:
+            errors.append(str(err))
+            continue
         times = [(t["start"], t["end"]) for t in res["tokens"]]
-        method, fallback, details = "pocketsphinx-5-forced-alignment+energy-refine", False, res
-    except AlignmentError as err:
+        q = verify_alignment(times, y, sr)
+        rank = (q["pause_agreement"], -(q["pause_onset_error_ms_mean"] or 0.0))
+        if best is None or rank > best[0]:
+            best = (rank, times, res, q)
+        if q["pause_agreement"] >= 1.0:
+            break
+    if best is not None:
+        _, times, details, q = best
+        method, fallback = "pocketsphinx-5-forced-alignment+energy-refine", False
+    else:
         times = proportional_align(y, sr, toks)
-        method, fallback, details = f"proportional-fallback ({err})", True, None
-    q = verify_alignment(times, y, sr)
+        method, fallback, details = f"proportional-fallback ({errors[0]})", True, None
+        q = verify_alignment(times, y, sr)
     return {"times": times, "method": method, "fallback": fallback, "quality": q, "details": details}
 
 

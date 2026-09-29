@@ -30,9 +30,9 @@ What it does
 
 Usage
   python3 scripts/guide-voice.py                     # all lines, cached voices/speed
-  python3 scripts/guide-voice.py --fit-total 91      # tune narrator speed, then write
+  python3 scripts/guide-voice.py --fit-total 90      # tune narrator speed, then write
   python3 scripts/guide-voice.py --select-voices     # re-run voice selection
-  python3 scripts/guide-voice.py --lines L14,L20     # regenerate some lines
+  python3 scripts/guide-voice.py --lines L14a,L20    # regenerate some lines
 """
 
 from __future__ import annotations
@@ -71,7 +71,7 @@ GRADE_VALUE = {"A": 1.0, "B": 0.8, "C": 0.6, "D": 0.4, "F": 0.2}
 # Scoring material. Narrator: real script lines covering statements, lists,
 # questions and the longest sentences. Worker: the worker line plus casual site
 # phrases used only for scoring (never in the film).
-NARRATOR_TEST_LINES = ["L01", "L03", "L05", "L08", "L10", "L14", "L17"]
+NARRATOR_TEST_LINES = ["L01", "L03", "L05", "L08", "L10", "L14a", "L14b", "L17"]
 WORKER_TEST_TEXT = [
     "I'm welding on Roof oh-three until six.",
     "Yeah, the fire watch is with me for the whole job.",

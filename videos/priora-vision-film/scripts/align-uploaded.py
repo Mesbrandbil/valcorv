@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
-"""Fallback path: split and force-align ONE uploaded narration file into takes.
+"""Agreed route: split and force-align uploaded narration audio into takes.
 
-Use this when the ElevenLabs narration is generated outside this environment
-(for example in the ElevenLabs web app) and uploaded as a single file. The
+Use this for the ElevenLabs narration generated in the ElevenLabs web app
+(the route agreed with the user, see BRIEF.md) and exported as a file. The
 file must contain every line of narration/lines.json once, in order (the
 worker line may instead come from a second file with --worker-audio, or be
 left out with --exclude L13 when a worker take already exists).
