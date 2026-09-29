@@ -1,55 +1,68 @@
 <!doctype html>
-<html lang="en">
+<html lang="en-GB">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=1920, height=1080" />
-    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <title>Priora vision film</title>
+    <!-- Shared runtime: local vendored GSAP 3.15 and plugins, the film library, generated cues. -->
+    <script src="assets/vendor/gsap/gsap.min.js"></script>
+    <script src="assets/vendor/gsap/DrawSVGPlugin.min.js"></script>
+    <script src="assets/vendor/gsap/CustomEase.min.js"></script>
+    <script src="assets/vendor/gsap/MorphSVGPlugin.min.js"></script>
+    <script src="assets/vendor/gsap/MotionPathPlugin.min.js"></script>
+    <script src="assets/js/film-lib.js"></script>
+    <script src="assets/js/cues.js"></script>
+    <script src="assets/js/film-assets.js"></script>
+    <link rel="stylesheet" href="assets/css/film.css" />
     <style>
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
-      html,
-      body {
-        margin: 0;
-        width: 1920px;
-        height: 1080px;
-        overflow: hidden;
-        background: #0a0a0a;
-      }
       #root {
+        position: relative;
         width: 100%;
         height: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+        overflow: hidden;
+        background: var(--paper);
       }
-      #title {
-        color: #f4f4f5;
-        font-size: 72px;
-        font-weight: 600;
-        letter-spacing: -0.03em;
+      /* Untimed full-bleed paper: warm ground, static grain, very faint vignette. */
+      #film-paper {
+        position: absolute;
+        inset: 0;
+        z-index: 0;
+        background-color: var(--paper);
+        pointer-events: none;
+      }
+      #film-paper-grain {
+        position: absolute;
+        inset: 0;
+        background-image: url("assets/textures/paper-grain.png");
+        background-size: 512px 512px;
+        background-repeat: repeat;
+      }
+      #film-paper-vignette {
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(ellipse 75% 70% at 50% 48%, rgba(59, 58, 51, 0) 58%, rgba(59, 58, 51, 0.035) 82%, rgba(59, 58, 51, 0.07) 100%);
       }
     </style>
   </head>
   <body>
-    <div
-      id="root"
-      data-composition-id="main"
-      data-start="0"
-      data-duration="10"
-      data-width="1920"
-      data-height="1080"
-    >
-      <h1 id="title" class="clip" data-start="0" data-duration="10" data-track-index="0">Title</h1>
+    <!-- build-cues:root:begin -->
+    <div id="root" data-composition-id="film" data-start="0" data-duration="90.9" data-width="1920" data-height="1080" data-fps="30">
+    <!-- build-cues:root:end -->
+      <div id="film-paper" aria-hidden="true" data-layout-ignore>
+        <div id="film-paper-grain"></div>
+        <div id="film-paper-vignette"></div>
+      </div>
+      <!-- build-cues:slots:begin -->
+      <div id="el-zz-proto" class="clip fl-slot" data-composition-id="zz-proto" data-composition-src="compositions/zz-proto.html" data-start="0" data-duration="90.9" data-track-index="1" data-width="1920" data-height="1080" style="z-index: 10"></div>
+      <!-- build-cues:slots:end -->
+      <!-- build-cues:audio:begin -->
+      <audio id="stem-voice" src="assets/audio/voice.wav" data-start="0" data-duration="90.9" data-track-index="20" data-volume="1"></audio>
+      <!-- stem-music: assets/audio/music.wav not found at build time; rerun build-cues when it exists -->
+      <!-- stem-sfx: assets/audio/sfx.wav not found at build time; rerun build-cues when it exists -->
+      <!-- build-cues:audio:end -->
     </div>
     <script>
-      const tl = gsap.timeline({ paused: true });
-      // Example: tl.fromTo("#title", { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.6 }, 0);
-      window.__timelines["main"] = tl;
-      tl.seek(0);
+      window.__timelines["film"] = gsap.timeline({ paused: true });
     </script>
   </body>
 </html>

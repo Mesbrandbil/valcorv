@@ -8,65 +8,65 @@
   "text": "Then a sprinkler zone goes offline.",
   "spoken_text": "Then a sprinkler zone goes offline.",
   "sample_rate": 48000,
-  "duration": 2.06,
+  "duration": 2.14,
   "speech_start": 0.13,
-  "speech_end": 1.83,
+  "speech_end": 1.91,
   "words": [
     {
       "w": "Then",
       "start": 0.13,
-      "end": 0.29
+      "end": 0.3
     },
     {
       "w": "a",
-      "start": 0.29,
+      "start": 0.3,
       "end": 0.34
     },
     {
       "w": "sprinkler",
       "start": 0.34,
-      "end": 0.8
+      "end": 0.83
     },
     {
       "w": "zone",
-      "start": 0.8,
-      "end": 1.14
+      "start": 0.83,
+      "end": 1.17
     },
     {
       "w": "goes",
-      "start": 1.14,
-      "end": 1.39
+      "start": 1.17,
+      "end": 1.42
     },
     {
       "w": "offline",
-      "start": 1.39,
-      "end": 1.83
+      "start": 1.42,
+      "end": 1.91
     }
   ],
   "sentences": [
     {
       "text": "Then a sprinkler zone goes offline.",
       "start": 0.13,
-      "end": 1.83,
+      "end": 1.91,
       "word_range": [
         0,
         6
       ]
     }
   ],
-  "created": "2026-09-29T19:19:06+00:00",
+  "created": "2026-09-29T19:29:47+00:00",
   "provider": "kokoro-onnx 0.6.1, kokoro-v1.0.onnx (local guide)",
   "voice": {
     "id": "bf_isabella",
     "lang": "en-gb"
   },
-  "speed": 1.2325,
+  "speed": 1.1649,
   "inner_pauses": [],
   "segments_synth": [
     {
       "text": "Then a sprinkler zone goes offline.",
       "start": 0.12,
-      "end": 1.86,
+      "end": 1.94,
       "alignment_quality": {
         "energy_pauses": 0,
         "pause_agreement": 1.0,

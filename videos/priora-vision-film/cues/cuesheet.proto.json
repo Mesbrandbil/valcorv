@@ -1,0 +1,38 @@
+{
+  "schema": "priora-cuesheet/1",
+  "note": "TEST cuesheet for the pipeline prototype (compositions/zz-proto.html). The orchestrator replaces it with cues/cuesheet.json.",
+  "fps": 30,
+  "film": { "duration": "END", "compositionId": "film" },
+  "cues": {
+    "l01": "L01.start",
+    "hour": "L01:hour.start",
+    "accepted": "L03:accepted.start",
+    "roof03": { "at": "L06:Roof.start", "note": "push to Roof 03" },
+    "landing": { "at": "L07.start-0.4", "note": "the instant before Sprinkler Zone 3 goes offline; the rewind lands here" },
+    "offline": "L07:offline.start",
+    "afterwards": "L09.start",
+    "whatTrue": { "at": "L10:what#2.start", "note": "occurrence index test: the second 'what' in L10" },
+    "rewindStart": { "at": "L11.end+0.5", "note": "picture and sound start to reverse" },
+    "rewindEnd": { "at": "L12.start-0.3", "note": "rewind lands on story time 'landing'" },
+    "resolve": "cue:rewindEnd+0.3",
+    "welding": "L13.start",
+    "prevention": "L15:Prevention.start",
+    "again": "L16:again.start",
+    "chainRecord": "L19a:Record.start",
+    "chainTrust": "L19b:Trust.start",
+    "chainDecision": "L19c:Decisions.start",
+    "chainPrice": "L19d:Price.start",
+    "chainCapacity": "L19d:capacity.start",
+    "priora": "L20:Priora.start",
+    "finalHold": "END-2.0"
+  },
+  "scenes": [
+    { "id": "zz-proto", "src": "compositions/zz-proto.html", "track": 1, "start": "START", "end": "END", "note": "temporary pipeline prototype covering the whole film" }
+  ],
+  "audio": [
+    { "id": "voice", "src": "assets/audio/voice.wav", "track": 20, "volume": 1 },
+    { "id": "music", "src": "assets/audio/music.wav", "track": 21, "volume": 1, "optional": true },
+    { "id": "sfx", "src": "assets/audio/sfx.wav", "track": 22, "volume": 1, "optional": true }
+  ],
+  "inline": { "SITE_PRECISE": "assets/site/site-precise.svg" }
+}

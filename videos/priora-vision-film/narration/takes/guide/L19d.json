@@ -8,60 +8,60 @@
   "text": "Price can connect to capacity.",
   "spoken_text": "Price can connect to capacity.",
   "sample_rate": 48000,
-  "duration": 1.85,
+  "duration": 1.96,
   "speech_start": 0.13,
-  "speech_end": 1.62,
+  "speech_end": 1.73,
   "words": [
     {
       "w": "Price",
       "start": 0.13,
-      "end": 0.38
+      "end": 0.43
     },
     {
       "w": "can",
-      "start": 0.38,
-      "end": 0.56
+      "start": 0.43,
+      "end": 0.61
     },
     {
       "w": "connect",
-      "start": 0.56,
-      "end": 0.93
+      "start": 0.61,
+      "end": 0.98
     },
     {
       "w": "to",
-      "start": 0.93,
-      "end": 1.03
+      "start": 0.98,
+      "end": 1.08
     },
     {
       "w": "capacity",
-      "start": 1.03,
-      "end": 1.62
+      "start": 1.08,
+      "end": 1.73
     }
   ],
   "sentences": [
     {
       "text": "Price can connect to capacity.",
       "start": 0.13,
-      "end": 1.62,
+      "end": 1.73,
       "word_range": [
         0,
         5
       ]
     }
   ],
-  "created": "2026-09-29T19:13:30+00:00",
+  "created": "2026-09-29T19:29:47+00:00",
   "provider": "kokoro-onnx 0.6.1, kokoro-v1.0.onnx (local guide)",
   "voice": {
     "id": "bf_isabella",
     "lang": "en-gb"
   },
-  "speed": 1.2325,
+  "speed": 1.1649,
   "inner_pauses": [],
   "segments_synth": [
     {
       "text": "Price can connect to capacity.",
       "start": 0.12,
-      "end": 1.65,
+      "end": 1.76,
       "alignment_quality": {
         "energy_pauses": 0,
         "pause_agreement": 1.0,

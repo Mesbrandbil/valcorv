@@ -8,75 +8,75 @@
   "text": "Today, the gap is often discovered too late.",
   "spoken_text": "Today, the gap is often discovered too late.",
   "sample_rate": 48000,
-  "duration": 2.44,
+  "duration": 2.54,
   "speech_start": 0.13,
-  "speech_end": 2.21,
+  "speech_end": 2.31,
   "words": [
     {
       "w": "Today",
       "start": 0.13,
-      "end": 0.49
+      "end": 0.51
     },
     {
       "w": "the",
-      "start": 0.49,
-      "end": 0.58
+      "start": 0.51,
+      "end": 0.6
     },
     {
       "w": "gap",
-      "start": 0.58,
-      "end": 0.85
+      "start": 0.6,
+      "end": 0.88
     },
     {
       "w": "is",
-      "start": 0.85,
-      "end": 0.99
+      "start": 0.88,
+      "end": 1.02
     },
     {
       "w": "often",
-      "start": 0.99,
-      "end": 1.22
+      "start": 1.02,
+      "end": 1.27
     },
     {
       "w": "discovered",
-      "start": 1.22,
-      "end": 1.71
+      "start": 1.27,
+      "end": 1.76
     },
     {
       "w": "too",
-      "start": 1.71,
-      "end": 1.89
+      "start": 1.76,
+      "end": 1.96
     },
     {
       "w": "late",
-      "start": 1.89,
-      "end": 2.21
+      "start": 1.96,
+      "end": 2.31
     }
   ],
   "sentences": [
     {
       "text": "Today, the gap is often discovered too late.",
       "start": 0.13,
-      "end": 2.21,
+      "end": 2.31,
       "word_range": [
         0,
         8
       ]
     }
   ],
-  "created": "2026-09-29T19:13:29+00:00",
+  "created": "2026-09-29T19:29:47+00:00",
   "provider": "kokoro-onnx 0.6.1, kokoro-v1.0.onnx (local guide)",
   "voice": {
     "id": "bf_isabella",
     "lang": "en-gb"
   },
-  "speed": 1.2325,
+  "speed": 1.1649,
   "inner_pauses": [],
   "segments_synth": [
     {
       "text": "Today, the gap is often discovered too late.",
       "start": 0.12,
-      "end": 2.24,
+      "end": 2.34,
       "alignment_quality": {
         "energy_pauses": 0,
         "pause_agreement": 1.0,

@@ -5,156 +5,167 @@
   "guide": true,
   "label": "GUIDE VOICE (local Kokoro). Not the final ElevenLabs performance.",
   "speaker": "narrator",
-  "text": "Now the risk owner can change the activity, knowingly retain the exposure, or eventually ask selected carriers whether they will cover it.",
-  "spoken_text": "Now the risk owner can change the activity, knowingly retain the exposure, or eventually ask selected carriers whether they will cover it.",
+  "text": "The risk owner decides: change the activity, knowingly retain the exposure, or eventually ask selected carriers to cover it.",
+  "spoken_text": "The risk owner decides: change the activity, knowingly retain the exposure, or eventually ask selected carriers to cover it.",
   "sample_rate": 48000,
-  "duration": 7.26,
+  "duration": 7.43,
   "speech_start": 0.13,
-  "speech_end": 7.03,
+  "speech_end": 7.2,
   "words": [
     {
-      "w": "Now",
+      "w": "The",
       "start": 0.13,
-      "end": 0.29
-    },
-    {
-      "w": "the",
-      "start": 0.29,
-      "end": 0.4
+      "end": 0.2
     },
     {
       "w": "risk",
-      "start": 0.4,
-      "end": 0.69
+      "start": 0.2,
+      "end": 0.53
     },
     {
       "w": "owner",
-      "start": 0.69,
-      "end": 0.93
+      "start": 0.53,
+      "end": 0.84
     },
     {
-      "w": "can",
-      "start": 0.93,
-      "end": 1.09
+      "w": "decides",
+      "start": 0.84,
+      "end": 1.49
     },
     {
       "w": "change",
-      "start": 1.09,
-      "end": 1.46
+      "start": 1.74,
+      "end": 2.05
     },
     {
       "w": "the",
-      "start": 1.46,
-      "end": 1.56
+      "start": 2.05,
+      "end": 2.15
     },
     {
       "w": "activity",
-      "start": 1.56,
-      "end": 2.1
+      "start": 2.15,
+      "end": 2.75
     },
     {
       "w": "knowingly",
-      "start": 2.43,
-      "end": 2.84
+      "start": 2.95,
+      "end": 3.36
     },
     {
       "w": "retain",
-      "start": 2.84,
-      "end": 3.2
+      "start": 3.36,
+      "end": 3.74
     },
     {
       "w": "the",
-      "start": 3.2,
-      "end": 3.28
+      "start": 3.74,
+      "end": 3.83
     },
     {
       "w": "exposure",
-      "start": 3.28,
-      "end": 3.84
+      "start": 3.83,
+      "end": 4.38
     },
     {
       "w": "or",
-      "start": 4.17,
-      "end": 4.32
+      "start": 4.71,
+      "end": 4.88
     },
     {
       "w": "eventually",
-      "start": 4.32,
-      "end": 4.83
+      "start": 4.88,
+      "end": 5.4
     },
     {
       "w": "ask",
-      "start": 4.83,
-      "end": 5.11
+      "start": 5.4,
+      "end": 5.73
     },
     {
       "w": "selected",
-      "start": 5.11,
-      "end": 5.56
+      "start": 5.73,
+      "end": 6.18
     },
     {
       "w": "carriers",
-      "start": 5.56,
-      "end": 6.01
+      "start": 6.18,
+      "end": 6.59
     },
     {
-      "w": "whether",
-      "start": 6.01,
-      "end": 6.26
-    },
-    {
-      "w": "they",
-      "start": 6.26,
-      "end": 6.42
-    },
-    {
-      "w": "will",
-      "start": 6.42,
-      "end": 6.52
+      "w": "to",
+      "start": 6.59,
+      "end": 6.69
     },
     {
       "w": "cover",
-      "start": 6.52,
-      "end": 6.86
+      "start": 6.69,
+      "end": 7.02
     },
     {
       "w": "it",
-      "start": 6.86,
-      "end": 7.03
+      "start": 7.02,
+      "end": 7.2
     }
   ],
   "sentences": [
     {
-      "text": "Now the risk owner can change the activity, knowingly retain the exposure, or eventually ask selected carriers whether they will cover it.",
+      "text": "The risk owner decides:",
       "start": 0.13,
-      "end": 7.03,
+      "end": 1.49,
       "word_range": [
         0,
-        22
+        4
+      ]
+    },
+    {
+      "text": "change the activity, knowingly retain the exposure, or eventually ask selected carriers to cover it.",
+      "start": 1.74,
+      "end": 7.2,
+      "word_range": [
+        4,
+        19
       ]
     }
   ],
-  "created": "2026-09-29T19:13:30+00:00",
+  "created": "2026-09-29T19:29:47+00:00",
   "provider": "kokoro-onnx 0.6.1, kokoro-v1.0.onnx (local guide)",
   "voice": {
     "id": "bf_isabella",
     "lang": "en-gb"
   },
-  "speed": 1.2325,
-  "inner_pauses": [],
+  "speed": 1.1649,
+  "inner_pauses": [
+    0.25
+  ],
   "segments_synth": [
     {
-      "text": "Now the risk owner can change the activity, knowingly retain the exposure, or eventually ask selected carriers whether they will cover it.",
+      "text": "The risk owner decides:",
       "start": 0.12,
-      "end": 7.06,
+      "end": 1.52,
+      "alignment_quality": {
+        "energy_pauses": 0,
+        "pause_agreement": 1.0,
+        "pauses_inside_words": [],
+        "onset_error_ms": 0.0,
+        "offset_error_ms": 0.0,
+        "pause_onset_error_ms_mean": null,
+        "pause_onset_error_ms_max": null
+      },
+      "fallback": false
+    },
+    {
+      "text": "change the activity, knowingly retain the exposure, or eventually ask selected carriers to cover it.",
+      "start": 1.73,
+      "end": 7.23,
       "alignment_quality": {
         "energy_pauses": 2,
         "pause_agreement": 1.0,
         "pauses_inside_words": [],
         "onset_error_ms": 0.0,
         "offset_error_ms": 0.0,
-        "pause_onset_error_ms_mean": 0.0,
-        "pause_onset_error_ms_max": 0.0
+        "pause_onset_error_ms_mean": 5.0,
+        "pause_onset_error_ms_max": 10.0
       },
       "fallback": false
     }
@@ -163,13 +174,13 @@
     "method": "pocketsphinx-5-forced-alignment+energy-refine",
     "fallback": false,
     "quality": {
-      "energy_pauses": 2,
+      "energy_pauses": 3,
       "pause_agreement": 1.0,
       "pauses_inside_words": [],
       "onset_error_ms": 0.0,
       "offset_error_ms": 0.0,
-      "pause_onset_error_ms_mean": 0.0,
-      "pause_onset_error_ms_max": 0.0
+      "pause_onset_error_ms_mean": 3.3,
+      "pause_onset_error_ms_max": 10.0
     },
     "quality_ok": true
   },

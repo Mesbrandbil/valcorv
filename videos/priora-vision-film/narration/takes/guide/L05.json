@@ -8,9 +8,9 @@
   "text": "But no one can hold a moving site in their head.",
   "spoken_text": "But no one can hold a moving site in their head.",
   "sample_rate": 48000,
-  "duration": 2.48,
+  "duration": 2.53,
   "speech_start": 0.13,
-  "speech_end": 2.25,
+  "speech_end": 2.3,
   "words": [
     {
       "w": "But",
@@ -20,78 +20,78 @@
     {
       "w": "no",
       "start": 0.2,
-      "end": 0.39
+      "end": 0.4
     },
     {
       "w": "one",
-      "start": 0.39,
-      "end": 0.62
+      "start": 0.4,
+      "end": 0.64
     },
     {
       "w": "can",
-      "start": 0.62,
-      "end": 0.74
+      "start": 0.64,
+      "end": 0.77
     },
     {
       "w": "hold",
-      "start": 0.74,
-      "end": 1.02
+      "start": 0.77,
+      "end": 1.05
     },
     {
       "w": "a",
-      "start": 1.02,
-      "end": 1.07
+      "start": 1.05,
+      "end": 1.09
     },
     {
       "w": "moving",
-      "start": 1.07,
-      "end": 1.4
+      "start": 1.09,
+      "end": 1.43
     },
     {
       "w": "site",
-      "start": 1.4,
-      "end": 1.72
+      "start": 1.43,
+      "end": 1.77
     },
     {
       "w": "in",
-      "start": 1.72,
-      "end": 1.78
+      "start": 1.77,
+      "end": 1.83
     },
     {
       "w": "their",
-      "start": 1.78,
-      "end": 1.91
+      "start": 1.83,
+      "end": 1.96
     },
     {
       "w": "head",
-      "start": 1.91,
-      "end": 2.25
+      "start": 1.96,
+      "end": 2.3
     }
   ],
   "sentences": [
     {
       "text": "But no one can hold a moving site in their head.",
       "start": 0.13,
-      "end": 2.25,
+      "end": 2.3,
       "word_range": [
         0,
         11
       ]
     }
   ],
-  "created": "2026-09-29T19:13:29+00:00",
+  "created": "2026-09-29T19:29:46+00:00",
   "provider": "kokoro-onnx 0.6.1, kokoro-v1.0.onnx (local guide)",
   "voice": {
     "id": "bf_isabella",
     "lang": "en-gb"
   },
-  "speed": 1.2325,
+  "speed": 1.1649,
   "inner_pauses": [],
   "segments_synth": [
     {
       "text": "But no one can hold a moving site in their head.",
       "start": 0.12,
-      "end": 2.28,
+      "end": 2.33,
       "alignment_quality": {
         "energy_pauses": 0,
         "pause_agreement": 1.0,

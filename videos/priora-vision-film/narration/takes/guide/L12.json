@@ -8,9 +8,9 @@
   "text": "What if the decision existed when the risk changed?",
   "spoken_text": "What if the decision existed when the risk changed?",
   "sample_rate": 48000,
-  "duration": 2.62,
+  "duration": 2.72,
   "speech_start": 0.13,
-  "speech_end": 2.39,
+  "speech_end": 2.49,
   "words": [
     {
       "w": "What",
@@ -25,63 +25,63 @@
     {
       "w": "the",
       "start": 0.38,
-      "end": 0.47
+      "end": 0.48
     },
     {
       "w": "decision",
-      "start": 0.47,
+      "start": 0.48,
       "end": 0.92
     },
     {
       "w": "existed",
       "start": 0.92,
-      "end": 1.44
+      "end": 1.47
     },
     {
       "w": "when",
-      "start": 1.44,
-      "end": 1.55
+      "start": 1.47,
+      "end": 1.63
     },
     {
       "w": "the",
-      "start": 1.55,
-      "end": 1.64
+      "start": 1.63,
+      "end": 1.72
     },
     {
       "w": "risk",
-      "start": 1.64,
-      "end": 1.9
+      "start": 1.72,
+      "end": 2.0
     },
     {
       "w": "changed",
-      "start": 1.9,
-      "end": 2.39
+      "start": 2.0,
+      "end": 2.49
     }
   ],
   "sentences": [
     {
       "text": "What if the decision existed when the risk changed?",
       "start": 0.13,
-      "end": 2.39,
+      "end": 2.49,
       "word_range": [
         0,
         9
       ]
     }
   ],
-  "created": "2026-09-29T19:13:30+00:00",
+  "created": "2026-09-29T19:29:47+00:00",
   "provider": "kokoro-onnx 0.6.1, kokoro-v1.0.onnx (local guide)",
   "voice": {
     "id": "bf_isabella",
     "lang": "en-gb"
   },
-  "speed": 1.2325,
+  "speed": 1.1649,
   "inner_pauses": [],
   "segments_synth": [
     {
       "text": "What if the decision existed when the risk changed?",
       "start": 0.12,
-      "end": 2.42,
+      "end": 2.52,
       "alignment_quality": {
         "energy_pauses": 0,
         "pause_agreement": 1.0,

@@ -85,7 +85,7 @@ Locked narration for the Priora vision film (Priora is the product, Valcorv the 
 **Delivery:** Controlled tension. Short beats, then the quiet realisation on nobody sees it.
 **Silence after:** 0.7 s
 
-    Nothing looks different. Work continues. But the conditions have changed, and nobody sees it.
+    Nothing looks different. Work continues. The conditions have changed, and nobody sees it.
 
 ## Line 9 (L09): Afterwards (Frame 5)
 
@@ -140,9 +140,9 @@ Locked narration for the Priora vision film (Priora is the product, Valcorv the 
 **Time:** 49.76 to 56.49 s (guide)
 **Delivery:** Clarity arrives. Precise, even, three clauses with light separation.
 **Silence after:** 0.35 s
-**Spoken as:** ElevenLabs text: `Pree-OR-uh connects the activity to the conditions that matter, verifies the certificate and safeguards, and creates the record while work happens.`; guide: Priora by phoneme override pɹiˈɔːɹə
+**Spoken as:** ElevenLabs text: `Pree-OR-uh connects the activity to the conditions that matter, verifies the certificate and safeguards, and keeps the record.`; guide: Priora by phoneme override pɹiˈɔːɹə
 
-    Priora connects the activity to the conditions that matter, verifies the certificate and safeguards, and creates the record while work happens.
+    Priora connects the activity to the conditions that matter, verifies the certificate and safeguards, and keeps the record.
 
 ## Line 15 (L15): Prevention and proof (Frame 8)
 
@@ -170,7 +170,7 @@ Locked narration for the Priora vision film (Priora is the product, Valcorv the 
 **Delivery:** Three options with momentum. Eventually is honest and unhurried.
 **Silence after:** 0.6 s
 
-    Now the risk owner can change the activity, knowingly retain the exposure, or eventually ask selected carriers whether they will cover it.
+    The risk owner decides: change the activity, knowingly retain the exposure, or eventually ask selected carriers to cover it.
 
 ## Line 18 (L18): Whole site and close (Frame 11)
 

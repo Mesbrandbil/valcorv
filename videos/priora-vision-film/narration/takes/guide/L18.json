@@ -8,66 +8,66 @@
   "text": "Most work remains ordinary. A few changes become explicit decisions.",
   "spoken_text": "Most work remains ordinary. A few changes become explicit decisions.",
   "sample_rate": 48000,
-  "duration": 4.41,
+  "duration": 4.67,
   "speech_start": 0.13,
-  "speech_end": 4.18,
+  "speech_end": 4.44,
   "words": [
     {
       "w": "Most",
       "start": 0.13,
-      "end": 0.39
+      "end": 0.4
     },
     {
       "w": "work",
-      "start": 0.39,
-      "end": 0.68
+      "start": 0.4,
+      "end": 0.74
     },
     {
       "w": "remains",
-      "start": 0.68,
-      "end": 1.08
+      "start": 0.74,
+      "end": 1.15
     },
     {
       "w": "ordinary",
-      "start": 1.08,
-      "end": 1.63
+      "start": 1.15,
+      "end": 1.72
     },
     {
       "w": "A",
-      "start": 2.03,
-      "end": 2.06
+      "start": 2.06,
+      "end": 2.11
     },
     {
       "w": "few",
-      "start": 2.06,
-      "end": 2.27
+      "start": 2.11,
+      "end": 2.37
     },
     {
       "w": "changes",
-      "start": 2.27,
-      "end": 2.81
+      "start": 2.37,
+      "end": 2.93
     },
     {
       "w": "become",
-      "start": 2.81,
-      "end": 3.14
+      "start": 2.93,
+      "end": 3.26
     },
     {
       "w": "explicit",
-      "start": 3.14,
-      "end": 3.64
+      "start": 3.26,
+      "end": 3.81
     },
     {
       "w": "decisions",
-      "start": 3.64,
-      "end": 4.18
+      "start": 3.81,
+      "end": 4.44
     }
   ],
   "sentences": [
     {
       "text": "Most work remains ordinary.",
       "start": 0.13,
-      "end": 1.63,
+      "end": 1.72,
       "word_range": [
         0,
         4
@@ -75,29 +75,29 @@
     },
     {
       "text": "A few changes become explicit decisions.",
-      "start": 2.03,
-      "end": 4.18,
+      "start": 2.06,
+      "end": 4.44,
       "word_range": [
         4,
         10
       ]
     }
   ],
-  "created": "2026-09-29T19:13:30+00:00",
+  "created": "2026-09-29T19:29:47+00:00",
   "provider": "kokoro-onnx 0.6.1, kokoro-v1.0.onnx (local guide)",
   "voice": {
     "id": "bf_isabella",
     "lang": "en-gb"
   },
-  "speed": 1.2325,
+  "speed": 1.1649,
   "inner_pauses": [
-    0.4
+    0.34
   ],
   "segments_synth": [
     {
       "text": "Most work remains ordinary.",
       "start": 0.12,
-      "end": 1.66,
+      "end": 1.75,
       "alignment_quality": {
         "energy_pauses": 0,
         "pause_agreement": 1.0,
@@ -111,8 +111,8 @@
     },
     {
       "text": "A few changes become explicit decisions.",
-      "start": 2.02,
-      "end": 4.21,
+      "start": 2.05,
+      "end": 4.47,
       "alignment_quality": {
         "energy_pauses": 0,
         "pause_agreement": 1.0,
@@ -134,8 +134,8 @@
       "pauses_inside_words": [],
       "onset_error_ms": 0.0,
       "offset_error_ms": 0.0,
-      "pause_onset_error_ms_mean": 0.0,
-      "pause_onset_error_ms_max": 0.0
+      "pause_onset_error_ms_mean": 10.0,
+      "pause_onset_error_ms_max": 10.0
     },
     "quality_ok": true
   },

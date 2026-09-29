@@ -8,9 +8,9 @@
   "text": "Every industrial site changes by the hour.",
   "spoken_text": "Every industrial site changes by the hour.",
   "sample_rate": 48000,
-  "duration": 2.65,
+  "duration": 2.78,
   "speech_start": 0.13,
-  "speech_end": 2.38,
+  "speech_end": 2.51,
   "words": [
     {
       "w": "Every",
@@ -25,53 +25,53 @@
     {
       "w": "site",
       "start": 0.96,
-      "end": 1.28
+      "end": 1.36
     },
     {
       "w": "changes",
-      "start": 1.28,
-      "end": 1.83
+      "start": 1.36,
+      "end": 1.93
     },
     {
       "w": "by",
-      "start": 1.83,
-      "end": 1.98
+      "start": 1.93,
+      "end": 2.08
     },
     {
       "w": "the",
-      "start": 1.98,
-      "end": 2.12
+      "start": 2.08,
+      "end": 2.22
     },
     {
       "w": "hour",
-      "start": 2.12,
-      "end": 2.38
+      "start": 2.22,
+      "end": 2.51
     }
   ],
   "sentences": [
     {
       "text": "Every industrial site changes by the hour.",
       "start": 0.13,
-      "end": 2.38,
+      "end": 2.51,
       "word_range": [
         0,
         7
       ]
     }
   ],
-  "created": "2026-09-29T19:13:29+00:00",
+  "created": "2026-09-29T19:29:46+00:00",
   "provider": "kokoro-onnx 0.6.1, kokoro-v1.0.onnx (local guide)",
   "voice": {
     "id": "bf_isabella",
     "lang": "en-gb"
   },
-  "speed": 1.2325,
+  "speed": 1.1649,
   "inner_pauses": [],
   "segments_synth": [
     {
       "text": "Every industrial site changes by the hour.",
       "start": 0.12,
-      "end": 2.45,
+      "end": 2.58,
       "alignment_quality": {
         "energy_pauses": 0,
         "pause_agreement": 1.0,

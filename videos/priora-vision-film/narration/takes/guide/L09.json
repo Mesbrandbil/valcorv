@@ -8,9 +8,9 @@
   "text": "If something goes wrong, questions begin afterwards:",
   "spoken_text": "If something goes wrong, questions begin afterwards:",
   "sample_rate": 48000,
-  "duration": 2.71,
+  "duration": 2.77,
   "speech_start": 0.13,
-  "speech_end": 2.48,
+  "speech_end": 2.54,
   "words": [
     {
       "w": "If",
@@ -20,58 +20,58 @@
     {
       "w": "something",
       "start": 0.2,
-      "end": 0.53
+      "end": 0.56
     },
     {
       "w": "goes",
-      "start": 0.53,
-      "end": 0.78
+      "start": 0.56,
+      "end": 0.81
     },
     {
       "w": "wrong",
-      "start": 0.78,
-      "end": 1.14
+      "start": 0.81,
+      "end": 1.17
     },
     {
       "w": "questions",
-      "start": 1.14,
-      "end": 1.7
+      "start": 1.17,
+      "end": 1.75
     },
     {
       "w": "begin",
-      "start": 1.7,
-      "end": 1.94
+      "start": 1.75,
+      "end": 1.99
     },
     {
       "w": "afterwards",
-      "start": 1.94,
-      "end": 2.48
+      "start": 1.99,
+      "end": 2.54
     }
   ],
   "sentences": [
     {
       "text": "If something goes wrong, questions begin afterwards:",
       "start": 0.13,
-      "end": 2.48,
+      "end": 2.54,
       "word_range": [
         0,
         7
       ]
     }
   ],
-  "created": "2026-09-29T19:13:29+00:00",
+  "created": "2026-09-29T19:29:47+00:00",
   "provider": "kokoro-onnx 0.6.1, kokoro-v1.0.onnx (local guide)",
   "voice": {
     "id": "bf_isabella",
     "lang": "en-gb"
   },
-  "speed": 1.2325,
+  "speed": 1.1649,
   "inner_pauses": [],
   "segments_synth": [
     {
       "text": "If something goes wrong, questions begin afterwards:",
       "start": 0.12,
-      "end": 2.51,
+      "end": 2.57,
       "alignment_quality": {
         "energy_pauses": 0,
         "pause_agreement": 1.0,

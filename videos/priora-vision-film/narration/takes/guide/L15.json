@@ -8,18 +8,18 @@
   "text": "Prevention before the work. Proof as it happens.",
   "spoken_text": "Prevention before the work. Proof as it happens.",
   "sample_rate": 48000,
-  "duration": 3.25,
+  "duration": 3.21,
   "speech_start": 0.13,
-  "speech_end": 2.93,
+  "speech_end": 2.98,
   "words": [
     {
       "w": "Prevention",
       "start": 0.13,
-      "end": 0.7
+      "end": 0.69
     },
     {
       "w": "before",
-      "start": 0.7,
+      "start": 0.69,
       "end": 1.0
     },
     {
@@ -30,16 +30,16 @@
     {
       "w": "work",
       "start": 1.08,
-      "end": 1.45
+      "end": 1.51
     },
     {
       "w": "Proof",
-      "start": 1.9,
-      "end": 2.15
+      "start": 1.85,
+      "end": 2.11
     },
     {
       "w": "as",
-      "start": 2.15,
+      "start": 2.11,
       "end": 2.31
     },
     {
@@ -50,14 +50,14 @@
     {
       "w": "happens",
       "start": 2.44,
-      "end": 2.93
+      "end": 2.98
     }
   ],
   "sentences": [
     {
       "text": "Prevention before the work.",
       "start": 0.13,
-      "end": 1.45,
+      "end": 1.51,
       "word_range": [
         0,
         4
@@ -65,29 +65,29 @@
     },
     {
       "text": "Proof as it happens.",
-      "start": 1.9,
-      "end": 2.93,
+      "start": 1.85,
+      "end": 2.98,
       "word_range": [
         4,
         8
       ]
     }
   ],
-  "created": "2026-09-29T19:13:30+00:00",
+  "created": "2026-09-29T19:29:47+00:00",
   "provider": "kokoro-onnx 0.6.1, kokoro-v1.0.onnx (local guide)",
   "voice": {
     "id": "bf_isabella",
     "lang": "en-gb"
   },
-  "speed": 1.2325,
+  "speed": 1.1649,
   "inner_pauses": [
-    0.45
+    0.34
   ],
   "segments_synth": [
     {
       "text": "Prevention before the work.",
       "start": 0.12,
-      "end": 1.48,
+      "end": 1.54,
       "alignment_quality": {
         "energy_pauses": 0,
         "pause_agreement": 1.0,
@@ -101,14 +101,14 @@
     },
     {
       "text": "Proof as it happens.",
-      "start": 1.89,
-      "end": 3.05,
+      "start": 1.84,
+      "end": 3.01,
       "alignment_quality": {
         "energy_pauses": 0,
         "pause_agreement": 1.0,
         "pauses_inside_words": [],
         "onset_error_ms": 0.0,
-        "offset_error_ms": 90.0,
+        "offset_error_ms": 0.0,
         "pause_onset_error_ms_mean": null,
         "pause_onset_error_ms_max": null
       },
@@ -123,7 +123,7 @@
       "pause_agreement": 1.0,
       "pauses_inside_words": [],
       "onset_error_ms": 0.0,
-      "offset_error_ms": 90.0,
+      "offset_error_ms": 0.0,
       "pause_onset_error_ms_mean": 0.0,
       "pause_onset_error_ms_max": 0.0
     },

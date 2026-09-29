@@ -5,89 +5,84 @@
   "guide": true,
   "label": "GUIDE VOICE (local Kokoro). Not the final ElevenLabs performance.",
   "speaker": "narrator",
-  "text": "Nothing looks different. Work continues. But the conditions have changed, and nobody sees it.",
-  "spoken_text": "Nothing looks different. Work continues. But the conditions have changed, and nobody sees it.",
+  "text": "Nothing looks different. Work continues. The conditions have changed, and nobody sees it.",
+  "spoken_text": "Nothing looks different. Work continues. The conditions have changed, and nobody sees it.",
   "sample_rate": 48000,
-  "duration": 5.65,
+  "duration": 5.68,
   "speech_start": 0.13,
-  "speech_end": 5.42,
+  "speech_end": 5.45,
   "words": [
     {
       "w": "Nothing",
       "start": 0.13,
-      "end": 0.48
+      "end": 0.5
     },
     {
       "w": "looks",
-      "start": 0.48,
-      "end": 0.73
+      "start": 0.5,
+      "end": 0.76
     },
     {
       "w": "different",
-      "start": 0.73,
-      "end": 1.2
+      "start": 0.76,
+      "end": 1.31
     },
     {
       "w": "Work",
-      "start": 1.68,
-      "end": 1.94
+      "start": 1.65,
+      "end": 1.91
     },
     {
       "w": "continues",
-      "start": 1.94,
+      "start": 1.91,
       "end": 2.66
     },
     {
-      "w": "But",
-      "start": 3.11,
-      "end": 3.2
-    },
-    {
-      "w": "the",
-      "start": 3.2,
-      "end": 3.26
+      "w": "The",
+      "start": 3.09,
+      "end": 3.14
     },
     {
       "w": "conditions",
-      "start": 3.26,
-      "end": 3.73
+      "start": 3.14,
+      "end": 3.65
     },
     {
       "w": "have",
-      "start": 3.73,
-      "end": 3.83
+      "start": 3.65,
+      "end": 3.75
     },
     {
       "w": "changed",
-      "start": 3.83,
-      "end": 4.35
+      "start": 3.75,
+      "end": 4.29
     },
     {
       "w": "and",
-      "start": 4.35,
-      "end": 4.57
+      "start": 4.29,
+      "end": 4.55
     },
     {
       "w": "nobody",
-      "start": 4.57,
-      "end": 4.94
+      "start": 4.55,
+      "end": 4.91
     },
     {
       "w": "sees",
-      "start": 4.94,
+      "start": 4.91,
       "end": 5.23
     },
     {
       "w": "it",
       "start": 5.23,
-      "end": 5.42
+      "end": 5.45
     }
   ],
   "sentences": [
     {
       "text": "Nothing looks different.",
       "start": 0.13,
-      "end": 1.2,
+      "end": 1.31,
       "word_range": [
         0,
         3
@@ -95,7 +90,7 @@
     },
     {
       "text": "Work continues.",
-      "start": 1.68,
+      "start": 1.65,
       "end": 2.66,
       "word_range": [
         3,
@@ -103,46 +98,31 @@
       ]
     },
     {
-      "text": "But the conditions have changed, and nobody sees it.",
-      "start": 3.11,
-      "end": 5.42,
+      "text": "The conditions have changed, and nobody sees it.",
+      "start": 3.09,
+      "end": 5.45,
       "word_range": [
         5,
-        14
+        13
       ]
     }
   ],
-  "created": "2026-09-29T19:13:29+00:00",
+  "created": "2026-09-29T19:29:47+00:00",
   "provider": "kokoro-onnx 0.6.1, kokoro-v1.0.onnx (local guide)",
   "voice": {
     "id": "bf_isabella",
     "lang": "en-gb"
   },
-  "speed": 1.2325,
+  "speed": 1.1649,
   "inner_pauses": [
-    0.4,
-    0.45
+    0.34,
+    0.34
   ],
   "segments_synth": [
     {
       "text": "Nothing looks different.",
       "start": 0.12,
-      "end": 1.31,
-      "alignment_quality": {
-        "energy_pauses": 0,
-        "pause_agreement": 1.0,
-        "pauses_inside_words": [],
-        "onset_error_ms": 0.0,
-        "offset_error_ms": 80.0,
-        "pause_onset_error_ms_mean": null,
-        "pause_onset_error_ms_max": null
-      },
-      "fallback": false
-    },
-    {
-      "text": "Work continues.",
-      "start": 1.67,
-      "end": 2.69,
+      "end": 1.34,
       "alignment_quality": {
         "energy_pauses": 0,
         "pause_agreement": 1.0,
@@ -155,9 +135,24 @@
       "fallback": false
     },
     {
-      "text": "But the conditions have changed, and nobody sees it.",
-      "start": 3.1,
-      "end": 5.45,
+      "text": "Work continues.",
+      "start": 1.64,
+      "end": 2.78,
+      "alignment_quality": {
+        "energy_pauses": 0,
+        "pause_agreement": 1.0,
+        "pauses_inside_words": [],
+        "onset_error_ms": 0.0,
+        "offset_error_ms": 90.0,
+        "pause_onset_error_ms_mean": null,
+        "pause_onset_error_ms_max": null
+      },
+      "fallback": false
+    },
+    {
+      "text": "The conditions have changed, and nobody sees it.",
+      "start": 3.08,
+      "end": 5.48,
       "alignment_quality": {
         "energy_pauses": 0,
         "pause_agreement": 1.0,

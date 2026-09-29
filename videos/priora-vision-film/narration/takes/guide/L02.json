@@ -8,51 +8,51 @@
   "text": "Contractors arrive. Equipment is isolated. Work moves.",
   "spoken_text": "Contractors arrive. Equipment is isolated. Work moves.",
   "sample_rate": 48000,
-  "duration": 4.19,
+  "duration": 4.41,
   "speech_start": 0.13,
-  "speech_end": 3.87,
+  "speech_end": 4.17,
   "words": [
     {
       "w": "Contractors",
       "start": 0.13,
-      "end": 0.72
+      "end": 0.78
     },
     {
       "w": "arrive",
-      "start": 0.72,
-      "end": 1.19
+      "start": 0.78,
+      "end": 1.29
     },
     {
       "w": "Equipment",
-      "start": 1.49,
-      "end": 2.0
+      "start": 1.59,
+      "end": 2.16
     },
     {
       "w": "is",
-      "start": 2.0,
-      "end": 2.17
+      "start": 2.16,
+      "end": 2.36
     },
     {
       "w": "isolated",
-      "start": 2.17,
-      "end": 2.87
+      "start": 2.36,
+      "end": 3.15
     },
     {
       "w": "Work",
-      "start": 3.17,
-      "end": 3.43
+      "start": 3.45,
+      "end": 3.7
     },
     {
       "w": "moves",
-      "start": 3.43,
-      "end": 3.87
+      "start": 3.7,
+      "end": 4.17
     }
   ],
   "sentences": [
     {
       "text": "Contractors arrive.",
       "start": 0.13,
-      "end": 1.19,
+      "end": 1.29,
       "word_range": [
         0,
         2
@@ -60,8 +60,8 @@
     },
     {
       "text": "Equipment is isolated.",
-      "start": 1.49,
-      "end": 2.87,
+      "start": 1.59,
+      "end": 3.15,
       "word_range": [
         2,
         5
@@ -69,21 +69,21 @@
     },
     {
       "text": "Work moves.",
-      "start": 3.17,
-      "end": 3.87,
+      "start": 3.45,
+      "end": 4.17,
       "word_range": [
         5,
         7
       ]
     }
   ],
-  "created": "2026-09-29T19:13:29+00:00",
+  "created": "2026-09-29T19:29:46+00:00",
   "provider": "kokoro-onnx 0.6.1, kokoro-v1.0.onnx (local guide)",
   "voice": {
     "id": "bf_isabella",
     "lang": "en-gb"
   },
-  "speed": 1.2325,
+  "speed": 1.1649,
   "inner_pauses": [
     0.3,
     0.3
@@ -92,7 +92,7 @@
     {
       "text": "Contractors arrive.",
       "start": 0.12,
-      "end": 1.22,
+      "end": 1.32,
       "alignment_quality": {
         "energy_pauses": 0,
         "pause_agreement": 1.0,
@@ -106,8 +106,8 @@
     },
     {
       "text": "Equipment is isolated.",
-      "start": 1.48,
-      "end": 2.9,
+      "start": 1.58,
+      "end": 3.18,
       "alignment_quality": {
         "energy_pauses": 0,
         "pause_agreement": 1.0,
@@ -121,14 +121,14 @@
     },
     {
       "text": "Work moves.",
-      "start": 3.16,
-      "end": 3.99,
+      "start": 3.44,
+      "end": 4.21,
       "alignment_quality": {
         "energy_pauses": 0,
         "pause_agreement": 1.0,
         "pauses_inside_words": [],
         "onset_error_ms": 0.0,
-        "offset_error_ms": 90.0,
+        "offset_error_ms": 10.0,
         "pause_onset_error_ms_mean": null,
         "pause_onset_error_ms_max": null
       },
@@ -143,7 +143,7 @@
       "pause_agreement": 1.0,
       "pauses_inside_words": [],
       "onset_error_ms": 0.0,
-      "offset_error_ms": 90.0,
+      "offset_error_ms": 10.0,
       "pause_onset_error_ms_mean": 0.0,
       "pause_onset_error_ms_max": 0.0
     },

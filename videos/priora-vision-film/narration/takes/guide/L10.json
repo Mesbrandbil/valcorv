@@ -8,76 +8,76 @@
   "text": "What was happening? Which condition applied? Can you prove what was true?",
   "spoken_text": "What was happening? Which condition applied? Can you prove what was true?",
   "sample_rate": 48000,
-  "duration": 4.51,
+  "duration": 4.63,
   "speech_start": 0.13,
-  "speech_end": 4.24,
+  "speech_end": 4.36,
   "words": [
     {
       "w": "What",
       "start": 0.13,
-      "end": 0.26
+      "end": 0.27
     },
     {
       "w": "was",
-      "start": 0.26,
-      "end": 0.41
+      "start": 0.27,
+      "end": 0.42
     },
     {
       "w": "happening",
-      "start": 0.41,
-      "end": 0.87
+      "start": 0.42,
+      "end": 0.96
     },
     {
       "w": "Which",
-      "start": 1.44,
-      "end": 1.64
+      "start": 1.47,
+      "end": 1.67
     },
     {
       "w": "condition",
-      "start": 1.64,
-      "end": 2.15
+      "start": 1.67,
+      "end": 2.21
     },
     {
       "w": "applied",
-      "start": 2.15,
-      "end": 2.63
+      "start": 2.21,
+      "end": 2.76
     },
     {
       "w": "Can",
-      "start": 3.03,
-      "end": 3.15
+      "start": 3.1,
+      "end": 3.23
     },
     {
       "w": "you",
-      "start": 3.15,
-      "end": 3.26
+      "start": 3.23,
+      "end": 3.35
     },
     {
       "w": "prove",
-      "start": 3.26,
-      "end": 3.61
+      "start": 3.35,
+      "end": 3.7
     },
     {
       "w": "what",
-      "start": 3.61,
-      "end": 3.76
+      "start": 3.7,
+      "end": 3.84
     },
     {
       "w": "was",
-      "start": 3.76,
-      "end": 3.92
+      "start": 3.84,
+      "end": 4.01
     },
     {
       "w": "true",
-      "start": 3.92,
-      "end": 4.24
+      "start": 4.01,
+      "end": 4.36
     }
   ],
   "sentences": [
     {
       "text": "What was happening?",
       "start": 0.13,
-      "end": 0.87,
+      "end": 0.96,
       "word_range": [
         0,
         3
@@ -85,8 +85,8 @@
     },
     {
       "text": "Which condition applied?",
-      "start": 1.44,
-      "end": 2.63,
+      "start": 1.47,
+      "end": 2.76,
       "word_range": [
         3,
         6
@@ -94,30 +94,30 @@
     },
     {
       "text": "Can you prove what was true?",
-      "start": 3.03,
-      "end": 4.24,
+      "start": 3.1,
+      "end": 4.36,
       "word_range": [
         6,
         12
       ]
     }
   ],
-  "created": "2026-09-29T19:13:29+00:00",
+  "created": "2026-09-29T19:29:47+00:00",
   "provider": "kokoro-onnx 0.6.1, kokoro-v1.0.onnx (local guide)",
   "voice": {
     "id": "bf_isabella",
     "lang": "en-gb"
   },
-  "speed": 1.2325,
+  "speed": 1.1649,
   "inner_pauses": [
-    0.4,
-    0.4
+    0.34,
+    0.34
   ],
   "segments_synth": [
     {
       "text": "What was happening?",
       "start": 0.12,
-      "end": 1.07,
+      "end": 1.16,
       "alignment_quality": {
         "energy_pauses": 0,
         "pause_agreement": 1.0,
@@ -131,8 +131,8 @@
     },
     {
       "text": "Which condition applied?",
-      "start": 1.43,
-      "end": 2.66,
+      "start": 1.46,
+      "end": 2.79,
       "alignment_quality": {
         "energy_pauses": 0,
         "pause_agreement": 1.0,
@@ -146,8 +146,8 @@
     },
     {
       "text": "Can you prove what was true?",
-      "start": 3.02,
-      "end": 4.31,
+      "start": 3.09,
+      "end": 4.43,
       "alignment_quality": {
         "energy_pauses": 0,
         "pause_agreement": 1.0,
