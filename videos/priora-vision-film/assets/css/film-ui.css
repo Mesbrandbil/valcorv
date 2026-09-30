@@ -7,17 +7,37 @@
    SVG elements (.fui-*), so nothing leaks into other scenes.
    - Nothing meant to be read is smaller than 18px (the demo's 10px mono labels
      are raised with max(18px, ...) where a component runs below --pui-scale 1.8).
-   - Signal is cobalt: --signal #1F47D6 (deep #1838A8, soft #DCE2F5).
+   - Cut 3 colour (docs/cut3-direction.md sections 1 and 2), tokens only from
+     assets/css/film-color.css. Film-native cards: paper-white, one colour band keyed
+     to the category (protection --c-water, hot work --c-hot, lifts --c-lift, gas
+     --c-gas, air --c-air), states as coloured pills and ticks, fewer hairlines.
+     --signal is Priora's cobalt (--c-priora): the live connection lines, the
+     product's own marks, the selected choice, a recorded decision.
+     VERIFIED and inside: --pui-ok (--c-ok). UNAVAILABLE, OUTSIDE AGREED CONDITIONS,
+     the crossing and a changed condition: --pui-alert (--c-alert).
    - Card shadows are the demo's, softened for video. No glass, no glow.
    - No transitions or keyframes: GSAP drives every change by seeking.
    ===================================================================== */
 
-.fui { --signal: #1F47D6; --signal-deep: #1838A8; --signal-soft: #DCE2F5; }
+.fui { --signal: var(--c-priora, #1F47D6); --signal-deep: var(--c-priora-deep, #1838A8); --signal-soft: var(--c-priora-soft, #DCE2F5); }
+/* the interface in the film's own ink and paper (warm), paper-white cards */
+.pui.fui, .fui .pui {
+  --pui-paper: var(--c-paper, #f5f3ee);
+  --pui-card: color-mix(in srgb, var(--c-paper, #f5f3ee) 30%, white);
+  --pui-ink: var(--c-ink, #1e1c19);
+  --pui-ink-2: color-mix(in srgb, var(--c-ink, #1e1c19) 76%, transparent);
+  --pui-ink-3: color-mix(in srgb, var(--c-ink, #1e1c19) 60%, transparent);
+  --pui-ink-4: color-mix(in srgb, var(--c-ink, #1e1c19) 40%, transparent);
+  --pui-hair: color-mix(in srgb, var(--c-ink, #1e1c19) 12%, transparent);
+  --pui-hair-2: color-mix(in srgb, var(--c-ink, #1e1c19) 6%, transparent);
+  --pui-ok: var(--c-ok, #2e8b57); --pui-ok-soft: var(--c-ok-soft, #d9eee1);
+  --pui-alert: var(--c-alert, #e0452b); --pui-alert-soft: var(--c-alert-soft, #fadcd5);
+}
 .pui.fui, .pui.fui [class*="pui-"], .fui .pui, .fui .pui [class*="pui-"] {
   --pui-shadow: 0 calc(1 * var(--u)) 0 rgba(17,17,17,.025), 0 calc(22 * var(--u)) calc(56 * var(--u)) calc(-30 * var(--u)) rgba(17,17,17,.15), 0 calc(6 * var(--u)) calc(16 * var(--u)) calc(-10 * var(--u)) rgba(17,17,17,.06);
 }
 .fui { --fui-soft-shadow: 0 1px 0 rgba(17,17,17,.025), 0 30px 70px -40px rgba(17,17,17,.22), 0 8px 22px -14px rgba(17,17,17,.08); }
-.fui .fui-sig-t { color: var(--pui-signal, #1F47D6); }
+.fui .fui-sig-t { color: var(--pui-alert, var(--c-alert, #e0452b)); }
 
 /* ---------- Swap: variants stacked in one grid cell ---------- */
 .fui-swap { display: inline-grid; vertical-align: baseline; }
@@ -53,14 +73,14 @@ div.fui-swap > .fui-sw { white-space: normal; }
 .fui-npx { transform: scale(calc(var(--sw) * var(--k, 1))); }
 .fui-px1 { transform: scale(var(--sw)); }
 .fui-n-pulse { fill: none; stroke: #111111; stroke-width: 1; }
-.fui-n-ring { fill: none; stroke: #111111; stroke-opacity: .42; stroke-width: 1; }
+.fui-n-ring { fill: none; stroke: var(--c-ok, #2e8b57); stroke-opacity: .8; stroke-width: 1.2; }
 .fui-n-chk { fill: none; stroke: #111111; stroke-width: 1; stroke-dasharray: 2.2 2.9; }
-.fui-n-out { fill: none; stroke: var(--signal, #1F47D6); }
+.fui-n-out { fill: none; stroke: var(--c-alert, #e0452b); }
 .fui-n-out circle { stroke-width: 1.7; }
 .fui-n-out path { stroke-width: 1.3; }
 .fui-n-dot { fill: #111111; stroke: #111111; stroke-width: 0; }
-.fui-n-sq { fill: #111111; }
-.fui-n-own .ob { fill: rgba(245,243,238,.94); stroke: #111111; stroke-width: 1.1; stroke-dasharray: 1.4 2.4; }
+.fui-n-sq { fill: var(--fui-act, var(--c-ink, #1e1c19)); }
+.fui-n-own .ob { fill: rgba(245,243,238,.94); stroke: var(--fui-act, var(--c-ink, #1e1c19)); stroke-width: 1.3; stroke-dasharray: 1.4 2.4; }
 .fui-n-own .oh { fill: none; stroke: #111111; stroke-opacity: .38; stroke-width: .8; }
 .fui-n-own .op { fill: #F5F3EE; }
 .fui-n-cap .c1 { fill: rgba(245,243,238,.92); stroke: #111111; stroke-width: 1.1; }
@@ -75,26 +95,27 @@ div.fui-swap > .fui-sw { white-space: normal; }
 .fui-caps-spine { stroke: #111111; stroke-width: calc(var(--sw) * 1.25px); stroke-linecap: round; }
 .fui-caps-head { fill: #111111; }
 .fui-caps-tail { fill: #111111; fill-opacity: .5; }
-.fui-tether { stroke: var(--signal, #1F47D6); stroke-opacity: .9; stroke-width: calc(var(--sw) * 1.4px); stroke-dasharray: calc(var(--sw) * 4px) calc(var(--sw) * 4px); stroke-linecap: butt; }
-.fui-anchor ellipse { fill: none; stroke: var(--signal, #1F47D6); stroke-opacity: .75; stroke-width: 1.2; stroke-dasharray: 2 2; }
-.fui-slice-ring circle { fill: none; stroke: var(--signal, #1F47D6); stroke-opacity: .9; stroke-width: 1.2; stroke-dasharray: 2.5 3; }
+.fui-tether { stroke: var(--c-alert, #e0452b); stroke-opacity: .9; stroke-width: calc(var(--sw) * 1.4px); stroke-dasharray: calc(var(--sw) * 4px) calc(var(--sw) * 4px); stroke-linecap: butt; }
+.fui-anchor ellipse { fill: none; stroke: var(--c-alert, #e0452b); stroke-opacity: .75; stroke-width: 1.2; stroke-dasharray: 2 2; }
+.fui-slice-ring circle { fill: none; stroke: var(--c-alert, #e0452b); stroke-opacity: .9; stroke-width: 1.2; stroke-dasharray: 2.5 3; }
 .fui-exit-ticks { fill: none; stroke: #111111; stroke-width: calc(var(--sw) * 1.1px); }
 
 /* ---------- site additions: Sprinkler Zone 3 offline, larger labels for video ---------- */
-.priora-site .fui-sz-offline { fill: none; stroke: #34332F; stroke-width: calc(var(--sw) * 1px); stroke-dasharray: calc(var(--sw) * 2px) calc(var(--sw) * 2px); }
-.priora-site .szl text.st.fui-sig-t { fill: var(--signal, #1F47D6); }
+.priora-site .fui-sz-offline { fill: none; stroke: var(--c-offline, #9c9994); stroke-width: calc(var(--sw) * 1.2px); stroke-dasharray: calc(var(--sw) * 2px) calc(var(--sw) * 2px); }
+.priora-site .szl text.st.fui-sig-t { fill: var(--c-alert, #e0452b); }
+.priora-site .szl text.st.fui-sz-st-res { fill: var(--c-ok, #2e8b57); }
 .fui-labels.priora-site .px { transform: scale(calc(var(--sw) * var(--fui-lab, 1.8))); }
 
 /* ---------- clause labels (world-sized, on paper) and live connections ---------- */
 .fui-clause text { font-family: 'IBM Plex Mono', monospace; font-weight: 500; letter-spacing: .12em; paint-order: stroke; stroke: #F5F3EE; stroke-width: 5px; stroke-linejoin: round; }
 .fui-clause-num { fill: #111111; }
 .fui-clause-tx { fill: #2A2A2A; }
-.fui-clause-box { fill: #FBFAF7; stroke: #111111; stroke-width: calc(var(--sw) * var(--fui-s) * 1.2px); }
+.fui-clause-box { fill: var(--fui-cat, #FBFAF7); stroke: var(--c-ink, #1e1c19); stroke-width: calc(var(--sw) * var(--fui-s) * 1.2px); }
 .fui-clause-term { fill: #F5F3EE; stroke: #111111; stroke-width: calc(var(--sw) * var(--fui-s) * 1.5px); }
 .fui-clause-lead { fill: none; stroke: #111111; stroke-opacity: .55; stroke-width: calc(var(--sw) * var(--fui-s) * 1.2px); }
 .fui-clause-rule { fill: none; stroke: #111111; stroke-opacity: .22; stroke-width: calc(var(--sw) * var(--fui-s) * 1px); }
 .fui-live-p { fill: none; stroke: var(--signal, #1F47D6); stroke-width: calc(var(--sw) * 2px); stroke-linecap: round; stroke-linejoin: round; }
-.fui-live-t circle { fill: #F5F3EE; stroke: var(--signal, #1F47D6); stroke-width: 1.8; }
+.fui-live-t circle { fill: var(--c-paper, #F5F3EE); stroke: var(--signal, #1F47D6); stroke-width: 1.8; }
 
 /* ---------- plates on decided nodes ---------- */
 .fui-plate-bg { fill: #FBFAF7; stroke: rgba(17,17,17,.14); stroke-width: 1; }
@@ -107,13 +128,26 @@ div.fui-swap > .fui-sw { white-space: normal; }
 /* ---------- 3. activity card (--pui-scale 1.8: every label is 18px or more) ---------- */
 .pui-herocard.fui-card { border-radius: calc(14 * var(--u)); }
 .fui-card .fui-card-g .g { width: calc(16 * var(--u)); height: calc(16 * var(--u)); }
-.pui.fui-card .ck .c-x.fui-cx { stroke: var(--pui-signal); stroke-width: 1.5; }
+.pui.fui-card .ck .c-x.fui-cx { stroke: var(--pui-alert); stroke-width: 1.5; }
 .fui-card .conds li em.fui-swap { justify-self: end; text-align: right; }
+/* cut 3: one colour band keyed to the category (no layout change: an inset shadow inside the radius) */
+.pui-herocard.fui-card.fui-band { box-shadow: inset 0 calc(7 * var(--u)) 0 var(--fui-band), var(--pui-shadow); }
+/* fewer hairlines: the rows breathe on paper; the checks are the ok colour, a lost condition alert */
+.fui-card .conds li { border-bottom-color: transparent; }
+.pui.fui-card .ck .c-p { stroke: var(--pui-ok); stroke-width: 1.8; }
+.fui-card .hc-title { font-size: calc(24 * var(--u)); line-height: calc(24.2 * var(--u)); letter-spacing: -.015em; }
+/* states as coloured pills (a painted background that does not move the layout) */
+.fui-card .conds li em .fui-sw-verified, .fui-card .conds li em .fui-sw-unavailable { border-radius: calc(3 * var(--u)); }
+.fui-card .conds li em .fui-sw-verified { color: var(--pui-ok); background: var(--pui-ok-soft); box-shadow: 0 0 0 calc(4 * var(--u)) var(--pui-ok-soft); }
+.fui-card .conds li em .fui-sw-unavailable { color: var(--pui-alert); background: var(--pui-alert-soft); box-shadow: 0 0 0 calc(4 * var(--u)) var(--pui-alert-soft); }
+.fui-card .conds li em .fui-sw { justify-self: end; }
+.fui-card .hc-foot .fui-sw-inside { color: var(--pui-ok); }
+.fui-card .hc-foot .fui-sw-h4, .fui-card .hc-foot .fui-sw-outside { color: var(--pui-alert); }
 
 /* ---------- readout ---------- */
 .fui-readout .slice.fui-slice { opacity: 1; height: calc(36 * var(--u)); margin-top: calc(9 * var(--u)); overflow: visible; }
-.fui-readout .fui-seg { stroke: var(--pui-signal); stroke-width: 1; }
-.fui-readout .fui-ro-v .ro-a.fui-sig-t { color: var(--pui-signal); }
+.fui-readout .fui-seg { stroke: var(--pui-alert); stroke-width: 1; }
+.fui-readout .fui-ro-v .ro-a.fui-sig-t { color: var(--pui-alert); }
 
 /* ---------- 4. capture strip ---------- */
 .fui-capture { position: relative; background: var(--pui-card); border: 1px solid var(--pui-hair); border-radius: 18px; padding: 26px 36px 26px; box-shadow: var(--fui-soft-shadow); }
@@ -302,3 +336,59 @@ div.fui-swap > .fui-sw { white-space: normal; }
 
 /* a free-floating record column can sit on its own paper panel (hides the drawing behind it) */
 .fui-record.fui-panel { background: #FBFAF7; border: 1px solid var(--pui-hair); border-radius: 18px; padding: 26px 30px 12px; box-shadow: var(--fui-soft-shadow); }
+
+/* =====================================================================
+   Cut 3: the rest of the interface in the film's colour system
+   ===================================================================== */
+/* trusted record: a system event that changed a condition is alert; a recorded decision is Priora's */
+.fui-record .rr.k-dev .m::after { border-color: var(--pui-alert); }
+.fui-record .rr.k-dev.sig .m::after { background: var(--pui-alert); }
+.fui-record .rr.k-decision { background: color-mix(in srgb, var(--pui-signal-soft) 45%, transparent); }
+.fui-record .rr.k-decision::before { background: var(--pui-signal); }
+.fui-record .rr.k-decision .m::after { background: var(--pui-signal); border-color: var(--pui-signal); }
+/* capture strip: the recognised fields underline in Priora's colour (the product reading the work) */
+.fui-capture { border-color: var(--pui-hair-2); }
+.fui-cap-fields { border-top-color: var(--pui-hair-2); }
+/* decision sheet: the changed state reads alert, the resolved state ok, fewer internal hairlines */
+.fui-sheet .facts > div:first-child dd { color: var(--pui-alert); }
+.fui-sheet .facts > div + div { border-left-color: transparent; }
+.fui-sheet .obs { border-color: transparent; }
+.fui-sheet .choice { border-color: var(--pui-hair); }
+.fui-oc-state, .fui-oc-state svg.g { color: var(--pui-ok); }
+.fui-oc-own svg.g { color: var(--pui-signal); }
+/* transfer: the observed state travels on Priora's lines; the changed facts in the packet read alert */
+.fui-tr-line { stroke: var(--pui-signal); stroke-opacity: .55; }
+.fui-tr-tok { fill: var(--pui-signal); }
+.fui-pk-list li b.u { color: var(--pui-alert); text-decoration-color: color-mix(in srgb, var(--pui-alert) 60%, transparent); }
+.fui-pk-list li { border-bottom-color: var(--pui-hair-2); }
+/* programme layer: the temporary layer is Priora's decision alongside the programme */
+.fui-pg-bar { fill: var(--c-stone-wall, #e8e1d7); stroke: var(--c-ink, #1e1c19); }
+/* chain and statements in the film's ink */
+.fui-ch-w { color: var(--c-ink, #1e1c19); }
+.fui-st { color: var(--c-ink, #1e1c19); }
+
+/* ---------- 3b. condition card (film-native, cut 3): larger type, one band, states as pills ---------- */
+.fui-cc { position: relative; box-sizing: border-box; padding: 40px 48px 36px; background: color-mix(in srgb, var(--c-paper, #f5f3ee) 30%, white); border-radius: 22px; font-family: 'IBM Plex Sans', sans-serif; color: var(--c-ink, #1e1c19); box-shadow: inset 0 10px 0 var(--fui-band, transparent), 0 1px 0 rgba(30,28,25,.03), 0 30px 70px -40px rgba(30,28,25,.24), 0 8px 22px -14px rgba(30,28,25,.08); }
+.fui-cc-top { display: block; min-height: 24px; }
+.fui-cc-row { display: flex; align-items: center; justify-content: space-between; gap: 24px; margin-top: 14px; min-height: 40px; }
+.fui-cc-eb { font: 500 20px/1.2 'IBM Plex Mono', monospace; letter-spacing: .12em; text-transform: uppercase; color: color-mix(in srgb, var(--c-ink, #1e1c19) 60%, transparent); white-space: nowrap; }
+.fui-cc-pills { justify-items: end; }
+.fui-cc-pill { display: inline-block; justify-self: end; padding: 8px 14px 7px; border-radius: 6px; font: 500 18px/1.2 'IBM Plex Mono', monospace; letter-spacing: .1em; text-transform: uppercase; white-space: nowrap; }
+.fui-cc-pill.fui-tone-ok { color: var(--c-ok, #2e8b57); background: var(--c-ok-soft, #d9eee1); }
+.fui-cc-pill.fui-tone-alert { color: var(--c-alert, #e0452b); background: var(--c-alert-soft, #fadcd5); }
+.fui-cc-pill.fui-tone-priora { color: var(--c-priora, #1f47d6); background: var(--c-priora-soft, #dce2f5); }
+.fui-cc-pill.fui-tone-ink { color: color-mix(in srgb, var(--c-ink, #1e1c19) 70%, transparent); background: color-mix(in srgb, var(--c-ink, #1e1c19) 6%, transparent); }
+.fui-cc-title { margin-top: 22px; font: 400 44px/1.14 'IBM Plex Sans', sans-serif; letter-spacing: -.015em; }
+.fui-cc-status { font: 500 24px/1.25 'IBM Plex Mono', monospace; letter-spacing: .1em; text-transform: uppercase; }
+.fui-cc-status .fui-tone-ok { color: var(--c-ok, #2e8b57); }
+.fui-cc-status .fui-tone-alert { color: var(--c-alert, #e0452b); }
+.fui-cc-status .fui-tone-ink { color: color-mix(in srgb, var(--c-ink, #1e1c19) 70%, transparent); }
+.fui-cc-read { display: flex; align-items: baseline; gap: 16px; margin-top: 26px; padding-top: 22px; border-top: 1px solid color-mix(in srgb, var(--c-ink, #1e1c19) 10%, transparent); }
+.fui-cc-rl { font: 500 20px/1 'IBM Plex Mono', monospace; letter-spacing: .12em; text-transform: uppercase; color: color-mix(in srgb, var(--c-ink, #1e1c19) 60%, transparent); min-width: 88px; }
+.fui-cc-rv { font: 400 80px/88px 'IBM Plex Mono', monospace; letter-spacing: -.02em; color: var(--c-ink, #1e1c19); }
+.fui-cc-ru { font: 500 26px/1 'IBM Plex Mono', monospace; letter-spacing: .06em; color: color-mix(in srgb, var(--c-ink, #1e1c19) 70%, transparent); }
+.fui-cc-lim { margin-left: auto; font: 500 20px/1 'IBM Plex Mono', monospace; letter-spacing: .1em; text-transform: uppercase; color: color-mix(in srgb, var(--c-ink, #1e1c19) 50%, transparent); }
+.fui-cc-oc .fui-cc-ocb { display: flex; align-items: flex-start; gap: 18px; margin-top: 26px; padding-top: 22px; border-top: 1px solid color-mix(in srgb, var(--c-ink, #1e1c19) 10%, transparent); }
+.fui-cc-ocm { flex: none; width: 18px; height: 18px; margin-top: 5px; border-radius: 3px; background: var(--c-priora, #1f47d6); }
+.fui-cc-oct b { display: block; font: 500 26px/1.3 'IBM Plex Mono', monospace; letter-spacing: .08em; text-transform: uppercase; color: var(--c-priora-deep, #1838a8); }
+.fui-cc-oct span { display: block; margin-top: 8px; font: 400 26px/1.35 'IBM Plex Sans', sans-serif; color: color-mix(in srgb, var(--c-ink, #1e1c19) 76%, transparent); }

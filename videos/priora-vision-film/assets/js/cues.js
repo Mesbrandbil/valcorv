@@ -2955,7 +2955,650 @@ window.FL_EVENTS = {
    "at": "cue:whether"
   }
  },
- "a3-close": {}
+ "a3-scenarios": {
+  "markers-01": {
+   "name": "markers-01",
+   "kind": "node-pass",
+   "snap": {
+    "mode": "next"
+   },
+   "gain_db": -16,
+   "scene": "a3-scenarios",
+   "t": 101.739,
+   "local": 0.339,
+   "at": "cue:everyKind"
+  },
+  "markers-02": {
+   "name": "markers-02",
+   "kind": "node-pass",
+   "snap": {
+    "mode": "next"
+   },
+   "gain_db": -16,
+   "scene": "a3-scenarios",
+   "t": 102.065,
+   "local": 0.665,
+   "at": "cue:everyKind"
+  },
+  "markers-03": {
+   "name": "markers-03",
+   "kind": "node-pass",
+   "snap": {
+    "mode": "next"
+   },
+   "gain_db": -16,
+   "scene": "a3-scenarios",
+   "t": 102.391,
+   "local": 0.991,
+   "at": "cue:everyKind"
+  },
+  "markers-04": {
+   "name": "markers-04",
+   "kind": "node-pass",
+   "snap": {
+    "mode": "next"
+   },
+   "gain_db": -16,
+   "scene": "a3-scenarios",
+   "t": 102.717,
+   "local": 1.317,
+   "at": "cue:everyKind"
+  },
+  "push-crane": {
+   "name": "push-crane",
+   "kind": "push",
+   "snap": {
+    "mode": "next"
+   },
+   "gain_db": -14,
+   "dur": 0.652,
+   "scene": "a3-scenarios",
+   "t": 104.348,
+   "local": 2.948,
+   "at": "L18a.end"
+  },
+  "cut-crane": {
+   "name": "cut-crane",
+   "kind": "cut",
+   "snap": "cut",
+   "material": "felt",
+   "gain_db": -14,
+   "scene": "a3-scenarios",
+   "t": 105,
+   "local": 3.6,
+   "at": "cue:crane"
+  },
+  "gusts-01": {
+   "name": "gusts-01",
+   "kind": "pencil-scatter",
+   "snap": {
+    "mode": "cut",
+    "off": 0.05
+   },
+   "gain_db": -24,
+   "scene": "a3-scenarios",
+   "t": 105.05,
+   "local": 3.65,
+   "at": "cue:crane"
+  },
+  "gusts-02": {
+   "name": "gusts-02",
+   "kind": "pencil-scatter",
+   "snap": {
+    "mode": "cut",
+    "off": 0.05
+   },
+   "gain_db": -24,
+   "scene": "a3-scenarios",
+   "t": 105.21,
+   "local": 3.81,
+   "at": "cue:crane"
+  },
+  "gusts-03": {
+   "name": "gusts-03",
+   "kind": "pencil-scatter",
+   "snap": {
+    "mode": "cut",
+    "off": 0.05
+   },
+   "gain_db": -24,
+   "scene": "a3-scenarios",
+   "t": 105.37,
+   "local": 3.97,
+   "at": "cue:crane"
+  },
+  "gusts-04": {
+   "name": "gusts-04",
+   "kind": "pencil-scatter",
+   "snap": {
+    "mode": "cut",
+    "off": 0.05
+   },
+   "gain_db": -24,
+   "scene": "a3-scenarios",
+   "t": 105.53,
+   "local": 4.13,
+   "at": "cue:crane"
+  },
+  "gusts-05": {
+   "name": "gusts-05",
+   "kind": "pencil-scatter",
+   "snap": {
+    "mode": "cut",
+    "off": 0.05
+   },
+   "gain_db": -24,
+   "scene": "a3-scenarios",
+   "t": 105.69,
+   "local": 4.29,
+   "at": "cue:crane"
+  },
+  "gusts-06": {
+   "name": "gusts-06",
+   "kind": "pencil-scatter",
+   "snap": {
+    "mode": "cut",
+    "off": 0.05
+   },
+   "gain_db": -24,
+   "scene": "a3-scenarios",
+   "t": 105.85,
+   "local": 4.45,
+   "at": "cue:crane"
+  },
+  "pull-card": {
+   "name": "pull-card",
+   "kind": "pull",
+   "snap": {
+    "mode": "next"
+   },
+   "gain_db": -14,
+   "dur": 0.652,
+   "scene": "a3-scenarios",
+   "t": 105.652,
+   "local": 4.252,
+   "at": "L18b:lift.start"
+  },
+  "connect-wind": {
+   "name": "connect-wind",
+   "kind": "connect-line",
+   "snap": {
+    "mode": "next",
+    "off": 0.05
+   },
+   "gain_db": -12,
+   "dur": 0.47,
+   "scene": "a3-scenarios",
+   "t": 105.702,
+   "local": 4.302,
+   "at": "L18b:lift.start"
+  },
+  "focus-card-crane": {
+   "name": "focus-card-crane",
+   "kind": "focus",
+   "snap": {
+    "mode": "next",
+    "off": 0.652
+   },
+   "gain_db": -16,
+   "scene": "a3-scenarios",
+   "t": 106.304,
+   "local": 4.904,
+   "at": "L18b:lift.start"
+  },
+  "wind-limit": {
+   "name": "wind-limit",
+   "kind": "row-unavailable",
+   "gain_db": -9,
+   "scene": "a3-scenarios",
+   "t": 106.413,
+   "local": 5.013,
+   "at": "cue:wind+0.283"
+  },
+  "outcome-change": {
+   "name": "outcome-change",
+   "kind": "choice-accent",
+   "snap": {
+    "mode": "next"
+   },
+   "variant": 1,
+   "gain_db": -10,
+   "scene": "a3-scenarios",
+   "t": 106.63,
+   "local": 5.23,
+   "at": "L18b:picks.start"
+  },
+  "cut-gas": {
+   "name": "cut-gas",
+   "kind": "cut",
+   "snap": "cut",
+   "material": "paper",
+   "gain_db": -14,
+   "scene": "a3-scenarios",
+   "t": 108.261,
+   "local": 6.861,
+   "at": "cue:gasDetector"
+  },
+  "connect-gas": {
+   "name": "connect-gas",
+   "kind": "connect-line",
+   "snap": {
+    "mode": "cut",
+    "off": 0.376
+   },
+   "gain_db": -12,
+   "dur": 0.396,
+   "scene": "a3-scenarios",
+   "t": 108.637,
+   "local": 7.237,
+   "at": "cue:gasDetector"
+  },
+  "key-turn": {
+   "name": "key-turn",
+   "kind": "handwheel",
+   "gain_db": -16,
+   "dur": 0.26,
+   "scene": "a3-scenarios",
+   "t": 108.991,
+   "local": 7.591,
+   "at": "cue:bypassed-0.25"
+  },
+  "bypassed": {
+   "name": "bypassed",
+   "kind": "row-unavailable",
+   "snap": {
+    "mode": "near"
+   },
+   "gain_db": -9,
+   "scene": "a3-scenarios",
+   "t": 109.239,
+   "local": 7.839,
+   "at": "cue:bypassed"
+  },
+  "push-card-gas": {
+   "name": "push-card-gas",
+   "kind": "push",
+   "snap": {
+    "mode": "next"
+   },
+   "gain_db": -14,
+   "dur": 0.652,
+   "scene": "a3-scenarios",
+   "t": 109.565,
+   "local": 8.165,
+   "at": "cue:bypassed+0.2"
+  },
+  "outcome-retain": {
+   "name": "outcome-retain",
+   "kind": "choice-accent",
+   "snap": {
+    "mode": "next"
+   },
+   "variant": 2,
+   "gain_db": -10,
+   "scene": "a3-scenarios",
+   "t": 110.217,
+   "local": 8.817,
+   "at": "L18c:maintenance.start"
+  },
+  "cut-tank": {
+   "name": "cut-tank",
+   "kind": "cut",
+   "snap": "cut",
+   "material": "paper",
+   "gain_db": -14,
+   "scene": "a3-scenarios",
+   "t": 111.848,
+   "local": 10.448,
+   "at": "cue:confined"
+  },
+  "pull-fan": {
+   "name": "pull-fan",
+   "kind": "pull",
+   "snap": {
+    "mode": "next"
+   },
+   "gain_db": -14,
+   "dur": 0.652,
+   "scene": "a3-scenarios",
+   "t": 113.152,
+   "local": 11.752,
+   "at": "L18d:entry.start"
+  },
+  "connect-fan": {
+   "name": "connect-fan",
+   "kind": "connect-line",
+   "snap": {
+    "mode": "next",
+    "off": 0.25
+   },
+   "gain_db": -12,
+   "dur": 0.47,
+   "scene": "a3-scenarios",
+   "t": 113.402,
+   "local": 12.002,
+   "at": "L18d:entry.start"
+  },
+  "focus-card-tank": {
+   "name": "focus-card-tank",
+   "kind": "focus",
+   "snap": {
+    "mode": "next",
+    "off": 0.652
+   },
+   "gain_db": -16,
+   "scene": "a3-scenarios",
+   "t": 113.804,
+   "local": 12.404,
+   "at": "L18d:entry.start"
+  },
+  "fan-stops": {
+   "name": "fan-stops",
+   "kind": "subtract-bed",
+   "gain_db": -10,
+   "dur": 0.62,
+   "scene": "a3-scenarios",
+   "t": 113.848,
+   "local": 12.448,
+   "at": "cue:ventilation"
+  },
+  "ventilation-down": {
+   "name": "ventilation-down",
+   "kind": "row-unavailable",
+   "snap": {
+    "mode": "next"
+   },
+   "gain_db": -9,
+   "scene": "a3-scenarios",
+   "t": 114.13,
+   "local": 12.73,
+   "at": "cue:ventilation"
+  },
+  "outcome-prevent": {
+   "name": "outcome-prevent",
+   "kind": "choice-accent",
+   "snap": {
+    "mode": "next"
+   },
+   "variant": 3,
+   "gain_db": -10,
+   "scene": "a3-scenarios",
+   "t": 114.783,
+   "local": 13.383,
+   "at": "L18d:down.start"
+  },
+  "cut-site": {
+   "name": "cut-site",
+   "kind": "cut",
+   "snap": "cut",
+   "material": "paper",
+   "gain_db": -14,
+   "scene": "a3-scenarios",
+   "t": 116.413,
+   "local": 15.013,
+   "at": "L18e.start"
+  },
+  "pull-site": {
+   "name": "pull-site",
+   "kind": "pull",
+   "snap": {
+    "mode": "cut",
+    "off": 0.002
+   },
+   "gain_db": -12,
+   "dur": 3.911,
+   "scene": "a3-scenarios",
+   "t": 116.415,
+   "local": 15.015,
+   "at": "L18e.start"
+  },
+  "node-pass-01": {
+   "name": "node-pass-01",
+   "kind": "node-pass",
+   "snap": {
+    "mode": "cut",
+    "off": 0.769
+   },
+   "gain_db": -20,
+   "scene": "a3-scenarios",
+   "t": 117.182,
+   "local": 15.782,
+   "at": "L18e.start"
+  },
+  "node-pass-02": {
+   "name": "node-pass-02",
+   "kind": "node-pass",
+   "snap": {
+    "mode": "cut",
+    "off": 1.004
+   },
+   "gain_db": -20,
+   "scene": "a3-scenarios",
+   "t": 117.417,
+   "local": 16.017,
+   "at": "L18e.start"
+  },
+  "node-pass-03": {
+   "name": "node-pass-03",
+   "kind": "node-pass",
+   "snap": {
+    "mode": "cut",
+    "off": 1.346
+   },
+   "gain_db": -20,
+   "scene": "a3-scenarios",
+   "t": 117.759,
+   "local": 16.359,
+   "at": "L18e.start"
+  },
+  "node-pass-04": {
+   "name": "node-pass-04",
+   "kind": "node-pass",
+   "snap": {
+    "mode": "cut",
+    "off": 1.573
+   },
+   "gain_db": -20,
+   "scene": "a3-scenarios",
+   "t": 117.986,
+   "local": 16.586,
+   "at": "L18e.start"
+  },
+  "node-pass-05": {
+   "name": "node-pass-05",
+   "kind": "node-pass",
+   "snap": {
+    "mode": "cut",
+    "off": 1.859
+   },
+   "gain_db": -20,
+   "scene": "a3-scenarios",
+   "t": 118.272,
+   "local": 16.872,
+   "at": "L18e.start"
+  },
+  "decisions-01": {
+   "name": "decisions-01",
+   "kind": "decision-accent",
+   "snap": {
+    "mode": "next"
+   },
+   "gain_db": -9,
+   "scene": "a3-scenarios",
+   "t": 118.696,
+   "local": 17.296,
+   "at": "cue:few"
+  },
+  "decisions-02": {
+   "name": "decisions-02",
+   "kind": "decision-accent",
+   "snap": {
+    "mode": "next"
+   },
+   "gain_db": -9,
+   "scene": "a3-scenarios",
+   "t": 119.022,
+   "local": 17.622,
+   "at": "cue:few"
+  },
+  "decisions-03": {
+   "name": "decisions-03",
+   "kind": "decision-accent",
+   "snap": {
+    "mode": "next"
+   },
+   "gain_db": -9,
+   "scene": "a3-scenarios",
+   "t": 119.348,
+   "local": 17.948,
+   "at": "cue:few"
+  },
+  "decisions-04": {
+   "name": "decisions-04",
+   "kind": "decision-accent",
+   "snap": {
+    "mode": "next"
+   },
+   "gain_db": -9,
+   "scene": "a3-scenarios",
+   "t": 119.674,
+   "local": 18.274,
+   "at": "cue:few"
+  },
+  "envelope-pulse": {
+   "name": "envelope-pulse",
+   "kind": "connect-line",
+   "snap": "cut",
+   "gain_db": -12,
+   "dur": 0.978,
+   "scene": "a3-scenarios",
+   "t": 121.304,
+   "local": 19.904,
+   "at": "cue:madeInTime"
+  }
+ },
+ "a3-close": {
+  "recede": {
+   "name": "recede",
+   "snap": {
+    "mode": "next",
+    "sub": 2
+   },
+   "kind": "pull",
+   "gain_db": -14,
+   "dur": 0.978,
+   "scene": "a3-close",
+   "t": 123.261,
+   "local": 0.628,
+   "at": "cue:closeIn+0.4"
+  },
+  "gap-rule": {
+   "name": "gap-rule",
+   "snap": {
+    "mode": "next",
+    "sub": 2,
+    "off": 0.3261
+   },
+   "kind": "gap-rule",
+   "gain_db": -12,
+   "dur": 0.72,
+   "scene": "a3-close",
+   "t": 123.587,
+   "local": 0.954,
+   "at": "cue:closeIn+0.4"
+  },
+  "tick-changed": {
+   "name": "tick-changed",
+   "snap": {
+    "mode": "next",
+    "sub": 2,
+    "off": 0.6522
+   },
+   "kind": "tick",
+   "gain_db": -12,
+   "scene": "a3-close",
+   "t": 123.913,
+   "local": 1.28,
+   "at": "cue:closeIn+0.4"
+  },
+  "tick-found": {
+   "name": "tick-found",
+   "snap": {
+    "mode": "next",
+    "sub": 2,
+    "off": 0.9783
+   },
+   "kind": "tick",
+   "gain_db": -14,
+   "scene": "a3-close",
+   "t": 124.239,
+   "local": 1.606,
+   "at": "cue:closeIn+0.4"
+  },
+  "gap-bracket": {
+   "name": "gap-bracket",
+   "snap": {
+    "mode": "next",
+    "sub": 2,
+    "off": 1.3043
+   },
+   "kind": "pencil",
+   "gain_db": -14,
+   "dur": 0.45,
+   "scene": "a3-close",
+   "t": 124.565,
+   "local": 1.932,
+   "at": "cue:closeIn+0.4"
+  },
+  "gap-closes": {
+   "name": "gap-closes",
+   "snap": {
+    "mode": "next",
+    "sub": 2
+   },
+   "kind": "decision-accent",
+   "gain_db": -8,
+   "scene": "a3-close",
+   "t": 126.196,
+   "local": 3.562,
+   "at": "cue:gapCloses+0.56"
+  },
+  "decided-hold": {
+   "name": "decided-hold",
+   "snap": {
+    "mode": "next",
+    "sub": 2,
+    "off": 0.45
+   },
+   "kind": "hold",
+   "gain_db": -5,
+   "dur": 1.3,
+   "scene": "a3-close",
+   "t": 126.646,
+   "local": 4.012,
+   "at": "cue:gapCloses+0.56"
+  },
+  "latch": {
+   "name": "latch",
+   "kind": "latch",
+   "gain_db": -6,
+   "dur": 0.12,
+   "scene": "a3-close",
+   "t": 128.412,
+   "local": 5.779,
+   "at": "cue:priora+0.26"
+  },
+  "end-hold": {
+   "name": "end-hold",
+   "kind": "hold",
+   "gain_db": -8,
+   "dur": 5.1,
+   "scene": "a3-close",
+   "t": 131.782,
+   "local": 9.149,
+   "at": "cue:tagline+1.96"
+  }
+ }
 };
 
 function flNormWord(s) {

@@ -10,10 +10,12 @@ untouched, and then voice.wav + music.wav + sfx.wav equals the master.
 
 Carve (music and the ambience beds, never the voice, never the sync one-shots):
   * voice activity: the voice's own band-limited level, 10 ms frames, 60 ms
-    look-ahead, 25 ms attack, 420 ms release (music does not snap back);
-  * a gentle broadband duck (music up to -4.5 dB, beds -2.5 dB);
+    look-ahead, 30 ms attack, 650 ms release (cut 3: the music no longer
+    breathes back between short lines; it is continuous now, so every
+    release is heard);
+  * a gentle broadband duck (music up to -3 dB, beds -2.5 dB);
   * a dynamic dip centred at 2.2 kHz spanning about 1 to 4.5 kHz (music up to
-    -6 dB, beds -4 dB) and a small low-mid dip at 450 Hz for the voice's body;
+    -7 dB, beds -4 dB) and a small low-mid dip at 450 Hz for the voice's body;
   * all applied as one smooth time-varying spectral gain (STFT, 75 percent
     overlap), so there is no pumping and no filter zipper.
 
@@ -34,7 +36,7 @@ from .dsp import SR, ns
 FRAME = 0.01
 
 
-def voice_activity(voice: np.ndarray, lookahead=0.06, attack=0.025, release=0.42):
+def voice_activity(voice: np.ndarray, lookahead=0.06, attack=0.03, release=0.65):
     """Voice activity 0..1 at FRAME rate: (times, activity)."""
     v = dsp.bp(dsp.mono(voice), 150, 5000, 2)
     h = ns(FRAME)

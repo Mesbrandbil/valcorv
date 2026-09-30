@@ -11,10 +11,9 @@ import soundfile as sf
 from . import cues as cuesmod, design, dsp, library, mixer, qa, rewind, score
 from .dsp import SR, ns, rng
 
-MACROS = {"pencil-scatter", "snap-cluster", "chain", "pencil-set-square", "draw", "subtract-bed", "rewind",
+MACROS = {"pencil-scatter", "snap-cluster", "pencil-set-square", "draw", "subtract-bed", "rewind",
           "ruler-line", "gap-rule", "question", "header-in", "node-return", "layer-slice", "word-token",
           "system-event", "hold"}
-CHAIN_ORDER = ["record", "trust", "decision", "price", "capacity"]
 # camera-move air (push, pull, whip): a texture, so it is carved under the
 # voice like the beds; every other one-shot stays uncarved (sync sounds)
 MOTION = {"push", "pull", "whip"}
@@ -39,14 +38,10 @@ def expand_macros(events):
         if k == "rewind":
             control["rewind_event"] = e["t"]
             continue
-        if k == "hold":  # control: thins the score and the beds (score.py, design.beds)
+        if k == "hold":  # control: a dip in the score and the beds, never a stop (score.py, design.beds)
             control.setdefault("holds", []).append(
                 {"t": e["t"], "dur": e.get("dur"), "gain_db": float(e.get("gain_db", 0.0) or 0.0),
                  "scene": e.get("scene"), "name": e.get("name")})
-            continue
-        if k == "chain":
-            i = int(e.get("index", 0)) % 5
-            out.append(dict(e, kind="chain-" + CHAIN_ORDER[i]))
             continue
         s0 = int(e.get("seed", 0))
         d = e.get("dur")
@@ -142,14 +137,18 @@ def _key(e):
 
 def resolve_holds(holds, C, rs, re_, warns):
     """Holds get a duration (default one bar) and a depth (gain_db below 0,
-    default score.HOLD_DEFAULT_DB); inside the rewind they have no effect."""
+    default score.HOLD_DEFAULT_DB, never deeper than score.HOLD_MAX_DB: a hold
+    is a dip, not a stop); inside the rewind they have no effect."""
     beat = score.cue_grid(C).beat
     out = []
     for h in holds or []:
         d = h.get("dur")
         d = float(d) if d not in (None, 0, "") else 4 * beat
         g = float(h.get("gain_db", 0.0) or 0.0)
-        g = score.HOLD_DEFAULT_DB if g >= 0 else max(g, -60.0)
+        if g < score.HOLD_MAX_DB:
+            warns.append(f"hold '{h.get('name') or 'hold'}' at {h['t']:.2f}s asks for {g:g} dB; holds are dips, "
+                         f"drawn to {score.HOLD_MAX_DB:g} dB at most")
+        g = score.HOLD_DEFAULT_DB if g >= 0 else max(g, score.HOLD_MAX_DB)
         if rs - 0.01 <= h["t"] < re_:
             warns.append(f"hold '{h.get('name') or 'hold'}' at {h['t']:.2f}s lies inside the rewind and is ignored")
             continue
@@ -241,6 +240,8 @@ def run(project: str, resolved_path: str, timing_path: str | None, voice_path: s
     fam, arr = score.render(C, report, holds)
     log("score rendered")
     music_pre = sum(fam.values())
+    # the thread continues through the rewind; only the rest is reversed
+    music_rev_src = music_pre - fam["thread"] - fam["verb-thread"]
 
     # ---------------- sfx: beds and one-shots
     bed = design.beds(C, control.get("subtract_at"), control.get("subtract_fade", 0.35), holds)
@@ -270,12 +271,12 @@ def run(project: str, resolved_path: str, timing_path: str | None, voice_path: s
 
     # ---------------- rewind (built from Act I as heard)
     sfx_pre = beds_sum + shots_fwd + motion_fwd
-    m_add, s_add = rewind.render(C, music_pre, sfx_pre, events, report)
+    m_add, s_add = rewind.render(C, music_rev_src, sfx_pre, events, report)
     log("rewind built")
 
     # ---------------- carve under the voice
     at, act = mixer.voice_activity(voice)
-    music = mixer.carve(music_pre, at, act, 4.5, 6.0, 2.5) + m_add
+    music = mixer.carve(music_pre, at, act, 3.0, 7.0, 3.0) + m_add
     beds_c = mixer.carve(beds_sum, at, act, 2.5, 4.0, 1.5)
     motion_c = mixer.carve(motion_fwd, at, act, 2.5, 4.0, 1.5) if np.any(motion_fwd) else motion_fwd
     sfx = beds_c + motion_c + shots_fwd + rew_shots + s_add
@@ -316,6 +317,7 @@ def run(project: str, resolved_path: str, timing_path: str | None, voice_path: s
     report["qa"] = qa_block(C, rd, vv, voice, qa_dir, pngs, events, tonal)
     report["qa"]["grid"] = qa.grid_audio_check(fam, rd["music"], arr, C)
     report["qa"]["silences"] = qa.silence_windows(rd["music"] + rd["sfx"], C, arr, holds)
+    report["qa"]["transitions"] = qa.transitions(rd["music"], rd["music"] + rd["sfx"], arr, C, holds)
     report["seconds"] = round(time.time() - t_start, 1)
     if qa_dir:
         os.makedirs(qa_dir, exist_ok=True)
@@ -327,8 +329,8 @@ def run(project: str, resolved_path: str, timing_path: str | None, voice_path: s
 
 def sections(C):
     return [("act1", 0.0, C["rewindStart"]), ("rewind", C["rewindStart"], C["rewindEnd"]),
-            ("act2", C["rewindEnd"], C["l16"] - 0.3), ("act3", C["l16"] - 0.3, C["chainRecord"] - 0.5),
-            ("close", C["chainRecord"] - 0.5, C.duration)]
+            ("act2", C["rewindEnd"], C["l16"] - 0.3), ("act3", C["l16"] - 0.3, C["scenariosIn"]),
+            ("scenarios", C["scenariosIn"], C["closeIn"]), ("close", C["closeIn"], C.duration)]
 
 
 def qa_block(C, rd, voice_st, voice_mono, qa_dir, pngs, events, tonal):
@@ -354,7 +356,7 @@ def qa_block(C, rd, voice_st, voice_mono, qa_dir, pngs, events, tonal):
     }
     # discontinuities at every edit point
     edits = [0.0, C.duration - 0.02] + [t for _, t in [(k, C[k]) for k in (
-        "offline", "rewindStart", "rewindEnd", "offline2", "cross", "chainRecord", "priora")]]
+        "offline", "rewindStart", "rewindEnd", "offline2", "cross", "scenariosIn", "closeIn", "priora")]]
     edits += [C["rewindStart"] + 0.3, C["offline"] + 0.35, C["offline2"] + 0.25]
     ons = [e["t"] for e in events]
     out["edges"] = {"music": qa.edge_check(music, edits, onsets=ons), "sfx": qa.edge_check(sfx, edits, onsets=ons),
@@ -370,7 +372,7 @@ def qa_block(C, rd, voice_st, voice_mono, qa_dir, pngs, events, tonal):
         os.makedirs(qa_dir, exist_ok=True)
         marks = [(k, C[k]) for k in ("noOne", "offline", "afterwards", "rewindStart", "rewindEnd", "worker",
                                      "connects", "prevention", "offline2", "cross", "change", "ordinary",
-                                     "chainRecord", "priora")]
+                                     "scenariosIn", "ordinary", "closeIn", "gapCloses", "priora")]
         qa.spectrogram_png(master, os.path.join(qa_dir, "film-master.png"), "master (voice + music + sfx)", marks=marks,
                            vmin=-120, vmax=-30, width=18)
         qa.spectrogram_png(music, os.path.join(qa_dir, "film-music.png"), "music stem", marks=marks,

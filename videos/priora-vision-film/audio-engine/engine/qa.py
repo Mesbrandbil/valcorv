@@ -152,8 +152,7 @@ AT_DUR = ("gauge",)  # the transient sits at the event's dur
 LOW = ()  # low-mid transients to be measured through a 60 Hz high-pass instead of 200 Hz
 CONTINUOUS = ("van", "footsteps", "pencil-hatch", "pull", "push", "arc", "handwheel", "paper-slide", "stretch",
               "technical-pen", "pencil-stroke", "connect-line", "rewind-suction", "rewind-whoosh")
-SHARP = ("valve-clunk", "system-tick", "cross-snap", "choice-accent", "decision-accent", "chain-record",
-         "chain-trust", "chain-decision", "chain-price", "chain-capacity", "latch", "stamp", "confirm",
+SHARP = ("valve-clunk", "system-tick", "cross-snap", "choice-accent", "decision-accent", "latch", "stamp", "confirm",
          "latch-soft", "record-append", "focus", "gauge")
 
 
@@ -306,7 +305,9 @@ def grid_audio_check(fam: dict, music_stem: np.ndarray, arr, C) -> dict:
 
 
 def silence_windows(bed: np.ndarray, C, arr, holds) -> dict:
-    """Music plus SFX in the moments that must be quiet (momentary, 400 ms)."""
+    """Music plus SFX in the quiet moments (momentary, 400 ms). In cut 3 they
+    are dips inside the one continuous sound: each should sit well under its
+    surroundings and never fall to silence."""
     tt, lm = loudness_curve(bed, 0.4, 0.05)
     mk = arr.marks
     B = arr.g.beat
@@ -317,19 +318,21 @@ def silence_windows(bed: np.ndarray, C, arr, holds) -> dict:
             return None
         v = lm[sel]
         return {"from": round(a, 2), "to": round(b, 2), "median_lufs_m": round(float(np.median(v)), 1),
-                "max_lufs_m": round(float(np.max(v)), 1)}
+                "min_lufs_m": round(float(np.min(v)), 1), "max_lufs_m": round(float(np.max(v)), 1)}
     out = {
         "unnoticed_change (offline + 1 beat to L08 end)": win(C["offline"] + B, C["nobodyEnd"]),
         "after_L08 (to afterwards)": win(C["nobodyEnd"] + 0.3, C["afterwards"] - 0.05),
-        "landing (rewindEnd to first note)": win(C["rewindEnd"] + 0.05, mk["bE"]),
+        "landing (rewindEnd to the clarity bar)": win(C["rewindEnd"] + 0.05, mk["bE"]),
         "crossing (cross to riskOwner)": win(C["cross"], C["riskOwner"]),
-        "full_chain_hold (chainHold to priora)": win(C["chainHold"], C["priora"] - 0.05),
+        "pull_back (ordinary to closeIn)": win(C["ordinary"], C["closeIn"]),
+        "resolution (gapCloses to priora)": win(C["gapCloses"], C["priora"] - 0.05),
         "final_2s": win(C.duration - 2.0, C.duration),
         "reference_act2_ostinato (bar near connects + 4 bars)": win(mk["bF"], mk["bF"] + 4 * arr.g.bar),
+        "reference_scenarios (everyKind + 4 bars)": win(mk["bS"], mk["bS"] + 4 * arr.g.bar),
     }
     hl = []
     for h in holds or []:
-        a, b = h["t"] + min(0.25, h["dur"] / 3), h["t"] + h["dur"]
+        a, b = h["t"] + min(B, h["dur"] / 3), h["t"] + h["dur"]
         before = win(max(h["t"] - 2.0, 0), h["t"] - 0.05)
         inside = win(a, b)
         hl.append({"t": round(h["t"], 2), "dur": round(h["dur"], 2), "gain_db": h["gain_db"],
@@ -337,6 +340,51 @@ def silence_windows(bed: np.ndarray, C, arr, holds) -> dict:
                    "inside_median": inside["median_lufs_m"] if inside else None})
     out["holds"] = hl
     return out
+
+
+def transitions(music: np.ndarray, bed: np.ndarray, arr, C, holds=None, span_bars: float = 1.0) -> dict:
+    """How each section change behaves: the music stem's momentary (400 ms)
+    loudness every 100 ms from one bar before the section's bar line to one
+    bar after, its median on each side, and the largest change over any
+    half second in that window (a hard stop or an abrupt entry reads 15 LU
+    or more; a crossfade a few LU). The rewind's own edges (its start and
+    its landing) are listed with the rest. Also the longest stretch under
+    -50 LUFS-M in the music stem before END's last two seconds (a cut to
+    silence would show here)."""
+    tt, lm = loudness_curve(music, 0.4, 0.1)
+    lm = np.maximum(lm, -70.0)
+    BAR = arr.g.bar
+    rows = []
+    pts = [(s["section"], s["t"]) for s in arr.sections]
+    pts += [("rewind start", C["rewindStart"]), ("rewind landing", C["rewindEnd"])]
+    for name, t in sorted(pts, key=lambda x: x[1]):
+        a, b = t - span_bars * BAR, t + span_bars * BAR
+        sel = (tt >= a) & (tt <= b)
+        if np.sum(sel) < 6:
+            continue
+        v = lm[sel]
+        d = v[5:] - v[:-5]
+        before = lm[(tt >= a) & (tt < t - 0.2)]
+        after = lm[(tt > t + 0.2) & (tt <= b)]
+        rows.append({"section": name, "t": round(t, 3), "at": arr.g.label(t),
+                     "median_before": round(float(np.median(before)), 1) if len(before) else None,
+                     "median_after": round(float(np.median(after)), 1) if len(after) else None,
+                     "max_rise_0_5s": round(float(d.max()), 1), "max_fall_0_5s": round(float(d.min()), 1),
+                     "curve": [round(float(x), 1) for x in v[::2]]})
+    low = lm < -50.0
+    stop = tt < C.duration - 2.0
+    longest, cur = 0.0, 0.0
+    for flag in (low & stop):
+        cur = cur + 0.1 if flag else 0.0
+        longest = max(longest, cur)
+    d_all = lm[5:] - lm[:-5]
+    body = (tt[:-5] > 1.0) & (tt[5:] < C.duration - 2.0)
+    return {"note": "music stem, 400 ms loudness, 100 ms hop; 'curve' is every 200 ms from one bar before to one "
+                    "bar after the section's bar line",
+            "sections": rows,
+            "largest_rise_0_5s_film": round(float(d_all[body].max()), 1),
+            "largest_fall_0_5s_film": round(float(d_all[body].min()), 1),
+            "longest_under_minus50_s": round(longest, 1)}
 
 
 # ---------------------------------------------------------------- pictures

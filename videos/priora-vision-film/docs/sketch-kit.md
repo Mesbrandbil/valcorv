@@ -2,7 +2,33 @@
 
 `assets/js/sketch-kit.js` (window.SketchKit) and `assets/css/film-sketch.css` draw everything in Act I that is not the site itself: people, the van, routes, tags, activity markers, safeguards, the condition connection and its fray, the redrawn envelope, the incident box, and on the paper around the site the Frame 2 detail sheet, the translation chain, the Frame 3 evidence fragments, the three questions and the gap timeline.
 
-It lives in the same visual universe as the graphite site twin in `site-kit.js`: seeded vertex jitter (`SiteKit.jitter`), a 32 percent overdraw pass, construction overshoot on straight edges, paper-filled solids, clipped diagonal hatching, and Plex Mono uppercase lettering with a tiny seeded rotation (under 0.8 degrees) and slightly irregular letter spacing. Typeset clause and statement text is Plex Sans. Colours are graphite #3B3A36, lighter graphite #8F8C86, the greys #6A6863 and #9C9994 for thinned text, and paper #F5F3EE. There is no blue anywhere in the kit.
+It lives in the same visual universe as the rough site twin in `site-kit.js`: seeded vertex jitter (`SiteKit.jitter`), a 32 percent overdraw pass, construction overshoot on straight edges, paper-filled solids, clipped diagonal hatching, and Plex Mono uppercase lettering with a tiny seeded rotation (under 0.8 degrees) and slightly irregular letter spacing. Typeset clause and statement text is Plex Sans. The line is graphite (`--c-graphite`, lighter graphite and the thinned-text greys are mixes of it with `--c-paper`); since cut 3 colour pencil and pale watercolour carry meaning (section Colour below). There is no Priora cobalt anywhere in the kit: Act I never uses it.
+
+## Colour (cut 3)
+
+Tokens only (`assets/css/film-color.css`), applied through `assets/css/film-sketch.css`. Graphite line on top; strong colour small and exact; washes pale.
+
+| What | Colour |
+| --- | --- |
+| People (`figure`, `groupFigures`, the fire watch) | a hi-vis vest (`--c-hivis`) and a white hard hat (`--c-helmet`) on every worker, at every scale; figures 46 px and taller get a retroreflective band; `garb: 'welder'` wears leather (`--c-leather`) instead; `garb: false` for none |
+| Activity markers | coloured by activity: ring and dot in the activity's colour pencil, a soft wash inside (`hot` amber with its second ring, `lift` yellow, `gas` violet, `air` teal, `general` grey for the many quiet markers). `activity: 'auto'` (default) reads the variant and the label (HOT WORK or WELD, LIFT, GAS, CONFINED / VENTILATION / TANK ENTRY); `activity: false` keeps graphite |
+| Safeguards | schedule ticks `--c-ok`; the extinguisher terracotta; the AREA CLEARED ring hatched in the hot tone; the SPRINKLERS loop water |
+| Condition connection | the dotted thread in `--c-water` (4.3 is sprinkler protection), its knot in the envelope's colour |
+| Envelope redraw | `--c-envelope-line` (the same as the site twin's envelope) |
+| Valve tags | the valve's bow tie washed in its system (water for SZ3, steel otherwise); the tag that marks the condition that changed (text with SZ3 or SPRINKLER) carries a pale alert wash and an alert inner outline; a routine LOTO tag stays paper. Options `valveTone`, `tagTone` (null for none) |
+| Incident box | the band hatched in `--c-alert` (colour pencil), the cross at the point alert; `tone: false` for graphite |
+| Evidence fragments | drained: class `skt-drained` (`--sk-sat` 0.12, `--sk-wash` 0.45): proof reconstructed afterwards is colourless (`drained: false` to opt out) |
+| Gap timeline | `14:42 · CONDITION CHANGED` (marker, dot and lettering) in `--c-alert`; options `leftTone`, `rightTone` |
+| Van | pale steel wash on the faces (`wash`, `washK` 0.6) |
+| Routes | graphite; `dottedPath({ tone })` for a coloured route |
+
+Grading: every tone is drained toward grey by the inherited `--sk-sat` and every wash scales with `--sk-wash`. SiteKit sets both on the site svg (`site.grade`, presets act1, after, graphite, full), so WORLD items follow the site's grading automatically; a PAPER overlay can set `--sk-sat` / `--sk-wash` on its svg (class `skt` recomputes the palette there).
+
+For scenes that draw their own props (the inserts, the welder, the valves):
+
+- CSS families: `skt-c-<tone>` on a path or group colours its pencil strokes (`.skt-m`, `.skt-o`, `.skt-x`, `.skt-h`, `.skt-d`, `.skt-fill`, lead and rules; lettering stays graphite; `skt-c-ink` resets a subgroup). `skt-w-<tone>` on a `.skt-wash` (a loose watercolour fill at `--sk-wash` times `--skt-wk`, default 0.85) or a `.skt-solid` (a flat colour mark: a vest, a helmet, a dot) or an occluder with `skt-occ-tone`. `.skt-h.skt-pencil` is a denser colour-pencil hatch; `.skt-lab.skt-lab-tone` lettering that carries a meaning colour.
+- Tones: hot, lift, gas, air, general, water, ok, alert, hivis, helmet, leather, envelope, offline, terracotta, steel; wash-only: hot-soft, lift-soft, gas-soft, air-soft, water-soft, ok-soft, alert-soft, envelope-field, steel-dark, slate, sand, sage, stone, paving, ground (`SketchKit.TONES`, `SketchKit.WASHES`).
+- JS: `util.hand(ctx, parent, d, { tone, wash, washInset, washJit, occTone })` (the wash is laid under the line and revealed with it), `util.hatch(ctx, parent, poly, { tone, pencil })`, `util.letters(..., { colour })`, `util.wash(ctx, parent, shape, { tone, strength, inset, jit, seed })` (reveal it with the line by opacity), `util.tickCmds`, `util.handCircleCmds`, `util.ellipseCmds`, `util.polyD`.
 
 Architectural working drawing, technical editorial illustration, forensic reconstruction. Never a whiteboard explainer: no hands, no faces, no cartoon people, no flames, no floating documents, no shadows, no tilt.
 
@@ -68,7 +94,7 @@ Drawing primitives: a hand line is a main pass (1.5 px graphite), an overdraw pa
 Hand-lettered Plex Mono label. `leader: [dx, dy]` draws a dot and a leader and letters on its end; `size` (18, the film's minimum for anything meant to be read), `weight`, `anchor`, `tone` (`skt-t2`, `skt-t3`), `scale`. World labels get a paper halo so they read over linework.
 
 ### figure(ctx, at, o) and fig.walk(tl, t, route, o)
-Architectural scale figure: a dignified line silhouette with a paper fill, no face. `pose`: `standing` (front), `standing-side`, `walking`, `carrying` (a toolbox by default, `carry: 'pipe'` for a pipe on the shoulder). `facing` 1 or -1, `heightPx` (28 at refScale, so 22 to 30 px at the overview; world height about 3.9 units), `tone: true` adds light hatching on one side. Small figures (under 46 px) use a finer line without overdraw.
+Architectural scale figure: a dignified line silhouette with a paper fill, no face. `pose`: `standing` (front), `standing-side`, `walking`, `carrying` (a toolbox by default, `carry: 'pipe'` for a pipe on the shoulder). `facing` 1 or -1, `heightPx` (28 at refScale, so 22 to 30 px at the overview; world height about 3.9 units), `tone: true` adds light hatching on one side. Small figures (under 46 px) use a finer line without overdraw. `garb` (cut 3): `'hivis'` (default: hi-vis vest and white hard hat), `'welder'` (leather jacket and sleeves, white hard hat), `false`. `fig.parts.vest`, `fig.parts.hat`.
 
 `walk(tl, t, route, { dur | speedPx, startPx, stopShortPx, stepPeriod, ease, fadeIn, gait })` moves the figure along a smoothed route as a chain of short `fromTo` translate tweens (position is a pure function of time), flips it to face the direction of travel with explicit `fromTo` flips, and plays a two-step gait: the body and arm outlines morph between two leg poses of identical command structure with a finite `yoyo` repeat. Logs `footsteps`.
 
@@ -101,7 +127,7 @@ SketchKit.valveTag(W, 'sprinklerZone3Valve', { text: 'SZ3 ISOLATED · MAINTENANC
 ```
 
 ### activityMarker(ctx, at, o) and m.breathe(tl, t, dur, { amp, period })
-A graphite ring (an open hand circle that overshoots its start, paper inside) with a centre dot and a lettered label on a leader. `variant`: `small` (r 4.4, 14 px, texture only), `normal` (r 7.2, 18 px), `hot` (r 11.5, heavier, a second light ring). `dir` (ne, nw, e, w, se, sw, n, s) or `angle` in degrees, `leadPx`, or `labelAt` (a world point: a world-space leader to a lettered shelf, for callout columns). `breathe` is a finite `yoyo` scale drift of the ring only (default 6 percent, 2.6 s period), never `repeat: -1`.
+A pencil ring (an open hand circle that overshoots its start, a soft wash of its colour inside) with a centre dot and a lettered label on a leader. `variant`: `small` (r 4.4, 14 px, texture only), `normal` (r 7.2, 18 px), `hot` (r 11.5, heavier, a second light ring); `lift`, `gas`, `air`, `general` are `normal` in that activity's colour. `activity` (cut 3): 'hot' | 'lift' | 'gas' | 'air' | 'general' | 'auto' (default, from the variant and the label) | false (graphite). `m.activity` is the colour used. `dir` (ne, nw, e, w, se, sw, n, s) or `angle` in degrees, `leadPx`, or `labelAt` (a world point: a world-space leader to a lettered shelf, for callout columns). `breathe` is a finite `yoyo` scale drift of the ring only (default 6 percent, 2.6 s period), never `repeat: -1`.
 
 The `hot` variant in WORLD mode letters its label as the header of the safeguard schedule (unless `dir`, `angle`, `labelAt` or `header: false` is given): `'HOT WORK · ROOF 03 · 14:18'` is split into a title (`HOT WORK`, 24 px, 600) and a line (`ROOF 03 · 14:18`, 19 px, 500), set on a flat paper plate at `SAFEGUARD_LAYOUT.header` (px at refScale 16 from the point, in the open paper east of the Production Hall), on a fine graphite leader from the ring. `safeguardItems` then letters its ticked rows directly under it, so the hot work and its checklist read as one note, like the permit it is. Pass `headerLayout` to move it.
 
@@ -172,9 +198,10 @@ Typeset statements, one child per line, each set with a quick wipe and no sound 
 
 ## State helpers
 
-- `SketchKit.sprinklerHeadsFade(tl, site, t, { to: 0.2, step: 0.055, dur: 0.45 })`: the site's graphite sprinkler heads fade from ink to 20 percent one after another in the demo's ripple order from the valve (`data-i`). Silent (subtraction).
+- `SketchKit.sprinklerHeadsFade(tl, site, t, { to: 0.2, step: 0.055, dur: 0.45 })`: the site's sprinkler heads (water blue since cut 3) fade to 20 percent one after another in the demo's ripple order from the valve (`data-i`); each sits on a small `--c-offline` bed, so a fading head drains to grey rather than disappearing (any scene fading `site.rough.heads` gets the same). Silent (subtraction).
 - `SketchKit.scaleOf(rect)`, `SketchKit.iso(x, y, z)`, `SketchKit.planFromWorld(w, z)`.
-- `SketchKit.util`: `rng`, `hashStr`, `smoothCmds`, `lineCmds`, `flatten`, `pointAt`, `plLen`, `hand`, `letters`, `sans`, `hatch`, `pxAt`, `monoWidth`, `sansWidth` for scenes that need a one-off drawn mark in the same hand.
+- `SketchKit.util`: `rng`, `hashStr`, `smoothCmds`, `lineCmds`, `flatten`, `pointAt`, `plLen`, `hand`, `letters`, `sans`, `hatch`, `pxAt`, `monoWidth`, `sansWidth`, `wash`, `tickCmds`, `handCircleCmds`, `ellipseCmds`, `polyD` for scenes that need a one-off drawn mark in the same hand (see Colour for the tone options).
+- `SketchKit.activityOf(o, variant)`, `SketchKit.ACTIVITIES`, `SketchKit.TONES`, `SketchKit.WASHES`.
 
 ## Sound events
 
@@ -214,7 +241,7 @@ Verification (review harness in the session scratchpad, `sketch-kit-review/`):
 
 - Seek safety: one 38.4 s timeline built only from kit calls (907 tweens: gate, route, van drive, file walk with gait, both valve tags, markers with breathe, toolbox talk, HSE loop, activity field with dim, containment, hot header, safeguards, connection with fray, heads fade, zone redraw, incident, detail callout and chain with slide, evidence board with followPin, questions, fades, gap timeline, five site camera moves and a CSS blur on the site). 20 seeded times were reached in a shuffled order with direct jumps (callbacks suppressed), then again in the reverse order, each via the end, time 0 and the middle with callbacks enabled. All 20 pairs of screenshots are byte-identical and all 20 DOM fingerprints (every attribute of every element, numbers rounded to 0.01) match. The timeline carries 0 callbacks and 0 infinite repeats.
 - Two compositions on one page (two sites, four paper sheets, the full Roof 03 state, the zone redraw, detail, evidence and gap in both): 696 ids, 0 duplicates, 0 unprefixed kit ids, 0 broken clip, mask or href references, identical drawings in both.
-- No blue anywhere (the kit's only colours are graphite #3B3A36, lighter graphite #8F8C86, grey-2 #6A6863, grey-3 #9C9994, paper #F5F3EE, and black and white inside masks), no em dashes, no `Math.random`, `Date` or `performance.now`.
+- No Priora cobalt anywhere (cut 3: the kit's colours are the film-color.css tokens through film-sketch.css; black and white only inside masks), no em dashes, no `Math.random`, `Date` or `performance.now`.
 
 ## Recipes (storyboard beats)
 
@@ -237,7 +264,7 @@ Review frames in the session scratchpad, `sketch-kit-review/after/` (the kit as 
 
 ## Known limits
 
-- The site's tremor filter (site-kit applies `feDisplacementMap` at scale 2 to the whole site SVG) also moves the kit's WORLD lettering, which sits inside that SVG: thin vertical stems (I, 1) get a 1 px kink that reads as a torn glyph at 20 px and up (visible in the schedule). The paper overlays are not affected. Fixing it needs a site-kit or scene change (a lower `wobble`, about 1.2, or the filter on the rough layer only); the kit cannot opt its lettering out of a filter on an ancestor.
+- (Resolved in cut 3) The site's tremor filter is gone, so WORLD lettering no longer kinks.
 - Screen-constant lettering (`annotations: 'screen'`) crowds when the camera pulls back over a cluster authored for a close camera; use `scale: 'world'` for such clusters (the safeguards, the hot header and, for the pull to afterwardsWide, the SZ3 tag) or fade the lettering during the pull. World lettering falls below 18 px at the wide cameras by design (it recedes with the site).
 - The zone redraw is a large change in extent (it has to be: Roof 03 is 31 units inside the envelope). It is quiet in line and colour and follows the zone's own geometry, so it reads as the zone leaving the accepted envelope rather than as a new shape.
 - The van translates along straight segments only (its faces are projected once for one heading).

@@ -4,17 +4,18 @@ events used for any scene that has not published its own events yet.
 Three sources of one-shots end up in the SFX stem:
 
   designed  story-level sounds tied to cues (radio, footsteps, the sprinkler
-            valve, the system tick, the crossing, the three choices, the five
-            chain confirmations, the latch). Always present; a scene event of
-            the same kind within 0.3 s replaces the designed one.
+            valve, the system tick, the crossing, the three choices, the few
+            decisions, the latch). Always present; a scene event of the same
+            kind within 0.3 s replaces the designed one.
   scene     events published by the compositions (cues/resolved.json events,
             or an --events file): every stroke, tick, stamp and click.
   auto      a plausible default set of drawing and interface events, tagged by
             scene. For each scene, auto events are used only while that scene
             publishes no events of its own.
 
-Holds (`hold` events) draw every bed down by 0.6 of the hold's depth over the
-hold, so the room thins with the score (never the voice).
+Holds (`hold` events) draw every bed down by half of the hold's depth over
+the hold, so the room breathes with the score (never the voice). The beds are
+tuned to the score's key (library.ventilation, library.machinery_hum).
 """
 from __future__ import annotations
 
@@ -32,7 +33,7 @@ def _cal(x, target):
     return x * dsp.undb(target - L) if L > -100 else x
 
 
-HOLD_BED_SCALE = 0.6  # beds dip by this fraction of a hold's depth (-8 dB hold: -4.8 dB)
+HOLD_BED_SCALE = 0.5  # beds dip by this fraction of a hold's depth (-5 dB hold: -2.5 dB)
 
 
 def beds(C, subtract_at=None, subtract_fade=0.35, holds=None) -> dict:
@@ -42,6 +43,8 @@ def beds(C, subtract_at=None, subtract_fade=0.35, holds=None) -> dict:
     end = C.duration
     rs, re_ = C["rewindStart"], C["rewindEnd"]
     off = subtract_at if subtract_at is not None else C["offline"]
+    beat = score.cue_grid(C).beat
+    subtract_fade = max(float(subtract_fade or 0.0), beat)  # a removal is a fade, never a cut
     out = {}
 
     v = _cal(library.ventilation(3, C.duration), BED_LUFS["ventilation"])
@@ -61,12 +64,13 @@ def beds(C, subtract_at=None, subtract_fade=0.35, holds=None) -> dict:
     out["roof"] = ra * re2[:, None]
 
     rt = _cal(library.room_tone(9, C.duration), BED_LUFS["roomtone"])
-    cr = C["chainRecord"]
-    rte = dsp.curve([(0, -80), (re_ - 0.2, -80), (re_ + 0.4, 0), (cr + 2.0, 0), (end - 1.5, -80), (end, -80)], n, "db")
+    ci = C["closeIn"]
+    rte = dsp.curve([(0, -80), (re_ - 0.2, -80), (re_ + 0.4, 0), (end - 3.0, 0), (end - 0.5, -80), (end, -80)],
+                    n, "db")
     out["roomtone"] = rt * rte[:, None]
 
     sa = _cal(library.ventilation(11, C.duration), BED_LUFS["siteair"])
-    sae = dsp.curve([(0, -80), (re_ + 0.8, -80), (C["worker"] + 0.5, 0), (cr - 0.5, 0), (cr + 2.5, -80),
+    sae = dsp.curve([(0, -80), (re_ + 0.8, -80), (C["worker"] + 0.5, 0), (ci - 0.5, 0), (ci + 3.0, -80),
                      (end, -80)], n, "db")
     out["siteair"] = sa * sae[:, None]
     if holds:
@@ -108,13 +112,13 @@ def designed(C) -> list:
     add(C["change"], "choice-accent", 0.0, seed=15, variant=0, pan=-0.2)
     add(C["retain"], "choice-accent", 0.0, seed=16, variant=1)
     add(C["carriers"], "choice-accent", 0.0, seed=17, variant=2, pan=0.2)
-    add(C["decisionsL18"], "decision-accent", 0.0, seed=18, pan=-0.25)
-    add(C["decisionsL18"] + 0.55, "decision-accent", -3.0, seed=19, pan=0.25)
-    # the chain and the mark
+    # the scenario run's pull back: the few changes become decisions
+    scene[0] = "a3-scenarios"
+    add(C["few"], "decision-accent", -2.0, seed=18, pan=-0.25)
+    add(C["decisionsL18"], "decision-accent", -5.0, seed=19, pan=0.25)
+    # the mark: one clean latch
     scene[0] = "a3-close"
-    for k, name in enumerate(["Record", "Trust", "Decision", "Price", "Capacity"]):
-        add(C[f"chain{name}"], f"chain-{name.lower()}", 0.0, seed=20 + k, pan=-0.3 + 0.15 * k)
-    add(C["priora"], "latch", 0.0, seed=30)
+    add(C["priora"], "latch", -2.0, seed=30)
     return ev
 
 
@@ -219,12 +223,23 @@ def auto(C) -> list:
     for k in range(4):
         add(X, C["carriers"] + 0.75 + 0.33 * k + float(r.uniform(0, 0.08)), "response-tick", -2.0 - k,
             pan=0.15 + 0.12 * k)
+
+    Sc = "a3-scenarios"
+    for k in range(5):  # markers appear across the site in their colours
+        add(Sc, C["everyKind"] + 0.25 + 0.33 * k, "node-pass", -4.0 - k, pan=-0.6 + 0.3 * k)
+    for cue, turn, gap in (("crane", "wind", 0.8), ("gasDetector", "bypassed", 0.1), ("confined", "ventilation", 0.3)):
+        add(Sc, C[cue] + 0.25, "sheet-in", -3.0, pan=0.3)                # the card arrives
+        add(Sc, C[turn] + gap, "row-unavailable", -3.0, pan=0.3)         # the condition turns
+        add(Sc, C[turn] + gap + 1.1, "record-append", -3.0, pan=0.35)    # the outcome settles
     t = C["ordinary"] - 0.6
-    while t < C["decisionsL18"] - 0.25:
-        add(X, t, "node-pass", float(r.uniform(-9, -3)), pan=float(r.uniform(-0.7, 0.7)))
-        t += float(r.uniform(0.28, 0.5))
-    add(X, C["decisionsL18"] + 0.95, "record-append", -3.0, pan=0.45)
-    add(X, C["decisionsL18"] + 1.3, "record-append", -5.0, pan=0.45)
+    while t < C["few"] - 0.25:
+        add(Sc, t, "node-pass", float(r.uniform(-10, -4)), pan=float(r.uniform(-0.7, 0.7)))
+        t += float(r.uniform(0.3, 0.55))
+    add(Sc, C["madeInTime"], "connect-line", -4.0, dur=1.3, pan=0.0)   # one pulse along the envelope
+
+    Cl = "a3-close"
+    add(Cl, C["l19"] + 0.2, "gap-rule", -4.0, dur=1.2, pan=0.0)        # the gap timeline returns
+    add(Cl, C["gapCloses"] + 0.35, "node-return", -3.0, pan=0.0)       # the two marks become one
     return ev
 
 

@@ -1,7 +1,7 @@
 /*
-  film-sketch.css: styles for SketchKit (assets/js/sketch-kit.js), the hand-drawn
-  graphite world of Act I: figures, van, routes, tags, markers, safeguards, the
-  detail sheet, the translation chain, evidence fragments and the gap timeline.
+  film-sketch.css: styles for SketchKit (assets/js/sketch-kit.js), the hand-drawn world
+  of Act I: figures, van, routes, tags, markers, safeguards, the detail sheet, the
+  translation chain, evidence fragments and the gap timeline.
 
   Load it in every composition that uses SketchKit (after fonts.css / film.css).
   Every rule is scoped under .skt, and every class starts with skt- so nothing
@@ -14,16 +14,116 @@
     1 for their children (.skt-u), so their geometry is authored in screen px.
   - PAPER overlays (svg.skt-paper) are 1920x1080 in screen px with --sw: 1.
 
-  Act I is graphite only: #3B3A36 and the lighter #8F8C86, plus paper. No blue.
+  Cut 3 colour (docs/cut3-direction.md section 1; tokens only from film-color.css):
+  graphite line on top, colour pencil and pale watercolour for meaning and materials.
+  - Stroke tones: class skt-c-<tone> on a path or group colours its pencil strokes
+    (main, overdraw, overshoot, hatching, dots, fills of marks). Lettering stays graphite.
+    skt-c-ink resets a subgroup to graphite.
+  - Wash tones: class skt-w-<tone> on a .skt-wash (a loose watercolour fill, strength
+    --sk-wash) or .skt-solid (a flat colour mark: vests, helmets, dots) or a tone occluder.
+  - Grading: every tone is drained toward grey by the inherited --sk-sat (0..1) and washes
+    scale with --sk-wash, the same two properties SiteKit sets on the site svg (site.grade);
+    --sk-bleed (site.bleed, 1 full, 0 graphite) multiplies both, for the rewind.
+    Items drawn in the site follow the site's grading; a paper overlay can set its own.
+    .skt-drained (evidence fragments by default) is the aftermath: colourless proof.
+  Tones: hot, lift, gas, air, general, water, ok, alert, hivis, helmet, leather, envelope,
+  offline, terracotta, steel, steel-dark, slate, sand, sage, stone, paving, ground and the
+  soft variants hot-soft, lift-soft, gas-soft, air-soft, water-soft, ok-soft, alert-soft,
+  envelope-field. Act I never uses the Priora cobalt.
 */
 
 .skt {
-  --skt-c: #3b3a36;   /* graphite */
-  --skt-l: #8f8c86;   /* lighter graphite */
-  --skt-p: #f5f3ee;   /* paper */
-  --skt-g2: #6a6863;  /* grey-2, thinned text */
-  --skt-g3: #9c9994;  /* grey-3, faintest text */
+  --skt-c: var(--c-graphite, #3b3a36);                                                    /* graphite */
+  --skt-l: color-mix(in srgb, var(--c-graphite, #3b3a36) 55%, var(--c-paper, #f5f3ee));   /* lighter graphite */
+  --skt-p: var(--c-paper, #f5f3ee);                                                        /* paper */
+  --skt-g2: color-mix(in srgb, var(--c-graphite, #3b3a36) 75%, var(--c-paper, #f5f3ee));  /* thinned text */
+  --skt-g3: var(--c-offline, #9c9994);                                                     /* faintest text */
 }
+/* the graded palette: recomputed wherever the grading can change (a context root, a drained item) */
+.skt,
+.skt-drained,
+.skt-regrade {
+  --skt-t-hot: color-mix(in oklab, var(--c-hot, #ef8a24) calc(var(--sk-sat, 1) * var(--sk-bleed, 1) * 100%), oklch(from var(--c-hot, #ef8a24) l 0 h));
+  --skt-t-hot-soft: color-mix(in oklab, var(--c-hot-soft, #fbe3c8) calc(var(--sk-sat, 1) * var(--sk-bleed, 1) * 100%), oklch(from var(--c-hot-soft, #fbe3c8) l 0 h));
+  --skt-t-lift: color-mix(in oklab, var(--c-lift, #eebd2b) calc(var(--sk-sat, 1) * var(--sk-bleed, 1) * 100%), oklch(from var(--c-lift, #eebd2b) l 0 h));
+  --skt-t-lift-soft: color-mix(in oklab, var(--c-lift-soft, #fbefc6) calc(var(--sk-sat, 1) * var(--sk-bleed, 1) * 100%), oklch(from var(--c-lift-soft, #fbefc6) l 0 h));
+  --skt-t-gas: color-mix(in oklab, var(--c-gas, #6f5bb3) calc(var(--sk-sat, 1) * var(--sk-bleed, 1) * 100%), oklch(from var(--c-gas, #6f5bb3) l 0 h));
+  --skt-t-gas-soft: color-mix(in oklab, var(--c-gas-soft, #e6e1f4) calc(var(--sk-sat, 1) * var(--sk-bleed, 1) * 100%), oklch(from var(--c-gas-soft, #e6e1f4) l 0 h));
+  --skt-t-air: color-mix(in oklab, var(--c-air, #15877e) calc(var(--sk-sat, 1) * var(--sk-bleed, 1) * 100%), oklch(from var(--c-air, #15877e) l 0 h));
+  --skt-t-air-soft: color-mix(in oklab, var(--c-air-soft, #d2ebe8) calc(var(--sk-sat, 1) * var(--sk-bleed, 1) * 100%), oklch(from var(--c-air-soft, #d2ebe8) l 0 h));
+  --skt-t-general: var(--c-general, #8a8d91);
+  --skt-t-water: color-mix(in oklab, var(--c-water, #2b8cc4) calc(var(--sk-sat, 1) * var(--sk-bleed, 1) * 100%), oklch(from var(--c-water, #2b8cc4) l 0 h));
+  --skt-t-water-soft: color-mix(in oklab, var(--c-water-soft, #d6e9f5) calc(var(--sk-sat, 1) * var(--sk-bleed, 1) * 100%), oklch(from var(--c-water-soft, #d6e9f5) l 0 h));
+  --skt-t-ok: color-mix(in oklab, var(--c-ok, #2e8b57) calc(var(--sk-sat, 1) * var(--sk-bleed, 1) * 100%), oklch(from var(--c-ok, #2e8b57) l 0 h));
+  --skt-t-ok-soft: color-mix(in oklab, var(--c-ok-soft, #d9eee1) calc(var(--sk-sat, 1) * var(--sk-bleed, 1) * 100%), oklch(from var(--c-ok-soft, #d9eee1) l 0 h));
+  --skt-t-alert: color-mix(in oklab, var(--c-alert, #e0452b) calc(var(--sk-sat, 1) * var(--sk-bleed, 1) * 100%), oklch(from var(--c-alert, #e0452b) l 0 h));
+  --skt-t-alert-soft: color-mix(in oklab, var(--c-alert-soft, #fadcd5) calc(var(--sk-sat, 1) * var(--sk-bleed, 1) * 100%), oklch(from var(--c-alert-soft, #fadcd5) l 0 h));
+  --skt-t-hivis: color-mix(in oklab, var(--c-hivis, #c7d92b) calc(var(--sk-sat, 1) * var(--sk-bleed, 1) * 100%), oklch(from var(--c-hivis, #c7d92b) l 0 h));
+  --skt-t-helmet: var(--c-helmet, #fbfaf7);
+  --skt-t-leather: color-mix(in oklab, var(--c-leather, #8a5a3c) calc(var(--sk-sat, 1) * var(--sk-bleed, 1) * 100%), oklch(from var(--c-leather, #8a5a3c) l 0 h));
+  --skt-t-envelope: color-mix(in oklab, var(--c-envelope-line, #2e7d6b) calc(var(--sk-sat, 1) * var(--sk-bleed, 1) * 100%), oklch(from var(--c-envelope-line, #2e7d6b) l 0 h));
+  --skt-t-envelope-field: color-mix(in oklab, var(--c-envelope-field, #dcebe3) calc(var(--sk-sat, 1) * var(--sk-bleed, 1) * 100%), oklch(from var(--c-envelope-field, #dcebe3) l 0 h));
+  --skt-t-offline: var(--c-offline, #9c9994);
+  --skt-t-terracotta: color-mix(in oklab, var(--c-terracotta, #c9785a) calc(var(--sk-sat, 1) * var(--sk-bleed, 1) * 100%), oklch(from var(--c-terracotta, #c9785a) l 0 h));
+  --skt-t-steel: color-mix(in oklab, var(--c-steel, #bcc6cc) calc(var(--sk-sat, 1) * var(--sk-bleed, 1) * 100%), oklch(from var(--c-steel, #bcc6cc) l 0 h));
+  --skt-t-steel-dark: color-mix(in oklab, var(--c-steel-dark, #97a3aa) calc(var(--sk-sat, 1) * var(--sk-bleed, 1) * 100%), oklch(from var(--c-steel-dark, #97a3aa) l 0 h));
+  --skt-t-slate: color-mix(in oklab, var(--c-slate-roof, #b9c7d2) calc(var(--sk-sat, 1) * var(--sk-bleed, 1) * 100%), oklch(from var(--c-slate-roof, #b9c7d2) l 0 h));
+  --skt-t-sand: color-mix(in oklab, var(--c-sand-roof, #e6d7b8) calc(var(--sk-sat, 1) * var(--sk-bleed, 1) * 100%), oklch(from var(--c-sand-roof, #e6d7b8) l 0 h));
+  --skt-t-sage: color-mix(in oklab, var(--c-sage-roof, #c9d6c0) calc(var(--sk-sat, 1) * var(--sk-bleed, 1) * 100%), oklch(from var(--c-sage-roof, #c9d6c0) l 0 h));
+  --skt-t-stone: color-mix(in oklab, var(--c-stone-roof, #ddd4c8) calc(var(--sk-sat, 1) * var(--sk-bleed, 1) * 100%), oklch(from var(--c-stone-roof, #ddd4c8) l 0 h));
+  --skt-t-paving: var(--c-paving, #dedad1);
+  --skt-t-ground: var(--c-ground, #e7e9dc);
+}
+/* the aftermath: proof reconstructed afterwards is colourless */
+.skt-drained { --sk-sat: 0.12; --sk-wash: 0.45; }
+
+/* stroke tones (colour pencil) */
+.skt-c-ink { --skt-tc: initial; }
+.skt-c-hot { --skt-tc: var(--skt-t-hot); }
+.skt-c-lift { --skt-tc: var(--skt-t-lift); }
+.skt-c-gas { --skt-tc: var(--skt-t-gas); }
+.skt-c-air { --skt-tc: var(--skt-t-air); }
+.skt-c-general { --skt-tc: var(--skt-t-general); }
+.skt-c-water { --skt-tc: var(--skt-t-water); }
+.skt-c-ok { --skt-tc: var(--skt-t-ok); }
+.skt-c-alert { --skt-tc: var(--skt-t-alert); }
+.skt-c-hivis { --skt-tc: var(--skt-t-hivis); }
+.skt-c-leather { --skt-tc: var(--skt-t-leather); }
+.skt-c-envelope { --skt-tc: var(--skt-t-envelope); }
+.skt-c-offline { --skt-tc: var(--skt-t-offline); }
+.skt-c-terracotta { --skt-tc: var(--skt-t-terracotta); }
+.skt-c-steel { --skt-tc: var(--skt-t-steel-dark); }
+/* wash tones (watercolour fills, flat colour marks) */
+.skt-w-hot { --skt-wc: var(--skt-t-hot); }
+.skt-w-hot-soft { --skt-wc: var(--skt-t-hot-soft); }
+.skt-w-lift { --skt-wc: var(--skt-t-lift); }
+.skt-w-lift-soft { --skt-wc: var(--skt-t-lift-soft); }
+.skt-w-gas { --skt-wc: var(--skt-t-gas); }
+.skt-w-gas-soft { --skt-wc: var(--skt-t-gas-soft); }
+.skt-w-air { --skt-wc: var(--skt-t-air); }
+.skt-w-air-soft { --skt-wc: var(--skt-t-air-soft); }
+.skt-w-general { --skt-wc: var(--skt-t-general); }
+.skt-w-water { --skt-wc: var(--skt-t-water); }
+.skt-w-water-soft { --skt-wc: var(--skt-t-water-soft); }
+.skt-w-ok { --skt-wc: var(--skt-t-ok); }
+.skt-w-ok-soft { --skt-wc: var(--skt-t-ok-soft); }
+.skt-w-alert { --skt-wc: var(--skt-t-alert); }
+.skt-w-alert-soft { --skt-wc: var(--skt-t-alert-soft); }
+.skt-w-hivis { --skt-wc: var(--skt-t-hivis); }
+.skt-w-helmet { --skt-wc: var(--skt-t-helmet); }
+.skt-w-leather { --skt-wc: var(--skt-t-leather); }
+.skt-w-envelope { --skt-wc: var(--skt-t-envelope); }
+.skt-w-envelope-field { --skt-wc: var(--skt-t-envelope-field); }
+.skt-w-offline { --skt-wc: var(--skt-t-offline); }
+.skt-w-terracotta { --skt-wc: var(--skt-t-terracotta); }
+.skt-w-steel { --skt-wc: var(--skt-t-steel); }
+.skt-w-steel-dark { --skt-wc: var(--skt-t-steel-dark); }
+.skt-w-slate { --skt-wc: var(--skt-t-slate); }
+.skt-w-sand { --skt-wc: var(--skt-t-sand); }
+.skt-w-sage { --skt-wc: var(--skt-t-sage); }
+.skt-w-stone { --skt-wc: var(--skt-t-stone); }
+.skt-w-paving { --skt-wc: var(--skt-t-paving); }
+.skt-w-ground { --skt-wc: var(--skt-t-ground); }
 
 svg.skt-paper {
   position: absolute;
@@ -53,34 +153,39 @@ svg.skt-paper {
 .skt .skt-lead,
 .skt .skt-rule {
   fill: none;
-  stroke: var(--skt-c);
+  stroke: var(--skt-tc, var(--skt-c));
   stroke-linecap: round;
   stroke-linejoin: round;
 }
 .skt .skt-m { stroke-width: calc(var(--sw) * 1.5px); }
-.skt .skt-m.skt-lite { stroke: var(--skt-l); stroke-width: calc(var(--sw) * 1px); }
+.skt .skt-m.skt-lite { stroke: var(--skt-tc, var(--skt-l)); stroke-width: calc(var(--sw) * 1px); }
 .skt .skt-m.skt-fine { stroke-width: calc(var(--sw) * 1.15px); }
 .skt .skt-m.skt-heavy { stroke-width: calc(var(--sw) * 1.9px); }
-.skt .skt-m.skt-grey { stroke: var(--skt-g2); stroke-width: calc(var(--sw) * 1.2px); }
-.skt .skt-m.skt-pale { stroke: var(--skt-g3); stroke-width: calc(var(--sw) * 1.1px); }
-.skt .skt-m.skt-env { stroke-width: calc(var(--sw) * 1.4px); }
-.skt .skt-m.skt-env-c { stroke-opacity: 0.35; stroke-width: calc(var(--sw) * 0.9px); }
+.skt .skt-m.skt-grey { stroke: var(--skt-tc, var(--skt-g2)); stroke-width: calc(var(--sw) * 1.2px); }
+.skt .skt-m.skt-pale { stroke: var(--skt-tc, var(--skt-g3)); stroke-width: calc(var(--sw) * 1.1px); }
+.skt .skt-m.skt-env { stroke: var(--skt-tc, var(--skt-t-envelope)); stroke-width: calc(var(--sw) * 1.5px); }
+.skt .skt-m.skt-env-c { stroke: var(--skt-tc, var(--skt-t-envelope)); stroke-opacity: 0.42; stroke-width: calc(var(--sw) * 0.9px); }
 .skt .skt-o { stroke-opacity: 0.32; stroke-width: calc(var(--sw) * 1.1px); }
 .skt .skt-x { stroke-opacity: 0.28; stroke-width: calc(var(--sw) * 0.9px); }
 .skt .skt-h { stroke-opacity: 0.34; stroke-width: calc(var(--sw) * 0.7px); }
 .skt .skt-h.skt-sparse { stroke-opacity: 0.2; }
+.skt .skt-h.skt-pencil { stroke-opacity: 0.62; stroke-width: calc(var(--sw) * 1.15px); }
 .skt .skt-d { stroke-width: calc(var(--sw) * 2.1px); }
-.skt .skt-d.skt-lite { stroke: var(--skt-l); stroke-width: calc(var(--sw) * 1.8px); }
+.skt .skt-d.skt-lite { stroke: var(--skt-tc, var(--skt-l)); stroke-width: calc(var(--sw) * 1.8px); }
 .skt .skt-d.skt-dash { stroke-width: calc(var(--sw) * 1.3px); }
 .skt .skt-d.skt-thin { stroke-width: calc(var(--sw) * 1.7px); }
 .skt .skt-lead { stroke-opacity: 0.62; stroke-width: calc(var(--sw) * 1px); }
 .skt .skt-rule { stroke-width: calc(var(--sw) * 1.25px); }
-.skt .skt-rule.skt-lite { stroke: var(--skt-l); stroke-width: calc(var(--sw) * 1px); }
+.skt .skt-rule.skt-lite { stroke: var(--skt-tc, var(--skt-l)); stroke-width: calc(var(--sw) * 1px); }
 
 /* fills: paper occlusion behind drawn solids, graphite dots */
 .skt .skt-occ { fill: var(--skt-p); stroke: none; }
-.skt .skt-fill { fill: var(--skt-c); stroke: none; }
-.skt .skt-fill.skt-lite { fill: var(--skt-l); }
+.skt .skt-occ.skt-occ-tone { fill: var(--skt-wc, var(--skt-p)); }
+.skt .skt-fill { fill: var(--skt-tc, var(--skt-c)); stroke: none; }
+.skt .skt-fill.skt-lite { fill: var(--skt-tc, var(--skt-l)); }
+/* colour: a loose watercolour wash (under the pencil line) and a flat colour mark */
+.skt .skt-wash { fill: var(--skt-wc, var(--skt-p)); fill-opacity: calc(var(--sk-wash, 0.85) * var(--sk-bleed, 1) * var(--skt-wk, 0.85)); stroke: none; }
+.skt .skt-solid { fill: var(--skt-wc, var(--skt-c)); stroke: none; }
 
 /* hand lettering: Plex Mono uppercase, graphite (size and spacing set per element) */
 .skt .skt-lab {
@@ -90,6 +195,8 @@ svg.skt-paper {
 }
 .skt .skt-lab.skt-w5 { font-weight: 500; }
 .skt .skt-lab.skt-w6 { font-weight: 600; }
+/* lettering that carries a meaning colour (the gap timeline's CONDITION CHANGED) */
+.skt .skt-lab.skt-lab-tone { fill: var(--skt-tc, var(--skt-c)); }
 /* paper halo behind lettering that sits over linework (as the site's own labels) */
 .skt .skt-halo { paint-order: stroke; stroke: var(--skt-p); stroke-width: 3.5px; stroke-linejoin: round; }
 .skt .skt-sans.skt-halo { stroke-width: 6px; }

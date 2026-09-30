@@ -7,7 +7,23 @@
  * site twin in site-kit.js: seeded vertex jitter (SiteKit.jitter), a 32 percent
  * overdraw pass, construction overshoot on straight edges, paper-filled solids,
  * clipped diagonal hatching, Plex Mono uppercase lettering with a tiny seeded
- * rotation and slightly irregular spacing. Graphite #3B3A36 and #8F8C86 only.
+ * rotation and slightly irregular spacing. Graphite line on top.
+ *
+ * COLOUR (cut 3, docs/cut3-direction.md section 1; tokens only, assets/css/film-color.css through
+ * assets/css/film-sketch.css): colour pencil and pale watercolour carry meaning, graded like the site.
+ *   - people: every figure wears a hi-vis vest and a white hard hat (o.garb 'hivis', default), the welder
+ *     leather (o.garb 'welder'), or none (o.garb false); readable at every scale
+ *   - activity markers are coloured by activity: o.activity 'hot' | 'lift' | 'gas' | 'air' | 'general' |
+ *     'auto' (default: read from the variant and label) | false (graphite)
+ *   - verified ticks are ok green; the safeguard extinguisher terracotta, the cleared ring hot, the
+ *     sprinkler loop and the condition connection water; the redrawn envelope in the envelope's colour
+ *   - the SZ3 isolation tag (the changed condition) alert; the incident box band alert; the gap timeline's
+ *     14:42 · CONDITION CHANGED alert; evidence fragments drained (class skt-drained: the aftermath)
+ *   - primitives: hand(..., { tone, wash, occTone }), hatch(..., { tone, pencil }), letters(..., { colour }),
+ *     util.wash(ctx, parent, shape, { tone, strength }) and the CSS families skt-c-<tone> (colour pencil
+ *     strokes) and skt-w-<tone> (washes, flat colour marks) for scenes that draw their own props
+ *   - grading: every tone is drained by the inherited --sk-sat and washes scale with --sk-wash (SiteKit's
+ *     site.grade sets both on the site svg; a paper overlay can set its own)
  *
  * Deterministic and seek-safe: every visual state is a tween property (DrawSVG,
  * attr, CSS opacity) placed with fromTo and explicit from-states. No callbacks
@@ -329,9 +345,12 @@
     const seed = o.seed || 'x';
     const mc = amt > 0 ? S.jitter(cmds, 'm' + seed, amt) : cmds;
     const rec = { cmds, u, amt, seed, d: S.fmt(mc) };
-    if (o.occ) rec.occ = mk('path', { class: 'skt-occ', d: rec.d }, parent);
-    rec.main = mk('path', { class: 'skt-m' + (o.cls ? ' ' + o.cls : ''), d: rec.d }, parent);
-    if (o.over !== false) rec.over = mk('path', { class: 'skt-o', d: S.fmt(S.jitter(cmds, 'o' + seed, amt * 1.5 + 0.25 * u)) }, parent);
+    const tc = o.tone ? ' skt-c-' + o.tone : '';
+    if (o.occ) rec.occ = mk('path', { class: 'skt-occ' + (o.occTone ? ' skt-occ-tone skt-w-' + o.occTone : ''), d: rec.d }, parent);
+    // a loose watercolour wash under the line (cut 3): inset, misregistered, jittered
+    if (o.wash) rec.wash = mk('path', { class: 'skt-wash skt-w-' + o.wash, d: S.fmt(S.washCmds ? S.washCmds(cmds, 'sk' + seed, (o.washInset != null ? o.washInset : 1.6) * u, (o.washJit != null ? o.washJit : 1.1) * u) : cmds) }, parent);
+    rec.main = mk('path', { class: 'skt-m' + (o.cls ? ' ' + o.cls : '') + tc, d: rec.d }, parent);
+    if (o.over !== false) rec.over = mk('path', { class: 'skt-o' + tc, d: S.fmt(S.jitter(cmds, 'o' + seed, amt * 1.5 + 0.25 * u)) }, parent);
     if (o.ext) {
       const r = rng('e' + seed); let ed = '';
       for (const [p0, p1] of straightSegs(cmds)) {
@@ -340,7 +359,7 @@
         const ux = dx / L, uy = dy / L, e0 = (3 + r() * 6) * u, e1 = (3 + r() * 6) * u;
         ed += 'M' + f2(p0[0] - ux * e0) + ' ' + f2(p0[1] - uy * e0) + 'L' + f2(p0[0]) + ' ' + f2(p0[1]) + 'M' + f2(p1[0]) + ' ' + f2(p1[1]) + 'L' + f2(p1[0] + ux * e1) + ' ' + f2(p1[1] + uy * e1);
       }
-      if (ed) rec.ext = mk('path', { class: 'skt-x', d: ed }, parent);
+      if (ed) rec.ext = mk('path', { class: 'skt-x' + tc, d: ed }, parent);
     }
     rec.len = flatten(cmds).reduce((a, p) => a + plLen(p), 0) / u;
     const straight = cmds.length === 2 && cmds[1][0] === 'L';
@@ -362,7 +381,7 @@
       if (dir === 1) d += 'M' + f2(x + j) + ' ' + f2(y1 + u) + 'L' + f2(x + hgt + j + u) + ' ' + f2(y0 - u);
       else d += 'M' + f2(x + j) + ' ' + f2(y0 - u) + 'L' + f2(x + hgt + j + u) + ' ' + f2(y1 + u);
     }
-    return mk('path', { class: 'skt-h' + (o.sparse ? ' skt-sparse' : ''), 'clip-path': 'url(#' + cid + ')', d }, parent);
+    return mk('path', { class: 'skt-h' + (o.sparse ? ' skt-sparse' : '') + (o.pencil ? ' skt-pencil' : '') + (o.tone ? ' skt-c-' + o.tone : ''), 'clip-path': 'url(#' + cid + ')', d }, parent);
   }
   // hand lettering: Plex Mono uppercase, per-glyph irregular spacing, rotation under 0.8 degrees, wipe-in clip
   function letters(ctx, parent, text, x, y, o) {
@@ -379,7 +398,7 @@
     const x0 = anchor === 'middle' ? x - w / 2 : anchor === 'end' ? x - w : x;
     const wrap = mk('g', { class: 'skt-tw' }, parent);
     const t = mk('text', {
-      class: 'skt-lab' + (o.weight >= 600 ? ' skt-w6' : o.weight >= 500 ? ' skt-w5' : '') + (o.tone ? ' ' + o.tone : '') + ((o.halo != null ? o.halo : ctx.mode === 'world') ? ' skt-halo' : ''),
+      class: 'skt-lab' + (o.weight >= 600 ? ' skt-w6' : o.weight >= 500 ? ' skt-w5' : '') + (o.tone ? ' ' + o.tone : '') + (o.colour ? ' skt-lab-tone skt-c-' + o.colour : '') + ((o.halo != null ? o.halo : ctx.mode === 'world') ? ' skt-halo' : ''),
       x: f2(x0), y: f2(y), 'font-size': fs, 'letter-spacing': f2(lsEm * fs),
       transform: 'rotate(' + rot.toFixed(2) + ' ' + f2(x0) + ' ' + f2(y) + ')',
     }, wrap);
@@ -484,6 +503,8 @@
     if (s.kind === 'stroke') {
       const r = s.rec;
       if (r.occ) tl.fromTo(r.occ, { opacity: 0 }, { opacity: 1, duration: 0.01, immediateRender: IR }, t0);
+      if (r.fills) tl.fromTo(r.fills, { opacity: 0 }, { opacity: 1, duration: Math.max(0.01, d * 0.3), ease: 'power1.out', immediateRender: IR }, t0 + d * 0.2);
+      if (r.wash) tl.fromTo(r.wash, { opacity: 0 }, { opacity: 1, duration: Math.max(0.05, d * 0.9), ease: 'power1.out', immediateRender: IR }, t0 + d * 0.5);
       tl.fromTo(r.main, { drawSVG: '0%' }, { drawSVG: '100%', duration: d, ease: s.ease || 'power1.inOut', immediateRender: IR }, t0);
       if (r.over) tl.fromTo(r.over, { drawSVG: '0%' }, { drawSVG: '100%', duration: d * 0.8, ease: 'power1.inOut', immediateRender: IR }, t0 + d * 0.45);
       if (r.ext) tl.fromTo(r.ext, { drawSVG: '0%' }, { drawSVG: '100%', duration: Math.min(0.22, d * 0.6), ease: 'power1.out', immediateRender: IR }, t0 + d * 0.9);
@@ -508,6 +529,8 @@
       if (r.over) tl.fromTo(r.over, { drawSVG: '0% 100%' }, { drawSVG: '0% 0%', duration: d * 0.8, ease: 'power1.in', immediateRender: false }, t0);
       if (r.ext) tl.fromTo(r.ext, { opacity: 1 }, { opacity: 0, duration: d * 0.5, immediateRender: false }, t0);
       if (r.occ) tl.fromTo(r.occ, { opacity: 1 }, { opacity: 0, duration: 0.01, immediateRender: false }, t0 + d);
+      if (r.fills) tl.fromTo(r.fills, { opacity: 1 }, { opacity: 0, duration: 0.01, immediateRender: false }, t0 + d);
+      if (r.wash) tl.fromTo(r.wash, { opacity: 1 }, { opacity: 0, duration: d * 0.6, immediateRender: false }, t0);
     } else if (s.kind === 'draw') {
       tl.fromTo(s.el, { drawSVG: '0% 100%' }, { drawSVG: '0% 0%', duration: d, ease: 'power1.in', immediateRender: false }, t0);
     } else if (s.kind === 'wipe') {
@@ -635,11 +658,41 @@
     const headC = ellipseCmds(A.head[0] * h, A.head[1] * h, A.head[2] * h, A.head[3] * h);
     const head = hand(ctx, it.face, headC, { u, seed: seed + 'h', jit: jit * 0.5, occ: true, over: fover, cls: fcls });
     const body = hand(ctx, it.face, bodyC, { u, seed: seed + 'b', jit, occ: true, over: fover, cls: fcls });
+    // cut 3: every worker wears a hi-vis vest and a white hard hat, so people read at any scale; the
+    // welder wears leather. The vest is a flat colour mark on the paper body, under the pencil line.
+    const garb = o.garb === undefined ? 'hivis' : o.garb;
+    let vest = null, hat = null;
+    if (garb) {
+      const front = pose === 'standing' || pose === 'front';
+      const V = garb === 'welder'
+        ? (front ? [[-0.03, -0.838], [-0.09, -0.826], [-0.103, -0.78], [-0.099, -0.70], [-0.094, -0.60], [-0.091, -0.47], [0.091, -0.47], [0.094, -0.60], [0.099, -0.70], [0.103, -0.78], [0.09, -0.826], [0.03, -0.838]]
+          : [[-0.024, -0.835], [-0.054, -0.806], [-0.064, -0.733], [-0.062, -0.62], [-0.057, -0.48], [0.05, -0.47], [0.057, -0.602], [0.06, -0.716], [0.048, -0.798], [0.016, -0.835]])
+        : (front ? [[-0.028, -0.834], [-0.084, -0.821], [-0.099, -0.785], [-0.097, -0.70], [-0.092, -0.60], [-0.089, -0.505], [0.089, -0.505], [0.092, -0.60], [0.097, -0.70], [0.099, -0.785], [0.084, -0.821], [0.028, -0.834], [0, -0.765]]
+          : [[-0.02, -0.829], [-0.05, -0.806], [-0.062, -0.733], [-0.06, -0.62], [-0.055, -0.515], [0.049, -0.507], [0.055, -0.602], [0.058, -0.716], [0.046, -0.795], [0.012, -0.826]]);
+      vest = mk('path', { class: 'skt-solid skt-w-' + (garb === 'welder' ? 'leather' : 'hivis'), d: polyD(sc(V), true) }, it.face);
+      it.face.insertBefore(vest, body.main);
+      body.fills = [vest];
+      // retroreflective tape across the vest, where the figure is large enough to read it
+      if (garb !== 'welder' && (o.heightPx || 0) >= 46) {
+        const xs = V.map(q => q[0]), x0 = Math.min(...xs) * 0.98, x1 = Math.max(...xs) * 0.98, y0 = -0.605, y1 = -0.582;
+        const band = mk('path', { class: 'skt-solid skt-w-helmet', d: polyD(sc([[x0, y0], [x1, y0], [x1, y1], [x0, y1]]), true) }, it.face);
+        it.face.insertBefore(band, body.main);
+        body.fills.push(band);
+      }
+      // the hard hat: a dome over the head and a short brim (a peak forward in side views)
+      const [hx, hy, hrx, hry] = A.head;
+      const R = hrx * 1.12, Ry = hry * 0.95, by = hy - hry * 0.18, pts = [];
+      const b0 = front ? -R * 1.32 : -R * 1.05, b1 = front ? R * 1.32 : R * 1.62, bt = hry * 0.16;
+      pts.push([hx + b0, by]);
+      for (let i = 0; i <= 10; i++) { const a = Math.PI + Math.PI * i / 10; pts.push([hx + Math.cos(a) * R, by + Math.sin(a) * Ry]); }
+      pts.push([hx + b1, by], [hx + b1 - hrx * 0.08, by + bt], [hx + b0 + hrx * 0.08, by + bt]);
+      hat = hand(ctx, it.face, lineCmds(sc(pts), true), { u, seed: seed + 'hat', jit: jit * 0.35, occ: true, occTone: 'helmet', over: false, cls: fcls || 'skt-fine' });
+    }
     if (o.tone) {
       const toneClip = flatten(bodyC)[0];
       it.parts.tone = hatch(ctx, it.face, toneClip.filter(q => q[0] < 0.02 * h), { u, spacing: 2.2, seed: seed + 't', sparse: true });
     }
-    const arms = A.arms.map((a, i) => hand(ctx, it.face, smoothCmds(sc(a), true), { u, seed: seed + 'a' + i, jit: jit * 0.8, occ: true, over: false, cls: small ? 'skt-lite' : 'skt-fine' }));
+    const arms = A.arms.map((a, i) => hand(ctx, it.face, smoothCmds(sc(a), true), { u, seed: seed + 'a' + i, jit: jit * 0.8, occ: true, occTone: garb === 'welder' ? 'leather' : null, over: false, cls: small ? 'skt-lite' : 'skt-fine' }));
     const extras = [];
     if (o.carry === 'box' || (pose === 'carrying' && o.carry !== 'pipe' && o.carry !== false)) {
       const hd = A.hand || [0.06, -0.5];
@@ -649,10 +702,10 @@
     } else if (o.carry === 'pipe') {
       extras.push(hand(ctx, it.face, 'M' + f2(-0.36 * h) + ' ' + f2(-0.83 * h) + 'L' + f2(0.42 * h) + ' ' + f2(-0.772 * h), { u, seed: seed + 'pp', jit: jit * 0.6, over: false, cls: 'skt-fine' }));
     }
-    it.stroke(head, { dur: 0.16 }); it.stroke(body, { dur: 0.42 });
+    it.stroke(head, { dur: 0.16 }); if (hat) it.stroke(hat, { dur: 0.12 }); it.stroke(body, { dur: 0.42 });
     arms.forEach(a => it.stroke(a, { dur: 0.14 }));
     extras.forEach(a => it.stroke(a, { dur: 0.14 }));
-    it.parts = Object.assign(it.parts, { face: it.face, head, body, arms, extras });
+    it.parts = Object.assign(it.parts, { face: it.face, head, body, arms, extras, vest, hat });
     // the two gait poses for walking figures (same command structure, seek-safe attr d morph)
     if (pose === 'walking' || pose === 'carrying') {
       const B = poseGeo(pose, 1);
@@ -737,7 +790,7 @@
       spots.forEach((sp, i) => {
         const dx = cx - sp.w[0];
         const side = Math.abs(dx) > (ctx.mode === 'world' ? 1.2 : 16);
-        const f = figure(ctx, sp.w, { layer: grp.root, pose: side ? 'standing-side' : 'standing', facing: dx >= 0 ? 1 : -1, heightPx: spec.heightPx, refScale: spec.refScale, seed: (spec.seed || 'talk') + i });
+        const f = figure(ctx, sp.w, { layer: grp.root, pose: side ? 'standing-side' : 'standing', facing: dx >= 0 ? 1 : -1, heightPx: spec.heightPx, refScale: spec.refScale, seed: (spec.seed || 'talk') + i, garb: spec.garb });
         figs.push(f); grp.child(f, { stagger: 0.12 });
       });
       if (spec.label) {
@@ -751,7 +804,7 @@
       grp.polyline = pl;
       const poses = spec.poses || ['walking', 'carrying', 'walking', 'walking', 'carrying'];
       for (let i = 0; i < n; i++) {
-        const f = figure(ctx, pl[0], { layer: grp.root, pose: poses[i % poses.length], carry: i % 2 ? 'box' : (i === 2 ? 'pipe' : false), heightPx: spec.heightPx, refScale: spec.refScale, seed: (spec.seed || 'file') + i });
+        const f = figure(ctx, pl[0], { layer: grp.root, pose: poses[i % poses.length], carry: i % 2 ? 'box' : (i === 2 ? 'pipe' : false), heightPx: spec.heightPx, refScale: spec.refScale, seed: (spec.seed || 'file') + i, garb: spec.garb });
         figs.push(f); grp.child(f, { stagger: 0.1 });
       }
       grp.walk = (tl, t, wo) => {
@@ -776,6 +829,7 @@
   function van(ctx, at, o) {
     o = o || {};
     const it = new Item(ctx, 'van', o);
+    it.root.style.setProperty('--skt-wk', o.washK != null ? o.washK : 0.6);
     const u = ctx.u(o);
     const base = ctx.plan(at || 'vanParked');
     const hd = (o.heading != null ? o.heading : 180) * Math.PI / 180, ch = Math.cos(hd), sh = Math.sin(hd), S = o.size || 1;
@@ -814,7 +868,7 @@
     const drawn = [], wheelSides = [];
     vis.forEach((f, i) => {
       const pts = f.pts.map(P);
-      const rec = hand(ctx, g, lineCmds(pts, true), { u, seed: seed + f.tag + i, jit: 0.45, occ: true, ext: true, extMin: 10 });
+      const rec = hand(ctx, g, lineCmds(pts, true), { u, seed: seed + f.tag + i, jit: 0.45, occ: true, ext: true, extMin: 10, wash: o.wash === false ? null : (o.wash || (f.tag === 'top' ? 'paving' : 'steel')), washInset: 0.9, washJit: 0.7 });
       drawn.push(rec);
       if (f.tag !== 'top' && f.nz < 0.6) {
         const left = f.ny > f.nx;
@@ -903,7 +957,7 @@
       dots.push({ p: [x, y], s });
       s += sp * (0.88 + R() * 0.24);
     }
-    const el = mk('path', { class: 'skt-d' + (o.lite ? ' skt-lite' : '') + (o.dash ? ' skt-dash' : ''), d }, it.root);
+    const el = mk('path', { class: 'skt-d' + (o.lite ? ' skt-lite' : '') + (o.dash ? ' skt-dash' : '') + (o.tone ? ' skt-c-' + o.tone : ''), d }, it.root);
     it.parts.dots = el; it.dots = dots; it.polyline = pl; it.length = L; it.u = u;
     const dur = o.dur || clamp(L / u / (o.pacePx || 360), 0.25, 4);
     it.draw(el, 0, { dur, type: o.sound === false ? null : 'pencil-dots', meta: { dots: dots.length, dashed: !!o.dash }, ease: 'none', advance: 1 });
@@ -913,7 +967,7 @@
       const back = [-q.t[0], -q.t[1]];
       const rot = (v, th) => [v[0] * Math.cos(th) - v[1] * Math.sin(th), v[0] * Math.sin(th) + v[1] * Math.cos(th)];
       const l = rot(back, ang), r = rot(back, -ang);
-      const head = hand(ctx, it.root, lineCmds([[q.p[0] + l[0] * a, q.p[1] + l[1] * a], q.p, [q.p[0] + r[0] * a, q.p[1] + r[1] * a]]), { u, seed: 'ah' + (o.seed || '') + f2(q.p[0]), jit: 0.35, cls: o.lite ? 'skt-lite' : (o.dash ? 'skt-fine' : ''), over: false });
+      const head = hand(ctx, it.root, lineCmds([[q.p[0] + l[0] * a, q.p[1] + l[1] * a], q.p, [q.p[0] + r[0] * a, q.p[1] + r[1] * a]]), { u, seed: 'ah' + (o.seed || '') + f2(q.p[0]), jit: 0.35, cls: o.lite ? 'skt-lite' : (o.dash ? 'skt-fine' : ''), over: false, tone: o.tone });
       it.parts.arrow = head;
       if (o.closed) it.stroke(head, { dur: 0.16, at: dur * (tipS / L) });
       else it.stroke(head, { dur: 0.16 });
@@ -942,12 +996,18 @@
     const g = pxAt(ctx, it.root, ctx.pt(at), o);
     const seed = (o.seed || (hb ? 'hand-b' : 'hand-a')) + (o.text || (o.lines || []).join('|'));
     const cls = hb ? 'skt-heavy' : '';
+    // cut 3 colour: the valve carries its system (fire protection water, else steel); the tag that marks the
+    // condition that changed (Sprinkler Zone 3 isolated) carries the alert tone, a routine LOTO tag stays paper
+    const allText = String(o.text || (o.lines || []).join(' ')).toUpperCase();
+    const isSz = /SZ3|SPRINKLER/.test(allText);
+    const valveWash = o.valveTone !== undefined ? o.valveTone : (isSz ? 'water-soft' : 'steel');
+    const tagTone = o.tagTone !== undefined ? o.tagTone : (isSz ? 'alert' : null);
     const jit = hb ? 1.0 : 0.7;
     const vs = o.valveSize || 10;
     // P&ID gate valve: pipe stubs, bow tie, stem, T handwheel
     if (o.valve !== false) {
       const pipe = hand(ctx, g, 'M' + (-2.2 * vs) + ' 0L' + (-vs) + ' 0M' + vs + ' 0L' + (2.2 * vs) + ' 0', { seed: seed + 'pp', jit: jit * 0.6, cls });
-      const bow = hand(ctx, g, 'M' + (-vs) + ' ' + (-0.62 * vs) + 'L' + vs + ' ' + (0.62 * vs) + 'L' + vs + ' ' + (-0.62 * vs) + 'L' + (-vs) + ' ' + (0.62 * vs) + 'Z', { seed: seed + 'bw', jit: jit * 0.6, cls, occ: true });
+      const bow = hand(ctx, g, 'M' + (-vs) + ' ' + (-0.62 * vs) + 'L' + vs + ' ' + (0.62 * vs) + 'L' + vs + ' ' + (-0.62 * vs) + 'L' + (-vs) + ' ' + (0.62 * vs) + 'Z', { seed: seed + 'bw', jit: jit * 0.6, cls, occ: true, occTone: valveWash || null });
       const stem = hand(ctx, g, 'M0 0L0 ' + (-1.3 * vs) + 'M' + (-0.75 * vs) + ' ' + (-1.3 * vs) + 'L' + (0.75 * vs) + ' ' + (-1.3 * vs), { seed: seed + 'st', jit: jit * 0.5, cls });
       [pipe, bow, stem].forEach(r => it.stroke(r, { dur: 0.2 }));
       it.parts.valve = { pipe, bow, stem };
@@ -967,11 +1027,12 @@
     const c = hb ? 12 : 9, e0 = 11, sx = side;
     const X = v => sx * v;
     const outline = [[X(-e0), -th / 2 + c], [X(-e0 + c), -th / 2], [X(tw - e0), -th / 2], [X(tw - e0), th / 2], [X(-e0 + c), th / 2], [X(-e0), th / 2 - c]];
-    const tag = hand(ctx, tg, lineCmds(outline, true), { seed: seed + 'tg', jit, cls, occ: true, ext: !hb, extMin: 30 });
+    const tag = hand(ctx, tg, lineCmds(outline, true), { seed: seed + 'tg', jit, cls, occ: true, ext: !hb, extMin: 30, wash: tagTone ? tagTone + '-soft' : null, washInset: 3, washJit: 1.4 });
+    if (tag.wash) tag.wash.style.setProperty('--skt-wk', 0.72);
     const eyelet = hand(ctx, tg, handCircleCmds(0, 0, 3.4, seed + 'ey', { spiral: 0.02 }), { seed: seed + 'eyl', jit: 0.3, over: false, cls: hb ? '' : 'skt-fine' });
     it.stroke(tag, { dur: 0.5 }); it.stroke(eyelet, { dur: 0.14 });
     if (hb) {
-      const dbl = hand(ctx, tg, lineCmds([[X(-e0 + c + 5), -th / 2 + 5], [X(tw - e0 - 5), -th / 2 + 5], [X(tw - e0 - 5), th / 2 - 5], [X(-e0 + c + 5), th / 2 - 5]], true), { seed: seed + 'db', jit: 0.5, over: false, cls: 'skt-lite' });
+      const dbl = hand(ctx, tg, lineCmds([[X(-e0 + c + 5), -th / 2 + 5], [X(tw - e0 - 5), -th / 2 + 5], [X(tw - e0 - 5), th / 2 - 5], [X(-e0 + c + 5), th / 2 - 5]], true), { seed: seed + 'db', jit: 0.5, over: false, cls: tagTone ? 'skt-fine' : 'skt-lite', tone: tagTone });
       it.stroke(dbl, { dur: 0.3 });
     }
     const tx = sx === 1 ? 16 : -(tw - e0) + 14;
@@ -982,20 +1043,37 @@
 
   // ------------------------------------------------------------ 5. activity marker
   const DIRS = { ne: -40, n: -90, nw: -140, e: -12, w: -168, se: 35, sw: 145, s: 90 };
+  // cut 3: markers are coloured by activity (docs/cut3-direction.md section 1). 'auto' reads the label.
+  const ACTIVITIES = ['hot', 'lift', 'gas', 'air', 'general'];
+  function activityOf(o, v) {
+    if (o.activity === false || o.activity === 'none') return null;
+    if (o.activity && o.activity !== 'auto') return o.activity;
+    if (ACTIVITIES.includes(v)) return v;
+    const L = (Array.isArray(o.label) ? o.label.join(' ') : String(o.label || '')).toUpperCase();
+    if (/HOT WORK|WELD/.test(L)) return 'hot';
+    if (/(^|[^A-Z])LIFT\b/.test(L)) return 'lift';
+    if (/(^|[^A-Z])GAS\b/.test(L)) return 'gas';
+    if (/CONFINED|VENTILATION|TANK ENTRY/.test(L)) return 'air';
+    return 'general';
+  }
   function activityMarker(ctx, at, o) {
     o = o || {};
     const v = o.variant || 'normal';
-    const V = { small: { r: 4.4, fs: 14, lead: 13, dot: 1.35 }, normal: { r: 7.2, fs: 18, lead: 19, dot: 1.9 }, hot: { r: 11.5, fs: 20, lead: 76, dot: 2.6, ring: 17.5, angle: -110, header: true } }[v] || {};
+    const act = activityOf(o, v);
+    const V = { small: { r: 4.4, fs: 14, lead: 13, dot: 1.35 }, normal: { r: 7.2, fs: 18, lead: 19, dot: 1.9 }, hot: { r: 11.5, fs: 20, lead: 76, dot: 2.6, ring: 17.5, angle: -110, header: true } }[ACTIVITIES.includes(v) && v !== 'hot' ? 'normal' : v] || {};
     const it = new Item(ctx, 'marker', o);
+    it.activity = act;
     const p = ctx.pt(at);
     const g = pxAt(ctx, it.root, p, o);
     const seed = o.seed || ('mk' + v + (o.label || '') + f2(p[0]) + f2(p[1]));
     const breath = mk('g', { transform: 'scale(1)' }, g);
-    const circ = hand(ctx, breath, handCircleCmds(0, 0, V.r, seed), { seed: seed + 'c', jit: 0.35, occ: o.occ !== false, cls: v === 'hot' ? 'skt-heavy' : (v === 'small' ? 'skt-fine' : '') });
-    const dot = mk('circle', { class: 'skt-fill', r: V.dot }, breath);
+    // the ring in the activity's colour pencil, a pale wash of it inside, the dot in the colour
+    const soft = act && act !== 'general' ? act + '-soft' : null;
+    const circ = hand(ctx, breath, handCircleCmds(0, 0, V.r, seed), { seed: seed + 'c', jit: 0.35, occ: o.occ !== false, occTone: soft, tone: act, cls: v === 'hot' ? 'skt-heavy' : (v === 'small' ? 'skt-fine' : '') });
+    const dot = mk('circle', { class: 'skt-fill' + (act ? ' skt-c-' + act : ''), r: V.dot }, breath);
     it.stroke(circ, { dur: v === 'small' ? 0.18 : 0.3 });
     it.pop(dot, { dur: 0.08, scale: 1.6 });
-    if (V.ring) { const ring = hand(ctx, breath, handCircleCmds(0, 0, V.ring, seed + 'r', { sweep: 5.2, over: 0 }), { seed: seed + 'rr', jit: 0.4, cls: 'skt-lite', over: false }); it.stroke(ring, { dur: 0.3 }); it.parts.ring = ring; }
+    if (V.ring) { const ring = hand(ctx, breath, handCircleCmds(0, 0, V.ring, seed + 'r', { sweep: 5.2, over: 0 }), { seed: seed + 'rr', jit: 0.4, cls: 'skt-lite', over: false, tone: act }); it.stroke(ring, { dur: 0.3 }); it.parts.ring = ring; }
     it.parts.breath = breath; it.parts.circle = circ; it.parts.dot = dot;
     if (o.label && V.header && o.header !== false && o.labelAt == null && o.angle == null && o.dir == null && ctx.mode === 'world') {
       // hot work: the label is the header of the safeguard schedule (SAFEGUARD_LAYOUT.header), in the open paper
@@ -1138,7 +1216,7 @@
         boxes.push(placed.bx); angle = placed.ang; leadPx = placed.len;
       }
       const small = (!lab || isTag) && r2() < 0.55;
-      const m = activityMarker(ctx, c, { layer: grp.root, variant: small ? 'small' : 'normal', label: lab, labelAt: columnAt[i], angle, leadPx, size: tfs, weight: isTag ? 400 : undefined, seed: 'fld' + i + (o.seed || ''), scale: o.scale, refScale: o.refScale });
+      const m = activityMarker(ctx, c, { layer: grp.root, variant: small ? 'small' : 'normal', label: lab, labelAt: columnAt[i], angle, leadPx, size: tfs, weight: isTag ? 400 : undefined, seed: 'fld' + i + (o.seed || ''), scale: o.scale, refScale: o.refScale, activity: o.activity });
       markers.push({ marker: m, trail });
     });
     grp.markers = markers.map(x => x.marker); grp.trails = trails; grp.points = chosen;
@@ -1218,7 +1296,8 @@
   // ------------------------------------------------------------ 6. the five safeguards around Roof 03
   function tickAfter(ctx, it, g, x, y, o) {
     o = o || {};
-    const rec = hand(ctx, g, tickCmds(x, y, o.s || 1), { seed: 'tk' + (o.seed || '') + f2(x) + f2(y), jit: 0.35, cls: 'skt-heavy', over: false });
+    // a verified tick is the ok colour (cut 3); o.tone false keeps it graphite
+    const rec = hand(ctx, g, tickCmds(x, y, o.s || 1), { seed: 'tk' + (o.seed || '') + f2(x) + f2(y), jit: 0.35, cls: 'skt-heavy', over: false, tone: o.tone === false ? null : (o.tone || 'ok') });
     it.stroke(rec, { dur: 0.16, type: 'tick', ease: 'power2.out' });
     return rec;
   }
@@ -1296,7 +1375,7 @@
       extinguisher() {
         const it = new Item(ctx, 'safeguard-extinguisher', { layer: grp.root });
         const g = pxAt(ctx, it.root, at(L.extinguisher.px), sc);
-        const body = hand(ctx, g, smoothCmds([[-6, 0], [-6.4, -20], [-5, -25], [0, -27], [5, -25], [6.4, -20], [6, 0]], false).concat([['Z', []]]), { seed: 'ext', jit: 0.4, occ: true });
+        const body = hand(ctx, g, smoothCmds([[-6, 0], [-6.4, -20], [-5, -25], [0, -27], [5, -25], [6.4, -20], [6, 0]], false).concat([['Z', []]]), { seed: 'ext', jit: 0.4, occ: true, occTone: 'terracotta' });
         const valve = hand(ctx, g, 'M-2 -27L-2 -31L3 -31L3 -27M-3 -33L9 -35M3 -30C10 -29 11 -22 9 -12', { seed: 'extv', jit: 0.3, over: false, cls: 'skt-fine' });
         const band = hand(ctx, g, 'M-6 -9L6 -9', { seed: 'extb', jit: 0.25, over: false, cls: 'skt-lite' });
         it.stroke(body, { dur: 0.3 }); it.stroke(valve, { dur: 0.25 }); it.stroke(band, { dur: 0.1 });
@@ -1310,7 +1389,7 @@
         const ell = r => { const pts = []; for (let i = 0; i < 40; i++) { const a = i / 40 * 6.283; pts.push(onRoof([Math.cos(a) * r, Math.sin(a) * r])); } return pts; };
         const outer = ell(rOut), inner = ell(rIn);
         const clipD = polyD(outer, true) + polyD(inner.slice().reverse(), true);
-        const hc = hatch(ctx, it.root, outer, { u, spacing: 4.2, seed: 'area', clipD, evenodd: true, dir: -1 });
+        const hc = hatch(ctx, it.root, outer, { u, spacing: 4.2, seed: 'area', clipD, evenodd: true, dir: -1, tone: 'hot', pencil: true });
         const ringCmds = (r, sd) => { const R2 = rng('ar' + sd); const a0 = R2() * 6.283, tot = 6.283 + 0.35, pts = []; for (let i = 0; i <= 22; i++) { const a = a0 + tot * i / 22, rr = r * (1 + 0.02 * Math.sin(3 * a) + 0.025 * (i / 22 - 0.5)); pts.push(onRoof([Math.cos(a) * rr, Math.sin(a) * rr])); } return smoothCmds(pts, false); };
         const o1 = hand(ctx, it.root, ringCmds(rOut, 'o'), { u, seed: 'areaO', jit: 0.4, cls: 'skt-fine' });
         const i1 = hand(ctx, it.root, ringCmds(rIn, 'i'), { u, seed: 'areaI', jit: 0.35, cls: 'skt-lite', over: false });
@@ -1331,7 +1410,7 @@
         if (ay < ax * minR) ay = ax * minR; if (ax < ay * minR) ax = ay * minR;
         const R2 = rng('sprk'), a0 = 2.2 + R2() * 0.6, tot = 6.283 + 0.45, pts = [];
         for (let i = 0; i <= 26; i++) { const a = a0 + tot * i / 26, f = 1 + 0.025 * Math.sin(2 * a + 1.3) + 0.04 * (i / 26 - 0.5); pts.push(iso(cx + Math.cos(a) * ax * f, cy + Math.sin(a) * ay * f, z)); }
-        const loop = hand(ctx, it.root, smoothCmds(pts, false), { u, seed: 'sprkloop', jit: 0.45, cls: 'skt-fine' });
+        const loop = hand(ctx, it.root, smoothCmds(pts, false), { u, seed: 'sprkloop', jit: 0.45, cls: 'skt-fine', tone: 'water' });
         it.stroke(loop, { dur: 0.6, ease: 'power1.inOut' });
         row(it, 'sprinklers');
         it.loop = loop; it.heads = H.map(h => iso(h[0], h[1], z)); it.centre = iso(cx, cy, z);
@@ -1369,13 +1448,13 @@
       if (Math.abs(s - k * L) <= gapHalf) gap.push(d); else (s < k * L ? partA : partB).push(d);
     }
     const dOf = arr => arr.map(({ p, t }) => 'M' + f2(p[0]) + ' ' + f2(p[1]) + 'L' + f2(p[0] + t[0] * dl) + ' ' + f2(p[1] + t[1] * dl)).join('');
-    const cls = 'skt-d' + (o.lite ? ' skt-lite' : ' skt-thin');
+    const cls = 'skt-d' + (o.lite ? ' skt-lite' : ' skt-thin') + (o.tone === false ? '' : ' skt-c-' + (o.tone || 'water'));
     const gA = mk('g', {}, it.root), gB = mk('g', { transform: 'rotate(0 ' + f2(B[0]) + ' ' + f2(B[1]) + ')' }, it.root);
     const elA = mk('path', { class: cls, d: dOf(partA) }, gA), elB = mk('path', { class: cls, d: dOf(partB) }, gB);
     const gapEls = gap.map((d, i) => mk('path', { class: cls, d: dOf([d]), transform: 'translate(0 0)' }, d.s < k * L ? gA : gB));
     // knot at the envelope end with the condition number
     const kg = pxAt(ctx, it.root, A, o);
-    const knot = hand(ctx, kg, handCircleCmds(0, 0, 3.4, 'knot' + f2(A[0]), { spiral: 0.02 }), { seed: 'knot', jit: 0.3, over: false, cls: 'skt-fine' });
+    const knot = hand(ctx, kg, handCircleCmds(0, 0, 3.4, 'knot' + f2(A[0]), { spiral: 0.02 }), { seed: 'knot', jit: 0.3, over: false, cls: 'skt-fine', tone: o.tone === false ? null : 'envelope' });
     it.stroke(knot, { dur: 0.14 });
     let lab = null;
     if (o.label !== false) { lab = letters(ctx, kg, o.label || '4.3', 7, -7, { size: o.labelSize || 16, weight: 500, seed: 'cclab' }); it.wipe(lab, { dur: 0.25 }); }
@@ -1549,14 +1628,15 @@
     const off = o.offset || [-(w + 40), -128];
     const x0 = off[0], y0 = off[1];
     it.add({ kind: 'fn', f: () => {}, dur: 0.1, type: 'incident', meta: { text }, advance: 0 });
-    const cross = hand(ctx, g, 'M-5 -5L5 5M5 -5L-5 5', { seed: 'incx', jit: 0.3, over: false });
+    const itone = o.tone === false ? null : (o.tone || 'alert');
+    const cross = hand(ctx, g, 'M-5 -5L5 5M5 -5L-5 5', { seed: 'incx', jit: 0.3, over: false, tone: itone });
     const lx = x0 + w / 2 < 0 ? x0 + w - 18 : x0 + 18;
     const lead = hand(ctx, g, lineCmds([[lx < 0 ? -6 : 6, -6], [lx, y0 + h]]), { seed: 'incl', jit: 0.4, cls: 'skt-lite', over: false });
     const outerP = [[x0, y0], [x0 + w, y0], [x0 + w, y0 + h], [x0, y0 + h]];
     const innerP = [[x0 + band, y0 + band], [x0 + w - band, y0 + band], [x0 + w - band, y0 + h - band], [x0 + band, y0 + h - band]];
     const outer = hand(ctx, g, lineCmds(outerP, true), { seed: 'inco', jit: 0.5, occ: true, ext: true, extMin: 20 });
     const inner = hand(ctx, g, lineCmds(innerP, true), { seed: 'inci', jit: 0.4, over: false, cls: 'skt-fine' });
-    const hc = hatch(ctx, g, outerP, { spacing: 4.6, seed: 'inch', clipD: polyD(outerP, true) + polyD(innerP.slice().reverse(), true), evenodd: true });
+    const hc = hatch(ctx, g, outerP, { spacing: 4.6, seed: 'inch', clipD: polyD(outerP, true) + polyD(innerP.slice().reverse(), true), evenodd: true, tone: itone, pencil: !!itone });
     const lab = letters(ctx, g, text, x0 + band + padX, y0 + h / 2 + fs * 0.35, { size: fs, weight: 500, ls, seed: 'incident' });
     it.stroke(cross, { dur: 0.16 }); it.stroke(lead, { dur: 0.22 }); it.stroke(outer, { dur: 0.5 }); it.stroke(inner, { dur: 0.35 });
     it.draw(hc, 0, { dur: 0.5, type: 'hatch' }); it.wipe(lab);
@@ -1831,6 +1911,8 @@
     o = o || {};
     const spec = Object.assign({}, EVIDENCE[kind] || {}, o);
     const it = new Item(ctx, 'evidence-' + kind, o);
+    // proof reconstructed afterwards is colourless (cut 3): the fragment is drained unless o.drained === false
+    if (o.drained !== false) it.root.classList.add('skt-drained');
     const x = spec.x, y = spec.y, w = spec.w, h = spec.h;
     const g = it.root;
     const fsT = o.titleSize || 18, fsB = o.size || 18, pad = 14;
@@ -1976,19 +2058,19 @@
     const ticks = hand(ctx, rule.root, td, { seed: 'gapt', jit: 0.25, over: false, cls: 'skt-lite' });
     rule.stroke(ticks, { dur: 0.5, at: 0.35, type: 'pencil-light' });
     grp.child(rule);
-    const marker = (x, text, anchor, name) => {
+    const marker = (x, text, anchor, name, tone) => {
       const it = new Item(ctx, 'gap-marker', { layer: grp.root });
-      const m = hand(ctx, it.root, 'M' + x + ' ' + (y + 7) + 'L' + x + ' ' + (y - 30), { seed: 'gm' + name, jit: 0.3, over: false, cls: 'skt-heavy' });
-      const dot = mk('circle', { class: 'skt-fill', cx: x, cy: y, r: 3.6 }, it.root);
+      const m = hand(ctx, it.root, 'M' + x + ' ' + (y + 7) + 'L' + x + ' ' + (y - 30), { seed: 'gm' + name, jit: 0.3, over: false, cls: 'skt-heavy', tone });
+      const dot = mk('circle', { class: 'skt-fill' + (tone ? ' skt-c-' + tone : ''), cx: x, cy: y, r: 3.6 }, it.root);
       it.pop(dot, { dur: 0.08, cx: x, cy: y, scale: 1.6, type: 'tick' });
       it.stroke(m, { dur: 0.2 });
-      const lb = letters(ctx, it.root, text, x + (anchor === 'end' ? 4 : -4), y - 44, { size: o.size || 20, weight: 500, anchor, ls: 0.12, seed: 'gl' + name, rot: 0.1, halo: true });
+      const lb = letters(ctx, it.root, text, x + (anchor === 'end' ? 4 : -4), y - 44, { size: o.size || 20, weight: 500, anchor, ls: 0.12, seed: 'gl' + name, rot: 0.1, halo: true, colour: tone });
       it.wipe(lb, { pace: 420 });
       it.label = lb;
       return it;
     };
-    grp.left = marker(lx, o.leftText || '14:42 · CONDITION CHANGED', 'start', 'l');
-    grp.right = marker(rx, o.rightText || 'DAY +2 · FOUND', 'end', 'r');
+    grp.left = marker(lx, o.leftText || '14:42 · CONDITION CHANGED', 'start', 'l', o.leftTone === undefined ? 'alert' : o.leftTone);
+    grp.right = marker(rx, o.rightText || 'DAY +2 · FOUND', 'end', 'r', o.rightTone || null);
     grp.child(grp.left, { gap: 0.1 }); grp.child(grp.right, { gap: 0.25 });
     const br = new Item(ctx, 'gap-bracket', { layer: grp.root });
     const mid = (lx + rx) / 2, by = y + 22;
@@ -2036,16 +2118,29 @@
     return end;
   }
   const scaleOf = r => FW / r.w;
+  // a loose watercolour wash of a closed shape (points [[x, y], ...], commands or a d string) for scenes that
+  // draw their own props: put it under the pencil line and reveal it with the line (opacity).
+  function wash(ctx, parent, shape, o) {
+    o = o || {};
+    const S = SK();
+    const u = o.u != null ? o.u : 1;
+    const cmds = typeof shape === 'string' ? S.parseD(shape) : (Array.isArray(shape) && Array.isArray(shape[0]) && typeof shape[0][0] === 'number' ? lineCmds(shape, true) : shape);
+    const el = mk('path', { class: 'skt-wash skt-w-' + (o.tone || 'steel'), d: S.fmt(S.washCmds(cmds, 'uw' + (o.seed || ''), (o.inset != null ? o.inset : 1.6) * u, (o.jit != null ? o.jit : 1.1) * u)) }, parent);
+    if (o.strength != null) el.style.setProperty('--skt-wk', o.strength);
+    return el;
+  }
+  const TONES = ['hot', 'lift', 'gas', 'air', 'general', 'water', 'ok', 'alert', 'hivis', 'helmet', 'leather', 'envelope', 'offline', 'terracotta', 'steel'];
+  const WASHES = TONES.concat(['hot-soft', 'lift-soft', 'gas-soft', 'air-soft', 'water-soft', 'ok-soft', 'alert-soft', 'envelope-field', 'steel-dark', 'slate', 'sand', 'sage', 'stone', 'paving', 'ground']);
 
   window.SketchKit = {
-    version: '1.0.0',
+    version: '1.1.0',
     world, paper,
     label, figure, groupFigures, van, gate, dottedPath, valveTag, activityMarker, activityField, containment,
     safeguardItems, conditionConnection, envelopeRedraw, incidentBox,
     detailCallout, translationChain, handArrow, evidence, evidenceBoard, questionMark, investigationLine, gapTimeline, typeStack,
     sprinklerHeadsFade, followPin, scaleOf,
-    iso, planFromWorld, PLACES, EVIDENCE, EVIDENCE_EXTRAS, FIELD_LABELS, FIELD_TAGS, SAFEGUARD_LAYOUT,
-    util: { rng, hashStr, smoothCmds, lineCmds, flatten, pointAt, plLen, hand, letters, sans, hatch, pxAt, monoWidth, sansWidth },
+    iso, planFromWorld, PLACES, EVIDENCE, EVIDENCE_EXTRAS, FIELD_LABELS, FIELD_TAGS, SAFEGUARD_LAYOUT, TONES, WASHES, ACTIVITIES, activityOf,
+    util: { rng, hashStr, smoothCmds, lineCmds, flatten, pointAt, plLen, hand, letters, sans, hatch, pxAt, monoWidth, sansWidth, wash, tickCmds, handCircleCmds, ellipseCmds, polyD },
     events: window.__filmEvents,
   };
 })();

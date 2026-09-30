@@ -10,8 +10,12 @@
    Scale   --pui-scale (default 1) multiplies every size, border and shadow.
            Set it on .pui, on any ancestor, or on a .pui-* component root.
    Signal  The demo's orange (#C4441C) is var(--signal); fallback is the
-           film cobalt #1F47D6. Deep and soft variants: --pui-signal-deep,
+           film cobalt, the token --c-priora. Deep and soft variants: --pui-signal-deep,
            --pui-signal-soft.
+   Colour  Cut 3 (docs/cut3-direction.md section 1): tokens from assets/css/film-color.css.
+           --pui-signal is Priora's own colour (the live connection, the product, the
+           selected choice); a changed condition or an outside state is --pui-alert
+           (--c-alert); verified and inside is --pui-ok (--c-ok).
    Motion  No transitions or keyframe animations: HyperFrames renders by
            seeking, so scenes animate with GSAP. Every component renders in
            its visible, settled state; the demo's state classes that change
@@ -35,9 +39,11 @@
   --pui-paper:#F5F3EE; --pui-paper-2:#EEEBE4; --pui-card:#FBFAF7; --pui-ink:#111111;
   --pui-ink-2:rgba(17,17,17,.74); --pui-ink-3:rgba(17,17,17,.60); --pui-ink-4:rgba(17,17,17,.42);
   --pui-hair:rgba(17,17,17,.13); --pui-hair-2:rgba(17,17,17,.07);
-  --pui-signal:var(--signal, #1F47D6);
-  --pui-signal-deep:var(--signal-deep, #1838A8);
-  --pui-signal-soft:var(--signal-soft, #DCE2F5);
+  --pui-signal:var(--signal, var(--c-priora, #1F47D6));
+  --pui-signal-deep:var(--signal-deep, var(--c-priora-deep, #1838A8));
+  --pui-signal-soft:var(--signal-soft, var(--c-priora-soft, #DCE2F5));
+  --pui-ok:var(--c-ok, #2e8b57); --pui-ok-soft:var(--c-ok-soft, #d9eee1);
+  --pui-alert:var(--c-alert, #e0452b); --pui-alert-soft:var(--c-alert-soft, #fadcd5);
   --pui-signal-2:color-mix(in srgb, var(--pui-signal) 10%, transparent);
   --pui-sans:'IBM Plex Sans', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;
   --pui-mono:'IBM Plex Mono', ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
@@ -92,7 +98,7 @@
 .pui .pf.pstat em{color:var(--pui-ink);font-weight:500;letter-spacing:.11em}
 .pui .pui-pstat{display:flex;align-items:center;gap:calc(7 * var(--u));font-weight:400}
 .pui .pui-pstat svg.g{width:calc(14 * var(--u));height:calc(14 * var(--u))}
-.pui .pui-pstat.sig svg.g{color:var(--pui-signal)}
+.pui .pui-pstat.sig svg.g{color:var(--pui-alert)}
 
 /* ---------- chapter caption (#caption) ---------- */
 .pui-caption{position:relative;width:calc(600 * var(--u));max-width:100%}
@@ -123,12 +129,12 @@
 .pui .conds li.ok,.pui .conds li.bad{color:var(--pui-ink)}
 .pui .conds li em{font:normal 500 calc(10 * var(--u))/1 var(--pui-mono);letter-spacing:.1em;color:var(--pui-ink-3)}
 .pui .conds li.bad em{color:var(--pui-ink)}
-.pui .conds li.bad.sig em{color:var(--pui-signal)}
+.pui .conds li.bad.sig em{color:var(--pui-alert)}
 .pui .ck{width:calc(16 * var(--u));height:calc(16 * var(--u));overflow:visible}
 .pui .ck .c-p{fill:none;stroke:var(--pui-ink);stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:1 2;stroke-dashoffset:1}
 .pui .ck .c-w{fill:none;stroke:var(--pui-ink-4);stroke-width:1;stroke-dasharray:1.5 2}
 .pui .ck .c-x{fill:none;stroke:var(--pui-ink);stroke-width:1.4;opacity:0}
-.pui li.ok .ck .c-p{stroke-dashoffset:0}
+.pui li.ok .ck .c-p{stroke-dashoffset:0;stroke:var(--pui-ok)}
 .pui li.ok .ck .c-w,.pui li.bad .ck .c-w{opacity:0}
 .pui li.bad .ck .c-p{stroke-dashoffset:1}
 .pui li.bad .ck .c-x{opacity:1}
@@ -141,13 +147,13 @@
 .pui .ro-a{font:500 calc(10 * var(--u))/1.25 var(--pui-mono);letter-spacing:.11em;text-transform:uppercase;margin-top:calc(7 * var(--u));padding-top:calc(7 * var(--u));border-top:calc(1 * var(--u)) solid var(--pui-hair)}
 .pui .ro-b{font:400 calc(12.5 * var(--u))/1.3 var(--pui-sans);color:var(--pui-ink-2);margin-top:calc(3 * var(--u))}
 .pui .ro-b.mono{font:500 calc(12 * var(--u))/1.3 var(--pui-mono)}
-.pui-readout.sig .ro-a{color:var(--pui-signal)}
+.pui-readout.sig .ro-a{color:var(--pui-alert)}
 .pui .slice{margin-top:0;height:0;overflow:hidden;opacity:0}
 .pui-readout.has-slice .slice{opacity:1;height:calc(36 * var(--u));margin-top:calc(9 * var(--u));overflow:visible}
 .pui .slice svg{width:calc(236 * var(--u));height:calc(36 * var(--u));overflow:visible}
 .pui .slice text{font:500 10px var(--pui-mono);letter-spacing:.05em;fill:var(--pui-ink-2)}
 .pui .slice .ax{stroke:var(--pui-ink);stroke-opacity:.3;stroke-width:1}
-.pui .slice .seg.dev{fill:url(#hatch);stroke:var(--pui-signal);stroke-width:1}
+.pui .slice .seg.dev{fill:url(#hatch);stroke:var(--pui-alert);stroke-width:1}
 .pui .slice .seg.dev.hist{fill:url(#hatch-ink);stroke:var(--pui-ink-3)}
 .pui .slice .seg.ret{fill:var(--pui-paper);stroke:var(--pui-ink);stroke-width:1;stroke-dasharray:1.3 2.2}
 .pui .slice .seg.cov{fill:var(--pui-paper);stroke:var(--pui-ink);stroke-width:1}
@@ -166,7 +172,7 @@
 .pui-detail .dx svg{width:calc(10 * var(--u));height:calc(10 * var(--u))}
 .pui-detail .ds{display:flex;align-items:center;gap:calc(8 * var(--u))}
 .pui-detail .ds .lab{color:var(--pui-ink)}
-.pui-detail .ds.sig svg.g{color:var(--pui-signal)}
+.pui-detail .ds.sig svg.g{color:var(--pui-alert)}
 .pui-detail .dn{font:400 calc(19 * var(--u))/1.2 var(--pui-sans);margin-top:calc(10 * var(--u));letter-spacing:-.01em;padding-right:calc(20 * var(--u))}
 .pui-detail .dz{font:500 calc(10 * var(--u))/1.3 var(--pui-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--pui-ink-3);margin-top:calc(5 * var(--u))}
 .pui-detail dl{margin-top:calc(12 * var(--u));border-top:calc(1 * var(--u)) solid var(--pui-hair)}
@@ -181,7 +187,7 @@
 .pui .eyebrow{display:flex;align-items:center;gap:calc(9 * var(--u));font:500 calc(10 * var(--u))/1.2 var(--pui-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--pui-ink-2)}
 .pui .eyebrow .sd{width:calc(7 * var(--u));height:calc(7 * var(--u));border-radius:50%;border:calc(1.3 * var(--u)) solid var(--pui-ink);flex:none}
 .pui .eyebrow .sd.ink{border-color:var(--pui-ink)}
-.pui .eyebrow .sd.sig{border-color:var(--pui-signal)}
+.pui .eyebrow .sd.sig{border-color:var(--pui-alert)}
 .pui .sheet-h{font:300 calc(44 * var(--u))/1.08 var(--pui-sans);letter-spacing:-.02em;margin-top:calc(18 * var(--u))}
 .pui .sheet-p{font:400 calc(16.5 * var(--u))/1.5 var(--pui-sans);color:var(--pui-ink-2);margin-top:calc(12 * var(--u));max-width:calc(520 * var(--u))}
 /* facts row */
@@ -233,7 +239,7 @@
 .pui .steps li.done .spin{display:none}
 .pui .steps li .ck{display:none}
 .pui .steps li.done .ck{display:block}
-.pui .steps li.done .ck .c-p{stroke-dashoffset:0}
+.pui .steps li.done .ck .c-p{stroke-dashoffset:0;stroke:var(--pui-ok)}
 .pui .steps li.done .ck .c-w{opacity:0}
 /* change: resolved */
 .pui .bigval{display:flex;align-items:baseline;gap:calc(12 * var(--u));margin-top:calc(26 * var(--u));padding:calc(20 * var(--u)) 0;border-top:calc(1 * var(--u)) solid var(--pui-hair);border-bottom:calc(1 * var(--u)) solid var(--pui-hair)}
@@ -343,8 +349,8 @@
 .pui .cell::after{content:"";position:absolute;left:0;right:calc(14 * var(--u));top:calc(-1 * var(--u));height:calc(2 * var(--u));background:var(--pui-ink);transform:scaleX(0);transform-origin:left}
 .pui .cell.on{opacity:1}
 .pui .cell.on::after{transform:none}
-.pui .cell.sig.on::after{background:var(--pui-signal)}
-.pui .cell.c-dev svg.g{color:var(--pui-signal)}
+.pui .cell.sig.on::after{background:var(--pui-alert)}
+.pui .cell.c-dev svg.g{color:var(--pui-alert)}
 .pui .cell svg.g{width:calc(18 * var(--u));height:calc(18 * var(--u));margin-top:calc(-1 * var(--u));flex:none}
 .pui .cell b{display:flex;align-items:center;gap:calc(8 * var(--u));font:500 calc(10 * var(--u))/1.2 var(--pui-mono);letter-spacing:.12em;text-transform:uppercase;white-space:nowrap}
 .pui .cell span{display:block;font:400 calc(12 * var(--u))/1.35 var(--pui-sans);color:var(--pui-ink-2);margin-top:calc(3 * var(--u));white-space:nowrap}
@@ -388,7 +394,7 @@
 .pui .srow .z .zn{font:400 calc(11.5 * var(--u))/1.2 var(--pui-sans);letter-spacing:0;text-transform:none;color:var(--pui-ink-3)}
 .pui .srow .z svg.g{width:calc(12 * var(--u));height:calc(12 * var(--u))}
 .pui .srow .z .sl{color:var(--pui-ink-2);letter-spacing:.06em}
-.pui .srow.st-outside .z svg{color:var(--pui-signal)}
+.pui .srow.st-outside .z svg{color:var(--pui-alert)}
 .pui .srow.st-outside .z .sl{color:var(--pui-ink)}
 .pui .srow.hero .n,.pui .srow.sys .n{font-weight:500}
 /* trusted record entries */
@@ -402,7 +408,7 @@
 .pui .rr:first-child .m::before{top:calc(6 * var(--u))}
 .pui .rr .m::after{content:"";position:absolute;left:calc(3.5 * var(--u));top:calc(4.5 * var(--u));width:calc(6 * var(--u));height:calc(6 * var(--u));border-radius:50%;background:var(--pui-paper);border:calc(1 * var(--u)) solid var(--pui-ink-3)}
 .pui .rr.k-dev .m::after{border-color:var(--pui-ink);border-width:calc(1.5 * var(--u));left:calc(3 * var(--u));top:calc(4 * var(--u));width:calc(7 * var(--u));height:calc(7 * var(--u))}
-.pui .rr.k-dev.sig .m::after{border-color:var(--pui-signal)}
+.pui .rr.k-dev.sig .m::after{border-color:var(--pui-alert)}
 .pui .rr.k-decision .m::after{border-radius:calc(1 * var(--u));background:var(--pui-ink);border-color:var(--pui-ink)}
 .pui .rr.k-sched .m::after{border-style:dashed}
 .pui .rr .x{font:400 calc(13.5 * var(--u))/1.4 var(--pui-sans)}
@@ -454,11 +460,11 @@
 .pui .n .chk{fill:none;stroke:var(--pui-ink);stroke-width:1;stroke-dasharray:2.2 2.9;opacity:0;transform-box:fill-box;transform-origin:center}
 .pui .n.st-checking .chk{opacity:1}
 .pui .n.st-checking .ring{opacity:0}
-.pui .n .out{fill:none;stroke:var(--pui-signal);opacity:0}
+.pui .n .out{fill:none;stroke:var(--pui-alert);opacity:0}
 .pui .n .out circle{stroke-width:1.7}
 .pui .n .out path{stroke-width:1.3}
 .pui .n.st-outside .out{opacity:1}
-.pui .n.st-outside .dot{fill:var(--pui-paper);stroke:var(--pui-signal);stroke-width:1.3}
+.pui .n.st-outside .dot{fill:var(--pui-paper);stroke:var(--pui-alert);stroke-width:1.3}
 .pui .n.st-outside .ring{opacity:0}
 .pui .n .sq{fill:var(--pui-ink);opacity:0}
 .pui .n.st-changed .sq{opacity:1}
@@ -479,10 +485,10 @@
 .pui .n .pulse{fill:none;stroke:var(--pui-ink);stroke-width:1;opacity:0}
 .pui .n.bg.is-dim{opacity:.4}
 .pui .teth{fill:none;stroke:var(--pui-ink);stroke-width:1;stroke-dasharray:3 3.5;opacity:.55}
-.pui .teth.sig{stroke:var(--pui-signal);opacity:.9}
+.pui .teth.sig{stroke:var(--pui-alert);opacity:.9}
 .pui .anc{fill:none;stroke:var(--pui-ink);stroke-width:1;stroke-dasharray:2 2;opacity:.6}
-.pui .anc.sig{stroke:var(--pui-signal)}
-.pui .pui-h-slice{fill:none;stroke:var(--pui-signal);stroke-width:1;stroke-dasharray:2.5 3;opacity:.9}
+.pui .anc.sig{stroke:var(--pui-alert)}
+.pui .pui-h-slice{fill:none;stroke:var(--pui-alert);stroke-width:1;stroke-dasharray:2.5 3;opacity:.9}
 .pui .pui-reticle path{fill:none;stroke:var(--pui-ink);stroke-width:1;opacity:.7}
 .pui .pui-lead{fill:none;stroke:var(--pui-ink);stroke-width:1;stroke-opacity:.35}
 .pui .xl{fill:none;stroke:var(--pui-ink);stroke-width:1;stroke-opacity:.5}

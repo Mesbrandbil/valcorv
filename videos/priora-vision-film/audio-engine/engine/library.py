@@ -521,35 +521,12 @@ def latch(seed=0) -> np.ndarray:
         click(r, 1500, 9000, 0.003, 0.0006) * 0.8,
         modal([2150, 3480, 5230, 7900], [0.06, 0.04, 0.025, 0.012], [1, 0.55, 0.3, 0.12], 0.1,
               mallet_ms=0.15, r=r) * 0.55,
-        modal([176, 412], [0.12, 0.06], [0.75, 0.3], 0.2, mallet_ms=1.0),
+        modal([NOTE["F#3"], NOTE["A4"]], [0.12, 0.06], [0.75, 0.3], 0.2, mallet_ms=1.0),
         tuned("resonant", NOTE["D3"], r, 0.8) * 0.2,
     )
     y = mix(slide, delay(catch, 0.036))
     y = hp(y, 45, 2)
     return _out(verb(y, "plate", 0.1, seed=43)[: ns(1.8)], r, 0.05)
-
-
-CHAIN = {  # the five chain links: word -> (material, note, character)
-    "record": ("paper", "A4"),
-    "trust": ("wood", "D5"),
-    "decision": ("string", "E5"),
-    "price": ("metal", "F#5"),
-    "capacity": ("resonant", "A3"),
-}
-
-
-def chain_link(seed=0, link="record") -> np.ndarray:
-    """RECORD paper, TRUST wood, DECISION felt-hammer string, PRICE metal,
-    CAPACITY a deep resonant block. Quiet, tuned into the closing D major."""
-    r = rng(seed, "chain", link)
-    mat, note = CHAIN[link]
-    body = tuned(mat, NOTE[note], r, 1.0)
-    if link == "record":
-        body = mix(body, tuned("felt", NOTE["A4"], r, 0.5) * 0.35)
-    if link == "capacity":
-        body = mix(body, tuned("felt", NOTE["A4"], r, 0.7) * 0.25)
-    y = mix(body, _precise(r, 0.1))
-    return _out(verb(y, "plate", 0.14, seed=47)[: ns(2.4)], r, 0.12)
 
 
 def pin(seed=0) -> np.ndarray:
@@ -601,7 +578,7 @@ def fray(seed=0, dur=0.5) -> np.ndarray:
 def incident(seed=0) -> np.ndarray:
     """The restrained incident mark: a far, muffled low thud and a short low swell."""
     r = rng(seed, "incident")
-    th = lp(thump(72, 48, 0.5, 1.0), 380, 2)
+    th = lp(thump(NOTE["E2"], NOTE["B1"], 0.5, 1.0), 380, 2)
     sn = ns(1.6)
     swell = lp(hp(white(sn, r), 60, 2), 260, 2) * curve([(0, 0.0), (0.3, 1.0), (1.6, 0.0)], sn, "cos") * 0.18
     y = mix(th, swell)
@@ -701,33 +678,35 @@ def cut(seed=0, material="paper") -> np.ndarray:
     mallet on a padded surface (long contact, dark and round); graphite: a
     pencil point set down on paper over the desk; wood: a soft knock on a
     small block. All under a quarter of a second with the energy in the low
-    mids; the attack is rounded so it never clicks.
+    mids; the attack is rounded so it never clicks. Cut 3: every body is
+    tuned to the key (D3 falling to A2, the wood block on A4) and the
+    contacts are longer, so a cut supports the picture instead of marking it.
     """
     mat = str(material or "paper").lower()
     mat = mat if mat in CUT_MATERIALS else "paper"
     r = rng(seed, "cut", mat)
     if mat == "felt":
-        body = thump(r.uniform(126, 144), r.uniform(90, 102), 0.075, 0.16)
-        body = _soft_contact(body, 3.5)
+        body = thump(NOTE["D3"], NOTE["A2"], 0.07, 0.16)
+        body = _soft_contact(body, 5.5)
         n = ns(0.06)
-        brush = lp(white(n, r), 650, 2) * perc(n, 0.004, 0.045) * 0.1
-        y = lp(mix(body, brush), 1500, 2)
+        brush = lp(white(n, r), 550, 2) * perc(n, 0.006, 0.045) * 0.08
+        y = lp(mix(body, brush), 1200, 2)
     elif mat == "graphite":
         n = ns(0.04)
-        y = mix(click(r, 1100, 4800, 0.004, 0.001) * 0.4, thump(172, 126, 0.045, 0.08) * 0.7,
-                bp(white(n, r), 650, 2800, 2) * perc(n, 0.002, 0.025) * 0.1)
-        y = lp(_soft_contact(y, 0.6), 4600, 2)
+        y = mix(click(r, 1100, 4200, 0.004, 0.001) * 0.16, thump(NOTE["A3"], NOTE["D3"], 0.045, 0.08) * 0.7,
+                bp(white(n, r), 650, 2600, 2) * perc(n, 0.003, 0.025) * 0.08)
+        y = lp(_soft_contact(y, 2.6), 3000, 2)
     elif mat == "wood":
-        f = r.uniform(340, 400)
-        y = mix(modal([f, f * 2.57, f * 4.1], [0.05, 0.025, 0.012], [1, 0.3, 0.1], 0.12, mallet_ms=1.6,
-                      r=r, jitter_cents=20) * 0.8, thump(150, 108, 0.045, 0.09) * 0.45)
-        y = lp(y, 3000, 2)
+        f = NOTE["A4"]
+        y = mix(modal([f, f * 2.57, f * 4.1], [0.05, 0.025, 0.012], [1, 0.25, 0.08], 0.12, mallet_ms=2.4,
+                      r=r) * 0.8, thump(NOTE["D3"], NOTE["A2"], 0.045, 0.09) * 0.45)
+        y = lp(_soft_contact(y, 2.0), 2200, 2)
     else:
         n = ns(0.1)
-        cushion = lp(hp(white(n, r), 70, 2), 320, 2) * perc(n, 0.006, 0.06) * 0.7
-        body = thump(128, 94, 0.055, 0.1) * 0.55
-        tap = bp(white(n, r), 450, 3000, 2) * perc(n, 0.0025, 0.03) * 0.3
-        y = lp(mix(cushion, body, tap), 3800, 2)
+        cushion = lp(hp(white(n, r), 70, 2), 320, 2) * perc(n, 0.008, 0.06) * 0.7
+        body = thump(NOTE["D3"], NOTE["A2"], 0.055, 0.1) * 0.55
+        tap = bp(white(n, r), 450, 2600, 2) * perc(n, 0.004, 0.03) * 0.18
+        y = lp(mix(cushion, body, tap), 2800, 2)
     y = verb(y, "room", 0.05, seed=151)[: ns(0.25)]
     return _out(y, r, 0.1)
 
@@ -748,7 +727,7 @@ def push(seed=0, dur=0.65) -> np.ndarray:
     air = lp(fade(air, 0.0, 0.035), 2400, 2)
     air *= 0.16 / (dsp.rms(air[-ns(min(0.25, D * 0.4)):]) + 1e-12)
     bn = ns(0.95)
-    bloom = thump(86, 62, 0.55, 0.95) * _rise(bn, 0.02)
+    bloom = thump(NOTE["G2"], NOTE["D2"], 0.55, 0.95) * _rise(bn, 0.03)
     bloom += lp(hp(white(bn, r), 45, 2), 200, 2) * perc(bn, 0.03, 0.45) * 0.12
     bloom = lp(bloom, 250, 2)
     bloom /= dsp.peak(bloom) + 1e-12
@@ -820,7 +799,7 @@ def focus(seed=0) -> np.ndarray:
                   mallet_ms=0.08, r=r) * 0.3,
             modal([NOTE["A5"]], [0.03], [0.25], 0.05, mallet_ms=0.5))
     y = mix(a, delay(click(r, 2400, 8000, 0.002, 0.0003) * 0.22, 0.006))
-    return _out(lp(y, 10000, 2), r, 0.05)
+    return _out(lp(_soft_contact(y, 0.5), 7000, 2), r, 0.05)  # cut 3: a softer seat
 
 
 def arc(seed=0, dur=1.3) -> np.ndarray:
@@ -920,13 +899,15 @@ def _decorrelated_pair(n, r, corr=0.4, **kw):
 
 
 def ventilation(seed=0, dur=10.0) -> np.ndarray:
-    """Ventilation air: soft coloured air, duct modes, a faint fan blade tone."""
+    """Ventilation air: soft coloured air, duct modes, a faint fan blade tone
+    (tuned to A2, 110 Hz, with its harmonics A3 and E4: in cut 2 it was
+    118 Hz, a B flat 22 cents sharp, under a D major score)."""
     r = rng(seed, "vent", dur)
     n = ns(dur)
     air = _decorrelated_pair(n, r, 0.45, slope_db_oct=-4.5, lo=55, hi=2600)
     duct = np.stack([reson(air[:, c], 185, 5) * 0.6 + reson(air[:, c], 420, 6) * 0.4 for c in range(2)], 1)
     wob = 1 + 0.003 * smooth_noise(n, r, 0.3)
-    ph = 2 * np.pi * np.cumsum(118.0 * wob) / SR
+    ph = 2 * np.pi * np.cumsum(110.0 * wob) / SR
     fan = (np.sin(ph) + 0.4 * np.sin(2 * ph) + 0.15 * np.sin(3 * ph)) * 0.03 * (1 + 0.3 * smooth_noise(n, r, 0.5))
     motion = 1 + 0.07 * smooth_noise(n, r, 0.25)
     y = (air + duct * 0.35) * motion[:, None] + dsp.st(fan)
@@ -935,16 +916,21 @@ def ventilation(seed=0, dur=10.0) -> np.ndarray:
 
 
 def machinery_hum(seed=0, dur=10.0) -> np.ndarray:
-    """Distant plant machinery: 50 Hz mains harmonics, a cyclic load, far away."""
+    """Distant plant machinery: a hum, a cyclic load, far away.
+
+    Tuned to the score's D (D2, A2, D3, A3 and a D5 whine). Cut 2 used real
+    50 Hz mains harmonics, which sit 35 cents sharp of G and 37 cents sharp
+    of D, with a whine between D5 and E flat 5: a sour drone under Act I."""
     r = rng(seed, "hum", dur)
     n = ns(dur)
     t = tvec(n)
-    tones = (np.sin(2 * np.pi * 100.0 * t) + 0.8 * np.sin(2 * np.pi * 100.35 * t + 1.0) +
-             0.35 * np.sin(2 * np.pi * 150.0 * t) + 0.5 * np.sin(2 * np.pi * 200.0 * t) +
-             0.15 * np.sin(2 * np.pi * 300.0 * t))
+    d2 = NOTE["D2"]
+    tones = (np.sin(2 * np.pi * d2 * t) + 0.8 * np.sin(2 * np.pi * d2 * 2 ** (1.5 / 1200) * t + 1.0) +
+             0.35 * np.sin(2 * np.pi * NOTE["A2"] * t) + 0.5 * np.sin(2 * np.pi * NOTE["D3"] * t) +
+             0.15 * np.sin(2 * np.pi * NOTE["A3"] * t))
     load = 1 + 0.25 * np.sin(2 * np.pi * 1.3 * t) * (0.6 + 0.4 * smooth_noise(n, r, 0.2))
     gear = bp(white(n, r), 380, 900, 2) * 0.5 * load
-    whine = np.sin(2 * np.pi * 612.0 * t + 0.4 * smooth_noise(n, r, 0.4)) * 0.04
+    whine = np.sin(2 * np.pi * NOTE["D5"] * t + 0.4 * smooth_noise(n, r, 0.4)) * 0.03
     y = tones * 0.25 * (1 + 0.05 * smooth_noise(n, r, 0.3)) + gear * 0.35 + whine
     y = lp(y, 1400, 2)
     y = hp(y, 48, 4)
@@ -958,7 +944,7 @@ def machinery_hum(seed=0, dur=10.0) -> np.ndarray:
 def pump_thud(seed=0) -> np.ndarray:
     """A distant press or pump stroke: the low industrial pulse, one hit."""
     r = rng(seed, "pump")
-    y = mix(thump(64, 47, 0.28, 0.5), bp(white(ns(0.05), r) * decay(ns(0.05), 0.03), 140, 600, 2) * 0.35)
+    y = mix(thump(NOTE["A1"] * 1.36, NOTE["A1"], 0.28, 0.5), bp(white(ns(0.05), r) * decay(ns(0.05), 0.03), 140, 600, 2) * 0.35)
     y = lp(y, 900, 2)
     y = hp(y, 36, 4)
     return _out(verb(y, "roof", 0.3, seed=59, hp_hz=70)[: ns(1.1)], r, 0)
@@ -1027,11 +1013,6 @@ KINDS = {
     "stretch": (stretch, -26.0, ("dur",)),
     "cross-snap": (cross_snap, -17.0, ()),
     "latch": (latch, -13.0, ()),
-    "chain-record": (lambda seed=0: chain_link(seed, "record"), -17.0, ()),
-    "chain-trust": (lambda seed=0: chain_link(seed, "trust"), -18.0, ()),
-    "chain-decision": (lambda seed=0: chain_link(seed, "decision"), -18.0, ()),
-    "chain-price": (lambda seed=0: chain_link(seed, "price"), -19.0, ()),
-    "chain-capacity": (lambda seed=0: chain_link(seed, "capacity"), -16.0, ()),
     "distant-clank": (distant_clank, -33.0, ()),
     "pin": (pin, -24.0, ()),
     "van": (van, -30.0, ("dur",)),
@@ -1043,16 +1024,16 @@ KINDS = {
     "connect-line": (connect_line, -26.0, ("dur",)),
     "sheet-in": (sheet_in, -26.0, ()),
     "pump-thud": (pump_thud, -23.0, ()),
-    # cut 2 editorial accents (felt more than heard)
-    "cut": (cut, -26.0, ("material",)),
-    "push": (push, -30.0, ("dur",)),
-    "pull": (pull, -30.0, ("dur",)),
-    "whip": (whip, -35.0, ("dur", "direction")),
-    "sheet-lay": (sheet_lay, -25.0, ("dur", "pan0", "pan1")),
-    "focus": (focus, -27.0, ()),
-    "arc": (arc, -30.0, ("dur",)),
-    "handwheel": (handwheel, -28.0, ("dur",)),
-    "gauge": (gauge, -25.0, ("dur", "direction")),
+    # editorial accents (felt more than heard; cut 3: 3 to 4 dB quieter than cut 2)
+    "cut": (cut, -30.0, ("material",)),
+    "push": (push, -34.0, ("dur",)),
+    "pull": (pull, -34.0, ("dur",)),
+    "whip": (whip, -39.0, ("dur", "direction")),
+    "sheet-lay": (sheet_lay, -28.0, ("dur", "pan0", "pan1")),
+    "focus": (focus, -29.0, ()),
+    "arc": (arc, -32.0, ("dur",)),
+    "handwheel": (handwheel, -31.0, ("dur",)),
+    "gauge": (gauge, -28.0, ("dur", "direction")),
 }
 
 

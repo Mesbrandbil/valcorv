@@ -28,12 +28,23 @@
   'use strict';
   const NS = 'http://www.w3.org/2000/svg';
   const W = 1920, H = 1080, FPS = 30;
+  // Colours (cut 3): the film tokens of assets/css/film-color.css, resolved when a helper builds (tweens
+  // need concrete values). Meaning: priora = the live connection and the product (its selected choice,
+  // decisions), ok = verified / inside, alert = changed / outside, water = fire protection, activities by kind.
+  const TOK = (n, fb) => (window.SiteKit && window.SiteKit.color ? window.SiteKit.color(n) : fb);
   const C = {
-    paper: '#F5F3EE', paper2: '#EFECE5', paper3: '#EAE6DD', paperHi: '#FBFAF7', card: '#FBFAF7',
-    ink: '#111111', ink2: 'rgba(17,17,17,.68)', ink3: 'rgba(17,17,17,.47)', ink4: 'rgba(17,17,17,.28)',
-    hair: 'rgba(17,17,17,.13)', graphite: '#3B3A36', grey1: '#5E5D59', grey2: '#6A6863', grey3: '#9C9994',
-    signal: '#1F47D6', signalInk: '#1838A8', signalSoft: '#DCE2F5',
+    paper2: '#EFECE5', paper3: '#EAE6DD', paperHi: '#FBFAF7', card: '#FBFAF7',
+    ink2: 'rgba(30,28,25,.72)', ink3: 'rgba(30,28,25,.5)', ink4: 'rgba(30,28,25,.3)',
+    hair: 'rgba(30,28,25,.13)', grey1: '#5E5D59', grey2: '#6A6863', grey3: '#9C9994',
   };
+  [['paper', 'paper'], ['ink', 'ink'], ['graphite', 'graphite'], ['signal', 'priora'], ['signalInk', 'priora-deep'], ['signalSoft', 'priora-soft'],
+    ['priora', 'priora'], ['prioraSoft', 'priora-soft'], ['prioraDeep', 'priora-deep'], ['ok', 'ok'], ['okSoft', 'ok-soft'], ['alert', 'alert'], ['alertSoft', 'alert-soft'],
+    ['water', 'water'], ['waterSoft', 'water-soft'], ['offline', 'offline'], ['hot', 'hot'], ['hotSoft', 'hot-soft'], ['lift', 'lift'], ['liftSoft', 'lift-soft'],
+    ['gas', 'gas'], ['gasSoft', 'gas-soft'], ['air', 'air'], ['airSoft', 'air-soft'], ['general', 'general'], ['envelope', 'envelope-line']]
+    .forEach(([k, n]) => Object.defineProperty(C, k, { get: () => TOK(n), enumerable: true }));
+  /** category -> colour token name (bands, chips, activity dots) */
+  const CATEGORY = { hot: 'hot', lift: 'lift', gas: 'gas', air: 'air', general: 'general', water: 'water', protection: 'water', sprinkler: 'water' };
+  const catVar = (cat, soft) => { const n = CATEGORY[cat]; if (!n) return null; return 'var(--c-' + n + (soft && n !== 'general' ? '-soft' : '') + ')'; };
 
   window.__filmEvents = window.__filmEvents || [];
   if (window.gsap) {
@@ -196,12 +207,16 @@
       nodes[k] = n;
     }
     return {
-      root, nodes, cur: initial, dy: o.dy == null ? 6 : o.dy,
+      root, nodes, cur: initial, dy: o.dy == null ? 6 : o.dy, fade: !!o.fadeOnly,
       to(tl, t, key, dur) {
         if (key === this.cur || !nodes[key]) return t;
         dur = dur == null ? 0.3 : dur;
         const a = nodes[this.cur], b = nodes[key];
-        if (dur <= 0.002) {
+        if (this.fade && dur > 0.002) {
+          // opacity only: no transform on the variants (a painted pill keeps identical edges in any seek order)
+          if (a) ft(tl, a, { opacity: 1 }, { opacity: 0, duration: dur * 0.4, ease: 'power2.in' }, t);
+          ft(tl, b, { opacity: 0 }, { opacity: 1, duration: dur, ease: 'power3.out' }, t + dur * 0.36);
+        } else if (dur <= 0.002) {
           if (a) cut(tl, a, { opacity: 1 }, { opacity: 0 }, t);
           cut(tl, b, { opacity: 0 }, { opacity: 1 }, t);
         } else {
@@ -441,7 +456,7 @@
     const vars = {};
     for (const k in statuses) {
       const [g, txt, sig] = statuses[k];
-      vars[k] = n => { n.classList.add('fui-pstat-v'); glyph(g, 'g', n, sig ? 'var(--pui-signal)' : null); h('span', '', n, txt); };
+      vars[k] = n => { n.classList.add('fui-pstat-v'); glyph(g, 'g', n, sig ? 'var(--pui-alert)' : (k === 'inside' || k === 'today' ? 'var(--pui-ok)' : null)); h('span', '', n, txt); };
     }
     const status = Swap(pb, vars, opts.status, { dy: 5 });
     h('div', 'spacer', root);
@@ -487,21 +502,31 @@
   }
 
   // ================================================================== 2. node glyph (site SVG, world coordinates, screen-constant size)
-  const NODE_STATES = {
-    //          ring chk out  own  cap  dot sq  dotFill      dotStroke     dotSW
-    checking: [0, 1, 0, 0, 0, 1, 0, C.ink, C.ink, 0],
-    inside: [1, 0, 0, 0, 0, 1, 0, C.ink, C.ink, 0],
-    outside: [0, 0, 1, 0, 0, 1, 0, C.paper, C.signal, 1.3],
-    changed: [1, 0, 0, 0, 0, 0, 1, C.ink, C.ink, 0],
-    retained: [0, 0, 0, 1, 0, 1, 0, C.ink, C.ink, 0],
-    cover: [0, 0, 0, 0, 1, 1, 0, C.ink, C.ink, 0],
-  };
+  function nodeStates(dot) {
+    const d = dot || C.ink;
+    return {
+      //          ring chk out  own  cap  dot sq  dotFill  dotStroke  dotSW
+      checking: [0, 1, 0, 0, 0, 1, 0, d, d, 0],
+      inside: [1, 0, 0, 0, 0, 1, 0, d, d, 0],
+      outside: [0, 0, 1, 0, 0, 1, 0, C.paper, C.alert, 1.3],
+      changed: [1, 0, 0, 0, 0, 0, 1, d, d, 0],
+      retained: [0, 0, 0, 1, 0, 1, 0, d, d, 0],
+      cover: [0, 0, 0, 0, 1, 1, 0, d, d, 0],
+    };
+  }
+  const NODE_STATES = nodeStates();
   const NODE_PARTS = ['ring', 'chk', 'out', 'own', 'cap', 'dot', 'sq'];
   function nodeGlyph(svgParent, xy, state, opts) {
     opts = opt({ k: 1, reticle: false, visible: true, events: true }, opts);
     state = state || 'inside';
     const c = ctx(opts, 'node' + (opts.name ? '-' + opts.name : ''));
-    const g = sv('g', { class: 'fui-node', transform: `translate(${f3(xy[0])} ${f3(xy[1])})` }, svgParent);
+    // cut 3: the dot (and a decided node's glyph) carries the activity's colour; the film's hot-work node is
+    // built as name 'hero' / 'inset', so those default to hot work. activity: false keeps the demo's ink.
+    const act = opts.activity !== undefined ? opts.activity : (/^(hero|inset)$/.test(opts.name || '') ? 'hot' : null);
+    const actCol = act && CATEGORY[act] ? TOK(CATEGORY[act]) : null;
+    const STATES = nodeStates(actCol);
+    const g = sv('g', { class: 'fui-node' + (act ? ' fui-act-' + act : ''), transform: `translate(${f3(xy[0])} ${f3(xy[1])})` }, svgParent);
+    if (act && catVar(act)) g.style.setProperty('--fui-act', catVar(act));
     const px = sv('g', { class: 'fui-npx' }, g);
     px.style.setProperty('--k', opts.k);
     const P = {};
@@ -526,7 +551,7 @@
     const ret = sv('path', { class: 'fui-nret-p', d: 'M-22 -14V-22H-14M14 -22H22V-14M22 14V22H14M-14 22H-22V14', transform: 'scale(1)' }, retG);
     retG.style.setProperty('--kr', opts.kr || Math.max(1, opts.k * 0.88));
     // initial state
-    const S = NODE_STATES[state];
+    const S = STATES[state];
     NODE_PARTS.forEach((p, i) => { P[p].style.opacity = S[i]; });
     P.dot.style.fill = S[7]; P.dot.style.stroke = S[8]; P.dot.style.strokeWidth = S[9];
     P.pulse.style.opacity = 0;
@@ -534,12 +559,12 @@
     if (!opts.visible) g.style.opacity = 0;
     idAll(g, c.base);
     const N = {
-      el: g, g, px, parts: P, reticleEl: retG, k: opts.k, cur: state, pos: [xy[0], xy[1]], rot: 0,
+      el: g, g, px, parts: P, reticleEl: retG, k: opts.k, cur: state, pos: [xy[0], xy[1]], rot: 0, activity: act,
       vis: opts.visible ? 1 : 0, ret: opts.reticle ? 1 : 0, ctx: c,
       state(tl, t, to, dur) {
         if (to === this.cur) return t;
         dur = dur == null ? 0.3 : dur;
-        const A = NODE_STATES[this.cur], B = NODE_STATES[to];
+        const A = STATES[this.cur], B = STATES[to];
         NODE_PARTS.forEach((p, i) => {
           if (A[i] !== B[i]) {
             if (dur <= 0.002) cut(tl, P[p], { opacity: A[i] }, { opacity: B[i] }, t);
@@ -780,9 +805,11 @@
       pv = v; pE = E1; pC = C1;
     }
     // colour: ink to cobalt as the head passes the edge
-    ft(tl, capRing, { stroke: C.ink }, { stroke: C.signal, duration: 0.24, ease: 'power2.out' }, tCross);
-    ft(tl, spine, { stroke: C.ink }, { stroke: C.signal, duration: 0.24, ease: 'power2.out' }, tCross);
-    ft(tl, headDot, { fill: C.ink }, { fill: C.signal, duration: 0.24, ease: 'power2.out' }, tCross);
+    const headIn = node.activity && CATEGORY[node.activity] ? TOK(CATEGORY[node.activity]) : C.ink;
+    headDot.style.fill = headIn;
+    ft(tl, capRing, { stroke: C.ink }, { stroke: C.alert, duration: 0.24, ease: 'power2.out' }, tCross);
+    ft(tl, spine, { stroke: C.ink }, { stroke: C.alert, duration: 0.24, ease: 'power2.out' }, tCross);
+    ft(tl, headDot, { fill: headIn }, { fill: C.alert, duration: 0.24, ease: 'power2.out' }, tCross);
     c.ev('stretch', t0, opts.stretch, { from: A, to: T, pinchAt: +(t0 + opts.stretch * 0.5).toFixed(3) });
     c.ev('cross-edge', tCross, 0.2, {});
     // ---- snap: tail retracts to the head, membrane relaxes to the notch, tether follows the tail
@@ -881,9 +908,10 @@
     const from = S.state;
     const off = to === 'offline';
     const n = S.order.length;
+    const wa = C.water, of = C.offline, pa = C.paper;
     S.order.forEach(([hd, cr], i) => {
       const ti = t + i * opts.step;
-      ft(tl, hd, { fill: off ? '#6A6863' : C.paper, opacity: off ? 1 : 0.9 }, { fill: off ? C.paper : '#6A6863', opacity: off ? 0.9 : 1, duration: 0.45, ease: 'power2.out' }, off ? ti : t + (n - 1 - i) * opts.step);
+      ft(tl, hd, { fill: off ? wa : pa, stroke: off ? wa : of, opacity: off ? 1 : 0.9 }, { fill: off ? pa : wa, stroke: off ? of : wa, opacity: off ? 0.9 : 1, duration: 0.45, ease: 'power2.out' }, off ? ti : t + (n - 1 - i) * opts.step);
       if (cr) ft(tl, cr, { opacity: off ? 0 : 1 }, { opacity: off ? 1 : 0, duration: 0.45, ease: 'power2.out' }, off ? ti : t + (n - 1 - i) * opts.step);
     });
     if (off || from === 'offline') {
@@ -912,11 +940,14 @@
     const D = Object.assign({}, DATA.card, opts.data || {});
     const root = h('div', 'pui pui-herocard fui fui-card');
     root.style.setProperty('--pui-scale', opts.scale);
+    // one colour band keyed to the category (cut 3): hot work by default for the film's card
+    const cat = opts.category !== undefined ? opts.category : (/hot work/i.test(D.title) ? 'hot' : null);
+    if (cat && catVar(cat)) { root.style.setProperty('--fui-band', catVar(cat)); root.classList.add('fui-band', 'fui-cat-' + cat); }
     const top = h('div', 'hc-top', root);
     h('span', 'lab', top, D.ref);
     const initRow = opts.state === 'verified' ? 'verified' : 'waiting';
     const glyphSwap = Swap(top, {
-      checking: n => glyph('g-checking', 'g', n), inside: n => glyph('g-inside', 'g', n), outside: n => glyph('g-outside', 'g', n, 'var(--pui-signal)'),
+      checking: n => glyph('g-checking', 'g', n), inside: n => glyph('g-inside', 'g', n, 'var(--pui-ok)'), outside: n => glyph('g-outside', 'g', n, 'var(--pui-alert)'),
     }, initRow === 'verified' ? 'inside' : 'checking', { dy: 0, cls: 'fui-card-g' });
     h('div', 'hc-title', root, D.title);
     h('div', 'hc-sub', root, D.sub);
@@ -930,7 +961,7 @@
       const cx = sv('g', { class: 'c-x fui-cx', transform: sc(1, 1, 8, 8) }, ck);
       sv('circle', { cx: 8, cy: 8, r: 6 }, cx); sv('path', { d: 'M4 12L12 4' }, cx);
       h('span', '', li, label);
-      const em = Swap(li, { none: '', verified: 'VERIFIED', unavailable: n => { n.textContent = 'UNAVAILABLE'; n.classList.add('fui-sig-t'); } }, ROW[initRow].em, { tag: 'em', dy: 4 });
+      const em = Swap(li, { none: '', verified: 'VERIFIED', unavailable: n => { n.textContent = 'UNAVAILABLE'; n.classList.add('fui-sig-t'); } }, ROW[initRow].em, { tag: 'em', dy: 4, fadeOnly: true });
       const R = ROW[initRow];
       li.style.color = R.color; cw.style.opacity = R.cw; cp.style.strokeDashoffset = R.cp; cx.style.opacity = R.cx;
       return { li, cw, cp, cx, em, label, cur: initRow };
@@ -996,6 +1027,108 @@
         footR.to(tl, t + 0.15, 'recalc', 0.3);
         this.setGlyph(tl, t + 0.15, 'checking');
         return t + 0.5;
+      },
+    };
+    return card;
+  }
+
+  // ================================================================== 3b. condition card (film-native, cut 3)
+  /**
+   * conditionCard(opts): a paper-white card for one condition of one kind of work, at film scale (no demo
+   * geometry to keep): a band in the category's colour, an eyebrow, the condition in large type, an optional
+   * live reading that counts and turns alert when it crosses its limit, a status line, a state pill, and an
+   * outcome row (the decision, in Priora's colour).
+   *   opts: prefix, scene, parent, left/top, width 760, scale 1, category 'lift' | 'gas' | 'air' | 'hot' | 'water',
+   *         eyebrow, title, status { key: [text, tone] } + statusInit, reading { label, unit, value, limit,
+   *         over: true (the limit is a maximum), digits 2 }, pill (initial key of pills), pills
+   *         { key: [text, tone] } (tones: ok, alert, priora, ink), outcome [line, subline]
+   *   helpers: enter(tl, t, dur) after hideForEnter(); read(tl, t0, t1, to, ease) -> { end, tCross };
+   *            setStatus(tl, t, key, dur); setPill(tl, t, key, dur); showOutcome(tl, t, dur)
+   */
+  function conditionCard(opts) {
+    opts = opt({ width: 760, scale: 1, category: 'lift', pill: 'inside', statusInit: null }, opts);
+    const c = ctx(opts, 'ccard');
+    const root = h('div', 'fui fui-cc fui-cat-' + opts.category);
+    root.style.width = opts.width + 'px';
+    root.style.setProperty('--fui-cc-k', opts.scale);
+    if (catVar(opts.category)) { root.style.setProperty('--fui-band', catVar(opts.category)); root.style.setProperty('--fui-band-soft', catVar(opts.category, true)); }
+    const top = h('div', 'fui-cc-top', root);
+    h('span', 'fui-cc-eb', top, opts.eyebrow || '');
+    h('div', 'fui-cc-title', root, opts.title || '');
+    const srow = h('div', 'fui-cc-row', root);
+    const sBox = h('div', 'fui-cc-status', srow);
+    const PILLS = Object.assign({ inside: ['Inside agreed conditions', 'ok'], checking: ['Checking', 'ink'], outside: ['Outside agreed conditions', 'alert'], decided: ['Decision recorded', 'priora'] }, opts.pills || {});
+    const pv = {};
+    for (const k in PILLS) pv[k] = n => { n.classList.add('fui-cc-pill', 'fui-tone-' + PILLS[k][1]); n.textContent = PILLS[k][0]; };
+    let status = null;
+    if (opts.status) {
+      const sv0 = {};
+      for (const k in opts.status) sv0[k] = n => { n.classList.add('fui-tone-' + (opts.status[k][1] || 'ink')); n.textContent = opts.status[k][0]; };
+      status = Swap(sBox, sv0, opts.statusInit || Object.keys(opts.status)[0], { tag: 'div', dy: 6 });
+    }
+    const pill = Swap(srow, pv, opts.pill, { cls: 'fui-cc-pills', dy: 4, fadeOnly: true });
+    let rd = null;
+    if (opts.reading) {
+      const R = Object.assign({ over: true, digits: 2 }, opts.reading);
+      const row = h('div', 'fui-cc-read', root);
+      h('span', 'fui-cc-rl', row, R.label || '');
+      const val = h('span', 'fui-cc-rv', row);
+      const odo = counterOdo(val, R.value, 88, R.digits);
+      h('span', 'fui-cc-ru', row, R.unit || '');
+      const lim = h('span', 'fui-cc-lim', row, (R.over ? 'Limit ' : 'Minimum ') + R.limit + (R.unit ? ' ' + R.unit : ''));
+      rd = { R, row, val, odo, lim, v: R.value };
+    }
+    let oc = null;
+    if (opts.outcome) {
+      const wrap = h('div', 'fui-fold fui-cc-oc', root);
+      wrap.style.gridTemplateRows = '0fr';
+      const inner = h('div', 'fui-fold-in', wrap);
+      const box = h('div', 'fui-cc-ocb', inner);
+      h('i', 'fui-cc-ocm', box);
+      const tx = h('div', 'fui-cc-oct', box);
+      h('b', '', tx, opts.outcome[0]);
+      if (opts.outcome[1]) h('span', '', tx, opts.outcome[1]);
+      box.style.opacity = 0;
+      oc = { wrap, box };
+    }
+    root.id = c.id();
+    idAll(root, c.base);
+    mountTo(root, opts);
+    const card = {
+      el: root, pill, status, reading: rd, ctx: c,
+      enter(tl, t, dur) { dur = dur || 0.7; ft(tl, root, { opacity: 0, y: 22 }, { opacity: 1, y: 0, duration: dur, ease: 'power3.out' }, t); c.ev('card-enter', t, dur, {}); return t + dur; },
+      hideForEnter() { gsap.set(root, { opacity: 0 }); return this; },
+      setPill(tl, t, key, dur) { return pill.to(tl, t, key, dur == null ? 0.3 : dur); },
+      setStatus(tl, t, key, dur) { if (!status) return t; const e = status.to(tl, t, key, dur == null ? 0.35 : dur); if (opts.status[key] && opts.status[key][1] === 'alert') c.ev('row-unavailable', t, 0.35, { label: opts.status[key][0] }); return e; },
+      /** the live reading counts to 'to' between t0 and t1; crossing the limit turns it alert (and the pill outside) */
+      read(tl, t0, t1, to, ease) {
+        if (!rd) return { end: t0, tCross: null };
+        const from = rd.v, R = rd.R, e = easeFn(ease || 'none');
+        rd.odo.roll(tl, t0, to, t1 - t0, e);
+        const over = v => (R.over ? v > R.limit : v < R.limit);
+        let tCross = null;
+        if (!over(from) && over(to)) {
+          // the first frame the displayed (rounded) value is past the limit
+          const N = Math.max(1, Math.round((t1 - t0) * FPS));
+          for (let k = 1; k <= N; k++) { const v = from + (to - from) * e(k / N); if (over(Math.round(v))) { tCross = t0 + (k - 1) * (t1 - t0) / N; break; } }
+          if (tCross == null) tCross = t1;
+          ft(tl, rd.val, { color: C.ink }, { color: C.alert, duration: 0.2, ease: 'power2.out' }, tCross);
+          ft(tl, rd.lim, { color: C.ink3 }, { color: C.alert, duration: 0.2, ease: 'power2.out' }, tCross);
+          if (opts.autoPill !== false && PILLS.outside) pill.to(tl, tCross, 'outside', 0.3);
+          c.ev('cross-edge', tCross, 0.2, { value: to, limit: R.limit });
+        }
+        rd.v = to;
+        return { end: t1, tCross };
+      },
+      /** the decision settles under the condition (Priora's mark) */
+      showOutcome(tl, t, dur) {
+        if (!oc) return t;
+        dur = dur || 0.6;
+        ft(tl, oc.wrap, { gridTemplateRows: '0fr' }, { gridTemplateRows: '1fr', duration: dur, ease: 'power2.inOut' }, t);
+        ft(tl, oc.box, { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: dur * 0.8, ease: 'power3.out' }, t + dur * 0.35);
+        if (opts.decidedPill !== false && PILLS.decided) pill.to(tl, t + dur * 0.3, 'decided', 0.3);
+        c.ev('decision-resolve', t, dur, { outcome: opts.outcome[0] });
+        return t + dur;
       },
     };
     return card;
@@ -1125,6 +1258,8 @@
     const at = opts.at;
     const g = sv('g', { class: 'fui-clause', transform: `translate(${f3(at[0])} ${f3(at[1])}) scale(${f3(k)})` }, svgParent);
     g.style.setProperty('--fui-s', opts.s);
+    const cat = opts.category !== undefined ? opts.category : ({ '4.2': 'hot', '4.3': 'water' })[opts.num];
+    if (cat && catVar(cat, true)) { g.style.setProperty('--fui-cat', catVar(cat, true)); g.style.setProperty('--fui-cat-line', catVar(cat)); g.classList.add('fui-cat-' + cat); }
     const fs = opts.size, cw = fs * (0.6 + 0.12), lh = fs * 1.5;
     const numW = opts.num.length * cw + 22, boxH = fs + 18;
     const dirx = opts.align === 'left' ? 1 : -1;
@@ -1231,7 +1366,7 @@
       const pid = c.id('hatch');
       const pat = sv('pattern', { id: pid, width: 4, height: 4, patternUnits: 'userSpaceOnUse', patternTransform: 'rotate(45)' }, sv('defs', {}, s));
       sv('rect', { width: 4, height: 4, fill: C.paper }, pat);
-      sv('line', { x1: 0, y1: 0, x2: 0, y2: 4, stroke: C.signal, 'stroke-width': 1.1, 'stroke-opacity': 0.55 }, pat);
+      sv('line', { x1: 0, y1: 0, x2: 0, y2: 4, stroke: C.alert, 'stroke-width': 1.1, 'stroke-opacity': 0.55 }, pat);
       sv('text', { x: 6, y: 9 }, s).textContent = 'EXPOSURE · TEMPORARY · 3H 18M';
       sv('line', { class: 'ax', x1: 6, y1: 20, x2: 228, y2: 20 }, s);
       [6, 55.33, 104.67, 154, 203.33].forEach(x => sv('line', { class: 'ax', x1: x, y1: 17, x2: x, y2: 23 }, s));
@@ -1349,7 +1484,7 @@
       const ob = h('div', 'ob', obs);
       h('span', 't', ob, tt);
       const xx = h('span', 'x', ob);
-      glyph(g, 'g', xx, sig ? 'var(--pui-signal)' : null);
+      glyph(g, 'g', xx, sig ? 'var(--pui-alert)' : (g === 'g-inside' ? 'var(--pui-ok)' : null));
       h('span', '', xx, x);
     });
     h('div', 'ask', svw, D.ask);
@@ -1421,7 +1556,8 @@
         dur = dur || 0.45;
         const prev = this.sel;
         if (prev === key) return t;
-        const look = (k, sel) => (sel === k ? { borderColor: C.ink, backgroundColor: '#FFFFFF', y: -3, opacity: 1 } : sel ? { borderColor: C.hair, backgroundColor: C.paper, y: 0, opacity: 0.42 } : { borderColor: C.hair, backgroundColor: C.paper, y: 0, opacity: 1 });
+        const cardC = C.card;
+        const look = (k, sel) => (sel === k ? { borderColor: C.priora, backgroundColor: cardC, boxShadow: '0 0 0 1.5px ' + C.priora, y: -3, opacity: 1 } : sel ? { borderColor: C.hair, backgroundColor: C.paper, boxShadow: '0 0 0 0px ' + C.priora, y: 0, opacity: 0.42 } : { borderColor: C.hair, backgroundColor: C.paper, boxShadow: '0 0 0 0px ' + C.priora, y: 0, opacity: 1 });
         for (const k in choices) {
           const a = look(k, prev), b = look(k, key);
           if (JSON.stringify(a) !== JSON.stringify(b)) ft(tl, choices[k], a, Object.assign(b, { duration: dur, ease: 'power2.out' }), t);
@@ -1469,7 +1605,7 @@
         const o = outcomes.retain;
         cut(tl, o.ack, { borderStyle: 'dashed' }, { borderStyle: 'solid' }, t);
         ft(tl, o.ack, { borderColor: C.ink4, color: C.ink2 }, { borderColor: C.ink3, color: C.ink, duration: 0.3 }, t);
-        ft(tl, o.bx, { backgroundColor: 'rgba(17,17,17,0)', borderColor: C.ink3 }, { backgroundColor: C.ink, borderColor: C.ink, duration: 0.25, ease: 'power2.out' }, t);
+        ft(tl, o.bx, { backgroundColor: 'rgba(30,28,25,0)', borderColor: C.ink3 }, { backgroundColor: C.priora, borderColor: C.priora, duration: 0.25, ease: 'power2.out' }, t);
         ft(tl, o.bs, { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 0.35, ease: 'expo.out' }, t + 0.08);
         ft(tl, o.by, { opacity: 0, y: 6 }, { opacity: 1, y: 0, duration: 0.45, ease: 'power3.out' }, t + 0.35);
         ft(tl, o.own, { opacity: 0, y: 6 }, { opacity: 1, y: 0, duration: 0.45, ease: 'power3.out' }, t + 0.65);
@@ -2004,9 +2140,9 @@
   };
 
   window.UIKit = {
-    version: '1.0.0', W, H, FPS, C, DATA, EASE, CAMERAS, cam,
+    version: '1.1.0', W, H, FPS, C, DATA, EASE, CAMERAS, cam, CATEGORY,
     // components
-    header, nodeGlyph, crossing, sprinkler, activityCard, captureStrip, conditionLabel, connect, readout,
+    header, nodeGlyph, crossing, sprinkler, activityCard, conditionCard, captureStrip, conditionLabel, connect, readout,
     recordColumn, decisionSheet, transferPanel, programmeLayer, systemView, plate, chain, endCard, statements,
     // helpers
     overlay, siteLabels, glyph, Swap, Odometer, clockOdo, counterOdo, heroDeviation, stadium, envelopeFromWords, event: pushEvent,

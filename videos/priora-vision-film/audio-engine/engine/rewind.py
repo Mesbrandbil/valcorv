@@ -11,7 +11,8 @@ does the same thing, built from the film's own Act I audio:
      sound literally travels back with the image (pitch is preserved; no
      varispeed, no tape-stop);
   3. a controlled suction: a reverse-reverb swell of the Act I bed, closing in
-     brightness, inhaled into near-silence exactly at the landing;
+     brightness, inhaled onto the landing, where the score's thread (which
+     continues under the whole rewind) is at its low point;
   4. an elegant reverse whoosh (a narrowing band rising, the stereo image
      collapsing to centre);
   5. mechanical state changes run backward: the sprinkler valve clunk reversed,
@@ -231,8 +232,9 @@ def render(C, music_pre: np.ndarray, sfx_pre: np.ndarray, events: list | None = 
     src = (music_pre + sfx_pre)[src_a:ns(rs)]
     sdur = min(1.9, dur * 0.6)
     su = rewind_suction(41, sdur, source=src)
-    # controlled: the swell's last 150 ms peaks at the Act I bed's own level
-    su = su * (dsp.undb(Lb - 4.0) / (dsp.rms(su[-ns(0.15):]) + 1e-12))
+    # controlled: the swell's last 150 ms peaks 9 dB under the Act I bed (cut 3:
+    # it inhales onto the thread, which continues under the landing)
+    su = su * (dsp.undb(Lb - 9.0) / (dsp.rms(su[-ns(0.15):]) + 1e-12))
     b = ns(re_) - len(su)
     music_add[b:b + len(su)] += su * 0.6
     sfx_add[b:b + len(su)] += su * 0.4
@@ -264,9 +266,10 @@ def render(C, music_pre: np.ndarray, sfx_pre: np.ndarray, events: list | None = 
             pc = rewind_pencil(60 + k, 0.2) * dsp.undb(KIT["rewind-pencil"][1] - 2 * k)
             _add(sfx_add, pc, t)
 
-    # hard guarantee: silence after the landing, clean edges at both ends
+    # nothing of the rewind after the landing (the thread carries on under
+    # it), clean edges at both ends; the close takes 30 ms, a catch, not a cut
     for buf in (music_add, sfx_add):
-        e = dsp.curve([(0, 0.0), (rs - 0.01, 0.0), (rs + 0.01, 1.0), (re_ - 0.006, 1.0), (re_, 0.0)], n, "cos")
+        e = dsp.curve([(0, 0.0), (rs - 0.01, 0.0), (rs + 0.01, 1.0), (re_ - 0.03, 1.0), (re_, 0.0)], n, "cos")
         buf *= e[:, None]
     if report is not None:
         report["rewind"] = {"start": round(rs, 3), "end": round(re_, 3), "landing_story_time": round(landing, 3),

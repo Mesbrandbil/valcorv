@@ -1,6 +1,20 @@
 # UI kit: the Priora interface at video scale (Acts II and III)
 
-`assets/js/ui-kit.js` (window.UIKit) and `assets/css/film-ui.css` build the film's destination: the Priora end-state interface, composed for 1080p. The components are the demo's own (ported in `assets/css/product.css`, scoped under `.pui`, scaled with `--pui-scale`), with cobalt in place of the demo's orange, plus the film-only pieces the storyboard needs (capture strip, clause labels, statements, programme layer, chain, end card).
+`assets/js/ui-kit.js` (window.UIKit) and `assets/css/film-ui.css` build the film's destination: the Priora end-state interface, composed for 1080p. The components are the demo's own (ported in `assets/css/product.css`, scoped under `.pui`, scaled with `--pui-scale`), with cobalt in place of the demo's orange, plus the film-only pieces the storyboard needs (capture strip, clause labels, statements, programme layer, chain, end card, and in cut 3 the film-native condition card).
+
+## 0. Cut 3 colour (docs/cut3-direction.md sections 1 and 2)
+
+Every colour comes from the tokens in `assets/css/film-color.css` (CSS `var(--c-...)`; tweens resolve them at build time through `SiteKit.color(name)`). The interface is film-native: paper-white cards in the film's warm ink, one colour band keyed to the category, states as coloured pills and ticks, fewer hairlines. The geometry of every existing component is unchanged (bands are inset shadows, pills are painted backgrounds), so scenes that measured positions on a card or a record keep them.
+
+| Meaning | Where in the kit |
+| --- | --- |
+| Priora `--c-priora` (`--signal`, `--pui-signal`, `UIKit.C.priora`) | live connections (`connect`), clause label `live`, capture field underlines, the selected choice (`decisionSheet.highlight`: priora border and ring), the retained acknowledgement tick, recorded decision entries (record), the transfer hairlines and tokens, the programme's temporary layer, the chain arrows, a condition card's decided pill and outcome |
+| Verified, inside `--c-ok` (`--pui-ok`) | card checks and VERIFIED pills, INSIDE ENVELOPE, the card's inside glyph, a node's inside ring, the change outcome's BACK INSIDE ACCEPTED ENVELOPE, sprinkler RESTORED, header status inside |
+| Changed, outside `--c-alert` (`--pui-alert`, class `fui-sig-t`) | UNAVAILABLE (pill and crossed circle), 4 OF 5 HOLD, OUTSIDE ENVELOPE, the node's outside ring and ticks, the crossing (capsule turns alert at the edge, tether, anchor, slice ring), the readout's OUTSIDE AGREED CONDITIONS and its exposure slice, the sprinkler OFFLINE label, system events and the outside entry in the record, the sheet's eyebrow dot, EXISTING PROGRAMME Outside agreed conditions, the packet's changed facts |
+| Fire protection `--c-water` | Sprinkler Zone 3 heads, outline, zone tint and ACTIVE label (SiteKit's precise layer); `sprinkler(..., 'offline')` drains the heads to `--c-offline` one by one |
+| Activities `--c-hot`, `--c-lift`, `--c-gas`, `--c-air`, `--c-general` | `nodeGlyph({ activity })` dot and decided glyph, `activityCard({ category })` band, `conditionLabel` number chip (4.2 hot, 4.3 water), `conditionCard({ category })` band |
+
+`UIKit.C` resolves tokens on access (`C.priora`, `C.ok`, `C.alert`, `C.water`, `C.hot` ...; `C.signal` is now the Priora token). `UIKit.CATEGORY` maps category names to tokens (`protection`/`sprinkler` are water).
 
 Style frames: `scratchpad/ui-kit/frames/` (session scratchpad). Test harness: `scratchpad/ui-kit/harness.html` + `shots.js` (one shot per `#shot=` hash), `shoot.mjs`, `verify.mjs`, `statecmp.mjs`.
 
@@ -48,7 +62,7 @@ The product header strip (demo `#top` at `--pui-scale` 1.6, 109 px tall, 96 px s
 
 Options: `prefix`, `scene`, `parent`, position, `scale` 1.6, `chip` ('End-state concept' or false), `chipVisible` true, `status` 'inside', `statuses` (extra `{ key: [glyph, text, signal?] }`), `time` '14:18', `seconds` false (HH:MM:SS).
 
-Status keys and texts (the demo's): `inside` All activity inside · `checking` Recalculating 1 activity · `outside` 1 activity outside conditions (cobalt glyph) · `retained` 1 increment retained · `cover` 1 slice on temporary cover · `changed` 1 decision recorded · back inside.
+Status keys and texts (the demo's): `inside` All activity inside · `checking` Recalculating 1 activity · `outside` 1 activity outside conditions (alert glyph; cut 3) · `retained` 1 increment retained · `cover` 1 slice on temporary cover · `changed` 1 decision recorded · back inside.
 
 Helpers: `setClock(tl, t, 'HH:MM')` (instant) · `rollClock(tl, t, to, dur, ease, from)` odometer roll with mechanical carry (from the current value, or from `from`) · `setStatus(tl, t, key, dur)` · `showChip(tl, t, on, dur)` · `enter(tl, t, dur)` (hairline draws, items settle left to right) after `hideForEnter()`. Handles: `el`, `clock` (Odometer), `status` (Swap), `chip`.
 
@@ -56,9 +70,9 @@ The chip: the task asked for it, while demo-map section 5 lists `END-STATE CONCE
 
 ### 4.2 nodeGlyph(svgParent, worldXY, state, opts)
 
-The demo node (`nodeMarkup`) at screen-constant size, drawn in world coordinates. States: `checking` (dashed ring r 9, dot), `inside` (ring r 6.6 at .42, dot r 3.1), `outside` (cobalt ring r 8.5 at 1.7 px + four ticks 11.5 to 16 px, paper dot with cobalt stroke), `changed` (ink square 6.8 px, ring), `retained` (dashed owned disc r 14 with hatch, paper core, dot), `cover` (the transferred capsule with clock). Optional reticle (corner brackets at 22 px).
+The demo node (`nodeMarkup`) at screen-constant size, drawn in world coordinates. States: `checking` (dashed ring r 9, dot), `inside` (ring r 6.6 at .42, dot r 3.1), `outside` (alert ring r 8.5 at 1.7 px + four ticks 11.5 to 16 px, paper dot with alert stroke; cut 3), `changed` (ink square 6.8 px, ring), `retained` (dashed owned disc r 14 with hatch, paper core, dot), `cover` (the transferred capsule with clock). Optional reticle (corner brackets at 22 px).
 
-Options: `prefix`, `scene`, `name`, `k` glyph scale (1 routine, 1.5 hero as the demo), `kr` reticle scale (default max(1, 0.88 k)), `reticle` false, `visible` true, `events` true.
+Options: `prefix`, `scene`, `name`, `k` glyph scale (1 routine, 1.5 hero as the demo), `kr` reticle scale (default max(1, 0.88 k)), `reticle` false, `visible` true, `events` true, `activity` (cut 3: 'hot' | 'lift' | 'gas' | 'air' | 'general' colours the dot and a decided glyph; nodes named 'hero' or 'inset' default to 'hot', the film's hot-work node; `false` keeps the demo's ink). The inside ring is ok green, the outside ring and ticks alert.
 
 Helpers: `state(tl, t, to, dur)` (part opacities and dot colours; `outside` lands with a small ring settle) · `moveTo(tl, t, xy, dur, ease)` · `spin(tl, t0, t1)` (checking ring, 2.2 s per turn, as the demo) · `pulse(tl, t, dur)` (spawn ring) · `show(tl, t, on, dur)` · `quiet(tl, t, opacity, dur)` · `reticle(tl, t, on, dur)`. Handle: `el`, `parts`, `cur`, `pos`, `k`.
 
@@ -68,8 +82,8 @@ The hero node (in `checking`, at `outsideState.heroOriginWorld` [38.971, 32.5]) 
 
 1. Stretch (`stretch`, 1.5 s, easeInOutCubic as the demo): the dashed checking ring becomes a stadium capsule (paper fill, dashed hairline outline, hairline spine, a faint tail dot on the roof and the solid dot riding the head). The head follows the demo's exit path `heroDeviation(...).P(v)` (the ray from the envelope centre through the node, 16 px arc) to the settle point just outside the edge (`clamp(34 + 6.2 s, 58, 118)` px past it, exactly the demo's).
 2. The membrane (`envelope-outline`, `envelope-outer`, and `envelope-fill` when it shares the outline) flexes with the demo's own Gaussian deformation driven by the head, up to the pinch point (44 px past the edge), and holds that tension while the head travels on.
-3. When the head crosses the edge (`crossV`, 0.763 at s 8.83) the capsule turns cobalt (event `cross-edge`; drive the header, card footer and readout from `X.tCross`).
-4. Hold (`hold`, 0.16 s), then snap (`snap`, 0.46 s, expo.out): the tail retracts to the head and leaves the dashed cobalt tether behind it, the membrane relaxes to the demo's 6 px notch with its two exit ticks, the node lands in `outside` with reticle and the slice ring growing 8 to 28 px, and the anchor ellipse marks the roof position. Event `snap` (meta.latch = landing time).
+3. When the head crosses the edge (`crossV`, 0.763 at s 8.83) the capsule turns alert (cut 3; event `cross-edge`; drive the header, card footer and readout from `X.tCross`).
+4. Hold (`hold`, 0.16 s), then snap (`snap`, 0.46 s, expo.out): the tail retracts to the head and leaves the dashed alert tether behind it, the membrane relaxes to the demo's 6 px notch with its two exit ticks, the node lands in `outside` with reticle and the slice ring growing 8 to 28 px, and the anchor ellipse marks the roof position. Event `snap` (meta.latch = landing time).
 
 The landed geometry equals the demo's (`heroDeviation` at v = 1). The intermediate membrane uses the same function at a held progress (the film's tension choice); documented as a deliberate difference from the demo, where the membrane relaxes while the node is still travelling.
 
@@ -81,19 +95,36 @@ Options: `s` (the camera scale the shot holds, default 8.83133), `stretch`, `hol
 
 ### 4.2c sprinkler(tl, site, t, to, opts)
 
-Sprinkler Zone 3 on a SiteKit site: `offline` (heads hollow in the demo's ripple order from the valve, 55 ms per step, crosses on, hatch in after 350 ms, outline to the darker 2 2 dashes, label `ACTIVE` to `OFFLINE` in cobalt), `restored` (reverse ripple, label `RESTORED` in ink), `active`. Adds its clones (offline outline, two status texts) to the site once. Options: `step` 0.055, `labelSignal` true. Events: `zone-offline`, `zone-restored`, `zone-active`.
+Sprinkler Zone 3 on a SiteKit site: `offline` (heads drain from water to hollow `--c-offline` in the demo's ripple order from the valve, 55 ms per step, crosses on, hatch in after 350 ms, outline to the offline 2 2 dashes, label `ACTIVE` to `OFFLINE` in alert), `restored` (reverse ripple back to water, label `RESTORED` in ok green), `active`. Adds its clones (offline outline, two status texts) to the site once. Options: `step` 0.055, `labelSignal` true. Events: `zone-offline`, `zone-restored`, `zone-active`.
 
 ### 4.3 activityCard(opts)
 
-The demo's activity card at `--pui-scale` 1.8 (612 px wide, every label 18 px or more): `ACTIVITY · ACT-1418-R03` with its state glyph, `Hot work`, `ROOF 03 · 14:18–18:00`, `Contractor · certified operator`, rows `Certified operator`, `Extinguishing equipment`, `Fire watch`, `Combustibles cleared`, `Automatic sprinkler protection`, each `VERIFIED` or `UNAVAILABLE` (cobalt, crossed circle). Footer left `CHECKING N OF 5` / `5 OF 5 VERIFIED` / `4 OF 5 HOLD`, right `CHECKING STATE` / `INSIDE ENVELOPE` / `RECALCULATING` / `OUTSIDE ENVELOPE`.
+The demo's activity card at `--pui-scale` 1.8 (612 px wide, every label 18 px or more): `ACTIVITY · ACT-1418-R03` with its state glyph, `Hot work`, `ROOF 03 · 14:18–18:00`, `Contractor · certified operator`, rows `Certified operator`, `Extinguishing equipment`, `Fire watch`, `Combustibles cleared`, `Automatic sprinkler protection`, each `VERIFIED` (ok pill) or `UNAVAILABLE` (alert pill, crossed circle). Footer left `CHECKING N OF 5` / `5 OF 5 VERIFIED` / `4 OF 5 HOLD`, right `CHECKING STATE` / `INSIDE ENVELOPE` / `RECALCULATING` / `OUTSIDE ENVELOPE`.
 
-Options: `prefix`, `scene`, `parent`, position, `scale` 1.8, `state` 'waiting' | 'verified', `data` (override texts).
+Options: `prefix`, `scene`, `parent`, position, `scale` 1.8, `state` 'waiting' | 'verified', `data` (override texts), `category` (cut 3: the colour band on top of the card; default 'hot' when the title is Hot work, `null` for none). VERIFIED and UNAVAILABLE are pills (ok, alert), the checks ok green, the lost condition's crossed circle alert, INSIDE ENVELOPE ok, 4 OF 5 HOLD and OUTSIDE ENVELOPE alert; the row hairlines are gone. Geometry is the demo's (a2-resolve measures a check position on it).
+
+### 4.3b conditionCard(opts) (cut 3, film-native)
+
+A paper-white card for one condition of one kind of work, at film scale (Plex Sans 44 px condition, Plex Mono 20 to 26 px labels, an 80 px live reading): a 10 px band in the category's colour, an eyebrow (`CRANE LIFT · PRODUCTION HALL 2`), the condition (`Lifts over process plant`), a status line with a state pill, an optional live reading with its limit, and an outcome row that settles with Priora's mark.
+
+Options: `prefix`, `scene`, `parent`, position, `width` 760, `category` 'lift' | 'gas' | 'air' | 'hot' | 'water', `eyebrow`, `title`, `status` `{ key: [text, tone] }` with `statusInit` (tones ok, alert, ink), `pill` initial key and `pills` `{ key: [text, tone] }` (defaults: inside `Inside agreed conditions` ok, checking ink, outside `Outside agreed conditions` alert, decided `Decision recorded` priora), `reading` `{ label, unit, value, limit, over: true, digits: 2 }`, `outcome` `[line, subline]`, `autoPill`, `decidedPill`.
+
+Helpers: `read(tl, t0, t1, to, ease)` counts the reading (per-digit odometer); crossing the limit turns the number and the limit alert and the pill outside on the first frame the displayed value is past it; returns `{ end, tCross }` (event `cross-edge`) · `setStatus(tl, t, key, dur)` (an alert status logs `row-unavailable`) · `setPill(tl, t, key, dur)` · `showOutcome(tl, t, dur)` (opens the outcome row, pill to decided; `decision-resolve`) · `enter(tl, t, dur)` after `hideForEnter()`.
+
+```js
+const cc = UIKit.conditionCard({ prefix: ID, parent: board, left: 1080, top: 260, category: 'lift',
+  eyebrow: 'Crane lift · Production Hall 2', title: 'Lifts over process plant',
+  status: { ok: ['Wind below 9 m/s', 'ink'] }, reading: { label: 'Wind', unit: 'm/s', value: 7, limit: 9 },
+  outcome: ['Lift paused · rescheduled 16:30', 'Change the work'] });
+cc.read(tl, T('wind'), T('wind', 1.2), 11, 'power1.in');
+cc.showOutcome(tl, T('wind', 2));
+```
 
 Helpers: `verifyRows(tl, t0, stagger)` (default 0.6 s, the demo's; each check draws, the row text switches, the footer counts, the top glyph turns `inside`; returns the end time) · `setRowState(tl, i, state, t, dur)` with `waiting | checking | verified | unavailable` · `conditionLost(tl, t, i)` (row i, default the fifth, to UNAVAILABLE; footer `4 OF 5 HOLD · RECALCULATING`; glyph `checking`) · `setFooter(tl, t, leftKey, rightKey)` (left `c0..c4 | v5 | h4`, right `checking | inside | recalc | outside`) · `setGlyph(tl, t, 'checking' | 'inside' | 'outside')` · `enter(tl, t, dur)` after `hideForEnter()`.
 
 ### 4.4 captureStrip(opts)
 
-Speech intake: `VOICE · ROOF 03 · 14:18` (state `LISTENING` then `STRUCTURED`), a fine waveform line drawn from an amplitude envelope, the transcript `I'm welding on Roof 03 until six.` setting word by word, then four fields, each underlined in cobalt as recognised: `ACTIVITY` Hot work (welding) · `LOCATION` Roof 03 · `WINDOW` 14:18–18:00 · `BY` Contractor, certified operator. On recognition the matched transcript words return to ink and the rest recede (`BY` has no spoken match: it comes from the permit).
+Speech intake: `VOICE · ROOF 03 · 14:18` (state `LISTENING` then `STRUCTURED`), a fine waveform line drawn from an amplitude envelope, the transcript `I'm welding on Roof 03 until six.` setting word by word, then four fields, each underlined in Priora's cobalt as recognised: `ACTIVITY` Hot work (welding) · `LOCATION` Roof 03 · `WINDOW` 14:18–18:00 · `BY` Contractor, certified operator. On recognition the matched transcript words return to ink and the rest recede (`BY` has no spoken match: it comes from the permit).
 
 Options: `prefix`, `scene`, `parent`, position, `width` 1040, `waveH` 64, `words` [{w, start, end}], `envelope` (array of 0..1, e.g. RMS of the worker take), `text`, `fields`, `label`. Without an envelope, `UIKit.envelopeFromWords(words, dur, n, seed)` makes a deterministic one.
 
@@ -103,13 +134,13 @@ Helpers: `play(tl, offset, words)` (waveform draws over the take, playhead hairl
 
 Clause labels on the drawing: a terminal, a short lead, the clause number in a hairline box (Act I's detail tag, made precise), the text in Plex Mono 500 uppercase, a hairline rule. Texts: `4.2` HOT WORK · PERMIT · CERTIFIED OPERATOR · FIRE WATCH, `4.3` SPRINKLER PROTECTION IN SERVICE. Wraps on the middle dots (then on spaces) to `maxChars` 32.
 
-Options: `num`, `text`, `at` (world point of the terminal), `s` (reference camera scale: `size` is px at that scale; the label is world-sized), `size` 21, `align` 'left' (text to the right of the terminal) or 'right', `lead` 22, `maxChars`. Helpers: `reveal(tl, t, dur)`, `live(tl, t, on)` (terminal and number box take the cobalt), `fade(tl, t, to, dur)`.
+Options: `num`, `text`, `at` (world point of the terminal), `s` (reference camera scale: `size` is px at that scale; the label is world-sized), `size` 21, `align` 'left' (text to the right of the terminal) or 'right', `lead` 22, `maxChars`, `category` (cut 3: the number box is tinted with the category's soft colour; default 4.2 hot, 4.3 water). Helpers: `reveal(tl, t, dur)`, `live(tl, t, on)` (terminal and number box take Priora's cobalt), `fade(tl, t, to, dur)`.
 
 `connect(...)`: a cobalt 2 px live connection drawn on (DrawSVG), world coordinates, with screen-constant terminals. `shape`: 'straight' | 'elbow' (horizontal first) | 'elbow-v' (vertical first; `bend` 1 gives a clean L) | 'arc'. Options `dur` 0.8, `bend`, `fromTerminal`, `toTerminal`, `name`. Returns `{ el, path, end, fade(tl, t, dur, to), ink(tl, t, dur) }`. Because both ends are world points, the line stays attached through any camera move.
 
 ### 4.5b readout(opts)
 
-The node's tooltip at `--pui-scale` 1.8: `HOT WORK · ROOF 03` then one of `checking` (CHECKING STATE / Verifying 5 conditions), `inside` (INSIDE PROGRAMME / DKK 0 incremental), `recalc` (RECALCULATING RISK STATE / Sprinkler Zone 3 offline), `outside` (OUTSIDE AGREED CONDITIONS in cobalt / Decision required, with the slice `EXPOSURE · TEMPORARY · 3H 18M` hatched cobalt from 14:42 to 18:00), `back` (BACK INSIDE ACCEPTED ENVELOPE / DKK 0 incremental), `retained` (RISK RETAINED · NORDHAVN / Owned and recorded · until 18:00; the demo's "no insurance purchased" line is not used). Helpers `set(tl, t, key)`, `enter`.
+The node's tooltip at `--pui-scale` 1.8: `HOT WORK · ROOF 03` then one of `checking` (CHECKING STATE / Verifying 5 conditions), `inside` (INSIDE PROGRAMME / DKK 0 incremental), `recalc` (RECALCULATING RISK STATE / Sprinkler Zone 3 offline), `outside` (OUTSIDE AGREED CONDITIONS in alert / Decision required, with the slice `EXPOSURE · TEMPORARY · 3H 18M` hatched alert from 14:42 to 18:00), `back` (BACK INSIDE ACCEPTED ENVELOPE / DKK 0 incremental), `retained` (RISK RETAINED · NORDHAVN / Owned and recorded · until 18:00; the demo's "no insurance purchased" line is not used). Helpers `set(tl, t, key)`, `enter`.
 
 ### 4.6 recordColumn(opts)
 
@@ -117,17 +148,17 @@ The trusted record: `TRUSTED RECORD · APPEND-ONLY` and `N ENTRIES` (odometer), 
 
 Options: `scale` 1.8, `width` 560, `entries` (initial, visible), `tail` (bottom-anchored with a top fade; needs `height`), `height`, `panel` (paper card behind it, for a free-floating column over the drawing), `title`, `sub` ('Append-only' or false). Helpers `append(tl, t, entry, dur)` where entry is a `UIKit.DATA.records` key or `{ t, kind, x, s, i, sig }`, `enter`.
 
-Record keys (demo texts): `open` 08:55 Day opened · site baseline verified · `hotStart` 14:18 Hot work started · Roof 03 · inside envelope (REC-0403-AA9A · e0b9 4d12) · `verified` 14:18 5 of 5 conditions verified (REC-0404-E3F8 · 6721 7a99) · `szOffline` 14:42 Sprinkler Zone 3 taken offline · `outside` 14:42 Risk state moved outside annual programme conditions (cobalt marker) · `requested` 14:43 Decision requested · Site Risk Manager · `restored` 14:47 Sprinkler Zone 3 restored · `changed` 14:48 Risk state returned inside annual programme · Incremental price DKK 0 · `retained` 14:46 Incremental risk retained by Nordhavn Bioprocessing · `requestedCapacity`, `responses` (transfer, future state) · `craneLift` 15:12 · `gasBypass` 15:41.
+Record keys (demo texts): `open` 08:55 Day opened · site baseline verified · `hotStart` 14:18 Hot work started · Roof 03 · inside envelope (REC-0403-AA9A · e0b9 4d12) · `verified` 14:18 5 of 5 conditions verified (REC-0404-E3F8 · 6721 7a99) · `szOffline` 14:42 Sprinkler Zone 3 taken offline · `outside` 14:42 Risk state moved outside annual programme conditions (filled alert marker; system events have an alert ring, decisions a cobalt square and tint) · `requested` 14:43 Decision requested · Site Risk Manager · `restored` 14:47 Sprinkler Zone 3 restored · `changed` 14:48 Risk state returned inside annual programme · Incremental price DKK 0 · `retained` 14:46 Incremental risk retained by Nordhavn Bioprocessing · `requestedCapacity`, `responses` (transfer, future state) · `craneLift` 15:12 · `gasBypass` 15:41.
 
 ### 4.7 decisionSheet(opts)
 
-The demo's sheet at video scale (980 px wide, film sizes: title 62 px Light, text 26 px, labels 18 px; full sheet 874 px tall, fits the safe area at top 96): eyebrow `14:43 · DECISION REQUESTED · SITE RISK MANAGER` (cobalt dot), `Risk state changed`, `Roof hot work is continuing while sprinkler protection in the affected zone is unavailable.`, facts `EXISTING PROGRAMME` Outside agreed conditions | `INCREMENTAL EXPOSURE` TEMPORARY | `EXPECTED DURATION` 3h 18m 14:42–18:00, timeline `14:18 · OBSERVED` Inside · 5 of 5 verified → `14:42 · CHANGED` Sprinkler Zone 3 offline → `14:43 · NOW` Outside · your decision (cobalt glyph), `WHAT DO YOU WANT TO DO?`, the three choices (keyboard hints removed):
+The demo's sheet at video scale (980 px wide, film sizes: title 62 px Light, text 26 px, labels 18 px; full sheet 874 px tall, fits the safe area at top 96): eyebrow `14:43 · DECISION REQUESTED · SITE RISK MANAGER` (alert dot), `Risk state changed`, `Roof hot work is continuing while sprinkler protection in the affected zone is unavailable.`, facts `EXISTING PROGRAMME` Outside agreed conditions | `INCREMENTAL EXPOSURE` TEMPORARY | `EXPECTED DURATION` 3h 18m 14:42–18:00, timeline `14:18 · OBSERVED` Inside · 5 of 5 verified → `14:42 · CHANGED` Sprinkler Zone 3 offline → `14:43 · NOW` Outside · your decision (alert glyph), `WHAT DO YOU WANT TO DO?`, the three choices (keyboard hints removed):
 - `CHANGE ACTIVITY` Modify the work or restore a safeguard until it returns inside the envelope. `INCREMENTAL DKK 0`
 - `RETAIN RISK` Knowingly carry the incremental exposure. Priora records who, what and for how long. `OWNED AND RECORDED`
 - `TRANSFER RISK` Ask the market whether a carrier will cover this temporary slice. `CARRIER PRICED`
 - foot: Priora supplies the observed state. The decision stays with the risk owner.
 
-Helpers: `highlight(tl, t, key)` (ink border, white, lifted 3 px; the others to .42) · `focus(tl, t, on)` (folds facts and timeline away so the outcome fits) · `outcome(tl, t, key)` opens that choice's panel under the choices (closes the previous) · `resolveChange(tl, t)` · `resolveRetain(tl, t)` · `enter`.
+Helpers: `highlight(tl, t, key)` (the selected choice in Priora's cobalt: border and a 1.5 px ring, paper-white, lifted 3 px; the others to .42) · `focus(tl, t, on)` (folds facts and timeline away so the outcome fits) · `outcome(tl, t, key)` opens that choice's panel under the choices (closes the previous) · `resolveChange(tl, t)` · `resolveRetain(tl, t)` · `enter`.
 
 Outcome panels:
 - change: `Restore sprinkler protection` / Reopen the Zone 3 valve. Protection back within minutes. Then `BACK INSIDE ACCEPTED ENVELOPE` and `INCREMENTAL DKK 0`. Pair with `sprinkler(..., 'restored')`, `crossing.back()`, `node.state('changed')`.
@@ -150,7 +181,7 @@ The wide whole-site product composition (a 1920x1080 root): SiteKit site in prec
 
 Helpers:
 - `scatter(tl, t0, dur, o)`: about 30 activities (the demo's routine and portfolio positions, then ambient spots) arrive in a seeded order: pulse, checking ring turning for `o.check` 0.7 s, inside, then quiet (.55). OBSERVED and INSIDE follow the arrivals and passes as a sum of 0.16 s smooth steps (one continuous odometer track; returns its end). Events `node-pass` (every third node).
-- `decide(tl, t, 'changed' | 'retained', o)`: a node arrives, turns cobalt `outside`, holds `o.hold` 1 s, resolves to its glyph; DECISIONS steps; a plate (`DECISION MADE · CHANGED / CRANE LIFT / RESCHEDULED OUTSIDE WIND LIMIT` or `RISK RETAINED · NORDHAVN / GAS DETECTOR BYPASS / RETAINED UNTIL 17:30`) with a leader, `o.side` and `o.dy`; the record appends 15:12 / 15:41. Events `decision-flip`, `decision-resolve`. Call it after the scatter's counter window if it should add to OBSERVED (it does not touch OBSERVED).
+- `decide(tl, t, 'changed' | 'retained', o)`: a node arrives, turns alert `outside`, holds `o.hold` 1 s, resolves to its glyph; DECISIONS steps; a plate (`DECISION MADE · CHANGED / CRANE LIFT / RESCHEDULED OUTSIDE WIND LIMIT` or `RISK RETAINED · NORDHAVN / GAS DETECTOR BYPASS / RETAINED UNTIL 17:30`) with a leader, `o.side` and `o.dy`; the record appends 15:12 / 15:41. Events `decision-flip`, `decision-resolve`. Call it after the scatter's counter window if it should add to OBSERVED (it does not touch OBSERVED).
 - Handles: `site`, `header`, `rail`, `counters[3]`, `record`, `nodes`, `decNodes`, `camera`, `overlay`.
 
 ### 4.10 chain(opts)

@@ -2,14 +2,2364 @@
 <html lang="en-GB">
   <head>
     <meta charset="UTF-8" />
-    <title>a3-scenarios (placeholder until the cut 3 build lands)</title>
+    <title>a3-scenarios: every kind of work carries its own conditions (cut 3, SC1 to SC5)</title>
+    <!-- Ignored by the assembler. Everything that must exist at render time is inside <template>.
+
+      HANDOFF IN (cue scenariosIn, 0.4 s crossfade over a3-change's programme-layer hold): this scene
+      carries its own paper (the index ground, grain tile and vignette at the same origin) inside the
+      wrapper that fades in, so a3-change is covered by clean paper once the crossfade completes,
+      whether or not a3-change fades itself out.
+
+      HANDOFF OUT (a3-close crossfades in over this scene's last 0.4 s, cue closeIn to closeIn + 0.4):
+        From cue closeIn to the end of this scene the frame is the bare precise site, exactly a full-frame
+        1920 x 1080 SiteKit mount:
+          SiteKit.mount(svg, { show: 'precise', rough: false })  (a hidden rough layer renders nothing, so
+                                                                  rough: true gives the same frame)
+          site.setView(SiteKit.CAMERAS.wholeSite)   = SiteKit.rect(16.5, 44.5, 6.01038),
+                                                     viewBox "-143.224 -45.345 319.447 179.689", --sw 0.166379
+          the untouched kit state: zone labels at the demo's 10 px (no label scaling is applied in this
+          scene), Sprinkler Zone 3 as mounted, the envelope and its label as drawn, in whatever colours
+          the kit gives a bare precise mount (this scene never restyles the site).
+        This scene's own overlay group (markers, tags, decision glyphs, the cobalt envelope pulse) is at
+        opacity 0 from closeIn: it fades out over [closeIn - 0.6, closeIn]. The site camera lands on
+        wholeSite at the shared cut on 'decisions' and is still from then on. This scene does not fade
+        itself out, so the incoming crossfade blends two identical frames.
+
+      SHOTS (docs/cut3-direction.md section 3, a3-scenarios; every time from cues through FL.clock):
+        SC1  scenariosIn (xfade 0.4): the whole precise site at wholeSite. Activity markers in their
+             colours on consecutive half beats from b(everyKind): hot work Roof 03, crane at Production
+             Hall 2, gas detection at the Laboratory, confined space at Tank 2, each with a condition
+             tag; ordinary grey markers ripple in after them. Still from then on; on b(L18a.end) a one-
+             beat push toward the crane, cut on c(crane).
+        SC2  c(crane): the crane vignette, close on the hook line and the load over the hall. On
+             b(L18b:lift) a one-beat pull follows the cobalt live line from the anemometer at the boom
+             head into the card's rule (the card sets as it arrives). The wind reading counts 7 to 11 m/s
+             from 'wind', crosses 9 (the number turns alert); the outcome settles on b(L18b:picks):
+             CHANGE THE WORK, Lift paused, Rescheduled 16:30. Hold to the cut.
+        SC3  c(gasDetector): the laboratory wall, the gas detector, its bypass key switch. The key
+             turns on 'bypassed' and the tag drops; the card's live state IN SERVICE becomes BYPASSED
+             (alert); a one-beat push makes the card the hero; the outcome settles on
+             b(L18c:maintenance): KNOWINGLY RETAINED, Retained until 17:30, portable detector, owned
+             by the lab lead (the portable detector appears in the drawing). Hold to the cut.
+        SC4  c(confined): close on the tank manhole, the rescue tripod and the entrant in hi-vis; on
+             b(L18d:entry) a one-beat move follows the duct to the fan and reveals the card. On
+             'ventilation' the blades run down and stop and the duct collapses; the card flips to
+             VENTILATION DOWN (alert) on the next half beat; the outcome settles on b(L18d:down):
+             PREVENTION BEFORE THE WORK, Entry held. Hold to the cut.
+        SC5  c(L18e.start): cut to the precise site close on Tank 2 (its teal marker), then one
+             continuous decelerating pull back to wholeSite, landing on c(decisionsL18). Ordinary
+             markers pass with small green ticks; from b(few) the four decisions of the film resolve
+             as distinct glyphs in their colours with short labels, one per half beat; on
+             c(decisionsL18) each gains the cobalt decision ring; on c(madeInTime) one cobalt pulse
+             runs the envelope line once. Overlays fade from closeIn - 0.6.
+
+      Vignette holds (outcome fully settled to the next cut, for the guide narration): see the report;
+      each is exactly two beats on the grid.
+    -->
   </head>
   <body>
     <template id="a3-scenarios-template">
-      <div data-composition-id="a3-scenarios" data-width="1920" data-height="1080"></div>
+      <link rel="stylesheet" href="assets/css/film.css" />
+      <link rel="stylesheet" href="assets/css/film-color.css" />
+      <link rel="stylesheet" href="assets/css/film-sketch.css" />
+      <style>
+        #root {
+          position: absolute;
+          inset: 0;
+          overflow: hidden;
+        }
+        #a3-scenarios-fade,
+        #a3-scenarios-paper,
+        #a3-scenarios-grain,
+        #a3-scenarios-vig,
+        #a3-scenarios-site-wrap,
+        .a3-scenarios-vw {
+          position: absolute;
+          inset: 0;
+        }
+        #a3-scenarios-paper {
+          background-color: var(--paper-ground);
+        }
+        #a3-scenarios-grain {
+          background-image: url("assets/textures/paper-grain.png");
+          background-size: 512px 512px;
+          background-repeat: repeat;
+        }
+        #a3-scenarios-vig {
+          background: radial-gradient(ellipse 75% 70% at 50% 48%, rgba(59, 58, 51, 0) 58%, rgba(59, 58, 51, 0.035) 82%, rgba(59, 58, 51, 0.07) 100%);
+        }
+        #a3-scenarios-site,
+        svg.a3-scenarios-svg {
+          position: absolute;
+          left: 0;
+          top: 0;
+          width: 1920px;
+          height: 1080px;
+          display: block;
+          overflow: hidden;
+        }
+        /* ---------------------------------------------------------------- the drawn vignettes */
+        /* linework: filled pressure ribbons for contours (ink), fine strokes for detail */
+        .a3-scenarios-svg .a3-scenarios-ink {
+          fill: var(--c-ink);
+          stroke: none;
+        }
+        .a3-scenarios-svg .a3-scenarios-inkl {
+          fill: var(--graphite-light);
+          stroke: none;
+        }
+        .a3-scenarios-svg .a3-scenarios-ln,
+        .a3-scenarios-svg .a3-scenarios-ov,
+        .a3-scenarios-svg .a3-scenarios-cn,
+        .a3-scenarios-svg .a3-scenarios-cl,
+        .a3-scenarios-svg .a3-scenarios-ht,
+        .a3-scenarios-svg .a3-scenarios-htl,
+        .a3-scenarios-svg .a3-scenarios-hc,
+        .a3-scenarios-svg .a3-scenarios-gust {
+          fill: none;
+          stroke: var(--c-ink);
+          stroke-linecap: round;
+          stroke-linejoin: round;
+        }
+        .a3-scenarios-svg .a3-scenarios-ln {
+          stroke-width: 1.25px;
+        }
+        .a3-scenarios-svg .a3-scenarios-ov {
+          stroke-width: 1px;
+          stroke-opacity: 0.28;
+        }
+        .a3-scenarios-svg .a3-scenarios-cn {
+          stroke: var(--graphite-light);
+          stroke-width: 0.9px;
+          stroke-opacity: 0.6;
+        }
+        .a3-scenarios-svg .a3-scenarios-cl {
+          stroke: var(--graphite-light);
+          stroke-width: 0.9px;
+          stroke-opacity: 0.7;
+          stroke-dasharray: 26 6 3 6;
+        }
+        .a3-scenarios-svg .a3-scenarios-ht {
+          stroke: var(--c-graphite);
+          stroke-width: 0.85px;
+          stroke-opacity: 0.5;
+        }
+        .a3-scenarios-svg .a3-scenarios-htl {
+          stroke: var(--c-graphite);
+          stroke-width: 0.75px;
+          stroke-opacity: 0.26;
+        }
+        .a3-scenarios-svg .a3-scenarios-gust {
+          stroke: var(--c-graphite);
+          stroke-width: 1.6px;
+          stroke-opacity: 0.55;
+        }
+        /* colour hatching on shadow sides */
+        .a3-scenarios-svg .a3-scenarios-hc {
+          stroke-width: 1px;
+          stroke-opacity: 0.85;
+        }
+        .a3-scenarios-svg .a3-scenarios-hc.a3-scenarios-hc-lift {
+          stroke: var(--c-ink);
+          stroke-opacity: 0.32;
+        }
+        .a3-scenarios-svg .a3-scenarios-hc-slate {
+          stroke: var(--c-slate-dark);
+        }
+        .a3-scenarios-svg .a3-scenarios-hc-sage {
+          stroke: var(--c-sage-dark);
+        }
+        .a3-scenarios-svg .a3-scenarios-hc-stone {
+          stroke: var(--c-stone-dark);
+        }
+        .a3-scenarios-svg .a3-scenarios-hc-steel {
+          stroke: var(--c-steel-dark);
+        }
+        .a3-scenarios-svg .a3-scenarios-hc-air {
+          stroke: var(--c-air);
+          stroke-opacity: 0.7;
+        }
+        .a3-scenarios-svg .a3-scenarios-hc-gas {
+          stroke: var(--c-gas);
+          stroke-opacity: 0.7;
+        }
+        .a3-scenarios-svg .a3-scenarios-hc-sand {
+          stroke: var(--c-sand-dark);
+        }
+        .a3-scenarios-svg .a3-scenarios-hc-hivis {
+          stroke: var(--c-ink);
+          stroke-opacity: 0.28;
+        }
+        .a3-scenarios-svg .a3-scenarios-hc-dark {
+          stroke: var(--c-ink);
+          stroke-opacity: 0.75;
+          stroke-width: 1.1px;
+        }
+        /* material washes (flat, pale; strong colour only where it carries meaning) */
+        .a3-scenarios-svg .a3-scenarios-oc {
+          fill: var(--c-paper);
+        }
+        .a3-scenarios-svg .a3-scenarios-hi {
+          fill: var(--paper-hi);
+        }
+        .a3-scenarios-svg .a3-scenarios-f-lift {
+          fill: var(--c-lift);
+        }
+        .a3-scenarios-svg .a3-scenarios-f-lifts {
+          fill: var(--c-lift-soft);
+        }
+        .a3-scenarios-svg .a3-scenarios-f-slr {
+          fill: var(--c-slate-roof);
+        }
+        .a3-scenarios-svg .a3-scenarios-f-slw {
+          fill: var(--c-slate-wall);
+        }
+        .a3-scenarios-svg .a3-scenarios-f-sld {
+          fill: var(--c-slate-dark);
+        }
+        .a3-scenarios-svg .a3-scenarios-f-sgw {
+          fill: var(--c-sage-wall);
+        }
+        .a3-scenarios-svg .a3-scenarios-f-sgr {
+          fill: var(--c-sage-roof);
+        }
+        .a3-scenarios-svg .a3-scenarios-f-sgd {
+          fill: var(--c-sage-dark);
+        }
+        .a3-scenarios-svg .a3-scenarios-f-str {
+          fill: var(--c-stone-roof);
+        }
+        .a3-scenarios-svg .a3-scenarios-f-stw {
+          fill: var(--c-stone-wall);
+        }
+        .a3-scenarios-svg .a3-scenarios-f-std {
+          fill: var(--c-stone-dark);
+        }
+        .a3-scenarios-svg .a3-scenarios-f-sand {
+          fill: var(--c-sand-roof);
+        }
+        .a3-scenarios-svg .a3-scenarios-f-sandd {
+          fill: var(--c-sand-dark);
+        }
+        .a3-scenarios-svg .a3-scenarios-f-steel {
+          fill: var(--c-steel);
+        }
+        .a3-scenarios-svg .a3-scenarios-f-steell {
+          fill: var(--c-steel);
+          fill-opacity: 0.5;
+        }
+        .a3-scenarios-svg .a3-scenarios-f-steeld {
+          fill: var(--c-steel-dark);
+        }
+        .a3-scenarios-svg .a3-scenarios-f-ground {
+          fill: var(--c-ground);
+        }
+        .a3-scenarios-svg .a3-scenarios-f-paving {
+          fill: var(--c-paving);
+        }
+        .a3-scenarios-svg .a3-scenarios-f-gas {
+          fill: var(--c-gas);
+        }
+        .a3-scenarios-svg .a3-scenarios-f-gass {
+          fill: var(--c-gas-soft);
+        }
+        .a3-scenarios-svg .a3-scenarios-f-air {
+          fill: var(--c-air);
+        }
+        .a3-scenarios-svg .a3-scenarios-f-airs {
+          fill: var(--c-air-soft);
+        }
+        .a3-scenarios-svg .a3-scenarios-f-hivis {
+          fill: var(--c-hivis);
+        }
+        .a3-scenarios-svg .a3-scenarios-f-helmet {
+          fill: var(--c-helmet);
+        }
+        .a3-scenarios-svg .a3-scenarios-f-dark {
+          fill: var(--c-graphite);
+        }
+        .a3-scenarios-svg .a3-scenarios-f-hole {
+          fill: var(--c-ink);
+          fill-opacity: 0.86;
+        }
+        .a3-scenarios-svg .a3-scenarios-wash {
+          fill-opacity: 0.72;
+        }
+        /* drawn lettering in the vignettes: Plex through the film tokens, ink */
+        .a3-scenarios-svg .skt-lab {
+          font-family: var(--mono);
+          fill: var(--c-ink);
+        }
+        .a3-scenarios-svg .skt-sans {
+          font-family: var(--sans);
+        }
+        .a3-scenarios-svg .a3-scenarios-plate {
+          font-family: var(--mono);
+          font-weight: 500;
+          fill: var(--c-ink);
+        }
+        .a3-scenarios-svg .a3-scenarios-plate-inv {
+          font-family: var(--mono);
+          font-weight: 500;
+          fill: var(--paper-hi);
+        }
+        /* the live connection */
+        .a3-scenarios-svg .a3-scenarios-live {
+          fill: none;
+          stroke: var(--c-priora);
+          stroke-width: 2.6px;
+          stroke-linecap: round;
+          stroke-linejoin: round;
+        }
+        .a3-scenarios-svg .a3-scenarios-live-dot {
+          fill: var(--c-priora);
+        }
+        .a3-scenarios-svg .a3-scenarios-live-ring {
+          fill: var(--paper-hi);
+          stroke: var(--c-priora);
+          stroke-width: 2.4px;
+        }
+        /* ---------------------------------------------------------------- the film-native Priora cards */
+        .a3-scenarios-svg .a3-scenarios-card {
+          fill: var(--paper-hi);
+          stroke: var(--c-ink);
+          stroke-opacity: 0.12;
+          stroke-width: 1px;
+        }
+        .a3-scenarios-svg .a3-scenarios-shadow {
+          fill: var(--c-ink);
+          fill-opacity: 0.016;
+        }
+        .a3-scenarios-svg .a3-scenarios-rule {
+          fill: none;
+          stroke: var(--rule);
+          stroke-width: 1.2px;
+        }
+        .a3-scenarios-svg .a3-scenarios-rule-live {
+          fill: none;
+          stroke: var(--c-priora);
+          stroke-width: 2.4px;
+          stroke-linecap: round;
+        }
+        .a3-scenarios-svg .a3-scenarios-mark {
+          fill: none;
+          stroke: var(--c-priora);
+          stroke-width: 2.2px;
+        }
+        .a3-scenarios-svg .a3-scenarios-t-eyebrow {
+          font-family: var(--mono);
+          font-weight: 500;
+          font-size: 20px;
+          letter-spacing: 0.12em;
+          fill: var(--ink-2);
+        }
+        .a3-scenarios-svg .a3-scenarios-t-label {
+          font-family: var(--mono);
+          font-weight: 500;
+          font-size: 18px;
+          letter-spacing: 0.14em;
+          fill: var(--grey-2);
+        }
+        .a3-scenarios-svg .a3-scenarios-t-kind {
+          font-family: var(--mono);
+          font-weight: 600;
+          font-size: 18px;
+          letter-spacing: 0.14em;
+          fill: var(--c-priora);
+        }
+        .a3-scenarios-svg .a3-scenarios-t-cond {
+          font-family: var(--sans);
+          font-weight: 400;
+          font-size: 40px;
+          letter-spacing: -0.01em;
+          fill: var(--c-ink);
+        }
+        .a3-scenarios-svg .a3-scenarios-t-sub {
+          font-family: var(--sans);
+          font-weight: 400;
+          font-size: 30px;
+          fill: var(--ink-2);
+        }
+        .a3-scenarios-svg .a3-scenarios-t-live {
+          font-family: var(--mono);
+          font-weight: 500;
+          font-size: 60px;
+          letter-spacing: 0.02em;
+          fill: var(--c-ink);
+        }
+        .a3-scenarios-svg .a3-scenarios-t-live.a3-scenarios-alert,
+        .a3-scenarios-svg .a3-scenarios-t-unit.a3-scenarios-alert {
+          fill: var(--c-alert);
+        }
+        .a3-scenarios-svg .a3-scenarios-t-unit {
+          font-family: var(--mono);
+          font-weight: 500;
+          font-size: 30px;
+          fill: var(--c-ink);
+        }
+        .a3-scenarios-svg .a3-scenarios-t-small {
+          font-family: var(--mono);
+          font-weight: 500;
+          font-size: 18px;
+          letter-spacing: 0.12em;
+          fill: var(--grey-1);
+        }
+        .a3-scenarios-svg .a3-scenarios-t-alertlab {
+          font-family: var(--mono);
+          font-weight: 600;
+          font-size: 20px;
+          letter-spacing: 0.14em;
+          fill: var(--c-alert);
+        }
+        .a3-scenarios-svg .a3-scenarios-gauge-track {
+          fill: var(--c-ink);
+          fill-opacity: 0.07;
+        }
+        .a3-scenarios-svg .a3-scenarios-gauge-fill {
+          fill: var(--c-ink);
+        }
+        .a3-scenarios-svg .a3-scenarios-gauge-alert {
+          fill: var(--c-alert);
+        }
+        .a3-scenarios-svg .a3-scenarios-gauge-limit {
+          fill: none;
+          stroke: var(--c-ink);
+          stroke-width: 2px;
+        }
+        .a3-scenarios-svg .a3-scenarios-sel {
+          fill: var(--c-priora);
+        }
+        .a3-scenarios-svg .a3-scenarios-band-lift {
+          fill: var(--c-lift);
+        }
+        .a3-scenarios-svg .a3-scenarios-band-gas {
+          fill: var(--c-gas);
+        }
+        .a3-scenarios-svg .a3-scenarios-band-air {
+          fill: var(--c-air);
+        }
+        /* ---------------------------------------------------------------- the site overlay (SC1, SC5) */
+        #a3-scenarios-site .a3-scenarios-px {
+          transform: scale(var(--sw));
+        }
+        #a3-scenarios-site .a3-scenarios-mk-halo {
+          fill: var(--paper-hi);
+          fill-opacity: 0.8;
+          stroke-width: 2px;
+        }
+        #a3-scenarios-site .a3-scenarios-mk-dot {
+          stroke: var(--c-ink);
+          stroke-width: 1.3px;
+        }
+        #a3-scenarios-site .a3-scenarios-k-hot {
+          fill: var(--c-hot);
+          stroke: var(--c-hot);
+        }
+        #a3-scenarios-site .a3-scenarios-k-lift {
+          fill: var(--c-lift);
+          stroke: var(--c-lift);
+        }
+        #a3-scenarios-site .a3-scenarios-k-gas {
+          fill: var(--c-gas);
+          stroke: var(--c-gas);
+        }
+        #a3-scenarios-site .a3-scenarios-k-air {
+          fill: var(--c-air);
+          stroke: var(--c-air);
+        }
+        #a3-scenarios-site .a3-scenarios-mk-halo.a3-scenarios-k-hot,
+        #a3-scenarios-site .a3-scenarios-mk-halo.a3-scenarios-k-lift,
+        #a3-scenarios-site .a3-scenarios-mk-halo.a3-scenarios-k-gas,
+        #a3-scenarios-site .a3-scenarios-mk-halo.a3-scenarios-k-air {
+          fill: var(--paper-hi);
+        }
+        #a3-scenarios-site .a3-scenarios-mk-dot.a3-scenarios-k-hot,
+        #a3-scenarios-site .a3-scenarios-mk-dot.a3-scenarios-k-lift,
+        #a3-scenarios-site .a3-scenarios-mk-dot.a3-scenarios-k-gas,
+        #a3-scenarios-site .a3-scenarios-mk-dot.a3-scenarios-k-air {
+          stroke: var(--c-ink);
+        }
+        #a3-scenarios-site .a3-scenarios-ord {
+          fill: var(--c-general);
+          stroke: var(--paper-hi);
+          stroke-width: 1.6px;
+        }
+        #a3-scenarios-site .a3-scenarios-tick {
+          fill: none;
+          stroke: var(--c-ok);
+          stroke-width: 2.4px;
+          stroke-linecap: round;
+          stroke-linejoin: round;
+        }
+        #a3-scenarios-site .a3-scenarios-lead {
+          fill: none;
+          stroke: var(--c-ink);
+          stroke-opacity: 0.55;
+          stroke-width: 1.2px;
+        }
+        #a3-scenarios-site .a3-scenarios-chip {
+          fill: var(--paper-hi);
+          stroke: var(--c-ink);
+          stroke-opacity: 0.16;
+          stroke-width: 1px;
+        }
+        #a3-scenarios-site .a3-scenarios-chip-t {
+          font-family: var(--mono);
+          font-weight: 500;
+          font-size: 18px;
+          letter-spacing: 0.1em;
+          fill: var(--c-ink);
+        }
+        #a3-scenarios-site .a3-scenarios-chip-t2 {
+          font-family: var(--mono);
+          font-weight: 400;
+          font-size: 18px;
+          letter-spacing: 0.08em;
+          fill: var(--ink-2);
+        }
+        #a3-scenarios-site .a3-scenarios-glyph-edge {
+          stroke: var(--c-ink);
+          stroke-width: 1.4px;
+        }
+        #a3-scenarios-site .a3-scenarios-ret-ring {
+          fill: var(--paper-hi);
+          stroke: var(--c-gas);
+          stroke-width: 2px;
+          stroke-dasharray: 4 3;
+        }
+        #a3-scenarios-site .a3-scenarios-ret-hatch {
+          fill: none;
+          stroke: var(--c-gas);
+          stroke-width: 1.2px;
+          stroke-opacity: 0.7;
+        }
+        #a3-scenarios-site .a3-scenarios-pause {
+          fill: var(--paper-hi);
+        }
+        #a3-scenarios-site .a3-scenarios-dec-ring {
+          fill: none;
+          stroke: var(--c-priora);
+          stroke-width: 2.2px;
+        }
+        #a3-scenarios-site .a3-scenarios-pulse {
+          fill: none;
+          stroke: var(--c-priora);
+          stroke-linecap: round;
+          stroke-width: calc(var(--sw) * 4px);
+        }
+      </style>
+
+      <div id="root" data-composition-id="a3-scenarios" data-width="1920" data-height="1080">
+        <div id="a3-scenarios-fade">
+          <div id="a3-scenarios-paper" aria-hidden="true" data-layout-ignore>
+            <div id="a3-scenarios-grain"></div>
+            <div id="a3-scenarios-vig"></div>
+          </div>
+          <div id="a3-scenarios-site-wrap" data-layout-ignore><svg id="a3-scenarios-site" xmlns="http://www.w3.org/2000/svg"></svg></div>
+          <div id="a3-scenarios-v1" class="a3-scenarios-vw" data-layout-ignore><svg id="a3-scenarios-v1-svg" class="a3-scenarios-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080"></svg></div>
+          <div id="a3-scenarios-v2" class="a3-scenarios-vw" data-layout-ignore><svg id="a3-scenarios-v2-svg" class="a3-scenarios-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080"></svg></div>
+          <div id="a3-scenarios-v3" class="a3-scenarios-vw" data-layout-ignore><svg id="a3-scenarios-v3-svg" class="a3-scenarios-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080"></svg></div>
+        </div>
+      </div>
+
       <script>
-        window.__timelines = window.__timelines || {};
-        window.__timelines["a3-scenarios"] = gsap.timeline({ paused: true });
+        (function () {
+          // Globals from index.html: gsap (+ DrawSVG, CustomEase), FL, CUES, SCENES, SITE_MODEL, SiteKit, SketchKit.
+          var ID = "a3-scenarios";
+          var clk = FL.clock(ID);
+          var T = function (a, off) {
+            return clk.t(a, off);
+          };
+          var CUT = function (a, off) {
+            return clk.c(a, off); // the shared picture cut: the half beat nearest 0.12 s before the word
+          };
+          var BT = function (a, off, mode) {
+            return clk.b(a, off || 0, mode || "next", 2); // half-beat grid at/after the anchor
+          };
+          var BEAT = FL.BEAT,
+            HB = BEAT / 2;
+          var U = SketchKit.util;
+          var SK = window.SiteKit,
+            M = window.SITE_MODEL;
+          // The site is mounted exactly as a bare precise mount, so it takes whatever colours the kit gives
+          // a precise mount (cut 3 recolour). If the kit ever needs an explicit option, it goes here only.
+          var SITE_OPTS = { show: "precise", rough: false };
+          var el = function (id) {
+            return document.getElementById(id);
+          };
+          var tl = gsap.timeline({ paused: true });
+          var ft = function (target, from, to, t) {
+            return tl.fromTo(target, from, Object.assign({ immediateRender: false }, to), t);
+          };
+          var cutTo = function (target, from, to, t) {
+            return ft(target, from, Object.assign({ duration: 0.001, ease: "steps(1)" }, to), t);
+          };
+          var attrTo = function (target, name, from, to, t, dur, ease) {
+            var a = { attr: {} },
+              b = { attr: {}, duration: dur, ease: ease || "none" };
+            a.attr[name] = from;
+            b.attr[name] = to;
+            return ft(target, a, b, t);
+          };
+
+          // ================================================================ key times (scene-local)
+          var tM1 = BT("everyKind"); // the four coloured markers on consecutive half beats
+          var tPush1 = BT("L18a.end"); // SC1: one-beat push toward the crane
+          var tC2 = CUT("crane"); // SC2 cut
+          var tMove2 = BT("L18b:lift.start"); // the pull follows the live line into the card
+          var tWind = T("wind"); // the reading counts up on "wind"
+          var tOut2 = BT("L18b:picks.start"); // the outcome settles
+          var tC3 = CUT("gasDetector"); // SC3 cut
+          var tByp = T("bypassed");
+          var tFlip3 = BT("bypassed", 0, "near"); // the card flips on the word (the grid point nearest it)
+          var tPush3 = BT("bypassed", 0.2);
+          var tOut3 = BT("L18c:maintenance.start");
+          var tC4 = CUT("confined"); // SC4 cut
+          var tMove4 = BT("L18d:entry.start");
+          var tVent = T("ventilation");
+          var tFlip4 = BT("ventilation");
+          var tOut4 = BT("L18d:down.start");
+          var tC5 = CUT("L18e.start"); // SC5 cut
+          var tFew = BT("few");
+          var tDec = CUT("decisionsL18");
+          var tPulse = CUT("madeInTime");
+          var tFade = T("closeIn", -0.6);
+          var tBare = T("closeIn");
+          var SETTLE = HB; // an outcome takes a half beat to settle
+
+          // ================================================================ maths
+          var PI = Math.PI,
+            TAU = 2 * Math.PI;
+          var add = function (a, b) {
+            return [a[0] + b[0], a[1] + b[1], a[2] + b[2]];
+          };
+          var sub = function (a, b) {
+            return [a[0] - b[0], a[1] - b[1], a[2] - b[2]];
+          };
+          var mul = function (a, k) {
+            return [a[0] * k, a[1] * k, a[2] * k];
+          };
+          var dot = function (a, b) {
+            return a[0] * b[0] + a[1] * b[1] + a[2] * b[2];
+          };
+          var cross = function (a, b) {
+            return [a[1] * b[2] - a[2] * b[1], a[2] * b[0] - a[0] * b[2], a[0] * b[1] - a[1] * b[0]];
+          };
+          var nrm = function (a) {
+            var l = Math.hypot(a[0], a[1], a[2]) || 1;
+            return [a[0] / l, a[1] / l, a[2] / l];
+          };
+          var a2 = function (a, b) {
+            return [a[0] + b[0], a[1] + b[1]];
+          };
+          var s2 = function (a, b) {
+            return [a[0] - b[0], a[1] - b[1]];
+          };
+          var m2 = function (a, k) {
+            return [a[0] * k, a[1] * k];
+          };
+          var d2 = function (a, b) {
+            return a[0] * b[0] + a[1] * b[1];
+          };
+          var len2 = function (a) {
+            return Math.hypot(a[0], a[1]);
+          };
+          var dist2 = function (a, b) {
+            return Math.hypot(b[0] - a[0], b[1] - a[1]);
+          };
+          var lerp2 = function (a, b, t) {
+            return [a[0] + (b[0] - a[0]) * t, a[1] + (b[1] - a[1]) * t];
+          };
+          var n2 = function (a) {
+            var l = len2(a) || 1;
+            return [a[0] / l, a[1] / l];
+          };
+          var clamp = function (v, a, b) {
+            return v < a ? a : v > b ? b : v;
+          };
+          var f2 = function (v) {
+            return (Math.round(v * 100) / 100).toString();
+          };
+          var f3 = function (v) {
+            return (Math.round(v * 1000) / 1000).toString();
+          };
+          var rng = function (seed) {
+            return FL.prng("a3s-" + seed);
+          };
+          var mk = function (tag, attrs, parent) {
+            return FL.svgEl(tag, attrs, parent);
+          };
+          var g = function (parent, attrs) {
+            return FL.svgEl("g", attrs || {}, parent);
+          };
+          var CLS = function (k) {
+            return ID + "-" + k;
+          };
+          var dPts = function (pts, closed) {
+            var s = "M" + f2(pts[0][0]) + " " + f2(pts[0][1]);
+            for (var i = 1; i < pts.length; i++) s += "L" + f2(pts[i][0]) + " " + f2(pts[i][1]);
+            return s + (closed ? "Z" : "");
+          };
+
+          // ================================================================ orthographic camera (as a1-inserts)
+          function Cam(o) {
+            var az = (o.az * PI) / 180,
+              elv = (o.el * PI) / 180,
+              s = o.s || 1;
+            var V = [Math.cos(elv) * Math.cos(az), Math.cos(elv) * Math.sin(az), Math.sin(elv)];
+            var R = nrm([V[1], -V[0], 0]);
+            var Up = cross(mul(V, -1), R);
+            return {
+              V: V,
+              s: s,
+              p: function (P) {
+                return [o.ox + s * dot(P, R), o.oy - s * dot(P, Up)];
+              },
+              v: function (D) {
+                return [s * dot(D, R), -s * dot(D, Up)];
+              },
+            };
+          }
+          function basis(n) {
+            var a = Math.abs(n[2]) < 0.9 ? [0, 0, 1] : [1, 0, 0];
+            var u = nrm(cross(n, a));
+            return [u, cross(n, u)];
+          }
+          function ell(cam, Cc, n, r, bs) {
+            var b = bs || basis(n);
+            return { c: cam.p(Cc), A: m2(cam.v(b[0]), r), B: m2(cam.v(b[1]), r), u: b[0], v: b[1], n: n, r: r, C: Cc };
+          }
+          function ellPt(e, th) {
+            var c = Math.cos(th),
+              s = Math.sin(th);
+            return [e.c[0] + e.A[0] * c + e.B[0] * s, e.c[1] + e.A[1] * c + e.B[1] * s];
+          }
+          function ellArc(e, t0, t1, N) {
+            N = N || Math.max(10, Math.ceil((Math.abs(t1 - t0) / TAU) * 120));
+            var out = [];
+            for (var i = 0; i <= N; i++) out.push(ellPt(e, t0 + ((t1 - t0) * i) / N));
+            return out;
+          }
+          function cyl(cam, C0, C1, r, N) {
+            var n = nrm(sub(C1, C0)),
+              bs = basis(n);
+            var e0 = ell(cam, C0, n, r, bs),
+              e1 = ell(cam, C1, n, r, bs);
+            var ax = s2(e1.c, e0.c),
+              axl = len2(ax);
+            var q = axl > 1e-6 ? [-ax[1] / axl, ax[0] / axl] : [1, 0];
+            var ts = Math.atan2(d2(e0.B, q), d2(e0.A, q));
+            var em = [e0.A[0] * Math.cos(ts + PI / 2) + e0.B[0] * Math.sin(ts + PI / 2), e0.A[1] * Math.cos(ts + PI / 2) + e0.B[1] * Math.sin(ts + PI / 2)];
+            var sg = d2(em, ax) >= 0 ? 1 : -1;
+            var hN = N ? N / 2 : null;
+            var arc1 = ellArc(e1, ts, ts + sg * PI, hN),
+              arc0 = ellArc(e0, ts + sg * PI, ts + 2 * sg * PI, hN);
+            var M2 = Math.hypot(d2(e0.A, q), d2(e0.B, q));
+            return {
+              cam: cam,
+              n: n,
+              u: bs[0],
+              v: bs[1],
+              e0: e0,
+              e1: e1,
+              ts: ts,
+              sg: sg,
+              q: q,
+              M: M2,
+              r: r,
+              C0: C0,
+              C1: C1,
+              outline: arc1.concat(arc0),
+              arc0: arc0,
+              arc1: arc1,
+              silA: [ellPt(e0, ts), ellPt(e1, ts)],
+              silB: [ellPt(e0, ts + PI), ellPt(e1, ts + PI)],
+              cap1: dot(n, cam.V) > 0,
+              capInner: dot(n, cam.V) > 0 ? ellArc(e1, ts + sg * PI, ts + 2 * sg * PI, hN) : ellArc(e0, ts, ts + sg * PI, hN),
+              capFull: dot(n, cam.V) > 0 ? ellArc(e1, 0, TAU, N) : ellArc(e0, 0, TAU, N),
+            };
+          }
+
+          // ================================================================ graphite and ink marks (the a1-inserts hand)
+          function resample(pts, maxSeg) {
+            var out = [pts[0]];
+            for (var i = 1; i < pts.length; i++) {
+              var a = pts[i - 1],
+                b = pts[i],
+                L = dist2(a, b),
+                n = Math.max(1, Math.ceil(L / maxSeg));
+              for (var k = 1; k <= n; k++) out.push(lerp2(a, b, k / n));
+            }
+            return out;
+          }
+          // a contour as a filled pressure ribbon: width breathes along the stroke, the pen lands heavier
+          // than it lifts, open strokes taper at both ends
+          function ribbon(parent, pts, o) {
+            o = o || {};
+            pts = resample(pts, o.seg || 12);
+            var closed = !!o.closed,
+              n = pts.length;
+            var R = rng("rb" + (o.seed || "") + f2(pts[0][0]) + "," + f2(pts[0][1]) + "," + n);
+            var ph1 = R() * TAU,
+              ph2 = R() * TAU,
+              ph3 = R() * TAU,
+              per1 = 150 + R() * 150,
+              per2 = 36 + R() * 30;
+            var s = [0];
+            for (var i = 1; i < n; i++) s.push(s[i - 1] + dist2(pts[i - 1], pts[i]));
+            var L = s[n - 1] || 1;
+            var w = o.w || 2,
+              press = o.press != null ? o.press : 0.3,
+              jit = o.jit != null ? o.jit : 0.6;
+            var tp = closed ? 0 : Math.min(o.taper != null ? o.taper : Math.max(6, L * 0.2), 80);
+            var wEnd = o.wEnd != null ? o.wEnd : 0.2;
+            var left = [],
+              right = [];
+            for (i = 0; i < n; i++) {
+              var ia = closed ? (i - 1 + n) % n : Math.max(0, i - 1),
+                ib = closed ? (i + 1) % n : Math.min(n - 1, i + 1);
+              var tx = pts[ib][0] - pts[ia][0],
+                ty = pts[ib][1] - pts[ia][1],
+                tln = Math.hypot(tx, ty) || 1;
+              var nx = -ty / tln,
+                ny = tx / tln,
+                si = s[i];
+              var wob = jit * (0.65 * Math.sin((si / per1) * TAU + ph1) + 0.35 * Math.sin((si / per2) * TAU + ph3));
+              var pr = 1 + press * (0.62 * Math.sin((si / per1) * TAU + ph2) + 0.38 * Math.sin((si / (per2 * 1.7)) * TAU + ph1));
+              var prof = 1;
+              if (tp > 0) {
+                var e = Math.min(si, L - si) / tp;
+                if (e < 1) prof = wEnd + (1 - wEnd) * (e * e * (3 - 2 * e));
+              }
+              if (!closed) prof *= 1.1 - 0.2 * (si / L);
+              var hw = Math.max(0.22, (w * pr * prof) / 2);
+              var cx = pts[i][0] + nx * wob,
+                cy = pts[i][1] + ny * wob;
+              left.push([cx + nx * hw, cy + ny * hw]);
+              right.push([cx - nx * hw, cy - ny * hw]);
+            }
+            var d = closed ? dPts(left, true) + dPts(right.slice().reverse(), true) : dPts(left.concat(right.slice().reverse()), true);
+            return mk("path", { d: d, class: CLS(o.cls || "ink"), "fill-rule": "evenodd" }, parent);
+          }
+          function overdraw(parent, pts, o) {
+            o = o || {};
+            pts = resample(pts, 16);
+            var R = rng("ov" + (o.seed || "") + f2(pts[0][0]) + f2(pts[0][1]));
+            var ph = R() * TAU,
+              per = 90 + R() * 120,
+              amp = o.amp != null ? o.amp : 1.1;
+            var n = pts.length,
+              out = [],
+              s = 0;
+            for (var i = 0; i < n; i++) {
+              if (i) s += dist2(pts[i - 1], pts[i]);
+              var ia = Math.max(0, i - 1),
+                ib = Math.min(n - 1, i + 1);
+              var t = n2(s2(pts[ib], pts[ia]));
+              var off = amp * Math.sin((s / per) * TAU + ph) + (o.bias || 0.5);
+              out.push([pts[i][0] - t[1] * off, pts[i][1] + t[0] * off]);
+            }
+            var a = Math.floor(n * (o.closed ? 0 : 0.06 + R() * 0.12)),
+              b = Math.ceil(n * (o.closed ? 1 : 0.8 + R() * 0.2));
+            var part = out.slice(a, Math.max(a + 2, b));
+            return mk("path", { d: dPts(part, false), class: CLS("ov") }, parent);
+          }
+          function overshoot(parent, a, b, o) {
+            o = o || {};
+            var R = rng("ex" + f2(a[0]) + f2(b[1]) + (o.seed || ""));
+            var t = n2(s2(b, a)),
+              e0 = (o.min || 7) + R() * (o.var || 16),
+              e1 = (o.min || 7) + R() * (o.var || 16);
+            var d = "M" + f2(a[0] - t[0] * e0) + " " + f2(a[1] - t[1] * e0) + "L" + f2(a[0] + t[0] * 4) + " " + f2(a[1] + t[1] * 4);
+            d += "M" + f2(b[0] - t[0] * 4) + " " + f2(b[1] - t[1] * 4) + "L" + f2(b[0] + t[0] * e1) + " " + f2(b[1] + t[1] * e1);
+            return mk("path", { d: d, class: CLS("cn") }, parent);
+          }
+          function line(parent, pts, cls, closed) {
+            return mk("path", { d: dPts(pts, closed), class: CLS(cls || "ln") }, parent);
+          }
+          function contour(parent, pts, o) {
+            o = o || {};
+            ribbon(parent, pts, o);
+            if (o.over !== false) overdraw(parent, pts, { seed: o.seed, closed: o.closed });
+            if (o.ext && pts.length >= 2) overshoot(parent, pts[0], pts[pts.length - 1], { seed: o.seed });
+          }
+          function fill(parent, pts, cls) {
+            return mk("path", { d: dPts(pts, true), class: CLS(cls || "oc") }, parent);
+          }
+          function hatchPoly(parent, poly, o) {
+            o = o || {};
+            var ang = ((o.angle != null ? o.angle : 45) * PI) / 180,
+              ca = Math.cos(ang),
+              sa = Math.sin(ang);
+            var rot = function (p) {
+              return [p[0] * ca + p[1] * sa, -p[0] * sa + p[1] * ca];
+            };
+            var unrot = function (p) {
+              return [p[0] * ca - p[1] * sa, p[0] * sa + p[1] * ca];
+            };
+            var rp = poly.map(rot),
+              y0 = Infinity,
+              y1 = -Infinity;
+            rp.forEach(function (p) {
+              y0 = Math.min(y0, p[1]);
+              y1 = Math.max(y1, p[1]);
+            });
+            var R = rng("hp" + (o.seed || "") + f2(poly[0][0]) + f2(poly[0][1]));
+            var sp = o.sp || 6,
+              d = "",
+              inset = o.inset != null ? o.inset : 3;
+            for (var y = y0 + sp * (0.3 + R() * 0.5); y < y1; y += sp * (0.85 + R() * 0.3)) {
+              var xs = [];
+              for (var i = 0; i < rp.length; i++) {
+                var a = rp[i],
+                  b = rp[(i + 1) % rp.length];
+                if (a[1] === b[1]) continue;
+                if ((y >= a[1] && y < b[1]) || (y >= b[1] && y < a[1])) xs.push(a[0] + ((y - a[1]) / (b[1] - a[1])) * (b[0] - a[0]));
+              }
+              xs.sort(function (p, q) {
+                return p - q;
+              });
+              for (var k = 0; k + 1 < xs.length; k += 2) {
+                var xa = xs[k] + inset * (0.3 + R() * 1.2),
+                  xb = xs[k + 1] - inset * (0.3 + R() * 1.2);
+                if (xb - xa < 4) continue;
+                var tilt = (R() - 0.5) * 1.2;
+                var pa = unrot([xa, y + tilt]),
+                  pb = unrot([xb, y - tilt]);
+                d += "M" + f2(pa[0]) + " " + f2(pa[1]) + "L" + f2(pb[0]) + " " + f2(pb[1]);
+              }
+            }
+            if (!d) return null;
+            return mk("path", { d: d, class: CLS(o.cls || "ht") + (o.cls2 ? " " + CLS(o.cls2) : "") }, parent);
+          }
+          function cylHatch(parent, c, Lt, o) {
+            o = o || {};
+            var R = rng("ch" + (o.seed || "") + f2(c.e0.c[0]) + f2(c.e0.c[1]));
+            var sp = o.sp || 6.5,
+              thr = o.thr != null ? o.thr : 0.3,
+              d = "",
+              w = -0.97;
+            var L2 = dist2(c.e0.c, c.e1.c);
+            if (c.M < 2) return null;
+            while (w < 0.97) {
+              var ang = Math.acos(w),
+                th1 = c.ts + ang,
+                th2 = c.ts - ang;
+              var N1 = add(mul(c.u, Math.cos(th1)), mul(c.v, Math.sin(th1))),
+                N2 = add(mul(c.u, Math.cos(th2)), mul(c.v, Math.sin(th2)));
+              var N = dot(N1, c.cam.V) >= dot(N2, c.cam.V) ? N1 : N2;
+              var lit = dot(N, Lt),
+                dark = clamp((thr - lit) / (thr + 0.75), 0, 1);
+              var step;
+              if (dark > 0.03 && L2 > 3) {
+                var p0 = c.cam.p(add(c.C0, mul(N, c.r))),
+                  p1 = c.cam.p(add(c.C1, mul(N, c.r)));
+                var t0 = 0.015 + R() * 0.07,
+                  t1 = 0.985 - R() * 0.08;
+                var pa = lerp2(p0, p1, t0),
+                  pb = lerp2(p0, p1, t1);
+                d += "M" + f2(pa[0]) + " " + f2(pa[1]) + "L" + f2(pb[0]) + " " + f2(pb[1]);
+                step = (sp * (1.9 - 1.35 * dark)) / c.M;
+              } else step = (sp * 1.4) / c.M;
+              w += step * (0.9 + R() * 0.2);
+            }
+            return d ? mk("path", { d: d, class: CLS(o.cls || "ht") + (o.cls2 ? " " + CLS(o.cls2) : "") }, parent) : null;
+          }
+          // a whole cylinder: a material wash inside, heavier silhouettes on the shadow side, the visible
+          // cap as a finer edge, colour hatching on the shadow side
+          function drawCyl(parent, c, Lt, o) {
+            o = o || {};
+            var gp = g(parent);
+            if (o.fill !== false) fill(gp, c.outline, o.fillCls || "oc");
+            if (o.capCls && (c.cap1 ? o.arc1 !== false : o.arc0 !== false)) fill(gp, c.capFull, o.capCls);
+            if (o.hatch !== false && Lt) cylHatch(gp, c, Lt, { sp: o.sp, thr: o.thr, seed: o.seed, cls: o.hcls || "hc", cls2: o.hcls2 });
+            var w = o.w || 2.2,
+              seed = o.seed || "";
+            var nA = add(mul(c.u, Math.cos(c.ts)), mul(c.v, Math.sin(c.ts))),
+              litA = Lt ? dot(nA, Lt) : 1;
+            contour(gp, c.silA, { w: litA < 0 ? w * 1.25 : w * 0.85, seed: seed + "a", ext: o.ext, cls: o.cls });
+            contour(gp, c.silB, { w: litA < 0 ? w * 0.85 : w * 1.25, seed: seed + "b", ext: o.ext, cls: o.cls });
+            if (o.arc0 !== false) contour(gp, c.arc0, { w: w, seed: seed + "c", cls: o.cls });
+            if (o.arc1 !== false) contour(gp, c.arc1, { w: w, seed: seed + "d", cls: o.cls });
+            if (o.cap !== false && ((c.cap1 && o.arc1 !== false) || (!c.cap1 && o.arc0 !== false))) contour(gp, c.capInner, { w: w * 0.7, seed: seed + "e", cls: o.cls });
+            return gp;
+          }
+          // a box from a corner and three edge vectors: washes by lighting, colour hatching on the shadow
+          // faces, silhouette edges heavier than the inner edges
+          function drawBox(parent, cam, Lt, P0, ax, ay, az, o) {
+            o = o || {};
+            var gp = g(parent);
+            var C = function (i, j, k) {
+              return add(add(add(P0, mul(ax, i)), mul(ay, j)), mul(az, k));
+            };
+            var faces = {
+              x0: { c: [[0, 0, 0], [0, 1, 0], [0, 1, 1], [0, 0, 1]], n: mul(nrm(ax), -1) },
+              x1: { c: [[1, 0, 0], [1, 0, 1], [1, 1, 1], [1, 1, 0]], n: nrm(ax) },
+              y0: { c: [[0, 0, 0], [0, 0, 1], [1, 0, 1], [1, 0, 0]], n: mul(nrm(ay), -1) },
+              y1: { c: [[0, 1, 0], [1, 1, 0], [1, 1, 1], [0, 1, 1]], n: nrm(ay) },
+              z0: { c: [[0, 0, 0], [1, 0, 0], [1, 1, 0], [0, 1, 0]], n: mul(nrm(az), -1) },
+              z1: { c: [[0, 0, 1], [0, 1, 1], [1, 1, 1], [1, 0, 1]], n: nrm(az) },
+            };
+            var vis = {};
+            var thr = o.thr != null ? o.thr : 0.12;
+            Object.keys(faces).forEach(function (k) {
+              var f = faces[k];
+              f.vis = dot(f.n, cam.V) > 1e-4;
+              vis[k] = f.vis;
+              if (!f.vis) return;
+              f.poly = f.c.map(function (q) {
+                return cam.p(C(q[0], q[1], q[2]));
+              });
+              var isTop = f.n[2] > 0.7;
+              var lit = dot(f.n, Lt);
+              f.dark = !isTop && lit <= thr;
+              var cls = isTop ? o.top || o.lit : f.dark ? o.dark || o.lit : o.lit;
+              fill(gp, f.poly, cls);
+              if (f.dark && o.hatch !== false) hatchPoly(gp, f.poly, { angle: o.hAngle != null ? o.hAngle : 62, sp: o.hsp || 5, seed: (o.seed || "") + k, cls: o.hcls || "hc", cls2: o.hcls2, inset: 2 });
+            });
+            if (o.onFaces) o.onFaces(faces, gp, C);
+            var E = [];
+            [0, 1].forEach(function (j) {
+              [0, 1].forEach(function (k) {
+                E.push([[0, j, k], [1, j, k], "y" + j, "z" + k]);
+              });
+            });
+            [0, 1].forEach(function (i) {
+              [0, 1].forEach(function (k) {
+                E.push([[i, 0, k], [i, 1, k], "x" + i, "z" + k]);
+              });
+            });
+            [0, 1].forEach(function (i) {
+              [0, 1].forEach(function (j) {
+                E.push([[i, j, 0], [i, j, 1], "x" + i, "y" + j]);
+              });
+            });
+            var w = o.w || 2;
+            E.forEach(function (e, ei) {
+              var v = (vis[e[2]] ? 1 : 0) + (vis[e[3]] ? 1 : 0);
+              if (!v) return;
+              var a = cam.p(C(e[0][0], e[0][1], e[0][2])),
+                b = cam.p(C(e[1][0], e[1][1], e[1][2]));
+              if (dist2(a, b) < 1.5) return;
+              contour(gp, [a, b], { w: v === 1 ? w * 1.15 : w * 0.62, seed: (o.seed || "") + "e" + ei, ext: v === 1 && o.ext, cls: o.lineCls, over: v === 1 && o.over !== false });
+            });
+            return { g: gp, C: C, faces: faces };
+          }
+          function sm(pts, closed, k) {
+            return U.flatten(U.smoothCmds(pts, !!closed, k), 10)[0];
+          }
+          function part(parent, pts, o) {
+            o = o || {};
+            var poly = sm(pts, true, o.k != null ? o.k : 1);
+            fill(parent, poly, o.fillCls || "oc");
+            if (o.shade) hatchPoly(parent, sm(o.shade, true), { angle: o.shadeAngle != null ? o.shadeAngle : 52, sp: o.shadeSp || 5, seed: o.seed + "h", cls: o.shadeCls || "hc", cls2: o.shadeCls2 || "hc-hivis", inset: 1 });
+            ribbon(parent, poly.concat([poly[0]]), { w: o.w || 2.3, seed: o.seed, closed: false, taper: 4, wEnd: 0.6, press: o.press != null ? o.press : 0.32, cls: o.cls });
+            if (o.over !== false) overdraw(parent, poly, { seed: o.seed, closed: false });
+            return poly;
+          }
+          function stroke(parent, pts, o) {
+            o = o || {};
+            var pl = o.smooth === false ? pts : sm(pts, false, o.k);
+            ribbon(parent, pl, { w: o.w || 1.4, seed: o.seed, taper: o.taper, press: o.press, cls: o.cls, wEnd: o.wEnd });
+            return pl;
+          }
+          function tube(pts, hw) {
+            var L = [],
+              R = [];
+            for (var i = 0; i < pts.length; i++) {
+              var a = pts[Math.max(0, i - 1)],
+                b = pts[Math.min(pts.length - 1, i + 1)];
+              var t = n2(s2(b, a)),
+                nn = [-t[1], t[0]];
+              var h = typeof hw === "number" ? hw : hw[i];
+              L.push(a2(pts[i], m2(nn, h)));
+              R.push(s2(pts[i], m2(nn, h)));
+            }
+            return L.concat(R.reverse());
+          }
+          // an irregular wash: a polygon whose edges wander a little, as watercolour stops short of a line
+          function wash(parent, poly, cls, seed, amp) {
+            var pts = resample(poly.concat([poly[0]]), 18);
+            var R = rng("wash" + seed),
+              ph = R() * TAU,
+              ph2 = R() * TAU,
+              out = [],
+              s = 0;
+            amp = amp == null ? 5 : amp;
+            for (var i = 0; i < pts.length - 1; i++) {
+              if (i) s += dist2(pts[i - 1], pts[i]);
+              var a = pts[Math.max(0, i - 1)],
+                b = pts[i + 1];
+              var t = n2(s2(b, a));
+              var off = amp * (0.6 * Math.sin(s / 70 + ph) + 0.4 * Math.sin(s / 23 + ph2));
+              out.push([pts[i][0] - t[1] * off, pts[i][1] + t[0] * off]);
+            }
+            var p = mk("path", { d: dPts(sm(out, true, 0.6), true), class: CLS(cls) + " " + CLS("wash") }, parent);
+            return p;
+          }
+          // a standing worker (the fire watch figure of a1-inserts, in colour): hi-vis vest, white hard hat.
+          // feet: screen point; S: scale (the figure is about 418 S px tall); o.arm: 'down' | 'reach'
+          function person(parent, feet, S, o) {
+            o = o || {};
+            var gp = g(parent);
+            var P = function (pts) {
+              return pts.map(function (p) {
+                return [feet[0] + p[0] * S, feet[1] + p[1] * S];
+              });
+            };
+            var W = Math.max(0.8, 2.1 * Math.min(1, S * 1.25));
+            var seed = o.seed || "p";
+            part(gp, P([[-40, -196], [-44, -104], [-40, -8], [-14, -6], [-12, -100], [-2, -160], [10, -100], [22, -8], [48, -10], [42, -104], [40, -196]]), { w: W * 0.9, seed: seed + "l", fillCls: "f-sld", shade: P([[-40, -190], [-42, -104], [-38, -12], [-26, -12], [-28, -104], [-26, -190]]), shadeAngle: 62, shadeCls2: "hc-slate", over: S > 0.3 });
+            part(gp, P([[-46, -10], [-12, -10], [-8, 4], [-50, 6]]), { w: W * 0.85, seed: seed + "b1", fillCls: "f-dark", over: false });
+            part(gp, P([[18, -12], [50, -14], [60, 0], [60, 6], [16, 6]]), { w: W * 0.85, seed: seed + "b2", fillCls: "f-dark", over: false });
+            // arms behind the vest edge
+            if (o.arm === "reach") part(gp, tube(P([[42, -324], [74, -280], [104, -256]]), [13 * S, 11 * S, 9 * S]), { w: W * 0.85, seed: seed + "a2", fillCls: "f-hivis", shade: null, over: false });
+            else part(gp, tube(P([[42, -324], [54, -262], [52, -206]]), [13 * S, 11 * S, 10 * S]), { w: W * 0.85, seed: seed + "a2", fillCls: "f-hivis", over: false });
+            part(gp, tube(P([[-42, -324], [-56, -262], [-54, -206]]), [13 * S, 11 * S, 10 * S]), { w: W * 0.85, seed: seed + "a1", fillCls: "f-hivis", over: false });
+            // the vest: hi-vis, two reflective bands
+            var tor = P([[-40, -330], [-50, -270], [-48, -190], [48, -188], [50, -270], [40, -330], [18, -342], [-18, -342]]);
+            part(gp, [[-40, -330], [-50, -270], [-48, -190], [48, -188], [50, -270], [40, -330], [18, -342], [-18, -342]].map(function (p) {
+              return [feet[0] + p[0] * S, feet[1] + p[1] * S];
+            }), { w: W, seed: seed + "t", fillCls: "f-hivis", shade: P([[-40, -326], [-48, -270], [-46, -194], [-30, -194], [-30, -270], [-24, -326]]), shadeAngle: 62, over: S > 0.3 });
+            [-252, -226].forEach(function (y, i) {
+              var band = P([[-49, y], [49, y + 1], [49, y + 9], [-49, y + 8]]);
+              fill(gp, band, "hi");
+              if (S > 0.25) line(gp, [band[0], band[1]], "ht");
+            });
+            if (o.harness) {
+              stroke(gp, P([[-26, -338], [-18, -270], [-10, -200]]), { w: W * 0.8, seed: seed + "h1", smooth: false });
+              stroke(gp, P([[26, -338], [18, -270], [10, -200]]), { w: W * 0.8, seed: seed + "h2", smooth: false });
+              stroke(gp, P([[-30, -268], [30, -266]]), { w: W * 0.7, seed: seed + "h3", smooth: false });
+              stroke(gp, P([[-44, -196], [0, -186], [44, -194]]), { w: W * 0.7, seed: seed + "h4" });
+            }
+            // gloved hands
+            if (o.arm === "reach") part(gp, P([[98, -266], [112, -262], [114, -248], [100, -246]]), { w: W * 0.8, seed: seed + "g2", fillCls: "f-dark", over: false });
+            part(gp, P([[-62, -212], [-48, -212], [-48, -196], [-60, -194]]), { w: W * 0.8, seed: seed + "g1", fillCls: "f-dark", over: false });
+            // head (no face) and the white hard hat
+            part(gp, P([[-18, -344], [-22, -376], [0, -396], [22, -380], [20, -346], [2, -336]]), { w: W * 0.9, seed: seed + "hd", fillCls: "f-stw", over: false });
+            part(gp, P([[-30, -380], [-24, -404], [0, -418], [24, -406], [30, -382], [40, -378], [-38, -376]]), { w: W, seed: seed + "hat", fillCls: "f-helmet" });
+            return { g: gp, P: P, torso: tor };
+          }
+          // a hanging tag (a1-inserts): string from a pivot, a paper tag, lettering; built hanging straight
+          // down from (0, 0), the caller swings the group about the pivot
+          function hangTag(Pc, parent, o) {
+            var gT = g(parent, { transform: "translate(" + f2(o.pivot[0]) + " " + f2(o.pivot[1]) + ") rotate(0)" });
+            var Ls = o.string,
+              w = o.w,
+              h = o.h;
+            var top = Ls - 16;
+            line(gT, [[0, 0], [-2.5, Ls * 0.5], [0, Ls]], "ln");
+            line(gT, [[0, 0], [2.2, Ls * 0.45], [1.5, Ls]], "ov");
+            var x0 = -w / 2,
+              x1 = w / 2,
+              y0 = top,
+              y1 = top + h,
+              ch = 22;
+            var body = [[x0 + ch, y0], [x1 - ch, y0], [x1, y0 + ch], [x1, y1], [x0, y1], [x0, y0 + ch]];
+            fill(gT, body, o.bodyCls || "hi");
+            if (o.band) {
+              var bd = [[x0 + 2, y1 - o.band], [x1 - 2, y1 - o.band], [x1 - 2, y1 - 2], [x0 + 2, y1 - 2]];
+              fill(gT, bd, o.bandCls);
+            }
+            contour(gT, body, { w: 1.9, closed: true, seed: "tag" + o.seed, press: 0.25 });
+            var ey = top + 16;
+            contour(gT, ellArc({ c: [0, ey], A: [11, 0], B: [0, 11] }, 0, TAU, 40), { w: 1.4, closed: true, seed: "ring" + o.seed, over: false });
+            fill(gT, ellArc({ c: [0, ey], A: [5.5, 0], B: [0, 5.5] }, 0, TAU, 24), "oc");
+            contour(gT, ellArc({ c: [0, ey], A: [5.5, 0], B: [0, 5.5] }, 0, TAU, 24), { w: 1.2, closed: true, seed: "eye" + o.seed, over: false });
+            o.lines.forEach(function (ln) {
+              U.letters(Pc, gT, ln.t, 0, top + ln.y, { size: ln.size, weight: ln.weight, ls: ln.ls, anchor: "middle", seed: "ha" + ln.t, rot: ln.rot != null ? ln.rot : null, irr: 0.05 });
+              if (ln.rule) line(gT, [[-w / 2 + 20, top + ln.y + 12], [w / 2 - 20, top + ln.y + 13]], "ln");
+            });
+            return gT;
+          }
+          function dropTag(gT, pivot, t0, seq) {
+            var tr = function (a) {
+              return "translate(" + f2(pivot[0]) + " " + f2(pivot[1]) + ") rotate(" + f2(a) + ")";
+            };
+            gT.setAttribute("opacity", 0);
+            cutTo(gT, { opacity: 0 }, { opacity: 1 }, t0);
+            var t = t0;
+            for (var i = 0; i + 1 < seq.length; i++) {
+              var d = seq[i + 1][1];
+              attrTo(gT, "transform", tr(seq[i][0]), tr(seq[i + 1][0]), t, d, i === 0 ? "power2.in" : "sine.inOut");
+              t += d;
+            }
+            return t;
+          }
+
+          // ================================================================ the film-native Priora card
+          // Paper-white card, one colour band for the activity, large type: the condition, the live
+          // change, the outcome settling. Laid out in vignette px (the card sits on the drawing's plane).
+          var CARD = { x: 1176, y: 176, w: 648 };
+          var sansW = function (t, size, wt) {
+            return U.sansWidth(t, size, wt || 400);
+          };
+          function text(parent, str, x, y, cls, anchor) {
+            var t = mk("text", { x: f2(x), y: f2(y), class: CLS(cls), "text-anchor": anchor || null }, parent);
+            t.textContent = str;
+            return t;
+          }
+          function card(parent, o) {
+            var W = CARD.w,
+              H = o.h;
+            var gC = g(parent, { transform: "translate(" + CARD.x + " " + CARD.y + ")" });
+            for (var i = 8; i >= 1; i--) mk("rect", { x: f2(i * 4 - 2), y: f2(10 + i * 3.2), width: f2(W - i * 8 + 4), height: f2(H - 6), rx: 18, class: CLS("shadow") }, gC);
+            mk("rect", { x: 0, y: 0, width: W, height: H, rx: 16, class: CLS("card") }, gC);
+            var cp = mk("clipPath", { id: ID + "-" + o.key + "-cardclip" }, o.defs);
+            mk("rect", { x: 0, y: 0, width: W, height: H, rx: 16 }, cp);
+            var band = mk("rect", { x: 0, y: 0, width: W, height: 12, class: CLS("band-" + o.band), "clip-path": "url(#" + ID + "-" + o.key + "-cardclip)" }, gC);
+            // the Priora mark, top right: the rounded square with its dot
+            var gm = g(gC, { transform: "translate(" + (W - 60) + " 36)" });
+            mk("rect", { x: 0, y: 0, width: 24, height: 24, rx: 6.5, class: CLS("mark") }, gm);
+            mk("circle", { cx: 12, cy: 12, r: 4, class: CLS("sel") }, gm);
+            // eyebrow: the activity, with its marker
+            var ge = g(gC);
+            mk("circle", { cx: 48, cy: 57, r: 9, class: CLS("band-" + o.band) }, ge);
+            mk("circle", { cx: 48, cy: 57, r: 9, fill: "none", stroke: "var(--c-ink)", "stroke-width": 1.3 }, ge);
+            text(ge, o.eyebrow, 70, 64, "t-eyebrow");
+            // the condition that was agreed
+            var gCond = g(gC);
+            text(gCond, "CONDITION", 40, 124, "t-label");
+            o.cond.forEach(function (ln, i) {
+              text(gCond, ln, 40, 176 + i * 48, "t-cond");
+            });
+            var yR1 = 176 + (o.cond.length - 1) * 48 + 44;
+            mk("path", { d: "M40 " + yR1 + "H" + (W - 40), class: CLS("rule") }, gC);
+            // the live section (the caller fills it)
+            var gLive = g(gC);
+            mk("circle", { cx: 46, cy: yR1 + 38, r: 5.5, class: CLS("sel") }, gLive);
+            text(gLive, o.liveLabel, 62, yR1 + 44, "t-label");
+            // the rule the live connection runs into, drawn in cobalt as it arrives
+            var ruleLive = mk("path", { d: "M0 " + yR1 + "H" + (W - 40), class: CLS("rule-live") }, gC);
+            var yR2 = yR1 + o.liveH;
+            mk("path", { d: "M40 " + yR2 + "H" + (W - 40), class: CLS("rule") }, gC);
+            // the outcome
+            var gOut = g(gC, { transform: "translate(0 10)", opacity: 0 });
+            text(gOut, "OUTCOME", 40, yR2 + 46, "t-label");
+            var kx = 40 + U.monoWidth("OUTCOME", 18, 0.14) + 16;
+            mk("rect", { x: kx, y: yR2 + 31, width: 12, height: 12, rx: 2, class: CLS("sel") }, gOut);
+            text(gOut, o.kind, kx + 24, yR2 + 46, "t-kind");
+            o.out.forEach(function (ln, i) {
+              text(gOut, ln.t, 40, yR2 + 104 + (ln.dy || 0) + i * 48, ln.cls || "t-cond");
+            });
+            return { g: gC, live: gLive, yR1: yR1, yR2: yR2, out: gOut, ruleLive: ruleLive, cond: gCond, entry: [CARD.x, CARD.y + yR1] };
+          }
+          // the cobalt live connection: from a point on the drawing into the card's rule
+          function liveLine(parent, from, to, bend) {
+            var gL = g(parent);
+            var c1 = [from[0] + (bend || [160, 0])[0], from[1] + (bend || [160, 0])[1]],
+              c2 = [to[0] - 130, to[1]];
+            var d = "M" + f2(from[0]) + " " + f2(from[1]) + "C" + f2(c1[0]) + " " + f2(c1[1]) + " " + f2(c2[0]) + " " + f2(c2[1]) + " " + f2(to[0]) + " " + f2(to[1]);
+            var path = mk("path", { d: d, class: CLS("live") }, gL);
+            var ring = mk("circle", { cx: f2(from[0]), cy: f2(from[1]), r: 7, class: CLS("live-ring"), opacity: 0 }, gL);
+            var dotc = mk("circle", { cx: f2(from[0]), cy: f2(from[1]), r: 3, class: CLS("live-dot"), opacity: 0 }, gL);
+            return { g: gL, path: path, ring: ring, dot: dotc };
+          }
+          function drawLive(L, card0, t, dur) {
+            ft([L.ring, L.dot], { opacity: 0 }, { opacity: 1, duration: 0.15, ease: "power1.out" }, t);
+            tl.fromTo(L.path, { drawSVG: "0%" }, { drawSVG: "100%", duration: dur * 0.72, ease: "power2.inOut", immediateRender: true }, t + 0.05);
+            tl.fromTo(card0.ruleLive, { drawSVG: "0%" }, { drawSVG: "100%", duration: dur * 0.4, ease: "power2.out", immediateRender: true }, t + dur * 0.62);
+          }
+          function settleOutcome(card0, t) {
+            ft(card0.out, { opacity: 0, attr: { transform: "translate(0 10)" } }, { opacity: 1, attr: { transform: "translate(0 0)" }, duration: SETTLE, ease: "power3.out" }, t);
+          }
+
+          // ================================================================ layers and visibility
+          var fade = el(ID + "-fade");
+          var siteWrap = el(ID + "-site-wrap");
+          var V1 = el(ID + "-v1"),
+            V2 = el(ID + "-v2"),
+            V3 = el(ID + "-v3");
+          [V1, V2, V3].forEach(function (v) {
+            v.style.opacity = 0;
+          });
+          tl.fromTo(fade, { opacity: 0 }, { opacity: 1, duration: SCENES[ID].xfadeIn || 0.4, ease: "power1.inOut", immediateRender: true }, 0);
+          // a hard cut switches 1 ms before the grid time, so the frame on the cut already shows the new shot
+          var CUTE = 0.001;
+          cutTo(siteWrap, { opacity: 1 }, { opacity: 0 }, tC2 - CUTE);
+          cutTo(V1, { opacity: 0 }, { opacity: 1 }, tC2 - CUTE);
+          cutTo(V1, { opacity: 1 }, { opacity: 0 }, tC3 - CUTE);
+          cutTo(V2, { opacity: 0 }, { opacity: 1 }, tC3 - CUTE);
+          cutTo(V2, { opacity: 1 }, { opacity: 0 }, tC4 - CUTE);
+          cutTo(V3, { opacity: 0 }, { opacity: 1 }, tC4 - CUTE);
+          cutTo(V3, { opacity: 1 }, { opacity: 0 }, tC5 - CUTE);
+          cutTo(siteWrap, { opacity: 0 }, { opacity: 1 }, tC5 - CUTE);
+
+          // ================================================================ SC1 and SC5: the precise site
+          var site = SK.mount(el(ID + "-site"), Object.assign({ prefix: ID + "-site" }, SITE_OPTS));
+          var WHOLE = SK.CAMERAS.wholeSite;
+          site.setView(WHOLE);
+          var ov = g(site.svg, { id: ID + "-ov" });
+          var ov1 = g(ov),
+            ov5 = g(ov);
+          var pxG = function (parent, w) {
+            var g0 = g(parent, { transform: "translate(" + f3(w[0]) + " " + f3(w[1]) + ")" });
+            return g(g0, { class: CLS("px") });
+          };
+          var ACT = M.activities;
+          var byId = function (id) {
+            var r = null;
+            ACT.routine.concat(ACT.portfolio).forEach(function (a) {
+              if (a.id === id) r = a;
+            });
+            return r;
+          };
+          var W_HOT = M.anchors.roof03Centre.world;
+          var W_LIFT = byId("d-04").world; // crane lift over Production Hall 2 (plan 86, 36, 0)
+          var W_GAS = byId("d-03").world; // gas detector, Lab 1 (plan 7, 50, 6)
+          var W_AIR = FL.iso(20, 31, 11); // Tank 2, the roof manhole
+          var KINDS = [
+            { k: "hot", w: W_HOT, tag: ["HOT WORK", "SPRINKLERS IN SERVICE"], dx: 36, dy: -92, dec: ["HOT WORK · DECIDED"], ddx: 34, ddy: -64 },
+            { k: "lift", w: W_LIFT, tag: ["CRANE LIFT", "WIND BELOW 9 M/S"], dx: 44, dy: 26, dec: ["CRANE LIFT · RESCHEDULED"], ddx: 40, ddy: 30 },
+            { k: "gas", w: W_GAS, tag: ["GAS DETECTION", "IN SERVICE"], dx: -250, dy: 30, dec: ["GAS DETECTOR · RETAINED"], ddx: -330, ddy: -78 },
+            { k: "air", w: W_AIR, tag: ["CONFINED SPACE", "VENTILATION ON"], dx: -120, dy: -118, dec: ["TANK ENTRY · HELD"], ddx: -150, ddy: -84 },
+          ];
+          function actMarker(parent, k, w) {
+            var gpx = pxG(parent, w);
+            var pop = g(gpx, { transform: "scale(1)" });
+            mk("circle", { r: 15, class: CLS("mk-halo") + " " + CLS("k-" + k) }, pop);
+            mk("circle", { r: 8.5, class: CLS("mk-dot") + " " + CLS("k-" + k) }, pop);
+            return { px: gpx, pop: pop };
+          }
+          function chip(gpx, k, lines, dx, dy) {
+            var gc = g(gpx, { opacity: 0 });
+            var wmax = 0;
+            lines.forEach(function (s, i) {
+              wmax = Math.max(wmax, U.monoWidth(s, 18, i ? 0.08 : 0.1));
+            });
+            var cw = wmax + 36,
+              ch = lines.length * 26 + 16;
+            var ax = dx >= 0 ? dx : dx + cw,
+              ay = dy + ch / 2;
+            // leader from the marker's edge to the chip
+            var u = n2([ax, ay]),
+              r0 = 17;
+            mk("path", { d: "M" + f2(u[0] * r0) + " " + f2(u[1] * r0) + "L" + f2(ax) + " " + f2(ay), class: CLS("lead") }, gc);
+            var gi = g(gc, { transform: "translate(" + f2(dx) + " " + f2(dy) + ")" });
+            mk("rect", { x: 0, y: 0, width: f2(cw), height: f2(ch), rx: 4, class: CLS("chip") }, gi);
+            mk("rect", { x: 0, y: 0, width: 6, height: f2(ch), rx: 2, class: CLS("k-" + k) }, gi);
+            lines.forEach(function (s, i) {
+              var t = mk("text", { x: 20, y: f2(8 + 19 + i * 26), class: CLS(i ? "chip-t2" : "chip-t") }, gi);
+              t.textContent = s;
+            });
+            return gc;
+          }
+
+          // ---------- SC1: markers in their colours, each with its condition; ordinary markers after them
+          var sc1 = KINDS.map(function (K, i) {
+            var m = actMarker(ov1, K.k, K.w);
+            var c = chip(m.px, K.k, K.tag, K.dx, K.dy);
+            var ti = tM1 + i * HB;
+            ft(m.pop, { opacity: 0, attr: { transform: "scale(0.3)" } }, { opacity: 1, attr: { transform: "scale(1)" }, duration: 0.28, ease: "back.out(2)" }, ti);
+            ft(c, { opacity: 0 }, { opacity: 1, duration: 0.3, ease: "power2.out" }, ti + 0.1);
+            if (K.k !== "lift") ft(c, { opacity: 1 }, { opacity: 0, duration: 0.4, ease: "power1.in" }, tPush1);
+            m.pop.setAttribute("opacity", 0);
+            return { m: m, c: c, t: ti };
+          });
+          // ordinary work: many quiet grey markers
+          var ORD = [];
+          ACT.routine.forEach(function (a) {
+            ORD.push(a.world);
+          });
+          ACT.portfolio.forEach(function (a) {
+            if (a.outcome === "inside") ORD.push(a.world);
+          });
+          var nearKind = function (w) {
+            return KINDS.some(function (K) {
+              return Math.hypot(K.w[0] - w[0], K.w[1] - w[1]) < 7;
+            });
+          };
+          ORD = ORD.filter(function (w) {
+            return !nearKind(w);
+          });
+          var ordMarker = function (parent, w, withTick) {
+            var gpx = pxG(parent, w);
+            var pop = g(gpx, { transform: "scale(1)", opacity: 0 });
+            mk("circle", { r: 5.5, class: CLS("ord") }, pop);
+            var tick = null;
+            if (withTick) tick = mk("path", { d: "M5 -6L8.5 -2.5L15 -11", class: CLS("tick") }, gpx);
+            return { pop: pop, tick: tick };
+          };
+          var r1 = rng("sc1-ord");
+          var ord1 = FL.shuffle(r1, ORD).map(function (w, j, arr) {
+            var m = ordMarker(ov1, w, false);
+            var ti = tM1 + 2 * HB + (j / arr.length) * 2 * HB + r1() * 0.08; // quiet, under the last two coloured markers
+            ft(m.pop, { opacity: 0, attr: { transform: "scale(0.4)" } }, { opacity: 1, attr: { transform: "scale(1)" }, duration: 0.22, ease: "power2.out" }, ti);
+            return ti;
+          });
+          // the camera: still on the whole site, then a one-beat push toward the crane into the cut
+          var R_PUSH = SK.rect(W_LIFT[0] - 2, W_LIFT[1] - 8, 6.01038 * 2.1);
+          site.camera(tl, WHOLE, 0, 0.001, "none", WHOLE);
+          site.camera(tl, R_PUSH, tPush1, tC2 - tPush1, "power2.in");
+          cutTo(ov1, { opacity: 1 }, { opacity: 0 }, tC2);
+
+          // ---------- SC5: cut to Tank 2, then one continuous pull back to the whole site
+          var R_TANK = SK.rect(W_AIR[0] - 1, W_AIR[1] + 3, 30);
+          site.camera(tl, R_TANK, tC5 - 2 * CUTE, 0.001, "steps(1)");
+          var PULL_EASE = (function () {
+            // velocity ramps in over the first 8 percent, then decays: a soft start, a long deceleration
+            var N = 400,
+              a = 0.08,
+              pw = 1.8,
+              acc = [0],
+              s = 0;
+            for (var i = 1; i <= N; i++) {
+              var p = (i - 0.5) / N;
+              s += (p < a ? Math.sin(((PI / 2) * p) / a) : 1) * Math.pow(1 - p, pw);
+              acc.push(s);
+            }
+            return function (p) {
+              if (p <= 0) return 0;
+              if (p >= 1) return 1;
+              var x = p * N,
+                i = Math.floor(x);
+              return (acc[i] + (acc[i + 1] - acc[i]) * (x - i)) / s;
+            };
+          })();
+          var tPB = tC5 + 0.002;
+          // the viewBox interpolates linearly, so the zoom is made geometric here: the pull opens up evenly
+          // and decelerates into the whole site instead of snapping wide in its first beat
+          var ZR = WHOLE.w / R_TANK.w;
+          var GEO_PULL = function (p) {
+            var e = PULL_EASE(p);
+            return (Math.pow(ZR, e) - 1) / (ZR - 1);
+          };
+          site.camera(tl, WHOLE, tPB, tDec - tPB, GEO_PULL, R_TANK);
+          ov5.setAttribute("opacity", 0);
+          cutTo(ov5, { opacity: 0 }, { opacity: 1 }, tC5 - CUTE);
+          // ordinary work passes quietly, each with a small green tick
+          var r5 = rng("sc5-ord");
+          var passes = [];
+          FL.shuffle(r5, ORD).forEach(function (w, j, arr) {
+            var m = ordMarker(ov5, w, true);
+            var ti = tC5 + 0.25 + (j / arr.length) * (tFew - tC5 - 0.9) + r5() * 0.12;
+            ft(m.pop, { opacity: 0, attr: { transform: "scale(0.4)" } }, { opacity: 1, attr: { transform: "scale(1)" }, duration: 0.22, ease: "power2.out" }, ti);
+            tl.fromTo(m.tick, { drawSVG: "0%" }, { drawSVG: "100%", duration: 0.2, ease: "power2.out", immediateRender: true }, ti + 0.4);
+            passes.push(ti + 0.4);
+          });
+          // the four decisions of the film: markers first, then distinct glyphs in their colours
+          function decGlyph(gpx, k) {
+            var gg = g(gpx, { opacity: 0 });
+            if (k === "hot") mk("path", { d: "M0 -12L12 0L0 12L-12 0Z", class: CLS("k-" + k) + " " + CLS("glyph-edge") }, gg);
+            else if (k === "lift") mk("rect", { x: -9.5, y: -9.5, width: 19, height: 19, rx: 1.5, class: CLS("k-" + k) + " " + CLS("glyph-edge") }, gg);
+            else if (k === "gas") {
+              mk("circle", { r: 13, class: CLS("ret-ring") }, gg);
+              var cpid = ID + "-retclip";
+              var cp = mk("clipPath", { id: cpid }, gg);
+              mk("circle", { r: 12 }, cp);
+              var hd = "";
+              for (var x = -16; x <= 16; x += 4.5) hd += "M" + x + " 14L" + (x + 14) + " -14";
+              mk("path", { d: hd, class: CLS("ret-hatch"), "clip-path": "url(#" + cpid + ")" }, gg);
+              mk("circle", { r: 5, class: CLS("k-" + k) + " " + CLS("glyph-edge") }, gg);
+            } else {
+              mk("circle", { r: 11.5, class: CLS("k-" + k) + " " + CLS("glyph-edge") }, gg);
+              mk("rect", { x: -5, y: -5.5, width: 3.4, height: 11, class: CLS("pause") }, gg);
+              mk("rect", { x: 1.6, y: -5.5, width: 3.4, height: 11, class: CLS("pause") }, gg);
+            }
+            return gg;
+          }
+          var decs = KINDS.map(function (K, i) {
+            var m = actMarker(ov5, K.k, K.w);
+            var tIn = K.k === "air" ? tC5 : tC5 + 0.45 + i * BEAT;
+            if (K.k !== "air") {
+              m.pop.setAttribute("opacity", 0);
+              ft(m.pop, { opacity: 0, attr: { transform: "scale(0.3)" } }, { opacity: 1, attr: { transform: "scale(1)" }, duration: 0.28, ease: "power2.out" }, tIn);
+            }
+            var gl = decGlyph(m.px, K.k);
+            var ring = mk("circle", { r: 20, class: CLS("dec-ring"), opacity: 0 }, m.px);
+            var lab = chip(m.px, K.k, K.dec, K.ddx, K.ddy);
+            var tRes = tFew + i * HB;
+            ft(m.pop, { opacity: 1 }, { opacity: 0, duration: 0.2, ease: "power1.in" }, tRes);
+            ft(gl, { opacity: 0, attr: { transform: "scale(0.5)" } }, { opacity: 1, attr: { transform: "scale(1)" }, duration: 0.3, ease: "back.out(2.2)" }, tRes + 0.05);
+            ft(lab, { opacity: 0 }, { opacity: 1, duration: 0.3, ease: "power2.out" }, tRes + 0.12);
+            ft(ring, { opacity: 0, attr: { r: 12 } }, { opacity: 1, attr: { r: 20 }, duration: 0.35, ease: "power3.out" }, tDec + i * 0.06);
+            return { t: tRes };
+          });
+          // made in time: one cobalt pulse runs the envelope line once
+          var envD = site.el("envelope-outline").getAttribute("d");
+          var pulse = mk("path", { d: envD, class: CLS("pulse"), opacity: 0 }, ov5);
+          var envLen = FL.pathLength(pulse);
+          var seg = envLen * 0.16;
+          pulse.style.strokeDasharray = f3(seg) + " " + f3(envLen);
+          ft(pulse, { opacity: 0 }, { opacity: 1, duration: 0.12 }, tPulse);
+          ft(pulse, { strokeDashoffset: seg }, { strokeDashoffset: -envLen, duration: 3 * HB, ease: "power1.inOut" }, tPulse);
+          ft(pulse, { opacity: 1 }, { opacity: 0, duration: 0.2 }, tPulse + 3 * HB - 0.1);
+          // everything but the site leaves before the handoff
+          ft(ov5, { opacity: 1 }, { opacity: 0, duration: tBare - tFade, ease: "power1.inOut" }, tFade);
+
+          // ================================================================ SC2: the crane lift
+          var v1 = (function () {
+            var svg = el(ID + "-v1-svg");
+            var P = SketchKit.paper(svg, { prefix: ID + "-v1", scene: ID });
+            svg.classList.add(CLS("svg"));
+            var root = P.top;
+            var gBg = g(root, { transform: "translate(0 0)", opacity: 0.78 }),
+              gMid = g(root, { transform: "translate(0 0)" }),
+              gFx = g(root),
+              gFg = g(root, { transform: "translate(0 0)", opacity: 0.4 }),
+              gConn = g(root),
+              gCard = g(root);
+            var cam = Cam({ az: 62, el: 12, s: 25, ox: 560, oy: 930 });
+            var Lt = nrm([-0.5, 0.45, 0.75]);
+            var LIFT = { top: "f-lift", lit: "f-lift", dark: "f-lift", hcls: "hc", hcls2: "hc-lift", w: 2 };
+            var STEEL = { top: "f-steel", lit: "f-steel", dark: "f-steeld", hcls: "hc", hcls2: "hc-steel", w: 1.8 };
+
+            // ---------- ground: the lay-down area, paving, a kerb
+            var gp = function (x, y) {
+              return cam.p([x, y, 0]);
+            };
+            wash(gBg, [gp(-16, -5), gp(24, -5), gp(24, 10), gp(-16, 10)], "f-paving", "pad", 6);
+            contour(gBg, [gp(-30, 10.5), gp(40, 10.5)], { w: 1.4, seed: "kerb", cls: "inkl" });
+            line(gBg, [gp(-30, 11.2), gp(40, 11.2)], "htl");
+            [-8, -2, 4, 10, 16].forEach(function (x, i) {
+              line(gBg, [gp(x, 4.6), gp(x + 1.5, 4.6)], "htl");
+            });
+
+            // ---------- the production hall behind: pale slate, cladding, a window band, the roof edge
+            var HALL = { top: "f-slr", lit: "f-slw", dark: "f-sld", hcls: "hc", hcls2: "hc-slate", lineCls: "inkl", w: 1.6, hsp: 7 };
+            var hall = drawBox(gBg, cam, Lt, [2, -40, 0], [46, 0, 0], [0, 34, 0], [0, 0, 10], Object.assign({ seed: "hall", ext: true }, HALL));
+            var clad = "";
+            for (var x = 3; x < 48; x += 1.3) {
+              var a = cam.p([x, -6, 0.3]),
+                b = cam.p([x, -6, 9.6]);
+              clad += "M" + f2(a[0]) + " " + f2(a[1]) + "L" + f2(b[0]) + " " + f2(b[1]);
+            }
+            mk("path", { d: clad, class: CLS("htl") }, gBg);
+            var wb = [cam.p([3, -6, 6.6]), cam.p([47, -6, 6.6]), cam.p([47, -6, 7.6]), cam.p([3, -6, 7.6])];
+            fill(gBg, wb, "hi");
+            contour(gBg, [wb[0], wb[1]], { w: 1, seed: "wb1", cls: "inkl", over: false });
+            contour(gBg, [wb[3], wb[2]], { w: 1, seed: "wb2", cls: "inkl", over: false });
+            var door = [cam.p([30, -6, 0]), cam.p([35, -6, 0]), cam.p([35, -6, 5]), cam.p([30, -6, 5])];
+            fill(gBg, door, "f-sld");
+            hatchPoly(gBg, door, { angle: 0, sp: 6, seed: "door", cls: "htl", inset: 1 });
+            contour(gBg, door, { w: 1.2, closed: true, seed: "door", cls: "inkl", over: false });
+            // the roof parapet, a stronger line where the load passes over it
+            contour(gBg, [cam.p([2, -6, 10.4]), cam.p([48, -6, 10.4])], { w: 1.6, seed: "par", cls: "inkl", ext: true });
+            line(gBg, [cam.p([2, -6, 10.4]), cam.p([2, -6, 10])], "ln");
+            // a roof unit on the far roof
+            drawBox(gBg, cam, Lt, [26, -24, 10], [4, 0, 0], [0, 3, 0], [0, 0, 1.6], Object.assign({ seed: "ru" }, HALL));
+
+            // ---------- the wind sock on the hall roof (swings up as the wind picks up)
+            var sockBase = cam.p([15, -8, 10]),
+              sockTop = cam.p([15, -8, 13.6]);
+            contour(gBg, [sockBase, sockTop], { w: 1.8, seed: "pole" });
+            var gSock = g(gBg, { transform: "translate(" + f2(sockTop[0]) + " " + f2(sockTop[1]) + ") rotate(48)" });
+            (function () {
+              var L = 112,
+                r0 = 17,
+                r1 = 7;
+              var pts = [[0, -r0], [L, -r1], [L, r1], [0, r0]];
+              fill(gSock, pts, "hi");
+              for (var i = 0; i < 5; i += 2) {
+                var u0 = i / 5,
+                  u1 = (i + 1) / 5;
+                var q = [[L * u0, -(r0 + (r1 - r0) * u0)], [L * u1, -(r0 + (r1 - r0) * u1)], [L * u1, r0 + (r1 - r0) * u1], [L * u0, r0 + (r1 - r0) * u0]];
+                fill(gSock, q, "f-std");
+                hatchPoly(gSock, q, { angle: 70, sp: 3.2, seed: "sk" + i, cls: "ht", inset: 1 });
+              }
+              contour(gSock, pts, { w: 1.5, closed: true, seed: "sock", press: 0.2 });
+              contour(gSock, ellArc({ c: [0, 0], A: [5, 0], B: [0, r0] }, 0, TAU, 30), { w: 1.3, closed: true, seed: "sockm", over: false });
+            })();
+
+            // ---------- the crane: back to front
+            // far outriggers and mats
+            var outrigger = function (x, side, seed) {
+              var y0 = side > 0 ? 1.3 : -1.3,
+                yF = side > 0 ? 3.5 : -3.5;
+              drawBox(gMid, cam, Lt, [x - 0.3, side > 0 ? 1.3 : -3.75, 1.0], [0.6, 0, 0], [0, 2.45, 0], [0, 0, 0.42], Object.assign({ seed: seed + "b" }, LIFT));
+              drawBox(gMid, cam, Lt, [x - 0.75, yF - 0.75, 0], [1.5, 0, 0], [0, 1.5, 0], [0, 0, 0.14], { seed: seed + "m", top: "f-sand", lit: "f-sand", dark: "f-sandd", hcls: "hc", hcls2: "hc-sand", w: 1.3, over: false });
+              drawCyl(gMid, cyl(cam, [x, yF, 0.14], [x, yF, 0.3], 0.4, 40), Lt, { w: 1.4, seed: seed + "p", fillCls: "f-steeld", capCls: "f-steel", hcls: "hc", hcls2: "hc-steel" });
+              drawCyl(gMid, cyl(cam, [x, yF, 0.3], [x, yF, 1.05], 0.13, 24), Lt, { w: 1.3, seed: seed + "j", fillCls: "f-steel", hcls: "hc", hcls2: "hc-steel" });
+            };
+            outrigger(-5.3, -1, "orf1");
+            outrigger(5.2, -1, "orf2");
+            // far wheels are hidden by the carrier; the carrier body
+            drawBox(gMid, cam, Lt, [-6.2, -1.3, 0.95], [12.4, 0, 0], [0, 2.6, 0], [0, 0, 1.35], Object.assign({ seed: "car", ext: true }, LIFT));
+            // the superstructure: counterweight, turret, the luffing ram, the boom
+            drawBox(gMid, cam, Lt, [-5.8, -1.2, 2.3], [1.5, 0, 0], [0, 2.4, 0], [0, 0, 1.7], Object.assign({ seed: "cw" }, STEEL));
+            drawBox(gMid, cam, Lt, [-4.3, -1.25, 2.3], [5.2, 0, 0], [0, 2.5, 0], [0, 0, 1.2], Object.assign({ seed: "tur" }, LIFT));
+            var phi = (-40 * PI) / 180,
+              elb = (62 * PI) / 180;
+            var D = [Math.cos(elb) * Math.cos(phi), Math.cos(elb) * Math.sin(phi), Math.sin(elb)];
+            var WV = [-Math.sin(phi), Math.cos(phi), 0];
+            var HV = nrm(cross(WV, D));
+            if (HV[2] < 0) HV = mul(HV, -1);
+            var B0 = [0.3, 0, 3.35];
+            var bp = function (s, w, h) {
+              return add(add(B0, mul(D, s)), add(mul(WV, w), mul(HV, h)));
+            };
+            // the luffing ram, under the boom
+            var ram0 = [0.6, 0, 2.9],
+              ram1 = bp(8.5, 0, -0.55);
+            drawCyl(gMid, cyl(cam, ram0, lerp3(ram0, ram1, 0.62), 0.24, 30), Lt, { w: 1.6, seed: "ram", fillCls: "f-steel", hcls: "hc", hcls2: "hc-steel" });
+            drawCyl(gMid, cyl(cam, lerp3(ram0, ram1, 0.6), ram1, 0.14, 24), Lt, { w: 1.3, seed: "rod", fillCls: "f-steel", hcls: "hc", hcls2: "hc-steel", hatch: false });
+            function lerp3(a, b, t) {
+              return [a[0] + (b[0] - a[0]) * t, a[1] + (b[1] - a[1]) * t, a[2] + (b[2] - a[2]) * t];
+            }
+            var sections = [
+              [0, 11.2, 1.0, 1.2],
+              [10.6, 20.8, 0.84, 1.0],
+              [20.2, 29.6, 0.7, 0.82],
+            ];
+            sections.forEach(function (sc, i) {
+              drawBox(gMid, cam, Lt, bp(sc[0], -sc[2] / 2, -sc[3] / 2), mul(D, sc[1] - sc[0]), mul(WV, sc[2]), mul(HV, sc[3]), Object.assign({ seed: "boom" + i, ext: i === 0, hsp: 4 }, LIFT));
+            });
+            // boom head plate and sheave
+            drawBox(gMid, cam, Lt, bp(29.5, -0.36, -0.5), mul(D, 1.1), mul(WV, 0.72), mul(HV, 1.0), Object.assign({ seed: "head" }, LIFT));
+            var TIP = bp(30.3, 0, -0.35);
+            drawCyl(gMid, cyl(cam, add(TIP, mul(WV, -0.28)), add(TIP, mul(WV, 0.28)), 0.46, 36), Lt, { w: 1.5, seed: "shv", fillCls: "f-steel", capCls: "f-steel", hcls: "hc", hcls2: "hc-steel" });
+            // the anemometer on its mast at the boom head (cups turn in a horizontal plane)
+            var mast0 = bp(30.1, 0, 0.5),
+              mast1 = add(mast0, [0, 0, 1.3]);
+            contour(gMid, [cam.p(mast0), cam.p(mast1)], { w: 1.5, seed: "mast" });
+            var eA = ell(cam, mast1, [0, 0, 1], 1, [
+              [1, 0, 0],
+              [0, 1, 0],
+            ]);
+            var gAn = g(gMid, { transform: "matrix(" + [eA.A[0], eA.A[1], eA.B[0], eA.B[1], eA.c[0], eA.c[1]].map(f3).join(" ") + ")" });
+            var gAnR = g(gAn, { transform: "rotate(0)" });
+            [0, 1, 2].forEach(function (i) {
+              var a = (i * TAU) / 3,
+                cx = Math.cos(a) * 0.5,
+                cy = Math.sin(a) * 0.5;
+              mk("path", { d: "M0 0L" + f3(cx) + " " + f3(cy), class: CLS("ln"), "vector-effect": "non-scaling-stroke" }, gAnR);
+              mk("circle", { cx: f3(cx), cy: f3(cy), r: 0.16, class: CLS("f-steel"), stroke: "var(--c-ink)", "stroke-width": 1.2, "vector-effect": "non-scaling-stroke" }, gAnR);
+            });
+            mk("circle", { cx: f2(cam.p(mast1)[0]), cy: f2(cam.p(mast1)[1]), r: 3, class: CLS("f-dark") }, gMid);
+            // the hook line: two falls from the sheave to the hook block, the block, the hook, the slings
+            var blockZ = 15.6;
+            var BLK = [TIP[0], TIP[1], blockZ];
+            [-0.12, 0.12].forEach(function (o, i) {
+              var a = cam.p(add(TIP, [0, 0, -0.42])),
+                b = cam.p(add(BLK, [0, 0, 0.45]));
+              contour(gMid, [a2(a, [o * 30, 0]), a2(b, [o * 30, 0])], { w: 1.3, seed: "fall" + i, over: false });
+            });
+            drawBox(gMid, cam, Lt, add(BLK, [-0.3, -0.22, -0.45]), [0.6, 0, 0], [0, 0.44, 0], [0, 0, 0.9], Object.assign({ seed: "blk" }, LIFT));
+            var hookTop = cam.p(add(BLK, [0, 0, -0.45])),
+              hookP = cam.p(add(BLK, [0, 0, -1.25]));
+            stroke(gMid, [hookTop, a2(hookTop, [0, 8]), a2(hookP, [-7, -4]), a2(hookP, [0, 4]), a2(hookP, [8, -2]), a2(hookP, [7, -12])], { w: 2.2, seed: "hook" });
+            // the load: an air-handling unit, pale stone, a fan ring on its top
+            var LD = [BLK[0] - 1.6, BLK[1] - 1.05, 11.4],
+              LW = [3.2, 0, 0],
+              LY = [0, 2.1, 0],
+              LZ = [0, 0, 1.55];
+            var LOAD = { top: "f-str", lit: "f-stw", dark: "f-std", hcls: "hc", hcls2: "hc-stone", w: 1.8 };
+            var hookEye = cam.p(add(BLK, [0, 0, -1.28]));
+            [[0, 0], [1, 0], [1, 1], [0, 1]].forEach(function (q, i) {
+              var c = cam.p(add(add(add(LD, mul(LW, q[0])), mul(LY, q[1])), LZ));
+              if (i === 0) line(gMid, [hookEye, c], "ln");
+            });
+            var load = drawBox(gMid, cam, Lt, LD, LW, LY, LZ, Object.assign({ seed: "load", ext: true }, LOAD));
+            [[1, 0], [1, 1], [0, 1]].forEach(function (q, i) {
+              var c = cam.p(add(add(add(LD, mul(LW, q[0])), mul(LY, q[1])), LZ));
+              contour(gMid, [hookEye, c], { w: 1.1, seed: "sl" + i, over: false });
+            });
+            var lc = add(add(LD, mul(LW, 0.5)), add(mul(LY, 0.5), LZ));
+            var eF = ell(cam, lc, [0, 0, 1], 0.62);
+            fill(gMid, ellArc(eF, 0, TAU, 40), "f-std");
+            contour(gMid, ellArc(eF, 0, TAU, 40), { w: 1.1, closed: true, seed: "fanr", over: false });
+            // louvres on the lit side
+            var louv = "";
+            for (var zz = 11.7; zz < 12.8; zz += 0.22) {
+              var la = cam.p([LD[0] + 0.3, LD[1] + 2.1, zz]),
+                lb = cam.p([LD[0] + 2.9, LD[1] + 2.1, zz]);
+              louv += "M" + f2(la[0]) + " " + f2(la[1]) + "L" + f2(lb[0]) + " " + f2(lb[1]);
+            }
+            mk("path", { d: louv, class: CLS("htl") }, gMid);
+            // two tag lines hanging from the load
+            [[0, 1], [1, 1]].forEach(function (q, i) {
+              var c = cam.p(add(add(LD, mul(LW, q[0])), mul(LY, q[1])));
+              stroke(gMid, [c, a2(c, [6 - 12 * i, 60]), a2(c, [-4 - 8 * i, 140]), a2(c, [2 - 10 * i, 190])], { w: 0.9, seed: "tl" + i, cls: "inkl" });
+            });
+            // the operator's cab on the near side of the turret
+            drawBox(gMid, cam, Lt, [-0.9, 1.25, 2.3], [1.9, 0, 0], [0, 1.0, 0], [0, 0, 1.9], Object.assign({ seed: "opc" }, LIFT, {
+              onFaces: function (F, gF, C) {
+                ["y1", "x1"].forEach(function (k) {
+                  if (!F[k].vis) return;
+                  var p = F[k].poly;
+                  var inset = function (u, v) {
+                    return lerp2(lerp2(p[0], p[1], u), lerp2(p[3], p[2], u), v);
+                  };
+                  var gl = [inset(0.14, 0.34), inset(0.86, 0.34), inset(0.86, 0.9), inset(0.14, 0.9)];
+                  fill(gF, gl, "f-steell");
+                  contour(gF, gl, { w: 1, closed: true, seed: "opg" + k, over: false });
+                  line(gF, [inset(0.3, 0.4), inset(0.5, 0.84)], "htl");
+                });
+              },
+            }));
+            // near outriggers
+            outrigger(-5.3, 1, "orn1");
+            outrigger(5.2, 1, "orn2");
+            // near wheels
+            [-4.6, -3.0, 2.4, 4.0].forEach(function (x, i) {
+              var c = cyl(cam, [x, 1.05, 0.62], [x, 1.45, 0.62], 0.62, 40);
+              drawCyl(gMid, c, Lt, { w: 1.7, seed: "wh" + i, fillCls: "f-dark", capCls: "f-dark", hatch: false });
+              var hub = ell(cam, [x, 1.46, 0.62], [0, 1, 0], 0.3);
+              fill(gMid, ellArc(hub, 0, TAU, 30), "f-steel");
+              contour(gMid, ellArc(hub, 0, TAU, 30), { w: 1, closed: true, seed: "hb" + i, over: false });
+            });
+            // the carrier cab
+            drawBox(gMid, cam, Lt, [6.2, -1.25, 0.95], [2.2, 0, 0], [0, 2.5, 0], [0, 0, 2.2], Object.assign({ seed: "cab", ext: true }, LIFT, {
+              onFaces: function (F, gF) {
+                ["x1", "y1"].forEach(function (k) {
+                  if (!F[k].vis) return;
+                  var p = F[k].poly;
+                  var inset = function (u, v) {
+                    return lerp2(lerp2(p[0], p[1], u), lerp2(p[3], p[2], u), v);
+                  };
+                  var gl = k === "x1" ? [inset(0.55, 0.1), inset(0.55, 0.9), inset(0.95, 0.9), inset(0.95, 0.1)] : [inset(0.62, 0.52), inset(0.92, 0.52), inset(0.92, 0.9), inset(0.62, 0.9)];
+                  fill(gF, gl, "f-steell");
+                  contour(gF, gl, { w: 1, closed: true, seed: "cg" + k, over: false });
+                });
+              },
+            }));
+            [6.9, 8.0].forEach(function (x, i) {
+              var c = cyl(cam, [x, 1.05, 0.62], [x, 1.45, 0.62], 0.62, 40);
+              drawCyl(gMid, c, Lt, { w: 1.7, seed: "wf" + i, fillCls: "f-dark", capCls: "f-dark", hatch: false });
+              var hub = ell(cam, [x, 1.46, 0.62], [0, 1, 0], 0.3);
+              fill(gMid, ellArc(hub, 0, TAU, 30), "f-steel");
+              contour(gMid, ellArc(hub, 0, TAU, 30), { w: 1, closed: true, seed: "hf" + i, over: false });
+            });
+            // the lift supervisor, small, at the edge of the lay-down area (scale)
+            person(gMid, cam.p([12.5, 7.5, 0]), 0.112, { seed: "sup" });
+
+            // ---------- gusts: streaks that draw across the sky, stronger after the wind picks up
+            var GUSTS = [
+              [110, 300, 1.0],
+              [300, 470, 0.9],
+              [180, 620, 0.8],
+              [560, 250, 0.85],
+              [700, 420, 0.75],
+              [960, 330, 0.8],
+              [880, 560, 0.7],
+              [420, 180, 0.7],
+            ];
+            var gusts = GUSTS.map(function (q, i) {
+              var R = rng("gust" + i);
+              var x0 = q[0],
+                y0 = q[1],
+                L = 260 * q[2];
+              var pts = [[x0, y0], [x0 + L * 0.3, y0 - 7 - R() * 4], [x0 + L * 0.6, y0 + 3], [x0 + L * 0.85, y0 - 8], [x0 + L, y0 - 22], [x0 + L * 1.02, y0 - 38], [x0 + L * 0.95, y0 - 46], [x0 + L * 0.9, y0 - 36]];
+              return mk("path", { d: dPts(sm(pts, false, 1), false), class: CLS("gust") }, gFx);
+            });
+
+            // ---------- foreground: a pale pedestrian barrier crossing the lower left, passing the lens
+            (function () {
+              var yA = 986,
+                yB = 1036;
+              var rail = function (y, seed) {
+                contour(gFg, [[-60, y], [960, y + 22]], { w: 3.2, seed: seed, cls: "inkl" });
+              };
+              fill(gFg, [[-60, yA - 6], [960, yA + 16], [960, yB + 30], [-60, yB + 8]], "oc");
+              rail(yA, "fr1");
+              rail(yA + 12, "fr2");
+              [60, 360, 660].forEach(function (x, i) {
+                contour(gFg, [[x, yA + x * 0.0216 - 4], [x - 4, 1100]], { w: 3, seed: "fp" + i, cls: "inkl" });
+                contour(gFg, [[x + 16, yA + x * 0.0216 - 3], [x + 12, 1100]], { w: 2, seed: "fq" + i, cls: "inkl" });
+              });
+              var mesh = "";
+              for (var x = -40; x < 960; x += 14) mesh += "M" + x + " " + f2(yA + 16 + x * 0.0216) + "L" + (x + 26) + " 1100";
+              mk("path", { d: mesh, class: CLS("htl") }, gFg);
+            })();
+
+            // ---------- the card
+            var c2 = card(gCard, {
+              key: "v1",
+              defs: P.defs,
+              band: "lift",
+              h: 690,
+              eyebrow: "CRANE LIFT · PRODUCTION HALL 2",
+              cond: ["Lifts over process plant", "Wind below 9 m/s"],
+              liveLabel: "LIVE · WIND AT THE BOOM HEAD",
+              liveH: 196,
+              kind: "CHANGE THE WORK",
+              out: [{ t: "Lift paused" }, { t: "Rescheduled 16:30" }],
+            });
+            // the live reading and the limit gauge
+            var yV = c2.yR1 + 126;
+            var gVal = g(c2.live);
+            var numR = 40 + U.monoWidth("11.0", 60, 0.02);
+            var vInk = text(gVal, "7.0", numR, yV, "t-live", "end"),
+              vAlert = text(gVal, "7.0", numR, yV, "t-live", "end");
+            vAlert.classList.add(CLS("alert"));
+            vAlert.setAttribute("opacity", 0);
+            var uInk = text(gVal, "m/s", numR + 14, yV, "t-unit"),
+              uAlert = text(gVal, "m/s", numR + 14, yV, "t-unit");
+            uAlert.classList.add(CLS("alert"));
+            uAlert.setAttribute("opacity", 0);
+            var GX = 352,
+              GW = 256,
+              GY = c2.yR1 + 88,
+              GMAX = 15;
+            var gx = function (v) {
+              return GX + (GW * v) / GMAX;
+            };
+            mk("rect", { x: GX, y: GY, width: GW, height: 14, rx: 7, class: CLS("gauge-track") }, c2.live);
+            var gFill = mk("rect", { x: GX, y: GY, width: f2(gx(7) - GX), height: 14, rx: 7, class: CLS("gauge-fill") }, c2.live);
+            var gFillA = mk("rect", { x: GX, y: GY, width: f2(gx(7) - GX), height: 14, rx: 7, class: CLS("gauge-alert"), opacity: 0 }, c2.live);
+            mk("path", { d: "M" + f2(gx(9)) + " " + (GY - 10) + "V" + (GY + 24), class: CLS("gauge-limit") }, c2.live);
+            text(c2.live, "LIMIT 9", gx(9), GY + 50, "t-small", "middle");
+            var above = text(c2.live, "ABOVE LIMIT", GX + GW, GY - 22, "t-alertlab", "end");
+            above.setAttribute("opacity", 0);
+            // the live connection from the anemometer into the card's rule
+            var anem = cam.p(mast1);
+            var L2c = liveLine(gConn, a2(anem, [22, -4]), c2.entry, [200, -10]);
+            return { svg: svg, P: P, cam: cam, gBg: gBg, gMid: gMid, gFg: gFg, gAnR: gAnR, gSock: gSock, sockTop: sockTop, gusts: gusts, card: c2, live: L2c, vInk: vInk, vAlert: vAlert, uInk: uInk, uAlert: uAlert, gFill: gFill, gFillA: gFillA, gx: gx, GX: GX, above: above };
+          })();
+
+          // ---------- SC2 on the timeline
+          (function () {
+            var camV = FL.camera(v1.svg, { sw: false, rects: { A: { x: 360, y: 60, w: 1040, h: 585 }, B: { x: 0, y: 0, w: 1920, h: 1080 } } });
+            camV.apply("A");
+            camV.set(tl, "A", tC2);
+            camV.drift(tl, "A", tC2 + 0.001, tMove2 - tC2 - 0.001, 0.012, "none");
+            camV.to(tl, "B", tMove2, BEAT, "power3.inOut");
+            camV.drift(tl, null, tMove2 + BEAT, tC3 - tMove2 - BEAT, 0.006, "sine.inOut");
+            // parallax during the move: the barrier passes the lens
+            attrTo(v1.gFg, "transform", "translate(0 0)", "translate(-90 -6)", tC2, tC3 - tC2, "none");
+            attrTo(v1.gBg, "transform", "translate(0 0)", "translate(8 0)", tC2, tC3 - tC2, "none");
+            // the anemometer turns, faster after the wind picks up
+            var tAcc = tWind + 0.4;
+            attrTo(v1.gAnR, "transform", "rotate(0)", "rotate(1500)", tC2, tAcc - tC2, "none");
+            attrTo(v1.gAnR, "transform", "rotate(1500)", "rotate(" + (1500 + 1080 * (tC3 - tAcc)) + ")", tAcc, tC3 - tAcc, "power1.in");
+            // the sock lifts toward horizontal as the wind rises
+            var st = v1.sockTop;
+            var sockR = function (a) {
+              return "translate(" + f2(st[0]) + " " + f2(st[1]) + ") rotate(" + f2(a) + ")";
+            };
+            attrTo(v1.gSock, "transform", sockR(48), sockR(40), tC2, tWind - tC2, "sine.inOut");
+            attrTo(v1.gSock, "transform", sockR(40), sockR(8), tWind, 0.55, "power2.out");
+            attrTo(v1.gSock, "transform", sockR(8), sockR(13), tWind + 0.55, tC3 - tWind - 0.55, "sine.inOut");
+            // gusts: each draws across and lets go; more of them, and quicker, from 'wind'
+            v1.gusts.forEach(function (p, i) {
+              var R = rng("gt" + i);
+              var t0 = tC2 + 0.05 + i * 0.16 + R() * 0.1;
+              var d1 = 0.5 + R() * 0.2;
+              tl.fromTo(p, { drawSVG: "0% 0%" }, { drawSVG: "0% 100%", duration: d1, ease: "power1.in", immediateRender: true }, t0);
+              ft(p, { drawSVG: "0% 100%" }, { drawSVG: "100% 100%", duration: d1 * 0.9, ease: "power1.out" }, t0 + d1);
+              var t1 = Math.max(tWind + i * 0.12, t0 + 2 * d1 + 0.05);
+              var d2 = 0.36 + R() * 0.1;
+              ft(p, { drawSVG: "0% 0%" }, { drawSVG: "0% 100%", duration: d2, ease: "power1.in" }, t1);
+              ft(p, { drawSVG: "0% 100%" }, { drawSVG: "100% 100%", duration: d2 * 0.9, ease: "power1.out" }, t1 + d2);
+              var t2 = t1 + 2 * d2 + 0.1 + R() * 0.2;
+              if (t2 + 2 * d2 < tC3) {
+                ft(p, { drawSVG: "0% 0%" }, { drawSVG: "0% 100%", duration: d2, ease: "power1.in" }, t2);
+                ft(p, { drawSVG: "0% 100%" }, { drawSVG: "100% 100%", duration: d2 * 0.9, ease: "power1.out" }, t2 + d2);
+              }
+            });
+            // the live line runs from the boom head into the card as the camera follows it
+            v1.card.g.setAttribute("opacity", 0);
+            ft(v1.card.g, { opacity: 0 }, { opacity: 1, duration: 0.3, ease: "power1.out" }, tMove2 + 0.2);
+            drawLive(v1.live, v1.card, tMove2, BEAT);
+            // the reading: a quiet 7.0 until 'wind', then 7 to 11 m/s, crossing 9 (alert)
+            var fmt = function (v) {
+              return v.toFixed(1);
+            };
+            var RISE = 0.4,
+              tCross = tWind + RISE * Math.sqrt(0.5);
+            [v1.vInk, v1.vAlert].forEach(function (n) {
+              FL.textTo(tl, n, { from: 6.8, to: 7.0, at: tMove2, duration: tWind - tMove2, ease: "sine.inOut", format: fmt });
+              FL.textTo(tl, n, { from: 7.0, to: 11.0, at: tWind, duration: RISE, ease: "power1.in", format: fmt });
+            });
+            var gw = function (v) {
+              return f2(v1.gx(v) - v1.GX);
+            };
+            ft([v1.gFill, v1.gFillA], { attr: { width: gw(6.8) } }, { attr: { width: gw(7.0) }, duration: tWind - tMove2, ease: "sine.inOut" }, tMove2);
+            ft([v1.gFill, v1.gFillA], { attr: { width: gw(7.0) } }, { attr: { width: gw(11.0) }, duration: RISE, ease: "power1.in" }, tWind);
+            cutTo([v1.vInk, v1.uInk, v1.gFill], { opacity: 1 }, { opacity: 0 }, tCross);
+            cutTo([v1.vAlert, v1.uAlert, v1.gFillA], { opacity: 0 }, { opacity: 1 }, tCross);
+            ft(v1.above, { opacity: 0 }, { opacity: 1, duration: 0.2, ease: "power1.out" }, tCross);
+            settleOutcome(v1.card, tOut2);
+          })();
+
+          // ================================================================ SC3: the gas detector, bypassed
+          var v2 = (function () {
+            var svg = el(ID + "-v2-svg");
+            var P = SketchKit.paper(svg, { prefix: ID + "-v2", scene: ID });
+            svg.classList.add(CLS("svg"));
+            var root = P.top;
+            var gBg = g(root, { transform: "translate(0 0)" }),
+              gMid = g(root, { transform: "translate(0 0)" }),
+              gFg = g(root, { transform: "translate(0 0)", opacity: 0.42 }),
+              gConn = g(root),
+              gCard = g(root);
+            var cam = Cam({ az: 70, el: 10, s: 1080, ox: 488, oy: 674 });
+            var Lt = nrm([-0.5, 0.6, 0.6]);
+            var wp = function (x, z) {
+              return cam.p([x, 0, z]);
+            };
+            // ---------- the laboratory wall: a sage wash, block courses
+            wash(gBg, [wp(-0.5, -0.5), wp(0.62, -0.5), wp(0.62, 0.52), wp(-0.5, 0.52)], "f-sgw", "wall", 7);
+            var courses = "";
+            for (var zc = -0.48; zc < 0.5; zc += 0.1) {
+              var a = wp(-0.48, zc),
+                b = wp(0.6, zc);
+              courses += "M" + f2(a[0]) + " " + f2(a[1]) + "L" + f2(b[0]) + " " + f2(b[1]);
+              var k = Math.round((zc + 0.48) / 0.1);
+              for (var xc = -0.48 + (k % 2 ? 0.1 : 0); xc < 0.6; xc += 0.2) {
+                var c = wp(xc, zc),
+                  d = wp(xc, zc + 0.1);
+                courses += "M" + f2(c[0]) + " " + f2(c[1]) + "L" + f2(d[0]) + " " + f2(d[1]);
+              }
+            }
+            mk("path", { d: courses, class: CLS("htl") }, gBg);
+            // a cable tray along the top of the wall
+            drawBox(gBg, cam, Lt, [-0.52, 0, 0.44], [1.16, 0, 0], [0, 0.08, 0], [0, 0, 0.035], { seed: "tray", top: "f-steel", lit: "f-steel", dark: "f-steeld", hcls: "hc", hcls2: "hc-steel", w: 1.3, lineCls: "inkl" });
+            // ---------- the conduit from the tray down to the detector
+            var STEEL = { top: "f-steel", lit: "f-steel", dark: "f-steeld", hcls: "hc", hcls2: "hc-steel" };
+            drawCyl(gMid, cyl(cam, [0, 0.05, 0.36], [0, 0.05, 0.44], 0.012, 20), Lt, Object.assign({ w: 1.3, seed: "cd1", fillCls: "f-steel" }, STEEL));
+            // ---------- the fixed gas detector: pale enclosure, violet band, display, sensor head
+            var DET = { top: "f-hi", lit: "f-stw", dark: "f-std", hcls: "hc", hcls2: "hc-stone", w: 2.2 };
+            var det = drawBox(gMid, cam, Lt, [-0.13, 0, 0.05], [0.26, 0, 0], [0, 0.1, 0], [0, 0, 0.3], Object.assign({ seed: "det", ext: true }, DET));
+            var fp = function (x, z) {
+              return cam.p([x, 0.1, z]);
+            };
+            // the violet band with its name
+            var band = [fp(-0.13, 0.12), fp(0.13, 0.12), fp(0.13, 0.172), fp(-0.13, 0.172)];
+            fill(gMid, band, "f-gas");
+            contour(gMid, [band[3], band[2]], { w: 1, seed: "bnd", over: false });
+            var bc = lerp2(band[0], band[2], 0.5);
+            text(gMid, "GAS DETECTOR", bc[0], bc[1] + 7, "plate-inv", "middle").setAttribute("font-size", 19);
+            // the display window: 0 %LEL, then BYPASS
+            var disp = [fp(-0.09, 0.225), fp(0.09, 0.225), fp(0.09, 0.305), fp(-0.09, 0.305)];
+            fill(gMid, disp, "hi");
+            contour(gMid, disp, { w: 1.4, closed: true, seed: "disp", over: false });
+            var dc = lerp2(disp[0], disp[2], 0.5);
+            var dOn = text(gMid, "0 %LEL", dc[0], dc[1] + 11, "plate", "middle");
+            dOn.setAttribute("font-size", 32);
+            var dByp = text(gMid, "BYPASS", dc[0], dc[1] + 11, "plate", "middle");
+            dByp.setAttribute("font-size", 32);
+            dByp.setAttribute("opacity", 0);
+            // two screws, a status lamp
+            [[-0.11, 0.04 + 0.03], [0.11, 0.07]].forEach(function (q, i) {
+              var p = fp(q[0], q[1]);
+              contour(gMid, ellArc({ c: p, A: [5, 0], B: [0, 5] }, 0, TAU, 16), { w: 1, closed: true, seed: "scr" + i, over: false });
+            });
+            var lamp = fp(0.105, 0.325);
+            mk("circle", { cx: f2(lamp[0]), cy: f2(lamp[1]), r: 6, class: CLS("f-steel"), stroke: "var(--c-ink)", "stroke-width": 1.2 }, gMid);
+            // the sensor head under the enclosure, with its violet ring
+            drawCyl(gMid, cyl(cam, [0, 0.05, 0.05], [0, 0.05, -0.012], 0.045, 40), Lt, Object.assign({ w: 1.8, seed: "sh", fillCls: "f-stw" }, { hcls: "hc", hcls2: "hc-stone" }));
+            drawCyl(gMid, cyl(cam, [0, 0.05, -0.012], [0, 0.05, -0.034], 0.047, 40), Lt, { w: 1.5, seed: "shr", fillCls: "f-gas", hatch: false, arc1: false });
+            // the conduit from the detector to the bypass switch
+            drawCyl(gMid, cyl(cam, [0.13, 0.04, 0.24], [0.375, 0.04, 0.24], 0.011, 20), Lt, Object.assign({ w: 1.2, seed: "cd2", fillCls: "f-steel" }, STEEL));
+            drawCyl(gMid, cyl(cam, [0.375, 0.04, 0.24], [0.375, 0.04, 0.17], 0.011, 20), Lt, Object.assign({ w: 1.2, seed: "cd3", fillCls: "f-steel" }, STEEL));
+            // ---------- the bypass key switch: ON and BYP engraved above the lock, the key points at one of them
+            var ks = drawBox(gMid, cam, Lt, [0.3, 0, -0.04], [0.15, 0, 0], [0, 0.07, 0], [0, 0, 0.21], Object.assign({ seed: "ks", w: 1.9, ext: true }, STEEL));
+            var kp = function (x, z) {
+              return cam.p([x, 0.07, z]);
+            };
+            var lockC = kp(0.375, 0.035);
+            var lbl = function (str, x, z, anchor) {
+              var q = kp(x, z);
+              text(gMid, str, q[0], q[1] + 6, "plate", anchor || "middle").setAttribute("font-size", 20);
+            };
+            lbl("ON", 0.338, 0.125);
+            lbl("BYP", 0.414, 0.125);
+            [[0.338, 0.096], [0.414, 0.096]].forEach(function (q, i) {
+              var a = kp(q[0], q[1]);
+              mk("circle", { cx: f2(a[0]), cy: f2(a[1]), r: 3, class: CLS("f-dark") }, gMid);
+            });
+            lbl("GD-L1", 0.375, -0.012);
+            contour(gMid, ellArc({ c: lockC, A: [19, 0], B: [0, 19] }, 0, TAU, 30), { w: 1.6, closed: true, seed: "lk", over: false });
+            fill(gMid, ellArc({ c: lockC, A: [18, 0], B: [0, 18] }, 0, TAU, 30), "f-steeld");
+            // the key: blade into the lock, a flat bow, turned in the face plane (up-left ON, up-right BYPASS)
+            var gKey = g(gMid, { transform: "translate(" + f2(lockC[0]) + " " + f2(lockC[1]) + ") rotate(-122)" });
+            var bow = [[4, -8], [22, -12], [40, -11], [46, 0], [40, 11], [22, 12], [4, 8]];
+            part(gKey, bow, { w: 1.9, seed: "bow", fillCls: "f-steel", k: 0.4, over: false });
+            contour(gKey, ellArc({ c: [34, 0], A: [4.5, 0], B: [0, 4.5] }, 0, TAU, 16), { w: 1.2, closed: true, seed: "bowh", over: false });
+            fill(gKey, [[-10, -4], [6, -4], [6, 4], [-10, 4]], "f-steel");
+            contour(gKey, [[-10, -4], [6, -4]], { w: 1.2, seed: "bl1", over: false });
+            contour(gKey, [[-10, 4], [6, 4]], { w: 1.2, seed: "bl2", over: false });
+            // the maintenance tag, hung from the switch once it is bypassed
+            var pivot = kp(0.375, -0.04);
+            pivot = [pivot[0], pivot[1] + 2];
+            var tag = hangTag(P, gMid, {
+              pivot: pivot,
+              string: 46,
+              w: 212,
+              h: 190,
+              seed: "byp",
+              band: 26,
+              bandCls: "f-gass",
+              lines: [
+                { t: "BYPASSED", y: 66, size: 28, weight: 600, ls: 0.06, rule: true },
+                { t: "FOR MAINTENANCE", y: 112, size: 19, weight: 500, ls: 0.06 },
+                { t: "LAB 1", y: 148, size: 22, weight: 500, ls: 0.1 },
+              ],
+            });
+            // ---------- the portable detector on its hook, appears as the risk is retained
+            var gPort = g(gMid, { opacity: 0, transform: "translate(0 -24)" });
+            (function () {
+              var hook = cam.p([0.2, 0.0, 0.0]);
+              contour(gPort, [a2(hook, [-6, 0]), a2(hook, [6, 0])], { w: 2, seed: "hk", over: false });
+              var top = cam.p([0.2, 0.03, -0.08]);
+              stroke(gPort, [hook, a2(lerp2(hook, top, 0.5), [-10, 0]), a2(top, [-12, 0])], { w: 1.2, seed: "lan1" });
+              stroke(gPort, [hook, a2(lerp2(hook, top, 0.5), [10, 0]), a2(top, [12, 0])], { w: 1.2, seed: "lan2" });
+              drawBox(gPort, cam, Lt, [0.165, 0.01, -0.25], [0.075, 0, 0], [0, 0.035, 0], [0, 0, 0.17], {
+                seed: "port",
+                top: "f-gass",
+                lit: "f-gass",
+                dark: "f-gas",
+                hcls: "hc",
+                hcls2: "hc-gas",
+                w: 1.8,
+                onFaces: function (F, gF) {
+                  var p = F.y1.poly;
+                  var ins = function (u, v) {
+                    return lerp2(lerp2(p[0], p[1], u), lerp2(p[3], p[2], u), v);
+                  };
+                  var d = [ins(0.15, 0.55), ins(0.85, 0.55), ins(0.85, 0.82), ins(0.15, 0.82)];
+                  fill(gF, d, "hi");
+                  contour(gF, d, { w: 1, closed: true, seed: "pd", over: false });
+                  var bd = [ins(0, 0.08), ins(1, 0.08), ins(1, 0.24), ins(0, 0.24)];
+                  fill(gF, bd, "f-gas");
+                },
+              });
+            })();
+            // ---------- foreground: a large pale extract duct passing the lens at the lower left
+            var fgCam = Cam({ az: 70, el: 10, s: 1000, ox: 300, oy: 1100 });
+            var duct = cyl(fgCam, [-1.2, 0.4, -0.02], [0.55, 0.4, 0.06], 0.11, 80);
+            drawCyl(gFg, duct, Lt, { w: 3, seed: "fgd", fillCls: "f-steell", hcls: "hc", hcls2: "hc-steel", sp: 9, arc0: false, arc1: false, cap: false, cls: "inkl" });
+            [0.2, 0.26].forEach(function (x, i) {
+              var e = ell(fgCam, [-1.2 + (1.75 * (x + 0.5)) / 1.05, 0.4, -0.02 + 0.08 * ((x + 0.5) / 1.05)], nrm([1.75, 0, 0.08]), 0.113);
+              ribbon(gFg, ellArc(e, duct.ts, duct.ts + duct.sg * PI, 40), { w: 2.2, seed: "fdb" + i, cls: "inkl" });
+            });
+            // ---------- the card
+            var c3 = card(gCard, {
+              key: "v2",
+              defs: P.defs,
+              band: "gas",
+              h: 716,
+              eyebrow: "GAS DETECTION · LABORATORY",
+              cond: ["Gas detection in service"],
+              liveLabel: "LIVE · DETECTOR GD-L1",
+              liveH: 150,
+              kind: "KNOWINGLY RETAINED",
+              out: [{ t: "Retained until 17:30" }, { t: "Portable detector", cls: "t-sub", dy: 4 }, { t: "Owned by the lab lead", cls: "t-sub", dy: -4 }],
+            });
+            var yV = c3.yR1 + 116;
+            var sIn = text(c3.live, "IN SERVICE", 40, yV, "t-live"),
+              sByp = text(c3.live, "BYPASSED", 40, yV, "t-live");
+            sByp.classList.add(CLS("alert"));
+            sByp.setAttribute("opacity", 0);
+            var L3 = liveLine(gConn, a2(fp(0.09, 0.265), [4, 0]), c3.entry, [220, -120]);
+            return { svg: svg, gBg: gBg, gMid: gMid, gFg: gFg, card: c3, live: L3, gKey: gKey, lockC: lockC, tag: tag, pivot: pivot, dOn: dOn, dByp: dByp, sIn: sIn, sByp: sByp, port: gPort };
+          })();
+
+          (function () {
+            // D: a push that makes the card the hero while keeping it inside the safe area and below the clock
+            var camV = FL.camera(v2.svg, { sw: false, rects: { C: { x: 0, y: 0, w: 1920, h: 1080 }, D: { x: 195.4, y: 40, w: 1714.3, h: 964.3 } } });
+            camV.apply("C");
+            camV.set(tl, "C", tC3);
+            camV.drift(tl, "C", tC3 + 0.001, tPush3 - tC3 - 0.001, 0.004, "none");
+            camV.to(tl, "D", tPush3, BEAT, "power3.inOut");
+            camV.drift(tl, null, tPush3 + BEAT, tC4 - tPush3 - BEAT, 0.005, "sine.inOut");
+            attrTo(v2.gFg, "transform", "translate(0 0)", "translate(-70 -8)", tC3, tC4 - tC3, "none");
+            attrTo(v2.gBg, "transform", "translate(0 0)", "translate(6 0)", tC3, tC4 - tC3, "none");
+            // the card and its live connection are there from the start of the shot
+            drawLive(v2.live, v2.card, tC3 + HB, 0.55);
+            // 'bypassed': the key turns to BYPASS, the display follows, the card flips, the tag drops
+            var lc = v2.lockC;
+            var kr = function (a) {
+              return "translate(" + f2(lc[0]) + " " + f2(lc[1]) + ") rotate(" + f2(a) + ")";
+            };
+            var tKey = tByp - 0.25;
+            attrTo(v2.gKey, "transform", kr(-122), kr(-58), tKey, 0.26, "power2.inOut");
+            cutTo(v2.dOn, { opacity: 1 }, { opacity: 0 }, tKey + 0.2);
+            cutTo(v2.dByp, { opacity: 0 }, { opacity: 1 }, tKey + 0.2);
+            cutTo(v2.sIn, { opacity: 1 }, { opacity: 0 }, tFlip3);
+            cutTo(v2.sByp, { opacity: 0 }, { opacity: 1 }, tFlip3);
+            dropTag(v2.tag, v2.pivot, tKey + 0.3, [
+              [-72, 0],
+              [9, 0.24],
+              [-4, 0.32],
+              [1.5, 0.3],
+              [0, 0.3],
+            ]);
+            // the outcome: knowingly retained, with a portable detector, owned
+            settleOutcome(v2.card, tOut3);
+            ft(v2.port, { opacity: 0, attr: { transform: "translate(0 -24)" } }, { opacity: 1, attr: { transform: "translate(0 0)" }, duration: 0.4, ease: "power2.out" }, tOut3 + 0.05);
+          })();
+
+          // ================================================================ SC4: the confined space entry
+          var v3 = (function () {
+            var svg = el(ID + "-v3-svg");
+            var P = SketchKit.paper(svg, { prefix: ID + "-v3", scene: ID });
+            svg.classList.add(CLS("svg"));
+            var root = P.top;
+            var gBg = g(root, { transform: "translate(0 0)" }),
+              gMid = g(root, { transform: "translate(0 0)" }),
+              gFg = g(root, { transform: "translate(0 0)", opacity: 0.45 }),
+              gConn = g(root),
+              gCard = g(root);
+            var cam = Cam({ az: 58, el: 26, s: 175, ox: 575, oy: 470 });
+            var Lt = nrm([-0.45, 0.5, 0.75]);
+            var STEEL = { hcls: "hc", hcls2: "hc-steel" };
+            var TR = 3.3;
+            // ---------- the tank: a pale steel shell, the roof, its seams
+            var shell = cyl(cam, [0, 0, -9], [0, 0, 0], TR, 180);
+            drawCyl(gBg, shell, Lt, Object.assign({ w: 2.4, seed: "shell", fillCls: "f-steel", capCls: "f-steell", sp: 8, thr: 0.25 }, STEEL));
+            var roofE = ell(cam, [0, 0, 0], [0, 0, 1], TR);
+            // roof seams: a ring and radial joints
+            var ring2 = ell(cam, [0, 0, 0], [0, 0, 1], 2.1);
+            line(gBg, ellArc(ring2, 0, TAU, 120), "htl");
+            var rad = "";
+            for (var ai = 0; ai < 12; ai++) {
+              var aa = (ai * TAU) / 12,
+                p0 = cam.p([Math.cos(aa) * 0.5, Math.sin(aa) * 0.5, 0]),
+                p1 = cam.p([Math.cos(aa) * TR * 0.98, Math.sin(aa) * TR * 0.98, 0]);
+              rad += "M" + f2(p0[0]) + " " + f2(p0[1]) + "L" + f2(p1[0]) + " " + f2(p1[1]);
+            }
+            mk("path", { d: rad, class: CLS("htl") }, gBg);
+            // wall courses on the shell
+            var vh0 = Math.atan2(cam.V[1], cam.V[0]);
+            for (var zc = -1.6; zc > -9; zc -= 1.6) line(gBg, ellArc(ell(cam, [0, 0, zc], [0, 0, 1], TR), vh0 - PI / 2 + 0.03, vh0 + PI / 2 - 0.03, 80), "htl");
+            // the handrail: posts and two rails round the roof edge; the far half behind everything
+            var HR = 3.18;
+            var railPts = function (z, a0, a1) {
+              var out = [];
+              for (var i = 0; i <= 90; i++) {
+                var a = a0 + ((a1 - a0) * i) / 90;
+                out.push(cam.p([Math.cos(a) * HR, Math.sin(a) * HR, z]));
+              }
+              return out;
+            };
+            // the far half: angles whose radial direction faces away from the viewer
+            var vh = Math.atan2(cam.V[1], cam.V[0]);
+            var farA0 = vh + PI / 2,
+              farA1 = vh + (3 * PI) / 2;
+            [1.08].forEach(function (z, i) {
+              contour(gBg, railPts(z, farA0, farA1), { w: 1.3, seed: "fr" + i, cls: "inkl", over: false });
+            });
+            for (var pa = farA0; pa <= farA1 + 1e-6; pa += PI / 9) {
+              var b0 = cam.p([Math.cos(pa) * HR, Math.sin(pa) * HR, 0]),
+                b1 = cam.p([Math.cos(pa) * HR, Math.sin(pa) * HR, 1.1]);
+              contour(gBg, [b0, b1], { w: 1.2, seed: "fp" + pa.toFixed(2), cls: "inkl", over: false });
+            }
+            // ---------- the manhole cover, lying on the roof
+            var CV = [1.95, 2.25, 0];
+            drawCyl(gMid, cyl(cam, CV, add(CV, [0, 0, 0.04]), 0.42, 60), Lt, Object.assign({ w: 1.6, seed: "cov", fillCls: "f-steeld", capCls: "f-steel" }, STEEL));
+            var eCv = ell(cam, add(CV, [0, 0, 0.04]), [0, 0, 1], 0.34);
+            for (var bi = 0; bi < 10; bi++) {
+              var bpnt = ellPt(eCv, (bi * TAU) / 10);
+              mk("circle", { cx: f2(bpnt[0]), cy: f2(bpnt[1]), r: 2.4, class: CLS("f-dark") }, gMid);
+            }
+            // ---------- the entrant, rigged, at the entry
+            var MH = [0.9, 1.6, 0];
+            var feet = cam.p([0.22, 2.25, 0]);
+            var worker = person(gMid, feet, 0.68, { seed: "ent", harness: true, arm: "reach" });
+            // ---------- the manhole: a teal collar round the opening, the dark space below
+            var col = cyl(cam, MH, add(MH, [0, 0, 0.22]), 0.36, 60);
+            drawCyl(gMid, col, Lt, { w: 2, seed: "col", fillCls: "f-airs", hcls: "hc", hcls2: "hc-air" });
+            var fl = cyl(cam, add(MH, [0, 0, 0.22]), add(MH, [0, 0, 0.27]), 0.46, 60);
+            drawCyl(gMid, fl, Lt, { w: 1.8, seed: "fl", fillCls: "f-air", capCls: "f-air", hatch: false });
+            var hole = ellArc(ell(cam, add(MH, [0, 0, 0.27]), [0, 0, 1], 0.34), 0, TAU, 60);
+            fill(gMid, hole, "f-hole");
+            hatchPoly(gMid, hole, { angle: 30, sp: 3, seed: "hole", cls: "hc", cls2: "hc-dark", inset: 1 });
+            contour(gMid, hole, { w: 1.6, closed: true, seed: "holec", over: false });
+            var eFl = ell(cam, add(MH, [0, 0, 0.27]), [0, 0, 1], 0.41);
+            for (var hb = 0; hb < 12; hb++) {
+              var hp = ellPt(eFl, (hb * TAU) / 12 + 0.1);
+              mk("circle", { cx: f2(hp[0]), cy: f2(hp[1]), r: 2.2, class: CLS("f-dark") }, gMid);
+            }
+            // ---------- the duct from the fan into the manhole: inflated while the fan runs
+            var DQ = [
+              [2.3, -0.02, 0.5],
+              [2.02, -0.3, 0.68],
+              [1.55, -0.02, 0.86],
+              [1.18, 0.62, 0.86],
+              [0.98, 1.2, 0.66],
+              [0.92, 1.52, 0.4],
+            ];
+            var centre = sm(DQ.map(function (q) {
+              return cam.p(q);
+            }), false, 1);
+            var NC = centre.length;
+            var sag = function (i) {
+              var u = i / (NC - 1);
+              return Math.sin(u * PI) * 30;
+            };
+            var ductD = function (k, sagK) {
+              var pts = centre.map(function (p, i) {
+                return [p[0], p[1] + sag(i) * sagK];
+              });
+              var hw = pts.map(function (p, i) {
+                var u = i / (NC - 1);
+                return 24 * (k + (1 - k) * (u < 0.08 || u > 0.94 ? 1 : 0.0));
+              });
+              return dPts(tube(pts, hw), true);
+            };
+            var ductFill = mk("path", { d: ductD(1, 0), class: CLS("f-airs") }, gMid);
+            var ductEdge = mk("path", { d: ductD(1, 0), class: CLS("ln"), style: "stroke-width:2px" }, gMid);
+            // ribs: short cross lines along the duct, one path so it tweens as one
+            var ribD = function (k, sagK) {
+              var d = "";
+              for (var i = 3; i < NC - 2; i += 4) {
+                var p = [centre[i][0], centre[i][1] + sag(i) * sagK];
+                var q = [centre[i + 1][0], centre[i + 1][1] + sag(i + 1) * sagK];
+                var t = n2(s2(q, p)),
+                  nn = [-t[1], t[0]];
+                var h = 24 * k - 2;
+                d += "M" + f2(p[0] + nn[0] * h) + " " + f2(p[1] + nn[1] * h) + "L" + f2(p[0] - nn[0] * h) + " " + f2(p[1] - nn[1] * h);
+              }
+              return d;
+            };
+            var ribs = mk("path", { d: ribD(1, 0), class: CLS("hc") + " " + CLS("hc-air") }, gMid);
+            // ---------- the tripod over the manhole: three legs, the head, the winch, the line
+            var HEAD = add(MH, [0, 0, 2.35]);
+            var legs = [100, 220, 340].map(function (deg) {
+              var a = (deg * PI) / 180;
+              return [MH[0] + Math.cos(a) * 1.02, MH[1] + Math.sin(a) * 1.02, 0];
+            });
+            var hp2 = cam.p(HEAD);
+            // the rescue line from the head down into the opening, and the lanyard to the entrant's harness
+            line(gMid, [hp2, cam.p(add(MH, [0, 0, 0.27]))], "ln");
+            var dring = worker.P([[0, -318]])[0];
+            stroke(gMid, [a2(hp2, [4, 6]), lerp2(a2(hp2, [4, 6]), dring, 0.5).map(function (v, i) {
+              return v + (i ? 18 : -6);
+            }), dring], { w: 1.4, seed: "lany" });
+            legs.forEach(function (F, i) {
+              var a = cam.p(F),
+                b = hp2;
+              var poly = tube([a, lerp2(a, b, 0.5), b], [5.2, 4.6, 3.6]);
+              fill(gMid, poly, "f-steel");
+              hatchPoly(gMid, poly, { angle: 10, sp: 3.4, seed: "lg" + i, cls: "hc", cls2: "hc-steel", inset: 0 });
+              contour(gMid, poly.slice(0, 3), { w: 1.7, seed: "lga" + i, over: false });
+              contour(gMid, poly.slice(3), { w: 1.4, seed: "lgb" + i, over: false });
+              // the foot
+              contour(gMid, [a2(a, [-9, 2]), a2(a, [9, 2])], { w: 2, seed: "ft" + i, over: false });
+            });
+            var hc = ellArc({ c: hp2, A: [11, 0], B: [0, 7] }, 0, TAU, 24);
+            fill(gMid, hc, "f-steeld");
+            contour(gMid, hc, { w: 1.6, closed: true, seed: "head", over: false });
+            // the winch on the near leg
+            var wl = lerp2(cam.p(legs[0]), hp2, 0.36);
+            var wb = [a2(wl, [-4, -16]), a2(wl, [30, -20]), a2(wl, [32, 12]), a2(wl, [-2, 16])];
+            fill(gMid, wb, "f-steeld");
+            hatchPoly(gMid, wb, { angle: 60, sp: 3.2, seed: "wn", cls: "hc", cls2: "hc-steel", inset: 1 });
+            contour(gMid, wb, { w: 1.6, closed: true, seed: "wnc", over: false });
+            var wdr = ellArc({ c: a2(wl, [14, -2]), A: [9, 0], B: [0, 12] }, 0, TAU, 24);
+            fill(gMid, wdr, "f-steel");
+            contour(gMid, wdr, { w: 1.3, closed: true, seed: "wd", over: false });
+            stroke(gMid, [a2(wl, [30, -4]), a2(wl, [46, -10]), a2(wl, [52, 4])], { w: 1.8, seed: "crank", smooth: false });
+            // ---------- the ventilation fan: teal housing, guard, blades, on a frame
+            var FC = [2.42, 0.22, 0.46];
+            var FA = nrm([0.35, 0.94, 0]);
+            var fBack = add(FC, mul(FA, -0.22)),
+              fFront = add(FC, mul(FA, 0.2));
+            // frame legs
+            [[-0.24, -0.22], [0.24, -0.22], [-0.24, 0.18], [0.24, 0.18]].forEach(function (q, i) {
+              var side = nrm(cross(FA, [0, 0, 1]));
+              var top = add(add(FC, mul(side, q[0])), mul(FA, q[1]));
+              contour(gMid, [cam.p([top[0], top[1], 0.18]), cam.p([top[0], top[1], 0])], { w: 2, seed: "fl" + i, over: false });
+            });
+            var fanH = cyl(cam, fBack, fFront, 0.3, 90);
+            drawCyl(gMid, fanH, Lt, { w: 2.2, seed: "fan", fillCls: "f-airs", hcls: "hc", hcls2: "hc-air", ext: true });
+            var rim = cyl(cam, fFront, add(fFront, mul(FA, 0.04)), 0.315, 90);
+            drawCyl(gMid, rim, Lt, { w: 1.8, seed: "rim", fillCls: "f-air", capCls: "f-airs", hatch: false });
+            // the intake plane: guard rings and wires; blades behind the guard turn in this plane
+            var eI = ell(cam, add(fFront, mul(FA, 0.04)), FA, 1);
+            var Mx = [eI.A[0], eI.A[1], eI.B[0], eI.B[1], eI.c[0], eI.c[1]].map(f3).join(" ");
+            var gPlane = g(gMid, { transform: "matrix(" + Mx + ")" });
+            var gBlur = g(gPlane);
+            mk("circle", { r: 0.27, class: CLS("f-air"), opacity: 0.22 }, gBlur);
+            var gBl = g(gPlane, { transform: "rotate(0)" });
+            for (var k = 0; k < 5; k++) {
+              var a0 = (k * TAU) / 5;
+              var bl = [];
+              [[0.05, -0.2], [0.27, -0.26], [0.27, 0.12], [0.05, 0.14]].forEach(function (q) {
+                var r = q[0],
+                  a = a0 + q[1];
+                bl.push([Math.cos(a) * r, Math.sin(a) * r]);
+              });
+              mk("path", { d: "M" + bl.map(function (p) {
+                return f3(p[0]) + " " + f3(p[1]);
+              }).join("L") + "Z", class: CLS("f-air"), stroke: "var(--c-ink)", "stroke-width": 1.2, "vector-effect": "non-scaling-stroke", "fill-opacity": 0.85 }, gBl);
+            }
+            mk("circle", { r: 0.06, class: CLS("f-dark") }, gPlane);
+            var guard = "";
+            [0.1, 0.18, 0.26].forEach(function (r) {
+              guard += "M" + f3(r) + " 0A" + f3(r) + " " + f3(r) + " 0 1 1 " + f3(-r) + " 0A" + f3(r) + " " + f3(r) + " 0 1 1 " + f3(r) + " 0";
+            });
+            for (var w8 = 0; w8 < 8; w8++) {
+              var aw = (w8 * TAU) / 8;
+              guard += "M" + f3(Math.cos(aw) * 0.06) + " " + f3(Math.sin(aw) * 0.06) + "L" + f3(Math.cos(aw) * 0.29) + " " + f3(Math.sin(aw) * 0.29);
+            }
+            mk("path", { d: guard, fill: "none", stroke: "var(--c-ink)", "stroke-width": 1, "stroke-opacity": 0.8, "vector-effect": "non-scaling-stroke" }, gPlane);
+            var gSpin = g(gPlane, { opacity: 1 });
+            var sp = "";
+            [0.13, 0.21].forEach(function (r, i) {
+              var a0 = 0.4 + i * 1.7;
+              sp += "M" + f3(Math.cos(a0) * r) + " " + f3(Math.sin(a0) * r) + "A" + f3(r) + " " + f3(r) + " 0 0 1 " + f3(Math.cos(a0 + 1.4) * r) + " " + f3(Math.sin(a0 + 1.4) * r);
+            });
+            mk("path", { d: sp, fill: "none", stroke: "var(--c-air)", "stroke-width": 1.6, "vector-effect": "non-scaling-stroke" }, gSpin);
+            // a data plate on the housing
+            var pl = cam.p(add(FC, [0, 0, 0.3]));
+            // ---------- the near handrail: large and pale in the foreground
+            // ---------- the card
+            var c4 = card(gCard, {
+              key: "v3",
+              defs: P.defs,
+              band: "air",
+              h: 682,
+              eyebrow: "CONFINED SPACE · TANK 2",
+              cond: ["Forced ventilation and", "gas test before entry"],
+              liveLabel: "LIVE · VENTILATION FAN",
+              liveH: 150,
+              kind: "PREVENTION BEFORE THE WORK",
+              out: [{ t: "Entry held" }],
+            });
+            var yV = c4.yR1 + 112;
+            var vOn = text(c4.live, "VENTILATION ON", 40, yV, "t-live"),
+              vDown = text(c4.live, "VENTILATION DOWN", 40, yV, "t-live");
+            [vOn, vDown].forEach(function (n) {
+              n.style.fontSize = "44px";
+            });
+            vDown.classList.add(CLS("alert"));
+            vDown.setAttribute("opacity", 0);
+            var L4 = liveLine(gConn, cam.p(add(FC, [0, 0, 0.36])), c4.entry, [120, -110]);
+            return { svg: svg, gBg: gBg, gMid: gMid, gFg: gFg, card: c4, live: L4, gBl: gBl, gSpin: gSpin, gBlur: gBlur, ductFill: ductFill, ductEdge: ductEdge, ribs: ribs, ductD: ductD, ribD: ribD, vOn: vOn, vDown: vDown };
+          })();
+
+          (function () {
+            var camV = FL.camera(v3.svg, { sw: false, rects: { E0: { x: 20, y: 150, w: 1180, h: 663.75 }, E1: { x: 0, y: 0, w: 1920, h: 1080 } } });
+            camV.apply("E0");
+            camV.set(tl, "E0", tC4);
+            camV.drift(tl, "E0", tC4 + 0.001, tMove4 - tC4 - 0.001, 0.006, "none");
+            camV.to(tl, "E1", tMove4, BEAT, "power3.inOut");
+            camV.drift(tl, null, tMove4 + BEAT, tC5 - tMove4 - BEAT, 0.009, "sine.inOut");
+            attrTo(v3.gBg, "transform", "translate(0 0)", "translate(6 -2)", tC4, tC5 - tC4, "none");
+            // the card arrives with the move; its live connection follows the duct to the fan
+            v3.card.g.setAttribute("opacity", 0);
+            ft(v3.card.g, { opacity: 0 }, { opacity: 1, duration: 0.3, ease: "power1.out" }, tMove4 + 0.25);
+            drawLive(v3.live, v3.card, tMove4 + 0.2, BEAT);
+            // the blades run at speed, then on 'ventilation' they run down and stop
+            var tStop = tVent + 0.62;
+            var runDeg = 520 * (tVent - tC4);
+            attrTo(v3.gBl, "transform", "rotate(0)", "rotate(" + f2(runDeg) + ")", tC4, tVent - tC4, "none");
+            attrTo(v3.gBl, "transform", "rotate(" + f2(runDeg) + ")", "rotate(" + f2(runDeg + 150) + ")", tVent, tStop - tVent, "power2.out");
+            var spinRot = function (a) {
+              return "rotate(" + f2(a) + ")";
+            };
+            attrTo(v3.gSpin, "transform", spinRot(0), spinRot(-520 * (tVent - tC4)), tC4, tVent - tC4, "none");
+            ft([v3.gSpin, v3.gBlur], { opacity: 1 }, { opacity: 0, duration: tStop - tVent, ease: "power1.in" }, tVent);
+            // the duct collapses as the air stops
+            attrTo(v3.ductFill, "d", v3.ductD(1, 0), v3.ductD(0.36, 1), tVent + 0.12, 0.7, "power2.inOut");
+            attrTo(v3.ductEdge, "d", v3.ductD(1, 0), v3.ductD(0.36, 1), tVent + 0.12, 0.7, "power2.inOut");
+            attrTo(v3.ribs, "d", v3.ribD(1, 0), v3.ribD(0.36, 1), tVent + 0.12, 0.7, "power2.inOut");
+            cutTo(v3.vOn, { opacity: 1 }, { opacity: 0 }, tFlip4);
+            cutTo(v3.vDown, { opacity: 0 }, { opacity: 1 }, tFlip4);
+            settleOutcome(v3.card, tOut4);
+          })();
+
+          // ================================================================ build-time initialisation
+          // Initialise every tween now (DrawSVG measures, start values), then return to the first frame,
+          // so the state at any time never depends on which frames were rendered before it.
+          tl.totalTime(tl.duration(), true);
+          tl.totalTime(0, true);
+
+          window.__timelines["a3-scenarios"] = tl;
+        })();
       </script>
     </template>
   </body>
