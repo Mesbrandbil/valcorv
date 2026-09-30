@@ -1,5 +1,5 @@
 {
-  "note": "a3-change (Act III, S17 to S20). Anchored to the same cues as the picture; each offset is the scene's beat-grid cut or move time minus its cue for the current narration timing (re-derive after a re-lock).",
+  "note": "a3-change (Act III, S17 to S19e). Anchored to the same cues as the picture; each offset is the scene's beat-grid cut or move time minus its cue for the current narration timing (re-derive after a re-lock: scripts/event-gen/a3-change-times.cjs, then scripts/snap-events.mjs --scene a3-change).",
   "events": [
     {
       "name": "cut-in",
@@ -73,23 +73,31 @@
     },
     {
       "name": "crossing-hold",
-      "at": "cue:cross+1.153",
+      "at": "cue:cross+1.133",
       "kind": "hold",
-      "dur": 1.074
+      "dur": 1.727
     },
     {
       "name": "cut-sheet",
       "at": "cue:riskOwner",
       "kind": "cut",
       "material": "paper",
-      "gain_db": -14
+      "gain_db": -14,
+      "snap": {
+        "mode": "cut",
+        "off": 0.0003
+      }
     },
     {
       "name": "sheet-in",
       "at": "cue:riskOwner",
       "kind": "sheet-in",
       "gain_db": -12,
-      "dur": 0.4
+      "dur": 0.4,
+      "snap": {
+        "mode": "cut",
+        "off": 0.0003
+      }
     },
     {
       "name": "focus-sheet",
@@ -105,7 +113,7 @@
       "dur": 0.652,
       "snap": {
         "mode": "cut",
-        "off": 0.0003
+        "off": 0.0002
       }
     },
     {
@@ -114,7 +122,10 @@
       "kind": "push",
       "gain_db": -14,
       "dur": 0.652,
-      "snap": "cut"
+      "snap": {
+        "mode": "cut",
+        "off": -0.0002
+      }
     },
     {
       "name": "choice-01",
@@ -122,11 +133,14 @@
       "kind": "choice-accent",
       "variant": 1,
       "gain_db": -10,
-      "snap": "cut"
+      "snap": {
+        "mode": "cut",
+        "off": -0.0002
+      }
     },
     {
       "name": "node-return",
-      "at": "cue:change+0.297",
+      "at": "cue:change+0.296",
       "kind": "node-return",
       "gain_db": -12,
       "dur": 0.6
@@ -136,7 +150,11 @@
       "at": "cue:knowingly",
       "kind": "whip",
       "gain_db": -16,
-      "dur": 0.489
+      "dur": 0.489,
+      "snap": {
+        "mode": "cut",
+        "off": 0.0001
+      }
     },
     {
       "name": "choice-02",
@@ -150,7 +168,11 @@
       "at": "cue:inTime",
       "kind": "whip",
       "gain_db": -16,
-      "dur": 0.489
+      "dur": 0.489,
+      "snap": {
+        "mode": "cut",
+        "off": 0.0003
+      }
     },
     {
       "name": "choice-03",
@@ -167,7 +189,7 @@
       "gain_db": -14,
       "snap": {
         "mode": "cut",
-        "off": -0.0005
+        "off": 0.0001
       }
     },
     {
@@ -183,8 +205,7 @@
       "gain_db": -12,
       "dur": 0.5,
       "snap": {
-        "mode": "next",
-        "off": 0.0004
+        "mode": "next"
       }
     },
     {
@@ -198,8 +219,26 @@
       },
       "snap": {
         "mode": "cut",
-        "off": 0.0002
+        "off": -0.0003
       }
+    },
+    {
+      "name": "layer-slice",
+      "at": "cue:whether",
+      "kind": "layer-slice",
+      "gain_db": -12,
+      "dur": 0.5,
+      "snap": {
+        "mode": "next",
+        "off": 1.9567
+      }
+    },
+    {
+      "name": "programme-hold",
+      "at": "cue:whether+2.445",
+      "kind": "hold",
+      "gain_db": -6,
+      "dur": 0.839
     }
   ]
 }

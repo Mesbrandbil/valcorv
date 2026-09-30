@@ -1,11 +1,13 @@
 // Recomputes a3-change's picture times (same formulas as the scene) and prints events anchored to cues.
+//   node scripts/event-gen/a3-change-times.cjs <project>          the time table (scene-local and absolute)
+//   node scripts/event-gen/a3-change-times.cjs <project> json     compositions/a3-change.events.json content
+// Then `node scripts/snap-events.mjs --scene a3-change` rewrites the grid events as snap anchors.
 const path = require('path');
 const T0 = process.argv[2];
 globalThis.window = globalThis;
 require(path.join(T0, 'assets/js/cues.js'));
 require(path.join(T0, 'assets/js/film-lib.js'));
 const FL = globalThis.FL, CUES = globalThis.CUES;
-const M = JSON.parse(require('fs').readFileSync(path.join(T0, 'assets/site/site-model.json'), 'utf8'));
 const ID = 'a3-change', clk = FL.clock(ID), S = clk.start;
 const T = (a, o) => clk.t(a, o), CUT = (a, o) => clk.c(a, o), BT = (a, o, m) => clk.b(a, o, m || 'near', 2);
 const HB = FL.BEAT / 2, BEAT = FL.BEAT;
@@ -14,19 +16,9 @@ t.tOff = CUT('offline2'); t.t18a = CUT('thisTime'); t.tSees = T('sees', -0.1); t
 t.SNAP_AT = t.t18b + 3 * HB; t.STRETCH = t.SNAP_AT - 0.163 - t.t18b; t.tLand = t.SNAP_AT + 0.23;
 t.t19a = CUT('riskOwner'); t.tPullA = BT('decides', 0, 'prev'); t.tChange = CUT('change'); t.tKnow = CUT('knowingly');
 t.tRetainW = T('retain'); t.tInTime = CUT('inTime'); t.tAsk = CUT('ask'); t.tSend = t.tAsk + HB; t.tWhether = CUT('whether');
-t.tResp = [0, 1, 2, 3].map(i => t.tWhether + i * BEAT); t.tDown = t.tResp[3] + 3 * HB; t.tSlice = t.tDown + BEAT;
-t.tPB = t.tDown + 2 * BEAT; t.tPBEnd = Math.min(CUT('closeIn'), T('closeIn', -0.05)); t.tFew = CUT('few'); t.tDec2 = CUT('decisionsL18');
-t.tExplicit = CUT('L18:explicit.start'); t.tFade = T('closeIn', -0.6); t.tBare = T('closeIn');
-// scatter passes (same seeded order as the scene)
-const A = M.activities; const pts = [];
-A.routine.forEach(a => pts.push(a.world)); A.portfolio.filter(a => a.outcome === 'inside').forEach(a => pts.push(a.world));
-for (let i = 0; pts.length < 30 && i < A.ambientSpots.spots.length; i += 5) pts.push(A.ambientSpots.spots[i].world);
-const rng = FL.prng(ID + '-scatter');
-const order = pts.map((p, i) => ({ i, k: rng() })).sort((a, b) => a.k - b.k);
-const SC0 = t.tPB + 0.55, SCD = t.tFade - SC0 - 0.75, CHECK = 0.45;
-const passes = order.map((x, j) => SC0 + SCD * (j + 0.2 + 0.6 * rng()) / order.length + CHECK).sort((a, b) => a - b);
-t.passes = passes;
-// anchors: cue + offset (absolute cut minus cue)
+t.tResp = [0, 1, 2, 3].map(i => t.tWhether + i * BEAT); t.tLayer = t.tResp[3] + HB; t.tEnd = clk.duration;
+t.tHold = t.tLayer + 0.2; // the temporary layer has landed (expo.out); the frame holds to the end of the slot
+// anchors: cue + offset (absolute time minus cue)
 const anc = (cue, local) => { const off = +(local + S - CUES[cue]).toFixed(3); return 'cue:' + cue + (off >= 0 ? '+' : '') + off; };
 const ev = [];
 const E = (name, cue, local, kind, extra) => ev.push(Object.assign({ name, at: anc(cue, local), kind }, extra || {}));
@@ -54,11 +46,8 @@ E('cut-packet', 'ask', t.tAsk, 'cut', { material: 'paper', gain_db: -14 });
 E('focus-packet', 'ask', t.tAsk + 0.02, 'focus', { gain_db: -16 });
 E('packet-send', 'ask', t.tSend, 'packet-send', { gain_db: -12, dur: 0.5 });
 E('carrier-response', 'whether', t.tResp[0], 'carrier-response', { gain_db: -13, series: { count: 4, every: +BEAT.toFixed(4) } });
-E('layer-slice', 'ordinary', t.tSlice, 'layer-slice', { gain_db: -12, dur: 0.55 });
-E('pull-site', 'ordinary', t.tPB, 'pull', { gain_db: -12, dur: +(t.tPBEnd - t.tPB).toFixed(3) });
-passes.filter((p, i) => i % 5 === 2).forEach((p, i) => E('node-pass-0' + (i + 1), 'ordinary', p, 'node-pass', { gain_db: -20 }));
-E('decision-01', 'few', t.tFew, 'decision-accent', { gain_db: -8 });
-E('decision-02', 'decisionsL18', t.tDec2, 'decision-accent', { gain_db: -8 });
-const out = { note: "a3-change (Act III, S17 to S20). Anchored to the same cues as the picture; each offset is the scene's beat-grid cut or move time minus its cue for the current narration timing (re-derive after a re-lock).", events: ev };
+E('layer-slice', 'whether', t.tLayer, 'layer-slice', { gain_db: -12, dur: 0.5 });
+E('programme-hold', 'whether', t.tHold, 'hold', { gain_db: -6, dur: +(t.tEnd - t.tHold).toFixed(3) });
+const out = { note: "a3-change (Act III, S17 to S19e). Anchored to the same cues as the picture; each offset is the scene's beat-grid cut or move time minus its cue for the current narration timing (re-derive after a re-lock: scripts/event-gen/a3-change-times.cjs, then scripts/snap-events.mjs --scene a3-change).", events: ev };
 if (process.argv[3] === 'json') console.log(JSON.stringify(out, null, 2).replace(/\n\s+("(?:material|gain_db|dur|variant|kind|at|series|count|every)")/g, ' $1'));
 else { for (const k in t) console.log(k, Array.isArray(t[k]) ? t[k].map(v => (v + S).toFixed(3)).join(' ') : (typeof t[k] === 'number' ? t[k].toFixed(3) + '  abs ' + (t[k] + S).toFixed(3) : t[k])); }
