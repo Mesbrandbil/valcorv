@@ -1,20 +1,21 @@
 # Production status and resume guide
 
-Last updated: 2026-09-29, cut 2 rendered and delivered as a preview (128.17 s, guide voice).
+Last updated: 2026-09-30, cut 3 integrated (136.97 s, guide voice): colour throughout, three more scenarios, a simpler close, one continuous score.
 
 ## Where things stand
 
 | Stage | State | Where |
 | --- | --- | --- |
-| Brief, design spec, storyboard | done; cut 2 direction added | BRIEF.md, frame.md, STORYBOARD.md, docs/cut2-direction.md |
-| Look development | done; cut 2 adds a uniform paper-tooth surface above every scene | docs/look-development.md, assets/textures/paper-tooth.png |
-| Demo extraction, site kit, interface kit, sketch kit | done (interface grey text raised to readable contrast in cut 2) | assets/, docs/ |
-| Narration (guide) | cut 2: natural speed, lines on the 92 BPM half-beat grid, no fixed runtime (126.53 s); L17 split a/b/c with "whether they will cover it" | narration/, SCRIPT.md |
+| Brief, design spec, storyboard | done; cut 2 and cut 3 direction added | BRIEF.md, frame.md, STORYBOARD.md, docs/cut2-direction.md, docs/cut3-direction.md |
+| Look development | done; cut 2 adds a uniform paper-tooth surface; cut 3 adds the colour system (colour carries meaning; tokens only) | docs/look-development.md, assets/css/film-color.css |
+| Demo extraction, site kit, interface kit, sketch kit | done; cut 3: washes, colour hatching, act grading and the rewind bleed (SiteKit), hi-vis people and activity markers (SketchKit), film-native cards, pills and condition cards (UIKit); the tremor filter is gone | assets/, docs/ |
+| Narration (guide) | cut 3: the end rewritten for the ICP (crane lift, gas detector bypass, confined space entry; 'For everyone who carries the risk, the gap closes.'; 'Priora. Know the risk you carry, while the work happens.'); Priora said pree-OH-ruh (user confirmed); 136.97 s on the 92 BPM grid | narration/, SCRIPT.md |
 | Pipeline | done; film-lib gains the beat grid, shared cut times and a DOM board camera | scripts/build-cues.mjs, assets/js/film-lib.js |
-| Scenes | cut 2: all eight compositions re-staged and integrated (a1-world, a1-inserts, a1-paper, a1-after, a2-resolve, a3-change, a3-close, chrome); full HyperFrames check passes | compositions/ |
-| Audio engine | cut 2: score on the 92 BPM grid, editorial accents, holds; master -16.0 LUFS, -1.05 dBTP | audio-engine/ |
+| Scenes | cut 3: nine compositions in colour (a1-world, a1-inserts, a1-paper, a1-after, a2-resolve, a3-change, the new a3-scenarios, the new a3-close, chrome); full HyperFrames check passes | compositions/ |
+| Audio engine | cut 3: one continuous piece in D (a sustained thread bed, per-note tuning, section ramps over one to three bars, holds as dips); master -16.02 LUFS, -1.05 dBTP | audio-engine/, docs/sound-design.md |
 | First cut (guide voice, 90 s) | delivered | renders/priora-vision-film-cut1.mp4 (not tracked), stills/cut1/ |
-| Cut 2 (guide voice, 128.17 s) | rendered | renders/priora-vision-film-cut2.mp4 and -preview.mp4 (not tracked), stills/cut2/ |
+| Cut 2 (guide voice, 128.17 s) | delivered | renders/priora-vision-film-cut2.mp4 and -preview.mp4 (not tracked), stills/cut2/ |
+| Cut 3 (guide voice, 136.97 s) | integrated; render in progress | renders/priora-vision-film-cut3.mp4 (not tracked) |
 | Seek-order check | run on cut 2: 83 of 97 sampled frames pixel-identical in any seek order; 14 differ only by text anti-aliasing and 1 to 3 px on graphite lines mid-draw (see below) | scripts/seek-check.py |
 | ElevenLabs narration | blocked (network) | see below |
 | Final render and delivery | not started | renders/ |
@@ -32,7 +33,7 @@ python3 scripts/seek-check.py --out <scratch dir>   # frames identical in any se
 
 The environment's egress policy answers 403 to CONNECT for elevenlabs.io, www.elevenlabs.io, api.elevenlabs.io, api.us.elevenlabs.io and api.eu.residency.elevenlabs.io, so neither the web app nor the API is reachable. The user is changing network access.
 
-Agreed route: the ElevenLabs web app in the agent's own Playwright Chromium, the agreed narrator direction (female, clear international British English, warm, composed, credible) and the worker direction (a natural man on a roof, not a narrator). Pause only if sign-in needs the user. The API is not used without the user's approval. After download: scripts/align-uploaded.py aligns the audio, scripts/assemble-narration.py builds voice.wav and timing.json at exactly 90 s, scripts/build-cues.mjs re-locks every cue, the audio engine remixes, and the film re-renders.
+Agreed route: the ElevenLabs web app in the agent's own Playwright Chromium, the agreed narrator direction (female, clear international British English, warm, composed, credible) and the worker direction (a natural man on a roof, not a narrator). Pause only if sign-in needs the user. The API is not used without the user's approval. Priora is respelled Pree-OH-ruh in tts_text.elevenlabs (user confirmed pree-OH-ruh). After download: scripts/align-uploaded.py aligns the audio, scripts/assemble-narration.py builds voice.wav and timing.json on the beat grid (no fixed runtime), scripts/build-cues.mjs re-locks every cue, the audio engine remixes, and the film re-renders.
 
 ## How to resume
 
