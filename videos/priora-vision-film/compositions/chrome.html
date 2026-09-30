@@ -115,6 +115,9 @@
           box-shadow: 0 0 8px 3px color-mix(in srgb, var(--c-paper) 75%, transparent);
           opacity: 0;
           white-space: nowrap;
+          /* its own compositing layer at all times (small, never scaled), so the glyph rasterises the same
+             whatever the scenes beneath were doing before this frame */
+          will-change: opacity;
         }
         #chrome-lockup svg {
           width: 30px;
@@ -251,6 +254,10 @@
         story.set(hms, { opacity: 0 }, T("L09:afterwards.start"));
         story.set(day, { opacity: 1 }, T("L09:afterwards.start"));
 
+        // initialise every story tween once at build time (DrawSVG measures its line on first render)
+        story.totalTime(story.duration(), true);
+        story.totalTime(0, true);
+
         // ============ REGISTERED TIMELINE
         var tl = gsap.timeline({ paused: true });
         FL.scrub(tl, story, { at: 0, from: 0, to: RS, duration: RS, ease: "none" });
@@ -271,7 +278,8 @@
         tl.fromTo("#chrome-replay", { opacity: 0 }, { opacity: 1, duration: 0.5, ease: "power1.out", immediateRender: false }, T("riskChanged", -0.4));
         tl.fromTo("#chrome-replay", { opacity: 1 }, { opacity: 0, duration: 0.6, ease: "power1.in", immediateRender: false }, T("l16", -0.8));
         // the product's identity and its honest label, once the drawing has become the interface
-        tl.fromTo("#chrome-lockup", { opacity: 0, x: -10 }, { opacity: 1, x: 0, duration: 0.65, ease: "power2.out", immediateRender: false }, T("riskChanged", 0.2));
+        // opacity only: a transform left on the lockup made its glyph's edge depend on seek history
+        tl.fromTo("#chrome-lockup", { opacity: 0 }, { opacity: 1, duration: 0.65, ease: "power2.out", immediateRender: false }, T("riskChanged", 0.2));
         // the day moves on quietly during prevention and proof
         FL.textTo(tl, act2, { from: H(14, 18, 0), to: H(14, 24, 10), at: T("connects"), duration: T("l16") - T("connects") - 0.5, ease: "none", format: fHMS });
         // Act III: the sprinkler goes offline again at 14:42, the decision is requested at 14:43
