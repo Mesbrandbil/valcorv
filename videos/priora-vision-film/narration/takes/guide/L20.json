@@ -5,65 +5,85 @@
   "guide": true,
   "label": "GUIDE VOICE (local Kokoro). Not the final ElevenLabs performance.",
   "speaker": "narrator",
-  "text": "Priora. Infrastructure for activity-level physical risk.",
-  "spoken_text": "Priora. Infrastructure for activity-level physical risk.",
+  "text": "Priora. Know the risk you carry, while the work happens.",
+  "spoken_text": "Priora. Know the risk you carry, while the work happens.",
   "sample_rate": 48000,
-  "duration": 4.87,
+  "duration": 4.39,
   "speech_start": 0.13,
-  "speech_end": 4.64,
+  "speech_end": 4.16,
   "words": [
     {
       "w": "Priora",
       "start": 0.13,
-      "end": 0.7
+      "end": 0.77
     },
     {
-      "w": "Infrastructure",
-      "start": 1.74,
-      "end": 2.58
+      "w": "Know",
+      "start": 1.8,
+      "end": 2.08
     },
     {
-      "w": "for",
-      "start": 2.66,
-      "end": 2.77
-    },
-    {
-      "w": "activity-level",
-      "start": 2.77,
-      "end": 3.72
-    },
-    {
-      "w": "physical",
-      "start": 3.72,
-      "end": 4.19
+      "w": "the",
+      "start": 2.08,
+      "end": 2.21
     },
     {
       "w": "risk",
-      "start": 4.19,
-      "end": 4.64
+      "start": 2.21,
+      "end": 2.55
+    },
+    {
+      "w": "you",
+      "start": 2.55,
+      "end": 2.65
+    },
+    {
+      "w": "carry",
+      "start": 2.65,
+      "end": 3.04
+    },
+    {
+      "w": "while",
+      "start": 3.04,
+      "end": 3.24
+    },
+    {
+      "w": "the",
+      "start": 3.24,
+      "end": 3.3
+    },
+    {
+      "w": "work",
+      "start": 3.3,
+      "end": 3.58
+    },
+    {
+      "w": "happens",
+      "start": 3.58,
+      "end": 4.16
     }
   ],
   "sentences": [
     {
       "text": "Priora.",
       "start": 0.13,
-      "end": 0.7,
+      "end": 0.77,
       "word_range": [
         0,
         1
       ]
     },
     {
-      "text": "Infrastructure for activity-level physical risk.",
-      "start": 1.74,
-      "end": 4.64,
+      "text": "Know the risk you carry, while the work happens.",
+      "start": 1.8,
+      "end": 4.16,
       "word_range": [
         1,
-        6
+        10
       ]
     }
   ],
-  "created": "2026-09-29T21:41:35+00:00",
+  "created": "2026-09-30T01:11:59+00:00",
   "provider": "kokoro-onnx 0.6.1, kokoro-v1.0.onnx (local guide)",
   "voice": {
     "id": "bf_isabella",
@@ -77,22 +97,22 @@
     {
       "text": "Priora.",
       "start": 0.12,
-      "end": 0.97,
+      "end": 1.03,
       "alignment_quality": {
         "energy_pauses": 0,
         "pause_agreement": 1.0,
         "pauses_inside_words": [],
         "onset_error_ms": 0.0,
-        "offset_error_ms": 240.0,
+        "offset_error_ms": 230.0,
         "pause_onset_error_ms_mean": null,
         "pause_onset_error_ms_max": null
       },
       "fallback": false
     },
     {
-      "text": "Infrastructure for activity-level physical risk.",
-      "start": 1.73,
-      "end": 4.67,
+      "text": "Know the risk you carry, while the work happens.",
+      "start": 1.79,
+      "end": 4.19,
       "alignment_quality": {
         "energy_pauses": 0,
         "pause_agreement": 1.0,
@@ -113,7 +133,7 @@
       "pause_agreement": 1.0,
       "pauses_inside_words": [],
       "onset_error_ms": 0.0,
-      "offset_error_ms": 10.0,
+      "offset_error_ms": 0.0,
       "pause_onset_error_ms_mean": 0.0,
       "pause_onset_error_ms_max": 0.0
     },
@@ -123,19 +143,19 @@
     {
       "word": "Priora",
       "token_index": 0,
-      "chosen_variant": "P R IY AO R AH",
+      "chosen_variant": "P R IY OW R AH",
       "intended": true,
-      "phones": "P R IY AO R AH",
+      "phones": "P R IY OW R AH",
       "phone_durations": {
         "P#0": 0.05,
         "R#1": 0.06,
-        "IY#2": 0.15,
-        "AO#3": 0.16,
-        "R#4": 0.07,
-        "AH#5": 0.11
+        "IY#2": 0.19,
+        "OW#3": 0.17,
+        "R#4": 0.08,
+        "AH#5": 0.12
       },
-      "longest_vowel": "AO",
-      "stress_on_middle_syllable": true,
+      "longest_vowel": "IY",
+      "stress_on_middle_syllable": false,
       "segment": 0
     }
   ]

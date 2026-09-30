@@ -623,6 +623,7 @@ const INDEX_TEMPLATE = `<!doctype html>
     <script src="assets/js/ui-kit.js"></script>
     <script src="assets/js/sketch-kit.js"></script>
     <link rel="stylesheet" href="assets/css/film.css" />
+    <link rel="stylesheet" href="assets/css/film-color.css" />
     <style>
       #root {
         position: relative;

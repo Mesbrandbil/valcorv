@@ -1,6 +1,6 @@
 {
   "schema": "priora-cuesheet/1",
-  "note": "The film's cue sheet (cut 2: no fixed runtime, 92 BPM grid; see docs/cut2-direction.md). Every sync point is a narration anchor, so the edit re-locks automatically when narration/timing.json changes (guide voice now, ElevenLabs for the final). Scene ids match compositions/<id>.html.",
+  "note": "The film's cue sheet (cut 3: no fixed runtime, 92 BPM grid; see docs/cut3-direction.md). Every sync point is a narration anchor, so the edit re-locks automatically when narration/timing.json changes (guide voice now, ElevenLabs for the final). Scene ids match compositions/<id>.html.",
   "fps": 30,
   "film": {
     "duration": "END",
@@ -86,16 +86,10 @@
     "retain": "L17b:retain.start",
     "carriers": "L17c:carriers.start",
     "cover": "L17c:cover.start",
-    "ordinary": "L18:ordinary.start",
-    "few": "L18:few.start",
-    "decisionsL18": "L18:decisions.start",
-    "chainRecord": "L19a:Record.start",
-    "chainTrust": "L19a:trust.start",
-    "chainDecision": "L19b:decisions.start",
-    "chainPrice": "L19c:price.start",
-    "chainCapacity": "L19d:capacity.start",
+    "ordinary": "L18e:ordinary.start",
+    "few": "L18e:few.start",
+    "decisionsL18": "L18e:decisions.start",
     "priora": "L20:Priora.start",
-    "infrastructure": "L20:Infrastructure.start",
     "connectionHold": {
       "at": "L14a.end",
       "note": "The connection registers: 0.8 s of room before L14b."
@@ -111,16 +105,29 @@
     "ask": "L17c:ask.start",
     "whether": "L17c:whether.start",
     "closeIn": {
-      "at": "L18.end+0.1",
-      "note": "a3-close takes over: the whole site recedes and its envelope becomes the chain line."
-    },
-    "chainHold": {
-      "at": "L19d.end",
-      "note": "The full chain is on screen and holds until the lift before Priora."
+      "at": "L19.start-0.65",
+      "note": "a3-close takes over: the gap closes, then Priora and the line."
     },
     "paperIn": {
       "at": "L03.end-0.3",
       "note": "a1-paper window opens; the sheet lays over the drawing on the next beat."
+    },
+    "everyKind": "L18a.start",
+    "crane": "L18b.start",
+    "wind": "L18b:wind.start",
+    "gasDetector": "L18c.start",
+    "bypassed": "L18c:bypassed.start",
+    "confined": "L18d.start",
+    "ventilation": "L18d:ventilation.start",
+    "madeInTime": "L18e:time.start",
+    "l19": "L19.start",
+    "everyone": "L19:everyone.start",
+    "carries": "L19:carries.start",
+    "gapCloses": "L19:closes.start",
+    "tagline": "L20:Know.start",
+    "scenariosIn": {
+      "at": "L18a.start-0.33",
+      "note": "a3-scenarios takes over from the three choices, a half beat before L18a."
     }
   },
   "scenes": [
@@ -176,8 +183,17 @@
       "src": "compositions/a3-change.html",
       "track": 1,
       "start": "cue:l16",
+      "end": "cue:scenariosIn+0.4",
+      "note": "Act III: offline again, seen at once, the crossing, the three choices and the programme layer."
+    },
+    {
+      "id": "a3-scenarios",
+      "src": "compositions/a3-scenarios.html",
+      "track": 1,
+      "start": "cue:scenariosIn",
       "end": "cue:closeIn+0.4",
-      "note": "Act III: offline again, seen at once, the crossing, three choices, the whole site. Opens on a hard cut."
+      "crossfade": true,
+      "note": "Cut 3: every kind of work carries its own conditions: crane lift, gas detector bypass, confined space entry; then the whole site, ordinary work and the few decisions."
     },
     {
       "id": "a3-close",
@@ -186,7 +202,7 @@
       "start": "cue:closeIn",
       "end": "END",
       "crossfade": true,
-      "note": "Close: envelope line becomes the chain; record to capacity with a full hold; Priora; qualifier."
+      "note": "Cut 3 close: for everyone who carries the risk, the gap closes; Priora and the line; the qualifier."
     },
     {
       "id": "chrome",

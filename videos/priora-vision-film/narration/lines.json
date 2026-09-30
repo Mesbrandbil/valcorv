@@ -9,11 +9,12 @@
     "2026-09-29 (third pass): L05 'in mind', L06 'hot work begins, every safeguard in place' (the certificate is named in L14b and shown on screen), L08 drops 'Work continues' (the drawing shows it). Lead-in 0.8 s, end hold 2.0 s before the final fit.",
     "2026-09-29 (fourth pass): L14a 'connects the work to the conditions that matter' (matches 'change the work' in L17); slower delivery on L01, L14a and L20.",
     "2026-09-29 (cut 2): no fixed runtime (user direction: let the narration, comprehension and story set the length). Natural delivery: narrator speed 1.0 (no speed-up), a few key lines slower. Every line starts on the 92 BPM beat grid (pacing.grid): the designed gap is the minimum silence, placement waits for the next beat. L17 restored to 'ask selected carriers whether they will cover it' and split into L17a/b/c so each choice gets its own beat and room. The rewind gets two bars; the full chain holds before 'Priora'; the qualifier gets reading time in the end hold.",
-    "2026-09-29 (cut 2 build): more room at the crossing (L16 gap 2.8) and after the first two choices (L17a 1.3, L17b 1.2) so each composed choice holds before the next is spoken."
+    "2026-09-29 (cut 2 build): more room at the crossing (L16 gap 2.8) and after the first two choices (L17a 1.3, L17b 1.2) so each composed choice holds before the next is spoken.",
+    "2026-09-30 (cut 3): the end section is rewritten for the ICP (whoever carries the risk): three scenarios beyond hot work (crane lift, gas detector bypass, confined space entry), 'Most work stays ordinary...', then 'For everyone who carries the risk, the gap closes.' The five-word chain is removed. The tagline replaces 'Infrastructure for activity-level physical risk' (pending the user's choice). Guide pronunciation of Priora moves from pree-AW-ruh to pree-OH-ruh (pending confirmation)."
   ],
   "pacing": {
     "lead_in": 2.609,
-    "end_hold": 4.2,
+    "end_hold": 4.6,
     "edge_pad": 0.04,
     "grid": {
       "bpm": 92,
@@ -36,7 +37,7 @@
     "Priora": {
       "intent": "pri-OR-a, stress on the middle syllable, never PRY-ora",
       "ipa": "pɹiˈɔːɹə",
-      "guide_ipa": "pɹiˈɔːɹə",
+      "guide_ipa": "pɹiˈəʊɹə",
       "guide_espeak_default": "pɹˈaɪɔːɹə",
       "elevenlabs": "Pree-OR-uh",
       "elevenlabs_alternates": [
@@ -46,6 +47,7 @@
       ],
       "aligner_word": "priora",
       "aligner_right": [
+        "P R IY OW R AH",
         "P R IY AO R AH",
         "P R IH AO R AH"
       ],
@@ -53,7 +55,8 @@
         "P R AY AO R AH",
         "P R AY ER AH"
       ],
-      "stressed_vowel": "AO"
+      "stressed_vowel": "OW",
+      "note_cut3": "Cut 2 guide said pri-AW-ra (ɔː), which the user found odd; cut 3 guide uses pree-OH-ruh (əʊ) pending confirmation."
     }
   },
   "engines": {
@@ -366,74 +369,108 @@
       "pace": 0.97
     },
     {
-      "id": "L18",
+      "id": "L18a",
       "speaker": "narrator",
-      "section": "b11-whole-site-and-close",
-      "text": "Most work remains ordinary. A few changes become explicit decisions.",
+      "section": "b11-other-work",
+      "text": "Every kind of work carries its own conditions.",
+      "delivery": "Opening the wider view. Plain and assured.",
+      "pre_gap": 0.0,
+      "gap_after": 0.6,
+      "pace": 0.97,
+      "tts_text": {
+        "guide": "Every kind of work carries its own conditions.",
+        "elevenlabs": "Every kind of work carries its own conditions."
+      }
+    },
+    {
+      "id": "L18b",
+      "speaker": "narrator",
+      "section": "b11-other-work",
+      "text": "A crane lift, as the wind picks up.",
+      "delivery": "First vignette. Concrete, unhurried.",
+      "pre_gap": 0.0,
+      "gap_after": 0.9,
+      "pace": 0.97,
+      "tts_text": {
+        "guide": "A crane lift, as the wind picks up.",
+        "elevenlabs": "A crane lift, as the wind picks up."
+      }
+    },
+    {
+      "id": "L18c",
+      "speaker": "narrator",
+      "section": "b11-other-work",
+      "text": "A gas detector, bypassed for maintenance.",
+      "delivery": "Second vignette. Same weight.",
+      "pre_gap": 0.0,
+      "gap_after": 0.9,
+      "pace": 0.97,
+      "tts_text": {
+        "guide": "A gas detector, bypassed for maintenance.",
+        "elevenlabs": "A gas detector, bypassed for maintenance."
+      }
+    },
+    {
+      "id": "L18d",
+      "speaker": "narrator",
+      "section": "b11-other-work",
+      "text": "A confined space entry, while the ventilation is down.",
+      "delivery": "Third vignette. Land it.",
+      "pre_gap": 0.0,
+      "gap_after": 1.2,
+      "pace": 0.97,
+      "tts_text": {
+        "guide": "A confined space entry, while the ventilation is down.",
+        "elevenlabs": "A confined space entry, while the ventilation is down."
+      }
+    },
+    {
+      "id": "L18e",
+      "speaker": "narrator",
+      "section": "b11-other-work",
+      "text": "Most work stays ordinary. The few changes that matter become decisions, made in time.",
       "delivery": "Pulling back. Reassuring, measured.",
       "pre_gap": 0.0,
-      "gap_after": 1.3,
+      "gap_after": 1.2,
+      "pace": 1.0,
       "guide_inner_pauses": [
         0.6
       ],
-      "pace": 1.0
+      "tts_text": {
+        "guide": "Most work stays ordinary. The few changes that matter become decisions, made in time.",
+        "elevenlabs": "Most work stays ordinary. The few changes that matter become decisions, made in time."
+      }
     },
     {
-      "id": "L19a",
+      "id": "L19",
       "speaker": "narrator",
-      "section": "b11-whole-site-and-close",
-      "text": "Record becomes trust.",
-      "delivery": "Chain link one. Even, deliberate.",
+      "section": "b12-close",
+      "text": "For everyone who carries the risk, the gap closes.",
+      "delivery": "Spoken to the risk carrier. Quiet conviction; let \"the gap closes\" land.",
       "pre_gap": 0.0,
-      "gap_after": 0.45,
-      "pace": 0.97
-    },
-    {
-      "id": "L19b",
-      "speaker": "narrator",
-      "section": "b11-whole-site-and-close",
-      "text": "Trust enables decisions.",
-      "delivery": "Chain link two.",
-      "pre_gap": 0.0,
-      "gap_after": 0.45,
-      "pace": 0.97
-    },
-    {
-      "id": "L19c",
-      "speaker": "narrator",
-      "section": "b11-whole-site-and-close",
-      "text": "Decisions can carry price.",
-      "delivery": "Chain link three. Can is conditional, not a promise.",
-      "pre_gap": 0.0,
-      "gap_after": 0.45,
-      "pace": 0.97
-    },
-    {
-      "id": "L19d",
-      "speaker": "narrator",
-      "section": "b11-whole-site-and-close",
-      "text": "Price can connect to capacity.",
-      "delivery": "Chain link four. Resolve downward.",
-      "pre_gap": 0.0,
-      "gap_after": 2.4,
-      "pace": 0.97
+      "gap_after": 1.8,
+      "pace": 0.95,
+      "tts_text": {
+        "guide": "For everyone who carries the risk, the gap closes.",
+        "elevenlabs": "For everyone who carries the risk, the gap closes."
+      }
     },
     {
       "id": "L20",
       "speaker": "narrator",
-      "section": "b11-whole-site-and-close",
-      "text": "Priora. Infrastructure for activity-level physical risk.",
-      "tts_text": {
-        "guide": "Priora. Infrastructure for activity-level physical risk.",
-        "elevenlabs": "Pree-OR-uh. Infrastructure for activity-level physical risk."
-      },
-      "delivery": "Calm, inevitable close. The name, a breath, the descriptor.",
+      "section": "b12-close",
+      "text": "Priora. Know the risk you carry, while the work happens.",
+      "delivery": "Calm, inevitable close. The name, a breath, the line.",
       "pre_gap": 0.0,
       "gap_after": 0.0,
+      "pace": 0.92,
       "guide_inner_pauses": [
         0.8
       ],
-      "pace": 0.92
+      "tts_text": {
+        "guide": "Priora. Know the risk you carry, while the work happens.",
+        "elevenlabs": "Pree-OR-uh. Know the risk you carry, while the work happens."
+      }
     }
   ]
 }

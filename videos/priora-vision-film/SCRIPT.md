@@ -10,7 +10,7 @@ Locked narration for the Priora vision film (Priora is the product, Valcorv the 
 **Worker direction:** A real worker on site speaking into a phone. Natural, practical, close-mic. Not an actor performing a slogan.
 **Guide voice (build only, not final):** local Kokoro bf_isabella (narrator) and bm_daniel (worker), narrator speed 1.0 with per-line pace.
 **Pronunciation:** Priora is pri-OR-a (IPA pɹiˈɔːɹə), stress on the middle syllable, never PRY-ora. ElevenLabs text uses the respelling `Pree-OR-uh`. Roof 03 is said Roof oh-three.
-**Pacing:** lead-in 2.609 s, designed silence after each line as listed, rewind silence 6.27 s before L12, end hold 4.2 s. Total 128.15 s, 203 words.
+**Pacing:** lead-in 2.609 s, designed silence after each line as listed, rewind silence 6.27 s before L12, end hold 4.6 s. Total 136.96 s, 236 words.
 
 **Time** values are from the current assembly (engine: guide). After the ElevenLabs take is assembled, `narration/timing.json` is the truth.
 
@@ -145,7 +145,7 @@ Locked narration for the Priora vision film (Priora is the product, Valcorv the 
 ## Line 14 (L14a): Speak the activity (Frame 4)
 
 **Speaker:** Narrator  
-**Time:** 66.85 to 69.66 s (guide)  
+**Time:** 66.85 to 69.73 s (guide)  
 **Delivery:** Clear and unhurried; this is the moment the connection becomes visible. Let it land.  
 **Pace:** 0.93 of the global speed  
 **Silence after:** 1.8 s  
@@ -175,7 +175,7 @@ Locked narration for the Priora vision film (Priora is the product, Valcorv the 
 ## Line 17 (L16): Priora sees the change (Frame 5)
 
 **Speaker:** Narrator  
-**Time:** 81.20 to 85.72 s (guide)  
+**Time:** 81.20 to 85.74 s (guide)  
 **Delivery:** Two beats: the event, then the contrast with Act I. 'This time' carries it.  
 **Pace:** 0.97 of the global speed  
 **Silence after:** 2.8 s  
@@ -213,62 +213,72 @@ Locked narration for the Priora vision film (Priora is the product, Valcorv the 
 
     or, in time, ask selected carriers whether they will cover it.
 
-## Line 21 (L18): Whole site and close (Frames 5 and 6)
+## Line 21 (L18a): Whole site and close (Frames 5 and 6)
 
 **Speaker:** Narrator  
-**Time:** 101.74 to 106.62 s (guide)  
+**Time:** 101.74 to 104.24 s (guide)  
+**Delivery:** Opening the wider view. Plain and assured.  
+**Pace:** 0.97 of the global speed  
+**Silence after:** 0.6 s  
+
+    Every kind of work carries its own conditions.
+
+## Line 22 (L18b): Whole site and close (Frames 5 and 6)
+
+**Speaker:** Narrator  
+**Time:** 105.00 to 107.12 s (guide)  
+**Delivery:** First vignette. Concrete, unhurried.  
+**Pace:** 0.97 of the global speed  
+**Silence after:** 0.9 s  
+
+    A crane lift, as the wind picks up.
+
+## Line 23 (L18c): Whole site and close (Frames 5 and 6)
+
+**Speaker:** Narrator  
+**Time:** 108.26 to 110.76 s (guide)  
+**Delivery:** Second vignette. Same weight.  
+**Pace:** 0.97 of the global speed  
+**Silence after:** 0.9 s  
+
+    A gas detector, bypassed for maintenance.
+
+## Line 24 (L18d): Whole site and close (Frames 5 and 6)
+
+**Speaker:** Narrator  
+**Time:** 111.85 to 115.16 s (guide)  
+**Delivery:** Third vignette. Land it.  
+**Pace:** 0.97 of the global speed  
+**Silence after:** 1.2 s  
+
+    A confined space entry, while the ventilation is down.
+
+## Line 25 (L18e): Whole site and close (Frames 5 and 6)
+
+**Speaker:** Narrator  
+**Time:** 116.41 to 121.93 s (guide)  
 **Delivery:** Pulling back. Reassuring, measured.  
-**Silence after:** 1.3 s  
+**Silence after:** 1.2 s  
 
-    Most work remains ordinary. A few changes become explicit decisions.
+    Most work stays ordinary. The few changes that matter become decisions, made in time.
 
-## Line 22 (L19a): Whole site and close (Frames 5 and 6)
-
-**Speaker:** Narrator  
-**Time:** 107.94 to 109.47 s (guide)  
-**Delivery:** Chain link one. Even, deliberate.  
-**Pace:** 0.97 of the global speed  
-**Silence after:** 0.45 s  
-
-    Record becomes trust.
-
-## Line 23 (L19b): Whole site and close (Frames 5 and 6)
+## Line 26 (L19): b12-close
 
 **Speaker:** Narrator  
-**Time:** 110.22 to 111.90 s (guide)  
-**Delivery:** Chain link two.  
-**Pace:** 0.97 of the global speed  
-**Silence after:** 0.45 s  
+**Time:** 123.27 to 126.03 s (guide)  
+**Delivery:** Spoken to the risk carrier. Quiet conviction; let "the gap closes" land.  
+**Pace:** 0.95 of the global speed  
+**Silence after:** 1.8 s  
 
-    Trust enables decisions.
+    For everyone who carries the risk, the gap closes.
 
-## Line 24 (L19c): Whole site and close (Frames 5 and 6)
-
-**Speaker:** Narrator  
-**Time:** 112.50 to 114.18 s (guide)  
-**Delivery:** Chain link three. Can is conditional, not a promise.  
-**Pace:** 0.97 of the global speed  
-**Silence after:** 0.45 s  
-
-    Decisions can carry price.
-
-## Line 25 (L19d): Whole site and close (Frames 5 and 6)
+## Line 27 (L20): b12-close
 
 **Speaker:** Narrator  
-**Time:** 114.78 to 116.69 s (guide)  
-**Delivery:** Chain link four. Resolve downward.  
-**Pace:** 0.97 of the global speed  
-**Silence after:** 2.4 s  
-
-    Price can connect to capacity.
-
-## Line 26 (L20): Whole site and close (Frames 5 and 6)
-
-**Speaker:** Narrator  
-**Time:** 119.35 to 123.86 s (guide)  
-**Delivery:** Calm, inevitable close. The name, a breath, the descriptor.  
+**Time:** 128.15 to 132.18 s (guide)  
+**Delivery:** Calm, inevitable close. The name, a breath, the line.  
 **Pace:** 0.92 of the global speed  
 **Silence after:** 0.0 s  
-**Spoken as (ElevenLabs):** `Pree-OR-uh. Infrastructure for activity-level physical risk.`  
+**Spoken as (ElevenLabs):** `Pree-OR-uh. Know the risk you carry, while the work happens.`  
 
-    Priora. Infrastructure for activity-level physical risk.
+    Priora. Know the risk you carry, while the work happens.

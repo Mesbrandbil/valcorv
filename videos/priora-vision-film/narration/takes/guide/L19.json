@@ -1,55 +1,75 @@
 {
   "schema": "priora-narration-take/1",
-  "id": "L19d",
+  "id": "L19",
   "engine": "guide",
   "guide": true,
   "label": "GUIDE VOICE (local Kokoro). Not the final ElevenLabs performance.",
   "speaker": "narrator",
-  "text": "Price can connect to capacity.",
-  "spoken_text": "Price can connect to capacity.",
+  "text": "For everyone who carries the risk, the gap closes.",
+  "spoken_text": "For everyone who carries the risk, the gap closes.",
   "sample_rate": 48000,
-  "duration": 2.27,
-  "speech_start": 0.13,
-  "speech_end": 2.04,
+  "duration": 3.13,
+  "speech_start": 0.14,
+  "speech_end": 2.9,
   "words": [
     {
-      "w": "Price",
-      "start": 0.13,
-      "end": 0.49
+      "w": "For",
+      "start": 0.14,
+      "end": 0.23
     },
     {
-      "w": "can",
-      "start": 0.49,
-      "end": 0.7
+      "w": "everyone",
+      "start": 0.23,
+      "end": 0.77
     },
     {
-      "w": "connect",
-      "start": 0.7,
-      "end": 1.13
+      "w": "who",
+      "start": 0.77,
+      "end": 0.89
     },
     {
-      "w": "to",
-      "start": 1.13,
-      "end": 1.23
+      "w": "carries",
+      "start": 0.89,
+      "end": 1.31
     },
     {
-      "w": "capacity",
-      "start": 1.23,
-      "end": 2.04
+      "w": "the",
+      "start": 1.31,
+      "end": 1.42
+    },
+    {
+      "w": "risk",
+      "start": 1.42,
+      "end": 1.9
+    },
+    {
+      "w": "the",
+      "start": 1.9,
+      "end": 2.0
+    },
+    {
+      "w": "gap",
+      "start": 2.0,
+      "end": 2.3
+    },
+    {
+      "w": "closes",
+      "start": 2.3,
+      "end": 2.9
     }
   ],
   "sentences": [
     {
-      "text": "Price can connect to capacity.",
-      "start": 0.13,
-      "end": 2.04,
+      "text": "For everyone who carries the risk, the gap closes.",
+      "start": 0.14,
+      "end": 2.9,
       "word_range": [
         0,
-        5
+        9
       ]
     }
   ],
-  "created": "2026-09-29T21:41:35+00:00",
+  "created": "2026-09-30T01:11:59+00:00",
   "provider": "kokoro-onnx 0.6.1, kokoro-v1.0.onnx (local guide)",
   "voice": {
     "id": "bf_isabella",
@@ -59,14 +79,14 @@
   "inner_pauses": [],
   "segments_synth": [
     {
-      "text": "Price can connect to capacity.",
+      "text": "For everyone who carries the risk, the gap closes.",
       "start": 0.12,
-      "end": 2.07,
+      "end": 2.93,
       "alignment_quality": {
         "energy_pauses": 0,
         "pause_agreement": 1.0,
         "pauses_inside_words": [],
-        "onset_error_ms": 0.0,
+        "onset_error_ms": 10.0,
         "offset_error_ms": 0.0,
         "pause_onset_error_ms_mean": null,
         "pause_onset_error_ms_max": null
@@ -81,7 +101,7 @@
       "energy_pauses": 0,
       "pause_agreement": 1.0,
       "pauses_inside_words": [],
-      "onset_error_ms": 0.0,
+      "onset_error_ms": 10.0,
       "offset_error_ms": 0.0,
       "pause_onset_error_ms_mean": null,
       "pause_onset_error_ms_max": null

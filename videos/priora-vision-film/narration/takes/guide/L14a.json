@@ -8,68 +8,68 @@
   "text": "Priora connects the work to the conditions that matter.",
   "spoken_text": "Priora connects the work to the conditions that matter.",
   "sample_rate": 48000,
-  "duration": 3.21,
+  "duration": 3.28,
   "speech_start": 0.13,
-  "speech_end": 2.94,
+  "speech_end": 3.01,
   "words": [
     {
       "w": "Priora",
       "start": 0.13,
-      "end": 0.58
+      "end": 0.65
     },
     {
       "w": "connects",
-      "start": 0.58,
-      "end": 1.08
+      "start": 0.65,
+      "end": 1.15
     },
     {
       "w": "the",
-      "start": 1.08,
-      "end": 1.17
+      "start": 1.15,
+      "end": 1.24
     },
     {
       "w": "work",
-      "start": 1.17,
-      "end": 1.43
+      "start": 1.24,
+      "end": 1.5
     },
     {
       "w": "to",
-      "start": 1.43,
-      "end": 1.54
+      "start": 1.5,
+      "end": 1.61
     },
     {
       "w": "the",
-      "start": 1.54,
-      "end": 1.62
+      "start": 1.61,
+      "end": 1.69
     },
     {
       "w": "conditions",
-      "start": 1.62,
-      "end": 2.27
+      "start": 1.69,
+      "end": 2.35
     },
     {
       "w": "that",
-      "start": 2.27,
-      "end": 2.45
+      "start": 2.35,
+      "end": 2.51
     },
     {
       "w": "matter",
-      "start": 2.45,
-      "end": 2.94
+      "start": 2.51,
+      "end": 3.01
     }
   ],
   "sentences": [
     {
       "text": "Priora connects the work to the conditions that matter.",
       "start": 0.13,
-      "end": 2.94,
+      "end": 3.01,
       "word_range": [
         0,
         9
       ]
     }
   ],
-  "created": "2026-09-29T21:41:34+00:00",
+  "created": "2026-09-30T01:11:59+00:00",
   "provider": "kokoro-onnx 0.6.1, kokoro-v1.0.onnx (local guide)",
   "voice": {
     "id": "bf_isabella",
@@ -81,7 +81,7 @@
     {
       "text": "Priora connects the work to the conditions that matter.",
       "start": 0.12,
-      "end": 3.01,
+      "end": 3.08,
       "alignment_quality": {
         "energy_pauses": 0,
         "pause_agreement": 1.0,
@@ -112,18 +112,18 @@
     {
       "word": "Priora",
       "token_index": 0,
-      "chosen_variant": "P R IY AO R AH",
+      "chosen_variant": "P R IY OW R AH",
       "intended": true,
-      "phones": "P R IY AO R AH",
+      "phones": "P R IY OW R AH",
       "phone_durations": {
         "P#0": 0.06,
         "R#1": 0.06,
-        "IY#2": 0.11,
-        "AO#3": 0.15,
-        "R#4": 0.05,
-        "AH#5": 0.06
+        "IY#2": 0.14,
+        "OW#3": 0.15,
+        "R#4": 0.06,
+        "AH#5": 0.09
       },
-      "longest_vowel": "AO",
+      "longest_vowel": "OW",
       "stress_on_middle_syllable": true,
       "segment": 0
     }

@@ -1,50 +1,60 @@
 {
   "schema": "priora-narration-take/1",
-  "id": "L19c",
+  "id": "L18c",
   "engine": "guide",
   "guide": true,
   "label": "GUIDE VOICE (local Kokoro). Not the final ElevenLabs performance.",
   "speaker": "narrator",
-  "text": "Decisions can carry price.",
-  "spoken_text": "Decisions can carry price.",
+  "text": "A gas detector, bypassed for maintenance.",
+  "spoken_text": "A gas detector, bypassed for maintenance.",
   "sample_rate": 48000,
-  "duration": 2.04,
+  "duration": 2.86,
   "speech_start": 0.13,
-  "speech_end": 1.81,
+  "speech_end": 2.63,
   "words": [
     {
-      "w": "Decisions",
+      "w": "A",
       "start": 0.13,
-      "end": 0.73
+      "end": 0.2
     },
     {
-      "w": "can",
-      "start": 0.73,
-      "end": 0.93
+      "w": "gas",
+      "start": 0.2,
+      "end": 0.52
     },
     {
-      "w": "carry",
-      "start": 0.93,
-      "end": 1.23
+      "w": "detector",
+      "start": 0.52,
+      "end": 1.11
     },
     {
-      "w": "price",
-      "start": 1.23,
-      "end": 1.81
+      "w": "bypassed",
+      "start": 1.11,
+      "end": 1.79
+    },
+    {
+      "w": "for",
+      "start": 1.79,
+      "end": 1.88
+    },
+    {
+      "w": "maintenance",
+      "start": 1.88,
+      "end": 2.63
     }
   ],
   "sentences": [
     {
-      "text": "Decisions can carry price.",
+      "text": "A gas detector, bypassed for maintenance.",
       "start": 0.13,
-      "end": 1.81,
+      "end": 2.63,
       "word_range": [
         0,
-        4
+        6
       ]
     }
   ],
-  "created": "2026-09-29T21:41:35+00:00",
+  "created": "2026-09-30T01:11:59+00:00",
   "provider": "kokoro-onnx 0.6.1, kokoro-v1.0.onnx (local guide)",
   "voice": {
     "id": "bf_isabella",
@@ -54,9 +64,9 @@
   "inner_pauses": [],
   "segments_synth": [
     {
-      "text": "Decisions can carry price.",
+      "text": "A gas detector, bypassed for maintenance.",
       "start": 0.12,
-      "end": 1.84,
+      "end": 2.66,
       "alignment_quality": {
         "energy_pauses": 0,
         "pause_agreement": 1.0,

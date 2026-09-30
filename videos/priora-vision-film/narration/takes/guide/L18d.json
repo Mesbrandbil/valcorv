@@ -1,0 +1,112 @@
+{
+  "schema": "priora-narration-take/1",
+  "id": "L18d",
+  "engine": "guide",
+  "guide": true,
+  "label": "GUIDE VOICE (local Kokoro). Not the final ElevenLabs performance.",
+  "speaker": "narrator",
+  "text": "A confined space entry, while the ventilation is down.",
+  "spoken_text": "A confined space entry, while the ventilation is down.",
+  "sample_rate": 48000,
+  "duration": 3.67,
+  "speech_start": 0.13,
+  "speech_end": 3.44,
+  "words": [
+    {
+      "w": "A",
+      "start": 0.13,
+      "end": 0.19
+    },
+    {
+      "w": "confined",
+      "start": 0.19,
+      "end": 0.83
+    },
+    {
+      "w": "space",
+      "start": 0.83,
+      "end": 1.21
+    },
+    {
+      "w": "entry",
+      "start": 1.21,
+      "end": 1.65
+    },
+    {
+      "w": "while",
+      "start": 1.94,
+      "end": 2.05
+    },
+    {
+      "w": "the",
+      "start": 2.05,
+      "end": 2.13
+    },
+    {
+      "w": "ventilation",
+      "start": 2.13,
+      "end": 2.85
+    },
+    {
+      "w": "is",
+      "start": 2.85,
+      "end": 3.0
+    },
+    {
+      "w": "down",
+      "start": 3.0,
+      "end": 3.44
+    }
+  ],
+  "sentences": [
+    {
+      "text": "A confined space entry, while the ventilation is down.",
+      "start": 0.13,
+      "end": 3.44,
+      "word_range": [
+        0,
+        9
+      ]
+    }
+  ],
+  "created": "2026-09-30T01:11:59+00:00",
+  "provider": "kokoro-onnx 0.6.1, kokoro-v1.0.onnx (local guide)",
+  "voice": {
+    "id": "bf_isabella",
+    "lang": "en-gb"
+  },
+  "speed": 1.0,
+  "inner_pauses": [],
+  "segments_synth": [
+    {
+      "text": "A confined space entry, while the ventilation is down.",
+      "start": 0.12,
+      "end": 3.47,
+      "alignment_quality": {
+        "energy_pauses": 1,
+        "pause_agreement": 1.0,
+        "pauses_inside_words": [],
+        "onset_error_ms": 0.0,
+        "offset_error_ms": 0.0,
+        "pause_onset_error_ms_mean": 0.0,
+        "pause_onset_error_ms_max": 0.0
+      },
+      "fallback": false
+    }
+  ],
+  "alignment": {
+    "method": "pocketsphinx-5-forced-alignment+energy-refine",
+    "fallback": false,
+    "quality": {
+      "energy_pauses": 1,
+      "pause_agreement": 1.0,
+      "pauses_inside_words": [],
+      "onset_error_ms": 0.0,
+      "offset_error_ms": 0.0,
+      "pause_onset_error_ms_mean": 0.0,
+      "pause_onset_error_ms_max": 0.0
+    },
+    "quality_ok": true
+  },
+  "pronunciation_checks": []
+}
