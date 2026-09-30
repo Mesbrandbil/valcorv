@@ -16,7 +16,7 @@ Last updated: 2026-09-30, cut 3 integrated (136.97 s, guide voice): colour throu
 | First cut (guide voice, 90 s) | delivered | renders/priora-vision-film-cut1.mp4 (not tracked), stills/cut1/ |
 | Cut 2 (guide voice, 128.17 s) | delivered | renders/priora-vision-film-cut2.mp4 and -preview.mp4 (not tracked), stills/cut2/ |
 | Cut 3 (guide voice, 136.97 s) | rendered and delivered as a preview (-16.0 LUFS, -0.9 dBFS true peak after AAC) | renders/priora-vision-film-cut3.mp4 and -preview.mp4 (not tracked), stills/priora-vision-film-cut3/ |
-| Seek-order check | cut 3 at zero tolerance: 112 of 118 frames identical on the first run; the chrome causes fixed (the lockup's transform and layer, the border's DrawSVG init) and a re-run of the failing times passes; full re-run below | scripts/seek-check.py |
+| Seek-order check | cut 3 at zero tolerance: 115 of 118 frames pixel-identical in any seek order; the other 3 differ by at most 1 level (the sheet border, 2 frames) and 5 levels (one line mid-rewind), below the check's default tolerance and not visible | scripts/seek-check.py |
 | ElevenLabs narration | blocked (network) | see below |
 | Final render and delivery | not started | renders/ |
 
@@ -51,7 +51,7 @@ Rejected: `will-change: transform` on scene slots (worse: a promoted slot keeps 
 
 ## Seek check on the assembled cut 3
 
-With the tremor filter gone, the first full run at zero tolerance (118 times) found 6 frames that differed: the chrome sheet border (1 level, 2 frames; its story now initialises at build time), the chrome lockup glyph's edge during the crane vignette (up to 26 levels on a few pixels, 3 frames; the lockup now fades by opacity only and keeps its own small layer), and one rewind frame at 54.01 s (up to 5 levels along one line; it passed on the re-run). Builders also found and fixed: a SiteKit custom-property tween that did not restore on backward seeks (--sk-bleed is now set inline at mount), and the rough site's pass-through filter, which made still frames depend on history (now attached only on request).
+With the tremor filter gone, the first full run at zero tolerance (118 times) found 6 frames that differed: the chrome sheet border (1 level, 2 frames; its story now initialises at build time), the chrome lockup glyph's edge during the crane vignette (up to 26 levels on a few pixels, 3 frames; the lockup now fades by opacity only and keeps its own small layer), and one rewind frame at 54.01 s (up to 5 levels along one line). The full re-run after the fixes: the lockup frames pass; the border (1 level at 28.97 and 37.43 s) and the rewind line (5 levels at 54.01 s) still differ when captured in the full shuffled batch, though both pass when those times are captured on their own. Both are below the default tolerance (8 levels) and invisible; renders capture frames in ascending order. Builders also found and fixed: a SiteKit custom-property tween that did not restore on backward seeks (--sk-bleed is now set inline at mount), and the rough site's pass-through filter, which made still frames depend on history (now attached only on request).
 
 ## Hard-won rules for every composition
 
