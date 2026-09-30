@@ -28,7 +28,9 @@
  *   site.precise                the precise layer <g>
  *   site.cameras                named film cameras (world rects, 16:9)
  *   site.disp                   a pass-through primitive of the site's screen-space filter (scenes append a
- *                               feGaussianBlur to site.disp.parentNode for depth of field; still works)
+ *                               feGaussianBlur to site.disp.parentNode for depth of field). Not attached by
+ *                               default: pass { filter: true } to mount, or set svg.style.filter to
+ *                               url(#<prefix>sk-wobble) only while the blur is needed (a1-world does).
  *   site.setView(rect)          set the camera immediately (viewBox + --sw)
  *   site.camera(tl, to, t, dur, ease)   tween the camera from the previous camera state in this timeline
  *   site.drawOn(tl, t0, opts)   draw the rough site building by building (line, then wash, then colour
@@ -368,7 +370,7 @@ ${mat}
     // film additions to the style: rough layer rules
     const extra = mk('style', {}, defs);
     extra.textContent = roughCss();
-    // The site's screen-space filter (applied to the svg in rough mode). Cut 3 removed the tremor
+    // The site's screen-space filter (attached in rough mode only with opts.filter). Cut 3 removed the tremor
     // (feTurbulence + feDisplacementMap): it made frames depend on seek order. What is left is a
     // pass-through primitive, so a scene can still append a depth-of-field blur to site.disp.parentNode.
     const filt = mk('filter', { id: P + 'sk-wobble', x: '-2%', y: '-2%', width: '104%', height: '104%', 'color-interpolation-filters': 'sRGB' }, defs);
@@ -570,7 +572,9 @@ ${mat}
 
     // initial visibility and grading
     handle.setGrade(opts.grade || (opts.show === 'rough' ? 'act1' : 'full'));
-    if (opts.show === 'rough') { precise.style.opacity = 0; svg.style.filter = `url(#${P}sk-wobble)`; }
+    // the pass-through filter is attached only on request (opts.filter): even a no-op filter made still
+    // frames depend on seek history where only part of the svg changes (measured in a1-world, cut 3)
+    if (opts.show === 'rough') { precise.style.opacity = 0; if (opts.filter) svg.style.filter = `url(#${P}sk-wobble)`; }
     else if (rough.root) { rough.root.style.opacity = 0; if (fieldG) fieldG.style.opacity = 0; handle._field = 0; }
     handle.setView(CAMERAS.siteOverview);
     return handle;

@@ -57,7 +57,7 @@ ev('safeguards-draw', 'certificate', S.tick1 - 0.75, 'pencil', { gain_db: -16, d
 ev('ticks', 'certificate', S.tick1, 'tick', { gain_db: -8, series: { count: 5, every: r3(HB) }, what: 'CERTIFICATE, FIRE WATCH, EXTINGUISHER, AREA CLEARED, SPRINKLERS on consecutive half beats' });
 // S8 the unnoticed change
 ev('subtract', 'offline', S.offline, 'subtract-bed', { dur: r3(S.nothingCut - S.offline), what: 'the valve closes (a1-inserts): part of the bed is removed' });
-ev('cut-sz3', 'L07.end', S.sz3Out, 'cut', { gain_db: -16, material: 'felt', what: 'S8b: cut to the zone 3 roof; the heads go grey on half beats' });
+ev('cut-sz3', 'L07.end', S.sz3Out, 'cut', { gain_db: -16, material: 'felt', what: 'S8b: cut to the zone 3 roof; the heads drain from water to grey one by one (silent)' });
 ev('hold-sz3', 'L07.end', S.sz3Out, 'hold', { dur: r3(S.nothingCut - S.sz3Out), what: "S8b: the silence after 'offline'" });
 // S9
 ev('cut-nothing', 'nothingLooks', S.nothingCut, 'cut', { gain_db: -16, material: 'felt', what: 'S9a: Roof 03 and zone 3 together' });
@@ -77,7 +77,7 @@ ev('rewind', 'rewindStart', S.RS, 'rewind', { dur: r3(S.RE - S.RS), what: 'the s
 ev('latch', 'rewindEnd', S.RE, 'latch-soft', { gain_db: -6, what: 'the rewind lands on the landing frame' });
 E.sort((a, b) => 0);
 const doc = {
-  note: "a1-world (cut 2): the sounds the graphite site makes. Every event is anchored to a narration cue or word; the offsets put it on the scene's 92 BPM grid time under the current narration (the scene computes the same times with FL.clock().b/.c and warns in the console when an event drifts more than 20 ms from its picture). After a narration re-lock, regenerate the offsets. Kinds from docs/sound-events.md only. a1-inserts owns handwheel, gauge, valve-clunk and arc; a1-paper owns the sheet-lay and paper-lift.",
+  note: "a1-world (cut 3): the sounds the Act I site makes. Every event is anchored to a narration cue or word; the offsets put it on the scene's 92 BPM grid time under the current narration (the scene computes the same times with FL.clock().b/.c and warns in the console when an event drifts more than 20 ms from its picture). After a narration re-lock, regenerate the offsets. Kinds from docs/sound-events.md only. a1-inserts owns handwheel, gauge, valve-clunk and arc; a1-paper owns the sheet-lay and paper-lift.",
   events: E,
 };
 fs.writeFileSync(path.join(T0, 'compositions/a1-world.events.json'), JSON.stringify(doc, null, 2) + '\n');

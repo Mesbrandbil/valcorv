@@ -1896,7 +1896,7 @@
     "name": "cut-sz3",
     "gain_db": -16.0,
     "material": "felt",
-    "what": "S8b: cut to the zone 3 roof; the heads go grey on half beats",
+    "what": "S8b: cut to the zone 3 roof; the heads drain from water to grey one by one (silent)",
     "snap": {
       "mode": "next",
       "off": -0.0003
@@ -2965,12 +2965,12 @@
     "gain_db": -9.0,
     "scene": "a3-change",
     "kind": "row-unavailable",
-    "t": 84.566,
+    "t": 84.586,
     "index": 0,
     "seed": 8659
   },
   {
-    "t": 84.666,
+    "t": 84.686,
     "kind": "system-tick",
     "gain_db": 0.0,
     "source": "designed",
@@ -3023,6 +3023,10 @@
     "name": "cut-sheet",
     "material": "paper",
     "gain_db": -14.0,
+    "snap": {
+      "mode": "cut",
+      "off": 0.0003
+    },
     "scene": "a3-change",
     "kind": "cut",
     "t": 88.696,
@@ -3033,6 +3037,10 @@
     "name": "sheet-in",
     "gain_db": -12.0,
     "dur": 0.4,
+    "snap": {
+      "mode": "cut",
+      "off": 0.0003
+    },
     "scene": "a3-change",
     "kind": "sheet-in",
     "t": 88.696,
@@ -3054,7 +3062,7 @@
     "dur": 0.652,
     "snap": {
       "mode": "cut",
-      "off": 0.0003
+      "off": 0.0002
     },
     "scene": "a3-change",
     "kind": "pull",
@@ -3066,7 +3074,10 @@
     "name": "choice-01",
     "variant": 1,
     "gain_db": -10.0,
-    "snap": "cut",
+    "snap": {
+      "mode": "cut",
+      "off": -0.0002
+    },
     "scene": "a3-change",
     "kind": "choice-accent",
     "t": 90.652,
@@ -3077,7 +3088,10 @@
     "name": "push-change",
     "gain_db": -14.0,
     "dur": 0.652,
-    "snap": "cut",
+    "snap": {
+      "mode": "cut",
+      "off": -0.0002
+    },
     "scene": "a3-change",
     "kind": "push",
     "t": 90.652,
@@ -3090,7 +3104,7 @@
     "dur": 0.6,
     "scene": "a3-change",
     "kind": "align-snap",
-    "t": 90.953,
+    "t": 90.952,
     "index": 0,
     "seed": 9066
   },
@@ -3100,7 +3114,7 @@
     "dur": 0.6,
     "scene": "a3-change",
     "kind": "confirm",
-    "t": 90.973,
+    "t": 90.972,
     "index": 0,
     "seed": 9067,
     "variant": 0
@@ -3109,6 +3123,10 @@
     "name": "whip-retain",
     "gain_db": -16.0,
     "dur": 0.489,
+    "snap": {
+      "mode": "cut",
+      "off": 0.0001
+    },
     "scene": "a3-change",
     "kind": "whip",
     "t": 93.261,
@@ -3129,6 +3147,10 @@
     "name": "whip-transfer",
     "gain_db": -16.0,
     "dur": 0.489,
+    "snap": {
+      "mode": "cut",
+      "off": 0.0003
+    },
     "scene": "a3-change",
     "kind": "whip",
     "t": 96.196,
@@ -3151,11 +3173,11 @@
     "gain_db": -14.0,
     "snap": {
       "mode": "cut",
-      "off": -0.0005
+      "off": 0.0001
     },
     "scene": "a3-change",
     "kind": "cut",
-    "t": 97.173,
+    "t": 97.174,
     "index": 0,
     "seed": 9251
   },
@@ -3173,8 +3195,7 @@
     "gain_db": -12.0,
     "dur": 0.5,
     "snap": {
-      "mode": "next",
-      "off": 0.0004
+      "mode": "next"
     },
     "scene": "a3-change",
     "kind": "packet",
@@ -3187,7 +3208,7 @@
     "gain_db": -13.0,
     "snap": {
       "mode": "cut",
-      "off": 0.0002
+      "off": -0.0003
     },
     "scene": "a3-change",
     "kind": "response-tick",
@@ -3200,11 +3221,11 @@
     "gain_db": -13.0,
     "snap": {
       "mode": "cut",
-      "off": 0.0002
+      "off": -0.0003
     },
     "scene": "a3-change",
     "kind": "response-tick",
-    "t": 99.131,
+    "t": 99.13,
     "index": 1,
     "seed": 9399
   },
@@ -3213,11 +3234,11 @@
     "gain_db": -13.0,
     "snap": {
       "mode": "cut",
-      "off": 0.0002
+      "off": -0.0003
     },
     "scene": "a3-change",
     "kind": "response-tick",
-    "t": 99.783,
+    "t": 99.782,
     "index": 2,
     "seed": 9436
   },
@@ -3226,7 +3247,7 @@
     "gain_db": -13.0,
     "snap": {
       "mode": "cut",
-      "off": 0.0002
+      "off": -0.0003
     },
     "scene": "a3-change",
     "kind": "response-tick",
@@ -3237,264 +3258,1382 @@
   {
     "name": "layer-slice",
     "gain_db": -12.0,
-    "dur": 0.55,
+    "dur": 0.5,
     "snap": {
-      "mode": "cut",
-      "off": -0.652
+      "mode": "next",
+      "off": 1.9567
     },
     "scene": "a3-change",
     "kind": "connect-line",
-    "t": 102.065,
+    "t": 100.761,
     "index": 0,
     "seed": 9510
   },
   {
-    "name": "pull-site",
-    "gain_db": -12.0,
-    "dur": 3.913,
-    "snap": "cut",
-    "scene": "a3-change",
-    "kind": "pull",
-    "t": 102.717,
-    "index": 0,
-    "seed": 9547
-  },
-  {
-    "name": "node-pass-01",
-    "gain_db": -20.0,
-    "scene": "a3-change",
+    "name": "markers-01",
+    "snap": {
+      "mode": "next"
+    },
+    "gain_db": -16.0,
+    "scene": "a3-scenarios",
     "kind": "node-pass",
-    "t": 103.874,
+    "t": 101.739,
     "index": 0,
     "seed": 9584
   },
   {
-    "name": "decision-01",
-    "gain_db": -8.0,
+    "name": "markers-02",
     "snap": {
-      "mode": "cut",
-      "off": -0.0003
+      "mode": "next"
     },
-    "scene": "a3-change",
-    "kind": "decision-accent",
-    "t": 104.021,
-    "index": 0,
+    "gain_db": -16.0,
+    "scene": "a3-scenarios",
+    "kind": "node-pass",
+    "t": 102.065,
+    "index": 1,
     "seed": 9621
   },
   {
-    "name": "node-pass-02",
-    "gain_db": -20.0,
-    "scene": "a3-change",
+    "name": "markers-03",
+    "snap": {
+      "mode": "next"
+    },
+    "gain_db": -16.0,
+    "scene": "a3-scenarios",
     "kind": "node-pass",
-    "t": 104.257,
-    "index": 1,
+    "t": 102.391,
+    "index": 2,
     "seed": 9658
   },
   {
-    "name": "node-pass-03",
-    "gain_db": -20.0,
-    "scene": "a3-change",
+    "name": "markers-04",
+    "snap": {
+      "mode": "next"
+    },
+    "gain_db": -16.0,
+    "scene": "a3-scenarios",
     "kind": "node-pass",
-    "t": 104.611,
-    "index": 2,
+    "t": 102.717,
+    "index": 3,
     "seed": 9695
   },
   {
-    "name": "node-pass-04",
-    "gain_db": -20.0,
-    "scene": "a3-change",
-    "kind": "node-pass",
-    "t": 104.959,
-    "index": 3,
+    "name": "push-crane",
+    "snap": {
+      "mode": "next"
+    },
+    "gain_db": -14.0,
+    "dur": 0.652,
+    "scene": "a3-scenarios",
+    "kind": "push",
+    "t": 104.348,
+    "index": 0,
     "seed": 9732
   },
   {
-    "name": "node-pass-05",
-    "gain_db": -20.0,
-    "scene": "a3-change",
-    "kind": "node-pass",
-    "t": 105.285,
-    "index": 4,
+    "name": "cut-crane",
+    "snap": "cut",
+    "material": "felt",
+    "gain_db": -14.0,
+    "scene": "a3-scenarios",
+    "kind": "cut",
+    "t": 105.0,
+    "index": 0,
     "seed": 9769
   },
   {
-    "name": "node-pass-06",
-    "gain_db": -20.0,
-    "scene": "a3-change",
-    "kind": "node-pass",
-    "t": 105.636,
-    "index": 5,
-    "seed": 9806
-  },
-  {
-    "name": "decision-02",
-    "gain_db": -8.0,
-    "scene": "a3-change",
-    "kind": "decision-accent",
-    "t": 105.978,
-    "index": 1,
-    "seed": 9843
-  },
-  {
-    "name": "line-straighten",
-    "gain_db": -18.0,
-    "dur": 0.62,
-    "scene": "a3-close",
-    "kind": "ruler-contact",
-    "t": 107.133,
-    "index": 0,
-    "seed": 9880
-  },
-  {
-    "name": "site-recede",
-    "gain_db": -16.0,
-    "dur": 0.62,
-    "scene": "a3-close",
-    "kind": "pull",
-    "t": 107.133,
-    "index": 0,
-    "seed": 9917
-  },
-  {
-    "name": "line-straighten",
-    "gain_db": -18.0,
-    "dur": 0.62,
-    "scene": "a3-close",
+    "name": "gusts-01",
+    "snap": {
+      "mode": "cut",
+      "off": 0.05
+    },
+    "gain_db": -27.8653,
+    "scene": "a3-scenarios",
     "kind": "pencil-stroke",
-    "t": 107.173,
+    "t": 105.05,
     "index": 0,
-    "seed": 9881,
-    "pressure": 0.75,
-    "speed": 1.2
+    "seed": 951182,
+    "dur": 0.2459,
+    "pan": 0.1297
   },
   {
-    "name": "confirm-record",
-    "dur": 0.4,
-    "scene": "a3-close",
-    "kind": "chain-record",
-    "gain_db": 0.0,
-    "t": 107.895,
+    "name": "gusts-01",
+    "snap": {
+      "mode": "cut",
+      "off": 0.05
+    },
+    "gain_db": -28.472,
+    "scene": "a3-scenarios",
+    "kind": "pencil-stroke",
+    "t": 105.1414,
+    "index": 0,
+    "seed": 951183,
+    "dur": 0.2055,
+    "pan": -0.2442
+  },
+  {
+    "name": "gusts-02",
+    "snap": {
+      "mode": "cut",
+      "off": 0.05
+    },
+    "gain_db": -26.8038,
+    "scene": "a3-scenarios",
+    "kind": "pencil-stroke",
+    "t": 105.21,
+    "index": 1,
+    "seed": 954771,
+    "dur": 0.16,
+    "pan": -0.0886
+  },
+  {
+    "name": "gusts-01",
+    "snap": {
+      "mode": "cut",
+      "off": 0.05
+    },
+    "gain_db": -25.4822,
+    "scene": "a3-scenarios",
+    "kind": "pencil-tick",
+    "t": 105.2988,
+    "index": 0,
+    "seed": 951184,
+    "dur": 0.2155,
+    "pan": -0.3025
+  },
+  {
+    "name": "gusts-02",
+    "snap": {
+      "mode": "cut",
+      "off": 0.05
+    },
+    "gain_db": -25.4404,
+    "scene": "a3-scenarios",
+    "kind": "pencil-stroke",
+    "t": 105.3054,
+    "index": 1,
+    "seed": 954772,
+    "dur": 0.1591,
+    "pan": 0.0421
+  },
+  {
+    "name": "gusts-03",
+    "snap": {
+      "mode": "cut",
+      "off": 0.05
+    },
+    "gain_db": -28.7353,
+    "scene": "a3-scenarios",
+    "kind": "pencil-tick",
+    "t": 105.37,
+    "index": 2,
+    "seed": 958360,
+    "dur": 0.2815,
+    "pan": -0.2526
+  },
+  {
+    "name": "gusts-01",
+    "snap": {
+      "mode": "cut",
+      "off": 0.05
+    },
+    "gain_db": -27.2472,
+    "scene": "a3-scenarios",
+    "kind": "pencil-stroke",
+    "t": 105.3798,
+    "index": 0,
+    "seed": 951185,
+    "dur": 0.243,
+    "pan": -0.1376
+  },
+  {
+    "name": "gusts-02",
+    "snap": {
+      "mode": "cut",
+      "off": 0.05
+    },
+    "gain_db": -26.0739,
+    "scene": "a3-scenarios",
+    "kind": "pencil-stroke",
+    "t": 105.3901,
+    "index": 1,
+    "seed": 954773,
+    "dur": 0.2947,
+    "pan": 0.3319
+  },
+  {
+    "name": "gusts-01",
+    "snap": {
+      "mode": "cut",
+      "off": 0.05
+    },
+    "gain_db": -27.2452,
+    "scene": "a3-scenarios",
+    "kind": "pencil-stroke",
+    "t": 105.5001,
+    "index": 0,
+    "seed": 951186,
+    "dur": 0.0973,
+    "pan": 0.1247
+  },
+  {
+    "name": "gusts-04",
+    "snap": {
+      "mode": "cut",
+      "off": 0.05
+    },
+    "gain_db": -28.6509,
+    "scene": "a3-scenarios",
+    "kind": "pencil-tick",
+    "t": 105.53,
+    "index": 3,
+    "seed": 961949,
+    "dur": 0.2905,
+    "pan": -0.107
+  },
+  {
+    "name": "gusts-03",
+    "snap": {
+      "mode": "cut",
+      "off": 0.05
+    },
+    "gain_db": -26.3083,
+    "scene": "a3-scenarios",
+    "kind": "pencil-tick",
+    "t": 105.5341,
+    "index": 2,
+    "seed": 958361,
+    "dur": 0.2846,
+    "pan": -0.2292
+  },
+  {
+    "name": "gusts-02",
+    "snap": {
+      "mode": "cut",
+      "off": 0.05
+    },
+    "gain_db": -25.5136,
+    "scene": "a3-scenarios",
+    "kind": "pencil-tick",
+    "t": 105.5354,
+    "index": 1,
+    "seed": 954774,
+    "dur": 0.1504,
+    "pan": 0.0627
+  },
+  {
+    "name": "pull-card",
+    "snap": {
+      "mode": "next"
+    },
+    "gain_db": -14.0,
+    "dur": 0.652,
+    "scene": "a3-scenarios",
+    "kind": "pull",
+    "t": 105.652,
     "index": 0,
     "seed": 9954
   },
   {
-    "name": "ride-trust",
-    "gain_db": -22.0,
-    "dur": 0.652,
+    "name": "gusts-02",
     "snap": {
-      "mode": "prev",
-      "off": -0.3265
+      "mode": "cut",
+      "off": 0.05
     },
-    "scene": "a3-close",
-    "kind": "whip",
-    "t": 108.26,
-    "index": 0,
-    "seed": 9991
+    "gain_db": -25.0668,
+    "scene": "a3-scenarios",
+    "kind": "pencil-tick",
+    "t": 105.6585,
+    "index": 1,
+    "seed": 954775,
+    "dur": 0.2221,
+    "pan": -0.0829
   },
   {
-    "name": "confirm-trust",
-    "dur": 0.4,
-    "scene": "a3-close",
-    "kind": "chain-trust",
-    "gain_db": 0.0,
-    "t": 108.855,
+    "name": "gusts-01",
+    "snap": {
+      "mode": "cut",
+      "off": 0.05
+    },
+    "gain_db": -28.0135,
+    "scene": "a3-scenarios",
+    "kind": "pencil-tick",
+    "t": 105.6724,
+    "index": 0,
+    "seed": 951187,
+    "dur": 0.1505,
+    "pan": 0.2428
+  },
+  {
+    "name": "gusts-05",
+    "snap": {
+      "mode": "cut",
+      "off": 0.05
+    },
+    "gain_db": -28.1066,
+    "scene": "a3-scenarios",
+    "kind": "pencil-tick",
+    "t": 105.69,
+    "index": 4,
+    "seed": 969127,
+    "dur": 0.2447,
+    "pan": -0.2815
+  },
+  {
+    "name": "gusts-03",
+    "snap": {
+      "mode": "cut",
+      "off": 0.05
+    },
+    "gain_db": -29.3272,
+    "scene": "a3-scenarios",
+    "kind": "pencil-tick",
+    "t": 105.6914,
+    "index": 2,
+    "seed": 958362,
+    "dur": 0.2663,
+    "pan": 0.0302
+  },
+  {
+    "name": "gusts-04",
+    "snap": {
+      "mode": "cut",
+      "off": 0.05
+    },
+    "gain_db": -25.0557,
+    "scene": "a3-scenarios",
+    "kind": "pencil-stroke",
+    "t": 105.6987,
+    "index": 3,
+    "seed": 961950,
+    "dur": 0.2584,
+    "pan": 0.0909
+  },
+  {
+    "name": "connect-wind",
+    "snap": {
+      "mode": "next",
+      "off": 0.05
+    },
+    "gain_db": -12.0,
+    "dur": 0.47,
+    "scene": "a3-scenarios",
+    "kind": "connect-line",
+    "t": 105.702,
     "index": 0,
     "seed": 10028
   },
   {
-    "name": "ride-decision",
-    "gain_db": -22.0,
-    "dur": 0.652,
+    "name": "gusts-01",
     "snap": {
-      "mode": "prev",
-      "off": -0.3261
+      "mode": "cut",
+      "off": 0.05
     },
-    "scene": "a3-close",
-    "kind": "whip",
-    "t": 110.543,
+    "gain_db": -26.0103,
+    "scene": "a3-scenarios",
+    "kind": "pencil-stroke",
+    "t": 105.805,
     "index": 0,
-    "seed": 10065
+    "seed": 951188,
+    "dur": 0.2333,
+    "pan": -0.3884
   },
   {
-    "name": "confirm-decision",
-    "dur": 0.4,
-    "scene": "a3-close",
-    "kind": "chain-decision",
-    "gain_db": 0.0,
-    "t": 111.137,
+    "name": "gusts-04",
+    "snap": {
+      "mode": "cut",
+      "off": 0.05
+    },
+    "gain_db": -25.3125,
+    "scene": "a3-scenarios",
+    "kind": "pencil-stroke",
+    "t": 105.8194,
+    "index": 3,
+    "seed": 961951,
+    "dur": 0.1199,
+    "pan": -0.1648
+  },
+  {
+    "name": "gusts-03",
+    "snap": {
+      "mode": "cut",
+      "off": 0.05
+    },
+    "gain_db": -29.1881,
+    "scene": "a3-scenarios",
+    "kind": "pencil-stroke",
+    "t": 105.8387,
+    "index": 2,
+    "seed": 958363,
+    "dur": 0.2014,
+    "pan": 0.1904
+  },
+  {
+    "name": "gusts-05",
+    "snap": {
+      "mode": "cut",
+      "off": 0.05
+    },
+    "gain_db": -27.4117,
+    "scene": "a3-scenarios",
+    "kind": "pencil-tick",
+    "t": 105.8469,
+    "index": 4,
+    "seed": 969128,
+    "dur": 0.1472,
+    "pan": -0.225
+  },
+  {
+    "name": "gusts-06",
+    "snap": {
+      "mode": "cut",
+      "off": 0.05
+    },
+    "gain_db": -29.9596,
+    "scene": "a3-scenarios",
+    "kind": "pencil-stroke",
+    "t": 105.85,
+    "index": 5,
+    "seed": 976305,
+    "dur": 0.1562,
+    "pan": -0.2492
+  },
+  {
+    "name": "gusts-02",
+    "snap": {
+      "mode": "cut",
+      "off": 0.05
+    },
+    "gain_db": -27.5522,
+    "scene": "a3-scenarios",
+    "kind": "pencil-tick",
+    "t": 105.8565,
+    "index": 1,
+    "seed": 954776,
+    "dur": 0.2879,
+    "pan": 0.1382
+  },
+  {
+    "name": "gusts-01",
+    "snap": {
+      "mode": "cut",
+      "off": 0.05
+    },
+    "gain_db": -29.0729,
+    "scene": "a3-scenarios",
+    "kind": "pencil-tick",
+    "t": 105.8973,
+    "index": 0,
+    "seed": 951189,
+    "dur": 0.1112,
+    "pan": -0.249
+  },
+  {
+    "name": "gusts-04",
+    "snap": {
+      "mode": "cut",
+      "off": 0.05
+    },
+    "gain_db": -27.3636,
+    "scene": "a3-scenarios",
+    "kind": "pencil-tick",
+    "t": 105.9001,
+    "index": 3,
+    "seed": 961952,
+    "dur": 0.2236,
+    "pan": 0.3574
+  },
+  {
+    "name": "gusts-06",
+    "snap": {
+      "mode": "cut",
+      "off": 0.05
+    },
+    "gain_db": -26.9531,
+    "scene": "a3-scenarios",
+    "kind": "pencil-tick",
+    "t": 105.9339,
+    "index": 5,
+    "seed": 976306,
+    "dur": 0.1336,
+    "pan": -0.39
+  },
+  {
+    "name": "gusts-03",
+    "snap": {
+      "mode": "cut",
+      "off": 0.05
+    },
+    "gain_db": -28.6006,
+    "scene": "a3-scenarios",
+    "kind": "pencil-stroke",
+    "t": 105.991,
+    "index": 2,
+    "seed": 958364,
+    "dur": 0.1085,
+    "pan": -0.2142
+  },
+  {
+    "name": "gusts-02",
+    "snap": {
+      "mode": "cut",
+      "off": 0.05
+    },
+    "gain_db": -27.5192,
+    "scene": "a3-scenarios",
+    "kind": "pencil-tick",
+    "t": 105.9951,
+    "index": 1,
+    "seed": 954777,
+    "dur": 0.196,
+    "pan": -0.1917
+  },
+  {
+    "name": "gusts-04",
+    "snap": {
+      "mode": "cut",
+      "off": 0.05
+    },
+    "gain_db": -26.7703,
+    "scene": "a3-scenarios",
+    "kind": "pencil-tick",
+    "t": 105.9996,
+    "index": 3,
+    "seed": 961953,
+    "dur": 0.1336,
+    "pan": 0.3404
+  },
+  {
+    "name": "gusts-05",
+    "snap": {
+      "mode": "cut",
+      "off": 0.05
+    },
+    "gain_db": -29.6298,
+    "scene": "a3-scenarios",
+    "kind": "pencil-stroke",
+    "t": 106.0435,
+    "index": 4,
+    "seed": 969129,
+    "dur": 0.2524,
+    "pan": 0.3383
+  },
+  {
+    "name": "gusts-01",
+    "snap": {
+      "mode": "cut",
+      "off": 0.05
+    },
+    "gain_db": -26.9839,
+    "scene": "a3-scenarios",
+    "kind": "pencil-stroke",
+    "t": 106.0712,
+    "index": 0,
+    "seed": 951190,
+    "dur": 0.1412,
+    "pan": 0.0496
+  },
+  {
+    "name": "gusts-06",
+    "snap": {
+      "mode": "cut",
+      "off": 0.05
+    },
+    "gain_db": -26.8197,
+    "scene": "a3-scenarios",
+    "kind": "pencil-stroke",
+    "t": 106.1022,
+    "index": 5,
+    "seed": 976307,
+    "dur": 0.2674,
+    "pan": 0.023
+  },
+  {
+    "name": "gusts-03",
+    "snap": {
+      "mode": "cut",
+      "off": 0.05
+    },
+    "gain_db": -26.2895,
+    "scene": "a3-scenarios",
+    "kind": "pencil-tick",
+    "t": 106.1087,
+    "index": 2,
+    "seed": 958365,
+    "dur": 0.1915,
+    "pan": -0.3433
+  },
+  {
+    "name": "gusts-02",
+    "snap": {
+      "mode": "cut",
+      "off": 0.05
+    },
+    "gain_db": -27.2998,
+    "scene": "a3-scenarios",
+    "kind": "pencil-stroke",
+    "t": 106.1691,
+    "index": 1,
+    "seed": 954778,
+    "dur": 0.1746,
+    "pan": 0.047
+  },
+  {
+    "name": "gusts-01",
+    "snap": {
+      "mode": "cut",
+      "off": 0.05
+    },
+    "gain_db": -29.538,
+    "scene": "a3-scenarios",
+    "kind": "pencil-stroke",
+    "t": 106.1715,
+    "index": 0,
+    "seed": 951191,
+    "dur": 0.2403,
+    "pan": -0.0584
+  },
+  {
+    "name": "gusts-05",
+    "snap": {
+      "mode": "cut",
+      "off": 0.05
+    },
+    "gain_db": -29.0639,
+    "scene": "a3-scenarios",
+    "kind": "pencil-stroke",
+    "t": 106.1726,
+    "index": 4,
+    "seed": 969130,
+    "dur": 0.2451,
+    "pan": -0.0452
+  },
+  {
+    "name": "gusts-04",
+    "snap": {
+      "mode": "cut",
+      "off": 0.05
+    },
+    "gain_db": -29.8971,
+    "scene": "a3-scenarios",
+    "kind": "pencil-stroke",
+    "t": 106.1949,
+    "index": 3,
+    "seed": 961954,
+    "dur": 0.28,
+    "pan": -0.2476
+  },
+  {
+    "name": "gusts-03",
+    "snap": {
+      "mode": "cut",
+      "off": 0.05
+    },
+    "gain_db": -26.7263,
+    "scene": "a3-scenarios",
+    "kind": "pencil-tick",
+    "t": 106.2038,
+    "index": 2,
+    "seed": 958366,
+    "dur": 0.2152,
+    "pan": 0.0066
+  },
+  {
+    "name": "gusts-02",
+    "snap": {
+      "mode": "cut",
+      "off": 0.05
+    },
+    "gain_db": -27.8932,
+    "scene": "a3-scenarios",
+    "kind": "pencil-tick",
+    "t": 106.2966,
+    "index": 1,
+    "seed": 954779,
+    "dur": 0.2064,
+    "pan": 0.1922
+  },
+  {
+    "name": "gusts-06",
+    "snap": {
+      "mode": "cut",
+      "off": 0.05
+    },
+    "gain_db": -29.4832,
+    "scene": "a3-scenarios",
+    "kind": "pencil-stroke",
+    "t": 106.3012,
+    "index": 5,
+    "seed": 976308,
+    "dur": 0.2574,
+    "pan": -0.2261
+  },
+  {
+    "name": "focus-card-crane",
+    "snap": {
+      "mode": "next",
+      "off": 0.652
+    },
+    "gain_db": -16.0,
+    "scene": "a3-scenarios",
+    "kind": "focus",
+    "t": 106.304,
     "index": 0,
     "seed": 10102
   },
   {
-    "name": "ride-price",
-    "gain_db": -22.0,
-    "dur": 0.652,
+    "name": "gusts-05",
     "snap": {
       "mode": "cut",
-      "off": -0.6518
+      "off": 0.05
     },
-    "scene": "a3-close",
-    "kind": "whip",
-    "t": 112.826,
+    "gain_db": -29.458,
+    "scene": "a3-scenarios",
+    "kind": "pencil-stroke",
+    "t": 106.3235,
+    "index": 4,
+    "seed": 969131,
+    "dur": 0.2286,
+    "pan": -0.3846
+  },
+  {
+    "name": "gusts-04",
+    "snap": {
+      "mode": "cut",
+      "off": 0.05
+    },
+    "gain_db": -26.6003,
+    "scene": "a3-scenarios",
+    "kind": "pencil-tick",
+    "t": 106.3271,
+    "index": 3,
+    "seed": 961955,
+    "dur": 0.0888,
+    "pan": 0.1159
+  },
+  {
+    "name": "gusts-03",
+    "snap": {
+      "mode": "cut",
+      "off": 0.05
+    },
+    "gain_db": -29.4749,
+    "scene": "a3-scenarios",
+    "kind": "pencil-stroke",
+    "t": 106.3515,
+    "index": 2,
+    "seed": 958367,
+    "dur": 0.2676,
+    "pan": 0.3728
+  },
+  {
+    "name": "wind-limit",
+    "gain_db": -9.0,
+    "scene": "a3-scenarios",
+    "kind": "row-unavailable",
+    "t": 106.413,
     "index": 0,
     "seed": 10139
   },
   {
-    "name": "confirm-price",
-    "dur": 0.4,
-    "scene": "a3-close",
-    "kind": "chain-price",
-    "gain_db": 0.0,
-    "t": 113.56,
+    "name": "gusts-03",
+    "snap": {
+      "mode": "cut",
+      "off": 0.05
+    },
+    "gain_db": -25.0906,
+    "scene": "a3-scenarios",
+    "kind": "pencil-stroke",
+    "t": 106.4683,
+    "index": 2,
+    "seed": 958368,
+    "dur": 0.1283,
+    "pan": 0.2503
+  },
+  {
+    "name": "gusts-05",
+    "snap": {
+      "mode": "cut",
+      "off": 0.05
+    },
+    "gain_db": -26.3355,
+    "scene": "a3-scenarios",
+    "kind": "pencil-stroke",
+    "t": 106.4725,
+    "index": 4,
+    "seed": 969132,
+    "dur": 0.187,
+    "pan": -0.0471
+  },
+  {
+    "name": "gusts-04",
+    "snap": {
+      "mode": "cut",
+      "off": 0.05
+    },
+    "gain_db": -28.3126,
+    "scene": "a3-scenarios",
+    "kind": "pencil-stroke",
+    "t": 106.4834,
+    "index": 3,
+    "seed": 961956,
+    "dur": 0.2715,
+    "pan": -0.3937
+  },
+  {
+    "name": "gusts-06",
+    "snap": {
+      "mode": "cut",
+      "off": 0.05
+    },
+    "gain_db": -28.7911,
+    "scene": "a3-scenarios",
+    "kind": "pencil-tick",
+    "t": 106.4932,
+    "index": 5,
+    "seed": 976309,
+    "dur": 0.1176,
+    "pan": 0.0183
+  },
+  {
+    "name": "gusts-06",
+    "snap": {
+      "mode": "cut",
+      "off": 0.05
+    },
+    "gain_db": -26.9967,
+    "scene": "a3-scenarios",
+    "kind": "pencil-stroke",
+    "t": 106.5886,
+    "index": 5,
+    "seed": 976310,
+    "dur": 0.2617,
+    "pan": 0.0373
+  },
+  {
+    "name": "gusts-05",
+    "snap": {
+      "mode": "cut",
+      "off": 0.05
+    },
+    "gain_db": -26.6375,
+    "scene": "a3-scenarios",
+    "kind": "pencil-stroke",
+    "t": 106.6189,
+    "index": 4,
+    "seed": 969133,
+    "dur": 0.1219,
+    "pan": 0.2387
+  },
+  {
+    "name": "outcome-change",
+    "snap": {
+      "mode": "next"
+    },
+    "variant": 1,
+    "gain_db": -10.0,
+    "scene": "a3-scenarios",
+    "kind": "choice-accent",
+    "t": 106.63,
     "index": 0,
     "seed": 10176
   },
   {
-    "name": "ride-capacity",
-    "gain_db": -22.0,
-    "dur": 0.652,
+    "name": "gusts-04",
     "snap": {
       "mode": "cut",
-      "off": -0.6524
+      "off": 0.05
     },
-    "scene": "a3-close",
-    "kind": "whip",
-    "t": 115.108,
+    "gain_db": -28.1413,
+    "scene": "a3-scenarios",
+    "kind": "pencil-stroke",
+    "t": 106.6467,
+    "index": 3,
+    "seed": 961957,
+    "dur": 0.2687,
+    "pan": 0.1142
+  },
+  {
+    "name": "gusts-06",
+    "snap": {
+      "mode": "cut",
+      "off": 0.05
+    },
+    "gain_db": -26.763,
+    "scene": "a3-scenarios",
+    "kind": "pencil-tick",
+    "t": 106.7308,
+    "index": 5,
+    "seed": 976311,
+    "dur": 0.1652,
+    "pan": 0.0668
+  },
+  {
+    "name": "gusts-05",
+    "snap": {
+      "mode": "cut",
+      "off": 0.05
+    },
+    "gain_db": -27.1426,
+    "scene": "a3-scenarios",
+    "kind": "pencil-stroke",
+    "t": 106.7819,
+    "index": 4,
+    "seed": 969134,
+    "dur": 0.0996,
+    "pan": -0.3315
+  },
+  {
+    "name": "gusts-06",
+    "snap": {
+      "mode": "cut",
+      "off": 0.05
+    },
+    "gain_db": -28.7262,
+    "scene": "a3-scenarios",
+    "kind": "pencil-stroke",
+    "t": 106.8753,
+    "index": 5,
+    "seed": 976312,
+    "dur": 0.2382,
+    "pan": -0.3392
+  },
+  {
+    "name": "gusts-05",
+    "snap": {
+      "mode": "cut",
+      "off": 0.05
+    },
+    "gain_db": -27.2538,
+    "scene": "a3-scenarios",
+    "kind": "pencil-stroke",
+    "t": 106.8853,
+    "index": 4,
+    "seed": 969135,
+    "dur": 0.2448,
+    "pan": -0.3921
+  },
+  {
+    "name": "gusts-06",
+    "snap": {
+      "mode": "cut",
+      "off": 0.05
+    },
+    "gain_db": -26.6907,
+    "scene": "a3-scenarios",
+    "kind": "pencil-tick",
+    "t": 107.0033,
+    "index": 5,
+    "seed": 976313,
+    "dur": 0.2627,
+    "pan": 0.0918
+  },
+  {
+    "name": "cut-gas",
+    "snap": "cut",
+    "material": "paper",
+    "gain_db": -14.0,
+    "scene": "a3-scenarios",
+    "kind": "cut",
+    "t": 108.261,
     "index": 0,
     "seed": 10213
   },
   {
-    "name": "chain-reveal",
-    "gain_db": -14.0,
-    "dur": 0.978,
+    "name": "connect-gas",
     "snap": {
       "mode": "cut",
-      "off": -0.0004
+      "off": 0.376
     },
-    "scene": "a3-close",
-    "kind": "pull",
-    "t": 115.76,
+    "gain_db": -12.0,
+    "dur": 0.396,
+    "scene": "a3-scenarios",
+    "kind": "connect-line",
+    "t": 108.637,
     "index": 0,
     "seed": 10250
   },
   {
-    "name": "confirm-capacity",
-    "dur": 0.4,
-    "scene": "a3-close",
-    "kind": "chain-capacity",
-    "gain_db": 0.0,
-    "t": 115.843,
+    "name": "key-turn",
+    "gain_db": -16.0,
+    "dur": 0.26,
+    "scene": "a3-scenarios",
+    "kind": "handwheel",
+    "t": 108.991,
     "index": 0,
     "seed": 10287
   },
   {
-    "name": "wordmark-latch",
+    "name": "bypassed",
+    "snap": {
+      "mode": "near"
+    },
+    "gain_db": -9.0,
+    "scene": "a3-scenarios",
+    "kind": "row-unavailable",
+    "t": 109.239,
+    "index": 0,
+    "seed": 10324
+  },
+  {
+    "name": "push-card-gas",
+    "snap": {
+      "mode": "next"
+    },
+    "gain_db": -14.0,
+    "dur": 0.652,
+    "scene": "a3-scenarios",
+    "kind": "push",
+    "t": 109.565,
+    "index": 0,
+    "seed": 10361
+  },
+  {
+    "name": "outcome-retain",
+    "snap": {
+      "mode": "next"
+    },
+    "variant": 2,
+    "gain_db": -10.0,
+    "scene": "a3-scenarios",
+    "kind": "choice-accent",
+    "t": 110.217,
+    "index": 0,
+    "seed": 10398
+  },
+  {
+    "name": "cut-tank",
+    "snap": "cut",
+    "material": "paper",
+    "gain_db": -14.0,
+    "scene": "a3-scenarios",
+    "kind": "cut",
+    "t": 111.848,
+    "index": 0,
+    "seed": 10435
+  },
+  {
+    "name": "pull-fan",
+    "snap": {
+      "mode": "next"
+    },
+    "gain_db": -14.0,
+    "dur": 0.652,
+    "scene": "a3-scenarios",
+    "kind": "pull",
+    "t": 113.152,
+    "index": 0,
+    "seed": 10472
+  },
+  {
+    "name": "connect-fan",
+    "snap": {
+      "mode": "next",
+      "off": 0.25
+    },
+    "gain_db": -12.0,
+    "dur": 0.47,
+    "scene": "a3-scenarios",
+    "kind": "connect-line",
+    "t": 113.402,
+    "index": 0,
+    "seed": 10509
+  },
+  {
+    "name": "focus-card-tank",
+    "snap": {
+      "mode": "next",
+      "off": 0.652
+    },
+    "gain_db": -16.0,
+    "scene": "a3-scenarios",
+    "kind": "focus",
+    "t": 113.804,
+    "index": 0,
+    "seed": 10546
+  },
+  {
+    "name": "ventilation-down",
+    "snap": {
+      "mode": "next"
+    },
+    "gain_db": -9.0,
+    "scene": "a3-scenarios",
+    "kind": "row-unavailable",
+    "t": 114.13,
+    "index": 0,
+    "seed": 10620
+  },
+  {
+    "name": "outcome-prevent",
+    "snap": {
+      "mode": "next"
+    },
+    "variant": 3,
+    "gain_db": -10.0,
+    "scene": "a3-scenarios",
+    "kind": "choice-accent",
+    "t": 114.783,
+    "index": 0,
+    "seed": 10657
+  },
+  {
+    "name": "cut-site",
+    "snap": "cut",
+    "material": "paper",
+    "gain_db": -14.0,
+    "scene": "a3-scenarios",
+    "kind": "cut",
+    "t": 116.413,
+    "index": 0,
+    "seed": 10694
+  },
+  {
+    "name": "pull-site",
+    "snap": {
+      "mode": "cut",
+      "off": 0.002
+    },
+    "gain_db": -12.0,
+    "dur": 3.911,
+    "scene": "a3-scenarios",
+    "kind": "pull",
+    "t": 116.415,
+    "index": 0,
+    "seed": 10731
+  },
+  {
+    "name": "node-pass-01",
+    "snap": {
+      "mode": "cut",
+      "off": 0.769
+    },
+    "gain_db": -20.0,
+    "scene": "a3-scenarios",
+    "kind": "node-pass",
+    "t": 117.182,
+    "index": 0,
+    "seed": 10768
+  },
+  {
+    "name": "node-pass-02",
+    "snap": {
+      "mode": "cut",
+      "off": 1.004
+    },
+    "gain_db": -20.0,
+    "scene": "a3-scenarios",
+    "kind": "node-pass",
+    "t": 117.417,
+    "index": 1,
+    "seed": 10805
+  },
+  {
+    "name": "node-pass-03",
+    "snap": {
+      "mode": "cut",
+      "off": 1.346
+    },
+    "gain_db": -20.0,
+    "scene": "a3-scenarios",
+    "kind": "node-pass",
+    "t": 117.759,
+    "index": 2,
+    "seed": 10842
+  },
+  {
+    "name": "node-pass-04",
+    "snap": {
+      "mode": "cut",
+      "off": 1.573
+    },
+    "gain_db": -20.0,
+    "scene": "a3-scenarios",
+    "kind": "node-pass",
+    "t": 117.986,
+    "index": 3,
+    "seed": 10879
+  },
+  {
+    "name": "node-pass-05",
+    "snap": {
+      "mode": "cut",
+      "off": 1.859
+    },
+    "gain_db": -20.0,
+    "scene": "a3-scenarios",
+    "kind": "node-pass",
+    "t": 118.272,
+    "index": 4,
+    "seed": 10916
+  },
+  {
+    "name": "decisions-01",
+    "snap": {
+      "mode": "next"
+    },
+    "gain_db": -9.0,
+    "scene": "a3-scenarios",
+    "kind": "decision-accent",
+    "t": 118.696,
+    "index": 0,
+    "seed": 10953
+  },
+  {
+    "name": "decisions-02",
+    "snap": {
+      "mode": "next"
+    },
+    "gain_db": -9.0,
+    "scene": "a3-scenarios",
+    "kind": "decision-accent",
+    "t": 119.022,
+    "index": 1,
+    "seed": 10990
+  },
+  {
+    "name": "decisions-03",
+    "snap": {
+      "mode": "next"
+    },
+    "gain_db": -9.0,
+    "scene": "a3-scenarios",
+    "kind": "decision-accent",
+    "t": 119.348,
+    "index": 2,
+    "seed": 11027
+  },
+  {
+    "name": "decisions-04",
+    "snap": {
+      "mode": "next"
+    },
+    "gain_db": -9.0,
+    "scene": "a3-scenarios",
+    "kind": "decision-accent",
+    "t": 119.674,
+    "index": 3,
+    "seed": 11064
+  },
+  {
+    "name": "envelope-pulse",
+    "snap": "cut",
+    "gain_db": -12.0,
+    "dur": 0.978,
+    "scene": "a3-scenarios",
+    "kind": "connect-line",
+    "t": 121.304,
+    "index": 0,
+    "seed": 11101
+  },
+  {
+    "name": "recede",
+    "snap": {
+      "mode": "next",
+      "sub": 2
+    },
+    "gain_db": -14.0,
+    "dur": 0.978,
+    "scene": "a3-close",
+    "kind": "pull",
+    "t": 123.261,
+    "index": 0,
+    "seed": 11138
+  },
+  {
+    "name": "gap-rule",
+    "snap": {
+      "mode": "next",
+      "sub": 2,
+      "off": 0.3261
+    },
+    "gain_db": -12.0,
+    "dur": 0.72,
+    "scene": "a3-close",
+    "kind": "ruler-contact",
+    "t": 123.587,
+    "index": 0,
+    "seed": 11175
+  },
+  {
+    "name": "gap-rule",
+    "snap": {
+      "mode": "next",
+      "sub": 2,
+      "off": 0.3261
+    },
+    "gain_db": -12.0,
+    "dur": 0.72,
+    "scene": "a3-close",
+    "kind": "technical-pen",
+    "t": 123.627,
+    "index": 0,
+    "seed": 11176
+  },
+  {
+    "name": "tick-changed",
+    "snap": {
+      "mode": "next",
+      "sub": 2,
+      "off": 0.6522
+    },
+    "gain_db": -12.0,
+    "scene": "a3-close",
+    "kind": "pencil-tick",
+    "t": 123.913,
+    "index": 0,
+    "seed": 11212
+  },
+  {
+    "name": "tick-found",
+    "snap": {
+      "mode": "next",
+      "sub": 2,
+      "off": 0.9783
+    },
+    "gain_db": -14.0,
+    "scene": "a3-close",
+    "kind": "pencil-tick",
+    "t": 124.239,
+    "index": 0,
+    "seed": 11249
+  },
+  {
+    "name": "gap-bracket",
+    "snap": {
+      "mode": "next",
+      "sub": 2,
+      "off": 1.3043
+    },
+    "gain_db": -14.0,
+    "dur": 0.45,
+    "scene": "a3-close",
+    "kind": "pencil-stroke",
+    "t": 124.565,
+    "index": 0,
+    "seed": 11286
+  },
+  {
+    "name": "gap-closes",
+    "snap": {
+      "mode": "next",
+      "sub": 2
+    },
+    "gain_db": -8.0,
+    "scene": "a3-close",
+    "kind": "decision-accent",
+    "t": 126.196,
+    "index": 0,
+    "seed": 11323
+  },
+  {
+    "name": "latch",
+    "gain_db": -6.0,
     "dur": 0.12,
     "scene": "a3-close",
     "kind": "latch",
-    "gain_db": 0.0,
-    "t": 119.748,
+    "t": 128.412,
     "index": 0,
-    "seed": 10361
+    "seed": 11397
   }
 ]

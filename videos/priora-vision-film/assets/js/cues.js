@@ -1206,7 +1206,7 @@ window.FL_EVENTS = {
    "kind": "cut",
    "gain_db": -16,
    "material": "felt",
-   "what": "S8b: cut to the zone 3 roof; the heads go grey on half beats",
+   "what": "S8b: cut to the zone 3 roof; the heads drain from water to grey one by one (silent)",
    "snap": {
     "mode": "next",
     "off": -0.0003
@@ -2744,17 +2744,21 @@ window.FL_EVENTS = {
   "crossing-hold": {
    "name": "crossing-hold",
    "kind": "hold",
-   "dur": 1.074,
+   "dur": 1.727,
    "scene": "a3-change",
-   "t": 86.989,
-   "local": 5.789,
-   "at": "cue:cross+1.153"
+   "t": 86.969,
+   "local": 5.769,
+   "at": "cue:cross+1.133"
   },
   "cut-sheet": {
    "name": "cut-sheet",
    "kind": "cut",
    "material": "paper",
    "gain_db": -14,
+   "snap": {
+    "mode": "cut",
+    "off": 0.0003
+   },
    "scene": "a3-change",
    "t": 88.696,
    "local": 7.496,
@@ -2765,6 +2769,10 @@ window.FL_EVENTS = {
    "kind": "sheet-in",
    "gain_db": -12,
    "dur": 0.4,
+   "snap": {
+    "mode": "cut",
+    "off": 0.0003
+   },
    "scene": "a3-change",
    "t": 88.696,
    "local": 7.496,
@@ -2786,7 +2794,7 @@ window.FL_EVENTS = {
    "dur": 0.652,
    "snap": {
     "mode": "cut",
-    "off": 0.0003
+    "off": 0.0002
    },
    "scene": "a3-change",
    "t": 89.348,
@@ -2798,7 +2806,10 @@ window.FL_EVENTS = {
    "kind": "push",
    "gain_db": -14,
    "dur": 0.652,
-   "snap": "cut",
+   "snap": {
+    "mode": "cut",
+    "off": -0.0002
+   },
    "scene": "a3-change",
    "t": 90.652,
    "local": 9.452,
@@ -2809,7 +2820,10 @@ window.FL_EVENTS = {
    "kind": "choice-accent",
    "variant": 1,
    "gain_db": -10,
-   "snap": "cut",
+   "snap": {
+    "mode": "cut",
+    "off": -0.0002
+   },
    "scene": "a3-change",
    "t": 90.652,
    "local": 9.452,
@@ -2821,15 +2835,19 @@ window.FL_EVENTS = {
    "gain_db": -12,
    "dur": 0.6,
    "scene": "a3-change",
-   "t": 90.953,
-   "local": 9.753,
-   "at": "cue:change+0.297"
+   "t": 90.952,
+   "local": 9.752,
+   "at": "cue:change+0.296"
   },
   "whip-retain": {
    "name": "whip-retain",
    "kind": "whip",
    "gain_db": -16,
    "dur": 0.489,
+   "snap": {
+    "mode": "cut",
+    "off": 0.0001
+   },
    "scene": "a3-change",
    "t": 93.261,
    "local": 12.061,
@@ -2850,6 +2868,10 @@ window.FL_EVENTS = {
    "kind": "whip",
    "gain_db": -16,
    "dur": 0.489,
+   "snap": {
+    "mode": "cut",
+    "off": 0.0003
+   },
    "scene": "a3-change",
    "t": 96.196,
    "local": 14.996,
@@ -2872,11 +2894,11 @@ window.FL_EVENTS = {
    "gain_db": -14,
    "snap": {
     "mode": "cut",
-    "off": -0.0005
+    "off": 0.0001
    },
    "scene": "a3-change",
-   "t": 97.173,
-   "local": 15.973,
+   "t": 97.174,
+   "local": 15.974,
    "at": "cue:ask"
   },
   "focus-packet": {
@@ -2894,8 +2916,7 @@ window.FL_EVENTS = {
    "gain_db": -12,
    "dur": 0.5,
    "snap": {
-    "mode": "next",
-    "off": 0.0004
+    "mode": "next"
    },
    "scene": "a3-change",
    "t": 97.5,
@@ -2908,7 +2929,7 @@ window.FL_EVENTS = {
    "gain_db": -13,
    "snap": {
     "mode": "cut",
-    "off": 0.0002
+    "off": -0.0003
    },
    "scene": "a3-change",
    "t": 98.478,
@@ -2921,11 +2942,11 @@ window.FL_EVENTS = {
    "gain_db": -13,
    "snap": {
     "mode": "cut",
-    "off": 0.0002
+    "off": -0.0003
    },
    "scene": "a3-change",
-   "t": 99.131,
-   "local": 17.931,
+   "t": 99.13,
+   "local": 17.93,
    "at": "cue:whether"
   },
   "carrier-response-03": {
@@ -2934,11 +2955,11 @@ window.FL_EVENTS = {
    "gain_db": -13,
    "snap": {
     "mode": "cut",
-    "off": 0.0002
+    "off": -0.0003
    },
    "scene": "a3-change",
-   "t": 99.783,
-   "local": 18.583,
+   "t": 99.782,
+   "local": 18.582,
    "at": "cue:whether"
   },
   "carrier-response-04": {
@@ -2947,12 +2968,36 @@ window.FL_EVENTS = {
    "gain_db": -13,
    "snap": {
     "mode": "cut",
-    "off": 0.0002
+    "off": -0.0003
    },
    "scene": "a3-change",
    "t": 100.435,
    "local": 19.235,
    "at": "cue:whether"
+  },
+  "layer-slice": {
+   "name": "layer-slice",
+   "kind": "layer-slice",
+   "gain_db": -12,
+   "dur": 0.5,
+   "snap": {
+    "mode": "next",
+    "off": 1.9567
+   },
+   "scene": "a3-change",
+   "t": 100.761,
+   "local": 19.561,
+   "at": "cue:whether"
+  },
+  "programme-hold": {
+   "name": "programme-hold",
+   "kind": "hold",
+   "gain_db": -6,
+   "dur": 0.839,
+   "scene": "a3-change",
+   "t": 100.961,
+   "local": 19.761,
+   "at": "cue:whether+2.445"
   }
  },
  "a3-scenarios": {

@@ -1,5 +1,5 @@
 {
-  "note": "a1-world (cut 2): the sounds the graphite site makes. Every event is anchored to a narration cue or word; the offsets put it on the scene's 92 BPM grid time under the current narration (the scene computes the same times with FL.clock().b/.c and warns in the console when an event drifts more than 20 ms from its picture). After a narration re-lock, regenerate the offsets. Kinds from docs/sound-events.md only. a1-inserts owns handwheel, gauge, valve-clunk and arc; a1-paper owns the sheet-lay and paper-lift.",
+  "note": "a1-world (cut 3): the sounds the Act I site makes. Every event is anchored to a narration cue or word; the offsets put it on the scene's 92 BPM grid time under the current narration (the scene computes the same times with FL.clock().b/.c and warns in the console when an event drifts more than 20 ms from its picture). After a narration re-lock, regenerate the offsets. Kinds from docs/sound-events.md only. a1-inserts owns handwheel, gauge, valve-clunk and arc; a1-paper owns the sheet-lay and paper-lift.",
   "events": [
     {
       "name": "lead-1",
@@ -323,7 +323,7 @@
       "kind": "cut",
       "gain_db": -16,
       "material": "felt",
-      "what": "S8b: cut to the zone 3 roof; the heads go grey on half beats",
+      "what": "S8b: cut to the zone 3 roof; the heads drain from water to grey one by one (silent)",
       "snap": {
         "mode": "next",
         "off": -0.0003

@@ -31,8 +31,9 @@ ROOT = Path(__file__).resolve().parent.parent
 KEY_CUES = ["hour", "equipment", "workMoves", "accepted", "translate", "checklists", "noOne", "head", "hotWork",
             "certificate", "landing", "then", "offline", "changed", "nobody", "afterwards", "q2", "gap",
             "rewindStart", "rewindEnd", "riskChanged", "welding", "connects", "connectionHold", "certificate2",
-            "keeps", "proof", "l16", "sees", "cross", "change", "retain", "whether", "few", "closeIn",
-            "chainTrust", "chainHold", "priora"]
+            "keeps", "proof", "l16", "sees", "cross", "change", "retain", "whether", "scenariosIn", "everyKind",
+            "crane", "wind", "gasDetector", "bypassed", "confined", "ventilation", "few", "madeInTime", "closeIn",
+            "gapCloses", "priora", "tagline"]
 
 
 def default_times(project: Path) -> list[float]:

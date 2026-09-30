@@ -2,48 +2,75 @@
 <html lang="en-GB">
   <head>
     <meta charset="UTF-8" />
-    <title>a1-world: the graphite site today, the unnoticed change, the rewind (cut 2)</title>
+    <title>a1-world: the site today in colour pencil, the unnoticed change, the rewind (cut 3)</title>
     <!-- Ignored by the assembler. Everything that must exist at render time is inside <template>. -->
   </head>
   <body>
     <template id="a1-world-template">
       <link rel="stylesheet" href="assets/css/film.css" />
+      <link rel="stylesheet" href="assets/css/film-color.css" />
       <link rel="stylesheet" href="assets/css/film-sketch.css" />
       <style>
         /*
-          HANDOFF CONTRACT FOR a2-resolve (the frame at story time of cue 'landing', site clock 14:41:59)
+          HANDOFF CONTRACT FOR a2-resolve (cut 3; the frame at story time of cue 'landing', site clock 14:41:59)
 
-          The rewind lands on this exact state and holds it from cue rewindEnd to the end of the slot
-          (rewindEnd + 0.4). a1-world never fades out: a2-resolve fades in over it on an identical frame.
+          The rewind lands on this exact state and holds it, fully opaque, from cue rewindEnd while a2-resolve
+          fades in over it on an identical frame. Cut 3 tail: from cue l12 (a2's precision-snap, 3 frames before
+          the fade-in completes) to the end of the slot (59.133) the whole a1-world layer steps down 1 to 0, so
+          its translucent layers and the Roof 03 lettering that a2 fades from l12 do not show through a2 and
+          vanish in one frame when the slot ends. The landing frame itself is unchanged.
 
           Camera   SiteKit.CAMERAS.landing = SiteKit.rect(43.5, 33.5, 14.5)
                    viewBox "-22.7069 -3.7414 132.4138 74.4828", --sw 0.068966 (world units per screen px).
-          Site     SiteKit.mount(svg, { prefix, show: 'rough', rough: true, wobble: 2 }), graphite twin at rest:
-                   every unit fully drawn (main, overdraw, construction overshoot, hatching, paper occlusion);
-                   precise layer opacity 0; rough root opacity 1; wobble filter scale 2 on the svg, no blur
-                   (a feGaussianBlur appended to that filter by a1-world sits at stdDeviation 0);
+          Site     SiteKit.mount(svg, { prefix, show: 'rough', rough: true, grade: 'act1' }) (the `wobble` option is a
+                   pass-through since cut 3: no tremor), the rough twin at rest in Act I colour:
+                   grade act1 on the svg (--sk-wash = --c-wash-act1 = 0.85, --sk-sat 1; site.setGrade('act1'));
+                   --sk-bleed 1 (the rewind's bleed has flooded back); per-face densities: the kit defaults
+                   (a1-world sets no --sk-kt, --sk-kr, --sk-kl or --sk-kg);
+                   the envelope field on at opacity 1 (site.field; a2-resolve mounts with field: true);
+                   every unit fully drawn (main, overdraw, construction overshoot, hatching, washes, colour
+                   hatching, paper occlusion); precise layer opacity 0; rough root opacity 1;
+                   no filter on the svg: svg.style.filter = 'none' (the kit attaches its pass-through filter in rough
+                   mode; a1-world detaches it and uses it only for the aftermath blur, because a filtered svg repainted
+                   a changed sub-region differently from a full repaint and gave seek-order dependent frames).
+                   a2-resolve keeps the kit's filter from its own mount: measured at the crossfade, it makes no
+                   difference to the match, so a2 needs no change for it;
                    zone paint numbers 01 02 03 at opacity 0.85; zone labels (.zl) at opacity 1;
                    the rough sprinkler-zone label group (.szl) hidden (opacity 0);
-                   envelope construct pass, firm pass and the textPath label at opacity 1, intact (a1-world's
-                   redraw mask on them is inert at the landing); the label is
+                   envelope construct pass, firm pass and the textPath label at opacity 1, intact, in the kit's
+                   --c-envelope-line (a1-world's redraw mask on them is inert at the landing); the label is
                    'ACCEPTED CONDITIONS · PROPERTY + BI PROGRAMME' with font-size set to 3.3 (kit default 2.2);
-                   all 31 zone 3 sprinkler heads (site.rough.heads) at opacity 1 (graphite, "in ink").
-                   Sprinkler Zone 3 outline (the rough unit whose main path has data-src="sz3-outline")
-                   dashed and a little firmer than the other lite lines (the rule below), opacity 1.
-          Items    const W = SketchKit.world(site, { prefix, scene, refScale: 14.5 });   all fully drawn:
+                   all 31 zone 3 sprinkler heads (site.rough.heads) at opacity 1 in --c-water (the kit's fill;
+                   a1-world's --a1w-on drain variable is back at 1, so the rule below computes to the kit's own);
+                   Sprinkler Zone 3 outline (the rough unit whose main path has data-src="sz3-outline"), opacity 1,
+                   in --c-water, dashed and a little firmer than the other lite lines (the rule below).
+          Items    const W = SketchKit.world(site, { prefix, scene, refScale: 14.5 });   all fully drawn, kit colours:
                    SketchKit.activityMarker(W, 'roof03Centre', { variant: 'hot', label: 'HOT WORK · ROOF 03 · 14:18',
-                     scale: 'world', refScale: 14.5 }) (the label is the header of the safeguard schedule)     ring scale exactly 1
+                     scale: 'world', refScale: 14.5 }) (amber; the label is the header of the safeguard schedule)     ring scale exactly 1
                    SketchKit.safeguardItems(W, 'roof03Centre', { refScale: 14.5, size: 18 }) (the kit's default schedule layout)
-                     every item drawn and ticked (CERTIFICATE, FIRE WATCH, EXTINGUISHER, AREA CLEARED, SPRINKLERS)
+                     every item drawn and ticked (CERTIFICATE, FIRE WATCH, EXTINGUISHER, AREA CLEARED, SPRINKLERS;
+                     ticks --c-ok, the fire watch in hi-vis, the extinguisher terracotta, the sprinkler loop water)
                    SketchKit.label(W, 'sprinklerZone3Label', 'SPRINKLER ZONE 3', { leader: [22, 30], size: 18 })
                    (screen-constant lettering, the kit's default annotations 'screen').
                    At the landing scale the hot-work label and the five safeguard labels are 18 px.
-          At 0     everything else a1-world draws: the opening graphite strokes (S1), contractors, van, gate,
+          At 0     everything else a1-world draws: the opening pencil strokes (S1), contractors, van, gate,
                    routes and their tag, the LOTO tag, the five morning markers, the toolbox talk, the HSE walk,
                    the accumulation field, containment lines, the ROOF 03 marker, the SZ3 valve tag, the small
                    welder and its arc (drawn after the landing), the condition connection (drawn after the
-                   landing, in S9a), the envelope redraw, the incident box. No blue.
+                   landing, in S9a), the envelope redraw, the incident box. No Priora cobalt anywhere in Act I.
           Motion   nothing breathes at the landing: the hot-work ring is never scaled (cut 2 dropped the breathing).
+
+          COLOUR BY STORY TIME (all on the story timeline except the bleed, which the outer timeline owns)
+            0 to accepted - 0.3   act1 grade, field hidden (the macro opening and the morning read on paper); in the
+                                  macro a twin of the Production Hall's roof wash lays its slate after beat 3 and
+                                  hands over to the kit's own wash as the site draws (opacity 0 from about l01 + 1)
+            accepted - 0.3        site.field fades the pale envelope field in over 1.2 s, as the envelope closes
+            b(head) to c(roof03)  the field steps back to 0.25 with the site on "mind" and returns to 1 on the push
+            sz3Out + 0.1          the 31 heads drain water to offline one by one outward from the valve (data-i),
+                                  the SZ3 outline with them (still dashed): only the viewer sees it
+            L09:questions.start   site.grade 'after' over 2 beats; the overlay svg (incident box) drains with it
+            rewind (outer tl)     site.bleed to 0 over the first 45 %, back to 1 over the last 35 %; the story scrub
+                                  restores act1 and the heads by itself as it passes back
 
           CAMERA PATH (FL.camera layer "story" on both svgs; SiteKit rects; the only camera on the site svg).
           Hard cuts are 1 ms moves with ease steps(1) from the previous rect, so the rewind passes back through them.
@@ -63,12 +90,29 @@
             The site steps back to 72 percent on the afterwards cut and recedes to 35 percent with a 1.1 px blur over the
             pull (the overlay svg with the incident box to 50 percent).
 
-          The Sprinkler Zone 3 outline rule (a2-resolve must apply the same to its own twin):
+          The Sprinkler Zone 3 outline rule. a2-resolve's is { stroke: var(--c-water); stroke-width: calc(var(--sw) *
+          1.2px); stroke-dasharray: calc(var(--sw) * 5px) calc(var(--sw) * 3.5px) }. a1-world's below is the same
+          line drained like the kit's tones (by --sk-sat and --sk-bleed, as SiteKit.drainCss) and mixed toward
+          --c-offline by --a1w-on (1 in service, 0 offline) for the unnoticed change; at the landing (sat 1, bleed 1,
+          --a1w-on 1) it renders pixel-identical to a2-resolve's rule, and the heads rule to the kit's own fill
+          (verified by swapping the rules: 0 pixels differ at the forward landing and at the rewind landing).
         */
         #a1-world-site .sk-rough path.sk-main[data-src="sz3-outline"] {
-          stroke: #5e5d59;
+          stroke: color-mix(
+            in srgb,
+            color-mix(in oklab, var(--c-water) calc(var(--sk-sat, 1) * var(--sk-bleed, 1) * 100%), oklch(from var(--c-water) l 0 h)) calc(var(--a1w-on, 1) * 100%),
+            var(--c-offline)
+          );
           stroke-width: calc(var(--sw) * 1.2px);
           stroke-dasharray: calc(var(--sw) * 5px) calc(var(--sw) * 3.5px);
+        }
+        /* the zone 3 heads: the kit's water fill, drained one by one to --c-offline by --a1w-on (per head) */
+        #a1-world-site .sk-rough .sk-head {
+          fill: color-mix(
+            in srgb,
+            color-mix(in oklab, var(--c-water) calc(var(--sk-sat, 1) * var(--sk-bleed, 1) * 100%), oklch(from var(--c-water) l 0 h)) calc(var(--a1w-on, 1) * 100%),
+            var(--c-offline)
+          );
         }
         #root {
           position: absolute;
@@ -93,28 +137,33 @@
           height: 1080px;
           display: block;
         }
-        /* S1: the first graphite strokes at macro scale (pressure ribbons, grain by filter) */
+        /* S1: the first pencil strokes at macro scale (pressure ribbons, grain by filter) */
         #a1-world-site .a1-world-lead {
-          fill: #3b3a36;
+          fill: var(--c-graphite);
           fill-opacity: 0.94;
           stroke: none;
         }
         #a1-world-site .a1-world-lead-halo {
-          fill: #3b3a36;
+          fill: var(--c-graphite);
           fill-opacity: 0.5;
           stroke: none;
         }
-        /* the small welder's arc: a paper-bright point in a graphite ring */
+        /* the small welder's arc: a --c-hot point in a soft --c-hot-soft glow, with short hot ticks (never a
+           flame shape); drained by the act grading and the rewind bleed like every kit tone */
+        #a1-world-site .a1-world-arcglow {
+          fill: color-mix(in oklab, var(--c-hot-soft) calc(var(--sk-sat, 1) * var(--sk-bleed, 1) * 100%), oklch(from var(--c-hot-soft) l 0 h));
+          fill-opacity: 0.9;
+          stroke: none;
+        }
         #a1-world-site .a1-world-arcpt {
-          fill: #fbfaf7;
-          stroke: #3b3a36;
-          stroke-width: calc(var(--sw) * 0.9px);
+          fill: color-mix(in oklab, var(--c-hot) calc(var(--sk-sat, 1) * var(--sk-bleed, 1) * 100%), oklch(from var(--c-hot) l 0 h));
+          stroke: none;
         }
         #a1-world-site .a1-world-arcray {
           fill: none;
-          stroke: #3b3a36;
+          stroke: color-mix(in oklab, var(--c-hot) calc(var(--sk-sat, 1) * var(--sk-bleed, 1) * 100%), oklch(from var(--c-hot) l 0 h));
           stroke-linecap: round;
-          stroke-width: calc(var(--sw) * 1.2px);
+          stroke-width: calc(var(--sw) * 1.1px);
         }
       </style>
 
@@ -194,12 +243,20 @@
             svg = el(ID + "-site"),
             ov = el(ID + "-ov");
 
-          // ================================================================ the site (graphite twin)
-          var site = SK.mount(svg, { prefix: ID, show: "rough", rough: true, wobble: 2 });
+          // ================================================================ the site (the rough twin in Act I colour)
+          // graded act1 at mount (colour pencil and pale watercolour over the pencil line); the envelope field
+          // stays hidden until the envelope closes (site.field below)
+          var site = SK.mount(svg, { prefix: ID, show: "rough", rough: true, grade: "act1" });
           var CAM = SK.CAMERAS;
-          // a depth-of-field blur rides on the site's own tremor filter (one filtered layer, screen space)
+          // a depth-of-field blur rides on the site's own screen-space filter (a pass-through since cut 3). The
+          // filter is attached only while the aftermath blurs the site (from L09:questions.start, below): a
+          // filtered svg repaints a changed sub-region differently from a full repaint, so with the filter on,
+          // a still camera over local changes (the morning markers, the heads draining) gave frames that
+          // depended on the seek history.
           var wobbleFilter = site.disp.parentNode;
           var blur = FL.svgEl("feGaussianBlur", { stdDeviation: "0" }, wobbleFilter);
+          var SITE_FILTER = "url(#" + wobbleFilter.getAttribute("id") + ")";
+          svg.style.filter = "none";
 
           // overlay world (same camera, no tremor): the incident annotation
           ov.setAttribute("preserveAspectRatio", "xMidYMid slice");
@@ -347,7 +404,7 @@
             FL.svgEl("path", { class: ID + "-lead", d: core.fill, filter: GRAIN }, gg);
             var mid = ID + "-leadmask-" + leadN++;
             var m = FL.svgEl("mask", { id: mid, maskUnits: "userSpaceOnUse", x: (-2 * o.w).toFixed(3), y: (-3 * o.w - 0.5).toFixed(3), width: (L + 4 * o.w).toFixed(3), height: (6 * o.w + 1).toFixed(3) }, W.defs);
-            var mp = FL.svgEl("path", { d: core.centre, fill: "none", stroke: "#fff", "stroke-width": (o.w * 2.6).toFixed(3), "stroke-linecap": "butt" }, m);
+            var mp = FL.svgEl("path", { d: core.centre, fill: "none", stroke: "white", "stroke-width": (o.w * 2.6).toFixed(3), "stroke-linecap": "butt" }, m);
             gg.setAttribute("mask", "url(#" + mid + ")");
             return {
               g: gg,
@@ -387,6 +444,22 @@
           move("siteOverview", S.l01, 4.5 * BEAT, "power2.inOut");
           var ORDER = ["production-hall", "production-hall-2", "pipe-bridge", "utilities", "loading-area-containers", "roads", "tanks", "warehouse", "loading-area", "laboratory", "ground-crosses"];
           site.drawOn(story, S.l01, { order: ORDER, perBuilding: 0.62, stagger: 0.17, scene: ID });
+          // colour from the first shot: once the two edges have met at the corner (beat 3), the Production Hall's
+          // roof takes its pale slate watercolour in the macro, under the strokes. It is a twin of the kit's own
+          // roof wash (same path, same classes, laid just beneath it) that hands over to it as the site draws: it
+          // fades out with exactly the kit wash's timing and ease, so the roof never doubles its colour.
+          (function macroWash() {
+            var roof = (site.rough.byBuilding["production-hall"] || []).filter(function (u) {
+              return u.id === "production-hall-roof" && u.wash;
+            })[0];
+            if (!roof) return;
+            var kitIn = story.getTweensOf(roof.wash)[0];
+            if (!kitIn) return;
+            var twin = roof.wash.cloneNode(false);
+            roof.wash.parentNode.insertBefore(twin, roof.wash);
+            story.fromTo(twin, { opacity: 0 }, { opacity: 1, duration: 0.7, ease: "power1.inOut", immediateRender: true }, S.beat3 + 0.2);
+            story.fromTo(twin, { opacity: 1 }, { opacity: 0, duration: kitIn.duration(), ease: "power1.out", immediateRender: false }, kitIn.startTime());
+          })();
           // sprinkler heads (zone 3) arrive with the production hall roofs; the zone outline waits for Roof 03
           var heads = site.rough.heads.slice().sort(function (a, b) {
             return (+a.getAttribute("data-i") || 0) - (+b.getAttribute("data-i") || 0);
@@ -503,6 +576,29 @@
               ["Z", []],
             ];
           }
+          // SketchKit's side-view garb geometry (figure units: height 1, feet at 0, facing +x): the vest over
+          // the torso, and the hard hat as a dome over the head with a short brim and a forward peak
+          var HEAD = [0.012, -0.905, 0.051, 0.06];
+          var VEST = [[-0.02, -0.829], [-0.05, -0.806], [-0.062, -0.733], [-0.06, -0.62], [-0.055, -0.515], [0.049, -0.507], [0.055, -0.602], [0.058, -0.716], [0.046, -0.795], [0.012, -0.826]];
+          var HAT = (function () {
+            var hx = HEAD[0],
+              hy = HEAD[1],
+              hrx = HEAD[2],
+              hry = HEAD[3];
+            var Rx = hrx * 1.12,
+              Ry = hry * 0.95,
+              by = hy - hry * 0.18,
+              b0 = -Rx * 1.05,
+              b1 = Rx * 1.62,
+              bt = hry * 0.16,
+              pts = [[hx + b0, by]];
+            for (var i = 0; i <= 10; i++) {
+              var a = Math.PI + (Math.PI * i) / 10;
+              pts.push([hx + Math.cos(a) * Rx, by + Math.sin(a) * Ry]);
+            }
+            pts.push([hx + b1, by], [hx + b1 - hrx * 0.08, by + bt], [hx + b0 + hrx * 0.08, by + bt]);
+            return pts;
+          })();
           var wn = 0;
           function makeWalker(ctx, layer, o) {
             var u = 1 / o.refScale,
@@ -529,14 +625,28 @@
                 bh = 0.1 * h;
               return SK.fmt(HU.lineCmds([[x - bw * 0.35, y], [x + bw * 0.65, y], [x + bw * 0.65, y + bh], [x - bw * 0.35, y + bh]], true));
             };
+            // cut 3 garb, as SketchKit's figures wear it: a hi-vis vest (a flat colour mark on the paper body,
+            // under the pencil line, riding the gait's rise and fall) and a white hard hat with a forward peak
+            var dVest = function (P) {
+              return HU.polyD(
+                sc(VEST.map(function (q) {
+                  return [q[0], q[1] - P.bob];
+                })),
+                true
+              );
+            };
             var P0 = gaitPose(0, GAIT.A, carrying);
             var opt = { u: u, jit: 0, occ: true, over: false, cls: "skt-fine" };
-            HU.hand(ctx, headG, ellipseCmds(0.012 * h, -0.905 * h, 0.051 * h, 0.06 * h), opt);
+            HU.hand(ctx, headG, ellipseCmds(HEAD[0] * h, HEAD[1] * h, HEAD[2] * h, HEAD[3] * h), opt);
+            HU.hand(ctx, headG, HU.lineCmds(sc(HAT), true), { u: u, jit: 0, occ: true, occTone: "helmet", over: false, cls: "skt-fine" });
             var body = HU.hand(ctx, face, dBody(P0), opt);
+            var vest = FL.svgEl("path", { class: "skt-solid skt-w-hivis", d: dVest(P0) }, face);
+            face.insertBefore(vest, body.main);
             var arm = HU.hand(ctx, face, dArm(P0), { u: u, jit: 0, occ: true, over: false, cls: "skt-lite" });
             var keyed = [
               [body.main, dBody],
               [body.occ, dBody],
+              [vest, dVest],
               [arm.main, dArm],
               [arm.occ, dArm],
             ];
@@ -694,6 +804,8 @@
           story.fromTo(env.construct, { drawSVG: "0%" }, { drawSVG: "100%", duration: 1.3, ease: "power1.inOut", immediateRender: true }, S.insurance);
           story.fromTo(env.firm, { drawSVG: "0%" }, { drawSVG: "100%", duration: S.accepted - (S.insurance + HB), ease: "power1.inOut", immediateRender: true }, S.insurance + HB);
           story.fromTo(env.label, { opacity: 0 }, { opacity: 1, duration: 0.7, ease: "power1.out", immediateRender: true }, S.accepted - 0.35);
+          // the accepted conditions become a place: the pale envelope field washes in as the firm pass closes
+          site.field(story, S.accepted - 0.3, 1.2);
 
           // ================================================================ S5 the sheet is down (a1-paper): the world dims to 40 %
           fade(siteWrap, 1, 0.4, S.sheetIn, BEAT, "power2.inOut");
@@ -755,10 +867,12 @@
           // on "mind": everything but Roof 03 steps back; then one beat (and more) of stillness
           fade([gField, gMorn, gMornGround], 1, 0.25, S.mind, HB);
           fade(site.rough.root, 1, 0.25, S.mind, HB);
+          site.field(story, S.mind, HB, 0.25); // the envelope's field steps back with the site ...
 
           // ================================================================ S7a Roof 03 (L06): a one-beat push
           move("roof03", S.roofCut, BEAT, "power3.inOut");
           fade(site.rough.root, 0.25, 1, S.roofCut, BEAT);
+          site.field(story, S.roofCut, BEAT, 1); // ... and comes back with it on the push
           fade([gField, gMorn, gMornGround], 0.25, 0, S.roofCut, BEAT * 0.9);
           // the ROOF 03 marker becomes the hot-work marker: its lettering lifts as the hot rings draw over it
           var roofLetters = (roofMk.lines || []).map(function (ln) {
@@ -797,8 +911,9 @@
           var szTag = K.valveTag(W, "sprinklerZone3Valve", { text: "SZ3 ISOLATED · MAINTENANCE · 14:42", hand: "b", side: "left", drop: 110, reach: 60, size: 18, layer: gLater });
           szTag.drawOn(story, S.sz3In + 0.45, { speed: 3, events: false });
 
-          // the small welder on Roof 03 (kneeling, mask down, torch to the seam; arc: a bright point in a ring
-          // with five short radial graphite ticks). Hidden at the landing; it appears under the SZ3 insert.
+          // the small welder on Roof 03 (kneeling, mask down, torch to the seam; leather jacket, white helmet; the
+          // arc: a --c-hot point in a soft glow with five short radial ticks). Hidden at the landing; it appears
+          // under the SZ3 insert.
           var welderAt = W.pt({ anchor: "roof03Centre", plan: [2.3, -0.7, 0] });
           (function buildWelder() {
             var h = 2.0; // world units (standing height 2.4; kneeling)
@@ -819,9 +934,14 @@
             var arm = [[0.0, -0.66], [0.14, -0.55], [0.3, -0.5], [0.4, -0.47]];
             var torch = [[0.38, -0.49], [0.52, -0.4]];
             var hose = [[0.36, -0.46], [0.2, -0.3], [-0.05, -0.12], [-0.3, -0.05], [-0.5, -0.02], [-0.62, 0.02]];
+            // the leather jacket over the torso (a flat colour mark under the pencil line, as SketchKit's
+            // garb: 'welder'), and the helmet, white, with its mask down
+            var jacket = [[-0.03, -0.775], [-0.095, -0.735], [-0.143, -0.62], [-0.162, -0.47], [-0.152, -0.37], [0.075, -0.385], [0.064, -0.5], [0.054, -0.66], [0.035, -0.745]];
             var o1 = { u: u, jit: 0.25, occ: true, over: false, cls: "skt-fine", seed: "welder-b" };
             var rb = HU.hand(W, root, HU.smoothCmds(sc(body), true), o1);
-            var rh = HU.hand(W, root, HU.smoothCmds(sc(helmet), true), { u: u, jit: 0.2, occ: true, over: false, cls: "skt-fine", seed: "welder-h" });
+            var jk = FL.svgEl("path", { class: "skt-solid skt-w-leather", d: HU.polyD(sc(jacket), true) }, root);
+            root.insertBefore(jk, rb.main);
+            var rh = HU.hand(W, root, HU.smoothCmds(sc(helmet), true), { u: u, jit: 0.2, occ: true, occTone: "helmet", over: false, cls: "skt-fine", seed: "welder-h" });
             var rv = HU.hand(W, root, HU.lineCmds(sc([[0.12, -0.95], [0.155, -0.8]]), false), { u: u, jit: 0.1, over: false, cls: "skt-heavy", seed: "welder-v" });
             var ra = HU.hand(W, root, HU.smoothCmds(sc(arm), false), { u: u, jit: 0.2, over: false, cls: "skt-fine", seed: "welder-a" });
             var rt = HU.hand(W, root, HU.lineCmds(sc(torch), false), { u: u, jit: 0.1, over: false, cls: "skt-heavy", seed: "welder-t" });
@@ -829,6 +949,7 @@
             // the arc at the torch tip
             var tip = [0.56 * h, -0.37 * h];
             var arcG = FL.svgEl("g", { transform: "translate(" + tip[0].toFixed(3) + " " + tip[1].toFixed(3) + ")" }, root);
+            FL.svgEl("circle", { class: ID + "-arcglow", r: "0.42" }, arcG);
             var rays = [];
             for (var k = 0; k < 5; k++) {
               var a = -1.9 + k * 0.78,
@@ -836,7 +957,7 @@
                 r1 = 0.5 + (k % 2) * 0.16;
               rays.push(FL.svgEl("path", { class: ID + "-arcray", d: "M" + (Math.cos(a) * r0).toFixed(3) + " " + (Math.sin(a) * r0).toFixed(3) + "L" + (Math.cos(a) * r1).toFixed(3) + " " + (Math.sin(a) * r1).toFixed(3) }, arcG));
             }
-            FL.svgEl("circle", { class: ID + "-arcpt", r: "0.12" }, arcG);
+            FL.svgEl("circle", { class: ID + "-arcpt", r: "0.13" }, arcG);
             // it appears (fully drawn) under the SZ3 insert and leaves on the cut to 'afterwards'
             fade(gWelder, 0, 1, S.sz3In + 0.6, 0.3, "power1.out", true);
             story.fromTo(gWelder, { opacity: 1 }, { opacity: 0, duration: 0.001, ease: "steps(1)", immediateRender: false }, S.after);
@@ -858,15 +979,27 @@
             });
           })();
 
-          // ================================================================ S8b the unnoticed change: heads go grey on half beats
-          // ripple order from the valve (data-i), three waves on consecutive half beats from the cut, then stillness
-          var NWAVE = 3,
-            perWave = Math.ceil(heads.length / NWAVE);
-          heads.forEach(function (hd, i) {
-            var w = Math.floor(i / perWave),
-              j = i - w * perWave;
-            story.fromTo(hd, { opacity: 1 }, { opacity: 0.2, duration: 0.26, ease: "power1.inOut", immediateRender: false }, S.sz3Out + w * HB + j * 0.012);
+          // ================================================================ S8b the unnoticed change, in colour
+          // On the cut back from the valve insert the zone is still water blue; then the 31 heads drain from
+          // --c-water to --c-offline one by one, a quiet stagger outward from the valve (the demo's ripple order,
+          // data-i), and the dashed zone outline drains with them. Only the viewer sees it: nothing reacts, no
+          // alarm, no sound (the score's hold). The drain is the per-element custom property --a1w-on (1 in
+          // service, 0 offline) that the zone 3 rules at the top mix with; the story owns it, so the rewind's
+          // scrub brings the water back by itself as it passes back before this moment.
+          // GSAP reverts a custom property to its inline value from before the tween when the playhead moves
+          // back before the tween (not to the from-state), so every drained element carries --a1w-on: 1 inline
+          heads.forEach(function (hd) {
+            hd.style.setProperty("--a1w-on", "1");
           });
+          if (szOutline) szOutline.style.setProperty("--a1w-on", "1");
+          var DRAIN0 = S.sz3Out + 0.1, // the first frame after the cut shows the zone in service
+            DRAIN_SPAN = 2 * BEAT, // head starts spread over two beats ...
+            DRAIN_EACH = 0.55; // ... and each head drains over a little under a beat: about 1.85 s in all
+          heads.forEach(function (hd, i) {
+            var ti = DRAIN0 + (DRAIN_SPAN * i) / Math.max(1, heads.length - 1);
+            story.fromTo(hd, { "--a1w-on": 1 }, { "--a1w-on": 0, duration: DRAIN_EACH, ease: "sine.inOut", immediateRender: false }, ti);
+          });
+          if (szOutline) story.fromTo(szOutline, { "--a1w-on": 1 }, { "--a1w-on": 0, duration: DRAIN_SPAN + DRAIN_EACH, ease: "sine.inOut", immediateRender: false }, DRAIN0);
 
           // ================================================================ S9 nothing looks different; the conditions have changed
           // 9a: Roof 03 and zone 3 together, camera almost still; the condition connection is quietly there
@@ -915,9 +1048,22 @@
           // a plain eased rect interpolation (not the geometric zoom ease) so SketchKit.followPin matches it exactly
           cam.to(story, "afterwardsWide", S.questions, 2 * BEAT, "sine.inOut");
           fade(siteWrap, 0.72, 0.35, S.questions, 2 * BEAT);
+          story.set(svg, { filter: SITE_FILTER }, S.questions); // the filter only while the site is blurred
           story.fromTo(blur, { attr: { stdDeviation: 0 } }, { attr: { stdDeviation: 1.1 }, duration: 2 * BEAT, ease: "power1.inOut", immediateRender: false }, S.questions);
           fade(ovWrap, 1, 0.5, S.questions, 2 * BEAT);
           fade(szTag.root, 1, 0, S.questions, 2 * BEAT);
+          // the aftermath drains toward grey: proof reconstructed afterwards is colourless. The site's grade goes
+          // to 'after' over the pull, and the overlay svg (the incident box) drains with it, so a1-after's 14:42
+          // CONDITION CHANGED mark is the one strong colour left in the aftermath.
+          site.grade(story, "after", S.questions, 2 * BEAT);
+          var AFTER_G = SK.gradeOf("after"),
+            ACT1_G = SK.gradeOf("act1");
+          // the overlay's grading starts inline at act1 and full bleed (GSAP reverts custom properties to their
+          // inline values when a seek goes back before a tween, so the inline value must be the from-state)
+          ov.style.setProperty("--sk-wash", String(ACT1_G.wash));
+          ov.style.setProperty("--sk-sat", String(ACT1_G.sat));
+          ov.style.setProperty("--sk-bleed", "1");
+          story.fromTo(ov, { "--sk-wash": ACT1_G.wash, "--sk-sat": ACT1_G.sat }, { "--sk-wash": AFTER_G.wash, "--sk-sat": AFTER_G.sat, duration: 2 * BEAT, ease: "power1.inOut", immediateRender: false }, S.questions);
 
           // ================================================================ dev check: picture and sound share the grid
           (function () {
@@ -943,7 +1089,26 @@
           var tl = gsap.timeline({ paused: true });
           FL.scrub(tl, story, { at: 0, from: 0, to: RS, duration: RS, ease: "none" });
           FL.scrub(tl, story, { at: RS, from: RS, to: LAND, duration: RE - RS, ease: FL.rewindEase() });
-          // after the landing the frame holds, fully opaque, under a2-resolve's fade-in
+          // the rewind's colour: it bleeds out as the story runs back and floods back in as it lands. The outer
+          // timeline owns --sk-bleed (the story owns the grade; scrubbing back past L09:questions restores act1
+          // by itself). The overlay svg bleeds with the site, so the incident box never re-colours mid rewind.
+          var RW = RE - RS;
+          // SiteKit.mount leaves --sk-bleed unset on the svg, and GSAP reverts a custom property to its inline
+          // value (not to the from-state) on a backward seek: without this a seek from mid rewind back into the
+          // story would leave the site drained
+          svg.style.setProperty("--sk-bleed", "1");
+          site.bleed(tl, 0, RS, RW * 0.45);
+          site.bleed(tl, 1, RE - RW * 0.35, RW * 0.35);
+          tl.fromTo(ov, { "--sk-bleed": 1 }, { "--sk-bleed": 0, duration: RW * 0.45, ease: "power1.inOut", immediateRender: false }, RS);
+          tl.fromTo(ov, { "--sk-bleed": 0 }, { "--sk-bleed": 1, duration: RW * 0.35, ease: "power1.inOut", immediateRender: false }, RE - RW * 0.35);
+          // after the landing the frame holds, fully opaque and in full Act I colour, under a2-resolve's fade-in.
+          // Tail: a2-resolve starts its resolve on l12, 3 frames before its fade-in completes and this slot ends.
+          // Our translucent layers (the field, ground washes, overdraw, hatching) and the Roof 03 lettering that
+          // a2 fades from l12 would otherwise show through a2 and vanish in one frame at the slot's end, so the
+          // whole layer steps down from l12 to the end of the slot, while a2 is already at 85 to 100 percent.
+          var SLOT_END = window.SCENES[ID].duration,
+            TAIL0 = T("l12");
+          if (TAIL0 < SLOT_END - 0.02) tl.fromTo(el(ID + "-all"), { opacity: 1 }, { opacity: 0, duration: SLOT_END - TAIL0, ease: "none", immediateRender: false }, TAIL0);
 
           window.__timelines["a1-world"] = tl;
         })();
