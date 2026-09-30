@@ -58,8 +58,8 @@ out = [
     "actor performing a slogan.",
     f"**Guide voice (build only, not final):** local Kokoro {g['narrator_voice']} (narrator) and "
     f"{g['worker_voice']} (worker), narrator speed {g['narrator_speed']} with per-line pace.",
-    "**Pronunciation:** Priora is pri-OR-a (IPA pɹiˈɔːɹə), stress on the middle syllable, never PRY-ora. "
-    "ElevenLabs text uses the respelling `Pree-OR-uh`. Roof 03 is said Roof oh-three.",
+    "**Pronunciation:** Priora is pree-OH-ruh (IPA pɹiˈəʊɹə), stress on the middle syllable, never PRY-ora. "
+    "ElevenLabs text uses the respelling `Pree-OH-ruh`. Roof 03 is said Roof oh-three.",
     f"**Pacing:** lead-in {pacing['lead_in']} s, designed silence after each line as listed, "
     f"rewind silence {timing['rewind']['end'] - timing['rewind']['start']:.2f} s before L12, end hold "
     f"{pacing['end_hold']} s. Total {timing['duration_total']:.2f} s, {words} words.",

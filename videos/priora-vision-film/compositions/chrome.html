@@ -2,11 +2,12 @@
 <html lang="en-GB">
   <head>
     <meta charset="UTF-8">
-    <title>chrome: frame furniture, sheet, site clock and rewind counter (Frame 7)</title>
+    <title>chrome: frame furniture, sheet, site clock and rewind counter (cut 3)</title>
   </head>
   <body>
     <template id="chrome-template">
       <link rel="stylesheet" href="assets/css/film.css">
+      <link rel="stylesheet" href="assets/css/film-color.css">
       <style>
         #root {
           position: absolute;
@@ -22,13 +23,13 @@
         }
         #chrome-frame .chrome-rule {
           fill: none;
-          stroke: #111111;
+          stroke: var(--c-ink);
           stroke-opacity: 0.2;
           stroke-width: 1;
         }
         #chrome-frame .chrome-reg {
           fill: none;
-          stroke: #111111;
+          stroke: var(--c-ink);
           stroke-opacity: 0.38;
           stroke-width: 1;
         }
@@ -37,24 +38,24 @@
           right: 36px;
           bottom: 36px;
           display: flex;
-          border-top: 1px solid rgba(17, 17, 17, 0.2);
-          border-left: 1px solid rgba(17, 17, 17, 0.2);
+          border-top: 1px solid color-mix(in srgb, var(--c-ink) 20%, transparent);
+          border-left: 1px solid color-mix(in srgb, var(--c-ink) 20%, transparent);
           font-family: var(--mono);
           font-size: 15px;
           letter-spacing: 0.12em;
           text-transform: uppercase;
-          color: #55544f;
+          color: color-mix(in srgb, var(--c-ink) 74%, var(--c-paper));
         }
         #chrome-titleblock .chrome-cell {
           padding: 12px 18px 11px;
-          border-right: 1px solid rgba(17, 17, 17, 0.2);
+          border-right: 1px solid color-mix(in srgb, var(--c-ink) 20%, transparent);
           white-space: nowrap;
         }
         #chrome-titleblock .chrome-cell:last-child {
           border-right: none;
         }
         #chrome-titleblock .chrome-strong {
-          color: #2a2a2a;
+          color: var(--c-ink);
           font-weight: 500;
         }
         #chrome-clock {
@@ -72,7 +73,7 @@
           font-size: 16px;
           letter-spacing: 0.14em;
           text-transform: uppercase;
-          color: #55544f;
+          color: color-mix(in srgb, var(--c-ink) 74%, var(--c-paper));
         }
         #chrome-clock .chrome-digits {
           position: absolute;
@@ -82,7 +83,7 @@
           font-weight: 500;
           font-size: 38px;
           letter-spacing: 0.02em;
-          color: #2a2a2a;
+          color: var(--c-ink);
           font-variant-numeric: tabular-nums;
           white-space: nowrap;
         }
@@ -95,7 +96,7 @@
           font-size: 16px;
           letter-spacing: 0.14em;
           text-transform: uppercase;
-          color: #55544f;
+          color: color-mix(in srgb, var(--c-ink) 74%, var(--c-paper));
           white-space: nowrap;
           opacity: 0;
         }
@@ -110,34 +111,34 @@
           padding: 10px 16px 10px 14px;
           border-radius: 8px;
           /* a soft paper backing, so site lines passing behind never cut through the label */
-          background: rgba(248, 246, 241, 0.94);
-          box-shadow: 0 0 8px 3px rgba(248, 246, 241, 0.75);
+          background: color-mix(in srgb, var(--c-paper) 94%, transparent);
+          box-shadow: 0 0 8px 3px color-mix(in srgb, var(--c-paper) 75%, transparent);
           opacity: 0;
           white-space: nowrap;
         }
         #chrome-lockup svg {
           width: 30px;
           height: 30px;
-          color: #111111;
+          color: var(--c-ink);
         }
         #chrome-lockup .chrome-wm {
           font-family: var(--sans);
           font-weight: 500;
           font-size: 26px;
           letter-spacing: -0.01em;
-          color: #111111;
+          color: var(--c-ink);
         }
         #chrome-lockup .chrome-chip {
           margin-left: 6px;
           padding: 7px 10px 6px;
-          border: 1px solid rgba(17, 17, 17, 0.22);
+          border: 1px solid color-mix(in srgb, var(--c-ink) 22%, transparent);
           border-radius: 5px;
           font-family: var(--mono);
           font-weight: 500;
           font-size: 18px;
           letter-spacing: 0.12em;
           text-transform: uppercase;
-          color: rgba(17, 17, 17, 0.74);
+          color: color-mix(in srgb, var(--c-ink) 74%, var(--c-paper));
         }
         #chrome-rewind {
           position: absolute;
@@ -153,7 +154,7 @@
           font-weight: 600;
           font-size: 18px;
           letter-spacing: 0.22em;
-          color: #2a2a2a;
+          color: var(--c-ink);
         }
         #chrome-rewind .chrome-rw-span {
           display: block;
@@ -162,14 +163,14 @@
           font-weight: 400;
           font-size: 18px;
           letter-spacing: 0.1em;
-          color: #55544f;
+          color: color-mix(in srgb, var(--c-ink) 74%, var(--c-paper));
         }
         #chrome-rw-bar {
           display: block;
           width: 320px;
           height: 1px;
           margin: 12px auto 0;
-          background: #2a2a2a;
+          background: var(--c-ink);
           transform-origin: 0% 50%;
         }
       </style>
@@ -196,6 +197,7 @@
           <span class="chrome-cell">Fictional site</span>
         </div>
 
+        <div id="chrome-clock-wrap" style="position:absolute;inset:0">
         <div id="chrome-clock">
           <span class="chrome-clock-label">Site time</span>
           <span id="chrome-hm" class="chrome-digits">06:00</span>
@@ -204,9 +206,10 @@
           <span id="chrome-act2" class="chrome-digits" style="opacity: 0">14:41:59</span>
           <span id="chrome-replay">Replay · with Priora</span>
         </div>
+        </div>
 
         <div id="chrome-lockup">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.2C19.2 3.2 20.8 4.8 20.8 12S19.2 20.8 12 20.8 3.2 19.2 3.2 12 4.8 3.2 12 3.2Z" fill="none" stroke="currentColor" stroke-width="1.15"/><circle cx="10.2" cy="13.4" r="2.3" fill="currentColor"/></svg>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.2C19.2 3.2 20.8 4.8 20.8 12S19.2 20.8 12 20.8 3.2 19.2 3.2 12 4.8 3.2 12 3.2Z" fill="none" stroke="currentColor" stroke-width="1.15"/><circle cx="10.2" cy="13.4" r="2.3" fill="var(--c-priora)"/></svg>
           <span class="chrome-wm">Priora</span>
           <span class="chrome-chip">End-state concept</span>
         </div>
@@ -274,8 +277,9 @@
         // Act III: the sprinkler goes offline again at 14:42, the decision is requested at 14:43
         FL.textTo(tl, act2, { from: H(14, 24, 10), to: H(14, 42, 0), at: T("l16", -0.3), duration: 0.9, ease: "power2.inOut", format: fHMS });
         FL.textTo(tl, act2, { from: H(14, 42, 0), to: H(14, 43, 0), at: T("decides"), duration: 0.4, ease: "none", format: fHMS });
-        // most work stays ordinary: the rest of the working day passes
-        FL.textTo(tl, act2, { from: H(14, 43, 0), to: H(17, 36, 0), at: T("ordinary"), duration: T("closeIn") - T("ordinary") - 0.6, ease: "power1.inOut", format: fHMS });
+        // the scenario run has its own times (16:30, 17:30), so the Nordhavn clock leaves as it begins;
+        // the lockup stays to the close
+        tl.fromTo("#chrome-clock-wrap", { opacity: 1 }, { opacity: 0, duration: 0.5, ease: "power1.in", immediateRender: false }, T("scenariosIn", -0.2));
 
         // everything leaves before the close
         tl.fromTo("#chrome-all", { opacity: 1 }, { opacity: 0, duration: 0.5, ease: "power1.in", immediateRender: false }, END - 0.55);

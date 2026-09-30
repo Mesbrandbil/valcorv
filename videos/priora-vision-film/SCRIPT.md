@@ -9,7 +9,7 @@ Locked narration for the Priora vision film (Priora is the product, Valcorv the 
 **Voice direction:** Warm, intelligent, composed and credible. Calm authority without sounding aristocratic, theatrical, breathy, sentimental or like a commercial announcer. Natural conversational cadence with room around the condition failure, the rewind, the connection and the final chain. Underplay the vision: confidence comes from precision, not hype.
 **Worker direction:** A real worker on site speaking into a phone. Natural, practical, close-mic. Not an actor performing a slogan.
 **Guide voice (build only, not final):** local Kokoro bf_isabella (narrator) and bm_daniel (worker), narrator speed 1.0 with per-line pace.
-**Pronunciation:** Priora is pri-OR-a (IPA pɹiˈɔːɹə), stress on the middle syllable, never PRY-ora. ElevenLabs text uses the respelling `Pree-OR-uh`. Roof 03 is said Roof oh-three.
+**Pronunciation:** Priora is pree-OH-ruh (IPA pɹiˈəʊɹə), stress on the middle syllable, never PRY-ora. ElevenLabs text uses the respelling `Pree-OH-ruh`. Roof 03 is said Roof oh-three.
 **Pacing:** lead-in 2.609 s, designed silence after each line as listed, rewind silence 6.27 s before L12, end hold 4.6 s. Total 136.96 s, 236 words.
 
 **Time** values are from the current assembly (engine: guide). After the ElevenLabs take is assembled, `narration/timing.json` is the truth.
@@ -149,7 +149,7 @@ Locked narration for the Priora vision film (Priora is the product, Valcorv the 
 **Delivery:** Clear and unhurried; this is the moment the connection becomes visible. Let it land.  
 **Pace:** 0.93 of the global speed  
 **Silence after:** 1.8 s  
-**Spoken as (ElevenLabs):** `Pree-OR-uh connects the work to the conditions that matter.`  
+**Spoken as (ElevenLabs):** `Pree-OH-ruh connects the work to the conditions that matter.`  
 
     Priora connects the work to the conditions that matter.
 
@@ -179,7 +179,7 @@ Locked narration for the Priora vision film (Priora is the product, Valcorv the 
 **Delivery:** Two beats: the event, then the contrast with Act I. 'This time' carries it.  
 **Pace:** 0.97 of the global speed  
 **Silence after:** 2.8 s  
-**Spoken as (ElevenLabs):** `The sprinkler goes offline again. This time, Pree-OR-uh sees it at once.`  
+**Spoken as (ElevenLabs):** `The sprinkler goes offline again. This time, Pree-OH-ruh sees it at once.`  
 
     The sprinkler goes offline again. This time, Priora sees it at once.
 
@@ -279,6 +279,6 @@ Locked narration for the Priora vision film (Priora is the product, Valcorv the 
 **Delivery:** Calm, inevitable close. The name, a breath, the line.  
 **Pace:** 0.92 of the global speed  
 **Silence after:** 0.0 s  
-**Spoken as (ElevenLabs):** `Pree-OR-uh. Know the risk you carry, while the work happens.`  
+**Spoken as (ElevenLabs):** `Pree-OH-ruh. Know the risk you carry, while the work happens.`  
 
     Priora. Know the risk you carry, while the work happens.

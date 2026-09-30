@@ -596,13 +596,13 @@ def self_test() -> int:
         disp = [nc.clean_token(t) for t in nc.tokens(line["text"])]
         check(doc["schema"] == nc.TAKE_SCHEMA and doc["engine"] == "elevenlabs", "take JSON schema and engine")
         check([w["w"] for w in doc["words"]] == disp, "words map one to one onto displayed words")
-        check(doc["words"][0]["w"] == "Priora" and doc["words"][0].get("spoken") == "Pree-OR-uh",
+        check(doc["words"][0]["w"] == "Priora" and doc["words"][0].get("spoken") == "Pree-OH-ruh",
               "respelled token maps back to 'Priora'")
         check(abs(doc["words"][0]["start"] - 0.15) < 0.002, f"first word start 0.15 (got {doc['words'][0]['start']})")
         mono = all(a["start"] < a["end"] <= b["start"] + 1e-6 for a, b in zip(doc["words"], doc["words"][1:]))
         check(mono, "word timings are ordered and non-overlapping")
         w2 = doc["words"][1]
-        exp_end = 0.15 + 10 * 0.065 + 0.02 + 8 * 0.065  # "Pree-OR-uh" (10 chars) + space + "connects"
+        exp_end = 0.15 + 11 * 0.065 + 0.02 + 8 * 0.065  # "Pree-OH-ruh" (11 chars) + space + "connects"
         check(abs(w2["end"] - exp_end) < 0.002, f"'connects' ends at {exp_end:.3f} (got {w2['end']})")
         info = nc.read_audio(tmp / "L14a.wav")[1]
         import soundfile as sf
