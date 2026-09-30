@@ -15,8 +15,8 @@ Last updated: 2026-09-30, cut 3 integrated (136.97 s, guide voice): colour throu
 | Audio engine | cut 3: one continuous piece in D (a sustained thread bed, per-note tuning, section ramps over one to three bars, holds as dips); master -16.02 LUFS, -1.05 dBTP | audio-engine/, docs/sound-design.md |
 | First cut (guide voice, 90 s) | delivered | renders/priora-vision-film-cut1.mp4 (not tracked), stills/cut1/ |
 | Cut 2 (guide voice, 128.17 s) | delivered | renders/priora-vision-film-cut2.mp4 and -preview.mp4 (not tracked), stills/cut2/ |
-| Cut 3 (guide voice, 136.97 s) | integrated; render in progress | renders/priora-vision-film-cut3.mp4 (not tracked) |
-| Seek-order check | run on cut 2: 83 of 97 sampled frames pixel-identical in any seek order; 14 differ only by text anti-aliasing and 1 to 3 px on graphite lines mid-draw (see below) | scripts/seek-check.py |
+| Cut 3 (guide voice, 136.97 s) | rendered and delivered as a preview (-16.0 LUFS, -0.9 dBFS true peak after AAC) | renders/priora-vision-film-cut3.mp4 and -preview.mp4 (not tracked), stills/priora-vision-film-cut3/ |
+| Seek-order check | cut 3 at zero tolerance: 112 of 118 frames identical on the first run; the chrome causes fixed (the lockup's transform and layer, the border's DrawSVG init) and a re-run of the failing times passes; full re-run below | scripts/seek-check.py |
 | ElevenLabs narration | blocked (network) | see below |
 | Final render and delivery | not started | renders/ |
 
@@ -48,6 +48,10 @@ Each scene was pixel-identical in any seek order on its own. Assembled, 14 of 97
 - DrawSVG cap compensation measured from a camera-dependent stroke width at a tween's first render (a1-world): the story timeline is now initialised once at build time.
 Remaining: 5 a1-world frames (11.1, 21.2, 21.4, 26.5, 33.1 s) where the sequential path differs from a direct seek by 1 to 3 px along lines. Cause: the site's tremor filter (feDisplacementMap); with the filter off, all 97 frames pass. Forcing filter invalidation per frame did not help. Plan for cut 3: drop the displacement filter (the rough twin's jittered geometry already carries the hand).
 Rejected: `will-change: transform` on scene slots (worse: a promoted slot keeps its raster scale while board cameras zoom).
+
+## Seek check on the assembled cut 3
+
+With the tremor filter gone, the first full run at zero tolerance (118 times) found 6 frames that differed: the chrome sheet border (1 level, 2 frames; its story now initialises at build time), the chrome lockup glyph's edge during the crane vignette (up to 26 levels on a few pixels, 3 frames; the lockup now fades by opacity only and keeps its own small layer), and one rewind frame at 54.01 s (up to 5 levels along one line; it passed on the re-run). Builders also found and fixed: a SiteKit custom-property tween that did not restore on backward seeks (--sk-bleed is now set inline at mount), and the rough site's pass-through filter, which made still frames depend on history (now attached only on request).
 
 ## Hard-won rules for every composition
 
