@@ -934,6 +934,12 @@
           })();
 
           // ================================================================ REGISTERED TIMELINE: forward, then the rewind
+          // Initialise every story tween once, at build time, in a fixed order: DrawSVG measures a path's
+          // cap compensation from its stroke width (calc(var(--sw) * N)) when a tween first renders, and --sw
+          // follows the camera, so a lazily initialised draw would depend on the seek history. A sweep to the
+          // end and back to 0 makes those recorded values the same on every page load.
+          story.totalTime(story.duration(), true);
+          story.totalTime(0, true);
           var tl = gsap.timeline({ paused: true });
           FL.scrub(tl, story, { at: 0, from: 0, to: RS, duration: RS, ease: "none" });
           FL.scrub(tl, story, { at: RS, from: RS, to: LAND, duration: RE - RS, ease: FL.rewindEase() });

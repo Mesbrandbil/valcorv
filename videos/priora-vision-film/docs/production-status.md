@@ -42,7 +42,11 @@ Agreed route: the ElevenLabs web app in the agent's own Playwright Chromium, the
 
 ## Seek check on the assembled cut 2
 
-Each scene was pixel-identical in any seek order on its own. Assembled, 14 of 97 sampled frames differ between ascending and shuffled seeks: text anti-aliasing flips in a1-paper (stamp), a2-resolve (VERIFIED labels) and the a3-close crossfade, and draw fronts 1 to 3 px apart on a1-world graphite lines being drawn (11.1, 21.2, 26.5, 33.1 s). At 21.18 s the shuffled (direct) seek equals a fresh page seek, so it is the sequential path that drifts there. Tried and rejected: removing the surface layer's opacity (no change); `will-change: transform` on every scene slot (worse: 17 of 97, because a promoted slot keeps its raster scale while board cameras zoom). Next: per-scene fixes (a1-world's containment draw, text layering in a1-paper and a2-resolve).
+Each scene was pixel-identical in any seek order on its own. Assembled, 14 of 97 sampled frames first differed between ascending and shuffled seeks. Causes found and fixed:
+- Text anti-aliasing flipping between LCD and greyscale with the compositor layer history (a1-paper stamp, a2-resolve labels, a3-close crossfade): renders and checks now run Chrome with --disable-lcd-text through scripts/chrome/chrome-headless-shell (render-film.sh and seek-check.py use it by default).
+- DrawSVG cap compensation measured from a camera-dependent stroke width at a tween's first render (a1-world): the story timeline is now initialised once at build time.
+Remaining: 5 a1-world frames (11.1, 21.2, 21.4, 26.5, 33.1 s) where the sequential path differs from a direct seek by 1 to 3 px along lines. Cause: the site's tremor filter (feDisplacementMap); with the filter off, all 97 frames pass. Forcing filter invalidation per frame did not help. Plan for cut 3: drop the displacement filter (the rough twin's jittered geometry already carries the hand).
+Rejected: `will-change: transform` on scene slots (worse: a promoted slot keeps its raster scale while board cameras zoom).
 
 ## Hard-won rules for every composition
 

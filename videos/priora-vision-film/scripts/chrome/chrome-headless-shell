@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+# Wrapper for HyperFrames' bundled chrome-headless-shell that turns off LCD (subpixel) text
+# anti-aliasing, so text renders greyscale on every compositing layer and a frame never depends on
+# the layer history of earlier seeks. Use: PRODUCER_HEADLESS_SHELL_PATH=scripts/chrome/chrome-headless-shell
+REAL="${PRIORA_REAL_HEADLESS_SHELL:-$(ls -d /root/.cache/hyperframes/chrome/chrome-headless-shell/*/chrome-headless-shell-linux64/chrome-headless-shell 2>/dev/null | sort | tail -1)}"
+exec "$REAL" --disable-lcd-text "$@"

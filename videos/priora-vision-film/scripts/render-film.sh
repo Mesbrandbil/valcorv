@@ -29,6 +29,9 @@ while [[ $# -gt 0 ]]; do
 done
 
 HF="npx --yes hyperframes@0.8.92"
+# Render with LCD (subpixel) text anti-aliasing off, so every frame is identical whatever was rendered
+# before it (scripts/seek-check.py). Override by exporting PRODUCER_HEADLESS_SHELL_PATH yourself.
+export PRODUCER_HEADLESS_SHELL_PATH="${PRODUCER_HEADLESS_SHELL_PATH:-$ROOT/scripts/chrome/chrome-headless-shell}"
 mkdir -p renders/tmp stills
 
 echo "== 1. cues and index"

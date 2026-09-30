@@ -17,6 +17,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import random
 import re
 import subprocess
@@ -54,8 +55,11 @@ def default_times(project: Path) -> list[float]:
 def snap(project: Path, times: list[float], out: Path) -> dict[float, Path]:
     out.mkdir(parents=True, exist_ok=True)
     at = ",".join(f"{t:g}" for t in times)
+    # the same browser as scripts/render-film.sh: LCD text anti-aliasing off
+    env = dict(os.environ)
+    env.setdefault("PRODUCER_HEADLESS_SHELL_PATH", str(ROOT / "scripts" / "chrome" / "chrome-headless-shell"))
     subprocess.run(["npx", "--yes", "hyperframes@0.8.92", "snapshot", ".", "--at", at, "--no-end", "-o", str(out)],
-                   cwd=project, check=True, stdout=subprocess.DEVNULL)
+                   cwd=project, check=True, stdout=subprocess.DEVNULL, env=env)
     found = {}
     for f in out.glob("frame-*-at-*s.png"):
         m = re.search(r"-at-([0-9.]+)s\.png$", f.name)
