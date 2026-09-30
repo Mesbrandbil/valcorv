@@ -1,0 +1,244 @@
+{
+  "schema": "priora-cuesheet/1",
+  "note": "The film's cue sheet (cut 3: no fixed runtime, 92 BPM grid; see docs/cut3-direction.md). Every sync point is a narration anchor, so the edit re-locks automatically when narration/timing.json changes (guide voice now, ElevenLabs for the final). Scene ids match compositions/<id>.html.",
+  "fps": 30,
+  "film": {
+    "duration": "END",
+    "compositionId": "film"
+  },
+  "cues": {
+    "l01": "L01.start",
+    "hour": "L01:hour.start",
+    "contractors": "L02:Contractors.start",
+    "isolated": "L02:isolated.start",
+    "workMoves": "L02:Work.start",
+    "insurance": "L03.start",
+    "accepted": "L03:accepted.start",
+    "translate": "L04:translate.start",
+    "permits": "L04:permits.start",
+    "briefings": "L04:briefings.start",
+    "checklists": "L04:checklists.start",
+    "noOne": "L05.start",
+    "moving": "L05:moving.start",
+    "head": "L05:mind.start",
+    "roof03": "L06:Roof.start",
+    "hotWork": "L06:hot.start",
+    "certificate": "L06:every.start",
+    "safeguards": "L06:safeguard.start",
+    "inPlace": "L06:place.end",
+    "landing": {
+      "at": "L07.start-0.25",
+      "note": "The instant before Sprinkler Zone 3 goes offline (site clock 14:41:59). The rewind lands on this story time and Frame 4 starts from it."
+    },
+    "sprinkler": "L07:sprinkler.start",
+    "offline": "L07:offline.start",
+    "nothingLooks": "L08.start",
+    "workContinues": {
+      "at": "L08:different.end+0.2",
+      "note": "The hot-work marker keeps its quiet life (the words no longer say it; the drawing does)."
+    },
+    "changed": "L08:changed.start",
+    "nobody": "L08:nobody.start",
+    "afterwards": "L09.start",
+    "wrong": "L09:wrong.start",
+    "q1": "L10:What#1.start",
+    "q2": "L10:Which.start",
+    "q3": "L10:Can.start",
+    "gap": "L11:gap.start",
+    "tooLate": "L11:late.start",
+    "rewindStart": {
+      "at": "L11.end+0.35",
+      "note": "Picture and sound start to reverse."
+    },
+    "rewindEnd": {
+      "at": "L12.start-0.3",
+      "note": "The rewind lands on story time 'landing' and holds."
+    },
+    "l12": "L12.start",
+    "decisionWord": "L12:decision.start",
+    "riskChanged": "L12:changed.end",
+    "worker": "L13.start",
+    "welding": "L13:welding.start",
+    "roofWord": "L13:Roof.start",
+    "six": "L13:six.end",
+    "connects": "L14a:connects.start",
+    "conditionsMatter": "L14a:conditions.start",
+    "verifies": "L14b:checks.start",
+    "certificate2": "L14b:certificate.start",
+    "safeguards2": "L14b:safeguards.start",
+    "keepsRecord": "L14b:record.start",
+    "prevention": "L15:Prevention.start",
+    "proof": "L15:Proof.start",
+    "l16": "L16.start",
+    "offline2": "L16:offline.start",
+    "sees": "L16:sees.start",
+    "immediately": {
+      "at": "L16:once.end",
+      "note": "Priora sees it at once."
+    },
+    "cross": {
+      "at": "L16.end+0.1",
+      "note": "The hot-work node stretches across the envelope in the silence after L16."
+    },
+    "riskOwner": "L17a.start",
+    "decides": "L17a:decides.start",
+    "change": "L17a:change.start",
+    "retain": "L17b:retain.start",
+    "carriers": "L17c:carriers.start",
+    "cover": "L17c:cover.start",
+    "ordinary": "L18e:ordinary.start",
+    "few": "L18e:few.start",
+    "decisionsL18": "L18e:decisions.start",
+    "priora": "L20:Priora.start",
+    "connectionHold": {
+      "at": "L14a.end",
+      "note": "The connection registers: 0.8 s of room before L14b."
+    },
+    "thisTime": "L16:This.start",
+    "equipment": "L02:Equipment.start",
+    "then": "L07.start",
+    "nobodyEnd": "L08.end",
+    "keeps": "L14b:keeps.start",
+    "again": "L16:again.start",
+    "knowingly": "L17b.start",
+    "inTime": "L17c.start",
+    "ask": "L17c:ask.start",
+    "whether": "L17c:whether.start",
+    "closeIn": {
+      "at": "L19.start-0.65",
+      "note": "a3-close takes over: the gap closes, then Priora and the line."
+    },
+    "paperIn": {
+      "at": "L03.end-0.3",
+      "note": "a1-paper window opens; the sheet lays over the drawing on the next beat."
+    },
+    "everyKind": "L18a.start",
+    "crane": "L18b.start",
+    "wind": "L18b:wind.start",
+    "gasDetector": "L18c.start",
+    "bypassed": "L18c:bypassed.start",
+    "confined": "L18d.start",
+    "ventilation": "L18d:ventilation.start",
+    "madeInTime": "L18e:time.start",
+    "l19": "L19.start",
+    "everyone": "L19:everyone.start",
+    "carries": "L19:carries.start",
+    "gapCloses": "L19:closes.start",
+    "tagline": "L20:Know.start",
+    "scenariosIn": {
+      "at": "L18a.start-0.33",
+      "note": "a3-scenarios takes over from the three choices, a half beat before L18a."
+    }
+  },
+  "scenes": [
+    {
+      "id": "a1-world",
+      "src": "compositions/a1-world.html",
+      "track": 1,
+      "start": "START",
+      "end": "cue:rewindEnd+0.4",
+      "note": "Act I world: the graphite site, the unnoticed change, the rewind (story-scrubbed)."
+    },
+    {
+      "id": "a1-inserts",
+      "src": "compositions/a1-inserts.html",
+      "track": 4,
+      "start": "cue:equipment-0.6",
+      "end": "cue:rewindEnd",
+      "layer": "overlay",
+      "z": 104,
+      "note": "Act I close-up inserts: LOTO valve, the welder, the SZ3 valve (story-scrubbed, reverses in the rewind)."
+    },
+    {
+      "id": "a1-paper",
+      "src": "compositions/a1-paper.html",
+      "track": 2,
+      "start": "cue:paperIn",
+      "end": "cue:noOne+1.0",
+      "layer": "overlay",
+      "note": "Act I sheet: clause 4.3 and its translation into procedure, permit, briefing, checklist.",
+      "z": 101
+    },
+    {
+      "id": "a1-after",
+      "src": "compositions/a1-after.html",
+      "track": 3,
+      "start": "cue:afterwards-0.6",
+      "end": "cue:rewindEnd",
+      "layer": "overlay",
+      "note": "Afterwards: evidence, the three questions, the gap; reverses with the rewind.",
+      "z": 102
+    },
+    {
+      "id": "a2-resolve",
+      "src": "compositions/a2-resolve.html",
+      "track": 1,
+      "start": "cue:rewindEnd",
+      "end": "cue:l16",
+      "crossfade": true,
+      "note": "Act II: graphite resolves into the interface; the worker speaks; the connection; checks; record; prevention and proof."
+    },
+    {
+      "id": "a3-change",
+      "src": "compositions/a3-change.html",
+      "track": 1,
+      "start": "cue:l16",
+      "end": "cue:scenariosIn+0.4",
+      "note": "Act III: offline again, seen at once, the crossing, the three choices and the programme layer."
+    },
+    {
+      "id": "a3-scenarios",
+      "src": "compositions/a3-scenarios.html",
+      "track": 1,
+      "start": "cue:scenariosIn",
+      "end": "cue:closeIn+0.4",
+      "crossfade": true,
+      "note": "Cut 3: every kind of work carries its own conditions: crane lift, gas detector bypass, confined space entry; then the whole site, ordinary work and the few decisions."
+    },
+    {
+      "id": "a3-close",
+      "src": "compositions/a3-close.html",
+      "track": 1,
+      "start": "cue:closeIn",
+      "end": "END",
+      "crossfade": true,
+      "note": "Cut 3 close: for everyone who carries the risk, the gap closes; Priora and the line; the qualifier."
+    },
+    {
+      "id": "chrome",
+      "src": "compositions/chrome.html",
+      "track": 5,
+      "start": "START",
+      "end": "cue:closeIn+0.4",
+      "layer": "overlay",
+      "z": 200,
+      "note": "Frame furniture: registration marks, Act I sheet and title block, site clock, rewind counter, Act II/III end-state lockup."
+    }
+  ],
+  "audio": [
+    {
+      "id": "voice",
+      "src": "assets/audio/master-voice.wav",
+      "track": 20,
+      "volume": 1,
+      "note": "Processed voice from the audio engine (DC removed, levelled, limited); assets/audio/voice.wav is the raw narration assembly."
+    },
+    {
+      "id": "music",
+      "src": "assets/audio/music.wav",
+      "track": 21,
+      "volume": 1,
+      "optional": true
+    },
+    {
+      "id": "sfx",
+      "src": "assets/audio/sfx.wav",
+      "track": 22,
+      "volume": 1,
+      "optional": true
+    }
+  ],
+  "inline": {
+    "SITE_PRECISE": "assets/site/site-precise.svg"
+  }
+}

@@ -1,0 +1,97 @@
+{
+  "schema": "priora-narration-take/1",
+  "id": "L07",
+  "engine": "guide",
+  "guide": true,
+  "label": "GUIDE VOICE (local Kokoro). Not the final ElevenLabs performance.",
+  "speaker": "narrator",
+  "text": "Then a sprinkler zone goes offline.",
+  "spoken_text": "Then a sprinkler zone goes offline.",
+  "sample_rate": 48000,
+  "duration": 2.41,
+  "speech_start": 0.13,
+  "speech_end": 2.17,
+  "words": [
+    {
+      "w": "Then",
+      "start": 0.13,
+      "end": 0.35
+    },
+    {
+      "w": "a",
+      "start": 0.35,
+      "end": 0.39
+    },
+    {
+      "w": "sprinkler",
+      "start": 0.39,
+      "end": 0.93
+    },
+    {
+      "w": "zone",
+      "start": 0.93,
+      "end": 1.38
+    },
+    {
+      "w": "goes",
+      "start": 1.38,
+      "end": 1.64
+    },
+    {
+      "w": "offline",
+      "start": 1.64,
+      "end": 2.17
+    }
+  ],
+  "sentences": [
+    {
+      "text": "Then a sprinkler zone goes offline.",
+      "start": 0.13,
+      "end": 2.17,
+      "word_range": [
+        0,
+        6
+      ]
+    }
+  ],
+  "created": "2026-09-29T21:41:34+00:00",
+  "provider": "kokoro-onnx 0.6.1, kokoro-v1.0.onnx (local guide)",
+  "voice": {
+    "id": "bf_isabella",
+    "lang": "en-gb"
+  },
+  "speed": 1.0,
+  "inner_pauses": [],
+  "segments_synth": [
+    {
+      "text": "Then a sprinkler zone goes offline.",
+      "start": 0.12,
+      "end": 2.21,
+      "alignment_quality": {
+        "energy_pauses": 0,
+        "pause_agreement": 1.0,
+        "pauses_inside_words": [],
+        "onset_error_ms": 0.0,
+        "offset_error_ms": 10.0,
+        "pause_onset_error_ms_mean": null,
+        "pause_onset_error_ms_max": null
+      },
+      "fallback": false
+    }
+  ],
+  "alignment": {
+    "method": "pocketsphinx-5-forced-alignment+energy-refine",
+    "fallback": false,
+    "quality": {
+      "energy_pauses": 0,
+      "pause_agreement": 1.0,
+      "pauses_inside_words": [],
+      "onset_error_ms": 0.0,
+      "offset_error_ms": 10.0,
+      "pause_onset_error_ms_mean": null,
+      "pause_onset_error_ms_max": null
+    },
+    "quality_ok": true
+  },
+  "pronunciation_checks": []
+}

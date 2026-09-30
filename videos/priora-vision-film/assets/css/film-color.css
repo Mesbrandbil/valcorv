@@ -1,0 +1,74 @@
+/*
+  film-color.css: the cut 3 colour system. One source of truth for every scene and kit.
+  Loaded by index.html after film.css. Scenes link it inside their <template> too (harmless duplicate).
+
+  Principle: colour carries meaning. The world is drawn and washed in pale, muted materials; strong colour
+  is reserved for meaning, and at most two or three strong colours share a frame. Act I is colour pencil and
+  watercolour over graphite (a little softer); Acts II and III are clean, flat colour with ink lines (the
+  same hues, crisper). Priora's cobalt stays the product's own colour: the live connection, the product.
+*/
+:root {
+  /* ---------------------------------------------------------------- base */
+  --c-paper: #f5f3ee;
+  --c-ink: #1e1c19;          /* warm black linework */
+  --c-graphite: #3b3a36;     /* Act I pencil line */
+  --c-shade: #6b6e72;        /* cool shadow hatching */
+
+  /* ---------------------------------------------------------------- world materials (pale washes) */
+  --c-slate-roof: #b9c7d2;   /* production halls: roofs */
+  --c-slate-wall: #d3dce3;   /*   lit wall */
+  --c-slate-dark: #9aabb9;   /*   shadow wall */
+  --c-sand-roof: #e6d7b8;    /* warehouse */
+  --c-sand-wall: #eee2c9;
+  --c-sand-dark: #cdb68d;
+  --c-sage-roof: #c9d6c0;    /* laboratory */
+  --c-sage-wall: #dae4d3;
+  --c-sage-dark: #a9bd9f;
+  --c-stone-roof: #ddd4c8;   /* utilities */
+  --c-stone-wall: #e8e1d7;
+  --c-stone-dark: #c2b6a6;
+  --c-terracotta: #c9785a;   /* the utilities stack, brick details */
+  --c-steel: #bcc6cc;        /* tanks, containers */
+  --c-steel-dark: #97a3aa;
+  --c-ground: #e7e9dc;       /* site apron and grass */
+  --c-paving: #dedad1;       /* roads, loading area */
+
+  /* ---------------------------------------------------------------- the accepted conditions */
+  --c-envelope-line: #2e7d6b;   /* the envelope of accepted conditions: deep teal-green */
+  --c-envelope-field: #dcebe3;  /* inside it, a very pale wash (low opacity) */
+
+  /* ---------------------------------------------------------------- activities (warm family and friends) */
+  --c-hot: #ef8a24;          /* hot work: amber (heat, never flames) */
+  --c-hot-soft: #fbe3c8;
+  --c-lift: #eebd2b;         /* crane lift: safety yellow */
+  --c-lift-soft: #fbefc6;
+  --c-gas: #6f5bb3;          /* gas detection: violet (a flat accent, never a gradient) */
+  --c-gas-soft: #e6e1f4;
+  --c-air: #15877e;          /* confined space and ventilation: teal */
+  --c-air-soft: #d2ebe8;
+  --c-general: #8a8d91;      /* ordinary activity markers */
+
+  /* ---------------------------------------------------------------- protection and people */
+  --c-water: #2b8cc4;        /* fire protection: sprinklers, water mains (drains to grey when offline) */
+  --c-water-soft: #d6e9f5;
+  --c-hivis: #c7d92b;        /* workers' hi-vis vests */
+  --c-helmet: #fbfaf7;       /* white hard hats */
+  --c-leather: #8a5a3c;      /* the welder's jacket and gloves */
+
+  /* ---------------------------------------------------------------- states */
+  --c-ok: #2e8b57;           /* verified, inside the agreed conditions */
+  --c-ok-soft: #d9eee1;
+  --c-alert: #e0452b;        /* changed condition, outside the agreed conditions */
+  --c-alert-soft: #fadcd5;
+  --c-offline: #9c9994;      /* a drained, offline element */
+
+  /* ---------------------------------------------------------------- Priora */
+  --c-priora: #1f47d6;       /* the live connection and the product itself */
+  --c-priora-soft: #dce2f5;
+  --c-priora-deep: #1838a8;
+
+  /* ---------------------------------------------------------------- act grading (multiply on washes) */
+  --c-wash-act1: 0.85;       /* Act I washes slightly softer: colour pencil on paper */
+  --c-wash-after: 0.35;      /* the aftermath drains toward grey */
+  --c-wash-act2: 1;          /* Acts II and III: full, clean */
+}

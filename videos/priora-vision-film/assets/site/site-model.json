@@ -1,0 +1,7454 @@
+{
+ "schema": "priora-site-model/1",
+ "source": "priora-end-state-demo.html (read-only). Geometry from buildSite(), ENV and frame(); values measured in Chromium at a 1920x1080 viewport.",
+ "svg": "assets/site/site-precise.svg",
+ "coordinates": {
+  "system": "World = the demo isometric plane before the camera. Plan coordinates (x, y on the ground, z up, metres-ish) project as world = [(x - y) * cos30, (x + y) * 0.5 - z]. cos30 = 0.8660254.",
+  "screen": "Demo canvas px = world * s + [tx, ty] (see cameras). 1 screen px = 1/s world units.",
+  "sw": "The SVG uses --sw (1 screen px in world units) for every hairline, dash and label, as the demo does. Default 0.1664 = 1/6.01038 (overview). When a scene zooms, set --sw = 1 / scale-in-px-per-world-unit to keep hairlines and labels at the demo size, or leave it to let lines thicken with the zoom.",
+  "defaultViewBox": {
+   "w": 319.447356073992,
+   "h": 179.6891377916205,
+   "x": -143.26919536509166,
+   "y": -43.34456889581025
+  }
+ },
+ "planGeometry": {
+  "envelope": {
+   "cx": 56,
+   "cy": 37,
+   "a": 74,
+   "b": 60,
+   "n": 3.6,
+   "samples": 220,
+   "formula": "superellipse on the ground: x = cx + a*sign(cos t)*|cos t|^(2/n), y = cy + b*sign(sin t)*|sin t|^(2/n), t = i/220*2pi"
+  },
+  "utilities": {
+   "x0": 6,
+   "x1": 26,
+   "y0": 6,
+   "y1": 24,
+   "h": 9
+  },
+  "utilitiesStack": {
+   "x0": 20.5,
+   "x1": 23.5,
+   "y0": 8.5,
+   "y1": 11.5,
+   "z0": 9,
+   "h": 21
+  },
+  "tanks": [
+   {
+    "x": 11,
+    "y": 31,
+    "r": 3.3,
+    "h": 11
+   },
+   {
+    "x": 20,
+    "y": 31,
+    "r": 3.3,
+    "h": 11
+   }
+  ],
+  "productionHall": {
+   "x0": 34,
+   "x1": 74,
+   "y0": 8,
+   "y1": 36,
+   "h": 12
+  },
+  "roofZones": {
+   "01": {
+    "x0": 34,
+    "x1": 47
+   },
+   "02": {
+    "x0": 47,
+    "x1": 60
+   },
+   "03": {
+    "x0": 60,
+    "x1": 74
+   },
+   "z": 12
+  },
+  "productionHall2": {
+   "x0": 74,
+   "x1": 94,
+   "y0": 8,
+   "y1": 30,
+   "h": 9
+  },
+  "laboratory": {
+   "x0": 6,
+   "x1": 26,
+   "y0": 38,
+   "y1": 58,
+   "h": 11
+  },
+  "laboratoryStacks": [
+   {
+    "x0": 10,
+    "x1": 11.6,
+    "y0": 41,
+    "y1": 42.6,
+    "z0": 11,
+    "h": 14.5
+   },
+   {
+    "x0": 14,
+    "x1": 15.6,
+    "y0": 41,
+    "y1": 42.6,
+    "z0": 11,
+    "h": 14.5
+   },
+   {
+    "x0": 18,
+    "x1": 19.6,
+    "y0": 41,
+    "y1": 42.6,
+    "z0": 11,
+    "h": 14.5
+   }
+  ],
+  "warehouse": {
+   "x0": 34,
+   "x1": 70,
+   "y0": 46,
+   "y1": 72,
+   "h": 10
+  },
+  "loadingArea": {
+   "x0": 74,
+   "x1": 106,
+   "y0": 40,
+   "y1": 72
+  },
+  "containers": [
+   {
+    "trailer": {
+     "x0": 71,
+     "x1": 85.5,
+     "y0": 50,
+     "y1": 53.6,
+     "z0": 0.6,
+     "h": 4.4
+    },
+    "cab": {
+     "x0": 86,
+     "x1": 89.4,
+     "y0": 50.2,
+     "y1": 53.4,
+     "z0": 0.4,
+     "h": 3.6
+    }
+   },
+   {
+    "trailer": {
+     "x0": 71,
+     "x1": 85.5,
+     "y0": 57.6,
+     "y1": 61.2,
+     "z0": 0.6,
+     "h": 4.4
+    },
+    "cab": {
+     "x0": 86,
+     "x1": 89.4,
+     "y0": 57.8,
+     "y1": 61,
+     "z0": 0.4,
+     "h": 3.6
+    }
+   }
+  ],
+  "sprinklerZone3": {
+   "roof03Part": {
+    "x0": 60.6,
+    "x1": 73.4,
+    "y0": 8.6,
+    "y1": 35.4,
+    "z": 12
+   },
+   "hall2Part": {
+    "x0": 74.6,
+    "x1": 93.4,
+    "y0": 8.6,
+    "y1": 29.4,
+    "z": 9
+   },
+   "valve": [
+    74,
+    20
+   ],
+   "headRows": {
+    "roof03": {
+     "x": [
+      62.5,
+      67,
+      71.5
+     ],
+     "y": [
+      11.5,
+      17,
+      22.5,
+      28,
+      33
+     ],
+     "z": 12
+    },
+    "hall2": {
+     "x": [
+      77.5,
+      82.5,
+      87.5,
+      91.5
+     ],
+     "y": [
+      11.5,
+      17,
+      22.5,
+      27
+     ],
+     "z": 9
+    }
+   }
+  },
+  "gate": null,
+  "gateNote": "The demo draws no gate. Site access reads from the road ends: main road y=40 runs east to x=112 past the loading area; west roads x=29 and x=32 run north to y=-2."
+ },
+ "drawing": {
+  "order": "Painter order is the document order of #world: ground-crosses, roads, loading-area, utilities (+ stack), tanks, pipe-bridge, production-hall (+ roof zones), production-hall-2, laboratory (+ stacks), warehouse, loading-area-containers, sprinkler-zone-3. Keep it when rebuilding or jittering.",
+  "demoDrawOn": "data-draw='stroke' paths were revealed by the demo with a dash-offset draw (2400 ms, easeInOut) starting at data-draw-delay ms; their face fills faded in over 1400 ms from delay + 900 ms. data-draw='fade' elements (ground-crosses, loading-area-outline, roof paint) faded in over 1400 ms at their delay. The site draw starts 1000 ms before the envelope.",
+  "pathNotes": "d strings are the demo output verbatim (M/L/Z polygons, A arcs on the tanks). pathLength was removed so GSAP DrawSVG measures real lengths. Faces (f-l, f-r, f-t) are closed 4-point polygons in the order left, right, top per box."
+ },
+ "elements": {
+  "envelope-fill": {
+   "role": "envelope-fill",
+   "tag": "path",
+   "class": "env-fill",
+   "bbox": [
+    -79.469,
+    -8.882,
+    191.847,
+    110.764
+   ],
+   "subpaths": 1
+  },
+  "world": {
+   "role": "site",
+   "tag": "g",
+   "bbox": [
+    -71.62,
+    -6.5,
+    174.42,
+    105.85
+   ]
+  },
+  "ground-crosses": {
+   "role": "ground-crosses",
+   "tag": "path",
+   "class": "grid",
+   "parent": "world",
+   "bbox": [
+    -71.62,
+    -5.35,
+    174.42,
+    104.7
+   ],
+   "drawDelayMs": 200,
+   "draw": "fade",
+   "subpaths": 452,
+   "note": "Survey grid crosses on the ground plane inside 0.84 of the envelope (8 m grid, 1.4 m crosses)."
+  },
+  "roads": {
+   "role": "roads",
+   "tag": "path",
+   "class": "faint",
+   "parent": "world",
+   "bbox": [
+    -40.7,
+    13.5,
+    103.05,
+    62.5
+   ],
+   "drawDelayMs": 100,
+   "draw": "stroke",
+   "subpaths": 4,
+   "note": "Four road edges: main road y=40 (x 28 to 112), service road y=44 (x 28 to 72), west roads x=29 (y -2 to 76) and x=32 (y -2 to 36)."
+  },
+  "loading-area": {
+   "role": "building",
+   "tag": "g",
+   "parent": "world",
+   "bbox": [
+    1.73,
+    57,
+    55.43,
+    32
+   ],
+   "note": "Paved loading apron (plan x 74 to 106, y 40 to 72), dashed boundary and four bay lines."
+  },
+  "loading-area-ground": {
+   "role": "ground",
+   "tag": "path",
+   "class": "ground",
+   "parent": "loading-area",
+   "bbox": [
+    1.73,
+    57,
+    55.43,
+    32
+   ],
+   "subpaths": 1
+  },
+  "loading-area-outline": {
+   "role": "outline-dashed",
+   "tag": "path",
+   "class": "dash",
+   "parent": "loading-area",
+   "bbox": [
+    1.73,
+    57,
+    55.43,
+    32
+   ],
+   "drawDelayMs": 600,
+   "draw": "fade",
+   "subpaths": 1
+  },
+  "loading-area-bays": {
+   "role": "bay-lines",
+   "tag": "path",
+   "class": "faint",
+   "parent": "loading-area",
+   "bbox": [
+    2.17,
+    60.25,
+    35.5,
+    20.5
+   ],
+   "drawDelayMs": 700,
+   "draw": "stroke",
+   "subpaths": 4
+  },
+  "utilities": {
+   "role": "building",
+   "tag": "g",
+   "parent": "world",
+   "bbox": [
+    -15.59,
+    -6.5,
+    32.91,
+    31.5
+   ],
+   "note": "Utilities block (plan x 6 to 26, y 6 to 24, h 9) with louvres, roof plant and the stack (plan 20.5 to 23.5 x 8.5 to 11.5, z 9 to 21)."
+  },
+  "utilities-face-left": {
+   "role": "face-left",
+   "tag": "path",
+   "class": "f f-l",
+   "parent": "utilities",
+   "bbox": [
+    -15.59,
+    6,
+    17.32,
+    19
+   ],
+   "drawDelayMs": 0,
+   "draw": "stroke",
+   "subpaths": 1
+  },
+  "utilities-face-right": {
+   "role": "face-right",
+   "tag": "path",
+   "class": "f f-r",
+   "parent": "utilities",
+   "bbox": [
+    1.73,
+    7,
+    15.59,
+    18
+   ],
+   "drawDelayMs": 0,
+   "draw": "stroke",
+   "subpaths": 1
+  },
+  "utilities-roof": {
+   "role": "face-top",
+   "tag": "path",
+   "class": "f f-t",
+   "parent": "utilities",
+   "bbox": [
+    -15.59,
+    -3,
+    32.91,
+    19
+   ],
+   "drawDelayMs": 0,
+   "draw": "stroke",
+   "subpaths": 1
+  },
+  "utilities-louvres": {
+   "role": "detail",
+   "tag": "path",
+   "class": "det",
+   "parent": "utilities",
+   "bbox": [
+    4.76,
+    10,
+    10.83,
+    11.25
+   ],
+   "drawDelayMs": 300,
+   "draw": "stroke",
+   "subpaths": 6
+  },
+  "utilities-facade-band": {
+   "role": "detail",
+   "tag": "path",
+   "class": "det",
+   "parent": "utilities",
+   "bbox": [
+    -15.59,
+    8.5,
+    17.32,
+    10
+   ],
+   "drawDelayMs": 300,
+   "draw": "stroke",
+   "subpaths": 1
+  },
+  "utilities-roof-plant": {
+   "role": "detail",
+   "tag": "path",
+   "class": "det",
+   "parent": "utilities",
+   "bbox": [
+    -4.33,
+    0,
+    9.53,
+    5.5
+   ],
+   "drawDelayMs": 300,
+   "draw": "stroke",
+   "subpaths": 1
+  },
+  "utilities-stack": {
+   "role": "stack",
+   "tag": "g",
+   "parent": "utilities",
+   "bbox": [
+    7.79,
+    -6.5,
+    5.2,
+    15
+   ]
+  },
+  "utilities-stack-face-left": {
+   "role": "face-left",
+   "tag": "path",
+   "class": "f f-l",
+   "parent": "utilities-stack",
+   "bbox": [
+    7.79,
+    -5,
+    2.6,
+    13.5
+   ],
+   "drawDelayMs": 120,
+   "draw": "stroke",
+   "subpaths": 1
+  },
+  "utilities-stack-face-right": {
+   "role": "face-right",
+   "tag": "path",
+   "class": "f f-r",
+   "parent": "utilities-stack",
+   "bbox": [
+    10.39,
+    -5,
+    2.6,
+    13.5
+   ],
+   "drawDelayMs": 120,
+   "draw": "stroke",
+   "subpaths": 1
+  },
+  "utilities-stack-top": {
+   "role": "face-top",
+   "tag": "path",
+   "class": "f f-t",
+   "parent": "utilities-stack",
+   "bbox": [
+    7.79,
+    -6.5,
+    5.2,
+    3
+   ],
+   "drawDelayMs": 120,
+   "draw": "stroke",
+   "subpaths": 1
+  },
+  "tanks": {
+   "role": "building",
+   "tag": "g",
+   "parent": "world",
+   "bbox": [
+    -21.36,
+    7.67,
+    15.88,
+    20.163
+   ],
+   "note": "Two vertical tanks at plan (11, 31) and (20, 31), r 3.3, h 11 (tank farm T2 is the second)."
+  },
+  "tank-1": {
+   "role": "tank",
+   "tag": "g",
+   "parent": "tanks",
+   "bbox": [
+    -21.36,
+    7.67,
+    8.08,
+    15.66
+   ]
+  },
+  "tank-1-body": {
+   "role": "face-right",
+   "tag": "path",
+   "class": "f f-r",
+   "parent": "tank-1",
+   "bbox": [
+    -21.36,
+    7.67,
+    8.08,
+    15.66
+   ],
+   "drawDelayMs": 180,
+   "draw": "stroke",
+   "subpaths": 1
+  },
+  "tank-1-top": {
+   "role": "face-top",
+   "tag": "path",
+   "class": "f f-t",
+   "parent": "tank-1",
+   "bbox": [
+    -21.36,
+    7.67,
+    8.08,
+    4.66
+   ],
+   "drawDelayMs": 180,
+   "draw": "stroke",
+   "subpaths": 1
+  },
+  "tank-1-ring": {
+   "role": "detail",
+   "tag": "path",
+   "class": "det",
+   "parent": "tank-1",
+   "bbox": [
+    -21.36,
+    13.85,
+    8.08,
+    2.33
+   ],
+   "drawDelayMs": 480,
+   "draw": "stroke",
+   "subpaths": 1
+  },
+  "tank-2": {
+   "role": "tank",
+   "tag": "g",
+   "parent": "tanks",
+   "bbox": [
+    -13.57,
+    12.167,
+    8.09,
+    15.666
+   ]
+  },
+  "tank-2-body": {
+   "role": "face-right",
+   "tag": "path",
+   "class": "f f-r",
+   "parent": "tank-2",
+   "bbox": [
+    -13.57,
+    12.167,
+    8.09,
+    15.666
+   ],
+   "drawDelayMs": 240,
+   "draw": "stroke",
+   "subpaths": 1
+  },
+  "tank-2-top": {
+   "role": "face-top",
+   "tag": "path",
+   "class": "f f-t",
+   "parent": "tank-2",
+   "bbox": [
+    -13.57,
+    12.167,
+    8.09,
+    4.666
+   ],
+   "drawDelayMs": 240,
+   "draw": "stroke",
+   "subpaths": 1
+  },
+  "tank-2-ring": {
+   "role": "detail",
+   "tag": "path",
+   "class": "det",
+   "parent": "tank-2",
+   "bbox": [
+    -13.57,
+    18.35,
+    8.09,
+    2.333
+   ],
+   "drawDelayMs": 540,
+   "draw": "stroke",
+   "subpaths": 1
+  },
+  "pipe-bridge": {
+   "role": "pipe-bridge",
+   "tag": "path",
+   "class": "e",
+   "parent": "world",
+   "bbox": [
+    8.14,
+    14.3,
+    8.31,
+    8.6
+   ],
+   "drawDelayMs": 300,
+   "draw": "stroke",
+   "subpaths": 3,
+   "note": "Pipe bridge from utilities to the production hall (plan x 26 to 34 at y 15 and 16.6)."
+  },
+  "production-hall": {
+   "role": "building",
+   "tag": "g",
+   "parent": "world",
+   "bbox": [
+    -1.73,
+    9,
+    58.89,
+    46
+   ],
+   "note": "Production Hall (plan x 34 to 74, y 8 to 36, h 12). Roof divided at x=47 and x=60 into roof zones 01, 02, 03."
+  },
+  "production-hall-face-left": {
+   "role": "face-left",
+   "tag": "path",
+   "class": "f f-l",
+   "parent": "production-hall",
+   "bbox": [
+    -1.73,
+    23,
+    34.64,
+    32
+   ],
+   "drawDelayMs": 300,
+   "draw": "stroke",
+   "subpaths": 1
+  },
+  "production-hall-face-right": {
+   "role": "face-right",
+   "tag": "path",
+   "class": "f f-r",
+   "parent": "production-hall",
+   "bbox": [
+    32.91,
+    29,
+    24.25,
+    26
+   ],
+   "drawDelayMs": 300,
+   "draw": "stroke",
+   "subpaths": 1
+  },
+  "production-hall-roof": {
+   "role": "face-top",
+   "tag": "path",
+   "class": "f f-t",
+   "parent": "production-hall",
+   "bbox": [
+    -1.73,
+    9,
+    58.89,
+    34
+   ],
+   "drawDelayMs": 300,
+   "draw": "stroke",
+   "subpaths": 1
+  },
+  "production-hall-roof-dividers": {
+   "role": "detail",
+   "tag": "path",
+   "class": "det",
+   "parent": "production-hall",
+   "bbox": [
+    9.53,
+    15.5,
+    35.5,
+    20.5
+   ],
+   "drawDelayMs": 600,
+   "draw": "stroke",
+   "subpaths": 2
+  },
+  "roof-zones": {
+   "role": "roof-zones",
+   "tag": "g",
+   "parent": "production-hall",
+   "bbox": [
+    -1.73,
+    9,
+    58.89,
+    34
+   ]
+  },
+  "roof-zone-01": {
+   "role": "roof-zone",
+   "tag": "g",
+   "parent": "roof-zones",
+   "bbox": [
+    -1.73,
+    9,
+    35.5,
+    20.5
+   ],
+   "note": "Roof 01 (plan x 34 to 47). Relocation target of the change option \"Move work outside affected zone\" (Sprinkler Zone 1)."
+  },
+  "roof-zone-01-area": {
+   "role": "zone-area",
+   "tag": "path",
+   "class": "zone-area",
+   "parent": "roof-zone-01",
+   "bbox": [
+    -1.73,
+    9,
+    35.5,
+    20.5
+   ],
+   "subpaths": 1
+  },
+  "roof-zone-01-skylights": {
+   "role": "detail",
+   "tag": "path",
+   "class": "det",
+   "parent": "roof-zone-01",
+   "bbox": [
+    3.29,
+    11.75,
+    25.72,
+    14.85
+   ],
+   "drawDelayMs": 600,
+   "draw": "stroke",
+   "subpaths": 4
+  },
+  "roof-zone-01-label": {
+   "role": "roof-paint",
+   "tag": "text",
+   "class": "paint",
+   "parent": "roof-zone-01",
+   "bbox": [
+    -0.663,
+    21.919,
+    6.396,
+    3.693
+   ],
+   "drawDelayMs": 1600,
+   "draw": "fade"
+  },
+  "roof-zone-02": {
+   "role": "roof-zone",
+   "tag": "g",
+   "parent": "roof-zones",
+   "bbox": [
+    9.53,
+    15.5,
+    35.5,
+    20.5
+   ],
+   "note": "Roof 02 (plan x 47 to 60)."
+  },
+  "roof-zone-02-area": {
+   "role": "zone-area",
+   "tag": "path",
+   "class": "zone-area",
+   "parent": "roof-zone-02",
+   "bbox": [
+    9.53,
+    15.5,
+    35.5,
+    20.5
+   ],
+   "subpaths": 1
+  },
+  "roof-zone-02-skylights": {
+   "role": "detail",
+   "tag": "path",
+   "class": "det",
+   "parent": "roof-zone-02",
+   "bbox": [
+    14.55,
+    18.25,
+    25.72,
+    14.85
+   ],
+   "drawDelayMs": 600,
+   "draw": "stroke",
+   "subpaths": 4
+  },
+  "roof-zone-02-label": {
+   "role": "roof-paint",
+   "tag": "text",
+   "class": "paint",
+   "parent": "roof-zone-02",
+   "bbox": [
+    10.595,
+    28.419,
+    6.396,
+    3.693
+   ],
+   "drawDelayMs": 1650,
+   "draw": "fade"
+  },
+  "roof-zone-03": {
+   "role": "roof-zone",
+   "tag": "g",
+   "parent": "roof-zones",
+   "bbox": [
+    20.78,
+    22,
+    36.38,
+    21
+   ],
+   "note": "Roof 03 (plan x 60 to 74): the hero hot-work location, covered by Sprinkler Zone 3."
+  },
+  "roof-zone-03-area": {
+   "role": "zone-area",
+   "tag": "path",
+   "class": "zone-area",
+   "parent": "roof-zone-03",
+   "bbox": [
+    20.78,
+    22,
+    36.38,
+    21
+   ],
+   "subpaths": 1
+  },
+  "roof-zone-03-label": {
+   "role": "roof-paint",
+   "tag": "text",
+   "class": "paint",
+   "parent": "roof-zone-03",
+   "bbox": [
+    21.853,
+    34.919,
+    6.396,
+    3.693
+   ],
+   "drawDelayMs": 1700,
+   "draw": "fade"
+  },
+  "production-hall-facade-band": {
+   "role": "detail",
+   "tag": "path",
+   "class": "det",
+   "parent": "production-hall",
+   "bbox": [
+    -1.73,
+    26.5,
+    34.64,
+    20
+   ],
+   "drawDelayMs": 600,
+   "draw": "stroke",
+   "subpaths": 1
+  },
+  "production-hall-facade-windows": {
+   "role": "detail",
+   "tag": "path",
+   "class": "det",
+   "parent": "production-hall",
+   "bbox": [
+    0,
+    28.6,
+    32.04,
+    20.3
+   ],
+   "drawDelayMs": 600,
+   "draw": "stroke",
+   "subpaths": 12
+  },
+  "production-hall-doors": {
+   "role": "detail",
+   "tag": "path",
+   "class": "det",
+   "parent": "production-hall",
+   "bbox": [
+    1.73,
+    32.4,
+    25.98,
+    19.6
+   ],
+   "drawDelayMs": 600,
+   "draw": "stroke",
+   "subpaths": 2
+  },
+  "production-hall-2": {
+   "role": "building",
+   "tag": "g",
+   "parent": "world",
+   "bbox": [
+    38.11,
+    32,
+    36.37,
+    30
+   ],
+   "note": "Production Hall 2, the lower annex beside Roof 03 (plan x 74 to 94, y 8 to 30, h 9). Asset exposure in the deviation."
+  },
+  "production-hall-2-face-left": {
+   "role": "face-left",
+   "tag": "path",
+   "class": "f f-l",
+   "parent": "production-hall-2",
+   "bbox": [
+    38.11,
+    43,
+    17.32,
+    19
+   ],
+   "drawDelayMs": 440,
+   "draw": "stroke",
+   "subpaths": 1
+  },
+  "production-hall-2-face-right": {
+   "role": "face-right",
+   "tag": "path",
+   "class": "f f-r",
+   "parent": "production-hall-2",
+   "bbox": [
+    55.43,
+    42,
+    19.05,
+    20
+   ],
+   "drawDelayMs": 440,
+   "draw": "stroke",
+   "subpaths": 1
+  },
+  "production-hall-2-roof": {
+   "role": "face-top",
+   "tag": "path",
+   "class": "f f-t",
+   "parent": "production-hall-2",
+   "bbox": [
+    38.11,
+    32,
+    36.37,
+    21
+   ],
+   "drawDelayMs": 440,
+   "draw": "stroke",
+   "subpaths": 1
+  },
+  "production-hall-2-roof-inset": {
+   "role": "detail",
+   "tag": "path",
+   "class": "det",
+   "parent": "production-hall-2",
+   "bbox": [
+    39.49,
+    32.8,
+    33.6,
+    19.4
+   ],
+   "drawDelayMs": 740,
+   "draw": "stroke",
+   "subpaths": 1
+  },
+  "production-hall-2-louvres": {
+   "role": "detail",
+   "tag": "path",
+   "class": "det",
+   "parent": "production-hall-2",
+   "bbox": [
+    55.34,
+    45.65,
+    16.97,
+    11.4
+   ],
+   "drawDelayMs": 740,
+   "draw": "stroke",
+   "subpaths": 7
+  },
+  "production-hall-2-facade-band": {
+   "role": "detail",
+   "tag": "path",
+   "class": "det",
+   "parent": "production-hall-2",
+   "bbox": [
+    38.11,
+    46,
+    17.32,
+    10
+   ],
+   "drawDelayMs": 740,
+   "draw": "stroke",
+   "subpaths": 1
+  },
+  "laboratory": {
+   "role": "building",
+   "tag": "g",
+   "parent": "world",
+   "bbox": [
+    -45.03,
+    11,
+    34.64,
+    31
+   ],
+   "note": "Laboratory (plan x 6 to 26, y 38 to 58, h 11) with three fume stacks."
+  },
+  "laboratory-face-left": {
+   "role": "face-left",
+   "tag": "path",
+   "class": "f f-l",
+   "parent": "laboratory",
+   "bbox": [
+    -45.03,
+    21,
+    17.32,
+    21
+   ],
+   "drawDelayMs": 560,
+   "draw": "stroke",
+   "subpaths": 1
+  },
+  "laboratory-face-right": {
+   "role": "face-right",
+   "tag": "path",
+   "class": "f f-r",
+   "parent": "laboratory",
+   "bbox": [
+    -27.71,
+    21,
+    17.32,
+    21
+   ],
+   "drawDelayMs": 560,
+   "draw": "stroke",
+   "subpaths": 1
+  },
+  "laboratory-roof": {
+   "role": "face-top",
+   "tag": "path",
+   "class": "f f-t",
+   "parent": "laboratory",
+   "bbox": [
+    -45.03,
+    11,
+    34.64,
+    20
+   ],
+   "drawDelayMs": 560,
+   "draw": "stroke",
+   "subpaths": 1
+  },
+  "laboratory-windows-front": {
+   "role": "detail",
+   "tag": "path",
+   "class": "det",
+   "parent": "laboratory",
+   "bbox": [
+    -43.3,
+    24,
+    15.93,
+    14.7
+   ],
+   "drawDelayMs": 860,
+   "draw": "stroke",
+   "subpaths": 14
+  },
+  "laboratory-windows-side": {
+   "role": "detail",
+   "tag": "path",
+   "class": "det",
+   "parent": "laboratory",
+   "bbox": [
+    -28.06,
+    24,
+    15.94,
+    14.7
+   ],
+   "drawDelayMs": 860,
+   "draw": "stroke",
+   "subpaths": 14
+  },
+  "laboratory-stacks": {
+   "role": "stacks",
+   "tag": "g",
+   "parent": "laboratory",
+   "bbox": [
+    -28.23,
+    11,
+    9.7,
+    9.1
+   ]
+  },
+  "laboratory-stack-1": {
+   "role": "stack",
+   "tag": "g",
+   "parent": "laboratory-stacks",
+   "bbox": [
+    -28.23,
+    11,
+    2.77,
+    5.1
+   ]
+  },
+  "laboratory-stack-1-face-left": {
+   "role": "face-left",
+   "tag": "path",
+   "class": "f f-l",
+   "parent": "laboratory-stack-1",
+   "bbox": [
+    -28.23,
+    11.8,
+    1.38,
+    4.3
+   ],
+   "drawDelayMs": 660,
+   "draw": "stroke",
+   "subpaths": 1
+  },
+  "laboratory-stack-1-face-right": {
+   "role": "face-right",
+   "tag": "path",
+   "class": "f f-r",
+   "parent": "laboratory-stack-1",
+   "bbox": [
+    -26.85,
+    11.8,
+    1.39,
+    4.3
+   ],
+   "drawDelayMs": 660,
+   "draw": "stroke",
+   "subpaths": 1
+  },
+  "laboratory-stack-1-top": {
+   "role": "face-top",
+   "tag": "path",
+   "class": "f f-t",
+   "parent": "laboratory-stack-1",
+   "bbox": [
+    -28.23,
+    11,
+    2.77,
+    1.6
+   ],
+   "drawDelayMs": 660,
+   "draw": "stroke",
+   "subpaths": 1
+  },
+  "laboratory-stack-2": {
+   "role": "stack",
+   "tag": "g",
+   "parent": "laboratory-stacks",
+   "bbox": [
+    -24.77,
+    13,
+    2.77,
+    5.1
+   ]
+  },
+  "laboratory-stack-2-face-left": {
+   "role": "face-left",
+   "tag": "path",
+   "class": "f f-l",
+   "parent": "laboratory-stack-2",
+   "bbox": [
+    -24.77,
+    13.8,
+    1.39,
+    4.3
+   ],
+   "drawDelayMs": 700,
+   "draw": "stroke",
+   "subpaths": 1
+  },
+  "laboratory-stack-2-face-right": {
+   "role": "face-right",
+   "tag": "path",
+   "class": "f f-r",
+   "parent": "laboratory-stack-2",
+   "bbox": [
+    -23.38,
+    13.8,
+    1.38,
+    4.3
+   ],
+   "drawDelayMs": 700,
+   "draw": "stroke",
+   "subpaths": 1
+  },
+  "laboratory-stack-2-top": {
+   "role": "face-top",
+   "tag": "path",
+   "class": "f f-t",
+   "parent": "laboratory-stack-2",
+   "bbox": [
+    -24.77,
+    13,
+    2.77,
+    1.6
+   ],
+   "drawDelayMs": 700,
+   "draw": "stroke",
+   "subpaths": 1
+  },
+  "laboratory-stack-3": {
+   "role": "stack",
+   "tag": "g",
+   "parent": "laboratory-stacks",
+   "bbox": [
+    -21.3,
+    15,
+    2.77,
+    5.1
+   ]
+  },
+  "laboratory-stack-3-face-left": {
+   "role": "face-left",
+   "tag": "path",
+   "class": "f f-l",
+   "parent": "laboratory-stack-3",
+   "bbox": [
+    -21.3,
+    15.8,
+    1.38,
+    4.3
+   ],
+   "drawDelayMs": 740,
+   "draw": "stroke",
+   "subpaths": 1
+  },
+  "laboratory-stack-3-face-right": {
+   "role": "face-right",
+   "tag": "path",
+   "class": "f f-r",
+   "parent": "laboratory-stack-3",
+   "bbox": [
+    -19.92,
+    15.8,
+    1.39,
+    4.3
+   ],
+   "drawDelayMs": 740,
+   "draw": "stroke",
+   "subpaths": 1
+  },
+  "laboratory-stack-3-top": {
+   "role": "face-top",
+   "tag": "path",
+   "class": "f f-t",
+   "parent": "laboratory-stack-3",
+   "bbox": [
+    -21.3,
+    15,
+    2.77,
+    1.6
+   ],
+   "drawDelayMs": 740,
+   "draw": "stroke",
+   "subpaths": 1
+  },
+  "warehouse": {
+   "role": "building",
+   "tag": "g",
+   "parent": "world",
+   "bbox": [
+    -32.91,
+    30,
+    53.69,
+    41
+   ],
+   "note": "Warehouse (plan x 34 to 70, y 46 to 72, h 10) with roof ribs and dock doors."
+  },
+  "warehouse-face-left": {
+   "role": "face-left",
+   "tag": "path",
+   "class": "f f-l",
+   "parent": "warehouse",
+   "bbox": [
+    -32.91,
+    43,
+    31.18,
+    28
+   ],
+   "drawDelayMs": 780,
+   "draw": "stroke",
+   "subpaths": 1
+  },
+  "warehouse-face-right": {
+   "role": "face-right",
+   "tag": "path",
+   "class": "f f-r",
+   "parent": "warehouse",
+   "bbox": [
+    -1.73,
+    48,
+    22.51,
+    23
+   ],
+   "drawDelayMs": 780,
+   "draw": "stroke",
+   "subpaths": 1
+  },
+  "warehouse-roof": {
+   "role": "face-top",
+   "tag": "path",
+   "class": "f f-t",
+   "parent": "warehouse",
+   "bbox": [
+    -32.91,
+    30,
+    53.69,
+    31
+   ],
+   "drawDelayMs": 780,
+   "draw": "stroke",
+   "subpaths": 1
+  },
+  "warehouse-roof-ribs": {
+   "role": "detail",
+   "tag": "path",
+   "class": "det",
+   "parent": "warehouse",
+   "bbox": [
+    -32.91,
+    31.3,
+    51.44,
+    29.7
+   ],
+   "drawDelayMs": 1080,
+   "draw": "stroke",
+   "subpaths": 10
+  },
+  "warehouse-dock-doors": {
+   "role": "detail",
+   "tag": "path",
+   "class": "det",
+   "parent": "warehouse",
+   "bbox": [
+    0.35,
+    54.9,
+    17.84,
+    14.9
+   ],
+   "drawDelayMs": 1080,
+   "draw": "stroke",
+   "subpaths": 5
+  },
+  "warehouse-facade-ribs": {
+   "role": "detail",
+   "tag": "path",
+   "class": "det",
+   "parent": "warehouse",
+   "bbox": [
+    -30.31,
+    45.1,
+    25.98,
+    24
+   ],
+   "drawDelayMs": 1080,
+   "draw": "stroke",
+   "subpaths": 11
+  },
+  "loading-area-containers": {
+   "role": "containers",
+   "tag": "g",
+   "parent": "world",
+   "bbox": [
+    8.49,
+    56.1,
+    25.46,
+    18.7
+   ],
+   "note": "Two trailers at the warehouse dock doors, each a trailer box plus a cab box."
+  },
+  "container-1": {
+   "role": "container",
+   "tag": "g",
+   "parent": "loading-area-containers",
+   "bbox": [
+    15.07,
+    56.1,
+    18.88,
+    14.9
+   ]
+  },
+  "container-1-trailer": {
+   "role": "g",
+   "tag": "g",
+   "parent": "container-1",
+   "bbox": [
+    15.07,
+    56.1,
+    15.67,
+    12.85
+   ]
+  },
+  "container-1-trailer-face-left": {
+   "role": "face-left",
+   "tag": "path",
+   "class": "f f-l",
+   "parent": "container-1-trailer",
+   "bbox": [
+    15.07,
+    57.9,
+    12.56,
+    11.05
+   ],
+   "drawDelayMs": 900,
+   "draw": "stroke",
+   "subpaths": 1
+  },
+  "container-1-trailer-face-right": {
+   "role": "face-right",
+   "tag": "path",
+   "class": "f f-r",
+   "parent": "container-1-trailer",
+   "bbox": [
+    27.63,
+    63.35,
+    3.11,
+    5.6
+   ],
+   "drawDelayMs": 900,
+   "draw": "stroke",
+   "subpaths": 1
+  },
+  "container-1-trailer-top": {
+   "role": "face-top",
+   "tag": "path",
+   "class": "f f-t",
+   "parent": "container-1-trailer",
+   "bbox": [
+    15.07,
+    56.1,
+    15.67,
+    9.05
+   ],
+   "drawDelayMs": 900,
+   "draw": "stroke",
+   "subpaths": 1
+  },
+  "container-1-cab": {
+   "role": "g",
+   "tag": "g",
+   "parent": "container-1",
+   "bbox": [
+    28.23,
+    64.5,
+    5.72,
+    6.5
+   ]
+  },
+  "container-1-cab-face-left": {
+   "role": "face-left",
+   "tag": "path",
+   "class": "f f-l",
+   "parent": "container-1-cab",
+   "bbox": [
+    28.23,
+    66.1,
+    2.95,
+    4.9
+   ],
+   "drawDelayMs": 930,
+   "draw": "stroke",
+   "subpaths": 1
+  },
+  "container-1-cab-face-right": {
+   "role": "face-right",
+   "tag": "path",
+   "class": "f f-r",
+   "parent": "container-1-cab",
+   "bbox": [
+    31.18,
+    66.2,
+    2.77,
+    4.8
+   ],
+   "drawDelayMs": 930,
+   "draw": "stroke",
+   "subpaths": 1
+  },
+  "container-1-cab-top": {
+   "role": "face-top",
+   "tag": "path",
+   "class": "f f-t",
+   "parent": "container-1-cab",
+   "bbox": [
+    28.23,
+    64.5,
+    5.72,
+    3.3
+   ],
+   "drawDelayMs": 930,
+   "draw": "stroke",
+   "subpaths": 1
+  },
+  "container-2": {
+   "role": "container",
+   "tag": "g",
+   "parent": "loading-area-containers",
+   "bbox": [
+    8.49,
+    59.9,
+    18.88,
+    14.9
+   ]
+  },
+  "container-2-trailer": {
+   "role": "g",
+   "tag": "g",
+   "parent": "container-2",
+   "bbox": [
+    8.49,
+    59.9,
+    15.67,
+    12.85
+   ]
+  },
+  "container-2-trailer-face-left": {
+   "role": "face-left",
+   "tag": "path",
+   "class": "f f-l",
+   "parent": "container-2-trailer",
+   "bbox": [
+    8.49,
+    61.7,
+    12.55,
+    11.05
+   ],
+   "drawDelayMs": 960,
+   "draw": "stroke",
+   "subpaths": 1
+  },
+  "container-2-trailer-face-right": {
+   "role": "face-right",
+   "tag": "path",
+   "class": "f f-r",
+   "parent": "container-2-trailer",
+   "bbox": [
+    21.04,
+    67.15,
+    3.12,
+    5.6
+   ],
+   "drawDelayMs": 960,
+   "draw": "stroke",
+   "subpaths": 1
+  },
+  "container-2-trailer-top": {
+   "role": "face-top",
+   "tag": "path",
+   "class": "f f-t",
+   "parent": "container-2-trailer",
+   "bbox": [
+    8.49,
+    59.9,
+    15.67,
+    9.05
+   ],
+   "drawDelayMs": 960,
+   "draw": "stroke",
+   "subpaths": 1
+  },
+  "container-2-cab": {
+   "role": "g",
+   "tag": "g",
+   "parent": "container-2",
+   "bbox": [
+    21.65,
+    68.3,
+    5.72,
+    6.5
+   ]
+  },
+  "container-2-cab-face-left": {
+   "role": "face-left",
+   "tag": "path",
+   "class": "f f-l",
+   "parent": "container-2-cab",
+   "bbox": [
+    21.65,
+    69.9,
+    2.95,
+    4.9
+   ],
+   "drawDelayMs": 990,
+   "draw": "stroke",
+   "subpaths": 1
+  },
+  "container-2-cab-face-right": {
+   "role": "face-right",
+   "tag": "path",
+   "class": "f f-r",
+   "parent": "container-2-cab",
+   "bbox": [
+    24.6,
+    70,
+    2.77,
+    4.8
+   ],
+   "drawDelayMs": 990,
+   "draw": "stroke",
+   "subpaths": 1
+  },
+  "container-2-cab-top": {
+   "role": "face-top",
+   "tag": "path",
+   "class": "f f-t",
+   "parent": "container-2-cab",
+   "bbox": [
+    21.65,
+    68.3,
+    5.72,
+    3.3
+   ],
+   "drawDelayMs": 990,
+   "draw": "stroke",
+   "subpaths": 1
+  },
+  "sprinkler-zone-3": {
+   "role": "sprinkler-zone",
+   "tag": "g",
+   "class": "sz3",
+   "parent": "world",
+   "bbox": [
+    21.82,
+    22.6,
+    51.62,
+    29.8
+   ],
+   "note": "Sprinkler Zone 3: roof of Production Hall roof 03 (plan x 60.6 to 73.4, y 8.6 to 35.4, z 12) plus the Production Hall 2 roof (plan x 74.6 to 93.4, y 8.6 to 29.4, z 9). 31 heads. Toggle class \"off\" on this group for the demo offline end state."
+  },
+  "sz3-fill": {
+   "role": "zone-fill",
+   "tag": "path",
+   "class": "zf",
+   "parent": "sprinkler-zone-3",
+   "bbox": [
+    21.82,
+    22.6,
+    51.62,
+    29.8
+   ],
+   "subpaths": 2
+  },
+  "sz3-hatch": {
+   "role": "zone-hatch-offline",
+   "tag": "path",
+   "class": "zx",
+   "parent": "sprinkler-zone-3",
+   "bbox": [
+    21.82,
+    22.6,
+    51.62,
+    29.8
+   ],
+   "subpaths": 2
+  },
+  "sz3-outline": {
+   "role": "zone-outline",
+   "tag": "path",
+   "class": "zo",
+   "parent": "sprinkler-zone-3",
+   "bbox": [
+    21.82,
+    22.6,
+    51.62,
+    29.8
+   ],
+   "subpaths": 2
+  },
+  "sz3-heads": {
+   "role": "sprinkler-heads",
+   "tag": "g",
+   "parent": "sprinkler-zone-3",
+   "bbox": [
+    25.11,
+    24.75,
+    44.61,
+    25.75
+   ]
+  },
+  "sz3-head-00": {
+   "role": "ellipse",
+   "tag": "ellipse",
+   "class": "hd",
+   "parent": "sz3-heads",
+   "bbox": [
+    42,
+    34.75,
+    0.88,
+    0.5
+   ],
+   "rippleIndex": 0
+  },
+  "sz3-head-01": {
+   "role": "ellipse",
+   "tag": "ellipse",
+   "class": "hd",
+   "parent": "sz3-heads",
+   "bbox": [
+    46.76,
+    32,
+    0.88,
+    0.5
+   ],
+   "rippleIndex": 1
+  },
+  "sz3-head-02": {
+   "role": "ellipse",
+   "tag": "ellipse",
+   "class": "hd",
+   "parent": "sz3-heads",
+   "bbox": [
+    47.19,
+    40.75,
+    0.88,
+    0.5
+   ],
+   "rippleIndex": 2
+  },
+  "sz3-head-03": {
+   "role": "ellipse",
+   "tag": "ellipse",
+   "class": "hd",
+   "parent": "sz3-heads",
+   "bbox": [
+    51.95,
+    38,
+    0.88,
+    0.5
+   ],
+   "rippleIndex": 3
+  },
+  "sz3-head-04": {
+   "role": "ellipse",
+   "tag": "ellipse",
+   "class": "hd",
+   "parent": "sz3-heads",
+   "bbox": [
+    38.1,
+    32.5,
+    0.88,
+    0.5
+   ],
+   "rippleIndex": 4
+  },
+  "sz3-head-05": {
+   "role": "ellipse",
+   "tag": "ellipse",
+   "class": "hd",
+   "parent": "sz3-heads",
+   "bbox": [
+    42.86,
+    29.75,
+    0.88,
+    0.5
+   ],
+   "rippleIndex": 5
+  },
+  "sz3-head-06": {
+   "role": "ellipse",
+   "tag": "ellipse",
+   "class": "hd",
+   "parent": "sz3-heads",
+   "bbox": [
+    43.29,
+    43,
+    0.88,
+    0.5
+   ],
+   "rippleIndex": 6
+  },
+  "sz3-head-07": {
+   "role": "ellipse",
+   "tag": "ellipse",
+   "class": "hd",
+   "parent": "sz3-heads",
+   "bbox": [
+    37.23,
+    37.5,
+    0.88,
+    0.5
+   ],
+   "rippleIndex": 7
+  },
+  "sz3-head-08": {
+   "role": "ellipse",
+   "tag": "ellipse",
+   "class": "hd",
+   "parent": "sz3-heads",
+   "bbox": [
+    51.52,
+    29.25,
+    0.88,
+    0.5
+   ],
+   "rippleIndex": 8
+  },
+  "sz3-head-09": {
+   "role": "ellipse",
+   "tag": "ellipse",
+   "class": "hd",
+   "parent": "sz3-heads",
+   "bbox": [
+    51.52,
+    43.25,
+    0.88,
+    0.5
+   ],
+   "rippleIndex": 9
+  },
+  "sz3-head-10": {
+   "role": "ellipse",
+   "tag": "ellipse",
+   "class": "hd",
+   "parent": "sz3-heads",
+   "bbox": [
+    56.28,
+    40.5,
+    0.88,
+    0.5
+   ],
+   "rippleIndex": 10
+  },
+  "sz3-head-11": {
+   "role": "ellipse",
+   "tag": "ellipse",
+   "class": "hd",
+   "parent": "sz3-heads",
+   "bbox": [
+    56.72,
+    35.25,
+    0.88,
+    0.5
+   ],
+   "rippleIndex": 11
+  },
+  "sz3-head-12": {
+   "role": "ellipse",
+   "tag": "ellipse",
+   "class": "hd",
+   "parent": "sz3-heads",
+   "bbox": [
+    33.33,
+    35.25,
+    0.88,
+    0.5
+   ],
+   "rippleIndex": 12
+  },
+  "sz3-head-13": {
+   "role": "ellipse",
+   "tag": "ellipse",
+   "class": "hd",
+   "parent": "sz3-heads",
+   "bbox": [
+    47.62,
+    27,
+    0.88,
+    0.5
+   ],
+   "rippleIndex": 13
+  },
+  "sz3-head-14": {
+   "role": "ellipse",
+   "tag": "ellipse",
+   "class": "hd",
+   "parent": "sz3-heads",
+   "bbox": [
+    47.62,
+    45.5,
+    0.88,
+    0.5
+   ],
+   "rippleIndex": 14
+  },
+  "sz3-head-15": {
+   "role": "ellipse",
+   "tag": "ellipse",
+   "class": "hd",
+   "parent": "sz3-heads",
+   "bbox": [
+    34.2,
+    30.25,
+    0.88,
+    0.5
+   ],
+   "rippleIndex": 15
+  },
+  "sz3-head-16": {
+   "role": "ellipse",
+   "tag": "ellipse",
+   "class": "hd",
+   "parent": "sz3-heads",
+   "bbox": [
+    38.96,
+    27.5,
+    0.88,
+    0.5
+   ],
+   "rippleIndex": 16
+  },
+  "sz3-head-17": {
+   "role": "ellipse",
+   "tag": "ellipse",
+   "class": "hd",
+   "parent": "sz3-heads",
+   "bbox": [
+    61.05,
+    37.75,
+    0.88,
+    0.5
+   ],
+   "rippleIndex": 17
+  },
+  "sz3-head-18": {
+   "role": "ellipse",
+   "tag": "ellipse",
+   "class": "hd",
+   "parent": "sz3-heads",
+   "bbox": [
+    32.9,
+    40,
+    0.88,
+    0.5
+   ],
+   "rippleIndex": 18
+  },
+  "sz3-head-19": {
+   "role": "ellipse",
+   "tag": "ellipse",
+   "class": "hd",
+   "parent": "sz3-heads",
+   "bbox": [
+    55.85,
+    45.75,
+    0.88,
+    0.5
+   ],
+   "rippleIndex": 19
+  },
+  "sz3-head-20": {
+   "role": "ellipse",
+   "tag": "ellipse",
+   "class": "hd",
+   "parent": "sz3-heads",
+   "bbox": [
+    60.61,
+    43,
+    0.88,
+    0.5
+   ],
+   "rippleIndex": 20
+  },
+  "sz3-head-21": {
+   "role": "ellipse",
+   "tag": "ellipse",
+   "class": "hd",
+   "parent": "sz3-heads",
+   "bbox": [
+    29.44,
+    33,
+    0.88,
+    0.5
+   ],
+   "rippleIndex": 21
+  },
+  "sz3-head-22": {
+   "role": "ellipse",
+   "tag": "ellipse",
+   "class": "hd",
+   "parent": "sz3-heads",
+   "bbox": [
+    43.73,
+    24.75,
+    0.88,
+    0.5
+   ],
+   "rippleIndex": 22
+  },
+  "sz3-head-23": {
+   "role": "ellipse",
+   "tag": "ellipse",
+   "class": "hd",
+   "parent": "sz3-heads",
+   "bbox": [
+    29,
+    37.75,
+    0.88,
+    0.5
+   ],
+   "rippleIndex": 23
+  },
+  "sz3-head-24": {
+   "role": "ellipse",
+   "tag": "ellipse",
+   "class": "hd",
+   "parent": "sz3-heads",
+   "bbox": [
+    51.95,
+    48,
+    0.88,
+    0.5
+   ],
+   "rippleIndex": 24
+  },
+  "sz3-head-25": {
+   "role": "ellipse",
+   "tag": "ellipse",
+   "class": "hd",
+   "parent": "sz3-heads",
+   "bbox": [
+    65.38,
+    40.25,
+    0.88,
+    0.5
+   ],
+   "rippleIndex": 25
+  },
+  "sz3-head-26": {
+   "role": "ellipse",
+   "tag": "ellipse",
+   "class": "hd",
+   "parent": "sz3-heads",
+   "bbox": [
+    25.11,
+    35.5,
+    0.88,
+    0.5
+   ],
+   "rippleIndex": 26
+  },
+  "sz3-head-27": {
+   "role": "ellipse",
+   "tag": "ellipse",
+   "class": "hd",
+   "parent": "sz3-heads",
+   "bbox": [
+    59.32,
+    47.75,
+    0.88,
+    0.5
+   ],
+   "rippleIndex": 27
+  },
+  "sz3-head-28": {
+   "role": "ellipse",
+   "tag": "ellipse",
+   "class": "hd",
+   "parent": "sz3-heads",
+   "bbox": [
+    64.08,
+    45,
+    0.88,
+    0.5
+   ],
+   "rippleIndex": 28
+  },
+  "sz3-head-29": {
+   "role": "ellipse",
+   "tag": "ellipse",
+   "class": "hd",
+   "parent": "sz3-heads",
+   "bbox": [
+    55.42,
+    50,
+    0.88,
+    0.5
+   ],
+   "rippleIndex": 29
+  },
+  "sz3-head-30": {
+   "role": "ellipse",
+   "tag": "ellipse",
+   "class": "hd",
+   "parent": "sz3-heads",
+   "bbox": [
+    68.84,
+    42.25,
+    0.88,
+    0.5
+   ],
+   "rippleIndex": 30
+  },
+  "sz3-crosses": {
+   "role": "sprinkler-head-crosses-offline",
+   "tag": "g",
+   "parent": "sprinkler-zone-3",
+   "bbox": [
+    24.9,
+    24.63,
+    45.03,
+    26
+   ]
+  },
+  "sz3-cross-00": {
+   "role": "path",
+   "tag": "path",
+   "class": "hx",
+   "parent": "sz3-crosses",
+   "bbox": [
+    41.79,
+    34.63,
+    1.29,
+    0.75
+   ],
+   "rippleIndex": 0,
+   "subpaths": 2
+  },
+  "sz3-cross-01": {
+   "role": "path",
+   "tag": "path",
+   "class": "hx",
+   "parent": "sz3-crosses",
+   "bbox": [
+    46.55,
+    31.88,
+    1.3,
+    0.75
+   ],
+   "rippleIndex": 1,
+   "subpaths": 2
+  },
+  "sz3-cross-02": {
+   "role": "path",
+   "tag": "path",
+   "class": "hx",
+   "parent": "sz3-crosses",
+   "bbox": [
+    46.98,
+    40.63,
+    1.3,
+    0.75
+   ],
+   "rippleIndex": 2,
+   "subpaths": 2
+  },
+  "sz3-cross-03": {
+   "role": "path",
+   "tag": "path",
+   "class": "hx",
+   "parent": "sz3-crosses",
+   "bbox": [
+    51.75,
+    37.88,
+    1.29,
+    0.75
+   ],
+   "rippleIndex": 3,
+   "subpaths": 2
+  },
+  "sz3-cross-04": {
+   "role": "path",
+   "tag": "path",
+   "class": "hx",
+   "parent": "sz3-crosses",
+   "bbox": [
+    37.89,
+    32.38,
+    1.3,
+    0.75
+   ],
+   "rippleIndex": 4,
+   "subpaths": 2
+  },
+  "sz3-cross-05": {
+   "role": "path",
+   "tag": "path",
+   "class": "hx",
+   "parent": "sz3-crosses",
+   "bbox": [
+    42.65,
+    29.63,
+    1.3,
+    0.75
+   ],
+   "rippleIndex": 5,
+   "subpaths": 2
+  },
+  "sz3-cross-06": {
+   "role": "path",
+   "tag": "path",
+   "class": "hx",
+   "parent": "sz3-crosses",
+   "bbox": [
+    43.08,
+    42.88,
+    1.3,
+    0.75
+   ],
+   "rippleIndex": 6,
+   "subpaths": 2
+  },
+  "sz3-cross-07": {
+   "role": "path",
+   "tag": "path",
+   "class": "hx",
+   "parent": "sz3-crosses",
+   "bbox": [
+    37.02,
+    37.38,
+    1.3,
+    0.75
+   ],
+   "rippleIndex": 7,
+   "subpaths": 2
+  },
+  "sz3-cross-08": {
+   "role": "path",
+   "tag": "path",
+   "class": "hx",
+   "parent": "sz3-crosses",
+   "bbox": [
+    51.31,
+    29.13,
+    1.3,
+    0.75
+   ],
+   "rippleIndex": 8,
+   "subpaths": 2
+  },
+  "sz3-cross-09": {
+   "role": "path",
+   "tag": "path",
+   "class": "hx",
+   "parent": "sz3-crosses",
+   "bbox": [
+    51.31,
+    43.13,
+    1.3,
+    0.75
+   ],
+   "rippleIndex": 9,
+   "subpaths": 2
+  },
+  "sz3-cross-10": {
+   "role": "path",
+   "tag": "path",
+   "class": "hx",
+   "parent": "sz3-crosses",
+   "bbox": [
+    56.08,
+    40.38,
+    1.29,
+    0.75
+   ],
+   "rippleIndex": 10,
+   "subpaths": 2
+  },
+  "sz3-cross-11": {
+   "role": "path",
+   "tag": "path",
+   "class": "hx",
+   "parent": "sz3-crosses",
+   "bbox": [
+    56.51,
+    35.13,
+    1.3,
+    0.75
+   ],
+   "rippleIndex": 11,
+   "subpaths": 2
+  },
+  "sz3-cross-12": {
+   "role": "path",
+   "tag": "path",
+   "class": "hx",
+   "parent": "sz3-crosses",
+   "bbox": [
+    33.13,
+    35.13,
+    1.29,
+    0.75
+   ],
+   "rippleIndex": 12,
+   "subpaths": 2
+  },
+  "sz3-cross-13": {
+   "role": "path",
+   "tag": "path",
+   "class": "hx",
+   "parent": "sz3-crosses",
+   "bbox": [
+    47.41,
+    26.88,
+    1.3,
+    0.75
+   ],
+   "rippleIndex": 13,
+   "subpaths": 2
+  },
+  "sz3-cross-14": {
+   "role": "path",
+   "tag": "path",
+   "class": "hx",
+   "parent": "sz3-crosses",
+   "bbox": [
+    47.41,
+    45.38,
+    1.3,
+    0.75
+   ],
+   "rippleIndex": 14,
+   "subpaths": 2
+  },
+  "sz3-cross-15": {
+   "role": "path",
+   "tag": "path",
+   "class": "hx",
+   "parent": "sz3-crosses",
+   "bbox": [
+    33.99,
+    30.13,
+    1.3,
+    0.75
+   ],
+   "rippleIndex": 15,
+   "subpaths": 2
+  },
+  "sz3-cross-16": {
+   "role": "path",
+   "tag": "path",
+   "class": "hx",
+   "parent": "sz3-crosses",
+   "bbox": [
+    38.75,
+    27.38,
+    1.3,
+    0.75
+   ],
+   "rippleIndex": 16,
+   "subpaths": 2
+  },
+  "sz3-cross-17": {
+   "role": "path",
+   "tag": "path",
+   "class": "hx",
+   "parent": "sz3-crosses",
+   "bbox": [
+    60.84,
+    37.63,
+    1.3,
+    0.75
+   ],
+   "rippleIndex": 17,
+   "subpaths": 2
+  },
+  "sz3-cross-18": {
+   "role": "path",
+   "tag": "path",
+   "class": "hx",
+   "parent": "sz3-crosses",
+   "bbox": [
+    32.69,
+    39.88,
+    1.3,
+    0.75
+   ],
+   "rippleIndex": 18,
+   "subpaths": 2
+  },
+  "sz3-cross-19": {
+   "role": "path",
+   "tag": "path",
+   "class": "hx",
+   "parent": "sz3-crosses",
+   "bbox": [
+    55.64,
+    45.63,
+    1.3,
+    0.75
+   ],
+   "rippleIndex": 19,
+   "subpaths": 2
+  },
+  "sz3-cross-20": {
+   "role": "path",
+   "tag": "path",
+   "class": "hx",
+   "parent": "sz3-crosses",
+   "bbox": [
+    60.41,
+    42.88,
+    1.29,
+    0.75
+   ],
+   "rippleIndex": 20,
+   "subpaths": 2
+  },
+  "sz3-cross-21": {
+   "role": "path",
+   "tag": "path",
+   "class": "hx",
+   "parent": "sz3-crosses",
+   "bbox": [
+    29.23,
+    32.88,
+    1.3,
+    0.75
+   ],
+   "rippleIndex": 21,
+   "subpaths": 2
+  },
+  "sz3-cross-22": {
+   "role": "path",
+   "tag": "path",
+   "class": "hx",
+   "parent": "sz3-crosses",
+   "bbox": [
+    43.52,
+    24.63,
+    1.3,
+    0.75
+   ],
+   "rippleIndex": 22,
+   "subpaths": 2
+  },
+  "sz3-cross-23": {
+   "role": "path",
+   "tag": "path",
+   "class": "hx",
+   "parent": "sz3-crosses",
+   "bbox": [
+    28.8,
+    37.63,
+    1.29,
+    0.75
+   ],
+   "rippleIndex": 23,
+   "subpaths": 2
+  },
+  "sz3-cross-24": {
+   "role": "path",
+   "tag": "path",
+   "class": "hx",
+   "parent": "sz3-crosses",
+   "bbox": [
+    51.75,
+    47.88,
+    1.29,
+    0.75
+   ],
+   "rippleIndex": 24,
+   "subpaths": 2
+  },
+  "sz3-cross-25": {
+   "role": "path",
+   "tag": "path",
+   "class": "hx",
+   "parent": "sz3-crosses",
+   "bbox": [
+    65.17,
+    40.13,
+    1.3,
+    0.75
+   ],
+   "rippleIndex": 25,
+   "subpaths": 2
+  },
+  "sz3-cross-26": {
+   "role": "path",
+   "tag": "path",
+   "class": "hx",
+   "parent": "sz3-crosses",
+   "bbox": [
+    24.9,
+    35.38,
+    1.3,
+    0.75
+   ],
+   "rippleIndex": 26,
+   "subpaths": 2
+  },
+  "sz3-cross-27": {
+   "role": "path",
+   "tag": "path",
+   "class": "hx",
+   "parent": "sz3-crosses",
+   "bbox": [
+    59.11,
+    47.63,
+    1.3,
+    0.75
+   ],
+   "rippleIndex": 27,
+   "subpaths": 2
+  },
+  "sz3-cross-28": {
+   "role": "path",
+   "tag": "path",
+   "class": "hx",
+   "parent": "sz3-crosses",
+   "bbox": [
+    63.87,
+    44.88,
+    1.3,
+    0.75
+   ],
+   "rippleIndex": 28,
+   "subpaths": 2
+  },
+  "sz3-cross-29": {
+   "role": "path",
+   "tag": "path",
+   "class": "hx",
+   "parent": "sz3-crosses",
+   "bbox": [
+    55.21,
+    49.88,
+    1.3,
+    0.75
+   ],
+   "rippleIndex": 29,
+   "subpaths": 2
+  },
+  "sz3-cross-30": {
+   "role": "path",
+   "tag": "path",
+   "class": "hx",
+   "parent": "sz3-crosses",
+   "bbox": [
+    68.63,
+    42.13,
+    1.3,
+    0.75
+   ],
+   "rippleIndex": 30,
+   "subpaths": 2
+  },
+  "envelope": {
+   "role": "envelope",
+   "tag": "g",
+   "bbox": [
+    -80.218,
+    -9.63,
+    193.345,
+    112.26
+   ]
+  },
+  "envelope-outer": {
+   "role": "envelope-outer",
+   "tag": "path",
+   "class": "env env-b",
+   "parent": "envelope",
+   "bbox": [
+    -80.218,
+    -9.63,
+    193.345,
+    112.26
+   ],
+   "subpaths": 1
+  },
+  "envelope-outline": {
+   "role": "envelope-outline",
+   "tag": "path",
+   "class": "env env-a",
+   "parent": "envelope",
+   "bbox": [
+    -79.469,
+    -8.882,
+    191.847,
+    110.764
+   ],
+   "subpaths": 1
+  },
+  "envelope-label": {
+   "role": "envelope-label",
+   "tag": "g",
+   "class": "env-lab",
+   "parent": "envelope",
+   "bbox": [
+    -46.397,
+    71.92,
+    45.888,
+    27.964
+   ]
+  },
+  "envelope-label-text": {
+   "role": "text",
+   "tag": "text",
+   "parent": "envelope-label",
+   "bbox": [
+    -46.397,
+    71.92,
+    45.888,
+    27.964
+   ]
+  },
+  "zone-labels": {
+   "role": "labels",
+   "tag": "g",
+   "bbox": [
+    -57.678,
+    -9.489,
+    134.135,
+    104.146
+   ]
+  },
+  "zone-label-utilities": {
+   "role": "zone-label",
+   "tag": "g",
+   "class": "zl",
+   "parent": "zone-labels",
+   "bbox": [
+    -11.449,
+    -9.489,
+    11.715,
+    6.755
+   ]
+  },
+  "zone-label-utilities-leader": {
+   "role": "line",
+   "tag": "line",
+   "parent": "zone-label-utilities",
+   "bbox": [
+    0,
+    -6.993,
+    0,
+    3.993
+   ]
+  },
+  "zone-label-utilities-text": {
+   "role": "text",
+   "tag": "text",
+   "parent": "zone-label-utilities",
+   "bbox": [
+    -11.449,
+    -9.489,
+    10.783,
+    2.163
+   ]
+  },
+  "zone-label-production-hall": {
+   "role": "zone-label",
+   "tag": "g",
+   "class": "zl",
+   "parent": "zone-labels",
+   "bbox": [
+    41.245,
+    15.184,
+    17.969,
+    10.083
+   ]
+  },
+  "zone-label-production-hall-leader": {
+   "role": "line",
+   "tag": "line",
+   "parent": "zone-label-production-hall",
+   "bbox": [
+    50.229,
+    17.679,
+    0,
+    7.321
+   ]
+  },
+  "zone-label-production-hall-text": {
+   "role": "text",
+   "tag": "text",
+   "parent": "zone-label-production-hall",
+   "bbox": [
+    41.245,
+    15.184,
+    17.969,
+    2.163
+   ]
+  },
+  "zone-label-roof": {
+   "role": "zone-label",
+   "tag": "g",
+   "class": "zl",
+   "parent": "zone-labels",
+   "bbox": [
+    25.316,
+    6.842,
+    4.794,
+    5.424
+   ]
+  },
+  "zone-label-roof-leader": {
+   "role": "line",
+   "tag": "line",
+   "parent": "zone-label-roof",
+   "bbox": [
+    27.713,
+    9.338,
+    0,
+    2.662
+   ]
+  },
+  "zone-label-roof-text": {
+   "role": "text",
+   "tag": "text",
+   "parent": "zone-label-roof",
+   "bbox": [
+    25.316,
+    6.842,
+    4.794,
+    2.163
+   ]
+  },
+  "zone-label-production-hall-2": {
+   "role": "zone-label",
+   "tag": "g",
+   "class": "zl",
+   "parent": "zone-labels",
+   "bbox": [
+    55.16,
+    61.734,
+    21.298,
+    5.923
+   ]
+  },
+  "zone-label-production-hall-2-leader": {
+   "role": "line",
+   "tag": "line",
+   "parent": "zone-label-production-hall-2",
+   "bbox": [
+    55.426,
+    62,
+    0,
+    3.328
+   ]
+  },
+  "zone-label-production-hall-2-text": {
+   "role": "text",
+   "tag": "text",
+   "parent": "zone-label-production-hall-2",
+   "bbox": [
+    56.092,
+    65.494,
+    20.366,
+    2.163
+   ]
+  },
+  "zone-label-laboratory": {
+   "role": "zone-label",
+   "tag": "g",
+   "class": "zl",
+   "parent": "zone-labels",
+   "bbox": [
+    -57.678,
+    31.734,
+    12.911,
+    5.59
+   ]
+  },
+  "zone-label-laboratory-leader": {
+   "role": "line",
+   "tag": "line",
+   "parent": "zone-label-laboratory",
+   "bbox": [
+    -45.033,
+    32,
+    0,
+    2.995
+   ]
+  },
+  "zone-label-laboratory-text": {
+   "role": "text",
+   "tag": "text",
+   "parent": "zone-label-laboratory",
+   "bbox": [
+    -57.678,
+    35.161,
+    11.979,
+    2.163
+   ]
+  },
+  "zone-label-warehouse": {
+   "role": "zone-label",
+   "tag": "g",
+   "class": "zl",
+   "parent": "zone-labels",
+   "bbox": [
+    -44.358,
+    52.734,
+    11.715,
+    5.923
+   ]
+  },
+  "zone-label-warehouse-leader": {
+   "role": "line",
+   "tag": "line",
+   "parent": "zone-label-warehouse",
+   "bbox": [
+    -32.909,
+    53,
+    0,
+    3.328
+   ]
+  },
+  "zone-label-warehouse-text": {
+   "role": "text",
+   "tag": "text",
+   "parent": "zone-label-warehouse",
+   "bbox": [
+    -44.358,
+    56.494,
+    10.783,
+    2.163
+   ]
+  },
+  "zone-label-loading-area": {
+   "role": "zone-label",
+   "tag": "g",
+   "class": "zl",
+   "parent": "zone-labels",
+   "bbox": [
+    29.179,
+    88.734,
+    15.308,
+    5.923
+   ]
+  },
+  "zone-label-loading-area-leader": {
+   "role": "line",
+   "tag": "line",
+   "parent": "zone-label-loading-area",
+   "bbox": [
+    29.445,
+    89,
+    0,
+    3.328
+   ]
+  },
+  "zone-label-loading-area-text": {
+   "role": "text",
+   "tag": "text",
+   "parent": "zone-label-loading-area",
+   "bbox": [
+    30.111,
+    92.494,
+    14.376,
+    2.163
+   ]
+  },
+  "sz3-label": {
+   "role": "sprinkler-zone-label",
+   "tag": "g",
+   "class": "szl",
+   "bbox": [
+    74.179,
+    37.175,
+    22.129,
+    5.124
+   ]
+  },
+  "sz3-label-leader": {
+   "role": "line",
+   "tag": "line",
+   "parent": "sz3-label",
+   "bbox": [
+    74.478,
+    39.338,
+    1.997,
+    2.662
+   ]
+  },
+  "sz3-label-name": {
+   "role": "text",
+   "tag": "text",
+   "parent": "sz3-label",
+   "bbox": [
+    77.14,
+    37.175,
+    19.167,
+    2.163
+   ]
+  },
+  "sz3-label-status": {
+   "role": "text",
+   "tag": "text",
+   "class": "st",
+   "parent": "sz3-label",
+   "bbox": [
+    77.14,
+    39.338,
+    7.188,
+    2.163
+   ]
+  },
+  "anchors": {
+   "role": "anchors",
+   "tag": "g",
+   "bbox": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  "anchor-hot-work": {
+   "role": "circle",
+   "tag": "circle",
+   "class": "anchor",
+   "parent": "anchors",
+   "bbox": [
+    38.971,
+    32.5,
+    0,
+    0
+   ]
+  },
+  "anchor-roof-01": {
+   "role": "circle",
+   "tag": "circle",
+   "class": "anchor",
+   "parent": "anchors",
+   "bbox": [
+    16.021,
+    19.25,
+    0,
+    0
+   ]
+  },
+  "anchor-roof-02": {
+   "role": "circle",
+   "tag": "circle",
+   "class": "anchor",
+   "parent": "anchors",
+   "bbox": [
+    27.28,
+    25.75,
+    0,
+    0
+   ]
+  },
+  "anchor-roof-03": {
+   "role": "circle",
+   "tag": "circle",
+   "class": "anchor",
+   "parent": "anchors",
+   "bbox": [
+    38.971,
+    32.5,
+    0,
+    0
+   ]
+  },
+  "anchor-roof-01-relocation": {
+   "role": "circle",
+   "tag": "circle",
+   "class": "anchor",
+   "parent": "anchors",
+   "bbox": [
+    18.187,
+    18.5,
+    0,
+    0
+   ]
+  },
+  "anchor-sz3-valve": {
+   "role": "circle",
+   "tag": "circle",
+   "class": "anchor",
+   "parent": "anchors",
+   "bbox": [
+    46.765,
+    35,
+    0,
+    0
+   ]
+  },
+  "anchor-envelope-centre": {
+   "role": "circle",
+   "tag": "circle",
+   "class": "anchor",
+   "parent": "anchors",
+   "bbox": [
+    16.454,
+    46.5,
+    0,
+    0
+   ]
+  },
+  "anchor-hero-exit": {
+   "role": "circle",
+   "tag": "circle",
+   "class": "anchor",
+   "parent": "anchors",
+   "bbox": [
+    66.489,
+    15.39,
+    0,
+    0
+   ]
+  },
+  "anchor-loading-area-centre": {
+   "role": "circle",
+   "tag": "circle",
+   "class": "anchor",
+   "parent": "anchors",
+   "bbox": [
+    29.445,
+    73,
+    0,
+    0
+   ]
+  }
+ },
+ "anchors": {
+  "hotWorkNode": {
+   "plan": [
+    67,
+    22,
+    12
+   ],
+   "world": [
+    38.971,
+    32.5
+   ],
+   "note": "DEMO.hero.loc: Roof 03 centre, the hot-work node. Node glyph drawn at 1.5x in focus stages, 1.2x otherwise."
+  },
+  "roof01Centre": {
+   "plan": [
+    40.5,
+    22,
+    12
+   ],
+   "world": [
+    16.021,
+    19.25
+   ]
+  },
+  "roof02Centre": {
+   "plan": [
+    53.5,
+    22,
+    12
+   ],
+   "world": [
+    27.28,
+    25.75
+   ]
+  },
+  "roof03Centre": {
+   "plan": [
+    67,
+    22,
+    12
+   ],
+   "world": [
+    38.971,
+    32.5
+   ]
+  },
+  "roof01Relocation": {
+   "plan": [
+    41,
+    20,
+    12
+   ],
+   "world": [
+    18.187,
+    18.5
+   ],
+   "note": "Change option 'Move work outside affected zone' moves the node here over 2600 ms (Roof 01, Sprinkler Zone 1)."
+  },
+  "sprinklerZone3Valve": {
+   "plan": [
+    74,
+    20,
+    12
+   ],
+   "world": [
+    46.765,
+    35
+   ],
+   "note": "Ripple origin: heads are ordered by plan distance from (74, 20); data-i is the ripple index (55 ms per step in the demo)."
+  },
+  "sprinklerZone3Label": {
+   "plan": [
+    94,
+    8,
+    9
+   ],
+   "world": [
+    74.478,
+    42
+   ],
+   "labelOffsetPx": [
+    12,
+    -16
+   ],
+   "alternativesPx": [
+    [
+     -12,
+     -16
+    ],
+    [
+     12,
+     26
+    ],
+    [
+     -12,
+     26
+    ]
+   ],
+   "textPx": {
+    "name": [
+     16,
+     -19
+    ],
+    "status": [
+     16,
+     -6
+    ]
+   },
+   "note": "Leader from the anchor to the offset point; name and status text start 4 px right of it. Status text: ACTIVE, OFFLINE or RESTORED."
+  },
+  "envelopeCentre": {
+   "world": [
+    16.454,
+    46.5
+   ],
+   "plan": [
+    56,
+    37,
+    0
+   ]
+  },
+  "heroExitPoint": {
+   "world": [
+    66.489,
+    15.39
+   ],
+   "note": "Where the ray from the envelope centre through the hot-work node meets the envelope."
+  },
+  "loadingAreaCentre": {
+   "plan": [
+    90,
+    56,
+    0
+   ],
+   "world": [
+    29.445,
+    73
+   ]
+  },
+  "zoneLabels": [
+   {
+    "id": "zone-label-utilities",
+    "text": "UTILITIES",
+    "plan": [
+     6,
+     6,
+     9
+    ],
+    "world": [
+     0,
+     -3
+    ],
+    "leaderPx": -24,
+    "textPx": [
+     -4,
+     -29
+    ],
+    "anchor": "end"
+   },
+   {
+    "id": "zone-label-production-hall",
+    "text": "PRODUCTION HALL",
+    "plan": [
+     66,
+     8,
+     12
+    ],
+    "world": [
+     50.229,
+     25
+    ],
+    "leaderPx": -44,
+    "textPx": [
+     0,
+     -49
+    ],
+    "anchor": "middle"
+   },
+   {
+    "id": "zone-label-roof",
+    "text": "ROOF",
+    "plan": [
+     40,
+     8,
+     12
+    ],
+    "world": [
+     27.713,
+     12
+    ],
+    "leaderPx": -16,
+    "textPx": [
+     0,
+     -21
+    ],
+    "anchor": "middle"
+   },
+   {
+    "id": "zone-label-production-hall-2",
+    "text": "PRODUCTION HALL 2",
+    "plan": [
+     94,
+     30,
+     0
+    ],
+    "world": [
+     55.426,
+     62
+    ],
+    "leaderPx": 20,
+    "textPx": [
+     4,
+     31
+    ],
+    "anchor": "start"
+   },
+   {
+    "id": "zone-label-laboratory",
+    "text": "LABORATORY",
+    "plan": [
+     6,
+     58,
+     0
+    ],
+    "world": [
+     -45.033,
+     32
+    ],
+    "leaderPx": 18,
+    "textPx": [
+     -4,
+     29
+    ],
+    "anchor": "end"
+   },
+   {
+    "id": "zone-label-warehouse",
+    "text": "WAREHOUSE",
+    "plan": [
+     34,
+     72,
+     0
+    ],
+    "world": [
+     -32.909,
+     53
+    ],
+    "leaderPx": 20,
+    "textPx": [
+     -4,
+     31
+    ],
+    "anchor": "end"
+   },
+   {
+    "id": "zone-label-loading-area",
+    "text": "LOADING AREA",
+    "plan": [
+     106,
+     72,
+     0
+    ],
+    "world": [
+     29.445,
+     89
+    ],
+    "leaderPx": 20,
+    "textPx": [
+     4,
+     31
+    ],
+    "anchor": "start"
+   }
+  ],
+  "zoneLabelNote": "Leader: vertical, from the anchor dot (r 1.6 px) by leaderPx screen px; text 10 px mono 500, letter-spacing .12em, ink-2 with a 3 px paper halo. The demo hides a label that would sit under a card or off the canvas."
+ },
+ "envelope": {
+  "ids": {
+   "fill": "envelope-fill",
+   "outline": "envelope-outline",
+   "outer": "envelope-outer",
+   "label": "envelope-label",
+   "labelText": "envelope-label-text",
+   "labelPath": "envelope-label-path"
+  },
+  "boundsWorld": [
+   -79.469,
+   -8.882,
+   191.847,
+   110.764
+  ],
+  "centreWorld": [
+   16.454,
+   46.5
+  ],
+  "pathD": "M80.54 83.5L73.319 87.652L69.893 89.58L67.15 91.08L64.758 92.343L62.587 93.446L60.568 94.427L58.661 95.31L56.839 96.11L55.082 96.838L53.379 97.501L51.718 98.106L50.091 98.657L48.492 99.158L46.917 99.611L45.36 100.018L43.818 100.382L42.289 100.704L40.769 100.985L39.256 101.227L37.749 101.43L36.245 101.594L34.744 101.721L33.242 101.811L31.74 101.865L30.235 101.882L28.727 101.862L27.214 101.807L25.695 101.715L24.169 101.587L22.635 101.423L21.091 101.222L19.536 100.985L17.968 100.709L16.387 100.396L14.789 100.045L13.175 99.654L11.54 99.222L9.884 98.749L8.203 98.234L6.494 97.674L4.754 97.067L2.978 96.412L1.161 95.706L-0.704 94.944L-2.623 94.123L-4.607 93.237L-6.668 92.279L-8.824 91.239L-11.096 90.104L-13.518 88.855L-16.141 87.464L-19.047 85.881L-22.4 84.013L-26.607 81.625L-35.507 76.5L-44.384 71.362L-48.52 68.932L-51.755 66.997L-54.497 65.319L-56.907 63.805L-59.07 62.406L-61.035 61.094L-62.837 59.85L-64.496 58.66L-66.031 57.514L-67.453 56.406L-68.772 55.33L-69.996 54.281L-71.131 53.255L-72.181 52.251L-73.151 51.264L-74.044 50.293L-74.863 49.337L-75.61 48.394L-76.288 47.461L-76.897 46.539L-77.439 45.626L-77.916 44.721L-78.328 43.823L-78.675 42.932L-78.96 42.046L-79.181 41.165L-79.34 40.288L-79.436 39.415L-79.469 38.544L-79.44 37.675L-79.348 36.808L-79.192 35.941L-78.971 35.074L-78.686 34.206L-78.335 33.335L-77.917 32.462L-77.43 31.585L-76.872 30.701L-76.242 29.811L-75.536 28.913L-74.752 28.003L-73.885 27.08L-72.93 26.141L-71.882 25.182L-70.733 24.198L-69.472 23.184L-68.086 22.132L-66.557 21.031L-64.858 19.865L-62.949 18.612L-60.761 17.231L-58.163 15.647L-54.824 13.669L-47.631 9.5L-40.41 5.348L-36.984 3.42L-34.241 1.92L-31.849 0.657L-29.678 -0.446L-27.659 -1.427L-25.752 -2.31L-23.93 -3.11L-22.173 -3.838L-20.47 -4.501L-18.809 -5.106L-17.182 -5.657L-15.583 -6.158L-14.008 -6.611L-12.451 -7.018L-10.909 -7.382L-9.38 -7.704L-7.86 -7.985L-6.347 -8.227L-4.84 -8.43L-3.336 -8.594L-1.835 -8.721L-0.333 -8.811L1.169 -8.865L2.674 -8.882L4.182 -8.862L5.695 -8.807L7.214 -8.715L8.74 -8.587L10.274 -8.423L11.818 -8.222L13.373 -7.985L14.941 -7.709L16.522 -7.396L18.12 -7.045L19.734 -6.654L21.369 -6.222L23.025 -5.749L24.706 -5.234L26.415 -4.674L28.155 -4.067L29.931 -3.412L31.748 -2.706L33.613 -1.944L35.532 -1.123L37.516 -0.237L39.577 0.721L41.733 1.761L44.005 2.896L46.427 4.145L49.05 5.536L51.956 7.119L55.308 8.987L59.516 11.375L68.416 16.5L77.292 21.638L81.429 24.068L84.664 26.003L87.406 27.681L89.816 29.195L91.979 30.594L93.944 31.906L95.746 33.15L97.405 34.34L98.94 35.486L100.362 36.594L101.681 37.67L102.905 38.719L104.04 39.745L105.09 40.749L106.06 41.736L106.953 42.707L107.772 43.663L108.519 44.606L109.196 45.539L109.806 46.461L110.348 47.374L110.825 48.279L111.236 49.177L111.584 50.068L111.869 50.954L112.09 51.835L112.249 52.712L112.345 53.585L112.378 54.456L112.349 55.325L112.257 56.192L112.101 57.059L111.88 57.926L111.595 58.794L111.244 59.665L110.826 60.538L110.339 61.415L109.781 62.299L109.151 63.189L108.445 64.087L107.661 64.997L106.794 65.92L105.839 66.859L104.791 67.818L103.642 68.802L102.381 69.816L100.995 70.868L99.466 71.969L97.767 73.135L95.858 74.388L93.67 75.769L91.072 77.353L87.733 79.331Z",
+  "pointsWorld": [
+   [
+    80.54,
+    83.5
+   ],
+   [
+    73.319,
+    87.652
+   ],
+   [
+    69.893,
+    89.58
+   ],
+   [
+    67.15,
+    91.08
+   ],
+   [
+    64.758,
+    92.343
+   ],
+   [
+    62.587,
+    93.446
+   ],
+   [
+    60.568,
+    94.427
+   ],
+   [
+    58.661,
+    95.31
+   ],
+   [
+    56.839,
+    96.11
+   ],
+   [
+    55.082,
+    96.838
+   ],
+   [
+    53.379,
+    97.501
+   ],
+   [
+    51.718,
+    98.106
+   ],
+   [
+    50.091,
+    98.657
+   ],
+   [
+    48.492,
+    99.158
+   ],
+   [
+    46.917,
+    99.611
+   ],
+   [
+    45.36,
+    100.018
+   ],
+   [
+    43.818,
+    100.382
+   ],
+   [
+    42.289,
+    100.704
+   ],
+   [
+    40.769,
+    100.985
+   ],
+   [
+    39.256,
+    101.227
+   ],
+   [
+    37.749,
+    101.43
+   ],
+   [
+    36.245,
+    101.594
+   ],
+   [
+    34.744,
+    101.721
+   ],
+   [
+    33.242,
+    101.811
+   ],
+   [
+    31.74,
+    101.865
+   ],
+   [
+    30.235,
+    101.882
+   ],
+   [
+    28.727,
+    101.862
+   ],
+   [
+    27.214,
+    101.807
+   ],
+   [
+    25.695,
+    101.715
+   ],
+   [
+    24.169,
+    101.587
+   ],
+   [
+    22.635,
+    101.423
+   ],
+   [
+    21.091,
+    101.222
+   ],
+   [
+    19.536,
+    100.985
+   ],
+   [
+    17.968,
+    100.709
+   ],
+   [
+    16.387,
+    100.396
+   ],
+   [
+    14.789,
+    100.045
+   ],
+   [
+    13.175,
+    99.654
+   ],
+   [
+    11.54,
+    99.222
+   ],
+   [
+    9.884,
+    98.749
+   ],
+   [
+    8.203,
+    98.234
+   ],
+   [
+    6.494,
+    97.674
+   ],
+   [
+    4.754,
+    97.067
+   ],
+   [
+    2.978,
+    96.412
+   ],
+   [
+    1.161,
+    95.706
+   ],
+   [
+    -0.704,
+    94.944
+   ],
+   [
+    -2.623,
+    94.123
+   ],
+   [
+    -4.607,
+    93.237
+   ],
+   [
+    -6.668,
+    92.279
+   ],
+   [
+    -8.824,
+    91.239
+   ],
+   [
+    -11.096,
+    90.104
+   ],
+   [
+    -13.518,
+    88.855
+   ],
+   [
+    -16.141,
+    87.464
+   ],
+   [
+    -19.047,
+    85.881
+   ],
+   [
+    -22.4,
+    84.013
+   ],
+   [
+    -26.607,
+    81.625
+   ],
+   [
+    -35.507,
+    76.5
+   ],
+   [
+    -44.384,
+    71.362
+   ],
+   [
+    -48.52,
+    68.932
+   ],
+   [
+    -51.755,
+    66.997
+   ],
+   [
+    -54.497,
+    65.319
+   ],
+   [
+    -56.907,
+    63.805
+   ],
+   [
+    -59.07,
+    62.406
+   ],
+   [
+    -61.035,
+    61.094
+   ],
+   [
+    -62.837,
+    59.85
+   ],
+   [
+    -64.496,
+    58.66
+   ],
+   [
+    -66.031,
+    57.514
+   ],
+   [
+    -67.453,
+    56.406
+   ],
+   [
+    -68.772,
+    55.33
+   ],
+   [
+    -69.996,
+    54.281
+   ],
+   [
+    -71.131,
+    53.255
+   ],
+   [
+    -72.181,
+    52.251
+   ],
+   [
+    -73.151,
+    51.264
+   ],
+   [
+    -74.044,
+    50.293
+   ],
+   [
+    -74.863,
+    49.337
+   ],
+   [
+    -75.61,
+    48.394
+   ],
+   [
+    -76.288,
+    47.461
+   ],
+   [
+    -76.897,
+    46.539
+   ],
+   [
+    -77.439,
+    45.626
+   ],
+   [
+    -77.916,
+    44.721
+   ],
+   [
+    -78.328,
+    43.823
+   ],
+   [
+    -78.675,
+    42.932
+   ],
+   [
+    -78.96,
+    42.046
+   ],
+   [
+    -79.181,
+    41.165
+   ],
+   [
+    -79.34,
+    40.288
+   ],
+   [
+    -79.436,
+    39.415
+   ],
+   [
+    -79.469,
+    38.544
+   ],
+   [
+    -79.44,
+    37.675
+   ],
+   [
+    -79.348,
+    36.808
+   ],
+   [
+    -79.192,
+    35.941
+   ],
+   [
+    -78.971,
+    35.074
+   ],
+   [
+    -78.686,
+    34.206
+   ],
+   [
+    -78.335,
+    33.335
+   ],
+   [
+    -77.917,
+    32.462
+   ],
+   [
+    -77.43,
+    31.585
+   ],
+   [
+    -76.872,
+    30.701
+   ],
+   [
+    -76.242,
+    29.811
+   ],
+   [
+    -75.536,
+    28.913
+   ],
+   [
+    -74.752,
+    28.003
+   ],
+   [
+    -73.885,
+    27.08
+   ],
+   [
+    -72.93,
+    26.141
+   ],
+   [
+    -71.882,
+    25.182
+   ],
+   [
+    -70.733,
+    24.198
+   ],
+   [
+    -69.472,
+    23.184
+   ],
+   [
+    -68.086,
+    22.132
+   ],
+   [
+    -66.557,
+    21.031
+   ],
+   [
+    -64.858,
+    19.865
+   ],
+   [
+    -62.949,
+    18.612
+   ],
+   [
+    -60.761,
+    17.231
+   ],
+   [
+    -58.163,
+    15.647
+   ],
+   [
+    -54.824,
+    13.669
+   ],
+   [
+    -47.631,
+    9.5
+   ],
+   [
+    -40.41,
+    5.348
+   ],
+   [
+    -36.984,
+    3.42
+   ],
+   [
+    -34.241,
+    1.92
+   ],
+   [
+    -31.849,
+    0.657
+   ],
+   [
+    -29.678,
+    -0.446
+   ],
+   [
+    -27.659,
+    -1.427
+   ],
+   [
+    -25.752,
+    -2.31
+   ],
+   [
+    -23.93,
+    -3.11
+   ],
+   [
+    -22.173,
+    -3.838
+   ],
+   [
+    -20.47,
+    -4.501
+   ],
+   [
+    -18.809,
+    -5.106
+   ],
+   [
+    -17.182,
+    -5.657
+   ],
+   [
+    -15.583,
+    -6.158
+   ],
+   [
+    -14.008,
+    -6.611
+   ],
+   [
+    -12.451,
+    -7.018
+   ],
+   [
+    -10.909,
+    -7.382
+   ],
+   [
+    -9.38,
+    -7.704
+   ],
+   [
+    -7.86,
+    -7.985
+   ],
+   [
+    -6.347,
+    -8.227
+   ],
+   [
+    -4.84,
+    -8.43
+   ],
+   [
+    -3.336,
+    -8.594
+   ],
+   [
+    -1.835,
+    -8.721
+   ],
+   [
+    -0.333,
+    -8.811
+   ],
+   [
+    1.169,
+    -8.865
+   ],
+   [
+    2.674,
+    -8.882
+   ],
+   [
+    4.182,
+    -8.862
+   ],
+   [
+    5.695,
+    -8.807
+   ],
+   [
+    7.214,
+    -8.715
+   ],
+   [
+    8.74,
+    -8.587
+   ],
+   [
+    10.274,
+    -8.423
+   ],
+   [
+    11.818,
+    -8.222
+   ],
+   [
+    13.373,
+    -7.985
+   ],
+   [
+    14.941,
+    -7.709
+   ],
+   [
+    16.522,
+    -7.396
+   ],
+   [
+    18.12,
+    -7.045
+   ],
+   [
+    19.734,
+    -6.654
+   ],
+   [
+    21.369,
+    -6.222
+   ],
+   [
+    23.025,
+    -5.749
+   ],
+   [
+    24.706,
+    -5.234
+   ],
+   [
+    26.415,
+    -4.674
+   ],
+   [
+    28.155,
+    -4.067
+   ],
+   [
+    29.931,
+    -3.412
+   ],
+   [
+    31.748,
+    -2.706
+   ],
+   [
+    33.613,
+    -1.944
+   ],
+   [
+    35.532,
+    -1.123
+   ],
+   [
+    37.516,
+    -0.237
+   ],
+   [
+    39.577,
+    0.721
+   ],
+   [
+    41.733,
+    1.761
+   ],
+   [
+    44.005,
+    2.896
+   ],
+   [
+    46.427,
+    4.145
+   ],
+   [
+    49.05,
+    5.536
+   ],
+   [
+    51.956,
+    7.119
+   ],
+   [
+    55.308,
+    8.987
+   ],
+   [
+    59.516,
+    11.375
+   ],
+   [
+    68.416,
+    16.5
+   ],
+   [
+    77.292,
+    21.638
+   ],
+   [
+    81.429,
+    24.068
+   ],
+   [
+    84.664,
+    26.003
+   ],
+   [
+    87.406,
+    27.681
+   ],
+   [
+    89.816,
+    29.195
+   ],
+   [
+    91.979,
+    30.594
+   ],
+   [
+    93.944,
+    31.906
+   ],
+   [
+    95.746,
+    33.15
+   ],
+   [
+    97.405,
+    34.34
+   ],
+   [
+    98.94,
+    35.486
+   ],
+   [
+    100.362,
+    36.594
+   ],
+   [
+    101.681,
+    37.67
+   ],
+   [
+    102.905,
+    38.719
+   ],
+   [
+    104.04,
+    39.745
+   ],
+   [
+    105.09,
+    40.749
+   ],
+   [
+    106.06,
+    41.736
+   ],
+   [
+    106.953,
+    42.707
+   ],
+   [
+    107.772,
+    43.663
+   ],
+   [
+    108.519,
+    44.606
+   ],
+   [
+    109.196,
+    45.539
+   ],
+   [
+    109.806,
+    46.461
+   ],
+   [
+    110.348,
+    47.374
+   ],
+   [
+    110.825,
+    48.279
+   ],
+   [
+    111.236,
+    49.177
+   ],
+   [
+    111.584,
+    50.068
+   ],
+   [
+    111.869,
+    50.954
+   ],
+   [
+    112.09,
+    51.835
+   ],
+   [
+    112.249,
+    52.712
+   ],
+   [
+    112.345,
+    53.585
+   ],
+   [
+    112.378,
+    54.456
+   ],
+   [
+    112.349,
+    55.325
+   ],
+   [
+    112.257,
+    56.192
+   ],
+   [
+    112.101,
+    57.059
+   ],
+   [
+    111.88,
+    57.926
+   ],
+   [
+    111.595,
+    58.794
+   ],
+   [
+    111.244,
+    59.665
+   ],
+   [
+    110.826,
+    60.538
+   ],
+   [
+    110.339,
+    61.415
+   ],
+   [
+    109.781,
+    62.299
+   ],
+   [
+    109.151,
+    63.189
+   ],
+   [
+    108.445,
+    64.087
+   ],
+   [
+    107.661,
+    64.997
+   ],
+   [
+    106.794,
+    65.92
+   ],
+   [
+    105.839,
+    66.859
+   ],
+   [
+    104.791,
+    67.818
+   ],
+   [
+    103.642,
+    68.802
+   ],
+   [
+    102.381,
+    69.816
+   ],
+   [
+    100.995,
+    70.868
+   ],
+   [
+    99.466,
+    71.969
+   ],
+   [
+    97.767,
+    73.135
+   ],
+   [
+    95.858,
+    74.388
+   ],
+   [
+    93.67,
+    75.769
+   ],
+   [
+    91.072,
+    77.353
+   ],
+   [
+    87.733,
+    79.331
+   ]
+  ],
+  "normalsWorld": [
+   [
+    0.5,
+    0.866
+   ],
+   [
+    0.4959,
+    0.8684
+   ],
+   [
+    0.4857,
+    0.8741
+   ],
+   [
+    0.4739,
+    0.8806
+   ],
+   [
+    0.4603,
+    0.8878
+   ],
+   [
+    0.4452,
+    0.8954
+   ],
+   [
+    0.4288,
+    0.9034
+   ],
+   [
+    0.4113,
+    0.9115
+   ],
+   [
+    0.3927,
+    0.9197
+   ],
+   [
+    0.3732,
+    0.9278
+   ],
+   [
+    0.3528,
+    0.9357
+   ],
+   [
+    0.3317,
+    0.9434
+   ],
+   [
+    0.31,
+    0.9507
+   ],
+   [
+    0.2877,
+    0.9577
+   ],
+   [
+    0.2649,
+    0.9643
+   ],
+   [
+    0.2416,
+    0.9704
+   ],
+   [
+    0.218,
+    0.976
+   ],
+   [
+    0.194,
+    0.981
+   ],
+   [
+    0.1699,
+    0.9855
+   ],
+   [
+    0.1455,
+    0.9894
+   ],
+   [
+    0.1211,
+    0.9926
+   ],
+   [
+    0.0966,
+    0.9953
+   ],
+   [
+    0.0721,
+    0.9974
+   ],
+   [
+    0.0477,
+    0.9989
+   ],
+   [
+    0.0234,
+    0.9997
+   ],
+   [
+    -0.0008,
+    1
+   ],
+   [
+    -0.0247,
+    0.9997
+   ],
+   [
+    -0.0485,
+    0.9988
+   ],
+   [
+    -0.0719,
+    0.9974
+   ],
+   [
+    -0.095,
+    0.9955
+   ],
+   [
+    -0.1178,
+    0.993
+   ],
+   [
+    -0.1401,
+    0.9901
+   ],
+   [
+    -0.1621,
+    0.9868
+   ],
+   [
+    -0.1836,
+    0.983
+   ],
+   [
+    -0.2047,
+    0.9788
+   ],
+   [
+    -0.2253,
+    0.9743
+   ],
+   [
+    -0.2454,
+    0.9694
+   ],
+   [
+    -0.2649,
+    0.9643
+   ],
+   [
+    -0.284,
+    0.9588
+   ],
+   [
+    -0.3024,
+    0.9532
+   ],
+   [
+    -0.3203,
+    0.9473
+   ],
+   [
+    -0.3377,
+    0.9413
+   ],
+   [
+    -0.3544,
+    0.9351
+   ],
+   [
+    -0.3705,
+    0.9288
+   ],
+   [
+    -0.3859,
+    0.9225
+   ],
+   [
+    -0.4007,
+    0.9162
+   ],
+   [
+    -0.4148,
+    0.9099
+   ],
+   [
+    -0.4282,
+    0.9037
+   ],
+   [
+    -0.4409,
+    0.8976
+   ],
+   [
+    -0.4527,
+    0.8917
+   ],
+   [
+    -0.4637,
+    0.886
+   ],
+   [
+    -0.4738,
+    0.8806
+   ],
+   [
+    -0.4828,
+    0.8757
+   ],
+   [
+    -0.4906,
+    0.8714
+   ],
+   [
+    -0.4973,
+    0.8676
+   ],
+   [
+    -0.5,
+    0.866
+   ],
+   [
+    -0.5027,
+    0.8645
+   ],
+   [
+    -0.5095,
+    0.8605
+   ],
+   [
+    -0.5174,
+    0.8557
+   ],
+   [
+    -0.5267,
+    0.8501
+   ],
+   [
+    -0.5372,
+    0.8435
+   ],
+   [
+    -0.5488,
+    0.8359
+   ],
+   [
+    -0.5615,
+    0.8275
+   ],
+   [
+    -0.5753,
+    0.8179
+   ],
+   [
+    -0.5902,
+    0.8072
+   ],
+   [
+    -0.6062,
+    0.7953
+   ],
+   [
+    -0.6232,
+    0.7821
+   ],
+   [
+    -0.6413,
+    0.7673
+   ],
+   [
+    -0.6605,
+    0.7509
+   ],
+   [
+    -0.6807,
+    0.7326
+   ],
+   [
+    -0.702,
+    0.7122
+   ],
+   [
+    -0.7243,
+    0.6895
+   ],
+   [
+    -0.7476,
+    0.6642
+   ],
+   [
+    -0.7716,
+    0.6361
+   ],
+   [
+    -0.7964,
+    0.6048
+   ],
+   [
+    -0.8216,
+    0.57
+   ],
+   [
+    -0.8471,
+    0.5315
+   ],
+   [
+    -0.8723,
+    0.4889
+   ],
+   [
+    -0.897,
+    0.4421
+   ],
+   [
+    -0.9205,
+    0.3908
+   ],
+   [
+    -0.9421,
+    0.3352
+   ],
+   [
+    -0.9614,
+    0.2752
+   ],
+   [
+    -0.9774,
+    0.2113
+   ],
+   [
+    -0.9896,
+    0.144
+   ],
+   [
+    -0.9973,
+    0.074
+   ],
+   [
+    -1,
+    0.0023
+   ],
+   [
+    -0.9975,
+    -0.07
+   ],
+   [
+    -0.9899,
+    -0.1418
+   ],
+   [
+    -0.9773,
+    -0.212
+   ],
+   [
+    -0.9601,
+    -0.2796
+   ],
+   [
+    -0.9391,
+    -0.3437
+   ],
+   [
+    -0.9149,
+    -0.4038
+   ],
+   [
+    -0.8883,
+    -0.4594
+   ],
+   [
+    -0.86,
+    -0.5103
+   ],
+   [
+    -0.8308,
+    -0.5566
+   ],
+   [
+    -0.8012,
+    -0.5984
+   ],
+   [
+    -0.7718,
+    -0.6359
+   ],
+   [
+    -0.7429,
+    -0.6694
+   ],
+   [
+    -0.7149,
+    -0.6993
+   ],
+   [
+    -0.688,
+    -0.7258
+   ],
+   [
+    -0.6623,
+    -0.7492
+   ],
+   [
+    -0.6381,
+    -0.77
+   ],
+   [
+    -0.6154,
+    -0.7882
+   ],
+   [
+    -0.5942,
+    -0.8043
+   ],
+   [
+    -0.5747,
+    -0.8184
+   ],
+   [
+    -0.5568,
+    -0.8306
+   ],
+   [
+    -0.5408,
+    -0.8412
+   ],
+   [
+    -0.5266,
+    -0.8501
+   ],
+   [
+    -0.5145,
+    -0.8575
+   ],
+   [
+    -0.5041,
+    -0.8636
+   ],
+   [
+    -0.5,
+    -0.866
+   ],
+   [
+    -0.4959,
+    -0.8684
+   ],
+   [
+    -0.4857,
+    -0.8741
+   ],
+   [
+    -0.4739,
+    -0.8806
+   ],
+   [
+    -0.4603,
+    -0.8878
+   ],
+   [
+    -0.4452,
+    -0.8954
+   ],
+   [
+    -0.4288,
+    -0.9034
+   ],
+   [
+    -0.4113,
+    -0.9115
+   ],
+   [
+    -0.3927,
+    -0.9197
+   ],
+   [
+    -0.3732,
+    -0.9278
+   ],
+   [
+    -0.3528,
+    -0.9357
+   ],
+   [
+    -0.3317,
+    -0.9434
+   ],
+   [
+    -0.31,
+    -0.9507
+   ],
+   [
+    -0.2877,
+    -0.9577
+   ],
+   [
+    -0.2649,
+    -0.9643
+   ],
+   [
+    -0.2416,
+    -0.9704
+   ],
+   [
+    -0.218,
+    -0.976
+   ],
+   [
+    -0.194,
+    -0.981
+   ],
+   [
+    -0.1699,
+    -0.9855
+   ],
+   [
+    -0.1455,
+    -0.9894
+   ],
+   [
+    -0.1211,
+    -0.9926
+   ],
+   [
+    -0.0966,
+    -0.9953
+   ],
+   [
+    -0.0721,
+    -0.9974
+   ],
+   [
+    -0.0477,
+    -0.9989
+   ],
+   [
+    -0.0234,
+    -0.9997
+   ],
+   [
+    0.0008,
+    -1
+   ],
+   [
+    0.0247,
+    -0.9997
+   ],
+   [
+    0.0485,
+    -0.9988
+   ],
+   [
+    0.0719,
+    -0.9974
+   ],
+   [
+    0.095,
+    -0.9955
+   ],
+   [
+    0.1178,
+    -0.993
+   ],
+   [
+    0.1401,
+    -0.9901
+   ],
+   [
+    0.1621,
+    -0.9868
+   ],
+   [
+    0.1836,
+    -0.983
+   ],
+   [
+    0.2047,
+    -0.9788
+   ],
+   [
+    0.2253,
+    -0.9743
+   ],
+   [
+    0.2454,
+    -0.9694
+   ],
+   [
+    0.2649,
+    -0.9643
+   ],
+   [
+    0.284,
+    -0.9588
+   ],
+   [
+    0.3024,
+    -0.9532
+   ],
+   [
+    0.3203,
+    -0.9473
+   ],
+   [
+    0.3377,
+    -0.9413
+   ],
+   [
+    0.3544,
+    -0.9351
+   ],
+   [
+    0.3705,
+    -0.9288
+   ],
+   [
+    0.3859,
+    -0.9225
+   ],
+   [
+    0.4007,
+    -0.9162
+   ],
+   [
+    0.4148,
+    -0.9099
+   ],
+   [
+    0.4282,
+    -0.9037
+   ],
+   [
+    0.4409,
+    -0.8976
+   ],
+   [
+    0.4527,
+    -0.8917
+   ],
+   [
+    0.4637,
+    -0.886
+   ],
+   [
+    0.4738,
+    -0.8806
+   ],
+   [
+    0.4828,
+    -0.8757
+   ],
+   [
+    0.4906,
+    -0.8714
+   ],
+   [
+    0.4973,
+    -0.8676
+   ],
+   [
+    0.5,
+    -0.866
+   ],
+   [
+    0.5027,
+    -0.8645
+   ],
+   [
+    0.5095,
+    -0.8605
+   ],
+   [
+    0.5174,
+    -0.8557
+   ],
+   [
+    0.5267,
+    -0.8501
+   ],
+   [
+    0.5372,
+    -0.8435
+   ],
+   [
+    0.5488,
+    -0.8359
+   ],
+   [
+    0.5615,
+    -0.8275
+   ],
+   [
+    0.5753,
+    -0.8179
+   ],
+   [
+    0.5902,
+    -0.8072
+   ],
+   [
+    0.6062,
+    -0.7953
+   ],
+   [
+    0.6232,
+    -0.7821
+   ],
+   [
+    0.6413,
+    -0.7673
+   ],
+   [
+    0.6605,
+    -0.7509
+   ],
+   [
+    0.6807,
+    -0.7326
+   ],
+   [
+    0.702,
+    -0.7122
+   ],
+   [
+    0.7243,
+    -0.6895
+   ],
+   [
+    0.7476,
+    -0.6642
+   ],
+   [
+    0.7716,
+    -0.6361
+   ],
+   [
+    0.7964,
+    -0.6048
+   ],
+   [
+    0.8216,
+    -0.57
+   ],
+   [
+    0.8471,
+    -0.5315
+   ],
+   [
+    0.8723,
+    -0.4889
+   ],
+   [
+    0.897,
+    -0.4421
+   ],
+   [
+    0.9205,
+    -0.3908
+   ],
+   [
+    0.9421,
+    -0.3352
+   ],
+   [
+    0.9614,
+    -0.2752
+   ],
+   [
+    0.9774,
+    -0.2113
+   ],
+   [
+    0.9896,
+    -0.144
+   ],
+   [
+    0.9973,
+    -0.074
+   ],
+   [
+    1,
+    -0.0023
+   ],
+   [
+    0.9975,
+    0.07
+   ],
+   [
+    0.9899,
+    0.1418
+   ],
+   [
+    0.9773,
+    0.212
+   ],
+   [
+    0.9601,
+    0.2796
+   ],
+   [
+    0.9391,
+    0.3437
+   ],
+   [
+    0.9149,
+    0.4038
+   ],
+   [
+    0.8883,
+    0.4594
+   ],
+   [
+    0.86,
+    0.5103
+   ],
+   [
+    0.8308,
+    0.5566
+   ],
+   [
+    0.8012,
+    0.5984
+   ],
+   [
+    0.7718,
+    0.6359
+   ],
+   [
+    0.7429,
+    0.6694
+   ],
+   [
+    0.7149,
+    0.6993
+   ],
+   [
+    0.688,
+    0.7258
+   ],
+   [
+    0.6623,
+    0.7492
+   ],
+   [
+    0.6381,
+    0.77
+   ],
+   [
+    0.6154,
+    0.7882
+   ],
+   [
+    0.5942,
+    0.8043
+   ],
+   [
+    0.5747,
+    0.8184
+   ],
+   [
+    0.5568,
+    0.8306
+   ],
+   [
+    0.5408,
+    0.8412
+   ],
+   [
+    0.5266,
+    0.8501
+   ],
+   [
+    0.5145,
+    0.8575
+   ],
+   [
+    0.5041,
+    0.8636
+   ]
+  ],
+  "outerOffsetPx": 4.5,
+  "style": {
+   "fill": "rgba(17,17,17,.045)",
+   "outline": "ink #111, 1.15 px, opacity .62, round joins",
+   "outer": "ink #111, 0.8 px, opacity .26"
+  },
+  "label": {
+   "text": "ANNUAL PROGRAMME ENVELOPE · PROPERTY + BI",
+   "decisionText": "ANNUAL PROGRAMME ENVELOPE",
+   "defaultIndex": 53,
+   "contourPointWorld": [
+    -22.4,
+    84.013
+   ],
+   "offsetPx": [
+    -8.09,
+    14.38
+   ],
+   "rotateDeg": 30.22,
+   "placements": {
+    "overview": {
+     "text": "ANNUAL PROGRAMME ENVELOPE · PROPERTY + BI",
+     "textOriginWorld": [
+      -23.742,
+      86.409
+     ],
+     "rotateDeg": 30.22,
+     "hidden": false
+    },
+    "roof03CloseUp": {
+     "text": "ANNUAL PROGRAMME ENVELOPE · PROPERTY + BI",
+     "textOriginWorld": [
+      49.829,
+      4.085
+     ],
+     "rotateDeg": 29.78,
+     "hidden": false
+    },
+    "somethingChanges": {
+     "text": "ANNUAL PROGRAMME ENVELOPE · PROPERTY + BI",
+     "textOriginWorld": [
+      49.937,
+      3.89
+     ],
+     "rotateDeg": 29.78,
+     "hidden": false
+    },
+    "decision": {
+     "text": "ANNUAL PROGRAMME ENVELOPE",
+     "textOriginWorld": [
+      12.346,
+      -11.917
+     ],
+     "rotateDeg": 11.83,
+     "hidden": false
+    }
+   },
+   "note": "Default placement on the front-left edge (index round(220*0.24)), 12 px outside the outer line. In focus stages the demo walks along the edge from the exit point and picks the first spot clear of every card; in the decision view it uses the shorter text."
+  },
+  "drawOn": "The demo draws the envelope with a dash-offset reveal over 2600 ms (easeInOut) starting 1000 ms after the site starts drawing; the fill fades in over 1600 ms."
+ },
+ "sprinklerZone3": {
+  "groupId": "sprinkler-zone-3",
+  "headIds": "sz3-head-00 .. sz3-head-30 (data-i = ripple order from the valve)",
+  "crossIds": "sz3-cross-00 .. sz3-cross-30",
+  "heads": [
+   {
+    "id": "sz3-head-00",
+    "i": 0,
+    "centreWorld": [
+     42.44,
+     35
+    ]
+   },
+   {
+    "id": "sz3-head-01",
+    "i": 1,
+    "centreWorld": [
+     47.2,
+     32.25
+    ]
+   },
+   {
+    "id": "sz3-head-02",
+    "i": 2,
+    "centreWorld": [
+     47.63,
+     41
+    ]
+   },
+   {
+    "id": "sz3-head-03",
+    "i": 3,
+    "centreWorld": [
+     52.39,
+     38.25
+    ]
+   },
+   {
+    "id": "sz3-head-04",
+    "i": 4,
+    "centreWorld": [
+     38.54,
+     32.75
+    ]
+   },
+   {
+    "id": "sz3-head-05",
+    "i": 5,
+    "centreWorld": [
+     43.3,
+     30
+    ]
+   },
+   {
+    "id": "sz3-head-06",
+    "i": 6,
+    "centreWorld": [
+     43.73,
+     43.25
+    ]
+   },
+   {
+    "id": "sz3-head-07",
+    "i": 7,
+    "centreWorld": [
+     37.67,
+     37.75
+    ]
+   },
+   {
+    "id": "sz3-head-08",
+    "i": 8,
+    "centreWorld": [
+     51.96,
+     29.5
+    ]
+   },
+   {
+    "id": "sz3-head-09",
+    "i": 9,
+    "centreWorld": [
+     51.96,
+     43.5
+    ]
+   },
+   {
+    "id": "sz3-head-10",
+    "i": 10,
+    "centreWorld": [
+     56.72,
+     40.75
+    ]
+   },
+   {
+    "id": "sz3-head-11",
+    "i": 11,
+    "centreWorld": [
+     57.16,
+     35.5
+    ]
+   },
+   {
+    "id": "sz3-head-12",
+    "i": 12,
+    "centreWorld": [
+     33.77,
+     35.5
+    ]
+   },
+   {
+    "id": "sz3-head-13",
+    "i": 13,
+    "centreWorld": [
+     48.06,
+     27.25
+    ]
+   },
+   {
+    "id": "sz3-head-14",
+    "i": 14,
+    "centreWorld": [
+     48.06,
+     45.75
+    ]
+   },
+   {
+    "id": "sz3-head-15",
+    "i": 15,
+    "centreWorld": [
+     34.64,
+     30.5
+    ]
+   },
+   {
+    "id": "sz3-head-16",
+    "i": 16,
+    "centreWorld": [
+     39.4,
+     27.75
+    ]
+   },
+   {
+    "id": "sz3-head-17",
+    "i": 17,
+    "centreWorld": [
+     61.49,
+     38
+    ]
+   },
+   {
+    "id": "sz3-head-18",
+    "i": 18,
+    "centreWorld": [
+     33.34,
+     40.25
+    ]
+   },
+   {
+    "id": "sz3-head-19",
+    "i": 19,
+    "centreWorld": [
+     56.29,
+     46
+    ]
+   },
+   {
+    "id": "sz3-head-20",
+    "i": 20,
+    "centreWorld": [
+     61.05,
+     43.25
+    ]
+   },
+   {
+    "id": "sz3-head-21",
+    "i": 21,
+    "centreWorld": [
+     29.88,
+     33.25
+    ]
+   },
+   {
+    "id": "sz3-head-22",
+    "i": 22,
+    "centreWorld": [
+     44.17,
+     25
+    ]
+   },
+   {
+    "id": "sz3-head-23",
+    "i": 23,
+    "centreWorld": [
+     29.44,
+     38
+    ]
+   },
+   {
+    "id": "sz3-head-24",
+    "i": 24,
+    "centreWorld": [
+     52.39,
+     48.25
+    ]
+   },
+   {
+    "id": "sz3-head-25",
+    "i": 25,
+    "centreWorld": [
+     65.82,
+     40.5
+    ]
+   },
+   {
+    "id": "sz3-head-26",
+    "i": 26,
+    "centreWorld": [
+     25.55,
+     35.75
+    ]
+   },
+   {
+    "id": "sz3-head-27",
+    "i": 27,
+    "centreWorld": [
+     59.76,
+     48
+    ]
+   },
+   {
+    "id": "sz3-head-28",
+    "i": 28,
+    "centreWorld": [
+     64.52,
+     45.25
+    ]
+   },
+   {
+    "id": "sz3-head-29",
+    "i": 29,
+    "centreWorld": [
+     55.86,
+     50.25
+    ]
+   },
+   {
+    "id": "sz3-head-30",
+    "i": 30,
+    "centreWorld": [
+     69.28,
+     42.5
+    ]
+   }
+  ],
+  "states": {
+   "active": "Default. Faint zone fill, grey dashed outline (4 2.5 px), filled grey heads, label ACTIVE.",
+   "offline": "Add class 'off' to #sprinkler-zone-3: fill clears, outline turns #34332f with 2 2 px dashes, heads hollow (paper fill, .9), a cross appears on each head (ripple 55 ms per data-i step, 450 ms fades), hatch fades in after 350 ms over 1100 ms. Label status text: OFFLINE.",
+   "restored": "Remove 'off'. Label status text: RESTORED (change option 'Restore sprinkler protection')."
+  },
+  "visibility": "The demo hides the whole zone (opacity 0) until the hero stage ('sz-on'); the SVG shows it by default."
+ },
+ "activities": {
+  "hero": {
+   "id": "act-hotwork-r03",
+   "name": "Hot work",
+   "location": "Roof 03",
+   "zone": "roof",
+   "start": "14:18",
+   "window": "14:18–18:00",
+   "plan": [
+    67,
+    22,
+    12
+   ],
+   "world": [
+    38.971,
+    32.5
+   ]
+  },
+  "routine": [
+   {
+    "time": "09:02",
+    "id": "r-01",
+    "name": "Pump inspection",
+    "zone": "utilities",
+    "location": "Pump house P2",
+    "persistent": false,
+    "plan": [
+     12,
+     24,
+     4.5
+    ],
+    "world": [
+     -10.392,
+     13.5
+    ]
+   },
+   {
+    "time": "09:07",
+    "id": "r-02",
+    "name": "Filter replacement",
+    "zone": "production",
+    "location": "Line 1 air handling",
+    "persistent": false,
+    "plan": [
+     40,
+     36,
+     6
+    ],
+    "world": [
+     3.464,
+     32
+    ]
+   },
+   {
+    "time": "09:13",
+    "id": "r-03",
+    "name": "Electrical inspection",
+    "zone": "laboratory",
+    "location": "Distribution board L1",
+    "persistent": false,
+    "plan": [
+     26,
+     44,
+     5.5
+    ],
+    "world": [
+     -15.588,
+     29.5
+    ]
+   },
+   {
+    "time": "09:21",
+    "id": "r-04",
+    "name": "Roof repair",
+    "zone": "roof",
+    "location": "Roof 01",
+    "persistent": false,
+    "plan": [
+     40,
+     20,
+     12
+    ],
+    "world": [
+     17.321,
+     18
+    ]
+   },
+   {
+    "time": "09:28",
+    "id": "r-05",
+    "name": "Sprinkler isolation",
+    "zone": "warehouse",
+    "location": "Zone 7 · planned, fire watch posted",
+    "persistent": false,
+    "plan": [
+     46,
+     58,
+     10
+    ],
+    "world": [
+     -10.392,
+     42
+    ]
+   },
+   {
+    "time": "09:46",
+    "id": "r-06",
+    "name": "Forklift maintenance",
+    "zone": "loading",
+    "location": "Bay 2",
+    "persistent": false,
+    "plan": [
+     98,
+     66,
+     0
+    ],
+    "world": [
+     27.713,
+     82
+    ]
+   },
+   {
+    "time": "10:04",
+    "id": "r-07",
+    "name": "Routine inspection",
+    "zone": "warehouse",
+    "location": "Aisle C",
+    "persistent": false,
+    "plan": [
+     58,
+     72,
+     5
+    ],
+    "world": [
+     -12.124,
+     60
+    ]
+   },
+   {
+    "time": "10:19",
+    "id": "r-08",
+    "name": "Electrical cabinet opened",
+    "zone": "utilities",
+    "location": "MCC-3",
+    "persistent": false,
+    "plan": [
+     16,
+     12,
+     9
+    ],
+    "world": [
+     3.464,
+     5
+    ]
+   },
+   {
+    "time": "10:37",
+    "id": "p-01",
+    "name": "Valve replacement",
+    "zone": "utilities",
+    "location": "Steam header V-12",
+    "persistent": true,
+    "plan": [
+     26,
+     15,
+     4.5
+    ],
+    "world": [
+     9.526,
+     16
+    ]
+   },
+   {
+    "time": "10:58",
+    "id": "p-02",
+    "name": "Fume hood service",
+    "zone": "laboratory",
+    "location": "Lab 2",
+    "persistent": true,
+    "plan": [
+     17,
+     58,
+     6
+    ],
+    "world": [
+     -35.507,
+     31.5
+    ]
+   },
+   {
+    "time": "11:16",
+    "id": "r-09",
+    "name": "Crane lift",
+    "zone": "loading",
+    "location": "Planned lift · inside wind limit",
+    "persistent": false,
+    "plan": [
+     95,
+     50,
+     0
+    ],
+    "world": [
+     38.971,
+     72.5
+    ]
+   },
+   {
+    "time": "11:34",
+    "id": "p-03",
+    "name": "Production line shutdown",
+    "zone": "production",
+    "location": "Line 2 · planned stop",
+    "persistent": true,
+    "plan": [
+     55,
+     36,
+     6
+    ],
+    "world": [
+     16.454,
+     39.5
+    ]
+   },
+   {
+    "time": "11:52",
+    "id": "r-10",
+    "name": "Pump maintenance",
+    "zone": "utilities",
+    "location": "Tank farm T2",
+    "persistent": false,
+    "plan": [
+     20,
+     31,
+     11
+    ],
+    "world": [
+     -9.526,
+     14.5
+    ]
+   },
+   {
+    "time": "12:15",
+    "id": "p-04",
+    "name": "Racking inspection",
+    "zone": "warehouse",
+    "location": "Racks 14 to 22",
+    "persistent": true,
+    "plan": [
+     60,
+     54,
+     10
+    ],
+    "world": [
+     5.196,
+     47
+    ]
+   },
+   {
+    "time": "12:40",
+    "id": "r-11",
+    "name": "Sensor calibration",
+    "zone": "laboratory",
+    "location": "Bioreactor suite",
+    "persistent": false,
+    "plan": [
+     12,
+     46,
+     11
+    ],
+    "world": [
+     -29.445,
+     18
+    ]
+   },
+   {
+    "time": "13:05",
+    "id": "p-05",
+    "name": "Conveyor service",
+    "zone": "production2",
+    "location": "Packing conveyor",
+    "persistent": true,
+    "plan": [
+     94,
+     20,
+     4.5
+    ],
+    "world": [
+     64.086,
+     52.5
+    ]
+   },
+   {
+    "time": "13:31",
+    "id": "p-06",
+    "name": "Dock leveller repair",
+    "zone": "loading",
+    "location": "Dock 3",
+    "persistent": true,
+    "plan": [
+     80,
+     66,
+     0
+    ],
+    "world": [
+     12.124,
+     73
+    ]
+   },
+   {
+    "time": "13:52",
+    "id": "r-12",
+    "name": "Roof drain clearing",
+    "zone": "roof",
+    "location": "Roof 02",
+    "persistent": false,
+    "plan": [
+     54,
+     30,
+     12
+    ],
+    "world": [
+     20.785,
+     30
+    ]
+   },
+   {
+    "time": "14:06",
+    "id": "r-13",
+    "name": "Compressor check",
+    "zone": "utilities",
+    "location": "Air compressor C1",
+    "persistent": false,
+    "plan": [
+     22,
+     20,
+     9
+    ],
+    "world": [
+     1.732,
+     12
+    ]
+   }
+  ],
+  "portfolio": [
+   {
+    "t": "14:56",
+    "id": "q-01",
+    "name": "Pump inspection",
+    "zone": "utilities",
+    "location": "Pump house P1",
+    "outcome": "inside",
+    "plan": [
+     9,
+     24,
+     4.5
+    ],
+    "world": [
+     -12.99,
+     12
+    ]
+   },
+   {
+    "t": "15:08",
+    "id": "q-02",
+    "name": "Electrical cabinet opened",
+    "zone": "laboratory",
+    "location": "Panel L3",
+    "outcome": "inside",
+    "plan": [
+     26,
+     52,
+     5.5
+    ],
+    "world": [
+     -22.517,
+     33.5
+    ]
+   },
+   {
+    "t": "15:12",
+    "id": "d-01",
+    "name": "Crane lift",
+    "zone": "loading",
+    "location": "Loading Area",
+    "outcome": "changed",
+    "note": "Rescheduled outside wind limit",
+    "plan": [
+     92,
+     45,
+     0
+    ],
+    "world": [
+     40.703,
+     68.5
+    ]
+   },
+   {
+    "t": "15:20",
+    "id": "q-03",
+    "name": "Filter replacement",
+    "zone": "production",
+    "location": "Line 3",
+    "outcome": "inside",
+    "plan": [
+     44,
+     36,
+     7
+    ],
+    "world": [
+     6.928,
+     33
+    ]
+   },
+   {
+    "t": "15:34",
+    "id": "d-02",
+    "name": "Grinding",
+    "zone": "warehouse",
+    "location": "Aisle F",
+    "outcome": "changed",
+    "note": "Moved outside Warehouse rack zone",
+    "plan": [
+     45,
+     72,
+     5
+    ],
+    "world": [
+     -23.383,
+     53.5
+    ]
+   },
+   {
+    "t": "15:41",
+    "id": "d-03",
+    "name": "Gas detector bypass",
+    "zone": "laboratory",
+    "location": "Lab 1",
+    "outcome": "retained",
+    "note": "Retained until 17:30",
+    "travelsOutside": true,
+    "plan": [
+     7,
+     50,
+     6
+    ],
+    "world": [
+     -37.239,
+     22.5
+    ]
+   },
+   {
+    "t": "15:47",
+    "id": "q-04",
+    "name": "Forklift maintenance",
+    "zone": "loading",
+    "location": "Bay 4",
+    "outcome": "inside",
+    "plan": [
+     101,
+     58,
+     0
+    ],
+    "world": [
+     37.239,
+     79.5
+    ]
+   },
+   {
+    "t": "16:02",
+    "id": "q-05",
+    "name": "Roof inspection",
+    "zone": "roof",
+    "location": "Roof 01",
+    "outcome": "inside",
+    "plan": [
+     38,
+     13,
+     12
+    ],
+    "world": [
+     21.651,
+     13.5
+    ]
+   },
+   {
+    "t": "16:05",
+    "id": "d-04",
+    "name": "Crane lift over Production Hall 2",
+    "zone": "production2",
+    "location": "Production Hall 2",
+    "outcome": "transferred",
+    "note": "2h cover · Boreal Risk · DKK 640",
+    "onlyWhenHeroPathIsNot": "transfer",
+    "travelsOutside": true,
+    "plan": [
+     86,
+     36,
+     0
+    ],
+    "world": [
+     43.301,
+     61
+    ]
+   },
+   {
+    "t": "16:05",
+    "id": "d-05",
+    "name": "Torch-on roofing",
+    "zone": "roof",
+    "location": "Roof 02",
+    "outcome": "changed",
+    "note": "Switched to cold-applied membrane",
+    "onlyWhenHeroPathIs": "transfer",
+    "plan": [
+     52,
+     27,
+     12
+    ],
+    "world": [
+     21.651,
+     27.5
+    ]
+   }
+  ],
+  "ambientSpots": {
+   "note": "Decorative pulses (ring r 5 px scaling .4 to 2.6 and fading over 1700 ms, plus a 1.8 px dot), every 380 ms in operating and 900 ms in portfolio, cycling through these 72 seeded spots in order. Never activity nodes.",
+   "spots": [
+    {
+     "plan": [
+      8.001,
+      20.891,
+      9
+     ],
+     "world": [
+      -11.163,
+      5.446
+     ]
+    },
+    {
+     "plan": [
+      46.413,
+      15.053,
+      12
+     ],
+     "world": [
+      27.158,
+      18.733
+     ]
+    },
+    {
+     "plan": [
+      87.67,
+      19.589,
+      9
+     ],
+     "world": [
+      58.96,
+      44.629
+     ]
+    },
+    {
+     "plan": [
+      13.269,
+      52.033,
+      11
+     ],
+     "world": [
+      -33.57,
+      21.651
+     ]
+    },
+    {
+     "plan": [
+      60.162,
+      59.943,
+      10
+     ],
+     "world": [
+      0.19,
+      50.053
+     ]
+    },
+    {
+     "plan": [
+      18.952,
+      16.903,
+      9
+     ],
+     "world": [
+      1.775,
+      8.928
+     ]
+    },
+    {
+     "plan": [
+      65.403,
+      15.808,
+      12
+     ],
+     "world": [
+      42.951,
+      28.606
+     ]
+    },
+    {
+     "plan": [
+      81.988,
+      22.742,
+      9
+     ],
+     "world": [
+      51.308,
+      43.365
+     ]
+    },
+    {
+     "plan": [
+      19.169,
+      40.862,
+      11
+     ],
+     "world": [
+      -18.787,
+      19.015
+     ]
+    },
+    {
+     "plan": [
+      57.885,
+      58.294,
+      10
+     ],
+     "world": [
+      -0.354,
+      48.089
+     ]
+    },
+    {
+     "plan": [
+      22.758,
+      19.304,
+      9
+     ],
+     "world": [
+      2.992,
+      12.031
+     ]
+    },
+    {
+     "plan": [
+      40.422,
+      22.313,
+      12
+     ],
+     "world": [
+      15.683,
+      19.368
+     ]
+    },
+    {
+     "plan": [
+      90.771,
+      22.393,
+      9
+     ],
+     "world": [
+      59.217,
+      47.582
+     ]
+    },
+    {
+     "plan": [
+      18.3,
+      49.239,
+      11
+     ],
+     "world": [
+      -26.794,
+      22.769
+     ]
+    },
+    {
+     "plan": [
+      65.184,
+      67.983,
+      10
+     ],
+     "world": [
+      -2.424,
+      56.584
+     ]
+    },
+    {
+     "plan": [
+      13.956,
+      12.695,
+      9
+     ],
+     "world": [
+      1.092,
+      4.326
+     ]
+    },
+    {
+     "plan": [
+      66.138,
+      17.974,
+      12
+     ],
+     "world": [
+      41.711,
+      30.056
+     ]
+    },
+    {
+     "plan": [
+      78.441,
+      15.358,
+      9
+     ],
+     "world": [
+      54.632,
+      37.899
+     ]
+    },
+    {
+     "plan": [
+      14.856,
+      44.718,
+      11
+     ],
+     "world": [
+      -25.862,
+      18.787
+     ]
+    },
+    {
+     "plan": [
+      65.992,
+      60.262,
+      10
+     ],
+     "world": [
+      4.963,
+      53.127
+     ]
+    },
+    {
+     "plan": [
+      19.668,
+      20.29,
+      9
+     ],
+     "world": [
+      -0.538,
+      10.979
+     ]
+    },
+    {
+     "plan": [
+      38.11,
+      16.564,
+      12
+     ],
+     "world": [
+      18.66,
+      15.337
+     ]
+    },
+    {
+     "plan": [
+      84.97,
+      19.158,
+      9
+     ],
+     "world": [
+      56.995,
+      43.064
+     ]
+    },
+    {
+     "plan": [
+      14.743,
+      43.087,
+      11
+     ],
+     "world": [
+      -24.547,
+      17.915
+     ]
+    },
+    {
+     "plan": [
+      65.087,
+      49.207,
+      10
+     ],
+     "world": [
+      13.752,
+      47.147
+     ]
+    },
+    {
+     "plan": [
+      13.847,
+      12.818,
+      9
+     ],
+     "world": [
+      0.892,
+      4.333
+     ]
+    },
+    {
+     "plan": [
+      59.919,
+      32.184,
+      12
+     ],
+     "world": [
+      24.019,
+      34.052
+     ]
+    },
+    {
+     "plan": [
+      84.238,
+      12.98,
+      9
+     ],
+     "world": [
+      61.711,
+      39.609
+     ]
+    },
+    {
+     "plan": [
+      14.49,
+      44.538,
+      11
+     ],
+     "world": [
+      -26.022,
+      18.514
+     ]
+    },
+    {
+     "plan": [
+      47.663,
+      57.327,
+      10
+     ],
+     "world": [
+      -8.37,
+      42.495
+     ]
+    },
+    {
+     "plan": [
+      13.321,
+      15.443,
+      9
+     ],
+     "world": [
+      -1.838,
+      5.382
+     ]
+    },
+    {
+     "plan": [
+      58.106,
+      15.598,
+      12
+     ],
+     "world": [
+      36.813,
+      24.852
+     ]
+    },
+    {
+     "plan": [
+      90.504,
+      18.241,
+      9
+     ],
+     "world": [
+      62.581,
+      45.372
+     ]
+    },
+    {
+     "plan": [
+      21.808,
+      50.162,
+      11
+     ],
+     "world": [
+      -24.555,
+      24.985
+     ]
+    },
+    {
+     "plan": [
+      56.299,
+      59.357,
+      10
+     ],
+     "world": [
+      -2.648,
+      47.828
+     ]
+    },
+    {
+     "plan": [
+      16.079,
+      17.646,
+      9
+     ],
+     "world": [
+      -1.357,
+      7.863
+     ]
+    },
+    {
+     "plan": [
+      69.825,
+      19.521,
+      12
+     ],
+     "world": [
+      43.564,
+      32.673
+     ]
+    },
+    {
+     "plan": [
+      87.332,
+      14.52,
+      9
+     ],
+     "world": [
+      63.057,
+      41.926
+     ]
+    },
+    {
+     "plan": [
+      17.39,
+      45.609,
+      11
+     ],
+     "world": [
+      -24.439,
+      20.5
+     ]
+    },
+    {
+     "plan": [
+      46.579,
+      56.612,
+      10
+     ],
+     "world": [
+      -8.688,
+      41.595
+     ]
+    },
+    {
+     "plan": [
+      20.716,
+      20.286,
+      9
+     ],
+     "world": [
+      0.372,
+      11.501
+     ]
+    },
+    {
+     "plan": [
+      39.999,
+      29.66,
+      12
+     ],
+     "world": [
+      8.953,
+      22.83
+     ]
+    },
+    {
+     "plan": [
+      77.244,
+      17.322,
+      9
+     ],
+     "world": [
+      51.893,
+      38.283
+     ]
+    },
+    {
+     "plan": [
+      10.457,
+      41.246,
+      11
+     ],
+     "world": [
+      -26.664,
+      14.852
+     ]
+    },
+    {
+     "plan": [
+      67.879,
+      52.84,
+      10
+     ],
+     "world": [
+      13.024,
+      50.359
+     ]
+    },
+    {
+     "plan": [
+      18.118,
+      10.02,
+      9
+     ],
+     "world": [
+      7.013,
+      5.069
+     ]
+    },
+    {
+     "plan": [
+      52.456,
+      24.23,
+      12
+     ],
+     "world": [
+      24.444,
+      26.343
+     ]
+    },
+    {
+     "plan": [
+      78.205,
+      26.594,
+      9
+     ],
+     "world": [
+      44.696,
+      43.399
+     ]
+    },
+    {
+     "plan": [
+      22.153,
+      54.249,
+      11
+     ],
+     "world": [
+      -27.796,
+      27.201
+     ]
+    },
+    {
+     "plan": [
+      64.327,
+      67.971,
+      10
+     ],
+     "world": [
+      -3.156,
+      56.149
+     ]
+    },
+    {
+     "plan": [
+      20.178,
+      11.856,
+      9
+     ],
+     "world": [
+      7.207,
+      7.017
+     ]
+    },
+    {
+     "plan": [
+      36.378,
+      15.959,
+      12
+     ],
+     "world": [
+      17.683,
+      14.168
+     ]
+    },
+    {
+     "plan": [
+      77.217,
+      10.029,
+      9
+     ],
+     "world": [
+      58.187,
+      34.623
+     ]
+    },
+    {
+     "plan": [
+      17.869,
+      43.702,
+      11
+     ],
+     "world": [
+      -22.372,
+      19.786
+     ]
+    },
+    {
+     "plan": [
+      59.717,
+      58.766,
+      10
+     ],
+     "world": [
+      0.823,
+      49.241
+     ]
+    },
+    {
+     "plan": [
+      19,
+      11.333,
+      9
+     ],
+     "world": [
+      6.64,
+      6.167
+     ]
+    },
+    {
+     "plan": [
+      67.755,
+      15.644,
+      12
+     ],
+     "world": [
+      45.13,
+      29.7
+     ]
+    },
+    {
+     "plan": [
+      81.983,
+      26.097,
+      9
+     ],
+     "world": [
+      48.399,
+      45.04
+     ]
+    },
+    {
+     "plan": [
+      9.894,
+      47.828,
+      11
+     ],
+     "world": [
+      -32.852,
+      17.861
+     ]
+    },
+    {
+     "plan": [
+      36.095,
+      68.086,
+      10
+     ],
+     "world": [
+      -27.705,
+      42.09
+     ]
+    },
+    {
+     "plan": [
+      93.834,
+      67.819,
+      0
+     ],
+     "world": [
+      22.53,
+      80.827
+     ]
+    },
+    {
+     "plan": [
+      76.588,
+      67.201,
+      0
+     ],
+     "world": [
+      8.129,
+      71.895
+     ]
+    },
+    {
+     "plan": [
+      81.268,
+      69.125,
+      0
+     ],
+     "world": [
+      10.516,
+      75.196
+     ]
+    },
+    {
+     "plan": [
+      91.828,
+      61.023,
+      0
+     ],
+     "world": [
+      26.678,
+      76.425
+     ]
+    },
+    {
+     "plan": [
+      83.456,
+      48.238,
+      0
+     ],
+     "world": [
+      30.5,
+      65.847
+     ]
+    },
+    {
+     "plan": [
+      81.85,
+      57.804,
+      0
+     ],
+     "world": [
+      20.825,
+      69.827
+     ]
+    },
+    {
+     "plan": [
+      77.466,
+      63.544,
+      0
+     ],
+     "world": [
+      12.057,
+      70.505
+     ]
+    },
+    {
+     "plan": [
+      95.62,
+      61.994,
+      0
+     ],
+     "world": [
+      29.121,
+      78.807
+     ]
+    },
+    {
+     "plan": [
+      89.949,
+      42.916,
+      0
+     ],
+     "world": [
+      40.732,
+      66.433
+     ]
+    },
+    {
+     "plan": [
+      79.089,
+      67.733,
+      0
+     ],
+     "world": [
+      9.834,
+      73.411
+     ]
+    },
+    {
+     "plan": [
+      79.661,
+      61.26,
+      0
+     ],
+     "world": [
+      15.936,
+      70.461
+     ]
+    },
+    {
+     "plan": [
+      101.005,
+      43.038,
+      0
+     ],
+     "world": [
+      50.201,
+      72.021
+     ]
+    }
+   ]
+  },
+  "nodeLifecycle": "Routine: spawn 'checking' (dashed ring spins) -> 'inside' after 1100 ms -> non-persistent ones retire (fade) after 7000 ms. Persistent ones stay for the final picture. Portfolio: spawn checking -> outcome after 800 ms; retained and transferred ones travel outside along their exit ray (1500 ms)."
+ },
+ "cameras": {
+  "_how": "World to demo canvas px: screen = world * s + [tx, ty]; the canvas sits at page (0, 68), 1564x1012, left of the 356 px rail, under the 68 px header, at a 1920x1080 viewport. pageViewBox: use as the SVG viewBox on a full 1920x1080 frame to land every world point on the exact pixel it occupies in the demo screenshot. canvasViewBox: the same framing for a 1564x1012 box at page (0,68). centredViewBox: the same zoom (s) with the demo's target box centred in a 1920x1080 frame (the demo shifts it right or down to make room for its cards). targetBox: the world box computeView() fits into its free region. sw: set --sw on the site SVG to this so hairlines and labels stay at the demo's screen size.",
+  "overview": {
+   "demoStep": "Stages 'intro', 'operating' (A site already has insurance / Physical work changes the real risk) and 'portfolio' (The site keeps operating)",
+   "cameraMatrix": "matrix(6.01038 0 0 6.01038 683.10 273.65)",
+   "s": 6.01038,
+   "tx": 683.1,
+   "ty": 273.65,
+   "sw": 0.1664,
+   "targetBox": {
+    "x": -79.469,
+    "y": -34.882,
+    "w": 191.848,
+    "h": 136.763,
+    "viewBox": "-79.469 -34.882 191.848 136.763"
+   },
+   "pageViewBox": {
+    "x": -113.653,
+    "y": -56.843,
+    "w": 319.447,
+    "h": 179.689,
+    "viewBox": "-113.653 -56.843 319.447 179.689"
+   },
+   "canvasViewBox": {
+    "x": -113.653,
+    "y": -45.53,
+    "w": 260.216,
+    "h": 168.375,
+    "viewBox": "-113.653 -45.53 260.216 168.375"
+   },
+   "centredViewBox": {
+    "x": -143.269,
+    "y": -56.345,
+    "w": 319.447,
+    "h": 179.689,
+    "viewBox": "-143.269 -56.345 319.447 179.689"
+   }
+  },
+  "roof03CloseUp": {
+   "demoStep": "Stage 'hero': Hot work begins on Roof 03 (zoom cap 10)",
+   "cameraMatrix": "matrix(10.00000 0 0 10.00000 452.01 208.15)",
+   "s": 10,
+   "tx": 452.01,
+   "ty": 208.15,
+   "sw": 0.1,
+   "targetBox": {
+    "x": 4.971,
+    "y": -4.53,
+    "w": 90.256,
+    "h": 67.03,
+    "viewBox": "4.971 -4.53 90.256 67.03"
+   },
+   "pageViewBox": {
+    "x": -45.201,
+    "y": -27.615,
+    "w": 192,
+    "h": 108,
+    "viewBox": "-45.201 -27.615 192 108"
+   },
+   "canvasViewBox": {
+    "x": -45.201,
+    "y": -20.815,
+    "w": 156.4,
+    "h": 101.2,
+    "viewBox": "-45.201 -20.815 156.4 101.2"
+   },
+   "centredViewBox": {
+    "x": -45.901,
+    "y": -25.015,
+    "w": 192,
+    "h": 108,
+    "viewBox": "-45.901 -25.015 192 108"
+   }
+  },
+  "somethingChanges": {
+   "demoStep": "Stage 'deviation': Something changes (zoom cap 9; the camera move runs 4200 ms, from 2000 ms into the stage)",
+   "cameraMatrix": "matrix(8.83133 0 0 8.83133 381.09 248.85)",
+   "s": 8.83133,
+   "tx": 381.09,
+   "ty": 248.85,
+   "sw": 0.1132,
+   "targetBox": {
+    "x": -1.029,
+    "y": -12.53,
+    "w": 132.256,
+    "h": 81.03,
+    "viewBox": "-1.029 -12.53 132.256 81.03"
+   },
+   "pageViewBox": {
+    "x": -43.152,
+    "y": -35.878,
+    "w": 217.408,
+    "h": 122.292,
+    "viewBox": "-43.152 -35.878 217.408 122.292"
+   },
+   "canvasViewBox": {
+    "x": -43.152,
+    "y": -28.178,
+    "w": 177.097,
+    "h": 114.592,
+    "viewBox": "-43.152 -28.178 177.097 114.592"
+   },
+   "centredViewBox": {
+    "x": -43.605,
+    "y": -33.161,
+    "w": 217.408,
+    "h": 122.292,
+    "viewBox": "-43.605 -33.161 217.408 122.292"
+   }
+  },
+  "decision": {
+   "demoStep": "Stage 'decision': The risk becomes a decision (whole envelope, node outside, framed left of the 600 px decision sheet; zoom cap 7.4)",
+   "cameraMatrix": "matrix(4.43059 0 0 4.43059 388.10 430.60)",
+   "s": 4.43059,
+   "tx": 388.1,
+   "ty": 430.6,
+   "sw": 0.2257,
+   "targetBox": {
+    "x": -79.469,
+    "y": -18.562,
+    "w": 191.848,
+    "h": 120.444,
+    "viewBox": "-79.469 -18.562 191.848 120.444"
+   },
+   "pageViewBox": {
+    "x": -87.596,
+    "y": -112.536,
+    "w": 433.351,
+    "h": 243.76,
+    "viewBox": "-87.596 -112.536 433.351 243.76"
+   },
+   "canvasViewBox": {
+    "x": -87.596,
+    "y": -97.188,
+    "w": 353,
+    "h": 228.412,
+    "viewBox": "-87.596 -97.188 353 228.412"
+   },
+   "centredViewBox": {
+    "x": -200.221,
+    "y": -80.22,
+    "w": 433.351,
+    "h": 243.76,
+    "viewBox": "-200.221 -80.22 433.351 243.76"
+   }
+  },
+  "transfer": {
+   "demoStep": "Stages 'transfer-packaging' / 'transfer-offers' / 'transfer-bound' (zoom cap 7; site pushed to the far left behind the packet and carriers)",
+   "cameraMatrix": "matrix(7.00000 0 0 7.00000 38.30 335.10)",
+   "s": 7,
+   "tx": 38.3,
+   "ty": 335.1,
+   "sw": 0.1429,
+   "targetBox": {
+    "x": 10.971,
+    "y": -2.53,
+    "w": 80.256,
+    "h": 61.03,
+    "viewBox": "10.971 -2.53 80.256 61.03"
+   },
+   "pageViewBox": {
+    "x": -5.471,
+    "y": -57.586,
+    "w": 274.286,
+    "h": 154.286,
+    "viewBox": "-5.471 -57.586 274.286 154.286"
+   },
+   "canvasViewBox": {
+    "x": -5.471,
+    "y": -47.871,
+    "w": 223.429,
+    "h": 144.571,
+    "viewBox": "-5.471 -47.871 223.429 144.571"
+   },
+   "centredViewBox": {
+    "x": -86.044,
+    "y": -49.158,
+    "w": 274.286,
+    "h": 154.286,
+    "viewBox": "-86.044 -49.158 274.286 154.286"
+   }
+  }
+ },
+ "outsideState": {
+  "_what": "How the demo draws the 'outside envelope' state (stage 'deviation' onwards). Sequence: 150 ms sprinkler zone 3 offline (heads hollow in a ripple from the valve, 55 ms per head in data-i order, crosses appear, hatch fades in 350 ms later, outline turns dark and tighter-dashed, label switches ACTIVE to OFFLINE); 1300 ms the Automatic sprinkler protection check turns UNAVAILABLE and the hero node goes to 'checking' (spinning dashed ring r 9 px); 2000 ms heroExits: the node travels 3400 ms (easeInOutCubic) along the ray from the envelope centre through the node, on a slight arc (16 px peak), while the camera moves to the 'somethingChanges' framing over 4200 ms. The envelope membrane bulges with the node (Gaussian, sigma 26 px + 0.55 x bulge) until the node is 44 px past the edge, then pinches off: the bulge relaxes, a 6 px inward notch (sigma 16 px) and two short exit ticks stay at the exit point, and the dashed signal slice ring grows to r 28 px around the node. The node's state flips to 'outside' the instant it crosses the edge (crossV). An anchor ellipse (7x4 px, dashed) stays at the node's original roof position with a dashed signal tether to the node. The reticle (corner brackets, +/-22 px) sits on the node from the hero stage to the decision. All px sizes are screen px (constant under zoom).",
+  "heroOriginWorld": [
+   38.971,
+   32.5
+  ],
+  "heroOriginPlan": [
+   67,
+   22,
+   12
+  ],
+  "exitDirectionWorld": [
+   0.8492,
+   -0.528
+  ],
+  "exitPointWorld": [
+   66.489,
+   15.39
+  ],
+  "settleOffsetPx": "clamp(34 + 6.2 * s, 58, 118) screen px beyond the edge, measured along the exit ray",
+  "leadLine": {
+   "what": "Solid leader from the activity card to the hero node, shown in the hero stage and hidden as soon as the node starts to leave (dev > 0.04). The dashed line after that is the tether.",
+   "pathPx": "M{cardRight} {cardTop + 58}H{cardRight + 0.45 * (node.x - cardRight)}L{node.x - 22} {node.y}",
+   "style": "ink, 1 px, stroke-opacity .35",
+   "observedAtRoof03CloseUpPx": "M392 308H594.4L819.7 533.1",
+   "cardPx": {
+    "left": 52,
+    "top": 250,
+    "width": 340,
+    "note": "demo layout at 1920 wide, canvas coordinates"
+   }
+  },
+  "atSomethingChanges": {
+   "camera": {
+    "s": 8.83133,
+    "tx": 381.09,
+    "ty": 248.85
+   },
+   "heroNode": {
+    "world": [
+     75.018,
+     10.083
+    ],
+    "screenPx": [
+     1043.6,
+     337.9
+    ],
+    "glyphScale": 1.5,
+    "classes": "n hero spawn st-outside"
+   },
+   "tether": {
+    "fromWorld": [
+     38.976,
+     32.504
+    ],
+    "toWorld": [
+     75.018,
+     10.083
+    ],
+    "style": "dashed 3 3.5 px, 1 px, signal, opacity .9"
+   },
+   "anchorEllipse": {
+    "centreWorld": [
+     38.976,
+     32.504
+    ],
+    "rxPx": 7,
+    "ryPx": 4,
+    "style": "dashed 2 2 px, 1 px, signal, opacity .6"
+   },
+   "sliceRing": {
+    "centreWorld": [
+     75.018,
+     10.083
+    ],
+    "rPx": 28,
+    "style": "circle, signal, 1 px, dashed 2.5 3 px, opacity .9"
+   },
+   "reticle": {
+    "centreWorld": [
+     75.018,
+     10.083
+    ],
+    "pathPx": "M-22 -14V-22H-14M14 -22H22V-14M22 14V22H14M-14 22H-22V14",
+    "style": "ink, 1 px, opacity .7"
+   },
+   "notchTicksWorld": "M65.11 14.25L66.458 13.412M66.899 17.138L68.247 16.3",
+   "notchTicksOpacity": 0.6,
+   "envelopeOutlineWorld": "M80.54 83.50L73.32 87.65L69.89 89.58L67.15 91.08L64.76 92.34L62.59 93.45L60.57 94.43L58.66 95.31L56.84 96.11L55.08 96.84L53.38 97.50L51.72 98.11L50.09 98.66L48.49 99.16L46.92 99.61L45.36 100.02L43.82 100.38L42.29 100.70L40.77 100.99L39.26 101.23L37.75 101.43L36.25 101.59L34.74 101.72L33.24 101.81L31.74 101.86L30.24 101.88L28.73 101.86L27.21 101.81L25.70 101.72L24.17 101.59L22.63 101.42L21.09 101.22L19.54 100.98L17.97 100.71L16.39 100.40L14.79 100.04L13.17 99.65L11.54 99.22L9.88 98.75L8.20 98.23L6.49 97.67L4.75 97.07L2.98 96.41L1.16 95.71L-0.70 94.94L-2.62 94.12L-4.61 93.24L-6.67 92.28L-8.82 91.24L-11.10 90.10L-13.52 88.86L-16.14 87.46L-19.05 85.88L-22.40 84.01L-26.61 81.62L-35.51 76.50L-44.38 71.36L-48.52 68.93L-51.75 67.00L-54.50 65.32L-56.91 63.80L-59.07 62.41L-61.04 61.09L-62.84 59.85L-64.50 58.66L-66.03 57.51L-67.45 56.41L-68.77 55.33L-70.00 54.28L-71.13 53.26L-72.18 52.25L-73.15 51.26L-74.04 50.29L-74.86 49.34L-75.61 48.39L-76.29 47.46L-76.90 46.54L-77.44 45.63L-77.92 44.72L-78.33 43.82L-78.68 42.93L-78.96 42.05L-79.18 41.16L-79.34 40.29L-79.44 39.41L-79.47 38.54L-79.44 37.68L-79.35 36.81L-79.19 35.94L-78.97 35.07L-78.69 34.21L-78.34 33.34L-77.92 32.46L-77.43 31.58L-76.87 30.70L-76.24 29.81L-75.54 28.91L-74.75 28.00L-73.88 27.08L-72.93 26.14L-71.88 25.18L-70.73 24.20L-69.47 23.18L-68.09 22.13L-66.56 21.03L-64.86 19.87L-62.95 18.61L-60.76 17.23L-58.16 15.65L-54.82 13.67L-47.63 9.50L-40.41 5.35L-36.98 3.42L-34.24 1.92L-31.85 0.66L-29.68 -0.45L-27.66 -1.43L-25.75 -2.31L-23.93 -3.11L-22.17 -3.84L-20.47 -4.50L-18.81 -5.11L-17.18 -5.66L-15.58 -6.16L-14.01 -6.61L-12.45 -7.02L-10.91 -7.38L-9.38 -7.70L-7.86 -7.99L-6.35 -8.23L-4.84 -8.43L-3.34 -8.59L-1.83 -8.72L-0.33 -8.81L1.17 -8.86L2.67 -8.88L4.18 -8.86L5.69 -8.81L7.21 -8.72L8.74 -8.59L10.27 -8.42L11.82 -8.22L13.37 -7.98L14.94 -7.71L16.52 -7.40L18.12 -7.04L19.73 -6.65L21.37 -6.22L23.02 -5.75L24.71 -5.23L26.41 -4.67L28.16 -4.07L29.93 -3.41L31.75 -2.71L33.61 -1.94L35.53 -1.12L37.52 -0.24L39.58 0.72L41.73 1.76L44.00 2.90L46.43 4.14L49.05 5.54L51.96 7.12L55.31 8.99L59.52 11.38L68.26 16.78L77.29 21.64L81.43 24.07L84.66 26.00L87.41 27.68L89.82 29.20L91.98 30.59L93.94 31.91L95.75 33.15L97.41 34.34L98.94 35.49L100.36 36.59L101.68 37.67L102.91 38.72L104.04 39.74L105.09 40.75L106.06 41.74L106.95 42.71L107.77 43.66L108.52 44.61L109.20 45.54L109.81 46.46L110.35 47.37L110.82 48.28L111.24 49.18L111.58 50.07L111.87 50.95L112.09 51.84L112.25 52.71L112.34 53.59L112.38 54.46L112.35 55.32L112.26 56.19L112.10 57.06L111.88 57.93L111.60 58.79L111.24 59.66L110.83 60.54L110.34 61.42L109.78 62.30L109.15 63.19L108.44 64.09L107.66 65.00L106.79 65.92L105.84 66.86L104.79 67.82L103.64 68.80L102.38 69.82L101.00 70.87L99.47 71.97L97.77 73.13L95.86 74.39L93.67 75.77L91.07 77.35L87.73 79.33Z",
+   "envelopeLabel": {
+    "text": "ANNUAL PROGRAMME ENVELOPE · PROPERTY + BI",
+    "textOriginWorld": [
+     49.937,
+     3.89
+    ],
+    "rotateDeg": 29.78,
+    "note": "text-anchor middle, 10 px mono, letter-spacing .16em, ink-3"
+   },
+   "readoutCardPx": {
+    "style": "transform: translate(1077.6px, 307.9px);",
+    "cls": "sig has-slice",
+    "w": 262,
+    "h": 127
+   }
+  },
+  "atDecision": {
+   "camera": {
+    "s": 4.43059,
+    "tx": 388.1,
+    "ty": 430.6
+   },
+   "heroNode": {
+    "world": [
+     78.274,
+     8.058
+    ],
+    "screenPx": [
+     734.9,
+     466.3
+    ],
+    "glyphScale": 1.5,
+    "classes": "n hero spawn st-outside"
+   },
+   "tether": {
+    "fromWorld": [
+     38.979,
+     32.501
+    ],
+    "toWorld": [
+     78.274,
+     8.058
+    ],
+    "style": "dashed 3 3.5 px, 1 px, signal, opacity .9"
+   },
+   "anchorEllipse": {
+    "centreWorld": [
+     38.979,
+     32.501
+    ],
+    "rxPx": 7,
+    "ryPx": 4,
+    "style": "dashed 2 2 px, 1 px, signal, opacity .6"
+   },
+   "sliceRing": {
+    "centreWorld": [
+     78.274,
+     8.058
+    ],
+    "rPx": 28,
+    "style": "circle, signal, 1 px, dashed 2.5 3 px, opacity .9"
+   },
+   "reticle": {
+    "centreWorld": [
+     78.274,
+     8.058
+    ],
+    "pathPx": "M-22 -14V-22H-14M14 -22H22V-14M22 14V22H14M-14 22H-22V14",
+    "style": "ink, 1 px, opacity .7"
+   },
+   "notchTicksWorld": "M63.739 13.113L66.425 11.443M67.327 18.869L69.991 17.199",
+   "notchTicksOpacity": 0.6,
+   "envelopeOutlineWorld": "M80.54 83.50L73.32 87.65L69.89 89.58L67.15 91.08L64.76 92.34L62.59 93.45L60.57 94.43L58.66 95.31L56.84 96.11L55.08 96.84L53.38 97.50L51.72 98.11L50.09 98.66L48.49 99.16L46.92 99.61L45.36 100.02L43.82 100.38L42.29 100.70L40.77 100.99L39.26 101.23L37.75 101.43L36.25 101.59L34.74 101.72L33.24 101.81L31.74 101.86L30.24 101.88L28.73 101.86L27.21 101.81L25.70 101.72L24.17 101.59L22.63 101.42L21.09 101.22L19.54 100.98L17.97 100.71L16.39 100.40L14.79 100.04L13.17 99.65L11.54 99.22L9.88 98.75L8.20 98.23L6.49 97.67L4.75 97.07L2.98 96.41L1.16 95.71L-0.70 94.94L-2.62 94.12L-4.61 93.24L-6.67 92.28L-8.82 91.24L-11.10 90.10L-13.52 88.86L-16.14 87.46L-19.05 85.88L-22.40 84.01L-26.61 81.62L-35.51 76.50L-44.38 71.36L-48.52 68.93L-51.75 67.00L-54.50 65.32L-56.91 63.80L-59.07 62.41L-61.04 61.09L-62.84 59.85L-64.50 58.66L-66.03 57.51L-67.45 56.41L-68.77 55.33L-70.00 54.28L-71.13 53.26L-72.18 52.25L-73.15 51.26L-74.04 50.29L-74.86 49.34L-75.61 48.39L-76.29 47.46L-76.90 46.54L-77.44 45.63L-77.92 44.72L-78.33 43.82L-78.68 42.93L-78.96 42.05L-79.18 41.16L-79.34 40.29L-79.44 39.41L-79.47 38.54L-79.44 37.68L-79.35 36.81L-79.19 35.94L-78.97 35.07L-78.69 34.21L-78.34 33.34L-77.92 32.46L-77.43 31.58L-76.87 30.70L-76.24 29.81L-75.54 28.91L-74.75 28.00L-73.88 27.08L-72.93 26.14L-71.88 25.18L-70.73 24.20L-69.47 23.18L-68.09 22.13L-66.56 21.03L-64.86 19.87L-62.95 18.61L-60.76 17.23L-58.16 15.65L-54.82 13.67L-47.63 9.50L-40.41 5.35L-36.98 3.42L-34.24 1.92L-31.85 0.66L-29.68 -0.45L-27.66 -1.43L-25.75 -2.31L-23.93 -3.11L-22.17 -3.84L-20.47 -4.50L-18.81 -5.11L-17.18 -5.66L-15.58 -6.16L-14.01 -6.61L-12.45 -7.02L-10.91 -7.38L-9.38 -7.70L-7.86 -7.99L-6.35 -8.23L-4.84 -8.43L-3.34 -8.59L-1.83 -8.72L-0.33 -8.81L1.17 -8.86L2.67 -8.88L4.18 -8.86L5.69 -8.81L7.21 -8.72L8.74 -8.59L10.27 -8.42L11.82 -8.22L13.37 -7.98L14.94 -7.71L16.52 -7.40L18.12 -7.04L19.73 -6.65L21.37 -6.22L23.02 -5.75L24.71 -5.23L26.41 -4.67L28.16 -4.07L29.93 -3.41L31.75 -2.71L33.61 -1.94L35.53 -1.12L37.52 -0.24L39.58 0.72L41.73 1.76L44.00 2.90L46.43 4.14L49.05 5.54L51.96 7.12L55.31 8.99L59.46 11.47L67.86 17.47L77.29 21.64L81.43 24.07L84.66 26.00L87.41 27.68L89.82 29.20L91.98 30.59L93.94 31.91L95.75 33.15L97.41 34.34L98.94 35.49L100.36 36.59L101.68 37.67L102.91 38.72L104.04 39.74L105.09 40.75L106.06 41.74L106.95 42.71L107.77 43.66L108.52 44.61L109.20 45.54L109.81 46.46L110.35 47.37L110.82 48.28L111.24 49.18L111.58 50.07L111.87 50.95L112.09 51.84L112.25 52.71L112.34 53.59L112.38 54.46L112.35 55.32L112.26 56.19L112.10 57.06L111.88 57.93L111.60 58.79L111.24 59.66L110.83 60.54L110.34 61.42L109.78 62.30L109.15 63.19L108.44 64.09L107.66 65.00L106.79 65.92L105.84 66.86L104.79 67.82L103.64 68.80L102.38 69.82L101.00 70.87L99.47 71.97L97.77 73.13L95.86 74.39L93.67 75.77L91.07 77.35L87.73 79.33Z",
+   "envelopeLabel": {
+    "text": "ANNUAL PROGRAMME ENVELOPE",
+    "textOriginWorld": [
+     12.346,
+     -11.917
+    ],
+    "rotateDeg": 11.83,
+    "note": "text-anchor middle, 10 px mono, letter-spacing .16em, ink-3"
+   },
+   "readoutCardPx": {
+    "style": "transform: translate(590.8px, 305.3px);",
+    "cls": "sig has-slice",
+    "w": 262,
+    "h": 127
+   }
+  },
+  "deformation": {
+   "functionSource": "function heroDeviation(envPts, envNrm, envCenter, heroWorld, s, v, notchK) {\n  // envPts/envNrm: envelope contour (world) and outward unit normals; heroWorld: iso(67,22,12)\n  // s: camera scale (px per world unit); v: 0..1 progress; notchK: 1 (fades to 0 in the portfolio)\n  if (notchK == null) notchK = 1;\n  const N = envPts.length, clamp = (x, a, b) => Math.max(a, Math.min(b, x)), lerp = (a, b, t) => a + (b - a) * t;\n  const norm = q => { const l = Math.hypot(q[0], q[1]) || 1; return [q[0] / l, q[1] / l]; };\n  const easeOut = p => 1 - Math.pow(1 - p, 3);\n  const rayHit = (pts, A, d) => { let best = null; for (let i = 0; i < pts.length; i++) { const p = pts[i], q = pts[(i + 1) % pts.length]; const ex = q[0] - p[0], ey = q[1] - p[1]; const den = d[0] * ey - d[1] * ex; if (Math.abs(den) < 1e-9) continue; const t = ((p[0] - A[0]) * ey - (p[1] - A[1]) * ex) / den; const u = ((p[0] - A[0]) * d[1] - (p[1] - A[1]) * d[0]) / den; if (t > 0 && u >= 0 && u <= 1 && (best === null || t < best)) best = t; } return best === null ? null : [A[0] + d[0] * best, A[1] + d[1] * best]; };\n  const px = 1 / s;                                   // one screen px in world units\n  const offPx = clamp(34 + 6.2 * s, 58, 118);         // how far outside the edge the node settles (screen px)\n  const A = heroWorld, dir = norm([A[0] - envCenter[0], A[1] - envCenter[1]]);\n  const E = rayHit(envPts, A, dir) || A;              // exit point on the envelope\n  const T = [E[0] + dir[0] * offPx * px, E[1] + dir[1] * offPx * px];\n  const arc = Math.sin(Math.PI * v) * 16 * px, perp = [dir[1], -dir[0]], sg = perp[1] < 0 ? 1 : -1;\n  const Pl = [lerp(A[0], T[0], v), lerp(A[1], T[1], v)];\n  const P = [Pl[0] + perp[0] * arc * sg, Pl[1] + perp[1] * arc * sg];   // node position (slight arc)\n  const crossV = clamp(Math.hypot(E[0] - A[0], E[1] - A[1]) / (Math.hypot(T[0] - A[0], T[1] - A[1]) || 1), 0.2, 0.8);\n  const u = ((Pl[0] - E[0]) * dir[0] + (Pl[1] - E[1]) * dir[1]) / px, uT = offPx;   // px beyond the edge\n  const pinch = 44, rN = 11, relax = Math.max(8, (uT - pinch) * 0.9);\n  let bulge = 0, notch = 0, ring = 0;\n  if (v > 0.001) {\n    if (u < pinch) bulge = clamp(u + rN, 0, pinch + rN);\n    else { const k = clamp((u - pinch) / relax, 0, 1); bulge = (pinch + rN) * (1 - easeOut(k)); ring = easeOut(k); }\n    notch = (u >= pinch ? 6 * clamp((u - pinch) / relax, 0, 1) : 0) * notchK;\n  }\n  const outline = [], outer = [];\n  for (let i = 0; i < N; i++) {\n    const p = envPts[i], nv = envNrm[i];\n    let x = p[0], y = p[1];\n    if (v > 0.001 && (bulge > 0.1 || notch > 0.1)) {\n      const dist = Math.hypot(p[0] - E[0], p[1] - E[1]) / px;          // in px\n      const sig = 26 + bulge * 0.55;\n      const gb = Math.exp(-(dist * dist) / (2 * sig * sig)), gn = Math.exp(-(dist * dist) / (2 * 16 * 16));\n      x += (dir[0] * bulge * gb - nv[0] * notch * gn) * px;\n      y += (dir[1] * bulge * gb - nv[1] * notch * gn) * px;\n    }\n    outline.push([x, y]); outer.push([x + nv[0] * 4.5 * px, y + nv[1] * 4.5 * px]);\n  }\n  let notchTicks = '', notchOpacity = 0;\n  if (notch > 0.5) {\n    const pp = [dir[1], -dir[0]], o = 15 * px;\n    const t1 = [E[0] + pp[0] * o, E[1] + pp[1] * o], t2 = [E[0] - pp[0] * o, E[1] - pp[1] * o];\n    const a = (t, k) => (t[0] + dir[0] * k * px).toFixed(3) + ' ' + (t[1] + dir[1] * k * px).toFixed(3);\n    notchTicks = 'M' + a(t1, -5) + 'L' + a(t1, 9) + 'M' + a(t2, -5) + 'L' + a(t2, 9);\n    notchOpacity = clamp(notch / 6, 0, 1) * 0.6;\n  }\n  return { P, A, E, T, dir, crossV, uPx: u, bulgePx: bulge, notchPx: notch, ring,\n    sliceRingRadiusPx: ring > 0.02 ? 8 + 20 * ring : 0, sliceRingOpacity: ring > 0.02 ? 0.9 * ring : 0,\n    outline, outer, notchTicks, notchOpacity, offPx, state: v >= crossV ? 'outside' : 'checking' };\n}",
+   "usage": "const r = heroDeviation(model.envelope.pointsWorld, model.envelope.normalsWorld, model.envelope.centreWorld, model.anchors.hotWorkNode.world, s, v, 1); r.outline -> envelope-outline d, r.outer -> envelope-outer d, r.P -> node position (world).",
+   "samplesAtSomethingChangesScale": {
+    "s": 8.83133,
+    "crossV": 0.7633,
+    "offPx": 88.75,
+    "samples": [
+     {
+      "v": 0,
+      "state": "checking",
+      "nodeWorld": [
+       38.971,
+       32.5
+      ],
+      "uPx": -286.16,
+      "bulgePx": 0,
+      "notchPx": 0,
+      "sliceRingRadiusPx": 0,
+      "sliceRingOpacity": 0,
+      "notchTicks": "",
+      "outlineD": "M80.54 83.5L73.319 87.652L69.893 89.58L67.15 91.08L64.758 92.343L62.587 93.446L60.568 94.427L58.661 95.31L56.839 96.11L55.082 96.838L53.379 97.501L51.718 98.106L50.091 98.657L48.492 99.158L46.917 99.611L45.36 100.018L43.818 100.382L42.289 100.704L40.769 100.985L39.256 101.227L37.749 101.43L36.245 101.594L34.744 101.721L33.242 101.811L31.74 101.865L30.235 101.882L28.727 101.862L27.214 101.807L25.695 101.715L24.169 101.587L22.635 101.423L21.091 101.222L19.536 100.985L17.968 100.709L16.387 100.396L14.789 100.045L13.175 99.654L11.54 99.222L9.884 98.749L8.203 98.234L6.494 97.674L4.754 97.067L2.978 96.412L1.161 95.706L-0.704 94.944L-2.623 94.123L-4.607 93.237L-6.668 92.279L-8.824 91.239L-11.096 90.104L-13.518 88.855L-16.141 87.464L-19.047 85.881L-22.4 84.013L-26.607 81.625L-35.507 76.5L-44.384 71.362L-48.52 68.932L-51.755 66.997L-54.497 65.319L-56.907 63.805L-59.07 62.406L-61.035 61.094L-62.837 59.85L-64.496 58.66L-66.031 57.514L-67.453 56.406L-68.772 55.33L-69.996 54.281L-71.131 53.255L-72.181 52.251L-73.151 51.264L-74.044 50.293L-74.863 49.337L-75.61 48.394L-76.288 47.461L-76.897 46.539L-77.439 45.626L-77.916 44.721L-78.328 43.823L-78.675 42.932L-78.96 42.046L-79.181 41.165L-79.34 40.288L-79.436 39.415L-79.469 38.544L-79.44 37.675L-79.348 36.808L-79.192 35.941L-78.971 35.074L-78.686 34.206L-78.335 33.335L-77.917 32.462L-77.43 31.585L-76.872 30.701L-76.242 29.811L-75.536 28.913L-74.752 28.003L-73.885 27.08L-72.93 26.141L-71.882 25.182L-70.733 24.198L-69.472 23.184L-68.086 22.132L-66.557 21.031L-64.858 19.865L-62.949 18.612L-60.761 17.231L-58.163 15.647L-54.824 13.669L-47.631 9.5L-40.41 5.348L-36.984 3.42L-34.241 1.92L-31.849 0.657L-29.678 -0.446L-27.659 -1.427L-25.752 -2.31L-23.93 -3.11L-22.173 -3.838L-20.47 -4.501L-18.809 -5.106L-17.182 -5.657L-15.583 -6.158L-14.008 -6.611L-12.451 -7.018L-10.909 -7.382L-9.38 -7.704L-7.86 -7.985L-6.347 -8.227L-4.84 -8.43L-3.336 -8.594L-1.835 -8.721L-0.333 -8.811L1.169 -8.865L2.674 -8.882L4.182 -8.862L5.695 -8.807L7.214 -8.715L8.74 -8.587L10.274 -8.423L11.818 -8.222L13.373 -7.985L14.941 -7.709L16.522 -7.396L18.12 -7.045L19.734 -6.654L21.369 -6.222L23.025 -5.749L24.706 -5.234L26.415 -4.674L28.155 -4.067L29.931 -3.412L31.748 -2.706L33.613 -1.944L35.532 -1.123L37.516 -0.237L39.577 0.721L41.733 1.761L44.005 2.896L46.427 4.145L49.05 5.536L51.956 7.119L55.308 8.987L59.516 11.375L68.416 16.5L77.292 21.638L81.429 24.068L84.664 26.003L87.406 27.681L89.816 29.195L91.979 30.594L93.944 31.906L95.746 33.15L97.405 34.34L98.94 35.486L100.362 36.594L101.681 37.67L102.905 38.719L104.04 39.745L105.09 40.749L106.06 41.736L106.953 42.707L107.772 43.663L108.519 44.606L109.196 45.539L109.806 46.461L110.348 47.374L110.825 48.279L111.236 49.177L111.584 50.068L111.869 50.954L112.09 51.835L112.249 52.712L112.345 53.585L112.378 54.456L112.349 55.325L112.257 56.192L112.101 57.059L111.88 57.926L111.595 58.794L111.244 59.665L110.826 60.538L110.339 61.415L109.781 62.299L109.151 63.189L108.445 64.087L107.661 64.997L106.794 65.92L105.839 66.859L104.791 67.818L103.642 68.802L102.381 69.816L100.995 70.868L99.466 71.969L97.767 73.135L95.858 74.388L93.67 75.769L91.072 77.353L87.733 79.331Z"
+     },
+     {
+      "v": 0.05,
+      "state": "checking",
+      "nodeWorld": [
+       40.624,
+       31.139
+      ],
+      "uPx": -267.42,
+      "bulgePx": 0,
+      "notchPx": 0,
+      "sliceRingRadiusPx": 0,
+      "sliceRingOpacity": 0,
+      "notchTicks": "",
+      "outlineD": "M80.54 83.5L73.319 87.652L69.893 89.58L67.15 91.08L64.758 92.343L62.587 93.446L60.568 94.427L58.661 95.31L56.839 96.11L55.082 96.838L53.379 97.501L51.718 98.106L50.091 98.657L48.492 99.158L46.917 99.611L45.36 100.018L43.818 100.382L42.289 100.704L40.769 100.985L39.256 101.227L37.749 101.43L36.245 101.594L34.744 101.721L33.242 101.811L31.74 101.865L30.235 101.882L28.727 101.862L27.214 101.807L25.695 101.715L24.169 101.587L22.635 101.423L21.091 101.222L19.536 100.985L17.968 100.709L16.387 100.396L14.789 100.045L13.175 99.654L11.54 99.222L9.884 98.749L8.203 98.234L6.494 97.674L4.754 97.067L2.978 96.412L1.161 95.706L-0.704 94.944L-2.623 94.123L-4.607 93.237L-6.668 92.279L-8.824 91.239L-11.096 90.104L-13.518 88.855L-16.141 87.464L-19.047 85.881L-22.4 84.013L-26.607 81.625L-35.507 76.5L-44.384 71.362L-48.52 68.932L-51.755 66.997L-54.497 65.319L-56.907 63.805L-59.07 62.406L-61.035 61.094L-62.837 59.85L-64.496 58.66L-66.031 57.514L-67.453 56.406L-68.772 55.33L-69.996 54.281L-71.131 53.255L-72.181 52.251L-73.151 51.264L-74.044 50.293L-74.863 49.337L-75.61 48.394L-76.288 47.461L-76.897 46.539L-77.439 45.626L-77.916 44.721L-78.328 43.823L-78.675 42.932L-78.96 42.046L-79.181 41.165L-79.34 40.288L-79.436 39.415L-79.469 38.544L-79.44 37.675L-79.348 36.808L-79.192 35.941L-78.971 35.074L-78.686 34.206L-78.335 33.335L-77.917 32.462L-77.43 31.585L-76.872 30.701L-76.242 29.811L-75.536 28.913L-74.752 28.003L-73.885 27.08L-72.93 26.141L-71.882 25.182L-70.733 24.198L-69.472 23.184L-68.086 22.132L-66.557 21.031L-64.858 19.865L-62.949 18.612L-60.761 17.231L-58.163 15.647L-54.824 13.669L-47.631 9.5L-40.41 5.348L-36.984 3.42L-34.241 1.92L-31.849 0.657L-29.678 -0.446L-27.659 -1.427L-25.752 -2.31L-23.93 -3.11L-22.173 -3.838L-20.47 -4.501L-18.809 -5.106L-17.182 -5.657L-15.583 -6.158L-14.008 -6.611L-12.451 -7.018L-10.909 -7.382L-9.38 -7.704L-7.86 -7.985L-6.347 -8.227L-4.84 -8.43L-3.336 -8.594L-1.835 -8.721L-0.333 -8.811L1.169 -8.865L2.674 -8.882L4.182 -8.862L5.695 -8.807L7.214 -8.715L8.74 -8.587L10.274 -8.423L11.818 -8.222L13.373 -7.985L14.941 -7.709L16.522 -7.396L18.12 -7.045L19.734 -6.654L21.369 -6.222L23.025 -5.749L24.706 -5.234L26.415 -4.674L28.155 -4.067L29.931 -3.412L31.748 -2.706L33.613 -1.944L35.532 -1.123L37.516 -0.237L39.577 0.721L41.733 1.761L44.005 2.896L46.427 4.145L49.05 5.536L51.956 7.119L55.308 8.987L59.516 11.375L68.416 16.5L77.292 21.638L81.429 24.068L84.664 26.003L87.406 27.681L89.816 29.195L91.979 30.594L93.944 31.906L95.746 33.15L97.405 34.34L98.94 35.486L100.362 36.594L101.681 37.67L102.905 38.719L104.04 39.745L105.09 40.749L106.06 41.736L106.953 42.707L107.772 43.663L108.519 44.606L109.196 45.539L109.806 46.461L110.348 47.374L110.825 48.279L111.236 49.177L111.584 50.068L111.869 50.954L112.09 51.835L112.249 52.712L112.345 53.585L112.378 54.456L112.349 55.325L112.257 56.192L112.101 57.059L111.88 57.926L111.595 58.794L111.244 59.665L110.826 60.538L110.339 61.415L109.781 62.299L109.151 63.189L108.445 64.087L107.661 64.997L106.794 65.92L105.839 66.859L104.791 67.818L103.642 68.802L102.381 69.816L100.995 70.868L99.466 71.969L97.767 73.135L95.858 74.388L93.67 75.769L91.072 77.353L87.733 79.331Z"
+     },
+     {
+      "v": 0.1,
+      "state": "checking",
+      "nodeWorld": [
+       42.281,
+       29.783
+      ],
+      "uPx": -248.67,
+      "bulgePx": 0,
+      "notchPx": 0,
+      "sliceRingRadiusPx": 0,
+      "sliceRingOpacity": 0,
+      "notchTicks": "",
+      "outlineD": "M80.54 83.5L73.319 87.652L69.893 89.58L67.15 91.08L64.758 92.343L62.587 93.446L60.568 94.427L58.661 95.31L56.839 96.11L55.082 96.838L53.379 97.501L51.718 98.106L50.091 98.657L48.492 99.158L46.917 99.611L45.36 100.018L43.818 100.382L42.289 100.704L40.769 100.985L39.256 101.227L37.749 101.43L36.245 101.594L34.744 101.721L33.242 101.811L31.74 101.865L30.235 101.882L28.727 101.862L27.214 101.807L25.695 101.715L24.169 101.587L22.635 101.423L21.091 101.222L19.536 100.985L17.968 100.709L16.387 100.396L14.789 100.045L13.175 99.654L11.54 99.222L9.884 98.749L8.203 98.234L6.494 97.674L4.754 97.067L2.978 96.412L1.161 95.706L-0.704 94.944L-2.623 94.123L-4.607 93.237L-6.668 92.279L-8.824 91.239L-11.096 90.104L-13.518 88.855L-16.141 87.464L-19.047 85.881L-22.4 84.013L-26.607 81.625L-35.507 76.5L-44.384 71.362L-48.52 68.932L-51.755 66.997L-54.497 65.319L-56.907 63.805L-59.07 62.406L-61.035 61.094L-62.837 59.85L-64.496 58.66L-66.031 57.514L-67.453 56.406L-68.772 55.33L-69.996 54.281L-71.131 53.255L-72.181 52.251L-73.151 51.264L-74.044 50.293L-74.863 49.337L-75.61 48.394L-76.288 47.461L-76.897 46.539L-77.439 45.626L-77.916 44.721L-78.328 43.823L-78.675 42.932L-78.96 42.046L-79.181 41.165L-79.34 40.288L-79.436 39.415L-79.469 38.544L-79.44 37.675L-79.348 36.808L-79.192 35.941L-78.971 35.074L-78.686 34.206L-78.335 33.335L-77.917 32.462L-77.43 31.585L-76.872 30.701L-76.242 29.811L-75.536 28.913L-74.752 28.003L-73.885 27.08L-72.93 26.141L-71.882 25.182L-70.733 24.198L-69.472 23.184L-68.086 22.132L-66.557 21.031L-64.858 19.865L-62.949 18.612L-60.761 17.231L-58.163 15.647L-54.824 13.669L-47.631 9.5L-40.41 5.348L-36.984 3.42L-34.241 1.92L-31.849 0.657L-29.678 -0.446L-27.659 -1.427L-25.752 -2.31L-23.93 -3.11L-22.173 -3.838L-20.47 -4.501L-18.809 -5.106L-17.182 -5.657L-15.583 -6.158L-14.008 -6.611L-12.451 -7.018L-10.909 -7.382L-9.38 -7.704L-7.86 -7.985L-6.347 -8.227L-4.84 -8.43L-3.336 -8.594L-1.835 -8.721L-0.333 -8.811L1.169 -8.865L2.674 -8.882L4.182 -8.862L5.695 -8.807L7.214 -8.715L8.74 -8.587L10.274 -8.423L11.818 -8.222L13.373 -7.985L14.941 -7.709L16.522 -7.396L18.12 -7.045L19.734 -6.654L21.369 -6.222L23.025 -5.749L24.706 -5.234L26.415 -4.674L28.155 -4.067L29.931 -3.412L31.748 -2.706L33.613 -1.944L35.532 -1.123L37.516 -0.237L39.577 0.721L41.733 1.761L44.005 2.896L46.427 4.145L49.05 5.536L51.956 7.119L55.308 8.987L59.516 11.375L68.416 16.5L77.292 21.638L81.429 24.068L84.664 26.003L87.406 27.681L89.816 29.195L91.979 30.594L93.944 31.906L95.746 33.15L97.405 34.34L98.94 35.486L100.362 36.594L101.681 37.67L102.905 38.719L104.04 39.745L105.09 40.749L106.06 41.736L106.953 42.707L107.772 43.663L108.519 44.606L109.196 45.539L109.806 46.461L110.348 47.374L110.825 48.279L111.236 49.177L111.584 50.068L111.869 50.954L112.09 51.835L112.249 52.712L112.345 53.585L112.378 54.456L112.349 55.325L112.257 56.192L112.101 57.059L111.88 57.926L111.595 58.794L111.244 59.665L110.826 60.538L110.339 61.415L109.781 62.299L109.151 63.189L108.445 64.087L107.661 64.997L106.794 65.92L105.839 66.859L104.791 67.818L103.642 68.802L102.381 69.816L100.995 70.868L99.466 71.969L97.767 73.135L95.858 74.388L93.67 75.769L91.072 77.353L87.733 79.331Z"
+     },
+     {
+      "v": 0.15,
+      "state": "checking",
+      "nodeWorld": [
+       43.945,
+       28.439
+      ],
+      "uPx": -229.93,
+      "bulgePx": 0,
+      "notchPx": 0,
+      "sliceRingRadiusPx": 0,
+      "sliceRingOpacity": 0,
+      "notchTicks": "",
+      "outlineD": "M80.54 83.5L73.319 87.652L69.893 89.58L67.15 91.08L64.758 92.343L62.587 93.446L60.568 94.427L58.661 95.31L56.839 96.11L55.082 96.838L53.379 97.501L51.718 98.106L50.091 98.657L48.492 99.158L46.917 99.611L45.36 100.018L43.818 100.382L42.289 100.704L40.769 100.985L39.256 101.227L37.749 101.43L36.245 101.594L34.744 101.721L33.242 101.811L31.74 101.865L30.235 101.882L28.727 101.862L27.214 101.807L25.695 101.715L24.169 101.587L22.635 101.423L21.091 101.222L19.536 100.985L17.968 100.709L16.387 100.396L14.789 100.045L13.175 99.654L11.54 99.222L9.884 98.749L8.203 98.234L6.494 97.674L4.754 97.067L2.978 96.412L1.161 95.706L-0.704 94.944L-2.623 94.123L-4.607 93.237L-6.668 92.279L-8.824 91.239L-11.096 90.104L-13.518 88.855L-16.141 87.464L-19.047 85.881L-22.4 84.013L-26.607 81.625L-35.507 76.5L-44.384 71.362L-48.52 68.932L-51.755 66.997L-54.497 65.319L-56.907 63.805L-59.07 62.406L-61.035 61.094L-62.837 59.85L-64.496 58.66L-66.031 57.514L-67.453 56.406L-68.772 55.33L-69.996 54.281L-71.131 53.255L-72.181 52.251L-73.151 51.264L-74.044 50.293L-74.863 49.337L-75.61 48.394L-76.288 47.461L-76.897 46.539L-77.439 45.626L-77.916 44.721L-78.328 43.823L-78.675 42.932L-78.96 42.046L-79.181 41.165L-79.34 40.288L-79.436 39.415L-79.469 38.544L-79.44 37.675L-79.348 36.808L-79.192 35.941L-78.971 35.074L-78.686 34.206L-78.335 33.335L-77.917 32.462L-77.43 31.585L-76.872 30.701L-76.242 29.811L-75.536 28.913L-74.752 28.003L-73.885 27.08L-72.93 26.141L-71.882 25.182L-70.733 24.198L-69.472 23.184L-68.086 22.132L-66.557 21.031L-64.858 19.865L-62.949 18.612L-60.761 17.231L-58.163 15.647L-54.824 13.669L-47.631 9.5L-40.41 5.348L-36.984 3.42L-34.241 1.92L-31.849 0.657L-29.678 -0.446L-27.659 -1.427L-25.752 -2.31L-23.93 -3.11L-22.173 -3.838L-20.47 -4.501L-18.809 -5.106L-17.182 -5.657L-15.583 -6.158L-14.008 -6.611L-12.451 -7.018L-10.909 -7.382L-9.38 -7.704L-7.86 -7.985L-6.347 -8.227L-4.84 -8.43L-3.336 -8.594L-1.835 -8.721L-0.333 -8.811L1.169 -8.865L2.674 -8.882L4.182 -8.862L5.695 -8.807L7.214 -8.715L8.74 -8.587L10.274 -8.423L11.818 -8.222L13.373 -7.985L14.941 -7.709L16.522 -7.396L18.12 -7.045L19.734 -6.654L21.369 -6.222L23.025 -5.749L24.706 -5.234L26.415 -4.674L28.155 -4.067L29.931 -3.412L31.748 -2.706L33.613 -1.944L35.532 -1.123L37.516 -0.237L39.577 0.721L41.733 1.761L44.005 2.896L46.427 4.145L49.05 5.536L51.956 7.119L55.308 8.987L59.516 11.375L68.416 16.5L77.292 21.638L81.429 24.068L84.664 26.003L87.406 27.681L89.816 29.195L91.979 30.594L93.944 31.906L95.746 33.15L97.405 34.34L98.94 35.486L100.362 36.594L101.681 37.67L102.905 38.719L104.04 39.745L105.09 40.749L106.06 41.736L106.953 42.707L107.772 43.663L108.519 44.606L109.196 45.539L109.806 46.461L110.348 47.374L110.825 48.279L111.236 49.177L111.584 50.068L111.869 50.954L112.09 51.835L112.249 52.712L112.345 53.585L112.378 54.456L112.349 55.325L112.257 56.192L112.101 57.059L111.88 57.926L111.595 58.794L111.244 59.665L110.826 60.538L110.339 61.415L109.781 62.299L109.151 63.189L108.445 64.087L107.661 64.997L106.794 65.92L105.839 66.859L104.791 67.818L103.642 68.802L102.381 69.816L100.995 70.868L99.466 71.969L97.767 73.135L95.858 74.388L93.67 75.769L91.072 77.353L87.733 79.331Z"
+     },
+     {
+      "v": 0.2,
+      "state": "checking",
+      "nodeWorld": [
+       45.619,
+       27.112
+      ],
+      "uPx": -211.18,
+      "bulgePx": 0,
+      "notchPx": 0,
+      "sliceRingRadiusPx": 0,
+      "sliceRingOpacity": 0,
+      "notchTicks": "",
+      "outlineD": "M80.54 83.5L73.319 87.652L69.893 89.58L67.15 91.08L64.758 92.343L62.587 93.446L60.568 94.427L58.661 95.31L56.839 96.11L55.082 96.838L53.379 97.501L51.718 98.106L50.091 98.657L48.492 99.158L46.917 99.611L45.36 100.018L43.818 100.382L42.289 100.704L40.769 100.985L39.256 101.227L37.749 101.43L36.245 101.594L34.744 101.721L33.242 101.811L31.74 101.865L30.235 101.882L28.727 101.862L27.214 101.807L25.695 101.715L24.169 101.587L22.635 101.423L21.091 101.222L19.536 100.985L17.968 100.709L16.387 100.396L14.789 100.045L13.175 99.654L11.54 99.222L9.884 98.749L8.203 98.234L6.494 97.674L4.754 97.067L2.978 96.412L1.161 95.706L-0.704 94.944L-2.623 94.123L-4.607 93.237L-6.668 92.279L-8.824 91.239L-11.096 90.104L-13.518 88.855L-16.141 87.464L-19.047 85.881L-22.4 84.013L-26.607 81.625L-35.507 76.5L-44.384 71.362L-48.52 68.932L-51.755 66.997L-54.497 65.319L-56.907 63.805L-59.07 62.406L-61.035 61.094L-62.837 59.85L-64.496 58.66L-66.031 57.514L-67.453 56.406L-68.772 55.33L-69.996 54.281L-71.131 53.255L-72.181 52.251L-73.151 51.264L-74.044 50.293L-74.863 49.337L-75.61 48.394L-76.288 47.461L-76.897 46.539L-77.439 45.626L-77.916 44.721L-78.328 43.823L-78.675 42.932L-78.96 42.046L-79.181 41.165L-79.34 40.288L-79.436 39.415L-79.469 38.544L-79.44 37.675L-79.348 36.808L-79.192 35.941L-78.971 35.074L-78.686 34.206L-78.335 33.335L-77.917 32.462L-77.43 31.585L-76.872 30.701L-76.242 29.811L-75.536 28.913L-74.752 28.003L-73.885 27.08L-72.93 26.141L-71.882 25.182L-70.733 24.198L-69.472 23.184L-68.086 22.132L-66.557 21.031L-64.858 19.865L-62.949 18.612L-60.761 17.231L-58.163 15.647L-54.824 13.669L-47.631 9.5L-40.41 5.348L-36.984 3.42L-34.241 1.92L-31.849 0.657L-29.678 -0.446L-27.659 -1.427L-25.752 -2.31L-23.93 -3.11L-22.173 -3.838L-20.47 -4.501L-18.809 -5.106L-17.182 -5.657L-15.583 -6.158L-14.008 -6.611L-12.451 -7.018L-10.909 -7.382L-9.38 -7.704L-7.86 -7.985L-6.347 -8.227L-4.84 -8.43L-3.336 -8.594L-1.835 -8.721L-0.333 -8.811L1.169 -8.865L2.674 -8.882L4.182 -8.862L5.695 -8.807L7.214 -8.715L8.74 -8.587L10.274 -8.423L11.818 -8.222L13.373 -7.985L14.941 -7.709L16.522 -7.396L18.12 -7.045L19.734 -6.654L21.369 -6.222L23.025 -5.749L24.706 -5.234L26.415 -4.674L28.155 -4.067L29.931 -3.412L31.748 -2.706L33.613 -1.944L35.532 -1.123L37.516 -0.237L39.577 0.721L41.733 1.761L44.005 2.896L46.427 4.145L49.05 5.536L51.956 7.119L55.308 8.987L59.516 11.375L68.416 16.5L77.292 21.638L81.429 24.068L84.664 26.003L87.406 27.681L89.816 29.195L91.979 30.594L93.944 31.906L95.746 33.15L97.405 34.34L98.94 35.486L100.362 36.594L101.681 37.67L102.905 38.719L104.04 39.745L105.09 40.749L106.06 41.736L106.953 42.707L107.772 43.663L108.519 44.606L109.196 45.539L109.806 46.461L110.348 47.374L110.825 48.279L111.236 49.177L111.584 50.068L111.869 50.954L112.09 51.835L112.249 52.712L112.345 53.585L112.378 54.456L112.349 55.325L112.257 56.192L112.101 57.059L111.88 57.926L111.595 58.794L111.244 59.665L110.826 60.538L110.339 61.415L109.781 62.299L109.151 63.189L108.445 64.087L107.661 64.997L106.794 65.92L105.839 66.859L104.791 67.818L103.642 68.802L102.381 69.816L100.995 70.868L99.466 71.969L97.767 73.135L95.858 74.388L93.67 75.769L91.072 77.353L87.733 79.331Z"
+     },
+     {
+      "v": 0.25,
+      "state": "checking",
+      "nodeWorld": [
+       47.308,
+       25.808
+      ],
+      "uPx": -192.43,
+      "bulgePx": 0,
+      "notchPx": 0,
+      "sliceRingRadiusPx": 0,
+      "sliceRingOpacity": 0,
+      "notchTicks": "",
+      "outlineD": "M80.54 83.5L73.319 87.652L69.893 89.58L67.15 91.08L64.758 92.343L62.587 93.446L60.568 94.427L58.661 95.31L56.839 96.11L55.082 96.838L53.379 97.501L51.718 98.106L50.091 98.657L48.492 99.158L46.917 99.611L45.36 100.018L43.818 100.382L42.289 100.704L40.769 100.985L39.256 101.227L37.749 101.43L36.245 101.594L34.744 101.721L33.242 101.811L31.74 101.865L30.235 101.882L28.727 101.862L27.214 101.807L25.695 101.715L24.169 101.587L22.635 101.423L21.091 101.222L19.536 100.985L17.968 100.709L16.387 100.396L14.789 100.045L13.175 99.654L11.54 99.222L9.884 98.749L8.203 98.234L6.494 97.674L4.754 97.067L2.978 96.412L1.161 95.706L-0.704 94.944L-2.623 94.123L-4.607 93.237L-6.668 92.279L-8.824 91.239L-11.096 90.104L-13.518 88.855L-16.141 87.464L-19.047 85.881L-22.4 84.013L-26.607 81.625L-35.507 76.5L-44.384 71.362L-48.52 68.932L-51.755 66.997L-54.497 65.319L-56.907 63.805L-59.07 62.406L-61.035 61.094L-62.837 59.85L-64.496 58.66L-66.031 57.514L-67.453 56.406L-68.772 55.33L-69.996 54.281L-71.131 53.255L-72.181 52.251L-73.151 51.264L-74.044 50.293L-74.863 49.337L-75.61 48.394L-76.288 47.461L-76.897 46.539L-77.439 45.626L-77.916 44.721L-78.328 43.823L-78.675 42.932L-78.96 42.046L-79.181 41.165L-79.34 40.288L-79.436 39.415L-79.469 38.544L-79.44 37.675L-79.348 36.808L-79.192 35.941L-78.971 35.074L-78.686 34.206L-78.335 33.335L-77.917 32.462L-77.43 31.585L-76.872 30.701L-76.242 29.811L-75.536 28.913L-74.752 28.003L-73.885 27.08L-72.93 26.141L-71.882 25.182L-70.733 24.198L-69.472 23.184L-68.086 22.132L-66.557 21.031L-64.858 19.865L-62.949 18.612L-60.761 17.231L-58.163 15.647L-54.824 13.669L-47.631 9.5L-40.41 5.348L-36.984 3.42L-34.241 1.92L-31.849 0.657L-29.678 -0.446L-27.659 -1.427L-25.752 -2.31L-23.93 -3.11L-22.173 -3.838L-20.47 -4.501L-18.809 -5.106L-17.182 -5.657L-15.583 -6.158L-14.008 -6.611L-12.451 -7.018L-10.909 -7.382L-9.38 -7.704L-7.86 -7.985L-6.347 -8.227L-4.84 -8.43L-3.336 -8.594L-1.835 -8.721L-0.333 -8.811L1.169 -8.865L2.674 -8.882L4.182 -8.862L5.695 -8.807L7.214 -8.715L8.74 -8.587L10.274 -8.423L11.818 -8.222L13.373 -7.985L14.941 -7.709L16.522 -7.396L18.12 -7.045L19.734 -6.654L21.369 -6.222L23.025 -5.749L24.706 -5.234L26.415 -4.674L28.155 -4.067L29.931 -3.412L31.748 -2.706L33.613 -1.944L35.532 -1.123L37.516 -0.237L39.577 0.721L41.733 1.761L44.005 2.896L46.427 4.145L49.05 5.536L51.956 7.119L55.308 8.987L59.516 11.375L68.416 16.5L77.292 21.638L81.429 24.068L84.664 26.003L87.406 27.681L89.816 29.195L91.979 30.594L93.944 31.906L95.746 33.15L97.405 34.34L98.94 35.486L100.362 36.594L101.681 37.67L102.905 38.719L104.04 39.745L105.09 40.749L106.06 41.736L106.953 42.707L107.772 43.663L108.519 44.606L109.196 45.539L109.806 46.461L110.348 47.374L110.825 48.279L111.236 49.177L111.584 50.068L111.869 50.954L112.09 51.835L112.249 52.712L112.345 53.585L112.378 54.456L112.349 55.325L112.257 56.192L112.101 57.059L111.88 57.926L111.595 58.794L111.244 59.665L110.826 60.538L110.339 61.415L109.781 62.299L109.151 63.189L108.445 64.087L107.661 64.997L106.794 65.92L105.839 66.859L104.791 67.818L103.642 68.802L102.381 69.816L100.995 70.868L99.466 71.969L97.767 73.135L95.858 74.388L93.67 75.769L91.072 77.353L87.733 79.331Z"
+     },
+     {
+      "v": 0.3,
+      "state": "checking",
+      "nodeWorld": [
+       49.013,
+       24.53
+      ],
+      "uPx": -173.69,
+      "bulgePx": 0,
+      "notchPx": 0,
+      "sliceRingRadiusPx": 0,
+      "sliceRingOpacity": 0,
+      "notchTicks": "",
+      "outlineD": "M80.54 83.5L73.319 87.652L69.893 89.58L67.15 91.08L64.758 92.343L62.587 93.446L60.568 94.427L58.661 95.31L56.839 96.11L55.082 96.838L53.379 97.501L51.718 98.106L50.091 98.657L48.492 99.158L46.917 99.611L45.36 100.018L43.818 100.382L42.289 100.704L40.769 100.985L39.256 101.227L37.749 101.43L36.245 101.594L34.744 101.721L33.242 101.811L31.74 101.865L30.235 101.882L28.727 101.862L27.214 101.807L25.695 101.715L24.169 101.587L22.635 101.423L21.091 101.222L19.536 100.985L17.968 100.709L16.387 100.396L14.789 100.045L13.175 99.654L11.54 99.222L9.884 98.749L8.203 98.234L6.494 97.674L4.754 97.067L2.978 96.412L1.161 95.706L-0.704 94.944L-2.623 94.123L-4.607 93.237L-6.668 92.279L-8.824 91.239L-11.096 90.104L-13.518 88.855L-16.141 87.464L-19.047 85.881L-22.4 84.013L-26.607 81.625L-35.507 76.5L-44.384 71.362L-48.52 68.932L-51.755 66.997L-54.497 65.319L-56.907 63.805L-59.07 62.406L-61.035 61.094L-62.837 59.85L-64.496 58.66L-66.031 57.514L-67.453 56.406L-68.772 55.33L-69.996 54.281L-71.131 53.255L-72.181 52.251L-73.151 51.264L-74.044 50.293L-74.863 49.337L-75.61 48.394L-76.288 47.461L-76.897 46.539L-77.439 45.626L-77.916 44.721L-78.328 43.823L-78.675 42.932L-78.96 42.046L-79.181 41.165L-79.34 40.288L-79.436 39.415L-79.469 38.544L-79.44 37.675L-79.348 36.808L-79.192 35.941L-78.971 35.074L-78.686 34.206L-78.335 33.335L-77.917 32.462L-77.43 31.585L-76.872 30.701L-76.242 29.811L-75.536 28.913L-74.752 28.003L-73.885 27.08L-72.93 26.141L-71.882 25.182L-70.733 24.198L-69.472 23.184L-68.086 22.132L-66.557 21.031L-64.858 19.865L-62.949 18.612L-60.761 17.231L-58.163 15.647L-54.824 13.669L-47.631 9.5L-40.41 5.348L-36.984 3.42L-34.241 1.92L-31.849 0.657L-29.678 -0.446L-27.659 -1.427L-25.752 -2.31L-23.93 -3.11L-22.173 -3.838L-20.47 -4.501L-18.809 -5.106L-17.182 -5.657L-15.583 -6.158L-14.008 -6.611L-12.451 -7.018L-10.909 -7.382L-9.38 -7.704L-7.86 -7.985L-6.347 -8.227L-4.84 -8.43L-3.336 -8.594L-1.835 -8.721L-0.333 -8.811L1.169 -8.865L2.674 -8.882L4.182 -8.862L5.695 -8.807L7.214 -8.715L8.74 -8.587L10.274 -8.423L11.818 -8.222L13.373 -7.985L14.941 -7.709L16.522 -7.396L18.12 -7.045L19.734 -6.654L21.369 -6.222L23.025 -5.749L24.706 -5.234L26.415 -4.674L28.155 -4.067L29.931 -3.412L31.748 -2.706L33.613 -1.944L35.532 -1.123L37.516 -0.237L39.577 0.721L41.733 1.761L44.005 2.896L46.427 4.145L49.05 5.536L51.956 7.119L55.308 8.987L59.516 11.375L68.416 16.5L77.292 21.638L81.429 24.068L84.664 26.003L87.406 27.681L89.816 29.195L91.979 30.594L93.944 31.906L95.746 33.15L97.405 34.34L98.94 35.486L100.362 36.594L101.681 37.67L102.905 38.719L104.04 39.745L105.09 40.749L106.06 41.736L106.953 42.707L107.772 43.663L108.519 44.606L109.196 45.539L109.806 46.461L110.348 47.374L110.825 48.279L111.236 49.177L111.584 50.068L111.869 50.954L112.09 51.835L112.249 52.712L112.345 53.585L112.378 54.456L112.349 55.325L112.257 56.192L112.101 57.059L111.88 57.926L111.595 58.794L111.244 59.665L110.826 60.538L110.339 61.415L109.781 62.299L109.151 63.189L108.445 64.087L107.661 64.997L106.794 65.92L105.839 66.859L104.791 67.818L103.642 68.802L102.381 69.816L100.995 70.868L99.466 71.969L97.767 73.135L95.858 74.388L93.67 75.769L91.072 77.353L87.733 79.331Z"
+     },
+     {
+      "v": 0.35,
+      "state": "checking",
+      "nodeWorld": [
+       50.737,
+       23.283
+      ],
+      "uPx": -154.94,
+      "bulgePx": 0,
+      "notchPx": 0,
+      "sliceRingRadiusPx": 0,
+      "sliceRingOpacity": 0,
+      "notchTicks": "",
+      "outlineD": "M80.54 83.5L73.319 87.652L69.893 89.58L67.15 91.08L64.758 92.343L62.587 93.446L60.568 94.427L58.661 95.31L56.839 96.11L55.082 96.838L53.379 97.501L51.718 98.106L50.091 98.657L48.492 99.158L46.917 99.611L45.36 100.018L43.818 100.382L42.289 100.704L40.769 100.985L39.256 101.227L37.749 101.43L36.245 101.594L34.744 101.721L33.242 101.811L31.74 101.865L30.235 101.882L28.727 101.862L27.214 101.807L25.695 101.715L24.169 101.587L22.635 101.423L21.091 101.222L19.536 100.985L17.968 100.709L16.387 100.396L14.789 100.045L13.175 99.654L11.54 99.222L9.884 98.749L8.203 98.234L6.494 97.674L4.754 97.067L2.978 96.412L1.161 95.706L-0.704 94.944L-2.623 94.123L-4.607 93.237L-6.668 92.279L-8.824 91.239L-11.096 90.104L-13.518 88.855L-16.141 87.464L-19.047 85.881L-22.4 84.013L-26.607 81.625L-35.507 76.5L-44.384 71.362L-48.52 68.932L-51.755 66.997L-54.497 65.319L-56.907 63.805L-59.07 62.406L-61.035 61.094L-62.837 59.85L-64.496 58.66L-66.031 57.514L-67.453 56.406L-68.772 55.33L-69.996 54.281L-71.131 53.255L-72.181 52.251L-73.151 51.264L-74.044 50.293L-74.863 49.337L-75.61 48.394L-76.288 47.461L-76.897 46.539L-77.439 45.626L-77.916 44.721L-78.328 43.823L-78.675 42.932L-78.96 42.046L-79.181 41.165L-79.34 40.288L-79.436 39.415L-79.469 38.544L-79.44 37.675L-79.348 36.808L-79.192 35.941L-78.971 35.074L-78.686 34.206L-78.335 33.335L-77.917 32.462L-77.43 31.585L-76.872 30.701L-76.242 29.811L-75.536 28.913L-74.752 28.003L-73.885 27.08L-72.93 26.141L-71.882 25.182L-70.733 24.198L-69.472 23.184L-68.086 22.132L-66.557 21.031L-64.858 19.865L-62.949 18.612L-60.761 17.231L-58.163 15.647L-54.824 13.669L-47.631 9.5L-40.41 5.348L-36.984 3.42L-34.241 1.92L-31.849 0.657L-29.678 -0.446L-27.659 -1.427L-25.752 -2.31L-23.93 -3.11L-22.173 -3.838L-20.47 -4.501L-18.809 -5.106L-17.182 -5.657L-15.583 -6.158L-14.008 -6.611L-12.451 -7.018L-10.909 -7.382L-9.38 -7.704L-7.86 -7.985L-6.347 -8.227L-4.84 -8.43L-3.336 -8.594L-1.835 -8.721L-0.333 -8.811L1.169 -8.865L2.674 -8.882L4.182 -8.862L5.695 -8.807L7.214 -8.715L8.74 -8.587L10.274 -8.423L11.818 -8.222L13.373 -7.985L14.941 -7.709L16.522 -7.396L18.12 -7.045L19.734 -6.654L21.369 -6.222L23.025 -5.749L24.706 -5.234L26.415 -4.674L28.155 -4.067L29.931 -3.412L31.748 -2.706L33.613 -1.944L35.532 -1.123L37.516 -0.237L39.577 0.721L41.733 1.761L44.005 2.896L46.427 4.145L49.05 5.536L51.956 7.119L55.308 8.987L59.516 11.375L68.416 16.5L77.292 21.638L81.429 24.068L84.664 26.003L87.406 27.681L89.816 29.195L91.979 30.594L93.944 31.906L95.746 33.15L97.405 34.34L98.94 35.486L100.362 36.594L101.681 37.67L102.905 38.719L104.04 39.745L105.09 40.749L106.06 41.736L106.953 42.707L107.772 43.663L108.519 44.606L109.196 45.539L109.806 46.461L110.348 47.374L110.825 48.279L111.236 49.177L111.584 50.068L111.869 50.954L112.09 51.835L112.249 52.712L112.345 53.585L112.378 54.456L112.349 55.325L112.257 56.192L112.101 57.059L111.88 57.926L111.595 58.794L111.244 59.665L110.826 60.538L110.339 61.415L109.781 62.299L109.151 63.189L108.445 64.087L107.661 64.997L106.794 65.92L105.839 66.859L104.791 67.818L103.642 68.802L102.381 69.816L100.995 70.868L99.466 71.969L97.767 73.135L95.858 74.388L93.67 75.769L91.072 77.353L87.733 79.331Z"
+     },
+     {
+      "v": 0.4,
+      "state": "checking",
+      "nodeWorld": [
+       52.482,
+       22.07
+      ],
+      "uPx": -136.2,
+      "bulgePx": 0,
+      "notchPx": 0,
+      "sliceRingRadiusPx": 0,
+      "sliceRingOpacity": 0,
+      "notchTicks": "",
+      "outlineD": "M80.54 83.5L73.319 87.652L69.893 89.58L67.15 91.08L64.758 92.343L62.587 93.446L60.568 94.427L58.661 95.31L56.839 96.11L55.082 96.838L53.379 97.501L51.718 98.106L50.091 98.657L48.492 99.158L46.917 99.611L45.36 100.018L43.818 100.382L42.289 100.704L40.769 100.985L39.256 101.227L37.749 101.43L36.245 101.594L34.744 101.721L33.242 101.811L31.74 101.865L30.235 101.882L28.727 101.862L27.214 101.807L25.695 101.715L24.169 101.587L22.635 101.423L21.091 101.222L19.536 100.985L17.968 100.709L16.387 100.396L14.789 100.045L13.175 99.654L11.54 99.222L9.884 98.749L8.203 98.234L6.494 97.674L4.754 97.067L2.978 96.412L1.161 95.706L-0.704 94.944L-2.623 94.123L-4.607 93.237L-6.668 92.279L-8.824 91.239L-11.096 90.104L-13.518 88.855L-16.141 87.464L-19.047 85.881L-22.4 84.013L-26.607 81.625L-35.507 76.5L-44.384 71.362L-48.52 68.932L-51.755 66.997L-54.497 65.319L-56.907 63.805L-59.07 62.406L-61.035 61.094L-62.837 59.85L-64.496 58.66L-66.031 57.514L-67.453 56.406L-68.772 55.33L-69.996 54.281L-71.131 53.255L-72.181 52.251L-73.151 51.264L-74.044 50.293L-74.863 49.337L-75.61 48.394L-76.288 47.461L-76.897 46.539L-77.439 45.626L-77.916 44.721L-78.328 43.823L-78.675 42.932L-78.96 42.046L-79.181 41.165L-79.34 40.288L-79.436 39.415L-79.469 38.544L-79.44 37.675L-79.348 36.808L-79.192 35.941L-78.971 35.074L-78.686 34.206L-78.335 33.335L-77.917 32.462L-77.43 31.585L-76.872 30.701L-76.242 29.811L-75.536 28.913L-74.752 28.003L-73.885 27.08L-72.93 26.141L-71.882 25.182L-70.733 24.198L-69.472 23.184L-68.086 22.132L-66.557 21.031L-64.858 19.865L-62.949 18.612L-60.761 17.231L-58.163 15.647L-54.824 13.669L-47.631 9.5L-40.41 5.348L-36.984 3.42L-34.241 1.92L-31.849 0.657L-29.678 -0.446L-27.659 -1.427L-25.752 -2.31L-23.93 -3.11L-22.173 -3.838L-20.47 -4.501L-18.809 -5.106L-17.182 -5.657L-15.583 -6.158L-14.008 -6.611L-12.451 -7.018L-10.909 -7.382L-9.38 -7.704L-7.86 -7.985L-6.347 -8.227L-4.84 -8.43L-3.336 -8.594L-1.835 -8.721L-0.333 -8.811L1.169 -8.865L2.674 -8.882L4.182 -8.862L5.695 -8.807L7.214 -8.715L8.74 -8.587L10.274 -8.423L11.818 -8.222L13.373 -7.985L14.941 -7.709L16.522 -7.396L18.12 -7.045L19.734 -6.654L21.369 -6.222L23.025 -5.749L24.706 -5.234L26.415 -4.674L28.155 -4.067L29.931 -3.412L31.748 -2.706L33.613 -1.944L35.532 -1.123L37.516 -0.237L39.577 0.721L41.733 1.761L44.005 2.896L46.427 4.145L49.05 5.536L51.956 7.119L55.308 8.987L59.516 11.375L68.416 16.5L77.292 21.638L81.429 24.068L84.664 26.003L87.406 27.681L89.816 29.195L91.979 30.594L93.944 31.906L95.746 33.15L97.405 34.34L98.94 35.486L100.362 36.594L101.681 37.67L102.905 38.719L104.04 39.745L105.09 40.749L106.06 41.736L106.953 42.707L107.772 43.663L108.519 44.606L109.196 45.539L109.806 46.461L110.348 47.374L110.825 48.279L111.236 49.177L111.584 50.068L111.869 50.954L112.09 51.835L112.249 52.712L112.345 53.585L112.378 54.456L112.349 55.325L112.257 56.192L112.101 57.059L111.88 57.926L111.595 58.794L111.244 59.665L110.826 60.538L110.339 61.415L109.781 62.299L109.151 63.189L108.445 64.087L107.661 64.997L106.794 65.92L105.839 66.859L104.791 67.818L103.642 68.802L102.381 69.816L100.995 70.868L99.466 71.969L97.767 73.135L95.858 74.388L93.67 75.769L91.072 77.353L87.733 79.331Z"
+     },
+     {
+      "v": 0.45,
+      "state": "checking",
+      "nodeWorld": [
+       54.25,
+       20.893
+      ],
+      "uPx": -117.45,
+      "bulgePx": 0,
+      "notchPx": 0,
+      "sliceRingRadiusPx": 0,
+      "sliceRingOpacity": 0,
+      "notchTicks": "",
+      "outlineD": "M80.54 83.5L73.319 87.652L69.893 89.58L67.15 91.08L64.758 92.343L62.587 93.446L60.568 94.427L58.661 95.31L56.839 96.11L55.082 96.838L53.379 97.501L51.718 98.106L50.091 98.657L48.492 99.158L46.917 99.611L45.36 100.018L43.818 100.382L42.289 100.704L40.769 100.985L39.256 101.227L37.749 101.43L36.245 101.594L34.744 101.721L33.242 101.811L31.74 101.865L30.235 101.882L28.727 101.862L27.214 101.807L25.695 101.715L24.169 101.587L22.635 101.423L21.091 101.222L19.536 100.985L17.968 100.709L16.387 100.396L14.789 100.045L13.175 99.654L11.54 99.222L9.884 98.749L8.203 98.234L6.494 97.674L4.754 97.067L2.978 96.412L1.161 95.706L-0.704 94.944L-2.623 94.123L-4.607 93.237L-6.668 92.279L-8.824 91.239L-11.096 90.104L-13.518 88.855L-16.141 87.464L-19.047 85.881L-22.4 84.013L-26.607 81.625L-35.507 76.5L-44.384 71.362L-48.52 68.932L-51.755 66.997L-54.497 65.319L-56.907 63.805L-59.07 62.406L-61.035 61.094L-62.837 59.85L-64.496 58.66L-66.031 57.514L-67.453 56.406L-68.772 55.33L-69.996 54.281L-71.131 53.255L-72.181 52.251L-73.151 51.264L-74.044 50.293L-74.863 49.337L-75.61 48.394L-76.288 47.461L-76.897 46.539L-77.439 45.626L-77.916 44.721L-78.328 43.823L-78.675 42.932L-78.96 42.046L-79.181 41.165L-79.34 40.288L-79.436 39.415L-79.469 38.544L-79.44 37.675L-79.348 36.808L-79.192 35.941L-78.971 35.074L-78.686 34.206L-78.335 33.335L-77.917 32.462L-77.43 31.585L-76.872 30.701L-76.242 29.811L-75.536 28.913L-74.752 28.003L-73.885 27.08L-72.93 26.141L-71.882 25.182L-70.733 24.198L-69.472 23.184L-68.086 22.132L-66.557 21.031L-64.858 19.865L-62.949 18.612L-60.761 17.231L-58.163 15.647L-54.824 13.669L-47.631 9.5L-40.41 5.348L-36.984 3.42L-34.241 1.92L-31.849 0.657L-29.678 -0.446L-27.659 -1.427L-25.752 -2.31L-23.93 -3.11L-22.173 -3.838L-20.47 -4.501L-18.809 -5.106L-17.182 -5.657L-15.583 -6.158L-14.008 -6.611L-12.451 -7.018L-10.909 -7.382L-9.38 -7.704L-7.86 -7.985L-6.347 -8.227L-4.84 -8.43L-3.336 -8.594L-1.835 -8.721L-0.333 -8.811L1.169 -8.865L2.674 -8.882L4.182 -8.862L5.695 -8.807L7.214 -8.715L8.74 -8.587L10.274 -8.423L11.818 -8.222L13.373 -7.985L14.941 -7.709L16.522 -7.396L18.12 -7.045L19.734 -6.654L21.369 -6.222L23.025 -5.749L24.706 -5.234L26.415 -4.674L28.155 -4.067L29.931 -3.412L31.748 -2.706L33.613 -1.944L35.532 -1.123L37.516 -0.237L39.577 0.721L41.733 1.761L44.005 2.896L46.427 4.145L49.05 5.536L51.956 7.119L55.308 8.987L59.516 11.375L68.416 16.5L77.292 21.638L81.429 24.068L84.664 26.003L87.406 27.681L89.816 29.195L91.979 30.594L93.944 31.906L95.746 33.15L97.405 34.34L98.94 35.486L100.362 36.594L101.681 37.67L102.905 38.719L104.04 39.745L105.09 40.749L106.06 41.736L106.953 42.707L107.772 43.663L108.519 44.606L109.196 45.539L109.806 46.461L110.348 47.374L110.825 48.279L111.236 49.177L111.584 50.068L111.869 50.954L112.09 51.835L112.249 52.712L112.345 53.585L112.378 54.456L112.349 55.325L112.257 56.192L112.101 57.059L111.88 57.926L111.595 58.794L111.244 59.665L110.826 60.538L110.339 61.415L109.781 62.299L109.151 63.189L108.445 64.087L107.661 64.997L106.794 65.92L105.839 66.859L104.791 67.818L103.642 68.802L102.381 69.816L100.995 70.868L99.466 71.969L97.767 73.135L95.858 74.388L93.67 75.769L91.072 77.353L87.733 79.331Z"
+     },
+     {
+      "v": 0.5,
+      "state": "checking",
+      "nodeWorld": [
+       56.041,
+       19.753
+      ],
+      "uPx": -98.7,
+      "bulgePx": 0,
+      "notchPx": 0,
+      "sliceRingRadiusPx": 0,
+      "sliceRingOpacity": 0,
+      "notchTicks": "",
+      "outlineD": "M80.54 83.5L73.319 87.652L69.893 89.58L67.15 91.08L64.758 92.343L62.587 93.446L60.568 94.427L58.661 95.31L56.839 96.11L55.082 96.838L53.379 97.501L51.718 98.106L50.091 98.657L48.492 99.158L46.917 99.611L45.36 100.018L43.818 100.382L42.289 100.704L40.769 100.985L39.256 101.227L37.749 101.43L36.245 101.594L34.744 101.721L33.242 101.811L31.74 101.865L30.235 101.882L28.727 101.862L27.214 101.807L25.695 101.715L24.169 101.587L22.635 101.423L21.091 101.222L19.536 100.985L17.968 100.709L16.387 100.396L14.789 100.045L13.175 99.654L11.54 99.222L9.884 98.749L8.203 98.234L6.494 97.674L4.754 97.067L2.978 96.412L1.161 95.706L-0.704 94.944L-2.623 94.123L-4.607 93.237L-6.668 92.279L-8.824 91.239L-11.096 90.104L-13.518 88.855L-16.141 87.464L-19.047 85.881L-22.4 84.013L-26.607 81.625L-35.507 76.5L-44.384 71.362L-48.52 68.932L-51.755 66.997L-54.497 65.319L-56.907 63.805L-59.07 62.406L-61.035 61.094L-62.837 59.85L-64.496 58.66L-66.031 57.514L-67.453 56.406L-68.772 55.33L-69.996 54.281L-71.131 53.255L-72.181 52.251L-73.151 51.264L-74.044 50.293L-74.863 49.337L-75.61 48.394L-76.288 47.461L-76.897 46.539L-77.439 45.626L-77.916 44.721L-78.328 43.823L-78.675 42.932L-78.96 42.046L-79.181 41.165L-79.34 40.288L-79.436 39.415L-79.469 38.544L-79.44 37.675L-79.348 36.808L-79.192 35.941L-78.971 35.074L-78.686 34.206L-78.335 33.335L-77.917 32.462L-77.43 31.585L-76.872 30.701L-76.242 29.811L-75.536 28.913L-74.752 28.003L-73.885 27.08L-72.93 26.141L-71.882 25.182L-70.733 24.198L-69.472 23.184L-68.086 22.132L-66.557 21.031L-64.858 19.865L-62.949 18.612L-60.761 17.231L-58.163 15.647L-54.824 13.669L-47.631 9.5L-40.41 5.348L-36.984 3.42L-34.241 1.92L-31.849 0.657L-29.678 -0.446L-27.659 -1.427L-25.752 -2.31L-23.93 -3.11L-22.173 -3.838L-20.47 -4.501L-18.809 -5.106L-17.182 -5.657L-15.583 -6.158L-14.008 -6.611L-12.451 -7.018L-10.909 -7.382L-9.38 -7.704L-7.86 -7.985L-6.347 -8.227L-4.84 -8.43L-3.336 -8.594L-1.835 -8.721L-0.333 -8.811L1.169 -8.865L2.674 -8.882L4.182 -8.862L5.695 -8.807L7.214 -8.715L8.74 -8.587L10.274 -8.423L11.818 -8.222L13.373 -7.985L14.941 -7.709L16.522 -7.396L18.12 -7.045L19.734 -6.654L21.369 -6.222L23.025 -5.749L24.706 -5.234L26.415 -4.674L28.155 -4.067L29.931 -3.412L31.748 -2.706L33.613 -1.944L35.532 -1.123L37.516 -0.237L39.577 0.721L41.733 1.761L44.005 2.896L46.427 4.145L49.05 5.536L51.956 7.119L55.308 8.987L59.516 11.375L68.416 16.5L77.292 21.638L81.429 24.068L84.664 26.003L87.406 27.681L89.816 29.195L91.979 30.594L93.944 31.906L95.746 33.15L97.405 34.34L98.94 35.486L100.362 36.594L101.681 37.67L102.905 38.719L104.04 39.745L105.09 40.749L106.06 41.736L106.953 42.707L107.772 43.663L108.519 44.606L109.196 45.539L109.806 46.461L110.348 47.374L110.825 48.279L111.236 49.177L111.584 50.068L111.869 50.954L112.09 51.835L112.249 52.712L112.345 53.585L112.378 54.456L112.349 55.325L112.257 56.192L112.101 57.059L111.88 57.926L111.595 58.794L111.244 59.665L110.826 60.538L110.339 61.415L109.781 62.299L109.151 63.189L108.445 64.087L107.661 64.997L106.794 65.92L105.839 66.859L104.791 67.818L103.642 68.802L102.381 69.816L100.995 70.868L99.466 71.969L97.767 73.135L95.858 74.388L93.67 75.769L91.072 77.353L87.733 79.331Z"
+     },
+     {
+      "v": 0.55,
+      "state": "checking",
+      "nodeWorld": [
+       57.855,
+       18.651
+      ],
+      "uPx": -79.96,
+      "bulgePx": 0,
+      "notchPx": 0,
+      "sliceRingRadiusPx": 0,
+      "sliceRingOpacity": 0,
+      "notchTicks": "",
+      "outlineD": "M80.54 83.5L73.319 87.652L69.893 89.58L67.15 91.08L64.758 92.343L62.587 93.446L60.568 94.427L58.661 95.31L56.839 96.11L55.082 96.838L53.379 97.501L51.718 98.106L50.091 98.657L48.492 99.158L46.917 99.611L45.36 100.018L43.818 100.382L42.289 100.704L40.769 100.985L39.256 101.227L37.749 101.43L36.245 101.594L34.744 101.721L33.242 101.811L31.74 101.865L30.235 101.882L28.727 101.862L27.214 101.807L25.695 101.715L24.169 101.587L22.635 101.423L21.091 101.222L19.536 100.985L17.968 100.709L16.387 100.396L14.789 100.045L13.175 99.654L11.54 99.222L9.884 98.749L8.203 98.234L6.494 97.674L4.754 97.067L2.978 96.412L1.161 95.706L-0.704 94.944L-2.623 94.123L-4.607 93.237L-6.668 92.279L-8.824 91.239L-11.096 90.104L-13.518 88.855L-16.141 87.464L-19.047 85.881L-22.4 84.013L-26.607 81.625L-35.507 76.5L-44.384 71.362L-48.52 68.932L-51.755 66.997L-54.497 65.319L-56.907 63.805L-59.07 62.406L-61.035 61.094L-62.837 59.85L-64.496 58.66L-66.031 57.514L-67.453 56.406L-68.772 55.33L-69.996 54.281L-71.131 53.255L-72.181 52.251L-73.151 51.264L-74.044 50.293L-74.863 49.337L-75.61 48.394L-76.288 47.461L-76.897 46.539L-77.439 45.626L-77.916 44.721L-78.328 43.823L-78.675 42.932L-78.96 42.046L-79.181 41.165L-79.34 40.288L-79.436 39.415L-79.469 38.544L-79.44 37.675L-79.348 36.808L-79.192 35.941L-78.971 35.074L-78.686 34.206L-78.335 33.335L-77.917 32.462L-77.43 31.585L-76.872 30.701L-76.242 29.811L-75.536 28.913L-74.752 28.003L-73.885 27.08L-72.93 26.141L-71.882 25.182L-70.733 24.198L-69.472 23.184L-68.086 22.132L-66.557 21.031L-64.858 19.865L-62.949 18.612L-60.761 17.231L-58.163 15.647L-54.824 13.669L-47.631 9.5L-40.41 5.348L-36.984 3.42L-34.241 1.92L-31.849 0.657L-29.678 -0.446L-27.659 -1.427L-25.752 -2.31L-23.93 -3.11L-22.173 -3.838L-20.47 -4.501L-18.809 -5.106L-17.182 -5.657L-15.583 -6.158L-14.008 -6.611L-12.451 -7.018L-10.909 -7.382L-9.38 -7.704L-7.86 -7.985L-6.347 -8.227L-4.84 -8.43L-3.336 -8.594L-1.835 -8.721L-0.333 -8.811L1.169 -8.865L2.674 -8.882L4.182 -8.862L5.695 -8.807L7.214 -8.715L8.74 -8.587L10.274 -8.423L11.818 -8.222L13.373 -7.985L14.941 -7.709L16.522 -7.396L18.12 -7.045L19.734 -6.654L21.369 -6.222L23.025 -5.749L24.706 -5.234L26.415 -4.674L28.155 -4.067L29.931 -3.412L31.748 -2.706L33.613 -1.944L35.532 -1.123L37.516 -0.237L39.577 0.721L41.733 1.761L44.005 2.896L46.427 4.145L49.05 5.536L51.956 7.119L55.308 8.987L59.516 11.375L68.416 16.5L77.292 21.638L81.429 24.068L84.664 26.003L87.406 27.681L89.816 29.195L91.979 30.594L93.944 31.906L95.746 33.15L97.405 34.34L98.94 35.486L100.362 36.594L101.681 37.67L102.905 38.719L104.04 39.745L105.09 40.749L106.06 41.736L106.953 42.707L107.772 43.663L108.519 44.606L109.196 45.539L109.806 46.461L110.348 47.374L110.825 48.279L111.236 49.177L111.584 50.068L111.869 50.954L112.09 51.835L112.249 52.712L112.345 53.585L112.378 54.456L112.349 55.325L112.257 56.192L112.101 57.059L111.88 57.926L111.595 58.794L111.244 59.665L110.826 60.538L110.339 61.415L109.781 62.299L109.151 63.189L108.445 64.087L107.661 64.997L106.794 65.92L105.839 66.859L104.791 67.818L103.642 68.802L102.381 69.816L100.995 70.868L99.466 71.969L97.767 73.135L95.858 74.388L93.67 75.769L91.072 77.353L87.733 79.331Z"
+     },
+     {
+      "v": 0.6,
+      "state": "checking",
+      "nodeWorld": [
+       59.693,
+       17.587
+      ],
+      "uPx": -61.21,
+      "bulgePx": 0,
+      "notchPx": 0,
+      "sliceRingRadiusPx": 0,
+      "sliceRingOpacity": 0,
+      "notchTicks": "",
+      "outlineD": "M80.54 83.5L73.319 87.652L69.893 89.58L67.15 91.08L64.758 92.343L62.587 93.446L60.568 94.427L58.661 95.31L56.839 96.11L55.082 96.838L53.379 97.501L51.718 98.106L50.091 98.657L48.492 99.158L46.917 99.611L45.36 100.018L43.818 100.382L42.289 100.704L40.769 100.985L39.256 101.227L37.749 101.43L36.245 101.594L34.744 101.721L33.242 101.811L31.74 101.865L30.235 101.882L28.727 101.862L27.214 101.807L25.695 101.715L24.169 101.587L22.635 101.423L21.091 101.222L19.536 100.985L17.968 100.709L16.387 100.396L14.789 100.045L13.175 99.654L11.54 99.222L9.884 98.749L8.203 98.234L6.494 97.674L4.754 97.067L2.978 96.412L1.161 95.706L-0.704 94.944L-2.623 94.123L-4.607 93.237L-6.668 92.279L-8.824 91.239L-11.096 90.104L-13.518 88.855L-16.141 87.464L-19.047 85.881L-22.4 84.013L-26.607 81.625L-35.507 76.5L-44.384 71.362L-48.52 68.932L-51.755 66.997L-54.497 65.319L-56.907 63.805L-59.07 62.406L-61.035 61.094L-62.837 59.85L-64.496 58.66L-66.031 57.514L-67.453 56.406L-68.772 55.33L-69.996 54.281L-71.131 53.255L-72.181 52.251L-73.151 51.264L-74.044 50.293L-74.863 49.337L-75.61 48.394L-76.288 47.461L-76.897 46.539L-77.439 45.626L-77.916 44.721L-78.328 43.823L-78.675 42.932L-78.96 42.046L-79.181 41.165L-79.34 40.288L-79.436 39.415L-79.469 38.544L-79.44 37.675L-79.348 36.808L-79.192 35.941L-78.971 35.074L-78.686 34.206L-78.335 33.335L-77.917 32.462L-77.43 31.585L-76.872 30.701L-76.242 29.811L-75.536 28.913L-74.752 28.003L-73.885 27.08L-72.93 26.141L-71.882 25.182L-70.733 24.198L-69.472 23.184L-68.086 22.132L-66.557 21.031L-64.858 19.865L-62.949 18.612L-60.761 17.231L-58.163 15.647L-54.824 13.669L-47.631 9.5L-40.41 5.348L-36.984 3.42L-34.241 1.92L-31.849 0.657L-29.678 -0.446L-27.659 -1.427L-25.752 -2.31L-23.93 -3.11L-22.173 -3.838L-20.47 -4.501L-18.809 -5.106L-17.182 -5.657L-15.583 -6.158L-14.008 -6.611L-12.451 -7.018L-10.909 -7.382L-9.38 -7.704L-7.86 -7.985L-6.347 -8.227L-4.84 -8.43L-3.336 -8.594L-1.835 -8.721L-0.333 -8.811L1.169 -8.865L2.674 -8.882L4.182 -8.862L5.695 -8.807L7.214 -8.715L8.74 -8.587L10.274 -8.423L11.818 -8.222L13.373 -7.985L14.941 -7.709L16.522 -7.396L18.12 -7.045L19.734 -6.654L21.369 -6.222L23.025 -5.749L24.706 -5.234L26.415 -4.674L28.155 -4.067L29.931 -3.412L31.748 -2.706L33.613 -1.944L35.532 -1.123L37.516 -0.237L39.577 0.721L41.733 1.761L44.005 2.896L46.427 4.145L49.05 5.536L51.956 7.119L55.308 8.987L59.516 11.375L68.416 16.5L77.292 21.638L81.429 24.068L84.664 26.003L87.406 27.681L89.816 29.195L91.979 30.594L93.944 31.906L95.746 33.15L97.405 34.34L98.94 35.486L100.362 36.594L101.681 37.67L102.905 38.719L104.04 39.745L105.09 40.749L106.06 41.736L106.953 42.707L107.772 43.663L108.519 44.606L109.196 45.539L109.806 46.461L110.348 47.374L110.825 48.279L111.236 49.177L111.584 50.068L111.869 50.954L112.09 51.835L112.249 52.712L112.345 53.585L112.378 54.456L112.349 55.325L112.257 56.192L112.101 57.059L111.88 57.926L111.595 58.794L111.244 59.665L110.826 60.538L110.339 61.415L109.781 62.299L109.151 63.189L108.445 64.087L107.661 64.997L106.794 65.92L105.839 66.859L104.791 67.818L103.642 68.802L102.381 69.816L100.995 70.868L99.466 71.969L97.767 73.135L95.858 74.388L93.67 75.769L91.072 77.353L87.733 79.331Z"
+     },
+     {
+      "v": 0.65,
+      "state": "checking",
+      "nodeWorld": [
+       61.553,
+       16.559
+      ],
+      "uPx": -42.47,
+      "bulgePx": 0,
+      "notchPx": 0,
+      "sliceRingRadiusPx": 0,
+      "sliceRingOpacity": 0,
+      "notchTicks": "",
+      "outlineD": "M80.54 83.5L73.319 87.652L69.893 89.58L67.15 91.08L64.758 92.343L62.587 93.446L60.568 94.427L58.661 95.31L56.839 96.11L55.082 96.838L53.379 97.501L51.718 98.106L50.091 98.657L48.492 99.158L46.917 99.611L45.36 100.018L43.818 100.382L42.289 100.704L40.769 100.985L39.256 101.227L37.749 101.43L36.245 101.594L34.744 101.721L33.242 101.811L31.74 101.865L30.235 101.882L28.727 101.862L27.214 101.807L25.695 101.715L24.169 101.587L22.635 101.423L21.091 101.222L19.536 100.985L17.968 100.709L16.387 100.396L14.789 100.045L13.175 99.654L11.54 99.222L9.884 98.749L8.203 98.234L6.494 97.674L4.754 97.067L2.978 96.412L1.161 95.706L-0.704 94.944L-2.623 94.123L-4.607 93.237L-6.668 92.279L-8.824 91.239L-11.096 90.104L-13.518 88.855L-16.141 87.464L-19.047 85.881L-22.4 84.013L-26.607 81.625L-35.507 76.5L-44.384 71.362L-48.52 68.932L-51.755 66.997L-54.497 65.319L-56.907 63.805L-59.07 62.406L-61.035 61.094L-62.837 59.85L-64.496 58.66L-66.031 57.514L-67.453 56.406L-68.772 55.33L-69.996 54.281L-71.131 53.255L-72.181 52.251L-73.151 51.264L-74.044 50.293L-74.863 49.337L-75.61 48.394L-76.288 47.461L-76.897 46.539L-77.439 45.626L-77.916 44.721L-78.328 43.823L-78.675 42.932L-78.96 42.046L-79.181 41.165L-79.34 40.288L-79.436 39.415L-79.469 38.544L-79.44 37.675L-79.348 36.808L-79.192 35.941L-78.971 35.074L-78.686 34.206L-78.335 33.335L-77.917 32.462L-77.43 31.585L-76.872 30.701L-76.242 29.811L-75.536 28.913L-74.752 28.003L-73.885 27.08L-72.93 26.141L-71.882 25.182L-70.733 24.198L-69.472 23.184L-68.086 22.132L-66.557 21.031L-64.858 19.865L-62.949 18.612L-60.761 17.231L-58.163 15.647L-54.824 13.669L-47.631 9.5L-40.41 5.348L-36.984 3.42L-34.241 1.92L-31.849 0.657L-29.678 -0.446L-27.659 -1.427L-25.752 -2.31L-23.93 -3.11L-22.173 -3.838L-20.47 -4.501L-18.809 -5.106L-17.182 -5.657L-15.583 -6.158L-14.008 -6.611L-12.451 -7.018L-10.909 -7.382L-9.38 -7.704L-7.86 -7.985L-6.347 -8.227L-4.84 -8.43L-3.336 -8.594L-1.835 -8.721L-0.333 -8.811L1.169 -8.865L2.674 -8.882L4.182 -8.862L5.695 -8.807L7.214 -8.715L8.74 -8.587L10.274 -8.423L11.818 -8.222L13.373 -7.985L14.941 -7.709L16.522 -7.396L18.12 -7.045L19.734 -6.654L21.369 -6.222L23.025 -5.749L24.706 -5.234L26.415 -4.674L28.155 -4.067L29.931 -3.412L31.748 -2.706L33.613 -1.944L35.532 -1.123L37.516 -0.237L39.577 0.721L41.733 1.761L44.005 2.896L46.427 4.145L49.05 5.536L51.956 7.119L55.308 8.987L59.516 11.375L68.416 16.5L77.292 21.638L81.429 24.068L84.664 26.003L87.406 27.681L89.816 29.195L91.979 30.594L93.944 31.906L95.746 33.15L97.405 34.34L98.94 35.486L100.362 36.594L101.681 37.67L102.905 38.719L104.04 39.745L105.09 40.749L106.06 41.736L106.953 42.707L107.772 43.663L108.519 44.606L109.196 45.539L109.806 46.461L110.348 47.374L110.825 48.279L111.236 49.177L111.584 50.068L111.869 50.954L112.09 51.835L112.249 52.712L112.345 53.585L112.378 54.456L112.349 55.325L112.257 56.192L112.101 57.059L111.88 57.926L111.595 58.794L111.244 59.665L110.826 60.538L110.339 61.415L109.781 62.299L109.151 63.189L108.445 64.087L107.661 64.997L106.794 65.92L105.839 66.859L104.791 67.818L103.642 68.802L102.381 69.816L100.995 70.868L99.466 71.969L97.767 73.135L95.858 74.388L93.67 75.769L91.072 77.353L87.733 79.331Z"
+     },
+     {
+      "v": 0.7,
+      "state": "checking",
+      "nodeWorld": [
+       63.434,
+       15.564
+      ],
+      "uPx": -23.72,
+      "bulgePx": 0,
+      "notchPx": 0,
+      "sliceRingRadiusPx": 0,
+      "sliceRingOpacity": 0,
+      "notchTicks": "",
+      "outlineD": "M80.54 83.5L73.319 87.652L69.893 89.58L67.15 91.08L64.758 92.343L62.587 93.446L60.568 94.427L58.661 95.31L56.839 96.11L55.082 96.838L53.379 97.501L51.718 98.106L50.091 98.657L48.492 99.158L46.917 99.611L45.36 100.018L43.818 100.382L42.289 100.704L40.769 100.985L39.256 101.227L37.749 101.43L36.245 101.594L34.744 101.721L33.242 101.811L31.74 101.865L30.235 101.882L28.727 101.862L27.214 101.807L25.695 101.715L24.169 101.587L22.635 101.423L21.091 101.222L19.536 100.985L17.968 100.709L16.387 100.396L14.789 100.045L13.175 99.654L11.54 99.222L9.884 98.749L8.203 98.234L6.494 97.674L4.754 97.067L2.978 96.412L1.161 95.706L-0.704 94.944L-2.623 94.123L-4.607 93.237L-6.668 92.279L-8.824 91.239L-11.096 90.104L-13.518 88.855L-16.141 87.464L-19.047 85.881L-22.4 84.013L-26.607 81.625L-35.507 76.5L-44.384 71.362L-48.52 68.932L-51.755 66.997L-54.497 65.319L-56.907 63.805L-59.07 62.406L-61.035 61.094L-62.837 59.85L-64.496 58.66L-66.031 57.514L-67.453 56.406L-68.772 55.33L-69.996 54.281L-71.131 53.255L-72.181 52.251L-73.151 51.264L-74.044 50.293L-74.863 49.337L-75.61 48.394L-76.288 47.461L-76.897 46.539L-77.439 45.626L-77.916 44.721L-78.328 43.823L-78.675 42.932L-78.96 42.046L-79.181 41.165L-79.34 40.288L-79.436 39.415L-79.469 38.544L-79.44 37.675L-79.348 36.808L-79.192 35.941L-78.971 35.074L-78.686 34.206L-78.335 33.335L-77.917 32.462L-77.43 31.585L-76.872 30.701L-76.242 29.811L-75.536 28.913L-74.752 28.003L-73.885 27.08L-72.93 26.141L-71.882 25.182L-70.733 24.198L-69.472 23.184L-68.086 22.132L-66.557 21.031L-64.858 19.865L-62.949 18.612L-60.761 17.231L-58.163 15.647L-54.824 13.669L-47.631 9.5L-40.41 5.348L-36.984 3.42L-34.241 1.92L-31.849 0.657L-29.678 -0.446L-27.659 -1.427L-25.752 -2.31L-23.93 -3.11L-22.173 -3.838L-20.47 -4.501L-18.809 -5.106L-17.182 -5.657L-15.583 -6.158L-14.008 -6.611L-12.451 -7.018L-10.909 -7.382L-9.38 -7.704L-7.86 -7.985L-6.347 -8.227L-4.84 -8.43L-3.336 -8.594L-1.835 -8.721L-0.333 -8.811L1.169 -8.865L2.674 -8.882L4.182 -8.862L5.695 -8.807L7.214 -8.715L8.74 -8.587L10.274 -8.423L11.818 -8.222L13.373 -7.985L14.941 -7.709L16.522 -7.396L18.12 -7.045L19.734 -6.654L21.369 -6.222L23.025 -5.749L24.706 -5.234L26.415 -4.674L28.155 -4.067L29.931 -3.412L31.748 -2.706L33.613 -1.944L35.532 -1.123L37.516 -0.237L39.577 0.721L41.733 1.761L44.005 2.896L46.427 4.145L49.05 5.536L51.956 7.119L55.308 8.987L59.516 11.375L68.416 16.5L77.292 21.638L81.429 24.068L84.664 26.003L87.406 27.681L89.816 29.195L91.979 30.594L93.944 31.906L95.746 33.15L97.405 34.34L98.94 35.486L100.362 36.594L101.681 37.67L102.905 38.719L104.04 39.745L105.09 40.749L106.06 41.736L106.953 42.707L107.772 43.663L108.519 44.606L109.196 45.539L109.806 46.461L110.348 47.374L110.825 48.279L111.236 49.177L111.584 50.068L111.869 50.954L112.09 51.835L112.249 52.712L112.345 53.585L112.378 54.456L112.349 55.325L112.257 56.192L112.101 57.059L111.88 57.926L111.595 58.794L111.244 59.665L110.826 60.538L110.339 61.415L109.781 62.299L109.151 63.189L108.445 64.087L107.661 64.997L106.794 65.92L105.839 66.859L104.791 67.818L103.642 68.802L102.381 69.816L100.995 70.868L99.466 71.969L97.767 73.135L95.858 74.388L93.67 75.769L91.072 77.353L87.733 79.331Z"
+     },
+     {
+      "v": 0.75,
+      "state": "checking",
+      "nodeWorld": [
+       65.334,
+       14.6
+      ],
+      "uPx": -4.98,
+      "bulgePx": 6.02,
+      "notchPx": 0,
+      "sliceRingRadiusPx": 0,
+      "sliceRingOpacity": 0,
+      "notchTicks": "",
+      "outlineD": "M80.54 83.5L73.319 87.652L69.893 89.58L67.15 91.08L64.758 92.343L62.587 93.446L60.568 94.427L58.661 95.31L56.839 96.11L55.082 96.838L53.379 97.501L51.718 98.106L50.091 98.657L48.492 99.158L46.917 99.611L45.36 100.018L43.818 100.382L42.289 100.704L40.769 100.985L39.256 101.227L37.749 101.43L36.245 101.594L34.744 101.721L33.242 101.811L31.74 101.865L30.235 101.882L28.727 101.862L27.214 101.807L25.695 101.715L24.169 101.587L22.635 101.423L21.091 101.222L19.536 100.985L17.968 100.709L16.387 100.396L14.789 100.045L13.175 99.654L11.54 99.222L9.884 98.749L8.203 98.234L6.494 97.674L4.754 97.067L2.978 96.412L1.161 95.706L-0.704 94.944L-2.623 94.123L-4.607 93.237L-6.668 92.279L-8.824 91.239L-11.096 90.104L-13.518 88.855L-16.141 87.464L-19.047 85.881L-22.4 84.013L-26.607 81.625L-35.507 76.5L-44.384 71.362L-48.52 68.932L-51.755 66.997L-54.497 65.319L-56.907 63.805L-59.07 62.406L-61.035 61.094L-62.837 59.85L-64.496 58.66L-66.031 57.514L-67.453 56.406L-68.772 55.33L-69.996 54.281L-71.131 53.255L-72.181 52.251L-73.151 51.264L-74.044 50.293L-74.863 49.337L-75.61 48.394L-76.288 47.461L-76.897 46.539L-77.439 45.626L-77.916 44.721L-78.328 43.823L-78.675 42.932L-78.96 42.046L-79.181 41.165L-79.34 40.288L-79.436 39.415L-79.469 38.544L-79.44 37.675L-79.348 36.808L-79.192 35.941L-78.971 35.074L-78.686 34.206L-78.335 33.335L-77.917 32.462L-77.43 31.585L-76.872 30.701L-76.242 29.811L-75.536 28.913L-74.752 28.003L-73.885 27.08L-72.93 26.141L-71.882 25.182L-70.733 24.198L-69.472 23.184L-68.086 22.132L-66.557 21.031L-64.858 19.865L-62.949 18.612L-60.761 17.231L-58.163 15.647L-54.824 13.669L-47.631 9.5L-40.41 5.348L-36.984 3.42L-34.241 1.92L-31.849 0.657L-29.678 -0.446L-27.659 -1.427L-25.752 -2.31L-23.93 -3.11L-22.173 -3.838L-20.47 -4.501L-18.809 -5.106L-17.182 -5.657L-15.583 -6.158L-14.008 -6.611L-12.451 -7.018L-10.909 -7.382L-9.38 -7.704L-7.86 -7.985L-6.347 -8.227L-4.84 -8.43L-3.336 -8.594L-1.835 -8.721L-0.333 -8.811L1.169 -8.865L2.674 -8.882L4.182 -8.862L5.695 -8.807L7.214 -8.715L8.74 -8.587L10.274 -8.423L11.818 -8.222L13.373 -7.985L14.941 -7.709L16.522 -7.396L18.12 -7.045L19.734 -6.654L21.369 -6.222L23.025 -5.749L24.706 -5.234L26.415 -4.674L28.155 -4.067L29.931 -3.412L31.748 -2.706L33.613 -1.944L35.532 -1.123L37.516 -0.237L39.577 0.721L41.733 1.761L44.005 2.896L46.427 4.145L49.05 5.536L51.956 7.119L55.309 8.987L59.547 11.356L68.879 16.212L77.293 21.638L81.429 24.068L84.664 26.003L87.406 27.681L89.816 29.195L91.979 30.594L93.944 31.906L95.746 33.15L97.405 34.34L98.94 35.486L100.362 36.594L101.681 37.67L102.905 38.719L104.04 39.745L105.09 40.749L106.06 41.736L106.953 42.707L107.772 43.663L108.519 44.606L109.196 45.539L109.806 46.461L110.348 47.374L110.825 48.279L111.236 49.177L111.584 50.068L111.869 50.954L112.09 51.835L112.249 52.712L112.345 53.585L112.378 54.456L112.349 55.325L112.257 56.192L112.101 57.059L111.88 57.926L111.595 58.794L111.244 59.665L110.826 60.538L110.339 61.415L109.781 62.299L109.151 63.189L108.445 64.087L107.661 64.997L106.794 65.92L105.839 66.859L104.791 67.818L103.642 68.802L102.381 69.816L100.995 70.868L99.466 71.969L97.767 73.135L95.858 74.388L93.67 75.769L91.072 77.353L87.733 79.331Z"
+     },
+     {
+      "v": 0.8,
+      "state": "outside",
+      "nodeWorld": [
+       67.251,
+       13.663
+      ],
+      "uPx": 13.77,
+      "bulgePx": 24.77,
+      "notchPx": 0,
+      "sliceRingRadiusPx": 0,
+      "sliceRingOpacity": 0,
+      "notchTicks": "",
+      "outlineD": "M80.54 83.5L73.319 87.652L69.893 89.58L67.15 91.08L64.758 92.343L62.587 93.446L60.568 94.427L58.661 95.31L56.839 96.11L55.082 96.838L53.379 97.501L51.718 98.106L50.091 98.657L48.492 99.158L46.917 99.611L45.36 100.018L43.818 100.382L42.289 100.704L40.769 100.985L39.256 101.227L37.749 101.43L36.245 101.594L34.744 101.721L33.242 101.811L31.74 101.865L30.235 101.882L28.727 101.862L27.214 101.807L25.695 101.715L24.169 101.587L22.635 101.423L21.091 101.222L19.536 100.985L17.968 100.709L16.387 100.396L14.789 100.045L13.175 99.654L11.54 99.222L9.884 98.749L8.203 98.234L6.494 97.674L4.754 97.067L2.978 96.412L1.161 95.706L-0.704 94.944L-2.623 94.123L-4.607 93.237L-6.668 92.279L-8.824 91.239L-11.096 90.104L-13.518 88.855L-16.141 87.464L-19.047 85.881L-22.4 84.013L-26.607 81.625L-35.507 76.5L-44.384 71.362L-48.52 68.932L-51.755 66.997L-54.497 65.319L-56.907 63.805L-59.07 62.406L-61.035 61.094L-62.837 59.85L-64.496 58.66L-66.031 57.514L-67.453 56.406L-68.772 55.33L-69.996 54.281L-71.131 53.255L-72.181 52.251L-73.151 51.264L-74.044 50.293L-74.863 49.337L-75.61 48.394L-76.288 47.461L-76.897 46.539L-77.439 45.626L-77.916 44.721L-78.328 43.823L-78.675 42.932L-78.96 42.046L-79.181 41.165L-79.34 40.288L-79.436 39.415L-79.469 38.544L-79.44 37.675L-79.348 36.808L-79.192 35.941L-78.971 35.074L-78.686 34.206L-78.335 33.335L-77.917 32.462L-77.43 31.585L-76.872 30.701L-76.242 29.811L-75.536 28.913L-74.752 28.003L-73.885 27.08L-72.93 26.141L-71.882 25.182L-70.733 24.198L-69.472 23.184L-68.086 22.132L-66.557 21.031L-64.858 19.865L-62.949 18.612L-60.761 17.231L-58.163 15.647L-54.824 13.669L-47.631 9.5L-40.41 5.348L-36.984 3.42L-34.241 1.92L-31.849 0.657L-29.678 -0.446L-27.659 -1.427L-25.752 -2.31L-23.93 -3.11L-22.173 -3.838L-20.47 -4.501L-18.809 -5.106L-17.182 -5.657L-15.583 -6.158L-14.008 -6.611L-12.451 -7.018L-10.909 -7.382L-9.38 -7.704L-7.86 -7.985L-6.347 -8.227L-4.84 -8.43L-3.336 -8.594L-1.835 -8.721L-0.333 -8.811L1.169 -8.865L2.674 -8.882L4.182 -8.862L5.695 -8.807L7.214 -8.715L8.74 -8.587L10.274 -8.423L11.818 -8.222L13.373 -7.985L14.941 -7.709L16.522 -7.396L18.12 -7.045L19.734 -6.654L21.369 -6.222L23.025 -5.749L24.706 -5.234L26.415 -4.674L28.155 -4.067L29.931 -3.412L31.748 -2.706L33.613 -1.944L35.532 -1.123L37.516 -0.237L39.577 0.721L41.733 1.761L44.005 2.896L46.427 4.145L49.05 5.536L51.958 7.118L55.347 8.963L59.993 11.079L70.523 15.19L77.342 21.608L81.431 24.067L84.664 26.003L87.406 27.681L89.816 29.195L91.979 30.594L93.944 31.906L95.746 33.15L97.405 34.34L98.94 35.486L100.362 36.594L101.681 37.67L102.905 38.719L104.04 39.745L105.09 40.749L106.06 41.736L106.953 42.707L107.772 43.663L108.519 44.606L109.196 45.539L109.806 46.461L110.348 47.374L110.825 48.279L111.236 49.177L111.584 50.068L111.869 50.954L112.09 51.835L112.249 52.712L112.345 53.585L112.378 54.456L112.349 55.325L112.257 56.192L112.101 57.059L111.88 57.926L111.595 58.794L111.244 59.665L110.826 60.538L110.339 61.415L109.781 62.299L109.151 63.189L108.445 64.087L107.661 64.997L106.794 65.92L105.839 66.859L104.791 67.818L103.642 68.802L102.381 69.816L100.995 70.868L99.466 71.969L97.767 73.135L95.858 74.388L93.67 75.769L91.072 77.353L87.733 79.331Z"
+     },
+     {
+      "v": 0.85,
+      "state": "outside",
+      "nodeWorld": [
+       69.182,
+       12.748
+      ],
+      "uPx": 32.52,
+      "bulgePx": 43.52,
+      "notchPx": 0,
+      "sliceRingRadiusPx": 0,
+      "sliceRingOpacity": 0,
+      "notchTicks": "",
+      "outlineD": "M80.54 83.5L73.319 87.652L69.893 89.58L67.15 91.08L64.758 92.343L62.587 93.446L60.568 94.427L58.661 95.31L56.839 96.11L55.082 96.838L53.379 97.501L51.718 98.106L50.091 98.657L48.492 99.158L46.917 99.611L45.36 100.018L43.818 100.382L42.289 100.704L40.769 100.985L39.256 101.227L37.749 101.43L36.245 101.594L34.744 101.721L33.242 101.811L31.74 101.865L30.235 101.882L28.727 101.862L27.214 101.807L25.695 101.715L24.169 101.587L22.635 101.423L21.091 101.222L19.536 100.985L17.968 100.709L16.387 100.396L14.789 100.045L13.175 99.654L11.54 99.222L9.884 98.749L8.203 98.234L6.494 97.674L4.754 97.067L2.978 96.412L1.161 95.706L-0.704 94.944L-2.623 94.123L-4.607 93.237L-6.668 92.279L-8.824 91.239L-11.096 90.104L-13.518 88.855L-16.141 87.464L-19.047 85.881L-22.4 84.013L-26.607 81.625L-35.507 76.5L-44.384 71.362L-48.52 68.932L-51.755 66.997L-54.497 65.319L-56.907 63.805L-59.07 62.406L-61.035 61.094L-62.837 59.85L-64.496 58.66L-66.031 57.514L-67.453 56.406L-68.772 55.33L-69.996 54.281L-71.131 53.255L-72.181 52.251L-73.151 51.264L-74.044 50.293L-74.863 49.337L-75.61 48.394L-76.288 47.461L-76.897 46.539L-77.439 45.626L-77.916 44.721L-78.328 43.823L-78.675 42.932L-78.96 42.046L-79.181 41.165L-79.34 40.288L-79.436 39.415L-79.469 38.544L-79.44 37.675L-79.348 36.808L-79.192 35.941L-78.971 35.074L-78.686 34.206L-78.335 33.335L-77.917 32.462L-77.43 31.585L-76.872 30.701L-76.242 29.811L-75.536 28.913L-74.752 28.003L-73.885 27.08L-72.93 26.141L-71.882 25.182L-70.733 24.198L-69.472 23.184L-68.086 22.132L-66.557 21.031L-64.858 19.865L-62.949 18.612L-60.761 17.231L-58.163 15.647L-54.824 13.669L-47.631 9.5L-40.41 5.348L-36.984 3.42L-34.241 1.92L-31.849 0.657L-29.678 -0.446L-27.659 -1.427L-25.752 -2.31L-23.93 -3.11L-22.173 -3.838L-20.47 -4.501L-18.809 -5.106L-17.182 -5.657L-15.583 -6.158L-14.008 -6.611L-12.451 -7.018L-10.909 -7.382L-9.38 -7.704L-7.86 -7.985L-6.347 -8.227L-4.84 -8.43L-3.336 -8.594L-1.835 -8.721L-0.333 -8.811L1.169 -8.865L2.674 -8.882L4.182 -8.862L5.695 -8.807L7.214 -8.715L8.74 -8.587L10.274 -8.423L11.818 -8.222L13.373 -7.985L14.941 -7.709L16.522 -7.396L18.12 -7.045L19.734 -6.654L21.369 -6.222L23.025 -5.749L24.706 -5.234L26.415 -4.674L28.155 -4.067L29.931 -3.412L31.748 -2.706L33.613 -1.944L35.532 -1.123L37.516 -0.237L39.577 0.721L41.733 1.761L44.005 2.896L46.428 4.144L49.057 5.531L52.009 7.086L55.62 8.793L61.036 10.43L72.289 14.092L77.659 21.411L81.469 24.043L84.668 26.001L87.406 27.681L89.816 29.195L91.979 30.594L93.944 31.906L95.746 33.15L97.405 34.34L98.94 35.486L100.362 36.594L101.681 37.67L102.905 38.719L104.04 39.745L105.09 40.749L106.06 41.736L106.953 42.707L107.772 43.663L108.519 44.606L109.196 45.539L109.806 46.461L110.348 47.374L110.825 48.279L111.236 49.177L111.584 50.068L111.869 50.954L112.09 51.835L112.249 52.712L112.345 53.585L112.378 54.456L112.349 55.325L112.257 56.192L112.101 57.059L111.88 57.926L111.595 58.794L111.244 59.665L110.826 60.538L110.339 61.415L109.781 62.299L109.151 63.189L108.445 64.087L107.661 64.997L106.794 65.92L105.839 66.859L104.791 67.818L103.642 68.802L102.381 69.816L100.995 70.868L99.466 71.969L97.767 73.135L95.858 74.388L93.67 75.769L91.072 77.353L87.733 79.331Z"
+     },
+     {
+      "v": 0.9,
+      "state": "outside",
+      "nodeWorld": [
+       71.123,
+       11.85
+      ],
+      "uPx": 51.26,
+      "bulgePx": 30.29,
+      "notchPx": 1.08,
+      "sliceRingRadiusPx": 16.98,
+      "sliceRingOpacity": 0.4,
+      "notchTicks": "M65.111 14.247L66.458 13.410M66.905 17.132L68.251 16.295",
+      "outlineD": "M80.54 83.5L73.319 87.652L69.893 89.58L67.15 91.08L64.758 92.343L62.587 93.446L60.568 94.427L58.661 95.31L56.839 96.11L55.082 96.838L53.379 97.501L51.718 98.106L50.091 98.657L48.492 99.158L46.917 99.611L45.36 100.018L43.818 100.382L42.289 100.704L40.769 100.985L39.256 101.227L37.749 101.43L36.245 101.594L34.744 101.721L33.242 101.811L31.74 101.865L30.235 101.882L28.727 101.862L27.214 101.807L25.695 101.715L24.169 101.587L22.635 101.423L21.091 101.222L19.536 100.985L17.968 100.709L16.387 100.396L14.789 100.045L13.175 99.654L11.54 99.222L9.884 98.749L8.203 98.234L6.494 97.674L4.754 97.067L2.978 96.412L1.161 95.706L-0.704 94.944L-2.623 94.123L-4.607 93.237L-6.668 92.279L-8.824 91.239L-11.096 90.104L-13.518 88.855L-16.141 87.464L-19.047 85.881L-22.4 84.013L-26.607 81.625L-35.507 76.5L-44.384 71.362L-48.52 68.932L-51.755 66.997L-54.497 65.319L-56.907 63.805L-59.07 62.406L-61.035 61.094L-62.837 59.85L-64.496 58.66L-66.031 57.514L-67.453 56.406L-68.772 55.33L-69.996 54.281L-71.131 53.255L-72.181 52.251L-73.151 51.264L-74.044 50.293L-74.863 49.337L-75.61 48.394L-76.288 47.461L-76.897 46.539L-77.439 45.626L-77.916 44.721L-78.328 43.823L-78.675 42.932L-78.96 42.046L-79.181 41.165L-79.34 40.288L-79.436 39.415L-79.469 38.544L-79.44 37.675L-79.348 36.808L-79.192 35.941L-78.971 35.074L-78.686 34.206L-78.335 33.335L-77.917 32.462L-77.43 31.585L-76.872 30.701L-76.242 29.811L-75.536 28.913L-74.752 28.003L-73.885 27.08L-72.93 26.141L-71.882 25.182L-70.733 24.198L-69.472 23.184L-68.086 22.132L-66.557 21.031L-64.858 19.865L-62.949 18.612L-60.761 17.231L-58.163 15.647L-54.824 13.669L-47.631 9.5L-40.41 5.348L-36.984 3.42L-34.241 1.92L-31.849 0.657L-29.678 -0.446L-27.659 -1.427L-25.752 -2.31L-23.93 -3.11L-22.173 -3.838L-20.47 -4.501L-18.809 -5.106L-17.182 -5.657L-15.583 -6.158L-14.008 -6.611L-12.451 -7.018L-10.909 -7.382L-9.38 -7.704L-7.86 -7.985L-6.347 -8.227L-4.84 -8.43L-3.336 -8.594L-1.835 -8.721L-0.333 -8.811L1.169 -8.865L2.674 -8.882L4.182 -8.862L5.695 -8.807L7.214 -8.715L8.74 -8.587L10.274 -8.423L11.818 -8.222L13.373 -7.985L14.941 -7.709L16.522 -7.396L18.12 -7.045L19.734 -6.654L21.369 -6.222L23.025 -5.749L24.706 -5.234L26.415 -4.674L28.155 -4.067L29.931 -3.412L31.748 -2.706L33.613 -1.944L35.532 -1.123L37.516 -0.237L39.577 0.721L41.733 1.761L44.005 2.896L46.427 4.145L49.05 5.536L51.963 7.115L55.392 8.935L60.243 10.923L71.007 14.921L77.396 21.574L81.434 24.065L84.664 26.003L87.406 27.681L89.816 29.195L91.979 30.594L93.944 31.906L95.746 33.15L97.405 34.34L98.94 35.486L100.362 36.594L101.681 37.67L102.905 38.719L104.04 39.745L105.09 40.749L106.06 41.736L106.953 42.707L107.772 43.663L108.519 44.606L109.196 45.539L109.806 46.461L110.348 47.374L110.825 48.279L111.236 49.177L111.584 50.068L111.869 50.954L112.09 51.835L112.249 52.712L112.345 53.585L112.378 54.456L112.349 55.325L112.257 56.192L112.101 57.059L111.88 57.926L111.595 58.794L111.244 59.665L110.826 60.538L110.339 61.415L109.781 62.299L109.151 63.189L108.445 64.087L107.661 64.997L106.794 65.92L105.839 66.859L104.791 67.818L103.642 68.802L102.381 69.816L100.995 70.868L99.466 71.969L97.767 73.135L95.858 74.388L93.67 75.769L91.072 77.353L87.733 79.331Z"
+     },
+     {
+      "v": 0.95,
+      "state": "outside",
+      "nodeWorld": [
+       73.071,
+       10.964
+      ],
+      "uPx": 70.01,
+      "bulgePx": 2.45,
+      "notchPx": 3.87,
+      "sliceRingRadiusPx": 27.11,
+      "sliceRingOpacity": 0.86,
+      "notchTicks": "M65.111 14.247L66.458 13.410M66.905 17.132L68.251 16.295",
+      "outlineD": "M80.54 83.5L73.319 87.652L69.893 89.58L67.15 91.08L64.758 92.343L62.587 93.446L60.568 94.427L58.661 95.31L56.839 96.11L55.082 96.838L53.379 97.501L51.718 98.106L50.091 98.657L48.492 99.158L46.917 99.611L45.36 100.018L43.818 100.382L42.289 100.704L40.769 100.985L39.256 101.227L37.749 101.43L36.245 101.594L34.744 101.721L33.242 101.811L31.74 101.865L30.235 101.882L28.727 101.862L27.214 101.807L25.695 101.715L24.169 101.587L22.635 101.423L21.091 101.222L19.536 100.985L17.968 100.709L16.387 100.396L14.789 100.045L13.175 99.654L11.54 99.222L9.884 98.749L8.203 98.234L6.494 97.674L4.754 97.067L2.978 96.412L1.161 95.706L-0.704 94.944L-2.623 94.123L-4.607 93.237L-6.668 92.279L-8.824 91.239L-11.096 90.104L-13.518 88.855L-16.141 87.464L-19.047 85.881L-22.4 84.013L-26.607 81.625L-35.507 76.5L-44.384 71.362L-48.52 68.932L-51.755 66.997L-54.497 65.319L-56.907 63.805L-59.07 62.406L-61.035 61.094L-62.837 59.85L-64.496 58.66L-66.031 57.514L-67.453 56.406L-68.772 55.33L-69.996 54.281L-71.131 53.255L-72.181 52.251L-73.151 51.264L-74.044 50.293L-74.863 49.337L-75.61 48.394L-76.288 47.461L-76.897 46.539L-77.439 45.626L-77.916 44.721L-78.328 43.823L-78.675 42.932L-78.96 42.046L-79.181 41.165L-79.34 40.288L-79.436 39.415L-79.469 38.544L-79.44 37.675L-79.348 36.808L-79.192 35.941L-78.971 35.074L-78.686 34.206L-78.335 33.335L-77.917 32.462L-77.43 31.585L-76.872 30.701L-76.242 29.811L-75.536 28.913L-74.752 28.003L-73.885 27.08L-72.93 26.141L-71.882 25.182L-70.733 24.198L-69.472 23.184L-68.086 22.132L-66.557 21.031L-64.858 19.865L-62.949 18.612L-60.761 17.231L-58.163 15.647L-54.824 13.669L-47.631 9.5L-40.41 5.348L-36.984 3.42L-34.241 1.92L-31.849 0.657L-29.678 -0.446L-27.659 -1.427L-25.752 -2.31L-23.93 -3.11L-22.173 -3.838L-20.47 -4.501L-18.809 -5.106L-17.182 -5.657L-15.583 -6.158L-14.008 -6.611L-12.451 -7.018L-10.909 -7.382L-9.38 -7.704L-7.86 -7.985L-6.347 -8.227L-4.84 -8.43L-3.336 -8.594L-1.835 -8.721L-0.333 -8.811L1.169 -8.865L2.674 -8.882L4.182 -8.862L5.695 -8.807L7.214 -8.715L8.74 -8.587L10.274 -8.423L11.818 -8.222L13.373 -7.985L14.941 -7.709L16.522 -7.396L18.12 -7.045L19.734 -6.654L21.369 -6.222L23.025 -5.749L24.706 -5.234L26.415 -4.674L28.155 -4.067L29.931 -3.412L31.748 -2.706L33.613 -1.944L35.532 -1.123L37.516 -0.237L39.577 0.721L41.733 1.761L44.005 2.896L46.427 4.145L49.05 5.536L51.956 7.119L55.309 8.987L59.524 11.37L68.494 16.566L77.293 21.638L81.429 24.068L84.664 26.003L87.406 27.681L89.816 29.195L91.979 30.594L93.944 31.906L95.746 33.15L97.405 34.34L98.94 35.486L100.362 36.594L101.681 37.67L102.905 38.719L104.04 39.745L105.09 40.749L106.06 41.736L106.953 42.707L107.772 43.663L108.519 44.606L109.196 45.539L109.806 46.461L110.348 47.374L110.825 48.279L111.236 49.177L111.584 50.068L111.869 50.954L112.09 51.835L112.249 52.712L112.345 53.585L112.378 54.456L112.349 55.325L112.257 56.192L112.101 57.059L111.88 57.926L111.595 58.794L111.244 59.665L110.826 60.538L110.339 61.415L109.781 62.299L109.151 63.189L108.445 64.087L107.661 64.997L106.794 65.92L105.839 66.859L104.791 67.818L103.642 68.802L102.381 69.816L100.995 70.868L99.466 71.969L97.767 73.135L95.858 74.388L93.67 75.769L91.072 77.353L87.733 79.331Z"
+     },
+     {
+      "v": 1,
+      "state": "outside",
+      "nodeWorld": [
+       75.024,
+       10.084
+      ],
+      "uPx": 88.75,
+      "bulgePx": 0,
+      "notchPx": 6,
+      "sliceRingRadiusPx": 28,
+      "sliceRingOpacity": 0.9,
+      "notchTicks": "M65.111 14.247L66.458 13.410M66.905 17.132L68.251 16.295",
+      "outlineD": "M80.54 83.5L73.319 87.652L69.893 89.58L67.15 91.08L64.758 92.343L62.587 93.446L60.568 94.427L58.661 95.31L56.839 96.11L55.082 96.838L53.379 97.501L51.718 98.106L50.091 98.657L48.492 99.158L46.917 99.611L45.36 100.018L43.818 100.382L42.289 100.704L40.769 100.985L39.256 101.227L37.749 101.43L36.245 101.594L34.744 101.721L33.242 101.811L31.74 101.865L30.235 101.882L28.727 101.862L27.214 101.807L25.695 101.715L24.169 101.587L22.635 101.423L21.091 101.222L19.536 100.985L17.968 100.709L16.387 100.396L14.789 100.045L13.175 99.654L11.54 99.222L9.884 98.749L8.203 98.234L6.494 97.674L4.754 97.067L2.978 96.412L1.161 95.706L-0.704 94.944L-2.623 94.123L-4.607 93.237L-6.668 92.279L-8.824 91.239L-11.096 90.104L-13.518 88.855L-16.141 87.464L-19.047 85.881L-22.4 84.013L-26.607 81.625L-35.507 76.5L-44.384 71.362L-48.52 68.932L-51.755 66.997L-54.497 65.319L-56.907 63.805L-59.07 62.406L-61.035 61.094L-62.837 59.85L-64.496 58.66L-66.031 57.514L-67.453 56.406L-68.772 55.33L-69.996 54.281L-71.131 53.255L-72.181 52.251L-73.151 51.264L-74.044 50.293L-74.863 49.337L-75.61 48.394L-76.288 47.461L-76.897 46.539L-77.439 45.626L-77.916 44.721L-78.328 43.823L-78.675 42.932L-78.96 42.046L-79.181 41.165L-79.34 40.288L-79.436 39.415L-79.469 38.544L-79.44 37.675L-79.348 36.808L-79.192 35.941L-78.971 35.074L-78.686 34.206L-78.335 33.335L-77.917 32.462L-77.43 31.585L-76.872 30.701L-76.242 29.811L-75.536 28.913L-74.752 28.003L-73.885 27.08L-72.93 26.141L-71.882 25.182L-70.733 24.198L-69.472 23.184L-68.086 22.132L-66.557 21.031L-64.858 19.865L-62.949 18.612L-60.761 17.231L-58.163 15.647L-54.824 13.669L-47.631 9.5L-40.41 5.348L-36.984 3.42L-34.241 1.92L-31.849 0.657L-29.678 -0.446L-27.659 -1.427L-25.752 -2.31L-23.93 -3.11L-22.173 -3.838L-20.47 -4.501L-18.809 -5.106L-17.182 -5.657L-15.583 -6.158L-14.008 -6.611L-12.451 -7.018L-10.909 -7.382L-9.38 -7.704L-7.86 -7.985L-6.347 -8.227L-4.84 -8.43L-3.336 -8.594L-1.835 -8.721L-0.333 -8.811L1.169 -8.865L2.674 -8.882L4.182 -8.862L5.695 -8.807L7.214 -8.715L8.74 -8.587L10.274 -8.423L11.818 -8.222L13.373 -7.985L14.941 -7.709L16.522 -7.396L18.12 -7.045L19.734 -6.654L21.369 -6.222L23.025 -5.749L24.706 -5.234L26.415 -4.674L28.155 -4.067L29.931 -3.412L31.748 -2.706L33.613 -1.944L35.532 -1.123L37.516 -0.237L39.577 0.721L41.733 1.761L44.005 2.896L46.427 4.145L49.05 5.536L51.956 7.119L55.308 8.987L59.516 11.375L68.256 16.777L77.292 21.638L81.429 24.068L84.664 26.003L87.406 27.681L89.816 29.195L91.979 30.594L93.944 31.906L95.746 33.15L97.405 34.34L98.94 35.486L100.362 36.594L101.681 37.67L102.905 38.719L104.04 39.745L105.09 40.749L106.06 41.736L106.953 42.707L107.772 43.663L108.519 44.606L109.196 45.539L109.806 46.461L110.348 47.374L110.825 48.279L111.236 49.177L111.584 50.068L111.869 50.954L112.09 51.835L112.249 52.712L112.345 53.585L112.378 54.456L112.349 55.325L112.257 56.192L112.101 57.059L111.88 57.926L111.595 58.794L111.244 59.665L110.826 60.538L110.339 61.415L109.781 62.299L109.151 63.189L108.445 64.087L107.661 64.997L106.794 65.92L105.839 66.859L104.791 67.818L103.642 68.802L102.381 69.816L100.995 70.868L99.466 71.969L97.767 73.135L95.858 74.388L93.67 75.769L91.072 77.353L87.733 79.331Z"
+     }
+    ]
+   },
+   "validation": {
+    "maxAbsErrorWorldVsDemoAtSomethingChanges": 0.005,
+    "maxAbsErrorWorldVsDemoAtDecision": 0.005,
+    "nodeWorldPortVsDemo": {
+     "somethingChanges": [
+      [
+       75.024,
+       10.084
+      ],
+      [
+       75.018,
+       10.083
+      ]
+     ],
+     "decision": [
+      [
+       78.271,
+       8.065
+      ],
+      [
+       78.274,
+       8.058
+      ]
+     ]
+    }
+   }
+  }
+ },
+ "nodeGlyph": {
+  "note": "Activity node markup in screen px (the demo node group is translated to the node position and scaled by k: hero 1.5 in focus stages, 1.2 otherwise; other nodes 1). Symbols node-* in assets/site/glyphs.svg reproduce each state at 1:1.",
+  "parts": {
+   "ring": "circle r 6.6, ink stroke 1 px, stroke-opacity .42 (inside)",
+   "dot": "circle r 3.1 ink (inside, checking)",
+   "checking": "circle r 9, ink 1 px, dash 2.2 2.9, spins 2200 ms/turn; ring hidden",
+   "outside": "circle r 8.5 (1.7 px) + 4 ticks from 11.5 to 16 px (1.3 px), signal; dot becomes paper with a 1.3 px signal stroke; ring hidden",
+   "changed": "square 6.8 px (x -3.4) ink replaces the dot; ring stays",
+   "retained": "circle r 14 paper .94 fill, ink 1.1 px dash 1.4 2.4, diagonal hatch (ink .38, .8 px) inside r 13, paper disc r 5.4, dot on top",
+   "transferred": "capsule 40x20 rx 10 from x -12 (paper .92, ink 1.1 px) + inner capsule 34x14 rx 7 (.8 px) + clock at (15.5, 0) r 3.6 with hands; ring hidden",
+   "pulse": "spawn pulse: circle r 7 scaling to 3.4x and fading over 1500 ms",
+   "hit": "transparent r 15"
+  }
+ }
+}

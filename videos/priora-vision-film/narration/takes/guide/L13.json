@@ -1,0 +1,103 @@
+{
+  "schema": "priora-narration-take/1",
+  "id": "L13",
+  "engine": "guide",
+  "guide": true,
+  "label": "GUIDE VOICE (local Kokoro). Not the final ElevenLabs performance.",
+  "speaker": "worker",
+  "text": "I'm welding on Roof 03 until six.",
+  "spoken_text": "I'm welding on Roof oh-three until six.",
+  "sample_rate": 48000,
+  "duration": 2.76,
+  "speech_start": 0.13,
+  "speech_end": 2.52,
+  "words": [
+    {
+      "w": "I'm",
+      "start": 0.13,
+      "end": 0.32
+    },
+    {
+      "w": "welding",
+      "start": 0.32,
+      "end": 0.7
+    },
+    {
+      "w": "on",
+      "start": 0.7,
+      "end": 0.86
+    },
+    {
+      "w": "Roof",
+      "start": 0.86,
+      "end": 1.12
+    },
+    {
+      "w": "03",
+      "start": 1.12,
+      "end": 1.65,
+      "spoken": "oh-three"
+    },
+    {
+      "w": "until",
+      "start": 1.65,
+      "end": 2.0
+    },
+    {
+      "w": "six",
+      "start": 2.0,
+      "end": 2.52
+    }
+  ],
+  "sentences": [
+    {
+      "text": "I'm welding on Roof 03 until six.",
+      "start": 0.13,
+      "end": 2.52,
+      "word_range": [
+        0,
+        7
+      ]
+    }
+  ],
+  "created": "2026-09-29T21:41:34+00:00",
+  "provider": "kokoro-onnx 0.6.1, kokoro-v1.0.onnx (local guide)",
+  "voice": {
+    "id": "bm_daniel",
+    "lang": "en-gb"
+  },
+  "speed": 1.0,
+  "inner_pauses": [],
+  "segments_synth": [
+    {
+      "text": "I'm welding on Roof oh-three until six.",
+      "start": 0.12,
+      "end": 2.56,
+      "alignment_quality": {
+        "energy_pauses": 0,
+        "pause_agreement": 1.0,
+        "pauses_inside_words": [],
+        "onset_error_ms": 0.0,
+        "offset_error_ms": 10.0,
+        "pause_onset_error_ms_mean": null,
+        "pause_onset_error_ms_max": null
+      },
+      "fallback": false
+    }
+  ],
+  "alignment": {
+    "method": "pocketsphinx-5-forced-alignment+energy-refine",
+    "fallback": false,
+    "quality": {
+      "energy_pauses": 0,
+      "pause_agreement": 1.0,
+      "pauses_inside_words": [],
+      "onset_error_ms": 0.0,
+      "offset_error_ms": 10.0,
+      "pause_onset_error_ms_mean": null,
+      "pause_onset_error_ms_max": null
+    },
+    "quality_ok": true
+  },
+  "pronunciation_checks": []
+}

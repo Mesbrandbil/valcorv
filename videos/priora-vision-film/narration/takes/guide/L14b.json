@@ -1,0 +1,117 @@
+{
+  "schema": "priora-narration-take/1",
+  "id": "L14b",
+  "engine": "guide",
+  "guide": true,
+  "label": "GUIDE VOICE (local Kokoro). Not the final ElevenLabs performance.",
+  "speaker": "narrator",
+  "text": "It checks the certificate and safeguards, and keeps the record.",
+  "spoken_text": "It checks the certificate and safeguards, and keeps the record.",
+  "sample_rate": 48000,
+  "duration": 3.65,
+  "speech_start": 0.13,
+  "speech_end": 3.42,
+  "words": [
+    {
+      "w": "It",
+      "start": 0.13,
+      "end": 0.25
+    },
+    {
+      "w": "checks",
+      "start": 0.25,
+      "end": 0.57
+    },
+    {
+      "w": "the",
+      "start": 0.57,
+      "end": 0.66
+    },
+    {
+      "w": "certificate",
+      "start": 0.66,
+      "end": 1.28
+    },
+    {
+      "w": "and",
+      "start": 1.28,
+      "end": 1.4
+    },
+    {
+      "w": "safeguards",
+      "start": 1.4,
+      "end": 2.1
+    },
+    {
+      "w": "and",
+      "start": 2.34,
+      "end": 2.48
+    },
+    {
+      "w": "keeps",
+      "start": 2.48,
+      "end": 2.77
+    },
+    {
+      "w": "the",
+      "start": 2.77,
+      "end": 2.88
+    },
+    {
+      "w": "record",
+      "start": 2.88,
+      "end": 3.42
+    }
+  ],
+  "sentences": [
+    {
+      "text": "It checks the certificate and safeguards, and keeps the record.",
+      "start": 0.13,
+      "end": 3.42,
+      "word_range": [
+        0,
+        10
+      ]
+    }
+  ],
+  "created": "2026-09-29T21:41:34+00:00",
+  "provider": "kokoro-onnx 0.6.1, kokoro-v1.0.onnx (local guide)",
+  "voice": {
+    "id": "bf_isabella",
+    "lang": "en-gb"
+  },
+  "speed": 1.0,
+  "inner_pauses": [],
+  "segments_synth": [
+    {
+      "text": "It checks the certificate and safeguards, and keeps the record.",
+      "start": 0.12,
+      "end": 3.45,
+      "alignment_quality": {
+        "energy_pauses": 0,
+        "pause_agreement": 1.0,
+        "pauses_inside_words": [],
+        "onset_error_ms": 0.0,
+        "offset_error_ms": 0.0,
+        "pause_onset_error_ms_mean": null,
+        "pause_onset_error_ms_max": null
+      },
+      "fallback": false
+    }
+  ],
+  "alignment": {
+    "method": "pocketsphinx-5-forced-alignment+energy-refine",
+    "fallback": false,
+    "quality": {
+      "energy_pauses": 0,
+      "pause_agreement": 1.0,
+      "pauses_inside_words": [],
+      "onset_error_ms": 0.0,
+      "offset_error_ms": 10.0,
+      "pause_onset_error_ms_mean": null,
+      "pause_onset_error_ms_max": null
+    },
+    "quality_ok": true
+  },
+  "pronunciation_checks": []
+}

@@ -1,0 +1,244 @@
+{
+  "note": "a3-change (Act III, S17 to S19e). Anchored to the same cues as the picture; each offset is the scene's beat-grid cut or move time minus its cue for the current narration timing (re-derive after a re-lock: scripts/event-gen/a3-change-times.cjs, then scripts/snap-events.mjs --scene a3-change).",
+  "events": [
+    {
+      "name": "cut-in",
+      "at": "cue:l16+0.024",
+      "kind": "cut",
+      "material": "paper",
+      "gain_db": -14
+    },
+    {
+      "name": "system-event",
+      "at": "cue:offline2+0.018",
+      "kind": "system-event",
+      "gain_db": -8,
+      "dur": 0.6
+    },
+    {
+      "name": "cut-card",
+      "at": "cue:thisTime",
+      "kind": "cut",
+      "material": "felt",
+      "gain_db": -14,
+      "snap": {
+        "mode": "cut",
+        "off": -0.0003
+      }
+    },
+    {
+      "name": "focus-row",
+      "at": "cue:thisTime-0.168",
+      "kind": "focus",
+      "gain_db": -16
+    },
+    {
+      "name": "row-unavailable",
+      "at": "cue:sees-0.1",
+      "kind": "row-unavailable",
+      "gain_db": -9
+    },
+    {
+      "name": "cut-edge",
+      "at": "cue:cross",
+      "kind": "cut",
+      "material": "paper",
+      "gain_db": -16,
+      "snap": {
+        "mode": "cut",
+        "off": 0.0001
+      }
+    },
+    {
+      "name": "node-stretch",
+      "at": "cue:cross",
+      "kind": "node-stretch",
+      "gain_db": -10,
+      "dur": 0.815,
+      "snap": {
+        "mode": "cut",
+        "off": 0.0001
+      }
+    },
+    {
+      "name": "node-cross",
+      "at": "cue:cross",
+      "kind": "node-cross",
+      "gain_db": -6,
+      "dur": 0.46,
+      "snap": {
+        "mode": "next",
+        "off": 0.652
+      }
+    },
+    {
+      "name": "crossing-hold",
+      "at": "cue:cross+1.133",
+      "kind": "hold",
+      "dur": 1.727
+    },
+    {
+      "name": "cut-sheet",
+      "at": "cue:riskOwner",
+      "kind": "cut",
+      "material": "paper",
+      "gain_db": -14,
+      "snap": {
+        "mode": "cut",
+        "off": 0.0003
+      }
+    },
+    {
+      "name": "sheet-in",
+      "at": "cue:riskOwner",
+      "kind": "sheet-in",
+      "gain_db": -12,
+      "dur": 0.4,
+      "snap": {
+        "mode": "cut",
+        "off": 0.0003
+      }
+    },
+    {
+      "name": "focus-sheet",
+      "at": "cue:riskOwner+0.02",
+      "kind": "focus",
+      "gain_db": -16
+    },
+    {
+      "name": "pull-choices",
+      "at": "cue:decides",
+      "kind": "pull",
+      "gain_db": -14,
+      "dur": 0.652,
+      "snap": {
+        "mode": "cut",
+        "off": 0.0002
+      }
+    },
+    {
+      "name": "push-change",
+      "at": "cue:change",
+      "kind": "push",
+      "gain_db": -14,
+      "dur": 0.652,
+      "snap": {
+        "mode": "cut",
+        "off": -0.0002
+      }
+    },
+    {
+      "name": "choice-01",
+      "at": "cue:change",
+      "kind": "choice-accent",
+      "variant": 1,
+      "gain_db": -10,
+      "snap": {
+        "mode": "cut",
+        "off": -0.0002
+      }
+    },
+    {
+      "name": "node-return",
+      "at": "cue:change+0.296",
+      "kind": "node-return",
+      "gain_db": -12,
+      "dur": 0.6
+    },
+    {
+      "name": "whip-retain",
+      "at": "cue:knowingly",
+      "kind": "whip",
+      "gain_db": -16,
+      "dur": 0.489,
+      "snap": {
+        "mode": "cut",
+        "off": 0.0001
+      }
+    },
+    {
+      "name": "choice-02",
+      "at": "cue:retain-0.05",
+      "kind": "choice-accent",
+      "variant": 2,
+      "gain_db": -10
+    },
+    {
+      "name": "whip-transfer",
+      "at": "cue:inTime",
+      "kind": "whip",
+      "gain_db": -16,
+      "dur": 0.489,
+      "snap": {
+        "mode": "cut",
+        "off": 0.0003
+      }
+    },
+    {
+      "name": "choice-03",
+      "at": "cue:inTime+0.04",
+      "kind": "choice-accent",
+      "variant": 3,
+      "gain_db": -10
+    },
+    {
+      "name": "cut-packet",
+      "at": "cue:ask",
+      "kind": "cut",
+      "material": "paper",
+      "gain_db": -14,
+      "snap": {
+        "mode": "cut",
+        "off": 0.0001
+      }
+    },
+    {
+      "name": "focus-packet",
+      "at": "cue:ask+0.008",
+      "kind": "focus",
+      "gain_db": -16
+    },
+    {
+      "name": "packet-send",
+      "at": "cue:ask",
+      "kind": "packet-send",
+      "gain_db": -12,
+      "dur": 0.5,
+      "snap": {
+        "mode": "next"
+      }
+    },
+    {
+      "name": "carrier-response",
+      "at": "cue:whether",
+      "kind": "carrier-response",
+      "gain_db": -13,
+      "series": {
+        "count": 4,
+        "every": 0.6522
+      },
+      "snap": {
+        "mode": "cut",
+        "off": -0.0003
+      }
+    },
+    {
+      "name": "layer-slice",
+      "at": "cue:whether",
+      "kind": "layer-slice",
+      "gain_db": -12,
+      "dur": 0.5,
+      "snap": {
+        "mode": "next",
+        "off": 1.9567
+      }
+    },
+    {
+      "name": "programme-hold",
+      "at": "cue:whether+2.445",
+      "kind": "hold",
+      "gain_db": -6,
+      "dur": 0.839
+    }
+  ]
+}

@@ -1,0 +1,394 @@
+/* =====================================================================
+   film-ui.css: the Priora interface at video scale (Acts II and III).
+   Pairs with assets/js/ui-kit.js; see docs/ui-kit.md.
+
+   Load after assets/css/product.css (the demo's components under .pui).
+   Everything here is scoped under .fui (HTML components) or a film class on
+   SVG elements (.fui-*), so nothing leaks into other scenes.
+   - Nothing meant to be read is smaller than 18px (the demo's 10px mono labels
+     are raised with max(18px, ...) where a component runs below --pui-scale 1.8).
+   - Cut 3 colour (docs/cut3-direction.md sections 1 and 2), tokens only from
+     assets/css/film-color.css. Film-native cards: paper-white, one colour band keyed
+     to the category (protection --c-water, hot work --c-hot, lifts --c-lift, gas
+     --c-gas, air --c-air), states as coloured pills and ticks, fewer hairlines.
+     --signal is Priora's cobalt (--c-priora): the live connection lines, the
+     product's own marks, the selected choice, a recorded decision.
+     VERIFIED and inside: --pui-ok (--c-ok). UNAVAILABLE, OUTSIDE AGREED CONDITIONS,
+     the crossing and a changed condition: --pui-alert (--c-alert).
+   - Card shadows are the demo's, softened for video. No glass, no glow.
+   - No transitions or keyframes: GSAP drives every change by seeking.
+   ===================================================================== */
+
+.fui { --signal: var(--c-priora, #1F47D6); --signal-deep: var(--c-priora-deep, #1838A8); --signal-soft: var(--c-priora-soft, #DCE2F5); }
+/* the interface in the film's own ink and paper (warm), paper-white cards */
+.pui.fui, .fui .pui {
+  --pui-paper: var(--c-paper, #f5f3ee);
+  --pui-card: color-mix(in srgb, var(--c-paper, #f5f3ee) 30%, white);
+  --pui-ink: var(--c-ink, #1e1c19);
+  --pui-ink-2: color-mix(in srgb, var(--c-ink, #1e1c19) 76%, transparent);
+  --pui-ink-3: color-mix(in srgb, var(--c-ink, #1e1c19) 60%, transparent);
+  --pui-ink-4: color-mix(in srgb, var(--c-ink, #1e1c19) 40%, transparent);
+  --pui-hair: color-mix(in srgb, var(--c-ink, #1e1c19) 12%, transparent);
+  --pui-hair-2: color-mix(in srgb, var(--c-ink, #1e1c19) 6%, transparent);
+  --pui-ok: var(--c-ok, #2e8b57); --pui-ok-soft: var(--c-ok-soft, #d9eee1);
+  --pui-alert: var(--c-alert, #e0452b); --pui-alert-soft: var(--c-alert-soft, #fadcd5);
+}
+.pui.fui, .pui.fui [class*="pui-"], .fui .pui, .fui .pui [class*="pui-"] {
+  --pui-shadow: 0 calc(1 * var(--u)) 0 rgba(17,17,17,.025), 0 calc(22 * var(--u)) calc(56 * var(--u)) calc(-30 * var(--u)) rgba(17,17,17,.15), 0 calc(6 * var(--u)) calc(16 * var(--u)) calc(-10 * var(--u)) rgba(17,17,17,.06);
+}
+.fui { --fui-soft-shadow: 0 1px 0 rgba(17,17,17,.025), 0 30px 70px -40px rgba(17,17,17,.22), 0 8px 22px -14px rgba(17,17,17,.08); }
+.fui .fui-sig-t { color: var(--pui-alert, var(--c-alert, #e0452b)); }
+
+/* ---------- Swap: variants stacked in one grid cell ---------- */
+.fui-swap { display: inline-grid; vertical-align: baseline; }
+div.fui-swap { display: grid; }
+.fui-swap > .fui-sw { grid-area: 1 / 1; white-space: nowrap; }
+div.fui-swap > .fui-sw { white-space: normal; }
+
+/* ---------- Odometer (clock, counters) ---------- */
+.fui-odo { display: inline-flex; align-items: flex-start; height: var(--lh); line-height: var(--lh); font-variant-numeric: tabular-nums; vertical-align: top; }
+.fui-odo-w { display: inline-block; width: .6em; height: var(--lh); overflow: hidden; position: relative; }
+.fui-odo-s { display: block; white-space: pre; line-height: var(--lh); text-align: left; }
+.fui-odo-sep { display: inline-block; line-height: var(--lh); }
+
+/* ---------- 1. header ---------- */
+.pui-top.fui-header { width: 1920px; padding: 0 96px; border-bottom: 0; background: var(--pui-paper); }
+.fui-header .brand .tag, .fui-header .pf em, .fui-header .clock .lab { font-size: max(18px, calc(10 * var(--u))); }
+.fui-header .siteid .nm { font-size: max(18px, calc(11 * var(--u))); }
+.fui-header .siteid .sb { font-size: max(18px, calc(12 * var(--u))); }
+.fui-header .pf b { font-size: max(19px, calc(12.5 * var(--u))); }
+.fui-header .pf.pstat { width: auto; padding-right: 0; border-right: 0; }
+.fui-header .pui-proghead { padding-right: calc(20 * var(--u)); }
+.fui-header .fui-pstat-v { display: flex; align-items: center; gap: calc(7 * var(--u)); }
+.fui-header .clock b { display: block; }
+/* clockStyle 'chrome': the chrome scene's clock, to the pixel (compositions/chrome.html #chrome-clock) */
+.fui-header .clock.fui-clock-chrome { position: absolute; right: 96px; display: block; width: 360px; text-align: right; gap: 0; font-family: 'IBM Plex Mono', monospace; text-rendering: geometricPrecision; font-kerning: normal; }
+.fui-header .clock.fui-clock-chrome .lab { display: block; font: 500 16px/normal 'IBM Plex Mono', monospace; letter-spacing: .14em; text-transform: uppercase; color: #6A6863; }
+.fui-header .clock.fui-clock-chrome b.fui-clock { position: absolute; right: 0; top: 26px; font: 500 38px/normal 'IBM Plex Mono', monospace; letter-spacing: .02em; color: #2A2A2A; }
+.fui-header .clock.fui-clock-chrome .fui-odo-w { width: .62em; }
+.fui-header .clock.fui-clock-chrome .fui-odo-sep { width: .62em; }
+.fui-hrule { position: absolute; left: 0; right: 0; bottom: 0; height: 1px; background: var(--pui-hair); transform-origin: 0 50%; }
+
+/* ---------- node glyph (inside a SiteKit SVG; --sw = 1 screen px in world units) ---------- */
+.fui-npx { transform: scale(calc(var(--sw) * var(--k, 1))); }
+.fui-px1 { transform: scale(var(--sw)); }
+.fui-n-pulse { fill: none; stroke: #111111; stroke-width: 1; }
+.fui-n-ring { fill: none; stroke: var(--c-ok, #2e8b57); stroke-opacity: .8; stroke-width: 1.2; }
+.fui-n-chk { fill: none; stroke: #111111; stroke-width: 1; stroke-dasharray: 2.2 2.9; }
+.fui-n-out { fill: none; stroke: var(--c-alert, #e0452b); }
+.fui-n-out circle { stroke-width: 1.7; }
+.fui-n-out path { stroke-width: 1.3; }
+.fui-n-dot { fill: #111111; stroke: #111111; stroke-width: 0; }
+.fui-n-sq { fill: var(--fui-act, var(--c-ink, #1e1c19)); }
+.fui-n-own .ob { fill: rgba(245,243,238,.94); stroke: var(--fui-act, var(--c-ink, #1e1c19)); stroke-width: 1.3; stroke-dasharray: 1.4 2.4; }
+.fui-n-own .oh { fill: none; stroke: #111111; stroke-opacity: .38; stroke-width: .8; }
+.fui-n-own .op { fill: #F5F3EE; }
+.fui-n-cap .c1 { fill: rgba(245,243,238,.92); stroke: #111111; stroke-width: 1.1; }
+.fui-n-cap .c2 { fill: none; stroke: #111111; stroke-width: .8; }
+.fui-n-cap .ck { fill: none; stroke: #111111; stroke-width: .9; }
+.fui-nret { transform: scale(calc(var(--sw) * var(--kr, 1))); }
+.fui-nret-p { fill: none; stroke: #111111; stroke-opacity: .72; stroke-width: 1.15; vector-effect: non-scaling-stroke; }
+
+/* ---------- the crossing ---------- */
+.fui-caps-fill { fill: rgba(245,243,238,.82); stroke: none; }
+.fui-caps-ring { fill: none; stroke: #111111; stroke-width: calc(var(--sw) * var(--k, 1) * 1px); stroke-dasharray: calc(var(--sw) * var(--k, 1) * 2.2px) calc(var(--sw) * var(--k, 1) * 2.9px); }
+.fui-caps-spine { stroke: #111111; stroke-width: calc(var(--sw) * 1.25px); stroke-linecap: round; }
+.fui-caps-head { fill: #111111; }
+.fui-caps-tail { fill: #111111; fill-opacity: .5; }
+.fui-tether { stroke: var(--c-alert, #e0452b); stroke-opacity: .9; stroke-width: calc(var(--sw) * 1.4px); stroke-dasharray: calc(var(--sw) * 4px) calc(var(--sw) * 4px); stroke-linecap: butt; }
+.fui-anchor ellipse { fill: none; stroke: var(--c-alert, #e0452b); stroke-opacity: .75; stroke-width: 1.2; stroke-dasharray: 2 2; }
+.fui-slice-ring circle { fill: none; stroke: var(--c-alert, #e0452b); stroke-opacity: .9; stroke-width: 1.2; stroke-dasharray: 2.5 3; }
+.fui-exit-ticks { fill: none; stroke: #111111; stroke-width: calc(var(--sw) * 1.1px); }
+
+/* ---------- site additions: Sprinkler Zone 3 offline, larger labels for video ---------- */
+.priora-site .fui-sz-offline { fill: none; stroke: var(--c-offline, #9c9994); stroke-width: calc(var(--sw) * 1.2px); stroke-dasharray: calc(var(--sw) * 2px) calc(var(--sw) * 2px); }
+.priora-site .szl text.st.fui-sig-t { fill: var(--c-alert, #e0452b); }
+.priora-site .szl text.st.fui-sz-st-res { fill: var(--c-ok, #2e8b57); }
+.fui-labels.priora-site .px { transform: scale(calc(var(--sw) * var(--fui-lab, 1.8))); }
+
+/* ---------- clause labels (world-sized, on paper) and live connections ---------- */
+.fui-clause text { font-family: 'IBM Plex Mono', monospace; font-weight: 500; letter-spacing: .12em; paint-order: stroke; stroke: #F5F3EE; stroke-width: 5px; stroke-linejoin: round; }
+.fui-clause-num { fill: #111111; }
+.fui-clause-tx { fill: #2A2A2A; }
+.fui-clause-box { fill: var(--fui-cat, #FBFAF7); stroke: var(--c-ink, #1e1c19); stroke-width: calc(var(--sw) * var(--fui-s) * 1.2px); }
+.fui-clause-term { fill: #F5F3EE; stroke: #111111; stroke-width: calc(var(--sw) * var(--fui-s) * 1.5px); }
+.fui-clause-lead { fill: none; stroke: #111111; stroke-opacity: .55; stroke-width: calc(var(--sw) * var(--fui-s) * 1.2px); }
+.fui-clause-rule { fill: none; stroke: #111111; stroke-opacity: .22; stroke-width: calc(var(--sw) * var(--fui-s) * 1px); }
+.fui-live-p { fill: none; stroke: var(--signal, #1F47D6); stroke-width: calc(var(--sw) * 2px); stroke-linecap: round; stroke-linejoin: round; }
+.fui-live-t circle { fill: var(--c-paper, #F5F3EE); stroke: var(--signal, #1F47D6); stroke-width: 1.8; }
+
+/* ---------- plates on decided nodes ---------- */
+.fui-plate-bg { fill: #FBFAF7; stroke: rgba(17,17,17,.14); stroke-width: 1; }
+.fui-plate-lead { fill: none; stroke: #111111; stroke-opacity: .4; stroke-width: 1; }
+.fui-plate text { font-family: 'IBM Plex Mono', monospace; font-weight: 500; letter-spacing: .1em; }
+.fui-plate-t0 { fill: rgba(17,17,17,.62); }
+.fui-plate-t1 { fill: #111111; }
+.fui-plate-t2 { fill: rgba(17,17,17,.6); }
+
+/* ---------- 3. activity card (--pui-scale 1.8: every label is 18px or more) ---------- */
+.pui-herocard.fui-card { border-radius: calc(14 * var(--u)); }
+.fui-card .fui-card-g .g { width: calc(16 * var(--u)); height: calc(16 * var(--u)); }
+.pui.fui-card .ck .c-x.fui-cx { stroke: var(--pui-alert); stroke-width: 1.5; }
+.fui-card .conds li em.fui-swap { justify-self: end; text-align: right; }
+/* cut 3: one colour band keyed to the category (no layout change: an inset shadow inside the radius) */
+.pui-herocard.fui-card.fui-band { box-shadow: inset 0 calc(7 * var(--u)) 0 var(--fui-band), var(--pui-shadow); }
+/* fewer hairlines: the rows breathe on paper; the checks are the ok colour, a lost condition alert */
+.fui-card .conds li { border-bottom-color: transparent; }
+.pui.fui-card .ck .c-p { stroke: var(--pui-ok); stroke-width: 1.8; }
+.fui-card .hc-title { font-size: calc(24 * var(--u)); line-height: calc(24.2 * var(--u)); letter-spacing: -.015em; }
+/* states as coloured pills (a painted background that does not move the layout) */
+.fui-card .conds li em .fui-sw-verified, .fui-card .conds li em .fui-sw-unavailable { border-radius: calc(3 * var(--u)); }
+.fui-card .conds li em .fui-sw-verified { color: color-mix(in srgb, var(--pui-ok) 70%, var(--c-ink)); background: var(--pui-ok-soft); box-shadow: 0 0 0 calc(4 * var(--u)) var(--pui-ok-soft); }
+.fui-card .conds li em .fui-sw-unavailable { color: var(--pui-alert); background: var(--pui-alert-soft); box-shadow: 0 0 0 calc(4 * var(--u)) var(--pui-alert-soft); }
+.fui-card .conds li em .fui-sw { justify-self: end; }
+.fui-card .hc-foot .fui-sw-inside { color: color-mix(in srgb, var(--pui-ok) 70%, var(--c-ink)); } /* a shade deeper: 5:1 on the pill */
+.fui-card .hc-foot .fui-sw-h4, .fui-card .hc-foot .fui-sw-outside { color: var(--pui-alert); }
+
+/* ---------- readout ---------- */
+.fui-readout .slice.fui-slice { opacity: 1; height: calc(36 * var(--u)); margin-top: calc(9 * var(--u)); overflow: visible; }
+.fui-readout .fui-seg { stroke: var(--pui-alert); stroke-width: 1; }
+.fui-readout .fui-ro-v .ro-a.fui-sig-t { color: var(--pui-alert); }
+
+/* ---------- 4. capture strip ---------- */
+.fui-capture { position: relative; background: var(--pui-card); border: 1px solid var(--pui-hair); border-radius: 18px; padding: 26px 36px 26px; box-shadow: var(--fui-soft-shadow); }
+.fui-cap-head { display: flex; align-items: center; gap: 12px; font: 500 18px/1.2 var(--pui-mono); letter-spacing: .12em; text-transform: uppercase; color: var(--pui-ink-2); }
+.fui-cap-dot { width: 9px; height: 9px; border-radius: 50%; background: var(--pui-ink); flex: none; }
+.fui-cap-state { margin-left: auto; color: var(--pui-ink-3); }
+.fui-cap-wave { display: block; margin-top: 16px; overflow: visible; }
+.fui-cap-wave .ax { stroke: var(--pui-hair); stroke-width: 1; }
+.fui-cap-wave .wv { fill: none; stroke: var(--pui-ink); stroke-width: 2; stroke-linecap: round; }
+.fui-cap-wave .hd { stroke: var(--pui-ink); stroke-width: 1.25; stroke-opacity: .7; }
+.fui-cap-tx { margin-top: 16px; font: 400 32px/1.3 var(--pui-sans); letter-spacing: -.01em; color: var(--pui-ink); }
+.fui-cap-tx .fui-w { display: inline-block; }
+.fui-cap-fields { display: flex; gap: 30px; margin-top: 20px; padding-top: 18px; border-top: 1px solid var(--pui-hair); }
+.fui-field { position: relative; display: flex; flex-direction: column; gap: 6px; padding-bottom: 12px; }
+.fui-field .k { font: 500 18px/1.2 var(--pui-mono); letter-spacing: .12em; text-transform: uppercase; color: var(--pui-ink-3); }
+.fui-field .v { font: 400 24px/1.25 var(--pui-sans); color: var(--pui-ink); white-space: nowrap; }
+.fui-field .v.mono { font: 500 22px/1.36 var(--pui-mono); }
+.fui-field .u { position: absolute; left: 0; right: 0; bottom: 0; height: 2px; background: var(--pui-signal); }
+
+/* ---------- 6. trusted record column ---------- */
+.fui-record { position: relative; }
+.fui-record .fui-rec-head { padding: 0 0 calc(10 * var(--u)); }
+.fui-record .fui-rec-head .lab { display: flex; align-items: center; gap: calc(6 * var(--u)); color: var(--pui-ink-2); font-size: max(18px, calc(10 * var(--u))); white-space: nowrap; }
+.fui-record .fui-rec-sep { font-style: normal; color: var(--pui-ink-4); }
+.fui-record .fui-rec-s { color: var(--pui-ink-3); }
+.fui-record .fui-rec-n { display: inline-flex; align-items: flex-start; gap: 0; }
+.fui-record .fui-rec-nl { white-space: pre; }
+.fui-record .fui-rec-list { padding: calc(4 * var(--u)) 0 calc(10 * var(--u)); -webkit-mask-image: none; mask-image: none; }
+.fui-record .fui-rec-list.tail { -webkit-mask-image: linear-gradient(transparent, #000 calc(24 * var(--u))); mask-image: linear-gradient(transparent, #000 calc(24 * var(--u))); }
+.fui-record .rr { --fui-rail: 1; --fui-mk: 1; padding-left: 0; padding-right: 0; }
+.fui-record .rr .t { font-size: max(18px, calc(10.5 * var(--u))); }
+.fui-record .rr .x, .fui-record .rr .s { text-wrap: pretty; }
+.fui-record .rr .i { font-size: max(18px, calc(10 * var(--u))); }
+.fui-record .rr .s { font-size: max(18px, calc(11 * var(--u))); }
+.fui-record .rr .m::before { top: calc(-6 * var(--u)); transform: scaleY(var(--fui-rail)); transform-origin: 50% 0; }
+.fui-record .rr.fui-first .m::before { top: calc(6 * var(--u)); }
+.fui-record .rr .m::after { transform: scale(var(--fui-mk)); }
+.fui-record .rr.k-decision { padding-left: calc(8 * var(--u)); }
+.fui-rr-wrap { display: grid; grid-template-rows: 1fr; }
+.fui-rr-in { min-height: 0; overflow: hidden; }
+
+/* ---------- 7. decision sheet at video scale (--pui-scale 1.5 with film sizes) ---------- */
+.pui-sheet.fui-sheet { border-radius: 22px; }
+.fui-sheet .sv { padding: 36px 48px 30px; }
+.fui-sheet .eyebrow { font-size: 18px; gap: 12px; }
+.fui-sheet .eyebrow .sd { width: 11px; height: 11px; border-width: 2px; }
+.fui-sheet .sheet-h { font-size: 62px; margin-top: 16px; }
+.fui-sheet .sheet-p { font-size: 26px; line-height: 1.4; max-width: none; margin-top: 12px; text-wrap: pretty; }
+.fui-sheet .facts { margin-top: 22px; grid-template-columns: auto auto auto; }
+.fui-sheet .facts dt, .fui-sheet .facts dd { white-space: nowrap; }
+.fui-sheet .facts > div { padding: 12px 16px 12px 0; }
+.fui-sheet .facts > div + div { padding-left: 18px; }
+.fui-sheet .facts dt { font-size: 18px; }
+.fui-sheet .facts dd, .fui-sheet .facts dd.mono { font-size: 23px; margin-top: 9px; }
+.fui-sheet .facts dd small { font-size: 18px; margin-top: 4px; }
+.fui-sheet .obs { margin-top: 12px; padding: 12px 18px; gap: 10px; border-radius: 12px; grid-template-columns: auto 22px auto 22px auto; justify-content: space-between; align-items: start; }
+.fui-sheet .ob .t { font-size: 18px; }
+.fui-sheet .ob .x { font-size: 19px; margin-top: 7px; gap: 8px; white-space: nowrap; }
+.fui-sheet .obs svg.oa { align-self: center; }
+.fui-sheet .ob svg.g { width: 19px; height: 19px; }
+.fui-sheet .obs svg.oa { width: 22px; height: 11px; }
+.fui-sheet .ask { font-size: 18px; margin-top: 22px; }
+.fui-sheet .choices { gap: 14px; margin-top: 12px; }
+.fui-sheet .choice { padding: 17px 20px 15px; border-radius: 16px; }
+.fui-sheet .choice svg.g { width: 30px; height: 30px; }
+.fui-sheet .choice b { font-size: 20px; margin-top: 12px; }
+.fui-sheet .choice .d { font-size: 21px; line-height: 1.4; margin-top: 9px; min-height: 0; }
+.fui-sheet .choice .o { font-size: 18px; margin-top: 10px; padding-top: 10px; }
+.fui-sheet .sheet-foot { font-size: 20px; margin-top: 16px; }
+.fui-fold { display: grid; grid-template-rows: 1fr; }
+.fui-fold-in { min-height: 0; overflow: hidden; }
+.fui-outcome { padding-top: 22px; }
+.fui-oc-opt b { display: block; font: 500 25px/1.3 var(--pui-sans); }
+.fui-oc-opt span { display: block; font: 400 21px/1.4 var(--pui-sans); color: var(--pui-ink-2); margin-top: 4px; }
+.fui-oc-res { display: flex; justify-content: space-between; align-items: center; margin-top: 16px; padding: 16px 0; border-top: 1px solid var(--pui-hair); border-bottom: 1px solid var(--pui-hair); }
+.fui-oc-state { display: flex; align-items: center; gap: 12px; font: 500 19px/1.2 var(--pui-mono); letter-spacing: .1em; text-transform: uppercase; }
+.fui-oc-state svg.g { width: 24px; height: 24px; }
+.fui-oc-val { display: flex; align-items: baseline; gap: 16px; }
+.fui-oc-val em { font: normal 500 18px/1 var(--pui-mono); letter-spacing: .12em; text-transform: uppercase; color: var(--pui-ink-3); }
+.fui-oc-val b { font: 400 44px/1 var(--pui-mono); letter-spacing: -.01em; }
+.fui-sheet .ack.fui-ack { font: 400 23px/1.45 var(--pui-sans); padding: 16px 18px; gap: 14px; border-radius: 14px; margin-top: 0; }
+.fui-sheet .ack.fui-ack > span:last-child { text-wrap: balance; }
+.fui-sheet .ack.fui-ack .bx { width: 24px; height: 24px; border-radius: 5px; margin-top: 3px; }
+.fui-sheet .ack.fui-ack .bx svg { width: 17px; height: 17px; color: var(--pui-paper); }
+.fui-oc-by { font: 500 18px/1.4 var(--pui-mono); letter-spacing: .1em; text-transform: uppercase; color: var(--pui-ink-2); margin-top: 16px; }
+.fui-oc-own { display: flex; align-items: center; gap: 12px; margin-top: 12px; font: 500 19px/1.2 var(--pui-mono); letter-spacing: .1em; text-transform: uppercase; }
+.fui-oc-own svg.g { width: 24px; height: 24px; }
+.fui-future { display: inline-block; flex: none; font: 500 18px/1 var(--pui-mono); letter-spacing: .14em; text-transform: uppercase; padding: 9px 12px 8px; border: 1.5px dashed var(--pui-ink); border-radius: 4px; color: var(--pui-ink); white-space: nowrap; }
+.fui-oc-tr { display: flex; align-items: center; gap: 18px; }
+.fui-oc-trt { font: 400 22px/1.4 var(--pui-sans); color: var(--pui-ink-2); }
+.fui-oc-note { font: 500 18px/1.4 var(--pui-mono); letter-spacing: .1em; text-transform: uppercase; color: var(--pui-ink-3); margin-top: 16px; }
+
+/* ---------- transfer panel ---------- */
+.fui-transfer { position: relative; font-family: var(--pui-sans); color: var(--pui-ink); }
+.fui-tr-head { display: flex; align-items: center; gap: 18px; height: 44px; }
+.fui-tr-title { font: 500 22px/1 var(--pui-mono); letter-spacing: .14em; text-transform: uppercase; }
+.fui-tr-sub { font: 400 24px/1.3 var(--pui-sans); color: var(--pui-ink-2); margin-left: 8px; }
+.fui-tr-body { position: relative; margin-top: 26px; }
+.fui-tr-lines { position: absolute; left: 0; top: 0; overflow: visible; pointer-events: none; }
+.fui-tr-line { fill: none; stroke: #111111; stroke-opacity: .42; stroke-width: 1.25; }
+.fui-tr-tok { fill: #111111; }
+.fui-packet { position: absolute; left: 0; box-sizing: border-box; background: var(--pui-card); border: 1px solid var(--pui-hair); border-radius: 16px; padding: 18px 26px 16px; box-shadow: var(--fui-soft-shadow); }
+.fui-pk-h { display: flex; justify-content: space-between; align-items: center; height: 36px; padding-bottom: 12px; border-bottom: 1px solid var(--pui-hair); box-sizing: content-box; }
+.fui-pk-t { font: 500 18px/1 var(--pui-mono); letter-spacing: .12em; text-transform: uppercase; }
+.fui-pk-id { font: 500 18px/1 var(--pui-mono); letter-spacing: .08em; color: var(--pui-ink-3); }
+.fui-pk-list li { display: flex; justify-content: space-between; align-items: center; gap: 16px; height: 40px; border-bottom: 1px solid var(--pui-hair-2); }
+.fui-pk-list li span { font: 400 20px/1 var(--pui-sans); color: var(--pui-ink-2); white-space: nowrap; }
+.fui-pk-list li b { font: 500 18px/1 var(--pui-mono); white-space: nowrap; }
+.fui-pk-list li b.u { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 5px; text-decoration-color: var(--pui-ink-4); }
+.fui-pk-f .fui-hash { text-transform: none; letter-spacing: .06em; }
+.fui-pk-f { display: flex; justify-content: space-between; margin-top: 12px; height: 24px; align-items: center; font: 500 18px/1 var(--pui-mono); letter-spacing: .1em; text-transform: uppercase; color: var(--pui-ink-3); }
+.fui-carriers { position: absolute; top: 0; }
+.fui-car-h { height: 42px; margin-bottom: 14px; font: 500 18px/42px var(--pui-mono); letter-spacing: .12em; text-transform: uppercase; color: var(--pui-ink-2); }
+.fui-car { position: relative; box-sizing: border-box; display: grid; grid-template-columns: 300px 1fr; align-items: center; column-gap: 24px; padding: 0 28px; margin-bottom: 14px; background: var(--pui-card); border: 1px solid var(--pui-hair); border-radius: 14px; }
+.fui-car.declined { border-style: dashed; border-color: rgba(17,17,17,.3); background: transparent; }
+.fui-car-l .nm { font: 500 20px/1.2 var(--pui-mono); letter-spacing: .1em; text-transform: uppercase; white-space: nowrap; }
+.fui-car-l .kd { font: 400 20px/1.3 var(--pui-sans); color: var(--pui-ink-3); margin-top: 6px; }
+.fui-car.declined .nm { color: var(--pui-ink-2); }
+.fui-car-st { position: absolute; right: 28px; top: 14px; font: 500 18px/1.2 var(--pui-mono); letter-spacing: .08em; text-transform: uppercase; color: var(--pui-ink-3); }
+.fui-car-res { display: flex; justify-content: space-between; align-items: flex-end; padding-top: 24px; }
+.fui-car-st > .fui-sw { justify-self: end; }
+.fui-car-facts { display: grid; grid-template-columns: 136px 136px 104px; column-gap: 28px; }
+.fui-car-facts em { display: block; font: normal 500 18px/1.2 var(--pui-mono); letter-spacing: .1em; text-transform: uppercase; color: var(--pui-ink-3); }
+.fui-car-facts b { display: block; font: 500 20px/1.2 var(--pui-mono); margin-top: 6px; white-space: nowrap; }
+.fui-car-price { display: flex; align-items: baseline; gap: 10px; }
+.fui-car-price span { font: 500 18px/1 var(--pui-mono); letter-spacing: .08em; color: var(--pui-ink-3); }
+.fui-car-price b { font: 400 36px/1 var(--pui-mono); letter-spacing: -.01em; }
+.fui-car-dec b { display: block; font: 500 20px/1.2 var(--pui-mono); letter-spacing: .1em; text-transform: uppercase; color: var(--pui-ink-2); }
+.fui-car-dec span { display: block; font: 400 20px/1.3 var(--pui-sans); color: var(--pui-ink-3); margin-top: 6px; }
+.fui-car-wait { position: absolute; left: 28px; right: 28px; bottom: 14px; height: 1px; background: var(--pui-hair); overflow: hidden; }
+.fui-car-wait i { position: absolute; top: 0; bottom: 0; left: 0; width: 30%; background: var(--pui-ink); }
+.fui-tr-note { font: 400 23px/1.4 var(--pui-sans); color: var(--pui-ink); margin-top: 6px; }
+
+/* ---------- 8. programme layer ---------- */
+.fui-programme { position: relative; }
+.fui-programme svg { display: block; overflow: visible; }
+.fui-pg-lab { font: 500 20px 'IBM Plex Mono', monospace; letter-spacing: .12em; fill: #111111; }
+.fui-pg-bar { fill: #EAE6DD; stroke: #111111; stroke-width: 1.25; }
+.fui-pg-ends { fill: none; stroke: #111111; stroke-opacity: .55; stroke-width: 1.25; stroke-dasharray: 3 3; }
+.fui-pg-slice { stroke: var(--signal, #1F47D6); stroke-width: 1.5; }
+.fui-pg-lead { fill: none; stroke: var(--signal, #1F47D6); stroke-width: 1.25; }
+.fui-pg-slab { font: 500 18px 'IBM Plex Mono', monospace; letter-spacing: .1em; fill: #111111; }
+.fui-pg-today { font: 500 18px 'IBM Plex Mono', monospace; letter-spacing: .12em; fill: rgba(17,17,17,.62); }
+.fui-pg-axis line { stroke: #111111; stroke-opacity: .16; stroke-width: 1; }
+.fui-pg-axis text { font: 500 18px 'IBM Plex Mono', monospace; letter-spacing: .04em; fill: rgba(17,17,17,.6); }
+
+/* ---------- 9. system view ---------- */
+.fui-system { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; overflow: hidden; background: #F5F3EE; }
+.fui-sys-site { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; }
+.pui-top.fui-sys-header { position: absolute; left: 0; top: 0; z-index: 2; }
+.pui-rail.fui-sys-rail { position: absolute; right: 0; bottom: 0; z-index: 2; }
+.fui-sys-rail .r-head .lab, .fui-sys-rail .stats em { font-size: max(18px, calc(10 * var(--u))); }
+.fui-sys-rail .pui-r-live { flex: 0 0 auto; }
+.fui-sys-rail .pui-r-rec { flex: 1 1 auto; padding: calc(14 * var(--u)) 96px 0 calc(20 * var(--u)); }
+/* the rail reaches the frame edge; its reading stays inside the 96 px safe area */
+.fui-sys-live .r-head, .fui-sys-live .stats { padding-right: 96px; }
+.fui-sys-rail .fui-record { width: auto !important; }
+
+/* ---------- 10. the chain ---------- */
+.fui-chain { position: absolute; height: 300px; }
+.fui-ch-col { position: absolute; top: 0; }
+.fui-ch-w { display: block; font: 500 var(--fui-chain-size, 44px)/1 'IBM Plex Mono', monospace; letter-spacing: .16em; color: #111111; white-space: nowrap; }
+.fui-ch-d { display: block; font: 400 22px/1.4 'IBM Plex Sans', sans-serif; color: #6A6863; margin-top: 20px; white-space: nowrap; }
+.fui-ch-svg { position: absolute; left: 0; top: 0; overflow: visible; }
+.fui-ch-ar { fill: none; stroke: rgba(17,17,17,.47); stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+.fui-ch-br path { fill: none; stroke: #111111; stroke-width: 1.25; }
+.fui-ch-br.dashed path { stroke: rgba(17,17,17,.62); }
+.fui-ch-br text { font: 500 18px 'IBM Plex Mono', monospace; letter-spacing: .14em; fill: #111111; }
+.fui-ch-br.dashed text { fill: rgba(17,17,17,.62); }
+
+/* ---------- 11. end card ---------- */
+.fui-end { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; }
+.fui-end-wm { position: absolute; overflow: hidden; }
+.fui-end-wm svg { display: block; }
+.fui-end-rule { position: absolute; height: 1px; background: #111111; }
+.fui-end-desc { position: absolute; left: 0; right: 0; text-align: center; font: 400 36px/1.3 'IBM Plex Sans', sans-serif; letter-spacing: -.005em; color: #111111; }
+.fui-end-q { position: absolute; left: 260px; right: 260px; top: 924px; margin: 0; text-align: center; font: 400 17px/1.6 'IBM Plex Mono', monospace; letter-spacing: .01em; color: #6A6863; }
+
+/* ---------- statements (Frame 4.4) ---------- */
+.fui-statements { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; pointer-events: none; }
+.fui-st-lab { position: absolute; font: 500 18px/1.2 'IBM Plex Mono', monospace; letter-spacing: .14em; text-transform: uppercase; color: rgba(17,17,17,.6); }
+.fui-st { position: absolute; font: 300 64px/1.08 'IBM Plex Sans', sans-serif; letter-spacing: -.02em; color: #111111; white-space: nowrap; }
+.fui-st-links { position: absolute; left: 0; top: 0; overflow: visible; }
+.fui-st-link { fill: none; stroke: #111111; stroke-opacity: .4; stroke-width: 1.25; }
+.fui-st-dot { fill: #F5F3EE; stroke: #111111; stroke-opacity: .6; stroke-width: 1.25; }
+
+/* a free-floating record column can sit on its own paper panel (hides the drawing behind it) */
+.fui-record.fui-panel { background: #FBFAF7; border: 1px solid var(--pui-hair); border-radius: 18px; padding: 26px 30px 12px; box-shadow: var(--fui-soft-shadow); }
+
+/* =====================================================================
+   Cut 3: the rest of the interface in the film's colour system
+   ===================================================================== */
+/* trusted record: a system event that changed a condition is alert; a recorded decision is Priora's */
+.fui-record .rr.k-dev .m::after { border-color: var(--pui-alert); }
+.fui-record .rr.k-dev.sig .m::after { background: var(--pui-alert); }
+.fui-record .rr.k-decision { background: color-mix(in srgb, var(--pui-signal-soft) 45%, transparent); }
+.fui-record .rr.k-decision::before { background: var(--pui-signal); }
+.fui-record .rr.k-decision .m::after { background: var(--pui-signal); border-color: var(--pui-signal); }
+/* capture strip: the recognised fields underline in Priora's colour (the product reading the work) */
+.fui-capture { border-color: var(--pui-hair-2); }
+.fui-cap-fields { border-top-color: var(--pui-hair-2); }
+/* decision sheet: the changed state reads alert, the resolved state ok, fewer internal hairlines */
+.fui-sheet .facts > div:first-child dd { color: var(--pui-alert); }
+.fui-sheet .facts > div + div { border-left-color: transparent; }
+.fui-sheet .obs { border-color: transparent; }
+.fui-sheet .choice { border-color: var(--pui-hair); }
+.fui-oc-state, .fui-oc-state svg.g { color: var(--pui-ok); }
+.fui-oc-own svg.g { color: var(--pui-signal); }
+/* transfer: the observed state travels on Priora's lines; the changed facts in the packet read alert */
+.fui-tr-line { stroke: var(--pui-signal); stroke-opacity: .55; }
+.fui-tr-tok { fill: var(--pui-signal); }
+.fui-pk-list li b.u { color: var(--pui-alert); text-decoration-color: color-mix(in srgb, var(--pui-alert) 60%, transparent); }
+.fui-pk-list li { border-bottom-color: var(--pui-hair-2); }
+/* programme layer: the temporary layer is Priora's decision alongside the programme */
+.fui-pg-bar { fill: var(--c-stone-wall, #e8e1d7); stroke: var(--c-ink, #1e1c19); }
+/* chain and statements in the film's ink */
+.fui-ch-w { color: var(--c-ink, #1e1c19); }
+.fui-st { color: var(--c-ink, #1e1c19); }
+
+/* ---------- 3b. condition card (film-native, cut 3): larger type, one band, states as pills ---------- */
+.fui-cc { position: relative; box-sizing: border-box; padding: 40px 48px 36px; background: color-mix(in srgb, var(--c-paper, #f5f3ee) 30%, white); border-radius: 22px; font-family: 'IBM Plex Sans', sans-serif; color: var(--c-ink, #1e1c19); box-shadow: inset 0 10px 0 var(--fui-band, transparent), 0 1px 0 rgba(30,28,25,.03), 0 30px 70px -40px rgba(30,28,25,.24), 0 8px 22px -14px rgba(30,28,25,.08); }
+.fui-cc-top { display: block; min-height: 24px; }
+.fui-cc-row { display: flex; align-items: center; justify-content: space-between; gap: 24px; margin-top: 14px; min-height: 40px; }
+.fui-cc-eb { font: 500 20px/1.2 'IBM Plex Mono', monospace; letter-spacing: .12em; text-transform: uppercase; color: color-mix(in srgb, var(--c-ink, #1e1c19) 60%, transparent); white-space: nowrap; }
+.fui-cc-pills { justify-items: end; }
+.fui-cc-pill { display: inline-block; justify-self: end; padding: 8px 14px 7px; border-radius: 6px; font: 500 18px/1.2 'IBM Plex Mono', monospace; letter-spacing: .1em; text-transform: uppercase; white-space: nowrap; }
+.fui-cc-pill.fui-tone-ok { color: var(--c-ok, #2e8b57); background: var(--c-ok-soft, #d9eee1); }
+.fui-cc-pill.fui-tone-alert { color: var(--c-alert, #e0452b); background: var(--c-alert-soft, #fadcd5); }
+.fui-cc-pill.fui-tone-priora { color: var(--c-priora, #1f47d6); background: var(--c-priora-soft, #dce2f5); }
+.fui-cc-pill.fui-tone-ink { color: color-mix(in srgb, var(--c-ink, #1e1c19) 70%, transparent); background: color-mix(in srgb, var(--c-ink, #1e1c19) 6%, transparent); }
+.fui-cc-title { margin-top: 22px; font: 400 44px/1.14 'IBM Plex Sans', sans-serif; letter-spacing: -.015em; }
+.fui-cc-status { font: 500 24px/1.25 'IBM Plex Mono', monospace; letter-spacing: .1em; text-transform: uppercase; }
+.fui-cc-status .fui-tone-ok { color: var(--c-ok, #2e8b57); }
+.fui-cc-status .fui-tone-alert { color: var(--c-alert, #e0452b); }
+.fui-cc-status .fui-tone-ink { color: color-mix(in srgb, var(--c-ink, #1e1c19) 70%, transparent); }
+.fui-cc-read { display: flex; align-items: baseline; gap: 16px; margin-top: 26px; padding-top: 22px; border-top: 1px solid color-mix(in srgb, var(--c-ink, #1e1c19) 10%, transparent); }
+.fui-cc-rl { font: 500 20px/1 'IBM Plex Mono', monospace; letter-spacing: .12em; text-transform: uppercase; color: color-mix(in srgb, var(--c-ink, #1e1c19) 60%, transparent); min-width: 88px; }
+.fui-cc-rv { font: 400 80px/88px 'IBM Plex Mono', monospace; letter-spacing: -.02em; color: var(--c-ink, #1e1c19); }
+.fui-cc-ru { font: 500 26px/1 'IBM Plex Mono', monospace; letter-spacing: .06em; color: color-mix(in srgb, var(--c-ink, #1e1c19) 70%, transparent); }
+.fui-cc-lim { margin-left: auto; font: 500 20px/1 'IBM Plex Mono', monospace; letter-spacing: .1em; text-transform: uppercase; color: color-mix(in srgb, var(--c-ink, #1e1c19) 50%, transparent); }
+.fui-cc-oc .fui-cc-ocb { display: flex; align-items: flex-start; gap: 18px; margin-top: 26px; padding-top: 22px; border-top: 1px solid color-mix(in srgb, var(--c-ink, #1e1c19) 10%, transparent); }
+.fui-cc-ocm { flex: none; width: 18px; height: 18px; margin-top: 5px; border-radius: 3px; background: var(--c-priora, #1f47d6); }
+.fui-cc-oct b { display: block; font: 500 26px/1.3 'IBM Plex Mono', monospace; letter-spacing: .08em; text-transform: uppercase; color: var(--c-priora-deep, #1838a8); }
+.fui-cc-oct span { display: block; margin-top: 8px; font: 400 26px/1.35 'IBM Plex Sans', sans-serif; color: color-mix(in srgb, var(--c-ink, #1e1c19) 76%, transparent); }

@@ -1,0 +1,439 @@
+<!doctype html>
+<html lang="en-GB">
+  <head>
+    <meta charset="UTF-8" />
+    <title>a3-close: the gap closes, then Priora and the line (CL1, CL2)</title>
+    <!-- Ignored by the assembler. Everything that must exist at render time is inside <template>. -->
+  </head>
+  <body>
+    <template id="a3-close-template">
+      <link rel="stylesheet" href="assets/css/film.css" />
+      <link rel="stylesheet" href="assets/css/film-color.css" />
+      <link rel="stylesheet" href="assets/css/film-sketch.css" />
+      <style>
+        #root {
+          position: absolute;
+          inset: 0;
+          overflow: hidden;
+        }
+        /* One wrapper owns the crossfade in (FL.sceneFade). It carries its own paper, identical to
+           the film's paper layer (same base, grain tile and vignette, same origin), so the scene
+           before is covered by clean paper once the crossfade completes. */
+        #a3-close-fade,
+        #a3-close-paper,
+        #a3-close-paper-grain,
+        #a3-close-paper-vignette,
+        #a3-close-site-wrap {
+          position: absolute;
+          inset: 0;
+        }
+        #a3-close-paper {
+          background-color: var(--paper-ground);
+        }
+        #a3-close-paper-grain {
+          background-image: url("assets/textures/paper-grain.png");
+          background-size: 512px 512px;
+          background-repeat: repeat;
+        }
+        #a3-close-paper-vignette {
+          background: radial-gradient(ellipse 75% 70% at 50% 48%, rgba(59, 58, 51, 0) 58%, rgba(59, 58, 51, 0.035) 82%, rgba(59, 58, 51, 0.07) 100%);
+        }
+        /* The handoff frame: a full-frame SiteKit mount, precise, at SiteKit.CAMERAS.wholeSite. */
+        #a3-close-site {
+          position: absolute;
+          left: 0;
+          top: 0;
+          width: 100%;
+          height: 100%;
+          display: block;
+        }
+        /* The drawing: one full-frame paper SVG (SketchKit paper context, screen px). Act I's pencil
+           tones through the kit's variables, set here from the film's colour tokens. */
+        #a3-close-draw {
+          --skt-c: var(--c-graphite);
+          --skt-l: var(--c-offline);
+          --skt-p: var(--c-paper);
+        }
+        /* the hero frame's weights: the rule and the markers a little firmer than under the board */
+        #a3-close-draw .skt-m.skt-rule {
+          stroke-width: 1.5px;
+        }
+        #a3-close-draw .skt-m.skt-heavy {
+          stroke-width: 2.2px;
+        }
+        #a3-close-draw .a3-close-alert {
+          --skt-c: var(--c-alert);
+        }
+        #a3-close-draw .a3-close-priora {
+          --skt-c: var(--c-priora);
+        }
+        /* the Priora mark (the g-mark glyph) and the wordmark: ink; the mark's dot is Priora's cobalt */
+        #a3-close-draw .a3-close-sq {
+          fill: none;
+          stroke: var(--c-ink);
+          stroke-linecap: round;
+          stroke-linejoin: round;
+        }
+        #a3-close-draw .a3-close-wm {
+          fill: var(--c-ink);
+        }
+        #a3-close-draw .a3-close-line {
+          font-family: var(--sans);
+          font-weight: 300;
+          font-size: 46px;
+          letter-spacing: -0.01em;
+          fill: var(--c-ink);
+        }
+        /* The qualifier: required reading, 18 px, held to the end. */
+        #a3-close-qual {
+          position: absolute;
+          left: 300px;
+          right: 300px;
+          top: 902px;
+          margin: 0;
+          text-align: center;
+          text-wrap: balance;
+          font-family: var(--mono);
+          font-weight: 400;
+          font-size: 18px;
+          line-height: 1.6;
+          letter-spacing: 0.01em;
+          color: var(--c-graphite);
+          opacity: 0;
+        }
+      </style>
+
+      <div id="root" data-composition-id="a3-close" data-width="1920" data-height="1080">
+        <div id="a3-close-fade">
+          <div id="a3-close-paper" aria-hidden="true" data-layout-ignore>
+            <div id="a3-close-paper-grain"></div>
+            <div id="a3-close-paper-vignette"></div>
+          </div>
+          <div id="a3-close-site-wrap" aria-hidden="true" data-layout-ignore>
+            <svg id="a3-close-site" width="1920" height="1080"></svg>
+          </div>
+          <svg id="a3-close-draw" width="1920" height="1080" viewBox="0 0 1920 1080"></svg>
+          <p id="a3-close-qual">Conceptual future-state demonstration. Risk transfer, carrier quotes, prices, people, carriers, scenarios and the Nordhavn site are illustrative. Priora today focuses on prevention and proof.</p>
+        </div>
+      </div>
+
+      <script>
+        /*
+          a3-close (cut 3): CL1 the gap closes, CL2 Priora and the line.
+          "For everyone who carries the risk, the gap closes. Priora. <LINE>"
+          Globals from index.html <head>: gsap (+ DrawSVG), FL, CUES, SCENES, SiteKit, SketchKit, UIKit.
+
+          HANDOFF IN (from a3-scenarios, 0.4 s crossfade from cue closeIn): the bare precise site in
+          colour, a full-frame 1920 x 1080 SiteKit mount (show 'precise', rough false, the kit's
+          default colours) at SiteKit.CAMERAS.wholeSite. This scene mounts exactly that and fades in
+          over it; nothing moves until the crossfade has completed.
+
+          CL1 (L19). On the half beat after the crossfade (the first word) the site recedes to paper:
+          its camera pulls back 1.5 beats while the drawing fades out in one beat. Act I's gap
+          timeline returns in the Act I drawn language (SketchKit hand lines and lettering, as
+          a1-after drew it), in colour: the rule on the next half beat, "14:42 · CONDITION CHANGED"
+          (--c-alert) on the beat, "DAY +2 · FOUND" (graphite: found afterwards, colourless) half a
+          beat later, the bracket "THE GAP" on the next beat, all set before "gap". On "closes" the
+          found end slides left along the rule (power3.inOut) and lands on the half beat: the bracket
+          shrinks to nothing with it, THE GAP rides its notch and fades, and the two marks become
+          one --c-priora point, relabelled "14:42 · DECIDED". Still for two beats.
+          The change marker sits exactly where the Priora mark's dot will be, so the point never moves.
+
+          CL2 (L20). Just before "Priora" the rule retracts into the point, its ticks and label clear,
+          and the point swells into the dot of the Priora mark; on "Priora" the mark's rounded square
+          (the g-mark glyph) draws round it and the wordmark rises out of its baseline beside it with
+          one clean latch. The line (LINE, below) sets beneath on 'tagline'; the qualifier fades in
+          one second later and holds to END. Everything is still well before the last two seconds.
+
+          Word anchors: word start - 0.04. Sound: compositions/a3-close.events.json (same cues).
+        */
+        // The line under the lockup: the one place to change it.
+        var LINE = "Know the risk you carry, while the work happens.";
+
+        var ID = "a3-close";
+        var clk = FL.clock(ID);
+        var T = function (anchor, off) {
+          return clk.t(anchor, off);
+        };
+        var el = function (id) {
+          return document.getElementById(id);
+        };
+        var f3 = function (v) {
+          return (Math.round(v * 1000) / 1000).toString();
+        };
+        var BEAT = FL.BEAT,
+          HB = BEAT / 2;
+        var LEAD = -0.04; // a word lands a hair ahead of its spoken onset
+
+        // ================================================================ the handoff site
+        var SK = window.SiteKit;
+        var siteSvg = el("a3-close-site");
+        var siteWrap = el("a3-close-site-wrap");
+        var site = SK.mount(siteSvg, { prefix: ID + "-site", show: "precise", rough: false });
+        // SiteKit's <style> is page-wide: its rules (e.g. the sprinkler hatch, url(#<prefix>-sz-hatch))
+        // would win for every site mount in the film, since this scene comes last. Scope this mount's
+        // copy to this SVG (same rules, higher specificity), so it styles only this drawing.
+        var siteStyle = siteSvg.querySelector("defs > style");
+        if (siteStyle) siteStyle.textContent = siteStyle.textContent.replace(/\.priora-site/g, "#a3-close-site.priora-site");
+        var R_SITE = SK.CAMERAS.wholeSite;
+        site.setView(R_SITE);
+        // the receded framing: the same centre, 14 percent smaller
+        var R_RECEDE = SK.rect(R_SITE.x + R_SITE.w / 2, R_SITE.y + R_SITE.h / 2, (1920 / R_SITE.w) * 0.86);
+
+        // ================================================================ geometry (screen px)
+        // The end lockup: the Priora mark (g-mark: a rounded square 17.6 of 24 units, stroke 1.15, its
+        // dot r 2.3 at (10.2, 13.4)) beside the wordmark (IBM Plex Sans SemiBold outlines, 2617 x 758
+        // units, baseline at 746, cap height 698), centred on the frame. The visible square is 1.2x the
+        // capitals (as in the chrome lockup), the gap to the P stem 0.62x (set tighter at display size).
+        var CAP_MID = 470; // the capitals' middle = the square's centre
+        var WM_W = 500;
+        var kW = WM_W / 2617; // px per wordmark unit
+        var CAP = 698 * kW;
+        var BASE = CAP_MID + CAP / 2; // the wordmark's baseline
+        var MARK = 1.2 * CAP; // the visible square
+        var kM = MARK / 17.6; // px per mark unit
+        var GAPW = 0.62 * CAP;
+        var LOCK_W = MARK + GAPW + WM_W;
+        var SQ_X = 960 - LOCK_W / 2;
+        var MX = SQ_X - 3.2 * kM,
+          MY = CAP_MID - 12 * kM; // the mark's unit origin
+        var DOT_X = MX + 10.2 * kM,
+          DOT_Y = MY + 13.4 * kM,
+          DOT_R = 2.3 * kM;
+        var WM_X = SQ_X + MARK + GAPW,
+          WM_TOP = BASE - 746 * kW;
+        var LINE_Y = BASE + 124; // the line's baseline
+
+        // The gap timeline: its rule runs through the point that becomes the mark's dot, so the change
+        // marker (14:42) sits on the dot; the rule is centred on the frame, found (DAY +2) to the right.
+        var RY = DOT_Y;
+        var CX = DOT_X; // 14:42 · condition changed
+        var FX = CX + 900; // DAY +2 · found (on a tick of the rule, as 14:42 is)
+        var X0 = 230,
+          X1 = 1690; // the rule, centred on the frame
+        // the kit's gapTimeline proportions at 1.2x for the hero frame (a1-after drew it at 1x under
+        // the evidence board): lettering 28 / 34 px, markers, bracket and ticks scaled alike
+        var K = 1.2;
+        var MR = 3.6 * K; // marker dot radius
+        var LAB_Y = RY - 44 * K; // marker lettering baseline
+        var BY = RY + 22 * K; // the bracket
+        var LS = 28,
+          GS = 34;
+        var R_PT = 6.2; // the closed gap: one cobalt point, a little heavier than a marker
+
+        // ================================================================ the drawing (SketchKit paper)
+        var P = SketchKit.paper(el("a3-close-draw"), { prefix: ID + "-gp", scene: ID });
+        var U = SketchKit.util;
+        var g = function (parent, attrs) {
+          return FL.svgEl("g", attrs || {}, parent);
+        };
+        var gTicks = g(P.top, { id: ID + "-ticks" });
+        var gRule = g(P.top, { id: ID + "-rule" });
+        var gBracket = g(P.top, { id: ID + "-bracket" });
+        var gGapLab = g(P.top, { id: ID + "-gaplab" });
+        var gFound = g(P.top, { id: ID + "-found" });
+        var gChange = g(P.top, { id: ID + "-change", class: "a3-close-alert" });
+        var gPoint = g(P.top, { id: ID + "-point", class: "a3-close-priora" });
+        var gMark = g(P.top, { id: ID + "-mark" });
+        var gLine = g(P.top, { id: ID + "-line" });
+
+        var clipN = 0;
+        var clipRect = function (target, x, y, w, h) {
+          var cid = ID + "-clip" + clipN++;
+          var cp = FL.svgEl("clipPath", { id: cid }, P.defs);
+          var r = FL.svgEl("rect", { x: f3(x), y: f3(y), width: f3(w), height: f3(h) }, cp);
+          target.setAttribute("clip-path", "url(#" + cid + ")");
+          return r;
+        };
+
+        // ---------------------------------------------------------------- the rule and its ticks
+        var rule = U.hand(P, gRule, "M" + X0 + " " + f3(RY) + "L" + X1 + " " + f3(RY), { seed: "gaprule", jit: 0.25, over: false, cls: "skt-rule", ext: true, extMin: 100 });
+        var td = "";
+        // light ticks every 60 px, in step with the markers (each marker stands on one)
+        for (var x = CX - 60 * Math.floor((CX - X0 - 30) / 60); x < X1 - 20; x += 60) td += "M" + f3(x) + " " + f3(RY - 6) + "L" + f3(x) + " " + f3(RY + 6);
+        U.hand(P, gTicks, td, { seed: "gapt", jit: 0.25, over: false, cls: "skt-lite" });
+        var tickWipe = clipRect(gTicks, X0 - 12, RY - 20, 0, 40);
+        var TICK_W = X1 - X0 + 24;
+        // where the change marker sits along the rule (the retract ends there)
+        var PC = f3(((CX - X0) / (X1 - X0)) * 100);
+
+        // ---------------------------------------------------------------- markers
+        var marker = function (parent, x, seed) {
+          var tick = U.hand(P, parent, "M" + f3(x) + " " + f3(RY + 7 * K) + "L" + f3(x) + " " + f3(RY - 30 * K), { seed: seed, jit: 0.3, over: false, cls: "skt-heavy" });
+          var dot = FL.svgEl("circle", { class: "skt-fill", cx: f3(x), cy: f3(RY), r: MR }, parent);
+          return { tick: tick.main, dot: dot };
+        };
+        var lab = function (parent, text, x, anchor, o) {
+          var L = U.letters(P, parent, text, x, LAB_Y, Object.assign({ size: LS, weight: 500, anchor: anchor, ls: 0.12, rot: 0.1, halo: false }, o || {}));
+          L.clip.setAttribute("width", "0");
+          return L;
+        };
+        // 14:42, the condition that changed (alert)
+        var mChange = marker(gChange, CX, "gml");
+        var lChange = lab(gChange, "14:42 · CONDITION CHANGED", CX - 4, "start", { irregular: false });
+        // DAY +2, where it was found afterwards (graphite)
+        var mFound = marker(gFound, FX, "gmr");
+        var lFound = lab(gFound, "DAY +2 · FOUND", FX + 4, "end", { seed: "glr" });
+        // the closed gap: one cobalt point, decided (its lettering sets over the same glyph positions)
+        var pTick = marker(gPoint, CX, "gml");
+        var pDot = pTick.dot;
+        var lDecided = lab(gPoint, "14:42 · DECIDED", CX - 4, "start", { irregular: false });
+
+        // ---------------------------------------------------------------- the bracket, THE GAP
+        // A dimension bracket between the two marks (the kit's shape). It closes by a d tween with the
+        // same jitter to a bracket of zero width at 14:42, tracking the found marker exactly.
+        var bPts = function (lx, rx, s) {
+          var mid = (lx + rx) / 2;
+          return [[lx, BY - 8 * K], [lx, BY], [mid - 12 * K * s, BY], [mid, BY + 11 * K * s], [mid + 12 * K * s, BY], [rx, BY], [rx, BY - 8 * K]];
+        };
+        var cmdsOf = function (pts) {
+          return pts.map(function (p, i) {
+            return [i ? "L" : "M", [p[0], p[1]]];
+          });
+        };
+        var bFull = cmdsOf(bPts(CX, FX, 1)),
+          bZero = cmdsOf(bPts(CX, CX, 0));
+        var jitPair = function (pass, amt) {
+          var j = SK.jitter(bFull, pass, amt);
+          var z = bZero.map(function (c, i) {
+            return [c[0], [c[1][0] + j[i][1][0] - bFull[i][1][0], c[1][1] + j[i][1][1] - bFull[i][1][1]]];
+          });
+          return [SK.fmt(j), SK.fmt(z)];
+        };
+        var bMainD = jitPair("mgapbr", 0.4),
+          bOverD = jitPair("ogapbr", 0.4 * 1.5 + 0.25);
+        var bMain = FL.svgEl("path", { class: "skt-m", d: bMainD[0] }, gBracket);
+        var bOver = FL.svgEl("path", { class: "skt-o", d: bOverD[0] }, gBracket);
+        var lGap = U.letters(P, gGapLab, "THE GAP", (CX + FX) / 2, BY + 50 * K, { size: GS, weight: 600, anchor: "middle", ls: 0.24, seed: "thegap", rot: 0, halo: false });
+        lGap.clip.setAttribute("width", "0");
+
+        // ---------------------------------------------------------------- the Priora mark and wordmark
+        var sqG = g(gMark, { transform: "translate(" + f3(MX) + " " + f3(MY) + ") scale(" + kM.toFixed(5) + ")" });
+        var sq = FL.svgEl("path", { class: "a3-close-sq", d: "M12 3.2C19.2 3.2 20.8 4.8 20.8 12S19.2 20.8 12 20.8 3.2 19.2 3.2 12 4.8 3.2 12 3.2Z", "stroke-width": 1.15 }, sqG);
+        var WMD = UIKit.DATA.wordmark;
+        var wmG = g(gMark, { transform: "translate(" + f3(WM_X) + " " + f3(WM_TOP) + ") scale(" + kW.toFixed(6) + ")" });
+        clipRect(wmG, 0, 0, 2617, 758); // the box clips at the round letters' overshoot below the baseline
+        var wmRise = g(wmG, { id: ID + "-wm", transform: "translate(0 758)" });
+        FL.svgEl("path", { class: "a3-close-wm", d: WMD.d, transform: WMD.transform }, wmRise);
+
+        // ---------------------------------------------------------------- the line
+        var lineG = g(gLine, { transform: "translate(0 12)" });
+        lineG.style.opacity = 0;
+        var lineT = FL.svgEl("text", { id: ID + "-linetext", class: "a3-close-line", x: 960, y: f3(LINE_Y), "text-anchor": "middle" }, lineG);
+        lineT.textContent = LINE;
+
+        // ================================================================ TIMES (scene-local)
+        var tIn = (SCENES[ID] && SCENES[ID].xfadeIn) || 0.4; // nothing moves until the crossfade is complete
+        var tRecede = Math.max(tIn, clk.b("closeIn", tIn, "next", 2)); // the half beat of "For"
+        var dRecede = 1.5 * BEAT;
+        var tSlide = T("gapCloses", LEAD);
+        var tRule = tRecede + HB;
+        var tChange = tRecede + BEAT;
+        var tFound = tRecede + 1.5 * BEAT;
+        var tBracket = Math.min(tRecede + 2 * BEAT, tSlide - 0.75); // set before "gap", held into "closes"
+        // the found end lands on 14:42 on the half beat after "closes" (about 0.8 s, never under a beat)
+        var tMeet = Math.max(tSlide + BEAT, clk.b("gapCloses", LEAD + 0.6, "next", 2));
+        var dSlide = tMeet - tSlide;
+        var tP = T("priora", LEAD);
+        var tR = tP - 0.16; // the rule retracts into the point, which swells into the dot
+        var tWm = tP + 0.14; // the wordmark rises; latch at tWm + 0.16
+        var tLine = T("tagline", LEAD);
+        // the qualifier fades in (1.0 s) about a second after the line, complete at least 2 s before END
+        var tQual = Math.max(tLine + 0.5, Math.min(tLine + 1.0, clk.duration - 2.0 - 1.0 - 0.15));
+
+        // ================================================================ TIMELINE
+        var tl = gsap.timeline({ paused: true });
+        FL.sceneFade(tl, el("a3-close-fade"), ID); // crossfade in over a3-scenarios' identical last frame
+        var ft = function (targets, from, to, t, d, ease) {
+          var v = { duration: d, ease: ease || "power1.inOut", immediateRender: false };
+          for (var k in to) v[k] = to[k];
+          tl.fromTo(targets, from, v, t);
+        };
+        var draw = function (path, t, d, ease) {
+          tl.fromTo(path, { drawSVG: "0%" }, { drawSVG: "100%", duration: d, ease: ease || "power2.inOut", immediateRender: true }, t);
+        };
+        var wipe = function (L, t, d, ease) {
+          ft(L.clip, { attr: { width: 0 } }, { attr: { width: f3(L.full) } }, t, d, ease || "power2.out");
+        };
+        var fade = function (targets, from, to, t, d, ease) {
+          ft(targets, { opacity: from }, { opacity: to }, t, d, ease);
+        };
+        // hidden until their moment (static states equal the tweens' from-states)
+        [mChange.dot, mFound.dot, pTick.tick, pDot].forEach(function (e) {
+          e.style.opacity = 0;
+        });
+
+        // ---------------------------------------------------------------- CL1: the site recedes to paper
+        site.camera(tl, R_RECEDE, tRecede, dRecede, "sine.inOut", R_SITE);
+        fade(siteWrap, 1, 0, tRecede, BEAT, "power1.inOut");
+
+        // ---------------------------------------------------------------- CL1: the gap timeline returns
+        draw(rule.main, tRule, 0.72, "power2.inOut");
+        if (rule.ext) draw(rule.ext, tRule + 0.62, 0.2, "power1.out");
+        ft(tickWipe, { attr: { width: 0 } }, { attr: { width: TICK_W } }, tRule + 0.1, 0.72, "power2.inOut");
+        // 14:42 · CONDITION CHANGED, on the beat
+        ft(mChange.dot, { opacity: 0, attr: { r: MR * 1.6 } }, { opacity: 1, attr: { r: MR } }, tChange, 0.16, "power3.out");
+        draw(mChange.tick, tChange + 0.04, 0.2, "power1.inOut");
+        wipe(lChange, tChange + 0.12, 0.5);
+        // DAY +2 · FOUND, half a beat later
+        ft(mFound.dot, { opacity: 0, attr: { r: MR * 1.6 } }, { opacity: 1, attr: { r: MR } }, tFound, 0.16, "power3.out");
+        draw(mFound.tick, tFound + 0.04, 0.2, "power1.inOut");
+        wipe(lFound, tFound + 0.12, 0.34);
+        // THE GAP: the bracket draws between them, lettered under its notch
+        draw(bMain, tBracket, 0.45, "power1.inOut");
+        draw(bOver, tBracket + 0.2, 0.36, "power1.inOut");
+        wipe(lGap, tBracket + 0.26, 0.34);
+
+        // ---------------------------------------------------------------- CL1: "closes"
+        // the found end slides left along the rule to 14:42; the bracket closes with it
+        var dx = CX - FX;
+        ft(gFound, { attr: { transform: "translate(0 0)" } }, { attr: { transform: "translate(" + f3(dx) + " 0)" } }, tSlide, dSlide, "power3.inOut");
+        fade(lFound.wrap, 1, 0, tSlide, dSlide * 0.35, "power1.in");
+        ft(bMain, { attr: { d: bMainD[0] } }, { attr: { d: bMainD[1] } }, tSlide, dSlide, "power3.inOut");
+        ft(bOver, { attr: { d: bOverD[0] } }, { attr: { d: bOverD[1] } }, tSlide, dSlide, "power3.inOut");
+        fade(gBracket, 1, 0, tSlide + dSlide * 0.7, dSlide * 0.3, "power1.in");
+        ft(gGapLab, { attr: { transform: "translate(0 0)" } }, { attr: { transform: "translate(" + f3(dx / 2) + " 0)" } }, tSlide, dSlide, "power3.inOut");
+        fade(gGapLab, 1, 0, tSlide, dSlide * 0.5, "power1.in");
+        // the two marks become one cobalt point
+        fade([mFound.tick, mFound.dot, mChange.tick, mChange.dot], 1, 0, tMeet - 0.12, 0.3, "power1.inOut");
+        fade(pTick.tick, 0, 1, tMeet - 0.12, 0.3, "power1.inOut");
+        fade(pDot, 0, 1, tMeet - 0.06, 0.1, "none");
+        ft(pDot, { attr: { r: MR } }, { attr: { r: R_PT * 1.3 } }, tMeet - 0.06, 0.18, "power2.out");
+        ft(pDot, { attr: { r: R_PT * 1.3 } }, { attr: { r: R_PT } }, tMeet + 0.12, 0.34, "power2.inOut");
+        // CONDITION CHANGED gives way to DECIDED
+        fade(lChange.wrap, 1, 0, tMeet - 0.04, 0.24, "power1.in");
+        wipe(lDecided, tMeet + 0.06, 0.4);
+        // still from here to tR (two beats)
+
+        // ---------------------------------------------------------------- CL2: the point becomes the mark's dot
+        var dR = 0.46;
+        ft(rule.main, { drawSVG: "0% 100%" }, { drawSVG: PC + "% " + PC + "%" }, tR, dR, "power3.inOut");
+        fade(rule.main, 1, 0, tR + dR, 0.04, "none");
+        if (rule.ext) fade(rule.ext, 1, 0, tR, 0.2, "power1.in");
+        fade(gTicks, 1, 0, tR, 0.26, "power1.in");
+        fade(lDecided.wrap, 1, 0, tR, 0.24, "power1.in");
+        ft(pTick.tick, { drawSVG: "0% 100%" }, { drawSVG: "0% 0%" }, tR, 0.3, "power2.in");
+        fade(pTick.tick, 1, 0, tR + 0.3, 0.04, "none");
+        ft(pDot, { attr: { r: R_PT } }, { attr: { r: f3(DOT_R) } }, tR, 0.5, "power3.inOut");
+        // on "Priora": the rounded square draws round the dot, the wordmark rises beside it and latches
+        draw(sq, tP, 0.45, "power2.inOut");
+        ft(wmRise, { attr: { transform: "translate(0 758)" } }, { attr: { transform: "translate(0 0)" } }, tWm, 0.7, "expo.out");
+
+        // ---------------------------------------------------------------- CL2: the line, the qualifier
+        ft(lineG, { opacity: 0, attr: { transform: "translate(0 12)" } }, { opacity: 1, attr: { transform: "translate(0 0)" } }, tLine, 0.8, "power3.out");
+        fade(el("a3-close-qual"), 0, 1, tQual, 1.0, "power1.inOut");
+        // from tQual + 1.0 to END nothing moves
+
+        // metadata only (sound-event authoring and review); no visual state
+        tl.data = { recede: tRecede, rule: tRule, change: tChange, found: tFound, bracket: tBracket, slide: tSlide, meet: tMeet, retract: tR, priora: tP, latch: tWm + 0.16, line: tLine, qualifier: tQual, still: tQual + 1.0 };
+
+        // initialise every tween once at build time (DrawSVG measures its paths before any d tween
+        // runs), then return to the start, so any seek order renders the same pixels
+        tl.totalTime(tl.duration(), true);
+        tl.totalTime(0, true);
+
+        window.__timelines["a3-close"] = tl;
+      </script>
+    </template>
+  </body>
+</html>

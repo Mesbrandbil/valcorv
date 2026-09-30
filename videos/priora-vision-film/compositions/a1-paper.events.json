@@ -1,0 +1,193 @@
+{
+  "note": "a1-paper (S5): the sounds the sheet makes, anchored to the cues the tweens use. Move starts are snapped to the 92 BPM grid near their words (quarter beats for the whips, the next half beat after 'accepted' for the sheet, the next beat after 'permits' for the stamp); the offsets here are those snapped times relative to the word under the current narration.",
+  "events": [
+    {
+      "name": "sheet-lay",
+      "at": "L03:accepted.end",
+      "kind": "sheet-lay",
+      "gain_db": -9,
+      "dur": 0.652,
+      "what": "the sheet slides in from the right and lies flat",
+      "snap": {
+        "mode": "near",
+        "off": -0.0001
+      }
+    },
+    {
+      "name": "underline",
+      "at": "L03:accepted.end",
+      "kind": "ruler",
+      "gain_db": -13,
+      "dur": 0.36,
+      "what": "graphite underline under 'sprinkler protection ... in service'",
+      "snap": {
+        "mode": "near",
+        "off": 0.6519
+      }
+    },
+    {
+      "name": "lead-arrow",
+      "at": "cue:translate",
+      "kind": "pencil",
+      "gain_db": -12,
+      "dur": 0.6,
+      "what": "the underline runs on into an arrow down to the procedure",
+      "snap": {
+        "mode": "cut",
+        "off": -0.0003
+      }
+    },
+    {
+      "name": "follow",
+      "at": "cue:translate",
+      "kind": "whip",
+      "gain_db": -20,
+      "dur": 0.6,
+      "what": "the camera follows the arrow to PROCEDURE",
+      "snap": {
+        "mode": "cut",
+        "off": -0.0003
+      }
+    },
+    {
+      "name": "procedure-line",
+      "at": "cue:translate+0.126",
+      "kind": "pen",
+      "gain_db": -15,
+      "dur": 0.58,
+      "what": "'Confirm sprinklers in service' written and underlined"
+    },
+    {
+      "name": "whip-permit",
+      "at": "cue:permits-0.248",
+      "kind": "whip",
+      "gain_db": -16,
+      "dur": 0.32608695652173914
+    },
+    {
+      "name": "arrow-permit",
+      "at": "cue:permits-0.288",
+      "kind": "pencil",
+      "gain_db": -15,
+      "dur": 0.376,
+      "what": "solid arrow procedure to permit"
+    },
+    {
+      "name": "permit-line",
+      "at": "cue:permits+0.018",
+      "kind": "pen",
+      "gain_db": -16,
+      "dur": 0.2
+    },
+    {
+      "name": "permit-tick",
+      "at": "cue:permits+0.218",
+      "kind": "tick",
+      "gain_db": -11
+    },
+    {
+      "name": "permit-stamp",
+      "at": "cue:permits",
+      "kind": "stamp",
+      "gain_db": -7,
+      "what": "APPROVED · HSE, on the beat",
+      "snap": {
+        "mode": "next",
+        "off": 0.0003
+      }
+    },
+    {
+      "name": "whip-briefing",
+      "at": "cue:briefings-0.146",
+      "kind": "whip",
+      "gain_db": -16,
+      "dur": 0.32608695652173914
+    },
+    {
+      "name": "arrow-briefing",
+      "at": "cue:briefings-0.186",
+      "kind": "pencil-scatter",
+      "gain_db": -17,
+      "dur": 0.03,
+      "series": {
+        "count": 10,
+        "every": 0.033
+      },
+      "what": "dashed arrow permit to briefing"
+    },
+    {
+      "name": "briefing-note",
+      "at": "cue:briefings+0.140",
+      "kind": "pencil",
+      "gain_db": -16,
+      "dur": 0.24,
+      "what": "the speech outline"
+    },
+    {
+      "name": "briefing-line",
+      "at": "cue:briefings+0.280",
+      "kind": "pen",
+      "gain_db": -17,
+      "dur": 0.26,
+      "what": "'sprinklers on', grey"
+    },
+    {
+      "name": "whip-checklist",
+      "at": "cue:checklists-0.184",
+      "kind": "whip",
+      "gain_db": -16,
+      "dur": 0.32608695652173914
+    },
+    {
+      "name": "arrow-checklist",
+      "at": "cue:checklists-0.224",
+      "kind": "pencil-scatter",
+      "gain_db": -19,
+      "dur": 0.02,
+      "series": {
+        "count": 14,
+        "every": 0.025
+      },
+      "what": "dotted arrow briefing to checklist"
+    },
+    {
+      "name": "checklist-line",
+      "at": "cue:checklists+0.082",
+      "kind": "pen",
+      "gain_db": -18,
+      "dur": 0.2,
+      "what": "'Sprinklers', pale"
+    },
+    {
+      "name": "question-mark",
+      "at": "cue:checklists+0.282",
+      "kind": "pencil",
+      "gain_db": -13,
+      "dur": 0.18
+    },
+    {
+      "name": "pull-back",
+      "at": "cue:checklists+0.468",
+      "kind": "pull",
+      "gain_db": -14,
+      "dur": 1,
+      "what": "the whole sheet: the clause and the four artefacts, the thread thinning across them"
+    },
+    {
+      "name": "circle-question",
+      "at": "cue:noOne-0.467",
+      "kind": "pencil",
+      "gain_db": -14,
+      "dur": 0.34,
+      "what": "the question mark circled in the hold"
+    },
+    {
+      "name": "sheet-lift",
+      "at": "cue:noOne",
+      "kind": "paper-lift",
+      "gain_db": -9,
+      "dur": 0.42,
+      "what": "the sheet lifts off to the left, fast and flat, on 'But'"
+    }
+  ]
+}

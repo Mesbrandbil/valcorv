@@ -1,0 +1,112 @@
+{
+  "schema": "priora-narration-take/1",
+  "id": "L12",
+  "engine": "guide",
+  "guide": true,
+  "label": "GUIDE VOICE (local Kokoro). Not the final ElevenLabs performance.",
+  "speaker": "narrator",
+  "text": "What if the decision existed when the risk changed?",
+  "spoken_text": "What if the decision existed when the risk changed?",
+  "sample_rate": 48000,
+  "duration": 3.09,
+  "speech_start": 0.13,
+  "speech_end": 2.86,
+  "words": [
+    {
+      "w": "What",
+      "start": 0.13,
+      "end": 0.32
+    },
+    {
+      "w": "if",
+      "start": 0.32,
+      "end": 0.46
+    },
+    {
+      "w": "the",
+      "start": 0.46,
+      "end": 0.56
+    },
+    {
+      "w": "decision",
+      "start": 0.56,
+      "end": 1.06
+    },
+    {
+      "w": "existed",
+      "start": 1.06,
+      "end": 1.64
+    },
+    {
+      "w": "when",
+      "start": 1.64,
+      "end": 1.81
+    },
+    {
+      "w": "the",
+      "start": 1.81,
+      "end": 1.9
+    },
+    {
+      "w": "risk",
+      "start": 1.9,
+      "end": 2.24
+    },
+    {
+      "w": "changed",
+      "start": 2.24,
+      "end": 2.86
+    }
+  ],
+  "sentences": [
+    {
+      "text": "What if the decision existed when the risk changed?",
+      "start": 0.13,
+      "end": 2.86,
+      "word_range": [
+        0,
+        9
+      ]
+    }
+  ],
+  "created": "2026-09-29T21:41:34+00:00",
+  "provider": "kokoro-onnx 0.6.1, kokoro-v1.0.onnx (local guide)",
+  "voice": {
+    "id": "bf_isabella",
+    "lang": "en-gb"
+  },
+  "speed": 1.0,
+  "inner_pauses": [],
+  "segments_synth": [
+    {
+      "text": "What if the decision existed when the risk changed?",
+      "start": 0.12,
+      "end": 2.89,
+      "alignment_quality": {
+        "energy_pauses": 0,
+        "pause_agreement": 1.0,
+        "pauses_inside_words": [],
+        "onset_error_ms": 0.0,
+        "offset_error_ms": 0.0,
+        "pause_onset_error_ms_mean": null,
+        "pause_onset_error_ms_max": null
+      },
+      "fallback": false
+    }
+  ],
+  "alignment": {
+    "method": "pocketsphinx-5-forced-alignment+energy-refine",
+    "fallback": false,
+    "quality": {
+      "energy_pauses": 0,
+      "pause_agreement": 1.0,
+      "pauses_inside_words": [],
+      "onset_error_ms": 0.0,
+      "offset_error_ms": 0.0,
+      "pause_onset_error_ms_mean": null,
+      "pause_onset_error_ms_max": null
+    },
+    "quality_ok": true
+  },
+  "pronunciation_checks": []
+}

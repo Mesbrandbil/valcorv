@@ -1,0 +1,107 @@
+{
+  "schema": "priora-narration-take/1",
+  "id": "L03",
+  "engine": "guide",
+  "guide": true,
+  "label": "GUIDE VOICE (local Kokoro). Not the final ElevenLabs performance.",
+  "speaker": "narrator",
+  "text": "Insurance sets conditions under which risk is accepted.",
+  "spoken_text": "Insurance sets conditions under which risk is accepted.",
+  "sample_rate": 48000,
+  "duration": 3.55,
+  "speech_start": 0.13,
+  "speech_end": 3.32,
+  "words": [
+    {
+      "w": "Insurance",
+      "start": 0.13,
+      "end": 0.76
+    },
+    {
+      "w": "sets",
+      "start": 0.76,
+      "end": 1.04
+    },
+    {
+      "w": "conditions",
+      "start": 1.04,
+      "end": 1.67
+    },
+    {
+      "w": "under",
+      "start": 1.67,
+      "end": 1.88
+    },
+    {
+      "w": "which",
+      "start": 1.88,
+      "end": 2.19
+    },
+    {
+      "w": "risk",
+      "start": 2.19,
+      "end": 2.53
+    },
+    {
+      "w": "is",
+      "start": 2.53,
+      "end": 2.68
+    },
+    {
+      "w": "accepted",
+      "start": 2.68,
+      "end": 3.32
+    }
+  ],
+  "sentences": [
+    {
+      "text": "Insurance sets conditions under which risk is accepted.",
+      "start": 0.13,
+      "end": 3.32,
+      "word_range": [
+        0,
+        8
+      ]
+    }
+  ],
+  "created": "2026-09-29T21:41:34+00:00",
+  "provider": "kokoro-onnx 0.6.1, kokoro-v1.0.onnx (local guide)",
+  "voice": {
+    "id": "bf_isabella",
+    "lang": "en-gb"
+  },
+  "speed": 1.0,
+  "inner_pauses": [],
+  "segments_synth": [
+    {
+      "text": "Insurance sets conditions under which risk is accepted.",
+      "start": 0.12,
+      "end": 3.35,
+      "alignment_quality": {
+        "energy_pauses": 0,
+        "pause_agreement": 1.0,
+        "pauses_inside_words": [],
+        "onset_error_ms": 0.0,
+        "offset_error_ms": 0.0,
+        "pause_onset_error_ms_mean": null,
+        "pause_onset_error_ms_max": null
+      },
+      "fallback": false
+    }
+  ],
+  "alignment": {
+    "method": "pocketsphinx-5-forced-alignment+energy-refine",
+    "fallback": false,
+    "quality": {
+      "energy_pauses": 0,
+      "pause_agreement": 1.0,
+      "pauses_inside_words": [],
+      "onset_error_ms": 0.0,
+      "offset_error_ms": 0.0,
+      "pause_onset_error_ms_mean": null,
+      "pause_onset_error_ms_max": null
+    },
+    "quality_ok": true
+  },
+  "pronunciation_checks": []
+}

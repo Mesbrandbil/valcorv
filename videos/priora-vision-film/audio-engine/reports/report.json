@@ -1,0 +1,3848 @@
+{
+  "inputs": {
+    "cues": "/home/user/valcorv/videos/priora-vision-film/cues/resolved.json",
+    "timing": "/home/user/valcorv/videos/priora-vision-film/narration/timing.json",
+    "voice": "/home/user/valcorv/videos/priora-vision-film/assets/audio/voice.wav",
+    "events": []
+  },
+  "duration": 136.96666666666667,
+  "cues": {
+    "l01": {
+      "t": 2.935,
+      "source": "cue:l01"
+    },
+    "hour": {
+      "t": 5.165,
+      "source": "cue:hour"
+    },
+    "contractors": {
+      "t": 6.196,
+      "source": "cue:contractors"
+    },
+    "equipment": {
+      "t": 8.086,
+      "source": "cue:equipment"
+    },
+    "isolated": {
+      "t": 8.916,
+      "source": "cue:isolated"
+    },
+    "workMoves": {
+      "t": 10.226,
+      "source": "cue:workMoves"
+    },
+    "insurance": {
+      "t": 12.065,
+      "source": "cue:insurance"
+    },
+    "accepted": {
+      "t": 14.615,
+      "source": "cue:accepted"
+    },
+    "translate": {
+      "t": 16.578,
+      "source": "cue:translate"
+    },
+    "permits": {
+      "t": 17.368,
+      "source": "cue:permits"
+    },
+    "checklists": {
+      "t": 18.608,
+      "source": "cue:checklists"
+    },
+    "noOne": {
+      "t": 20.543,
+      "source": "cue:noOne"
+    },
+    "moving": {
+      "t": 21.603,
+      "source": "cue:moving"
+    },
+    "head": {
+      "t": 22.463,
+      "source": "cue:head"
+    },
+    "roof03": {
+      "t": 24.26,
+      "source": "cue:roof03"
+    },
+    "hotWork": {
+      "t": 25.04,
+      "source": "cue:hotWork"
+    },
+    "safeguards": {
+      "t": 26.52,
+      "source": "cue:safeguards"
+    },
+    "inPlace": {
+      "t": 27.69,
+      "source": "cue:inPlace"
+    },
+    "landing": {
+      "t": 28.772,
+      "source": "cue:landing"
+    },
+    "then": {
+      "t": 29.022,
+      "source": "cue:then"
+    },
+    "offline": {
+      "t": 30.532,
+      "source": "cue:offline"
+    },
+    "nothingLooks": {
+      "t": 33.587,
+      "source": "cue:nothingLooks"
+    },
+    "changed": {
+      "t": 36.297,
+      "source": "cue:changed"
+    },
+    "nobody": {
+      "t": 37.227,
+      "source": "cue:nobody"
+    },
+    "nobodyEnd": {
+      "t": 38.227,
+      "source": "cue:nobodyEnd"
+    },
+    "afterwards": {
+      "t": 40.435,
+      "source": "cue:afterwards"
+    },
+    "q1": {
+      "t": 43.696,
+      "source": "cue:q1"
+    },
+    "q3": {
+      "t": 47.676,
+      "source": "cue:q3"
+    },
+    "gap": {
+      "t": 50.807,
+      "source": "cue:gap"
+    },
+    "tooLate": {
+      "t": 52.357,
+      "source": "cue:tooLate"
+    },
+    "rewindStart": {
+      "t": 53.107,
+      "source": "cue:rewindStart"
+    },
+    "rewindEnd": {
+      "t": 58.722,
+      "source": "cue:rewindEnd"
+    },
+    "l12": {
+      "t": 59.022,
+      "source": "cue:l12"
+    },
+    "decisionWord": {
+      "t": 59.452,
+      "source": "cue:decisionWord"
+    },
+    "riskChanged": {
+      "t": 61.752,
+      "source": "cue:riskChanged"
+    },
+    "worker": {
+      "t": 63.261,
+      "source": "cue:worker"
+    },
+    "workerEnd": {
+      "t": 65.651,
+      "source": "cue:six"
+    },
+    "connects": {
+      "t": 67.368,
+      "source": "cue:connects"
+    },
+    "keepsRecord": {
+      "t": 74.489,
+      "source": "cue:keepsRecord"
+    },
+    "prevention": {
+      "t": 75.978,
+      "source": "cue:prevention"
+    },
+    "proof": {
+      "t": 78.128,
+      "source": "cue:proof"
+    },
+    "l16": {
+      "t": 81.196,
+      "source": "cue:l16"
+    },
+    "offline2": {
+      "t": 82.156,
+      "source": "cue:offline2"
+    },
+    "sees": {
+      "t": 84.686,
+      "source": "cue:sees"
+    },
+    "cross": {
+      "t": 85.836,
+      "source": "cue:cross"
+    },
+    "riskOwner": {
+      "t": 88.696,
+      "source": "cue:riskOwner"
+    },
+    "change": {
+      "t": 90.656,
+      "source": "cue:change"
+    },
+    "retain": {
+      "t": 93.761,
+      "source": "cue:retain"
+    },
+    "carriers": {
+      "t": 98.016,
+      "source": "cue:carriers"
+    },
+    "scenariosIn": {
+      "t": 101.409,
+      "source": "cue:scenariosIn"
+    },
+    "everyKind": {
+      "t": 101.739,
+      "source": "cue:everyKind"
+    },
+    "crane": {
+      "t": 105.0,
+      "source": "cue:crane"
+    },
+    "wind": {
+      "t": 106.13,
+      "source": "cue:wind"
+    },
+    "gasDetector": {
+      "t": 108.261,
+      "source": "cue:gasDetector"
+    },
+    "bypassed": {
+      "t": 109.241,
+      "source": "cue:bypassed"
+    },
+    "confined": {
+      "t": 111.848,
+      "source": "cue:confined"
+    },
+    "ventilation": {
+      "t": 113.848,
+      "source": "cue:ventilation"
+    },
+    "ordinary": {
+      "t": 117.373,
+      "source": "cue:ordinary"
+    },
+    "few": {
+      "t": 118.633,
+      "source": "cue:few"
+    },
+    "decisionsL18": {
+      "t": 120.423,
+      "source": "cue:decisionsL18"
+    },
+    "madeInTime": {
+      "t": 121.533,
+      "source": "cue:madeInTime"
+    },
+    "l19": {
+      "t": 123.271,
+      "source": "cue:l19"
+    },
+    "closeIn": {
+      "t": 122.621,
+      "source": "cue:closeIn"
+    },
+    "gapCloses": {
+      "t": 125.431,
+      "source": "cue:gapCloses"
+    },
+    "priora": {
+      "t": 128.152,
+      "source": "cue:priora"
+    },
+    "tagline": {
+      "t": 129.822,
+      "source": "cue:tagline"
+    }
+  },
+  "events": {
+    "total": 367,
+    "by_source_kind": {
+      "designed:distant-clank": 2,
+      "designed:radio-click": 1,
+      "designed:radio-squelch": 1,
+      "designed:system-tick": 1,
+      "designed:valve-clunk": 1,
+      "scene:align-snap": 21,
+      "scene:arc": 1,
+      "scene:capture-start": 1,
+      "scene:choice-accent": 6,
+      "scene:confirm": 6,
+      "scene:connect-line": 7,
+      "scene:cross-snap": 1,
+      "scene:cut": 20,
+      "scene:decision-accent": 5,
+      "scene:focus": 7,
+      "scene:footsteps": 2,
+      "scene:fray": 1,
+      "scene:gauge": 1,
+      "scene:handwheel": 3,
+      "scene:incident": 1,
+      "scene:latch": 1,
+      "scene:latch-soft": 1,
+      "scene:node-pass": 9,
+      "scene:packet": 1,
+      "scene:paper-lift": 1,
+      "scene:paper-slide": 3,
+      "scene:pencil-hatch": 2,
+      "scene:pencil-stroke": 108,
+      "scene:pencil-tick": 80,
+      "scene:pin": 13,
+      "scene:pull": 13,
+      "scene:push": 6,
+      "scene:record-append": 3,
+      "scene:relay-click": 1,
+      "scene:response-tick": 4,
+      "scene:row-unavailable": 4,
+      "scene:ruler-contact": 3,
+      "scene:set-square-tap": 1,
+      "scene:sheet-in": 1,
+      "scene:sheet-lay": 1,
+      "scene:stamp": 1,
+      "scene:stretch": 1,
+      "scene:technical-pen": 9,
+      "scene:valve-clunk": 1,
+      "scene:van": 1,
+      "scene:whip": 9
+    },
+    "control": {
+      "subtract_at": 113.848,
+      "subtract_fade": 0.62,
+      "rewind_event": 53.107
+    },
+    "holds": 8
+  },
+  "editorial_grid": {
+    "count": 64,
+    "on_half_beat_within_20ms": 49,
+    "max_offset_from_half_beat_ms": 163.0,
+    "rows": [
+      {
+        "t": 2.935,
+        "kind": "pull",
+        "scene": "a1-world",
+        "name": "pull",
+        "at": "1.1.5",
+        "offset_ms": 0.2
+      },
+      {
+        "t": 6.196,
+        "kind": "cut",
+        "scene": "a1-world",
+        "name": "cut-gate",
+        "at": "2.2.5",
+        "offset_ms": 0.3
+      },
+      {
+        "t": 7.826,
+        "kind": "cut",
+        "scene": "a1-inserts",
+        "name": "loto-cut-in",
+        "at": "3.1",
+        "offset_ms": -0.1
+      },
+      {
+        "t": 10.109,
+        "kind": "cut",
+        "scene": "a1-world",
+        "name": "cut-morning",
+        "at": "3.4.5",
+        "offset_ms": 0.3
+      },
+      {
+        "t": 12.065,
+        "kind": "pull",
+        "scene": "a1-world",
+        "name": "rise",
+        "at": "4.3.5",
+        "offset_ms": -0.2
+      },
+      {
+        "t": 15.326,
+        "kind": "sheet-lay",
+        "scene": "a1-paper",
+        "name": "sheet-lay",
+        "at": "5.4.5",
+        "offset_ms": -0.1
+      },
+      {
+        "t": 16.304,
+        "kind": "whip",
+        "scene": "a1-paper",
+        "name": "follow",
+        "at": "6.2",
+        "offset_ms": -0.3
+      },
+      {
+        "t": 17.12,
+        "kind": "whip",
+        "scene": "a1-paper",
+        "name": "whip-permit",
+        "at": "6.3.5",
+        "offset_ms": -162.6
+      },
+      {
+        "t": 17.772,
+        "kind": "whip",
+        "scene": "a1-paper",
+        "name": "whip-briefing",
+        "at": "6.4.5",
+        "offset_ms": -162.8
+      },
+      {
+        "t": 18.424,
+        "kind": "whip",
+        "scene": "a1-paper",
+        "name": "whip-checklist",
+        "at": "7.1.5",
+        "offset_ms": -163.0
+      },
+      {
+        "t": 19.076,
+        "kind": "pull",
+        "scene": "a1-paper",
+        "name": "pull-back",
+        "at": "7.2",
+        "offset_ms": 163.0
+      },
+      {
+        "t": 24.13,
+        "kind": "push",
+        "scene": "a1-world",
+        "name": "push-roof03",
+        "at": "9.2",
+        "offset_ms": -0.4
+      },
+      {
+        "t": 24.783,
+        "kind": "cut",
+        "scene": "a1-inserts",
+        "name": "weld-cut-in",
+        "at": "9.3",
+        "offset_ms": 0.4
+      },
+      {
+        "t": 26.087,
+        "kind": "cut",
+        "scene": "a1-world",
+        "name": "cut-roof03",
+        "at": "10.1",
+        "offset_ms": 0.0
+      },
+      {
+        "t": 29.022,
+        "kind": "cut",
+        "scene": "a1-inserts",
+        "name": "sz3-cut-in",
+        "at": "11.1.5",
+        "offset_ms": 0.3
+      },
+      {
+        "t": 31.304,
+        "kind": "cut",
+        "scene": "a1-world",
+        "name": "cut-sz3",
+        "at": "12.1",
+        "offset_ms": -0.3
+      },
+      {
+        "t": 31.304,
+        "kind": "hold",
+        "scene": "a1-world",
+        "name": "hold-sz3",
+        "at": "12.1",
+        "offset_ms": -0.3
+      },
+      {
+        "t": 33.587,
+        "kind": "cut",
+        "scene": "a1-world",
+        "name": "cut-nothing",
+        "at": "12.4.5",
+        "offset_ms": 0.0
+      },
+      {
+        "t": 35.543,
+        "kind": "push",
+        "scene": "a1-world",
+        "name": "push-edge",
+        "at": "13.3.5",
+        "offset_ms": -0.5
+      },
+      {
+        "t": 38.152,
+        "kind": "pull",
+        "scene": "a1-world",
+        "name": "pull-back",
+        "at": "14.3.5",
+        "offset_ms": -0.2
+      },
+      {
+        "t": 38.227,
+        "kind": "hold",
+        "scene": "a1-world",
+        "name": "hold-9c",
+        "at": "14.3.5",
+        "offset_ms": 74.8
+      },
+      {
+        "t": 40.435,
+        "kind": "cut",
+        "scene": "a1-world",
+        "name": "cut-after",
+        "at": "15.3",
+        "offset_ms": 0.2
+      },
+      {
+        "t": 41.705,
+        "kind": "pull",
+        "scene": "a1-world",
+        "name": "pull-after",
+        "at": "16.1",
+        "offset_ms": -34.1
+      },
+      {
+        "t": 45.326,
+        "kind": "whip",
+        "scene": "a1-after",
+        "name": "whip-1",
+        "at": "17.2.5",
+        "offset_ms": -0.1
+      },
+      {
+        "t": 47.609,
+        "kind": "whip",
+        "scene": "a1-after",
+        "name": "whip-2",
+        "at": "18.2",
+        "offset_ms": 0.3
+      },
+      {
+        "t": 50.543,
+        "kind": "pull",
+        "scene": "a1-after",
+        "name": "pull-wide",
+        "at": "19.2.5",
+        "offset_ms": -0.5
+      },
+      {
+        "t": 51.848,
+        "kind": "hold",
+        "scene": "a1-after",
+        "name": "gap-hold",
+        "at": "19.4.5",
+        "offset_ms": 0.2
+      },
+      {
+        "t": 62.283,
+        "kind": "push",
+        "scene": "a2-resolve",
+        "name": "push-worker",
+        "at": "23.4.5",
+        "offset_ms": 0.4
+      },
+      {
+        "t": 63.261,
+        "kind": "cut",
+        "scene": "a2-resolve",
+        "name": "cut-capture",
+        "at": "24.2",
+        "offset_ms": 0.1
+      },
+      {
+        "t": 68.152,
+        "kind": "focus",
+        "scene": "a2-resolve",
+        "name": "focus-clause",
+        "at": "26.1.5",
+        "offset_ms": -0.2
+      },
+      {
+        "t": 69.13,
+        "kind": "pull",
+        "scene": "a2-resolve",
+        "name": "pull-connection",
+        "at": "26.3",
+        "offset_ms": -0.4
+      },
+      {
+        "t": 69.728,
+        "kind": "hold",
+        "scene": "a2-resolve",
+        "name": "hold-connection",
+        "at": "26.4",
+        "offset_ms": -54.6
+      },
+      {
+        "t": 71.739,
+        "kind": "cut",
+        "scene": "a2-resolve",
+        "name": "cut-card",
+        "at": "27.3",
+        "offset_ms": -0.1
+      },
+      {
+        "t": 71.769,
+        "kind": "focus",
+        "scene": "a2-resolve",
+        "name": "focus-card",
+        "at": "27.3",
+        "offset_ms": 29.9
+      },
+      {
+        "t": 74.022,
+        "kind": "whip",
+        "scene": "a2-resolve",
+        "name": "whip-record",
+        "at": "28.2.5",
+        "offset_ms": 0.3
+      },
+      {
+        "t": 75.652,
+        "kind": "pull",
+        "scene": "a2-resolve",
+        "name": "pull-twoup",
+        "at": "29.1",
+        "offset_ms": -0.2
+      },
+      {
+        "t": 81.22,
+        "kind": "cut",
+        "scene": "a3-change",
+        "name": "cut-in",
+        "at": "31.1.5",
+        "offset_ms": 24.3
+      },
+      {
+        "t": 83.478,
+        "kind": "cut",
+        "scene": "a3-change",
+        "name": "cut-card",
+        "at": "32.1",
+        "offset_ms": -0.3
+      },
+      {
+        "t": 83.498,
+        "kind": "focus",
+        "scene": "a3-change",
+        "name": "focus-row",
+        "at": "32.1",
+        "offset_ms": 19.7
+      },
+      {
+        "t": 85.761,
+        "kind": "cut",
+        "scene": "a3-change",
+        "name": "cut-edge",
+        "at": "32.4.5",
+        "offset_ms": 0.1
+      },
+      {
+        "t": 86.969,
+        "kind": "hold",
+        "scene": "a3-change",
+        "name": "crossing-hold",
+        "at": "33.2.5",
+        "offset_ms": -96.2
+      },
+      {
+        "t": 88.696,
+        "kind": "cut",
+        "scene": "a3-change",
+        "name": "cut-sheet",
+        "at": "34.1",
+        "offset_ms": 0.3
+      },
+      {
+        "t": 88.716,
+        "kind": "focus",
+        "scene": "a3-change",
+        "name": "focus-sheet",
+        "at": "34.1",
+        "offset_ms": 20.3
+      },
+      {
+        "t": 89.348,
+        "kind": "pull",
+        "scene": "a3-change",
+        "name": "pull-choices",
+        "at": "34.2",
+        "offset_ms": 0.2
+      },
+      {
+        "t": 90.652,
+        "kind": "push",
+        "scene": "a3-change",
+        "name": "push-change",
+        "at": "34.4",
+        "offset_ms": -0.2
+      },
+      {
+        "t": 93.261,
+        "kind": "whip",
+        "scene": "a3-change",
+        "name": "whip-retain",
+        "at": "35.4",
+        "offset_ms": 0.1
+      },
+      {
+        "t": 96.196,
+        "kind": "whip",
+        "scene": "a3-change",
+        "name": "whip-transfer",
+        "at": "36.4.5",
+        "offset_ms": 0.3
+      },
+      {
+        "t": 97.174,
+        "kind": "cut",
+        "scene": "a3-change",
+        "name": "cut-packet",
+        "at": "37.2",
+        "offset_ms": 0.1
+      },
+      {
+        "t": 97.194,
+        "kind": "focus",
+        "scene": "a3-change",
+        "name": "focus-packet",
+        "at": "37.2",
+        "offset_ms": 20.1
+      },
+      {
+        "t": 100.961,
+        "kind": "hold",
+        "scene": "a3-change",
+        "name": "programme-hold",
+        "at": "38.4",
+        "offset_ms": -126.0
+      },
+      {
+        "t": 104.348,
+        "kind": "push",
+        "scene": "a3-scenarios",
+        "name": "push-crane",
+        "at": "40.1",
+        "offset_ms": 0.2
+      },
+      {
+        "t": 105.0,
+        "kind": "cut",
+        "scene": "a3-scenarios",
+        "name": "cut-crane",
+        "at": "40.2",
+        "offset_ms": 0.0
+      },
+      {
+        "t": 105.652,
+        "kind": "pull",
+        "scene": "a3-scenarios",
+        "name": "pull-card",
+        "at": "40.3",
+        "offset_ms": -0.2
+      },
+      {
+        "t": 106.304,
+        "kind": "focus",
+        "scene": "a3-scenarios",
+        "name": "focus-card-crane",
+        "at": "40.4",
+        "offset_ms": -0.3
+      },
+      {
+        "t": 108.261,
+        "kind": "cut",
+        "scene": "a3-scenarios",
+        "name": "cut-gas",
+        "at": "41.3",
+        "offset_ms": 0.1
+      },
+      {
+        "t": 109.565,
+        "kind": "push",
+        "scene": "a3-scenarios",
+        "name": "push-card-gas",
+        "at": "42.1",
+        "offset_ms": -0.2
+      },
+      {
+        "t": 111.848,
+        "kind": "cut",
+        "scene": "a3-scenarios",
+        "name": "cut-tank",
+        "at": "42.4.5",
+        "offset_ms": 0.2
+      },
+      {
+        "t": 113.152,
+        "kind": "pull",
+        "scene": "a3-scenarios",
+        "name": "pull-fan",
+        "at": "43.2.5",
+        "offset_ms": -0.2
+      },
+      {
+        "t": 113.804,
+        "kind": "focus",
+        "scene": "a3-scenarios",
+        "name": "focus-card-tank",
+        "at": "43.3.5",
+        "offset_ms": -0.3
+      },
+      {
+        "t": 116.413,
+        "kind": "cut",
+        "scene": "a3-scenarios",
+        "name": "cut-site",
+        "at": "44.3.5",
+        "offset_ms": -0.0
+      },
+      {
+        "t": 116.415,
+        "kind": "pull",
+        "scene": "a3-scenarios",
+        "name": "pull-site",
+        "at": "44.3.5",
+        "offset_ms": 2.0
+      },
+      {
+        "t": 123.261,
+        "kind": "pull",
+        "scene": "a3-close",
+        "name": "recede",
+        "at": "47.2",
+        "offset_ms": 0.1
+      },
+      {
+        "t": 126.646,
+        "kind": "hold",
+        "scene": "a3-close",
+        "name": "decided-hold",
+        "at": "48.3",
+        "offset_ms": 124.3
+      },
+      {
+        "t": 131.782,
+        "kind": "hold",
+        "scene": "a3-close",
+        "name": "end-hold",
+        "at": "50.3",
+        "offset_ms": 42.9
+      }
+    ]
+  },
+  "score": {
+    "bpm": 92.0,
+    "grid_offset": 0.0,
+    "beat_s": 0.65217,
+    "bar_s": 2.6087,
+    "sections": [
+      {
+        "section": "A strings enter",
+        "t": 2.609,
+        "bar": "1.1",
+        "cue": "l01",
+        "cue_t": 2.935,
+        "from_cue_beats": -0.5,
+        "what": "Dsus2 over the D pedal; felt piano motif"
+      },
+      {
+        "section": "A pulse",
+        "t": 5.217,
+        "bar": "2.1",
+        "cue": "contractors",
+        "cue_t": 6.196,
+        "from_cue_beats": -1.5,
+        "what": "the operational pulse fades in over two bars"
+      },
+      {
+        "section": "B build",
+        "t": 20.87,
+        "bar": "8.1",
+        "cue": "noOne",
+        "cue_t": 20.543,
+        "from_cue_beats": 0.5,
+        "what": "the rhythmic system builds under S6"
+      },
+      {
+        "section": "B high B",
+        "t": 28.696,
+        "bar": "11.1",
+        "cue": "then",
+        "cue_t": 29.022,
+        "from_cue_beats": -0.5,
+        "what": "the tone that will remain"
+      },
+      {
+        "section": "C unnoticed change",
+        "t": 30.532,
+        "bar": "11.3.816",
+        "cue": "offline",
+        "cue_t": 30.532,
+        "from_cue_beats": 0.0,
+        "what": "on the word: the pump winds down, the rest thins over a bar"
+      },
+      {
+        "section": "C darker",
+        "t": 36.522,
+        "bar": "14.1",
+        "cue": "changed",
+        "cue_t": 36.297,
+        "from_cue_beats": 0.34,
+        "what": "Em9: the harmony darkens"
+      },
+      {
+        "section": "D aftermath",
+        "t": 41.739,
+        "bar": "16.1",
+        "cue": "afterwards",
+        "cue_t": 40.435,
+        "from_cue_beats": 2.0,
+        "what": "B minor, grown over a bar and a half"
+      },
+      {
+        "section": "D gap",
+        "t": 49.565,
+        "bar": "19.1",
+        "cue": "gap",
+        "cue_t": 50.807,
+        "from_cue_beats": -1.9,
+        "what": "Gmaj7"
+      },
+      {
+        "section": "rewind thread",
+        "t": 54.783,
+        "bar": "21.1",
+        "cue": "rewindStart",
+        "cue_t": 53.107,
+        "from_cue_beats": 2.57,
+        "what": "the thread moves to Dsus2 under the rewind"
+      },
+      {
+        "section": "E clarity",
+        "t": 60.0,
+        "bar": "23.1",
+        "cue": "l12",
+        "cue_t": 59.022,
+        "from_cue_beats": 1.5,
+        "what": "a clean fifth and one piano note from the landing's floor"
+      },
+      {
+        "section": "E pulse",
+        "t": 62.609,
+        "bar": "24.1",
+        "cue": "riskChanged",
+        "cue_t": 61.752,
+        "from_cue_beats": 1.31,
+        "what": "the wood tick fades in"
+      },
+      {
+        "section": "F ostinato",
+        "t": 67.826,
+        "bar": "26.1",
+        "cue": "connects",
+        "cue_t": 67.368,
+        "from_cue_beats": 0.7,
+        "what": "felt ostinato, chord per bar"
+      },
+      {
+        "section": "G step down",
+        "t": 82.174,
+        "bar": "31.3",
+        "cue": "offline2",
+        "cue_t": 82.156,
+        "from_cue_beats": 0.03,
+        "what": "the ostinato thins over a bar"
+      },
+      {
+        "section": "G crossing",
+        "t": 86.087,
+        "bar": "33.1",
+        "cue": "cross",
+        "cue_t": 85.836,
+        "from_cue_beats": 0.38,
+        "what": "the thread's dip on a bare fifth, the cello's low D"
+      },
+      {
+        "section": "H momentum",
+        "t": 88.696,
+        "bar": "34.1",
+        "cue": "riskOwner",
+        "cue_t": 88.696,
+        "from_cue_beats": -0.0,
+        "what": "the three choices, grown over two bars"
+      },
+      {
+        "section": "S scenarios",
+        "t": 101.739,
+        "bar": "39.1",
+        "cue": "everyKind",
+        "cue_t": 101.739,
+        "from_cue_beats": 0.0,
+        "what": "a light, forward pulse over a rising bass"
+      },
+      {
+        "section": "O thinning",
+        "t": 114.783,
+        "bar": "44.1",
+        "cue": "ordinary",
+        "cue_t": 117.373,
+        "from_cue_beats": -3.97,
+        "what": "the pulse thins over the bar before the pull back"
+      },
+      {
+        "section": "O pull back",
+        "t": 117.391,
+        "bar": "45.1",
+        "cue": "ordinary",
+        "cue_t": 117.373,
+        "from_cue_beats": 0.03,
+        "what": "the harmony opens: Gmaj9 wide, the contrabass"
+      },
+      {
+        "section": "O decisions",
+        "t": 120.0,
+        "bar": "46.1",
+        "cue": "decisionsL18",
+        "cue_t": 120.423,
+        "from_cue_beats": -0.65,
+        "what": "Em9"
+      },
+      {
+        "section": "K close",
+        "t": 122.609,
+        "bar": "47.1",
+        "cue": "closeIn",
+        "cue_t": 122.621,
+        "from_cue_beats": -0.02,
+        "what": "Asus4"
+      },
+      {
+        "section": "K resolution",
+        "t": 125.217,
+        "bar": "48.1",
+        "cue": "gapCloses",
+        "cue_t": 125.431,
+        "from_cue_beats": -0.33,
+        "what": "D add9 under 'the gap closes'"
+      },
+      {
+        "section": "K line",
+        "t": 130.435,
+        "bar": "50.1",
+        "cue": "tagline",
+        "cue_t": 129.822,
+        "from_cue_beats": 0.94,
+        "what": "G/D under the line"
+      },
+      {
+        "section": "K home",
+        "t": 133.043,
+        "bar": "51.1",
+        "cue": "tagline",
+        "cue_t": 129.822,
+        "from_cue_beats": 4.94,
+        "what": "D again after the line, a natural decay to END"
+      }
+    ],
+    "chords": [
+      {
+        "t": 0.0,
+        "at": "0.1",
+        "chord": "D5",
+        "voices": [
+          "D2",
+          "A2",
+          "A3",
+          "D4",
+          "A4"
+        ]
+      },
+      {
+        "t": 2.609,
+        "at": "1.1",
+        "chord": "Dsus2",
+        "voices": [
+          "D2",
+          "A2",
+          "A3",
+          "D4",
+          "E4",
+          "A4"
+        ]
+      },
+      {
+        "t": 13.043,
+        "at": "5.1",
+        "chord": "Bm7",
+        "voices": [
+          "B2",
+          "F#3",
+          "A3",
+          "D4",
+          "F#4",
+          "A4"
+        ]
+      },
+      {
+        "t": 15.652,
+        "at": "6.1",
+        "chord": "Gmaj7",
+        "voices": [
+          "G2",
+          "D3",
+          "G3",
+          "D4",
+          "F#4",
+          "B4"
+        ]
+      },
+      {
+        "t": 18.261,
+        "at": "7.1",
+        "chord": "Asus4",
+        "voices": [
+          "A2",
+          "E3",
+          "A3",
+          "D4",
+          "E4",
+          "A4"
+        ]
+      },
+      {
+        "t": 20.87,
+        "at": "8.1",
+        "chord": "D",
+        "voices": [
+          "D2",
+          "A2",
+          "A3",
+          "D4",
+          "F#4",
+          "A4"
+        ]
+      },
+      {
+        "t": 23.478,
+        "at": "9.1",
+        "chord": "D",
+        "voices": [
+          "D2",
+          "A2",
+          "A3",
+          "D4",
+          "F#4",
+          "A4"
+        ]
+      },
+      {
+        "t": 26.087,
+        "at": "10.1",
+        "chord": "Gmaj7",
+        "voices": [
+          "G2",
+          "D3",
+          "G3",
+          "D4",
+          "F#4",
+          "B4"
+        ]
+      },
+      {
+        "t": 28.696,
+        "at": "11.1",
+        "chord": "Gmaj7",
+        "voices": [
+          "G2",
+          "D3",
+          "G3",
+          "D4",
+          "F#4",
+          "B4"
+        ]
+      },
+      {
+        "t": 36.522,
+        "at": "14.1",
+        "chord": "Em9",
+        "voices": [
+          "E2",
+          "B2",
+          "G3",
+          "D4",
+          "F#4",
+          "B4"
+        ]
+      },
+      {
+        "t": 41.739,
+        "at": "16.1",
+        "chord": "Bm",
+        "voices": [
+          "B2",
+          "F#3",
+          "D4",
+          "F#4",
+          "B4"
+        ]
+      },
+      {
+        "t": 49.565,
+        "at": "19.1",
+        "chord": "Gmaj7",
+        "voices": [
+          "G2",
+          "D3",
+          "F#3",
+          "D4",
+          "F#4",
+          "B4"
+        ]
+      },
+      {
+        "t": 54.783,
+        "at": "21.1",
+        "chord": "Dsus2",
+        "voices": [
+          "D2",
+          "A2",
+          "E3",
+          "D4",
+          "E4",
+          "A4"
+        ]
+      },
+      {
+        "t": 67.826,
+        "at": "26.1",
+        "chord": "Dadd9",
+        "voices": [
+          "D2",
+          "A2",
+          "E3",
+          "D4",
+          "F#4",
+          "A4"
+        ]
+      },
+      {
+        "t": 70.435,
+        "at": "27.1",
+        "chord": "A/C#",
+        "voices": [
+          "C#3",
+          "E3",
+          "C#4",
+          "E4",
+          "A4"
+        ]
+      },
+      {
+        "t": 73.043,
+        "at": "28.1",
+        "chord": "Bm7",
+        "voices": [
+          "B2",
+          "D3",
+          "F#3",
+          "D4",
+          "F#4",
+          "A4"
+        ]
+      },
+      {
+        "t": 75.652,
+        "at": "29.1",
+        "chord": "Gmaj7",
+        "voices": [
+          "G2",
+          "D3",
+          "D4",
+          "F#4",
+          "B4"
+        ]
+      },
+      {
+        "t": 78.261,
+        "at": "30.1",
+        "chord": "Dadd9",
+        "voices": [
+          "D2",
+          "A2",
+          "D3",
+          "E4",
+          "F#4",
+          "A4"
+        ]
+      },
+      {
+        "t": 80.87,
+        "at": "31.1",
+        "chord": "A/C#",
+        "voices": [
+          "C#3",
+          "E3",
+          "C#4",
+          "E4",
+          "A4"
+        ]
+      },
+      {
+        "t": 83.478,
+        "at": "32.1",
+        "chord": "Bm7",
+        "voices": [
+          "B2",
+          "D3",
+          "F#3",
+          "D4",
+          "F#4",
+          "A4"
+        ]
+      },
+      {
+        "t": 86.087,
+        "at": "33.1",
+        "chord": "D5",
+        "voices": [
+          "D2",
+          "A2",
+          "D3",
+          "A3",
+          "D4",
+          "A4"
+        ]
+      },
+      {
+        "t": 88.696,
+        "at": "34.1",
+        "chord": "Bm",
+        "voices": [
+          "B2",
+          "D3",
+          "F#3",
+          "D4",
+          "B4"
+        ]
+      },
+      {
+        "t": 91.304,
+        "at": "35.1",
+        "chord": "G",
+        "voices": [
+          "G2",
+          "D3",
+          "G3",
+          "D4",
+          "B4"
+        ]
+      },
+      {
+        "t": 93.913,
+        "at": "36.1",
+        "chord": "D",
+        "voices": [
+          "D2",
+          "A2",
+          "D3",
+          "F#3",
+          "D4",
+          "A4"
+        ]
+      },
+      {
+        "t": 96.522,
+        "at": "37.1",
+        "chord": "A",
+        "voices": [
+          "A2",
+          "E3",
+          "A3",
+          "C#4",
+          "A4"
+        ]
+      },
+      {
+        "t": 99.13,
+        "at": "38.1",
+        "chord": "Gadd9",
+        "voices": [
+          "G2",
+          "D3",
+          "A3",
+          "D4",
+          "B4"
+        ]
+      },
+      {
+        "t": 101.739,
+        "at": "39.1",
+        "chord": "Dadd9",
+        "voices": [
+          "D2",
+          "A2",
+          "D3",
+          "F#3",
+          "E4",
+          "A4"
+        ]
+      },
+      {
+        "t": 104.348,
+        "at": "40.1",
+        "chord": "Em7",
+        "voices": [
+          "E2",
+          "B2",
+          "D3",
+          "G3",
+          "E4",
+          "B4"
+        ]
+      },
+      {
+        "t": 106.957,
+        "at": "41.1",
+        "chord": "F#m7",
+        "voices": [
+          "F#2",
+          "C#3",
+          "E3",
+          "A3",
+          "C#4",
+          "A4"
+        ]
+      },
+      {
+        "t": 109.565,
+        "at": "42.1",
+        "chord": "G",
+        "voices": [
+          "G2",
+          "D3",
+          "G3",
+          "D4",
+          "B4"
+        ]
+      },
+      {
+        "t": 112.174,
+        "at": "43.1",
+        "chord": "A",
+        "voices": [
+          "A2",
+          "E3",
+          "A3",
+          "C#4",
+          "A4"
+        ]
+      },
+      {
+        "t": 114.783,
+        "at": "44.1",
+        "chord": "Bm7",
+        "voices": [
+          "B2",
+          "F#3",
+          "A3",
+          "D4",
+          "A4"
+        ]
+      },
+      {
+        "t": 117.391,
+        "at": "45.1",
+        "chord": "Gmaj9",
+        "voices": [
+          "G2",
+          "D3",
+          "F#3",
+          "A3",
+          "D4",
+          "A4",
+          "B4"
+        ]
+      },
+      {
+        "t": 120.0,
+        "at": "46.1",
+        "chord": "Em9",
+        "voices": [
+          "E2",
+          "B2",
+          "F#3",
+          "B3",
+          "D4",
+          "G4",
+          "B4"
+        ]
+      },
+      {
+        "t": 122.609,
+        "at": "47.1",
+        "chord": "Asus4",
+        "voices": [
+          "A2",
+          "E3",
+          "A3",
+          "D4",
+          "A4",
+          "D5"
+        ]
+      },
+      {
+        "t": 125.217,
+        "at": "48.1",
+        "chord": "Dadd9",
+        "voices": [
+          "D2",
+          "A2",
+          "E3",
+          "A3",
+          "D4",
+          "F#4",
+          "D5"
+        ]
+      },
+      {
+        "t": 130.435,
+        "at": "50.1",
+        "chord": "G/D",
+        "voices": [
+          "D2",
+          "D3",
+          "B3",
+          "D4",
+          "G4",
+          "D5"
+        ]
+      },
+      {
+        "t": 133.043,
+        "at": "51.1",
+        "chord": "Dadd9",
+        "voices": [
+          "D2",
+          "A2",
+          "D3",
+          "A3",
+          "D4",
+          "F#4",
+          "E5"
+        ]
+      }
+    ],
+    "parts": {
+      "strings-held": 1,
+      "piano-a1": 29,
+      "piano-a2": 135,
+      "strings-a1": 16,
+      "strings-a2": 51,
+      "cello-a1": 3,
+      "cello-a2": 23,
+      "bass-a1": 1,
+      "bass-a2": 5
+    },
+    "thread_tones": 125,
+    "pulse_events": 279,
+    "family_gain_db": {
+      "strings": 6.36,
+      "piano": 18.68,
+      "cello": 6.31,
+      "bass": 7.6,
+      "sub": -38.13,
+      "pulse": 5.14,
+      "thread": -32.53
+    },
+    "tuning": {
+      "strings-held": {
+        "71": {
+          "measured_cents": 3.14,
+          "sd_cents": 4.22,
+          "bend_cents": -3.14
+        }
+      },
+      "piano-a1": {
+        "43": {
+          "measured_cents": -12.13,
+          "sd_cents": 0.21,
+          "bend_cents": 12.13
+        },
+        "47": {
+          "measured_cents": -0.06,
+          "sd_cents": 0.27,
+          "bend_cents": 0.06
+        },
+        "50": {
+          "measured_cents": -2.7,
+          "sd_cents": 0.06,
+          "bend_cents": 2.7
+        },
+        "54": {
+          "measured_cents": -2.38,
+          "sd_cents": 0.05,
+          "bend_cents": 2.38
+        },
+        "57": {
+          "measured_cents": -3.13,
+          "sd_cents": 0.07,
+          "bend_cents": 3.13
+        },
+        "59": {
+          "measured_cents": -2.46,
+          "sd_cents": 0.2,
+          "bend_cents": 2.46
+        },
+        "62": {
+          "measured_cents": -1.98,
+          "sd_cents": 0.8,
+          "bend_cents": 1.98
+        },
+        "64": {
+          "measured_cents": -0.92,
+          "sd_cents": 2.56,
+          "bend_cents": 0.92
+        },
+        "66": {
+          "measured_cents": -3.11,
+          "sd_cents": 0.34,
+          "bend_cents": 3.11
+        },
+        "69": {
+          "measured_cents": -1.8,
+          "sd_cents": 1.05,
+          "bend_cents": 1.8
+        },
+        "71": {
+          "measured_cents": -1.74,
+          "sd_cents": 1.34,
+          "bend_cents": 1.74
+        },
+        "73": {
+          "measured_cents": -2.22,
+          "sd_cents": 1.11,
+          "bend_cents": 2.22
+        },
+        "74": {
+          "measured_cents": -2.54,
+          "sd_cents": 1.37,
+          "bend_cents": 2.54
+        }
+      },
+      "piano-a2": {
+        "38": {
+          "measured_cents": -5.66,
+          "sd_cents": 0.22,
+          "bend_cents": 5.66
+        },
+        "43": {
+          "measured_cents": -12.13,
+          "sd_cents": 0.21,
+          "bend_cents": 12.13
+        },
+        "45": {
+          "measured_cents": -6.45,
+          "sd_cents": 0.32,
+          "bend_cents": 6.45
+        },
+        "50": {
+          "measured_cents": -2.7,
+          "sd_cents": 0.06,
+          "bend_cents": 2.7
+        },
+        "54": {
+          "measured_cents": -2.38,
+          "sd_cents": 0.05,
+          "bend_cents": 2.38
+        },
+        "55": {
+          "measured_cents": -2.39,
+          "sd_cents": 0.04,
+          "bend_cents": 2.39
+        },
+        "57": {
+          "measured_cents": -3.13,
+          "sd_cents": 0.07,
+          "bend_cents": 3.13
+        },
+        "59": {
+          "measured_cents": -2.46,
+          "sd_cents": 0.2,
+          "bend_cents": 2.46
+        },
+        "61": {
+          "measured_cents": 0.55,
+          "sd_cents": 1.41,
+          "bend_cents": -0.55
+        },
+        "62": {
+          "measured_cents": -1.98,
+          "sd_cents": 0.8,
+          "bend_cents": 1.98
+        },
+        "64": {
+          "measured_cents": -0.92,
+          "sd_cents": 2.56,
+          "bend_cents": 0.92
+        },
+        "66": {
+          "measured_cents": -3.11,
+          "sd_cents": 0.34,
+          "bend_cents": 3.11
+        },
+        "67": {
+          "measured_cents": -3.3,
+          "sd_cents": 0.41,
+          "bend_cents": 3.3
+        },
+        "69": {
+          "measured_cents": -1.8,
+          "sd_cents": 1.05,
+          "bend_cents": 1.8
+        },
+        "71": {
+          "measured_cents": -1.74,
+          "sd_cents": 1.34,
+          "bend_cents": 1.74
+        },
+        "73": {
+          "measured_cents": -2.22,
+          "sd_cents": 1.11,
+          "bend_cents": 2.22
+        },
+        "74": {
+          "measured_cents": -2.54,
+          "sd_cents": 1.37,
+          "bend_cents": 2.54
+        },
+        "76": {
+          "measured_cents": -0.35,
+          "sd_cents": 1.33,
+          "bend_cents": 0.35
+        },
+        "78": {
+          "measured_cents": 0.82,
+          "sd_cents": 1.53,
+          "bend_cents": -0.82
+        }
+      },
+      "strings-a1": {
+        "55": {
+          "measured_cents": -0.61,
+          "sd_cents": 6.5,
+          "bend_cents": 0.61
+        },
+        "57": {
+          "measured_cents": -0.97,
+          "sd_cents": 5.65,
+          "bend_cents": 0.97
+        },
+        "62": {
+          "measured_cents": 2.01,
+          "sd_cents": 2.88,
+          "bend_cents": -2.01
+        },
+        "64": {
+          "measured_cents": -1.48,
+          "sd_cents": 3.58,
+          "bend_cents": 1.48
+        },
+        "66": {
+          "measured_cents": -1.44,
+          "sd_cents": 3.05,
+          "bend_cents": 1.44
+        },
+        "69": {
+          "measured_cents": -4.84,
+          "sd_cents": 3.65,
+          "bend_cents": 4.84
+        },
+        "71": {
+          "measured_cents": 3.14,
+          "sd_cents": 4.22,
+          "bend_cents": -3.14
+        }
+      },
+      "strings-a2": {
+        "55": {
+          "measured_cents": -0.61,
+          "sd_cents": 6.5,
+          "bend_cents": 0.61
+        },
+        "57": {
+          "measured_cents": -0.97,
+          "sd_cents": 5.65,
+          "bend_cents": 0.97
+        },
+        "59": {
+          "measured_cents": -1.89,
+          "sd_cents": 3.22,
+          "bend_cents": 1.89
+        },
+        "61": {
+          "measured_cents": 2.51,
+          "sd_cents": 3.33,
+          "bend_cents": -2.51
+        },
+        "62": {
+          "measured_cents": 2.01,
+          "sd_cents": 2.88,
+          "bend_cents": -2.01
+        },
+        "64": {
+          "measured_cents": -1.48,
+          "sd_cents": 3.58,
+          "bend_cents": 1.48
+        },
+        "66": {
+          "measured_cents": -1.44,
+          "sd_cents": 3.05,
+          "bend_cents": 1.44
+        },
+        "67": {
+          "measured_cents": -1.24,
+          "sd_cents": 2.77,
+          "bend_cents": 1.24
+        },
+        "69": {
+          "measured_cents": -4.84,
+          "sd_cents": 3.65,
+          "bend_cents": 4.84
+        },
+        "71": {
+          "measured_cents": 3.14,
+          "sd_cents": 4.22,
+          "bend_cents": -3.14
+        },
+        "74": {
+          "measured_cents": 3.65,
+          "sd_cents": 2.6,
+          "bend_cents": -3.65
+        },
+        "76": {
+          "measured_cents": 4.79,
+          "sd_cents": 2.35,
+          "bend_cents": -4.79
+        }
+      },
+      "cello-a1": {
+        "38": {
+          "measured_cents": -6.14,
+          "sd_cents": 2.45,
+          "bend_cents": 6.14
+        },
+        "42": {
+          "measured_cents": 10.54,
+          "sd_cents": 4.44,
+          "bend_cents": -10.54
+        },
+        "43": {
+          "measured_cents": -6.8,
+          "sd_cents": 2.43,
+          "bend_cents": 6.8
+        }
+      },
+      "cello-a2": {
+        "38": {
+          "measured_cents": -6.14,
+          "sd_cents": 2.45,
+          "bend_cents": 6.14
+        },
+        "40": {
+          "measured_cents": 6.61,
+          "sd_cents": 3.69,
+          "bend_cents": -6.61
+        },
+        "42": {
+          "measured_cents": 10.54,
+          "sd_cents": 4.44,
+          "bend_cents": -10.54
+        },
+        "43": {
+          "measured_cents": -6.8,
+          "sd_cents": 2.43,
+          "bend_cents": 6.8
+        },
+        "45": {
+          "measured_cents": -6.42,
+          "sd_cents": 2.1,
+          "bend_cents": 6.42
+        },
+        "47": {
+          "measured_cents": -5.58,
+          "sd_cents": 3.8,
+          "bend_cents": 5.58
+        },
+        "49": {
+          "measured_cents": 1.93,
+          "sd_cents": 5.77,
+          "bend_cents": -1.93
+        }
+      },
+      "bass-a1": {
+        "35": {
+          "measured_cents": -1.36,
+          "sd_cents": 1.25,
+          "bend_cents": 1.36
+        }
+      },
+      "bass-a2": {
+        "31": {
+          "measured_cents": -1.13,
+          "sd_cents": 1.36,
+          "bend_cents": 1.13
+        },
+        "33": {
+          "measured_cents": -1.41,
+          "sd_cents": 1.29,
+          "bend_cents": 1.41
+        },
+        "35": {
+          "measured_cents": -1.36,
+          "sd_cents": 1.25,
+          "bend_cents": 1.36
+        },
+        "38": {
+          "measured_cents": 0.31,
+          "sd_cents": 1.02,
+          "bend_cents": -0.31
+        },
+        "40": {
+          "measured_cents": -0.32,
+          "sd_cents": 0.47,
+          "bend_cents": 0.32
+        }
+      }
+    },
+    "holds": [
+      {
+        "t": 31.304,
+        "dur": 2.283,
+        "gain_db": -5.0,
+        "at": "12.1",
+        "scene": "a1-world",
+        "dip_db": {
+          "pulse": -5.0,
+          "piano": -5.0,
+          "strings": -3.5,
+          "cello": -3.5,
+          "bass": -3.5,
+          "sub": -3.5,
+          "thread": -2.25
+        },
+        "ramp_in_s": 0.652,
+        "ramp_out_s": 0.978
+      },
+      {
+        "t": 38.227,
+        "dur": 2.208,
+        "gain_db": -5.0,
+        "at": "14.3.615",
+        "scene": "a1-world",
+        "dip_db": {
+          "pulse": -5.0,
+          "piano": -5.0,
+          "strings": -3.5,
+          "cello": -3.5,
+          "bass": -3.5,
+          "sub": -3.5,
+          "thread": -2.25
+        },
+        "ramp_in_s": 0.652,
+        "ramp_out_s": 0.978
+      },
+      {
+        "t": 51.848,
+        "dur": 1.259,
+        "gain_db": -5.0,
+        "at": "19.4.5",
+        "scene": "a1-after",
+        "dip_db": {
+          "pulse": -5.0,
+          "piano": -5.0,
+          "strings": -3.5,
+          "cello": -3.5,
+          "bass": -3.5,
+          "sub": -3.5,
+          "thread": -2.25
+        },
+        "ramp_in_s": 0.42,
+        "ramp_out_s": 0.978
+      },
+      {
+        "t": 69.728,
+        "dur": 2.08,
+        "gain_db": -5.0,
+        "at": "26.3.916",
+        "scene": "a2-resolve",
+        "dip_db": {
+          "pulse": -5.0,
+          "piano": -5.0,
+          "strings": -3.5,
+          "cello": -3.5,
+          "bass": -3.5,
+          "sub": -3.5,
+          "thread": -2.25
+        },
+        "ramp_in_s": 0.652,
+        "ramp_out_s": 0.978
+      },
+      {
+        "t": 86.969,
+        "dur": 1.727,
+        "gain_db": -5.0,
+        "at": "33.2.352",
+        "scene": "a3-change",
+        "dip_db": {
+          "pulse": -5.0,
+          "piano": -5.0,
+          "strings": -3.5,
+          "cello": -3.5,
+          "bass": -3.5,
+          "sub": -3.5,
+          "thread": -2.25
+        },
+        "ramp_in_s": 0.576,
+        "ramp_out_s": 0.978
+      },
+      {
+        "t": 100.961,
+        "dur": 0.839,
+        "gain_db": -6.0,
+        "at": "38.3.807",
+        "scene": "a3-change",
+        "dip_db": {
+          "pulse": -6.0,
+          "piano": -6.0,
+          "strings": -4.2,
+          "cello": -4.2,
+          "bass": -4.2,
+          "sub": -4.2,
+          "thread": -2.7
+        },
+        "ramp_in_s": 0.28,
+        "ramp_out_s": 0.978
+      },
+      {
+        "t": 126.646,
+        "dur": 1.3,
+        "gain_db": -5.0,
+        "at": "48.3.191",
+        "scene": "a3-close",
+        "dip_db": {
+          "pulse": -5.0,
+          "piano": -5.0,
+          "strings": -3.5,
+          "cello": -3.5,
+          "bass": -3.5,
+          "sub": -3.5,
+          "thread": -2.25
+        },
+        "ramp_in_s": 0.433,
+        "ramp_out_s": 0.978
+      },
+      {
+        "t": 131.782,
+        "dur": 5.1,
+        "gain_db": -8.0,
+        "at": "50.3.066",
+        "scene": "a3-close",
+        "dip_db": {
+          "pulse": -8.0,
+          "piano": -8.0,
+          "strings": -5.6,
+          "cello": -5.6,
+          "bass": -5.6,
+          "sub": -5.6,
+          "thread": -3.6
+        },
+        "ramp_in_s": 0.652,
+        "ramp_out_s": 0.978
+      }
+    ],
+    "grid_check": {
+      "onsets": 543,
+      "by_grid_unit": {
+        "bar": 194,
+        "beat": 181,
+        "half": 158,
+        "sixteenth": 10
+      },
+      "max_offset_from_sixteenth_ms": 0.0,
+      "note": "thread chord changes are crossfades centred a quarter beat before their bar line"
+    }
+  },
+  "rewind": {
+    "start": 53.107,
+    "end": 58.722,
+    "landing_story_time": 28.772,
+    "act1_bed_rms_dbfs": -29.2,
+    "offline_passes_at": 57.087,
+    "scrub_seconds_of_story": 24.34
+  },
+  "voice_activity_seconds": 90.32,
+  "master": {
+    "mode": "target",
+    "iterations": 1,
+    "gain_db": 0.834,
+    "lufs": -16.023,
+    "true_peak_dbtp": -1.05,
+    "voice_limiter_max_db": 1.22,
+    "voice_limited_over_0_5db_seconds": 0.266,
+    "bed_ceiling_max_db": 3.66,
+    "bed_ceiling_seconds": 3.122
+  },
+  "outputs": {
+    "voice": "/home/user/valcorv/videos/priora-vision-film/assets/audio/master-voice.wav",
+    "music": "/home/user/valcorv/videos/priora-vision-film/assets/audio/music.wav",
+    "sfx": "/home/user/valcorv/videos/priora-vision-film/assets/audio/sfx.wav",
+    "master": "/home/user/valcorv/videos/priora-vision-film/assets/audio/master.wav"
+  },
+  "stem_sum_check": {
+    "max_abs_diff": 2.384185791015625e-07,
+    "max_abs_diff_dbfs": -132.5,
+    "note": "24-bit quantisation of three stems bounds this at about -132 dBFS"
+  },
+  "qa": {
+    "stems": {
+      "master": {
+        "lufs_integrated": -16.02,
+        "lra_lu": 4.92,
+        "true_peak_dbtp": -1.05,
+        "sample_peak_dbfs": -1.06,
+        "rms_dbfs": -19.75,
+        "crest_factor_db": 18.7,
+        "dc_offset": [
+          3.18e-08,
+          6.08e-08
+        ],
+        "sub30_rel_db": -44.8,
+        "band_2k_5k_vs_200_2k_db": -13.6,
+        "lr_correlation": 0.96,
+        "mono_foldown_loss_db": -0.2,
+        "short_term_max_lufs": -14.56
+      },
+      "music": {
+        "lufs_integrated": -27.73,
+        "lra_lu": 10.76,
+        "true_peak_dbtp": -6.97,
+        "sample_peak_dbfs": -6.97,
+        "rms_dbfs": -30.26,
+        "crest_factor_db": 23.29,
+        "dc_offset": [
+          -2.16e-07,
+          -2.75e-07
+        ],
+        "sub30_rel_db": -49.6,
+        "band_2k_5k_vs_200_2k_db": -18.2,
+        "lr_correlation": 0.614,
+        "mono_foldown_loss_db": 1.07,
+        "short_term_max_lufs": -23.36
+      },
+      "sfx": {
+        "lufs_integrated": -40.77,
+        "lra_lu": 5.21,
+        "true_peak_dbtp": -18.79,
+        "sample_peak_dbfs": -18.8,
+        "rms_dbfs": -42.68,
+        "crest_factor_db": 23.88,
+        "dc_offset": [
+          -8.19e-08,
+          6.34e-09
+        ],
+        "sub30_rel_db": -44.7,
+        "band_2k_5k_vs_200_2k_db": -11.9,
+        "lr_correlation": -0.015,
+        "mono_foldown_loss_db": 2.52,
+        "short_term_max_lufs": -35.03
+      },
+      "voice": {
+        "lufs_integrated": -15.33,
+        "lra_lu": 4.35,
+        "true_peak_dbtp": -1.4,
+        "sample_peak_dbfs": -1.41,
+        "rms_dbfs": -20.17,
+        "crest_factor_db": 18.77,
+        "dc_offset": [
+          2.3e-07,
+          2.3e-07
+        ],
+        "sub30_rel_db": -44.6,
+        "band_2k_5k_vs_200_2k_db": -13.4,
+        "short_term_max_lufs": -14.75
+      }
+    },
+    "sections": {
+      "act1": {
+        "start": 0.0,
+        "end": 53.107,
+        "master": {
+          "lufs_integrated": -15.6,
+          "lra_lu": 3.21,
+          "true_peak_dbtp": -1.05,
+          "sample_peak_dbfs": -1.06,
+          "rms_dbfs": -19.38,
+          "crest_factor_db": 18.32,
+          "dc_offset": [
+            -1.68e-07,
+            -2.18e-07
+          ],
+          "sub30_rel_db": -44.4,
+          "band_2k_5k_vs_200_2k_db": -13.6,
+          "lr_correlation": 0.966,
+          "mono_foldown_loss_db": -0.2,
+          "short_term_max_lufs": -14.56
+        },
+        "music+sfx": {
+          "lufs_integrated": -28.39,
+          "lra_lu": 11.86,
+          "true_peak_dbtp": -7.1,
+          "sample_peak_dbfs": -7.11,
+          "rms_dbfs": -30.7,
+          "crest_factor_db": 23.59,
+          "dc_offset": [
+            -4.67e-07,
+            -5.16e-07
+          ],
+          "sub30_rel_db": -46.3,
+          "band_2k_5k_vs_200_2k_db": -16.8,
+          "lr_correlation": 0.539,
+          "mono_foldown_loss_db": 1.27,
+          "short_term_max_lufs": -23.32
+        }
+      },
+      "rewind": {
+        "start": 53.107,
+        "end": 58.722,
+        "master": {
+          "lufs_integrated": -27.65,
+          "lra_lu": 1.95,
+          "true_peak_dbtp": -14.33,
+          "sample_peak_dbfs": -14.34,
+          "rms_dbfs": -30.04,
+          "crest_factor_db": 15.7,
+          "dc_offset": [
+            3.17e-07,
+            -6.05e-06
+          ],
+          "sub30_rel_db": -57.7,
+          "band_2k_5k_vs_200_2k_db": -16.0,
+          "lr_correlation": 0.471,
+          "mono_foldown_loss_db": 1.35,
+          "short_term_max_lufs": -26.1
+        },
+        "music+sfx": {
+          "lufs_integrated": -27.65,
+          "lra_lu": 1.95,
+          "true_peak_dbtp": -14.33,
+          "sample_peak_dbfs": -14.34,
+          "rms_dbfs": -30.04,
+          "crest_factor_db": 15.7,
+          "dc_offset": [
+            2.57e-07,
+            -6.1e-06
+          ],
+          "sub30_rel_db": -57.7,
+          "band_2k_5k_vs_200_2k_db": -16.0,
+          "lr_correlation": 0.471,
+          "mono_foldown_loss_db": 1.35,
+          "short_term_max_lufs": -26.1
+        }
+      },
+      "act2": {
+        "start": 58.722,
+        "end": 80.896,
+        "master": {
+          "lufs_integrated": -16.1,
+          "lra_lu": 3.98,
+          "true_peak_dbtp": -1.05,
+          "sample_peak_dbfs": -1.06,
+          "rms_dbfs": -19.68,
+          "crest_factor_db": 18.63,
+          "dc_offset": [
+            8.45e-06,
+            1.01e-05
+          ],
+          "sub30_rel_db": -44.7,
+          "band_2k_5k_vs_200_2k_db": -12.9,
+          "lr_correlation": 0.956,
+          "mono_foldown_loss_db": -0.01,
+          "short_term_max_lufs": -14.76
+        },
+        "music+sfx": {
+          "lufs_integrated": -27.69,
+          "lra_lu": 8.76,
+          "true_peak_dbtp": -10.15,
+          "sample_peak_dbfs": -10.16,
+          "rms_dbfs": -29.85,
+          "crest_factor_db": 19.7,
+          "dc_offset": [
+            8.26e-06,
+            9.92e-06
+          ],
+          "sub30_rel_db": -52.4,
+          "band_2k_5k_vs_200_2k_db": -18.6,
+          "lr_correlation": 0.543,
+          "mono_foldown_loss_db": 1.18,
+          "short_term_max_lufs": -24.58
+        }
+      },
+      "act3": {
+        "start": 80.896,
+        "end": 101.409,
+        "master": {
+          "lufs_integrated": -16.34,
+          "lra_lu": 5.68,
+          "true_peak_dbtp": -1.05,
+          "sample_peak_dbfs": -1.06,
+          "rms_dbfs": -20.02,
+          "crest_factor_db": 18.97,
+          "dc_offset": [
+            -8.24e-06,
+            -9.1e-06
+          ],
+          "sub30_rel_db": -45.4,
+          "band_2k_5k_vs_200_2k_db": -14.6,
+          "lr_correlation": 0.958,
+          "mono_foldown_loss_db": -0.23,
+          "short_term_max_lufs": -14.83
+        },
+        "music+sfx": {
+          "lufs_integrated": -27.53,
+          "lra_lu": 10.84,
+          "true_peak_dbtp": -11.11,
+          "sample_peak_dbfs": -11.11,
+          "rms_dbfs": -29.67,
+          "crest_factor_db": 18.56,
+          "dc_offset": [
+            -8.86e-06,
+            -9.73e-06
+          ],
+          "sub30_rel_db": -49.9,
+          "band_2k_5k_vs_200_2k_db": -21.1,
+          "lr_correlation": 0.612,
+          "mono_foldown_loss_db": 0.72,
+          "short_term_max_lufs": -24.41
+        }
+      },
+      "scenarios": {
+        "start": 101.409,
+        "end": 122.621,
+        "master": {
+          "lufs_integrated": -15.76,
+          "lra_lu": 1.98,
+          "true_peak_dbtp": -1.05,
+          "sample_peak_dbfs": -1.06,
+          "rms_dbfs": -18.89,
+          "crest_factor_db": 17.84,
+          "dc_offset": [
+            4.86e-07,
+            1.97e-06
+          ],
+          "sub30_rel_db": -45.4,
+          "band_2k_5k_vs_200_2k_db": -13.4,
+          "lr_correlation": 0.962,
+          "mono_foldown_loss_db": -0.14,
+          "short_term_max_lufs": -14.67
+        },
+        "music+sfx": {
+          "lufs_integrated": -26.73,
+          "lra_lu": 2.02,
+          "true_peak_dbtp": -12.47,
+          "sample_peak_dbfs": -12.47,
+          "rms_dbfs": -28.8,
+          "crest_factor_db": 16.33,
+          "dc_offset": [
+            3.52e-09,
+            1.49e-06
+          ],
+          "sub30_rel_db": -52.5,
+          "band_2k_5k_vs_200_2k_db": -20.9,
+          "lr_correlation": 0.637,
+          "mono_foldown_loss_db": 0.92,
+          "short_term_max_lufs": -25.14
+        }
+      },
+      "close": {
+        "start": 122.621,
+        "end": 136.967,
+        "master": {
+          "lufs_integrated": -16.46,
+          "lra_lu": 17.68,
+          "true_peak_dbtp": -1.05,
+          "sample_peak_dbfs": -1.1,
+          "rms_dbfs": -20.94,
+          "crest_factor_db": 19.84,
+          "dc_offset": [
+            -1.2e-06,
+            -1.76e-06
+          ],
+          "sub30_rel_db": -45.1,
+          "band_2k_5k_vs_200_2k_db": -14.7,
+          "lr_correlation": 0.959,
+          "mono_foldown_loss_db": -0.23,
+          "short_term_max_lufs": -14.71
+        },
+        "music+sfx": {
+          "lufs_integrated": -27.73,
+          "lra_lu": 7.63,
+          "true_peak_dbtp": -13.28,
+          "sample_peak_dbfs": -13.29,
+          "rms_dbfs": -30.64,
+          "crest_factor_db": 17.35,
+          "dc_offset": [
+            -1.32e-06,
+            -1.89e-06
+          ],
+          "sub30_rel_db": -58.9,
+          "band_2k_5k_vs_200_2k_db": -15.6,
+          "lr_correlation": 0.62,
+          "mono_foldown_loss_db": 1.0,
+          "short_term_max_lufs": -25.5
+        }
+      }
+    },
+    "bed_vs_voice": {
+      "voice_momentary_median_lufs": -15.5,
+      "bed_under_speech_median_lufs": -29.0,
+      "bed_in_pauses_median_lufs": -35.3
+    },
+    "edges": {
+      "music": [],
+      "sfx": [],
+      "master": []
+    },
+    "onsets_from_silence": {
+      "music": [],
+      "sfx": []
+    },
+    "onset_timing": {
+      "count": 35,
+      "clear": 17,
+      "max_abs_delta_ms": 51.0,
+      "median_abs_delta_ms": 0.5,
+      "max_abs_delta_ms_including_masked": 51.0,
+      "note": "clear rows have no other sound starting within 80 ms and no continuous sound running through them; a masked reading measures its neighbour, not a timing error (placement is sample exact)",
+      "rows": [
+        {
+          "kind": "stamp",
+          "t": 17.609,
+          "delta_ms": 21.0,
+          "masked": true
+        },
+        {
+          "kind": "valve-clunk",
+          "t": 30.682,
+          "delta_ms": 51.0,
+          "masked": false
+        },
+        {
+          "kind": "gauge",
+          "t": 31.342,
+          "delta_ms": 22.0,
+          "masked": true
+        },
+        {
+          "kind": "latch-soft",
+          "t": 58.722,
+          "delta_ms": -1.5,
+          "masked": false
+        },
+        {
+          "kind": "focus",
+          "t": 68.152,
+          "delta_ms": 45.5,
+          "masked": false
+        },
+        {
+          "kind": "focus",
+          "t": 71.769,
+          "delta_ms": -10.5,
+          "masked": true
+        },
+        {
+          "kind": "confirm",
+          "t": 72.391,
+          "delta_ms": -0.5,
+          "masked": false
+        },
+        {
+          "kind": "confirm",
+          "t": 72.717,
+          "delta_ms": -0.5,
+          "masked": false
+        },
+        {
+          "kind": "confirm",
+          "t": 73.043,
+          "delta_ms": -0.5,
+          "masked": false
+        },
+        {
+          "kind": "confirm",
+          "t": 73.369,
+          "delta_ms": -1.0,
+          "masked": false
+        },
+        {
+          "kind": "confirm",
+          "t": 73.695,
+          "delta_ms": -0.5,
+          "masked": false
+        },
+        {
+          "kind": "record-append",
+          "t": 74.674,
+          "delta_ms": 0.0,
+          "masked": false
+        },
+        {
+          "kind": "record-append",
+          "t": 75.0,
+          "delta_ms": -0.5,
+          "masked": false
+        },
+        {
+          "kind": "valve-clunk",
+          "t": 82.156,
+          "delta_ms": 0.0,
+          "masked": true
+        },
+        {
+          "kind": "record-append",
+          "t": 82.174,
+          "delta_ms": -18.0,
+          "masked": true
+        },
+        {
+          "kind": "focus",
+          "t": 83.498,
+          "delta_ms": -0.5,
+          "masked": true
+        },
+        {
+          "kind": "system-tick",
+          "t": 84.686,
+          "delta_ms": -10.5,
+          "masked": false
+        },
+        {
+          "kind": "cross-snap",
+          "t": 86.739,
+          "delta_ms": 0.0,
+          "masked": false
+        },
+        {
+          "kind": "focus",
+          "t": 88.716,
+          "delta_ms": -32.5,
+          "masked": true
+        },
+        {
+          "kind": "choice-accent",
+          "t": 90.652,
+          "delta_ms": -1.0,
+          "masked": true
+        },
+        {
+          "kind": "confirm",
+          "t": 90.972,
+          "delta_ms": -21.0,
+          "masked": true
+        },
+        {
+          "kind": "choice-accent",
+          "t": 93.711,
+          "delta_ms": -1.0,
+          "masked": false
+        },
+        {
+          "kind": "choice-accent",
+          "t": 96.236,
+          "delta_ms": -0.5,
+          "masked": true
+        },
+        {
+          "kind": "focus",
+          "t": 97.194,
+          "delta_ms": -0.5,
+          "masked": true
+        },
+        {
+          "kind": "focus",
+          "t": 106.304,
+          "delta_ms": 38.0,
+          "masked": true
+        },
+        {
+          "kind": "choice-accent",
+          "t": 106.63,
+          "delta_ms": 35.5,
+          "masked": true
+        },
+        {
+          "kind": "choice-accent",
+          "t": 110.217,
+          "delta_ms": -0.5,
+          "masked": false
+        },
+        {
+          "kind": "focus",
+          "t": 113.804,
+          "delta_ms": 13.0,
+          "masked": true
+        },
+        {
+          "kind": "choice-accent",
+          "t": 114.783,
+          "delta_ms": -1.0,
+          "masked": false
+        },
+        {
+          "kind": "decision-accent",
+          "t": 118.696,
+          "delta_ms": -1.0,
+          "masked": true
+        },
+        {
+          "kind": "decision-accent",
+          "t": 119.022,
+          "delta_ms": 0.0,
+          "masked": true
+        },
+        {
+          "kind": "decision-accent",
+          "t": 119.348,
+          "delta_ms": -1.0,
+          "masked": true
+        },
+        {
+          "kind": "decision-accent",
+          "t": 119.674,
+          "delta_ms": -1.0,
+          "masked": true
+        },
+        {
+          "kind": "decision-accent",
+          "t": 126.196,
+          "delta_ms": 0.0,
+          "masked": false
+        },
+        {
+          "kind": "latch",
+          "t": 128.448,
+          "delta_ms": -0.5,
+          "masked": false
+        }
+      ]
+    },
+    "tonal_music_hf_spikes": {
+      "count": 0,
+      "times": []
+    },
+    "head_tail": {
+      "first_sample_abs": 0.0,
+      "last_sample_abs": 0.0,
+      "last_50ms_peak_dbfs": -76.2
+    },
+    "grid": {
+      "detector_offset_ms": -5.0,
+      "rhythmic_layers_pulse_and_piano": {
+        "detected_onsets": 155,
+        "signed_median_offset_ms": 1.13,
+        "median_abs_offset_from_sixteenth_ms": 1.17,
+        "p90_abs_offset_ms": 7.94,
+        "within_5ms_of_grid": 0.845,
+        "within_10ms_of_grid": 0.916,
+        "within_20ms_of_grid": 0.955
+      },
+      "piano_note_ons_to_nearest_attack": {
+        "notes": 155,
+        "median_ms": 5.04,
+        "within_15ms": 0.645,
+        "note": "notes that start over their own sustain (repeated ostinato notes, chord tones) show no separate 6 dB rise; they are not late, only unheard as attacks"
+      },
+      "by_family": {
+        "strings": {
+          "detected_onsets": 2,
+          "signed_median_offset_ms": -13.91,
+          "median_abs_offset_from_sixteenth_ms": 15.35,
+          "p90_abs_offset_ms": 26.48,
+          "within_5ms_of_grid": 0.5,
+          "within_10ms_of_grid": 0.5,
+          "within_20ms_of_grid": 0.5
+        },
+        "piano": {
+          "detected_onsets": 118,
+          "signed_median_offset_ms": 7.8,
+          "median_abs_offset_from_sixteenth_ms": 8.0,
+          "p90_abs_offset_ms": 22.69,
+          "within_5ms_of_grid": 0.305,
+          "within_10ms_of_grid": 0.669,
+          "within_20ms_of_grid": 0.89
+        },
+        "cello": {
+          "detected_onsets": 0
+        },
+        "bass": {
+          "detected_onsets": 4,
+          "signed_median_offset_ms": -9.41,
+          "median_abs_offset_from_sixteenth_ms": 45.41,
+          "p90_abs_offset_ms": 73.74,
+          "within_5ms_of_grid": 0.0,
+          "within_10ms_of_grid": 0.0,
+          "within_20ms_of_grid": 0.25
+        },
+        "sub": {
+          "detected_onsets": 37,
+          "signed_median_offset_ms": -21.26,
+          "median_abs_offset_from_sixteenth_ms": 40.04,
+          "p90_abs_offset_ms": 67.94,
+          "within_5ms_of_grid": 0.0,
+          "within_10ms_of_grid": 0.135,
+          "within_20ms_of_grid": 0.216
+        },
+        "pulse": {
+          "detected_onsets": 217,
+          "signed_median_offset_ms": 0.04,
+          "median_abs_offset_from_sixteenth_ms": 0.26,
+          "p90_abs_offset_ms": 0.65,
+          "within_5ms_of_grid": 1.0,
+          "within_10ms_of_grid": 1.0,
+          "within_20ms_of_grid": 1.0
+        },
+        "thread": {
+          "detected_onsets": 107,
+          "signed_median_offset_ms": 5.04,
+          "median_abs_offset_from_sixteenth_ms": 43.17,
+          "p90_abs_offset_ms": 73.25,
+          "within_5ms_of_grid": 0.075,
+          "within_10ms_of_grid": 0.159,
+          "within_20ms_of_grid": 0.271
+        },
+        "verb-plate": {
+          "detected_onsets": 112,
+          "signed_median_offset_ms": 25.67,
+          "median_abs_offset_from_sixteenth_ms": 33.13,
+          "p90_abs_offset_ms": 47.55,
+          "within_5ms_of_grid": 0.0,
+          "within_10ms_of_grid": 0.0,
+          "within_20ms_of_grid": 0.009
+        },
+        "verb-hall": {
+          "detected_onsets": 0
+        },
+        "verb-thread": {
+          "detected_onsets": 136,
+          "signed_median_offset_ms": -7.43,
+          "median_abs_offset_from_sixteenth_ms": 37.85,
+          "p90_abs_offset_ms": 73.04,
+          "within_5ms_of_grid": 0.081,
+          "within_10ms_of_grid": 0.162,
+          "within_20ms_of_grid": 0.25
+        }
+      },
+      "music_stem": {
+        "detected_onsets": 94,
+        "signed_median_offset_ms": 7.89,
+        "median_abs_offset_from_sixteenth_ms": 11.76,
+        "p90_abs_offset_ms": 63.27,
+        "within_5ms_of_grid": 0.117,
+        "within_10ms_of_grid": 0.447,
+        "within_20ms_of_grid": 0.713
+      },
+      "note": "a sixteenth is 163 ms; an attack is a 6 dB rise within 24 ms, prominent within 18 dB of its surroundings. Sustained families (pad, strings, reverb returns) have few true attacks; their readings are the patches' own slow shimmer and are not a timing measure.",
+      "scheduled": {
+        "onsets": 543,
+        "by_grid_unit": {
+          "bar": 194,
+          "beat": 181,
+          "half": 158,
+          "sixteenth": 10
+        },
+        "max_offset_from_sixteenth_ms": 0.0,
+        "note": "thread chord changes are crossfades centred a quarter beat before their bar line"
+      }
+    },
+    "silences": {
+      "unnoticed_change (offline + 1 beat to L08 end)": {
+        "from": 31.18,
+        "to": 38.23,
+        "median_lufs_m": -33.7,
+        "min_lufs_m": -36.9,
+        "max_lufs_m": -25.8
+      },
+      "after_L08 (to afterwards)": {
+        "from": 38.53,
+        "to": 40.39,
+        "median_lufs_m": -35.9,
+        "min_lufs_m": -36.2,
+        "max_lufs_m": -35.3
+      },
+      "landing (rewindEnd to the clarity bar)": {
+        "from": 58.77,
+        "to": 60.0,
+        "median_lufs_m": -37.0,
+        "min_lufs_m": -37.3,
+        "max_lufs_m": -30.8
+      },
+      "crossing (cross to riskOwner)": {
+        "from": 85.84,
+        "to": 88.7,
+        "median_lufs_m": -35.0,
+        "min_lufs_m": -37.1,
+        "max_lufs_m": -32.4
+      },
+      "pull_back (ordinary to closeIn)": {
+        "from": 117.37,
+        "to": 122.62,
+        "median_lufs_m": -27.7,
+        "min_lufs_m": -28.9,
+        "max_lufs_m": -22.7
+      },
+      "resolution (gapCloses to priora)": {
+        "from": 125.43,
+        "to": 128.1,
+        "median_lufs_m": -25.8,
+        "min_lufs_m": -28.4,
+        "max_lufs_m": -23.8
+      },
+      "final_2s": {
+        "from": 134.97,
+        "to": 136.97,
+        "median_lufs_m": -46.1,
+        "min_lufs_m": -54.2,
+        "max_lufs_m": -39.1
+      },
+      "reference_act2_ostinato (bar near connects + 4 bars)": {
+        "from": 67.83,
+        "to": 78.26,
+        "median_lufs_m": -26.9,
+        "min_lufs_m": -31.6,
+        "max_lufs_m": -21.0
+      },
+      "reference_scenarios (everyKind + 4 bars)": {
+        "from": 101.74,
+        "to": 112.17,
+        "median_lufs_m": -26.8,
+        "min_lufs_m": -32.0,
+        "max_lufs_m": -21.5
+      },
+      "holds": [
+        {
+          "t": 31.3,
+          "dur": 2.28,
+          "gain_db": -5.0,
+          "before_median": -25.9,
+          "inside_median": -30.7
+        },
+        {
+          "t": 38.23,
+          "dur": 2.21,
+          "gain_db": -5.0,
+          "before_median": -36.0,
+          "inside_median": -35.9
+        },
+        {
+          "t": 51.85,
+          "dur": 1.26,
+          "gain_db": -5.0,
+          "before_median": -28.2,
+          "inside_median": -31.7
+        },
+        {
+          "t": 69.73,
+          "dur": 2.08,
+          "gain_db": -5.0,
+          "before_median": -29.0,
+          "inside_median": -27.2
+        },
+        {
+          "t": 86.97,
+          "dur": 1.73,
+          "gain_db": -5.0,
+          "before_median": -34.8,
+          "inside_median": -36.7
+        },
+        {
+          "t": 100.96,
+          "dur": 0.84,
+          "gain_db": -6.0,
+          "before_median": -26.0,
+          "inside_median": -26.9
+        },
+        {
+          "t": 126.65,
+          "dur": 1.3,
+          "gain_db": -5.0,
+          "before_median": -25.4,
+          "inside_median": -27.0
+        },
+        {
+          "t": 131.78,
+          "dur": 5.1,
+          "gain_db": -8.0,
+          "before_median": -30.1,
+          "inside_median": -36.0
+        }
+      ]
+    },
+    "transitions": {
+      "note": "music stem, 400 ms loudness, 100 ms hop; 'curve' is every 200 ms from one bar before to one bar after the section's bar line",
+      "sections": [
+        {
+          "section": "A strings enter",
+          "t": 2.609,
+          "at": "1.1",
+          "median_before": -52.5,
+          "median_after": -38.5,
+          "max_rise_0_5s": 8.7,
+          "max_fall_0_5s": -2.9,
+          "curve": [
+            -66.8,
+            -65.6,
+            -63.7,
+            -60.9,
+            -57.8,
+            -54.4,
+            -50.8,
+            -47.4,
+            -44.3,
+            -41.6,
+            -39.6,
+            -38.4,
+            -37.8,
+            -38.1,
+            -39.6,
+            -40.5,
+            -40.0,
+            -39.5,
+            -39.1,
+            -38.6,
+            -38.1,
+            -38.0,
+            -38.0,
+            -37.5,
+            -37.4,
+            -31.2
+          ]
+        },
+        {
+          "section": "A pulse",
+          "t": 5.217,
+          "at": "2.1",
+          "median_before": -38.5,
+          "median_after": -30.2,
+          "max_rise_0_5s": 7.9,
+          "max_fall_0_5s": -4.1,
+          "curve": [
+            -37.6,
+            -38.8,
+            -40.5,
+            -40.3,
+            -39.8,
+            -39.3,
+            -38.9,
+            -38.4,
+            -38.0,
+            -38.0,
+            -37.7,
+            -37.5,
+            -33.2,
+            -30.4,
+            -30.1,
+            -30.1,
+            -29.5,
+            -29.8,
+            -31.2,
+            -29.0,
+            -28.1,
+            -30.4,
+            -32.2,
+            -32.2,
+            -31.7,
+            -29.1
+          ]
+        },
+        {
+          "section": "B build",
+          "t": 20.87,
+          "at": "8.1",
+          "median_before": -27.0,
+          "median_after": -28.4,
+          "max_rise_0_5s": 5.2,
+          "max_fall_0_5s": -2.7,
+          "curve": [
+            -29.6,
+            -30.2,
+            -30.8,
+            -29.3,
+            -27.9,
+            -27.2,
+            -26.2,
+            -25.8,
+            -26.1,
+            -26.0,
+            -25.1,
+            -26.2,
+            -27.9,
+            -27.6,
+            -28.3,
+            -29.4,
+            -30.2,
+            -30.7,
+            -30.9,
+            -28.3,
+            -27.8,
+            -29.3,
+            -28.6,
+            -26.8,
+            -24.8,
+            -23.2
+          ]
+        },
+        {
+          "section": "B high B",
+          "t": 28.696,
+          "at": "11.1",
+          "median_before": -25.2,
+          "median_after": -26.0,
+          "max_rise_0_5s": 4.3,
+          "max_fall_0_5s": -6.9,
+          "curve": [
+            -23.8,
+            -24.0,
+            -27.6,
+            -26.2,
+            -25.6,
+            -26.7,
+            -25.2,
+            -25.0,
+            -26.0,
+            -24.5,
+            -23.1,
+            -23.2,
+            -23.0,
+            -19.3,
+            -19.3,
+            -24.2,
+            -25.5,
+            -24.9,
+            -26.6,
+            -26.0,
+            -26.0,
+            -28.1,
+            -27.6,
+            -25.8,
+            -26.3,
+            -28.8,
+            -26.5
+          ]
+        },
+        {
+          "section": "C unnoticed change",
+          "t": 30.532,
+          "at": "11.3.816",
+          "median_before": -24.6,
+          "median_after": -29.4,
+          "max_rise_0_5s": 4.3,
+          "max_fall_0_5s": -6.9,
+          "curve": [
+            -23.3,
+            -22.8,
+            -23.6,
+            -20.3,
+            -19.0,
+            -21.8,
+            -26.2,
+            -25.0,
+            -25.3,
+            -27.5,
+            -26.0,
+            -26.0,
+            -28.4,
+            -26.4,
+            -25.7,
+            -27.7,
+            -26.9,
+            -26.2,
+            -27.4,
+            -28.6,
+            -29.6,
+            -30.1,
+            -31.4,
+            -30.7,
+            -30.4,
+            -31.5
+          ]
+        },
+        {
+          "section": "C darker",
+          "t": 36.522,
+          "at": "14.1",
+          "median_before": -34.5,
+          "median_after": -37.1,
+          "max_rise_0_5s": 1.7,
+          "max_fall_0_5s": -3.9,
+          "curve": [
+            -35.1,
+            -35.0,
+            -34.5,
+            -33.7,
+            -33.6,
+            -33.7,
+            -32.4,
+            -32.4,
+            -34.6,
+            -36.0,
+            -36.4,
+            -36.9,
+            -36.6,
+            -36.9,
+            -37.2,
+            -36.5,
+            -37.2,
+            -37.8,
+            -37.0,
+            -37.5,
+            -37.7,
+            -36.6,
+            -36.1,
+            -36.9,
+            -37.3,
+            -36.9
+          ]
+        },
+        {
+          "section": "D aftermath",
+          "t": 41.739,
+          "at": "16.1",
+          "median_before": -37.3,
+          "median_after": -33.0,
+          "max_rise_0_5s": 6.8,
+          "max_fall_0_5s": -3.8,
+          "curve": [
+            -37.1,
+            -37.2,
+            -37.2,
+            -37.1,
+            -37.0,
+            -36.5,
+            -37.1,
+            -39.7,
+            -40.6,
+            -39.5,
+            -38.5,
+            -38.9,
+            -36.7,
+            -32.9,
+            -32.2,
+            -33.6,
+            -34.3,
+            -34.4,
+            -34.4,
+            -34.0,
+            -33.3,
+            -32.5,
+            -31.6,
+            -30.3,
+            -29.7,
+            -29.8
+          ]
+        },
+        {
+          "section": "D gap",
+          "t": 49.565,
+          "at": "19.1",
+          "median_before": -30.7,
+          "median_after": -28.7,
+          "max_rise_0_5s": 4.1,
+          "max_fall_0_5s": -4.8,
+          "curve": [
+            -29.9,
+            -28.6,
+            -28.4,
+            -28.1,
+            -29.0,
+            -31.2,
+            -30.9,
+            -30.8,
+            -31.7,
+            -32.3,
+            -31.3,
+            -30.4,
+            -28.2,
+            -26.8,
+            -26.6,
+            -26.1,
+            -27.5,
+            -30.7,
+            -30.9,
+            -29.8,
+            -28.8,
+            -28.5,
+            -28.2,
+            -28.2,
+            -28.9,
+            -29.9
+          ]
+        },
+        {
+          "section": "rewind start",
+          "t": 53.107,
+          "at": "20.2.431",
+          "median_before": -29.9,
+          "median_after": -26.0,
+          "max_rise_0_5s": 4.4,
+          "max_fall_0_5s": -3.5,
+          "curve": [
+            -30.9,
+            -30.4,
+            -29.4,
+            -28.6,
+            -28.2,
+            -28.2,
+            -28.5,
+            -29.3,
+            -30.4,
+            -31.9,
+            -33.0,
+            -31.9,
+            -31.1,
+            -30.8,
+            -31.7,
+            -32.7,
+            -31.7,
+            -30.9,
+            -29.8,
+            -28.1,
+            -26.0,
+            -25.2,
+            -24.9,
+            -24.7,
+            -25.3,
+            -25.6,
+            -26.0
+          ]
+        },
+        {
+          "section": "rewind thread",
+          "t": 54.783,
+          "at": "21.1",
+          "median_before": -31.2,
+          "median_after": -27.4,
+          "max_rise_0_5s": 4.4,
+          "max_fall_0_5s": -4.2,
+          "curve": [
+            -31.1,
+            -32.7,
+            -32.3,
+            -31.5,
+            -30.8,
+            -31.2,
+            -32.6,
+            -32.2,
+            -31.2,
+            -30.4,
+            -29.3,
+            -27.0,
+            -25.5,
+            -25.1,
+            -24.6,
+            -24.9,
+            -25.5,
+            -25.4,
+            -26.9,
+            -29.6,
+            -28.9,
+            -27.0,
+            -27.2,
+            -28.5,
+            -28.7,
+            -29.2
+          ]
+        },
+        {
+          "section": "rewind landing",
+          "t": 58.722,
+          "at": "22.3.04",
+          "median_before": -30.2,
+          "median_after": -37.3,
+          "max_rise_0_5s": 8.7,
+          "max_fall_0_5s": -7.1,
+          "curve": [
+            -28.9,
+            -27.0,
+            -27.2,
+            -28.5,
+            -28.7,
+            -29.2,
+            -30.5,
+            -31.3,
+            -32.5,
+            -33.7,
+            -34.6,
+            -34.9,
+            -34.9,
+            -35.6,
+            -37.6,
+            -39.5,
+            -39.3,
+            -39.0,
+            -38.9,
+            -31.4,
+            -30.3,
+            -34.1,
+            -36.9,
+            -37.7,
+            -37.2,
+            -37.2
+          ]
+        },
+        {
+          "section": "E clarity",
+          "t": 60.0,
+          "at": "23.1",
+          "median_before": -34.9,
+          "median_after": -35.8,
+          "max_rise_0_5s": 8.7,
+          "max_fall_0_5s": -7.1,
+          "curve": [
+            -30.5,
+            -31.3,
+            -32.5,
+            -33.7,
+            -34.6,
+            -34.9,
+            -34.9,
+            -35.6,
+            -37.6,
+            -39.5,
+            -39.3,
+            -39.0,
+            -38.9,
+            -31.4,
+            -30.3,
+            -34.1,
+            -36.9,
+            -37.7,
+            -37.2,
+            -37.2,
+            -37.2,
+            -36.4,
+            -35.4,
+            -34.5,
+            -33.8,
+            -33.3,
+            -33.0
+          ]
+        },
+        {
+          "section": "E pulse",
+          "t": 62.609,
+          "at": "24.1",
+          "median_before": -35.8,
+          "median_after": -34.9,
+          "max_rise_0_5s": 2.3,
+          "max_fall_0_5s": -7.1,
+          "curve": [
+            -30.7,
+            -32.2,
+            -35.7,
+            -37.4,
+            -37.5,
+            -37.2,
+            -37.1,
+            -36.9,
+            -36.0,
+            -34.9,
+            -34.1,
+            -33.5,
+            -33.1,
+            -32.8,
+            -32.7,
+            -32.9,
+            -34.7,
+            -36.7,
+            -36.5,
+            -36.1,
+            -36.1,
+            -35.7,
+            -35.0,
+            -34.5,
+            -34.2,
+            -33.6
+          ]
+        },
+        {
+          "section": "F ostinato",
+          "t": 67.826,
+          "at": "26.1",
+          "median_before": -31.3,
+          "median_after": -28.6,
+          "max_rise_0_5s": 4.2,
+          "max_fall_0_5s": -4.8,
+          "curve": [
+            -33.2,
+            -32.9,
+            -31.8,
+            -30.5,
+            -29.5,
+            -28.5,
+            -27.6,
+            -27.5,
+            -29.6,
+            -32.1,
+            -31.8,
+            -31.8,
+            -28.5,
+            -27.7,
+            -29.8,
+            -30.6,
+            -29.6,
+            -29.8,
+            -31.0,
+            -27.6,
+            -26.8,
+            -29.0,
+            -27.7,
+            -26.5,
+            -27.6,
+            -27.2
+          ]
+        },
+        {
+          "section": "G step down",
+          "t": 82.174,
+          "at": "31.3",
+          "median_before": -23.5,
+          "median_after": -28.8,
+          "max_rise_0_5s": 2.2,
+          "max_fall_0_5s": -6.0,
+          "curve": [
+            -23.5,
+            -23.1,
+            -23.8,
+            -22.8,
+            -22.7,
+            -23.9,
+            -21.9,
+            -21.3,
+            -24.2,
+            -26.9,
+            -27.8,
+            -28.5,
+            -29.1,
+            -27.5,
+            -27.1,
+            -29.0,
+            -28.5,
+            -28.0,
+            -28.7,
+            -27.4,
+            -27.6,
+            -30.8,
+            -32.3,
+            -31.8,
+            -32.3,
+            -34.3
+          ]
+        },
+        {
+          "section": "G crossing",
+          "t": 86.087,
+          "at": "33.1",
+          "median_before": -33.9,
+          "median_after": -37.4,
+          "max_rise_0_5s": 2.1,
+          "max_fall_0_5s": -5.0,
+          "curve": [
+            -27.3,
+            -28.4,
+            -32.4,
+            -31.9,
+            -31.8,
+            -33.5,
+            -34.2,
+            -33.8,
+            -34.6,
+            -36.0,
+            -36.4,
+            -36.0,
+            -35.5,
+            -35.3,
+            -35.6,
+            -34.4,
+            -33.6,
+            -33.6,
+            -34.0,
+            -36.0,
+            -38.0,
+            -38.9,
+            -39.0,
+            -38.7,
+            -38.2,
+            -37.7
+          ]
+        },
+        {
+          "section": "H momentum",
+          "t": 88.696,
+          "at": "34.1",
+          "median_before": -35.9,
+          "median_after": -35.5,
+          "max_rise_0_5s": 4.3,
+          "max_fall_0_5s": -4.6,
+          "curve": [
+            -35.3,
+            -35.6,
+            -34.4,
+            -33.6,
+            -33.6,
+            -34.0,
+            -36.0,
+            -38.0,
+            -38.9,
+            -39.0,
+            -38.7,
+            -38.2,
+            -37.7,
+            -38.0,
+            -39.6,
+            -40.4,
+            -39.3,
+            -38.5,
+            -38.0,
+            -36.2,
+            -35.0,
+            -35.3,
+            -35.3,
+            -35.5,
+            -35.6,
+            -34.7,
+            -31.2
+          ]
+        },
+        {
+          "section": "S scenarios",
+          "t": 101.739,
+          "at": "39.1",
+          "median_before": -26.3,
+          "median_after": -28.0,
+          "max_rise_0_5s": 5.3,
+          "max_fall_0_5s": -5.4,
+          "curve": [
+            -25.9,
+            -26.8,
+            -27.8,
+            -28.3,
+            -27.0,
+            -26.1,
+            -23.0,
+            -22.9,
+            -25.9,
+            -25.9,
+            -26.4,
+            -26.8,
+            -27.1,
+            -29.9,
+            -32.4,
+            -31.7,
+            -30.0,
+            -27.4,
+            -26.6,
+            -27.2,
+            -27.9,
+            -29.2,
+            -28.2,
+            -27.4,
+            -28.3,
+            -26.6
+          ]
+        },
+        {
+          "section": "O thinning",
+          "t": 114.783,
+          "at": "44.1",
+          "median_before": -27.9,
+          "median_after": -27.1,
+          "max_rise_0_5s": 4.2,
+          "max_fall_0_5s": -3.5,
+          "curve": [
+            -28.0,
+            -28.9,
+            -31.2,
+            -29.4,
+            -27.3,
+            -27.0,
+            -26.8,
+            -27.7,
+            -29.4,
+            -28.0,
+            -26.3,
+            -26.5,
+            -27.3,
+            -27.1,
+            -27.9,
+            -28.8,
+            -26.3,
+            -25.3,
+            -26.4,
+            -25.9,
+            -24.3,
+            -25.6,
+            -28.4,
+            -27.5,
+            -27.3,
+            -28.1
+          ]
+        },
+        {
+          "section": "O pull back",
+          "t": 117.391,
+          "at": "45.1",
+          "median_before": -27.1,
+          "median_after": -28.2,
+          "max_rise_0_5s": 3.4,
+          "max_fall_0_5s": -3.5,
+          "curve": [
+            -27.1,
+            -27.9,
+            -28.8,
+            -26.3,
+            -25.3,
+            -26.4,
+            -25.9,
+            -24.3,
+            -25.6,
+            -28.4,
+            -27.5,
+            -27.3,
+            -28.1,
+            -28.2,
+            -28.4,
+            -28.8,
+            -27.9,
+            -26.5,
+            -25.6,
+            -26.4,
+            -28.0,
+            -28.6,
+            -28.7,
+            -28.4,
+            -28.1,
+            -28.2
+          ]
+        },
+        {
+          "section": "O decisions",
+          "t": 120.0,
+          "at": "46.1",
+          "median_before": -28.3,
+          "median_after": -28.0,
+          "max_rise_0_5s": 3.0,
+          "max_fall_0_5s": -2.7,
+          "curve": [
+            -28.2,
+            -28.4,
+            -28.8,
+            -27.9,
+            -26.5,
+            -25.6,
+            -26.4,
+            -28.0,
+            -28.6,
+            -28.7,
+            -28.4,
+            -28.1,
+            -28.2,
+            -27.3,
+            -27.4,
+            -28.5,
+            -28.9,
+            -28.6,
+            -27.7,
+            -28.1,
+            -28.8,
+            -28.3,
+            -27.5,
+            -25.7,
+            -25.1,
+            -24.7,
+            -22.7
+          ]
+        },
+        {
+          "section": "K close",
+          "t": 122.609,
+          "at": "47.1",
+          "median_before": -28.0,
+          "median_after": -28.4,
+          "max_rise_0_5s": 3.7,
+          "max_fall_0_5s": -5.7,
+          "curve": [
+            -27.1,
+            -28.0,
+            -28.9,
+            -28.6,
+            -28.0,
+            -27.8,
+            -28.6,
+            -28.5,
+            -28.0,
+            -26.5,
+            -25.4,
+            -25.0,
+            -23.4,
+            -22.5,
+            -23.2,
+            -24.2,
+            -26.5,
+            -29.4,
+            -28.9,
+            -28.7,
+            -29.0,
+            -29.6,
+            -29.7,
+            -27.9,
+            -26.3,
+            -25.8
+          ]
+        },
+        {
+          "section": "K resolution",
+          "t": 125.217,
+          "at": "48.1",
+          "median_before": -28.4,
+          "median_after": -25.7,
+          "max_rise_0_5s": 3.7,
+          "max_fall_0_5s": -5.7,
+          "curve": [
+            -22.5,
+            -23.2,
+            -24.2,
+            -26.5,
+            -29.4,
+            -28.9,
+            -28.7,
+            -29.0,
+            -29.6,
+            -29.7,
+            -27.9,
+            -26.3,
+            -25.8,
+            -24.8,
+            -24.9,
+            -26.0,
+            -25.8,
+            -25.3,
+            -24.7,
+            -24.0,
+            -23.9,
+            -25.0,
+            -26.8,
+            -27.2,
+            -27.1,
+            -26.9
+          ]
+        },
+        {
+          "section": "K line",
+          "t": 130.435,
+          "at": "50.1",
+          "median_before": -28.2,
+          "median_after": -30.0,
+          "max_rise_0_5s": 3.2,
+          "max_fall_0_5s": -4.2,
+          "curve": [
+            -27.0,
+            -28.4,
+            -30.6,
+            -30.4,
+            -29.2,
+            -27.6,
+            -26.9,
+            -26.8,
+            -26.6,
+            -27.2,
+            -29.3,
+            -30.9,
+            -29.8,
+            -28.6,
+            -29.2,
+            -30.6,
+            -31.0,
+            -30.9,
+            -30.2,
+            -29.3,
+            -29.2,
+            -29.8,
+            -30.4,
+            -30.3,
+            -29.6,
+            -29.3
+          ]
+        },
+        {
+          "section": "K home",
+          "t": 133.043,
+          "at": "51.1",
+          "median_before": -30.0,
+          "median_after": -35.3,
+          "max_rise_0_5s": 1.7,
+          "max_fall_0_5s": -4.4,
+          "curve": [
+            -28.6,
+            -29.2,
+            -30.6,
+            -31.0,
+            -30.9,
+            -30.2,
+            -29.3,
+            -29.2,
+            -29.8,
+            -30.4,
+            -30.3,
+            -29.6,
+            -29.3,
+            -29.4,
+            -30.0,
+            -30.8,
+            -31.3,
+            -32.4,
+            -33.9,
+            -34.7,
+            -35.5,
+            -36.8,
+            -38.3,
+            -40.0,
+            -41.7,
+            -43.4
+          ]
+        }
+      ],
+      "largest_rise_0_5s_film": 8.7,
+      "largest_fall_0_5s_film": -7.5,
+      "longest_under_minus50_s": 1.3
+    }
+  },
+  "seconds": 189.0
+}

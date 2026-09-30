@@ -1,0 +1,170 @@
+{
+  "note": "Frame 4 (a2-resolve), cut 3 (cut 2 shots and timings, recoloured): the sounds the picture makes. The scene reads every one of these times back through FL.clock('a2-resolve').ev(name), so picture and sound share one source. Offsets put each event on the 92 BPM half-beat grid for the guide narration (picture cuts use the shared rule FL.clock(id).c(anchor)); re-check them after a narration re-lock. The cut 3 colour accents (the strip's hot band on the first word-token, a condition chip's cobalt ring on focus-clause and connect-zone, the green record markers on record-append) land on existing events, so no event was added. Kinds from docs/sound-events.md only.",
+  "events": [
+    {
+      "name": "precision-snap",
+      "at": "cue:l12",
+      "kind": "precision-snap",
+      "gain_db": -10,
+      "dur": 2.36
+    },
+    {
+      "name": "push-worker",
+      "at": "L13.start",
+      "kind": "push",
+      "gain_db": -14,
+      "dur": 0.978,
+      "snap": {
+        "mode": "cut",
+        "off": -0.9779
+      }
+    },
+    {
+      "name": "cut-capture",
+      "at": "L13.start",
+      "kind": "cut",
+      "material": "paper",
+      "gain_db": -16,
+      "dur": 0.1
+    },
+    {
+      "name": "capture-start",
+      "at": "L13.start+0.02",
+      "kind": "capture-start",
+      "gain_db": -16,
+      "dur": 0.6
+    },
+    {
+      "name": "word-token",
+      "at": "L13:six.start",
+      "kind": "word-token",
+      "gain_db": -18,
+      "dur": 0.4,
+      "series": {
+        "count": 4,
+        "every": 0.326087
+      },
+      "snap": {
+        "mode": "near",
+        "off": -0.0004
+      }
+    },
+    {
+      "name": "connect-activity",
+      "at": "L14a.start",
+      "kind": "connect-line",
+      "gain_db": -12,
+      "dur": 1.304
+    },
+    {
+      "name": "focus-clause",
+      "at": "L14a.start",
+      "kind": "focus",
+      "gain_db": -16,
+      "dur": 0.1,
+      "snap": {
+        "mode": "next",
+        "off": 0.9781
+      }
+    },
+    {
+      "name": "connect-zone",
+      "at": "cue:conditionsMatter",
+      "kind": "connect-line",
+      "gain_db": -13,
+      "dur": 0.652,
+      "snap": {
+        "mode": "near",
+        "off": -0.0003
+      }
+    },
+    {
+      "name": "pull-connection",
+      "at": "L14a:matter.start",
+      "kind": "pull",
+      "gain_db": -13,
+      "dur": 0.978,
+      "snap": {
+        "mode": "cut",
+        "off": -0.0004
+      }
+    },
+    {
+      "name": "hold-connection",
+      "at": "cue:connectionHold",
+      "kind": "hold",
+      "gain_db": 0,
+      "dur": 2.08
+    },
+    {
+      "name": "cut-card",
+      "at": "L14b.start",
+      "kind": "cut",
+      "material": "paper",
+      "gain_db": -16,
+      "dur": 0.1
+    },
+    {
+      "name": "focus-card",
+      "at": "L14b.start+0.03",
+      "kind": "focus",
+      "gain_db": -17,
+      "dur": 0.1
+    },
+    {
+      "name": "verify-tick",
+      "at": "cue:certificate2+0.122",
+      "kind": "verify-tick",
+      "gain_db": -12,
+      "dur": 0.36,
+      "series": {
+        "count": 5,
+        "every": 0.326087
+      }
+    },
+    {
+      "name": "whip-record",
+      "at": "cue:keeps",
+      "kind": "whip",
+      "gain_db": -16,
+      "dur": 0.652,
+      "snap": {
+        "mode": "cut",
+        "off": 0.0003
+      }
+    },
+    {
+      "name": "record-append-1",
+      "at": "cue:keepsRecord",
+      "kind": "record-append",
+      "gain_db": -13,
+      "dur": 0.75,
+      "snap": {
+        "mode": "next",
+        "off": 0.0001
+      }
+    },
+    {
+      "name": "record-append-2",
+      "at": "cue:keepsRecord",
+      "kind": "record-append",
+      "gain_db": -14,
+      "dur": 0.75,
+      "snap": {
+        "mode": "next",
+        "off": 0.3261
+      }
+    },
+    {
+      "name": "pull-twoup",
+      "at": "cue:prevention",
+      "kind": "pull",
+      "gain_db": -15,
+      "dur": 0.652,
+      "snap": {
+        "mode": "prev",
+        "off": -0.0002
+      }
+    }
+  ]
+}

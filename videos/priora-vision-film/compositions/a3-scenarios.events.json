@@ -1,0 +1,307 @@
+{
+  "note": "a3-scenarios (cut 3, SC1 to SC5). Generated from the scene's own time formulas (scratch gen-events.cjs): every grid-synced sound is its picture's cue plus the same snap rule, so it stays on the picture after a narration re-lock.",
+  "events": [
+    {
+      "name": "markers",
+      "at": "cue:everyKind",
+      "kind": "node-pass",
+      "snap": {
+        "mode": "next"
+      },
+      "gain_db": -16,
+      "series": {
+        "count": 4,
+        "every": 0.326
+      }
+    },
+    {
+      "name": "push-crane",
+      "at": "L18a.end",
+      "kind": "push",
+      "snap": {
+        "mode": "next"
+      },
+      "gain_db": -14,
+      "dur": 0.652
+    },
+    {
+      "name": "cut-crane",
+      "at": "cue:crane",
+      "kind": "cut",
+      "snap": "cut",
+      "material": "felt",
+      "gain_db": -14
+    },
+    {
+      "name": "gusts",
+      "at": "cue:crane",
+      "kind": "pencil-scatter",
+      "snap": {
+        "mode": "cut",
+        "off": 0.05
+      },
+      "gain_db": -24,
+      "series": {
+        "count": 6,
+        "every": 0.16
+      }
+    },
+    {
+      "name": "pull-card",
+      "at": "L18b:lift.start",
+      "kind": "pull",
+      "snap": {
+        "mode": "next"
+      },
+      "gain_db": -14,
+      "dur": 0.652
+    },
+    {
+      "name": "connect-wind",
+      "at": "L18b:lift.start",
+      "kind": "connect-line",
+      "snap": {
+        "mode": "next",
+        "off": 0.05
+      },
+      "gain_db": -12,
+      "dur": 0.47
+    },
+    {
+      "name": "focus-card-crane",
+      "at": "L18b:lift.start",
+      "kind": "focus",
+      "snap": {
+        "mode": "next",
+        "off": 0.652
+      },
+      "gain_db": -16
+    },
+    {
+      "name": "wind-limit",
+      "at": "cue:wind+0.283",
+      "kind": "row-unavailable",
+      "gain_db": -9
+    },
+    {
+      "name": "outcome-change",
+      "at": "L18b:picks.start",
+      "kind": "choice-accent",
+      "snap": {
+        "mode": "next"
+      },
+      "variant": 1,
+      "gain_db": -10
+    },
+    {
+      "name": "cut-gas",
+      "at": "cue:gasDetector",
+      "kind": "cut",
+      "snap": "cut",
+      "material": "paper",
+      "gain_db": -14
+    },
+    {
+      "name": "connect-gas",
+      "at": "cue:gasDetector",
+      "kind": "connect-line",
+      "snap": {
+        "mode": "cut",
+        "off": 0.376
+      },
+      "gain_db": -12,
+      "dur": 0.396
+    },
+    {
+      "name": "key-turn",
+      "at": "cue:bypassed-0.25",
+      "kind": "handwheel",
+      "gain_db": -16,
+      "dur": 0.26
+    },
+    {
+      "name": "bypassed",
+      "at": "cue:bypassed",
+      "kind": "row-unavailable",
+      "snap": {
+        "mode": "near"
+      },
+      "gain_db": -9
+    },
+    {
+      "name": "push-card-gas",
+      "at": "cue:bypassed+0.2",
+      "kind": "push",
+      "snap": {
+        "mode": "next"
+      },
+      "gain_db": -14,
+      "dur": 0.652
+    },
+    {
+      "name": "outcome-retain",
+      "at": "L18c:maintenance.start",
+      "kind": "choice-accent",
+      "snap": {
+        "mode": "next"
+      },
+      "variant": 2,
+      "gain_db": -10
+    },
+    {
+      "name": "cut-tank",
+      "at": "cue:confined",
+      "kind": "cut",
+      "snap": "cut",
+      "material": "paper",
+      "gain_db": -14
+    },
+    {
+      "name": "pull-fan",
+      "at": "L18d:entry.start",
+      "kind": "pull",
+      "snap": {
+        "mode": "next"
+      },
+      "gain_db": -14,
+      "dur": 0.652
+    },
+    {
+      "name": "connect-fan",
+      "at": "L18d:entry.start",
+      "kind": "connect-line",
+      "snap": {
+        "mode": "next",
+        "off": 0.25
+      },
+      "gain_db": -12,
+      "dur": 0.47
+    },
+    {
+      "name": "focus-card-tank",
+      "at": "L18d:entry.start",
+      "kind": "focus",
+      "snap": {
+        "mode": "next",
+        "off": 0.652
+      },
+      "gain_db": -16
+    },
+    {
+      "name": "fan-stops",
+      "at": "cue:ventilation",
+      "kind": "subtract-bed",
+      "gain_db": -10,
+      "dur": 0.62
+    },
+    {
+      "name": "ventilation-down",
+      "at": "cue:ventilation",
+      "kind": "row-unavailable",
+      "snap": {
+        "mode": "next"
+      },
+      "gain_db": -9
+    },
+    {
+      "name": "outcome-prevent",
+      "at": "L18d:down.start",
+      "kind": "choice-accent",
+      "snap": {
+        "mode": "next"
+      },
+      "variant": 3,
+      "gain_db": -10
+    },
+    {
+      "name": "cut-site",
+      "at": "L18e.start",
+      "kind": "cut",
+      "snap": "cut",
+      "material": "paper",
+      "gain_db": -14
+    },
+    {
+      "name": "pull-site",
+      "at": "L18e.start",
+      "kind": "pull",
+      "snap": {
+        "mode": "cut",
+        "off": 0.002
+      },
+      "gain_db": -12,
+      "dur": 3.911
+    },
+    {
+      "name": "node-pass-01",
+      "at": "L18e.start",
+      "kind": "node-pass",
+      "snap": {
+        "mode": "cut",
+        "off": 0.769
+      },
+      "gain_db": -20
+    },
+    {
+      "name": "node-pass-02",
+      "at": "L18e.start",
+      "kind": "node-pass",
+      "snap": {
+        "mode": "cut",
+        "off": 1.004
+      },
+      "gain_db": -20
+    },
+    {
+      "name": "node-pass-03",
+      "at": "L18e.start",
+      "kind": "node-pass",
+      "snap": {
+        "mode": "cut",
+        "off": 1.346
+      },
+      "gain_db": -20
+    },
+    {
+      "name": "node-pass-04",
+      "at": "L18e.start",
+      "kind": "node-pass",
+      "snap": {
+        "mode": "cut",
+        "off": 1.573
+      },
+      "gain_db": -20
+    },
+    {
+      "name": "node-pass-05",
+      "at": "L18e.start",
+      "kind": "node-pass",
+      "snap": {
+        "mode": "cut",
+        "off": 1.859
+      },
+      "gain_db": -20
+    },
+    {
+      "name": "decisions",
+      "at": "cue:few",
+      "kind": "decision-accent",
+      "snap": {
+        "mode": "next"
+      },
+      "gain_db": -9,
+      "series": {
+        "count": 4,
+        "every": 0.326
+      }
+    },
+    {
+      "name": "envelope-pulse",
+      "at": "cue:madeInTime",
+      "kind": "connect-line",
+      "snap": "cut",
+      "gain_db": -12,
+      "dur": 0.978
+    }
+  ]
+}

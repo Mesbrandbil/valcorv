@@ -1,0 +1,107 @@
+{
+  "schema": "priora-narration-take/1",
+  "id": "L18a",
+  "engine": "guide",
+  "guide": true,
+  "label": "GUIDE VOICE (local Kokoro). Not the final ElevenLabs performance.",
+  "speaker": "narrator",
+  "text": "Every kind of work carries its own conditions.",
+  "spoken_text": "Every kind of work carries its own conditions.",
+  "sample_rate": 48000,
+  "duration": 2.86,
+  "speech_start": 0.13,
+  "speech_end": 2.63,
+  "words": [
+    {
+      "w": "Every",
+      "start": 0.13,
+      "end": 0.37
+    },
+    {
+      "w": "kind",
+      "start": 0.37,
+      "end": 0.64
+    },
+    {
+      "w": "of",
+      "start": 0.64,
+      "end": 0.73
+    },
+    {
+      "w": "work",
+      "start": 0.73,
+      "end": 1.01
+    },
+    {
+      "w": "carries",
+      "start": 1.01,
+      "end": 1.47
+    },
+    {
+      "w": "its",
+      "start": 1.47,
+      "end": 1.67
+    },
+    {
+      "w": "own",
+      "start": 1.67,
+      "end": 1.92
+    },
+    {
+      "w": "conditions",
+      "start": 1.92,
+      "end": 2.63
+    }
+  ],
+  "sentences": [
+    {
+      "text": "Every kind of work carries its own conditions.",
+      "start": 0.13,
+      "end": 2.63,
+      "word_range": [
+        0,
+        8
+      ]
+    }
+  ],
+  "created": "2026-09-30T01:11:59+00:00",
+  "provider": "kokoro-onnx 0.6.1, kokoro-v1.0.onnx (local guide)",
+  "voice": {
+    "id": "bf_isabella",
+    "lang": "en-gb"
+  },
+  "speed": 1.0,
+  "inner_pauses": [],
+  "segments_synth": [
+    {
+      "text": "Every kind of work carries its own conditions.",
+      "start": 0.12,
+      "end": 2.66,
+      "alignment_quality": {
+        "energy_pauses": 0,
+        "pause_agreement": 1.0,
+        "pauses_inside_words": [],
+        "onset_error_ms": 0.0,
+        "offset_error_ms": 0.0,
+        "pause_onset_error_ms_mean": null,
+        "pause_onset_error_ms_max": null
+      },
+      "fallback": false
+    }
+  ],
+  "alignment": {
+    "method": "pocketsphinx-5-forced-alignment+energy-refine",
+    "fallback": false,
+    "quality": {
+      "energy_pauses": 0,
+      "pause_agreement": 1.0,
+      "pauses_inside_words": [],
+      "onset_error_ms": 0.0,
+      "offset_error_ms": 0.0,
+      "pause_onset_error_ms_mean": null,
+      "pause_onset_error_ms_max": null
+    },
+    "quality_ok": true
+  },
+  "pronunciation_checks": []
+}

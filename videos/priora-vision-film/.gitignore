@@ -1,0 +1,17 @@
+node_modules/
+.hyperframes/cache/
+snapshots/tmp/
+narration/takes/**/*.raw
+audio-engine/__pycache__/
+*.pyc
+renders/tmp/
+__pycache__/
+narration/takes/guide/*.wav
+.hyperframes/preview/
+assets/audio/master.wav
+assets/audio/master-voice.wav
+assets/audio/music.wav
+assets/audio/sfx.wav
+renders/*.mp4
+renders/*.webm
+stills/**/*.png

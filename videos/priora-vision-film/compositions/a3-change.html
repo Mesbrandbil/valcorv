@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+  <head>
+    <meta charset="UTF-8">
+    <title>a3-change: the change seen live, the crossing, three choices, the programme layer (Act III)</title>
+    <!-- Ignored by the assembler. Everything that must exist at render time is inside <template>.
+
+      HANDOFF IN (cue l16): a HARD CUT from a2-resolve, no crossfade and no shared frame. This scene starts
+      at full opacity on its own first frame (S17).
+
+      HANDOFF OUT (a3-scenarios crossfades in over this scene's last 0.4 s, from cue scenariosIn to the end
+      of this slot at scenariosIn + 0.4): the programme-layer hold. From tLayer + 0.5 (tLayer = the half
+      beat after the fourth carrier answer) to the end the frame is settled and only drifts (board camera,
+      a 1 percent push from c(whether) to the end of the slot): the board at s 1.1 on the transfer view,
+      the four responses in arrival order (Northstar declined, Boreal DKK 1,240, Atlas DKK 980, Helvetic
+      DKK 1,680) under RESPONSES · IN ORDER OF ARRIVAL with its dashed FUTURE STATE tag, the cobalt
+      hairlines' ends at left (at 70 percent), the note "Carriers set appetite and price. The risk owner
+      chooses." and beneath it ANNUAL PROGRAMME · PROPERTY + BI with the cobalt hatched TEMPORARY LAYER ·
+      ROOF 03 HOT WORK · 14:42–18:00 alongside. No site drawing is visible. This scene does not fade itself
+      out: a3-scenarios carries its own paper and covers it once its crossfade completes.
+
+      SHOTS (docs/cut3-direction.md section 3 and docs/cut2-direction.md S17 to S19; every time from cues
+      through FL.clock, cuts on the half-beat grid):
+        S17  l16 hard cut: Sprinkler Zone 3 close (precise, SiteKit rect 56, 37 at 16 px/unit: the Act I
+             sz3 framing, closer), heads in water. From c(offline2) the heads drain from water to hollow
+             offline marks in four ripple waves on half beats (the Act I drain, precise); the status turns
+             OFFLINE (alert) on the next half beat, the zone name stays ink; the system event line (the
+             trusted record's row at 3x, a water band for fire protection, the alert marker) slides in at
+             the bottom on c(offline2). Slow drift.
+        S18a c(thisTime): cut to the activity card (board camera s 1.5, about 2.7x of the demo: the whole
+             card with its hot-work band, clear of the chrome; the other rows and the card head at 42
+             percent, the last row the hero); the row flips VERIFIED to UNAVAILABLE (alert) on 'sees';
+             footer 4 OF 5 HOLD · RECALCULATING.
+        S18b c(cross): cut to the envelope boundary beside Roof 03 (precise, 16 px/unit): the node stretches
+             from the cut and snaps outside (alert) on the third half beat; the readout sets beside it;
+             still until riskOwner.
+        S19a c(riskOwner): cut to the decision sheet head (1.5x board) set on the paper with an alert band
+             at its left (the risk state changed); one-beat pull back from the half beat before 'decides'
+             reveals the ask and the three choice cards (outline cards on the paper).
+        S19b c(change): one-beat push to CHANGE ACTIVITY (the head clears first: the push would carry it
+             under the chrome lockup): the card selects (cobalt ring and band), outcome with the Roof 03
+             inset (the heads back to water, the node returns inside), BACK INSIDE ACCEPTED ENVELOPE (ok),
+             INCREMENTAL DKK 0.
+        S19c c(knowingly): snappy lateral move to RETAIN RISK (cobalt); the acknowledgement resolves on
+             'retain'.
+        S19d c(inTime): lateral move to TRANSFER RISK (cobalt) with its FUTURE STATE tag; c(ask): cut to
+             the packet card (the transfer head set beneath it); the camera follows the packet's lines
+             horizontally to the responses, which arrive one per beat from c(whether) in arrival order; the
+             annual programme draws beneath them as the camera arrives (at half strength while the answers
+             land).
+        S19e the programme layer: on the half beat after the fourth answer the cobalt temporary layer grows
+             alongside the annual programme, the programme comes to full strength and the note sets. Hold
+             (drift only) to the end of the slot.
+
+      SEEK EXACTNESS (two seek orders give identical pixels): the board holds HTML, so four rules keep the
+      compositor layer tree independent of seek history: every HTML element renders GSAP transforms in 2D
+      (force3D false), boxes clip with overflow: clip (never a scroller), no HTML piece inside the board is
+      transformed (only the board), and the scene's top-level wrappers are compositor layers from frame one.
+    -->
+  </head>
+  <body>
+    <template id="a3-change-template">
+      <link rel="stylesheet" href="assets/css/film.css">
+      <link rel="stylesheet" href="assets/css/film-color.css">
+      <link rel="stylesheet" href="assets/css/product.css">
+      <link rel="stylesheet" href="assets/css/film-ui.css">
+      <style>
+        #root {
+          position: absolute;
+          inset: 0;
+          overflow: clip;
+        }
+        #a3-change-wrap-a,
+        #a3-change-siteui,
+        #a3-change-board-wrap {
+          position: absolute;
+          left: 0;
+          top: 0;
+          width: 1920px;
+          height: 1080px;
+        }
+        /* Clip without creating scroll containers: an overflow:hidden box whose content overflows is a
+           scroller, and Chrome composites scrollers (and whatever overlaps them) depending on seek history,
+           which flips text anti-aliasing between two renders of the same frame. overflow: clip clips the
+           same way and is never a scroller. */
+        #a3-change-wrap-a,
+        #a3-change-siteui,
+        #a3-change-board-wrap,
+        #a3-change-inset,
+        #a3-change-board .fui-odo-w,
+        #a3-change-board .fui-rr-in,
+        #a3-change-board .fui-fold-in,
+        #a3-change-board .fui-car-wait,
+        #a3-change-board .pui-sheet,
+        #a3-change-board .slice,
+        #a3-change-board .pui-record,
+        #a3-change-siteui .fui-odo-w,
+        #a3-change-siteui .fui-rr-in,
+        #a3-change-siteui .slice,
+        #a3-change-siteui .pui-record,
+        #a3-change-siteui .fui-record.fui-panel {
+          overflow: clip;
+        }
+        /* Inside the board only the board itself moves: the kit's small lifts and slides on HTML pieces
+           (a selected card's 3 px rise, 8 to 18 px settles) are dropped, because a transformed piece over a
+           zooming board is layerised differently depending on seek history (sub-pixel edge differences). */
+        #a3-change-board :not(svg):not(svg *) {
+          transform: none !important;
+        }
+        /* Each top-level layer of this scene is its own compositor layer from the first frame, so the
+           layer structure (and with it the text anti-aliasing) never depends on seek history. The layers
+           themselves never transform; the board and the site camera repaint inside them at full resolution. */
+        #a3-change-wrap-a,
+        #a3-change-siteui,
+        #a3-change-board-wrap {
+          will-change: transform;
+        }
+        #a3-change-site-a {
+          position: absolute;
+          left: 0;
+          top: 0;
+          width: 1920px;
+          height: 1080px;
+          display: block;
+        }
+        #a3-change-board {
+          position: absolute;
+          left: 0;
+          top: 0;
+          width: 4200px;
+          height: 2700px;
+        }
+        #a3-change-board-main,
+        #a3-change-board-prog {
+          position: absolute;
+          left: 0;
+          top: 0;
+          width: 4200px;
+          height: 2700px;
+        }
+
+        /* ---- S17: the system event as a hero line (the trusted record's row at 3x, head hidden) ---- */
+        #a3-change-siteui .fui-record .fui-rec-head {
+          display: none;
+        }
+        #a3-change-siteui .fui-record.fui-panel {
+          padding: 14px 40px 4px 44px;
+          border-radius: 20px;
+        }
+        /* the category band: fire protection (water); the event's own marker stays alert */
+        #a3-change-siteui .fui-record.fui-panel::before {
+          content: "";
+          position: absolute;
+          left: 0;
+          top: 0;
+          bottom: 0;
+          width: 12px;
+          background: var(--c-water);
+        }
+        /* Appended record rows open and fade in without the kit's 12 px rise: a transform mid-append leaves
+           the row's text rasterised differently depending on seek history. */
+        #a3-change-siteui .fui-record .rr {
+          transform: none !important;
+        }
+        #a3-change-siteui .fui-record .rr .x {
+          white-space: nowrap;
+        }
+
+        /* ---- S19: the decision sheet set on the paper (no sheet panel: the head, the ask and the choice
+           cards lie on the drawing plane, so nothing of the sheet sits under the chrome lockup) ---- */
+        #a3-change-board .pui-sheet.fui-sheet {
+          background: none;
+          border-color: transparent;
+          box-shadow: none;
+        }
+        #a3-change-headband {
+          position: absolute;
+          left: 20px;
+          top: 36px;
+          width: 8px;
+          height: 153px;
+          border-radius: 4px;
+          background: var(--c-alert);
+        }
+        .a3-change-cband {
+          position: absolute;
+          left: 0;
+          right: 0;
+          top: 0;
+          height: 9px;
+          border-radius: 15px 15px 0 0;
+          background: var(--c-priora);
+        }
+        /* each outcome sits under its own choice card (columns: 0..492, 506..998, 1012..1504 of the 1504 px body) */
+        #a3-change-board .fui-oc-change .fui-outcome {
+          width: 780px;
+        }
+        #a3-change-board .fui-oc-retain .fui-outcome {
+          width: 860px;
+          margin-left: 322px;
+        }
+        #a3-change-board .fui-oc-transfer .fui-outcome {
+          width: 640px;
+          margin-left: 864px;
+        }
+        #a3-change-board .fui-oc-change .fui-oc-row {
+          display: flex;
+          justify-content: space-between;
+          align-items: flex-start;
+          gap: 28px;
+        }
+        /* on the paper (no sheet panel) the ok state text is taken a shade deeper for contrast */
+        #a3-change-board .fui-oc-state span {
+          color: color-mix(in srgb, var(--c-ok) 84%, var(--c-ink));
+        }
+        /* the carriers' note lands after the responses, not inside the sheet */
+        #a3-change-board .fui-oc-note {
+          display: none;
+        }
+        #a3-change-inset {
+          position: relative;
+          flex: none;
+          width: 360px;
+          height: 203px;
+          border-radius: 12px;
+          background: var(--c-paper);
+          box-shadow: var(--fui-soft-shadow);
+        }
+        #a3-change-inset-svg {
+          position: absolute;
+          left: 0;
+          top: 0;
+          width: 360px;
+          height: 203px;
+          display: block;
+        }
+        #a3-change-inset-svg .zl,
+        #a3-change-inset-svg .szl,
+        #a3-change-inset-svg .env-lab,
+        #a3-change-inset-svg .paint {
+          display: none;
+        }
+        #a3-change-inset-cap {
+          position: absolute;
+          left: 14px;
+          top: 11px;
+          font: 500 18px/1 var(--mono);
+          letter-spacing: 0.12em;
+          text-transform: uppercase;
+          color: color-mix(in srgb, var(--c-ink) 70%, transparent);
+        }
+
+        /* ---- transfer view: the head set beneath the packet (the packet shot carries it, and the
+           horizontal follow to the responses keeps it low, clear of the chrome lockup) ---- */
+        #a3-change-board .fui-transfer {
+          display: flex;
+          flex-direction: column-reverse;
+        }
+        #a3-change-board .fui-tr-body {
+          margin-top: 0;
+          height: 534px !important;
+        }
+        #a3-change-board .fui-tr-head {
+          width: 560px;
+          height: auto;
+          flex-wrap: wrap;
+          row-gap: 14px;
+          margin-top: 28px;
+        }
+        #a3-change-board .fui-tr-sub {
+          flex-basis: 100%;
+          margin-left: 0;
+        }
+        #a3-change-board .fui-tr-note {
+          display: none;
+        }
+        /* the responses carry the future-state tag too, so the last frames keep the claim */
+        #a3-change-board .fui-car-h {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+        }
+        #a3-change-board .fui-car-h .fui-future {
+          padding: 7px 11px 6px;
+        }
+        /* the hour marks set inside the programme's washed bar, a shade deeper for contrast */
+        #a3-change-board .fui-pg-axis text {
+          fill: color-mix(in srgb, var(--c-ink) 70%, transparent);
+        }
+        #a3-change-note {
+          position: absolute;
+          margin: 0;
+          font: 400 28px/1.35 var(--sans);
+          letter-spacing: -0.005em;
+          color: var(--c-ink);
+          white-space: nowrap;
+        }
+      </style>
+
+      <div id="root" data-composition-id="a3-change" data-width="1920" data-height="1080">
+        <div id="a3-change-wrap-a" data-layout-ignore><svg id="a3-change-site-a" xmlns="http://www.w3.org/2000/svg"></svg></div>
+        <div id="a3-change-siteui"></div>
+        <div id="a3-change-board-wrap">
+          <div id="a3-change-board" data-layout-allow-overflow>
+            <div id="a3-change-board-main"></div>
+            <div id="a3-change-board-prog">
+              <p id="a3-change-note">Carriers set appetite and price. The risk owner chooses.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <script>
+        (function () {
+          // Globals from index.html <head>: gsap (+ plugins), FL, CUES, SCENES, FL_EVENTS, SITE_MODEL, SiteKit, UIKit.
+          var ID = "a3-change";
+          var clk = FL.clock(ID);
+          var T = function (a, off) {
+            return clk.t(a, off);
+          };
+          var CUT = function (a, off) {
+            return clk.c(a, off); // the shared picture cut: half beat nearest 0.12 s before the word
+          };
+          var BT = function (a, off, mode) {
+            return clk.b(a, off, mode || "near", 2); // half-beat grid
+          };
+          var HB = FL.BEAT / 2,
+            BEAT = FL.BEAT;
+          var K = window.UIKit,
+            SK = window.SiteKit,
+            M = window.SITE_MODEL;
+          var el = function (id) {
+            return document.getElementById(id);
+          };
+          var O = { prefix: ID, scene: ID };
+          var opts = function (x) {
+            return Object.assign({}, O, x || {});
+          };
+          // colour tokens resolved once at build time (assets/css/film-color.css), for colour tweens
+          var COL = { water: SK.color("water"), paper: SK.color("paper"), offline: SK.color("offline") };
+          var tl = gsap.timeline({ paused: true });
+          // seek-safe helpers (explicit from-states, never rendered at build time)
+          var ft = function (target, from, to, t) {
+            return tl.fromTo(target, from, Object.assign({ immediateRender: false }, to), t);
+          };
+          var cutTo = function (target, from, to, t) {
+            return ft(target, from, Object.assign({ duration: 0.001, ease: "none" }, to), t);
+          };
+
+          // ================================================================ key times (scene-local, from cues)
+          var tOff = CUT("offline2"); // first offline marks, the system event line
+          var tLab = tOff + HB; // the zone status turns (on "again")
+          var t18a = CUT("thisTime"); // cut: the card's last row
+          var tSees = T("sees", -0.1); // UNAVAILABLE lands on "sees"
+          var t18b = CUT("cross"); // cut: the envelope boundary; the stretch starts here
+          var SNAP_AT = t18b + 3 * HB; // the snap lands on the third half beat
+          var HOLD = 0.163,
+            STRETCH = SNAP_AT - HOLD - t18b;
+          var t19a = CUT("riskOwner"); // cut: the decision sheet head
+          var tPullA = BT("decides", 0, "prev"); // one-beat pull back reveals the choices
+          var tChange = CUT("change");
+          var tKnow = CUT("knowingly");
+          var tRetainW = T("retain");
+          var tInTime = CUT("inTime");
+          var tAsk = CUT("ask");
+          var tSend = tAsk + HB;
+          var tWhether = CUT("whether");
+          var tResp = [0, 1, 2, 3].map(function (i) {
+            return tWhether + i * BEAT; // one answer per beat, in arrival order
+          });
+          var tLayer = tResp[3] + HB; // the temporary layer grows alongside the programme; the note sets
+          var tEnd = clk.duration; // the end of the slot (scenariosIn + 0.4)
+
+          // ================================================================ layers
+          var wrapA = el(ID + "-wrap-a"),
+            siteUI = el(ID + "-siteui"),
+            boardWrap = el(ID + "-board-wrap"),
+            board = el(ID + "-board"),
+            boardMain = el(ID + "-board-main"),
+            boardProg = el(ID + "-board-prog"),
+            noteEl = el(ID + "-note");
+          var sw = function (node, from, to, t) {
+            cutTo(node, { opacity: from }, { opacity: to }, t);
+          };
+          boardWrap.style.opacity = 0;
+          sw(wrapA, 1, 0, t18a);
+          sw(wrapA, 0, 1, t18b);
+          sw(wrapA, 1, 0, t19a);
+          sw(siteUI, 1, 0, t18a);
+          sw(siteUI, 0, 1, t18b);
+          sw(siteUI, 1, 0, t19a);
+          sw(boardWrap, 0, 1, t18a);
+          sw(boardWrap, 1, 0, t18b);
+          sw(boardWrap, 0, 1, t19a);
+
+          var A = M.outsideState.heroOriginWorld; // the hot-work node on Roof 03
+          var ENV = M.envelope;
+
+          // ================================================================ SITE A: S17 and S18b
+          var siteA = SK.mount(el(ID + "-site-a"), { prefix: ID + "-sa", show: "precise", rough: false });
+          // SiteKit's <style> is page-wide: pin this mount's zone hatch to its own pattern
+          siteA.el("sz3-hatch").style.fill = "url(#" + siteA.prefix + "-sz-hatch)";
+          K.siteLabels(siteA, 2.6); // S17: the zone label reads at 26 px
+          // labels that would sit under the event line (S17) or be cut by the frame edge (S18b)
+          // the ROOF label would sit behind the chrome's top-left END-STATE CONCEPT lockup
+          ["zone-label-production-hall-2", "zone-label-utilities", "zone-label-roof"].forEach(function (k) {
+            siteA.el(k).style.display = "none";
+          });
+          var ovA = K.overlay(siteA, ID + "-sa");
+          var R17 = SK.rect(56, 37, 16); // the Act I sz3 framing (56, 37), closer
+          var R17d = SK.rect(56, 37, 16 * 1.01);
+          siteA.setView(R17);
+          siteA.camera(tl, R17d, 0, t18a, "sine.inOut"); // a slow drift; the next framing is a cut
+
+          // ---- S17: Sprinkler Zone 3 goes offline. The heads drain one by one from water to the hollow
+          // offline mark (the Act I drain in the precise style) in four ripple waves on the half beats, in
+          // the kit's ripple order from the valve, with the kit's handles and colours (UIKit.sprinkler).
+          K.sprinkler(tl, siteA, 0, "active", opts()); // builds the kit's zone handles (no tween: already active)
+          var SZ = siteA.__fuiSz;
+          var nH = SZ.order.length,
+            WAVES = 4;
+          SZ.order.forEach(function (o, i) {
+            var g = Math.min(WAVES - 1, Math.floor((i * WAVES) / nH));
+            var g0 = Math.ceil((g * nH) / WAVES);
+            var ti = tOff + g * HB + (i - g0) * 0.03;
+            ft(o[0], { fill: COL.water, stroke: COL.water, opacity: 1 }, { fill: COL.paper, stroke: COL.offline, opacity: 0.9, duration: 0.45, ease: "power2.out" }, ti);
+            if (o[1]) ft(o[1], { opacity: 0 }, { opacity: 1, duration: 0.45, ease: "power2.out" }, ti);
+          });
+          ft(SZ.hatch, { opacity: 0 }, { opacity: 1, duration: 1.1, ease: "power1.inOut" }, tOff + 0.35);
+          ft(SZ.fill, { opacity: 1 }, { opacity: 0, duration: 0.6, ease: "power1.inOut" }, tOff);
+          ft(SZ.offLine, { opacity: 0 }, { opacity: 1, duration: 0.4, ease: "power1.inOut" }, tOff);
+          ft(SZ.outline, { opacity: 1 }, { opacity: 0, duration: 0.4, ease: "power1.inOut" }, tOff);
+          // the status turns OFFLINE (alert, the kit's class); the zone name stays ink
+          ft(SZ.labels.active, { opacity: 1 }, { opacity: 0, duration: 0.2, ease: "power1.in" }, tLab);
+          ft(SZ.labels.offline, { opacity: 0 }, { opacity: 1, duration: 0.35, ease: "power2.out" }, tLab + 0.15);
+          SZ.state = "offline";
+
+          // the hot-work node, as Act II left it: inside, hero size (amber, the kit's hero default)
+          var heroA = K.nodeGlyph(ovA, A, "inside", opts({ name: "hero", k: 1.5, reticle: false }));
+
+          // the system event line: the trusted record's own row, enlarged to a hero line at the bottom
+          var SYS_ENTRY = { t: "14:42", kind: "dev", x: "Sprinkler Zone 3 offline · Production Hall 2 · SYSTEM", i: "REC-0405-0AF1 · 0d9b 70f9" };
+          // the entry is written into the record as the line lands: the panel carries it in whole
+          var sysRec = K.recordColumn(opts({ parent: siteUI, panel: true, scale: 3.0, width: 1260, entries: [SYS_ENTRY], left: 330, top: 800 }));
+          sysRec.el.style.opacity = 0;
+          ft(sysRec.el, { opacity: 0, y: 34 }, { opacity: 1, y: 0, duration: HB, ease: "power3.out" }, tOff - 0.05);
+          sw(sysRec.el, 1, 0, t18a + 0.002); // it belongs to S17 only
+          FL.$$(sysRec.el, ".fui-rr-wrap, .fui-rr-in, .rr, .fui-odo-w, .fui-odo-s").forEach(function (n) {
+            n.setAttribute("data-layout-allow-overflow", "");
+          });
+
+          // ---- S18b: the crossing, at the envelope boundary beside Roof 03 (the Act I envelope-edge close)
+          var S18 = 16;
+          var landW = K.heroDeviation(ENV.pointsWorld, ENV.normalsWorld, ENV.centreWorld, A, S18, 1, 1).P;
+          var LAND_SCR = [1010, 450];
+          var R18b = { x: landW[0] - LAND_SCR[0] / S18, y: landW[1] - LAND_SCR[1] / S18, w: 1920 / S18, h: 1080 / S18 };
+          siteA.camera(tl, R18b, t18b, 0.001, "steps(1)"); // hard cut, restored by backward seeks
+          K.siteLabels(siteA, 1.8, tl, t18b, 0.001);
+          heroA.state(tl, T("sees", 0.15), "checking", 0.3);
+          heroA.spin(tl, T("sees", 0.15), t18b);
+          var X = K.crossing(tl, t18b, heroA, siteA, opts({ s: S18, stretch: STRETCH, hold: HOLD, snap: 0.46 }));
+          var ro = K.readout(opts({ parent: siteUI, state: "outside", left: LAND_SCR[0] + 66, top: LAND_SCR[1] - 118 }));
+          ro.hideForEnter();
+          ro.enter(tl, X.tLand + 0.02, 0.4);
+          // the exposure slice's time labels hang 4 px below its 36-unit viewBox (the kit's drawing): intended
+          FL.$$(ro.el, ".fui-slice, .fui-slice *").forEach(function (n) {
+            n.setAttribute("data-layout-allow-overflow", "");
+          });
+
+          // ================================================================ THE BOARD (Act III interface pieces, one thing at a time)
+          var cam = FL.boardCam(board, {});
+          // ---- the activity card (S18a)
+          var CARD = [300, 300];
+          var card = K.activityCard(opts({ parent: boardMain, left: CARD[0], top: CARD[1], state: "verified" }));
+          card.conditionLost(tl, tSees);
+
+          // ---- the decision sheet (S19a to S19d), set on the paper
+          var SH = [1300, 200],
+            SHW = 1600,
+            BODY = [SH[0] + 48, SH[1] + 36]; // the sheet body's padding box origin
+          var sheet = K.decisionSheet(opts({ parent: boardMain, left: SH[0], top: SH[1], width: SHW }));
+          sheet.focus(tl, 0, true, 0.001); // compact: the facts were just shown in the readout
+          var sq = function (s) {
+            return sheet.el.querySelector(s);
+          };
+          // the risk state changed: an alert band at the head's left edge (eyebrow to paragraph: 36 to 189)
+          var headBand = document.createElement("div");
+          headBand.id = ID + "-headband";
+          sheet.el.appendChild(headBand);
+          var head = [sq(".eyebrow"), sq(".sheet-h"), sq(".sheet-p"), headBand];
+          var ask = sq(".ask"),
+            foot = sq(".sheet-foot");
+          var KEYS = ["change", "retain", "transfer"];
+          var choiceEls = KEYS.map(function (k) {
+            return sheet.choices[k];
+          });
+          head.forEach(function (n) {
+            n.style.opacity = 0;
+          });
+          // the selected choice in Priora's cobalt: the kit's ring and border, plus a band across the card's top
+          var cband = {};
+          KEYS.forEach(function (k) {
+            var b = document.createElement("div");
+            b.className = ID + "-cband";
+            b.id = ID + "-cband-" + k;
+            b.style.opacity = 0;
+            sheet.choices[k].appendChild(b);
+            cband[k] = b;
+          });
+          var selected = null;
+          var select = function (t, key, dur) {
+            if (selected) ft(cband[selected], { opacity: 1 }, { opacity: 0, duration: dur, ease: "power2.out" }, t);
+            ft(cband[key], { opacity: 0 }, { opacity: 1, duration: dur, ease: "power2.out" }, t);
+            sheet.highlight(tl, t, key, dur);
+            selected = key;
+          };
+          // the Roof 03 inset lives inside the change outcome, beside "Restore sprinkler protection"
+          var ocRow = sheet.outcomes.change.box.querySelector(".fui-oc-row");
+          var insetBox = document.createElement("div");
+          insetBox.id = ID + "-inset";
+          ocRow.appendChild(insetBox);
+          var insetSvg = FL.svgEl("svg", { id: ID + "-inset-svg", xmlns: "http://www.w3.org/2000/svg" }, insetBox);
+          var insetCap = document.createElement("div");
+          insetCap.id = ID + "-inset-cap";
+          insetCap.textContent = "Roof 03";
+          insetBox.appendChild(insetCap);
+
+          // ---- transfer view (future state): data in ARRIVAL order, never sorted, never ranked
+          var D = K.DATA,
+            savedCarriers = D.carriers,
+            savedPacket = D.packet,
+            tp;
+          D.carriers = [
+            { key: "northstar", name: "Northstar Commercial", kind: "Existing carrier", declined: true, dec: "Outside appetite", decS: "No quote" },
+            { key: "boreal", name: "Boreal Risk", kind: "Temporary activity cover", stat: "Quote · 14:45", price: "1,240", ded: "DKK 50,000", cap: "DKK 25m" },
+            { key: "atlas", name: "Atlas Specialty", kind: "Temporary activity cover", stat: "Quote · 14:46", price: "980", ded: "DKK 100,000", cap: "DKK 25m" },
+            { key: "helvetic", name: "Helvetic Industrial", kind: "Temporary activity cover", stat: "Quote · 14:47", price: "1,680", ded: "DKK 25,000", cap: "DKK 25m" },
+          ];
+          var TP = [1300, 1500];
+          try {
+            tp = K.transferPanel(opts({ parent: boardMain, left: TP[0], top: TP[1], width: 2230, packetW: 560, gap: 650, rowH: 104, rowGap: 12, order: ["northstar", "boreal", "atlas", "helvetic"] }));
+          } finally {
+            D.carriers = savedCarriers;
+            D.packet = savedPacket;
+          }
+          tp.rows[0].st.nodes.done.textContent = "Declined · 14:44";
+          tp.hideForEnter();
+          var carFuture = document.createElement("span");
+          carFuture.className = "fui-future";
+          carFuture.id = ID + "-car-future";
+          carFuture.textContent = "Future state";
+          tp.el.querySelector(".fui-car-h").appendChild(carFuture);
+          // Board layout of the transfer view: the packet at TP[0] to TP[0] + 560, the responses at TP[0] + 1210
+          // to TP[0] + 2230 (so neither shot shows the other's cropped edge); the responses' header at TP[1],
+          // the rows from TP[1] + 56 to TP[1] + 508 (4 x 104 + 3 x 12), the packet from TP[1] + 56 to
+          // TP[1] + 534, the head beneath the packet from TP[1] + 562. The note and the programme sit under
+          // the responses, the programme (1320 wide) right-aligned with them, the note left-aligned with the
+          // programme's label.
+          var PG = [TP[0] + 910, TP[1] + 596];
+          var NOTE = [PG[0] + 64, TP[1] + 534];
+          noteEl.style.left = NOTE[0] + "px";
+          noteEl.style.top = NOTE[1] + "px";
+          noteEl.style.opacity = 0;
+
+          // ---- programme diagram: the annual programme and the temporary layer alongside it
+          var pg = K.programmeLayer(opts({ parent: boardProg, left: PG[0], top: PG[1], width: 1320, axis: [6, 24] }));
+          var pq = function (s) {
+            return pg.el.querySelector(s);
+          };
+
+          // ---- board framings (board px; s = zoom). Every framing keeps this scene's pieces clear of the
+          // chrome: nothing under the top-left lockup (520 x 120) or the top-right clock (420 x 140).
+          var R = {
+            // the whole card (612 x 580 board px) at 2.7x of the demo, its band in frame: x 524 to 1442, y 100 to 970
+            card: { cx: CARD[0] + 290.7, cy: CARD[1] + 293.3, s: 1.5 },
+            head: { cx: BODY[0] + 515, cy: BODY[1] + 92, s: 1.5 },
+            sheet: { cx: SH[0] + SHW / 2, cy: SH[1] + 296, s: 1.05 },
+            change: { cx: BODY[0] + 330, cy: BODY[1] + 466, s: 1.4 },
+            retain: { cx: BODY[0] + 752, cy: BODY[1] + 433, s: 1.6 },
+            transfer: { cx: BODY[0] + 1190, cy: BODY[1] + 433, s: 1.6 },
+            // the packet and the responses share one height and zoom: the follow is purely horizontal
+            packet: { cx: TP[0] + 280, cy: TP[1] + 340, s: 1.1 },
+            resp: { cx: TP[0] + 1457.3, cy: TP[1] + 340, s: 1.1 }, // the responses' right edge at x 1810
+          };
+          for (var rk in R) cam.define(rk, R[rk]);
+
+          // ================================================================ S18a: the card, its last row the hero, about 2.7x
+          cam.apply("card");
+          cam.drift(tl, t18a, t18b - t18a, 0.01);
+          card.rows
+            .slice(0, 4)
+            .map(function (r) {
+              return r.li;
+            })
+            .concat(FL.$$(card.el, ".hc-top, .hc-title, .hc-sub, .hc-meta"))
+            .forEach(function (n) {
+              cutTo(n, { opacity: 1 }, { opacity: 0.42 }, t18a);
+            });
+
+          // ================================================================ S19a: the decision sheet head, then the choices
+          cam.cut(tl, "head", t19a);
+          [0, 1, 2, 0].forEach(function (k, i) {
+            ft(head[i], { opacity: 0 }, { opacity: 1, duration: 0.34, ease: "power3.out" }, t19a + k * 0.07);
+          });
+          [ask, foot].concat(choiceEls).forEach(function (n) {
+            n.style.opacity = 0;
+          });
+          cam.to(tl, "sheet", tPullA, BEAT, "power3.inOut");
+          ft(ask, { opacity: 0 }, { opacity: 1, duration: 0.3, ease: "power1.out" }, tPullA + 0.08);
+          choiceEls.forEach(function (n, i) {
+            ft(n, { opacity: 0 }, { opacity: 1, duration: 0.42, ease: "power3.out" }, tPullA + 0.16 + i * 0.08);
+          });
+          ft(foot, { opacity: 0 }, { opacity: 1, duration: 0.4, ease: "power1.out" }, tPullA + 0.45);
+
+          // ================================================================ S19b: change the work
+          var siteI = SK.mount(insetSvg, { prefix: ID + "-si", show: "precise", rough: false });
+          siteI.el("sz3-hatch").style.fill = "url(#" + siteI.prefix + "-sz-hatch)";
+          var ovI = K.overlay(siteI, ID + "-si");
+          var ZC = R.change.s,
+            INSET_W = 360,
+            SI = (INSET_W * ZC) / 62; // screen px per world unit inside the inset at the change framing
+          var landI = K.heroDeviation(ENV.pointsWorld, ENV.normalsWorld, ENV.centreWorld, A, SI, 1, 1).P;
+          var RI = SK.rect(A[0] * 0.58 + landI[0] * 0.42, A[1] * 0.58 + landI[1] * 0.42, 1920 / 62);
+          siteI.setView(RI);
+          insetSvg.style.setProperty("--sw", (1 / SI).toFixed(6));
+          var heroI = K.nodeGlyph(ovI, A, "checking", opts({ name: "inset", k: 1.25, reticle: false }));
+          K.sprinkler(tl, siteI, 0.05, "offline", opts({ step: 0.001 })); // the zone is down while the inset is closed
+          var XI = K.crossing(tl, 1.0, heroI, siteI, opts({ s: SI, stretch: 0.4, hold: 0.05, snap: 0.3 })); // lands outside, hidden
+
+          // the head and the ask clear at once: the push would carry them under the chrome lockup
+          ft(head.concat([ask]), { opacity: 1 }, { opacity: 0, duration: 0.24, ease: "power1.in" }, tChange - 0.04);
+          cam.to(tl, "change", tChange, BEAT, "power3.inOut");
+          select(tChange, "change", 0.4);
+          sheet.outcome(tl, tChange + 0.05, "change", 0.5);
+          var tBack = tChange + 0.3; // the zone is restored and the node comes back inside
+          sheet.resolveChange(tl, tChange + 0.25);
+          K.sprinkler(tl, siteI, tChange + 0.2, "restored", opts({ step: 0.012 }));
+          XI.back(tl, tBack, 0.6, "power2.inOut");
+          heroI.state(tl, tBack + 0.48, "changed", 0.3);
+          heroI.reticle(tl, tBack + 0.6, false, 0.3);
+          cam.drift(tl, tChange + BEAT, tKnow - tChange - BEAT, 0.006);
+
+          // ================================================================ S19c: knowingly retain the risk
+          var WHIP = 1.5 * HB;
+          cam.to(tl, "retain", tKnow, WHIP, "power3.inOut");
+          select(tKnow + 0.06, "retain", 0.35);
+          sheet.outcome(tl, tKnow + 0.1, "retain", 0.45);
+          sheet.resolveRetain(tl, tRetainW - 0.05);
+          cam.drift(tl, tKnow + WHIP, tInTime - tKnow - WHIP, 0.006);
+          ft(foot, { opacity: 1 }, { opacity: 0, duration: 0.3, ease: "power1.in" }, tKnow);
+
+          // ================================================================ S19d: or, in time, ask selected carriers
+          cam.to(tl, "transfer", tInTime, WHIP, "power3.inOut");
+          select(tInTime + 0.04, "transfer", 0.35);
+          sheet.outcome(tl, tInTime + 0.08, "transfer", 0.4);
+
+          // the packet assembles off frame just before the cut, so the cut lands on the whole card
+          tp.enter(tl, tAsk - 0.75, 0.4);
+          cam.cut(tl, "packet", tAsk);
+          tp.send(tl, tSend, 0.05, 0.5);
+          cam.to(tl, "resp", tSend, tWhether - tSend, "power2.inOut"); // follows the lines to the responses
+          // each answer lands after that row's WAITING to EVALUATING swap has finished (send + 0.45 + 0.34)
+          var respT = tResp.map(function (t, i) {
+            return Math.max(t, tSend + i * 0.05 + 0.5 * 0.9 + 0.36);
+          });
+          tp.respond(tl, respT);
+          cam.drift(tl, tWhether, tEnd - tWhether, 0.01); // then only a 1 percent push to the end of the slot
+
+          // ================================================================ S19e: the programme layer
+          // The annual programme draws beneath the responses as the camera arrives, at half strength while
+          // the answers land; on the half beat after the fourth answer the temporary layer grows alongside
+          // it, the programme comes to full strength and the note sets. Then the frame holds.
+          var pLab = [pq(".fui-pg-lab"), pq(".fui-pg-today")],
+            pBar = pq(".fui-pg-bar"),
+            pEnds = pq(".fui-pg-ends"),
+            pAxis = pq(".fui-pg-axis"),
+            pSlice = pq(".fui-pg-slice"),
+            pLead = pq(".fui-pg-lead"),
+            pSlab = pq(".fui-pg-slab");
+          var scs = function (sx, ox, oy) {
+            var f = function (v) {
+              return (Math.round(v * 1000) / 1000).toString();
+            };
+            return "translate(" + f(ox) + " " + f(oy) + ") scale(" + f(sx) + " 1) translate(" + f(-ox) + " " + f(-oy) + ")";
+          };
+          var sx0 = +pSlice.getAttribute("x"),
+            sy0 = +pSlice.getAttribute("y");
+          // the last frame's hero reads on a phone: the temporary layer drawn 24 units deep (the kit's 14),
+          // its lead and label moved down with it
+          var SLH = 24;
+          pSlice.setAttribute("height", SLH);
+          pLead.setAttribute("d", "M" + sx0 + " " + (sy0 + SLH) + "V" + (sy0 + SLH + 30));
+          pSlab.setAttribute("y", sy0 + SLH + 28);
+          var tBar = tSend + 0.45;
+          pg.el.style.opacity = 0.5;
+          ft(pLab, { opacity: 0 }, { opacity: 1, duration: 0.35 }, tBar);
+          ft(pBar, { attr: { transform: scs(0, 64, 38) } }, { attr: { transform: scs(1, 64, 38) }, duration: 0.7, ease: "power3.inOut" }, tBar + 0.05);
+          ft([pEnds, pAxis], { opacity: 0 }, { opacity: 1, duration: 0.4 }, tBar + 0.5);
+          ft(pg.el, { opacity: 0.5 }, { opacity: 1, duration: 0.4, ease: "power1.inOut" }, tLayer - 0.1);
+          ft(pSlice, { attr: { transform: scs(0, sx0, sy0) } }, { attr: { transform: scs(1, sx0, sy0) }, duration: 0.5, ease: "expo.out" }, tLayer);
+          ft(pLead, { opacity: 0 }, { opacity: 1, duration: 0.2 }, tLayer + 0.12);
+          ft(pSlab, { opacity: 0, attr: { transform: "translate(-8 0)" } }, { opacity: 1, attr: { transform: "translate(0 0)" }, duration: 0.35, ease: "power3.out" }, tLayer + 0.15);
+          ft(noteEl, { opacity: 0 }, { opacity: 1, duration: 0.4, ease: "power2.out" }, tLayer + 0.05);
+          // the packet's hairlines step back once the answers are in
+          ft(
+            tp.lines.map(function (L) {
+              return L.p;
+            }),
+            { opacity: 1 },
+            { opacity: 0.7, duration: 0.4, ease: "power1.inOut" },
+            tLayer - 0.1
+          );
+
+          // odometer digit strips roll inside one-line windows; record rows open from zero height: intentional clipping
+          [boardWrap, siteUI].forEach(function (root) {
+            FL.$$(root, ".fui-odo-w, .fui-odo-s, .fui-rr-wrap, .fui-rr-in, .fui-fold-in").forEach(function (n) {
+              n.setAttribute("data-layout-allow-overflow", "");
+            });
+          });
+
+          // GSAP's default force3D "auto" writes translate3d() while an HTML transform tween is in progress.
+          // A 3D transform promotes a compositor layer, and Chrome's overlap testing then composites other
+          // pieces depending on seek history (text anti-aliasing flips between frames of the same time).
+          // Every HTML element of this scene renders its transforms in 2D.
+          [siteUI, boardWrap].forEach(function (root) {
+            [root].concat(FL.$$(root, "*")).forEach(function (n) {
+              if (n instanceof HTMLElement) gsap.set(n, { force3D: false });
+            });
+          });
+
+          window.__timelines["a3-change"] = tl;
+        })();
+      </script>
+    </template>
+  </body>
+</html>

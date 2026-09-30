@@ -1,0 +1,162 @@
+{
+  "schema": "priora-narration-take/1",
+  "id": "L20",
+  "engine": "guide",
+  "guide": true,
+  "label": "GUIDE VOICE (local Kokoro). Not the final ElevenLabs performance.",
+  "speaker": "narrator",
+  "text": "Priora. Know the risk you carry, while the work happens.",
+  "spoken_text": "Priora. Know the risk you carry, while the work happens.",
+  "sample_rate": 48000,
+  "duration": 4.39,
+  "speech_start": 0.13,
+  "speech_end": 4.16,
+  "words": [
+    {
+      "w": "Priora",
+      "start": 0.13,
+      "end": 0.77
+    },
+    {
+      "w": "Know",
+      "start": 1.8,
+      "end": 2.08
+    },
+    {
+      "w": "the",
+      "start": 2.08,
+      "end": 2.21
+    },
+    {
+      "w": "risk",
+      "start": 2.21,
+      "end": 2.55
+    },
+    {
+      "w": "you",
+      "start": 2.55,
+      "end": 2.65
+    },
+    {
+      "w": "carry",
+      "start": 2.65,
+      "end": 3.04
+    },
+    {
+      "w": "while",
+      "start": 3.04,
+      "end": 3.24
+    },
+    {
+      "w": "the",
+      "start": 3.24,
+      "end": 3.3
+    },
+    {
+      "w": "work",
+      "start": 3.3,
+      "end": 3.58
+    },
+    {
+      "w": "happens",
+      "start": 3.58,
+      "end": 4.16
+    }
+  ],
+  "sentences": [
+    {
+      "text": "Priora.",
+      "start": 0.13,
+      "end": 0.77,
+      "word_range": [
+        0,
+        1
+      ]
+    },
+    {
+      "text": "Know the risk you carry, while the work happens.",
+      "start": 1.8,
+      "end": 4.16,
+      "word_range": [
+        1,
+        10
+      ]
+    }
+  ],
+  "created": "2026-09-30T01:11:59+00:00",
+  "provider": "kokoro-onnx 0.6.1, kokoro-v1.0.onnx (local guide)",
+  "voice": {
+    "id": "bf_isabella",
+    "lang": "en-gb"
+  },
+  "speed": 1.0,
+  "inner_pauses": [
+    0.8
+  ],
+  "segments_synth": [
+    {
+      "text": "Priora.",
+      "start": 0.12,
+      "end": 1.03,
+      "alignment_quality": {
+        "energy_pauses": 0,
+        "pause_agreement": 1.0,
+        "pauses_inside_words": [],
+        "onset_error_ms": 0.0,
+        "offset_error_ms": 230.0,
+        "pause_onset_error_ms_mean": null,
+        "pause_onset_error_ms_max": null
+      },
+      "fallback": false
+    },
+    {
+      "text": "Know the risk you carry, while the work happens.",
+      "start": 1.79,
+      "end": 4.19,
+      "alignment_quality": {
+        "energy_pauses": 0,
+        "pause_agreement": 1.0,
+        "pauses_inside_words": [],
+        "onset_error_ms": 0.0,
+        "offset_error_ms": 0.0,
+        "pause_onset_error_ms_mean": null,
+        "pause_onset_error_ms_max": null
+      },
+      "fallback": false
+    }
+  ],
+  "alignment": {
+    "method": "pocketsphinx-5-forced-alignment+energy-refine",
+    "fallback": false,
+    "quality": {
+      "energy_pauses": 1,
+      "pause_agreement": 1.0,
+      "pauses_inside_words": [],
+      "onset_error_ms": 0.0,
+      "offset_error_ms": 0.0,
+      "pause_onset_error_ms_mean": 0.0,
+      "pause_onset_error_ms_max": 0.0
+    },
+    "quality_ok": true
+  },
+  "pronunciation_checks": [
+    {
+      "word": "Priora",
+      "token_index": 0,
+      "chosen_variant": "P R IY OW R AH",
+      "intended": true,
+      "phones": "P R IY OW R AH",
+      "phone_durations": {
+        "P#0": 0.05,
+        "R#1": 0.06,
+        "IY#2": 0.19,
+        "OW#3": 0.17,
+        "R#4": 0.08,
+        "AH#5": 0.12
+      },
+      "longest_vowel": "IY",
+      "stress_on_middle_syllable": false,
+      "segment": 0
+    }
+  ]
+}

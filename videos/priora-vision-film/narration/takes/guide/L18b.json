@@ -1,0 +1,107 @@
+{
+  "schema": "priora-narration-take/1",
+  "id": "L18b",
+  "engine": "guide",
+  "guide": true,
+  "label": "GUIDE VOICE (local Kokoro). Not the final ElevenLabs performance.",
+  "speaker": "narrator",
+  "text": "A crane lift, as the wind picks up.",
+  "spoken_text": "A crane lift, as the wind picks up.",
+  "sample_rate": 48000,
+  "duration": 2.48,
+  "speech_start": 0.13,
+  "speech_end": 2.25,
+  "words": [
+    {
+      "w": "A",
+      "start": 0.13,
+      "end": 0.21
+    },
+    {
+      "w": "crane",
+      "start": 0.21,
+      "end": 0.62
+    },
+    {
+      "w": "lift",
+      "start": 0.62,
+      "end": 0.99
+    },
+    {
+      "w": "as",
+      "start": 0.99,
+      "end": 1.18
+    },
+    {
+      "w": "the",
+      "start": 1.18,
+      "end": 1.26
+    },
+    {
+      "w": "wind",
+      "start": 1.26,
+      "end": 1.67
+    },
+    {
+      "w": "picks",
+      "start": 1.67,
+      "end": 1.96
+    },
+    {
+      "w": "up",
+      "start": 1.96,
+      "end": 2.25
+    }
+  ],
+  "sentences": [
+    {
+      "text": "A crane lift, as the wind picks up.",
+      "start": 0.13,
+      "end": 2.25,
+      "word_range": [
+        0,
+        8
+      ]
+    }
+  ],
+  "created": "2026-09-30T01:11:59+00:00",
+  "provider": "kokoro-onnx 0.6.1, kokoro-v1.0.onnx (local guide)",
+  "voice": {
+    "id": "bf_isabella",
+    "lang": "en-gb"
+  },
+  "speed": 1.0,
+  "inner_pauses": [],
+  "segments_synth": [
+    {
+      "text": "A crane lift, as the wind picks up.",
+      "start": 0.12,
+      "end": 2.28,
+      "alignment_quality": {
+        "energy_pauses": 0,
+        "pause_agreement": 1.0,
+        "pauses_inside_words": [],
+        "onset_error_ms": 0.0,
+        "offset_error_ms": 0.0,
+        "pause_onset_error_ms_mean": null,
+        "pause_onset_error_ms_max": null
+      },
+      "fallback": false
+    }
+  ],
+  "alignment": {
+    "method": "pocketsphinx-5-forced-alignment+energy-refine",
+    "fallback": false,
+    "quality": {
+      "energy_pauses": 0,
+      "pause_agreement": 1.0,
+      "pauses_inside_words": [],
+      "onset_error_ms": 0.0,
+      "offset_error_ms": 0.0,
+      "pause_onset_error_ms_mean": null,
+      "pause_onset_error_ms_max": null
+    },
+    "quality_ok": true
+  },
+  "pronunciation_checks": []
+}

@@ -1,0 +1,830 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+  <head>
+    <meta charset="UTF-8">
+    <title>a2-resolve: Priora today, prevention and proof (Frame 4, cut 3)</title>
+    <!-- Ignored by the assembler. Everything the render needs is inside the template.
+
+      HANDOFF IN (from a1-world, identical frame at cue rewindEnd; this scene crossfades in over 0.4 s):
+        Mirrors the handoff contract written at the top of a1-world (its landing frame, site clock 14:41:59),
+        cut 3 colour. SiteKit.mount(svg, { show: 'rough', rough: true, wobble: 2, grade: 'act1', field: true })
+        at SiteKit.CAMERAS.landing (rect 43.5, 33.5, s 14.5): the rough twin fully drawn in colour pencil and
+        watercolour at the Act I grade (--sk-wash = var(--c-wash-act1) 0.85, --sk-sat 1), --sk-bleed 1 (the
+        rewind has flooded the colour back in), the pale envelope field ON (fieldG opacity 1), precise layer
+        at 0. Rough zone labels at their default size (no --fui-lab scaling), the rough sprinkler zone label
+        (.szl) hidden, paint numbers at 0.85, rough envelope (construct + firm) with its hand label at
+        font-size 3.3, all 31 Sprinkler Zone 3 heads (site.rough.heads) in --c-water at opacity 1, the Sprinkler
+        Zone 3 outline (the rough main path with data-src="sz3-outline") in var(--c-water), dashed and a little
+        firmer than the other light lines (the rule in the style block below; a1-world applies the same rule).
+        SketchKit world context at refScale 14.5 (the landing scale) with the hot-work marker (activityMarker
+        'roof03Centre', variant 'hot', label 'HOT WORK · ROOF 03 · 14:18', scale 'world', refScale 14.5, ring
+        at rest; amber by the kit), safeguardItems('roof03Centre', { refScale: 14.5, size: 18 }) (ok ticks,
+        coloured by the kit) and the hand label 'SPRINKLER ZONE 3' (label at 'sprinklerZone3Label', leader
+        [22, 30], size 18), all fully drawn. Nothing else visible. The chrome clock reads 14:41:59. The LANDING
+        block in the script holds these settings in one place: if a1-world changes them, change them there too.
+        The resolve then lands on the flat, full-colour precise site (site.resolve grades act1 to full).
+
+      CUT 2 STAGING: one board. The precise site and every interface piece are laid out on one large board
+      (5760 x 3800 board px) framed one thing at a time by FL.boardCam. The site keeps its own full-frame SVG
+      (SiteKit's viewBox camera, so hairlines stay 1 px at every zoom) and is registered to the board at
+      K0 = 12.5 board px per world unit: every board move is issued twice, once to the board (flBoard, zoom
+      'linear') and once to the site's viewBox (SiteKit camera), with the same ease and duration, so both
+      interpolate identically. Live lines, terminals and the node live in a board-level SVG whose --sw
+      (board px per screen px) is tweened with the camera, so they stay screen-constant like the demo's.
+        Board layout (board px):  hot-work node on Roof 03 at (2400, 1500);  capture strip north of it
+        (left 2351, top 738, 1040 wide), its ACTIVITY underline directly above the node;  programme
+        conditions card east (left 3160, 700 wide), 4.2 at the node's height, 4.3 at the height of the
+        SPRINKLER ZONE 3 label's anchor;  activity card (left 1434) and trusted record (left 2606, 760 wide)
+        side by side south of the site, top 2800.
+
+      SHOTS (every time from a cue, a word anchor or the beat grid; see compositions/a2-resolve.events.json):
+        S12  the landing resolves (precision-snap, finishing on "changed") into the flat, full-colour precise
+             site; the worker's point (the demo's node, amber, checking) appears on Roof 03; push of 1.5 beats
+             toward it, ending on the worker's first word.
+        S13  match cut on L13.start: the node's dot becomes the dot at the start of the waveform line, at
+             the same screen point; the camera follows the waveform as it draws (the capture strip fills
+             the frame width); the words set on the worker's own times; on "six" the tokens underline in
+             cobalt on half beats and drop into ACTIVITY / LOCATION / WINDOW, then BY; hold one beat.
+        S14  from "Priora" the cobalt line leaves the ACTIVITY field, the camera follows it down to the node
+             on Roof 03 (one beat) and on to the conditions card (one beat): 4.2 as a hero; on "conditions"
+             the line runs on down the card to 4.3 and back to SPRINKLER ZONE 3 · ACTIVE; on "matter" pull
+             back to the whole connection (strip, node, zone, card) and hold still to "It" (slow drift).
+        S15  cut on "It" to the activity card at 2.4x; five rows verify on half beats from "certificate";
+             on "keeps" the last check mark lifts off and becomes the record entry's marker while the
+             camera whips one beat to the trusted record at 2.2x; two entries append inside "record".
+        S16  on "prevention" pull back to the calm two-up (card left, record right, 1.4x), statements on
+             their words; slow drift to the hard cut at l16.
+
+      CUT 3 COLOUR (docs/cut3-direction.md section 1; tokens only, no hex in this file). Colour tells Act II:
+        the worker's point is amber (--c-hot: the node's dot on a paper-white bed, its pulse, the matched dot
+        at the start of the waveform, the capture strip's band); Sprinkler Zone 3 and condition 4.3 are water
+        (protection, ACTIVE); everything Priora does is cobalt (--c-priora: the capture underlines and the
+        STRUCTURED pill, the live lines, the node's reticle, the ring round a condition chip once the line
+        reaches it, the trusted record's band); verification is green (--c-ok: the card's ticks and pills,
+        the flying tick, the rail markers of the two new record entries). The node stays in its checking state
+        (dashed ink ring, turning, easing to a stop as the connection lands) through S12 to S14: green arrives
+        with verification, on the card, not before. At most three strong colours share a frame: S12 amber +
+        water; S13 amber + cobalt; S14 amber + water + cobalt; S15 amber band + green; S16 amber band + cobalt
+        band + green. The cobalt lines are 2.5 px (the demo's 2) so they read as their own layer over the site.
+        Film-native pieces (scene-drawn, deviating from the demo; the product's words and logic unchanged): the
+        capture strip has no border and takes the hot band when ACTIVITY is recognised, its state is a pill
+        (LISTENING ink, STRUCTURED cobalt), the rule above the fields is gone; the programme conditions card is
+        paper-white with one water band (protection conditions), no border, a 22 px mono head, the numbers as
+        filled chips in their category (4.2 hot-soft with a hot border, 4.3 water-soft with a water border);
+        the trusted record is borderless with a cobalt band (Priora's own record). The kit's activity card is
+        unchanged except its green state words, a shade deeper for contrast.
+
+      HANDOFF OUT (hard cut at cue l16, no fade): board camera on the two-up (card and record at 1.4x)
+      drifted 1.2 percent; site layer at opacity 0; statements, label, card (hot band, 5 OF 5 VERIFIED ·
+      INSIDE ENVELOPE, green ticks and pills) and record (cobalt band, 3 ENTRIES, the two new entries with
+      green markers) visible. a3-change does not share this frame (hard cut).
+    -->
+  </head>
+  <body>
+    <template id="a2-resolve-template">
+      <link rel="stylesheet" href="assets/css/film.css">
+      <link rel="stylesheet" href="assets/css/film-color.css">
+      <link rel="stylesheet" href="assets/css/film-sketch.css">
+      <link rel="stylesheet" href="assets/css/product.css">
+      <link rel="stylesheet" href="assets/css/film-ui.css">
+      <style>
+        #root {
+          position: absolute;
+          inset: 0;
+          overflow: hidden;
+        }
+        #a2-resolve-fade,
+        #a2-resolve-site-wrap,
+        #a2-resolve-view {
+          position: absolute;
+          left: 0;
+          top: 0;
+          width: 1920px;
+          height: 1080px;
+        }
+        #a2-resolve-view {
+          overflow: hidden;
+        }
+        #a2-resolve-site {
+          position: absolute;
+          left: 0;
+          top: 0;
+          width: 1920px;
+          height: 1080px;
+          display: block;
+        }
+        #a2-resolve-board {
+          position: absolute;
+          left: 0;
+          top: 0;
+          width: 5760px;
+          height: 3800px;
+        }
+        #a2-resolve-bov {
+          position: absolute;
+          left: 0;
+          top: 0;
+          overflow: visible;
+        }
+        /* Act I's Sprinkler Zone 3 outline (a1-world applies the same rule to its twin): water, dashed, a
+           little firmer than the other light lines, so the handoff frame is identical. */
+        #a2-resolve-site .sk-rough path.sk-main[data-src="sz3-outline"] {
+          stroke: var(--c-water);
+          stroke-width: calc(var(--sw) * 1.2px);
+          stroke-dasharray: calc(var(--sw) * 5px) calc(var(--sw) * 3.5px);
+        }
+
+        /* ---- the worker's point and Priora's marks on the board svg ---- */
+        /* the node's call to the eye is amber (the hot work), its reticle Priora's own */
+        #a2-resolve-bov .fui-n-pulse {
+          stroke: var(--c-hot);
+          stroke-width: 1.5;
+        }
+        #a2-resolve-bov .a2-node-bed {
+          fill: color-mix(in srgb, var(--c-paper) 30%, white);
+        }
+        #a2-resolve-bov .fui-nret-p {
+          stroke: var(--c-priora);
+          stroke-opacity: 0.9;
+        }
+        /* the live lines a little firmer than the demo's, so the cobalt reads as its own layer over the
+           coloured site on a phone */
+        #a2-resolve-bov .fui-live-p {
+          stroke-width: calc(var(--sw) * 2.5px);
+        }
+
+        /* ---- the capture strip on the board: large type, fields sized so the four fit in one row ---- */
+        /* film-native: no border (one hairline fewer), a hot band that drops in when ACTIVITY is recognised
+           (--a2-band, tweened), 6 px more head room for it; the horizontal geometry is the kit's (37 px) */
+        #a2-resolve-board .fui-capture {
+          border: 0;
+          padding: 33px 37px 27px;
+          box-shadow: inset 0 var(--a2-band, 0px) 0 var(--c-hot), var(--fui-soft-shadow);
+        }
+        #a2-resolve-board .fui-cap-fields {
+          border-top-color: transparent;
+        }
+        /* the state as a pill: painted with a spread shadow, so the head row keeps its height */
+        #a2-resolve-board .fui-cap-state .fui-sw {
+          border-radius: 3px;
+          background: var(--a2-pill);
+          box-shadow: 0 0 0 7px var(--a2-pill);
+        }
+        #a2-resolve-board .fui-cap-state .fui-sw-listening {
+          --a2-pill: color-mix(in srgb, var(--c-ink) 7%, var(--c-paper));
+          color: color-mix(in srgb, var(--c-ink) 68%, var(--c-paper));
+        }
+        #a2-resolve-board .fui-cap-state .fui-sw-resolved {
+          --a2-pill: var(--c-priora-soft);
+          color: var(--c-priora-deep);
+        }
+        #a2-resolve-board .fui-cap-tx {
+          font-size: 40px;
+          line-height: 52px;
+        }
+        /* No transforms inside the strip: an HTML element with a transform under the strip (which is hidden
+           before the match cut and shown after it) made earlier frames render differently after a later
+           frame had been seen. The words fade in without the kit's 8 px rise; the field values drop in with a
+           top-down clip wipe. */
+        #a2-resolve-board .fui-cap-tx .fui-w {
+          position: relative;
+          transform: none !important;
+        }
+        #a2-resolve-board .fui-field .v {
+          clip-path: inset(0 0 100% 0);
+        }
+        #a2-resolve-board .fui-cap-fields {
+          gap: 22px;
+        }
+        #a2-resolve-board .fui-field .v {
+          font-size: 25px;
+          line-height: 31.25px;
+        }
+        #a2-resolve-board .fui-field .v.mono {
+          font-size: 24px;
+          line-height: 31.25px;
+        }
+        /* a recognised token: its cobalt underline, wiped in by width (no transform, no clip: both made
+           later frames depend on seek history on this DOM board) */
+        #a2-resolve-board .a2-tok-u {
+          position: absolute;
+          left: 0;
+          right: 0;
+          bottom: -2px;
+          height: 3px;
+          display: block;
+        }
+        #a2-resolve-board .a2-tok-u.a2-tok-join {
+          right: -0.26em;
+        }
+        #a2-resolve-board .a2-tok-fill {
+          display: block;
+          width: 0%;
+          height: 100%;
+          background: var(--c-priora);
+        }
+        /* the dot and listening ring at the start of the waveform (the worker's point, matched): the node's
+           amber dot and its dashed checking ring (radius, dashes and turn set by the script) */
+        #a2-resolve-board .a2-wave-dot {
+          fill: var(--c-hot);
+        }
+        #a2-resolve-board .a2-wave-ring {
+          fill: none;
+          stroke: var(--c-ink);
+        }
+
+        /* ---- the programme conditions card (film-native: the Act I clause made exact) ----
+           paper-white, one water band (protection conditions), no border, the head at 22 px, the numbers as
+           filled chips in their category (4.2 hot work, 4.3 water) whose border turns cobalt when Priora's
+           line connects. Vertical metrics are mirrored in the script (CL): keep them in step. */
+        #a2-resolve-clauses {
+          position: absolute;
+          box-sizing: border-box;
+          width: 700px;
+          padding: 32px 32px 34px 36px;
+          background: color-mix(in srgb, var(--c-paper) 30%, white);
+          border-radius: 22px;
+          box-shadow:
+            inset 0 12px 0 var(--c-water),
+            0 1px 0 color-mix(in srgb, var(--c-ink) 3%, transparent),
+            0 30px 70px -40px color-mix(in srgb, var(--c-ink) 24%, transparent),
+            0 8px 22px -14px color-mix(in srgb, var(--c-ink) 8%, transparent);
+        }
+        #a2-resolve-clauses .a2-cl-head {
+          height: 26.4px;
+          margin-bottom: 16px;
+          font: 500 22px/26.4px "IBM Plex Mono";
+          letter-spacing: 0.12em;
+          text-transform: uppercase;
+          color: color-mix(in srgb, var(--c-ink) 62%, var(--c-paper));
+          white-space: nowrap;
+        }
+        #a2-resolve-clauses .a2-cl-row {
+          display: grid;
+          grid-template-columns: 76px 1fr;
+          column-gap: 22px;
+          align-items: center;
+          height: 96px;
+        }
+        #a2-resolve-cl42 {
+          --a2-cat: var(--c-hot);
+          --a2-cat-soft: var(--c-hot-soft);
+        }
+        #a2-resolve-cl43 {
+          --a2-cat: var(--c-water);
+          --a2-cat-soft: var(--c-water-soft);
+        }
+        #a2-resolve-clauses .a2-cl-num {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          box-sizing: border-box;
+          height: 46px;
+          border: 2px solid var(--a2-cat);
+          border-radius: 8px;
+          background: var(--a2-cat-soft);
+          /* connected: Priora's cobalt ring settles round the chip (the script tweens its colour and offset) */
+          outline: 3px solid transparent;
+          outline-offset: 3px;
+          font: 500 24px/1 "IBM Plex Mono";
+          letter-spacing: 0.04em;
+          color: var(--c-ink);
+        }
+        #a2-resolve-clauses .a2-cl-tx {
+          font: 400 26px/33.8px "IBM Plex Sans";
+          letter-spacing: -0.005em;
+          color: var(--c-ink);
+        }
+
+        /* ---- the activity card (kit): its green state words a shade deeper so they read on their pills
+           (the kit's --c-ok on --c-ok-soft measures 3.4:1; this is 5:1); the ticks keep the kit's green ---- */
+        #a2-resolve-board .fui-card .conds li em .fui-sw-verified,
+        #a2-resolve-board .fui-card .hc-foot .fui-sw-inside {
+          color: color-mix(in srgb, var(--c-ok) 70%, var(--c-ink));
+        }
+
+        /* ---- the two statements on the board (the two-up frames them at 1.4 / 1.8 of board px) ---- */
+        #a2-resolve-board .fui-st {
+          font-size: 82.29px;
+          color: var(--c-ink);
+        }
+        #a2-resolve-board .fui-st-lab {
+          font-size: 23.14px;
+          color: color-mix(in srgb, var(--c-ink) 62%, var(--c-paper));
+        }
+        /* ---- the trusted record on the board: an opaque paper-white panel with Priora's band (its own
+           record); no border, 10 px more head room for the band (FLY_B follows it) ---- */
+        #a2-resolve-board .fui-record.fui-panel {
+          background: color-mix(in srgb, var(--c-paper) 30%, white);
+          border: 0;
+          padding: 37px 31px 13px;
+          box-shadow: inset 0 12.6px 0 var(--c-priora), var(--fui-soft-shadow);
+        }
+        /* the two entries appended today are verified, inside: their rail markers are green */
+        #a2-resolve-board .fui-record .rr.a2-rr-ok .m::after {
+          border-color: var(--c-ok);
+          background: var(--c-ok-soft);
+        }
+        /* the flying check mark (the card's green tick) that becomes the record entry's marker */
+        #a2-resolve-bov .a2-fly-tick {
+          fill: none;
+          stroke: var(--c-ok);
+          stroke-width: 3.24;
+          stroke-linecap: round;
+          stroke-linejoin: round;
+        }
+        #a2-resolve-bov .a2-fly-mk {
+          fill: var(--c-ok-soft);
+          stroke: var(--c-ok);
+          stroke-width: 1.8;
+        }
+      </style>
+
+      <div id="root" data-composition-id="a2-resolve" data-width="1920" data-height="1080">
+        <div id="a2-resolve-fade">
+          <div id="a2-resolve-site-wrap" data-layout-ignore>
+            <svg id="a2-resolve-site" xmlns="http://www.w3.org/2000/svg"></svg>
+          </div>
+          <div id="a2-resolve-view">
+            <div id="a2-resolve-board" data-layout-allow-overflow>
+              <div id="a2-resolve-clauses" class="fui">
+                <div id="a2-resolve-cl-head" class="a2-cl-head">Property + BI programme · Conditions</div>
+                <div id="a2-resolve-cl42" class="a2-cl-row">
+                  <span id="a2-resolve-cl42-n" class="a2-cl-num">4.2</span>
+                  <span id="a2-resolve-cl42-t" class="a2-cl-tx">Hot work requires a permit, a certified operator and a fire watch.</span>
+                </div>
+                <div id="a2-resolve-cl43" class="a2-cl-row">
+                  <span id="a2-resolve-cl43-n" class="a2-cl-num">4.3</span>
+                  <span id="a2-resolve-cl43-t" class="a2-cl-tx">Automatic sprinkler protection must remain in service.</span>
+                </div>
+              </div>
+              <svg id="a2-resolve-bov" xmlns="http://www.w3.org/2000/svg" width="5760" height="3800" viewBox="0 0 5760 3800" data-layout-ignore>
+                <g id="a2-resolve-bov-lines"></g>
+                <g id="a2-resolve-bov-nodes"></g>
+                <g id="a2-resolve-fly" opacity="0">
+                  <circle id="a2-resolve-fly-mk" class="a2-fly-mk" r="5.4" opacity="0"></circle>
+                  <path id="a2-resolve-fly-tick" class="a2-fly-tick" d="M-8.28 0.72L-2.52 6.12L8.64 -6.12"></path>
+                </g>
+              </svg>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <script>
+        (function () {
+          // Globals from index.html <head>: gsap (+ plugins), FL, CUES, SCENES, NARRATION, FL_EVENTS,
+          // SITE_MODEL, SiteKit, UIKit, SketchKit. Nothing is loaded again here.
+          var ID = "a2-resolve";
+          var clk = FL.clock(ID);
+          var T = function (a, off) {
+            return clk.t(a, off);
+          };
+          var EV = function (name) {
+            return clk.ev(name);
+          };
+          var DUR = clk.duration;
+          var BEAT = FL.BEAT,
+            HB = FL.BEAT / 2;
+          var K = window.UIKit,
+            SK = window.SiteKit,
+            SKT = window.SketchKit,
+            M = window.SITE_MODEL;
+          var el = function (id) {
+            return document.getElementById(id);
+          };
+          var fade = el(ID + "-fade"),
+            svg = el(ID + "-site"),
+            board = el(ID + "-board"),
+            bov = el(ID + "-bov"),
+            bovLines = el(ID + "-bov-lines"),
+            bovNodes = el(ID + "-bov-nodes");
+          var O = { prefix: ID, scene: ID };
+          var opts = function (extra) {
+            return Object.assign({}, O, extra || {});
+          };
+          var tl = gsap.timeline({ paused: true });
+          FL.sceneFade(tl, fade, ID); // 0.4 s in over Frame 1's identical landing frame; hard cut out at l16
+
+          // film-color.css tokens resolved for colour tweens (GSAP cannot interpolate var() or color-mix)
+          var TK = function (n) {
+            return SK.color(n);
+          };
+          var rgba = function (hex, a) {
+            var h = String(hex).trim().replace("#", "");
+            if (h.length === 3) h = h.replace(/(.)/g, "$1$1");
+            return "rgba(" + [0, 2, 4].map(function (i) { return parseInt(h.slice(i, i + 2), 16); }).join(",") + "," + a + ")";
+          };
+
+          // ================================================================ the Frame 1 handoff frame
+          // LANDING: a1-world's landing frame (its handoff contract), cut 3 colour, in one place. SketchKit
+          // seeds by content, so the same calls draw the same lines; the Roof 03 items are drawn to completion
+          // on a throwaway timeline at build time. If a1-world changes any of this, change it here too.
+          var LANDING = {
+            grade: "act1", // --sk-wash var(--c-wash-act1), --sk-sat 1: colour pencil and watercolour
+            field: true, // the pale envelope field is on
+            bleed: 1, // the rewind has flooded the colour back in
+            heads: 1, // all 31 zone 3 heads in --c-water (site.rough.heads)
+            refScale: 14.5, // SiteKit.CAMERAS.landing: world-scaled lettering is 18 px here
+            hot: { variant: "hot", label: "HOT WORK · ROOF 03 · 14:18", scale: "world" },
+            safeguards: { size: 18 },
+            szLabel: { text: "SPRINKLER ZONE 3", leader: [22, 30], size: 18 },
+          };
+          // SiteKit rough twin at CAMERAS.landing, fully drawn, with the precise layer beneath it.
+          var site = SK.mount(svg, { prefix: ID + "-site", show: "rough", rough: true, wobble: 2, grade: LANDING.grade, field: LANDING.field });
+          svg.style.setProperty("--sk-bleed", LANDING.bleed);
+          site.rough.heads.forEach(function (hd) {
+            hd.style.opacity = LANDING.heads;
+          });
+          var CAM = SK.CAMERAS;
+          site.setView(CAM.landing);
+          // Act I conventions at the landing: the zone 3 label is left to the scene (hidden), paint numbers at .85
+          var szlRough = site.rough.labels ? site.rough.labels.querySelector(".szl") : null;
+          if (szlRough) szlRough.style.opacity = 0;
+          site.rough.zoneText.forEach(function (z) {
+            z.style.opacity = 0.85;
+          });
+          // the envelope's hand lettering at a1-world's size
+          if (site.rough.envelope.label) site.rough.envelope.label.setAttribute("font-size", "3.3");
+          // zone labels at their Act I size; they grow to 18 px as they become precise
+          svg.classList.add("fui-labels");
+          svg.style.setProperty("--fui-lab", 1);
+          svg.__fuiLab = 1;
+
+          var W = SKT.world(site, { prefix: ID + "-sk", scene: ID, refScale: LANDING.refScale });
+          var hot = SKT.activityMarker(W, "roof03Centre", Object.assign({ refScale: LANDING.refScale }, LANDING.hot));
+          var sg = SKT.safeguardItems(W, "roof03Centre", Object.assign({ refScale: LANDING.refScale }, LANDING.safeguards));
+          var szLab = SKT.label(W, "sprinklerZone3Label", LANDING.szLabel.text, { leader: LANDING.szLabel.leader, size: LANDING.szLabel.size });
+          var pre = gsap.timeline({ paused: true });
+          hot.drawOn(pre, 0, { events: false });
+          sg.drawOn(pre, 0, { events: false });
+          szLab.drawOn(pre, 0, { events: false });
+          pre.progress(1);
+          pre.kill();
+
+          // ================================================================ the board and its camera
+          // The site is registered to the board at K0 board px per world unit, with the hot-work node on
+          // Roof 03 at NODE. A board rect {x, y, w} and a site viewBox are the same framing (bw / toB).
+          var K0 = 12.5;
+          var A = M.anchors.hotWorkNode.world; // [38.971, 32.5]
+          var NODE = [2400, 1500];
+          var BX = NODE[0] - K0 * A[0],
+            BY = NODE[1] - K0 * A[1];
+          var toB = function (p) {
+            return [BX + K0 * p[0], BY + K0 * p[1]];
+          };
+          var bw = function (r) {
+            return { x: (r.x - BX) / K0, y: (r.y - BY) / K0, w: r.w / K0, h: (r.w * 9) / 16 / K0 };
+          };
+          var ZA = toB(M.anchors.sprinklerZone3Label.world); // the SPRINKLER ZONE 3 label's anchor dot
+          // a board rect that puts board point p at screen (sx, sy) at zoom z (screen px per board px)
+          var rectAt = function (p, sx, sy, z) {
+            return { x: p[0] - sx / z, y: p[1] - sy / z, w: 1920 / z };
+          };
+
+          // pieces (board px)
+          var STRIP = { x: NODE[0] - 49, y: 738, w: 1040 }; // ACTIVITY field's left edge 12 px left of the node
+          // the strip's vertical metrics (the style block: no border, padding 33 / 27, head 21.6, wave 16 + 72,
+          // transcript 16 + 52, fields 20 + 1 (transparent rule) + 18, key 21.6 + 6, value 31.25, underline pad 12)
+          var CAP = { padT: 33, head: 21.6, waveMT: 16, waveH: 72 };
+          var CAP_AX = CAP.padT + CAP.head + CAP.waveMT + CAP.waveH / 2; // the waveform axis (106.6)
+          var CAP_U = CAP.padT + CAP.head + CAP.waveMT + CAP.waveH + 16 + 52 + 20 + 1 + 18 + 21.6 + 6 + 31.25 + 12 - 1; // 319.45
+          var CAP_H = CAP_U + 1 + 27; // the strip's height
+          var STRIP_DOT = [STRIP.x + 37, STRIP.y + CAP_AX]; // start of the waveform axis (padding 37)
+          var ACT_U = [NODE[0], STRIP.y + CAP_U]; // on the ACTIVITY field's underline
+          // the conditions card's vertical metrics (the style block: padding 32 / 34, head 26.4 + 16, rows 96)
+          var CL = { padT: 32, head: 26.4, headMB: 16, row: 96, padB: 34 };
+          var CL_ROW = CL.row,
+            CL_GAP = ZA[1] - NODE[1] - CL_ROW; // 4.3 sits at the height of the zone label's anchor
+          var CL_42 = CL.padT + CL.head + CL.headMB + CL_ROW / 2; // the 4.2 row's centre below the card's top
+          var CL_H = CL.padT + CL.head + CL.headMB + 2 * CL_ROW + CL_GAP + CL.padB;
+          var CLAUSE = { x: 3160, y: NODE[1] - CL_42, w: 700 }; // 4.2 row centre at the node's height
+          var J42 = [CLAUSE.x + 16, NODE[1]],
+            J43 = [CLAUSE.x + 16, ZA[1]];
+          var CARD = { x: 1434, y: 2800 },
+            REC = { x: 2606, y: 2800, w: 760 };
+
+          var zStrip = 1728 / STRIP.w, // the strip fills the frame width
+            zTwo = 1.4 / 1.8; // the two-up: card and record at 1.4x of the demo
+          var R = {
+            landing: { x: BX + K0 * CAM.landing.x, y: BY + K0 * CAM.landing.y, w: K0 * CAM.landing.w },
+            worker: rectAt(NODE, 700, 530, 2.0),
+            strip0: rectAt(STRIP_DOT, 700, 530, zStrip), // the match: the dot sits where the node was
+            strip: rectAt([STRIP.x + STRIP.w / 2, STRIP.y + CAP_H / 2], 960, 540, zStrip),
+            nodeF: rectAt(NODE, 465, 540, 1.5),
+            clause: rectAt([CLAUSE.x + CLAUSE.w / 2, CLAUSE.y + CL_H / 2], 960, 540, 1.65),
+            reveal: rectAt(NODE, 580, 730, 0.83),
+            card: rectAt([CARD.x + 306, CARD.y + 293], 960, 540, 2.4 / 1.8),
+            record: rectAt([REC.x + REC.w / 2, REC.y + 217], 960, 540, 2.2 / 1.8), // (the band's head room: +5)
+            twoUp: rectAt([(CARD.x + REC.x + REC.w) / 2, CARD.y], 960, 392, zTwo),
+          };
+
+          var bcam = FL.boardCam(board, {});
+          var camLast = R.landing;
+          bcam.apply(camLast);
+          bov.style.setProperty("--sw", (camLast.w / 1920).toFixed(6));
+          // one framing, two cameras: flBoard with a linear zoom and the site viewBox interpolate identically
+          var camMove = function (r, at, dur, ease) {
+            var a = camLast;
+            bcam.move(tl, a, r, at, dur, ease, "linear");
+            site.camera(tl, bw(r), at, dur, ease, a === R.landing ? CAM.landing : bw(a));
+            tl.fromTo(bov, { "--sw": +(a.w / 1920).toFixed(6) }, { "--sw": +(r.w / 1920).toFixed(6), duration: dur, ease: ease, immediateRender: false }, at);
+            camLast = r;
+          };
+          var camCut = function (r, at) {
+            camMove(r, at, 0.001, "steps(1)");
+          };
+          var camDrift = function (at, dur, pct) {
+            var a = camLast,
+              d = a.w * pct;
+            camMove({ x: a.x + d / 2, y: a.y + (d * 9) / 32, w: a.w - d }, at, dur, "sine.inOut");
+          };
+
+          // ================================================================ times
+          var RES0 = EV("precision-snap"),
+            RESD = T("L12:changed.start", 0.25) - RES0; // the resolve finishes on "changed"
+          var PUSH0 = EV("push-worker"),
+            CUT13 = EV("cut-capture"); // = FL.clock(ID).c("L13.start")
+          var TOK = [1, 2, 3, 4].map(function (i) {
+            return EV("word-token-0" + i);
+          });
+          var TRACK_END = TOK[0] + HB; // the camera settles on the full strip as the last word ends
+          var F0 = EV("connect-activity"), // the follow: down to the node (one beat), on to 4.2 (one beat)
+            F1 = F0 + BEAT,
+            F2 = F0 + 2 * BEAT;
+          var LB0 = EV("connect-zone");
+          var PULL1 = EV("pull-connection"),
+            PULL1D = 1.5 * BEAT;
+          var CUT15 = EV("cut-card");
+          var VT = [1, 2, 3, 4, 5].map(function (i) {
+            return EV("verify-tick-0" + i);
+          });
+          var SLIDE = EV("whip-record"),
+            RA1 = EV("record-append-1"),
+            RA2 = EV("record-append-2");
+          var PULL2 = EV("pull-twoup"),
+            PULL2D = BEAT; // lands on "prevention"
+          var END_T = DUR - 0.02;
+
+          // ================================================================ camera
+          camMove(R.landing, 0, PUSH0, "none"); // the landing frame holds while the drawing resolves
+          camMove(R.worker, PUSH0, CUT13 - PUSH0, "power3.inOut"); // S12: push toward the worker (1.5 beats)
+          camCut(R.strip0, CUT13); // S13: match cut on the worker's first word
+          camMove(R.strip, CUT13, TRACK_END - CUT13, "sine.inOut"); // follows the waveform as it draws
+          camMove(R.nodeF, F0, BEAT, "power2.inOut"); // S14: down the line to Roof 03
+          camMove(R.clause, F1, BEAT, "power2.inOut"); // and on to the conditions card
+          camMove(R.reveal, PULL1, PULL1D, "power2.inOut"); // on "matter": the whole connection
+          camDrift(PULL1 + PULL1D, CUT15 - PULL1 - PULL1D, 0.005); // the held connection: drift only
+          camCut(R.card, CUT15); // S15: cut on "It"
+          camDrift(CUT15, SLIDE - CUT15, 0.006);
+          camMove(R.record, SLIDE, BEAT, "power3.inOut"); // on "keeps": whip to the trusted record
+          camDrift(SLIDE + BEAT, PULL2 - SLIDE - BEAT, 0.0025);
+          camMove(R.twoUp, PULL2, PULL2D, "power2.inOut"); // S16: the calm two-up
+          camDrift(PULL2 + PULL2D, END_T - PULL2 - PULL2D, 0.012);
+
+          // the site recedes behind the strip, returns for the connection, leaves for the product close-ups.
+          // Dimmed on the precise layer (an SVG group, painted with the site) rather than on an HTML wrapper:
+          // a fractional opacity on the wrapper made later board frames depend on seek history.
+          var siteOp = function (from, to, at, dur) {
+            tl.fromTo(site.precise, { opacity: from }, { opacity: to, duration: dur, ease: dur > 0.01 ? "power1.inOut" : "none", immediateRender: false }, at);
+          };
+          siteOp(1, 0.4, CUT13, 0.001);
+          siteOp(0.4, 1, F0, BEAT);
+          siteOp(1, 0.8, PULL1, PULL1D); // the connection leads, the drawing steps back a little
+          siteOp(0.8, 0, CUT15, 0.001);
+
+          // ================================================================ S12 the resolve (L12)
+          // radiate from Roof 03 outward, so the snap starts where the eye already is
+          site.resolve(tl, RES0, RESD, {
+            scene: ID,
+            order: ["production-hall", "sprinkler-zone-3", "production-hall-2", "pipe-bridge", "utilities", "tanks", "laboratory", "loading-area-containers", "loading-area", "warehouse", "roads", "ground-crosses"],
+          });
+          K.siteLabels(site, 1.8, tl, RES0 + RESD * 0.45, RESD * 0.55);
+          // Priora will verify for itself: the pencil ticks lift first, then the hand-drawn items and the marker
+          var ticks = FL.$$(sg.root, ".skt-heavy");
+          tl.fromTo(ticks, { opacity: 1 }, { opacity: 0, duration: 0.3, stagger: 0.07, ease: "power1.in", immediateRender: false }, RES0 + 0.1);
+          sg.children.forEach(function (c, i) {
+            c.fade(tl, RES0 + 0.35 + i * 0.1, 1, 0, 0.55, "power1.inOut");
+          });
+          hot.fade(tl, RES0 + 0.7, 1, 0, 0.6, "power1.inOut");
+          // the hand lettering of the zone gives way to the precise "SPRINKLER ZONE 3 · ACTIVE" beside it
+          szLab.fade(tl, RES0 + RESD * 0.45, 1, 0, RESD * 0.35, "power1.inOut");
+
+          // the live lines (board SVG, drawn later) sit under the node
+          // the worker's point: the hot-work node (amber dot, the kit's 'hero' activity), a little larger than the
+          // demo's 1.5 so it reads as the subject of the push. It stays in its checking state (dashed ink ring,
+          // turning as the demo's) through the connection: green comes only with verification, on the card.
+          var KN = 2;
+          var node = K.nodeGlyph(bovNodes, NODE, "checking", opts({ name: "hero", k: KN, reticle: false, visible: false }));
+          // a paper-white bed inside the checking ring, so the worker's point reads clean over the coloured roof
+          // (and the sprinkler head beside it), and the live lines plug into it
+          var bed = FL.svgEl("circle", { id: ID + "-node-bed", class: "a2-node-bed", r: 10 });
+          node.px.insertBefore(bed, node.px.firstChild);
+          // the hand marker's ring gives way to the precise node
+          var SPIN0 = RES0 + 0.85;
+          node.show(tl, SPIN0, true, 0.45);
+          node.pulse(tl, PUSH0 - 0.05, 1.3); // it calls the eye (amber) just before the push
+          // the checking ring turns at the demo's 2.2 s per turn and eases to a stop as the connection lands, so
+          // the held reveal is still (one tween per segment, continuous angle and speed)
+          var TURN = 2.2;
+          var SPIN1 = PULL1,
+            SPIN2 = PULL1 + PULL1D; // stopped as the pull to the whole connection lands
+          var spinA = function (t) {
+            return (360 * (t - SPIN0)) / TURN;
+          };
+          var rot = function (a) {
+            return "rotate(" + a.toFixed(3) + ")";
+          };
+          var SPIN_A1 = spinA(SPIN1),
+            SPIN_A2 = SPIN_A1 + ((360 / TURN) * (SPIN2 - SPIN1)) / 2; // power2.out starts at twice its mean speed
+          tl.fromTo(node.parts.chk, { attr: { transform: rot(0) } }, { attr: { transform: rot(SPIN_A1) }, duration: SPIN1 - SPIN0, ease: "none", immediateRender: false }, SPIN0);
+          tl.fromTo(node.parts.chk, { attr: { transform: rot(SPIN_A1) } }, { attr: { transform: rot(SPIN_A2) }, duration: SPIN2 - SPIN1, ease: "power2.out", immediateRender: false }, SPIN1);
+
+          // ================================================================ S13 the worker speaks (L13)
+          var L13 = FL.words("L13");
+          // amplitude envelope of the worker take: RMS of assets/audio/voice.wav over L13.start - 0.05 ..
+          // L13.end + 0.1 (63.211 .. 65.751 s), 200 bins, normalised to the 98th percentile, gamma 0.8;
+          // re-derive after the ElevenLabs re-lock
+          var ENV = [0,0,0,0,0.12,0.29,0.94,1,1,1,0.95,0.89,0.78,0.8,0.74,0.75,0.65,0.68,0.56,0.51,0.48,0.5,0.63,0.9,0.96,0.87,0.8,0.85,0.85,0.85,0.83,0.79,0.8,0.83,0.68,0.47,0.38,0.33,0.4,0.71,0.75,0.72,0.67,0.55,0.66,0.63,0.69,0.63,0.62,0.65,0.55,0.66,0.54,0.67,0.57,0.61,0.51,0.64,0.61,0.59,0.64,0.57,0.6,0.45,0.41,0.47,0.67,0.7,0.82,1,1,0.89,0.72,0.74,0.79,0.95,0.72,0.34,0.26,0.23,0.16,0.18,0.12,0.25,0.18,0.23,0.15,0.39,0.63,0.69,0.66,0.63,0.69,0.68,0.59,0.63,0.53,0.37,0.23,0.14,0.17,0.16,0.25,0.36,0.22,0.2,0.13,0.24,0.65,0.81,0.91,0.95,0.88,0.64,0.66,0.66,0.57,0.43,0.36,0.37,0.39,0.41,0.27,0.13,0.1,0.06,0.11,0.16,0.26,0.52,0.47,0.69,0.59,0.68,0.55,0.45,0.15,0.17,0.41,0.51,0.42,0.24,0.3,0.7,0.71,0.6,0.7,0.44,0.4,0.35,0.33,0.31,0.3,0.35,0.38,0.34,0.32,0.33,0.35,0.34,0.36,0.34,0.2,0.36,0.98,1,0.96,0.71,0.58,0.52,0.36,0.29,0.15,0.09,0.08,0.06,0.04,0.03,0.28,0.18,0.36,0.41,0.36,0.38,0.35,0.34,0.3,0.32,0.27,0.21,0.14,0.08,0.05,0.04,0.03,0.02,0.01,0.01,0.01,0];
+          var cap = K.captureStrip(opts({ parent: board, left: STRIP.x, top: STRIP.y, width: STRIP.w, waveH: 72, words: L13, envelope: ENV }));
+          // the strip exists from the match cut on (it would otherwise sit at the top edge of the landing frame)
+          cap.el.style.opacity = 0;
+          tl.fromTo(cap.el, { opacity: 0 }, { opacity: 1, duration: 0.001, ease: "none", immediateRender: false }, CUT13);
+          cap.play(tl, -clk.start, L13); // waveform with the take, each word on the worker's own time
+          // the matched dot at the start of the waveform line (the node's amber dot) with the node's dashed
+          // checking ring at the angle it has reached on the cut, still turning as it fades (node px x KN are
+          // screen px; the strip is framed at zStrip)
+          var waveSvg = FL.$(cap.el, ".fui-cap-wave");
+          var wu = KN / zStrip; // board px per node px at the match
+          var wRing = FL.svgEl("circle", { id: ID + "-wave-ring", class: "a2-wave-ring", cx: 0, cy: CAP.waveH / 2, r: (9 * wu).toFixed(3), "stroke-width": wu.toFixed(3), "stroke-dasharray": (2.2 * wu).toFixed(3) + " " + (2.9 * wu).toFixed(3) }, waveSvg);
+          FL.svgEl("circle", { id: ID + "-wave-dot", class: "a2-wave-dot", cx: 0, cy: CAP.waveH / 2, r: (3.1 * wu).toFixed(3) }, waveSvg);
+          var wrot = function (a) {
+            return "rotate(" + a.toFixed(3) + " 0 " + CAP.waveH / 2 + ")";
+          };
+          var WR_D = 0.75;
+          wRing.setAttribute("transform", wrot(spinA(CUT13)));
+          tl.fromTo(wRing, { attr: { transform: wrot(spinA(CUT13)) } }, { attr: { transform: wrot(spinA(CUT13 + WR_D)) }, duration: WR_D, ease: "none", immediateRender: false }, CUT13);
+          tl.fromTo(wRing, { opacity: 1 }, { opacity: 0, duration: 0.6, ease: "power1.out", immediateRender: false }, CUT13 + 0.15);
+
+          // on the last word the tokens underline in cobalt on half beats and drop into their fields
+          var toks = cap.tokens,
+            F = cap.fields;
+          var mkU = function (tok, join) {
+            var u = document.createElement("i");
+            u.className = "a2-tok-u" + (join ? " a2-tok-join" : "");
+            u.id = tok.id + "-u";
+            tok.appendChild(u);
+            var fill = document.createElement("b");
+            fill.className = "a2-tok-fill";
+            fill.id = tok.id + "-uf";
+            u.appendChild(fill);
+            u.fill = fill;
+            return u;
+          };
+          var TOKU = [[mkU(toks[1])], [mkU(toks[3], true), mkU(toks[4])], [mkU(toks[5], true), mkU(toks[6])]];
+          var stateNodes = FL.$$(cap.el, ".fui-cap-state .fui-sw");
+          tl.fromTo(stateNodes[0], { opacity: 1 }, { opacity: 0, duration: 0.12, ease: "power2.in", immediateRender: false }, TOK[0]);
+          tl.fromTo(stateNodes[1], { opacity: 0 }, { opacity: 1, duration: 0.3, ease: "power3.out", immediateRender: false }, TOK[0] + 0.1);
+          var INK = TK("ink"),
+            PRI = TK("priora");
+          [toks[0], toks[2]].forEach(function (tk) {
+            tl.fromTo(tk, { color: INK }, { color: rgba(INK, 0.47), duration: 0.5, ease: "power1.inOut", immediateRender: false }, TOK[0]);
+          });
+          // ACTIVITY recognised: the strip takes the hot-work band (it drops in from the top edge)
+          cap.el.style.setProperty("--a2-band", "0px");
+          tl.fromTo(cap.el, { "--a2-band": "0px" }, { "--a2-band": "12px", duration: 0.45, ease: "expo.out", immediateRender: false }, TOK[0] + 0.1);
+          // the field underlines wipe in by width, never a scale or a clip (either made later board frames
+          // depend on seek history); the kit set them to scaleX 0 at build
+          F.forEach(function (f) {
+            gsap.set(f.u, { clearProps: "transform" });
+            f.u.style.right = "auto";
+            f.u.style.width = "0%";
+          });
+          F.forEach(function (f, i) {
+            var ti = TOK[i];
+            if (TOKU[i]) {
+              TOKU[i].forEach(function (u, j) {
+                tl.fromTo(u.fill, { width: "0%" }, { width: "100%", duration: 0.26, ease: "expo.out", immediateRender: false }, ti + j * 0.07);
+              });
+            }
+            // the token drops into its field beneath; the field's name sets once the value has landed
+            tl.fromTo(f.v, { opacity: 0, clipPath: "inset(0% 0% 100% 0%)" }, { opacity: 1, clipPath: "inset(0% 0% 0% 0%)", duration: 0.36, ease: "power3.out", immediateRender: false }, ti + 0.08);
+            tl.fromTo(f.k, { opacity: 0 }, { opacity: 1, duration: 0.3, ease: "power2.out", immediateRender: false }, ti + 0.26);
+            tl.fromTo(f.u, { width: "0%" }, { width: "100%", duration: 0.45, ease: "expo.out", immediateRender: false }, ti + 0.28);
+          });
+          // when the connection leaves, only the live one stays cobalt: the token marks lift and the other
+          // fields' underlines settle to ink
+          var allTokU = [].concat.apply([], TOKU);
+          tl.fromTo(allTokU, { opacity: 1 }, { opacity: 0, duration: 0.4, ease: "power1.inOut", immediateRender: false }, F0);
+          tl.fromTo([F[1].u, F[2].u, F[3].u], { backgroundColor: PRI }, { backgroundColor: rgba(INK, 0.28), duration: 0.5, ease: "power1.inOut", immediateRender: false }, F0);
+
+          // ================================================================ S14 the connection (L14a), protected
+          // the programme conditions card: exact rows so 4.2 meets the line at the node's height and 4.3 the
+          // zone label's
+          var clause = el(ID + "-clauses");
+          clause.style.left = CLAUSE.x + "px";
+          clause.style.top = CLAUSE.y + "px";
+          el(ID + "-cl43").style.marginTop = CL_GAP.toFixed(2) + "px";
+          clause.style.opacity = 0;
+          tl.fromTo(clause, { opacity: 0 }, { opacity: 1, duration: 0.001, ease: "none", immediateRender: false }, CUT13);
+          var num42 = el(ID + "-cl42-n"),
+            num43 = el(ID + "-cl43-n"),
+            row43 = el(ID + "-cl43");
+          row43.style.opacity = 0.5;
+
+          var lineOpts = function (name, extra) {
+            return opts(Object.assign({ shape: "straight", name: name, ease: "power2.inOut" }, extra));
+          };
+          // from the ACTIVITY field down to the node on Roof 03 (one beat), then on to 4.2 (one beat)
+          K.connect(tl, F0, bovLines, ACT_U, NODE, lineOpts("activity-roof03", { dur: BEAT, toTerminal: false }));
+          K.connect(tl, F1, bovLines, NODE, J42, lineOpts("roof03-clause-4.2", { dur: BEAT, fromTerminal: false }));
+          node.pulse(tl, F1 - 0.05, 1.2);
+          node.reticle(tl, F1 - 0.05, true, 0.45);
+          // a connected condition: its chip keeps its category colour (4.2 hot work, 4.3 water) and Priora's
+          // cobalt ring, the colour of the line that reached it, settles round it
+          var live = function (numEl, t) {
+            tl.fromTo(numEl, { outlineColor: rgba(PRI, 0), outlineOffset: "9px" }, { outlineColor: rgba(PRI, 1), outlineOffset: "3px", duration: 0.35, ease: "power2.out", immediateRender: false }, t);
+          };
+          live(num42, F2 - 0.05);
+          // on "conditions" the line runs on down the card to 4.3 and back to SPRINKLER ZONE 3 · ACTIVE
+          var LB1 = 0.24; // J42 to J43 down the card's rail; then back to the zone, reached during the pull
+          K.connect(tl, LB0, bovLines, J42, J43, lineOpts("clause-4.2-4.3", { dur: LB1, ease: "power2.in", fromTerminal: false }));
+          tl.fromTo(row43, { opacity: 0.5 }, { opacity: 1, duration: 0.25, ease: "power1.out", immediateRender: false }, LB0 + LB1 - 0.1);
+          live(num43, LB0 + LB1 - 0.05);
+          K.connect(tl, LB0 + LB1, bovLines, J43, ZA, lineOpts("clause-4.3-zone-3", { dur: PULL1 + 0.35 - LB0 - LB1, ease: "power2.out", fromTerminal: false }));
+
+          // ================================================================ S15 check, verify, record (L14b)
+          var card = K.activityCard(opts({ parent: board, left: CARD.x, top: CARD.y }));
+          VT.forEach(function (tv, i) {
+            var ti = tv - 0.054; // setRowState starts the check stroke at t + 0.15 x 0.36 s: on the tick
+            card.setRowState(tl, i, "verified", ti);
+            card.footL.to(tl, ti + 0.18, i < VT.length - 1 ? "c" + (i + 1) : "v5", 0.24);
+          });
+          var VERIFIED_T = VT[4] + 0.02; // settled before the whip
+          card.footR.to(tl, VERIFIED_T, "inside", 0.3); // 5 OF 5 VERIFIED · INSIDE ENVELOPE
+          card.setGlyph(tl, VERIFIED_T, "inside");
+
+          // the trusted record: it waits on the board; both entries append inside the word "record"
+          var rec = K.recordColumn(opts({ parent: board, left: REC.x, top: REC.y, width: REC.w, scale: 1.8, panel: true, entries: ["open"] }));
+          var AP = 0.75,
+            MK = 0.35 * AP; // append() lands its marker at t + 0.35 x dur
+          rec.append(tl, RA1 - MK, "hotStart", AP);
+          rec.append(tl, RA2 - MK, "verified", AP);
+          // today's two entries are verified, inside: green rail markers (the flying tick lands as the first)
+          rec.entries.slice(1).forEach(function (e) {
+            e.rr.classList.add("a2-rr-ok");
+          });
+          // the kit always prints "N ENTRIES": the count shows only once it reads 2, so "1 ENTRIES" never appears
+          var recCount = FL.$(rec.el, ".fui-rec-n");
+          if (recCount) {
+            recCount.style.opacity = 0;
+            tl.fromTo(recCount, { opacity: 0 }, { opacity: 1, duration: 0.3, ease: "power1.out", immediateRender: false }, RA1 + 0.3);
+          }
+          // odometer digit strips roll inside one-line windows (the kit's counters): the clipping is intentional
+          // and each appended record row opens from zero height inside its clipping wrapper (grid 0fr to 1fr)
+          FL.$$(board, ".fui-odo-w, .fui-odo-s, .fui-rr-wrap *").forEach(function (n) {
+            n.setAttribute("data-layout-allow-overflow", "");
+          });
+
+          // the last check mark lifts off the card and becomes the first new entry's marker (board px, u = 1.8)
+          var FLY_A = [CARD.x + 47.5, CARD.y + 489.2]; // row 5 check centre (measured in a snapshot)
+          var FLY_B = [REC.x + 125, REC.y + 218.9 + 10]; // the hotStart entry's rail marker (measured in cut 2; + 10 for the band's head room)
+          var fly = el(ID + "-fly"),
+            flyTick = el(ID + "-fly-tick"),
+            flyMk = el(ID + "-fly-mk");
+          var tr = function (p) {
+            return "translate(" + p[0].toFixed(2) + " " + p[1].toFixed(2) + ")";
+          };
+          fly.setAttribute("transform", tr(FLY_A));
+          tl.fromTo(fly, { opacity: 0 }, { opacity: 1, duration: 0.001, ease: "none", immediateRender: false }, SLIDE);
+          tl.fromTo(fly, { attr: { transform: tr(FLY_A) } }, { attr: { transform: tr(FLY_B) }, duration: BEAT, ease: "power3.inOut", immediateRender: false }, SLIDE);
+          tl.fromTo(flyTick, { opacity: 1 }, { opacity: 0, duration: BEAT * 0.5, ease: "power1.inOut", immediateRender: false }, SLIDE + BEAT * 0.25);
+          tl.fromTo(flyMk, { opacity: 0 }, { opacity: 1, duration: BEAT * 0.5, ease: "power1.inOut", immediateRender: false }, SLIDE + BEAT * 0.25);
+          tl.fromTo(fly, { opacity: 1 }, { opacity: 0, duration: 0.12, ease: "power1.in", immediateRender: false }, RA1 + 0.05);
+
+          // ================================================================ S16 prevention and proof (L15)
+          // on the board, over their evidence (board px; 64 px and 18 px on screen at the two-up)
+          var ST_Y0 = CARD.y - 392 / zTwo; // top of the two-up frame
+          var st = K.statements(
+            opts({
+              parent: board,
+              label: "Today · prevention and proof",
+              labelAt: [CARD.x, ST_Y0 + 230 / zTwo],
+              items: [
+                { text: "Prevention before the work.", at: [CARD.x, ST_Y0 + 268 / zTwo] },
+                { text: "Proof as it happens.", at: [REC.x + REC.w, ST_Y0 + 268 / zTwo], align: "right" },
+              ],
+            })
+          );
+          st.reveal(tl, T("prevention", 0.12), 0);
+          st.reveal(tl, T("proof", -0.05), 1);
+
+          // the live lines, the node and the flying check mark sit above every piece on the board
+          board.appendChild(bov);
+
+          window.__timelines["a2-resolve"] = tl;
+        })();
+      </script>
+    </template>
+  </body>
+</html>

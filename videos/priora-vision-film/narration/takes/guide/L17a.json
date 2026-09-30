@@ -1,0 +1,128 @@
+{
+  "schema": "priora-narration-take/1",
+  "id": "L17a",
+  "engine": "guide",
+  "guide": true,
+  "label": "GUIDE VOICE (local Kokoro). Not the final ElevenLabs performance.",
+  "speaker": "narrator",
+  "text": "The risk owner decides: change the work,",
+  "spoken_text": "The risk owner decides: change the work,",
+  "sample_rate": 48000,
+  "duration": 3.51,
+  "speech_start": 0.13,
+  "speech_end": 3.14,
+  "words": [
+    {
+      "w": "The",
+      "start": 0.13,
+      "end": 0.25
+    },
+    {
+      "w": "risk",
+      "start": 0.25,
+      "end": 0.65
+    },
+    {
+      "w": "owner",
+      "start": 0.72,
+      "end": 0.97
+    },
+    {
+      "w": "decides",
+      "start": 0.97,
+      "end": 1.74
+    },
+    {
+      "w": "change",
+      "start": 2.09,
+      "end": 2.51
+    },
+    {
+      "w": "the",
+      "start": 2.51,
+      "end": 2.63
+    },
+    {
+      "w": "work",
+      "start": 2.63,
+      "end": 3.14
+    }
+  ],
+  "sentences": [
+    {
+      "text": "The risk owner decides:",
+      "start": 0.13,
+      "end": 1.74,
+      "word_range": [
+        0,
+        4
+      ]
+    },
+    {
+      "text": "change the work,",
+      "start": 2.09,
+      "end": 3.14,
+      "word_range": [
+        4,
+        7
+      ]
+    }
+  ],
+  "created": "2026-09-29T21:41:34+00:00",
+  "provider": "kokoro-onnx 0.6.1, kokoro-v1.0.onnx (local guide)",
+  "voice": {
+    "id": "bf_isabella",
+    "lang": "en-gb"
+  },
+  "speed": 1.0,
+  "inner_pauses": [
+    0.35
+  ],
+  "segments_synth": [
+    {
+      "text": "The risk owner decides:",
+      "start": 0.12,
+      "end": 1.77,
+      "alignment_quality": {
+        "energy_pauses": 0,
+        "pause_agreement": 1.0,
+        "pauses_inside_words": [],
+        "onset_error_ms": 0.0,
+        "offset_error_ms": 0.0,
+        "pause_onset_error_ms_mean": null,
+        "pause_onset_error_ms_max": null
+      },
+      "fallback": false
+    },
+    {
+      "text": "change the work,",
+      "start": 2.08,
+      "end": 3.31,
+      "alignment_quality": {
+        "energy_pauses": 0,
+        "pause_agreement": 1.0,
+        "pauses_inside_words": [],
+        "onset_error_ms": 0.0,
+        "offset_error_ms": 140.0,
+        "pause_onset_error_ms_mean": null,
+        "pause_onset_error_ms_max": null
+      },
+      "fallback": false
+    }
+  ],
+  "alignment": {
+    "method": "pocketsphinx-5-forced-alignment+energy-refine",
+    "fallback": false,
+    "quality": {
+      "energy_pauses": 1,
+      "pause_agreement": 1.0,
+      "pauses_inside_words": [],
+      "onset_error_ms": 0.0,
+      "offset_error_ms": 140.0,
+      "pause_onset_error_ms_mean": 0.0,
+      "pause_onset_error_ms_max": 0.0
+    },
+    "quality_ok": true
+  },
+  "pronunciation_checks": []
+}

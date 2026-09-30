@@ -1,0 +1,4639 @@
+[
+  {
+    "name": "lead-1",
+    "gain_db": -7.0,
+    "dur": 0.95,
+    "what": "S1: the first graphite stroke lands at the roof corner and crosses the frame (downbeat)",
+    "scene": "a1-world",
+    "kind": "set-square-tap",
+    "t": 0.652,
+    "index": 0,
+    "seed": 1000
+  },
+  {
+    "name": "lead-1",
+    "gain_db": -7.0,
+    "dur": 0.95,
+    "what": "S1: the first graphite stroke lands at the roof corner and crosses the frame (downbeat)",
+    "scene": "a1-world",
+    "kind": "pencil-stroke",
+    "t": 0.682,
+    "index": 0,
+    "seed": 1001,
+    "pressure": 0.8
+  },
+  {
+    "name": "lead-2",
+    "gain_db": -9.0,
+    "dur": 0.5,
+    "what": "S1: the second edge meets it at the corner (beat 3)",
+    "scene": "a1-world",
+    "kind": "pencil-stroke",
+    "t": 1.957,
+    "index": 1,
+    "seed": 1037
+  },
+  {
+    "name": "lead-over",
+    "gain_db": -15.0,
+    "dur": 0.26,
+    "light": true,
+    "what": "S1: construction overshoot past the corner (beat 4)",
+    "scene": "a1-world",
+    "kind": "pencil-stroke",
+    "t": 2.609,
+    "index": 0,
+    "seed": 1074
+  },
+  {
+    "name": "pull",
+    "gain_db": -14.0,
+    "dur": 2.935,
+    "what": "S2: continuous pull back from the corner to the whole site",
+    "scene": "a1-world",
+    "kind": "pull",
+    "t": 2.935,
+    "index": 0,
+    "seed": 1111
+  },
+  {
+    "name": "site-draw-01",
+    "gain_db": -17.3047,
+    "dur": 0.2617,
+    "what": "S2: the site draws itself, radiating from Roof 03",
+    "scene": "a1-world",
+    "kind": "pencil-tick",
+    "t": 2.985,
+    "index": 0,
+    "seed": 111356,
+    "pan": -0.2542
+  },
+  {
+    "name": "site-draw-02",
+    "gain_db": -16.4273,
+    "dur": 0.2755,
+    "what": "S2: the site draws itself, radiating from Roof 03",
+    "scene": "a1-world",
+    "kind": "pencil-tick",
+    "t": 3.155,
+    "index": 1,
+    "seed": 114945,
+    "pan": -0.2517
+  },
+  {
+    "name": "site-draw-02",
+    "gain_db": -14.0936,
+    "dur": 0.2545,
+    "what": "S2: the site draws itself, radiating from Roof 03",
+    "scene": "a1-world",
+    "kind": "pencil-stroke",
+    "t": 3.2709,
+    "index": 1,
+    "seed": 114946,
+    "pan": 0.0159
+  },
+  {
+    "name": "site-draw-03",
+    "gain_db": -15.2814,
+    "dur": 0.1747,
+    "what": "S2: the site draws itself, radiating from Roof 03",
+    "scene": "a1-world",
+    "kind": "pencil-tick",
+    "t": 3.325,
+    "index": 2,
+    "seed": 118534,
+    "pan": -0.1574
+  },
+  {
+    "name": "site-draw-03",
+    "gain_db": -15.3674,
+    "dur": 0.2605,
+    "what": "S2: the site draws itself, radiating from Roof 03",
+    "scene": "a1-world",
+    "kind": "pencil-stroke",
+    "t": 3.4457,
+    "index": 2,
+    "seed": 118535,
+    "pan": -0.2669
+  },
+  {
+    "name": "site-draw-04",
+    "gain_db": -18.4106,
+    "dur": 0.1671,
+    "what": "S2: the site draws itself, radiating from Roof 03",
+    "scene": "a1-world",
+    "kind": "pencil-tick",
+    "t": 3.495,
+    "index": 3,
+    "seed": 122123,
+    "pan": -0.2878
+  },
+  {
+    "name": "site-hatch",
+    "gain_db": -17.0,
+    "dur": 2.4,
+    "scene": "a1-world",
+    "kind": "pencil-hatch",
+    "t": 3.535,
+    "index": 0,
+    "seed": 1296
+  },
+  {
+    "name": "site-draw-04",
+    "gain_db": -16.0472,
+    "dur": 0.136,
+    "what": "S2: the site draws itself, radiating from Roof 03",
+    "scene": "a1-world",
+    "kind": "pencil-stroke",
+    "t": 3.6053,
+    "index": 3,
+    "seed": 122124,
+    "pan": 0.1471
+  },
+  {
+    "name": "site-draw-05",
+    "gain_db": -18.6449,
+    "dur": 0.2293,
+    "what": "S2: the site draws itself, radiating from Roof 03",
+    "scene": "a1-world",
+    "kind": "pencil-tick",
+    "t": 3.665,
+    "index": 4,
+    "seed": 129301,
+    "pan": -0.0659
+  },
+  {
+    "name": "site-draw-05",
+    "gain_db": -17.9029,
+    "dur": 0.204,
+    "what": "S2: the site draws itself, radiating from Roof 03",
+    "scene": "a1-world",
+    "kind": "pencil-tick",
+    "t": 3.8102,
+    "index": 4,
+    "seed": 129302,
+    "pan": -0.3661
+  },
+  {
+    "name": "site-draw-06",
+    "gain_db": -16.5428,
+    "dur": 0.2987,
+    "what": "S2: the site draws itself, radiating from Roof 03",
+    "scene": "a1-world",
+    "kind": "pencil-tick",
+    "t": 3.835,
+    "index": 5,
+    "seed": 132890,
+    "pan": -0.0912
+  },
+  {
+    "name": "site-draw-06",
+    "gain_db": -14.5112,
+    "dur": 0.1641,
+    "what": "S2: the site draws itself, radiating from Roof 03",
+    "scene": "a1-world",
+    "kind": "pencil-stroke",
+    "t": 3.9662,
+    "index": 5,
+    "seed": 132891,
+    "pan": -0.3426
+  },
+  {
+    "name": "site-draw-07",
+    "gain_db": -18.0567,
+    "dur": 0.1395,
+    "what": "S2: the site draws itself, radiating from Roof 03",
+    "scene": "a1-world",
+    "kind": "pencil-stroke",
+    "t": 4.005,
+    "index": 6,
+    "seed": 136479,
+    "pan": -0.2297
+  },
+  {
+    "name": "site-draw-07",
+    "gain_db": -14.8979,
+    "dur": 0.1689,
+    "what": "S2: the site draws itself, radiating from Roof 03",
+    "scene": "a1-world",
+    "kind": "pencil-stroke",
+    "t": 4.1057,
+    "index": 6,
+    "seed": 136480,
+    "pan": -0.117
+  },
+  {
+    "name": "site-draw-08",
+    "gain_db": -16.7907,
+    "dur": 0.1637,
+    "what": "S2: the site draws itself, radiating from Roof 03",
+    "scene": "a1-world",
+    "kind": "pencil-stroke",
+    "t": 4.175,
+    "index": 7,
+    "seed": 140068,
+    "pan": 0.3966
+  },
+  {
+    "name": "site-draw-09",
+    "gain_db": -18.7107,
+    "dur": 0.1459,
+    "what": "S2: the site draws itself, radiating from Roof 03",
+    "scene": "a1-world",
+    "kind": "pencil-tick",
+    "t": 4.345,
+    "index": 8,
+    "seed": 143657,
+    "pan": 0.359
+  },
+  {
+    "name": "site-draw-09",
+    "gain_db": -15.9929,
+    "dur": 0.1354,
+    "what": "S2: the site draws itself, radiating from Roof 03",
+    "scene": "a1-world",
+    "kind": "pencil-stroke",
+    "t": 4.5043,
+    "index": 8,
+    "seed": 143658,
+    "pan": 0.3897
+  },
+  {
+    "name": "site-draw-10",
+    "gain_db": -15.1818,
+    "dur": 0.1648,
+    "what": "S2: the site draws itself, radiating from Roof 03",
+    "scene": "a1-world",
+    "kind": "pencil-tick",
+    "t": 4.515,
+    "index": 9,
+    "seed": 147246,
+    "pan": -0.3214
+  },
+  {
+    "name": "site-draw-10",
+    "gain_db": -15.9369,
+    "dur": 0.2649,
+    "what": "S2: the site draws itself, radiating from Roof 03",
+    "scene": "a1-world",
+    "kind": "pencil-tick",
+    "t": 4.647,
+    "index": 9,
+    "seed": 147247,
+    "pan": 0.385
+  },
+  {
+    "name": "site-draw-11",
+    "gain_db": -18.0063,
+    "dur": 0.1243,
+    "what": "S2: the site draws itself, radiating from Roof 03",
+    "scene": "a1-world",
+    "kind": "pencil-stroke",
+    "t": 4.685,
+    "index": 10,
+    "seed": 150835,
+    "pan": 0.2561
+  },
+  {
+    "name": "site-draw-11",
+    "gain_db": -17.7426,
+    "dur": 0.2395,
+    "what": "S2: the site draws itself, radiating from Roof 03",
+    "scene": "a1-world",
+    "kind": "pencil-stroke",
+    "t": 4.7849,
+    "index": 10,
+    "seed": 150836,
+    "pan": -0.1781
+  },
+  {
+    "name": "site-draw-12",
+    "gain_db": -14.775,
+    "dur": 0.1481,
+    "what": "S2: the site draws itself, radiating from Roof 03",
+    "scene": "a1-world",
+    "kind": "pencil-stroke",
+    "t": 4.855,
+    "index": 11,
+    "seed": 154424,
+    "pan": 0.1981
+  },
+  {
+    "name": "van",
+    "gain_db": -10.0,
+    "dur": 1.9,
+    "scene": "a1-world",
+    "kind": "van",
+    "t": 4.896,
+    "index": 0,
+    "seed": 1629
+  },
+  {
+    "name": "site-draw-12",
+    "gain_db": -15.1426,
+    "dur": 0.0941,
+    "what": "S2: the site draws itself, radiating from Roof 03",
+    "scene": "a1-world",
+    "kind": "pencil-tick",
+    "t": 4.9661,
+    "index": 11,
+    "seed": 154425,
+    "pan": -0.2797
+  },
+  {
+    "name": "site-draw-13",
+    "gain_db": -17.6065,
+    "dur": 0.2596,
+    "what": "S2: the site draws itself, radiating from Roof 03",
+    "scene": "a1-world",
+    "kind": "pencil-stroke",
+    "t": 5.025,
+    "index": 12,
+    "seed": 161602,
+    "pan": 0.1988
+  },
+  {
+    "name": "gate",
+    "gain_db": -16.0,
+    "dur": 0.5,
+    "scene": "a1-world",
+    "kind": "pencil-stroke",
+    "t": 5.096,
+    "index": 0,
+    "seed": 1703
+  },
+  {
+    "name": "site-draw-13",
+    "gain_db": -16.5655,
+    "dur": 0.1629,
+    "what": "S2: the site draws itself, radiating from Roof 03",
+    "scene": "a1-world",
+    "kind": "pencil-stroke",
+    "t": 5.1735,
+    "index": 12,
+    "seed": 161603,
+    "pan": -0.05
+  },
+  {
+    "name": "site-draw-14",
+    "gain_db": -18.1577,
+    "dur": 0.139,
+    "what": "S2: the site draws itself, radiating from Roof 03",
+    "scene": "a1-world",
+    "kind": "pencil-stroke",
+    "t": 5.195,
+    "index": 13,
+    "seed": 168780,
+    "pan": -0.0058
+  },
+  {
+    "name": "site-draw-14",
+    "gain_db": -15.9122,
+    "dur": 0.1955,
+    "what": "S2: the site draws itself, radiating from Roof 03",
+    "scene": "a1-world",
+    "kind": "pencil-tick",
+    "t": 5.3274,
+    "index": 13,
+    "seed": 168781,
+    "pan": -0.0123
+  },
+  {
+    "name": "footsteps",
+    "gain_db": -13.0,
+    "dur": 13.5,
+    "what": "four contractors in file from the gate to the loading-area apron",
+    "scene": "a1-world",
+    "kind": "footsteps",
+    "t": 5.746,
+    "index": 0,
+    "seed": 1777,
+    "count": 25
+  },
+  {
+    "name": "route-01",
+    "gain_db": -22.9748,
+    "dur": 0.2247,
+    "scene": "a1-world",
+    "kind": "pencil-stroke",
+    "t": 5.996,
+    "index": 0,
+    "seed": 175958,
+    "pan": -0.3628
+  },
+  {
+    "name": "route-02",
+    "gain_db": -20.3807,
+    "dur": 0.2108,
+    "scene": "a1-world",
+    "kind": "pencil-tick",
+    "t": 6.126,
+    "index": 1,
+    "seed": 179547,
+    "pan": -0.1579
+  },
+  {
+    "name": "cut-gate",
+    "gain_db": -12.0,
+    "material": "paper",
+    "what": "S3a: cut to the gate road medium-close",
+    "scene": "a1-world",
+    "kind": "cut",
+    "t": 6.196,
+    "index": 0,
+    "seed": 1888
+  },
+  {
+    "name": "route-03",
+    "gain_db": -20.4623,
+    "dur": 0.086,
+    "scene": "a1-world",
+    "kind": "pencil-stroke",
+    "t": 6.256,
+    "index": 2,
+    "seed": 186725,
+    "pan": -0.0979
+  },
+  {
+    "name": "route-04",
+    "gain_db": -19.3147,
+    "dur": 0.1116,
+    "scene": "a1-world",
+    "kind": "pencil-tick",
+    "t": 6.386,
+    "index": 3,
+    "seed": 190314,
+    "pan": -0.1424
+  },
+  {
+    "name": "route-05",
+    "gain_db": -22.1998,
+    "dur": 0.2124,
+    "scene": "a1-world",
+    "kind": "pencil-stroke",
+    "t": 6.516,
+    "index": 4,
+    "seed": 193903,
+    "pan": -0.1936
+  },
+  {
+    "name": "route-tag",
+    "gain_db": -15.0,
+    "dur": 0.9,
+    "lettering": true,
+    "what": "CONTRACTORS \u00b7 GATE 2 \u00b7 07:10",
+    "snap": {
+      "mode": "next",
+      "off": 0.0003
+    },
+    "scene": "a1-world",
+    "kind": "technical-pen",
+    "t": 6.522,
+    "index": 0,
+    "seed": 2036
+  },
+  {
+    "name": "route-06",
+    "gain_db": -22.5014,
+    "dur": 0.12,
+    "scene": "a1-world",
+    "kind": "pencil-stroke",
+    "t": 6.646,
+    "index": 5,
+    "seed": 201081,
+    "pan": -0.3173
+  },
+  {
+    "name": "route-07",
+    "gain_db": -18.0315,
+    "dur": 0.1684,
+    "scene": "a1-world",
+    "kind": "pencil-tick",
+    "t": 6.776,
+    "index": 6,
+    "seed": 204670,
+    "pan": 0.2773
+  },
+  {
+    "name": "route-07",
+    "gain_db": -20.893,
+    "dur": 0.2992,
+    "scene": "a1-world",
+    "kind": "pencil-tick",
+    "t": 6.8754,
+    "index": 6,
+    "seed": 204671,
+    "pan": -0.0246
+  },
+  {
+    "name": "route-08",
+    "gain_db": -21.2623,
+    "dur": 0.0848,
+    "scene": "a1-world",
+    "kind": "pencil-stroke",
+    "t": 6.906,
+    "index": 7,
+    "seed": 208259,
+    "pan": 0.1101
+  },
+  {
+    "t": 7.096,
+    "kind": "radio-squelch",
+    "gain_db": 0.0,
+    "source": "designed",
+    "scene": "a1-world",
+    "seed": 3,
+    "pan": 0.45
+  },
+  {
+    "name": "loto-cut-in",
+    "material": "paper",
+    "gain_db": -12.0,
+    "what": "S3b: cut to the LOTO valve close-up",
+    "snap": {
+      "mode": "cut",
+      "off": -0.0001
+    },
+    "scene": "a1-inserts",
+    "kind": "cut",
+    "t": 7.826,
+    "index": 0,
+    "seed": 2184
+  },
+  {
+    "name": "loto-handwheel",
+    "gain_db": -10.0,
+    "dur": 0.489,
+    "what": "a quarter turn, closing",
+    "scene": "a1-inserts",
+    "kind": "handwheel",
+    "t": 7.989,
+    "index": 0,
+    "seed": 2221
+  },
+  {
+    "name": "loto-tag",
+    "gain_db": -12.0,
+    "what": "the LOTO tag drops on its string and the string goes taut",
+    "scene": "a1-inserts",
+    "kind": "pencil-tick",
+    "t": 8.748,
+    "index": 0,
+    "seed": 2258
+  },
+  {
+    "name": "cut-morning",
+    "gain_db": -12.0,
+    "material": "paper",
+    "what": "S3c: cut back to the wide site from the LOTO insert",
+    "snap": {
+      "mode": "cut",
+      "off": 0.0003
+    },
+    "scene": "a1-world",
+    "kind": "cut",
+    "t": 10.109,
+    "index": 0,
+    "seed": 2295
+  },
+  {
+    "name": "hse-loop-01",
+    "gain_db": -22.0695,
+    "dur": 0.2847,
+    "scene": "a1-world",
+    "kind": "pencil-tick",
+    "t": 10.159,
+    "index": 0,
+    "seed": 226204,
+    "pan": -0.1568
+  },
+  {
+    "name": "talk-label",
+    "gain_db": -17.0,
+    "dur": 0.8,
+    "lettering": true,
+    "scene": "a1-world",
+    "kind": "technical-pen",
+    "t": 10.259,
+    "index": 0,
+    "seed": 2369
+  },
+  {
+    "name": "hse-loop-02",
+    "gain_db": -18.7174,
+    "dur": 0.1126,
+    "scene": "a1-world",
+    "kind": "pencil-tick",
+    "t": 10.267,
+    "index": 1,
+    "seed": 233382,
+    "pan": -0.039
+  },
+  {
+    "name": "hse-footsteps",
+    "gain_db": -20.0,
+    "dur": 11.991,
+    "what": "the HSE site walk",
+    "scene": "a1-world",
+    "kind": "footsteps",
+    "t": 10.309,
+    "index": 0,
+    "seed": 2443,
+    "count": 22
+  },
+  {
+    "name": "hse-loop-03",
+    "gain_db": -22.6298,
+    "dur": 0.0929,
+    "scene": "a1-world",
+    "kind": "pencil-stroke",
+    "t": 10.375,
+    "index": 2,
+    "seed": 240560,
+    "pan": 0.2488
+  },
+  {
+    "name": "markers-01",
+    "gain_db": -11.0,
+    "what": "S3c: five activity markers pop in on consecutive half beats",
+    "snap": {
+      "mode": "next",
+      "off": 0.0002
+    },
+    "scene": "a1-world",
+    "kind": "pencil-tick",
+    "t": 10.435,
+    "index": 0,
+    "seed": 2517
+  },
+  {
+    "name": "hse-loop-04",
+    "gain_db": -22.0807,
+    "dur": 0.2754,
+    "scene": "a1-world",
+    "kind": "pencil-stroke",
+    "t": 10.483,
+    "index": 3,
+    "seed": 247738,
+    "pan": -0.3424
+  },
+  {
+    "name": "hse-loop-05",
+    "gain_db": -22.2837,
+    "dur": 0.1254,
+    "scene": "a1-world",
+    "kind": "pencil-stroke",
+    "t": 10.591,
+    "index": 4,
+    "seed": 251327,
+    "pan": 0.269
+  },
+  {
+    "name": "hse-loop-06",
+    "gain_db": -21.3206,
+    "dur": 0.2678,
+    "scene": "a1-world",
+    "kind": "pencil-stroke",
+    "t": 10.699,
+    "index": 5,
+    "seed": 254916,
+    "pan": -0.3067
+  },
+  {
+    "name": "markers-02",
+    "gain_db": -11.0,
+    "what": "S3c: five activity markers pop in on consecutive half beats",
+    "snap": {
+      "mode": "next",
+      "off": 0.0002
+    },
+    "scene": "a1-world",
+    "kind": "pencil-tick",
+    "t": 10.761,
+    "index": 1,
+    "seed": 2665
+  },
+  {
+    "name": "hse-loop-07",
+    "gain_db": -21.372,
+    "dur": 0.2455,
+    "scene": "a1-world",
+    "kind": "pencil-stroke",
+    "t": 10.807,
+    "index": 6,
+    "seed": 262094,
+    "pan": -0.2115
+  },
+  {
+    "name": "hse-loop-08",
+    "gain_db": -21.2507,
+    "dur": 0.155,
+    "scene": "a1-world",
+    "kind": "pencil-stroke",
+    "t": 10.915,
+    "index": 7,
+    "seed": 265683,
+    "pan": 0.2929
+  },
+  {
+    "name": "hse-loop-09",
+    "gain_db": -22.634,
+    "dur": 0.2788,
+    "scene": "a1-world",
+    "kind": "pencil-stroke",
+    "t": 11.023,
+    "index": 8,
+    "seed": 269272,
+    "pan": -0.2034
+  },
+  {
+    "name": "markers-03",
+    "gain_db": -11.0,
+    "what": "S3c: five activity markers pop in on consecutive half beats",
+    "snap": {
+      "mode": "next",
+      "off": 0.0002
+    },
+    "scene": "a1-world",
+    "kind": "pencil-tick",
+    "t": 11.087,
+    "index": 2,
+    "seed": 2813
+  },
+  {
+    "name": "hse-loop-10",
+    "gain_db": -19.4893,
+    "dur": 0.1053,
+    "scene": "a1-world",
+    "kind": "pencil-tick",
+    "t": 11.131,
+    "index": 9,
+    "seed": 276450,
+    "pan": -0.2335
+  },
+  {
+    "t": 11.226,
+    "kind": "distant-clank",
+    "gain_db": 0.0,
+    "source": "designed",
+    "scene": "a1-world",
+    "seed": 7,
+    "pan": -0.6
+  },
+  {
+    "name": "hse-loop-10",
+    "gain_db": -19.6434,
+    "dur": 0.2968,
+    "scene": "a1-world",
+    "kind": "pencil-stroke",
+    "t": 11.2306,
+    "index": 9,
+    "seed": 276451,
+    "pan": 0.1528
+  },
+  {
+    "name": "markers-04",
+    "gain_db": -11.0,
+    "what": "S3c: five activity markers pop in on consecutive half beats",
+    "snap": {
+      "mode": "next",
+      "off": 0.0002
+    },
+    "scene": "a1-world",
+    "kind": "pencil-tick",
+    "t": 11.413,
+    "index": 3,
+    "seed": 2887
+  },
+  {
+    "name": "markers-05",
+    "gain_db": -11.0,
+    "what": "S3c: five activity markers pop in on consecutive half beats",
+    "snap": {
+      "mode": "next",
+      "off": 0.0002
+    },
+    "scene": "a1-world",
+    "kind": "pencil-tick",
+    "t": 11.739,
+    "index": 4,
+    "seed": 2924
+  },
+  {
+    "name": "envelope-construct",
+    "gain_db": -14.0,
+    "dur": 1.3,
+    "light": true,
+    "scene": "a1-world",
+    "kind": "pencil-stroke",
+    "t": 12.065,
+    "index": 0,
+    "seed": 2961
+  },
+  {
+    "name": "rise",
+    "gain_db": -20.0,
+    "dur": 1.304,
+    "what": "S4: the camera rises to a clean overview",
+    "scene": "a1-world",
+    "kind": "pull",
+    "t": 12.065,
+    "index": 0,
+    "seed": 2998
+  },
+  {
+    "name": "envelope-firm",
+    "gain_db": -9.0,
+    "dur": 2.224,
+    "what": "the firm pass closes on 'accepted'",
+    "snap": {
+      "mode": "cut",
+      "off": 0.3258
+    },
+    "scene": "a1-world",
+    "kind": "pencil-stroke",
+    "t": 12.391,
+    "index": 0,
+    "seed": 3035
+  },
+  {
+    "name": "envelope-label",
+    "gain_db": -15.0,
+    "dur": 0.7,
+    "lettering": true,
+    "scene": "a1-world",
+    "kind": "technical-pen",
+    "t": 14.265,
+    "index": 0,
+    "seed": 3072
+  },
+  {
+    "name": "sheet-lay",
+    "gain_db": -9.0,
+    "dur": 0.652,
+    "what": "the sheet slides in from the right and lies flat",
+    "snap": {
+      "mode": "near",
+      "off": -0.0001
+    },
+    "scene": "a1-paper",
+    "kind": "sheet-lay",
+    "t": 15.326,
+    "index": 0,
+    "seed": 3109
+  },
+  {
+    "name": "underline",
+    "gain_db": -13.0,
+    "dur": 0.36,
+    "what": "graphite underline under 'sprinkler protection ... in service'",
+    "snap": {
+      "mode": "near",
+      "off": 0.6519
+    },
+    "scene": "a1-paper",
+    "kind": "ruler-contact",
+    "t": 15.978,
+    "index": 0,
+    "seed": 3146
+  },
+  {
+    "name": "underline",
+    "gain_db": -13.0,
+    "dur": 0.36,
+    "what": "graphite underline under 'sprinkler protection ... in service'",
+    "snap": {
+      "mode": "near",
+      "off": 0.6519
+    },
+    "scene": "a1-paper",
+    "kind": "pencil-stroke",
+    "t": 16.018,
+    "index": 0,
+    "seed": 3147,
+    "pressure": 0.75,
+    "speed": 1.2
+  },
+  {
+    "name": "follow",
+    "gain_db": -20.0,
+    "dur": 0.6,
+    "what": "the camera follows the arrow to PROCEDURE",
+    "snap": {
+      "mode": "cut",
+      "off": -0.0003
+    },
+    "scene": "a1-paper",
+    "kind": "whip",
+    "t": 16.304,
+    "index": 0,
+    "seed": 3183
+  },
+  {
+    "name": "lead-arrow",
+    "gain_db": -12.0,
+    "dur": 0.6,
+    "what": "the underline runs on into an arrow down to the procedure",
+    "snap": {
+      "mode": "cut",
+      "off": -0.0003
+    },
+    "scene": "a1-paper",
+    "kind": "pencil-stroke",
+    "t": 16.304,
+    "index": 0,
+    "seed": 3220
+  },
+  {
+    "name": "procedure-line",
+    "gain_db": -15.0,
+    "dur": 0.58,
+    "what": "'Confirm sprinklers in service' written and underlined",
+    "scene": "a1-paper",
+    "kind": "technical-pen",
+    "t": 16.704,
+    "index": 0,
+    "seed": 3257
+  },
+  {
+    "name": "arrow-permit",
+    "gain_db": -15.0,
+    "dur": 0.376,
+    "what": "solid arrow procedure to permit",
+    "scene": "a1-paper",
+    "kind": "pencil-stroke",
+    "t": 17.08,
+    "index": 0,
+    "seed": 3294
+  },
+  {
+    "name": "whip-permit",
+    "gain_db": -16.0,
+    "dur": 0.3261,
+    "scene": "a1-paper",
+    "kind": "whip",
+    "t": 17.12,
+    "index": 0,
+    "seed": 3331
+  },
+  {
+    "name": "permit-line",
+    "gain_db": -16.0,
+    "dur": 0.2,
+    "scene": "a1-paper",
+    "kind": "technical-pen",
+    "t": 17.386,
+    "index": 0,
+    "seed": 3368
+  },
+  {
+    "name": "permit-tick",
+    "gain_db": -11.0,
+    "scene": "a1-paper",
+    "kind": "pencil-tick",
+    "t": 17.586,
+    "index": 0,
+    "seed": 3405
+  },
+  {
+    "name": "permit-stamp",
+    "gain_db": -7.0,
+    "what": "APPROVED \u00b7 HSE, on the beat",
+    "snap": {
+      "mode": "next",
+      "off": 0.0003
+    },
+    "scene": "a1-paper",
+    "kind": "stamp",
+    "t": 17.609,
+    "index": 0,
+    "seed": 3442
+  },
+  {
+    "name": "arrow-briefing-01",
+    "gain_db": -18.7826,
+    "dur": 0.2937,
+    "what": "dashed arrow permit to briefing",
+    "scene": "a1-paper",
+    "kind": "pencil-stroke",
+    "t": 17.732,
+    "index": 0,
+    "seed": 337463,
+    "pan": -0.1681
+  },
+  {
+    "name": "arrow-briefing-02",
+    "gain_db": -20.2623,
+    "dur": 0.0954,
+    "what": "dashed arrow permit to briefing",
+    "scene": "a1-paper",
+    "kind": "pencil-stroke",
+    "t": 17.765,
+    "index": 1,
+    "seed": 341052,
+    "pan": 0.3976
+  },
+  {
+    "name": "whip-briefing",
+    "gain_db": -16.0,
+    "dur": 0.3261,
+    "scene": "a1-paper",
+    "kind": "whip",
+    "t": 17.772,
+    "index": 0,
+    "seed": 3553
+  },
+  {
+    "name": "arrow-briefing-03",
+    "gain_db": -22.9014,
+    "dur": 0.2663,
+    "what": "dashed arrow permit to briefing",
+    "scene": "a1-paper",
+    "kind": "pencil-stroke",
+    "t": 17.798,
+    "index": 2,
+    "seed": 348230,
+    "pan": 0.2902
+  },
+  {
+    "name": "arrow-briefing-04",
+    "gain_db": -19.2764,
+    "dur": 0.0822,
+    "what": "dashed arrow permit to briefing",
+    "scene": "a1-paper",
+    "kind": "pencil-stroke",
+    "t": 17.831,
+    "index": 3,
+    "seed": 351819,
+    "pan": -0.0638
+  },
+  {
+    "name": "arrow-briefing-05",
+    "gain_db": -22.2003,
+    "dur": 0.1924,
+    "what": "dashed arrow permit to briefing",
+    "scene": "a1-paper",
+    "kind": "pencil-stroke",
+    "t": 17.864,
+    "index": 4,
+    "seed": 355408,
+    "pan": 0.2548
+  },
+  {
+    "name": "arrow-briefing-06",
+    "gain_db": -19.0421,
+    "dur": 0.2687,
+    "what": "dashed arrow permit to briefing",
+    "scene": "a1-paper",
+    "kind": "pencil-stroke",
+    "t": 17.897,
+    "index": 5,
+    "seed": 358997,
+    "pan": 0.144
+  },
+  {
+    "name": "arrow-briefing-07",
+    "gain_db": -20.3632,
+    "dur": 0.2159,
+    "what": "dashed arrow permit to briefing",
+    "scene": "a1-paper",
+    "kind": "pencil-stroke",
+    "t": 17.93,
+    "index": 6,
+    "seed": 362586,
+    "pan": 0.3758
+  },
+  {
+    "name": "arrow-briefing-08",
+    "gain_db": -19.4448,
+    "dur": 0.1386,
+    "what": "dashed arrow permit to briefing",
+    "scene": "a1-paper",
+    "kind": "pencil-tick",
+    "t": 17.963,
+    "index": 7,
+    "seed": 366175,
+    "pan": 0.3142
+  },
+  {
+    "name": "arrow-briefing-09",
+    "gain_db": -18.129,
+    "dur": 0.1217,
+    "what": "dashed arrow permit to briefing",
+    "scene": "a1-paper",
+    "kind": "pencil-tick",
+    "t": 17.996,
+    "index": 8,
+    "seed": 369764,
+    "pan": 0.1183
+  },
+  {
+    "name": "arrow-briefing-10",
+    "gain_db": -18.4167,
+    "dur": 0.0855,
+    "what": "dashed arrow permit to briefing",
+    "scene": "a1-paper",
+    "kind": "pencil-stroke",
+    "t": 18.029,
+    "index": 9,
+    "seed": 373353,
+    "pan": 0.1816
+  },
+  {
+    "name": "briefing-note",
+    "gain_db": -16.0,
+    "dur": 0.24,
+    "what": "the speech outline",
+    "scene": "a1-paper",
+    "kind": "pencil-stroke",
+    "t": 18.058,
+    "index": 0,
+    "seed": 3886
+  },
+  {
+    "name": "briefing-line",
+    "gain_db": -17.0,
+    "dur": 0.26,
+    "what": "'sprinklers on', grey",
+    "scene": "a1-paper",
+    "kind": "technical-pen",
+    "t": 18.198,
+    "index": 0,
+    "seed": 3923
+  },
+  {
+    "name": "arrow-checklist-01",
+    "gain_db": -23.4327,
+    "dur": 0.1264,
+    "what": "dotted arrow briefing to checklist",
+    "scene": "a1-paper",
+    "kind": "pencil-tick",
+    "t": 18.384,
+    "index": 0,
+    "seed": 384120,
+    "pan": 0.0667
+  },
+  {
+    "name": "arrow-checklist-02",
+    "gain_db": -20.7182,
+    "dur": 0.096,
+    "what": "dotted arrow briefing to checklist",
+    "scene": "a1-paper",
+    "kind": "pencil-tick",
+    "t": 18.409,
+    "index": 1,
+    "seed": 387709,
+    "pan": 0.394
+  },
+  {
+    "name": "whip-checklist",
+    "gain_db": -16.0,
+    "dur": 0.3261,
+    "scene": "a1-paper",
+    "kind": "whip",
+    "t": 18.424,
+    "index": 0,
+    "seed": 4034
+  },
+  {
+    "name": "arrow-checklist-03",
+    "gain_db": -24.82,
+    "dur": 0.2612,
+    "what": "dotted arrow briefing to checklist",
+    "scene": "a1-paper",
+    "kind": "pencil-stroke",
+    "t": 18.434,
+    "index": 2,
+    "seed": 394887,
+    "pan": 0.0931
+  },
+  {
+    "name": "arrow-checklist-04",
+    "gain_db": -20.1838,
+    "dur": 0.2642,
+    "what": "dotted arrow briefing to checklist",
+    "scene": "a1-paper",
+    "kind": "pencil-tick",
+    "t": 18.459,
+    "index": 3,
+    "seed": 398476,
+    "pan": 0.1088
+  },
+  {
+    "name": "arrow-checklist-05",
+    "gain_db": -20.2103,
+    "dur": 0.1297,
+    "what": "dotted arrow briefing to checklist",
+    "scene": "a1-paper",
+    "kind": "pencil-stroke",
+    "t": 18.484,
+    "index": 4,
+    "seed": 402065,
+    "pan": 0.202
+  },
+  {
+    "name": "arrow-checklist-06",
+    "gain_db": -20.7276,
+    "dur": 0.1301,
+    "what": "dotted arrow briefing to checklist",
+    "scene": "a1-paper",
+    "kind": "pencil-tick",
+    "t": 18.509,
+    "index": 5,
+    "seed": 405654,
+    "pan": -0.0137
+  },
+  {
+    "name": "arrow-checklist-07",
+    "gain_db": -23.5046,
+    "dur": 0.192,
+    "what": "dotted arrow briefing to checklist",
+    "scene": "a1-paper",
+    "kind": "pencil-stroke",
+    "t": 18.534,
+    "index": 6,
+    "seed": 409243,
+    "pan": -0.2933
+  },
+  {
+    "name": "arrow-checklist-08",
+    "gain_db": -24.8732,
+    "dur": 0.2771,
+    "what": "dotted arrow briefing to checklist",
+    "scene": "a1-paper",
+    "kind": "pencil-stroke",
+    "t": 18.559,
+    "index": 7,
+    "seed": 412832,
+    "pan": 0.1419
+  },
+  {
+    "name": "arrow-checklist-09",
+    "gain_db": -22.7404,
+    "dur": 0.1528,
+    "what": "dotted arrow briefing to checklist",
+    "scene": "a1-paper",
+    "kind": "pencil-stroke",
+    "t": 18.584,
+    "index": 8,
+    "seed": 416421,
+    "pan": -0.0135
+  },
+  {
+    "name": "arrow-checklist-10",
+    "gain_db": -23.8782,
+    "dur": 0.0826,
+    "what": "dotted arrow briefing to checklist",
+    "scene": "a1-paper",
+    "kind": "pencil-tick",
+    "t": 18.609,
+    "index": 9,
+    "seed": 420010,
+    "pan": -0.3264
+  },
+  {
+    "name": "arrow-checklist-11",
+    "gain_db": -24.7392,
+    "dur": 0.2144,
+    "what": "dotted arrow briefing to checklist",
+    "scene": "a1-paper",
+    "kind": "pencil-tick",
+    "t": 18.634,
+    "index": 10,
+    "seed": 423599,
+    "pan": -0.1437
+  },
+  {
+    "name": "arrow-checklist-12",
+    "gain_db": -20.5946,
+    "dur": 0.2209,
+    "what": "dotted arrow briefing to checklist",
+    "scene": "a1-paper",
+    "kind": "pencil-tick",
+    "t": 18.659,
+    "index": 11,
+    "seed": 427188,
+    "pan": 0.3865
+  },
+  {
+    "name": "arrow-checklist-13",
+    "gain_db": -21.8789,
+    "dur": 0.1494,
+    "what": "dotted arrow briefing to checklist",
+    "scene": "a1-paper",
+    "kind": "pencil-tick",
+    "t": 18.684,
+    "index": 12,
+    "seed": 430777,
+    "pan": -0.0712
+  },
+  {
+    "name": "checklist-line",
+    "gain_db": -18.0,
+    "dur": 0.2,
+    "what": "'Sprinklers', pale",
+    "scene": "a1-paper",
+    "kind": "technical-pen",
+    "t": 18.69,
+    "index": 0,
+    "seed": 4478
+  },
+  {
+    "name": "arrow-checklist-14",
+    "gain_db": -22.5449,
+    "dur": 0.225,
+    "what": "dotted arrow briefing to checklist",
+    "scene": "a1-paper",
+    "kind": "pencil-tick",
+    "t": 18.709,
+    "index": 13,
+    "seed": 437955,
+    "pan": -0.3388
+  },
+  {
+    "name": "question-mark",
+    "gain_db": -13.0,
+    "dur": 0.18,
+    "scene": "a1-paper",
+    "kind": "pencil-stroke",
+    "t": 18.89,
+    "index": 0,
+    "seed": 4552
+  },
+  {
+    "name": "pull-back",
+    "gain_db": -14.0,
+    "dur": 1,
+    "what": "the whole sheet: the clause and the four artefacts, the thread thinning across them",
+    "scene": "a1-paper",
+    "kind": "pull",
+    "t": 19.076,
+    "index": 0,
+    "seed": 4589
+  },
+  {
+    "name": "field-01",
+    "gain_db": -12.3378,
+    "dur": 0.2849,
+    "what": "S6: the accumulation arrives in waves on half beats (the first three under the sheet)",
+    "snap": {
+      "mode": "prev",
+      "off": -0.6524
+    },
+    "scene": "a1-world",
+    "kind": "pencil-stroke",
+    "t": 19.565,
+    "index": 0,
+    "seed": 448722,
+    "pan": -0.1519
+  },
+  {
+    "name": "field-02",
+    "gain_db": -14.9631,
+    "dur": 0.1909,
+    "what": "S6: the accumulation arrives in waves on half beats (the first three under the sheet)",
+    "snap": {
+      "mode": "prev",
+      "off": -0.6524
+    },
+    "scene": "a1-world",
+    "kind": "pencil-tick",
+    "t": 19.891,
+    "index": 1,
+    "seed": 452311,
+    "pan": -0.2048
+  },
+  {
+    "name": "circle-question",
+    "gain_db": -14.0,
+    "dur": 0.34,
+    "what": "the question mark circled in the hold",
+    "scene": "a1-paper",
+    "kind": "pencil-stroke",
+    "t": 20.076,
+    "index": 0,
+    "seed": 4700
+  },
+  {
+    "name": "field-03",
+    "gain_db": -14.6333,
+    "dur": 0.1633,
+    "what": "S6: the accumulation arrives in waves on half beats (the first three under the sheet)",
+    "snap": {
+      "mode": "prev",
+      "off": -0.6524
+    },
+    "scene": "a1-world",
+    "kind": "pencil-tick",
+    "t": 20.217,
+    "index": 2,
+    "seed": 459489,
+    "pan": -0.0736
+  },
+  {
+    "name": "field-04",
+    "gain_db": -13.4968,
+    "dur": 0.1004,
+    "what": "S6: the accumulation arrives in waves on half beats (the first three under the sheet)",
+    "snap": {
+      "mode": "prev",
+      "off": -0.6524
+    },
+    "scene": "a1-world",
+    "kind": "pencil-stroke",
+    "t": 20.543,
+    "index": 3,
+    "seed": 463078,
+    "pan": -0.063
+  },
+  {
+    "name": "sheet-lift",
+    "gain_db": -9.0,
+    "dur": 0.42,
+    "what": "the sheet lifts off to the left, fast and flat, on 'But'",
+    "scene": "a1-paper",
+    "kind": "paper-lift",
+    "t": 20.543,
+    "index": 0,
+    "seed": 4811
+  },
+  {
+    "name": "field-04",
+    "gain_db": -13.6166,
+    "dur": 0.2652,
+    "what": "S6: the accumulation arrives in waves on half beats (the first three under the sheet)",
+    "snap": {
+      "mode": "prev",
+      "off": -0.6524
+    },
+    "scene": "a1-world",
+    "kind": "pencil-tick",
+    "t": 20.6314,
+    "index": 3,
+    "seed": 463079,
+    "pan": 0.1143
+  },
+  {
+    "name": "field-05",
+    "gain_db": -16.6653,
+    "dur": 0.1984,
+    "what": "S6: the accumulation arrives in waves on half beats (the first three under the sheet)",
+    "snap": {
+      "mode": "prev",
+      "off": -0.6524
+    },
+    "scene": "a1-world",
+    "kind": "pencil-tick",
+    "t": 20.869,
+    "index": 4,
+    "seed": 470256,
+    "pan": -0.2143
+  },
+  {
+    "name": "containment-01",
+    "gain_db": -12.0,
+    "dur": 0.6,
+    "snap": {
+      "mode": "cut",
+      "off": 0.3265
+    },
+    "scene": "a1-world",
+    "kind": "pencil-stroke",
+    "t": 20.87,
+    "index": 0,
+    "seed": 4885
+  },
+  {
+    "name": "field-06",
+    "gain_db": -12.2102,
+    "dur": 0.0892,
+    "what": "S6: the accumulation arrives in waves on half beats (the first three under the sheet)",
+    "snap": {
+      "mode": "prev",
+      "off": -0.6524
+    },
+    "scene": "a1-world",
+    "kind": "pencil-tick",
+    "t": 21.195,
+    "index": 5,
+    "seed": 477434,
+    "pan": -0.3899
+  },
+  {
+    "name": "containment-02",
+    "gain_db": -12.0,
+    "dur": 0.6,
+    "snap": {
+      "mode": "cut",
+      "off": 0.6525
+    },
+    "scene": "a1-world",
+    "kind": "pencil-stroke",
+    "t": 21.196,
+    "index": 1,
+    "seed": 4959
+  },
+  {
+    "name": "field-07",
+    "gain_db": -13.4458,
+    "dur": 0.2042,
+    "what": "S6: the accumulation arrives in waves on half beats (the first three under the sheet)",
+    "snap": {
+      "mode": "prev",
+      "off": -0.6524
+    },
+    "scene": "a1-world",
+    "kind": "pencil-stroke",
+    "t": 21.521,
+    "index": 6,
+    "seed": 484612,
+    "pan": 0.1632
+  },
+  {
+    "name": "roof-marker",
+    "gain_db": -12.0,
+    "dur": 0.5,
+    "what": "the ROOF 03 marker",
+    "snap": {
+      "mode": "cut",
+      "off": 0.9785
+    },
+    "scene": "a1-world",
+    "kind": "pencil-stroke",
+    "t": 21.522,
+    "index": 0,
+    "seed": 5033
+  },
+  {
+    "name": "field-07",
+    "gain_db": -12.5075,
+    "dur": 0.1217,
+    "what": "S6: the accumulation arrives in waves on half beats (the first three under the sheet)",
+    "snap": {
+      "mode": "prev",
+      "off": -0.6524
+    },
+    "scene": "a1-world",
+    "kind": "pencil-stroke",
+    "t": 21.61,
+    "index": 6,
+    "seed": 484613,
+    "pan": -0.2164
+  },
+  {
+    "name": "field-08",
+    "gain_db": -12.9262,
+    "dur": 0.1338,
+    "what": "S6: the accumulation arrives in waves on half beats (the first three under the sheet)",
+    "snap": {
+      "mode": "prev",
+      "off": -0.6524
+    },
+    "scene": "a1-world",
+    "kind": "pencil-tick",
+    "t": 21.847,
+    "index": 7,
+    "seed": 491790,
+    "pan": 0.3337
+  },
+  {
+    "name": "containment-03",
+    "gain_db": -13.0,
+    "dur": 0.6,
+    "snap": {
+      "mode": "cut",
+      "off": 1.3045
+    },
+    "scene": "a1-world",
+    "kind": "pencil-stroke",
+    "t": 21.848,
+    "index": 2,
+    "seed": 5107
+  },
+  {
+    "name": "field-09",
+    "gain_db": -13.1794,
+    "dur": 0.2388,
+    "what": "S6: the accumulation arrives in waves on half beats (the first three under the sheet)",
+    "snap": {
+      "mode": "prev",
+      "off": -0.6524
+    },
+    "scene": "a1-world",
+    "kind": "pencil-stroke",
+    "t": 22.173,
+    "index": 8,
+    "seed": 498968,
+    "pan": -0.1049
+  },
+  {
+    "name": "field-09",
+    "gain_db": -12.9711,
+    "dur": 0.2936,
+    "what": "S6: the accumulation arrives in waves on half beats (the first three under the sheet)",
+    "snap": {
+      "mode": "prev",
+      "off": -0.6524
+    },
+    "scene": "a1-world",
+    "kind": "pencil-tick",
+    "t": 22.293,
+    "index": 8,
+    "seed": 498969,
+    "pan": -0.16
+  },
+  {
+    "t": 23.463,
+    "kind": "radio-click",
+    "gain_db": -2.0,
+    "source": "designed",
+    "scene": "a1-world",
+    "seed": 9,
+    "pan": -0.4
+  },
+  {
+    "t": 23.943,
+    "kind": "distant-clank",
+    "gain_db": -3.0,
+    "source": "designed",
+    "scene": "a1-world",
+    "seed": 8,
+    "pan": 0.55
+  },
+  {
+    "name": "push-roof03",
+    "gain_db": -10.0,
+    "dur": 0.652,
+    "what": "S7a: one-beat push from the extreme wide to Roof 03",
+    "scene": "a1-world",
+    "kind": "push",
+    "t": 24.13,
+    "index": 0,
+    "seed": 5181
+  },
+  {
+    "name": "hot-marker",
+    "gain_db": -10.0,
+    "dur": 0.6,
+    "what": "the ROOF 03 marker becomes the hot-work marker",
+    "scene": "a1-world",
+    "kind": "pencil-stroke",
+    "t": 24.21,
+    "index": 0,
+    "seed": 5218
+  },
+  {
+    "name": "weld-arc",
+    "gain_db": -16.0,
+    "dur": 1.304,
+    "what": "the arc point flickering while the torch travels along the seam",
+    "snap": {
+      "mode": "cut",
+      "off": 0.0004
+    },
+    "scene": "a1-inserts",
+    "kind": "arc",
+    "t": 24.783,
+    "index": 0,
+    "seed": 5255
+  },
+  {
+    "name": "weld-cut-in",
+    "material": "felt",
+    "gain_db": -12.0,
+    "what": "S7b: cut to the welder close-up",
+    "snap": {
+      "mode": "cut",
+      "off": 0.0004
+    },
+    "scene": "a1-inserts",
+    "kind": "cut",
+    "t": 24.783,
+    "index": 0,
+    "seed": 5292
+  },
+  {
+    "name": "safeguards-draw-01",
+    "gain_db": -16.0,
+    "dur": 0.3,
+    "light": true,
+    "what": "each safeguard draws where it stands before its tick",
+    "scene": "a1-world",
+    "kind": "pencil-stroke",
+    "t": 25.663,
+    "index": 0,
+    "seed": 5329
+  },
+  {
+    "name": "safeguards-draw-02",
+    "gain_db": -16.0,
+    "dur": 0.3,
+    "light": true,
+    "what": "each safeguard draws where it stands before its tick",
+    "scene": "a1-world",
+    "kind": "pencil-stroke",
+    "t": 25.989,
+    "index": 1,
+    "seed": 5366
+  },
+  {
+    "name": "cut-roof03",
+    "gain_db": -12.0,
+    "material": "paper",
+    "what": "S7c: cut back to Roof 03 from the worker insert",
+    "snap": "cut",
+    "scene": "a1-world",
+    "kind": "cut",
+    "t": 26.087,
+    "index": 0,
+    "seed": 5403
+  },
+  {
+    "name": "safeguards-draw-03",
+    "gain_db": -16.0,
+    "dur": 0.3,
+    "light": true,
+    "what": "each safeguard draws where it stands before its tick",
+    "scene": "a1-world",
+    "kind": "pencil-stroke",
+    "t": 26.315,
+    "index": 2,
+    "seed": 5440
+  },
+  {
+    "name": "ticks-01",
+    "gain_db": -8.0,
+    "what": "CERTIFICATE, FIRE WATCH, EXTINGUISHER, AREA CLEARED, SPRINKLERS on consecutive half beats",
+    "snap": {
+      "mode": "near"
+    },
+    "scene": "a1-world",
+    "kind": "pencil-tick",
+    "t": 26.413,
+    "index": 0,
+    "seed": 5477
+  },
+  {
+    "name": "safeguards-draw-04",
+    "gain_db": -16.0,
+    "dur": 0.3,
+    "light": true,
+    "what": "each safeguard draws where it stands before its tick",
+    "scene": "a1-world",
+    "kind": "pencil-stroke",
+    "t": 26.641,
+    "index": 3,
+    "seed": 5514
+  },
+  {
+    "name": "ticks-02",
+    "gain_db": -8.0,
+    "what": "CERTIFICATE, FIRE WATCH, EXTINGUISHER, AREA CLEARED, SPRINKLERS on consecutive half beats",
+    "snap": {
+      "mode": "near"
+    },
+    "scene": "a1-world",
+    "kind": "pencil-tick",
+    "t": 26.739,
+    "index": 1,
+    "seed": 5551
+  },
+  {
+    "name": "safeguards-draw-05",
+    "gain_db": -16.0,
+    "dur": 0.3,
+    "light": true,
+    "what": "each safeguard draws where it stands before its tick",
+    "scene": "a1-world",
+    "kind": "pencil-stroke",
+    "t": 26.967,
+    "index": 4,
+    "seed": 5588
+  },
+  {
+    "name": "ticks-03",
+    "gain_db": -8.0,
+    "what": "CERTIFICATE, FIRE WATCH, EXTINGUISHER, AREA CLEARED, SPRINKLERS on consecutive half beats",
+    "snap": {
+      "mode": "near"
+    },
+    "scene": "a1-world",
+    "kind": "pencil-tick",
+    "t": 27.065,
+    "index": 2,
+    "seed": 5625
+  },
+  {
+    "name": "ticks-04",
+    "gain_db": -8.0,
+    "what": "CERTIFICATE, FIRE WATCH, EXTINGUISHER, AREA CLEARED, SPRINKLERS on consecutive half beats",
+    "snap": {
+      "mode": "near"
+    },
+    "scene": "a1-world",
+    "kind": "pencil-tick",
+    "t": 27.391,
+    "index": 3,
+    "seed": 5662
+  },
+  {
+    "name": "ticks-05",
+    "gain_db": -8.0,
+    "what": "CERTIFICATE, FIRE WATCH, EXTINGUISHER, AREA CLEARED, SPRINKLERS on consecutive half beats",
+    "snap": {
+      "mode": "near"
+    },
+    "scene": "a1-world",
+    "kind": "pencil-tick",
+    "t": 27.717,
+    "index": 4,
+    "seed": 5699
+  },
+  {
+    "name": "sz3-cut-in",
+    "material": "paper",
+    "gain_db": -12.0,
+    "what": "S8a: cut to the Sprinkler Zone 3 control valve",
+    "scene": "a1-inserts",
+    "kind": "cut",
+    "t": 29.022,
+    "index": 0,
+    "seed": 5736
+  },
+  {
+    "name": "sz3-handwheel",
+    "gain_db": -10.0,
+    "dur": 1.31,
+    "what": "the handwheel turns closed over 'sprinkler zone', the rising stem runs in",
+    "scene": "a1-inserts",
+    "kind": "handwheel",
+    "t": 29.222,
+    "index": 0,
+    "seed": 5773
+  },
+  {
+    "name": "sz3-valve-clunk",
+    "gain_db": -6.0,
+    "what": "the gate seats on 'offline': muted, mechanical, no alarm",
+    "scene": "a1-inserts",
+    "kind": "valve-clunk",
+    "t": 30.532,
+    "index": 0,
+    "seed": 5847
+  },
+  {
+    "name": "sz3-gauge",
+    "gain_db": -12.0,
+    "dur": 0.51,
+    "what": "the needle falls from 7.2 bar on 'goes offline' and ticks on the zero stop (the fall began dur seconds earlier)",
+    "scene": "a1-inserts",
+    "kind": "gauge",
+    "t": 30.832,
+    "index": 0,
+    "seed": 5884
+  },
+  {
+    "name": "cut-sz3",
+    "gain_db": -16.0,
+    "material": "felt",
+    "what": "S8b: cut to the zone 3 roof; the heads drain from water to grey one by one (silent)",
+    "snap": {
+      "mode": "next",
+      "off": -0.0003
+    },
+    "scene": "a1-world",
+    "kind": "cut",
+    "t": 31.304,
+    "index": 0,
+    "seed": 5921
+  },
+  {
+    "name": "cut-nothing",
+    "gain_db": -16.0,
+    "material": "felt",
+    "what": "S9a: Roof 03 and zone 3 together",
+    "scene": "a1-world",
+    "kind": "cut",
+    "t": 33.587,
+    "index": 0,
+    "seed": 5995
+  },
+  {
+    "name": "connection-01",
+    "gain_db": -25.9985,
+    "dur": 0.2575,
+    "snap": {
+      "mode": "next"
+    },
+    "scene": "a1-world",
+    "kind": "pencil-tick",
+    "t": 33.913,
+    "index": 0,
+    "seed": 585104,
+    "pan": -0.2812
+  },
+  {
+    "name": "connection-02",
+    "gain_db": -22.8818,
+    "dur": 0.1017,
+    "snap": {
+      "mode": "next"
+    },
+    "scene": "a1-world",
+    "kind": "pencil-stroke",
+    "t": 34.013,
+    "index": 1,
+    "seed": 588693,
+    "pan": -0.0705
+  },
+  {
+    "name": "connection-02",
+    "gain_db": -26.2368,
+    "dur": 0.2201,
+    "snap": {
+      "mode": "next"
+    },
+    "scene": "a1-world",
+    "kind": "pencil-stroke",
+    "t": 34.0996,
+    "index": 1,
+    "seed": 588694,
+    "pan": 0.3192
+  },
+  {
+    "name": "connection-03",
+    "gain_db": -24.0278,
+    "dur": 0.2267,
+    "snap": {
+      "mode": "next"
+    },
+    "scene": "a1-world",
+    "kind": "pencil-tick",
+    "t": 34.113,
+    "index": 2,
+    "seed": 592282,
+    "pan": -0.2733
+  },
+  {
+    "name": "connection-03",
+    "gain_db": -22.9167,
+    "dur": 0.1275,
+    "snap": {
+      "mode": "next"
+    },
+    "scene": "a1-world",
+    "kind": "pencil-tick",
+    "t": 34.2054,
+    "index": 2,
+    "seed": 592283,
+    "pan": 0.1898
+  },
+  {
+    "name": "connection-04",
+    "gain_db": -22.155,
+    "dur": 0.2746,
+    "snap": {
+      "mode": "next"
+    },
+    "scene": "a1-world",
+    "kind": "pencil-stroke",
+    "t": 34.213,
+    "index": 3,
+    "seed": 595871,
+    "pan": 0.3642
+  },
+  {
+    "name": "connection-05",
+    "gain_db": -25.0457,
+    "dur": 0.1676,
+    "snap": {
+      "mode": "next"
+    },
+    "scene": "a1-world",
+    "kind": "pencil-stroke",
+    "t": 34.313,
+    "index": 4,
+    "seed": 599460,
+    "pan": 0.3587
+  },
+  {
+    "name": "connection-06",
+    "gain_db": -24.486,
+    "dur": 0.1702,
+    "snap": {
+      "mode": "next"
+    },
+    "scene": "a1-world",
+    "kind": "pencil-tick",
+    "t": 34.413,
+    "index": 5,
+    "seed": 603049,
+    "pan": -0.1517
+  },
+  {
+    "name": "connection-07",
+    "gain_db": -25.7123,
+    "dur": 0.1509,
+    "snap": {
+      "mode": "next"
+    },
+    "scene": "a1-world",
+    "kind": "pencil-stroke",
+    "t": 34.513,
+    "index": 6,
+    "seed": 606638,
+    "pan": -0.3685
+  },
+  {
+    "name": "connection-08",
+    "gain_db": -26.0964,
+    "dur": 0.2642,
+    "snap": {
+      "mode": "next"
+    },
+    "scene": "a1-world",
+    "kind": "pencil-stroke",
+    "t": 34.613,
+    "index": 7,
+    "seed": 610227,
+    "pan": 0.0898
+  },
+  {
+    "name": "connection-09",
+    "gain_db": -26.024,
+    "dur": 0.0809,
+    "snap": {
+      "mode": "next"
+    },
+    "scene": "a1-world",
+    "kind": "pencil-tick",
+    "t": 34.713,
+    "index": 8,
+    "seed": 613816,
+    "pan": 0.0676
+  },
+  {
+    "name": "connection-10",
+    "gain_db": -25.169,
+    "dur": 0.214,
+    "snap": {
+      "mode": "next"
+    },
+    "scene": "a1-world",
+    "kind": "pencil-tick",
+    "t": 34.813,
+    "index": 9,
+    "seed": 617405,
+    "pan": -0.0698
+  },
+  {
+    "name": "push-edge",
+    "gain_db": -17.0,
+    "dur": 0.652,
+    "what": "S9b: a gentle push to the envelope edge beside Roof 03",
+    "snap": {
+      "mode": "cut",
+      "off": -0.0005
+    },
+    "scene": "a1-world",
+    "kind": "push",
+    "t": 35.543,
+    "index": 0,
+    "seed": 6402
+  },
+  {
+    "name": "envelope-redraw",
+    "gain_db": -17.0,
+    "dur": 1.5,
+    "light": true,
+    "what": "the envelope quietly redrawn inward",
+    "snap": {
+      "mode": "cut",
+      "off": 0.0003
+    },
+    "scene": "a1-world",
+    "kind": "pencil-stroke",
+    "t": 36.196,
+    "index": 0,
+    "seed": 6439
+  },
+  {
+    "name": "fray",
+    "gain_db": -24.0,
+    "dur": 1.1,
+    "snap": {
+      "mode": "cut",
+      "off": 0.0001
+    },
+    "scene": "a1-world",
+    "kind": "fray",
+    "t": 37.174,
+    "index": 0,
+    "seed": 6476
+  },
+  {
+    "name": "pull-back",
+    "gain_db": -18.0,
+    "dur": 1.957,
+    "what": "S9c: slow pull back to Roof 03 and zone 3",
+    "snap": {
+      "mode": "cut",
+      "off": -0.0002
+    },
+    "scene": "a1-world",
+    "kind": "pull",
+    "t": 38.152,
+    "index": 0,
+    "seed": 6513
+  },
+  {
+    "name": "cut-after",
+    "gain_db": -12.0,
+    "material": "graphite",
+    "what": "S10a: cut to Roof 03 medium-close",
+    "scene": "a1-world",
+    "kind": "cut",
+    "t": 40.435,
+    "index": 0,
+    "seed": 6587
+  },
+  {
+    "name": "incident",
+    "gain_db": -8.0,
+    "dur": 0.75,
+    "text": "INCIDENT \u00b7 ROOF 03 \u00b7 16:07",
+    "scene": "a1-world",
+    "kind": "incident",
+    "t": 40.485,
+    "index": 0,
+    "seed": 6624
+  },
+  {
+    "name": "incident-hatch",
+    "gain_db": -18.0,
+    "dur": 0.16,
+    "scene": "a1-world",
+    "kind": "pencil-hatch",
+    "t": 40.815,
+    "index": 0,
+    "seed": 6661
+  },
+  {
+    "name": "pull-after",
+    "gain_db": -14.0,
+    "dur": 1.304,
+    "what": "S10b: the site recedes as the camera pulls back to afterwardsWide",
+    "scene": "a1-world",
+    "kind": "pull",
+    "t": 41.705,
+    "index": 0,
+    "seed": 6698
+  },
+  {
+    "name": "pin-wave-01",
+    "gain_db": -12.0,
+    "what": "S10b: photo, call log, statement, work order pin while the site recedes",
+    "snap": {
+      "mode": "cut",
+      "off": 0.6519
+    },
+    "scene": "a1-after",
+    "kind": "pin",
+    "t": 42.391,
+    "index": 0,
+    "seed": 6735
+  },
+  {
+    "name": "pin-wave-02",
+    "gain_db": -12.0,
+    "what": "S10b: photo, call log, statement, work order pin while the site recedes",
+    "snap": {
+      "mode": "cut",
+      "off": 0.6519
+    },
+    "scene": "a1-after",
+    "kind": "pin",
+    "t": 42.717,
+    "index": 1,
+    "seed": 6772
+  },
+  {
+    "name": "pin-wave-03",
+    "gain_db": -12.0,
+    "what": "S10b: photo, call log, statement, work order pin while the site recedes",
+    "snap": {
+      "mode": "cut",
+      "off": 0.6519
+    },
+    "scene": "a1-after",
+    "kind": "pin",
+    "t": 43.043,
+    "index": 2,
+    "seed": 6809
+  },
+  {
+    "name": "pin-wave-04",
+    "gain_db": -12.0,
+    "what": "S10b: photo, call log, statement, work order pin while the site recedes",
+    "snap": {
+      "mode": "cut",
+      "off": 0.6519
+    },
+    "scene": "a1-after",
+    "kind": "pin",
+    "t": 43.369,
+    "index": 3,
+    "seed": 6846
+  },
+  {
+    "name": "question-1",
+    "gain_db": -28.0,
+    "what": "What was happening?",
+    "scene": "a1-after",
+    "kind": "paper-slide",
+    "t": 43.696,
+    "index": 0,
+    "seed": 6883,
+    "dur": 0.18
+  },
+  {
+    "name": "pin-crowd-1-01",
+    "gain_db": -17.0,
+    "what": "email, shift note, photo 16:12 crowd in behind (background plane)",
+    "scene": "a1-after",
+    "kind": "pin",
+    "t": 44.348,
+    "index": 0,
+    "seed": 6920
+  },
+  {
+    "name": "pin-crowd-1-02",
+    "gain_db": -17.0,
+    "what": "email, shift note, photo 16:12 crowd in behind (background plane)",
+    "scene": "a1-after",
+    "kind": "pin",
+    "t": 44.674,
+    "index": 1,
+    "seed": 6957
+  },
+  {
+    "name": "pin-crowd-1-03",
+    "gain_db": -17.0,
+    "what": "email, shift note, photo 16:12 crowd in behind (background plane)",
+    "scene": "a1-after",
+    "kind": "pin",
+    "t": 45.0,
+    "index": 2,
+    "seed": 6994
+  },
+  {
+    "name": "whip-1",
+    "gain_db": -16.0,
+    "dur": 0.652,
+    "what": "one-beat lateral dolly to shot 2, parallax on three planes",
+    "scene": "a1-after",
+    "kind": "whip",
+    "t": 45.326,
+    "index": 0,
+    "seed": 7031
+  },
+  {
+    "name": "question-2",
+    "gain_db": -28.0,
+    "what": "Which condition applied?",
+    "scene": "a1-after",
+    "kind": "paper-slide",
+    "t": 45.536,
+    "index": 1,
+    "seed": 7068,
+    "dur": 0.18
+  },
+  {
+    "name": "pin-programme",
+    "gain_db": -12.0,
+    "what": "PROGRAMME 4.3 pins as the camera lands",
+    "scene": "a1-after",
+    "kind": "pin",
+    "t": 45.978,
+    "index": 0,
+    "seed": 7105
+  },
+  {
+    "name": "pin-crowd-2-01",
+    "gain_db": -17.0,
+    "what": "call log 16:08, witness note (background plane)",
+    "scene": "a1-after",
+    "kind": "pin",
+    "t": 46.304,
+    "index": 0,
+    "seed": 7142
+  },
+  {
+    "name": "pin-crowd-2-02",
+    "gain_db": -17.0,
+    "what": "call log 16:08, witness note (background plane)",
+    "scene": "a1-after",
+    "kind": "pin",
+    "t": 46.63,
+    "index": 1,
+    "seed": 7179
+  },
+  {
+    "name": "whip-2",
+    "gain_db": -16.0,
+    "dur": 0.652,
+    "what": "one-beat lateral dolly to shot 3",
+    "scene": "a1-after",
+    "kind": "whip",
+    "t": 47.609,
+    "index": 1,
+    "seed": 7216
+  },
+  {
+    "name": "question-3",
+    "gain_db": -28.0,
+    "what": "Can you prove / what was true?",
+    "scene": "a1-after",
+    "kind": "paper-slide",
+    "t": 47.676,
+    "index": 2,
+    "seed": 7253,
+    "dur": 0.18
+  },
+  {
+    "name": "pin-permit",
+    "gain_db": -12.0,
+    "what": "PERMIT HW-0412 pins as the camera lands",
+    "scene": "a1-after",
+    "kind": "pin",
+    "t": 48.261,
+    "index": 0,
+    "seed": 7290
+  },
+  {
+    "name": "permit-loop",
+    "gain_db": -15.0,
+    "dur": 0.5,
+    "what": "the SPRINKLERS tick circled on 'true'",
+    "scene": "a1-after",
+    "kind": "pencil-stroke",
+    "t": 48.606,
+    "index": 0,
+    "seed": 7327
+  },
+  {
+    "name": "pin-crowd-3-01",
+    "gain_db": -17.0,
+    "what": "photo 16:14, email 16:40 (background plane)",
+    "scene": "a1-after",
+    "kind": "pin",
+    "t": 49.239,
+    "index": 0,
+    "seed": 7364
+  },
+  {
+    "name": "pin-crowd-3-02",
+    "gain_db": -17.0,
+    "what": "photo 16:14, email 16:40 (background plane)",
+    "scene": "a1-after",
+    "kind": "pin",
+    "t": 49.565,
+    "index": 1,
+    "seed": 7401
+  },
+  {
+    "name": "pull-wide",
+    "gain_db": -12.0,
+    "dur": 1.304,
+    "what": "S10d: two-beat pull back to the whole board",
+    "snap": {
+      "mode": "cut",
+      "off": -0.0005
+    },
+    "scene": "a1-after",
+    "kind": "pull",
+    "t": 50.543,
+    "index": 0,
+    "seed": 7438
+  },
+  {
+    "name": "gap-rule",
+    "gain_db": -10.0,
+    "dur": 0.7,
+    "scene": "a1-after",
+    "kind": "ruler-contact",
+    "t": 50.807,
+    "index": 0,
+    "seed": 7475
+  },
+  {
+    "name": "gap-rule",
+    "gain_db": -10.0,
+    "dur": 0.7,
+    "scene": "a1-after",
+    "kind": "technical-pen",
+    "t": 50.847,
+    "index": 0,
+    "seed": 7476
+  },
+  {
+    "name": "latch",
+    "gain_db": -6.0,
+    "what": "the rewind lands on the landing frame",
+    "scene": "a1-world",
+    "kind": "latch-soft",
+    "t": 58.722,
+    "index": 0,
+    "seed": 7586
+  },
+  {
+    "name": "precision-snap",
+    "gain_db": -10.0,
+    "dur": 2.36,
+    "scene": "a2-resolve",
+    "kind": "align-snap",
+    "t": 59.0112,
+    "index": 0,
+    "seed": 236313,
+    "pan": -0.3776
+  },
+  {
+    "name": "precision-snap",
+    "gain_db": -12.0,
+    "dur": 2.36,
+    "scene": "a2-resolve",
+    "kind": "align-snap",
+    "t": 59.1739,
+    "index": 0,
+    "seed": 236314,
+    "pan": 0.0578
+  },
+  {
+    "name": "precision-snap",
+    "gain_db": -14.0,
+    "dur": 2.36,
+    "scene": "a2-resolve",
+    "kind": "align-snap",
+    "t": 59.3287,
+    "index": 0,
+    "seed": 236315,
+    "pan": -0.4717
+  },
+  {
+    "name": "precision-snap",
+    "gain_db": -10.0,
+    "dur": 2.36,
+    "scene": "a2-resolve",
+    "kind": "align-snap",
+    "t": 59.4618,
+    "index": 0,
+    "seed": 236316,
+    "pan": -0.3229
+  },
+  {
+    "name": "precision-snap",
+    "gain_db": -12.0,
+    "dur": 2.36,
+    "scene": "a2-resolve",
+    "kind": "align-snap",
+    "t": 59.603,
+    "index": 0,
+    "seed": 236317,
+    "pan": 0.456
+  },
+  {
+    "name": "precision-snap",
+    "gain_db": -14.0,
+    "dur": 2.36,
+    "scene": "a2-resolve",
+    "kind": "align-snap",
+    "t": 59.749,
+    "index": 0,
+    "seed": 236318,
+    "pan": -0.5411
+  },
+  {
+    "name": "precision-snap",
+    "gain_db": -10.0,
+    "dur": 2.36,
+    "scene": "a2-resolve",
+    "kind": "align-snap",
+    "t": 59.92,
+    "index": 0,
+    "seed": 236319,
+    "pan": 0.1958
+  },
+  {
+    "name": "precision-snap",
+    "gain_db": -12.0,
+    "dur": 2.36,
+    "scene": "a2-resolve",
+    "kind": "align-snap",
+    "t": 60.0584,
+    "index": 0,
+    "seed": 236320,
+    "pan": 0.5072
+  },
+  {
+    "name": "precision-snap",
+    "gain_db": -14.0,
+    "dur": 2.36,
+    "scene": "a2-resolve",
+    "kind": "align-snap",
+    "t": 60.2119,
+    "index": 0,
+    "seed": 236321,
+    "pan": -0.1132
+  },
+  {
+    "name": "precision-snap",
+    "gain_db": -10.0,
+    "dur": 2.36,
+    "scene": "a2-resolve",
+    "kind": "align-snap",
+    "t": 60.3525,
+    "index": 0,
+    "seed": 236322,
+    "pan": -0.3877
+  },
+  {
+    "name": "precision-snap",
+    "gain_db": -12.0,
+    "dur": 2.36,
+    "scene": "a2-resolve",
+    "kind": "align-snap",
+    "t": 60.5091,
+    "index": 0,
+    "seed": 236323,
+    "pan": 0.0088
+  },
+  {
+    "name": "precision-snap",
+    "gain_db": -14.0,
+    "dur": 2.36,
+    "scene": "a2-resolve",
+    "kind": "align-snap",
+    "t": 60.628,
+    "index": 0,
+    "seed": 236324,
+    "pan": 0.3627
+  },
+  {
+    "name": "precision-snap",
+    "gain_db": -10.0,
+    "dur": 2.36,
+    "scene": "a2-resolve",
+    "kind": "align-snap",
+    "t": 60.8111,
+    "index": 0,
+    "seed": 236325,
+    "pan": -0.3287
+  },
+  {
+    "name": "precision-snap",
+    "gain_db": -12.0,
+    "dur": 2.36,
+    "scene": "a2-resolve",
+    "kind": "align-snap",
+    "t": 60.9229,
+    "index": 0,
+    "seed": 236326,
+    "pan": -0.1549
+  },
+  {
+    "name": "precision-snap",
+    "gain_db": -14.0,
+    "dur": 2.36,
+    "scene": "a2-resolve",
+    "kind": "align-snap",
+    "t": 61.0942,
+    "index": 0,
+    "seed": 236327,
+    "pan": 0.2944
+  },
+  {
+    "name": "precision-snap",
+    "gain_db": -10.0,
+    "dur": 2.36,
+    "scene": "a2-resolve",
+    "kind": "align-snap",
+    "t": 61.2471,
+    "index": 0,
+    "seed": 236328,
+    "pan": -0.0182
+  },
+  {
+    "name": "push-worker",
+    "gain_db": -14.0,
+    "dur": 0.978,
+    "snap": {
+      "mode": "cut",
+      "off": -0.9779
+    },
+    "scene": "a2-resolve",
+    "kind": "push",
+    "t": 62.283,
+    "index": 0,
+    "seed": 7660
+  },
+  {
+    "name": "cut-capture",
+    "material": "paper",
+    "gain_db": -16.0,
+    "dur": 0.1,
+    "scene": "a2-resolve",
+    "kind": "cut",
+    "t": 63.261,
+    "index": 0,
+    "seed": 7697
+  },
+  {
+    "name": "capture-start",
+    "gain_db": -16.0,
+    "dur": 0.6,
+    "scene": "a2-resolve",
+    "kind": "capture-start",
+    "t": 63.281,
+    "index": 0,
+    "seed": 7734
+  },
+  {
+    "name": "word-token-01",
+    "gain_db": -22.0,
+    "dur": 0.4,
+    "snap": {
+      "mode": "near",
+      "off": -0.0004
+    },
+    "scene": "a2-resolve",
+    "kind": "align-snap",
+    "t": 65.217,
+    "index": 0,
+    "seed": 7771
+  },
+  {
+    "name": "word-token-02",
+    "gain_db": -22.0,
+    "dur": 0.4,
+    "snap": {
+      "mode": "near",
+      "off": -0.0004
+    },
+    "scene": "a2-resolve",
+    "kind": "align-snap",
+    "t": 65.543,
+    "index": 1,
+    "seed": 7808
+  },
+  {
+    "name": "word-token-03",
+    "gain_db": -22.0,
+    "dur": 0.4,
+    "snap": {
+      "mode": "near",
+      "off": -0.0004
+    },
+    "scene": "a2-resolve",
+    "kind": "align-snap",
+    "t": 65.869,
+    "index": 2,
+    "seed": 7845
+  },
+  {
+    "name": "word-token-04",
+    "gain_db": -22.0,
+    "dur": 0.4,
+    "snap": {
+      "mode": "near",
+      "off": -0.0004
+    },
+    "scene": "a2-resolve",
+    "kind": "align-snap",
+    "t": 66.195,
+    "index": 3,
+    "seed": 7882
+  },
+  {
+    "name": "connect-activity",
+    "gain_db": -12.0,
+    "dur": 1.304,
+    "scene": "a2-resolve",
+    "kind": "connect-line",
+    "t": 66.848,
+    "index": 0,
+    "seed": 7919
+  },
+  {
+    "name": "focus-clause",
+    "gain_db": -16.0,
+    "dur": 0.1,
+    "snap": {
+      "mode": "next",
+      "off": 0.9781
+    },
+    "scene": "a2-resolve",
+    "kind": "focus",
+    "t": 68.152,
+    "index": 0,
+    "seed": 7956
+  },
+  {
+    "name": "connect-zone",
+    "gain_db": -13.0,
+    "dur": 0.652,
+    "snap": {
+      "mode": "near",
+      "off": -0.0003
+    },
+    "scene": "a2-resolve",
+    "kind": "connect-line",
+    "t": 68.478,
+    "index": 0,
+    "seed": 7993
+  },
+  {
+    "name": "pull-connection",
+    "gain_db": -13.0,
+    "dur": 0.978,
+    "snap": {
+      "mode": "cut",
+      "off": -0.0004
+    },
+    "scene": "a2-resolve",
+    "kind": "pull",
+    "t": 69.13,
+    "index": 0,
+    "seed": 8030
+  },
+  {
+    "name": "cut-card",
+    "material": "paper",
+    "gain_db": -16.0,
+    "dur": 0.1,
+    "scene": "a2-resolve",
+    "kind": "cut",
+    "t": 71.739,
+    "index": 0,
+    "seed": 8104
+  },
+  {
+    "name": "focus-card",
+    "gain_db": -17.0,
+    "dur": 0.1,
+    "scene": "a2-resolve",
+    "kind": "focus",
+    "t": 71.769,
+    "index": 0,
+    "seed": 8141
+  },
+  {
+    "name": "verify-tick-01",
+    "gain_db": -12.0,
+    "dur": 0.36,
+    "scene": "a2-resolve",
+    "kind": "confirm",
+    "t": 72.391,
+    "index": 0,
+    "seed": 8178,
+    "variant": 0
+  },
+  {
+    "name": "verify-tick-02",
+    "gain_db": -12.0,
+    "dur": 0.36,
+    "scene": "a2-resolve",
+    "kind": "confirm",
+    "t": 72.717,
+    "index": 1,
+    "seed": 8215,
+    "variant": 1
+  },
+  {
+    "name": "verify-tick-03",
+    "gain_db": -12.0,
+    "dur": 0.36,
+    "scene": "a2-resolve",
+    "kind": "confirm",
+    "t": 73.043,
+    "index": 2,
+    "seed": 8252,
+    "variant": 2
+  },
+  {
+    "name": "verify-tick-04",
+    "gain_db": -12.0,
+    "dur": 0.36,
+    "scene": "a2-resolve",
+    "kind": "confirm",
+    "t": 73.369,
+    "index": 3,
+    "seed": 8289,
+    "variant": 3
+  },
+  {
+    "name": "verify-tick-05",
+    "gain_db": -12.0,
+    "dur": 0.36,
+    "scene": "a2-resolve",
+    "kind": "confirm",
+    "t": 73.695,
+    "index": 4,
+    "seed": 8326,
+    "variant": 4
+  },
+  {
+    "name": "whip-record",
+    "gain_db": -16.0,
+    "dur": 0.652,
+    "snap": {
+      "mode": "cut",
+      "off": 0.0003
+    },
+    "scene": "a2-resolve",
+    "kind": "whip",
+    "t": 74.022,
+    "index": 0,
+    "seed": 8363
+  },
+  {
+    "name": "record-append-1",
+    "gain_db": -13.0,
+    "dur": 0.75,
+    "snap": {
+      "mode": "next",
+      "off": 0.0001
+    },
+    "scene": "a2-resolve",
+    "kind": "record-append",
+    "t": 74.674,
+    "index": 0,
+    "seed": 8400
+  },
+  {
+    "name": "record-append-2",
+    "gain_db": -14.0,
+    "dur": 0.75,
+    "snap": {
+      "mode": "next",
+      "off": 0.3261
+    },
+    "scene": "a2-resolve",
+    "kind": "record-append",
+    "t": 75.0,
+    "index": 1,
+    "seed": 8437
+  },
+  {
+    "name": "pull-twoup",
+    "gain_db": -15.0,
+    "dur": 0.652,
+    "snap": {
+      "mode": "prev",
+      "off": -0.0002
+    },
+    "scene": "a2-resolve",
+    "kind": "pull",
+    "t": 75.652,
+    "index": 0,
+    "seed": 8474
+  },
+  {
+    "name": "cut-in",
+    "material": "paper",
+    "gain_db": -14.0,
+    "scene": "a3-change",
+    "kind": "cut",
+    "t": 81.22,
+    "index": 0,
+    "seed": 8511
+  },
+  {
+    "t": 82.006,
+    "kind": "valve-clunk",
+    "gain_db": -4.0,
+    "source": "designed",
+    "scene": "a3-change",
+    "seed": 11,
+    "pan": 0.35,
+    "flow": false
+  },
+  {
+    "name": "system-event",
+    "gain_db": -8.0,
+    "dur": 0.6,
+    "scene": "a3-change",
+    "kind": "record-append",
+    "t": 82.174,
+    "index": 0,
+    "seed": 8548
+  },
+  {
+    "name": "system-event",
+    "gain_db": -14.0,
+    "dur": 0.6,
+    "scene": "a3-change",
+    "kind": "relay-click",
+    "t": 82.184,
+    "index": 0,
+    "seed": 8549
+  },
+  {
+    "name": "cut-card",
+    "material": "felt",
+    "gain_db": -14.0,
+    "snap": {
+      "mode": "cut",
+      "off": -0.0003
+    },
+    "scene": "a3-change",
+    "kind": "cut",
+    "t": 83.478,
+    "index": 0,
+    "seed": 8585
+  },
+  {
+    "name": "focus-row",
+    "gain_db": -16.0,
+    "scene": "a3-change",
+    "kind": "focus",
+    "t": 83.498,
+    "index": 0,
+    "seed": 8622
+  },
+  {
+    "name": "row-unavailable",
+    "gain_db": -9.0,
+    "scene": "a3-change",
+    "kind": "row-unavailable",
+    "t": 84.586,
+    "index": 0,
+    "seed": 8659
+  },
+  {
+    "t": 84.686,
+    "kind": "system-tick",
+    "gain_db": 0.0,
+    "source": "designed",
+    "scene": "a3-change",
+    "seed": 12
+  },
+  {
+    "name": "cut-edge",
+    "material": "paper",
+    "gain_db": -16.0,
+    "snap": {
+      "mode": "cut",
+      "off": 0.0001
+    },
+    "scene": "a3-change",
+    "kind": "cut",
+    "t": 85.761,
+    "index": 0,
+    "seed": 8696
+  },
+  {
+    "name": "node-stretch",
+    "gain_db": -10.0,
+    "dur": 0.815,
+    "snap": {
+      "mode": "cut",
+      "off": 0.0001
+    },
+    "scene": "a3-change",
+    "kind": "stretch",
+    "t": 85.761,
+    "index": 0,
+    "seed": 8733
+  },
+  {
+    "name": "node-cross",
+    "gain_db": -6.0,
+    "dur": 0.46,
+    "snap": {
+      "mode": "next",
+      "off": 0.652
+    },
+    "scene": "a3-change",
+    "kind": "cross-snap",
+    "t": 86.739,
+    "index": 0,
+    "seed": 8770
+  },
+  {
+    "name": "cut-sheet",
+    "material": "paper",
+    "gain_db": -14.0,
+    "snap": {
+      "mode": "cut",
+      "off": 0.0003
+    },
+    "scene": "a3-change",
+    "kind": "cut",
+    "t": 88.696,
+    "index": 0,
+    "seed": 8844
+  },
+  {
+    "name": "sheet-in",
+    "gain_db": -12.0,
+    "dur": 0.4,
+    "snap": {
+      "mode": "cut",
+      "off": 0.0003
+    },
+    "scene": "a3-change",
+    "kind": "sheet-in",
+    "t": 88.696,
+    "index": 0,
+    "seed": 8881
+  },
+  {
+    "name": "focus-sheet",
+    "gain_db": -16.0,
+    "scene": "a3-change",
+    "kind": "focus",
+    "t": 88.716,
+    "index": 0,
+    "seed": 8918
+  },
+  {
+    "name": "pull-choices",
+    "gain_db": -14.0,
+    "dur": 0.652,
+    "snap": {
+      "mode": "cut",
+      "off": 0.0002
+    },
+    "scene": "a3-change",
+    "kind": "pull",
+    "t": 89.348,
+    "index": 0,
+    "seed": 8955
+  },
+  {
+    "name": "choice-01",
+    "variant": 1,
+    "gain_db": -10.0,
+    "snap": {
+      "mode": "cut",
+      "off": -0.0002
+    },
+    "scene": "a3-change",
+    "kind": "choice-accent",
+    "t": 90.652,
+    "index": 0,
+    "seed": 8992
+  },
+  {
+    "name": "push-change",
+    "gain_db": -14.0,
+    "dur": 0.652,
+    "snap": {
+      "mode": "cut",
+      "off": -0.0002
+    },
+    "scene": "a3-change",
+    "kind": "push",
+    "t": 90.652,
+    "index": 0,
+    "seed": 9029
+  },
+  {
+    "name": "node-return",
+    "gain_db": -12.0,
+    "dur": 0.6,
+    "scene": "a3-change",
+    "kind": "align-snap",
+    "t": 90.952,
+    "index": 0,
+    "seed": 9066
+  },
+  {
+    "name": "node-return",
+    "gain_db": -18.0,
+    "dur": 0.6,
+    "scene": "a3-change",
+    "kind": "confirm",
+    "t": 90.972,
+    "index": 0,
+    "seed": 9067,
+    "variant": 0
+  },
+  {
+    "name": "whip-retain",
+    "gain_db": -16.0,
+    "dur": 0.489,
+    "snap": {
+      "mode": "cut",
+      "off": 0.0001
+    },
+    "scene": "a3-change",
+    "kind": "whip",
+    "t": 93.261,
+    "index": 0,
+    "seed": 9103
+  },
+  {
+    "name": "choice-02",
+    "variant": 2,
+    "gain_db": -10.0,
+    "scene": "a3-change",
+    "kind": "choice-accent",
+    "t": 93.711,
+    "index": 1,
+    "seed": 9140
+  },
+  {
+    "name": "whip-transfer",
+    "gain_db": -16.0,
+    "dur": 0.489,
+    "snap": {
+      "mode": "cut",
+      "off": 0.0003
+    },
+    "scene": "a3-change",
+    "kind": "whip",
+    "t": 96.196,
+    "index": 0,
+    "seed": 9177
+  },
+  {
+    "name": "choice-03",
+    "variant": 3,
+    "gain_db": -10.0,
+    "scene": "a3-change",
+    "kind": "choice-accent",
+    "t": 96.236,
+    "index": 2,
+    "seed": 9214
+  },
+  {
+    "name": "cut-packet",
+    "material": "paper",
+    "gain_db": -14.0,
+    "snap": {
+      "mode": "cut",
+      "off": 0.0001
+    },
+    "scene": "a3-change",
+    "kind": "cut",
+    "t": 97.174,
+    "index": 0,
+    "seed": 9251
+  },
+  {
+    "name": "focus-packet",
+    "gain_db": -16.0,
+    "scene": "a3-change",
+    "kind": "focus",
+    "t": 97.194,
+    "index": 0,
+    "seed": 9288
+  },
+  {
+    "name": "packet-send",
+    "gain_db": -12.0,
+    "dur": 0.5,
+    "snap": {
+      "mode": "next"
+    },
+    "scene": "a3-change",
+    "kind": "packet",
+    "t": 97.5,
+    "index": 0,
+    "seed": 9325
+  },
+  {
+    "name": "carrier-response-01",
+    "gain_db": -13.0,
+    "snap": {
+      "mode": "cut",
+      "off": -0.0003
+    },
+    "scene": "a3-change",
+    "kind": "response-tick",
+    "t": 98.478,
+    "index": 0,
+    "seed": 9362
+  },
+  {
+    "name": "carrier-response-02",
+    "gain_db": -13.0,
+    "snap": {
+      "mode": "cut",
+      "off": -0.0003
+    },
+    "scene": "a3-change",
+    "kind": "response-tick",
+    "t": 99.13,
+    "index": 1,
+    "seed": 9399
+  },
+  {
+    "name": "carrier-response-03",
+    "gain_db": -13.0,
+    "snap": {
+      "mode": "cut",
+      "off": -0.0003
+    },
+    "scene": "a3-change",
+    "kind": "response-tick",
+    "t": 99.782,
+    "index": 2,
+    "seed": 9436
+  },
+  {
+    "name": "carrier-response-04",
+    "gain_db": -13.0,
+    "snap": {
+      "mode": "cut",
+      "off": -0.0003
+    },
+    "scene": "a3-change",
+    "kind": "response-tick",
+    "t": 100.435,
+    "index": 3,
+    "seed": 9473
+  },
+  {
+    "name": "layer-slice",
+    "gain_db": -12.0,
+    "dur": 0.5,
+    "snap": {
+      "mode": "next",
+      "off": 1.9567
+    },
+    "scene": "a3-change",
+    "kind": "connect-line",
+    "t": 100.761,
+    "index": 0,
+    "seed": 9510
+  },
+  {
+    "name": "markers-01",
+    "snap": {
+      "mode": "next"
+    },
+    "gain_db": -16.0,
+    "scene": "a3-scenarios",
+    "kind": "node-pass",
+    "t": 101.739,
+    "index": 0,
+    "seed": 9584
+  },
+  {
+    "name": "markers-02",
+    "snap": {
+      "mode": "next"
+    },
+    "gain_db": -16.0,
+    "scene": "a3-scenarios",
+    "kind": "node-pass",
+    "t": 102.065,
+    "index": 1,
+    "seed": 9621
+  },
+  {
+    "name": "markers-03",
+    "snap": {
+      "mode": "next"
+    },
+    "gain_db": -16.0,
+    "scene": "a3-scenarios",
+    "kind": "node-pass",
+    "t": 102.391,
+    "index": 2,
+    "seed": 9658
+  },
+  {
+    "name": "markers-04",
+    "snap": {
+      "mode": "next"
+    },
+    "gain_db": -16.0,
+    "scene": "a3-scenarios",
+    "kind": "node-pass",
+    "t": 102.717,
+    "index": 3,
+    "seed": 9695
+  },
+  {
+    "name": "push-crane",
+    "snap": {
+      "mode": "next"
+    },
+    "gain_db": -14.0,
+    "dur": 0.652,
+    "scene": "a3-scenarios",
+    "kind": "push",
+    "t": 104.348,
+    "index": 0,
+    "seed": 9732
+  },
+  {
+    "name": "cut-crane",
+    "snap": "cut",
+    "material": "felt",
+    "gain_db": -14.0,
+    "scene": "a3-scenarios",
+    "kind": "cut",
+    "t": 105.0,
+    "index": 0,
+    "seed": 9769
+  },
+  {
+    "name": "gusts-01",
+    "snap": {
+      "mode": "cut",
+      "off": 0.05
+    },
+    "gain_db": -27.8653,
+    "scene": "a3-scenarios",
+    "kind": "pencil-stroke",
+    "t": 105.05,
+    "index": 0,
+    "seed": 951182,
+    "dur": 0.2459,
+    "pan": 0.1297
+  },
+  {
+    "name": "gusts-01",
+    "snap": {
+      "mode": "cut",
+      "off": 0.05
+    },
+    "gain_db": -28.472,
+    "scene": "a3-scenarios",
+    "kind": "pencil-stroke",
+    "t": 105.1414,
+    "index": 0,
+    "seed": 951183,
+    "dur": 0.2055,
+    "pan": -0.2442
+  },
+  {
+    "name": "gusts-02",
+    "snap": {
+      "mode": "cut",
+      "off": 0.05
+    },
+    "gain_db": -26.8038,
+    "scene": "a3-scenarios",
+    "kind": "pencil-stroke",
+    "t": 105.21,
+    "index": 1,
+    "seed": 954771,
+    "dur": 0.16,
+    "pan": -0.0886
+  },
+  {
+    "name": "gusts-01",
+    "snap": {
+      "mode": "cut",
+      "off": 0.05
+    },
+    "gain_db": -25.4822,
+    "scene": "a3-scenarios",
+    "kind": "pencil-tick",
+    "t": 105.2988,
+    "index": 0,
+    "seed": 951184,
+    "dur": 0.2155,
+    "pan": -0.3025
+  },
+  {
+    "name": "gusts-02",
+    "snap": {
+      "mode": "cut",
+      "off": 0.05
+    },
+    "gain_db": -25.4404,
+    "scene": "a3-scenarios",
+    "kind": "pencil-stroke",
+    "t": 105.3054,
+    "index": 1,
+    "seed": 954772,
+    "dur": 0.1591,
+    "pan": 0.0421
+  },
+  {
+    "name": "gusts-03",
+    "snap": {
+      "mode": "cut",
+      "off": 0.05
+    },
+    "gain_db": -28.7353,
+    "scene": "a3-scenarios",
+    "kind": "pencil-tick",
+    "t": 105.37,
+    "index": 2,
+    "seed": 958360,
+    "dur": 0.2815,
+    "pan": -0.2526
+  },
+  {
+    "name": "gusts-01",
+    "snap": {
+      "mode": "cut",
+      "off": 0.05
+    },
+    "gain_db": -27.2472,
+    "scene": "a3-scenarios",
+    "kind": "pencil-stroke",
+    "t": 105.3798,
+    "index": 0,
+    "seed": 951185,
+    "dur": 0.243,
+    "pan": -0.1376
+  },
+  {
+    "name": "gusts-02",
+    "snap": {
+      "mode": "cut",
+      "off": 0.05
+    },
+    "gain_db": -26.0739,
+    "scene": "a3-scenarios",
+    "kind": "pencil-stroke",
+    "t": 105.3901,
+    "index": 1,
+    "seed": 954773,
+    "dur": 0.2947,
+    "pan": 0.3319
+  },
+  {
+    "name": "gusts-01",
+    "snap": {
+      "mode": "cut",
+      "off": 0.05
+    },
+    "gain_db": -27.2452,
+    "scene": "a3-scenarios",
+    "kind": "pencil-stroke",
+    "t": 105.5001,
+    "index": 0,
+    "seed": 951186,
+    "dur": 0.0973,
+    "pan": 0.1247
+  },
+  {
+    "name": "gusts-04",
+    "snap": {
+      "mode": "cut",
+      "off": 0.05
+    },
+    "gain_db": -28.6509,
+    "scene": "a3-scenarios",
+    "kind": "pencil-tick",
+    "t": 105.53,
+    "index": 3,
+    "seed": 961949,
+    "dur": 0.2905,
+    "pan": -0.107
+  },
+  {
+    "name": "gusts-03",
+    "snap": {
+      "mode": "cut",
+      "off": 0.05
+    },
+    "gain_db": -26.3083,
+    "scene": "a3-scenarios",
+    "kind": "pencil-tick",
+    "t": 105.5341,
+    "index": 2,
+    "seed": 958361,
+    "dur": 0.2846,
+    "pan": -0.2292
+  },
+  {
+    "name": "gusts-02",
+    "snap": {
+      "mode": "cut",
+      "off": 0.05
+    },
+    "gain_db": -25.5136,
+    "scene": "a3-scenarios",
+    "kind": "pencil-tick",
+    "t": 105.5354,
+    "index": 1,
+    "seed": 954774,
+    "dur": 0.1504,
+    "pan": 0.0627
+  },
+  {
+    "name": "pull-card",
+    "snap": {
+      "mode": "next"
+    },
+    "gain_db": -14.0,
+    "dur": 0.652,
+    "scene": "a3-scenarios",
+    "kind": "pull",
+    "t": 105.652,
+    "index": 0,
+    "seed": 9954
+  },
+  {
+    "name": "gusts-02",
+    "snap": {
+      "mode": "cut",
+      "off": 0.05
+    },
+    "gain_db": -25.0668,
+    "scene": "a3-scenarios",
+    "kind": "pencil-tick",
+    "t": 105.6585,
+    "index": 1,
+    "seed": 954775,
+    "dur": 0.2221,
+    "pan": -0.0829
+  },
+  {
+    "name": "gusts-01",
+    "snap": {
+      "mode": "cut",
+      "off": 0.05
+    },
+    "gain_db": -28.0135,
+    "scene": "a3-scenarios",
+    "kind": "pencil-tick",
+    "t": 105.6724,
+    "index": 0,
+    "seed": 951187,
+    "dur": 0.1505,
+    "pan": 0.2428
+  },
+  {
+    "name": "gusts-05",
+    "snap": {
+      "mode": "cut",
+      "off": 0.05
+    },
+    "gain_db": -28.1066,
+    "scene": "a3-scenarios",
+    "kind": "pencil-tick",
+    "t": 105.69,
+    "index": 4,
+    "seed": 969127,
+    "dur": 0.2447,
+    "pan": -0.2815
+  },
+  {
+    "name": "gusts-03",
+    "snap": {
+      "mode": "cut",
+      "off": 0.05
+    },
+    "gain_db": -29.3272,
+    "scene": "a3-scenarios",
+    "kind": "pencil-tick",
+    "t": 105.6914,
+    "index": 2,
+    "seed": 958362,
+    "dur": 0.2663,
+    "pan": 0.0302
+  },
+  {
+    "name": "gusts-04",
+    "snap": {
+      "mode": "cut",
+      "off": 0.05
+    },
+    "gain_db": -25.0557,
+    "scene": "a3-scenarios",
+    "kind": "pencil-stroke",
+    "t": 105.6987,
+    "index": 3,
+    "seed": 961950,
+    "dur": 0.2584,
+    "pan": 0.0909
+  },
+  {
+    "name": "connect-wind",
+    "snap": {
+      "mode": "next",
+      "off": 0.05
+    },
+    "gain_db": -12.0,
+    "dur": 0.47,
+    "scene": "a3-scenarios",
+    "kind": "connect-line",
+    "t": 105.702,
+    "index": 0,
+    "seed": 10028
+  },
+  {
+    "name": "gusts-01",
+    "snap": {
+      "mode": "cut",
+      "off": 0.05
+    },
+    "gain_db": -26.0103,
+    "scene": "a3-scenarios",
+    "kind": "pencil-stroke",
+    "t": 105.805,
+    "index": 0,
+    "seed": 951188,
+    "dur": 0.2333,
+    "pan": -0.3884
+  },
+  {
+    "name": "gusts-04",
+    "snap": {
+      "mode": "cut",
+      "off": 0.05
+    },
+    "gain_db": -25.3125,
+    "scene": "a3-scenarios",
+    "kind": "pencil-stroke",
+    "t": 105.8194,
+    "index": 3,
+    "seed": 961951,
+    "dur": 0.1199,
+    "pan": -0.1648
+  },
+  {
+    "name": "gusts-03",
+    "snap": {
+      "mode": "cut",
+      "off": 0.05
+    },
+    "gain_db": -29.1881,
+    "scene": "a3-scenarios",
+    "kind": "pencil-stroke",
+    "t": 105.8387,
+    "index": 2,
+    "seed": 958363,
+    "dur": 0.2014,
+    "pan": 0.1904
+  },
+  {
+    "name": "gusts-05",
+    "snap": {
+      "mode": "cut",
+      "off": 0.05
+    },
+    "gain_db": -27.4117,
+    "scene": "a3-scenarios",
+    "kind": "pencil-tick",
+    "t": 105.8469,
+    "index": 4,
+    "seed": 969128,
+    "dur": 0.1472,
+    "pan": -0.225
+  },
+  {
+    "name": "gusts-06",
+    "snap": {
+      "mode": "cut",
+      "off": 0.05
+    },
+    "gain_db": -29.9596,
+    "scene": "a3-scenarios",
+    "kind": "pencil-stroke",
+    "t": 105.85,
+    "index": 5,
+    "seed": 976305,
+    "dur": 0.1562,
+    "pan": -0.2492
+  },
+  {
+    "name": "gusts-02",
+    "snap": {
+      "mode": "cut",
+      "off": 0.05
+    },
+    "gain_db": -27.5522,
+    "scene": "a3-scenarios",
+    "kind": "pencil-tick",
+    "t": 105.8565,
+    "index": 1,
+    "seed": 954776,
+    "dur": 0.2879,
+    "pan": 0.1382
+  },
+  {
+    "name": "gusts-01",
+    "snap": {
+      "mode": "cut",
+      "off": 0.05
+    },
+    "gain_db": -29.0729,
+    "scene": "a3-scenarios",
+    "kind": "pencil-tick",
+    "t": 105.8973,
+    "index": 0,
+    "seed": 951189,
+    "dur": 0.1112,
+    "pan": -0.249
+  },
+  {
+    "name": "gusts-04",
+    "snap": {
+      "mode": "cut",
+      "off": 0.05
+    },
+    "gain_db": -27.3636,
+    "scene": "a3-scenarios",
+    "kind": "pencil-tick",
+    "t": 105.9001,
+    "index": 3,
+    "seed": 961952,
+    "dur": 0.2236,
+    "pan": 0.3574
+  },
+  {
+    "name": "gusts-06",
+    "snap": {
+      "mode": "cut",
+      "off": 0.05
+    },
+    "gain_db": -26.9531,
+    "scene": "a3-scenarios",
+    "kind": "pencil-tick",
+    "t": 105.9339,
+    "index": 5,
+    "seed": 976306,
+    "dur": 0.1336,
+    "pan": -0.39
+  },
+  {
+    "name": "gusts-03",
+    "snap": {
+      "mode": "cut",
+      "off": 0.05
+    },
+    "gain_db": -28.6006,
+    "scene": "a3-scenarios",
+    "kind": "pencil-stroke",
+    "t": 105.991,
+    "index": 2,
+    "seed": 958364,
+    "dur": 0.1085,
+    "pan": -0.2142
+  },
+  {
+    "name": "gusts-02",
+    "snap": {
+      "mode": "cut",
+      "off": 0.05
+    },
+    "gain_db": -27.5192,
+    "scene": "a3-scenarios",
+    "kind": "pencil-tick",
+    "t": 105.9951,
+    "index": 1,
+    "seed": 954777,
+    "dur": 0.196,
+    "pan": -0.1917
+  },
+  {
+    "name": "gusts-04",
+    "snap": {
+      "mode": "cut",
+      "off": 0.05
+    },
+    "gain_db": -26.7703,
+    "scene": "a3-scenarios",
+    "kind": "pencil-tick",
+    "t": 105.9996,
+    "index": 3,
+    "seed": 961953,
+    "dur": 0.1336,
+    "pan": 0.3404
+  },
+  {
+    "name": "gusts-05",
+    "snap": {
+      "mode": "cut",
+      "off": 0.05
+    },
+    "gain_db": -29.6298,
+    "scene": "a3-scenarios",
+    "kind": "pencil-stroke",
+    "t": 106.0435,
+    "index": 4,
+    "seed": 969129,
+    "dur": 0.2524,
+    "pan": 0.3383
+  },
+  {
+    "name": "gusts-01",
+    "snap": {
+      "mode": "cut",
+      "off": 0.05
+    },
+    "gain_db": -26.9839,
+    "scene": "a3-scenarios",
+    "kind": "pencil-stroke",
+    "t": 106.0712,
+    "index": 0,
+    "seed": 951190,
+    "dur": 0.1412,
+    "pan": 0.0496
+  },
+  {
+    "name": "gusts-06",
+    "snap": {
+      "mode": "cut",
+      "off": 0.05
+    },
+    "gain_db": -26.8197,
+    "scene": "a3-scenarios",
+    "kind": "pencil-stroke",
+    "t": 106.1022,
+    "index": 5,
+    "seed": 976307,
+    "dur": 0.2674,
+    "pan": 0.023
+  },
+  {
+    "name": "gusts-03",
+    "snap": {
+      "mode": "cut",
+      "off": 0.05
+    },
+    "gain_db": -26.2895,
+    "scene": "a3-scenarios",
+    "kind": "pencil-tick",
+    "t": 106.1087,
+    "index": 2,
+    "seed": 958365,
+    "dur": 0.1915,
+    "pan": -0.3433
+  },
+  {
+    "name": "gusts-02",
+    "snap": {
+      "mode": "cut",
+      "off": 0.05
+    },
+    "gain_db": -27.2998,
+    "scene": "a3-scenarios",
+    "kind": "pencil-stroke",
+    "t": 106.1691,
+    "index": 1,
+    "seed": 954778,
+    "dur": 0.1746,
+    "pan": 0.047
+  },
+  {
+    "name": "gusts-01",
+    "snap": {
+      "mode": "cut",
+      "off": 0.05
+    },
+    "gain_db": -29.538,
+    "scene": "a3-scenarios",
+    "kind": "pencil-stroke",
+    "t": 106.1715,
+    "index": 0,
+    "seed": 951191,
+    "dur": 0.2403,
+    "pan": -0.0584
+  },
+  {
+    "name": "gusts-05",
+    "snap": {
+      "mode": "cut",
+      "off": 0.05
+    },
+    "gain_db": -29.0639,
+    "scene": "a3-scenarios",
+    "kind": "pencil-stroke",
+    "t": 106.1726,
+    "index": 4,
+    "seed": 969130,
+    "dur": 0.2451,
+    "pan": -0.0452
+  },
+  {
+    "name": "gusts-04",
+    "snap": {
+      "mode": "cut",
+      "off": 0.05
+    },
+    "gain_db": -29.8971,
+    "scene": "a3-scenarios",
+    "kind": "pencil-stroke",
+    "t": 106.1949,
+    "index": 3,
+    "seed": 961954,
+    "dur": 0.28,
+    "pan": -0.2476
+  },
+  {
+    "name": "gusts-03",
+    "snap": {
+      "mode": "cut",
+      "off": 0.05
+    },
+    "gain_db": -26.7263,
+    "scene": "a3-scenarios",
+    "kind": "pencil-tick",
+    "t": 106.2038,
+    "index": 2,
+    "seed": 958366,
+    "dur": 0.2152,
+    "pan": 0.0066
+  },
+  {
+    "name": "gusts-02",
+    "snap": {
+      "mode": "cut",
+      "off": 0.05
+    },
+    "gain_db": -27.8932,
+    "scene": "a3-scenarios",
+    "kind": "pencil-tick",
+    "t": 106.2966,
+    "index": 1,
+    "seed": 954779,
+    "dur": 0.2064,
+    "pan": 0.1922
+  },
+  {
+    "name": "gusts-06",
+    "snap": {
+      "mode": "cut",
+      "off": 0.05
+    },
+    "gain_db": -29.4832,
+    "scene": "a3-scenarios",
+    "kind": "pencil-stroke",
+    "t": 106.3012,
+    "index": 5,
+    "seed": 976308,
+    "dur": 0.2574,
+    "pan": -0.2261
+  },
+  {
+    "name": "focus-card-crane",
+    "snap": {
+      "mode": "next",
+      "off": 0.652
+    },
+    "gain_db": -16.0,
+    "scene": "a3-scenarios",
+    "kind": "focus",
+    "t": 106.304,
+    "index": 0,
+    "seed": 10102
+  },
+  {
+    "name": "gusts-05",
+    "snap": {
+      "mode": "cut",
+      "off": 0.05
+    },
+    "gain_db": -29.458,
+    "scene": "a3-scenarios",
+    "kind": "pencil-stroke",
+    "t": 106.3235,
+    "index": 4,
+    "seed": 969131,
+    "dur": 0.2286,
+    "pan": -0.3846
+  },
+  {
+    "name": "gusts-04",
+    "snap": {
+      "mode": "cut",
+      "off": 0.05
+    },
+    "gain_db": -26.6003,
+    "scene": "a3-scenarios",
+    "kind": "pencil-tick",
+    "t": 106.3271,
+    "index": 3,
+    "seed": 961955,
+    "dur": 0.0888,
+    "pan": 0.1159
+  },
+  {
+    "name": "gusts-03",
+    "snap": {
+      "mode": "cut",
+      "off": 0.05
+    },
+    "gain_db": -29.4749,
+    "scene": "a3-scenarios",
+    "kind": "pencil-stroke",
+    "t": 106.3515,
+    "index": 2,
+    "seed": 958367,
+    "dur": 0.2676,
+    "pan": 0.3728
+  },
+  {
+    "name": "wind-limit",
+    "gain_db": -9.0,
+    "scene": "a3-scenarios",
+    "kind": "row-unavailable",
+    "t": 106.413,
+    "index": 0,
+    "seed": 10139
+  },
+  {
+    "name": "gusts-03",
+    "snap": {
+      "mode": "cut",
+      "off": 0.05
+    },
+    "gain_db": -25.0906,
+    "scene": "a3-scenarios",
+    "kind": "pencil-stroke",
+    "t": 106.4683,
+    "index": 2,
+    "seed": 958368,
+    "dur": 0.1283,
+    "pan": 0.2503
+  },
+  {
+    "name": "gusts-05",
+    "snap": {
+      "mode": "cut",
+      "off": 0.05
+    },
+    "gain_db": -26.3355,
+    "scene": "a3-scenarios",
+    "kind": "pencil-stroke",
+    "t": 106.4725,
+    "index": 4,
+    "seed": 969132,
+    "dur": 0.187,
+    "pan": -0.0471
+  },
+  {
+    "name": "gusts-04",
+    "snap": {
+      "mode": "cut",
+      "off": 0.05
+    },
+    "gain_db": -28.3126,
+    "scene": "a3-scenarios",
+    "kind": "pencil-stroke",
+    "t": 106.4834,
+    "index": 3,
+    "seed": 961956,
+    "dur": 0.2715,
+    "pan": -0.3937
+  },
+  {
+    "name": "gusts-06",
+    "snap": {
+      "mode": "cut",
+      "off": 0.05
+    },
+    "gain_db": -28.7911,
+    "scene": "a3-scenarios",
+    "kind": "pencil-tick",
+    "t": 106.4932,
+    "index": 5,
+    "seed": 976309,
+    "dur": 0.1176,
+    "pan": 0.0183
+  },
+  {
+    "name": "gusts-06",
+    "snap": {
+      "mode": "cut",
+      "off": 0.05
+    },
+    "gain_db": -26.9967,
+    "scene": "a3-scenarios",
+    "kind": "pencil-stroke",
+    "t": 106.5886,
+    "index": 5,
+    "seed": 976310,
+    "dur": 0.2617,
+    "pan": 0.0373
+  },
+  {
+    "name": "gusts-05",
+    "snap": {
+      "mode": "cut",
+      "off": 0.05
+    },
+    "gain_db": -26.6375,
+    "scene": "a3-scenarios",
+    "kind": "pencil-stroke",
+    "t": 106.6189,
+    "index": 4,
+    "seed": 969133,
+    "dur": 0.1219,
+    "pan": 0.2387
+  },
+  {
+    "name": "outcome-change",
+    "snap": {
+      "mode": "next"
+    },
+    "variant": 1,
+    "gain_db": -10.0,
+    "scene": "a3-scenarios",
+    "kind": "choice-accent",
+    "t": 106.63,
+    "index": 0,
+    "seed": 10176
+  },
+  {
+    "name": "gusts-04",
+    "snap": {
+      "mode": "cut",
+      "off": 0.05
+    },
+    "gain_db": -28.1413,
+    "scene": "a3-scenarios",
+    "kind": "pencil-stroke",
+    "t": 106.6467,
+    "index": 3,
+    "seed": 961957,
+    "dur": 0.2687,
+    "pan": 0.1142
+  },
+  {
+    "name": "gusts-06",
+    "snap": {
+      "mode": "cut",
+      "off": 0.05
+    },
+    "gain_db": -26.763,
+    "scene": "a3-scenarios",
+    "kind": "pencil-tick",
+    "t": 106.7308,
+    "index": 5,
+    "seed": 976311,
+    "dur": 0.1652,
+    "pan": 0.0668
+  },
+  {
+    "name": "gusts-05",
+    "snap": {
+      "mode": "cut",
+      "off": 0.05
+    },
+    "gain_db": -27.1426,
+    "scene": "a3-scenarios",
+    "kind": "pencil-stroke",
+    "t": 106.7819,
+    "index": 4,
+    "seed": 969134,
+    "dur": 0.0996,
+    "pan": -0.3315
+  },
+  {
+    "name": "gusts-06",
+    "snap": {
+      "mode": "cut",
+      "off": 0.05
+    },
+    "gain_db": -28.7262,
+    "scene": "a3-scenarios",
+    "kind": "pencil-stroke",
+    "t": 106.8753,
+    "index": 5,
+    "seed": 976312,
+    "dur": 0.2382,
+    "pan": -0.3392
+  },
+  {
+    "name": "gusts-05",
+    "snap": {
+      "mode": "cut",
+      "off": 0.05
+    },
+    "gain_db": -27.2538,
+    "scene": "a3-scenarios",
+    "kind": "pencil-stroke",
+    "t": 106.8853,
+    "index": 4,
+    "seed": 969135,
+    "dur": 0.2448,
+    "pan": -0.3921
+  },
+  {
+    "name": "gusts-06",
+    "snap": {
+      "mode": "cut",
+      "off": 0.05
+    },
+    "gain_db": -26.6907,
+    "scene": "a3-scenarios",
+    "kind": "pencil-tick",
+    "t": 107.0033,
+    "index": 5,
+    "seed": 976313,
+    "dur": 0.2627,
+    "pan": 0.0918
+  },
+  {
+    "name": "cut-gas",
+    "snap": "cut",
+    "material": "paper",
+    "gain_db": -14.0,
+    "scene": "a3-scenarios",
+    "kind": "cut",
+    "t": 108.261,
+    "index": 0,
+    "seed": 10213
+  },
+  {
+    "name": "connect-gas",
+    "snap": {
+      "mode": "cut",
+      "off": 0.376
+    },
+    "gain_db": -12.0,
+    "dur": 0.396,
+    "scene": "a3-scenarios",
+    "kind": "connect-line",
+    "t": 108.637,
+    "index": 0,
+    "seed": 10250
+  },
+  {
+    "name": "key-turn",
+    "gain_db": -16.0,
+    "dur": 0.26,
+    "scene": "a3-scenarios",
+    "kind": "handwheel",
+    "t": 108.991,
+    "index": 0,
+    "seed": 10287
+  },
+  {
+    "name": "bypassed",
+    "snap": {
+      "mode": "near"
+    },
+    "gain_db": -9.0,
+    "scene": "a3-scenarios",
+    "kind": "row-unavailable",
+    "t": 109.239,
+    "index": 0,
+    "seed": 10324
+  },
+  {
+    "name": "push-card-gas",
+    "snap": {
+      "mode": "next"
+    },
+    "gain_db": -14.0,
+    "dur": 0.652,
+    "scene": "a3-scenarios",
+    "kind": "push",
+    "t": 109.565,
+    "index": 0,
+    "seed": 10361
+  },
+  {
+    "name": "outcome-retain",
+    "snap": {
+      "mode": "next"
+    },
+    "variant": 2,
+    "gain_db": -10.0,
+    "scene": "a3-scenarios",
+    "kind": "choice-accent",
+    "t": 110.217,
+    "index": 0,
+    "seed": 10398
+  },
+  {
+    "name": "cut-tank",
+    "snap": "cut",
+    "material": "paper",
+    "gain_db": -14.0,
+    "scene": "a3-scenarios",
+    "kind": "cut",
+    "t": 111.848,
+    "index": 0,
+    "seed": 10435
+  },
+  {
+    "name": "pull-fan",
+    "snap": {
+      "mode": "next"
+    },
+    "gain_db": -14.0,
+    "dur": 0.652,
+    "scene": "a3-scenarios",
+    "kind": "pull",
+    "t": 113.152,
+    "index": 0,
+    "seed": 10472
+  },
+  {
+    "name": "connect-fan",
+    "snap": {
+      "mode": "next",
+      "off": 0.25
+    },
+    "gain_db": -12.0,
+    "dur": 0.47,
+    "scene": "a3-scenarios",
+    "kind": "connect-line",
+    "t": 113.402,
+    "index": 0,
+    "seed": 10509
+  },
+  {
+    "name": "focus-card-tank",
+    "snap": {
+      "mode": "next",
+      "off": 0.652
+    },
+    "gain_db": -16.0,
+    "scene": "a3-scenarios",
+    "kind": "focus",
+    "t": 113.804,
+    "index": 0,
+    "seed": 10546
+  },
+  {
+    "name": "ventilation-down",
+    "snap": {
+      "mode": "next"
+    },
+    "gain_db": -9.0,
+    "scene": "a3-scenarios",
+    "kind": "row-unavailable",
+    "t": 114.13,
+    "index": 0,
+    "seed": 10620
+  },
+  {
+    "name": "outcome-prevent",
+    "snap": {
+      "mode": "next"
+    },
+    "variant": 3,
+    "gain_db": -10.0,
+    "scene": "a3-scenarios",
+    "kind": "choice-accent",
+    "t": 114.783,
+    "index": 0,
+    "seed": 10657
+  },
+  {
+    "name": "cut-site",
+    "snap": "cut",
+    "material": "paper",
+    "gain_db": -14.0,
+    "scene": "a3-scenarios",
+    "kind": "cut",
+    "t": 116.413,
+    "index": 0,
+    "seed": 10694
+  },
+  {
+    "name": "pull-site",
+    "snap": {
+      "mode": "cut",
+      "off": 0.002
+    },
+    "gain_db": -12.0,
+    "dur": 3.911,
+    "scene": "a3-scenarios",
+    "kind": "pull",
+    "t": 116.415,
+    "index": 0,
+    "seed": 10731
+  },
+  {
+    "name": "node-pass-01",
+    "snap": {
+      "mode": "cut",
+      "off": 0.769
+    },
+    "gain_db": -20.0,
+    "scene": "a3-scenarios",
+    "kind": "node-pass",
+    "t": 117.182,
+    "index": 0,
+    "seed": 10768
+  },
+  {
+    "name": "node-pass-02",
+    "snap": {
+      "mode": "cut",
+      "off": 1.004
+    },
+    "gain_db": -20.0,
+    "scene": "a3-scenarios",
+    "kind": "node-pass",
+    "t": 117.417,
+    "index": 1,
+    "seed": 10805
+  },
+  {
+    "name": "node-pass-03",
+    "snap": {
+      "mode": "cut",
+      "off": 1.346
+    },
+    "gain_db": -20.0,
+    "scene": "a3-scenarios",
+    "kind": "node-pass",
+    "t": 117.759,
+    "index": 2,
+    "seed": 10842
+  },
+  {
+    "name": "node-pass-04",
+    "snap": {
+      "mode": "cut",
+      "off": 1.573
+    },
+    "gain_db": -20.0,
+    "scene": "a3-scenarios",
+    "kind": "node-pass",
+    "t": 117.986,
+    "index": 3,
+    "seed": 10879
+  },
+  {
+    "name": "node-pass-05",
+    "snap": {
+      "mode": "cut",
+      "off": 1.859
+    },
+    "gain_db": -20.0,
+    "scene": "a3-scenarios",
+    "kind": "node-pass",
+    "t": 118.272,
+    "index": 4,
+    "seed": 10916
+  },
+  {
+    "name": "decisions-01",
+    "snap": {
+      "mode": "next"
+    },
+    "gain_db": -9.0,
+    "scene": "a3-scenarios",
+    "kind": "decision-accent",
+    "t": 118.696,
+    "index": 0,
+    "seed": 10953
+  },
+  {
+    "name": "decisions-02",
+    "snap": {
+      "mode": "next"
+    },
+    "gain_db": -9.0,
+    "scene": "a3-scenarios",
+    "kind": "decision-accent",
+    "t": 119.022,
+    "index": 1,
+    "seed": 10990
+  },
+  {
+    "name": "decisions-03",
+    "snap": {
+      "mode": "next"
+    },
+    "gain_db": -9.0,
+    "scene": "a3-scenarios",
+    "kind": "decision-accent",
+    "t": 119.348,
+    "index": 2,
+    "seed": 11027
+  },
+  {
+    "name": "decisions-04",
+    "snap": {
+      "mode": "next"
+    },
+    "gain_db": -9.0,
+    "scene": "a3-scenarios",
+    "kind": "decision-accent",
+    "t": 119.674,
+    "index": 3,
+    "seed": 11064
+  },
+  {
+    "name": "envelope-pulse",
+    "snap": "cut",
+    "gain_db": -12.0,
+    "dur": 0.978,
+    "scene": "a3-scenarios",
+    "kind": "connect-line",
+    "t": 121.304,
+    "index": 0,
+    "seed": 11101
+  },
+  {
+    "name": "recede",
+    "snap": {
+      "mode": "next",
+      "sub": 2
+    },
+    "gain_db": -14.0,
+    "dur": 0.978,
+    "scene": "a3-close",
+    "kind": "pull",
+    "t": 123.261,
+    "index": 0,
+    "seed": 11138
+  },
+  {
+    "name": "gap-rule",
+    "snap": {
+      "mode": "next",
+      "sub": 2,
+      "off": 0.3261
+    },
+    "gain_db": -12.0,
+    "dur": 0.72,
+    "scene": "a3-close",
+    "kind": "ruler-contact",
+    "t": 123.587,
+    "index": 0,
+    "seed": 11175
+  },
+  {
+    "name": "gap-rule",
+    "snap": {
+      "mode": "next",
+      "sub": 2,
+      "off": 0.3261
+    },
+    "gain_db": -12.0,
+    "dur": 0.72,
+    "scene": "a3-close",
+    "kind": "technical-pen",
+    "t": 123.627,
+    "index": 0,
+    "seed": 11176
+  },
+  {
+    "name": "tick-changed",
+    "snap": {
+      "mode": "next",
+      "sub": 2,
+      "off": 0.6522
+    },
+    "gain_db": -12.0,
+    "scene": "a3-close",
+    "kind": "pencil-tick",
+    "t": 123.913,
+    "index": 0,
+    "seed": 11212
+  },
+  {
+    "name": "tick-found",
+    "snap": {
+      "mode": "next",
+      "sub": 2,
+      "off": 0.9783
+    },
+    "gain_db": -14.0,
+    "scene": "a3-close",
+    "kind": "pencil-tick",
+    "t": 124.239,
+    "index": 0,
+    "seed": 11249
+  },
+  {
+    "name": "gap-bracket",
+    "snap": {
+      "mode": "next",
+      "sub": 2,
+      "off": 1.3043
+    },
+    "gain_db": -14.0,
+    "dur": 0.45,
+    "scene": "a3-close",
+    "kind": "pencil-stroke",
+    "t": 124.565,
+    "index": 0,
+    "seed": 11286
+  },
+  {
+    "name": "gap-closes",
+    "snap": {
+      "mode": "next",
+      "sub": 2
+    },
+    "gain_db": -8.0,
+    "scene": "a3-close",
+    "kind": "decision-accent",
+    "t": 126.196,
+    "index": 0,
+    "seed": 11323
+  },
+  {
+    "name": "latch",
+    "gain_db": -6.0,
+    "dur": 0.12,
+    "scene": "a3-close",
+    "kind": "latch",
+    "t": 128.412,
+    "index": 0,
+    "seed": 11397
+  }
+]

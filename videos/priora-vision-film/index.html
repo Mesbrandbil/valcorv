@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en-GB">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1920, height=1080" />
+    <title>Priora vision film</title>
+    <!-- Shared runtime: local vendored GSAP 3.15 and plugins, the film library, generated cues. -->
+    <script src="assets/vendor/gsap/gsap.min.js"></script>
+    <script src="assets/vendor/gsap/DrawSVGPlugin.min.js"></script>
+    <script src="assets/vendor/gsap/CustomEase.min.js"></script>
+    <script src="assets/vendor/gsap/MorphSVGPlugin.min.js"></script>
+    <script src="assets/vendor/gsap/MotionPathPlugin.min.js"></script>
+    <script src="assets/js/film-lib.js"></script>
+    <script src="assets/js/cues.js"></script>
+    <script src="assets/js/film-assets.js"></script>
+    <!-- Shared kits: the site (graphite twin + precise), the interface, the Act I sketch world. -->
+    <script src="assets/js/site-data.js"></script>
+    <script src="assets/js/site-kit.js"></script>
+    <script src="assets/js/ui-kit.js"></script>
+    <script src="assets/js/sketch-kit.js"></script>
+    <link rel="stylesheet" href="assets/css/film.css" />
+    <link rel="stylesheet" href="assets/css/film-color.css" />
+    <style>
+      #root {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        background: var(--paper);
+      }
+      /* Untimed full-bleed paper: warm ground, static grain, very faint vignette. */
+      #film-paper {
+        position: absolute;
+        inset: 0;
+        z-index: 0;
+        background-color: var(--paper-ground); /* grain darkens it to an average of --paper */
+        pointer-events: none;
+      }
+      #film-paper-grain {
+        position: absolute;
+        inset: 0;
+        background-image: url("assets/textures/paper-grain.png");
+        background-size: 512px 512px;
+        background-repeat: repeat;
+      }
+      #film-paper-vignette {
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(ellipse 75% 70% at 50% 48%, rgba(59, 58, 51, 0) 58%, rgba(59, 58, 51, 0.035) 82%, rgba(59, 58, 51, 0.07) 100%);
+      }
+      /* Surface above every scene (cut 2): one printed paper tooth and a restrained light falloff,
+         so graphite, ink and interface share the same sheet. Uniform, so paper-filled shapes still
+         match the ground. Untimed and never read by the layout checks. */
+      #film-surface {
+        position: absolute;
+        inset: 0;
+        z-index: 900;
+        pointer-events: none;
+      }
+      /* Rendered at 50 % layer opacity with double-strength alpha in the image: the same look, and
+         the layout audit treats a sub-60 % overlay as texture rather than as an occluder. */
+      #film-surface-tooth {
+        position: absolute;
+        inset: 0;
+        opacity: 0.5;
+        background-image: url("assets/textures/paper-tooth.png");
+        background-size: 1024px 1024px;
+        background-repeat: repeat;
+      }
+      #film-surface-light {
+        position: absolute;
+        inset: 0;
+        opacity: 0.5;
+        background: radial-gradient(ellipse 90% 85% at 46% 42%, rgba(59, 58, 51, 0) 55%, rgba(59, 58, 51, 0.06) 80%, rgba(59, 58, 51, 0.12) 100%);
+      }
+    </style>
+  </head>
+  <body>
+    <!-- build-cues:root:begin -->
+    <div id="root" data-composition-id="film" data-start="0" data-duration="136.966666" data-width="1920" data-height="1080" data-fps="30">
+    <!-- build-cues:root:end -->
+      <div id="film-paper" aria-hidden="true" data-layout-ignore>
+        <div id="film-paper-grain"></div>
+        <div id="film-paper-vignette"></div>
+      </div>
+      <!-- build-cues:slots:begin -->
+      <div id="el-a1-world" class="clip fl-slot" data-composition-id="a1-world" data-composition-src="compositions/a1-world.html" data-start="0" data-duration="59.133333" data-track-index="1" data-width="1920" data-height="1080" style="z-index: 10"></div>
+      <div id="el-a2-resolve" class="clip fl-slot" data-composition-id="a2-resolve" data-composition-src="compositions/a2-resolve.html" data-start="58.733333" data-duration="22.466666" data-track-index="1" data-width="1920" data-height="1080" style="z-index: 11"></div>
+      <div id="el-a3-change" class="clip fl-slot" data-composition-id="a3-change" data-composition-src="compositions/a3-change.html" data-start="81.2" data-duration="20.6" data-track-index="1" data-width="1920" data-height="1080" style="z-index: 12"></div>
+      <div id="el-a3-scenarios" class="clip fl-slot" data-composition-id="a3-scenarios" data-composition-src="compositions/a3-scenarios.html" data-start="101.4" data-duration="21.633333" data-track-index="1" data-width="1920" data-height="1080" style="z-index: 13"></div>
+      <div id="el-a3-close" class="clip fl-slot" data-composition-id="a3-close" data-composition-src="compositions/a3-close.html" data-start="122.633333" data-duration="14.333333" data-track-index="1" data-width="1920" data-height="1080" style="z-index: 14"></div>
+      <div id="el-a1-paper" class="clip fl-slot" data-composition-id="a1-paper" data-composition-src="compositions/a1-paper.html" data-start="14.966666" data-duration="6.566666" data-track-index="2" data-width="1920" data-height="1080" style="z-index: 101"></div>
+      <div id="el-a1-after" class="clip fl-slot" data-composition-id="a1-after" data-composition-src="compositions/a1-after.html" data-start="39.833333" data-duration="18.9" data-track-index="3" data-width="1920" data-height="1080" style="z-index: 102"></div>
+      <div id="el-a1-inserts" class="clip fl-slot" data-composition-id="a1-inserts" data-composition-src="compositions/a1-inserts.html" data-start="7.5" data-duration="51.233333" data-track-index="4" data-width="1920" data-height="1080" style="z-index: 104"></div>
+      <div id="el-chrome" class="clip fl-slot" data-composition-id="chrome" data-composition-src="compositions/chrome.html" data-start="0" data-duration="123.033333" data-track-index="5" data-width="1920" data-height="1080" style="z-index: 200"></div>
+      <!-- build-cues:slots:end -->
+      <div id="film-surface" aria-hidden="true" data-layout-ignore data-layout-allow-occlusion>
+        <div id="film-surface-tooth" data-layout-ignore data-layout-allow-occlusion></div>
+        <div id="film-surface-light" data-layout-ignore data-layout-allow-occlusion></div>
+      </div>
+      <!-- build-cues:audio:begin -->
+      <audio id="stem-voice" src="assets/audio/master-voice.wav" data-start="0" data-duration="136.966" data-track-index="20" data-volume="1"></audio>
+      <audio id="stem-music" src="assets/audio/music.wav" data-start="0" data-duration="136.966" data-track-index="21" data-volume="1"></audio>
+      <audio id="stem-sfx" src="assets/audio/sfx.wav" data-start="0" data-duration="136.966" data-track-index="22" data-volume="1"></audio>
+      <!-- build-cues:audio:end -->
+    </div>
+    <script>
+      window.__timelines["film"] = gsap.timeline({ paused: true });
+    </script>
+  </body>
+</html>

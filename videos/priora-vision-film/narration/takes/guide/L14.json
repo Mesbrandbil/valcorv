@@ -1,0 +1,176 @@
+{
+  "schema": "priora-narration-take/1",
+  "id": "L14",
+  "engine": "guide",
+  "guide": true,
+  "label": "GUIDE VOICE (local Kokoro). Not the final ElevenLabs performance.",
+  "speaker": "narrator",
+  "text": "Priora connects the activity to the conditions that matter, verifies the certificate and safeguards, and keeps the record.",
+  "spoken_text": "Priora connects the activity to the conditions that matter, verifies the certificate and safeguards, and keeps the record.",
+  "sample_rate": 48000,
+  "duration": 6.54,
+  "speech_start": 0.13,
+  "speech_end": 6.31,
+  "words": [
+    {
+      "w": "Priora",
+      "start": 0.13,
+      "end": 0.51
+    },
+    {
+      "w": "connects",
+      "start": 0.51,
+      "end": 0.92
+    },
+    {
+      "w": "the",
+      "start": 0.92,
+      "end": 1.01
+    },
+    {
+      "w": "activity",
+      "start": 1.01,
+      "end": 1.53
+    },
+    {
+      "w": "to",
+      "start": 1.53,
+      "end": 1.62
+    },
+    {
+      "w": "the",
+      "start": 1.62,
+      "end": 1.7
+    },
+    {
+      "w": "conditions",
+      "start": 1.7,
+      "end": 2.22
+    },
+    {
+      "w": "that",
+      "start": 2.22,
+      "end": 2.32
+    },
+    {
+      "w": "matter",
+      "start": 2.32,
+      "end": 2.71
+    },
+    {
+      "w": "verifies",
+      "start": 3.11,
+      "end": 3.64
+    },
+    {
+      "w": "the",
+      "start": 3.64,
+      "end": 3.72
+    },
+    {
+      "w": "certificate",
+      "start": 3.72,
+      "end": 4.31
+    },
+    {
+      "w": "and",
+      "start": 4.31,
+      "end": 4.44
+    },
+    {
+      "w": "safeguards",
+      "start": 4.44,
+      "end": 5.09
+    },
+    {
+      "w": "and",
+      "start": 5.39,
+      "end": 5.5
+    },
+    {
+      "w": "keeps",
+      "start": 5.5,
+      "end": 5.77
+    },
+    {
+      "w": "the",
+      "start": 5.77,
+      "end": 5.87
+    },
+    {
+      "w": "record",
+      "start": 5.87,
+      "end": 6.31
+    }
+  ],
+  "sentences": [
+    {
+      "text": "Priora connects the activity to the conditions that matter, verifies the certificate and safeguards, and keeps the record.",
+      "start": 0.13,
+      "end": 6.31,
+      "word_range": [
+        0,
+        18
+      ]
+    }
+  ],
+  "created": "2026-09-29T19:29:47+00:00",
+  "provider": "kokoro-onnx 0.6.1, kokoro-v1.0.onnx (local guide)",
+  "voice": {
+    "id": "bf_isabella",
+    "lang": "en-gb"
+  },
+  "speed": 1.1649,
+  "inner_pauses": [],
+  "segments_synth": [
+    {
+      "text": "Priora connects the activity to the conditions that matter, verifies the certificate and safeguards, and keeps the record.",
+      "start": 0.12,
+      "end": 6.34,
+      "alignment_quality": {
+        "energy_pauses": 2,
+        "pause_agreement": 1.0,
+        "pauses_inside_words": [],
+        "onset_error_ms": 0.0,
+        "offset_error_ms": 0.0,
+        "pause_onset_error_ms_mean": 0.0,
+        "pause_onset_error_ms_max": 0.0
+      },
+      "fallback": false
+    }
+  ],
+  "alignment": {
+    "method": "pocketsphinx-5-forced-alignment+energy-refine",
+    "fallback": false,
+    "quality": {
+      "energy_pauses": 2,
+      "pause_agreement": 1.0,
+      "pauses_inside_words": [],
+      "onset_error_ms": 0.0,
+      "offset_error_ms": 0.0,
+      "pause_onset_error_ms_mean": 0.0,
+      "pause_onset_error_ms_max": 0.0
+    },
+    "quality_ok": true
+  },
+  "pronunciation_checks": [
+    {
+      "word": "Priora",
+      "token_index": 0,
+      "chosen_variant": "P R IY AO R AH",
+      "intended": true,
+      "phones": "P R IY AO R AH",
+      "phone_durations": {
+        "P#0": 0.03,
+        "R#1": 0.05,
+        "IY#2": 0.08,
+        "AO#3": 0.15,
+        "R#4": 0.04,
+        "AH#5": 0.06
+      },
+      "longest_vowel": "AO",
+      "stress_on_middle_syllable": true,
+      "segment": 0
+    }
+  ]
+}

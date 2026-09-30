@@ -1,0 +1,133 @@
+{
+  "schema": "priora-narration-take/1",
+  "id": "L15",
+  "engine": "guide",
+  "guide": true,
+  "label": "GUIDE VOICE (local Kokoro). Not the final ElevenLabs performance.",
+  "speaker": "narrator",
+  "text": "Prevention before the work. Proof as it happens.",
+  "spoken_text": "Prevention before the work. Proof as it happens.",
+  "sample_rate": 48000,
+  "duration": 3.81,
+  "speech_start": 0.13,
+  "speech_end": 3.58,
+  "words": [
+    {
+      "w": "Prevention",
+      "start": 0.13,
+      "end": 0.76
+    },
+    {
+      "w": "before",
+      "start": 0.76,
+      "end": 1.09
+    },
+    {
+      "w": "the",
+      "start": 1.09,
+      "end": 1.18
+    },
+    {
+      "w": "work",
+      "start": 1.18,
+      "end": 1.68
+    },
+    {
+      "w": "Proof",
+      "start": 2.28,
+      "end": 2.62
+    },
+    {
+      "w": "as",
+      "start": 2.62,
+      "end": 2.83
+    },
+    {
+      "w": "it",
+      "start": 2.83,
+      "end": 2.95
+    },
+    {
+      "w": "happens",
+      "start": 2.95,
+      "end": 3.58
+    }
+  ],
+  "sentences": [
+    {
+      "text": "Prevention before the work.",
+      "start": 0.13,
+      "end": 1.68,
+      "word_range": [
+        0,
+        4
+      ]
+    },
+    {
+      "text": "Proof as it happens.",
+      "start": 2.28,
+      "end": 3.58,
+      "word_range": [
+        4,
+        8
+      ]
+    }
+  ],
+  "created": "2026-09-29T21:41:34+00:00",
+  "provider": "kokoro-onnx 0.6.1, kokoro-v1.0.onnx (local guide)",
+  "voice": {
+    "id": "bf_isabella",
+    "lang": "en-gb"
+  },
+  "speed": 1.0,
+  "inner_pauses": [
+    0.6
+  ],
+  "segments_synth": [
+    {
+      "text": "Prevention before the work.",
+      "start": 0.12,
+      "end": 1.71,
+      "alignment_quality": {
+        "energy_pauses": 0,
+        "pause_agreement": 1.0,
+        "pauses_inside_words": [],
+        "onset_error_ms": 0.0,
+        "offset_error_ms": 0.0,
+        "pause_onset_error_ms_mean": null,
+        "pause_onset_error_ms_max": null
+      },
+      "fallback": false
+    },
+    {
+      "text": "Proof as it happens.",
+      "start": 2.27,
+      "end": 3.61,
+      "alignment_quality": {
+        "energy_pauses": 0,
+        "pause_agreement": 1.0,
+        "pauses_inside_words": [],
+        "onset_error_ms": 0.0,
+        "offset_error_ms": 0.0,
+        "pause_onset_error_ms_mean": null,
+        "pause_onset_error_ms_max": null
+      },
+      "fallback": false
+    }
+  ],
+  "alignment": {
+    "method": "pocketsphinx-5-forced-alignment+energy-refine",
+    "fallback": false,
+    "quality": {
+      "energy_pauses": 1,
+      "pause_agreement": 1.0,
+      "pauses_inside_words": [],
+      "onset_error_ms": 0.0,
+      "offset_error_ms": 0.0,
+      "pause_onset_error_ms_mean": 0.0,
+      "pause_onset_error_ms_max": 0.0
+    },
+    "quality_ok": true
+  },
+  "pronunciation_checks": []
+}

@@ -1,0 +1,112 @@
+{
+  "schema": "priora-narration-take/1",
+  "id": "L19",
+  "engine": "guide",
+  "guide": true,
+  "label": "GUIDE VOICE (local Kokoro). Not the final ElevenLabs performance.",
+  "speaker": "narrator",
+  "text": "For everyone who carries the risk, the gap closes.",
+  "spoken_text": "For everyone who carries the risk, the gap closes.",
+  "sample_rate": 48000,
+  "duration": 3.13,
+  "speech_start": 0.14,
+  "speech_end": 2.9,
+  "words": [
+    {
+      "w": "For",
+      "start": 0.14,
+      "end": 0.23
+    },
+    {
+      "w": "everyone",
+      "start": 0.23,
+      "end": 0.77
+    },
+    {
+      "w": "who",
+      "start": 0.77,
+      "end": 0.89
+    },
+    {
+      "w": "carries",
+      "start": 0.89,
+      "end": 1.31
+    },
+    {
+      "w": "the",
+      "start": 1.31,
+      "end": 1.42
+    },
+    {
+      "w": "risk",
+      "start": 1.42,
+      "end": 1.9
+    },
+    {
+      "w": "the",
+      "start": 1.9,
+      "end": 2.0
+    },
+    {
+      "w": "gap",
+      "start": 2.0,
+      "end": 2.3
+    },
+    {
+      "w": "closes",
+      "start": 2.3,
+      "end": 2.9
+    }
+  ],
+  "sentences": [
+    {
+      "text": "For everyone who carries the risk, the gap closes.",
+      "start": 0.14,
+      "end": 2.9,
+      "word_range": [
+        0,
+        9
+      ]
+    }
+  ],
+  "created": "2026-09-30T01:11:59+00:00",
+  "provider": "kokoro-onnx 0.6.1, kokoro-v1.0.onnx (local guide)",
+  "voice": {
+    "id": "bf_isabella",
+    "lang": "en-gb"
+  },
+  "speed": 1.0,
+  "inner_pauses": [],
+  "segments_synth": [
+    {
+      "text": "For everyone who carries the risk, the gap closes.",
+      "start": 0.12,
+      "end": 2.93,
+      "alignment_quality": {
+        "energy_pauses": 0,
+        "pause_agreement": 1.0,
+        "pauses_inside_words": [],
+        "onset_error_ms": 10.0,
+        "offset_error_ms": 0.0,
+        "pause_onset_error_ms_mean": null,
+        "pause_onset_error_ms_max": null
+      },
+      "fallback": false
+    }
+  ],
+  "alignment": {
+    "method": "pocketsphinx-5-forced-alignment+energy-refine",
+    "fallback": false,
+    "quality": {
+      "energy_pauses": 0,
+      "pause_agreement": 1.0,
+      "pauses_inside_words": [],
+      "onset_error_ms": 10.0,
+      "offset_error_ms": 0.0,
+      "pause_onset_error_ms_mean": null,
+      "pause_onset_error_ms_max": null
+    },
+    "quality_ok": true
+  },
+  "pronunciation_checks": []
+}
