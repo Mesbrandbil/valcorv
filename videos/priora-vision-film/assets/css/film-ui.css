@@ -138,10 +138,10 @@ div.fui-swap > .fui-sw { white-space: normal; }
 .fui-card .hc-title { font-size: calc(24 * var(--u)); line-height: calc(24.2 * var(--u)); letter-spacing: -.015em; }
 /* states as coloured pills (a painted background that does not move the layout) */
 .fui-card .conds li em .fui-sw-verified, .fui-card .conds li em .fui-sw-unavailable { border-radius: calc(3 * var(--u)); }
-.fui-card .conds li em .fui-sw-verified { color: var(--pui-ok); background: var(--pui-ok-soft); box-shadow: 0 0 0 calc(4 * var(--u)) var(--pui-ok-soft); }
+.fui-card .conds li em .fui-sw-verified { color: color-mix(in srgb, var(--pui-ok) 70%, var(--c-ink)); background: var(--pui-ok-soft); box-shadow: 0 0 0 calc(4 * var(--u)) var(--pui-ok-soft); }
 .fui-card .conds li em .fui-sw-unavailable { color: var(--pui-alert); background: var(--pui-alert-soft); box-shadow: 0 0 0 calc(4 * var(--u)) var(--pui-alert-soft); }
 .fui-card .conds li em .fui-sw { justify-self: end; }
-.fui-card .hc-foot .fui-sw-inside { color: var(--pui-ok); }
+.fui-card .hc-foot .fui-sw-inside { color: color-mix(in srgb, var(--pui-ok) 70%, var(--c-ink)); } /* a shade deeper: 5:1 on the pill */
 .fui-card .hc-foot .fui-sw-h4, .fui-card .hc-foot .fui-sw-outside { color: var(--pui-alert); }
 
 /* ---------- readout ---------- */

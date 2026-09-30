@@ -8,13 +8,15 @@
   <body>
     <template id="a1-inserts-template">
       <link rel="stylesheet" href="assets/css/film.css" />
+      <link rel="stylesheet" href="assets/css/film-color.css" />
       <link rel="stylesheet" href="assets/css/film-sketch.css" />
       <style>
         /*
           a1-inserts: three full-frame close-up inserts over a1-world (z 104, under the chrome).
           Each insert is an opaque paper panel (the page ground, the index grain tile at the same
           phase and the index vignette, so the paper reads exactly as it does elsewhere; the index's
-          top paper tooth lies over it like every scene) carrying a graphite illustration drawn here.
+          top paper tooth lies over it like every scene) carrying a graphite and colour illustration
+          drawn here.
           Between the windows the scene is fully transparent.
 
           Shared windows (other builders cut on exactly these):
@@ -24,8 +26,28 @@
           Everything is built on one story timeline (story time = scene-local time) that the
           registered timeline plays forward to rewindStart and then scrubs back to the story time of
           cue 'landing' with FL.rewindEase(), like a1-after. The rewind's tail passes the SZ3 window
-          backwards (the tag lifts, the needle rises, the handwheel turns back); the landing itself
-          (before clk.c('then')) shows no insert.
+          backwards (the tag lifts, the needle rises, the handwheel turns back, the water refills the
+          riser); the landing itself (before clk.c('then')) shows no insert.
+
+          Cut 3 colour (docs/cut3-direction.md section 1; tokens only): graphite line on top, pale
+          watercolour washes and colour pencil under it.
+            S3b LOTO: the valve body steel, the lagged steam run sand; the LOTO tag stays paper with
+              ink lettering (a routine, accepted isolation). No strong colour.
+            S7b weld: Roof 03's slate membrane, the terracotta utilities stack beyond; the welder in
+              leather with a white shell; the arc a small --c-hot point in a --c-hot-soft glow (flat
+              discs, never a flame); the fire watch in hi-vis with a white hard hat, a terracotta
+              extinguisher. Strong: hot, hi-vis, leather.
+            S8a SZ3: fire protection is water. The supply riser, the riser up to the zone and the
+              handwheel are water (water-soft wash, water colour pencil); the valve, flanges and gauge
+              steel. With the needle (from 'goes'), the water drains out of the riser to the zone: the
+              wash sinks from the top of the frame to the valve's flange and the colour pencil above
+              the level is offline grey. The tag hangs in alert (alert-soft wash, alert inner outline).
+              Nobody in the insert reacts. Strong: water, alert.
+          Handoff: the cuts are hard and unchanged. The last SZ3 frame (cut to a1-world S8b at
+          clk.c('L07.end', 0.25)) shows the upper riser drained to paper and offline grey, the supply
+          riser still water, the tag in alert; a1-world then drains the zone's heads one by one.
+          The rewind: each insert svg carries --sk-bleed on the registered timeline, 1 to 0 over
+          [rewindStart, +0.45 of the rewind] and back to 1 over its last 0.35, as a1-world's site.
         */
         #root {
           position: absolute;
@@ -50,7 +72,7 @@
         .a1-inserts-vig {
           position: absolute;
           inset: 0;
-          background: radial-gradient(ellipse 75% 70% at 50% 48%, rgba(59, 58, 51, 0) 58%, rgba(59, 58, 51, 0.035) 82%, rgba(59, 58, 51, 0.07) 100%);
+          background: radial-gradient(ellipse 75% 70% at 50% 48%, color-mix(in srgb, var(--c-graphite) 0%, transparent) 58%, color-mix(in srgb, var(--c-graphite) 3.5%, transparent) 82%, color-mix(in srgb, var(--c-graphite) 7%, transparent) 100%);
         }
         svg.a1-inserts-svg {
           position: absolute;
@@ -59,27 +81,54 @@
           width: 1920px;
           height: 1080px;
           overflow: hidden;
+          /* the graphite line and its lighter pass (a group may lighten both, as the fire watch does) */
+          --a1i-g: var(--c-graphite);
+          --a1i-gl: color-mix(in srgb, var(--c-graphite) 55%, var(--c-paper));
         }
-        /* graphite: filled pressure ribbons for contours, fine strokes for detail */
+        /*
+          Colour (cut 3): graphite pressure ribbons stay the line on top; colour is pale watercolour
+          under them (SketchKit's .skt-wash .skt-w-<tone>, laid by util.wash) and colour pencil in
+          the hatching and the colour-pencil passes (.a1-inserts-cp), which follow the tone class of
+          their group (skt-c-<tone> sets --skt-tc). The inserts follow the rewind's bleed (--sk-bleed
+          on each svg, as a1-world's site).
+        */
         .a1-inserts-svg .a1-inserts-ink {
-          fill: #3b3a36;
+          fill: var(--a1i-g);
           stroke: none;
         }
         .a1-inserts-svg .a1-inserts-inkl {
-          fill: #8f8c86;
+          fill: var(--a1i-gl);
+          stroke: none;
+        }
+        /* a pressure ribbon in its group's colour pencil (the SZ3 tag's inner alert outline) */
+        .a1-inserts-svg .a1-inserts-tl {
+          fill: var(--skt-tc, var(--a1i-g));
           stroke: none;
         }
         .a1-inserts-svg .a1-inserts-ln,
         .a1-inserts-svg .a1-inserts-ov,
-        .a1-inserts-svg .a1-inserts-cn,
-        .a1-inserts-svg .a1-inserts-cl,
         .a1-inserts-svg .a1-inserts-ht,
         .a1-inserts-svg .a1-inserts-htl,
-        .a1-inserts-svg .a1-inserts-soft {
+        .a1-inserts-svg .a1-inserts-cp {
           fill: none;
-          stroke: #3b3a36;
+          stroke: var(--a1i-g);
           stroke-linecap: round;
           stroke-linejoin: round;
+        }
+        .a1-inserts-svg .a1-inserts-cn,
+        .a1-inserts-svg .a1-inserts-cl,
+        .a1-inserts-svg .a1-inserts-soft {
+          fill: none;
+          stroke: var(--a1i-gl);
+          stroke-linecap: round;
+          stroke-linejoin: round;
+        }
+        /* colour pencil: overdraw, hatching and the colour line take the group's tone */
+        .a1-inserts-svg .a1-inserts-ov,
+        .a1-inserts-svg .a1-inserts-ht,
+        .a1-inserts-svg .a1-inserts-htl,
+        .a1-inserts-svg .a1-inserts-cp {
+          stroke: var(--skt-tc, var(--a1i-g));
         }
         .a1-inserts-svg .a1-inserts-ln {
           stroke-width: 1.25px;
@@ -88,13 +137,15 @@
           stroke-width: 1px;
           stroke-opacity: 0.3;
         }
+        .a1-inserts-svg .a1-inserts-cp {
+          stroke-width: 1.7px;
+          stroke-opacity: 0.82;
+        }
         .a1-inserts-svg .a1-inserts-cn {
-          stroke: #8f8c86;
           stroke-width: 0.9px;
           stroke-opacity: 0.62;
         }
         .a1-inserts-svg .a1-inserts-cl {
-          stroke: #8f8c86;
           stroke-width: 0.9px;
           stroke-opacity: 0.7;
           stroke-dasharray: 26 6 3 6;
@@ -103,25 +154,30 @@
           stroke-width: 0.85px;
           stroke-opacity: 0.58;
         }
+        /* colour-pencil hatching is pressed a little harder than the graphite */
+        .a1-inserts-svg [class*="skt-c-"] .a1-inserts-ht {
+          stroke-width: 1.05px;
+          stroke-opacity: 0.72;
+        }
         .a1-inserts-svg .a1-inserts-htl {
           stroke-width: 0.75px;
           stroke-opacity: 0.3;
         }
         .a1-inserts-svg .a1-inserts-soft {
-          stroke: #8f8c86;
           stroke-width: 9px;
           stroke-opacity: 0.07;
         }
         .a1-inserts-svg .a1-inserts-oc {
-          fill: #f5f3ee;
+          fill: var(--c-paper);
           stroke: none;
         }
+        /* the palette's white (--c-helmet): the dial, the zone plate, the SZ3 tag, the welder's shell */
         .a1-inserts-svg .a1-inserts-hi {
-          fill: #fdfcf9;
+          fill: var(--c-helmet);
           stroke: none;
         }
         .a1-inserts-svg .a1-inserts-dot {
-          fill: #3b3a36;
+          fill: var(--a1i-g);
           stroke: none;
         }
         .a1-inserts-svg .a1-inserts-nss {
@@ -449,6 +505,19 @@
           function fill(parent, pts, cls) {
             return mk("path", { d: dPts(pts, true), class: CLS(cls || "oc") }, parent);
           }
+          // a pale watercolour wash (SketchKit util.wash: inset, misregistered, jittered) under the line.
+          // tone: a SketchKit wash tone; k: its strength (--skt-wk).
+          var curP = null; // the paper context of the insert being built
+          function wash(parent, pts, tone, k, o) {
+            o = o || {};
+            return U.wash(curP, parent, pts, { tone: tone, strength: k != null ? k : 0.85, inset: o.inset != null ? o.inset : 2.4, jit: o.jit != null ? o.jit : 1.8, seed: (o.seed || "w") + f2(pts[0][0]) + "," + f2(pts[0][1]) });
+          }
+          // a group in a colour pencil tone (hatching, overdraw and colour lines inside take it)
+          function tg(parent, tone, attrs) {
+            var a = attrs || {};
+            a["class"] = (a["class"] ? a["class"] + " " : "") + "skt-c-" + tone;
+            return g(parent, a);
+          }
           // straight hatching inside a polygon: angle (deg), spacing (px), ends inset by a random
           // amount the way a hand stops short of an edge
           function hatchPoly(parent, poly, o) {
@@ -543,8 +612,9 @@
           // shadow side, the visible cap as a finer edge, hatching, optional centreline
           function drawCyl(parent, c, Lt, o) {
             o = o || {};
-            var gp = g(parent);
+            var gp = o.tone ? tg(parent, o.tone) : g(parent);
             if (o.fill !== false) fill(gp, c.outline);
+            if (o.wash) wash(gp, c.outline, o.wash, o.washK, { seed: "cy" + (o.seed || "") });
             var w = o.w || 2.2,
               seed = o.seed || "";
             // which silhouette is on the shadow side: the one whose surface normal faces away from the light
@@ -603,7 +673,7 @@
               if (o.which === "back" && facing >= 0) continue;
               var base = add(o.centre, mul(rad, o.rb));
               var c = cyl(cam, base, add(base, mul(ax, o.len)), o.rbolt, 36);
-              drawCyl(gp, c, Lt, { w: 1.5, seed: "b" + o.seed + k, sp: 3.2, thr: 0.5 });
+              drawCyl(gp, c, Lt, { w: 1.5, seed: "b" + o.seed + k, sp: 3.2, thr: 0.5, wash: o.wash === undefined ? "steel" : o.wash, washK: o.washK != null ? o.washK : 0.9 });
               // the stud end past the nut
               if (o.stud) {
                 var c2 = cyl(cam, add(base, mul(ax, o.len)), add(base, mul(ax, o.len + o.stud)), o.rbolt * 0.55, 24);
@@ -618,7 +688,7 @@
             var n = o.axis,
               bs = o.basis || basis(n),
               Cc = o.centre;
-            var gW = g(parent);
+            var gW = o.tone ? tg(parent, o.tone) : g(parent);
             var e = ell(cam, Cc, n, 1, bs);
             // the rotating spokes, in wheel-plane coordinates (units: world units)
             var M = [e.A[0], e.A[1], e.B[0], e.B[1], e.c[0], e.c[1]];
@@ -642,6 +712,7 @@
                 [dx * hubR * 0.8 - px * w0, dy * hubR * 0.8 - py * w0],
               ];
               mk("path", { d: dPts(poly, true), class: CLS("oc") }, gr);
+              if (o.wash) wash(gr, poly, o.wash, o.washK, { inset: 0.9, jit: 0.7, seed: "spk" + o.seed + k });
               mk("path", { d: dPts([poly[0], poly[1]], false), class: CLS("ln") + " " + CLS("nss"), style: "stroke-width:1.7px" }, gr);
               mk("path", { d: dPts([poly[3], poly[2]], false), class: CLS("ln") + " " + CLS("nss"), style: "stroke-width:1.2px" }, gr);
               // a shading line down the spoke on its shadow side
@@ -658,6 +729,10 @@
             var ring = outer.outline;
             var hole = ellArc(eInTop, 0, TAU, 120);
             mk("path", { d: dPts(ring, true) + dPts(hole.slice().reverse(), true), class: CLS("oc"), "fill-rule": "evenodd" }, gW);
+            if (o.wash) {
+              var rw = mk("path", { d: dPts(ring, true) + dPts(hole.slice().reverse(), true), class: "skt-wash skt-w-" + o.wash, "fill-rule": "evenodd" }, gW);
+              rw.style.setProperty("--skt-wk", o.washK != null ? o.washK : 0.85);
+            }
             drawCyl(gW, outer, Lt, { w: o.w || 2.2, seed: "rim" + o.seed, sp: 3.4, thr: 0.45, fill: false });
             contour(gW, hole, { w: (o.w || 2.2) * 0.8, seed: "rimin" + o.seed, closed: true });
             // shading on the rim's upper face near the shadow side: a few curved strokes
@@ -666,7 +741,7 @@
             line(gW, arcSh, "htl");
             // hub on the axis
             var hub = cyl(cam, add(Cc, mul(n, -o.hubLen)), add(Cc, mul(n, o.hubLen)), hubR, 48);
-            drawCyl(gW, hub, Lt, { w: 1.8, seed: "hub" + o.seed, sp: 3.4 });
+            drawCyl(gW, hub, Lt, { w: 1.8, seed: "hub" + o.seed, sp: 3.4, wash: o.wash, washK: o.washK });
             if (o.cons) consEll(gW, ell(cam, Cc, n, o.r + o.tube, bs), 1.035, 0.4);
             return { g: gW, rot: gr, det: det, e: e, outer: outer, rimAt: function (phi) {
               var P = add(Cc, add(mul(bs[0], Math.cos(phi) * (o.r + o.tube * 0.2)), mul(bs[1], Math.sin(phi) * (o.r + o.tube * 0.2))));
@@ -694,12 +769,16 @@
             var body = hb
               ? [[x0 + ch, y0], [x1 - ch, y0], [x1, y0 + ch], [x1, y1 - ch], [x1 - ch, y1], [x0 + ch, y1], [x0, y1 - ch], [x0, y0 + ch]]
               : [[x0 + ch, y0], [x1 - ch, y0], [x1, y0 + ch], [x1, y1], [x0, y1], [x0, y0 + ch]];
-            fill(gT, body, "hi");
+            // cut 3: the lettering in ink; a routine tag stays paper (o.face 'oc'), the tag of the changed
+            // condition carries a pale wash and an inner outline in its tone (o.tone, as SketchKit.valveTag)
+            gT.style.setProperty("--skt-c", "var(--c-ink)");
+            fill(gT, body, o.face || "hi");
+            if (o.tone) wash(gT, body, o.tone + "-soft", 0.72, { inset: 3, jit: 1.6, seed: "tagw" + o.seed });
             contour(gT, body, { w: hb ? 2.4 : 1.9, closed: true, seed: "tag" + o.seed, press: 0.25 });
             if (hb) {
               var inset = 7;
               var inner = [[x0 + ch + 2, y0 + inset], [x1 - ch - 2, y0 + inset], [x1 - inset, y0 + ch + 2], [x1 - inset, y1 - ch - 2], [x1 - ch - 2, y1 - inset], [x0 + ch + 2, y1 - inset], [x0 + inset, y1 - ch - 2], [x0 + inset, y0 + ch + 2]];
-              contour(gT, inner, { w: 1.1, closed: true, seed: "tagin" + o.seed, over: false });
+              contour(o.tone ? tg(gT, o.tone) : gT, inner, { w: o.tone ? 1.5 : 1.1, closed: true, seed: "tagin" + o.seed, over: false, cls: o.tone ? CLS("tl") : undefined });
             }
             // eyelet with its reinforcing ring
             var ey = top + 16;
@@ -736,6 +815,9 @@
             var svg = document.getElementById(ID + "-loto-svg");
             var P = SketchKit.paper(svg, { prefix: ID + "-loto", scene: ID });
             svg.classList.add(CLS("svg"));
+            curP = P;
+            // colour: a routine, accepted isolation. Pale materials only: the valve body in steel, the
+            // lagged steam run in sand, the utilities pipework behind in steel; the LOTO tag stays paper.
             var CX = 900,
               CY = 560;
             var camT = function (k) {
@@ -752,9 +834,9 @@
 
             // ---------- background: the utilities wall behind the run
             var bgPipe = cyl(cam, [-1800, -420, 226], [1900, -420, 226], 24, 60);
-            drawCyl(gBg, bgPipe, Lt, { w: 1.3, seed: "bgp", sp: 6, arc0: false, arc1: false, cap: false, cls: CLS("inkl"), hcls: "htl" });
+            drawCyl(gBg, bgPipe, Lt, { w: 1.3, seed: "bgp", sp: 6, arc0: false, arc1: false, cap: false, cls: CLS("inkl"), hcls: "htl", wash: "steel", washK: 0.7 });
             var bgPipe2 = cyl(cam, [-1800, -420, 292], [1900, -420, 292], 11, 40);
-            drawCyl(gBg, bgPipe2, Lt, { w: 1, seed: "bgp2", sp: 5, arc0: false, arc1: false, cap: false, cls: CLS("inkl"), hcls: "htl" });
+            drawCyl(gBg, bgPipe2, Lt, { w: 1, seed: "bgp2", sp: 5, arc0: false, arc1: false, cap: false, cls: CLS("inkl"), hcls: "htl", wash: "sand", washK: 0.7 });
             [-420, 380].forEach(function (x, i) {
               // wall brackets: a steel angle from the wall under the pipes
               var a = cam.p([x, -420, 180]),
@@ -768,25 +850,25 @@
 
             // ---------- the run: left pipe, flange pair, valve body, flange pair, right pipe
             var pipeL = cyl(cam, [-1900, 0, 0], [-152, 0, 0], 50, 80);
-            drawCyl(gMid, pipeL, Lt, { w: 2.2, seed: "pl", arc0: false, arc1: false, cap: false, centre: false });
+            drawCyl(gMid, pipeL, Lt, { w: 2.2, seed: "pl", arc0: false, arc1: false, cap: false, centre: false, wash: "sand", washK: 0.62 });
             boltRing(gMid, cam, Lt, { axis: [-1, 0, 0], centre: [-152, 0, 0], rb: 80, rbolt: 8, len: 12, stud: 6, count: 8, phase: 0.39, which: "all", seed: "lb" });
             var flL1 = cyl(cam, [-152, 0, 0], [-128, 0, 0], 96, 90),
               flL2 = cyl(cam, [-125, 0, 0], [-101, 0, 0], 96, 90);
-            drawCyl(gMid, flL1, Lt, { w: 2.1, seed: "fl1", sp: 4.5 });
-            drawCyl(gMid, flL2, Lt, { w: 2.1, seed: "fl2", sp: 4.5 });
+            drawCyl(gMid, flL1, Lt, { w: 2.1, seed: "fl1", sp: 4.5, wash: "steel", washK: 0.85 });
+            drawCyl(gMid, flL2, Lt, { w: 2.1, seed: "fl2", sp: 4.5, wash: "steel", washK: 0.85 });
             boltRing(gMid, cam, Lt, { axis: X, centre: [-101, 0, 0], rb: 80, rbolt: 9.5, len: 11, stud: 7, count: 8, phase: 0.39, which: "back", seed: "lf" });
             var barrel = cyl(cam, [-101, 0, 0], [101, 0, 0], 64, 90);
-            drawCyl(gMid, barrel, Lt, { w: 2.2, seed: "bar", sp: 5, arc0: false });
+            drawCyl(gMid, barrel, Lt, { w: 2.2, seed: "bar", sp: 5, arc0: false, wash: "steel", washK: 1 });
             var chest = cyl(cam, [0, 0, -72], [0, 0, 96], 76, 100);
-            drawCyl(gMid, chest, Lt, { w: 2.4, seed: "chest", sp: 5.2, thr: 0.36 });
+            drawCyl(gMid, chest, Lt, { w: 2.4, seed: "chest", sp: 5.2, thr: 0.36, wash: "steel", washK: 1 });
             boltRing(gMid, cam, Lt, { axis: X, centre: [-101, 0, 0], rb: 80, rbolt: 9.5, len: 11, stud: 7, count: 8, phase: 0.39, which: "front", seed: "lf" });
             var flR2 = cyl(cam, [101, 0, 0], [125, 0, 0], 96, 90),
               flR1 = cyl(cam, [128, 0, 0], [152, 0, 0], 96, 90);
-            drawCyl(gMid, flR2, Lt, { w: 2.1, seed: "fr2", sp: 4.5 });
-            drawCyl(gMid, flR1, Lt, { w: 2.1, seed: "fr1", sp: 4.5 });
+            drawCyl(gMid, flR2, Lt, { w: 2.1, seed: "fr2", sp: 4.5, wash: "steel", washK: 0.85 });
+            drawCyl(gMid, flR1, Lt, { w: 2.1, seed: "fr1", sp: 4.5, wash: "steel", washK: 0.85 });
             boltRing(gMid, cam, Lt, { axis: X, centre: [152, 0, 0], rb: 80, rbolt: 9.5, len: 11, stud: 7, count: 8, phase: 0.39, which: "back", seed: "rf" });
             var pipeR = cyl(cam, [152, 0, 0], [1900, 0, 0], 50, 80);
-            drawCyl(gMid, pipeR, Lt, { w: 2.2, seed: "pr", arc0: false, arc1: false, cap: false });
+            drawCyl(gMid, pipeR, Lt, { w: 2.2, seed: "pr", arc0: false, arc1: false, cap: false, wash: "sand", washK: 0.62 });
             boltRing(gMid, cam, Lt, { axis: X, centre: [152, 0, 0], rb: 80, rbolt: 9.5, len: 11, stud: 7, count: 8, phase: 0.39, which: "front", seed: "rf" });
             // the run's centreline, a technical-illustration habit
             line(gMid, [cam.p([-1900, 0, 0]), cam.p([1900, 0, 0])], "cl");
@@ -804,27 +886,27 @@
 
             // ---------- bonnet, gland, stem, handwheel
             var bfl = cyl(cam, [0, 0, 96], [0, 0, 120], 90, 100);
-            drawCyl(gMid, bfl, Lt, { w: 2.1, seed: "bfl", sp: 4.2 });
+            drawCyl(gMid, bfl, Lt, { w: 2.1, seed: "bfl", sp: 4.2, wash: "steel", washK: 0.85 });
             boltRing(gMid, cam, Lt, { axis: Z, centre: [0, 0, 120], rb: 76, rbolt: 9, len: 12, stud: 7, count: 8, phase: 0.2, which: "back", seed: "bb" });
             var bon = cyl(cam, [0, 0, 120], [0, 0, 192], 52, 80);
-            drawCyl(gMid, bon, Lt, { w: 2.2, seed: "bon", sp: 4.6 });
+            drawCyl(gMid, bon, Lt, { w: 2.2, seed: "bon", sp: 4.6, wash: "steel", washK: 1 });
             boltRing(gMid, cam, Lt, { axis: Z, centre: [0, 0, 120], rb: 76, rbolt: 9, len: 12, stud: 7, count: 8, phase: 0.2, which: "front", seed: "bb" });
             var gfl = cyl(cam, [0, 0, 192], [0, 0, 204], 34, 60);
-            drawCyl(gMid, gfl, Lt, { w: 1.8, seed: "gfl", sp: 3.6 });
+            drawCyl(gMid, gfl, Lt, { w: 1.8, seed: "gfl", sp: 3.6, wash: "steel", washK: 0.85 });
             var gl = cyl(cam, [0, 0, 204], [0, 0, 240], 22, 48);
-            drawCyl(gMid, gl, Lt, { w: 1.8, seed: "gl", sp: 3.4 });
+            drawCyl(gMid, gl, Lt, { w: 1.8, seed: "gl", sp: 3.4, wash: "steel", washK: 0.85 });
             var stem = cyl(cam, [0, 0, 240], [0, 0, 262], 10, 30);
             drawCyl(gMid, stem, Lt, { w: 1.6, seed: "stem", sp: 3 });
             // the vertical centreline of the stem
             line(gMid, [cam.p([0, 0, 40]), cam.p([0, 0, 360])], "cl");
-            var hw = handwheel(gMid, cam, Lt, { axis: Z, centre: [0, 0, 262], r: 132, tube: 9, spokes: 5, spokeW: 7, hub: 24, hubLen: 14, phase: 0.5, seed: "lw", cons: true, w: 2.3 });
+            var hw = handwheel(gMid, cam, Lt, { axis: Z, centre: [0, 0, 262], r: 132, tube: 9, spokes: 5, spokeW: 7, hub: 24, hubLen: 14, phase: 0.5, seed: "lw", cons: true, w: 2.3, wash: "steel-dark", washK: 0.55 });
             var nut = cyl(cam, [0, 0, 276], [0, 0, 290], 14, 36);
             drawCyl(gMid, nut, Lt, { w: 1.6, seed: "nut", sp: 3 });
 
             // ---------- foreground: a large pale riser passing the lens at the left edge
             var camF = Cam({ az: 64, el: 30, s: 1.35, ox: 200, oy: 540 });
             var riser = cyl(camF, [0, 0, -900], [0, 0, 900], 108, 90);
-            drawCyl(gFg, riser, Lt, { w: 3, seed: "fgr", sp: 7, thr: 0.5, arc0: false, arc1: false, cap: false, cls: CLS("inkl"), hcls: "htl", soft: true });
+            drawCyl(gFg, riser, Lt, { w: 3, seed: "fgr", sp: 7, thr: 0.5, arc0: false, arc1: false, cap: false, cls: CLS("inkl"), hcls: "htl", soft: true, wash: "steel", washK: 0.8 });
 
             // ---------- the LOTO tag on the rim, hand a
             var pivot = hw.rimAt(-1.3);
@@ -835,6 +917,7 @@
               h: 262,
               hand: "a",
               seed: "loto",
+              face: "oc",
               lines: [
                 { t: "LOTO", y: 58, size: 20, weight: 600, ls: 0.34, rule: true },
                 { t: "ISOLATED", y: 112, size: 30, weight: 600, ls: 0.06 },
@@ -851,6 +934,12 @@
             var svg = document.getElementById(ID + "-sz3-svg");
             var P = SketchKit.paper(svg, { prefix: ID + "-sz3", scene: ID });
             svg.classList.add(CLS("svg"));
+            curP = P;
+            // colour: fire protection is water. The supply riser, the riser up to the zone and the
+            // handwheel carry water (a water-soft wash, water colour pencil); the valve body, flanges and
+            // gauge are steel. When the valve seats, the water drains out of the riser to the zone (the
+            // wash sinks to the valve, the colour pencil turns offline grey) and the tag reads in alert.
+            // Nobody in the insert reacts: the change is visible to the viewer only.
             var CX = 900,
               CY = 520;
             var camT = function (k) {
@@ -869,7 +958,7 @@
             // ---------- background: the valve room wall, a main along it, the zone plate
             var wallY = -300;
             var main = cyl(cam, [-1600, wallY, 760], [1900, wallY, 760], 40, 60);
-            drawCyl(gBg, main, Lt, { w: 1.6, seed: "wm", sp: 7, arc0: false, arc1: false, cap: false });
+            drawCyl(gBg, main, Lt, { w: 1.6, seed: "wm", sp: 7, arc0: false, arc1: false, cap: false, wash: "steel", washK: 0.75 });
             [-300, 700].forEach(function (x, i) {
               line(gBg, [cam.p([x, wallY, 720]), cam.p([x, wallY, 1100])], "ln");
               line(gBg, [cam.p([x + 24, wallY, 720]), cam.p([x + 24, wallY, 1100])], "ov");
@@ -904,25 +993,58 @@
             U.letters(P, gTxt, "SPRINKLER ZONE", 158, 64, { size: 18, weight: 500, ls: 0.1, seed: "psz", rot: 0, irr: 0.02, tone: "skt-t2" });
 
             // ---------- riser below the valve, the valve, riser above
+            // a water pipe: paper, a water-soft wash, water colour-pencil hatching and a colour line inside
+            // each silhouette, the graphite contours on top. o.drain adds an offline twin of the colour
+            // pencil (identical seeds) for the crossfade, and a clip on the wash for the sinking level.
+            function waterPipe(parent, c, o) {
+              var gp = g(parent);
+              fill(gp, c.outline);
+              var gWash = g(gp);
+              wash(gWash, c.outline, "water-soft", o.washK != null ? o.washK : 1, { seed: "wp" + o.seed, inset: 3, jit: 2.2 });
+              var layers = [];
+              ["water"].concat(o.drain ? ["offline"] : []).forEach(function (tone, i) {
+                var gc = tg(gp, tone);
+                cylHatch(gc, c, Lt, { sp: 6, seed: "wp" + o.seed });
+                [[c.silA, -1], [c.silB, 1]].forEach(function (sl) {
+                  var off = m2(c.q, 4.2 * sl[1]);
+                  line(gc, [a2(sl[0][0], off), a2(sl[0][1], off)], "cp");
+                });
+                layers.push(gc);
+              });
+              drawCyl(gp, c, Lt, { w: 2.2, seed: o.seed, arc0: false, arc1: false, cap: false, fill: false, hatch: false });
+              return { g: gp, wash: gWash, water: layers[0], offline: layers[1] };
+            }
             var rs0 = cyl(cam, [0, 0, -1000], [0, 0, -150], 58, 80);
-            drawCyl(gMid, rs0, Lt, { w: 2.2, seed: "rs0", arc0: false, arc1: false, cap: false, sp: 6 });
+            waterPipe(gMid, rs0, { seed: "rs0" });
             var fB1 = cyl(cam, [0, 0, -150], [0, 0, -126], 94, 96),
               fB2 = cyl(cam, [0, 0, -123], [0, 0, -99], 94, 96);
-            drawCyl(gMid, fB1, Lt, { w: 2.1, seed: "sf1", sp: 4.4 });
-            drawCyl(gMid, fB2, Lt, { w: 2.1, seed: "sf2", sp: 4.4 });
+            drawCyl(gMid, fB1, Lt, { w: 2.1, seed: "sf1", sp: 4.4, wash: "steel", washK: 0.85 });
+            drawCyl(gMid, fB2, Lt, { w: 2.1, seed: "sf2", sp: 4.4, wash: "steel", washK: 0.85 });
             boltRing(gMid, cam, Lt, { axis: Z, centre: [0, 0, -99], rb: 78, rbolt: 9, len: 11, stud: 6, count: 8, phase: 0.3, which: "back", seed: "sb" });
             // riser above first (it is further from the viewer than the valve's chest and yoke)
             var fT2 = cyl(cam, [0, 0, 99], [0, 0, 123], 94, 96),
               fT1 = cyl(cam, [0, 0, 126], [0, 0, 150], 94, 96);
             var rs1 = cyl(cam, [0, 0, 150], [0, 0, 1000], 58, 80);
             var barrel = cyl(cam, [0, 0, -99], [0, 0, 99], 64, 90);
-            drawCyl(gMid, barrel, Lt, { w: 2.2, seed: "sbar", sp: 5 });
+            drawCyl(gMid, barrel, Lt, { w: 2.2, seed: "sbar", sp: 5, wash: "steel", washK: 1 });
             boltRing(gMid, cam, Lt, { axis: Z, centre: [0, 0, -99], rb: 78, rbolt: 9, len: 11, stud: 6, count: 8, phase: 0.3, which: "front", seed: "sb" });
             boltRing(gMid, cam, Lt, { axis: [0, 0, -1], centre: [0, 0, 99], rb: 78, rbolt: 9, len: 11, stud: 6, count: 8, phase: 0.3, which: "all", seed: "st" });
-            drawCyl(gMid, fT2, Lt, { w: 2.1, seed: "sf3", sp: 4.4 });
-            drawCyl(gMid, fT1, Lt, { w: 2.1, seed: "sf4", sp: 4.4 });
+            drawCyl(gMid, fT2, Lt, { w: 2.1, seed: "sf3", sp: 4.4, wash: "steel", washK: 0.85 });
+            drawCyl(gMid, fT1, Lt, { w: 2.1, seed: "sf4", sp: 4.4, wash: "steel", washK: 0.85 });
             boltRing(gMid, cam, Lt, { axis: Z, centre: [0, 0, 150], rb: 78, rbolt: 9, len: 11, stud: 6, count: 8, phase: 0.3, which: "back", seed: "st2" });
-            drawCyl(gMid, rs1, Lt, { w: 2.2, seed: "rs1", arc0: false, arc1: false, cap: false, sp: 6 });
+            var riser = waterPipe(gMid, rs1, { seed: "rs1", drain: true });
+            // the sinking level: the water (its wash and its colour pencil) is clipped below the level and
+            // the offline twin above it; the level runs from the top of the frame down to the valve's flange
+            var yTop = Math.max(-40, Math.min.apply(null, rs1.outline.map(function (p) { return p[1]; })) - 8),
+              yBot = Math.max.apply(null, rs1.outline.map(function (p) { return p[1]; })) + 4;
+            var lvId = ID + "-sz3-level",
+              upId = ID + "-sz3-above";
+            var lvRect = mk("rect", { x: -400, y: f2(yTop), width: 2800, height: f2(yBot - yTop) }, mk("clipPath", { id: lvId }, P.defs));
+            var upRect = mk("rect", { x: -400, y: f2(yTop - 400), width: 2800, height: 400 }, mk("clipPath", { id: upId }, P.defs));
+            riser.wash.setAttribute("clip-path", "url(#" + lvId + ")");
+            riser.water.setAttribute("clip-path", "url(#" + lvId + ")");
+            riser.offline.setAttribute("clip-path", "url(#" + upId + ")");
+            riser.level = { rect: lvRect, above: upRect, top: yTop, bot: yBot };
             boltRing(gMid, cam, Lt, { axis: Z, centre: [0, 0, 150], rb: 78, rbolt: 9, len: 11, stud: 6, count: 8, phase: 0.3, which: "front", seed: "st2" });
             line(gMid, [cam.p([0, 0, -1000]), cam.p([0, 0, 1000])], "cl");
 
@@ -930,11 +1052,11 @@
             var ng = nrm([-0.35, 1, 0]);
             var gBase = [0, 0, 280];
             var nip = cyl(cam, add(gBase, mul(ng, 40)), add(gBase, mul(ng, 128)), 10, 30);
-            drawCyl(gMid, nip, Lt, { w: 1.6, seed: "nip", sp: 3 });
+            drawCyl(gMid, nip, Lt, { w: 1.6, seed: "nip", sp: 3, wash: "steel", washK: 0.85 });
             var gC0 = add(gBase, mul(ng, 128)),
               gAx = nrm(add(mul(ng, 0.35), mul(cam.V, 0.65)));
             var gCase = cyl(cam, add(gC0, mul(gAx, -4)), add(gC0, mul(gAx, 30)), 72, 110);
-            drawCyl(gMid, gCase, Lt, { w: 2.3, seed: "gcase", sp: 3.6, thr: 0.4 });
+            drawCyl(gMid, gCase, Lt, { w: 2.3, seed: "gcase", sp: 3.6, thr: 0.4, wash: "steel", washK: 0.95 });
             var gF = add(gC0, mul(gAx, 30));
             var upP = nrm(sub([0, 0, 1], mul(gAx, gAx[2])));
             var dEy = mul(upP, -1),
@@ -984,15 +1106,15 @@
               return mul(ns, d);
             };
             var chest = cyl(cam, ax(26), ax(128), 74, 100);
-            drawCyl(gMid, chest, Lt, { w: 2.4, seed: "sch", sp: 5, thr: 0.36, arc0: false });
+            drawCyl(gMid, chest, Lt, { w: 2.4, seed: "sch", sp: 5, thr: 0.36, arc0: false, wash: "steel", washK: 1 });
             var sbf = cyl(cam, ax(128), ax(150), 88, 96);
-            drawCyl(gMid, sbf, Lt, { w: 2.1, seed: "sbf", sp: 4.2 });
+            drawCyl(gMid, sbf, Lt, { w: 2.1, seed: "sbf", sp: 4.2, wash: "steel", washK: 0.85 });
             boltRing(gMid, cam, Lt, { axis: ns, centre: ax(150), rb: 74, rbolt: 8.5, len: 11, stud: 6, count: 8, phase: 0.2, which: "back", seed: "sbb" });
             var sbon = cyl(cam, ax(150), ax(214), 50, 80);
-            drawCyl(gMid, sbon, Lt, { w: 2.2, seed: "sbon", sp: 4.4 });
+            drawCyl(gMid, sbon, Lt, { w: 2.2, seed: "sbon", sp: 4.4, wash: "steel", washK: 1 });
             boltRing(gMid, cam, Lt, { axis: ns, centre: ax(150), rb: 74, rbolt: 8.5, len: 11, stud: 6, count: 8, phase: 0.2, which: "front", seed: "sbb" });
             var gland = cyl(cam, ax(214), ax(236), 28, 50);
-            drawCyl(gMid, gland, Lt, { w: 1.8, seed: "sgl", sp: 3.4 });
+            drawCyl(gMid, gland, Lt, { w: 1.8, seed: "sgl", sp: 3.4, wash: "steel", washK: 0.85 });
             // the stem inside the yoke: static cylinder, its threads travel with the stem
             var yokeFar = bsS[1],
               yo = 46; // yoke arms above and below the stem, in the vertical plane of the stem
@@ -1012,14 +1134,15 @@
                 off = cam.v([0, 0, i ? -14 : 14]);
               var bar = [p0, p1, a2(p1, off), a2(p0, off)];
               fill(gMid, bar);
+              wash(gMid, bar, "steel", 0.95, { inset: 1.2, jit: 0.8, seed: "yk" + i });
               contour(gMid, [p0, p1], { w: 2.2, seed: "ya" + i, ext: true });
               contour(gMid, [a2(p0, off), a2(p1, off)], { w: 1.6, seed: "yb" + i });
               hatchPoly(gMid, bar, { angle: -38, sp: 4.2, seed: "yh" + i });
             });
             // the yoke sleeve (the handwheel's bushing)
             var sleeve = cyl(cam, ax(410), ax(446), 34, 60);
-            drawCyl(gMid, sleeve, Lt, { w: 2, seed: "slv", sp: 3.6 });
-            var hw = handwheel(gMid, cam, Lt, { axis: ns, centre: ax(452), r: 150, tube: 10, spokes: 5, spokeW: 8, hub: 30, hubLen: 14, phase: 0.2, seed: "sw", cons: true, w: 2.4, shadeFrom: 2.2, shadeTo: 3.9 });
+            drawCyl(gMid, sleeve, Lt, { w: 2, seed: "slv", sp: 3.6, wash: "steel", washK: 0.85 });
+            var hw = handwheel(gMid, cam, Lt, { axis: ns, centre: ax(452), r: 150, tube: 10, spokes: 5, spokeW: 8, hub: 30, hubLen: 14, phase: 0.2, seed: "sw", cons: true, w: 2.4, shadeFrom: 2.2, shadeTo: 3.9, tone: "water", wash: "water-soft", washK: 1 });
             // the rising stem beyond the wheel: its length is the valve's position
             var tipOpen = 640,
               tipShut = 486;
@@ -1063,7 +1186,7 @@
             // ---------- foreground: a pale drain line crossing the lower left
             var camF = Cam({ az: 58, el: 18, s: 1.2, ox: 300, oy: 1000 });
             var drain = cyl(camF, [-1400, 0, 0], [900, 0, 0], 92, 80);
-            drawCyl(gFg, drain, Lt, { w: 3, seed: "fgd", sp: 8, arc0: false, arc1: false, cap: false, cls: CLS("inkl"), hcls: "htl", soft: true });
+            drawCyl(gFg, drain, Lt, { w: 3, seed: "fgd", sp: 8, arc0: false, arc1: false, cap: false, cls: CLS("inkl"), hcls: "htl", soft: true, wash: "steel", washK: 0.8 });
             [-160, -134].forEach(function (x, i) {
               var e = ell(camF, [x, 0, 0], [1, 0, 0], 95);
               ribbon(gFg, ellArc(e, drain.ts, drain.ts + drain.sg * PI, 40), { w: 2.2, seed: "fdb" + i, cls: CLS("inkl"), soft: true });
@@ -1078,6 +1201,7 @@
               h: 214,
               hand: "b",
               seed: "sz3",
+              tone: "alert",
               lines: [
                 { t: "SZ3 ISOLATED", y: 74, size: 27, weight: 600, ls: 0.04 },
                 { t: "MAINTENANCE", y: 122, size: 23, weight: 500, ls: 0.1 },
@@ -1096,6 +1220,7 @@
               pivot: pivot,
               needle: gNeedle,
               needleDeg: needleDeg,
+              riser: riser,
               stem: { fill: stFill, clip: cpPath, sil: stSilA, cap: stCap, open: stOpen, shut: stShut, thr: gThrMove, thrIn: gThrInMove, travel: travel },
             };
           }
@@ -1110,6 +1235,8 @@
             o = o || {};
             var poly = sm(pts, true, o.k != null ? o.k : 1);
             fill(parent, poly, o.fillCls || "oc");
+            if (o.wash) wash(parent, poly, o.wash, o.washK, { seed: "pt" + o.seed });
+            if (o.after) o.after(parent);
             ribbon(parent, poly.concat([poly[0]]), { w: o.w || 2.3, seed: o.seed, closed: false, taper: 4, wEnd: 0.6, press: o.press != null ? o.press : 0.32, cls: o.cls });
             overdraw(parent, poly, { seed: o.seed, closed: false });
             if (o.shade) hatchPoly(parent, sm(o.shade, true), { angle: o.shadeAngle != null ? o.shadeAngle : 52, sp: o.shadeSp || 5, seed: o.seed + "h", cls: o.shadeCls || "ht", inset: 2 });
@@ -1140,6 +1267,11 @@
             var svg = document.getElementById(ID + "-weld-svg");
             var P = SketchKit.paper(svg, { prefix: ID + "-weld", scene: ID });
             svg.classList.add(CLS("svg"));
+            curP = P;
+            // colour: Roof 03 is a slate roof (the site's material), the utilities stack beyond it
+            // terracotta; the welder in leather with a white shell, the arc a small hot point with a soft
+            // hot glow (never a flame), the fire watch in hi-vis with a white hard hat and a terracotta
+            // extinguisher; steel for the workpiece, the bottles and the plant.
             var CX = 960,
               CY = 600;
             var camT = function (k) {
@@ -1159,6 +1291,8 @@
 
             // ---------- far: roof membrane seams in perspective, the far parapet, a stack, a roof unit
             var gRoof = g(gFar);
+            // the roof membrane's pale slate wash, from the far parapet to the near one
+            wash(gRoof, [[-60, 238], [1980, 230], [1980, 1140], [-60, 1140]], "slate", 0.55, { inset: 0, jit: 2.5, seed: "roof" });
             var seams = "";
             [-1400, -880, -380, 120, 600, 1060, 1500, 1940, 2400, 2900, 3500].forEach(function (x) {
               var b = [x, 1100],
@@ -1176,12 +1310,14 @@
             // the utilities stack beyond the roof edge, and a rooftop unit on the right
             var stk = [[196, 232], [196, 66], [236, 62], [236, 230]];
             fill(gRoof, stk);
+            wash(gRoof, stk, "terracotta", 1.1, { inset: 1.2, jit: 1, seed: "stk" });
             contour(gRoof, [[196, 232], [196, 66]], { w: 1.4, seed: "stk1" });
             contour(gRoof, [[236, 62], [236, 230]], { w: 1.1, seed: "stk2" });
             contour(gRoof, [[192, 68], [240, 62]], { w: 1.3, seed: "stk3", ext: true });
             hatchPoly(gRoof, [[196, 228], [196, 70], [212, 68], [212, 228]], { angle: 62, sp: 4.5, seed: "stkh", cls: "htl" });
             var ru = [[1560, 250], [1560, 206], [1590, 192], [1742, 192], [1742, 236], [1712, 250]];
             fill(gRoof, ru);
+            wash(gRoof, ru, "steel", 1, { inset: 1.2, jit: 1, seed: "ru" });
             contour(gRoof, ru, { w: 1.3, closed: true, seed: "ru" });
             contour(gRoof, [[1560, 206], [1712, 206], [1742, 192]], { w: 1, seed: "ru2" });
             line(gRoof, [[1712, 206], [1712, 250]], "ln");
@@ -1197,8 +1333,8 @@
             contour(gTr, ellArc(ell(camB, [0, -30, 300], [0, 1, 0], 40), PI, TAU, 30), { w: 1.3, seed: "thd" });
             var oxy = cyl(camB, [-22, 6, 6], [-22, 6, 236], 25, 60),
               ace = cyl(camB, [30, 10, 6], [30, 10, 190], 31, 60);
-            drawCyl(gTr, oxy, Lt, { w: 1.6, seed: "oxy", sp: 4 });
-            drawCyl(gTr, ace, Lt, { w: 1.6, seed: "ace", sp: 4 });
+            drawCyl(gTr, oxy, Lt, { w: 1.6, seed: "oxy", sp: 4, wash: "steel", washK: 1 });
+            drawCyl(gTr, ace, Lt, { w: 1.6, seed: "ace", sp: 4, wash: "steel-dark", washK: 0.8 });
             drawCyl(gTr, cyl(camB, [-22, 6, 236], [-22, 6, 262], 11, 30), Lt, { w: 1.2, seed: "oxc", sp: 3 });
             drawCyl(gTr, cyl(camB, [30, 10, 190], [30, 10, 214], 13, 30), Lt, { w: 1.2, seed: "acc", sp: 3 });
             [[-22, 6, 262], [30, 10, 214]].forEach(function (p, i) {
@@ -1214,7 +1350,11 @@
             });
 
             // ---------- the fire watch, mid-ground: standing, extinguisher in hand, lighter
-            var gFW = g(gMidB, { transform: "translate(0 0) rotate(0 1330 452)", opacity: 0.46 });
+            // mid-ground and lighter: a light graphite line (about 45 percent) over an opaque figure, so
+            // the hi-vis and the white hard hat keep their colour
+            var gFW = g(gMidB, { transform: "translate(0 0) rotate(0 1330 452)" });
+            gFW.style.setProperty("--a1i-g", "color-mix(in srgb, var(--c-graphite) 50%, var(--c-paper))");
+            gFW.style.setProperty("--a1i-gl", "color-mix(in srgb, var(--c-graphite) 28%, var(--c-paper))");
             var FX = 1330,
               FY = 452,
               S = 0.72; // feet centre, scale (figure about 360 px)
@@ -1224,26 +1364,37 @@
               });
             };
             // legs, weight on the near leg, the other knee soft
-            part(gFW, fw([[-40, -196], [-44, -104], [-40, -8], [-14, -6], [-12, -100], [-2, -160], [10, -100], [22, -8], [48, -10], [42, -104], [40, -196]]), { w: 1.9, seed: "fwl", shade: fw([[-40, -190], [-42, -104], [-38, -12], [-26, -12], [-28, -104], [-26, -190]]), shadeAngle: 62 });
-            part(gFW, fw([[-46, -10], [-12, -10], [-8, 4], [-50, 6]]), { w: 1.8, seed: "fwb1" });
-            part(gFW, fw([[18, -12], [50, -14], [60, 0], [60, 6], [16, 6]]), { w: 1.8, seed: "fwb2" });
+            part(gFW, fw([[-40, -196], [-44, -104], [-40, -8], [-14, -6], [-12, -100], [-2, -160], [10, -100], [22, -8], [48, -10], [42, -104], [40, -196]]), { w: 1.9, seed: "fwl", wash: "stone", washK: 0.95, shade: fw([[-40, -190], [-42, -104], [-38, -12], [-26, -12], [-28, -104], [-26, -190]]), shadeAngle: 62 });
+            part(gFW, fw([[-46, -10], [-12, -10], [-8, 4], [-50, 6]]), { w: 1.8, seed: "fwb1", wash: "steel-dark", washK: 0.7 });
+            part(gFW, fw([[18, -12], [50, -14], [60, 0], [60, 6], [16, 6]]), { w: 1.8, seed: "fwb2", wash: "steel-dark", washK: 0.7 });
             // jacket with reflective bands
             var fwT = fw([[-40, -330], [-50, -270], [-48, -190], [48, -188], [50, -270], [40, -330], [18, -342], [-18, -342]]);
-            part(gFW, fwT, { w: 2, seed: "fwt", shade: fw([[-40, -326], [-48, -270], [-46, -194], [-30, -194], [-30, -270], [-24, -326]]), shadeAngle: 62 });
+            part(gFW, fwT, {
+              w: 2,
+              seed: "fwt",
+              wash: "hivis",
+              washK: 0.85,
+              // the retroreflective band, white, across the vest
+              after: function (gp) {
+                fill(gp, fw([[-47, -250], [47, -250], [47, -238], [-47, -238]]), "hi");
+              },
+              shade: fw([[-40, -326], [-48, -270], [-46, -194], [-30, -194], [-30, -270], [-24, -326]]),
+              shadeAngle: 62,
+            });
             stroke(gFW, fw([[-48, -250], [48, -250]]), { w: 1.2, seed: "fwr1" });
             stroke(gFW, fw([[-48, -238], [48, -238]]), { w: 1.2, seed: "fwr2" });
             stroke(gFW, fw([[0, -340], [0, -192]]), { w: 0.9, seed: "fwz", cls: CLS("inkl") });
             // arms: one carries the extinguisher by its handle, the other holds the nozzle ready
-            part(gFW, tube(fw([[-42, -324], [-58, -262], [-60, -206]]), [13, 11, 10]), { w: 1.8, seed: "fwa1" });
-            part(gFW, tube(fw([[42, -324], [54, -262], [34, -226]]), [13, 11, 10]), { w: 1.8, seed: "fwa2" });
+            part(gFW, tube(fw([[-42, -324], [-58, -262], [-60, -206]]), [13, 11, 10]), { w: 1.8, seed: "fwa1", wash: "hivis", washK: 0.72 });
+            part(gFW, tube(fw([[42, -324], [54, -262], [34, -226]]), [13, 11, 10]), { w: 1.8, seed: "fwa2", wash: "hivis", washK: 0.72 });
             var camE = Cam({ az: 64, el: 12, s: S, ox: FX - 66 * S, oy: FY - 60 * S });
-            drawCyl(gFW, cyl(camE, [0, 0, 0], [0, 0, 118], 22, 40), Lt, { w: 1.9, seed: "ext", sp: 3.6 });
+            drawCyl(gFW, cyl(camE, [0, 0, 0], [0, 0, 118], 22, 40), Lt, { w: 1.9, seed: "ext", sp: 3.6, wash: "terracotta", washK: 1.05 });
             stroke(gFW, fw([[-76, -186], [-62, -210], [-50, -206], [-56, -184]]), { w: 1.4, seed: "exh" });
             stroke(gFW, fw([[-58, -196], [-30, -150], [8, -170], [30, -218]]), { w: 1.4, seed: "exhose" });
             part(gFW, fw([[26, -234], [36, -230], [30, -210], [22, -214]]), { w: 1.3, seed: "exnz" });
             // head with a hard hat, no face
             part(gFW, fw([[-18, -344], [-22, -376], [0, -396], [22, -380], [20, -346], [2, -336]]), { w: 1.8, seed: "fwh" });
-            part(gFW, fw([[-30, -380], [-24, -404], [0, -418], [24, -406], [30, -382], [40, -378], [-38, -376]]), { w: 2, seed: "fwhat" });
+            part(gFW, fw([[-30, -380], [-24, -404], [0, -418], [24, -406], [30, -382], [40, -378], [-38, -376]]), { w: 2, seed: "fwhat", fillCls: "hi" });
 
             // ---------- a raised rooflight in the right mid-ground, in the roof's perspective (lighter)
             var gRl = g(gMidB, { opacity: 0.55 });
@@ -1255,6 +1406,7 @@
               BTR = lerp2(FTR, VP, 0.18),
               BBL = lerp2(FBL, VP, 0.18);
             fill(gRl, [FBL, FBR, FTR, BTR, BTL, BBL]);
+            wash(gRl, [FBL, FBR, FTR, BTR, BTL, BBL], "steel", 0.8, { seed: "rl" });
             contour(gRl, [FBL, FBR], { w: 1.8, seed: "rl1", ext: true });
             contour(gRl, [FTL, FTR], { w: 1.5, seed: "rl2", ext: true });
             contour(gRl, [FBR, FTR, BTR], { w: 1.4, seed: "rl3" });
@@ -1289,6 +1441,8 @@
             var bpT = [[1066, 826], [1244, 826], dep(dep(dep([1244, 826]))), dep(dep(dep([1066, 826])))];
             fill(gW, bpT);
             fill(gW, bpF);
+            wash(gW, bpT, "steel", 0.8, { inset: 1, jit: 0.8, seed: "bpt" });
+            wash(gW, bpF, "steel-dark", 0.8, { inset: 0.5, jit: 0.5, seed: "bpf" });
             contour(gW, [bpT[0], bpT[1]], { w: 1.6, seed: "bp1", ext: true });
             contour(gW, [bpT[1], bpT[2], bpT[3], bpT[0]], { w: 1.3, seed: "bp2" });
             contour(gW, [bpF[3], bpF[2]], { w: 2, seed: "bp3", ext: true });
@@ -1302,6 +1456,9 @@
             fill(gW, pr);
             fill(gW, pf);
             fill(gW, ptop);
+            wash(gW, pr, "steel-dark", 0.9, { inset: 1, jit: 0.8, seed: "pr" });
+            wash(gW, pf, "steel", 1, { inset: 1.2, jit: 1, seed: "pf" });
+            wash(gW, ptop, "steel", 0.6, { inset: 1, jit: 0.8, seed: "ptop" });
             contour(gW, [pf[0], pf[3]], { w: 2.2, seed: "po1", ext: true });
             contour(gW, [pf[1], pf[2]], { w: 2, seed: "po2", ext: true });
             contour(gW, [pf[0], pf[1]], { w: 1.8, seed: "po3", ext: true });
@@ -1345,6 +1502,13 @@
             var F = function (parent, pts, k) {
               return fill(parent, sm(pts, true, k != null ? k : 0.8));
             };
+            // a filled part with a watercolour wash (leather, steel) under its line; cls: the fill class
+            var FW = function (parent, pts, k, tone, wk, cls) {
+              var poly = sm(pts, true, k != null ? k : 0.8);
+              fill(parent, poly, cls);
+              if (tone) wash(parent, poly, tone, wk, { inset: 2.4, jit: 1.8, seed: "fw" + f2(pts[0][0]) });
+              return poly;
+            };
             var Ln = function (parent, pts, w, seed, o) {
               o = o || {};
               var pl = sm(pts, !!o.closed, o.k != null ? o.k : 0.8);
@@ -1360,21 +1524,21 @@
             };
             // far leg: the thigh forward, the knee up, the shin down to the planted boot
             var farLeg = [[782, 604], [846, 586], [906, 572], [936, 572], [956, 590], [962, 620], [958, 690], [956, 760], [954, 796], [926, 800], [924, 740], [920, 670], [912, 630], [892, 618], [842, 632], [794, 646]];
-            F(gBody, farLeg, 0.6);
+            FW(gBody, farLeg, 0.6, "stone", 0.95);
             Hs(gBody, [[922, 648], [938, 642], [950, 792], [928, 796]], 60, 3.8, "flh");
             Ln(gBody, [[846, 586], [906, 572], [936, 572], [956, 590], [962, 620], [958, 690], [956, 760], [954, 796]], 1.9, "fl1", { k: 0.6 });
             Ln(gBody, [[926, 800], [924, 740], [920, 670], [912, 630], [896, 618]], 1.6, "fl2", { k: 0.6 });
             Ln(gBody, [[896, 618], [842, 632], [800, 644]], 1.3, "fl3");
             Lf(gBody, [[930, 612], [944, 626]], "flf");
             var farBoot = [[924, 794], [956, 790], [972, 796], [1010, 806], [1034, 814], [1040, 826], [1038, 838], [922, 840], [918, 818]];
-            F(gBody, farBoot, 0.3);
+            FW(gBody, farBoot, 0.3, "steel-dark", 0.7);
             Hs(gBody, [[920, 828], [1038, 828], [1038, 838], [922, 838]], 0, 2.4, "fbh");
             Ln(gBody, farBoot, 1.9, "fb1", { closed: true, k: 0.3 });
             Ln(gBody, [[920, 828], [1039, 828]], 1.4, "fb2", { k: 0 });
             Lf(gBody, [[958, 792], [974, 812]], "fbl");
             // torso: a stiff leather welding jacket leaning into the work
             var torso = [[900, 392], [866, 396], [836, 406], [806, 428], [780, 466], [758, 516], [742, 564], [730, 610], [724, 652], [770, 664], [828, 660], [856, 636], [882, 594], [908, 544], [926, 498], [936, 456], [940, 424], [930, 402]];
-            F(gBody, torso, 0.7);
+            FW(gBody, torso, 0.7, "leather", 0.72);
             Hs(gBody, [[860, 402], [832, 412], [804, 434], [780, 472], [760, 520], [744, 566], [732, 612], [728, 646], [746, 648], [750, 606], [764, 556], [786, 500], [816, 452], [848, 420]], 54, 3.8, "toh");
             Ln(gBody, [[898, 394], [866, 398], [836, 408], [806, 430], [780, 468], [758, 518], [742, 566], [730, 612], [724, 650]], 2.3, "to1", { k: 0.7 });
             Ln(gBody, [[724, 650], [770, 662], [828, 658], [856, 636]], 1.7, "to2");
@@ -1387,7 +1551,7 @@
             Lf(gBody, [[740, 610], [760, 618]], "tf2");
             // near leg: kneeling, the thigh upright, the shin along the roof
             var nearLeg = [[806, 598], [818, 664], [824, 730], [830, 790], [828, 818], [808, 836], [740, 838], [680, 838], [630, 836], [620, 814], [630, 794], [690, 790], [742, 784], [760, 768], [754, 724], [740, 674], [724, 630], [738, 604], [772, 596]];
-            F(gBody, nearLeg, 0.55);
+            FW(gBody, nearLeg, 0.55, "stone", 0.95);
             Hs(gBody, [[726, 636], [742, 678], [756, 726], [762, 764], [746, 780], [690, 788], [640, 792], [640, 804], [700, 800], [764, 792], [776, 766], [770, 718], [756, 670], [740, 634]], 48, 3.8, "nlh");
             Ln(gBody, [[808, 604], [818, 664], [824, 730], [830, 790], [828, 818], [810, 836]], 2.3, "nl1", { k: 0.6 });
             Ln(gBody, [[810, 836], [740, 839], [680, 839], [632, 837]], 2.1, "nl2", { k: 0.6 });
@@ -1398,7 +1562,7 @@
             Lf(gBody, [[792, 612], [798, 700], [802, 758]], "nls");
             // the knee pad and its straps, the cargo pocket
             var kp = [[790, 760], [828, 764], [834, 812], [818, 834], [790, 832], [784, 794]];
-            F(gBody, kp, 0.3);
+            FW(gBody, kp, 0.3, "steel-dark", 0.7);
             Hs(gBody, [[784, 796], [790, 830], [802, 832], [798, 796]], 40, 3.4, "kph");
             Ln(gBody, kp, 1.6, "kp", { closed: true, k: 0.3 });
             Ln(gBody, [[776, 770], [790, 771]], 1.1, "ks1", { k: 0, over: false });
@@ -1406,7 +1570,7 @@
             Ln(gBody, [[772, 674], [806, 672], [808, 726], [774, 730], [772, 674]], 1, "pk", { k: 0.1, over: false });
             Ln(gBody, [[772, 688], [806, 686]], 0.9, "pkf", { k: 0, over: false });
             var nearBoot = [[638, 800], [628, 784], [608, 774], [590, 770], [580, 780], [576, 800], [574, 822], [582, 838], [624, 841], [640, 836]];
-            F(gBody, nearBoot, 0.3);
+            FW(gBody, nearBoot, 0.3, "steel-dark", 0.7);
             Hs(gBody, [[560, 826], [636, 828], [636, 838], [560, 838]], 0, 2.4, "nbh");
             Ln(gBody, nearBoot, 1.9, "nb1", { closed: true, k: 0.3 });
             Ln(gBody, [[592, 772], [584, 788], [580, 810], [580, 830]], 1.4, "nb2");
@@ -1421,11 +1585,11 @@
                 return [PV[0] + p[0] * Math.cos(hr) - p[1] * Math.sin(hr), PV[1] + p[0] * Math.sin(hr) + p[1] * Math.cos(hr)];
               });
             };
-            F(gHead, hx([[-8, -52], [-26, -46], [-40, -18], [-42, 20], [-34, 52], [-18, 78], [10, 82], [20, 60], [8, 40], [-4, 10]]), 0.8);
+            FW(gHead, hx([[-8, -52], [-26, -46], [-40, -18], [-42, 20], [-34, 52], [-18, 78], [10, 82], [20, 60], [8, 40], [-4, 10]]), 0.8, "leather", 0.72);
             Hs(gHead, hx([[-22, -44], [-36, -18], [-38, 20], [-30, 50], [-18, 70], [-14, 40], [-18, 0]]), 62, 3.6, "hdh");
             Ln(gHead, hx([[-8, -52], [-26, -46], [-40, -18], [-42, 20], [-34, 52], [-18, 78], [4, 86]]), 1.9, "hd1");
             var shell = [[-8, -52], [16, -68], [50, -66], [78, -50], [90, -28], [94, 10], [92, 44], [84, 62], [58, 70], [28, 66], [8, 40], [-4, 10], [-8, -20]];
-            F(gHead, hx(shell), 0.55);
+            FW(gHead, hx(shell), 0.55, null, 0, "hi");
             Hs(gHead, hx([[-6, -48], [8, -60], [10, -40], [4, 0], [12, 38], [4, 30], [-4, 8]]), 56, 3.4, "shh");
             Ln(gHead, hx([[-8, -52], [16, -68], [50, -66], [78, -50], [90, -28]]), 2.3, "sh1", { k: 0.6 });
             Ln(gHead, hx([[90, -28], [94, 10], [92, 44], [84, 62]]), 2.4, "sh1b", { k: 0.4 });
@@ -1439,7 +1603,7 @@
             Lf(gHead, hx([[-2, -10], [-22, -34]]), "hgb");
             // near arm: sleeve, gauntlet, torch, the glove round the handle (all one group: it travels)
             var arm = [[872, 446], [902, 438], [926, 458], [942, 506], [952, 562], [962, 588], [1010, 628], [1018, 644], [1004, 664], [990, 662], [944, 612], [920, 594], [902, 534], [880, 482]];
-            F(gArm, arm, 0.7);
+            FW(gArm, arm, 0.7, "leather", 0.72);
             Hs(gArm, [[876, 456], [884, 488], [904, 538], [920, 588], [940, 604], [980, 646], [986, 636], [946, 598], [930, 580], [916, 530], [898, 478], [890, 452]], 64, 3.8, "arh");
             Ln(gArm, [[872, 450], [882, 484], [902, 534], [918, 588], [926, 600]], 2.2, "ar1", { k: 0.7 });
             Ln(gArm, [[926, 600], [944, 614], [990, 662]], 1.9, "ar2");
@@ -1451,37 +1615,38 @@
             Lf(gArm, [[916, 500], [930, 506]], "af3");
             // gauntlet cuff
             var cuff = [[994, 622], [1026, 620], [1038, 650], [1030, 680], [1000, 676], [988, 650]];
-            F(gArm, cuff, 0.35);
+            FW(gArm, cuff, 0.35, "leather", 0.95);
             Hs(gArm, [[988, 650], [1000, 678], [1010, 678], [1002, 650]], 40, 3.2, "cfh");
             Ln(gArm, cuff, 1.8, "cf", { closed: true, k: 0.35 });
             Lf(gArm, [[1004, 628], [1008, 674]], "cfs");
             // the torch: handle, two valve knobs at the back, the neck bent down to the tip at the seam
             var hdl = tube([[976, 618], [1104, 712]], [6.5, 6]);
-            F(gArm, hdl, 0.3);
+            FW(gArm, hdl, 0.3, "steel", 1);
             Ln(gArm, [hdl[0], hdl[1]], 1.5, "th1", { k: 0 });
             Ln(gArm, [hdl[3], hdl[2]], 1.5, "th2", { k: 0 });
             [[984, 614], [996, 622]].forEach(function (p, i) {
               contour(gArm, ellArc({ c: p, A: [5, 0], B: [0, 5] }, 0, TAU, 18), { w: 1.1, closed: true, seed: "kn" + i, over: false });
             });
             var nk = tube([[1102, 710], [1122, 736], [1132, 778], [tip0[0], tip0[1] - 4]], [3.4, 3, 2.6, 2.1]);
-            F(gArm, nk, 0.5);
+            FW(gArm, nk, 0.5, "steel", 1.1);
             Ln(gArm, nk.slice(0, 4), 1.2, "nk1", { over: false });
             Ln(gArm, nk.slice(4), 1.2, "nk2", { over: false });
             // the glove round the handle: knuckles, fingers wrapping under, the thumb along the top
             var glove = [[1026, 644], [1052, 640], [1068, 650], [1078, 668], [1074, 686], [1056, 694], [1036, 690], [1022, 672]];
-            F(gArm, glove, 0.5);
+            FW(gArm, glove, 0.5, "leather", 0.95);
             Hs(gArm, [[1022, 672], [1036, 690], [1050, 692], [1036, 670]], 40, 3.2, "glh");
             Ln(gArm, glove, 1.8, "gl", { closed: true, k: 0.5 });
             Ln(gArm, [[1042, 652], [1050, 668], [1046, 686]], 1, "gf1", { over: false });
             Ln(gArm, [[1054, 654], [1062, 670], [1058, 688]], 1, "gf2", { over: false });
             Ln(gArm, [[1028, 652], [1046, 646], [1062, 652], [1072, 664]], 1.2, "gth", { over: false });
-            // the arc: a small bright point, a fine ring, radial ticks that flicker (stepped)
+            // the arc: a small hot point in a soft hot glow (two flat discs, no gradient, never a flame),
+            // short radial colour-pencil ticks that flicker (stepped), the glow breathing with them
             var gArc = g(gArm, { transform: "translate(" + f2(tip0[0]) + " " + f2(tip0[1]) + ")" });
             hatchPoly(gArc, [[-20, -4], [-6, -14], [8, 2], [-6, 12]], { angle: 28, sp: 2.4, seed: "pool" });
-            mk("circle", { cx: 0, cy: 0, r: 9, class: CLS("hi"), style: "fill:#ffffff" }, gArc);
-            mk("circle", { cx: 0, cy: 0, r: 6.5, class: CLS("ln"), style: "stroke-width:0.9px;stroke-opacity:0.55" }, gArc);
-            mk("circle", { cx: 0, cy: 0, r: 2.6, class: CLS("dot"), style: "fill-opacity:0.25" }, gArc);
-            var ticks = mk("path", { d: "", class: CLS("ln"), style: "stroke-width:1.5px" }, gArc);
+            var glow = mk("circle", { cx: 0, cy: 0, r: 30, class: "skt-solid skt-w-hot-soft", opacity: 0.62 }, gArc);
+            mk("circle", { cx: 0, cy: 0, r: 15, class: "skt-solid skt-w-hot-soft" }, gArc);
+            mk("circle", { cx: 0, cy: 0, r: 5.2, class: "skt-solid skt-w-hot" }, gArc);
+            var ticks = mk("path", { d: "", class: CLS("cp"), style: "stroke-width:1.5px;stroke-opacity:0.95" }, tg(gArc, "hot"));
 
             // ---------- foreground: the roof parapet, large and pale, passing the lens
             var par = [[-40, 930], [1960, 996], [1960, 1120], [-40, 1120]];
@@ -1504,10 +1669,15 @@
               body: gBody,
               fw: gFW,
               ticks: ticks,
+              glow: glow,
               bead: bead,
               beadFrac0: beadFrac0,
               travel: s2(tip1, tip0),
             };
+          }
+          // the glow's radius for flicker step k (deterministic)
+          function arcGlow(k) {
+            return f2(26 + rng("glow" + k)() * 8);
           }
           // the arc's flicker: a deterministic sequence of tick sets (four to six short radial marks)
           function arcTicks(k) {
@@ -1580,13 +1750,18 @@
             // the arc flickers on a stepped, seeded sequence (about 12 changes a second)
             var step = 1 / 12,
               k = 0,
-              prev = arcTicks(0);
+              prev = arcTicks(0),
+              prevR = arcGlow(0);
             weld.ticks.setAttribute("d", prev);
+            weld.glow.setAttribute("r", prevR);
             for (var t = t0 + step; t < t1; t += step) {
               k++;
-              var next = arcTicks(k);
+              var next = arcTicks(k),
+                nextR = arcGlow(k);
               tweenAttr(weld.ticks, "d", prev, next, t, 0.001, "steps(1)");
+              tweenAttr(weld.glow, "r", prevR, nextR, t, 0.001, "steps(1)");
               prev = next;
+              prevR = nextR;
             }
           })();
 
@@ -1621,6 +1796,17 @@
             var tg0 = T("L07:goes.start", 0.05),
               tg1 = T("offline", 0.3);
             tweenAttr(sz3.needle, "transform", "rotate(" + f2(sz3.needleDeg(7.2)) + ")", "rotate(" + f2(sz3.needleDeg(0)) + ")", tg0, tg1 - tg0, "power2.in");
+            // cut 3 colour, the unnoticed change: with the needle, the water drains out of the riser to
+            // the zone. The wash sinks from the top of the frame to the valve's flange and the colour
+            // pencil turns from water to offline grey; the supply riser below the valve stays water.
+            // Silent (the clunk and the gauge carry the sound); nobody in the insert reacts.
+            var rz = sz3.riser,
+              lv = rz.level,
+              td0 = T("L07:goes.start", -0.05),
+              td1 = T("offline", 0.45);
+            var span = lv.bot - lv.top;
+            story.fromTo(lv.rect, { attr: { y: f2(lv.top), height: f2(span) } }, { attr: { y: f2(lv.bot), height: 0 }, duration: td1 - td0, ease: "power1.in", immediateRender: true }, td0);
+            story.fromTo(lv.above, { attr: { height: 400 } }, { attr: { height: f2(span + 400) }, duration: td1 - td0, ease: "power1.in", immediateRender: true }, td0);
             // the tag, after the clunk
             dropTag(sz3.tag, sz3.pivot, T("offline", 0.06), {
               seq: [
@@ -1638,6 +1824,16 @@
           var tl = gsap.timeline({ paused: true });
           FL.scrub(tl, story, { at: 0, from: 0, to: RS, duration: RS, ease: "none" });
           FL.scrub(tl, story, { at: RS, from: RS, to: LAND, duration: RE - RS, ease: FL.rewindEase() });
+          // the rewind's bleed, as a1-world's site: the colour drains as the tape runs back and floods
+          // back in as it lands (the SZ3 insert passes backwards in the rewind's tail)
+          var RW = RE - RS;
+          [loto.panel, weld.panel, sz3.panel].forEach(function (pn) {
+            var sv = pn.querySelector("svg");
+            // immediateRender true: a custom-property fromTo that never rendered its start at build time is
+            // not restored when a seek goes back past it (measured; opacity and attr tweens are)
+            tl.fromTo(sv, { "--sk-bleed": 1 }, { "--sk-bleed": 0, duration: RW * 0.45, ease: "power1.inOut", immediateRender: true }, RS);
+            tl.fromTo(sv, { "--sk-bleed": 0 }, { "--sk-bleed": 1, duration: RW * 0.35, ease: "power1.inOut", immediateRender: false }, RE - RW * 0.35);
+          });
 
           window.__timelines["a1-inserts"] = tl;
         })();

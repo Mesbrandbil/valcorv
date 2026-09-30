@@ -8,6 +8,7 @@
   <body>
     <template id="a1-after-template">
       <link rel="stylesheet" href="assets/css/film.css">
+      <link rel="stylesheet" href="assets/css/film-color.css">
       <link rel="stylesheet" href="assets/css/film-sketch.css">
       <style>
         /* An overlay above a1-world (z 102). a1-world holds SiteKit.CAMERAS.afterwardsWide, the site
@@ -41,22 +42,30 @@
         #a1-after-stage .skt-sans {
           font-family: var(--sans);
         }
+        /* Colour (cut 3): the aftermath is drained on purpose (proof reconstructed afterwards is
+           colourless): the fragments stay drained (the kit's skt-drained), the questions are ink, and the
+           gap timeline is ink with one strong colour, "14:42 · CONDITION CHANGED" in alert. */
         /* Background plane: smaller and sharp, about 55 percent contrast (lighter graphite on opaque paper). */
         #a1-after-bgsvg {
-          --skt-c: #8f8c86;
-          --skt-l: #b3b0a9;
+          --skt-c: color-mix(in srgb, var(--c-graphite) 55%, var(--c-paper));
+          --skt-l: color-mix(in srgb, var(--c-graphite) 35%, var(--c-paper));
         }
         /* Foreground plane: larger and paler, about 25 percent contrast, paper slightly translucent. */
         #a1-after-fgsvg {
-          --skt-c: #c3bfb7;
-          --skt-l: #d6d2ca;
+          --skt-c: color-mix(in srgb, var(--c-graphite) 27%, var(--c-paper));
+          --skt-l: color-mix(in srgb, var(--c-graphite) 17%, var(--c-paper));
+        }
+        /* The gap timeline in ink (the rule, THE GAP bracket, DAY +2 · FOUND); its 14:42 marker keeps
+           the kit's alert tone. */
+        #a1-after-gapsheet {
+          --skt-c: var(--c-ink);
         }
         #a1-after-fgsvg .skt-occ {
           fill-opacity: 0.82;
         }
         /* The questions: Plex Sans Light in ink, on a paper halo over the receded site. */
         #a1-after-midsvg .a1-after-q .skt-sans {
-          fill: #2a2a2a;
+          fill: var(--c-ink);
         }
       </style>
 
@@ -202,7 +211,7 @@
         FL.svgEl("feGaussianBlur", { stdDeviation: "2.6" }, shadowFilter);
         var addShadow = function (frag) {
           var b = frag.box;
-          var sh = FL.svgEl("rect", { x: b.x + 1, y: b.y + 3, width: b.w, height: b.h, fill: "#3b3a36", "fill-opacity": 0.13, filter: "url(#" + ID + "-contact)" });
+          var sh = FL.svgEl("rect", { x: b.x + 1, y: b.y + 3, width: b.w, height: b.h, style: "fill: var(--c-graphite)", "fill-opacity": 0.13, filter: "url(#" + ID + "-contact)" });
           frag.root.parentNode.insertBefore(sh, frag.root);
           var frameStep = frag.steps[1],
             cur = frag.cur;
@@ -456,6 +465,9 @@
         var tl = gsap.timeline({ paused: true });
         FL.scrub(tl, story, { at: 0, from: -LANDL, to: RS - LANDL, duration: RS, ease: "none" });
         FL.scrub(tl, story, { at: RS, from: RS - LANDL, to: 0, duration: RE - RS, ease: FL.rewindEase() });
+        // the rewind's bleed on the gap timeline (the scene's one colour), as a1-world's site: it drains as
+        // the tape runs back (the timeline un-draws early in the rewind, so this is felt, not seen)
+        tl.fromTo(document.getElementById(ID + "-gapsheet"), { "--sk-bleed": 1 }, { "--sk-bleed": 0, duration: (RE - RS) * 0.45, ease: "power1.inOut", immediateRender: true }, RS);
         // metadata only (sound-event authoring and review); no visual state
         tl.data = { wave: tWave, d1: d1, d2: d2, pb: pb, still: tStill, pins: { photo: tWave, statement: tWave + 2 * HB, programme: d1 + DOLLY, permit: d2 + DOLLY } };
 

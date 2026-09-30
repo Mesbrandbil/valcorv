@@ -1,5 +1,5 @@
 {
-  "note": "Frame 4 (a2-resolve), cut 2: the sounds the picture makes. The scene reads every one of these times back through FL.clock('a2-resolve').ev(name), so picture and sound share one source. Offsets put each event on the 92 BPM half-beat grid for the guide narration (picture cuts use the shared rule FL.clock(id).c(anchor)); re-check them after a narration re-lock. Kinds from docs/sound-events.md only.",
+  "note": "Frame 4 (a2-resolve), cut 3 (cut 2 shots and timings, recoloured): the sounds the picture makes. The scene reads every one of these times back through FL.clock('a2-resolve').ev(name), so picture and sound share one source. Offsets put each event on the 92 BPM half-beat grid for the guide narration (picture cuts use the shared rule FL.clock(id).c(anchor)); re-check them after a narration re-lock. The cut 3 colour accents (the strip's hot band on the first word-token, a condition chip's cobalt ring on focus-clause and connect-zone, the green record markers on record-append) land on existing events, so no event was added. Kinds from docs/sound-events.md only.",
   "events": [
     {
       "name": "precision-snap",

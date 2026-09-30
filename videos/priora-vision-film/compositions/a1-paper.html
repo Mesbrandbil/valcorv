@@ -8,6 +8,7 @@
   <body>
     <template id="a1-paper-template">
       <link rel="stylesheet" href="assets/css/film.css" />
+      <link rel="stylesheet" href="assets/css/film-color.css" />
       <link rel="stylesheet" href="assets/css/film-sketch.css" />
       <style>
         /*
@@ -21,6 +22,11 @@
           nested <svg> viewport (the sheet window, which also clips it) framed by FL.boardCam, so
           the camera transform has an unambiguous origin and seeks render identical pixels.
           Board units are sheet px: at the whole-sheet framing the board is shown at scale 1.
+
+          Colour (cut 3): the sheet is paper and stays calm, two strong colours only. The sprinkler
+          condition carries water: the clause's underline, the thread and the procedure's underline, and
+          the thread thins in colour as it thins in line (solid water, dashed paler, dotted palest, then
+          the graphite question mark). Every tick is ok green. The briefing figures wear hi-vis (the kit).
         */
         #root {
           position: absolute;
@@ -37,22 +43,23 @@
           overflow: hidden;
         }
         #a1-paper-svg .a1-paper-shadow {
-          fill: #3b3a33;
+          fill: var(--c-graphite);
           stroke: none;
         }
+        /* the sheet: the palette's white (--c-helmet), a shade lighter than the ground */
         #a1-paper-svg .a1-paper-face {
-          fill: #fbfaf7;
+          fill: var(--c-helmet);
           stroke: none;
         }
         #a1-paper-svg .a1-paper-edge {
           fill: none;
-          stroke: #3b3a36;
+          stroke: var(--c-graphite);
           stroke-opacity: 0.22;
           stroke-width: 1px;
         }
         #a1-paper-svg .a1-paper-rule {
           fill: none;
-          stroke: #8f8c86;
+          stroke: color-mix(in srgb, var(--c-graphite) 55%, var(--c-paper));
           stroke-width: 1px;
           stroke-opacity: 0.75;
         }
@@ -130,14 +137,16 @@
           var svg = el(ID + "-svg");
           var slide = el(ID + "-slide");
           var sh = el(ID + "-shadows");
-          // a restrained contact shadow: a few soft offset plates, mostly under the bottom edge
+          // a restrained contact shadow: a few soft offset plates, mostly under the bottom edge. Square
+          // corners on whole pixels: a laid sheet has no anti-aliased shadow edge, so its pixels do not
+          // depend on the seek history (the rounded corners flipped a level on 2 px in the seek check)
           [
-            [0, 2, 0, 0.07],
-            [2, 5, 3, 0.045],
-            [4, 10, 7, 0.028],
-            [8, 18, 12, 0.016],
+            [0, 2, 0.07],
+            [2, 5, 0.045],
+            [4, 10, 0.028],
+            [8, 18, 0.016],
           ].forEach(function (s) {
-            FL.svgEl("rect", { class: ID + "-shadow", x: 77 - s[0], y: 65 + s[1] - s[0] * 0.5, width: 1766 + 2 * s[0], height: 950 + s[0], rx: s[2], opacity: s[3] }, sh);
+            FL.svgEl("rect", { class: ID + "-shadow", x: 77 - s[0], y: 65 + s[1] - s[0] * 0.5, width: 1766 + 2 * s[0], height: 950 + s[0], opacity: s[2] }, sh);
           });
           var SX = function (x) {
             return "translate(" + f2(x) + " 0)";
@@ -206,7 +215,7 @@
             return hand(parent, rectCmds(x, y, w, h), { seed: "fr" + seed, jit: 0.6, ext: true, extMin: 30, cls: "skt-fine", occ: true });
           };
           var tick = function (parent, x, y, s, seed) {
-            return hand(parent, tickCmds(x, y, s), { seed: "tk" + seed, jit: 0.35, cls: "skt-heavy", over: false });
+            return hand(parent, tickCmds(x, y, s), { seed: "tk" + seed, jit: 0.35, cls: "skt-heavy", over: false, tone: "ok" });
           };
           var rule = function (parent, x0, y0, x1, y1, seed, cls) {
             return hand(parent, "M" + f2(x0) + " " + f2(y0) + "L" + f2(x1) + " " + f2(y1), { seed: seed, jit: 0.3, over: false, cls: cls || "skt-lite" });
@@ -260,8 +269,8 @@
             u1x1 = 132 + U.sansWidth(L1, 28, 400),
             u2x0 = 132 + U.sansWidth(L2a, 28, 400),
             u2x1 = 132 + U.sansWidth("must remain in service", 28, 400);
-          var ul1 = hand(gCl, "M" + f2(u1x0 - 2) + " 275L" + f2(u1x1 + 2) + " 276.2", { seed: "ul1", jit: 0.5, over: true, cls: "skt-heavy" });
-          var ul2 = hand(gCl, "M" + f2(u2x0 - 2) + " 315.4L" + f2(u2x1 + 3) + " 316", { seed: "ul2", jit: 0.5, over: true, cls: "skt-heavy" });
+          var ul1 = hand(gCl, "M" + f2(u1x0 - 2) + " 275L" + f2(u1x1 + 2) + " 276.2", { seed: "ul1", jit: 0.5, over: true, cls: "skt-heavy", tone: "water" });
+          var ul2 = hand(gCl, "M" + f2(u2x0 - 2) + " 315.4L" + f2(u2x1 + 3) + " 316", { seed: "ul2", jit: 0.5, over: true, cls: "skt-heavy", tone: "water" });
           stroke(ul1, tUnder, 0.2, "power2.out");
           stroke(ul2, tUnder + 0.2, 0.16, "power2.out");
 
@@ -289,7 +298,7 @@
             hand(gp, greekCmds(x + PAD, AY + 122, AW - 2 * PAD, 5, 18, "pr1"), { seed: "gkpr1", jit: 0.45, cls: "skt-lite", over: false });
             proc.s1 = sansT(gp, "Confirm sprinklers", x + PAD, YS, { size: CS });
             proc.s2 = sansT(gp, "in service", x + PAD, YS + 28, { size: CS });
-            proc.ul = hand(gp, "M" + (x + PAD) + " " + (YS + 7) + "L" + f2(proc.s1.x1 + 2) + " " + (YS + 7) + "M" + (x + PAD) + " " + (YS + 35) + "L" + f2(proc.s2.x1 + 2) + " " + (YS + 35), { seed: "prul", jit: 0.45, over: false });
+            proc.ul = hand(gp, "M" + (x + PAD) + " " + (YS + 7) + "L" + f2(proc.s1.x1 + 2) + " " + (YS + 7) + "M" + (x + PAD) + " " + (YS + 35) + "L" + f2(proc.s2.x1 + 2) + " " + (YS + 35), { seed: "prul", jit: 0.45, over: false, tone: "water" });
             hand(gp, greekCmds(x + PAD, YS + 72, AW - 2 * PAD, 4, 18, "pr2"), { seed: "gkpr2", jit: 0.45, cls: "skt-lite", over: false });
             mono(gp, "REV 04 · HSE", x + PAD, AY + AH - 22, { size: 18, tone: "skt-t2", ls: 0.08, seed: "prrev", rot: -0.15 });
             hand(gp, scribbleCmds(x + AW - 120, AY + AH - 28, 90, 6, "prsig"), { seed: "prsig", jit: 0.3, over: false, cls: "skt-fine" });
@@ -395,6 +404,11 @@
             ringPts.push([chk.qAt[0] + Math.cos(ra) * 26 * (1 + 0.04 * ri / 22), chk.qAt[1] + Math.sin(ra) * 25]);
           }
           var ring = hand(gThread, U.smoothCmds(ringPts, false), { seed: "qring", jit: 0.5, over: true });
+          // the condition carries water and thins in colour as it thins in line
+          lead.root.classList.add("skt-c-water");
+          arrows[0].root.classList.add("skt-c-water");
+          arrows[1].root.style.setProperty("--skt-tc", "color-mix(in srgb, var(--skt-t-water) 66%, var(--c-paper))");
+          arrows[2].root.style.setProperty("--skt-tc", "color-mix(in srgb, var(--skt-t-water) 42%, var(--c-paper))");
 
           // ================================================================ choreography of the reading
           // the underline has drawn by the translate cut; the arrow extends as the camera follows it

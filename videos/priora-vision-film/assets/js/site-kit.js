@@ -552,6 +552,8 @@ ${mat}
     // the rewind's bleed: an independent multiplier on wash and saturation (1 full, 0 graphite), so a
     // timeline other than the one that owns the grading can drain and restore the colour
     handle._bleed = 1;
+    // set inline at mount, so a bleed tween's start value restores on a backward seek
+    svg.style.setProperty('--sk-bleed', '1');
     handle.bleed = function (tl, to, t, dur, ease) {
       tl.fromTo(svg, { '--sk-bleed': handle._bleed }, { '--sk-bleed': to, duration: Math.max(0.001, dur || 0.001), ease: ease || (dur > 0.002 ? 'power1.inOut' : 'none'), immediateRender: false }, t);
       handle._bleed = to;
