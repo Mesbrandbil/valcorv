@@ -168,14 +168,15 @@ body{background:var(--letterbox);color:var(--ink);font-family:var(--sans);-webki
 /* the location label wraps on phones instead of running off the stage */
 .portrait .loc{white-space:normal;max-width:852px;line-height:1.45}
 /* model sheet route: the canvas sheet only */
-.sheet #world,.sheet #screen{display:none}
+.sheet #world,.sheet #screen,.sheet #phoneP,.sheet #dock{display:none !important}
 
 /* spoken sentence beside Rasmus */
 .spk{width:max-content;max-width:640px}
 .portrait .spk{max-width:820px}
-.spk-lab{margin-bottom:max(8px, calc(5px / var(--s)))}
-.spk-txt{font:500 var(--fs-spoken)/1.25 var(--sans);color:var(--ink);white-space:normal;padding:2px 8px 4px;margin:-2px -8px -4px;border-radius:4px}
-.spk-txt span{display:inline-block;white-space:pre}
+.spk-lab{margin-bottom:max(8px, calc(5px / var(--s)));display:table;padding:1px 6px;margin-left:-6px;border-radius:3px;background:rgba(251,250,247,.85)}
+.spk-txt{font:500 var(--fs-spoken)/1.25 var(--sans);color:var(--ink);white-space:normal}
+/* each typed letter carries its own paper knockout (the sentence sits over the room drawing) */
+.spk-txt span{display:inline-block;white-space:pre;background:rgba(251,250,247,.85)}
 .spk-cur{display:inline-block;width:max(2px, calc(1.5px / var(--s)));height:.95em;margin-left:2px;vertical-align:-.12em;background:var(--ink-3)}
 
 /* agent notes: marginal annotations, never bubbles */
@@ -194,7 +195,7 @@ body{background:var(--letterbox);color:var(--ink);font-family:var(--sans);-webki
 .portrait .cap{display:none}
 
 /* Ingrid inset label and initials */
-.inset-lab{white-space:nowrap}
+.inset-lab{white-space:nowrap;padding:2px 6px;margin:-2px -6px;border-radius:3px;background:rgba(251,250,247,.86)}
 .initials{overflow:visible}
 .initials path,.sig path{fill:none;stroke:var(--ink);stroke-linecap:round;stroke-linejoin:round}
 
@@ -297,6 +298,8 @@ body{background:var(--letterbox);color:var(--ink);font-family:var(--sans);-webki
 /* portrait phone card overlay (CSS px) */
 #phoneP{position:absolute;left:4%;top:calc((100% - var(--ctrl-h)) / 2);width:92%;z-index:25;display:none;padding:16px 16px 14px;background:var(--page);color:var(--ink);border:1px solid var(--hair);border-radius:20px;box-shadow:var(--card-shadow)}
 .portrait #phoneP{display:block}
+/* the overlay lives outside the scaled stage (no --s), so its hairlines (rules, tap box, ring) are plain CSS px */
+#phoneP{--hair-px:1px}
 #phoneP .ph-lab{font-size:11px}
 #phoneP .ph-title{font-size:18px;margin-top:8px}
 #phoneP .ph-sub{font-size:13px;margin-top:6px}
@@ -756,9 +759,9 @@ const AGENT_IDS = ['activity', 'site', 'd4', 'room4', 'safety', 'evidence', 'con
    tether: the real counterpart (an anchor name resolved by tetherPoint() in 40-text.js), or null. */
 const AGENTS = {
   activity:   { glyph: '¶', label: 'ACTIVITY', tag: ['ACTIVITY', 'the work, as Rasmus described it'], tagT: 15.0, home: [930, 466], h: 90, w: 48, tether: 'record.first' },
-  site:       { glyph: '@', label: 'SITE · NORDHAVN', tag: ['SITE · NORDHAVN', 'standards, people, production'], tagT: 17.0, home: [1000, 640], h: 96, w: 84, tether: 'door' },
-  d4:         { glyph: 'D4', label: 'FIRE ALARM · D4-07', tag: ['FIRE ALARM · DETECTOR D4-07', 'live state of the alarm'], tagT: 19.0, home: [980, 230], h: 26, w: 70, tether: 'd4.mini', mono: true },
-  room4:      { glyph: 'R4', label: 'ROOM 4', tag: ['ROOM 4', 'everything inside these walls'], tagT: 21.4, home: [760, 380], h: 70, w: 64, tether: 'roomCorner' },
+  site:       { glyph: '@', label: 'SITE · NORDHAVN', tag: ['SITE · NORDHAVN', 'standards, people, production'], tagT: 17.0, home: [1195, 630], h: 96, w: 84, tether: 'door' },
+  d4:         { glyph: 'D4', label: 'FIRE ALARM · D4-07', tag: ['FIRE ALARM · DETECTOR D4-07', 'live state of the alarm'], tagT: 19.0, home: [872, 300], h: 26, w: 70, tether: 'd4.mini', mono: true },
+  room4:      { glyph: 'R4', label: 'ROOM 4', tag: ['ROOM 4', 'everything inside these walls'], tagT: 21.4, home: [744, 380], h: 70, w: 64, tether: 'roomCorner' },
   safety:     { glyph: '!', label: 'SAFETY', tag: ['SAFETY', 'preventable danger'], tagT: 23.4, home: [125, 650], h: 100, w: 34, tether: 'rasmus.head' },
   evidence:   { glyph: '?', label: 'EVIDENCE', tag: ['EVIDENCE', 'what is actually known'], tagT: 26.2, home: [820, 720], h: 105, w: 72, tether: 'record' },
   conditions: { glyph: '§', label: 'INSURANCE CONDITIONS', tag: ['INSURANCE CONDITIONS', "the annual programme's wording"], tagT: 25.0, home: [860, 820], h: 110, w: 60, tether: 'frameLabel' },
@@ -846,18 +849,21 @@ const CAM_KEYS = {
   S4:  { L: [80, 200, 1240, 697.5], P: [180, 240, 700, 933.3] },
   S5:  { L: [150, 100, 600, 337.5], P: [270, 110, 420, 560] },
   S6:  { L: [80, 315, 1180, 663.75], P: [120, 420, 720, 960] },
-  S6b: { L: [40, 250, 1380, 776.25], P: [120, 420, 720, 960] },
-  S7:  { L: [40, 250, 1380, 776.25], P: [60, 480, 820, 1093.3] },
+  S6b: { L: [40, 250, 1380, 776.25], P: [110, 40, 880, 1173.3] },
+  S7:  { L: [40, 250, 1380, 776.25], P: [40, 60, 900, 1200] },
   S8:  { L: [880, 40, 1500, 843.75], P: [1240, 60, 480, 640] },
   S9:  { L: [830, 80, 420, 236.25], P: [880, 60, 300, 400] },
   S10: { L: [30, 50, 1480, 832.5], P: [120, 90, 720, 960] },
   S11: { L: [800 - 84210 / 2, 450 - 84210 * 900 / 1600 / 2, 84210, 84210 * 900 / 1600], P: [800 - 25714 / 2, 450 - 25714 * 4 / 3 / 2, 25714, 25714 * 4 / 3] },
   S12: { L: [90, 250, 1320, 742.5], P: [700, 280, 600, 800] }
 };
-/* Integration changes to the authored landscape rects (portrait rects are as authored):
+/* Integration changes to the authored rects:
    S6 sits higher and a little wider: the record line clears the running head, the page fills the
    frame and the Site agent (moved right, see 50-agents.js) stays in shot.
-   S6b (the second S6 hold, 40.0 to 48.2, portrait as S6) and S7 share one rect that reaches x 1420, so the red hairline visibly
+   Portrait: S6b (the second S6 hold, 40.0 to 48.2) is a wider S6 that keeps D4 at row 4 and the whole
+   red bar in shot with Room 4 above; S7 holds the whole rope. Neither follows the speaker, so the
+   deviation and the tug of war read whole (the authored portrait S7 sat mostly below the page).
+   S6b and S7 share one landscape rect that reaches x 1420, so the red hairline visibly
    crosses the frame to the OUTSIDE CONDITIONS tag, and it keeps the pullers' feet and tags in shot.
    S8 drops to y 884 and starts at x 880: the carriers' feet and tags and the whole decision card
    (its Transfer row retypes at 100.2) are in shot.
@@ -874,8 +880,8 @@ const CAM = [
   { k: 'S4', a: 16.0, b: 27.6, follow: true },
   { k: 'S6', a: 28.6, b: 34.0, follow: true },
   { k: 'S5', a: 35.2, b: 39.0 },
-  { k: 'S6b', a: 40.0, b: 48.2, follow: true },
-  { k: 'S7', a: 49.2, b: 66.6, follow: true },
+  { k: 'S6b', a: 40.0, b: 48.2 },
+  { k: 'S7', a: 49.2, b: 66.6 },
   { k: 'S12', a: 67.6, b: 77.0, follow: true },
   { k: 'S8', a: 79.6, b: 102.8, follow: true },
   { k: 'S3', a: 103.8, b: 105.0 },
@@ -948,7 +954,7 @@ const WORLD = {
   slip: { x0: 1290, y0: 110, x1: 1530, y1: 560, rules: [420, 450, 480, 510] },
   tally: [1290, 592],
   footnote: [100, 868],
-  newRecord: [150, 500],
+  newRecord: [150, 514],          // storyboard (150, 500) collides with the word tags at baseline 488
   redBar: [526, 756],
   annaOffice: [1050, 200],
   marginSig: [1060, 560],
@@ -2138,6 +2144,8 @@ function txMeasure() {
   TX.corner.style.top = px(S.corner[1] - txBaseOf(TX.corner, 'mono'));
   TX.insetBox = portrait ? (() => { const sz = 240 / LAYOUT.s; return [S.W - sz - 16 / LAYOUT.s, TX.headH + 16 / LAYOUT.s, sz, sz]; })() : SCREEN.L.inset;
   const ib = TX.insetBox;
+  // portrait: the label wraps right-aligned under the 240 px inset instead of running off the stage
+  Object.assign(TX.insetLab.style, portrait ? { width: px(ib[2]), whiteSpace: 'normal', textAlign: 'right' } : { width: '', whiteSpace: '', textAlign: '' });
   TX.insetLab.style.left = px(ib[0] + ib[2] - TX.insetLab.offsetWidth);
   TX.insetLab.style.top = px(ib[1] + ib[3] + 10);
   const isz = ib[2] * 0.2;
@@ -2471,8 +2479,6 @@ function txSyncHead(t, portrait) {
 function txSyncSpoken(t, view) {
   const show = envelope(t, COPY.speaker.a, COPY.fall.stopLands, 0.3, 0.01);
   setAlpha(TX.spk, show);
-  // soft paper knockout behind the typed sentence (it sits over the room's wall and pipe); it clears as the letters leave
-  setStyle(TX.spkTxt, 'background-color', `rgba(251,250,247,${(0.85 * (1 - prog(t, COPY.fall.a, COPY.fall.a + 0.6))).toFixed(3)})`);
   if (show <= 0) { setAlpha(TX.spkCur, 0); setAttr(TX.lines[2], 'visibility', 'hidden'); return; }
   const blk = txSpokenBlock(t, view.cam);
   setStyle(TX.spk, 'transform', `translate(${blk.x.toFixed(2)}px,${blk.y.toFixed(2)}px)`);
@@ -2678,7 +2684,7 @@ function txTagRect(o, view, above) {
   return { x: clamp(fx - o.w / 2, S[0], S[2] - o.w), y: clamp(y, S[1], view.H - 8 - o.h), w: o.w, h: o.h };
 }
 /* Above the head or under the feet, decided once per tag and layout over the tag's life (start,
-   middle, end): page text, notes already showing, earlier tags and the caption count against a spot. */
+   middle, end): page text, notes already showing, earlier tags, other agents and the caption count against a spot. */
 function txTagAbove(o) {
   const key = LAYOUT.mode + LAYOUT.s;
   if (o.posKey === key) return o.above;
@@ -2693,6 +2699,8 @@ function txTagAbove(o) {
     }
     // tags introduced earlier and still showing keep their place
     TX.tags.forEach(g => { if (AGENTS[g.id].tagT < T && txTagAlpha(g.id, ts) > 0) avoid.push(txTagRect(g, view, txTagAbove(g))); });
+    // other agents (half weight: their boxes are generous)
+    txAgentRects(view).forEach(r => { if (r.id !== o.id) avoid.push({ x: r.x + r.w / 4, y: r.y + r.h / 4, w: r.w / 2, h: r.h / 2 }); });
     return { view, avoid };
   });
   const score = above => views.reduce((a, V) => { const r = txTagRect(o, V.view, above); return a + V.avoid.reduce((b, k) => b + txOverlapArea(r, k, 4), 0); }, 0);
@@ -2863,12 +2871,13 @@ const AG_SPOT = {
   activityCard: [878, 466],     // off the decision card (900 to 1220, 340 to 600) before it appears
   site: [1195, 630],            // right of its storyboard home (1000, 640), so the notes beside the rows (Evidence, D4) stay clear of it
   tc12: [640, 812],             // below the hour after, clear of its labels and of Evidence at the seal
-  tc12Late: [690, 436],         // Chapter 9: below Room 4's corner, watching the joint, clear of the caption band
-  d4: [850, 342],               // between the two miniatures: below the running head in S4, out of Anna's S9 close-up
+  tc12Late: [800, 440],         // Chapter 9: beside Room 4, outside the S5 close-up and clear of the caption band
+  d4: [872, 300],               // between the two miniatures, above Room 4 and the Pilcrow: below the running head in S4, out of Anna's S9 close-up
+  d4Late: [872, 346],           // from Chapter 8: lowered just out of Anna's S9 close-up (its frame ends at y 316)
   d4Row4: [960, 625],           // dome beside row 4, clear of Evidence and its loupe at the row stops
   evidenceGap: [960, 580],      // out of the tug of war
   conditionsTug: [985, 820],    // steps along the frame line while the Site agent pulls at the ribbon's right end
-  siteLate: [1002, 700],        // below the decision card (its box appears at 70.2)
+  siteLate: [966, 690],         // below the decision card (its box appears at 70.2)
   evidenceSeal: [722, 818],     // beside the held slip's seal corner, clear of the DOM slip
   evidenceMarket: [1160, 712],  // follows the sealed slip toward the gate, so it stays in the S8 shot for its line
   conditionsLate: [1150, 820],  // Chapter 9: further along the frame line, clear of the caption under the rows
@@ -2957,8 +2966,9 @@ const AG_MOVES = {
   site: { at: [-60, 640], moves: [
     [16.6, 18.0, AG_SPOT.site, 'walk'], [49.0, 50.2, agSiteRope, 'walk'], [62.2, 63.4, AG_SPOT.siteLate, 'walk']] },
   d4: { at: [850, 100], moves: [
-    [19.0, 20.0, AG_SPOT.d4, 'drop'], [40.2, 41.0, AG_SPOT.d4Row4, 'drop'], [48.2, 49.2, AG_SPOT.d4, 'glide']] },
-  room4: { at: [736, 380], moves: [[21.4, 22.0, [760, 380], 'shuffle']] },
+    [19.0, 20.0, AG_SPOT.d4, 'drop'], [40.2, 41.0, AG_SPOT.d4Row4, 'drop'], [48.2, 49.2, AG_SPOT.d4, 'glide'], [102.9, 103.7, AG_SPOT.d4Late, 'glide']] },
+  // 16 pu left of its storyboard home (clear of D4's tag), then it shuffles right, out of the S5 Room 4 close-ups
+  room4: { at: [722, 380], moves: [[21.4, 22.0, [744, 380], 'shuffle'], [32.6, 33.6, [800, 380], 'shuffle']] },
   safety: { at: [125, 650], moves: [
     [53.4, 54.0, agSafetyRope, 'run'], [62.2, 63.0, [125, 650], 'walk'],
     [92.4, 93.8, [1255, 640], 'run'], [93.8, 94.4, AG_SPOT.safetyMarket, 'hop'], [103.0, 104.4, [125, 650], 'run']] },
@@ -6303,7 +6313,8 @@ function fiLiveLayers(ctx, view, G, nv) {
   // margin marks: two walk the page's margin lane, one circles in the right margin
   if (css > FI.dotsAbove && out > 0) {
     const r = Math.max(0.6 / s, 9 * z), round = r * s > 1.2;
-    ctx.fillStyle = inkA(out);
+    // small dots are short butt-capped strokes (about 40 percent cheaper than a path of rects)
+    ctx.fillStyle = ctx.strokeStyle = inkA(out); ctx.lineWidth = 2 * r; ctx.lineCap = 'butt';
     ctx.beginPath();
     for (let k = 0; k < nv; k++) {
       const c = FI_VIS[k];
@@ -6321,10 +6332,10 @@ function fiLiveLayers(ctx, view, G, nv) {
           lx = 1390 + 70 * Math.cos(a); ly = 300 + ph * 420 + 40 * Math.sin(a);
         }
         const px = X(k, lx, ly), py = Y(k, lx, ly);
-        if (round) { ctx.moveTo(px + r, py); ctx.arc(px, py, r, 0, TAU); } else ctx.rect(px - r, py - r, 2 * r, 2 * r);
+        if (round) { ctx.moveTo(px + r, py); ctx.arc(px, py, r, 0, TAU); } else { ctx.moveTo(px - r, py); ctx.lineTo(px + r, py); }
       }
     }
-    ctx.fill();
+    if (round) ctx.fill(); else ctx.stroke();
   }
   // sentences landing on 300 seeded pages (intent): a new line inks under the record
   ctx.beginPath();
@@ -6339,8 +6350,9 @@ function fiLiveLayers(ctx, view, G, nv) {
   // detector LEDs (state, from 124.6): a small ink light that blinks on its own schedule
   if (t >= FI.state.t && out > 0) {
     const r = Math.max(0.7 / s, 8 * z);
+    ctx.lineWidth = 2 * r; ctx.lineCap = 'butt';
     for (const lit of [false, true]) {
-      ctx.fillStyle = inkA((lit ? 1 : 0.45) * out); ctx.beginPath();
+      ctx.fillStyle = ctx.strokeStyle = inkA((lit ? 1 : 0.45) * out); ctx.beginPath();
       for (let k = 0; k < nv; k++) {
         const c = FI_VIS[k];
         if (t < G.led[c]) continue;
@@ -6348,9 +6360,9 @@ function fiLiveLayers(ctx, view, G, nv) {
         const on = since < FI.state.on || ((since / G.ledPer[c] + G.ledPh[c]) % 1) * G.ledPer[c] < FI.state.on;
         if (on !== lit) continue;
         const px = X(k, G.ledXY[2 * c], G.ledXY[2 * c + 1]), py = Y(k, G.ledXY[2 * c], G.ledXY[2 * c + 1]);
-        if (lit) { ctx.moveTo(px + 2 * r, py); ctx.arc(px, py, 2 * r, 0, TAU); } else ctx.rect(px - r, py - r, 2 * r, 2 * r);
+        if (lit) { ctx.moveTo(px + 2 * r, py); ctx.arc(px, py, 2 * r, 0, TAU); } else { ctx.moveTo(px - r, py); ctx.lineTo(px + r, py); }
       }
-      ctx.fill();
+      if (lit) ctx.fill(); else ctx.stroke();
     }
   }
   // § marks (values and authority) appear with the first beat and pulse with every beat
@@ -6377,6 +6389,18 @@ function fiLiveLayers(ctx, view, G, nv) {
 /* Vest specks from a flat list [x, y, size, ...] (stage px): an ink rim, then the vest yellow. */
 function fiSpecks(ctx, specks, s) {
   const rim = FI.speck.rim / s;
+  // all one size (no values beat running): short butt-capped strokes, cheaper than paths of rects
+  let same = true;
+  for (let q = 5; q < specks.length && same; q += 3) same = specks[q] === specks[2];
+  if (same && specks.length) {
+    ctx.lineCap = 'butt';
+    for (const [col, w] of [[inkA(FI.speck.rimA), specks[2] + 2 * rim], [COL.vest, specks[2]]]) {
+      ctx.strokeStyle = col; ctx.lineWidth = w; ctx.beginPath();
+      for (let q = 0; q < specks.length; q += 3) { ctx.moveTo(specks[q] - w / 2, specks[q + 1]); ctx.lineTo(specks[q] + w / 2, specks[q + 1]); }
+      ctx.stroke();
+    }
+    return;
+  }
   ctx.fillStyle = inkA(FI.speck.rimA); ctx.beginPath();
   for (let q = 0; q < specks.length; q += 3) { const h = specks[q + 2] / 2 + rim; ctx.rect(specks[q] - h, specks[q + 1] - h, 2 * h, 2 * h); }
   ctx.fill();
