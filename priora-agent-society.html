@@ -80,6 +80,9 @@ body { font-family: var(--sans); -webkit-font-smoothing: antialiased; }
   #bar button { width: 44px; height: 44px; }
   #time { min-width: 0; font-size: 11px; }
 }
+
+/* Export mode: the picture only. */
+#film.clean #bar, #film.clean #cover { display: none; }
 </style>
 </head>
 <body>
@@ -272,6 +275,9 @@ const Sound = (function () {
     const AC = window.AudioContext || window.webkitAudioContext;
     if (!AC) return;
     try { ac = new AC(); } catch (e) { ac = null; return; }
+    buildGraph();
+  }
+  function buildGraph() {
     master = ac.createGain();
     master.gain.value = muted ? 0 : 0.85;
     const comp = ac.createDynamicsCompressor();
@@ -292,7 +298,7 @@ const Sound = (function () {
     for (let i = 0; i < bd.length; i++) { last = (last + 0.02 * (h1(i * 0.913) * 2 - 1)) / 1.02; bd[i] = last * 3.5; }
     crackBuf = ac.createBuffer(1, ac.sampleRate * 2, ac.sampleRate);
     const cd = crackBuf.getChannelData(0);
-    for (let i = 0; i < cd.length; i++) { const r = h1(i * 0.0137); cd[i] = r > 0.9965 ? (h1(i * 3.3) * 2 - 1) : cd[i - 1] ? cd[i - 1] * 0.86 : 0; }
+    for (let i = 0; i < cd.length; i++) { const r = h1(i * 0.0137); cd[i] = r > 0.9965 ? (h1(i * 3.3) * 2 - 1) : i > 0 ? cd[i - 1] * 0.86 : 0; }
     buildBeds();
   }
 
@@ -464,7 +470,24 @@ const Sound = (function () {
   function stopAll() { for (const n of live) { try { n.stop(); } catch (e) { /* ignore */ } } live.clear(); }
   function seekIdx(t) { nextIdx = 0; while (nextIdx < CUES.length && CUES[nextIdx][0] < t) nextIdx++; }
 
+  /* Render the whole soundtrack offline (for exporting the film as a video file). */
+  async function renderOffline(sr = 48000) {
+    const saved = [ac, master, verb, beds, noiseBuf, brownBuf, crackBuf, muted];
+    const OAC = window.OfflineAudioContext || window.webkitOfflineAudioContext;
+    ac = new OAC(2, Math.ceil(DURATION * sr), sr);
+    muted = false;
+    buildGraph();
+    for (const k of ['room', 'sea', 'pad', 'market']) beds[k].gain.setValueAtTime(0, 0);
+    for (let t = 0.05; t <= DURATION; t += 0.05) { const L = bedLevels(t); for (const k in L) beds[k].gain.linearRampToValueAtTime(L[k], t); }
+    for (const [ct, fn] of CUES) { try { fn(ct); } catch (e) { /* skip */ } }
+    const buf = await ac.startRendering();
+    live.clear();
+    [ac, master, verb, beds, noiseBuf, brownBuf, crackBuf, muted] = saved;
+    return buf;
+  }
+
   return {
+    renderOffline,
     init() { init(); if (ac) seekIdx(lastT); },
     resume() { if (ac && ac.state === 'suspended') ac.resume().catch(() => {}); },
     pauseAll() { if (!ac) return; stopAll(); if (beds) for (const k of ['room', 'sea', 'pad', 'market']) beds[k].gain.setTargetAtTime(0, ac.currentTime, 0.05); },
@@ -3312,7 +3335,23 @@ window.film = {
   play() { start(); },
   pause() { setPlaying(false); },
   get time() { return T; },
+  /* Export helper: renders the soundtrack offline and keeps 16-bit stereo PCM for retrieval in slices. */
+  async renderAudio() {
+    const buf = await Sound.renderOffline(48000);
+    const L = buf.getChannelData(0), R = buf.getChannelData(1), n = buf.length;
+    const pcm = new Int16Array(n * 2);
+    for (let i = 0; i < n; i++) { pcm[2 * i] = Math.max(-1, Math.min(1, L[i])) * 32767; pcm[2 * i + 1] = Math.max(-1, Math.min(1, R[i])) * 32767; }
+    window.__pcm = new Uint8Array(pcm.buffer);
+    return { bytes: window.__pcm.length, sampleRate: 48000 };
+  },
+  audioSlice(a, b) {
+    const u = window.__pcm.subarray(a, b);
+    let s = '';
+    for (let i = 0; i < u.length; i += 0x8000) s += String.fromCharCode.apply(null, u.subarray(i, i + 0x8000));
+    return btoa(s);
+  },
 };
+if (/[?&]clean/.test(location.search)) filmEl.classList.add('clean');
 filmEl.classList.add('cover-on');
 (async function boot() {
   layout();
