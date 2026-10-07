@@ -1,46 +1,56 @@
 /*
-  s5-deviation (47 to 57 s): a deviation. Cut 2 (docs/cut2-plan.md).
+  s5-deviation (47 to 57 s): a deviation. Cut 3 (docs/cut3-plan.md, section "C: s5").
 
-  Camera: still on the panel [530, 510, 1044] from 48.1 to 52.75 (the site window is in
-  frame on the right), pull out 52.75 to 53.95, still [930, 560, 1340] to 56.95.
+  Camera: still on the panel [540, 514, 1090] from 48.1 to 53.35; a pan right 53.35 to 54.35
+  to [930, 600, 1020] (the escalation follows it); still to 56.95 (the decision is held there).
 
-  48.1 the Insurer re-checks (brackets open, its arc trembles). On "slips" its arc rotates
-  out of line, drifts outward and turns dashed (its tie from s4 goes dashed with it); the
-  token tilts and its brackets fail to close. Two rust-deep ticks and a faint grey ghost
-  mark the gap at the top of the ring. Fire pings the Insurer. Beside the gap: FIRE WATCH
-  PLANNED: 30 MIN with a solid 30-unit length, then on "half" POLICY ASKS: 60 MIN with a
-  dashed 60-unit length stacked above it. 50.3 to 52.6 an unengaged, dashed grey barrier
-  outline sits on the route outside the door (the route runs over it unbroken) with NO HARD
-  STOP CONFIGURED, the spark flickering in the same frame. 52.1 to 52.75 (still frame) the
-  finding fades, the ring contracts to one compact decision packet (arcsG 0.85, the facets
-  slide aside so the gap at the top is clear, the gap ticks stay), the packet comes out
-  through the door and waits beside Priora: DECISION PACKET, held. Pull out. 53.95 to 55.5
-  (still frame) Priora carries the packet to the risk owner: Priora to GEO.prioraDock, the
-  packet to GEO.dock, beside the risk owner on the side toward the rooms. On "the human
-  decides" the risk owner's black line leaves the desk, reaches the packet, loops once round
-  it and ends at its right side with a round end dot: RISK OWNER DECIDES. Still to 56.95.
+  48.10 the Insurer re-checks: its brackets tremble, its arc trembles. On "slips" (48.34) its
+  arc rotates out of line and turns dashed (clearly out by 48.55), its tie from s4 goes dashed
+  with it, the token tilts (by 48.75) and its brackets fail to close; 48.75 two short rust-deep
+  ticks lock onto the ring at the gap's edges (a faint grey ghost shows where the arc belongs).
+  CONFIGURED FOR THIS SITE fades at 48.1. Fire pings the Insurer. In the clear paper right of
+  the panel (reported out, above Priora), each label with its own ruler under it from one
+  shared origin tick: FIRE WATCH PLANNED: 30 MIN
+  (a solid 30-minute length, about 150 px) then on "half" POLICY ASKS: 60 MIN (a dashed
+  60-minute length, about 300 px). 50.3 an unengaged dashed grey barrier outline on the route
+  outside the door, the route running over it unbroken: NO HARD STOP CONFIGURED (ink-2).
+  51.55 the finding and the barrier fade; the five ties retract into their agents; Priora
+  steps up clear of the door; its bead pulses and a thread reaches in through the door to the
+  ring, which contracts at the table into one compact decision packet (arcsG 0.85, the
+  facets slide aside so the gap at the top stays clear); on "Priora brings it" the packet
+  comes out along the thread through the open door to Priora (52.45 to 52.85), and the thread
+  that is left ties it to Priora's bead: DECISION PACKET. The route lets go of the empty
+  table (it now runs from the panel door to the window). Pan: the panel names fade; Priora
+  carries the packet to the dock beside the risk owner (53.45 to 54.65), landing before
+  "Agents prepare". On "the human decides" the risk owner's black line leaves the desk's
+  top-right corner on a diagonal, swings under the packet, rises at its right side and loops
+  once round it, ending where the loop began, with a round end dot: RISK OWNER DECIDES,
+  above the risk owner. Still to 56.95.
 
-  Contract at 47.0 (from s4): docs/cut2-plan.md section 2. If s4 has not provided W.align,
-  this section builds the 47.0 state itself (arcs, agents, panel, route, record, spark).
+  Contract at 47.0 (from s4): docs/cut2-plan.md section 2 (unchanged). If s4 has not provided
+  W.align, this section builds the 47.0 state itself.
 
   Contract at 57.0 (for s6):
-    Priora (1186, 612) = GEO.prioraDock, scale 1, beadG rotation 58.3 (pointing at the packet).
-    Packet W.caseT.g (1228, 680) = GEO.dock, body scale 1, arcsG scale 0.85 (svgOrigin 0 0).
+    Priora at GEO.prioraDock (1186, 612), scale 1, beadG rotation 58.3 (at the packet).
+    Packet W.caseT.g at GEO.dock (1228, 680), body scale 1, arcsG scale 0.85 (svgOrigin 0 0).
     Insurer arc opacity 0 (back at its aligned place); the four other arcs solid, opacity 1.
-    Facets folded (chipG x 22, chipG untouched) and slid aside round the ring: fc.g rotation
-      = W.facetRotations[key] (repair 210, hot 330, place 378 = 18, time 66, conditions 114,
-      photo 162; W.facetAngles has them mod 360) and each fc.mark carries the transform
-      attribute rotate(fc.angle - that) so the marks stay upright. No facet in the gap 234-306.
-    W.gapTicks: two rust-deep ticks at 234 and 306 deg (radius 34 to 46 local, inside arcsG),
-      opacity 1. W.gap = { a0: 234, a1: 306, r: 40 } (local to arcsG).
-    W.decision (class pk-decision) d = W.decisionD, drawn, opacity 1: from the desk top right
-      (1180, 711) to the packet, one loop round it (radius 40 to 46), ending at
-      W.decisionTip = [1274, 680] heading straight up. W.decisionDot: round ink end dot at
-      the tip, opacity 1 (s6 may hide it under the trunk).
-    W.ownerDecides ("RISK OWNER DECIDES", ink mono) visible; s6 fades it at 57.9.
-    W.align.insurerDashed (the dashed twin of the insurer arc) opacity 0.
-    The Insurer conditions token tilted 12 deg and 8 units outward, brackets shut, name visible.
-    Panel, route, record and real world as at 47. No barrier, no other labels.
+    Facets folded (chipG untouched) and slid aside: fc.g rotation = W.facetRotations[key]
+      (repair 210, hot 330, place 378 = 18, time 66, conditions 114, photo 162), each fc.mark
+      with transform attribute rotate(fc.angle - that), so the marks stay upright.
+    W.gapTicks: two short rust-deep radial ticks on the ring line at 234 and 306 degrees
+      (local radius 35.5 to 41.55 inside arcsG: on the arc ends, just inside, pointing to the
+      core; nothing beyond the ring outline).
+      W.gap = { a0: 234, a1: 306, r: 40 } (local to arcsG).
+    W.decision (pk-decision) d = W.decisionD, drawn, opacity 1: from the desk's top-right
+      corner (1182, 710) on a diagonal under the packet, up its right side to W.decisionTip,
+      then one turn round the packet (radius W.decisionLoop.r = 42, counter-clockwise on
+      screen: right, top, left, bottom, right) ending at W.decisionTip = [1270, 680], heading
+      straight up. W.decisionDot: round ink end dot at the tip, opacity 1.
+    W.ownerDecides ("RISK OWNER DECIDES", ink mono, 19 px) above the risk owner, visible.
+    W.route drawn from the panel door to the window: drawSVG W.routeDraw (start at the door).
+    Panel agent names and CONFIGURED FOR THIS SITE at opacity 0 (hidden for the rest of the film).
+    W.align.insurerDashed opacity 0. The Insurer conditions token tilted 12 degrees and 8 units
+    outward, brackets shut. No barrier, no other labels.
 */
 PK.section("s5-deviation", 47, 57, function (tl, W, ctx, S) {
   var G = PK.GEO,
@@ -49,11 +59,13 @@ PK.section("s5-deviation", 47, 57, function (tl, W, ctx, S) {
   var T0 = 47.0;
   var cs = W.caseT;
   var A = W.agents;
+  var P = W.priora;
   var tc = G.table; // the case at the table, (380, 520)
   var AR = G.alignR; // 40
   var KEYS = ["siteRules", "insurer", "fire", "riskEng", "evidence"];
   var DOCK = G.dock || [1228, 680];
   var PDOCK = G.prioraDock || [1186, 612];
+  var INK2 = C.ink2 || "#3A3936";
   function pt(p) {
     return f(p[0]) + " " + f(p[1]);
   }
@@ -61,6 +73,10 @@ PK.section("s5-deviation", 47, 57, function (tl, W, ctx, S) {
     var c = PK.cam.camAt(t);
     var p = (x - c[0]) / (c[2] / 2);
     return Math.round(Math.max(-1, Math.min(1, p)) * 100) / 100;
+  }
+  function FT(el, from, to, at) {
+    to.immediateRender = false;
+    tl.fromTo(el, from, to, at);
   }
 
   // ------------------------------------------------------------ standalone: build the 47.0 state if s4 has not
@@ -75,19 +91,18 @@ PK.section("s5-deviation", 47, 57, function (tl, W, ctx, S) {
     });
     alignArcs = made;
     if (!W.align) W.align = { arcs: made };
-    var P = W.panel;
-    tl.set(P.walls, { drawSVG: "0% 100%" }, T0);
-    tl.set([P.leafA, P.leafB, P.jambs, P.title, P.sub], { opacity: 1 }, T0);
-    tl.set(P.leafA, { y: -G.panel.gap / 2 + 0.01 }, T0);
-    tl.set(P.leafB, { y: G.panel.gap / 2 - 0.01 }, T0);
-    P.slots.forEach(function (s) {
+    var PN = W.panel;
+    tl.set(PN.walls, { drawSVG: "0% 100%" }, T0);
+    tl.set([PN.leafA, PN.leafB, PN.jambs, PN.title], { opacity: 1 }, T0);
+    tl.set(PN.leafA, { y: -G.panel.gap / 2 + 0.01 }, T0);
+    tl.set(PN.leafB, { y: G.panel.gap / 2 - 0.01 }, T0);
+    PN.slots.forEach(function (s) {
       tl.set(s.el, { opacity: 0 }, T0);
     });
     KEYS.forEach(function (k) {
       var p = G.slot(G.agents[k].aligned);
       tl.set(A[k].g, { x: p[0], y: p[1], opacity: 1 }, T0);
       tl.set(A[k].body, { rotation: 0, scale: 1, svgOrigin: "0 0" }, T0);
-      tl.set(A[k].label, { opacity: 1 }, T0);
     });
     tl.set(W.route, { drawSVG: "0% 100%" }, T0);
     tl.set(W.record.spine, { drawSVG: "0% 100%" }, T0);
@@ -127,10 +142,14 @@ PK.section("s5-deviation", 47, 57, function (tl, W, ctx, S) {
   var insP = G.slot(G.agents.insurer.aligned); // (380, 370)
   var fireP = G.slot(G.agents.fire.aligned);
   var prioraP = [700, 470];
-  tl.set(W.priora.g, { x: prioraP[0], y: prioraP[1], opacity: 1 }, T0);
-  tl.set(W.priora.body, { scale: 1, svgOrigin: "0 0" }, T0);
-  tl.set(W.priora.beadG, { rotation: 180, svgOrigin: "0 0" }, T0);
-  tl.set(W.priora.label, { opacity: 0 }, T0);
+  var names = KEYS.map(function (k) {
+    return A[k].label;
+  });
+  tl.set(P.g, { x: prioraP[0], y: prioraP[1], opacity: 1 }, T0);
+  tl.set(P.body, { scale: 1, svgOrigin: "0 0" }, T0);
+  tl.set(P.beadG, { rotation: 180, svgOrigin: "0 0" }, T0);
+  tl.set(P.bead, { scale: 1, svgOrigin: "26 0" }, T0);
+  tl.set(P.label, { opacity: 0 }, T0);
   tl.set(cs.g, { x: tc[0], y: tc[1], opacity: 1 }, T0);
   tl.set(cs.body, { scale: 1, svgOrigin: "0 0" }, T0);
   tl.set(cs.arcsG, { scale: 1, svgOrigin: "0 0" }, T0);
@@ -141,6 +160,9 @@ PK.section("s5-deviation", 47, 57, function (tl, W, ctx, S) {
   tl.set(ins.body, { rotation: 0, svgOrigin: "0 0" }, T0);
   tl.set([ins.left, ins.right], { x: 0 }, T0);
   tl.set(fire.dots, { opacity: 0 }, T0);
+  tl.set(names, { opacity: 1 }, T0);
+  tl.set(W.panel.sub, { opacity: 1 }, T0);
+  tl.set(W.route, { drawSVG: "0% 100%" }, T0);
   tl.set(W.decision, { opacity: 0 }, T0);
   cs.facets.forEach(function (fc) {
     tl.set(fc.g, { rotation: fc.angle, svgOrigin: "0 0" }, T0);
@@ -206,127 +228,138 @@ PK.section("s5-deviation", 47, 57, function (tl, W, ctx, S) {
     tl.to(fc.spoke, { drawSVG: "0% 0%", duration: 0.5, ease: "power2.in", immediateRender: false }, 47.15 + i * 0.03);
   });
 
-  // ------------------------------------------------------------ 48.1 (camera landed): the Insurer re-checks
+  // ------------------------------------------------------------ 48.1 (camera landed): the subtitle goes, the Insurer re-checks
   var tCheck = 48.1;
-  tl.fromTo(ins.left, { x: 0 }, { x: -3.5, duration: 0.25, ease: "power2.out", immediateRender: false }, tCheck);
-  tl.fromTo(ins.right, { x: 0 }, { x: 3.5, duration: 0.25, ease: "power2.out", immediateRender: false }, tCheck);
-  tl.fromTo(
+  FT(W.panel.sub, { opacity: 1 }, { opacity: 0, duration: 0.3, ease: "power1.in" }, tCheck);
+  // a visible tremble of the brackets (about 2 world units = 3.5 px) and of its arc, 48.10 to 48.30
+  FT(ins.left, { x: 0 }, { keyframes: [{ x: -2, duration: 0.05 }, { x: -0.3, duration: 0.05 }, { x: -2, duration: 0.05 }, { x: 0, duration: 0.05 }] }, tCheck);
+  FT(ins.right, { x: 0 }, { keyframes: [{ x: 2, duration: 0.05 }, { x: 0.3, duration: 0.05 }, { x: 2, duration: 0.05 }, { x: 0, duration: 0.05 }] }, tCheck);
+  FT(
     insW,
     { attr: { transform: wT(0, 0, 0) } },
     {
       keyframes: [
-        { attr: { transform: wT(0, 0, 1.3) }, duration: 0.08, ease: "power1.out" },
-        { attr: { transform: wT(0, 0, -0.8) }, duration: 0.08, ease: "power1.inOut" },
-        { attr: { transform: wT(0, 0, 0) }, duration: 0.07, ease: "power1.in" },
+        { attr: { transform: wT(0, 0, 1.4) }, duration: 0.05, ease: "power1.out" },
+        { attr: { transform: wT(0, 0, -0.9) }, duration: 0.07, ease: "power1.inOut" },
+        { attr: { transform: wT(0, 0, 0.6) }, duration: 0.05, ease: "power1.inOut" },
+        { attr: { transform: wT(0, 0, 0) }, duration: 0.05, ease: "power1.in" },
       ],
-      immediateRender: false,
     },
-    tCheck + 0.01,
+    tCheck,
   );
   PK.sfx("inspect", tCheck, { gain_db: -14, pan: pan(insP[0], tCheck), agent: "insurer" });
 
-  // ------------------------------------------------------------ "slips": deviate
+  // ------------------------------------------------------------ "slips" (48.34): deviate, on the word
   var tSlip = PK.word("L07", "slips");
   var devRot = 9,
     drift = 15;
   var dv = PK.polar(0, 0, drift, 270 + devRot);
-  tl.fromTo(insW, { attr: { transform: wT(0, 0, 0) } }, { attr: { transform: wT(dv[0], dv[1], devRot) }, duration: 1.0, ease: "power2.inOut", immediateRender: false }, tSlip);
-  tl.fromTo(arcIns, { opacity: 1 }, { opacity: 0, duration: 0.45, ease: "power1.inOut", immediateRender: false }, tSlip + 0.3);
-  tl.fromTo(twin, { opacity: 0 }, { opacity: 1, duration: 0.4, ease: "power1.inOut", immediateRender: false }, tSlip + 0.25);
-  tl.fromTo(ins.body, { rotation: 0, svgOrigin: "0 0" }, { rotation: 12, svgOrigin: "0 0", duration: 1.0, ease: "power2.inOut", immediateRender: false }, tSlip + 0.06);
-  tl.fromTo(ins.g, { x: insP[0], y: insP[1] }, { x: insP[0], y: insP[1] - 8, duration: 1.0, ease: "power2.inOut", immediateRender: false }, tSlip + 0.06);
-  // the brackets try to close and cannot
-  tl.fromTo(ins.left, { x: -3.5 }, { x: -2.1, duration: 0.3, ease: "power2.out", immediateRender: false }, tSlip + 0.2);
-  tl.fromTo(ins.right, { x: 3.5 }, { x: 2.1, duration: 0.3, ease: "power2.out", immediateRender: false }, tSlip + 0.2);
-  PK.sfx("deviate", tSlip, { gain_db: -2, dur: 1.0, pan: pan(tc[0], tSlip) });
+  FT(insW, { attr: { transform: wT(0, 0, 0) } }, { attr: { transform: wT(dv[0], dv[1], devRot) }, duration: 0.55, ease: "power2.out" }, tSlip); // clearly out by 48.55
+  FT(twin, { opacity: 0 }, { opacity: 1, duration: 0.16, ease: "power1.out" }, tSlip);
+  FT(arcIns, { opacity: 1 }, { opacity: 0, duration: 0.18, ease: "power1.in" }, tSlip + 0.02);
+  FT(ins.body, { rotation: 0, svgOrigin: "0 0" }, { rotation: 12, svgOrigin: "0 0", duration: 0.41, ease: "power2.out" }, tSlip); // tilted by 48.75
+  FT(ins.g, { x: insP[0], y: insP[1] }, { x: insP[0], y: insP[1] - 8, duration: 0.41, ease: "power2.out" }, tSlip);
+  // the brackets open, try to close and cannot
+  FT(ins.left, { x: 0 }, { x: -3.5, duration: 0.16, ease: "power2.out" }, tSlip);
+  FT(ins.right, { x: 0 }, { x: 3.5, duration: 0.16, ease: "power2.out" }, tSlip);
+  FT(ins.left, { x: -3.5 }, { x: -2.1, duration: 0.25, ease: "power2.out" }, tSlip + 0.22);
+  FT(ins.right, { x: 3.5 }, { x: 2.1, duration: 0.25, ease: "power2.out" }, tSlip + 0.22);
+  PK.sfx("deviate", tSlip, { gain_db: -2, dur: 0.55, pan: pan(tc[0], tSlip) });
 
   // the insurer's tie goes dashed with its arc: the solid tie fades, a dashed tie follows token and arc
   var dashTie = null;
   if (ties.insurer) {
     var tieIns = ties.insurer;
-    var tieOp = parseFloat(tieIns.getAttribute("stroke-opacity") || tieIns.getAttribute("opacity") || "") || 0.6;
-    var arcMid0 = [tc[0], tc[1] - AR - 2],
-      arcMid1 = [tc[0] + PK.polar(0, 0, AR + 2, 270 + devRot)[0] + dv[0], tc[1] + PK.polar(0, 0, AR + 2, 270 + devRot)[1] + dv[1]];
+    var midA = PK.polar(0, 0, AR + 3, 270 + devRot);
+    var arcMid0 = [tc[0], tc[1] - AR - 3],
+      arcMid1 = [tc[0] + midA[0] + dv[0], tc[1] + midA[1] + dv[1]];
     var tok0 = [insP[0], insP[1] + 17],
       tok1 = [insP[0] + 2.5, insP[1] - 8 + 17];
     dashTie = PK.el("path", { d: "M" + pt(tok0) + " L" + pt(arcMid0) }, W.L.threads);
     dashTie.setAttribute(
       "style",
-      "fill:none;stroke:" + C.rust + ";stroke-opacity:" + Math.max(0.55, tieOp) + ";stroke-width:calc(var(--sw, 1) * 1.25px);stroke-linecap:butt;" +
+      "fill:none;stroke:" + C.rust + ";stroke-opacity:0.55;stroke-width:calc(var(--sw, 1) * 1.25px);stroke-linecap:butt;" +
         "stroke-dasharray:calc(var(--sw, 1) * 3px) calc(var(--sw, 1) * 3px);",
     );
     gsap.set(dashTie, { opacity: 0 });
-    tl.to(tieIns, { opacity: 0, duration: 0.35, ease: "power1.inOut", immediateRender: false }, tSlip + 0.3);
-    tl.fromTo(dashTie, { opacity: 0 }, { opacity: 1, duration: 0.35, ease: "power1.inOut", immediateRender: false }, tSlip + 0.3);
-    tl.fromTo(dashTie, { attr: { d: "M" + pt(tok0) + " L" + pt(arcMid0) } }, { attr: { d: "M" + pt(tok1) + " L" + pt(arcMid1) }, duration: 1.0, ease: "power2.inOut", immediateRender: false }, tSlip);
+    tl.to(tieIns, { opacity: 0, duration: 0.18, ease: "power1.in", immediateRender: false }, tSlip + 0.02);
+    FT(dashTie, { opacity: 0 }, { opacity: 1, duration: 0.16, ease: "power1.out" }, tSlip);
+    FT(dashTie, { attr: { d: "M" + pt(tok0) + " L" + pt(arcMid0) } }, { attr: { d: "M" + pt(tok1) + " L" + pt(arcMid1) }, duration: 0.55, ease: "power2.out" }, tSlip);
   }
 
-  // the gap, measured: two rust-deep ticks at its edges (they stay with the packet) and a faint ghost
+  // the gap: two short rust-deep ticks lock onto the ring line at its edges (they stay with the
+  // packet; nothing sticks out of the ring) and a faint grey ghost of where the arc belongs
   var gapGhost = PK.el("path", { d: PK.arc(0, 0, AR, 236, 304), class: "pk-ghost" }, cs.arcsG);
   gsap.set(gapGhost, { opacity: 0 });
   var gapTicks = PK.g(cs.arcsG);
   [234, 306].forEach(function (a) {
-    var p0 = PK.polar(0, 0, AR - 6, a),
-      p1 = PK.polar(0, 0, AR + 6, a);
-    PK.el("path", { d: "M" + pt(p0) + " L" + pt(p1), fill: "none", stroke: C.rustDeep, "stroke-width": 1.5, "stroke-linecap": "round" }, gapTicks);
+    var p0 = PK.polar(0, 0, AR - 4.5, a),
+      p1 = PK.polar(0, 0, AR + 1.55, a);
+    PK.el("path", { d: "M" + pt(p0) + " L" + pt(p1), fill: "none", stroke: C.rustDeep, "stroke-width": 1.9, "stroke-linecap": "butt" }, gapTicks);
   });
   gsap.set(gapTicks, { opacity: 0 });
-  var tGap = tSlip + 0.75;
-  tl.fromTo(gapTicks, { opacity: 0, scale: 0.6, svgOrigin: "0 0" }, { opacity: 1, scale: 1, svgOrigin: "0 0", duration: 0.3, ease: "power2.out", immediateRender: false }, tGap);
-  tl.fromTo(gapGhost, { opacity: 0 }, { opacity: 1, duration: 0.3, ease: "power1.out", immediateRender: false }, tGap + 0.05);
+  var tGap = tSlip + 0.41; // 48.75, as the token settles
+  FT(gapTicks, { opacity: 0 }, { opacity: 1, duration: 0.08, ease: "none" }, tGap);
+  FT(gapGhost, { opacity: 0 }, { opacity: 1, duration: 0.3, ease: "power1.out" }, tGap + 0.05);
   PK.sfx("lock", tGap, { gain_db: -16, pan: pan(tc[0], tGap), material: "tick" });
 
   // ------------------------------------------------------------ "The fire watch ...": Fire pings the Insurer
   var tFire = PK.word("L07", "fire");
   var toIns = (Math.atan2(insP[1] - 8 - fireP[1], insP[0] - fireP[0]) * 180) / Math.PI;
-  tl.fromTo(fire.dots, { opacity: 0 }, { opacity: 1, duration: 0.2, ease: "power1.out", immediateRender: false }, tFire - 0.1);
-  tl.fromTo(fire.dots, { opacity: 1 }, { opacity: 0, duration: 0.35, ease: "power1.in", immediateRender: false }, tFire + 1.1);
+  FT(fire.dots, { opacity: 0 }, { opacity: 1, duration: 0.2, ease: "power1.out" }, tFire - 0.1);
+  FT(fire.dots, { opacity: 1 }, { opacity: 0, duration: 0.35, ease: "power1.in" }, tFire + 1.1);
   var pingG = PK.g(W.L.threads);
   gsap.set(pingG, { x: fireP[0], y: fireP[1] });
   [0, 1].forEach(function (k) {
     var pa = PK.el("path", { d: PK.arc(0, 0, 19, toIns - 26, toIns + 26), class: "pk-thread" }, pingG);
     gsap.set(pa, { opacity: 0 });
     var t0 = tFire + 0.02 + k * 0.2;
-    tl.fromTo(pa, { scale: 0.75, svgOrigin: "0 0" }, { scale: 1.7, svgOrigin: "0 0", duration: 0.7, ease: "power2.out", immediateRender: false }, t0);
-    tl.fromTo(pa, { opacity: 0 }, { keyframes: [{ opacity: 1, duration: 0.12 }, { opacity: 0, duration: 0.58, ease: "power1.in" }], immediateRender: false }, t0);
+    FT(pa, { scale: 0.75, svgOrigin: "0 0" }, { scale: 1.7, svgOrigin: "0 0", duration: 0.7, ease: "power2.out" }, t0);
+    FT(pa, { opacity: 0 }, { keyframes: [{ opacity: 1, duration: 0.12 }, { opacity: 0, duration: 0.58, ease: "power1.in" }] }, t0);
   });
   PK.sfx("inspect", tFire, { gain_db: -10, pan: pan(fireP[0], tFire), agent: "fire", material: "ping" });
 
-  // ------------------------------------------------------------ the finding, beside the gap (right of the insurer's tie)
-  // two plain rust lengths stacked like rulers: the policy's 60 (dashed) over the planned 30 (solid)
-  var FS = PK.cam.px(50.5, 19); // 10.3 world units = 19 px in the still panel shot
+  // ------------------------------------------------------------ the finding, reported out beside the door: each label with its own ruler
+  // one shared origin tick; 60 min is about 300 px on screen, 30 min about 150 px
+  var FS = PK.cam.px(50.5, 19); // 10.8 world units = 19 px in the panel frame
+  var U60 = PK.cam.px(50.5, 300),
+    U30 = U60 / 2;
   var findG = PK.g(W.L.labels);
-  var fx = 402,
-    yP = 396,
-    yF = yP + FS * 1.7,
-    yRd = yF + FS * 1.05,
-    yRs = yRd + 6;
-  var linePolicy = PK.text(findG, "Policy asks: 60 min", fx, yP, { font: "mono", size: FS, fill: C.rust });
-  var linePlanned = PK.text(findG, "Fire watch planned: 30 min", fx, yF, { font: "mono", size: FS, fill: C.rust });
-  var rulerD = PK.el("path", { d: "M" + f(fx) + " " + f(yRd) + " H" + f(fx + 60) }, findG);
-  rulerD.setAttribute("style", "fill:none;stroke:" + C.rust + ";stroke-width:2.2;stroke-linecap:butt;stroke-dasharray:4.2 3;");
-  var rulerS = PK.el("path", { d: "M" + f(fx) + " " + f(yRs) + " H" + f(fx + 30), fill: "none", stroke: C.rust, "stroke-width": 2.2, "stroke-linecap": "butt" }, findG);
-  gsap.set([linePolicy, linePlanned, rulerD], { opacity: 0 });
+  var ox = 652, // the shared origin (in the clear paper right of the panel, above Priora)
+    tx = ox + 6, // text starts just right of the origin tick
+    yL1 = 300,
+    yR1 = yL1 + 8,
+    yL2 = yR1 + FS * 2.25,
+    yR2 = yL2 + 8;
+  var linePlanned = PK.text(findG, "Fire watch planned: 30 min", tx, yL1, { font: "mono", size: FS, fill: C.rust });
+  var rulerS = PK.el("path", { d: "M" + f(ox) + " " + f(yR1) + " H" + f(ox + U30), fill: "none", stroke: C.rust, "stroke-width": 2.6, "stroke-linecap": "butt" }, findG);
+  var linePolicy = PK.text(findG, "Policy asks: 60 min", tx, yL2, { font: "mono", size: FS, fill: C.rust });
+  var rulerD = PK.el("path", { d: "M" + f(ox) + " " + f(yR2) + " H" + f(ox + U60) }, findG);
+  rulerD.setAttribute("style", "fill:none;stroke:" + C.rust + ";stroke-width:2.6;stroke-linecap:butt;stroke-dasharray:6.5 4.2;");
+  var origin = PK.el("path", { d: "M" + f(ox) + " " + f(yR1 - 6) + " V" + f(yR2 + 6), fill: "none", stroke: C.rust, "stroke-width": 1.3, "stroke-linecap": "butt" }, findG);
+  gsap.set([linePlanned, linePolicy, rulerD], { opacity: 0 });
   gsap.set(rulerS, { drawSVG: "0% 0%" });
+  gsap.set(origin, { drawSVG: "50% 50%" });
   var tWatch = PK.word("L07", "watch");
-  tl.fromTo(linePlanned, { opacity: 0, y: 3 }, { opacity: 1, y: 0, duration: 0.35, ease: "power2.out", immediateRender: false }, tWatch - 0.15);
-  PK.drawOn(tl, rulerS, tWatch + 0.05, 0.4, "power2.out", { later: true });
-  PK.sfx("return", tWatch - 0.15, { gain_db: -12, pan: pan(fx, tWatch) });
+  FT(linePlanned, { opacity: 0, y: 3 }, { opacity: 1, y: 0, duration: 0.3, ease: "power2.out" }, tWatch - 0.15);
+  FT(origin, { drawSVG: "50% 50%" }, { drawSVG: "0% 100%", duration: 0.2, ease: "power2.out" }, tWatch - 0.05);
+  PK.drawOn(tl, rulerS, tWatch + 0.05, 0.35, "power2.out", { later: true });
+  PK.sfx("return", tWatch + 0.38, { gain_db: -12, pan: pan(ox + U30, tWatch) }); // the 30-minute length lands
   var tHalf = PK.word("L07", "half");
-  tl.fromTo(linePolicy, { opacity: 0, y: 3 }, { opacity: 1, y: 0, duration: 0.35, ease: "power2.out", immediateRender: false }, tHalf - 0.05);
-  tl.fromTo(rulerD, { opacity: 0 }, { opacity: 1, duration: 0.3, ease: "power1.out", immediateRender: false }, tHalf);
-  PK.sfx("compare", tHalf, { gain_db: -9, pan: pan(fx, tHalf) });
+  FT(linePolicy, { opacity: 0, y: 3 }, { opacity: 1, y: 0, duration: 0.3, ease: "power2.out" }, tHalf - 0.05);
+  FT(rulerD, { opacity: 0 }, { opacity: 1, duration: 0.2, ease: "power1.out" }, tHalf);
+  PK.sfx("compare", tHalf + 0.05, { gain_db: -9, pan: pan(ox + U60 / 2, tHalf) });
 
   // ------------------------------------------------------------ no hard stop: an unengaged, dashed barrier outline on the route
   function routeAt(x) {
     var len = W.route.getTotalLength();
     for (var s = 0; s <= len; s += 0.5) {
       var q = W.route.getPointAtLength(s);
-      if (q.x >= x) return [q.x, q.y];
+      if (q.x >= x) return { p: [q.x, q.y], s: s, len: len };
     }
-    return [x, G.panel.doorY];
+    return { p: [x, G.panel.doorY], s: 0, len: len };
   }
-  var gp = routeAt(756);
+  var gp = routeAt(756).p;
   // under the route layer, so the route runs over it unbroken: an outline, not engaged
   var gate = PK.g(W.L.trails);
   gsap.set(gate, { x: gp[0], y: gp[1] });
@@ -339,31 +372,49 @@ PK.section("s5-deviation", 47, 57, function (tl, W, ctx, S) {
       "stroke-dasharray:calc(var(--sw, 1) * 4.5px) calc(var(--sw, 1) * 3.5px);",
   );
   gsap.set(gate, { opacity: 0 });
-  var BS = PK.cam.px(51.0, 19);
-  var gateLabel = PK.text(W.L.labels, "No hard stop configured", gp[0], gp[1] + barL / 2 + BS * 1.9, { font: "mono", size: BS, fill: C.grey, anchor: "middle" });
+  var BS = PK.cam.px(50.5, 20);
+  var gateLabel = PK.text(W.L.labels, "No hard stop configured", gp[0], gp[1] + barL / 2 + BS * 1.8, { font: "mono", size: BS, fill: INK2, anchor: "middle" });
   gsap.set(gateLabel, { opacity: 0 });
   var tGate = 50.3;
-  tl.fromTo(gate, { opacity: 0 }, { opacity: 1, duration: 0.35, ease: "power1.out", immediateRender: false }, tGate);
-  tl.fromTo(gateLabel, { opacity: 0, y: 3 }, { opacity: 1, y: 0, duration: 0.35, ease: "power2.out", immediateRender: false }, tGate + 0.15);
-  tl.fromTo([gate, gateLabel], { opacity: 1 }, { opacity: 0, duration: 0.3, ease: "power1.in", immediateRender: false }, 52.3);
-  PK.sfx("thread", tGate, { gain_db: -16, material: "pencil", dur: 0.35, pan: pan(gp[0], tGate) });
+  FT(gate, { opacity: 0 }, { opacity: 1, duration: 0.3, ease: "power1.out" }, tGate);
+  FT(gateLabel, { opacity: 0, y: 3 }, { opacity: 1, y: 0, duration: 0.3, ease: "power2.out" }, tGate + 0.12);
 
-  // ------------------------------------------------------------ 52.1 to 52.75 (still): assemble one compact decision packet
-  var tA = PK.word("L08", "priora") - 0.3; // 52.10
-  var gapPt = [tc[0], tc[1] - AR * 0.85];
-  // the finding fades before it shrinks below 85 percent, drawn toward the gap
-  tl.fromTo(findG, { scale: 1, svgOrigin: pt(gapPt) }, { scale: 0.85, svgOrigin: pt(gapPt), duration: 0.25, ease: "power2.in", immediateRender: false }, tA);
-  tl.fromTo(findG, { opacity: 1 }, { opacity: 0, duration: 0.22, ease: "power1.in", immediateRender: false }, tA);
-  tl.fromTo([twin, gapGhost], { opacity: 1 }, { opacity: 0, duration: 0.3, ease: "power1.in", immediateRender: false }, tA);
-  if (dashTie) tl.fromTo(dashTie, { opacity: 1 }, { opacity: 0, duration: 0.3, ease: "power1.in", immediateRender: false }, tA);
-  // the other ties retract toward their agents (nothing left pointing at an empty table)
+  // ------------------------------------------------------------ 51.55: the finding is gathered
+  var tF = 51.55;
+  FT([findG, gate, gateLabel, twin, gapGhost], { opacity: 1 }, { opacity: 0, duration: 0.2, ease: "power1.in" }, tF);
+  if (dashTie) FT(dashTie, { opacity: 1 }, { opacity: 0, duration: 0.2, ease: "power1.in" }, tF);
+  // the ties retract into their agents (51.6 to 51.8), leaving nothing behind
   KEYS.forEach(function (k, i) {
     if (!ties[k] || k === "insurer") return;
     var keep = agentEnd(ties[k], k) === "start" ? "0% 0%" : "100% 100%";
-    tl.to(ties[k], { drawSVG: keep, duration: 0.35, ease: "power2.in", immediateRender: false }, tA + 0.05 + i * 0.03);
-    tl.to(ties[k], { opacity: 0, duration: 0.05, ease: "none", immediateRender: false }, tA + 0.38 + i * 0.03); // no round-cap dot left behind
+    tl.to(ties[k], { drawSVG: keep, duration: 0.2, ease: "power2.in", immediateRender: false }, 51.6);
+    tl.to(ties[k], { opacity: 0, duration: 0.02, ease: "none", immediateRender: false }, 51.8);
   });
-  tl.fromTo(cs.arcsG, { scale: 1, svgOrigin: "0 0" }, { scale: 0.85, svgOrigin: "0 0", duration: 0.4, ease: "power3.inOut", immediateRender: false }, tA + 0.02);
+  tl.set(insW, { attr: { transform: wT(0, 0, 0) } }, 51.8); // the hidden insurer arc back to its aligned place
+
+  // Priora steps up clear of the door (51.6 to 51.95), its bead toward the door
+  var waitP = [712, 404];
+  var pkWait = [668, 470]; // just outside the door, above the route
+  PK.travel(tl, P.g, PK.curve(prioraP, waitP, 8), 51.6, 0.35, "power2.inOut");
+  FT(P.beadG, { rotation: 180, svgOrigin: "0 0" }, { rotation: 122, svgOrigin: "0 0", duration: 0.35, ease: "power2.inOut" }, 51.6);
+  var beadAt = PK.polar(waitP[0], waitP[1], 26, 122);
+
+  // Priora gathers: its bead pulses and a thread reaches in through the door to the ring
+  function beadPulse(at) {
+    FT(P.bead, { scale: 1, svgOrigin: "26 0" }, { keyframes: [{ scale: 1.7, duration: 0.1, ease: "power2.out" }, { scale: 1, duration: 0.22, ease: "power2.inOut" }], svgOrigin: "26 0" }, at);
+  }
+  var door = [G.panel.x + G.panel.w, G.panel.doorY];
+  var outD = "M" + pt(tc) + " C" + pt([450, 560]) + " " + pt([540, 552]) + " " + pt([door[0], door[1]]) + " Q" + pt([646, door[1]]) + " " + pt(pkWait);
+  var gatherD = "M" + pt(beadAt) + " L" + pt(pkWait) + " Q" + pt([646, door[1]]) + " " + pt([door[0], door[1]]) + " C" + pt([540, 552]) + " " + pt([450, 560]) + " " + pt(tc);
+  var gather = PK.thread(W.L.threads, gatherD);
+  gsap.set(gather, { drawSVG: "0% 0%" });
+  var linkPct = (Math.hypot(pkWait[0] - beadAt[0], pkWait[1] - beadAt[1]) / gather.getTotalLength()) * 100;
+  var tG = 51.95;
+  beadPulse(tG);
+  PK.drawOn(tl, gather, tG, 0.25, "power2.out", { later: true });
+  PK.sfx("assemble", tG, { gain_db: -5, dur: 0.5, pan: pan(500, tG) });
+  // the ring contracts at the table into one compact packet (51.8 to 52.45)
+  FT(cs.arcsG, { scale: 1, svgOrigin: "0 0" }, { scale: 0.85, svgOrigin: "0 0", duration: 0.65, ease: "power3.inOut" }, 51.8);
   // the facets slide aside round the ring so the gap at the top is clear: each facet group turns
   // about the ring centre; its mark counter-turns (transform attribute) so it stays upright
   var FACET_TO = { repair: 210, hot: 330, place: 18, time: 66, conditions: 114, photo: 162 };
@@ -374,42 +425,41 @@ PK.section("s5-deviation", 47, 57, function (tl, W, ctx, S) {
     if (to - from > 180) to -= 360;
     if (to - from < -180) to += 360; // place: 330 -> 378 (= 18)
     FACET_ROT[fc.key] = to;
-    tl.fromTo(fc.g, { rotation: from, svgOrigin: "0 0" }, { rotation: to, svgOrigin: "0 0", duration: 0.45, ease: "power2.inOut", immediateRender: false }, tA + 0.05);
-    tl.fromTo(fc.mark, { attr: { transform: "rotate(0)" } }, { attr: { transform: "rotate(" + f(from - to) + ")" }, duration: 0.45, ease: "power2.inOut", immediateRender: false }, tA + 0.05);
+    FT(fc.g, { rotation: from, svgOrigin: "0 0" }, { rotation: to, svgOrigin: "0 0", duration: 0.6, ease: "power3.inOut" }, 51.85);
+    FT(fc.mark, { attr: { transform: "rotate(0)" } }, { attr: { transform: "rotate(" + f(from - to) + ")" }, duration: 0.6, ease: "power3.inOut" }, 51.85);
   });
-  PK.sfx("assemble", tA + 0.02, { gain_db: -4, dur: 0.45, pan: pan(tc[0], tA) });
-  // reset the hidden insurer arc and its twin to the aligned place (s6 to s8 may use the arc again)
-  tl.set(insW, { attr: { transform: wT(0, 0, 0) } }, tA + 0.5);
+  beadPulse(52.22);
 
-  // Priora steps up clear of the door; the packet comes out and waits beside it
-  var waitP = [710, 402];
-  var pkWait = [668, 470]; // just outside the door, above the route
-  PK.travel(tl, W.priora.g, PK.curve(prioraP, waitP, 8), tA, 0.5, "power2.inOut");
-  tl.fromTo(W.priora.beadG, { rotation: 180, svgOrigin: "0 0" }, { rotation: 122, svgOrigin: "0 0", duration: 0.45, ease: "power2.inOut", immediateRender: false }, tA + 0.05);
-  PK.sfx("move", tA, { gain_db: -15, dur: 0.5, pan: pan(700, tA), size: "small" });
-  var door = [G.panel.x + G.panel.w, G.panel.doorY];
-  // under Fire, through the middle of the door, up beside Priora
-  var outD = "M" + pt(tc) + " C" + pt([450, 560]) + " " + pt([540, 552]) + " " + pt([door[0], door[1]]) + " Q" + pt([646, door[1]]) + " " + pt(pkWait);
-  var tOut = tA + 0.02,
-    outDur = 0.6;
-  PK.travel(tl, cs.g, outD, tOut, outDur, "power2.inOut");
-  PK.trail(tl, W.L.trails, outD, tOut, outDur, "power2.inOut");
-  PK.sfx("move", tOut, { gain_db: -11, dur: outDur, pan: pan(520, tOut) });
+  // ------------------------------------------------------------ "Priora brings it": the packet comes out along the thread (52.45 to 52.85)
+  var tOut = 52.45,
+    outDur = 0.4,
+    outE = "power3.out";
+  PK.travel(tl, cs.g, outD, tOut, outDur, outE);
+  PK.trail(tl, W.L.trails, outD, tOut, outDur, outE);
+  // the thread follows the packet back to the bead: what is left ties the packet to Priora
+  FT(gather, { drawSVG: "0% 100%" }, { drawSVG: "0% " + f(linkPct) + "%", duration: outDur, ease: outE }, tOut);
   PK.sfx("packet", tOut + outDur, { gain_db: -8, pan: pan(pkWait[0], tOut + outDur) });
 
-  // DECISION PACKET: still beside the packet at the door, through the pull out
-  var PS = PK.cam.px(53.95, 19); // 19 px in the escalation shot, larger in the close-up
-  var pLabel = PK.text(W.L.labels, "Decision packet", pkWait[0] + AR * 0.85 + 10, pkWait[1] + PS * 0.36, { font: "mono", size: PS, fill: C.rust, anchor: "start" });
+  // DECISION PACKET: still beside the packet at the door, then it rides with the packet into the carry
+  var PS = PK.cam.px(52.9, 19);
+  var pLabel = PK.text(cs.g, "Decision packet", AR * 0.85 + 11, PS * 0.36, { font: "mono", size: PS, fill: C.rust, anchor: "start" });
   gsap.set(pLabel, { opacity: 0 });
-  tl.fromTo(pLabel, { opacity: 0 }, { opacity: 1, duration: 0.15, ease: "power1.out", immediateRender: false }, tOut + outDur - 0.17);
-  tl.fromTo(pLabel, { opacity: 1 }, { opacity: 0, duration: 0.15, ease: "power1.in", immediateRender: false }, 53.85);
-  // the brackets settle shut during the pull out (nothing to read there)
-  tl.fromTo(ins.left, { x: -2.1 }, { x: 0, duration: 0.4, ease: "power2.inOut", immediateRender: false }, 53.0);
-  tl.fromTo(ins.right, { x: 2.1 }, { x: 0, duration: 0.4, ease: "power2.inOut", immediateRender: false }, 53.0);
+  FT(pLabel, { opacity: 0 }, { opacity: 1, duration: 0.12, ease: "power1.out" }, tOut + outDur);
+  FT(pLabel, { opacity: 1 }, { opacity: 0, duration: 0.2, ease: "power1.in" }, 54.05);
 
-  // ------------------------------------------------------------ 53.95 to 55.5 (still): Priora carries the packet to the risk owner
-  var tEsc = 53.95,
-    escDur = 1.55,
+  // the route lets go of the empty table: from now on it runs from the panel door to the window
+  var rDoor = routeAt(door[0]);
+  var routeDraw = f((rDoor.s / rDoor.len) * 100) + "% 100%";
+  FT(W.route, { drawSVG: "0% 100%" }, { drawSVG: routeDraw, duration: 0.4, ease: "power2.inOut" }, 52.95);
+
+  // ------------------------------------------------------------ the pan (53.35 to 54.35): names fade, Priora carries the packet to the dock
+  FT(names, { opacity: 1 }, { opacity: 0, duration: 0.35, ease: "power1.in" }, 53.35);
+  FT(ins.left, { x: -2.1 }, { x: 0, duration: 0.3, ease: "power2.inOut" }, 53.4);
+  FT(ins.right, { x: 2.1 }, { x: 0, duration: 0.3, ease: "power2.inOut" }, 53.4);
+  FT(gather, { drawSVG: "0% " + f(linkPct) + "%" }, { drawSVG: "0% 0%", duration: 0.12, ease: "power1.in" }, 53.33); // the tie draws into the bead
+  FT(P.beadG, { rotation: 122, svgOrigin: "0 0" }, { rotation: 20, svgOrigin: "0 0", duration: 0.3, ease: "power2.inOut" }, 53.35);
+  var tEsc = 53.45,
+    escDur = 1.2,
     escE = "power2.inOut";
   var off0 = [pkWait[0] - waitP[0], pkWait[1] - waitP[1]],
     off1 = [DOCK[0] - PDOCK[0], DOCK[1] - PDOCK[1]];
@@ -417,50 +467,50 @@ PK.section("s5-deviation", 47, 57, function (tl, W, ctx, S) {
     c2 = [PDOCK[0], 440];
   var escD = "M" + pt(waitP) + " C" + pt(c1) + " " + pt(c2) + " " + pt(PDOCK);
   var escPk = "M" + pt(pkWait) + " C" + pt([c1[0] + off0[0], c1[1] + off0[1]]) + " " + pt([c2[0] + off1[0], c2[1] + off1[1]]) + " " + pt(DOCK);
-  var beadAt = (Math.atan2(DOCK[1] - PDOCK[1], DOCK[0] - PDOCK[0]) * 180) / Math.PI; // 58.3: at the packet
-  tl.fromTo(W.priora.beadG, { rotation: 122, svgOrigin: "0 0" }, { rotation: 20, svgOrigin: "0 0", duration: 0.4, ease: "power2.inOut", immediateRender: false }, tEsc - 0.05);
-  PK.travel(tl, W.priora.g, escD, tEsc, escDur, escE);
+  var beadDock = (Math.atan2(DOCK[1] - PDOCK[1], DOCK[0] - PDOCK[0]) * 180) / Math.PI; // 58.3: at the packet
+  PK.travel(tl, P.g, escD, tEsc, escDur, escE);
   PK.travel(tl, cs.g, escPk, tEsc, escDur, escE);
   PK.trail(tl, W.L.trails, escD, tEsc, escDur, escE);
-  PK.trail(tl, W.L.trails, escPk, tEsc, escDur, escE);
-  PK.sfx("escalate", tEsc, { gain_db: -4, dur: escDur, pan: pan(950, tEsc) });
-  var tArr = tEsc + escDur; // 55.5
-  tl.fromTo(W.priora.beadG, { rotation: 20, svgOrigin: "0 0" }, { rotation: beadAt, svgOrigin: "0 0", duration: 0.35, ease: "power2.inOut", immediateRender: false }, tArr - 0.15);
-  PK.sfx("arrive", tArr - 0.05, { gain_db: -8, size: "case", pan: pan(DOCK[0], tArr) });
+  PK.sfx("escalate", tEsc, { gain_db: -5, dur: escDur, pan: pan(950, tEsc + 0.6) });
+  var tArr = tEsc + escDur; // 54.65, before "Agents prepare" (54.78)
+  FT(P.beadG, { rotation: 20, svgOrigin: "0 0" }, { rotation: beadDock, svgOrigin: "0 0", duration: 0.3, ease: "power2.inOut" }, tArr - 0.12);
+  PK.sfx("arrive", tArr, { gain_db: -8, size: "case", pan: pan(DOCK[0], tArr) });
 
   // ------------------------------------------------------------ "the human decides": the risk owner's black line loops the packet
-  var tDec = PK.word("L08", "the", 2); // 55.72
-  var hand = [1180, 711];
-  var th0 = 120,
-    sweep = 480,
-    r0 = AR,
-    r1 = AR + 6;
-  var join = PK.polar(DOCK[0], DOCK[1], r0, th0);
-  var decD = "M" + pt(hand) + " C" + pt([hand[0] + 9, hand[1] + 1]) + " " + pt([join[0] - 8.5, join[1] - 5]) + " " + pt(join);
-  for (var s2 = 3; s2 <= sweep; s2 += 3) {
-    var u = s2 / sweep;
-    decD += " L" + pt(PK.polar(DOCK[0], DOCK[1], r0 + (r1 - r0) * u, th0 - s2));
-  }
-  var tip = PK.polar(DOCK[0], DOCK[1], r1, th0 - sweep); // (1274, 680), heading straight up
+  var tDec = PK.word("L08", "the", 2); // 55.72: the line leaves the desk
+  var corner = [1182, 710]; // the desk's top-right corner
+  var LR = 42; // loop radius: about 10 px clear of the packet ring, about 20 px clear of Priora's orbit
+  var tip = [DOCK[0] + LR, DOCK[1]];
+  var decD =
+    "M" + pt(corner) +
+    " C" + pt([1196, 736]) + " " + pt([1282, 770]) + " " + pt(tip) + // a diagonal off the corner, under the packet, up its right side
+    " A" + LR + " " + LR + " 0 0 0 " + pt([DOCK[0], DOCK[1] - LR]) +
+    " A" + LR + " " + LR + " 0 0 0 " + pt([DOCK[0] - LR, DOCK[1]]) +
+    " A" + LR + " " + LR + " 0 0 0 " + pt([DOCK[0], DOCK[1] + LR]) +
+    " A" + LR + " " + LR + " 0 0 0 " + pt(tip); // one turn: right, top, left, bottom, right
   tl.set(W.decision, { attr: { d: decD } }, tDec - 0.1);
   tl.set(W.decision, { opacity: 1 }, tDec);
-  PK.drawOn(tl, W.decision, tDec, 0.68, "power2.inOut", { later: true });
-  var decDot = PK.el("circle", { cx: f(tip[0]), cy: f(tip[1]), r: 3.4, fill: C.ink }, W.L.routes);
+  PK.drawOn(tl, W.decision, tDec, 0.65, "power2.inOut", { later: true }); // reaches the packet about 55.95, loop done 56.37
+  var decDot = PK.el("circle", { cx: f(tip[0]), cy: f(tip[1]), r: 3.6, fill: C.ink }, W.L.routes);
   gsap.set(decDot, { opacity: 0 });
-  tl.fromTo(decDot, { opacity: 0, scale: 0.4, svgOrigin: pt(tip) }, { opacity: 1, scale: 1, svgOrigin: pt(tip), duration: 0.18, ease: "power2.out", immediateRender: false }, tDec + 0.64);
-  PK.sfx("decision", tDec, { gain_db: -2, dur: 0.68, pan: pan(DOCK[0], tDec) });
-  var DS = PK.cam.px(56.2, 19);
-  W.ownerDecides = PK.text(W.L.labels, "Risk owner decides", tip[0] + 14, DOCK[1] - 30, { font: "mono", size: DS, fill: C.ink, anchor: "start" });
+  var tEnd = tDec + 0.63; // 56.35
+  FT(decDot, { opacity: 0, scale: 0.4, svgOrigin: pt(tip) }, { opacity: 1, scale: 1, svgOrigin: pt(tip), duration: 0.12, ease: "power2.out" }, tEnd);
+  PK.sfx("decision", tDec, { gain_db: -2, dur: 0.65, pan: pan(DOCK[0], tDec) });
+  // RISK OWNER DECIDES, ink, above the risk owner (clear of Priora, the packet and the trunk s6 draws up from the tip)
+  var DS = PK.cam.px(56.4, 19);
+  W.ownerDecides = PK.text(W.L.labels, "Risk owner decides", 1144, 614, { font: "mono", size: DS, fill: C.ink, anchor: "end" });
   gsap.set(W.ownerDecides, { opacity: 0 });
-  tl.fromTo(W.ownerDecides, { opacity: 0, y: 3 }, { opacity: 1, y: 0, duration: 0.3, ease: "power2.out", immediateRender: false }, tDec + 0.3);
+  FT(W.ownerDecides, { opacity: 0, y: 3 }, { opacity: 1, y: 0, duration: 0.25, ease: "power2.out" }, tEnd);
 
   // ------------------------------------------------------------ hand-over
   W.gap = { a0: 234, a1: 306, r: AR };
   W.gapTicks = gapTicks;
-  W.facetAngles = FACET_TO; // fc.g rotation at 57.0 (place is 378, i.e. 18)
+  W.facetAngles = FACET_TO; // fc.g rotation at 57.0, mod 360
   W.facetRotations = FACET_ROT;
   W.decisionD = decD;
-  W.decisionTip = [Math.round(tip[0] * 1000) / 1000, Math.round(tip[1] * 1000) / 1000];
+  W.decisionTip = [tip[0], tip[1]];
+  W.decisionLoop = { c: [DOCK[0], DOCK[1]], r: LR, from: corner };
   W.decisionDot = decDot;
+  W.routeDraw = routeDraw;
   if (W.align.arcs === arcs) W.align.insurerDashed = twin;
 });

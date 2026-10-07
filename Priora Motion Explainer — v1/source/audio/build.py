@@ -65,8 +65,20 @@ A4 = 440.0
 # is within a fraction of a dB of the final master.
 REF_EVENT_LUFS = -21.0  # an event with gain_db 0 and trim 0 peaks at this 100 ms loudness
 EVENT_JITTER_DB = 0.6  # seeded per-instance level variation (organic, not mechanical)
-MUSIC_LUFS = -26.0  # music bed integrated loudness before ducking
+MUSIC_LUFS = -28.5  # music bed integrated loudness before ducking (cut 3: lowered with the shallower duck)
+MUSIC_PAUSE_CAP_LUFS = -26.0  # master frame: the bed never rises above this momentary loudness (no pumping)
+MUSIC_MAX_MOVE_DB = 6.0  # QA: the bed never moves more than this within 1 s
 SFX_CAP_LUFS = -25.0  # sfx bus leveller: momentary (400 ms) ceiling, catches pile-ups only
+HIERARCHY_CAP_LUFS = -28.0  # every event except the deviation and the human's decision stays at or under this (100 ms)
+S7_SOFTER = (78.0, 84.0, ("lock", "decision", "resolve"), -3.0)  # the densest passage, under "stays in control"
+SMALL_KINDS = ("speech-fragment", "packet")  # not lifted with the background in the no-narration master
+NONAR_SFX_W01_PEAK_DBFS = -20.0  # QA: sfx peak under the worker's voice note in the no-narration master
+
+# Voice levelling in the mix (voice.wav stays the raw stem)
+NARRATOR_TARGET_LUFS = -16.0  # every narrator sentence, measured in the master
+NARRATOR_TOL = 1.0
+WORKER_TARGET_LUFS = -16.5  # the worker's voice note, just under the narrator
+RIDES = (("L06", "kept", 1, 4.0),)  # short gain rides on single words: (line, word, occurrence, dB)
 
 MASTER_LUFS = -16.0
 NONAR_LUFS = -17.0
@@ -74,13 +86,15 @@ LUFS_TOL = 0.5
 TP_MAX = -1.0  # dBTP, oversampled 4x
 LIMITER_CEILING = -1.3  # dBTP the limiter aims at (0.3 dB of safety)
 
-DUCK_NARRATOR_DB = 8.0
+DUCK_NARRATOR_DB = 5.0
 DUCK_WORKER_DB = 5.0
 DUCK_ATTACK = 0.35  # s, the ramp ends at the first sound of the line
 DUCK_HOLD = 0.10  # s after the last sound of the line
-DUCK_RELEASE = 0.80  # s
-DUCK_BRIDGE = 1.00  # s, gaps shorter than this stay ducked (no pumping between lines)
+DUCK_RELEASE = 1.50  # s
+DUCK_BRIDGE = 2.00  # s, gaps shorter than this stay ducked (no pumping between lines)
 
+BED_FADE = (88.7, 1.2)  # the music's final raised-cosine fade: start, length (silent from 89.9)
+WORDMARK_SILENT_AT = 89.9  # the wordmark note decays naturally to -60 dB (re its peak) by here
 END_SAFE = 89.95  # no event sound may run past this (then a fade); outputs end in silence
 FADE_OUT = (89.93, 89.995)  # final raised-cosine fade on every output, then digital zero
 
@@ -451,7 +465,19 @@ def k_print(ev, rng, idx):
 
 
 def k_speech_fragment(ev, rng, idx):
-    return Snd().add(paper_flick(rng))
+    """A tiny soft paper flick: 3.5 ms attack, about 15 ms decay, low-passed at 4.5 kHz."""
+    n = ns(0.03)
+    t = tax(n)
+    a = ns(0.0035)
+    e = np.exp(-np.maximum(t - a / SR, 0.0) / 0.0045)
+    e[:a] *= ramp_on(a)
+    e *= 1.0 - rc((t - 0.012) / 0.0065)  # the decay tapers to nothing by 18.5 ms (15 ms after the peak)
+    x = cnoise(rng, n, 1200, 7000) * e
+    m = ns(0.0015)
+    for _ in range(int(rng.integers(1, 3))):
+        p = int(rng.uniform(0.002, 0.012) * SR)
+        x[p : p + m] += cnoise(rng, m + 64, 2000, 6000)[:m] * env_exp(m, 0.0004, att=0.0002) * rng.uniform(0.3, 0.6)
+    return Snd().add(lp(hp(x, 700), 4500, 4))
 
 
 def k_summon(ev, rng, idx):
@@ -769,16 +795,23 @@ def k_title(ev, rng, idx):
 
 
 def k_wordmark(ev, rng, idx):
-    n = ns(1.55)
-    x = mallet(rng, 1.55, hz(50), decay=0.85)
-    x += np.sin(2 * np.pi * hz(38) * tax(n)) * env_exp(n, 0.7, att=0.012) * 0.4
-    return Snd().add(x * arch(n, 0.001, 0.25))
+    """One soft low note (felt mallet on D3 over a D2 body). Its decay is natural (exponential, no
+    fade) and timed so the note is 60 dB down by WORDMARK_SILENT_AT, whatever its start time."""
+    avail = WORDMARK_SILENT_AT - float(ev["t"])
+    if avail < 0.8:
+        warn(f"wordmark at {ev['t']} leaves only {avail:.2f} s to decay before {WORDMARK_SILENT_AT}")
+    avail = max(avail, 0.3)
+    tau = float(np.clip((avail - 0.12) / 6.91, 0.04, 0.85))
+    n = ns(avail)
+    x = mallet(rng, avail, hz(50), decay=tau, bright=0.12)
+    x += np.sin(2 * np.pi * hz(38) * tax(n)) * env_exp(n, tau, att=0.012) * 0.4
+    return Snd().add(x)
 
 
 # kind -> (synth, trim dB against REF_EVENT_LUFS, reverb send into the small room); docs/sound.md describes each
 KINDS = {
     "print": (k_print, 0.0, 0.18),
-    "speech-fragment": (k_speech_fragment, -2.0, 0.10),
+    "speech-fragment": (k_speech_fragment, -10.0, 0.08),
     "summon": (k_summon, -6.0, 0.30),
     "arrive": (k_arrive, -2.0, 0.15),
     "move": (k_move, -6.0, 0.12),
@@ -803,7 +836,7 @@ KINDS = {
     "decision": (k_decision, -4.0, 0.25),
     "simulated": (k_simulated, -5.0, 0.30),
     "title": (k_title, -6.0, 0.20),
-    "wordmark": (k_wordmark, -3.0, 0.35),
+    "wordmark": (k_wordmark, -3.0, 0.12),
 }
 UNKNOWN_FALLBACK = "arrive"  # a soft facet tok
 DISTANT_KINDS = {"simulated"}  # always muted, hollow and distant; any event with 'sim' in part/material too
@@ -940,9 +973,15 @@ def render_sfx(events):
     larger, darker, more distant space), calibrate dry + reverb together to its target loudness
     (max 100 ms K-weighted window), place it. Then a 30 Hz high-pass and the bus leveller."""
     out = np.zeros((N, 2))
+    out_small = np.zeros((N, 2))
     placed = []
     per_kind_idx = Counter()
     same_t = Counter()
+    human_decision = None  # the first full decision (not a 'reach'): with the deviation, the loudest moments
+    for ev in events:
+        if ev["kind"] == "decision" and "reach" not in hint(ev):
+            human_decision = ev
+            break
     room = make_ir(seed_of("ir-room"), rt60=(0.7, 0.55, 0.35), length=1.0, predelay=0.006, early=6, tone=(1.0, 0.75, 0.3))
     far = make_ir(seed_of("ir-far"), rt60=(2.2, 1.8, 1.0), length=2.4, predelay=0.03, early=0, tone=(1.0, 0.6, 0.2))
     lim = int(END_SAFE * SR)
@@ -980,6 +1019,12 @@ def render_sfx(events):
         target = REF_EVENT_LUFS + trim + gdb + rng.uniform(-EVENT_JITTER_DB, EVENT_JITTER_DB)
         if distant:
             target -= 3.0
+        a7, b7, kinds7, d7 = S7_SOFTER
+        if kind in kinds7 and a7 <= ev["t"] < b7:
+            target += d7
+        tier = "key" if (kind == "deviate" or ev is human_decision) else "other"
+        if tier == "other" and target > HIERARCHY_CAP_LUFS:
+            target = HIERARCHY_CAP_LUFS
         st *= undb(target - event_loudness(st))
         t0 = ev["t"] - pre
         note = []
@@ -990,29 +1035,32 @@ def render_sfx(events):
         i_end_nat = i0 + len(st)
         if i0 >= lim:
             warn(f"{kind} at {ev['t']} starts after {END_SAFE} s: skipped")
-            placed.append({"kind": kind, "t": ev["t"], "start": round(t0, 4), "end": round(t0, 4), "lufs_100ms": None, "note": "starts after the safe end: skipped"})
+            placed.append({"kind": kind, "t": ev["t"], "start": round(t0, 4), "end": round(t0, 4), "lufs_100ms": None, "tier": None, "note": "starts after the safe end: skipped"})
             continue
         if i_end_nat > lim:
             st = st[: lim - i0].copy()
             k = min(len(st), ns(0.5), len(st) // 2)  # a natural fade, not a cut
             st[-k:] *= (1.0 - ramp_on(k))[:, None]
             note.append("tail faded to end by %.2f s (natural end %.3f s)" % (END_SAFE, i_end_nat / SR))
-        out[i0 : i0 + len(st)] += st
-        placed.append({"kind": kind, "t": ev["t"], "start": round(i0 / SR, 4), "end": round((i0 + len(st)) / SR, 4), "lufs_100ms": round(target, 1), "note": "; ".join(note)})
-    sfx = hp(out, 30.0)
-    sfx, lev = leveller(sfx, SFX_CAP_LUFS)
-    return sfx, placed, lev
+        (out_small if kind in SMALL_KINDS else out)[i0 : i0 + len(st)] += st
+        placed.append({"kind": kind, "t": ev["t"], "start": round(i0 / SR, 4), "end": round((i0 + len(st)) / SR, 4), "lufs_100ms": round(target, 1), "tier": tier, "note": "; ".join(note)})
+    main_bus, small_bus = hp(out, 30.0), hp(out_small, 30.0)
+    _, lev, g = leveller(main_bus + small_bus, SFX_CAP_LUFS, return_gain=True)
+    return main_bus * g[:, None], small_bus * g[:, None], placed, lev
 
 
-def leveller(x, cap_lufs, hold=0.2, rel=0.5):
-    """Slow bus leveller: keeps momentary loudness under cap; passes everything below it untouched."""
+def leveller(x, cap_lufs, hold=0.2, rel=0.5, return_gain=False):
+    """Slow bus leveller: keeps momentary loudness under cap; passes everything below it untouched.
+    hold looks ahead and behind (s) so the gain is already down before a rise; rel is the recovery."""
     tc, L = window_loudness(x, 0.4, 0.01)
     over = np.maximum(0.0, L - cap_lufs)
     if over.max() <= 0:
-        return x, {"cap_lufs": cap_lufs, "max_reduction_db": 0.0}
-    h = ns(hold) // ns(0.01)
+        g = np.ones(len(x))
+        info = {"cap_lufs": round(cap_lufs, 2), "max_reduction_db": 0.0}
+        return (x, info, g) if return_gain else (x, info)
+    h = max(1, ns(hold) // ns(0.01))
     held = over.copy()
-    for j in range(1, h + 1):  # look ahead and behind so the gain is down before the pile-up
+    for j in range(1, h + 1):
         held[:-j] = np.maximum(held[:-j], over[j:])
         held[j:] = np.maximum(held[j:], over[:-j])
     a = math.exp(-0.01 / rel)
@@ -1021,8 +1069,12 @@ def leveller(x, cap_lufs, hold=0.2, rel=0.5):
     for i, v in enumerate(held):
         cur = v if v > cur else v + (cur - v) * a
         sm[i] = cur
+    k = max(1, ns(hold) // ns(0.01))  # smooth the attack too (moving average over the hold)
+    sm = np.maximum(np.convolve(sm, np.ones(2 * k + 1) / (2 * k + 1), mode="same"), 0.0)
+    sm = np.maximum(sm, over)  # never above the cap
     g = 10 ** (-np.interp(np.arange(len(x)) / SR, tc, sm) / 20.0)
-    return x * g[:, None], {"cap_lufs": cap_lufs, "max_reduction_db": round(float(sm.max()), 2)}
+    info = {"cap_lufs": round(cap_lufs, 2), "max_reduction_db": round(float(sm.max()), 2)}
+    return (x * g[:, None], info, g) if return_gain else (x * g[:, None], info)
 
 
 # ---------------------------------------------------------------------------------------------
@@ -1079,7 +1131,7 @@ ANCHORS = {
 }
 
 
-def music_plan(tm: Timing):
+def music_plan(tm: Timing, has_wordmark=True):
     def w(line, word, n=1):
         return tm.word(line, word, n, fallback=ANCHORS.get((line, word, n)))
 
@@ -1108,8 +1160,7 @@ def music_plan(tm: Timing):
         (w("L13", "priora") - 0.3, 1.5, [33, 45, 52, 55, 59, 62], -5.0, 0.36, 0.40),  # between rooms: A11
         (w("L13", "the", 2) + 0.1, 1.2, [38, 45, 54, 57, 62, 66, 69], -3.5, 0.55, 0.40),  # decision: D, resolved
         (w("L14", "priora") - 0.2, 1.6, [38, 45, 52, 57, 66, 76], -3.0, 0.60, 0.42),  # tagline: open Dadd9
-        (88.3, 1.0, [38, 45, 57], -5.0, 0.40, 0.42),  # under the wordmark
-        (89.35, 1.0, [], -60.0, 0.40, 0.42),  # silent by 89.85
+        (88.3, 1.0, [38, 45, 57], -5.0, 0.40, 0.42),  # under the wordmark, held into the bed fade (BED_FADE)
     ]
     P = []  # felt piano: (time, MIDI note, velocity, distant)
 
@@ -1131,7 +1182,8 @@ def music_plan(tm: Timing):
     P.append((w("L13", "priora") - 0.25, 57, 0.26, False))  # between rooms: A3
     chord(w("L13", "the", 2), [50, 57, 66], 0.40, 0.08)  # the decision: D3, A3, F#4
     chord(w("L14", "priora") - 0.15, [50, 69, 76], 0.30, 0.21)  # tagline: D3, A4, E5
-    P.append((88.4, 38, 0.45, False))  # the wordmark: a soft low D2
+    if not has_wordmark:  # the sfx wordmark note is the single low note; without it the piano gives one
+        P.append((88.4, 38, 0.45, False))
     return S, P
 
 
@@ -1255,8 +1307,8 @@ def felt_piano(m, vel, rng, distant=False):
     return x * vel**1.4
 
 
-def render_music(tm: Timing):
-    S, P = music_plan(tm)
+def render_music(tm: Timing, has_wordmark=True):
+    S, P = music_plan(tm, has_wordmark)
     tc = np.arange(0, int(DUR * 1000) + 1) / 1000.0
     env, bright, send = build_curves(S, tc)
     pad = np.zeros((N, 2))
@@ -1279,20 +1331,20 @@ def render_music(tm: Timing):
         tgt = piano_far if distant else piano
         tgt[i0:i1, 0] += x * math.cos(th)
         tgt[i0:i1, 1] += x * math.sin(th)
-        notes.append({"t": round(t, 3), "note": m, "hz": round(hz(m), 2), "velocity": vel, "distant": distant})
+        notes.append({"t": round(t, 3), "note": note_name(m), "hz": round(hz(m), 2), "velocity": vel, "distant": distant})
     piano_gain = undb(PIANO_DB)
     dry = pad + (piano + piano_far * 0.6) * piano_gain
     s = np.interp(np.arange(N) / SR, tc, send)[:, None]
     hall = make_ir(seed_of("ir-hall"), rt60=(3.0, 2.4, 1.4), length=3.6, predelay=0.022, tone=(1.0, 0.6, 0.22))
     wet = convolve_st(dry * s * MUSIC_WET + piano_far * piano_gain * 0.6, hall)
     music = sosfiltfilt(_sos("highpass", 28.0, 2), dry + wet, axis=0)
-    # end: everything silent before 90 s
+    # end: a raised-cosine fade of the whole bed, silent from BED_FADE[0] + BED_FADE[1]
     t = np.arange(N) / SR
-    music *= (1.0 - rc((t - 89.2) / 0.7))[:, None]
+    music *= (1.0 - rc((t - BED_FADE[0]) / BED_FADE[1]))[:, None]
     L = pyln.Meter(SR).integrated_loudness(music)
     music *= undb(MUSIC_LUFS - L)
     plan = [{"t": round(x[0], 3), "xfade_s": x[1], "notes": [note_name(m) for m in x[2]], "level_db": x[3], "brightness": x[4], "reverb_send": x[5]} for x in S]
-    return music, {"segments": plan, "piano": notes, "pre_duck_lufs": MUSIC_LUFS}
+    return music, {"segments": plan, "piano": notes, "pre_duck_lufs": MUSIC_LUFS, "bed_fade": {"from": BED_FADE[0], "seconds": BED_FADE[1]}}
 
 
 PIANO_DB = 3.0  # felt piano bus against the pad
@@ -1310,24 +1362,93 @@ def note_name(m):
 
 
 def duck_curve(tm: Timing, speakers):
-    """Music gain (dB) at control rate 1 kHz: smooth cosine ramps (in dB), attack ends at the
-    first sound of each line, release starts just after its last; short gaps stay ducked."""
+    """Music gain (dB) at control rate 1 kHz: smooth cosine ramps (in dB); the attack ends at the
+    first sound of each line, the release starts just after its last. Lines closer than DUCK_BRIDGE
+    (whoever speaks) stay ducked through the gap; after the last line the duck is held to the end."""
     tc = np.arange(0, int(DUR * 1000) + 1) / 1000.0
     g = np.zeros_like(tc)
+    raw = sorted(((k, s, e, depth) for spk, depth in speakers.items() for k, s, e in tm.spans(spk)), key=lambda x: x[1])
     spans = []
-    for spk, depth in speakers.items():
-        for k, s, e in tm.spans(spk):
-            if spans and spans[-1][3] == depth and s - spans[-1][2] < DUCK_BRIDGE:
-                spans[-1] = (spans[-1][0] + "+" + k, spans[-1][1], e, depth)
-            else:
-                spans.append((k, s, e, depth))
-    spans.sort(key=lambda x: x[1])
-    for k, s, e, depth in spans:
+    for k, s, e, depth in raw:
+        if spans and s - spans[-1][2] < DUCK_BRIDGE:
+            pk, ps, pe, pd = spans[-1]
+            if pd == depth:
+                spans[-1] = (pk + "+" + k, ps, max(pe, e), pd)
+                continue
+            spans[-1] = (pk, ps, s, pd)  # different depth: hold the first until the second starts
+        spans.append((k, s, e, depth))
+    for i, (k, s, e, depth) in enumerate(spans):
         a0 = s - DUCK_ATTACK
-        r0 = e + DUCK_HOLD
+        r0 = DUR + 1.0 if i == len(spans) - 1 else e + DUCK_HOLD  # after the last line: no release
         shape = np.where(tc < s, rc((tc - a0) / DUCK_ATTACK), np.where(tc <= r0, 1.0, 1.0 - rc((tc - r0) / DUCK_RELEASE)))
         g = np.minimum(g, -depth * shape)
-    return tc, g, [{"lines": k, "start": round(s, 3), "end": round(e, 3), "depth_db": d} for k, s, e, d in spans]
+    return tc, g, [{"lines": k, "start": round(s, 3), "end": round(e, 3) if i < len(spans) - 1 else "held to the end", "depth_db": d}
+                   for i, (k, s, e, d) in enumerate(spans)]
+
+
+def word_span(tm: Timing, line, w, n=1):
+    want = w.lower()
+    k = 0
+    for x in tm.lines.get(line, {}).get("words", []):
+        if re.sub(r"[^a-z']", "", x["w"].lower()) == want:
+            k += 1
+            if k == n:
+                return float(x["start"]), float(x["end"])
+    return None
+
+
+def voice_segments(tm: Timing):
+    """Every narrator sentence and the worker's line, with their level targets (master frame)."""
+    segs = []
+    for k in tm.order:
+        L = tm.lines[k]
+        spk = L.get("speaker")
+        if spk == "narrator":
+            for i, s in enumerate(L.get("sentences") or [{"start": L["start"], "end": L["end"], "text": L.get("text", "")}]):
+                segs.append({"line": k, "sentence": i + 1, "speaker": spk, "text": s.get("text", ""), "start": float(s["start"]), "end": float(s["end"]), "target_lufs": NARRATOR_TARGET_LUFS})
+        elif spk == "worker":
+            segs.append({"line": k, "sentence": None, "speaker": spk, "text": L.get("text", ""), "start": float(L["start"]), "end": float(L["end"]), "target_lufs": WORKER_TARGET_LUFS})
+    segs.sort(key=lambda d: d["start"])
+    return segs
+
+
+def seg_window(s):
+    return s["start"] - 0.03, s["end"] + 0.08
+
+
+def voice_gain_curve(tm: Timing, v_st, meter, offset_db, segs=None):
+    """Per-sentence levelling of the raw voice, in the mix (voice.wav itself is never changed).
+    Each sentence gets the constant gain that puts it on its target (narrator -16 LUFS, the worker
+    -16.5) once the master gain is applied (offset_db = -G). Gains change only inside the pauses
+    between sentences (raised cosine, at most 0.25 s, centred in the pause). Word rides (RIDES) are
+    added on top with 30 to 40 ms ramps. Returns (gain in dB at 1 kHz, segment table, ride table)."""
+    segs = [dict(x) for x in (segs or voice_segments(tm))]
+    for s in segs:
+        a, b = seg_window(s)
+        L = meter.integrated_loudness(v_st[int(a * SR) : int(b * SR)])
+        s["raw_lufs"] = round(float(L), 2)
+        s["gain_db"] = round(float(np.clip(s["target_lufs"] + offset_db - L, -12.0, 12.0)), 2)
+    tc = np.arange(0, int(DUR * 1000) + 1) / 1000.0
+    g = np.full_like(tc, segs[0]["gain_db"] if segs else 0.0)
+    for s0, s1 in zip(segs, segs[1:]):
+        gap = s1["start"] - s0["end"]
+        mid = 0.5 * (s0["end"] + s1["start"])
+        w = float(np.clip(gap - 0.1, 0.03, 0.25))
+        x = rc((tc - (mid - w / 2)) / w)
+        sel = tc >= mid - w / 2
+        g[sel] = (s0["gain_db"] + (s1["gain_db"] - s0["gain_db"]) * x)[sel]
+    rides = []
+    for line, word, n, d in RIDES:
+        span = word_span(tm, line, word, n)
+        if span is None:
+            warn(f"ride: word {word!r} not found in {line}; skipped")
+            continue
+        ws, we = span
+        up = rc((tc - (ws - 0.03)) / 0.04)
+        down = 1.0 - rc((tc - (we - 0.04)) / 0.04)
+        g += d * np.minimum(up, down)
+        rides.append({"line": line, "word": word, "start": ws, "end": we, "gain_db": d})
+    return tc, g, segs, rides
 
 
 def apply_gain_curve(x, tc, gdb):
@@ -1578,19 +1699,39 @@ def main(argv=None):
 
     tm = Timing(TIMING_JSON)
 
+    has_wordmark = any(e["kind"] == "wordmark" for e in events)
     print("== sfx")
-    sfx, placed, lev = render_sfx(events)
+    sfx_main, sfx_small, placed, lev = render_sfx(events)
+    sfx = sfx_main + sfx_small
     print("== music")
-    music_raw, mplan = render_music(tm)
+    music_raw, mplan = render_music(tm, has_wordmark)
 
-    print("== ducking and mix")
+    print("== voice levelling, ducking and mix")
     tcd, g_master, duck_spans = duck_curve(tm, {"narrator": DUCK_NARRATOR_DB, "worker": DUCK_WORKER_DB})
     _, g_worker, _ = duck_curve(tm, {"worker": DUCK_WORKER_DB_NONAR})
-    music_m = apply_gain_curve(music_raw, tcd, g_master)
+    music_d = apply_gain_curve(music_raw, tcd, g_master)
     music_w = apply_gain_curve(music_raw, tcd, g_worker)
 
-    voice = mono_to_st(dc_block(load_mono(OUT_DIR / "voice.wav")))
-    worker = mono_to_st(dc_block(load_mono(OUT_DIR / "voice-worker.wav")))
+    v_raw = mono_to_st(dc_block(load_mono(OUT_DIR / "voice.wav")))
+    w_raw = mono_to_st(dc_block(load_mono(OUT_DIR / "voice-worker.wav")))
+    segs0 = voice_segments(tm)
+
+    # the voice is levelled sentence by sentence in the mix frame (the master gain then moves everything
+    # by G, about +0.5 dB); the music's pause cap is a master-frame value, so it iterates with G
+    tcv, gv, segs, rides = voice_gain_curve(tm, v_raw, meter, 0.0, segs0)
+    voice = apply_gain_curve(v_raw, tcv, gv)
+    G_est = 0.0
+    for _ in range(6):
+        music_m, mcap = leveller(music_d, MUSIC_PAUSE_CAP_LUFS - G_est - 0.15, hold=0.5, rel=1.5)
+        G_new = MASTER_LUFS - meter.integrated_loudness(voice + music_m + sfx)
+        done = abs(G_new - G_est) < 0.03
+        G_est = G_new
+        if done:
+            break
+    w_seg = next((x for x in segs if x["speaker"] == "worker"), None)
+    worker = w_raw * undb(w_seg["gain_db"] if w_seg else 0.0)
+    gains = ", ".join(f'{x["line"]}{"" if x["sentence"] in (None, 1) else "." + str(x["sentence"])} {x["gain_db"]:+.1f}' for x in segs)
+    print(f"  voice gains (dB): {gains}")
 
     # master: one gain for everything, then the limiter
     mix = voice + music_m + sfx
@@ -1600,9 +1741,10 @@ def main(argv=None):
     write(OUT_DIR / "sfx.wav", quantize24(end_fade(sfx * gG)))
     write(OUT_DIR / "master.wav", master_y)
 
-    # no narration: the worker's voice note stays at its master level, the background is raised
-    bg = music_w + sfx
-    w_fixed = worker * gG
+    # no narration: the worker's voice note and the small sounds (flicks, packets) stay at their master
+    # level; the music (ducked under W01 only) and the other sounds are raised together to -17 LUFS
+    bg = music_w + sfx_main
+    w_fixed = (worker + sfx_small) * gG
 
     def nonar_lufs(gb_db):
         return meter.integrated_loudness(end_fade(w_fixed + bg * undb(gb_db)))
@@ -1630,8 +1772,12 @@ def main(argv=None):
     write(OUT_DIR / "master-no-narration.wav", quantize24(y2))
 
     print("== QA")
-    report = qa(meter, tm, events, counts, unknown, placed, lev, mplan, duck_spans, source,
-                voice, worker, music_m, music_w, sfx, G, lim_gain, gr, Gb, gain2, gr2, gG, tcd, g_master, g_worker, music_raw)
+    ctx = dict(meter=meter, tm=tm, events=events, counts=counts, unknown=unknown, placed=placed, lev=lev, mplan=mplan,
+               duck_spans=duck_spans, source=source, voice=voice, v_raw=v_raw, worker=worker, music_m=music_m, music_d=music_d,
+               music_w=music_w, sfx=sfx, sfx_main=sfx_main, sfx_small=sfx_small, G=G, lim_gain=lim_gain, gr=gr, Gb=Gb,
+               gain2=gain2, gr2=gr2, gG=gG, tcd=tcd, g_master=g_master, g_worker=g_worker, music_raw=music_raw,
+               segs=segs, rides=rides, tcv=tcv, gv=gv, mcap=mcap, has_wordmark=has_wordmark)
+    report = qa(ctx)
     REPORT_JSON.write_text(json.dumps(report, indent=1) + "\n")
     bad = [c for c in report["checks"] if not c["ok"]]
     for c in report["checks"]:
@@ -1643,8 +1789,11 @@ def main(argv=None):
 DUCK_WORKER_DB_NONAR = 5.0
 
 
-def qa(meter, tm, events, counts, unknown, placed, lev, mplan, duck_spans, source,
-       voice, worker, music_m, music_w, sfx, G, lim_gain, gr, Gb, gain2, gr2, gG, tcd, g_master, g_worker, music_raw):
+def qa(c):
+    meter, tm, events, counts, unknown, placed, lev, mplan, duck_spans, source = (c[k] for k in (
+        "meter", "tm", "events", "counts", "unknown", "placed", "lev", "mplan", "duck_spans", "source"))
+    voice, worker, music_m, music_w, sfx, G, lim_gain, gr, Gb, gain2, gr2, gG, tcd, g_master, g_worker, music_raw = (c[k] for k in (
+        "voice", "worker", "music_m", "music_w", "sfx", "G", "lim_gain", "gr", "Gb", "gain2", "gr2", "gG", "tcd", "g_master", "g_worker", "music_raw"))
     outs = {}
     arrays = {}
     for name in ("music.wav", "sfx.wav", "master.wav", "master-no-narration.wav"):
@@ -1680,7 +1829,8 @@ def qa(meter, tm, events, counts, unknown, placed, lev, mplan, duck_spans, sourc
     # the no-narration version: the worker line against its background
     g2 = gain2[:, None]
     w2 = worker * gG * g2
-    b2 = (music_w + sfx) * undb(Gb) * g2
+    sfx2 = (c["sfx_main"] * undb(Gb) + c["sfx_small"] * gG) * g2
+    b2 = music_w * undb(Gb) * g2 + sfx2
     wl = tm.lines.get("W01")
     worker_margin = None
     if wl:
@@ -1718,7 +1868,104 @@ def qa(meter, tm, events, counts, unknown, placed, lev, mplan, duck_spans, sourc
     if worker_margin and worker_margin["margin_lu"] is not None:
         chk("worker over background (no-narration version)", worker_margin["margin_lu"] >= 8.0, worker_margin["margin_lu"], ">= 8 LU")
     narr_duck = [x["music_duck_db"][1] for x in narr]
-    chk("music ducked under every narrator line", all(-9.0 <= d <= -7.0 for d in narr_duck), narr_duck, "-7 to -9 dB throughout each line")
+    chk("music ducked under every narrator line", all(-DUCK_NARRATOR_DB - 0.5 <= d <= -DUCK_NARRATOR_DB + 0.5 for d in narr_duck), narr_duck, f"-{DUCK_NARRATOR_DB:g} dB (+-0.5) throughout each line")
+
+    # --- cut 3: voice levelling (per sentence, in the master)
+    v_m = voice * g
+    vl_rows = []
+    for x in c["segs"]:
+        a_, b_ = seg_window(x)
+        vl_rows.append({"line": x["line"], "sentence": x["sentence"], "speaker": x["speaker"], "text": x["text"],
+                        "raw_lufs_mix_frame": x["raw_lufs"], "gain_db": x["gain_db"], "master_lufs": segment_lufs(meter, v_m, a_, b_),
+                        "target_lufs": x["target_lufs"]})
+    nar_rows = [x for x in vl_rows if x["speaker"] == "narrator" and x["master_lufs"] is not None]
+    nar_vals = [x["master_lufs"] for x in nar_rows]
+    chk("narrator sentences levelled", all(abs(v - NARRATOR_TARGET_LUFS) <= NARRATOR_TOL for v in nar_vals),
+        [round(min(nar_vals), 2), round(max(nar_vals), 2)], f"every sentence {NARRATOR_TARGET_LUFS} +- {NARRATOR_TOL} LUFS")
+    w_rows = [x for x in vl_rows if x["speaker"] == "worker" and x["master_lufs"] is not None]
+    if w_rows and nar_vals:
+        wv = w_rows[0]["master_lufs"]
+        med = float(np.median(nar_vals))
+        chk("worker voice note just under the narrator", med - 1.5 <= wv <= med - 0.2, f"{wv} (narrator median {med:.2f})",
+            "0.2 to 1.5 LU under the narrator's median sentence")
+    ride_rows = []
+    for r in c["rides"]:
+        wl_ = segment_lufs(meter, v_m, r["start"], max(r["end"], r["start"] + 0.42))
+        ride_rows.append(dict(r, word_master_lufs=wl_))
+
+    # --- cut 3: the music never pumps
+    tmm, Mm = window_loudness(arrays["music.wav"], 0.4, 0.01)
+    sel = (tmm >= 3.5) & (tmm <= BED_FADE[0])
+    step = 100  # 1 s at a 10 ms hop
+    moves = np.abs(Mm[step:] - Mm[:-step])
+    selm = sel[:-step] & sel[step:]
+    i_mv = int(np.argmax(np.where(selm, moves, -1)))
+    max_move = round(float(moves[i_mv]), 2)
+    chk("music pause cap", mus["max_momentary_lufs"] <= MUSIC_PAUSE_CAP_LUFS + 0.05, mus["max_momentary_lufs"], f"<= {MUSIC_PAUSE_CAP_LUFS} LUFS momentary")
+    chk("music never moves more than 6 dB within 1 s", max_move <= MUSIC_MAX_MOVE_DB, f"{max_move} dB at {tmm[i_mv]:.2f} s", f"<= {MUSIC_MAX_MOVE_DB} dB (3.5 s to {BED_FADE[0]} s)")
+
+    # --- cut 3: loudness hierarchy, measured in the sfx stem (100 ms windows)
+    sx_st = arrays["sfx.wav"]
+
+    def l100(a_, b_):
+        seg = sx_st[max(0, int(a_ * SR)) : int(b_ * SR)]
+        if len(seg) < ns(0.1):
+            return None
+        _, L = window_loudness(seg, 0.1, 0.005)
+        return round(float(L.max()), 2)
+
+    for pl in placed:
+        pl["measured_lufs_100ms"] = None if pl["tier"] is None else l100(pl["start"], min(pl["end"], pl["start"] + 0.5))
+    keys = [pl for pl in placed if pl["tier"] == "key"]
+    key_windows = [(pl["start"] - 0.1, pl["start"] + 1.5) for pl in keys]
+    others = [pl for pl in placed if pl["tier"] == "other" and pl["measured_lufs_100ms"] is not None
+              and not any(pl["start"] <= b_ and min(pl["end"], pl["start"] + 0.5) >= a_ for a_, b_ in key_windows)]
+    top_other = max(others, key=lambda pl: pl["measured_lufs_100ms"]) if others else None
+    if keys and top_other:
+        kmin = min(pl["measured_lufs_100ms"] for pl in keys)
+        chk("deviation and the human's decision are the loudest sounds", kmin > top_other["measured_lufs_100ms"],
+            f'keys >= {kmin}, next loudest {top_other["kind"]} at {top_other["t"]}: {top_other["measured_lufs_100ms"]}', "every key moment louder than every other sound")
+    prints = [pl for pl in placed if pl["kind"] == "print" and pl["t"] < 8.0 and pl["measured_lufs_100ms"] is not None]
+    if prints:
+        pv = [pl["measured_lufs_100ms"] for pl in prints]
+        chk("opening print thuds about -28 LUFS", all(abs(v - HIERARCHY_CAP_LUFS) <= 1.5 for v in pv), pv, f"{HIERARCHY_CAP_LUFS} +- 1.5 LUFS (100 ms)")
+    flicks = [pl["measured_lufs_100ms"] for pl in placed if pl["kind"] == "speech-fragment" and pl["measured_lufs_100ms"] is not None]
+
+    # --- cut 3: the no-narration master keeps the small sounds small under the worker
+    if wl:
+        seg = sfx2[int((wl["start"] - 0.1) * SR) : int((wl["end"] + 0.1) * SR)]
+        pk_w = round(db(np.abs(seg).max()), 2) if len(seg) else None
+        chk("no-narration: sfx peak under the worker's voice note", pk_w is None or pk_w <= NONAR_SFX_W01_PEAK_DBFS, pk_w, f"<= {NONAR_SFX_W01_PEAK_DBFS} dBFS")
+    else:
+        pk_w = None
+
+    # --- cut 3: the ending
+    last = max((tm.lines[k] for k in tm.order if tm.lines[k].get("speaker") == "narrator"), key=lambda L: L["start"], default=None)
+    end_info = {}
+    if last:
+        held = g_master[tcd >= float(last["start"])]
+        end_info["duck_after_last_line_db"] = [round(float(held.min()), 2), round(float(held.max()), 2)]
+        chk("no duck release after the last line", float(held.max()) <= -DUCK_NARRATOR_DB + 0.01, end_info["duck_after_last_line_db"], f"held at -{DUCK_NARRATOR_DB:g} dB to the end")
+    mu_st = arrays["music.wav"]
+    t_silent = BED_FADE[0] + BED_FADE[1]
+    tail_pk = db(np.abs(mu_st[int(t_silent * SR) :]).max()) if int(t_silent * SR) < N else -240.0
+    fade_m = Mm[(tmm >= BED_FADE[0] + 0.2) & (tmm <= t_silent - 0.2)]
+    rises = float(np.max(np.diff(fade_m))) if len(fade_m) > 1 else 0.0
+    end_info.update({"bed_fade": {"from": BED_FADE[0], "seconds": BED_FADE[1]}, "music_peak_after_fade_dbfs": round(tail_pk, 1),
+                     "music_largest_rise_during_fade_db_per_10ms": round(rises, 3)})
+    chk("bed fades out cleanly", tail_pk < -90 and rises <= 0.05, f"{tail_pk:.1f} dBFS after {t_silent} s, largest rise {rises:.3f} dB", f"one {BED_FADE[1]} s fade from {BED_FADE[0]} s, silent from {t_silent} s")
+    wm = [pl for pl in placed if pl["kind"] == "wordmark" and pl["tier"] is not None]
+    if wm:
+        tw = wm[-1]["t"]
+        w20 = ns(0.02)
+        seg = sx_st[int(tw * SR) : int(t_silent * SR)]
+        r = np.sqrt(np.convolve(np.mean(seg ** 2, axis=1), np.ones(w20) / w20, mode="valid"))
+        rel = db(r[-1]) - db(r.max())
+        later = [pl for pl in placed if pl["start"] > wm[-1]["start"] + 0.001 and pl["tier"] is not None]
+        end_info.update({"wordmark_t": tw, "wordmark_level_at_silent_point_db_re_peak": round(rel, 1), "events_after_wordmark": [(pl["kind"], pl["t"]) for pl in later]})
+        chk("wordmark decays to -60 dB by %.1f s" % t_silent, rel <= -60.0, round(rel, 1), "<= -60 dB re its peak")
+        chk("the wordmark is the last sound", not later, end_info["events_after_wordmark"], "no event starts after it")
+
     w_duck = [x["music_duck_db"] for x in lines if x["speaker"] == "worker"]
     chk("music ducked under the worker line", all(-5.5 <= d[0] and d[1] <= -4.5 for d in w_duck), w_duck, "about -5 dB")
     chk("no sound before 0 or after 90 s", (not starts or min(starts) >= 0) and (not ends or max(ends) <= DUR), [span["earliest_start_s"], span["latest_end_s"]], "[>= 0, <= 90]")
@@ -1765,7 +2012,17 @@ def qa(meter, tm, events, counts, unknown, placed, lev, mplan, duck_spans, sourc
             "loudest_momentary_400ms_lufs": sfxs["max_momentary_lufs"], "loudest_momentary_at_s": sfxs["max_momentary_at_s"],
             "bus_leveller": lev,
         },
-        "ducking": {"master": duck_spans, "no_narration": "worker line W01 only, %.1f dB" % DUCK_WORKER_DB_NONAR},
+        "ducking": {"master": duck_spans, "no_narration": "worker line W01 only, %.1f dB" % DUCK_WORKER_DB_NONAR,
+                    "music_pause_cap": c["mcap"], "music_max_move_1s_db": max_move},
+        "voice_levelling": {"target_narrator_lufs": NARRATOR_TARGET_LUFS, "target_worker_lufs": WORKER_TARGET_LUFS,
+                            "sentences": vl_rows, "rides": ride_rows,
+                            "note": "measured in master.wav's voice component over each sentence (word times -0.03 s / +0.08 s); voice.wav is untouched"},
+        "hierarchy": {"cap_others_lufs_100ms": HIERARCHY_CAP_LUFS, "s7_softer": {"from": S7_SOFTER[0], "to": S7_SOFTER[1], "kinds": list(S7_SOFTER[2]), "db": S7_SOFTER[3]},
+                      "key_moments": [{k_: pl[k_] for k_ in ("kind", "t", "lufs_100ms", "measured_lufs_100ms")} for pl in keys],
+                      "loudest_others": [{k_: pl[k_] for k_ in ("kind", "t", "lufs_100ms", "measured_lufs_100ms")} for pl in sorted(others, key=lambda q: -q["measured_lufs_100ms"])[:6]],
+                      "opening_prints_measured": [pl["measured_lufs_100ms"] for pl in prints], "speech_fragments_measured": flicks},
+        "no_narration_small_sounds": {"kinds": list(SMALL_KINDS), "sfx_peak_under_W01_dbfs": pk_w},
+        "ending": end_info,
         "speech_vs_background": {"master": lines, "min_narrator_over_background_lu": min_m, "min_narrator_over_music_lu": min_mm,
                                   "no_narration_worker": worker_margin},
         "events": {

@@ -6,36 +6,36 @@
   "no_narration_lufs": -17.0,
   "lufs_tolerance": 0.5,
   "true_peak_max_dbtp": -1.0,
-  "duck_narrator_db": 8.0,
+  "duck_narrator_db": 5.0,
   "duck_worker_db": 5.0,
   "duck_worker_db_no_narration": 5.0,
   "duck_attack_s": 0.35,
-  "duck_release_s": 0.8,
-  "duck_bridge_s": 1.0,
-  "music_pre_duck_lufs_mix_frame": -26.0,
+  "duck_release_s": 1.5,
+  "duck_bridge_s": 2.0,
+  "music_pre_duck_lufs_mix_frame": -28.5,
   "event_reference_lufs_100ms": -21.0,
   "sfx_bus_cap_momentary_lufs": -25.0,
   "true_peak_method": "4x polyphase oversampling (scipy resample_poly), max of all channels",
   "loudness_method": "ITU-R BS.1770-4 via pyloudnorm (integrated, gated); momentary = ungated 400 ms K-weighted windows, 10 ms hop"
  },
  "inputs": {
-  "events_source": "chrome",
+  "events_source": "cache",
   "voice": {
    "file": "assets/audio/voice.wav",
-   "mono_lufs": -19.0
+   "mono_lufs": -20.86
   },
   "voice_worker": {
    "file": "assets/audio/voice-worker.wav",
-   "mono_lufs": -16.27
+   "mono_lufs": -21.19
   }
  },
  "gains": {
-  "master_gain_db": 0.514,
-  "master_limiter_max_reduction_db": 0.02,
-  "no_narration_worker_gain_db": 0.514,
-  "no_narration_background_gain_db": 7.992,
-  "no_narration_background_over_master_db": 7.478,
-  "no_narration_limiter_max_reduction_db": 0.0,
+  "master_gain_db": 2.206,
+  "master_limiter_max_reduction_db": 2.09,
+  "no_narration_worker_gain_db": 2.206,
+  "no_narration_background_gain_db": 14.309,
+  "no_narration_background_over_master_db": 12.103,
+  "no_narration_limiter_max_reduction_db": 1.87,
   "note": "master.wav = TP-limiter(G * voice.wav as dual mono, DC-blocked + music.wav + sfx.wav); the stems are written post-gain G (the level they have inside master.wav, before the limiter). master-no-narration.wav = TP-limiter(G * voice-worker.wav + Gb * (music ducked under W01 only + sfx)), Gb = no_narration_background_gain_db"
  },
  "outputs": {
@@ -45,22 +45,22 @@
    "sample_rate": 48000,
    "channels": 2,
    "subtype": "PCM_24",
-   "integrated_lufs": -31.09,
-   "true_peak_dbtp": -14.3,
-   "sample_peak_dbfs": -14.3,
-   "max_momentary_lufs": -22.06,
-   "max_momentary_at_s": 45.76,
+   "integrated_lufs": -30.63,
+   "true_peak_dbtp": -16.41,
+   "sample_peak_dbfs": -16.41,
+   "max_momentary_lufs": -25.64,
+   "max_momentary_at_s": 46.88,
    "clipped_samples": 0,
    "dc_offset": [
-    -1.08e-09,
-    -3.07e-09
+    4.56e-10,
+    3.19e-10
    ],
    "first_sample_abs": 0.0,
    "last_10ms_peak_dbfs": -240.0,
-   "sha256": "cf5ea25e1ebafd742ee36b1ff9005b694ea0ad3d159459fd3cc8950c798c0384",
+   "sha256": "7dc8523f4f2872a394ac8be7780dc64b510ca8609c7af8763dbc6a5d44b8240a",
    "ffmpeg_ebur128": {
-    "integrated_lufs": -31.1,
-    "true_peak_dbtp": -14.3
+    "integrated_lufs": -30.6,
+    "true_peak_dbtp": -16.4
    }
   },
   "sfx.wav": {
@@ -69,22 +69,22 @@
    "sample_rate": 48000,
    "channels": 2,
    "subtype": "PCM_24",
-   "integrated_lufs": -34.21,
-   "true_peak_dbtp": -11.51,
-   "sample_peak_dbfs": -12.22,
-   "max_momentary_lufs": -26.61,
+   "integrated_lufs": -32.86,
+   "true_peak_dbtp": -11.88,
+   "sample_peak_dbfs": -11.89,
+   "max_momentary_lufs": -24.92,
    "max_momentary_at_s": 48.55,
    "clipped_samples": 0,
    "dc_offset": [
-    1.68e-11,
-    -3.09e-12
+    3.2e-11,
+    -8.31e-12
    ],
    "first_sample_abs": 0.0,
    "last_10ms_peak_dbfs": -240.0,
-   "sha256": "a9da27855eb73a504ff03c71b8578cce8835eb425b8211ada6234e3008dd1492",
+   "sha256": "800b8b1d1489bbea848f0c4342041e1d1143473096f1f07786571d99b745c16e",
    "ffmpeg_ebur128": {
-    "integrated_lufs": -34.2,
-    "true_peak_dbtp": -11.5
+    "integrated_lufs": -32.8,
+    "true_peak_dbtp": -11.9
    }
   },
   "master.wav": {
@@ -95,17 +95,17 @@
    "subtype": "PCM_24",
    "integrated_lufs": -16.0,
    "true_peak_dbtp": -1.3,
-   "sample_peak_dbfs": -1.34,
-   "max_momentary_lufs": -9.28,
-   "max_momentary_at_s": 11.93,
+   "sample_peak_dbfs": -1.31,
+   "max_momentary_lufs": -10.55,
+   "max_momentary_at_s": 87.6,
    "clipped_samples": 0,
    "dc_offset": [
-    -1.74e-09,
-    -3.09e-09
+    1.32e-08,
+    2.54e-07
    ],
    "first_sample_abs": 0.0,
    "last_10ms_peak_dbfs": -240.0,
-   "sha256": "bf60631e0ba9bdd7281a1ac6f5cc235892599ec349b20eecd821f71ecef9ca39",
+   "sha256": "cf56e238403d0fab8a440f0de18f205ec6b2ba50e745ab7622c99728c18625a7",
    "ffmpeg_ebur128": {
     "integrated_lufs": -16.0,
     "true_peak_dbtp": -1.3
@@ -117,29 +117,29 @@
    "sample_rate": 48000,
    "channels": 2,
    "subtype": "PCM_24",
-   "integrated_lufs": -17.0,
-   "true_peak_dbtp": -2.24,
-   "sample_peak_dbfs": -2.25,
-   "max_momentary_lufs": -9.25,
-   "max_momentary_at_s": 11.92,
+   "integrated_lufs": -17.01,
+   "true_peak_dbtp": -1.3,
+   "sample_peak_dbfs": -1.31,
+   "max_momentary_lufs": -11.68,
+   "max_momentary_at_s": 48.54,
    "clipped_samples": 0,
    "dc_offset": [
-    4.47e-10,
-    4.85e-10
+    3.64e-07,
+    5.56e-07
    ],
    "first_sample_abs": 0.0,
    "last_10ms_peak_dbfs": -240.0,
-   "sha256": "038e112d79b0fcd71c9e29e336d1dadf4a1daf0df58d770050af28fa8a7e465e",
+   "sha256": "aed5daf724427ba59cf7bf8289262c9452c83eb8ada886e40c3d2ce29de85a5e",
    "ffmpeg_ebur128": {
     "integrated_lufs": -17.0,
-    "true_peak_dbtp": -2.2
+    "true_peak_dbtp": -1.3
    }
   }
  },
  "music": {
-  "stem_integrated_lufs": -31.09,
-  "loudest_momentary_400ms_lufs": -22.06,
-  "loudest_momentary_at_s": 45.76,
+  "stem_integrated_lufs": -30.63,
+  "loudest_momentary_400ms_lufs": -25.64,
+  "loudest_momentary_at_s": 46.88,
   "analysis_before_ducking": {
    "segments": [
     {
@@ -151,7 +151,7 @@
       "A3",
       "E4"
      ],
-     "lufs": -31.14,
+     "lufs": -31.94,
      "strongest_notes": [
       {
        "note": "D3",
@@ -195,7 +195,7 @@
       "A3",
       "E4"
      ],
-     "lufs": -28.27,
+     "lufs": -29.07,
      "strongest_notes": [
       {
        "note": "D3",
@@ -228,7 +228,7 @@
       "C#4",
       "E4"
      ],
-     "lufs": -25.49,
+     "lufs": -26.29,
      "strongest_notes": [
       {
        "note": "F#3",
@@ -279,7 +279,7 @@
       "E4",
       "A4"
      ],
-     "lufs": -25.61,
+     "lufs": -26.41,
      "strongest_notes": [
       {
        "note": "F#3",
@@ -324,7 +324,7 @@
       "B3",
       "F#4"
      ],
-     "lufs": -26.23,
+     "lufs": -27.03,
      "strongest_notes": [
       {
        "note": "D3",
@@ -374,7 +374,7 @@
       "G3",
       "D4"
      ],
-     "lufs": -26.22
+     "lufs": -27.02
     },
     {
      "from": 32.0,
@@ -387,7 +387,7 @@
       "D4",
       "E4"
      ],
-     "lufs": -28.36,
+     "lufs": -29.15,
      "strongest_notes": [
       {
        "note": "B2",
@@ -437,7 +437,7 @@
       "B3",
       "D4"
      ],
-     "lufs": -26.35,
+     "lufs": -27.14,
      "strongest_notes": [
       {
        "note": "E3",
@@ -472,7 +472,7 @@
       "A4",
       "E5"
      ],
-     "lufs": -20.79,
+     "lufs": -21.59,
      "strongest_notes": [
       {
        "note": "F#3",
@@ -523,7 +523,7 @@
       "F#4",
       "A4"
      ],
-     "lufs": -23.5,
+     "lufs": -24.3,
      "strongest_notes": [
       {
        "note": "D3",
@@ -567,7 +567,7 @@
       "A3",
       "C#4"
      ],
-     "lufs": -24.39,
+     "lufs": -25.19,
      "strongest_notes": [
       {
        "note": "B2",
@@ -617,7 +617,7 @@
       "F#3",
       "C#4"
      ],
-     "lufs": -27.7
+     "lufs": -28.49
     },
     {
      "from": 55.73,
@@ -629,7 +629,7 @@
       "G3",
       "D4"
      ],
-     "lufs": -25.32
+     "lufs": -26.12
     },
     {
      "from": 58.3,
@@ -641,7 +641,7 @@
       "B3",
       "E4"
      ],
-     "lufs": -25.49
+     "lufs": -26.29
     },
     {
      "from": 60.85,
@@ -654,7 +654,7 @@
       "B3",
       "F#4"
      ],
-     "lufs": -27.17,
+     "lufs": -27.96,
      "strongest_notes": [
       {
        "note": "D3",
@@ -705,7 +705,7 @@
       "D4",
       "B4"
      ],
-     "lufs": -23.4
+     "lufs": -24.19
     },
     {
      "from": 69.84,
@@ -718,7 +718,7 @@
       "D4",
       "B4"
      ],
-     "lufs": -26.35
+     "lufs": -27.15
     },
     {
      "from": 72.7,
@@ -730,7 +730,7 @@
       "D4",
       "G4"
      ],
-     "lufs": -26.57,
+     "lufs": -27.37,
      "strongest_notes": [
       {
        "note": "B2",
@@ -781,7 +781,7 @@
       "B3",
       "D4"
      ],
-     "lufs": -25.0
+     "lufs": -25.79
     },
     {
      "from": 81.94,
@@ -795,7 +795,7 @@
       "F#4",
       "A4"
      ],
-     "lufs": -21.54
+     "lufs": -22.33
     },
     {
      "from": 84.35,
@@ -808,7 +808,7 @@
       "F#4",
       "E5"
      ],
-     "lufs": -22.48,
+     "lufs": -23.28,
      "strongest_notes": [
       {
        "note": "D3",
@@ -849,7 +849,7 @@
      ]
     }
    ],
-   "min_momentary_lufs_3_to_88_8": -34.14,
+   "min_momentary_lufs_3_to_88_8": -34.94,
    "min_momentary_at_s": 4.15,
    "max_fall_in_100ms_db": 1.78,
    "max_fall_at_s": 64.45,
@@ -1208,227 +1208,216 @@
      "level_db": -5.0,
      "brightness": 0.4,
      "reverb_send": 0.42
-    },
-    {
-     "t": 89.35,
-     "xfade_s": 1.0,
-     "notes": [],
-     "level_db": -60.0,
-     "brightness": 0.4,
-     "reverb_send": 0.42
     }
    ],
    "piano": [
     {
      "t": 0.55,
-     "note": 62,
+     "note": "D4",
      "hz": 293.66,
      "velocity": 0.28,
      "distant": false
     },
     {
      "t": 14.55,
-     "note": 62,
+     "note": "D4",
      "hz": 293.66,
      "velocity": 0.32,
      "distant": false
     },
     {
      "t": 14.9,
-     "note": 66,
+     "note": "F#4",
      "hz": 369.99,
      "velocity": 0.32,
      "distant": false
     },
     {
      "t": 23.15,
-     "note": 55,
+     "note": "G3",
      "hz": 196.0,
      "velocity": 0.28,
      "distant": false
     },
     {
      "t": 23.2,
-     "note": 62,
+     "note": "D4",
      "hz": 293.66,
      "velocity": 0.28,
      "distant": false
     },
     {
      "t": 31.05,
-     "note": 66,
+     "note": "F#4",
      "hz": 369.99,
      "velocity": 0.26,
      "distant": false
     },
     {
      "t": 39.29,
-     "note": 62,
+     "note": "D4",
      "hz": 293.66,
      "velocity": 0.38,
      "distant": false
     },
     {
      "t": 39.36,
-     "note": 66,
+     "note": "F#4",
      "hz": 369.99,
      "velocity": 0.38,
      "distant": false
     },
     {
      "t": 39.43,
-     "note": 69,
+     "note": "A4",
      "hz": 440.0,
      "velocity": 0.38,
      "distant": false
     },
     {
      "t": 40.26,
-     "note": 69,
+     "note": "A4",
      "hz": 440.0,
      "velocity": 0.3,
      "distant": false
     },
     {
      "t": 40.6,
-     "note": 74,
+     "note": "D5",
      "hz": 587.33,
      "velocity": 0.3,
      "distant": false
     },
     {
      "t": 48.46,
-     "note": 47,
+     "note": "B2",
      "hz": 123.47,
      "velocity": 0.32,
      "distant": false
     },
     {
      "t": 57.75,
-     "note": 64,
+     "note": "E4",
      "hz": 329.63,
      "velocity": 0.28,
      "distant": false
     },
     {
      "t": 58.1,
-     "note": 69,
+     "note": "A4",
      "hz": 440.0,
      "velocity": 0.28,
      "distant": false
     },
     {
      "t": 58.45,
-     "note": 71,
+     "note": "B4",
      "hz": 493.88,
      "velocity": 0.28,
      "distant": false
     },
     {
      "t": 60.15,
-     "note": 55,
+     "note": "G3",
      "hz": 196.0,
      "velocity": 0.3,
      "distant": false
     },
     {
      "t": 60.21,
-     "note": 59,
+     "note": "B3",
      "hz": 246.94,
      "velocity": 0.3,
      "distant": false
     },
     {
      "t": 66.6,
-     "note": 64,
+     "note": "E4",
      "hz": 329.63,
      "velocity": 0.28,
      "distant": false
     },
     {
      "t": 66.9,
-     "note": 71,
+     "note": "B4",
      "hz": 493.88,
      "velocity": 0.28,
      "distant": false
     },
     {
      "t": 72.0,
-     "note": 62,
+     "note": "D4",
      "hz": 293.66,
      "velocity": 0.26,
      "distant": true
     },
     {
      "t": 72.08,
-     "note": 67,
+     "note": "G4",
      "hz": 392.0,
      "velocity": 0.26,
      "distant": true
     },
     {
      "t": 78.35,
-     "note": 57,
+     "note": "A3",
      "hz": 220.0,
      "velocity": 0.26,
      "distant": false
     },
     {
      "t": 81.24,
-     "note": 50,
+     "note": "D3",
      "hz": 146.83,
      "velocity": 0.4,
      "distant": false
     },
     {
      "t": 81.32,
-     "note": 57,
+     "note": "A3",
      "hz": 220.0,
      "velocity": 0.4,
      "distant": false
     },
     {
      "t": 81.4,
-     "note": 66,
+     "note": "F#4",
      "hz": 369.99,
      "velocity": 0.4,
      "distant": false
     },
     {
      "t": 83.6,
-     "note": 50,
+     "note": "D3",
      "hz": 146.83,
      "velocity": 0.3,
      "distant": false
     },
     {
      "t": 83.81,
-     "note": 69,
+     "note": "A4",
      "hz": 440.0,
      "velocity": 0.3,
      "distant": false
     },
     {
      "t": 84.02,
-     "note": 76,
+     "note": "E5",
      "hz": 659.26,
      "velocity": 0.3,
      "distant": false
-    },
-    {
-     "t": 88.4,
-     "note": 38,
-     "hz": 73.42,
-     "velocity": 0.45,
-     "distant": false
     }
    ],
-   "pre_duck_lufs": -26.0
+   "pre_duck_lufs": -28.5,
+   "bed_fade": {
+    "from": 88.7,
+    "seconds": 1.2
+   }
   }
  },
  "sfx": {
-  "stem_integrated_lufs": -34.21,
-  "loudest_momentary_400ms_lufs": -26.61,
+  "stem_integrated_lufs": -32.86,
+  "loudest_momentary_400ms_lufs": -24.92,
   "loudest_momentary_at_s": 48.55,
   "bus_leveller": {
    "cap_lufs": -25.0,
@@ -1438,67 +1427,381 @@
  "ducking": {
   "master": [
    {
-    "lines": "L01+L02",
+    "lines": "L01+L02+W01+L03",
     "start": 0.87,
-    "end": 7.65,
-    "depth_db": 8.0
-   },
-   {
-    "lines": "W01",
-    "start": 8.52,
-    "end": 13.91,
-    "depth_db": 5.0
-   },
-   {
-    "lines": "L03",
-    "start": 14.77,
     "end": 20.38,
-    "depth_db": 8.0
+    "depth_db": 5.0
    },
    {
     "lines": "L04",
     "start": 23.37,
     "end": 26.88,
-    "depth_db": 8.0
+    "depth_db": 5.0
    },
    {
     "lines": "L05",
     "start": 31.17,
     "end": 33.97,
-    "depth_db": 8.0
+    "depth_db": 5.0
    },
    {
     "lines": "L06",
     "start": 38.58,
     "end": 44.75,
-    "depth_db": 8.0
+    "depth_db": 5.0
    },
    {
-    "lines": "L07+L08+L09+L10+L10b",
+    "lines": "L07+L08+L09+L10+L10b+L11+L12+L13+L14",
     "start": 47.28,
-    "end": 65.74,
-    "depth_db": 8.0
-   },
-   {
-    "lines": "L11",
-    "start": 66.92,
-    "end": 71.229,
-    "depth_db": 8.0
-   },
-   {
-    "lines": "L12",
-    "start": 72.23,
-    "end": 77.158,
-    "depth_db": 8.0
-   },
-   {
-    "lines": "L13+L14",
-    "start": 78.57,
-    "end": 88.489,
-    "depth_db": 8.0
+    "end": "held to the end",
+    "depth_db": 5.0
    }
   ],
-  "no_narration": "worker line W01 only, 5.0 dB"
+  "no_narration": "worker line W01 only, 5.0 dB",
+  "music_pause_cap": {
+   "cap_lufs": -27.86,
+   "max_reduction_db": 1.85
+  },
+  "music_max_move_1s_db": 8.54
+ },
+ "voice_levelling": {
+  "target_narrator_lufs": -16.0,
+  "target_worker_lufs": -16.5,
+  "sentences": [
+   {
+    "line": "L01",
+    "sentence": 1,
+    "speaker": "narrator",
+    "text": "Real work in the middle:",
+    "raw_lufs_mix_frame": -15.78,
+    "gain_db": -1.93,
+    "master_lufs": -15.51,
+    "target_lufs": -16.0
+   },
+   {
+    "line": "L01",
+    "sentence": 2,
+    "speaker": "narrator",
+    "text": "a worker, a site, a risk owner.",
+    "raw_lufs_mix_frame": -16.64,
+    "gain_db": -1.07,
+    "master_lufs": -15.51,
+    "target_lufs": -16.0
+   },
+   {
+    "line": "L02",
+    "sentence": 1,
+    "speaker": "narrator",
+    "text": "Priora places agents around it.",
+    "raw_lufs_mix_frame": -13.53,
+    "gain_db": -4.18,
+    "master_lufs": -15.5,
+    "target_lufs": -16.0
+   },
+   {
+    "line": "W01",
+    "sentence": null,
+    "speaker": "worker",
+    "text": "Hey, the bracket by the packing line has cracked again. We're going to weld it before the night shift.",
+    "raw_lufs_mix_frame": -13.29,
+    "gain_db": -4.92,
+    "master_lufs": -16.0,
+    "target_lufs": -16.5
+   },
+   {
+    "line": "L03",
+    "sentence": 1,
+    "speaker": "narrator",
+    "text": "Priora hears a repair, hot work, a place and a deadline.",
+    "raw_lufs_mix_frame": -19.15,
+    "gain_db": 1.44,
+    "master_lufs": -15.51,
+    "target_lufs": -16.0
+   },
+   {
+    "line": "L03",
+    "sentence": 2,
+    "speaker": "narrator",
+    "text": "Then it asks for a photo.",
+    "raw_lufs_mix_frame": -17.86,
+    "gain_db": 0.15,
+    "master_lufs": -15.77,
+    "target_lufs": -16.0
+   },
+   {
+    "line": "L04",
+    "sentence": 1,
+    "speaker": "narrator",
+    "text": "Next, it summons only the specialists this site and job need.",
+    "raw_lufs_mix_frame": -16.91,
+    "gain_db": -0.8,
+    "master_lufs": -15.53,
+    "target_lufs": -16.0
+   },
+   {
+    "line": "L05",
+    "sentence": 1,
+    "speaker": "narrator",
+    "text": "Each checks its own conditions and reports back.",
+    "raw_lufs_mix_frame": -14.21,
+    "gain_db": -3.49,
+    "master_lufs": -15.5,
+    "target_lufs": -16.0
+   },
+   {
+    "line": "L06",
+    "sentence": 1,
+    "speaker": "narrator",
+    "text": "When everything holds, the route opens.",
+    "raw_lufs_mix_frame": -16.25,
+    "gain_db": -1.46,
+    "master_lufs": -15.5,
+    "target_lufs": -16.0
+   },
+   {
+    "line": "L06",
+    "sentence": 2,
+    "speaker": "narrator",
+    "text": "Work goes on, the record is kept, no one is disturbed.",
+    "raw_lufs_mix_frame": -16.5,
+    "gain_db": -1.21,
+    "master_lufs": -15.31,
+    "target_lufs": -16.0
+   },
+   {
+    "line": "L07",
+    "sentence": 1,
+    "speaker": "narrator",
+    "text": "Then one condition slips.",
+    "raw_lufs_mix_frame": -14.78,
+    "gain_db": -2.93,
+    "master_lufs": -15.5,
+    "target_lufs": -16.0
+   },
+   {
+    "line": "L07",
+    "sentence": 2,
+    "speaker": "narrator",
+    "text": "The fire watch is half what the policy asks.",
+    "raw_lufs_mix_frame": -16.7,
+    "gain_db": -1.01,
+    "master_lufs": -15.5,
+    "target_lufs": -16.0
+   },
+   {
+    "line": "L08",
+    "sentence": 1,
+    "speaker": "narrator",
+    "text": "Priora brings it to the risk owner.",
+    "raw_lufs_mix_frame": -14.5,
+    "gain_db": -3.21,
+    "master_lufs": -15.5,
+    "target_lufs": -16.0
+   },
+   {
+    "line": "L08",
+    "sentence": 2,
+    "speaker": "narrator",
+    "text": "Agents prepare; the human decides.",
+    "raw_lufs_mix_frame": -15.17,
+    "gain_db": -2.54,
+    "master_lufs": -15.5,
+    "target_lufs": -16.0
+   },
+   {
+    "line": "L09",
+    "sentence": 1,
+    "speaker": "narrator",
+    "text": "Three decision rooms open.",
+    "raw_lufs_mix_frame": -16.33,
+    "gain_db": -1.37,
+    "master_lufs": -15.5,
+    "target_lufs": -16.0
+   },
+   {
+    "line": "L10",
+    "sentence": 1,
+    "speaker": "narrator",
+    "text": "Retain is never a default.",
+    "raw_lufs_mix_frame": -14.46,
+    "gain_db": -3.25,
+    "master_lufs": -15.5,
+    "target_lufs": -16.0
+   },
+   {
+    "line": "L10b",
+    "sentence": 1,
+    "speaker": "narrator",
+    "text": "Risk is kept on purpose, with its terms explicit.",
+    "raw_lufs_mix_frame": -18.31,
+    "gain_db": 0.6,
+    "master_lufs": -15.68,
+    "target_lufs": -16.0
+   },
+   {
+    "line": "L11",
+    "sentence": 1,
+    "speaker": "narrator",
+    "text": "Mitigate compares safeguards, and checks whether the work is back inside.",
+    "raw_lufs_mix_frame": -15.82,
+    "gain_db": -1.88,
+    "master_lufs": -15.5,
+    "target_lufs": -16.0
+   },
+   {
+    "line": "L12",
+    "sentence": 1,
+    "speaker": "narrator",
+    "text": "Transfer, simulated for now, asks outside capacity for terms and a price.",
+    "raw_lufs_mix_frame": -18.06,
+    "gain_db": 0.36,
+    "master_lufs": -15.58,
+    "target_lufs": -16.0
+   },
+   {
+    "line": "L13",
+    "sentence": 1,
+    "speaker": "narrator",
+    "text": "Priora carries the case between rooms.",
+    "raw_lufs_mix_frame": -16.91,
+    "gain_db": -0.79,
+    "master_lufs": -15.5,
+    "target_lufs": -16.0
+   },
+   {
+    "line": "L13",
+    "sentence": 2,
+    "speaker": "narrator",
+    "text": "The risk owner stays in control.",
+    "raw_lufs_mix_frame": -16.82,
+    "gain_db": -0.89,
+    "master_lufs": -15.55,
+    "target_lufs": -16.0
+   },
+   {
+    "line": "L14",
+    "sentence": 1,
+    "speaker": "narrator",
+    "text": "Priora turns physical work into explicit risk decisions, while the work happens.",
+    "raw_lufs_mix_frame": -16.43,
+    "gain_db": -1.28,
+    "master_lufs": -15.5,
+    "target_lufs": -16.0
+   }
+  ],
+  "rides": [
+   {
+    "line": "L06",
+    "word": "kept",
+    "start": 42.85,
+    "end": 43.33,
+    "gain_db": 4.0,
+    "word_master_lufs": -18.39
+   }
+  ],
+  "note": "measured in master.wav's voice component over each sentence (word times -0.03 s / +0.08 s); voice.wav is untouched"
+ },
+ "hierarchy": {
+  "cap_others_lufs_100ms": -28.0,
+  "s7_softer": {
+   "from": 78.0,
+   "to": 84.0,
+   "kinds": [
+    "lock",
+    "decision",
+    "resolve"
+   ],
+   "db": -3.0
+  },
+  "key_moments": [
+   {
+    "kind": "deviate",
+    "t": 48.34,
+    "lufs_100ms": -25.6,
+    "measured_lufs_100ms": -23.34
+   },
+   {
+    "kind": "decision",
+    "t": 55.72,
+    "lufs_100ms": -26.7,
+    "measured_lufs_100ms": -24.48
+   }
+  ],
+  "loudest_others": [
+   {
+    "kind": "inspect",
+    "t": 48.1,
+    "lufs_100ms": -41.4,
+    "measured_lufs_100ms": -23.34
+   },
+   {
+    "kind": "lock",
+    "t": 39.35,
+    "lufs_100ms": -28.0,
+    "measured_lufs_100ms": -24.43
+   },
+   {
+    "kind": "move",
+    "t": 38.98,
+    "lufs_100ms": -43.6,
+    "measured_lufs_100ms": -24.47
+   },
+   {
+    "kind": "arrive",
+    "t": 55.45,
+    "lufs_100ms": -31.5,
+    "measured_lufs_100ms": -24.48
+   },
+   {
+    "kind": "resolve",
+    "t": 70.13,
+    "lufs_100ms": -29.8,
+    "measured_lufs_100ms": -25.32
+   },
+   {
+    "kind": "compare",
+    "t": 70.5,
+    "lufs_100ms": -30.5,
+    "measured_lufs_100ms": -25.44
+   }
+  ],
+  "opening_prints_measured": [
+   -26.04,
+   -25.83,
+   -26.17
+  ],
+  "speech_fragments_measured": [
+   -36.28,
+   -36.23,
+   -36.24,
+   -35.14,
+   -36.76,
+   -29.36,
+   -40.52,
+   -39.22
+  ]
+ },
+ "no_narration_small_sounds": {
+  "kinds": [
+   "speech-fragment",
+   "packet"
+  ],
+  "sfx_peak_under_W01_dbfs": -14.18
+ },
+ "ending": {
+  "duck_after_last_line_db": [
+   -5.0,
+   -5.0
+  ],
+  "bed_fade": {
+   "from": 88.7,
+   "seconds": 1.2
+  },
+  "music_peak_after_fade_dbfs": -240.0,
+  "music_largest_rise_during_fade_db_per_10ms": -0.013,
+  "wordmark_t": 88.75,
+  "wordmark_level_at_silent_point_db_re_peak": -64.5,
+  "events_after_wordmark": []
  },
  "speech_vs_background": {
   "master": [
@@ -1507,15 +1810,15 @@
     "speaker": "narrator",
     "start": 0.9,
     "end": 4.71,
-    "voice_lufs": -15.73,
-    "music_lufs": -39.47,
-    "sfx_lufs": -34.92,
-    "background_lufs": -35.53,
-    "voice_over_music_lu": 23.7,
-    "voice_over_background_lu": 19.8,
+    "voice_lufs": -15.42,
+    "music_lufs": -37.26,
+    "sfx_lufs": -33.23,
+    "background_lufs": -33.63,
+    "voice_over_music_lu": 21.8,
+    "voice_over_background_lu": 18.2,
     "music_duck_db": [
-     -8.0,
-     -8.0
+     -5.0,
+     -5.0
     ]
    },
    {
@@ -1523,15 +1826,15 @@
     "speaker": "narrator",
     "start": 5.45,
     "end": 7.59,
-    "voice_lufs": -12.96,
-    "music_lufs": -37.59,
-    "sfx_lufs": -38.87,
-    "background_lufs": -35.84,
-    "voice_over_music_lu": 24.6,
-    "voice_over_background_lu": 22.9,
+    "voice_lufs": -15.44,
+    "music_lufs": -35.39,
+    "sfx_lufs": -37.18,
+    "background_lufs": -33.8,
+    "voice_over_music_lu": 20.0,
+    "voice_over_background_lu": 18.4,
     "music_duck_db": [
-     -8.0,
-     -8.0
+     -5.0,
+     -5.0
     ]
    },
    {
@@ -1539,12 +1842,12 @@
     "speaker": "worker",
     "start": 8.55,
     "end": 13.85,
-    "voice_lufs": -12.74,
-    "music_lufs": -33.3,
-    "sfx_lufs": -38.6,
-    "background_lufs": -32.77,
-    "voice_over_music_lu": 20.6,
-    "voice_over_background_lu": 20.0,
+    "voice_lufs": -15.97,
+    "music_lufs": -34.1,
+    "sfx_lufs": -43.11,
+    "background_lufs": -33.85,
+    "voice_over_music_lu": 18.1,
+    "voice_over_background_lu": 17.9,
     "music_duck_db": [
      -5.0,
      -5.0
@@ -1555,15 +1858,15 @@
     "speaker": "narrator",
     "start": 14.8,
     "end": 20.27,
-    "voice_lufs": -18.12,
-    "music_lufs": -33.82,
-    "sfx_lufs": -36.72,
-    "background_lufs": -32.17,
-    "voice_over_music_lu": 15.7,
-    "voice_over_background_lu": 14.1,
+    "voice_lufs": -15.6,
+    "music_lufs": -31.65,
+    "sfx_lufs": -35.04,
+    "background_lufs": -30.27,
+    "voice_over_music_lu": 16.0,
+    "voice_over_background_lu": 14.7,
     "music_duck_db": [
-     -8.0,
-     -8.0
+     -5.0,
+     -5.0
     ]
    },
    {
@@ -1571,15 +1874,15 @@
     "speaker": "narrator",
     "start": 23.4,
     "end": 26.82,
-    "voice_lufs": -16.37,
-    "music_lufs": -34.06,
-    "sfx_lufs": -37.23,
-    "background_lufs": -32.45,
-    "voice_over_music_lu": 17.7,
-    "voice_over_background_lu": 16.1,
+    "voice_lufs": -15.5,
+    "music_lufs": -31.87,
+    "sfx_lufs": -35.55,
+    "background_lufs": -30.4,
+    "voice_over_music_lu": 16.4,
+    "voice_over_background_lu": 14.9,
     "music_duck_db": [
-     -8.0,
-     -8.0
+     -5.0,
+     -5.0
     ]
    },
    {
@@ -1587,15 +1890,15 @@
     "speaker": "narrator",
     "start": 31.2,
     "end": 33.91,
-    "voice_lufs": -13.61,
-    "music_lufs": -36.26,
-    "sfx_lufs": -34.9,
-    "background_lufs": -32.82,
-    "voice_over_music_lu": 22.6,
-    "voice_over_background_lu": 19.2,
+    "voice_lufs": -15.41,
+    "music_lufs": -34.23,
+    "sfx_lufs": -33.21,
+    "background_lufs": -30.97,
+    "voice_over_music_lu": 18.8,
+    "voice_over_background_lu": 15.6,
     "music_duck_db": [
-     -8.0,
-     -8.0
+     -5.0,
+     -5.0
     ]
    },
    {
@@ -1603,15 +1906,15 @@
     "speaker": "narrator",
     "start": 38.6,
     "end": 44.69,
-    "voice_lufs": -15.85,
-    "music_lufs": -30.22,
-    "sfx_lufs": -33.13,
-    "background_lufs": -28.89,
-    "voice_over_music_lu": 14.4,
-    "voice_over_background_lu": 13.0,
+    "voice_lufs": -15.35,
+    "music_lufs": -28.18,
+    "sfx_lufs": -31.69,
+    "background_lufs": -26.99,
+    "voice_over_music_lu": 12.8,
+    "voice_over_background_lu": 11.6,
     "music_duck_db": [
-     -8.0,
-     -8.0
+     -5.0,
+     -5.0
     ]
    },
    {
@@ -1619,15 +1922,15 @@
     "speaker": "narrator",
     "start": 47.3,
     "end": 51.89,
-    "voice_lufs": -15.51,
-    "music_lufs": -32.47,
-    "sfx_lufs": -30.94,
-    "background_lufs": -29.71,
-    "voice_over_music_lu": 17.0,
-    "voice_over_background_lu": 14.2,
+    "voice_lufs": -15.5,
+    "music_lufs": -30.93,
+    "sfx_lufs": -29.24,
+    "background_lufs": -28.09,
+    "voice_over_music_lu": 15.4,
+    "voice_over_background_lu": 12.6,
     "music_duck_db": [
-     -8.0,
-     -8.0
+     -5.0,
+     -5.0
     ]
    },
    {
@@ -1635,15 +1938,15 @@
     "speaker": "narrator",
     "start": 52.4,
     "end": 56.92,
-    "voice_lufs": -14.33,
-    "music_lufs": -34.15,
-    "sfx_lufs": -32.57,
-    "background_lufs": -30.93,
-    "voice_over_music_lu": 19.8,
-    "voice_over_background_lu": 16.6,
+    "voice_lufs": -15.48,
+    "music_lufs": -31.96,
+    "sfx_lufs": -30.88,
+    "background_lufs": -28.99,
+    "voice_over_music_lu": 16.5,
+    "voice_over_background_lu": 13.5,
     "music_duck_db": [
-     -8.0,
-     -8.0
+     -5.0,
+     -5.0
     ]
    },
    {
@@ -1651,15 +1954,15 @@
     "speaker": "narrator",
     "start": 57.7,
     "end": 59.41,
-    "voice_lufs": -15.87,
-    "music_lufs": -33.46,
-    "sfx_lufs": -34.28,
-    "background_lufs": -31.1,
-    "voice_over_music_lu": 17.6,
-    "voice_over_background_lu": 15.2,
+    "voice_lufs": -15.55,
+    "music_lufs": -31.26,
+    "sfx_lufs": -32.59,
+    "background_lufs": -29.11,
+    "voice_over_music_lu": 15.7,
+    "voice_over_background_lu": 13.6,
     "music_duck_db": [
-     -8.0,
-     -8.0
+     -5.0,
+     -5.0
     ]
    },
    {
@@ -1667,15 +1970,15 @@
     "speaker": "narrator",
     "start": 60.25,
     "end": 61.94,
-    "voice_lufs": -13.8,
-    "music_lufs": -34.93,
-    "sfx_lufs": -35.6,
-    "background_lufs": -33.13,
-    "voice_over_music_lu": 21.1,
-    "voice_over_background_lu": 19.3,
+    "voice_lufs": -15.36,
+    "music_lufs": -32.73,
+    "sfx_lufs": -34.37,
+    "background_lufs": -31.25,
+    "voice_over_music_lu": 17.4,
+    "voice_over_background_lu": 15.9,
     "music_duck_db": [
-     -8.0,
-     -8.0
+     -5.0,
+     -5.0
     ]
    },
    {
@@ -1683,15 +1986,15 @@
     "speaker": "narrator",
     "start": 62.6,
     "end": 65.68,
-    "voice_lufs": -17.71,
-    "music_lufs": -35.5,
-    "sfx_lufs": -33.46,
-    "background_lufs": -31.81,
+    "voice_lufs": -15.6,
+    "music_lufs": -33.37,
+    "sfx_lufs": -31.93,
+    "background_lufs": -30.01,
     "voice_over_music_lu": 17.8,
-    "voice_over_background_lu": 14.1,
+    "voice_over_background_lu": 14.4,
     "music_duck_db": [
-     -8.0,
-     -8.0
+     -5.0,
+     -5.0
     ]
    },
    {
@@ -1699,15 +2002,15 @@
     "speaker": "narrator",
     "start": 66.95,
     "end": 71.17,
-    "voice_lufs": -15.41,
-    "music_lufs": -33.32,
-    "sfx_lufs": -32.38,
-    "background_lufs": -30.11,
-    "voice_over_music_lu": 17.9,
-    "voice_over_background_lu": 14.7,
+    "voice_lufs": -15.6,
+    "music_lufs": -31.12,
+    "sfx_lufs": -30.84,
+    "background_lufs": -28.23,
+    "voice_over_music_lu": 15.5,
+    "voice_over_background_lu": 12.6,
     "music_duck_db": [
-     -8.0,
-     -8.0
+     -5.0,
+     -5.0
     ]
    },
    {
@@ -1715,15 +2018,15 @@
     "speaker": "narrator",
     "start": 72.25,
     "end": 77.1,
-    "voice_lufs": -17.45,
-    "music_lufs": -34.4,
-    "sfx_lufs": -34.29,
-    "background_lufs": -31.85,
-    "voice_over_music_lu": 16.9,
+    "voice_lufs": -15.49,
+    "music_lufs": -32.25,
+    "sfx_lufs": -32.6,
+    "background_lufs": -29.89,
+    "voice_over_music_lu": 16.8,
     "voice_over_background_lu": 14.4,
     "music_duck_db": [
-     -8.0,
-     -8.0
+     -5.0,
+     -5.0
     ]
    },
    {
@@ -1731,15 +2034,15 @@
     "speaker": "narrator",
     "start": 78.6,
     "end": 83.32,
-    "voice_lufs": -16.5,
-    "music_lufs": -31.36,
-    "sfx_lufs": -31.83,
-    "background_lufs": -28.56,
-    "voice_over_music_lu": 14.9,
-    "voice_over_background_lu": 12.1,
+    "voice_lufs": -15.67,
+    "music_lufs": -29.17,
+    "sfx_lufs": -31.86,
+    "background_lufs": -27.27,
+    "voice_over_music_lu": 13.5,
+    "voice_over_background_lu": 11.6,
     "music_duck_db": [
-     -8.0,
-     -8.0
+     -5.0,
+     -5.0
     ]
    },
    {
@@ -1747,24 +2050,24 @@
     "speaker": "narrator",
     "start": 83.75,
     "end": 88.43,
-    "voice_lufs": -15.99,
-    "music_lufs": -30.71,
-    "sfx_lufs": -37.79,
-    "background_lufs": -30.21,
-    "voice_over_music_lu": 14.7,
-    "voice_over_background_lu": 14.2,
+    "voice_lufs": -15.57,
+    "music_lufs": -28.51,
+    "sfx_lufs": -36.7,
+    "background_lufs": -28.12,
+    "voice_over_music_lu": 12.9,
+    "voice_over_background_lu": 12.6,
     "music_duck_db": [
-     -8.0,
-     -8.0
+     -5.0,
+     -5.0
     ]
    }
   ],
-  "min_narrator_over_background_lu": 12.1,
-  "min_narrator_over_music_lu": 14.4,
+  "min_narrator_over_background_lu": 11.6,
+  "min_narrator_over_music_lu": 12.8,
   "no_narration_worker": {
-   "worker_lufs": -12.74,
-   "background_lufs": -25.29,
-   "margin_lu": 12.5
+   "worker_lufs": -15.97,
+   "background_lufs": -21.98,
+   "margin_lu": 6.0
   }
  },
  "events": {
@@ -1801,18 +2104,9 @@
   "unknown_kinds": [],
   "span": {
    "earliest_start_s": 0.3,
-   "latest_end_s": 89.95,
+   "latest_end_s": 89.91,
    "moved_from_before_0": [],
-   "faded_at_end": [
-    {
-     "kind": "wordmark",
-     "t": 88.75,
-     "start": 88.75,
-     "end": 89.95,
-     "lufs_100ms": -29.6,
-     "note": "tail faded to end by 89.95 s (natural end 90.757 s)"
-    }
-   ],
+   "faded_at_end": [],
    "skipped": []
   },
   "placed": [
@@ -1822,7 +2116,9 @@
     "start": 0.3,
     "end": 1.6352,
     "lufs_100ms": -33.5,
-    "note": ""
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -31.32
    },
    {
     "kind": "title",
@@ -1830,7 +2126,9 @@
     "start": 0.9,
     "end": 1.8355,
     "lufs_100ms": -35.1,
-    "note": ""
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -30.69
    },
    {
     "kind": "print",
@@ -1838,7 +2136,9 @@
     "start": 1.75,
     "end": 2.5664,
     "lufs_100ms": -28.2,
-    "note": ""
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -26.04
    },
    {
     "kind": "print",
@@ -1846,7 +2146,9 @@
     "start": 2.63,
     "end": 3.3905,
     "lufs_100ms": -28.0,
-    "note": ""
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -25.83
    },
    {
     "kind": "print",
@@ -1854,7 +2156,9 @@
     "start": 3.88,
     "end": 4.6412,
     "lufs_100ms": -28.3,
-    "note": ""
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -26.17
    },
    {
     "kind": "arrive",
@@ -1862,7 +2166,9 @@
     "start": 5.5,
     "end": 6.1673,
     "lufs_100ms": -33.5,
-    "note": ""
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -31.29
    },
    {
     "kind": "thread",
@@ -1870,7 +2176,9 @@
     "start": 6.2,
     "end": 7.4354,
     "lufs_100ms": -35.9,
-    "note": ""
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -31.83
    },
    {
     "kind": "arrive",
@@ -1878,7 +2186,9 @@
     "start": 6.516,
     "end": 7.0698,
     "lufs_100ms": -38.4,
-    "note": ""
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -31.84
    },
    {
     "kind": "arrive",
@@ -1886,7 +2196,9 @@
     "start": 6.682,
     "end": 7.2365,
     "lufs_100ms": -37.6,
-    "note": ""
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -32.38
    },
    {
     "kind": "arrive",
@@ -1894,7 +2206,9 @@
     "start": 6.704,
     "end": 7.2493,
     "lufs_100ms": -38.0,
-    "note": ""
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -33.98
    },
    {
     "kind": "arrive",
@@ -1902,7 +2216,9 @@
     "start": 7.01,
     "end": 7.5644,
     "lufs_100ms": -38.4,
-    "note": ""
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -36.2
    },
    {
     "kind": "move",
@@ -1910,15 +2226,19 @@
     "start": 7.95,
     "end": 9.17,
     "lufs_100ms": -36.6,
-    "note": ""
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -34.35
    },
    {
     "kind": "speech-fragment",
     "t": 10.5,
     "start": 10.5,
-    "end": 10.9233,
-    "lufs_100ms": -31.2,
-    "note": ""
+    "end": 10.9453,
+    "lufs_100ms": -38.5,
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -36.28
    },
    {
     "kind": "packet",
@@ -1926,15 +2246,19 @@
     "start": 10.6,
     "end": 11.1822,
     "lufs_100ms": -40.8,
-    "note": ""
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -36.24
    },
    {
     "kind": "speech-fragment",
     "t": 11.04,
     "start": 11.04,
-    "end": 11.4453,
-    "lufs_100ms": -30.5,
-    "note": ""
+    "end": 11.4525,
+    "lufs_100ms": -38.4,
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -36.23
    },
    {
     "kind": "packet",
@@ -1942,15 +2266,19 @@
     "start": 11.4,
     "end": 12.0315,
     "lufs_100ms": -40.9,
-    "note": ""
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -38.68
    },
    {
     "kind": "speech-fragment",
     "t": 12.74,
     "start": 12.74,
-    "end": 13.1524,
-    "lufs_100ms": -30.8,
-    "note": ""
+    "end": 13.1237,
+    "lufs_100ms": -38.4,
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -36.24
    },
    {
     "kind": "packet",
@@ -1958,15 +2286,19 @@
     "start": 13.0,
     "end": 13.6854,
     "lufs_100ms": -41.6,
-    "note": ""
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -39.35
    },
    {
     "kind": "speech-fragment",
     "t": 13.97,
     "start": 13.97,
-    "end": 14.3829,
-    "lufs_100ms": -30.9,
-    "note": ""
+    "end": 14.3933,
+    "lufs_100ms": -39.3,
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -35.14
    },
    {
     "kind": "packet",
@@ -1974,7 +2306,9 @@
     "start": 14.0,
     "end": 14.6841,
     "lufs_100ms": -40.7,
-    "note": ""
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -35.97
    },
    {
     "kind": "thread",
@@ -1982,7 +2316,9 @@
     "start": 14.25,
     "end": 15.0725,
     "lufs_100ms": -38.7,
-    "note": ""
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -35.32
    },
    {
     "kind": "move",
@@ -1990,7 +2326,9 @@
     "start": 14.3,
     "end": 15.37,
     "lufs_100ms": -41.2,
-    "note": ""
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -35.32
    },
    {
     "kind": "arrive",
@@ -1998,23 +2336,29 @@
     "start": 14.8,
     "end": 15.5512,
     "lufs_100ms": -28.8,
-    "note": ""
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -26.46
    },
    {
     "kind": "speech-fragment",
     "t": 14.9,
     "start": 14.9,
-    "end": 15.3146,
-    "lufs_100ms": -35.2,
-    "note": ""
+    "end": 15.3425,
+    "lufs_100ms": -43.0,
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -36.76
    },
    {
     "kind": "speech-fragment",
     "t": 15.37,
     "start": 15.37,
-    "end": 15.7663,
-    "lufs_100ms": -35.2,
-    "note": ""
+    "end": 15.7978,
+    "lufs_100ms": -43.0,
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -29.36
    },
    {
     "kind": "arrive",
@@ -2022,7 +2366,9 @@
     "start": 15.4,
     "end": 16.0073,
     "lufs_100ms": -31.7,
-    "note": ""
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -29.53
    },
    {
     "kind": "arrive",
@@ -2030,15 +2376,19 @@
     "start": 15.87,
     "end": 16.4758,
     "lufs_100ms": -32.3,
-    "note": ""
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -30.11
    },
    {
     "kind": "speech-fragment",
     "t": 16.35,
     "start": 16.35,
-    "end": 16.7635,
-    "lufs_100ms": -35.2,
-    "note": ""
+    "end": 16.7773,
+    "lufs_100ms": -42.7,
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -40.52
    },
    {
     "kind": "arrive",
@@ -2046,15 +2396,19 @@
     "start": 16.85,
     "end": 17.4584,
     "lufs_100ms": -32.5,
-    "note": ""
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -29.9
    },
    {
     "kind": "speech-fragment",
     "t": 16.92,
     "start": 16.92,
-    "end": 17.3208,
-    "lufs_100ms": -35.3,
-    "note": ""
+    "end": 17.334,
+    "lufs_100ms": -42.8,
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -39.22
    },
    {
     "kind": "arrive",
@@ -2062,7 +2416,9 @@
     "start": 17.42,
     "end": 18.0257,
     "lufs_100ms": -32.6,
-    "note": ""
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -30.39
    },
    {
     "kind": "thread",
@@ -2070,7 +2426,9 @@
     "start": 17.89,
     "end": 18.8746,
     "lufs_100ms": -37.5,
-    "note": ""
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -29.7
    },
    {
     "kind": "arrive",
@@ -2078,7 +2436,9 @@
     "start": 18.31,
     "end": 18.9447,
     "lufs_100ms": -32.4,
-    "note": ""
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -29.85
    },
    {
     "kind": "arrive",
@@ -2086,7 +2446,9 @@
     "start": 18.51,
     "end": 19.1158,
     "lufs_100ms": -32.1,
-    "note": ""
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -29.01
    },
    {
     "kind": "request",
@@ -2094,7 +2456,9 @@
     "start": 18.62,
     "end": 20.295,
     "lufs_100ms": -31.1,
-    "note": ""
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -28.89
    },
    {
     "kind": "evidence",
@@ -2102,15 +2466,19 @@
     "start": 19.67,
     "end": 20.4478,
     "lufs_100ms": -29.3,
-    "note": ""
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -27.16
    },
    {
     "kind": "evidence",
     "t": 20.53,
     "start": 20.53,
     "end": 21.1741,
-    "lufs_100ms": -27.0,
-    "note": ""
+    "lufs_100ms": -28.0,
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -25.79
    },
    {
     "kind": "assemble",
@@ -2118,7 +2486,9 @@
     "start": 21.5,
     "end": 22.604,
     "lufs_100ms": -35.1,
-    "note": ""
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -32.92
    },
    {
     "kind": "move",
@@ -2126,7 +2496,9 @@
     "start": 22.3,
     "end": 24.1187,
     "lufs_100ms": -36.7,
-    "note": ""
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -38.11
    },
    {
     "kind": "thread",
@@ -2134,7 +2506,9 @@
     "start": 23.6,
     "end": 24.7428,
     "lufs_100ms": -35.9,
-    "note": ""
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -32.99
    },
    {
     "kind": "packet",
@@ -2142,7 +2516,9 @@
     "start": 23.8,
     "end": 24.4301,
     "lufs_100ms": -39.3,
-    "note": ""
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -32.99
    },
    {
     "kind": "arrive",
@@ -2150,7 +2526,9 @@
     "start": 24.3,
     "end": 24.8521,
     "lufs_100ms": -40.5,
-    "note": ""
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -32.99
    },
    {
     "kind": "door-open",
@@ -2158,7 +2536,9 @@
     "start": 24.45,
     "end": 25.6273,
     "lufs_100ms": -35.2,
-    "note": ""
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -32.99
    },
    {
     "kind": "request",
@@ -2166,7 +2546,9 @@
     "start": 24.62,
     "end": 26.2948,
     "lufs_100ms": -41.2,
-    "note": ""
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -33.19
    },
    {
     "kind": "request",
@@ -2174,7 +2556,9 @@
     "start": 25.1,
     "end": 26.775,
     "lufs_100ms": -41.6,
-    "note": ""
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -39.39
    },
    {
     "kind": "request",
@@ -2182,7 +2566,9 @@
     "start": 25.58,
     "end": 27.2548,
     "lufs_100ms": -41.2,
-    "note": ""
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -35.67
    },
    {
     "kind": "summon",
@@ -2190,7 +2576,9 @@
     "start": 26.04,
     "end": 27.9432,
     "lufs_100ms": -33.1,
-    "note": ""
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -30.85
    },
    {
     "kind": "summon",
@@ -2198,7 +2586,9 @@
     "start": 26.64,
     "end": 28.622,
     "lufs_100ms": -33.4,
-    "note": ""
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -26.48
    },
    {
     "kind": "arrive",
@@ -2206,7 +2596,9 @@
     "start": 26.7,
     "end": 27.2799,
     "lufs_100ms": -31.0,
-    "note": ""
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -26.49
    },
    {
     "kind": "summon",
@@ -2214,7 +2606,9 @@
     "start": 27.24,
     "end": 29.2745,
     "lufs_100ms": -32.5,
-    "note": ""
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -27.08
    },
    {
     "kind": "arrive",
@@ -2222,7 +2616,9 @@
     "start": 27.3,
     "end": 27.924,
     "lufs_100ms": -31.5,
-    "note": ""
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -27.12
    },
    {
     "kind": "summon",
@@ -2230,7 +2626,9 @@
     "start": 27.84,
     "end": 29.8253,
     "lufs_100ms": -32.6,
-    "note": ""
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -27.9
    },
    {
     "kind": "arrive",
@@ -2238,7 +2636,9 @@
     "start": 27.9,
     "end": 28.4996,
     "lufs_100ms": -30.5,
-    "note": ""
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -28.64
    },
    {
     "kind": "summon",
@@ -2246,7 +2646,9 @@
     "start": 28.44,
     "end": 30.4204,
     "lufs_100ms": -32.5,
-    "note": ""
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -25.89
    },
    {
     "kind": "arrive",
@@ -2254,7 +2656,9 @@
     "start": 28.5,
     "end": 29.1616,
     "lufs_100ms": -30.7,
-    "note": ""
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -25.94
    },
    {
     "kind": "arrive",
@@ -2262,7 +2666,9 @@
     "start": 29.1,
     "end": 29.7238,
     "lufs_100ms": -31.3,
-    "note": ""
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -29.48
    },
    {
     "kind": "move",
@@ -2270,7 +2676,9 @@
     "start": 29.12,
     "end": 30.2127,
     "lufs_100ms": -36.5,
-    "note": ""
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -32.41
    },
    {
     "kind": "arrive",
@@ -2278,7 +2686,9 @@
     "start": 29.78,
     "end": 30.5123,
     "lufs_100ms": -29.1,
-    "note": ""
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -26.8
    },
    {
     "kind": "packet",
@@ -2286,7 +2696,9 @@
     "start": 30.0,
     "end": 30.7299,
     "lufs_100ms": -34.6,
-    "note": ""
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -32.36
    },
    {
     "kind": "thread",
@@ -2294,7 +2706,9 @@
     "start": 30.25,
     "end": 31.4719,
     "lufs_100ms": -38.4,
-    "note": ""
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -31.45
    },
    {
     "kind": "packet",
@@ -2302,7 +2716,9 @@
     "start": 30.35,
     "end": 31.0349,
     "lufs_100ms": -36.7,
-    "note": ""
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -31.35
    },
    {
     "kind": "door-close",
@@ -2310,7 +2726,9 @@
     "start": 30.55,
     "end": 31.7237,
     "lufs_100ms": -36.4,
-    "note": ""
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -31.35
    },
    {
     "kind": "packet",
@@ -2318,7 +2736,9 @@
     "start": 30.65,
     "end": 31.2815,
     "lufs_100ms": -36.5,
-    "note": ""
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -31.35
    },
    {
     "kind": "packet",
@@ -2326,7 +2746,9 @@
     "start": 30.95,
     "end": 31.5659,
     "lufs_100ms": -37.0,
-    "note": ""
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -33.63
    },
    {
     "kind": "inspect",
@@ -2334,7 +2756,9 @@
     "start": 31.72,
     "end": 33.3028,
     "lufs_100ms": -39.0,
-    "note": ""
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -30.12
    },
    {
     "kind": "inspect",
@@ -2342,7 +2766,9 @@
     "start": 31.85,
     "end": 32.6224,
     "lufs_100ms": -35.4,
-    "note": ""
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -30.12
    },
    {
     "kind": "inspect",
@@ -2350,7 +2776,9 @@
     "start": 32.0,
     "end": 32.9066,
     "lufs_100ms": -36.0,
-    "note": ""
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -30.12
    },
    {
     "kind": "inspect",
@@ -2358,7 +2786,9 @@
     "start": 32.02,
     "end": 33.603,
     "lufs_100ms": -42.4,
-    "note": ""
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -31.29
    },
    {
     "kind": "request",
@@ -2366,7 +2796,9 @@
     "start": 32.5,
     "end": 34.1753,
     "lufs_100ms": -35.3,
-    "note": ""
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -31.91
    },
    {
     "kind": "return",
@@ -2374,7 +2806,9 @@
     "start": 32.86,
     "end": 34.0374,
     "lufs_100ms": -39.6,
-    "note": ""
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -27.84
    },
    {
     "kind": "evidence",
@@ -2382,7 +2816,9 @@
     "start": 33.02,
     "end": 33.5856,
     "lufs_100ms": -30.2,
-    "note": ""
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -27.83
    },
    {
     "kind": "door-open",
@@ -2390,7 +2826,9 @@
     "start": 33.05,
     "end": 34.1846,
     "lufs_100ms": -34.9,
-    "note": ""
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -27.67
    },
    {
     "kind": "inspect",
@@ -2398,7 +2836,9 @@
     "start": 33.2,
     "end": 34.0472,
     "lufs_100ms": -35.9,
-    "note": ""
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -27.67
    },
    {
     "kind": "return",
@@ -2406,7 +2846,9 @@
     "start": 33.2,
     "end": 34.3784,
     "lufs_100ms": -35.6,
-    "note": ""
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -27.67
    },
    {
     "kind": "evidence",
@@ -2414,7 +2856,9 @@
     "start": 33.43,
     "end": 34.09,
     "lufs_100ms": -32.2,
-    "note": ""
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -27.67
    },
    {
     "kind": "return",
@@ -2422,7 +2866,9 @@
     "start": 33.8,
     "end": 34.9783,
     "lufs_100ms": -35.0,
-    "note": ""
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -32.54
    },
    {
     "kind": "request",
@@ -2430,7 +2876,9 @@
     "start": 33.9,
     "end": 35.5755,
     "lufs_100ms": -36.4,
-    "note": ""
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -33.99
    },
    {
     "kind": "return",
@@ -2438,7 +2886,9 @@
     "start": 34.35,
     "end": 35.5284,
     "lufs_100ms": -40.1,
-    "note": ""
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -31.87
    },
    {
     "kind": "return",
@@ -2446,7 +2896,9 @@
     "start": 34.4,
     "end": 35.5784,
     "lufs_100ms": -35.1,
-    "note": ""
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -32.49
    },
    {
     "kind": "return",
@@ -2454,7 +2906,9 @@
     "start": 35.0,
     "end": 36.1783,
     "lufs_100ms": -34.9,
-    "note": ""
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -32.75
    },
    {
     "kind": "return",
@@ -2462,7 +2916,9 @@
     "start": 35.6,
     "end": 36.7772,
     "lufs_100ms": -34.9,
-    "note": ""
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -33.02
    },
    {
     "kind": "door-close",
@@ -2470,7 +2926,9 @@
     "start": 36.3,
     "end": 37.4732,
     "lufs_100ms": -36.4,
-    "note": ""
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -34.24
    },
    {
     "kind": "assemble",
@@ -2478,7 +2936,9 @@
     "start": 37.3,
     "end": 38.3966,
     "lufs_100ms": -35.1,
-    "note": ""
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -32.88
    },
    {
     "kind": "assemble",
@@ -2486,7 +2946,9 @@
     "start": 38.0,
     "end": 39.0244,
     "lufs_100ms": -38.6,
-    "note": ""
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -29.99
    },
    {
     "kind": "align",
@@ -2494,7 +2956,9 @@
     "start": 38.4,
     "end": 41.4931,
     "lufs_100ms": -29.6,
-    "note": ""
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -27.29
    },
    {
     "kind": "move",
@@ -2502,7 +2966,9 @@
     "start": 38.42,
     "end": 39.0658,
     "lufs_100ms": -44.3,
-    "note": ""
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -27.29
    },
    {
     "kind": "move",
@@ -2510,7 +2976,9 @@
     "start": 38.7,
     "end": 39.3302,
     "lufs_100ms": -44.0,
-    "note": ""
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -27.34
    },
    {
     "kind": "move",
@@ -2518,15 +2986,19 @@
     "start": 38.98,
     "end": 39.5895,
     "lufs_100ms": -43.6,
-    "note": ""
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -24.47
    },
    {
     "kind": "lock",
     "t": 39.35,
     "start": 39.328,
     "end": 40.0101,
-    "lufs_100ms": -26.0,
-    "note": ""
+    "lufs_100ms": -28.0,
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -24.43
    },
    {
     "kind": "door-open",
@@ -2534,7 +3006,9 @@
     "start": 40.26,
     "end": 41.4206,
     "lufs_100ms": -33.4,
-    "note": ""
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -30.39
    },
    {
     "kind": "route",
@@ -2542,7 +3016,9 @@
     "start": 40.85,
     "end": 41.8917,
     "lufs_100ms": -30.3,
-    "note": ""
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -28.11
    },
    {
     "kind": "arrive",
@@ -2550,7 +3026,9 @@
     "start": 41.4,
     "end": 41.9463,
     "lufs_100ms": -34.8,
-    "note": ""
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -32.56
    },
    {
     "kind": "thread",
@@ -2558,7 +3036,9 @@
     "start": 42.32,
     "end": 43.3589,
     "lufs_100ms": -39.5,
-    "note": ""
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -37.27
    },
    {
     "kind": "record",
@@ -2566,7 +3046,9 @@
     "start": 43.0,
     "end": 43.5589,
     "lufs_100ms": -31.8,
-    "note": ""
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -29.64
    },
    {
     "kind": "inspect",
@@ -2574,7 +3056,9 @@
     "start": 48.1,
     "end": 48.8725,
     "lufs_100ms": -41.4,
-    "note": ""
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -23.34
    },
    {
     "kind": "deviate",
@@ -2582,7 +3066,9 @@
     "start": 48.34,
     "end": 51.3321,
     "lufs_100ms": -25.6,
-    "note": ""
+    "tier": "key",
+    "note": "",
+    "measured_lufs_100ms": -23.34
    },
    {
     "kind": "lock",
@@ -2590,7 +3076,9 @@
     "start": 49.072,
     "end": 49.6434,
     "lufs_100ms": -39.4,
-    "note": ""
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -27.92
    },
    {
     "kind": "inspect",
@@ -2598,7 +3086,9 @@
     "start": 49.4,
     "end": 50.9829,
     "lufs_100ms": -37.2,
-    "note": ""
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -28.6
    },
    {
     "kind": "return",
@@ -2606,7 +3096,9 @@
     "start": 49.61,
     "end": 50.7882,
     "lufs_100ms": -39.4,
-    "note": ""
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -30.0
    },
    {
     "kind": "compare",
@@ -2614,7 +3106,9 @@
     "start": 50.28,
     "end": 50.9175,
     "lufs_100ms": -33.9,
-    "note": ""
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -30.01
    },
    {
     "kind": "thread",
@@ -2622,7 +3116,9 @@
     "start": 50.3,
     "end": 51.0226,
     "lufs_100ms": -42.7,
-    "note": ""
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -31.6
    },
    {
     "kind": "move",
@@ -2630,7 +3126,9 @@
     "start": 52.1,
     "end": 53.0744,
     "lufs_100ms": -41.8,
-    "note": ""
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -25.99
    },
    {
     "kind": "assemble",
@@ -2638,7 +3136,9 @@
     "start": 52.12,
     "end": 53.1322,
     "lufs_100ms": -28.7,
-    "note": ""
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -25.99
    },
    {
     "kind": "move",
@@ -2646,7 +3146,9 @@
     "start": 52.12,
     "end": 53.1605,
     "lufs_100ms": -37.5,
-    "note": ""
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -25.99
    },
    {
     "kind": "packet",
@@ -2654,7 +3156,9 @@
     "start": 52.72,
     "end": 53.5099,
     "lufs_100ms": -33.2,
-    "note": ""
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -31.0
    },
    {
     "kind": "escalate",
@@ -2662,7 +3166,9 @@
     "start": 53.95,
     "end": 55.9038,
     "lufs_100ms": -28.4,
-    "note": ""
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -28.21
    },
    {
     "kind": "arrive",
@@ -2670,7 +3176,9 @@
     "start": 55.45,
     "end": 56.1739,
     "lufs_100ms": -31.5,
-    "note": ""
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -24.48
    },
    {
     "kind": "decision",
@@ -2678,7 +3186,9 @@
     "start": 55.72,
     "end": 57.9245,
     "lufs_100ms": -26.7,
-    "note": ""
+    "tier": "key",
+    "note": "",
+    "measured_lufs_100ms": -24.48
    },
    {
     "kind": "decision",
@@ -2686,7 +3196,9 @@
     "start": 57.75,
     "end": 60.043,
     "lufs_100ms": -30.5,
-    "note": ""
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -28.3
    },
    {
     "kind": "route",
@@ -2694,7 +3206,9 @@
     "start": 58.0,
     "end": 58.8297,
     "lufs_100ms": -38.8,
-    "note": ""
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -29.38
    },
    {
     "kind": "simulated",
@@ -2702,7 +3216,9 @@
     "start": 58.045,
     "end": 61.1507,
     "lufs_100ms": -38.7,
-    "note": ""
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -29.38
    },
    {
     "kind": "thread",
@@ -2710,7 +3226,9 @@
     "start": 58.045,
     "end": 58.8723,
     "lufs_100ms": -39.1,
-    "note": ""
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -29.38
    },
    {
     "kind": "thread",
@@ -2718,7 +3236,9 @@
     "start": 58.169,
     "end": 59.0181,
     "lufs_100ms": -39.3,
-    "note": ""
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -29.41
    },
    {
     "kind": "arrive",
@@ -2726,7 +3246,9 @@
     "start": 58.3,
     "end": 58.7973,
     "lufs_100ms": -38.5,
-    "note": ""
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -30.31
    },
    {
     "kind": "arrive",
@@ -2734,7 +3256,9 @@
     "start": 58.45,
     "end": 58.9876,
     "lufs_100ms": -40.5,
-    "note": ""
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -33.31
    },
    {
     "kind": "move",
@@ -2742,7 +3266,9 @@
     "start": 59.85,
     "end": 61.0066,
     "lufs_100ms": -36.4,
-    "note": ""
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -34.21
    },
    {
     "kind": "move",
@@ -2750,15 +3276,19 @@
     "start": 60.65,
     "end": 61.4492,
     "lufs_100ms": -40.4,
-    "note": ""
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -25.8
    },
    {
     "kind": "reject",
     "t": 60.92,
     "start": 60.92,
     "end": 61.7282,
-    "lufs_100ms": -27.5,
-    "note": ""
+    "lufs_100ms": -28.0,
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -25.8
    },
    {
     "kind": "request",
@@ -2766,7 +3296,9 @@
     "start": 62.0,
     "end": 62.9091,
     "lufs_100ms": -37.8,
-    "note": ""
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -35.62
    },
    {
     "kind": "decision",
@@ -2774,7 +3306,9 @@
     "start": 62.6,
     "end": 64.8592,
     "lufs_100ms": -29.4,
-    "note": ""
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -27.19
    },
    {
     "kind": "door-open",
@@ -2782,7 +3316,9 @@
     "start": 62.887,
     "end": 63.9659,
     "lufs_100ms": -30.9,
-    "note": ""
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -27.26
    },
    {
     "kind": "packet",
@@ -2790,7 +3326,9 @@
     "start": 63.3,
     "end": 64.0046,
     "lufs_100ms": -33.7,
-    "note": ""
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -28.06
    },
    {
     "kind": "arrive",
@@ -2798,7 +3336,9 @@
     "start": 63.85,
     "end": 64.5693,
     "lufs_100ms": -34.5,
-    "note": ""
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -26.93
    },
    {
     "kind": "lock",
@@ -2806,7 +3346,9 @@
     "start": 64.078,
     "end": 64.7409,
     "lufs_100ms": -29.2,
-    "note": ""
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -26.92
    },
    {
     "kind": "record",
@@ -2814,7 +3356,9 @@
     "start": 64.22,
     "end": 64.7266,
     "lufs_100ms": -37.2,
-    "note": ""
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -34.68
    },
    {
     "kind": "record",
@@ -2822,7 +3366,9 @@
     "start": 64.38,
     "end": 64.9092,
     "lufs_100ms": -37.3,
-    "note": ""
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -35.05
    },
    {
     "kind": "return",
@@ -2830,7 +3376,9 @@
     "start": 65.62,
     "end": 66.7614,
     "lufs_100ms": -37.3,
-    "note": ""
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -35.09
    },
    {
     "kind": "door-close",
@@ -2838,7 +3386,9 @@
     "start": 66.04,
     "end": 67.2138,
     "lufs_100ms": -32.4,
-    "note": ""
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -29.59
    },
    {
     "kind": "move",
@@ -2846,7 +3396,9 @@
     "start": 66.04,
     "end": 67.2138,
     "lufs_100ms": -37.5,
-    "note": ""
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -29.59
    },
    {
     "kind": "decision",
@@ -2854,7 +3406,9 @@
     "start": 66.85,
     "end": 69.1091,
     "lufs_100ms": -28.9,
-    "note": ""
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -26.3
    },
    {
     "kind": "door-open",
@@ -2862,7 +3416,9 @@
     "start": 67.03,
     "end": 68.2085,
     "lufs_100ms": -30.6,
-    "note": ""
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -26.3
    },
    {
     "kind": "packet",
@@ -2870,7 +3426,9 @@
     "start": 67.35,
     "end": 68.1024,
     "lufs_100ms": -33.8,
-    "note": ""
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -28.15
    },
    {
     "kind": "arrive",
@@ -2878,7 +3436,9 @@
     "start": 67.9,
     "end": 68.5874,
     "lufs_100ms": -34.5,
-    "note": ""
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -27.98
    },
    {
     "kind": "compare",
@@ -2886,7 +3446,9 @@
     "start": 67.97,
     "end": 68.594,
     "lufs_100ms": -31.2,
-    "note": ""
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -28.48
    },
    {
     "kind": "route",
@@ -2894,7 +3456,9 @@
     "start": 68.59,
     "end": 69.9275,
     "lufs_100ms": -39.0,
-    "note": ""
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -37.05
    },
    {
     "kind": "compare",
@@ -2902,15 +3466,19 @@
     "start": 69.12,
     "end": 69.7478,
     "lufs_100ms": -30.8,
-    "note": ""
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -25.81
    },
    {
     "kind": "lock",
     "t": 69.5,
     "start": 69.478,
     "end": 70.1432,
-    "lufs_100ms": -26.7,
-    "note": ""
+    "lufs_100ms": -28.0,
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -25.8
    },
    {
     "kind": "inspect",
@@ -2918,7 +3486,9 @@
     "start": 69.75,
     "end": 70.3627,
     "lufs_100ms": -36.5,
-    "note": ""
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -28.96
    },
    {
     "kind": "resolve",
@@ -2926,7 +3496,9 @@
     "start": 70.13,
     "end": 73.3486,
     "lufs_100ms": -29.8,
-    "note": ""
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -25.32
    },
    {
     "kind": "compare",
@@ -2934,7 +3506,9 @@
     "start": 70.5,
     "end": 71.1499,
     "lufs_100ms": -30.5,
-    "note": ""
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -25.44
    },
    {
     "kind": "move",
@@ -2942,7 +3516,9 @@
     "start": 70.95,
     "end": 71.8298,
     "lufs_100ms": -41.0,
-    "note": ""
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -30.3
    },
    {
     "kind": "return",
@@ -2950,7 +3526,9 @@
     "start": 71.15,
     "end": 72.2913,
     "lufs_100ms": -37.6,
-    "note": ""
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -30.63
    },
    {
     "kind": "door-close",
@@ -2958,7 +3536,9 @@
     "start": 71.55,
     "end": 72.7241,
     "lufs_100ms": -31.4,
-    "note": ""
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -27.83
    },
    {
     "kind": "move",
@@ -2966,7 +3546,9 @@
     "start": 71.57,
     "end": 72.6701,
     "lufs_100ms": -36.4,
-    "note": ""
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -27.82
    },
    {
     "kind": "decision",
@@ -2974,7 +3556,9 @@
     "start": 72.23,
     "end": 74.4892,
     "lufs_100ms": -29.1,
-    "note": ""
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -26.64
    },
    {
     "kind": "door-open",
@@ -2982,7 +3566,9 @@
     "start": 72.46,
     "end": 73.5456,
     "lufs_100ms": -30.6,
-    "note": ""
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -26.38
    },
    {
     "kind": "simulated",
@@ -2990,7 +3576,9 @@
     "start": 72.87,
     "end": 75.9712,
     "lufs_100ms": -32.4,
-    "note": ""
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -26.29
    },
    {
     "kind": "packet",
@@ -2998,7 +3586,9 @@
     "start": 72.89,
     "end": 73.6813,
     "lufs_100ms": -34.2,
-    "note": ""
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -26.89
    },
    {
     "kind": "arrive",
@@ -3006,7 +3596,9 @@
     "start": 73.44,
     "end": 74.1595,
     "lufs_100ms": -33.9,
-    "note": ""
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -30.53
    },
    {
     "kind": "request",
@@ -3014,7 +3606,9 @@
     "start": 74.74,
     "end": 76.4073,
     "lufs_100ms": -34.6,
-    "note": ""
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -31.55
    },
    {
     "kind": "request",
@@ -3022,7 +3616,9 @@
     "start": 74.84,
     "end": 76.5116,
     "lufs_100ms": -34.9,
-    "note": ""
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -31.55
    },
    {
     "kind": "request",
@@ -3030,7 +3626,9 @@
     "start": 74.94,
     "end": 76.607,
     "lufs_100ms": -35.2,
-    "note": ""
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -31.55
    },
    {
     "kind": "return",
@@ -3038,7 +3636,9 @@
     "start": 75.76,
     "end": 76.9014,
     "lufs_100ms": -35.6,
-    "note": ""
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -31.04
    },
    {
     "kind": "return",
@@ -3046,7 +3646,9 @@
     "start": 75.86,
     "end": 77.0013,
     "lufs_100ms": -36.0,
-    "note": ""
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -31.04
    },
    {
     "kind": "return",
@@ -3054,7 +3656,9 @@
     "start": 75.96,
     "end": 77.1014,
     "lufs_100ms": -36.1,
-    "note": ""
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -31.04
    },
    {
     "kind": "simulated",
@@ -3062,7 +3666,9 @@
     "start": 76.51,
     "end": 79.6112,
     "lufs_100ms": -42.5,
-    "note": ""
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -38.37
    },
    {
     "kind": "return",
@@ -3070,7 +3676,9 @@
     "start": 77.25,
     "end": 78.3915,
     "lufs_100ms": -37.2,
-    "note": ""
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -34.95
    },
    {
     "kind": "door-close",
@@ -3078,7 +3686,9 @@
     "start": 77.63,
     "end": 78.8039,
     "lufs_100ms": -32.0,
-    "note": ""
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -29.79
    },
    {
     "kind": "move",
@@ -3086,15 +3696,19 @@
     "start": 79.07,
     "end": 79.9961,
     "lufs_100ms": -36.7,
-    "note": ""
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -28.66
    },
    {
     "kind": "decision",
     "t": 79.1,
     "start": 79.1,
     "end": 80.5957,
-    "lufs_100ms": -34.5,
-    "note": ""
+    "lufs_100ms": -37.5,
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -28.66
    },
    {
     "kind": "door-open",
@@ -3102,7 +3716,9 @@
     "start": 79.32,
     "end": 80.4016,
     "lufs_100ms": -33.3,
-    "note": ""
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -28.66
    },
    {
     "kind": "compare",
@@ -3110,15 +3726,19 @@
     "start": 79.42,
     "end": 80.0727,
     "lufs_100ms": -34.7,
-    "note": ""
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -28.83
    },
    {
     "kind": "lock",
     "t": 79.8,
     "start": 79.782,
     "end": 80.3359,
-    "lufs_100ms": -29.3,
-    "note": ""
+    "lufs_100ms": -32.3,
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -28.21
    },
    {
     "kind": "door-open",
@@ -3126,7 +3746,9 @@
     "start": 80.0,
     "end": 82.7003,
     "lufs_100ms": -36.6,
-    "note": ""
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -28.21
    },
    {
     "kind": "route",
@@ -3134,7 +3756,9 @@
     "start": 80.04,
     "end": 80.9457,
     "lufs_100ms": -34.1,
-    "note": ""
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -28.21
    },
    {
     "kind": "packet",
@@ -3142,7 +3766,9 @@
     "start": 80.14,
     "end": 80.7012,
     "lufs_100ms": -35.8,
-    "note": ""
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -28.21
    },
    {
     "kind": "request",
@@ -3150,7 +3776,9 @@
     "start": 80.5,
     "end": 82.167,
     "lufs_100ms": -34.9,
-    "note": ""
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -30.08
    },
    {
     "kind": "simulated",
@@ -3158,7 +3786,9 @@
     "start": 80.56,
     "end": 83.6654,
     "lufs_100ms": -43.0,
-    "note": ""
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -30.08
    },
    {
     "kind": "return",
@@ -3166,7 +3796,9 @@
     "start": 80.86,
     "end": 82.0011,
     "lufs_100ms": -35.6,
-    "note": ""
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -29.12
    },
    {
     "kind": "door-open",
@@ -3174,7 +3806,9 @@
     "start": 80.92,
     "end": 81.999,
     "lufs_100ms": -33.6,
-    "note": ""
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -29.12
    },
    {
     "kind": "route",
@@ -3182,7 +3816,9 @@
     "start": 80.96,
     "end": 81.8173,
     "lufs_100ms": -34.5,
-    "note": ""
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -29.12
    },
    {
     "kind": "move",
@@ -3190,23 +3826,29 @@
     "start": 81.06,
     "end": 81.9874,
     "lufs_100ms": -39.4,
-    "note": ""
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -29.18
    },
    {
     "kind": "lock",
     "t": 81.5,
     "start": 81.478,
     "end": 82.157,
-    "lufs_100ms": -28.1,
-    "note": ""
+    "lufs_100ms": -31.1,
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -27.57
    },
    {
     "kind": "decision",
     "t": 81.8,
     "start": 81.8,
     "end": 84.093,
-    "lufs_100ms": -26.8,
-    "note": ""
+    "lufs_100ms": -29.8,
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -27.6
    },
    {
     "kind": "assemble",
@@ -3214,15 +3856,19 @@
     "start": 82.08,
     "end": 83.1735,
     "lufs_100ms": -32.2,
-    "note": ""
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -27.35
    },
    {
     "kind": "resolve",
     "t": 82.42,
     "start": 82.42,
     "end": 85.6711,
-    "lufs_100ms": -30.6,
-    "note": ""
+    "lufs_100ms": -33.6,
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -27.31
    },
    {
     "kind": "move",
@@ -3230,7 +3876,9 @@
     "start": 84.4,
     "end": 85.4485,
     "lufs_100ms": -36.6,
-    "note": ""
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -32.95
    },
    {
     "kind": "title",
@@ -3238,7 +3886,9 @@
     "start": 84.6,
     "end": 85.5286,
     "lufs_100ms": -43.1,
-    "note": ""
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -28.92
    },
    {
     "kind": "align",
@@ -3246,7 +3896,9 @@
     "start": 84.85,
     "end": 87.861,
     "lufs_100ms": -40.3,
-    "note": ""
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -28.92
    },
    {
     "kind": "title",
@@ -3254,7 +3906,9 @@
     "start": 84.9,
     "end": 85.8202,
     "lufs_100ms": -43.6,
-    "note": ""
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -28.92
    },
    {
     "kind": "record",
@@ -3262,7 +3916,9 @@
     "start": 84.98,
     "end": 85.5184,
     "lufs_100ms": -31.9,
-    "note": ""
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -28.92
    },
    {
     "kind": "title",
@@ -3270,7 +3926,9 @@
     "start": 85.2,
     "end": 86.1304,
     "lufs_100ms": -43.2,
-    "note": ""
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -31.69
    },
    {
     "kind": "print",
@@ -3278,7 +3936,9 @@
     "start": 85.4,
     "end": 86.1603,
     "lufs_100ms": -34.5,
-    "note": ""
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -31.68
    },
    {
     "kind": "print",
@@ -3286,7 +3946,9 @@
     "start": 85.7,
     "end": 86.2666,
     "lufs_100ms": -39.0,
-    "note": ""
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -34.25
    },
    {
     "kind": "summon",
@@ -3294,7 +3956,9 @@
     "start": 85.75,
     "end": 87.2482,
     "lufs_100ms": -44.6,
-    "note": ""
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -34.25
    },
    {
     "kind": "title",
@@ -3302,15 +3966,19 @@
     "start": 86.06,
     "end": 87.0115,
     "lufs_100ms": -36.6,
-    "note": ""
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -34.25
    },
    {
     "kind": "wordmark",
     "t": 88.75,
     "start": 88.75,
-    "end": 89.95,
-    "lufs_100ms": -29.6,
-    "note": "tail faded to end by 89.95 s (natural end 90.757 s)"
+    "end": 89.91,
+    "lufs_100ms": -29.7,
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -27.53
    }
   ]
  },
@@ -3338,8 +4006,8 @@
    "name": "music.wav DC",
    "ok": true,
    "value": [
-    -1.08e-09,
-    -3.07e-09
+    4.56e-10,
+    3.19e-10
    ],
    "target": "|mean| < 1e-4"
   },
@@ -3365,8 +4033,8 @@
    "name": "sfx.wav DC",
    "ok": true,
    "value": [
-    1.68e-11,
-    -3.09e-12
+    3.2e-11,
+    -8.31e-12
    ],
    "target": "|mean| < 1e-4"
   },
@@ -3392,8 +4060,8 @@
    "name": "master.wav DC",
    "ok": true,
    "value": [
-    -1.74e-09,
-    -3.09e-09
+    1.32e-08,
+    2.54e-07
    ],
    "target": "|mean| < 1e-4"
   },
@@ -3419,8 +4087,8 @@
    "name": "master-no-narration.wav DC",
    "ok": true,
    "value": [
-    4.47e-10,
-    4.85e-10
+    3.64e-07,
+    5.56e-07
    ],
    "target": "|mean| < 1e-4"
   },
@@ -3445,54 +4113,130 @@
   {
    "name": "master-no-narration.wav integrated loudness",
    "ok": true,
-   "value": -17.0,
+   "value": -17.01,
    "target": "-17.0 +- 0.5"
   },
   {
    "name": "master-no-narration.wav true peak",
    "ok": true,
-   "value": -2.24,
+   "value": -1.3,
    "target": "<= -1.0"
   },
   {
    "name": "narrator over background (every line)",
-   "ok": true,
-   "value": 12.1,
+   "ok": false,
+   "value": 11.6,
    "target": ">= 12 LU per line"
   },
   {
    "name": "narrator over music (every line)",
-   "ok": true,
-   "value": 14.4,
+   "ok": false,
+   "value": 12.8,
    "target": ">= 14 LU per line"
   },
   {
    "name": "worker over background (no-narration version)",
-   "ok": true,
-   "value": 12.5,
+   "ok": false,
+   "value": 6.0,
    "target": ">= 8 LU"
   },
   {
    "name": "music ducked under every narrator line",
    "ok": true,
    "value": [
-    -8.0,
-    -8.0,
-    -8.0,
-    -8.0,
-    -8.0,
-    -8.0,
-    -8.0,
-    -8.0,
-    -8.0,
-    -8.0,
-    -8.0,
-    -8.0,
-    -8.0,
-    -8.0,
-    -8.0
+    -5.0,
+    -5.0,
+    -5.0,
+    -5.0,
+    -5.0,
+    -5.0,
+    -5.0,
+    -5.0,
+    -5.0,
+    -5.0,
+    -5.0,
+    -5.0,
+    -5.0,
+    -5.0,
+    -5.0
    ],
-   "target": "-7 to -9 dB throughout each line"
+   "target": "-5 dB (+-0.5) throughout each line"
+  },
+  {
+   "name": "narrator sentences levelled",
+   "ok": true,
+   "value": [
+    -15.77,
+    -15.31
+   ],
+   "target": "every sentence -16.0 +- 1.0 LUFS"
+  },
+  {
+   "name": "worker voice note just under the narrator",
+   "ok": false,
+   "value": -16.0,
+   "target": "-17.5 to -16.1 LUFS"
+  },
+  {
+   "name": "music pause cap",
+   "ok": false,
+   "value": -25.64,
+   "target": "<= -26.0 LUFS momentary"
+  },
+  {
+   "name": "music never moves more than 6 dB within 1 s",
+   "ok": false,
+   "value": "8.54 dB at 30.53 s",
+   "target": "<= 6.0 dB (3.5 s to 88.7 s)"
+  },
+  {
+   "name": "deviation and the human's decision are the loudest sounds",
+   "ok": false,
+   "value": "keys >= -24.48, next loudest inspect at 48.1: -23.34",
+   "target": "every key moment louder than every other sound"
+  },
+  {
+   "name": "opening print thuds about -28 LUFS",
+   "ok": false,
+   "value": [
+    -26.04,
+    -25.83,
+    -26.17
+   ],
+   "target": "-28.0 +- 1.5 LUFS (100 ms)"
+  },
+  {
+   "name": "no-narration: sfx peak under the worker's voice note",
+   "ok": false,
+   "value": -14.18,
+   "target": "<= -20.0 dBFS"
+  },
+  {
+   "name": "no duck release after the last line",
+   "ok": true,
+   "value": [
+    -5.0,
+    -5.0
+   ],
+   "target": "held at -5 dB to the end"
+  },
+  {
+   "name": "bed fades out cleanly",
+   "ok": true,
+   "value": "-240.0 dBFS after 89.9 s, largest rise -0.013 dB",
+   "target": "one 1.2 s fade from 88.7 s, silent from 89.9 s"
+  },
+  {
+   "name": "wordmark decays to -60 dB by 89.9 s",
+   "ok": true,
+   "value": -64.5,
+   "target": "<= -60 dB re its peak"
+  },
+  {
+   "name": "the wordmark is the last sound",
+   "ok": true,
+   "value": [],
+   "target": "no event starts after it"
   },
   {
    "name": "music ducked under the worker line",
@@ -3510,7 +4254,7 @@
    "ok": true,
    "value": [
     0.3,
-    89.95
+    89.91
    ],
    "target": "[>= 0, <= 90]"
   },
@@ -3535,7 +4279,7 @@
   {
    "name": "music never drops out (3 to 88.8 s, before ducking)",
    "ok": true,
-   "value": -34.14,
+   "value": -34.94,
    "target": ">= -45 LUFS momentary"
   },
   {
@@ -3545,5 +4289,5 @@
    "target": "<= 4 dB fall within any 100 ms"
   }
  ],
- "all_ok": true
+ "all_ok": false
 }
