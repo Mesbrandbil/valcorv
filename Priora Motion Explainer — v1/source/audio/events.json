@@ -14,70 +14,70 @@
  {
   "kind": "print",
   "t": 1.75,
-  "gain_db": -3
+  "gain_db": -7
  },
  {
   "kind": "print",
   "t": 2.63,
-  "gain_db": -3
+  "gain_db": -7
  },
  {
   "kind": "print",
   "t": 3.88,
-  "gain_db": -3
+  "gain_db": -7
+ },
+ {
+  "kind": "arrive",
+  "t": 5.5,
+  "gain_db": -11,
+  "pan": 0.3,
+  "size": "agent"
  },
  {
   "kind": "thread",
-  "t": 6.22,
-  "dur": 0.7,
+  "t": 6.2,
+  "dur": 0.8,
   "gain_db": -9
  },
  {
   "kind": "arrive",
-  "t": 6.296,
-  "gain_db": -14,
-  "pan": -0.8333333333333334,
+  "t": 6.516,
+  "gain_db": -15,
+  "pan": -0.11714807500000006,
   "size": "small"
  },
  {
   "kind": "arrive",
-  "t": 6.392,
-  "gain_db": -14,
-  "pan": -0.5,
+  "t": 6.527,
+  "gain_db": -15,
+  "pan": 0.7521734249999997,
   "size": "small"
  },
  {
   "kind": "arrive",
-  "t": 6.488,
-  "gain_db": -14,
-  "pan": -0.16666666666666666,
+  "t": 6.682,
+  "gain_db": -15,
+  "pan": -0.7195570749999999,
   "size": "small"
  },
  {
   "kind": "arrive",
-  "t": 6.59,
-  "gain_db": -14,
-  "pan": 0.16666666666666666,
+  "t": 6.704,
+  "gain_db": -15,
+  "pan": 0.11714807500000006,
   "size": "small"
  },
  {
   "kind": "arrive",
-  "t": 6.692,
-  "gain_db": -14,
-  "pan": 0.5,
-  "size": "small"
- },
- {
-  "kind": "arrive",
-  "t": 6.788,
-  "gain_db": -14,
-  "pan": 0.8333333333333334,
+  "t": 7.01,
+  "gain_db": -15,
+  "pan": -0.5029208499999999,
   "size": "small"
  },
  {
   "kind": "move",
-  "t": 7.6,
-  "dur": 1,
+  "t": 7.95,
+  "dur": 0.8,
   "gain_db": -10
  },
  {
@@ -278,7 +278,7 @@
   "kind": "door-open",
   "t": 24.45,
   "gain_db": -10,
-  "pan": 0.17
+  "pan": 0.15
  },
  {
   "kind": "request",
@@ -292,14 +292,14 @@
   "t": 25.1,
   "gain_db": -16,
   "part": "probe",
-  "pan": 0
+  "pan": -0.02
  },
  {
   "kind": "request",
   "t": 25.58,
   "gain_db": -16,
   "part": "probe",
-  "pan": -0.08
+  "pan": -0.1
  },
  {
   "kind": "summon",
@@ -343,7 +343,7 @@
   "t": 27.84,
   "gain_db": -6,
   "agent": "fire",
-  "pan": -0.08
+  "pan": -0.1
  },
  {
   "kind": "arrive",
@@ -366,7 +366,7 @@
   "gain_db": -8,
   "size": "agent",
   "agent": "fire",
-  "pan": -0.08
+  "pan": -0.1
  },
  {
   "kind": "arrive",
@@ -415,7 +415,7 @@
   "kind": "door-close",
   "t": 30.55,
   "gain_db": -11,
-  "pan": 0.17
+  "pan": 0.15
  },
  {
   "kind": "packet",
@@ -437,7 +437,7 @@
   "gain_db": -12,
   "agent": "fire",
   "material": "ping",
-  "pan": -0.08
+  "pan": -0.1
  },
  {
   "kind": "inspect",
@@ -462,20 +462,20 @@
   "gain_db": -15,
   "agent": "fire",
   "material": "ping",
-  "pan": -0.08
+  "pan": -0.1
  },
  {
   "kind": "request",
   "t": 32.5,
   "gain_db": -10,
-  "pan": -0.17
+  "pan": -0.18
  },
  {
   "kind": "return",
   "t": 32.86,
   "gain_db": -13,
   "size": "small",
-  "pan": -0.17
+  "pan": -0.18
  },
  {
   "kind": "evidence",
@@ -488,7 +488,7 @@
   "kind": "door-open",
   "t": 33.05,
   "gain_db": -10,
-  "pan": 0.17
+  "pan": 0.15
  },
  {
   "kind": "inspect",
@@ -519,20 +519,20 @@
   "gain_db": -8,
   "agent": "fire",
   "dur": 0.8,
-  "pan": -0.08
+  "pan": -0.1
  },
  {
   "kind": "request",
   "t": 33.9,
   "gain_db": -11,
-  "pan": -0.38
+  "pan": -0.39
  },
  {
   "kind": "return",
   "t": 34.35,
   "gain_db": -13,
   "size": "small",
-  "pan": -0.38
+  "pan": -0.39
  },
  {
   "kind": "return",
@@ -562,14 +562,14 @@
   "kind": "door-close",
   "t": 36.3,
   "gain_db": -11,
-  "pan": 0.17
+  "pan": 0.15
  },
  {
   "kind": "assemble",
   "t": 37.3,
   "gain_db": -10,
   "size": "small",
-  "pan": 0.33
+  "pan": 0.29
  },
  {
   "kind": "assemble",
@@ -618,7 +618,7 @@
   "kind": "door-open",
   "t": 40.26,
   "gain_db": -9,
-  "pan": 0
+  "pan": 0.15
  },
  {
   "kind": "route",
@@ -673,7 +673,7 @@
   "kind": "inspect",
   "t": 49.4,
   "gain_db": -10,
-  "pan": -0.01,
+  "pan": -0.03,
   "agent": "fire",
   "material": "ping"
  },
@@ -695,14 +695,14 @@
   "gain_db": -16,
   "material": "pencil",
   "dur": 0.35,
-  "pan": 0.43
+  "pan": 0.4
  },
  {
   "kind": "move",
   "t": 52.1,
   "gain_db": -15,
   "dur": 0.5,
-  "pan": 0.33,
+  "pan": 0.29,
   "size": "small"
  },
  {
@@ -717,34 +717,34 @@
   "t": 52.12,
   "gain_db": -11,
   "dur": 0.6,
-  "pan": -0.02
+  "pan": -0.04
  },
  {
   "kind": "packet",
   "t": 52.72,
   "gain_db": -8,
-  "pan": 0.26
+  "pan": 0.23
  },
  {
   "kind": "escalate",
   "t": 53.95,
   "gain_db": -4,
   "dur": 1.55,
-  "pan": 0.03
+  "pan": 0.23
  },
  {
   "kind": "arrive",
   "t": 55.45,
   "gain_db": -8,
   "size": "case",
-  "pan": 0.44
+  "pan": 0.58
  },
  {
   "kind": "decision",
   "t": 55.72,
   "gain_db": -2,
   "dur": 0.68,
-  "pan": 0.44
+  "pan": 0.58
  },
  {
   "kind": "decision",

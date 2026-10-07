@@ -30,11 +30,11 @@
   }
  },
  "gains": {
-  "master_gain_db": 0.517,
+  "master_gain_db": 0.514,
   "master_limiter_max_reduction_db": 0.02,
-  "no_narration_worker_gain_db": 0.517,
-  "no_narration_background_gain_db": 7.977,
-  "no_narration_background_over_master_db": 7.46,
+  "no_narration_worker_gain_db": 0.514,
+  "no_narration_background_gain_db": 7.992,
+  "no_narration_background_over_master_db": 7.478,
   "no_narration_limiter_max_reduction_db": 0.0,
   "note": "master.wav = TP-limiter(G * voice.wav as dual mono, DC-blocked + music.wav + sfx.wav); the stems are written post-gain G (the level they have inside master.wav, before the limiter). master-no-narration.wav = TP-limiter(G * voice-worker.wav + Gb * (music ducked under W01 only + sfx)), Gb = no_narration_background_gain_db"
  },
@@ -45,19 +45,19 @@
    "sample_rate": 48000,
    "channels": 2,
    "subtype": "PCM_24",
-   "integrated_lufs": -31.08,
-   "true_peak_dbtp": -14.29,
+   "integrated_lufs": -31.09,
+   "true_peak_dbtp": -14.3,
    "sample_peak_dbfs": -14.3,
-   "max_momentary_lufs": -22.05,
+   "max_momentary_lufs": -22.06,
    "max_momentary_at_s": 45.76,
    "clipped_samples": 0,
    "dc_offset": [
-    -1.1e-09,
+    -1.08e-09,
     -3.07e-09
    ],
    "first_sample_abs": 0.0,
    "last_10ms_peak_dbfs": -240.0,
-   "sha256": "bd344e7d5623b1ab025ad3c38b2212a8e79908cc10a49803832934e06fde6ebf",
+   "sha256": "cf5ea25e1ebafd742ee36b1ff9005b694ea0ad3d159459fd3cc8950c798c0384",
    "ffmpeg_ebur128": {
     "integrated_lufs": -31.1,
     "true_peak_dbtp": -14.3
@@ -69,21 +69,21 @@
    "sample_rate": 48000,
    "channels": 2,
    "subtype": "PCM_24",
-   "integrated_lufs": -34.04,
-   "true_peak_dbtp": -11.5,
-   "sample_peak_dbfs": -12.21,
+   "integrated_lufs": -34.21,
+   "true_peak_dbtp": -11.51,
+   "sample_peak_dbfs": -12.22,
    "max_momentary_lufs": -26.61,
    "max_momentary_at_s": 48.55,
    "clipped_samples": 0,
    "dc_offset": [
-    -5.71e-12,
-    -7.62e-12
+    1.68e-11,
+    -3.09e-12
    ],
    "first_sample_abs": 0.0,
    "last_10ms_peak_dbfs": -240.0,
-   "sha256": "3159affef0ba5419606f5fd7ee4d708828dd66fa5878eb53b8f560a78a512416",
+   "sha256": "a9da27855eb73a504ff03c71b8578cce8835eb425b8211ada6234e3008dd1492",
    "ffmpeg_ebur128": {
-    "integrated_lufs": -34.0,
+    "integrated_lufs": -34.2,
     "true_peak_dbtp": -11.5
    }
   },
@@ -100,12 +100,12 @@
    "max_momentary_at_s": 11.93,
    "clipped_samples": 0,
    "dc_offset": [
-    -1.9e-09,
-    -3.13e-09
+    -1.74e-09,
+    -3.09e-09
    ],
    "first_sample_abs": 0.0,
    "last_10ms_peak_dbfs": -240.0,
-   "sha256": "3f06d0b0df020e662361d454758b6804295bbea37c76f3558d1920675c8d3f88",
+   "sha256": "bf60631e0ba9bdd7281a1ac6f5cc235892599ec349b20eecd821f71ecef9ca39",
    "ffmpeg_ebur128": {
     "integrated_lufs": -16.0,
     "true_peak_dbtp": -1.3
@@ -124,12 +124,12 @@
    "max_momentary_at_s": 11.92,
    "clipped_samples": 0,
    "dc_offset": [
-    4.52e-10,
-    4.89e-10
+    4.47e-10,
+    4.85e-10
    ],
    "first_sample_abs": 0.0,
    "last_10ms_peak_dbfs": -240.0,
-   "sha256": "7c6d5c5cba3c3f64325f60c0b71049eb94865ecdd35f5f5acc5213cf88d3704e",
+   "sha256": "038e112d79b0fcd71c9e29e336d1dadf4a1daf0df58d770050af28fa8a7e465e",
    "ffmpeg_ebur128": {
     "integrated_lufs": -17.0,
     "true_peak_dbtp": -2.2
@@ -137,8 +137,8 @@
   }
  },
  "music": {
-  "stem_integrated_lufs": -31.08,
-  "loudest_momentary_400ms_lufs": -22.05,
+  "stem_integrated_lufs": -31.09,
+  "loudest_momentary_400ms_lufs": -22.06,
   "loudest_momentary_at_s": 45.76,
   "analysis_before_ducking": {
    "segments": [
@@ -387,7 +387,7 @@
       "D4",
       "E4"
      ],
-     "lufs": -28.35,
+     "lufs": -28.36,
      "strongest_notes": [
       {
        "note": "B2",
@@ -437,7 +437,7 @@
       "B3",
       "D4"
      ],
-     "lufs": -26.34,
+     "lufs": -26.35,
      "strongest_notes": [
       {
        "note": "E3",
@@ -523,7 +523,7 @@
       "F#4",
       "A4"
      ],
-     "lufs": -23.49,
+     "lufs": -23.5,
      "strongest_notes": [
       {
        "note": "D3",
@@ -617,7 +617,7 @@
       "F#3",
       "C#4"
      ],
-     "lufs": -27.69
+     "lufs": -27.7
     },
     {
      "from": 55.73,
@@ -654,7 +654,7 @@
       "B3",
       "F#4"
      ],
-     "lufs": -27.16,
+     "lufs": -27.17,
      "strongest_notes": [
       {
        "note": "D3",
@@ -705,7 +705,7 @@
       "D4",
       "B4"
      ],
-     "lufs": -23.39
+     "lufs": -23.4
     },
     {
      "from": 69.84,
@@ -781,7 +781,7 @@
       "B3",
       "D4"
      ],
-     "lufs": -24.99
+     "lufs": -25.0
     },
     {
      "from": 81.94,
@@ -795,7 +795,7 @@
       "F#4",
       "A4"
      ],
-     "lufs": -21.53
+     "lufs": -21.54
     },
     {
      "from": 84.35,
@@ -1427,7 +1427,7 @@
   }
  },
  "sfx": {
-  "stem_integrated_lufs": -34.04,
+  "stem_integrated_lufs": -34.21,
   "loudest_momentary_400ms_lufs": -26.61,
   "loudest_momentary_at_s": 48.55,
   "bus_leveller": {
@@ -1508,11 +1508,11 @@
     "start": 0.9,
     "end": 4.71,
     "voice_lufs": -15.73,
-    "music_lufs": -39.46,
-    "sfx_lufs": -30.92,
-    "background_lufs": -32.92,
+    "music_lufs": -39.47,
+    "sfx_lufs": -34.92,
+    "background_lufs": -35.53,
     "voice_over_music_lu": 23.7,
-    "voice_over_background_lu": 17.2,
+    "voice_over_background_lu": 19.8,
     "music_duck_db": [
      -8.0,
      -8.0
@@ -1523,12 +1523,12 @@
     "speaker": "narrator",
     "start": 5.45,
     "end": 7.59,
-    "voice_lufs": -12.95,
+    "voice_lufs": -12.96,
     "music_lufs": -37.59,
-    "sfx_lufs": -36.05,
-    "background_lufs": -35.25,
+    "sfx_lufs": -38.87,
+    "background_lufs": -35.84,
     "voice_over_music_lu": 24.6,
-    "voice_over_background_lu": 22.3,
+    "voice_over_background_lu": 22.9,
     "music_duck_db": [
      -8.0,
      -8.0
@@ -1539,7 +1539,7 @@
     "speaker": "worker",
     "start": 8.55,
     "end": 13.85,
-    "voice_lufs": -12.73,
+    "voice_lufs": -12.74,
     "music_lufs": -33.3,
     "sfx_lufs": -38.6,
     "background_lufs": -32.77,
@@ -1571,10 +1571,10 @@
     "speaker": "narrator",
     "start": 23.4,
     "end": 26.82,
-    "voice_lufs": -16.36,
+    "voice_lufs": -16.37,
     "music_lufs": -34.06,
     "sfx_lufs": -37.23,
-    "background_lufs": -32.44,
+    "background_lufs": -32.45,
     "voice_over_music_lu": 17.7,
     "voice_over_background_lu": 16.1,
     "music_duck_db": [
@@ -1588,9 +1588,9 @@
     "start": 31.2,
     "end": 33.91,
     "voice_lufs": -13.61,
-    "music_lufs": -36.25,
+    "music_lufs": -36.26,
     "sfx_lufs": -34.9,
-    "background_lufs": -32.81,
+    "background_lufs": -32.82,
     "voice_over_music_lu": 22.6,
     "voice_over_background_lu": 19.2,
     "music_duck_db": [
@@ -1603,10 +1603,10 @@
     "speaker": "narrator",
     "start": 38.6,
     "end": 44.69,
-    "voice_lufs": -15.84,
+    "voice_lufs": -15.85,
     "music_lufs": -30.22,
     "sfx_lufs": -33.13,
-    "background_lufs": -28.88,
+    "background_lufs": -28.89,
     "voice_over_music_lu": 14.4,
     "voice_over_background_lu": 13.0,
     "music_duck_db": [
@@ -1621,7 +1621,7 @@
     "end": 51.89,
     "voice_lufs": -15.51,
     "music_lufs": -32.47,
-    "sfx_lufs": -30.93,
+    "sfx_lufs": -30.94,
     "background_lufs": -29.71,
     "voice_over_music_lu": 17.0,
     "voice_over_background_lu": 14.2,
@@ -1636,9 +1636,9 @@
     "start": 52.4,
     "end": 56.92,
     "voice_lufs": -14.33,
-    "music_lufs": -34.14,
+    "music_lufs": -34.15,
     "sfx_lufs": -32.57,
-    "background_lufs": -30.92,
+    "background_lufs": -30.93,
     "voice_over_music_lu": 19.8,
     "voice_over_background_lu": 16.6,
     "music_duck_db": [
@@ -1668,7 +1668,7 @@
     "start": 60.25,
     "end": 61.94,
     "voice_lufs": -13.8,
-    "music_lufs": -34.92,
+    "music_lufs": -34.93,
     "sfx_lufs": -35.6,
     "background_lufs": -33.13,
     "voice_over_music_lu": 21.1,
@@ -1685,8 +1685,8 @@
     "end": 65.68,
     "voice_lufs": -17.71,
     "music_lufs": -35.5,
-    "sfx_lufs": -33.45,
-    "background_lufs": -31.8,
+    "sfx_lufs": -33.46,
+    "background_lufs": -31.81,
     "voice_over_music_lu": 17.8,
     "voice_over_background_lu": 14.1,
     "music_duck_db": [
@@ -1716,9 +1716,9 @@
     "start": 72.25,
     "end": 77.1,
     "voice_lufs": -17.45,
-    "music_lufs": -34.39,
-    "sfx_lufs": -34.28,
-    "background_lufs": -31.84,
+    "music_lufs": -34.4,
+    "sfx_lufs": -34.29,
+    "background_lufs": -31.85,
     "voice_over_music_lu": 16.9,
     "voice_over_background_lu": 14.4,
     "music_duck_db": [
@@ -1734,7 +1734,7 @@
     "voice_lufs": -16.5,
     "music_lufs": -31.36,
     "sfx_lufs": -31.83,
-    "background_lufs": -28.55,
+    "background_lufs": -28.56,
     "voice_over_music_lu": 14.9,
     "voice_over_background_lu": 12.1,
     "music_duck_db": [
@@ -1747,8 +1747,8 @@
     "speaker": "narrator",
     "start": 83.75,
     "end": 88.43,
-    "voice_lufs": -15.98,
-    "music_lufs": -30.7,
+    "voice_lufs": -15.99,
+    "music_lufs": -30.71,
     "sfx_lufs": -37.79,
     "background_lufs": -30.21,
     "voice_over_music_lu": 14.7,
@@ -1762,16 +1762,16 @@
   "min_narrator_over_background_lu": 12.1,
   "min_narrator_over_music_lu": 14.4,
   "no_narration_worker": {
-   "worker_lufs": -12.73,
-   "background_lufs": -25.31,
-   "margin_lu": 12.6
+   "worker_lufs": -12.74,
+   "background_lufs": -25.29,
+   "margin_lu": 12.5
   }
  },
  "events": {
-  "count": 188,
+  "count": 187,
   "per_kind": {
    "align": 2,
-   "arrive": 27,
+   "arrive": 26,
    "assemble": 5,
    "compare": 5,
    "decision": 7,
@@ -1837,7 +1837,7 @@
     "t": 1.75,
     "start": 1.75,
     "end": 2.5664,
-    "lufs_100ms": -24.2,
+    "lufs_100ms": -28.2,
     "note": ""
    },
    {
@@ -1845,7 +1845,7 @@
     "t": 2.63,
     "start": 2.63,
     "end": 3.3905,
-    "lufs_100ms": -24.0,
+    "lufs_100ms": -28.0,
     "note": ""
    },
    {
@@ -1853,71 +1853,63 @@
     "t": 3.88,
     "start": 3.88,
     "end": 4.6412,
-    "lufs_100ms": -24.3,
+    "lufs_100ms": -28.3,
+    "note": ""
+   },
+   {
+    "kind": "arrive",
+    "t": 5.5,
+    "start": 5.5,
+    "end": 6.1673,
+    "lufs_100ms": -33.5,
     "note": ""
    },
    {
     "kind": "thread",
-    "t": 6.22,
-    "start": 6.22,
-    "end": 7.3559,
+    "t": 6.2,
+    "start": 6.2,
+    "end": 7.4354,
     "lufs_100ms": -35.9,
     "note": ""
    },
    {
     "kind": "arrive",
-    "t": 6.296,
-    "start": 6.296,
-    "end": 6.8448,
-    "lufs_100ms": -37.0,
+    "t": 6.516,
+    "start": 6.516,
+    "end": 7.0698,
+    "lufs_100ms": -38.4,
     "note": ""
    },
    {
     "kind": "arrive",
-    "t": 6.392,
-    "start": 6.392,
-    "end": 6.9446,
-    "lufs_100ms": -37.2,
+    "t": 6.682,
+    "start": 6.682,
+    "end": 7.2365,
+    "lufs_100ms": -37.6,
     "note": ""
    },
    {
     "kind": "arrive",
-    "t": 6.488,
-    "start": 6.488,
-    "end": 7.0369,
-    "lufs_100ms": -36.9,
+    "t": 6.704,
+    "start": 6.704,
+    "end": 7.2493,
+    "lufs_100ms": -38.0,
     "note": ""
    },
    {
     "kind": "arrive",
-    "t": 6.59,
-    "start": 6.59,
-    "end": 7.1234,
-    "lufs_100ms": -37.5,
-    "note": ""
-   },
-   {
-    "kind": "arrive",
-    "t": 6.692,
-    "start": 6.692,
-    "end": 7.2296,
-    "lufs_100ms": -36.5,
-    "note": ""
-   },
-   {
-    "kind": "arrive",
-    "t": 6.788,
-    "start": 6.788,
-    "end": 7.285,
-    "lufs_100ms": -37.0,
+    "t": 7.01,
+    "start": 7.01,
+    "end": 7.5644,
+    "lufs_100ms": -38.4,
     "note": ""
    },
    {
     "kind": "move",
-    "t": 7.6,
-    "start": 7.6,
-    "end": 8.9962,
-    "lufs_100ms": -37.2,
+    "t": 7.95,
+    "start": 7.95,
+    "end": 9.17,
+    "lufs_100ms": -36.6,
     "note": ""
    },
    {
@@ -2236,7 +2228,7 @@
     "kind": "summon",
     "t": 27.84,
     "start": 27.84,
-    "end": 29.8307,
+    "end": 29.8253,
     "lufs_100ms": -32.6,
     "note": ""
    },
@@ -2396,7 +2388,7 @@
     "kind": "door-open",
     "t": 33.05,
     "start": 33.05,
-    "end": 34.144,
+    "end": 34.1846,
     "lufs_100ms": -34.9,
     "note": ""
    },
@@ -2476,7 +2468,7 @@
     "kind": "door-close",
     "t": 36.3,
     "start": 36.3,
-    "end": 37.4731,
+    "end": 37.4732,
     "lufs_100ms": -36.4,
     "note": ""
    },
@@ -2636,7 +2628,7 @@
     "kind": "move",
     "t": 52.1,
     "start": 52.1,
-    "end": 53.0706,
+    "end": 53.0744,
     "lufs_100ms": -41.8,
     "note": ""
    },
@@ -2684,7 +2676,7 @@
     "kind": "decision",
     "t": 55.72,
     "start": 55.72,
-    "end": 57.9824,
+    "end": 57.9245,
     "lufs_100ms": -26.7,
     "note": ""
    },
@@ -3323,6 +3315,7 @@
   ]
  },
  "warnings": [
+  "duplicate arrive at 6.527 merged with 6.516",
   "duplicate thread at 58.05 merged with 58.045",
   "duplicate record at 64.22 merged with 64.22",
   "duplicate record at 64.38 merged with 64.38",
@@ -3345,7 +3338,7 @@
    "name": "music.wav DC",
    "ok": true,
    "value": [
-    -1.1e-09,
+    -1.08e-09,
     -3.07e-09
    ],
    "target": "|mean| < 1e-4"
@@ -3372,8 +3365,8 @@
    "name": "sfx.wav DC",
    "ok": true,
    "value": [
-    -5.71e-12,
-    -7.62e-12
+    1.68e-11,
+    -3.09e-12
    ],
    "target": "|mean| < 1e-4"
   },
@@ -3399,8 +3392,8 @@
    "name": "master.wav DC",
    "ok": true,
    "value": [
-    -1.9e-09,
-    -3.13e-09
+    -1.74e-09,
+    -3.09e-09
    ],
    "target": "|mean| < 1e-4"
   },
@@ -3426,8 +3419,8 @@
    "name": "master-no-narration.wav DC",
    "ok": true,
    "value": [
-    4.52e-10,
-    4.89e-10
+    4.47e-10,
+    4.85e-10
    ],
    "target": "|mean| < 1e-4"
   },
@@ -3476,7 +3469,7 @@
   {
    "name": "worker over background (no-narration version)",
    "ok": true,
-   "value": 12.6,
+   "value": 12.5,
    "target": ">= 8 LU"
   },
   {
