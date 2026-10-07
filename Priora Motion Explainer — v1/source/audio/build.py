@@ -775,7 +775,7 @@ def k_wordmark(ev, rng, idx):
     return Snd().add(x * arch(n, 0.001, 0.25))
 
 
-# kind -> (synth, trim dB, reverb send, description for docs)
+# kind -> (synth, trim dB against REF_EVENT_LUFS, reverb send into the small room); docs/sound.md describes each
 KINDS = {
     "print": (k_print, 0.0, 0.18),
     "speech-fragment": (k_speech_fragment, -2.0, 0.10),
@@ -1067,8 +1067,22 @@ class Timing:
 # music
 
 
+# Fallback times for the music's anchor words (v1 timing), used with a warning if the narration
+# is re-written and a word disappears: the build never fails on a timing change.
+ANCHORS = {
+    ("L02", "agents", 1): 6.44, ("W01", "hey", 1): 8.55, ("L03", "priora", 1): 14.80, ("L03", "then", 1): 18.57,
+    ("L04", "next", 1): 22.60, ("L04", "need", 1): 25.63, ("L05", "each", 1): 31.20, ("L06", "when", 1): 38.60,
+    ("L06", "holds", 1): 39.29, ("L06", "opens", 1): 40.26, ("L06", "disturbed", 1): 44.00, ("L07", "slips", 1): 48.34,
+    ("L08", "priora", 1): 52.40, ("L08", "agents", 1): 54.78, ("L09", "three", 1): 57.35, ("L10", "retain", 1): 59.45,
+    ("L11", "mitigate", 1): 66.40, ("L11", "checks", 1): 68.54, ("L12", "transfer", 1): 72.20, ("L13", "priora", 1): 78.50,
+    ("L13", "the", 2): 81.14, ("L14", "priora", 1): 84.40,
+}
+
+
 def music_plan(tm: Timing):
-    w = tm.word
+    def w(line, word, n=1):
+        return tm.word(line, word, n, fallback=ANCHORS.get((line, word, n)))
+
     # (turn time, crossfade width, MIDI notes, level dB, brightness 0..1, reverb send)
     S = [
         (1.6, 3.2, [38, 50, 57, 64], -8.0, 0.25, 0.35),  # quiet open start: D, A, E (no third)
@@ -1734,9 +1748,10 @@ def qa(meter, tm, events, counts, unknown, placed, lev, mplan, duck_spans, sourc
             "master_gain_db": round(G, 3),
             "master_limiter_max_reduction_db": round(gr, 2),
             "no_narration_worker_gain_db": round(G, 3),
-            "no_narration_background_gain_db": round(Gb + G, 3),
+            "no_narration_background_gain_db": round(Gb, 3),
+            "no_narration_background_over_master_db": round(Gb - G, 3),
             "no_narration_limiter_max_reduction_db": round(gr2, 2),
-            "note": "master.wav = limiter(G * (voice dual-mono + music.wav/G + sfx.wav/G)); music.wav and sfx.wav are written post-gain (the level they have in master.wav, before the limiter)",
+            "note": "master.wav = TP-limiter(G * voice.wav as dual mono, DC-blocked + music.wav + sfx.wav); the stems are written post-gain G (the level they have inside master.wav, before the limiter). master-no-narration.wav = TP-limiter(G * voice-worker.wav + Gb * (music ducked under W01 only + sfx)), Gb = no_narration_background_gain_db",
         },
         "outputs": outs,
         "music": {

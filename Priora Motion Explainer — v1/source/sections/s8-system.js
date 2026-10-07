@@ -235,7 +235,7 @@ PK.section("s8-system", 84, 90, function (tl, W, ctx, S) {
 
   // ------------------------------------------------------------ 5. the world fades to paper; the wordmark
   var world = document.getElementById("pk-world");
-  tl.fromTo(world, { opacity: 1 }, { opacity: 0, duration: 0.5, ease: "power1.inOut", immediateRender: false }, 88.2);
+  tl.fromTo(world, { opacity: 1 }, { opacity: 0, duration: 0.45, ease: "power1.inOut", immediateRender: false }, 88.2);
   tl.fromTo(tag, { opacity: 1 }, { opacity: 0, duration: 0.5, ease: "power1.inOut", immediateRender: false }, 88.25);
 
   var wmW = 440,
@@ -257,6 +257,6 @@ PK.section("s8-system", 84, 90, function (tl, W, ctx, S) {
     '"/></g></svg>';
   ctx.overlay.appendChild(wm);
   gsap.set(wm, { opacity: 0 });
-  tl.fromTo(wm, { opacity: 0 }, { opacity: 1, duration: 0.6, ease: "power1.inOut", immediateRender: false }, 88.4);
-  PK.sfx("wordmark", 88.4, { gain_db: -6 });
+  tl.fromTo(wm, { opacity: 0 }, { opacity: 1, duration: 0.5, ease: "power2.inOut", immediateRender: false }, 88.5);
+  PK.sfx("wordmark", 88.5, { gain_db: -6 });
 });
