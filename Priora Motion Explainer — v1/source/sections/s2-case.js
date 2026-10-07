@@ -10,7 +10,8 @@
 
   Contract at 22.3 (for s3): Priora at (1150, 445), scale 1, bead at 180 deg, label hidden;
   case at GEO.caseForm (1000, 455), all facets folded and visible, photo filled,
-  W.caseLabel ("Case") visible at (1000, 497); transcript, waveform, threads and question gone.
+  W.caseLabel ("Case", 22 px) visible since 21.35 at (1000, 499); transcript, waveform, threads
+  and question gone; the worker's phone is down (faded).
 */
 PK.section("s2-case", 8, 22.3, function (tl, W, ctx) {
   var G = PK.GEO,
@@ -32,7 +33,18 @@ PK.section("s2-case", 8, 22.3, function (tl, W, ctx) {
   tl.fromTo(W.priora.beadG, { rotation: 0, svgOrigin: "0 0" }, { rotation: 85, svgOrigin: "0 0", duration: 0.7, ease: "power2.inOut", immediateRender: false }, 9.0);
 
   // ------------------------------------------------------------ the voice note
-  var head = [G.worker[0] + 16, G.worker[1] - 116];
+  // the worker raises a phone to the mouth: an ink forearm and a small slab, each cut from the
+  // silhouette by a hairline of paper, so it reads as a voice message, not speech
+  var phone = PK.g(W.real.worker.body);
+  PK.el("path", { d: "M13 -66 C19 -74 21 -84 18.5 -92", fill: "none", stroke: C.paper, "stroke-width": 9.6, "stroke-linecap": "round" }, phone);
+  PK.el("path", { d: "M13 -66 C19 -74 21 -84 18.5 -92", fill: "none", stroke: C.ink, "stroke-width": 7, "stroke-linecap": "round" }, phone);
+  var slab = PK.g(phone, { transform: "translate(18.5 -100) rotate(-14)" });
+  PK.el("rect", { x: -4.6, y: -8, width: 9.2, height: 16, rx: 1.8, fill: C.ink, stroke: C.paper, "stroke-width": 1.3 }, slab);
+  PK.el("rect", { x: -2.6, y: -5.6, width: 5.2, height: 8.6, rx: 0.6, fill: "none", stroke: C.paper, "stroke-width": 0.7, opacity: 0.85 }, slab);
+  gsap.set(phone, { opacity: 0 });
+  tl.fromTo(phone, { opacity: 0, y: 6 }, { opacity: 1, y: 0, duration: 0.3, ease: "power2.out", immediateRender: false }, V.start - 0.55);
+  tl.to(phone, { opacity: 0, y: 6, duration: 0.35, ease: "power2.in" }, 14.2);
+  var head = [G.worker[0] + 21, G.worker[1] - 109];
   var waveY = 600,
     waveX0 = 814;
   var wave = PK.g(W.L.real);
@@ -82,21 +94,33 @@ PK.section("s2-case", 8, 22.3, function (tl, W, ctx) {
     marks.push(p);
   });
 
-  // Priora listens: a fine dashed thread from its bead to the end of the sentence, with
-  // small beads of meaning running back up it while the worker speaks
-  var lisFrom = beadAt(85),
-    lisTo = [1262, 520];
-  var lisD = PK.curve(lisFrom, lisTo, 8);
-  var lis = PK.el("path", { d: lisD, class: "pk-thread-dash" }, W.L.threads);
-  PK.fade(tl, lis, 0, 0.8, 9.55, 0.4, "none");
+  // Priora listens: a fine dashed thread from its bead, down past the end of the sentence and
+  // in along the wave's line to the wave's growing head, with small beads of meaning running
+  // back up it while the worker speaks
+  var lisFrom = beadAt(85);
+  var nBars = Math.floor(env.values.length / step);
+  function waveHead(t) {
+    var b = Math.max(0, Math.min(nBars - 1, ((t - env.start) * env.rate) / step));
+    return waveX0 + b * 2.3;
+  }
+  function lisPath(xh) {
+    return "M" + PK.fmt(lisFrom[0]) + " " + PK.fmt(lisFrom[1]) + " C1263 560 1242 " + waveY + " 1192 " + waveY + " L" + PK.fmt(xh + 7) + " " + waveY;
+  }
+  function lisBackPath(xh) {
+    return "M" + PK.fmt(xh + 7) + " " + waveY + " L1192 " + waveY + " C1242 " + waveY + " 1263 560 " + PK.fmt(lisFrom[0]) + " " + PK.fmt(lisFrom[1]);
+  }
+  var tLis = 9.45,
+    tLisEnd = env.start + (nBars * step) / env.rate;
+  var lis = PK.el("path", { d: lisPath(waveHead(tLis)), class: "pk-thread-dash" }, W.L.threads);
+  PK.fade(tl, lis, 0, 0.8, tLis, 0.4, "none");
+  tl.fromTo(lis, { attr: { d: lisPath(waveHead(tLis)) } }, { attr: { d: lisPath(waveHead(tLisEnd)) }, duration: tLisEnd - tLis, ease: "none", immediateRender: false }, tLis);
   tl.to(lis, { opacity: 0, duration: 0.4, ease: "power1.in" }, 14.1);
-  var lisBack = PK.curve(lisTo, lisFrom, -8);
   [10.15, 10.95, 12.55, 13.55].forEach(function (t, n) {
     var bd = PK.bead(W.L.threads, 2.2);
     tl.set(bd.g, { opacity: 1 }, t);
-    PK.travel(tl, bd.g, lisBack, t, 0.45, "power1.in");
-    tl.set(bd.g, { opacity: 0 }, t + 0.45);
-    PK.sfx("packet", t + 0.45, { gain_db: -16, size: "small", pan: 0.5 });
+    PK.travel(tl, bd.g, lisBackPath(waveHead(t)), t, 0.5, "power1.in");
+    tl.set(bd.g, { opacity: 0 }, t + 0.5);
+    PK.sfx("packet", t + 0.5, { gain_db: -16, size: "small", pan: 0.5 });
   });
 
   // the underlines: one per contiguous phrase, drawn shortly after each is spoken
@@ -196,7 +220,7 @@ PK.section("s2-case", 8, 22.3, function (tl, W, ctx) {
   // the site's own conditions flow up from the building
   var tCond = PK.word("L03", "deadline") + 0.35;
   var cpos = PK.polar(cx, cy, cs.spokeR, 90);
-  var condD = PK.curve([G.site[0] + 20, G.site[1] - 128], [cpos[0], cpos[1] + 9], -30);
+  var condD = "M" + (G.site[0] + 20) + " " + (G.site[1] - 128) + " C" + (G.site[0] - 30) + " " + (G.site[1] - 150) + " " + PK.fmt(cpos[0] - 120) + " " + PK.fmt(cpos[1] + 30) + " " + PK.fmt(cpos[0] - 90) + " " + PK.fmt(cpos[1]) + " L" + PK.fmt(cpos[0] - 9) + " " + PK.fmt(cpos[1]);
   var cond = PK.thread(W.L.threads, condD);
   PK.drawOn(tl, cond, tCond, 0.5, "power2.out");
   var cb = PK.bead(W.L.threads, 2.6);
@@ -235,17 +259,20 @@ PK.section("s2-case", 8, 22.3, function (tl, W, ctx) {
   var tSend = tAsk + 1.05;
   var phPos = PK.polar(cx, cy, cs.spokeR, 150);
   var photo = PK.g(W.L.case);
-  var pin = PK.g(photo, { transform: "rotate(-8)" });
-  PK.el("rect", { x: -9, y: -9, width: 18, height: 18, rx: 0.8, fill: C.paper, stroke: C.ink, "stroke-width": 0.6 }, pin);
-  PK.el("rect", { x: -7.2, y: -7.2, width: 14.4, height: 14.4, fill: C.ink }, pin);
-  // the cracked L bracket, in paper, inside the print
-  PK.el("path", { d: "M-3.6 -4.6 V3.4 H4.4", fill: "none", stroke: C.paper, "stroke-width": 1.7, "stroke-linecap": "square" }, pin);
-  PK.el("path", { d: "M-5.2 -0.6 L-2.2 0.4 L-4.4 1.6", fill: "none", stroke: C.ink, "stroke-width": 0.9 }, pin);
+  var pin = PK.g(photo, { transform: "rotate(-6)" });
+  // a printed photo: paper border, an ink picture, and in it an L bracket in paper with a
+  // jagged break through its corner
+  PK.el("rect", { x: -18, y: -21, width: 36, height: 42, rx: 1.2, fill: C.paper, stroke: C.ink, "stroke-width": 0.9 }, pin);
+  PK.el("rect", { x: -15, y: -18, width: 30, height: 30, fill: C.ink }, pin);
+  PK.el("path", { d: "M-7 -11 V5 H9", fill: "none", stroke: C.paper, "stroke-width": 3.4, "stroke-linecap": "butt" }, pin);
+  // the crack: a dark jagged break straight across the upright, the two parts slightly offset
+  PK.el("path", { d: "M-10.5 -3.2 L-8.1 -1.4 L-7.2 -3.6 L-5.4 -1.8 L-3.6 -2.9", fill: "none", stroke: C.ink, "stroke-width": 2.1, "stroke-linejoin": "miter" }, pin);
   gsap.set(photo, { x: wHead[0], y: wHead[1], opacity: 0 });
-  var back = PK.curve(wHead, phPos, 30);
+  // up from the worker first, then across above the case labels to the photo facet
+  var back = "M" + PK.fmt(wHead[0]) + " " + PK.fmt(wHead[1]) + " C" + PK.fmt(wHead[0] - 6) + " " + PK.fmt(wHead[1] - 120) + " " + PK.fmt(phPos[0] - 70) + " " + PK.fmt(phPos[1] - 14) + " " + PK.fmt(phPos[0]) + " " + PK.fmt(phPos[1]);
   tl.fromTo(photo, { opacity: 0, scale: 0.5, transformOrigin: "50% 50%" }, { opacity: 1, scale: 1, transformOrigin: "50% 50%", duration: 0.25, ease: "power2.out", immediateRender: false }, tSend);
   PK.travel(tl, photo, back, tSend + 0.15, 0.7, "power2.inOut");
-  tl.to(photo, { scale: 0.45, transformOrigin: "50% 50%", duration: 0.3, ease: "power2.in" }, tSend + 0.62);
+  tl.to(photo, { scale: 0.22, transformOrigin: "50% 50%", duration: 0.3, ease: "power2.in" }, tSend + 0.62);
   tl.to(photo, { opacity: 0, duration: 0.12, ease: "none" }, tSend + 0.88);
   PK.sfx("evidence", tSend, { gain_db: -6, part: "send" });
   // answered: the photo's own path is drawn solid behind it and the request goes
@@ -260,17 +287,17 @@ PK.section("s2-case", 8, 22.3, function (tl, W, ctx) {
   tl.to([question, answer], { opacity: 0, duration: 0.4, ease: "power1.in" }, tFill + 0.3);
 
   // ------------------------------------------------------------ the finished case holds, then folds to travel
-  var tFold = 21.4;
+  var tFold = 21.0;
   var allLabels = Object.keys(labels).map(function (k) {
     return labels[k];
   });
   tl.to(allLabels, { opacity: 0, duration: 0.3, ease: "power1.in" }, tFold);
   cs.fold(tl, tFold + 0.08, 0.38, null, { stagger: 0.03 });
   PK.sfx("assemble", tFold + 0.1, { gain_db: -10, size: "small" });
-  W.caseLabel = PK.text(W.L.labels, "Case", cx, cy + cs.R + 20, { font: "mono", size: FS, fill: C.rust, anchor: "middle" });
+  W.caseLabel = PK.text(W.L.labels, "Case", cx, cy + cs.R + 22, { font: "mono", size: PK.cam.px(21.35, 22), fill: C.rust, anchor: "middle" });
   gsap.set(W.caseLabel, { opacity: 0 });
-  PK.show(tl, W.caseLabel, tFold + 0.5, 0.3);
+  PK.show(tl, W.caseLabel, 21.35, 0.3);
   // Priora closes in, facing the case
-  tl.to(W.priora.beadG, { rotation: 180, svgOrigin: "0 0", duration: 0.5, ease: "power2.inOut" }, 21.6);
-  PK.travel(tl, W.priora.g, PK.curve(listen, [1150, 445], 8), 21.6, 0.65, "power2.inOut");
+  tl.to(W.priora.beadG, { rotation: 180, svgOrigin: "0 0", duration: 0.5, ease: "power2.inOut" }, 21.4);
+  PK.travel(tl, W.priora.g, PK.curve(listen, [1150, 445], 8), 21.4, 0.5, "power2.inOut");
 });
