@@ -19,7 +19,7 @@
   "loudness_method": "ITU-R BS.1770-4 via pyloudnorm (integrated, gated); momentary = ungated 400 ms K-weighted windows, 10 ms hop"
  },
  "inputs": {
-  "events_source": "cache",
+  "events_source": "chrome",
   "voice": {
    "file": "assets/audio/voice.wav",
    "mono_lufs": -19.0
