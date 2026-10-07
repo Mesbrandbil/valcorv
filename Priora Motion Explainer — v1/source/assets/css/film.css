@@ -179,3 +179,9 @@ body {
 #world [style*="stroke-dasharray: 0px, 999999px"] {
   visibility: hidden;
 }
+
+/* Small SVG text under a zooming camera: geometric precision makes glyph advances independent
+   of the zoom history, so a label measures the same whatever order the frames are rendered in. */
+#world text {
+  text-rendering: geometricPrecision;
+}

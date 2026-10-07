@@ -138,9 +138,15 @@ PK.section("s7-cooperate", 78, 84, function (tl, W, ctx, S) {
     FT(el, { scale: 1, svgOrigin: o || "0 0" }, { keyframes: [{ scale: s || 1.1, duration: 0.11, ease: "power1.out" }, { scale: 1, duration: 0.26, ease: "power2.inOut" }], svgOrigin: o || "0 0" }, at);
   }
   var LS = PK.cam.px(80, 19.5); // mono status labels in the held cooperation shot (78.9 to 83.1)
+  // unhinted glyph metrics: under the zooming camera Chrome otherwise lays small SVG text out at
+  // screen-scale-dependent widths that depend on seek history (a seek-order difference of ~7% in width)
+  function crisp(el) {
+    el.style.textRendering = "geometricPrecision";
+    return el;
+  }
   function mono(str, x, y, o) {
     o = o || {};
-    var t = PK.text(W.L.labels, str, x, y, { font: "mono", size: o.size || LS, fill: o.fill || C.rust, anchor: o.anchor || "start" });
+    var t = crisp(PK.text(W.L.labels, str, x, y, { font: "mono", size: o.size || LS, fill: o.fill || C.rust, anchor: o.anchor || "start" }));
     gsap.set(t, { opacity: 0 });
     return t;
   }
@@ -270,7 +276,7 @@ PK.section("s7-cooperate", 78, 84, function (tl, W, ctx, S) {
     W.roomTags = {};
     ["retain", "mitigate"].forEach(function (k) {
       var r = G.rooms[k];
-      var t = PK.text(W.L.labels, "Design proposal", r.x + r.w - 18, r.y + 28, { font: "mono", size: PK.cam.px(80, 19), fill: C.ink2, anchor: "end" });
+      var t = crisp(PK.text(W.L.labels, "Design proposal", r.x + r.w - 18, r.y + 28, { font: "mono", size: PK.cam.px(80, 19), fill: C.ink2, anchor: "end" }));
       gsap.set(t, { opacity: 0 });
       tl.set(t, { opacity: 1 }, T0);
       W.roomTags[k] = t;
@@ -309,17 +315,19 @@ PK.section("s7-cooperate", 78, 84, function (tl, W, ctx, S) {
   var decD = W.decisionD || valAt(W.decision, "attr", T0, "d") || W.decision.getAttribute("d");
   var dec = null;
   try {
-    var dp = samplePath(decD, 300);
+    var dp = samplePath(decD, 360);
+    var LC = (W.decisionLoop && W.decisionLoop.c) || DOCK,
+      LRr = (W.decisionLoop && W.decisionLoop.r) || 44;
     var near = [];
     dp.forEach(function (p, i) {
-      if (dist(p, DOCK) < 52) near.push(i);
+      if (dist(p, LC) < LRr + 6) near.push(i);
     });
     if (near.length > 40) {
       var i1 = near[0],
         i2 = near[near.length - 1],
         sweep = 0;
       for (var i = i1 + 1; i <= i2; i++) {
-        var da = ang(DOCK, dp[i]) - ang(DOCK, dp[i - 1]);
+        var da = ang(LC, dp[i]) - ang(LC, dp[i - 1]);
         while (da > 180) da -= 360;
         while (da < -180) da += 360;
         sweep += Math.abs(da);
@@ -544,12 +552,12 @@ PK.section("s7-cooperate", 78, 84, function (tl, W, ctx, S) {
   var BRAD = PK.cam.px(80, 11);
   var qBead = PK.g(W.L.labels);
   PK.el("circle", { cx: 0, cy: 0, r: f(BRAD), fill: C.paper, stroke: C.rust, "stroke-width": PK.cam.px(80, 1.6), "stroke-dasharray": f(PK.cam.px(80, 3.6)) + " " + f(PK.cam.px(80, 2.6)) }, qBead);
-  PK.text(qBead, "?", 0, LS * 0.36, { font: "mono", size: LS, fill: C.rust, anchor: "middle", upper: false, track: 0 });
+  crisp(PK.text(qBead, "?", 0, LS * 0.36, { font: "mono", size: LS, fill: C.rust, anchor: "middle", upper: false, track: 0 }));
   gsap.set(qBead, { opacity: 0 });
-  // it leaves the Transfer door below the owner's line and settles at the packet's lower right
-  var qFrom = [dT[0] + 22, dT[1] + 12],
-    qTo = [PT[0] + 30, PT[1] + 28];
-  var qPath = "M" + pt(qFrom) + " C" + f(qFrom[0] - 26) + " " + f(qFrom[1] + 2) + " " + f(qTo[0] + 22) + " " + f(qTo[1]) + " " + pt(qTo);
+  // it comes out to the open Transfer doorway, below the owner's line, beside the packet (the human's line runs between)
+  var qFrom = [dT[0] + 64, dT[1] + 16],
+    qTo = [dT[0] + 2, dT[1] + 16];
+  var qPath = "M" + pt(qFrom) + " L" + pt(qTo);
   tl.set(qBead, { x: qFrom[0], y: qFrom[1] }, tm.ask - 0.01);
   FT(qBead, { opacity: 0, scale: 0.6, svgOrigin: "0 0" }, { opacity: 1, scale: 1, svgOrigin: "0 0", duration: 0.12, ease: "power2.out" }, tm.ask);
   PK.travel(tl, qBead, qPath, tm.ask, tm.askD, "power3.out");
@@ -557,7 +565,7 @@ PK.section("s7-cooperate", 78, 84, function (tl, W, ctx, S) {
   PK.sfx("return", tAns, { gain_db: -9, pan: 0.4, room: "transfer" });
   // the owner's question sits above the packet (the owner is to its left), its leader to the packet's top
   var qx = PT[0] + 18,
-    qy = PT[1] - 34 - 32;
+    qy = PT[1] - 34 - 32 - LS * 1.45; // the decision will sit below it, nearest the packet
   var lQ = mono("What would it cost?", qx, qy, { fill: C.ink, anchor: "end" });
   var ldQ = PK.el("path", { d: "M" + f(qx - 6) + " " + f(qy + 6) + " V" + f(PT[1] - 34 - 4), fill: "none", stroke: C.ink, "stroke-width": 1, "stroke-linecap": "round" }, W.L.labels);
   gsap.set(ldQ, { drawSVG: "0% 0%" });
@@ -584,7 +592,7 @@ PK.section("s7-cooperate", 78, 84, function (tl, W, ctx, S) {
   FT(qBead, { opacity: 1 }, { opacity: 0, duration: 0.2, ease: "power1.in" }, tSolid);
   FT(cs.body, { scale: 1 }, { keyframes: [{ scale: 1.06, duration: 0.12, ease: "power1.out" }, { scale: 1, duration: 0.18, ease: "power2.inOut" }], svgOrigin: "0 0" }, tSolid);
   PK.sfx("resolve", tSolid, { gain_db: -12, pan: 0.3 });
-  var lD = mono("Risk owner decides", qx, qy - LS * 1.45, { fill: C.ink, anchor: "end" });
+  var lD = mono("Risk owner decides", qx, qy + LS * 1.45, { fill: C.ink, anchor: "end" });
   labelIn(lD, tSolid);
 
   W.coop = {

@@ -63,6 +63,11 @@ PK.section("s8-system", 84, 90, function (tl, W, ctx, S) {
     if (!(o > 0)) return; // already hidden
     FT(el, { opacity: o }, { opacity: 0, duration: dur || 0.4, ease: "power1.in" }, at);
   }
+  // unhinted glyph metrics, so text widths do not depend on the camera's scale history (see s7)
+  function crisp(el) {
+    el.style.textRendering = "geometricPrecision";
+    return el;
+  }
   var tPull = 83.3,
     tStill = 84.5;
 
@@ -74,7 +79,9 @@ PK.section("s8-system", 84, 90, function (tl, W, ctx, S) {
   var tLateOut = 84.0;
   var lateSize = PK.cam.px(tLateOut, 19.5);
   (co.labels.late || []).forEach(function (el) {
-    tl.to(el, { fontSize: lateSize, duration: tLateOut - tPull, ease: "power2.inOut" }, tPull);
+    // explicit from-value (the authored size read at build time), so the start never depends on seek order
+    // (autoRound off: GSAP rounds px values by default, which would snap the type to whole pixels)
+    FT(el, { fontSize: fontSize(el), autoRound: false }, { fontSize: lateSize, autoRound: false, duration: tLateOut - tPull, ease: "power2.inOut" }, tPull);
     FT(el, { opacity: 1 }, { opacity: 0, duration: 0.25, ease: "power1.in" }, tLateOut - 0.05);
   });
   if (W.roomTags) {
@@ -119,7 +126,7 @@ PK.section("s8-system", 84, 90, function (tl, W, ctx, S) {
   });
   // WORKER / SITE / RISK OWNER are counter-scaled by s1 up to 83.2: continue from their current size
   ["worker", "site", "owner"].forEach(function (k) {
-    tl.to(W.real.labels[k], { fontSize: 18.5, duration: tStill - tPull, ease: "power2.inOut" }, tPull);
+    tl.to(W.real.labels[k], { fontSize: 18.5, autoRound: false, duration: tStill - tPull, ease: "power2.inOut" }, tPull);
   });
   // the SIMULATED chip stays one chip: it grows to 19 px type at 1:1 and moves clear of the carriers
   var chip = W.rooms.transfer.chip;
@@ -206,7 +213,7 @@ PK.section("s8-system", 84, 90, function (tl, W, ctx, S) {
   var tops = [];
   function label(str, x, y, at, o) {
     o = o || {};
-    var t = PK.text(W.L.top, str, x, y, { font: "mono", size: o.size || LS, fill: o.fill || C.ink, anchor: o.anchor || "middle" });
+    var t = crisp(PK.text(W.L.top, str, x, y, { font: "mono", size: o.size || LS, fill: o.fill || C.ink, anchor: o.anchor || "middle" }));
     gsap.set(t, { opacity: 0 });
     FT(t, { opacity: 0, y: 4 }, { opacity: 1, y: 0, duration: 0.35, ease: "power2.out" }, at);
     tops.push(t);
@@ -238,16 +245,16 @@ PK.section("s8-system", 84, 90, function (tl, W, ctx, S) {
   var y1 = P.y + P.h + 34,
     y2 = y1 + tabH + 10;
   var rowG = PK.g(W.L.top);
-  var lFirst = PK.text(rowG, "First", P.x, y1 + TS * 0.36, { font: "mono", size: TS, fill: C.ink2, track: TR });
+  var lFirst = crisp(PK.text(rowG, "First", P.x, y1 + TS * 0.36, { font: "mono", size: TS, fill: C.ink2, track: TR }));
   var tabX = P.x + PK.measure("FIRST", "mono500", TS, TR) + 14;
   var hotW = PK.measure("HOT WORK", "mono500", TS, TR) + pad * 2;
   var hot = PK.g(rowG);
   PK.el("path", { d: PK.rectPath(tabX, y1 - tabH / 2, hotW, tabH, 4), class: "pk-hair" }, hot);
-  PK.text(hot, "Hot work", tabX + pad, y1 + TS * 0.36, { font: "mono", size: TS, fill: C.ink, track: TR });
+  crisp(PK.text(hot, "Hot work", tabX + pad, y1 + TS * 0.36, { font: "mono", size: TS, fill: C.ink, track: TR }));
   var laterStr = "Possibly later: other insured activities";
   var laterW = PK.measure(laterStr.toUpperCase(), "mono500", TS, TR);
   var later = PK.g(rowG);
-  PK.text(later, laterStr, P.x, y2 + TS * 0.36, { font: "mono", size: TS, fill: C.grey, track: TR });
+  crisp(PK.text(later, laterStr, P.x, y2 + TS * 0.36, { font: "mono", size: TS, fill: C.grey, track: TR }));
   PK.el("path", { d: "M" + f(P.x) + " " + f(y2 + TS * 0.36 + 5) + " H" + f(P.x + laterW), fill: "none", stroke: C.grey, "stroke-width": 1, "stroke-dasharray": "3 3" }, later);
   gsap.set([lFirst, hot, later], { opacity: 0 });
   var tFirst = 85.62,
