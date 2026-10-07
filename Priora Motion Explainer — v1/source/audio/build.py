@@ -1864,7 +1864,7 @@ def main(argv=None):
     return 0 if not bad else 1
 
 
-DUCK_WORKER_DB_NONAR = 5.0
+DUCK_WORKER_DB_NONAR = 7.0  # no-narration master: the lifted bed dips further under the worker so the voice note stays clear
 
 
 def qa(c):
