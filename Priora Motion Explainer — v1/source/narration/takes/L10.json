@@ -1,0 +1,118 @@
+{
+  "schema": "priora-narration-take/1",
+  "id": "L10",
+  "engine": "guide",
+  "guide": true,
+  "label": "GUIDE VOICE (local Kokoro). Not the final ElevenLabs performance.",
+  "speaker": "narrator",
+  "text": "Retain is never a default. Risk is kept on purpose, with exposure and authority explicit.",
+  "spoken_text": "Retain is never a default. Risk is kept on purpose, with exposure and authority explicit.",
+  "sample_rate": 48000,
+  "duration": 6.38,
+  "speech_start": 0.03,
+  "speech_end": 6.32,
+  "words": [
+    {
+      "w": "Retain",
+      "start": 0.03,
+      "end": 0.56
+    },
+    {
+      "w": "is",
+      "start": 0.56,
+      "end": 0.76
+    },
+    {
+      "w": "never",
+      "start": 0.76,
+      "end": 1.17
+    },
+    {
+      "w": "a",
+      "start": 1.17,
+      "end": 1.21
+    },
+    {
+      "w": "default",
+      "start": 1.21,
+      "end": 1.9
+    },
+    {
+      "w": "Risk",
+      "start": 2.32,
+      "end": 2.67
+    },
+    {
+      "w": "is",
+      "start": 2.67,
+      "end": 2.81
+    },
+    {
+      "w": "kept",
+      "start": 2.81,
+      "end": 3.1
+    },
+    {
+      "w": "on",
+      "start": 3.1,
+      "end": 3.24
+    },
+    {
+      "w": "purpose",
+      "start": 3.24,
+      "end": 3.8
+    },
+    {
+      "w": "with",
+      "start": 4.14,
+      "end": 4.24
+    },
+    {
+      "w": "exposure",
+      "start": 4.24,
+      "end": 4.86
+    },
+    {
+      "w": "and",
+      "start": 4.86,
+      "end": 5.05
+    },
+    {
+      "w": "authority",
+      "start": 5.05,
+      "end": 5.6
+    },
+    {
+      "w": "explicit",
+      "start": 5.6,
+      "end": 6.32
+    }
+  ],
+  "sentences": [
+    {
+      "text": "Retain is never a default.",
+      "start": 0.03,
+      "end": 1.9,
+      "word_range": [
+        0,
+        5
+      ]
+    },
+    {
+      "text": "Risk is kept on purpose, with exposure and authority explicit.",
+      "start": 2.32,
+      "end": 6.32,
+      "word_range": [
+        5,
+        15
+      ]
+    }
+  ],
+  "created": "2026-10-07T20:33:46+00:00",
+  "provider": "kokoro-onnx 0.6.1 (kokoro-v1.0.onnx, voices-v1.0.bin)",
+  "voice": "bf_isabella",
+  "speed": 0.92,
+  "window": 6.45,
+  "fallback_words": 0,
+  "pronunciation_checks": []
+}

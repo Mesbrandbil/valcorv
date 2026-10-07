@@ -1,0 +1,146 @@
+{
+  "schema": "priora-narration-take/1",
+  "id": "L03",
+  "engine": "guide",
+  "guide": true,
+  "label": "GUIDE VOICE (local Kokoro). Not the final ElevenLabs performance.",
+  "speaker": "narrator",
+  "text": "Priora hears a repair, hot work, a place and a deadline. Then it asks for a photo.",
+  "spoken_text": "Priora hears a repair, hot work, a place and a deadline. Then it asks for a photo.",
+  "sample_rate": 48000,
+  "duration": 5.61,
+  "speech_start": 0.03,
+  "speech_end": 5.5,
+  "words": [
+    {
+      "w": "Priora",
+      "start": 0.03,
+      "end": 0.39
+    },
+    {
+      "w": "hears",
+      "start": 0.39,
+      "end": 0.7
+    },
+    {
+      "w": "a",
+      "start": 0.7,
+      "end": 0.75
+    },
+    {
+      "w": "repair",
+      "start": 0.75,
+      "end": 1.22
+    },
+    {
+      "w": "hot",
+      "start": 1.22,
+      "end": 1.52
+    },
+    {
+      "w": "work",
+      "start": 1.52,
+      "end": 1.91
+    },
+    {
+      "w": "a",
+      "start": 2.14,
+      "end": 2.2
+    },
+    {
+      "w": "place",
+      "start": 2.2,
+      "end": 2.61
+    },
+    {
+      "w": "and",
+      "start": 2.61,
+      "end": 2.73
+    },
+    {
+      "w": "a",
+      "start": 2.73,
+      "end": 2.77
+    },
+    {
+      "w": "deadline",
+      "start": 2.77,
+      "end": 3.38
+    },
+    {
+      "w": "Then",
+      "start": 3.8,
+      "end": 4.04
+    },
+    {
+      "w": "it",
+      "start": 4.04,
+      "end": 4.19
+    },
+    {
+      "w": "asks",
+      "start": 4.19,
+      "end": 4.63
+    },
+    {
+      "w": "for",
+      "start": 4.63,
+      "end": 4.76
+    },
+    {
+      "w": "a",
+      "start": 4.76,
+      "end": 4.79
+    },
+    {
+      "w": "photo",
+      "start": 4.79,
+      "end": 5.5
+    }
+  ],
+  "sentences": [
+    {
+      "text": "Priora hears a repair, hot work, a place and a deadline.",
+      "start": 0.03,
+      "end": 3.38,
+      "word_range": [
+        0,
+        11
+      ]
+    },
+    {
+      "text": "Then it asks for a photo.",
+      "start": 3.8,
+      "end": 5.5,
+      "word_range": [
+        11,
+        17
+      ]
+    }
+  ],
+  "created": "2026-10-07T20:32:39+00:00",
+  "provider": "kokoro-onnx 0.6.1 (kokoro-v1.0.onnx, voices-v1.0.bin)",
+  "voice": "bf_isabella",
+  "speed": 0.92,
+  "window": 6.6,
+  "fallback_words": 0,
+  "pronunciation_checks": [
+    {
+      "word": "Priora",
+      "token_index": 0,
+      "chosen_variant": "P R IY OW R AH",
+      "intended": true,
+      "phones": "P R IY OW R AH",
+      "phone_durations": {
+        "P#0": 0.06,
+        "R#1": 0.05,
+        "IY#2": 0.13,
+        "OW#3": 0.07,
+        "R#4": 0.06,
+        "AH#5": 0.03
+      },
+      "longest_vowel": "IY",
+      "stress_on_middle_syllable": false
+    }
+  ]
+}

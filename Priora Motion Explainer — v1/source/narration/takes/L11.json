@@ -1,0 +1,89 @@
+{
+  "schema": "priora-narration-take/1",
+  "id": "L11",
+  "engine": "guide",
+  "guide": true,
+  "label": "GUIDE VOICE (local Kokoro). Not the final ElevenLabs performance.",
+  "speaker": "narrator",
+  "text": "Mitigate compares safeguards, and checks whether the work is back inside.",
+  "spoken_text": "Mitigate compares safeguards, and checks whether the work is back inside.",
+  "sample_rate": 48000,
+  "duration": 4.3093,
+  "speech_start": 0.03,
+  "speech_end": 4.25,
+  "words": [
+    {
+      "w": "Mitigate",
+      "start": 0.03,
+      "end": 0.49
+    },
+    {
+      "w": "compares",
+      "start": 0.49,
+      "end": 0.95
+    },
+    {
+      "w": "safeguards",
+      "start": 0.95,
+      "end": 1.71
+    },
+    {
+      "w": "and",
+      "start": 2.06,
+      "end": 2.17
+    },
+    {
+      "w": "checks",
+      "start": 2.17,
+      "end": 2.51
+    },
+    {
+      "w": "whether",
+      "start": 2.51,
+      "end": 2.75
+    },
+    {
+      "w": "the",
+      "start": 2.75,
+      "end": 2.84
+    },
+    {
+      "w": "work",
+      "start": 2.84,
+      "end": 3.13
+    },
+    {
+      "w": "is",
+      "start": 3.13,
+      "end": 3.27
+    },
+    {
+      "w": "back",
+      "start": 3.27,
+      "end": 3.57
+    },
+    {
+      "w": "inside",
+      "start": 3.57,
+      "end": 4.25
+    }
+  ],
+  "sentences": [
+    {
+      "text": "Mitigate compares safeguards, and checks whether the work is back inside.",
+      "start": 0.03,
+      "end": 4.25,
+      "word_range": [
+        0,
+        11
+      ]
+    }
+  ],
+  "created": "2026-10-07T20:33:10+00:00",
+  "provider": "kokoro-onnx 0.6.1 (kokoro-v1.0.onnx, voices-v1.0.bin)",
+  "voice": "bf_isabella",
+  "speed": 0.92,
+  "window": 5.05,
+  "fallback_words": 0,
+  "pronunciation_checks": []
+}

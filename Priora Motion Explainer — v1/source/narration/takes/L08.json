@@ -1,0 +1,121 @@
+{
+  "schema": "priora-narration-take/1",
+  "id": "L08",
+  "engine": "guide",
+  "guide": true,
+  "label": "GUIDE VOICE (local Kokoro). Not the final ElevenLabs performance.",
+  "speaker": "narrator",
+  "text": "Priora brings it to the risk owner. Agents prepare; the human decides.",
+  "spoken_text": "Priora brings it to the risk owner. Agents prepare; the human decides.",
+  "sample_rate": 48000,
+  "duration": 4.61,
+  "speech_start": 0.03,
+  "speech_end": 4.55,
+  "words": [
+    {
+      "w": "Priora",
+      "start": 0.03,
+      "end": 0.47
+    },
+    {
+      "w": "brings",
+      "start": 0.47,
+      "end": 0.85
+    },
+    {
+      "w": "it",
+      "start": 0.85,
+      "end": 0.99
+    },
+    {
+      "w": "to",
+      "start": 0.99,
+      "end": 1.11
+    },
+    {
+      "w": "the",
+      "start": 1.11,
+      "end": 1.22
+    },
+    {
+      "w": "risk",
+      "start": 1.22,
+      "end": 1.56
+    },
+    {
+      "w": "owner",
+      "start": 1.56,
+      "end": 1.97
+    },
+    {
+      "w": "Agents",
+      "start": 2.41,
+      "end": 2.85
+    },
+    {
+      "w": "prepare",
+      "start": 2.85,
+      "end": 3.35
+    },
+    {
+      "w": "the",
+      "start": 3.35,
+      "end": 3.56
+    },
+    {
+      "w": "human",
+      "start": 3.56,
+      "end": 3.89
+    },
+    {
+      "w": "decides",
+      "start": 3.89,
+      "end": 4.55
+    }
+  ],
+  "sentences": [
+    {
+      "text": "Priora brings it to the risk owner.",
+      "start": 0.03,
+      "end": 1.97,
+      "word_range": [
+        0,
+        7
+      ]
+    },
+    {
+      "text": "Agents prepare; the human decides.",
+      "start": 2.41,
+      "end": 4.55,
+      "word_range": [
+        7,
+        12
+      ]
+    }
+  ],
+  "created": "2026-10-07T20:33:00+00:00",
+  "provider": "kokoro-onnx 0.6.1 (kokoro-v1.0.onnx, voices-v1.0.bin)",
+  "voice": "bf_isabella",
+  "speed": 0.9707,
+  "window": 4.55,
+  "fallback_words": 0,
+  "pronunciation_checks": [
+    {
+      "word": "Priora",
+      "token_index": 0,
+      "chosen_variant": "P R IY OW R AH",
+      "intended": true,
+      "phones": "P R IY OW R AH",
+      "phone_durations": {
+        "P#0": 0.06,
+        "R#1": 0.05,
+        "IY#2": 0.13,
+        "OW#3": 0.1,
+        "R#4": 0.06,
+        "AH#5": 0.07
+      },
+      "longest_vowel": "IY",
+      "stress_on_middle_syllable": false
+    }
+  ]
+}

@@ -1,0 +1,7 @@
+renders/
+.hyperframes/
+node_modules/
+__pycache__/
+*.pyc
+narration/takes/*.wav
+assets/audio/worker-dry.wav

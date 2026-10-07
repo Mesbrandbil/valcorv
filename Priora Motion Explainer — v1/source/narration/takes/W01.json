@@ -1,0 +1,138 @@
+{
+  "schema": "priora-narration-take/1",
+  "id": "W01",
+  "engine": "guide",
+  "guide": true,
+  "label": "GUIDE VOICE (local Kokoro). Not the final ElevenLabs performance.",
+  "speaker": "worker",
+  "text": "Hey, the bracket by the packing line has cracked again. We're going to weld it before the night shift.",
+  "spoken_text": "Hey, the bracket by the packing line has cracked again. We're going to weld it before the night shift.",
+  "sample_rate": 48000,
+  "duration": 5.39,
+  "speech_start": 0.03,
+  "speech_end": 5.33,
+  "words": [
+    {
+      "w": "Hey",
+      "start": 0.03,
+      "end": 0.33
+    },
+    {
+      "w": "the",
+      "start": 0.33,
+      "end": 0.43
+    },
+    {
+      "w": "bracket",
+      "start": 0.43,
+      "end": 0.84
+    },
+    {
+      "w": "by",
+      "start": 0.84,
+      "end": 1.01
+    },
+    {
+      "w": "the",
+      "start": 1.01,
+      "end": 1.11
+    },
+    {
+      "w": "packing",
+      "start": 1.11,
+      "end": 1.47
+    },
+    {
+      "w": "line",
+      "start": 1.47,
+      "end": 1.8
+    },
+    {
+      "w": "has",
+      "start": 1.8,
+      "end": 1.99
+    },
+    {
+      "w": "cracked",
+      "start": 1.99,
+      "end": 2.3
+    },
+    {
+      "w": "again",
+      "start": 2.3,
+      "end": 2.7
+    },
+    {
+      "w": "We're",
+      "start": 3.17,
+      "end": 3.31
+    },
+    {
+      "w": "going",
+      "start": 3.31,
+      "end": 3.6
+    },
+    {
+      "w": "to",
+      "start": 3.6,
+      "end": 3.7
+    },
+    {
+      "w": "weld",
+      "start": 3.7,
+      "end": 4.02
+    },
+    {
+      "w": "it",
+      "start": 4.02,
+      "end": 4.16
+    },
+    {
+      "w": "before",
+      "start": 4.16,
+      "end": 4.46
+    },
+    {
+      "w": "the",
+      "start": 4.46,
+      "end": 4.53
+    },
+    {
+      "w": "night",
+      "start": 4.53,
+      "end": 4.8
+    },
+    {
+      "w": "shift",
+      "start": 4.8,
+      "end": 5.33
+    }
+  ],
+  "sentences": [
+    {
+      "text": "Hey, the bracket by the packing line has cracked again.",
+      "start": 0.03,
+      "end": 2.7,
+      "word_range": [
+        0,
+        10
+      ]
+    },
+    {
+      "text": "We're going to weld it before the night shift.",
+      "start": 3.17,
+      "end": 5.33,
+      "word_range": [
+        10,
+        19
+      ]
+    }
+  ],
+  "created": "2026-10-07T20:32:36+00:00",
+  "provider": "kokoro-onnx 0.6.1 (kokoro-v1.0.onnx, voices-v1.0.bin)",
+  "voice": "bm_daniel",
+  "speed": 1.06,
+  "window": 5.75,
+  "fallback_words": 0,
+  "pronunciation_checks": []
+}

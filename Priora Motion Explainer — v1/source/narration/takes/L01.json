@@ -1,0 +1,103 @@
+{
+  "schema": "priora-narration-take/1",
+  "id": "L01",
+  "engine": "guide",
+  "guide": true,
+  "label": "GUIDE VOICE (local Kokoro). Not the final ElevenLabs performance.",
+  "speaker": "narrator",
+  "text": "Real work in the middle: a worker, a site, a risk owner.",
+  "spoken_text": "Real work in the middle: a worker, a site, a risk owner.",
+  "sample_rate": 48000,
+  "duration": 3.92,
+  "speech_start": 0.03,
+  "speech_end": 3.84,
+  "words": [
+    {
+      "w": "Real",
+      "start": 0.03,
+      "end": 0.4
+    },
+    {
+      "w": "work",
+      "start": 0.4,
+      "end": 0.79
+    },
+    {
+      "w": "in",
+      "start": 0.79,
+      "end": 0.88
+    },
+    {
+      "w": "the",
+      "start": 0.88,
+      "end": 0.96
+    },
+    {
+      "w": "middle",
+      "start": 0.96,
+      "end": 1.32
+    },
+    {
+      "w": "a",
+      "start": 1.79,
+      "end": 1.86
+    },
+    {
+      "w": "worker",
+      "start": 1.86,
+      "end": 2.31
+    },
+    {
+      "w": "a",
+      "start": 2.31,
+      "end": 2.46
+    },
+    {
+      "w": "site",
+      "start": 2.46,
+      "end": 3.05
+    },
+    {
+      "w": "a",
+      "start": 3.05,
+      "end": 3.13
+    },
+    {
+      "w": "risk",
+      "start": 3.13,
+      "end": 3.46
+    },
+    {
+      "w": "owner",
+      "start": 3.46,
+      "end": 3.84
+    }
+  ],
+  "sentences": [
+    {
+      "text": "Real work in the middle:",
+      "start": 0.03,
+      "end": 1.32,
+      "word_range": [
+        0,
+        5
+      ]
+    },
+    {
+      "text": "a worker, a site, a risk owner.",
+      "start": 1.79,
+      "end": 3.84,
+      "word_range": [
+        5,
+        12
+      ]
+    }
+  ],
+  "created": "2026-10-07T20:32:31+00:00",
+  "provider": "kokoro-onnx 0.6.1 (kokoro-v1.0.onnx, voices-v1.0.bin)",
+  "voice": "bf_isabella",
+  "speed": 0.92,
+  "window": 4.15,
+  "fallback_words": 0,
+  "pronunciation_checks": []
+}

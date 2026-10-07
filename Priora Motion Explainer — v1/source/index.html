@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en-GB">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1920, height=1080" />
+    <title>Priora motion explainer v1</title>
+    <script src="assets/vendor/gsap/gsap.min.js"></script>
+    <script src="assets/vendor/gsap/DrawSVGPlugin.min.js"></script>
+    <script src="assets/vendor/gsap/MotionPathPlugin.min.js"></script>
+    <script src="assets/vendor/gsap/CustomEase.min.js"></script>
+    <script>
+      gsap.registerPlugin(DrawSVGPlugin, MotionPathPlugin, CustomEase);
+      gsap.config({ force3D: false });
+    </script>
+    <link rel="stylesheet" href="assets/css/film.css" />
+    <style>
+      #grain { background-image: url("assets/textures/paper-grain.png"); }
+      #tooth { background-image: url("assets/textures/paper-tooth.png"); }
+    </style>
+    <script src="assets/js/pk-cues.js"></script>
+    <script src="assets/js/pk-metrics.js"></script>
+    <script src="assets/js/pk-kit.js"></script>
+    <script src="assets/js/camera.js"></script>
+    <script src="assets/js/world.js"></script>
+    <script src="sections/s1-world.js"></script>
+    <script src="sections/s2-case.js"></script>
+    <script src="sections/s3-panel.js"></script>
+    <script src="sections/s4-inside.js"></script>
+    <script src="sections/s5-deviation.js"></script>
+    <script src="sections/s6-rooms.js"></script>
+    <script src="sections/s7-cooperate.js"></script>
+    <script src="sections/s8-system.js"></script>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="90" data-width="1920" data-height="1080">
+      <svg id="world" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" preserveAspectRatio="xMidYMid slice"></svg>
+      <div id="overlay"></div>
+      <div id="tooth"></div>
+      <div id="grain"></div>
+      <audio id="mix" src="assets/audio/voice.wav" data-start="0" data-duration="90" data-track-index="20" data-volume="1"></audio>
+    </div>
+    <script type="application/json" id="pk-events">[]</script>
+    <script>
+      (function () {
+        window.__timelines = window.__timelines || {};
+        var tl = gsap.timeline({ paused: true });
+        var svg = document.getElementById("world");
+        var W = (window.PK_WORLD = PK.buildWorld(svg));
+        PK.cam.attach(tl, svg);
+        var ctx = { overlay: document.getElementById("overlay"), root: document.getElementById("root") };
+        PK.SECTIONS.sort(function (a, b) {
+          return a.t0 - b.t0;
+        }).forEach(function (S) {
+          try {
+            S.fn(tl, W, ctx, S);
+          } catch (err) {
+            console.error("[section " + S.id + "] " + (err && err.stack ? err.stack : err));
+          }
+        });
+        tl.set({}, {}, PK.DURATION);
+        document.getElementById("pk-events").textContent = JSON.stringify(
+          PK.EVENTS.slice().sort(function (a, b) {
+            return a.t - b.t;
+          }),
+        );
+        window.__timelines["main"] = tl;
+      })();
+    </script>
+  </body>
+</html>

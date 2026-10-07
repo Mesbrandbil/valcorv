@@ -1,0 +1,94 @@
+{
+  "schema": "priora-narration-take/1",
+  "id": "L12",
+  "engine": "guide",
+  "guide": true,
+  "label": "GUIDE VOICE (local Kokoro). Not the final ElevenLabs performance.",
+  "speaker": "narrator",
+  "text": "Transfer, simulated for now, asks outside capacity for terms and a price.",
+  "spoken_text": "Transfer, simulated for now, asks outside capacity for terms and a price.",
+  "sample_rate": 48000,
+  "duration": 4.928,
+  "speech_start": 0.02,
+  "speech_end": 4.87,
+  "words": [
+    {
+      "w": "Transfer",
+      "start": 0.02,
+      "end": 0.61
+    },
+    {
+      "w": "simulated",
+      "start": 0.64,
+      "end": 1.21
+    },
+    {
+      "w": "for",
+      "start": 1.21,
+      "end": 1.34
+    },
+    {
+      "w": "now",
+      "start": 1.34,
+      "end": 1.7
+    },
+    {
+      "w": "asks",
+      "start": 2.1,
+      "end": 2.43
+    },
+    {
+      "w": "outside",
+      "start": 2.43,
+      "end": 2.98
+    },
+    {
+      "w": "capacity",
+      "start": 2.98,
+      "end": 3.58
+    },
+    {
+      "w": "for",
+      "start": 3.58,
+      "end": 3.69
+    },
+    {
+      "w": "terms",
+      "start": 3.69,
+      "end": 4.17
+    },
+    {
+      "w": "and",
+      "start": 4.17,
+      "end": 4.29
+    },
+    {
+      "w": "a",
+      "start": 4.29,
+      "end": 4.32
+    },
+    {
+      "w": "price",
+      "start": 4.32,
+      "end": 4.87
+    }
+  ],
+  "sentences": [
+    {
+      "text": "Transfer, simulated for now, asks outside capacity for terms and a price.",
+      "start": 0.02,
+      "end": 4.87,
+      "word_range": [
+        0,
+        12
+      ]
+    }
+  ],
+  "created": "2026-10-07T20:33:13+00:00",
+  "provider": "kokoro-onnx 0.6.1 (kokoro-v1.0.onnx, voices-v1.0.bin)",
+  "voice": "bf_isabella",
+  "speed": 0.92,
+  "window": 5.2,
+  "fallback_words": 0,
+  "pronunciation_checks": []
+}

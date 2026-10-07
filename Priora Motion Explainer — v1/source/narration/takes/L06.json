@@ -1,0 +1,128 @@
+{
+  "schema": "priora-narration-take/1",
+  "id": "L06",
+  "engine": "guide",
+  "guide": true,
+  "label": "GUIDE VOICE (local Kokoro). Not the final ElevenLabs performance.",
+  "speaker": "narrator",
+  "text": "When everything holds, the route opens. Work goes on, the record is kept, no one is disturbed.",
+  "spoken_text": "When everything holds, the route opens. Work goes on, the record is kept, no one is disturbed.",
+  "sample_rate": 48000,
+  "duration": 6.17,
+  "speech_start": 0.02,
+  "speech_end": 6.11,
+  "words": [
+    {
+      "w": "When",
+      "start": 0.02,
+      "end": 0.15
+    },
+    {
+      "w": "everything",
+      "start": 0.15,
+      "end": 0.71
+    },
+    {
+      "w": "holds",
+      "start": 0.71,
+      "end": 1.2
+    },
+    {
+      "w": "the",
+      "start": 1.2,
+      "end": 1.34
+    },
+    {
+      "w": "route",
+      "start": 1.34,
+      "end": 1.68
+    },
+    {
+      "w": "opens",
+      "start": 1.68,
+      "end": 2.27
+    },
+    {
+      "w": "Work",
+      "start": 2.77,
+      "end": 3.06
+    },
+    {
+      "w": "goes",
+      "start": 3.06,
+      "end": 3.36
+    },
+    {
+      "w": "on",
+      "start": 3.36,
+      "end": 3.63
+    },
+    {
+      "w": "the",
+      "start": 3.63,
+      "end": 3.74
+    },
+    {
+      "w": "record",
+      "start": 3.74,
+      "end": 4.14
+    },
+    {
+      "w": "is",
+      "start": 4.14,
+      "end": 4.27
+    },
+    {
+      "w": "kept",
+      "start": 4.27,
+      "end": 4.75
+    },
+    {
+      "w": "no",
+      "start": 4.75,
+      "end": 5.03
+    },
+    {
+      "w": "one",
+      "start": 5.03,
+      "end": 5.25
+    },
+    {
+      "w": "is",
+      "start": 5.25,
+      "end": 5.42
+    },
+    {
+      "w": "disturbed",
+      "start": 5.42,
+      "end": 6.11
+    }
+  ],
+  "sentences": [
+    {
+      "text": "When everything holds, the route opens.",
+      "start": 0.02,
+      "end": 2.27,
+      "word_range": [
+        0,
+        6
+      ]
+    },
+    {
+      "text": "Work goes on, the record is kept, no one is disturbed.",
+      "start": 2.77,
+      "end": 6.11,
+      "word_range": [
+        6,
+        17
+      ]
+    }
+  ],
+  "created": "2026-10-07T20:32:47+00:00",
+  "provider": "kokoro-onnx 0.6.1 (kokoro-v1.0.onnx, voices-v1.0.bin)",
+  "voice": "bf_isabella",
+  "speed": 0.92,
+  "window": 7.3,
+  "fallback_words": 0,
+  "pronunciation_checks": []
+}

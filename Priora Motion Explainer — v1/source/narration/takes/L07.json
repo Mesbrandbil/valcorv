@@ -1,0 +1,108 @@
+{
+  "schema": "priora-narration-take/1",
+  "id": "L07",
+  "engine": "guide",
+  "guide": true,
+  "label": "GUIDE VOICE (local Kokoro). Not the final ElevenLabs performance.",
+  "speaker": "narrator",
+  "text": "Then one condition slips. The fire watch is half what the policy asks.",
+  "spoken_text": "Then one condition slips. The fire watch is half what the policy asks.",
+  "sample_rate": 48000,
+  "duration": 4.67,
+  "speech_start": 0.02,
+  "speech_end": 4.61,
+  "words": [
+    {
+      "w": "Then",
+      "start": 0.02,
+      "end": 0.23
+    },
+    {
+      "w": "one",
+      "start": 0.23,
+      "end": 0.53
+    },
+    {
+      "w": "condition",
+      "start": 0.53,
+      "end": 1.06
+    },
+    {
+      "w": "slips",
+      "start": 1.06,
+      "end": 1.59
+    },
+    {
+      "w": "The",
+      "start": 2.06,
+      "end": 2.12
+    },
+    {
+      "w": "fire",
+      "start": 2.12,
+      "end": 2.48
+    },
+    {
+      "w": "watch",
+      "start": 2.48,
+      "end": 2.86
+    },
+    {
+      "w": "is",
+      "start": 2.86,
+      "end": 3.0
+    },
+    {
+      "w": "half",
+      "start": 3.0,
+      "end": 3.4
+    },
+    {
+      "w": "what",
+      "start": 3.4,
+      "end": 3.56
+    },
+    {
+      "w": "the",
+      "start": 3.56,
+      "end": 3.64
+    },
+    {
+      "w": "policy",
+      "start": 3.64,
+      "end": 4.09
+    },
+    {
+      "w": "asks",
+      "start": 4.09,
+      "end": 4.61
+    }
+  ],
+  "sentences": [
+    {
+      "text": "Then one condition slips.",
+      "start": 0.02,
+      "end": 1.59,
+      "word_range": [
+        0,
+        4
+      ]
+    },
+    {
+      "text": "The fire watch is half what the policy asks.",
+      "start": 2.06,
+      "end": 4.61,
+      "word_range": [
+        4,
+        13
+      ]
+    }
+  ],
+  "created": "2026-10-07T20:32:54+00:00",
+  "provider": "kokoro-onnx 0.6.1 (kokoro-v1.0.onnx, voices-v1.0.bin)",
+  "voice": "bf_isabella",
+  "speed": 0.9358,
+  "window": 4.65,
+  "fallback_words": 0,
+  "pronunciation_checks": []
+}

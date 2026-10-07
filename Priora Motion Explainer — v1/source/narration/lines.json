@@ -1,0 +1,164 @@
+{
+  "schema": "priora-explainer-lines/1",
+  "film_duration": 90.0,
+  "note": "Single source of truth for the voiceover. 'at' is the designed absolute start of the first word (film seconds); 'by' is the latest allowed end of the last word. scripts/voice.py synthesises each line, fits its pace into its window, aligns every word and writes the voice stem and narration/timing.json.",
+  "pronunciations": {
+    "Priora": {
+      "intent": "pree-OH-ruh, stress on the middle syllable (confirmed by the user for the vision film)",
+      "ipa": "pɹiˈəʊɹə",
+      "guide_ipa": "pɹiˈəʊɹə",
+      "guide_espeak_default": "pɹˈaɪɔːɹə",
+      "elevenlabs": "Pree-OH-ruh",
+      "aligner_word": "priora",
+      "aligner_right": [
+        "P R IY OW R AH",
+        "P R IY AO R AH",
+        "P R IH AO R AH"
+      ],
+      "aligner_wrong": [
+        "P R AY AO R AH",
+        "P R AY ER AH"
+      ],
+      "stressed_vowel": "OW"
+    }
+  },
+  "engines": {
+    "guide": {
+      "provider": "kokoro-onnx 0.6.1 (kokoro-v1.0.onnx, voices-v1.0.bin)",
+      "lang": "en-gb",
+      "narrator_voice": "bf_isabella",
+      "worker_voice": "bm_daniel",
+      "narrator_speed": 0.92,
+      "worker_speed": 1.06,
+      "default_inner_pause": {
+        ".": 0.42,
+        "?": 0.42,
+        "!": 0.36,
+        ":": 0.3,
+        ";": 0.3
+      }
+    }
+  },
+  "lines": [
+    {
+      "id": "L01",
+      "speaker": "narrator",
+      "section": "s1-world",
+      "at": 0.9,
+      "by": 5.05,
+      "text": "Real work in the middle: a worker, a site, a risk owner."
+    },
+    {
+      "id": "L02",
+      "speaker": "narrator",
+      "section": "s1-world",
+      "at": 5.45,
+      "by": 7.75,
+      "text": "Priora places agents around them."
+    },
+    {
+      "id": "W01",
+      "speaker": "worker",
+      "section": "s2-case",
+      "at": 8.55,
+      "by": 14.3,
+      "text": "Hey, the bracket by the packing line has cracked again. We're going to weld it before the night shift."
+    },
+    {
+      "id": "L03",
+      "speaker": "narrator",
+      "section": "s2-case",
+      "at": 14.8,
+      "by": 21.4,
+      "text": "Priora hears a repair, hot work, a place and a deadline. Then it asks for a photo."
+    },
+    {
+      "id": "L04",
+      "speaker": "narrator",
+      "section": "s3-panel",
+      "at": 22.6,
+      "by": 26.9,
+      "text": "Next, it summons only the specialists this site and job need."
+    },
+    {
+      "id": "L05",
+      "speaker": "narrator",
+      "section": "s3-panel",
+      "at": 31.2,
+      "by": 34.6,
+      "text": "Each checks its own conditions and reports back."
+    },
+    {
+      "id": "L06",
+      "speaker": "narrator",
+      "section": "s4-inside",
+      "at": 38.6,
+      "by": 45.9,
+      "text": "When everything holds, the route opens. Work goes on, the record is kept, no one is disturbed."
+    },
+    {
+      "id": "L07",
+      "speaker": "narrator",
+      "section": "s5-deviation",
+      "at": 47.3,
+      "by": 51.95,
+      "text": "Then one condition slips. The fire watch is half what the policy asks."
+    },
+    {
+      "id": "L08",
+      "speaker": "narrator",
+      "section": "s5-deviation",
+      "at": 52.4,
+      "by": 56.95,
+      "text": "Priora brings it to the risk owner. Agents prepare; the human decides."
+    },
+    {
+      "id": "L09",
+      "speaker": "narrator",
+      "section": "s6-rooms",
+      "at": 57.35,
+      "by": 59.05,
+      "text": "Three decision rooms open."
+    },
+    {
+      "id": "L10",
+      "speaker": "narrator",
+      "section": "s6-rooms",
+      "at": 59.45,
+      "by": 65.9,
+      "text": "Retain is never a default. Risk is kept on purpose, with exposure and authority explicit."
+    },
+    {
+      "id": "L11",
+      "speaker": "narrator",
+      "section": "s6-rooms",
+      "at": 66.4,
+      "by": 71.45,
+      "text": "Mitigate compares safeguards, and checks whether the work is back inside."
+    },
+    {
+      "id": "L12",
+      "speaker": "narrator",
+      "section": "s6-rooms",
+      "at": 72.2,
+      "by": 77.4,
+      "text": "Transfer, simulated for now, asks outside capacity for terms and a price."
+    },
+    {
+      "id": "L13",
+      "speaker": "narrator",
+      "section": "s7-cooperate",
+      "at": 78.5,
+      "by": 83.45,
+      "text": "Priora carries the case between rooms. The risk owner stays in control."
+    },
+    {
+      "id": "L14",
+      "speaker": "narrator",
+      "section": "s8-system",
+      "at": 84.4,
+      "by": 89.05,
+      "text": "Priora turns physical work into explicit risk decisions, while the work happens."
+    }
+  ]
+}
