@@ -33,7 +33,10 @@
   local to the ring centre: an annular sector at radius 28.2 to 31.8 world units, the size of
   the packet's gap with arcsG at 0.75, so moving g to the packet's x/y seats it in the gap).
   W.roomOwnerLines = { retain, mitigate, transfer }: solid black paths from B through each
-  door, undrawn (s7 may draw them to open a door again). No transient labels.
+  door, undrawn (s7 may draw them to open a door again); W.branchNode: the small ink dot at B.
+  No transient labels. Note: W.rooms.transfer.walls carries a static clip-path (a circle that
+  grows from its door at 58.1 and covers the whole room afterwards) and its inline DrawSVG
+  dash is cleared at 58.1 so the class dash shows: never DrawSVG those walls.
 */
 PK.section("s6-rooms", 57, 78, function (tl, W, ctx, S) {
   "use strict";
