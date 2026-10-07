@@ -173,3 +173,9 @@ body {
   background-size: 1024px 1024px;
   opacity: 0.35;
 }
+
+/* An undrawn DrawSVG stroke (dash of length 0) still paints a dot when its caps are round.
+   Hide every zero-length draw: nothing visible is lost, and no section has to remember it. */
+#world [style*="stroke-dasharray: 0px, 999999px"] {
+  visibility: hidden;
+}

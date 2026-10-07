@@ -1,0 +1,3197 @@
+{
+ "schema": "priora-audio-report/1",
+ "targets": {
+  "format": "48 kHz, 24-bit PCM, stereo, 4,320,000 samples (90.000 s)",
+  "master_lufs": -16.0,
+  "no_narration_lufs": -17.0,
+  "lufs_tolerance": 0.5,
+  "true_peak_max_dbtp": -1.0,
+  "duck_narrator_db": 8.0,
+  "duck_worker_db": 5.0,
+  "duck_worker_db_no_narration": 5.0,
+  "duck_attack_s": 0.35,
+  "duck_release_s": 0.8,
+  "duck_bridge_s": 1.0,
+  "music_pre_duck_lufs_mix_frame": -26.0,
+  "event_reference_lufs_100ms": -21.0,
+  "sfx_bus_cap_momentary_lufs": -25.0,
+  "true_peak_method": "4x polyphase oversampling (scipy resample_poly), max of all channels",
+  "loudness_method": "ITU-R BS.1770-4 via pyloudnorm (integrated, gated); momentary = ungated 400 ms K-weighted windows, 10 ms hop"
+ },
+ "inputs": {
+  "events_source": "chrome",
+  "voice": {
+   "file": "assets/audio/voice.wav",
+   "mono_lufs": -19.0
+  },
+  "voice_worker": {
+   "file": "assets/audio/voice-worker.wav",
+   "mono_lufs": -16.09
+  }
+ },
+ "gains": {
+  "master_gain_db": 0.525,
+  "master_limiter_max_reduction_db": 0.38,
+  "no_narration_worker_gain_db": 0.525,
+  "no_narration_background_gain_db": 8.459,
+  "no_narration_limiter_max_reduction_db": 0.0,
+  "note": "master.wav = limiter(G * (voice dual-mono + music.wav/G + sfx.wav/G)); music.wav and sfx.wav are written post-gain (the level they have in master.wav, before the limiter)"
+ },
+ "outputs": {
+  "music.wav": {
+   "samples": 4320000,
+   "seconds": 90.0,
+   "sample_rate": 48000,
+   "channels": 2,
+   "subtype": "PCM_24",
+   "integrated_lufs": -31.05,
+   "true_peak_dbtp": -14.52,
+   "sample_peak_dbfs": -14.52,
+   "max_momentary_lufs": -22.28,
+   "max_momentary_at_s": 45.76,
+   "clipped_samples": 0,
+   "dc_offset": [
+    6.22e-09,
+    1.76e-09
+   ],
+   "first_sample_abs": 0.0,
+   "last_10ms_peak_dbfs": -240.0,
+   "sha256": "69d79e085a4d937167611418b8e5ea470efb6663dedc0f8f8cfe23b24c2cc033",
+   "ffmpeg_ebur128": {
+    "integrated_lufs": -31.0,
+    "true_peak_dbtp": -14.5
+   }
+  },
+  "sfx.wav": {
+   "samples": 4320000,
+   "seconds": 90.0,
+   "sample_rate": 48000,
+   "channels": 2,
+   "subtype": "PCM_24",
+   "integrated_lufs": -34.18,
+   "true_peak_dbtp": -11.5,
+   "sample_peak_dbfs": -12.21,
+   "max_momentary_lufs": -26.56,
+   "max_momentary_at_s": 48.55,
+   "clipped_samples": 0,
+   "dc_offset": [
+    4.8e-12,
+    9.13e-12
+   ],
+   "first_sample_abs": 0.0,
+   "last_10ms_peak_dbfs": -240.0,
+   "sha256": "c420150a68b3fb5378d590f918e09c228f8d8f87503db01eb01474bde0a7004e",
+   "ffmpeg_ebur128": {
+    "integrated_lufs": -34.1,
+    "true_peak_dbtp": -11.5
+   }
+  },
+  "master.wav": {
+   "samples": 4320000,
+   "seconds": 90.0,
+   "sample_rate": 48000,
+   "channels": 2,
+   "subtype": "PCM_24",
+   "integrated_lufs": -16.0,
+   "true_peak_dbtp": -1.3,
+   "sample_peak_dbfs": -1.31,
+   "max_momentary_lufs": -9.09,
+   "max_momentary_at_s": 11.93,
+   "clipped_samples": 0,
+   "dc_offset": [
+    -5.4e-09,
+    2.55e-08
+   ],
+   "first_sample_abs": 0.0,
+   "last_10ms_peak_dbfs": -240.0,
+   "sha256": "98d5fd43bdb2c1822afe0af06bd58be7fba4ed6fbbfba45c301aa9bf586ddc81",
+   "ffmpeg_ebur128": {
+    "integrated_lufs": -16.0,
+    "true_peak_dbtp": -1.3
+   }
+  },
+  "master-no-narration.wav": {
+   "samples": 4320000,
+   "seconds": 90.0,
+   "sample_rate": 48000,
+   "channels": 2,
+   "subtype": "PCM_24",
+   "integrated_lufs": -17.0,
+   "true_peak_dbtp": -2.1,
+   "sample_peak_dbfs": -2.11,
+   "max_momentary_lufs": -9.07,
+   "max_momentary_at_s": 11.92,
+   "clipped_samples": 0,
+   "dc_offset": [
+    4.6e-10,
+    4.67e-10
+   ],
+   "first_sample_abs": 0.0,
+   "last_10ms_peak_dbfs": -240.0,
+   "sha256": "b060c480ba38c16aeded769923349182b6d51081c0e050d2ffbf1477407c80d9",
+   "ffmpeg_ebur128": {
+    "integrated_lufs": -17.0,
+    "true_peak_dbtp": -2.1
+   }
+  }
+ },
+ "music": {
+  "stem_integrated_lufs": -31.05,
+  "loudest_momentary_400ms_lufs": -22.28,
+  "loudest_momentary_at_s": 45.76,
+  "analysis_before_ducking": {
+   "segments": [
+    {
+     "from": 3.2,
+     "to": 5.49,
+     "notes": [
+      "D2",
+      "D3",
+      "A3",
+      "E4"
+     ],
+     "lufs": -31.36
+    },
+    {
+     "from": 8.75,
+     "to": 13.7,
+     "notes": [
+      "D2",
+      "A2",
+      "D3",
+      "A3",
+      "E4"
+     ],
+     "lufs": -28.49,
+     "strongest_notes": [
+      {
+       "note": "A2",
+       "hz_12tet": 110.0,
+       "centre_cents": 1.0,
+       "partials": 3
+      },
+      {
+       "note": "D3",
+       "hz_12tet": 146.83,
+       "centre_cents": -0.2,
+       "partials": 3
+      },
+      {
+       "note": "A3",
+       "hz_12tet": 220.0,
+       "centre_cents": 2.1,
+       "partials": 3
+      },
+      {
+       "note": "E4",
+       "hz_12tet": 329.63,
+       "centre_cents": -2.6,
+       "partials": 3
+      }
+     ]
+    },
+    {
+     "from": 15.3,
+     "to": 17.87,
+     "notes": [
+      "D2",
+      "A2",
+      "F#3",
+      "A3",
+      "C#4",
+      "E4"
+     ],
+     "lufs": -25.71
+    },
+    {
+     "from": 19.47,
+     "to": 21.35,
+     "notes": [
+      "D2",
+      "A2",
+      "F#3",
+      "B3",
+      "E4",
+      "A4"
+     ],
+     "lufs": -25.07
+    },
+    {
+     "from": 23.35,
+     "to": 25.53,
+     "notes": [
+      "G2",
+      "D3",
+      "F#3",
+      "A3",
+      "B3",
+      "F#4"
+     ],
+     "lufs": -27.03
+    },
+    {
+     "from": 27.53,
+     "to": 30.0,
+     "notes": [
+      "E2",
+      "B2",
+      "F#3",
+      "G3",
+      "D4"
+     ],
+     "lufs": -26.26
+    },
+    {
+     "from": 32.0,
+     "to": 34.2,
+     "notes": [
+      "B1",
+      "B2",
+      "F#3",
+      "A3",
+      "D4",
+      "E4"
+     ],
+     "lufs": -28.58
+    },
+    {
+     "from": 36.2,
+     "to": 38.84,
+     "notes": [
+      "A1",
+      "A2",
+      "E3",
+      "B3",
+      "D4"
+     ],
+     "lufs": -26.57
+    },
+    {
+     "from": 40.91,
+     "to": 43.2,
+     "notes": [
+      "D2",
+      "A2",
+      "F#3",
+      "A3",
+      "D4",
+      "F#4",
+      "A4",
+      "E5"
+     ],
+     "lufs": -21.01
+    },
+    {
+     "from": 45.2,
+     "to": 47.84,
+     "notes": [
+      "D2",
+      "D3",
+      "G3",
+      "B3",
+      "F#4",
+      "A4"
+     ],
+     "lufs": -23.72
+    },
+    {
+     "from": 49.04,
+     "to": 51.75,
+     "notes": [
+      "B1",
+      "F#2",
+      "D3",
+      "A3",
+      "C#4"
+     ],
+     "lufs": -22.64
+    },
+    {
+     "from": 53.25,
+     "to": 54.23,
+     "notes": [
+      "G1",
+      "G2",
+      "D3",
+      "F#3",
+      "C#4"
+     ],
+     "lufs": -26.92
+    },
+    {
+     "from": 55.73,
+     "to": 56.75,
+     "notes": [
+      "A1",
+      "A2",
+      "E3",
+      "G3",
+      "D4"
+     ],
+     "lufs": -23.5
+    },
+    {
+     "from": 57.95,
+     "to": 58.55,
+     "notes": [
+      "A1",
+      "A2",
+      "E3",
+      "B3",
+      "E4"
+     ],
+     "lufs": -25.41
+    },
+    {
+     "from": 60.05,
+     "to": 65.25,
+     "notes": [
+      "G1",
+      "G2",
+      "D3",
+      "A3",
+      "B3",
+      "F#4"
+     ],
+     "lufs": -27.48,
+     "strongest_notes": [
+      {
+       "note": "D3",
+       "hz_12tet": 146.83,
+       "centre_cents": 0.2,
+       "partials": 3
+      },
+      {
+       "note": "G3",
+       "hz_12tet": 196.0,
+       "centre_cents": 0.4,
+       "partials": 2
+      },
+      {
+       "note": "A3",
+       "hz_12tet": 220.0,
+       "centre_cents": 2.4,
+       "partials": 3
+      },
+      {
+       "note": "B3",
+       "hz_12tet": 246.94,
+       "centre_cents": -1.1,
+       "partials": 3
+      },
+      {
+       "note": "F#4",
+       "hz_12tet": 369.99,
+       "centre_cents": -2.4,
+       "partials": 3
+      },
+      {
+       "note": "A4",
+       "hz_12tet": 440.0,
+       "centre_cents": 0.1,
+       "partials": 2
+      }
+     ]
+    },
+    {
+     "from": 66.75,
+     "to": 67.79,
+     "notes": [
+      "E2",
+      "B2",
+      "F#3",
+      "G3",
+      "D4",
+      "B4"
+     ],
+     "lufs": -24.52
+    },
+    {
+     "from": 69.29,
+     "to": 71.15,
+     "notes": [
+      "E2",
+      "B2",
+      "F#3",
+      "A3",
+      "D4",
+      "B4"
+     ],
+     "lufs": -27.18
+    },
+    {
+     "from": 72.65,
+     "to": 77.45,
+     "notes": [
+      "B2",
+      "E3",
+      "A3",
+      "D4",
+      "G4"
+     ],
+     "lufs": -27.12,
+     "strongest_notes": [
+      {
+       "note": "B2",
+       "hz_12tet": 123.47,
+       "centre_cents": -2.2,
+       "partials": 2
+      },
+      {
+       "note": "E3",
+       "hz_12tet": 164.81,
+       "centre_cents": -1.1,
+       "partials": 3
+      },
+      {
+       "note": "A3",
+       "hz_12tet": 220.0,
+       "centre_cents": 1.0,
+       "partials": 3
+      },
+      {
+       "note": "D4",
+       "hz_12tet": 293.66,
+       "centre_cents": 0.8,
+       "partials": 3
+      },
+      {
+       "note": "G4",
+       "hz_12tet": 392.0,
+       "centre_cents": 1.8,
+       "partials": 3
+      },
+      {
+       "note": "D5",
+       "hz_12tet": 587.33,
+       "centre_cents": 0.7,
+       "partials": 2
+      }
+     ]
+    },
+    {
+     "from": 78.95,
+     "to": 80.64,
+     "notes": [
+      "A1",
+      "A2",
+      "E3",
+      "G3",
+      "B3",
+      "D4"
+     ],
+     "lufs": -24.23
+    },
+    {
+     "from": 81.84,
+     "to": 83.4,
+     "notes": [
+      "D2",
+      "A2",
+      "F#3",
+      "A3",
+      "D4",
+      "F#4",
+      "A4"
+     ],
+     "lufs": -21.46
+    },
+    {
+     "from": 85.0,
+     "to": 87.8,
+     "notes": [
+      "D2",
+      "A2",
+      "E3",
+      "A3",
+      "F#4",
+      "E5"
+     ],
+     "lufs": -22.45
+    }
+   ],
+   "min_momentary_lufs_3_to_88_8": -34.37,
+   "min_momentary_at_s": 4.15,
+   "max_fall_in_100ms_db": 1.75,
+   "max_fall_at_s": 64.42,
+   "worst_note_centre_cents": 2.6,
+   "peaks_outside_d_major": [],
+   "tuning_method": "per segment of 3 s or more: Hann FFT (5 s max, 4x zero padding), spectral peaks 100 to 2000 Hz within 24 dB of the strongest, grouped by nearest note, magnitude-weighted centre in cents (the pad's chorus spreads each note +-3.5 to 7 cents by design)"
+  },
+  "plan": {
+   "segments": [
+    {
+     "t": 1.6,
+     "xfade_s": 3.2,
+     "notes": [
+      "D2",
+      "D3",
+      "A3",
+      "E4"
+     ],
+     "level_db": -8.0,
+     "brightness": 0.25,
+     "reverb_send": 0.35
+    },
+    {
+     "t": 6.29,
+     "xfade_s": 1.6,
+     "notes": [
+      "D2",
+      "D3",
+      "A3",
+      "E4",
+      "A4",
+      "E5"
+     ],
+     "level_db": -7.0,
+     "brightness": 0.3,
+     "reverb_send": 0.38
+    },
+    {
+     "t": 7.95,
+     "xfade_s": 1.6,
+     "notes": [
+      "D2",
+      "A2",
+      "D3",
+      "A3",
+      "E4"
+     ],
+     "level_db": -7.0,
+     "brightness": 0.25,
+     "reverb_send": 0.35
+    },
+    {
+     "t": 14.5,
+     "xfade_s": 1.6,
+     "notes": [
+      "D2",
+      "A2",
+      "F#3",
+      "A3",
+      "C#4",
+      "E4"
+     ],
+     "level_db": -5.0,
+     "brightness": 0.4,
+     "reverb_send": 0.35
+    },
+    {
+     "t": 18.67,
+     "xfade_s": 1.6,
+     "notes": [
+      "D2",
+      "A2",
+      "F#3",
+      "B3",
+      "E4",
+      "A4"
+     ],
+     "level_db": -5.0,
+     "brightness": 0.42,
+     "reverb_send": 0.35
+    },
+    {
+     "t": 22.35,
+     "xfade_s": 2.0,
+     "notes": [
+      "G2",
+      "D3",
+      "F#3",
+      "A3",
+      "B3",
+      "F#4"
+     ],
+     "level_db": -4.5,
+     "brightness": 0.38,
+     "reverb_send": 0.35
+    },
+    {
+     "t": 26.53,
+     "xfade_s": 2.0,
+     "notes": [
+      "E2",
+      "B2",
+      "F#3",
+      "G3",
+      "D4"
+     ],
+     "level_db": -4.5,
+     "brightness": 0.36,
+     "reverb_send": 0.35
+    },
+    {
+     "t": 31.0,
+     "xfade_s": 2.0,
+     "notes": [
+      "B1",
+      "B2",
+      "F#3",
+      "A3",
+      "D4",
+      "E4"
+     ],
+     "level_db": -5.0,
+     "brightness": 0.34,
+     "reverb_send": 0.35
+    },
+    {
+     "t": 35.2,
+     "xfade_s": 2.0,
+     "notes": [
+      "A1",
+      "A2",
+      "E3",
+      "B3",
+      "D4"
+     ],
+     "level_db": -4.5,
+     "brightness": 0.36,
+     "reverb_send": 0.35
+    },
+    {
+     "t": 39.34,
+     "xfade_s": 1.0,
+     "notes": [
+      "D2",
+      "A2",
+      "F#3",
+      "A3",
+      "D4",
+      "F#4"
+     ],
+     "level_db": -3.0,
+     "brightness": 0.55,
+     "reverb_send": 0.38
+    },
+    {
+     "t": 40.41,
+     "xfade_s": 1.0,
+     "notes": [
+      "D2",
+      "A2",
+      "F#3",
+      "A3",
+      "D4",
+      "F#4",
+      "A4",
+      "E5"
+     ],
+     "level_db": -2.5,
+     "brightness": 0.68,
+     "reverb_send": 0.42
+    },
+    {
+     "t": 44.2,
+     "xfade_s": 2.0,
+     "notes": [
+      "D2",
+      "D3",
+      "G3",
+      "B3",
+      "F#4",
+      "A4"
+     ],
+     "level_db": -3.5,
+     "brightness": 0.55,
+     "reverb_send": 0.38
+    },
+    {
+     "t": 48.44,
+     "xfade_s": 1.2,
+     "notes": [
+      "B1",
+      "F#2",
+      "D3",
+      "A3",
+      "C#4"
+     ],
+     "level_db": -3.5,
+     "brightness": 0.26,
+     "reverb_send": 0.38
+    },
+    {
+     "t": 52.5,
+     "xfade_s": 1.5,
+     "notes": [
+      "G1",
+      "G2",
+      "D3",
+      "F#3",
+      "C#4"
+     ],
+     "level_db": -3.5,
+     "brightness": 0.24,
+     "reverb_send": 0.4
+    },
+    {
+     "t": 54.98,
+     "xfade_s": 1.5,
+     "notes": [
+      "A1",
+      "A2",
+      "E3",
+      "G3",
+      "D4"
+     ],
+     "level_db": -4.0,
+     "brightness": 0.26,
+     "reverb_send": 0.4
+    },
+    {
+     "t": 57.35,
+     "xfade_s": 1.2,
+     "notes": [
+      "A1",
+      "A2",
+      "E3",
+      "B3",
+      "E4"
+     ],
+     "level_db": -3.5,
+     "brightness": 0.36,
+     "reverb_send": 0.4
+    },
+    {
+     "t": 59.3,
+     "xfade_s": 1.5,
+     "notes": [
+      "G1",
+      "G2",
+      "D3",
+      "A3",
+      "B3",
+      "F#4"
+     ],
+     "level_db": -4.0,
+     "brightness": 0.3,
+     "reverb_send": 0.36
+    },
+    {
+     "t": 66.0,
+     "xfade_s": 1.5,
+     "notes": [
+      "E2",
+      "B2",
+      "F#3",
+      "G3",
+      "D4",
+      "B4"
+     ],
+     "level_db": -4.0,
+     "brightness": 0.5,
+     "reverb_send": 0.36
+    },
+    {
+     "t": 68.54,
+     "xfade_s": 1.5,
+     "notes": [
+      "E2",
+      "B2",
+      "F#3",
+      "A3",
+      "D4",
+      "B4"
+     ],
+     "level_db": -4.0,
+     "brightness": 0.52,
+     "reverb_send": 0.36
+    },
+    {
+     "t": 71.9,
+     "xfade_s": 1.5,
+     "notes": [
+      "B2",
+      "E3",
+      "A3",
+      "D4",
+      "G4"
+     ],
+     "level_db": -6.0,
+     "brightness": 0.2,
+     "reverb_send": 0.62
+    },
+    {
+     "t": 78.2,
+     "xfade_s": 1.5,
+     "notes": [
+      "A1",
+      "A2",
+      "E3",
+      "G3",
+      "B3",
+      "D4"
+     ],
+     "level_db": -4.0,
+     "brightness": 0.36,
+     "reverb_send": 0.4
+    },
+    {
+     "t": 81.24,
+     "xfade_s": 1.2,
+     "notes": [
+      "D2",
+      "A2",
+      "F#3",
+      "A3",
+      "D4",
+      "F#4",
+      "A4"
+     ],
+     "level_db": -2.5,
+     "brightness": 0.55,
+     "reverb_send": 0.4
+    },
+    {
+     "t": 84.2,
+     "xfade_s": 1.6,
+     "notes": [
+      "D2",
+      "A2",
+      "E3",
+      "A3",
+      "F#4",
+      "E5"
+     ],
+     "level_db": -3.0,
+     "brightness": 0.6,
+     "reverb_send": 0.42
+    },
+    {
+     "t": 88.3,
+     "xfade_s": 1.0,
+     "notes": [
+      "D2",
+      "A2",
+      "A3"
+     ],
+     "level_db": -5.0,
+     "brightness": 0.4,
+     "reverb_send": 0.42
+    },
+    {
+     "t": 89.35,
+     "xfade_s": 1.0,
+     "notes": [],
+     "level_db": -60.0,
+     "brightness": 0.4,
+     "reverb_send": 0.42
+    }
+   ],
+   "piano": [
+    {
+     "t": 0.55,
+     "note": 62,
+     "hz": 293.66,
+     "velocity": 0.28,
+     "distant": false
+    },
+    {
+     "t": 14.55,
+     "note": 62,
+     "hz": 293.66,
+     "velocity": 0.32,
+     "distant": false
+    },
+    {
+     "t": 14.9,
+     "note": 66,
+     "hz": 369.99,
+     "velocity": 0.32,
+     "distant": false
+    },
+    {
+     "t": 22.35,
+     "note": 55,
+     "hz": 196.0,
+     "velocity": 0.28,
+     "distant": false
+    },
+    {
+     "t": 22.4,
+     "note": 62,
+     "hz": 293.66,
+     "velocity": 0.28,
+     "distant": false
+    },
+    {
+     "t": 31.05,
+     "note": 66,
+     "hz": 369.99,
+     "velocity": 0.26,
+     "distant": false
+    },
+    {
+     "t": 39.29,
+     "note": 62,
+     "hz": 293.66,
+     "velocity": 0.38,
+     "distant": false
+    },
+    {
+     "t": 39.36,
+     "note": 66,
+     "hz": 369.99,
+     "velocity": 0.38,
+     "distant": false
+    },
+    {
+     "t": 39.43,
+     "note": 69,
+     "hz": 440.0,
+     "velocity": 0.38,
+     "distant": false
+    },
+    {
+     "t": 40.26,
+     "note": 69,
+     "hz": 440.0,
+     "velocity": 0.3,
+     "distant": false
+    },
+    {
+     "t": 40.6,
+     "note": 74,
+     "hz": 587.33,
+     "velocity": 0.3,
+     "distant": false
+    },
+    {
+     "t": 48.46,
+     "note": 47,
+     "hz": 123.47,
+     "velocity": 0.32,
+     "distant": false
+    },
+    {
+     "t": 57.4,
+     "note": 64,
+     "hz": 329.63,
+     "velocity": 0.28,
+     "distant": false
+    },
+    {
+     "t": 57.75,
+     "note": 69,
+     "hz": 440.0,
+     "velocity": 0.28,
+     "distant": false
+    },
+    {
+     "t": 58.1,
+     "note": 71,
+     "hz": 493.88,
+     "velocity": 0.28,
+     "distant": false
+    },
+    {
+     "t": 59.35,
+     "note": 55,
+     "hz": 196.0,
+     "velocity": 0.3,
+     "distant": false
+    },
+    {
+     "t": 59.41,
+     "note": 59,
+     "hz": 246.94,
+     "velocity": 0.3,
+     "distant": false
+    },
+    {
+     "t": 66.05,
+     "note": 64,
+     "hz": 329.63,
+     "velocity": 0.28,
+     "distant": false
+    },
+    {
+     "t": 66.35,
+     "note": 71,
+     "hz": 493.88,
+     "velocity": 0.28,
+     "distant": false
+    },
+    {
+     "t": 71.95,
+     "note": 62,
+     "hz": 293.66,
+     "velocity": 0.26,
+     "distant": true
+    },
+    {
+     "t": 72.03,
+     "note": 67,
+     "hz": 392.0,
+     "velocity": 0.26,
+     "distant": true
+    },
+    {
+     "t": 78.25,
+     "note": 57,
+     "hz": 220.0,
+     "velocity": 0.26,
+     "distant": false
+    },
+    {
+     "t": 81.14,
+     "note": 50,
+     "hz": 146.83,
+     "velocity": 0.4,
+     "distant": false
+    },
+    {
+     "t": 81.22,
+     "note": 57,
+     "hz": 220.0,
+     "velocity": 0.4,
+     "distant": false
+    },
+    {
+     "t": 81.3,
+     "note": 66,
+     "hz": 369.99,
+     "velocity": 0.4,
+     "distant": false
+    },
+    {
+     "t": 84.25,
+     "note": 50,
+     "hz": 146.83,
+     "velocity": 0.3,
+     "distant": false
+    },
+    {
+     "t": 84.46,
+     "note": 69,
+     "hz": 440.0,
+     "velocity": 0.3,
+     "distant": false
+    },
+    {
+     "t": 84.67,
+     "note": 76,
+     "hz": 659.26,
+     "velocity": 0.3,
+     "distant": false
+    },
+    {
+     "t": 88.4,
+     "note": 38,
+     "hz": 73.42,
+     "velocity": 0.45,
+     "distant": false
+    }
+   ],
+   "pre_duck_lufs": -26.0
+  }
+ },
+ "sfx": {
+  "stem_integrated_lufs": -34.18,
+  "loudest_momentary_400ms_lufs": -26.56,
+  "loudest_momentary_at_s": 48.55,
+  "bus_leveller": {
+   "cap_lufs": -25.0,
+   "max_reduction_db": 0.0
+  }
+ },
+ "ducking": {
+  "master": [
+   {
+    "lines": "L01+L02",
+    "start": 0.87,
+    "end": 7.71,
+    "depth_db": 8.0
+   },
+   {
+    "lines": "W01",
+    "start": 8.52,
+    "end": 13.91,
+    "depth_db": 5.0
+   },
+   {
+    "lines": "L03",
+    "start": 14.77,
+    "end": 20.38,
+    "depth_db": 8.0
+   },
+   {
+    "lines": "L04",
+    "start": 22.57,
+    "end": 26.08,
+    "depth_db": 8.0
+   },
+   {
+    "lines": "L05",
+    "start": 31.17,
+    "end": 33.97,
+    "depth_db": 8.0
+   },
+   {
+    "lines": "L06",
+    "start": 38.58,
+    "end": 44.75,
+    "depth_db": 8.0
+   },
+   {
+    "lines": "L07+L08+L09+L10+L11",
+    "start": 47.28,
+    "end": 70.679,
+    "depth_db": 8.0
+   },
+   {
+    "lines": "L12",
+    "start": 72.18,
+    "end": 77.108,
+    "depth_db": 8.0
+   },
+   {
+    "lines": "L13",
+    "start": 78.47,
+    "end": 83.28,
+    "depth_db": 8.0
+   },
+   {
+    "lines": "L14",
+    "start": 84.37,
+    "end": 89.09,
+    "depth_db": 8.0
+   }
+  ],
+  "no_narration": "worker line W01 only, 5.0 dB"
+ },
+ "speech_vs_background": {
+  "master": [
+   {
+    "line": "L01",
+    "speaker": "narrator",
+    "start": 0.9,
+    "end": 4.71,
+    "voice_lufs": -15.55,
+    "music_lufs": -39.69,
+    "sfx_lufs": -30.92,
+    "background_lufs": -32.98,
+    "voice_over_music_lu": 24.1,
+    "voice_over_background_lu": 17.4,
+    "music_duck_db": [
+     -8.0,
+     -8.0
+    ]
+   },
+   {
+    "line": "L02",
+    "speaker": "narrator",
+    "start": 5.45,
+    "end": 7.51,
+    "voice_lufs": -13.44,
+    "music_lufs": -37.81,
+    "sfx_lufs": -36.5,
+    "background_lufs": -35.19,
+    "voice_over_music_lu": 24.4,
+    "voice_over_background_lu": 21.8,
+    "music_duck_db": [
+     -8.0,
+     -8.0
+    ]
+   },
+   {
+    "line": "W01",
+    "speaker": "worker",
+    "start": 8.55,
+    "end": 13.85,
+    "voice_lufs": -12.55,
+    "music_lufs": -33.52,
+    "sfx_lufs": -37.5,
+    "background_lufs": -32.97,
+    "voice_over_music_lu": 21.0,
+    "voice_over_background_lu": 20.4,
+    "music_duck_db": [
+     -5.0,
+     -5.0
+    ]
+   },
+   {
+    "line": "L03",
+    "speaker": "narrator",
+    "start": 14.8,
+    "end": 20.27,
+    "voice_lufs": -17.94,
+    "music_lufs": -34.04,
+    "sfx_lufs": -36.12,
+    "background_lufs": -32.28,
+    "voice_over_music_lu": 16.1,
+    "voice_over_background_lu": 14.3,
+    "music_duck_db": [
+     -8.0,
+     -8.0
+    ]
+   },
+   {
+    "line": "L04",
+    "speaker": "narrator",
+    "start": 22.6,
+    "end": 26.02,
+    "voice_lufs": -16.18,
+    "music_lufs": -34.63,
+    "sfx_lufs": -35.2,
+    "background_lufs": -31.86,
+    "voice_over_music_lu": 18.5,
+    "voice_over_background_lu": 15.7,
+    "music_duck_db": [
+     -8.0,
+     -8.0
+    ]
+   },
+   {
+    "line": "L05",
+    "speaker": "narrator",
+    "start": 31.2,
+    "end": 33.91,
+    "voice_lufs": -13.43,
+    "music_lufs": -36.48,
+    "sfx_lufs": -34.76,
+    "background_lufs": -32.74,
+    "voice_over_music_lu": 23.0,
+    "voice_over_background_lu": 19.3,
+    "music_duck_db": [
+     -8.0,
+     -8.0
+    ]
+   },
+   {
+    "line": "L06",
+    "speaker": "narrator",
+    "start": 38.6,
+    "end": 44.69,
+    "voice_lufs": -15.66,
+    "music_lufs": -30.45,
+    "sfx_lufs": -33.0,
+    "background_lufs": -29.0,
+    "voice_over_music_lu": 14.8,
+    "voice_over_background_lu": 13.3,
+    "music_duck_db": [
+     -8.0,
+     -8.0
+    ]
+   },
+   {
+    "line": "L07",
+    "speaker": "narrator",
+    "start": 47.3,
+    "end": 51.89,
+    "voice_lufs": -15.33,
+    "music_lufs": -31.13,
+    "sfx_lufs": -30.67,
+    "background_lufs": -28.76,
+    "voice_over_music_lu": 15.8,
+    "voice_over_background_lu": 13.4,
+    "music_duck_db": [
+     -8.0,
+     -8.0
+    ]
+   },
+   {
+    "line": "L08",
+    "speaker": "narrator",
+    "start": 52.4,
+    "end": 56.92,
+    "voice_lufs": -14.14,
+    "music_lufs": -33.07,
+    "sfx_lufs": -32.9,
+    "background_lufs": -30.21,
+    "voice_over_music_lu": 18.9,
+    "voice_over_background_lu": 16.1,
+    "music_duck_db": [
+     -8.0,
+     -8.0
+    ]
+   },
+   {
+    "line": "L09",
+    "speaker": "narrator",
+    "start": 57.35,
+    "end": 59.02,
+    "voice_lufs": -16.39,
+    "music_lufs": -33.37,
+    "sfx_lufs": -33.99,
+    "background_lufs": -30.68,
+    "voice_over_music_lu": 17.0,
+    "voice_over_background_lu": 14.3,
+    "music_duck_db": [
+     -8.0,
+     -8.0
+    ]
+   },
+   {
+    "line": "L10",
+    "speaker": "narrator",
+    "start": 59.45,
+    "end": 65.74,
+    "voice_lufs": -17.56,
+    "music_lufs": -35.27,
+    "sfx_lufs": -34.83,
+    "background_lufs": -32.98,
+    "voice_over_music_lu": 17.7,
+    "voice_over_background_lu": 15.4,
+    "music_duck_db": [
+     -8.0,
+     -8.0
+    ]
+   },
+   {
+    "line": "L11",
+    "speaker": "narrator",
+    "start": 66.4,
+    "end": 70.62,
+    "voice_lufs": -15.23,
+    "music_lufs": -34.06,
+    "sfx_lufs": -33.57,
+    "background_lufs": -31.16,
+    "voice_over_music_lu": 18.8,
+    "voice_over_background_lu": 15.9,
+    "music_duck_db": [
+     -8.0,
+     -8.0
+    ]
+   },
+   {
+    "line": "L12",
+    "speaker": "narrator",
+    "start": 72.2,
+    "end": 77.05,
+    "voice_lufs": -17.27,
+    "music_lufs": -35.08,
+    "sfx_lufs": -34.94,
+    "background_lufs": -32.62,
+    "voice_over_music_lu": 17.8,
+    "voice_over_background_lu": 15.3,
+    "music_duck_db": [
+     -8.0,
+     -8.0
+    ]
+   },
+   {
+    "line": "L13",
+    "speaker": "narrator",
+    "start": 78.5,
+    "end": 83.22,
+    "voice_lufs": -16.32,
+    "music_lufs": -30.92,
+    "sfx_lufs": -32.92,
+    "background_lufs": -28.66,
+    "voice_over_music_lu": 14.6,
+    "voice_over_background_lu": 12.3,
+    "music_duck_db": [
+     -8.0,
+     -8.0
+    ]
+   },
+   {
+    "line": "L14",
+    "speaker": "narrator",
+    "start": 84.4,
+    "end": 89.03,
+    "voice_lufs": -15.61,
+    "music_lufs": -31.05,
+    "sfx_lufs": -36.03,
+    "background_lufs": -30.23,
+    "voice_over_music_lu": 15.4,
+    "voice_over_background_lu": 14.6,
+    "music_duck_db": [
+     -8.0,
+     -8.0
+    ]
+   }
+  ],
+  "min_narrator_over_background_lu": 12.3,
+  "min_narrator_over_music_lu": 14.6,
+  "no_narration_worker": {
+   "worker_lufs": -12.55,
+   "background_lufs": -25.56,
+   "margin_lu": 13.0
+  }
+ },
+ "events": {
+  "count": 188,
+  "per_kind": {
+   "align": 2,
+   "arrive": 28,
+   "assemble": 4,
+   "compare": 5,
+   "decision": 9,
+   "deviate": 1,
+   "door-close": 7,
+   "door-open": 9,
+   "escalate": 1,
+   "evidence": 4,
+   "inspect": 9,
+   "lock": 6,
+   "move": 21,
+   "packet": 10,
+   "print": 6,
+   "record": 6,
+   "reject": 1,
+   "request": 8,
+   "resolve": 2,
+   "return": 11,
+   "route": 3,
+   "simulated": 4,
+   "speech-fragment": 8,
+   "summon": 6,
+   "thread": 11,
+   "title": 5,
+   "wordmark": 1
+  },
+  "unknown_kinds": [],
+  "span": {
+   "earliest_start_s": 0.3,
+   "latest_end_s": 89.95,
+   "moved_from_before_0": [],
+   "faded_at_end": [
+    {
+     "kind": "wordmark",
+     "t": 88.4,
+     "start": 88.4,
+     "end": 89.95,
+     "lufs_100ms": -29.5,
+     "note": "tail faded to end by 89.95 s (natural end 90.417 s)"
+    }
+   ],
+   "skipped": []
+  },
+  "placed": [
+   {
+    "kind": "thread",
+    "t": 0.3,
+    "start": 0.3,
+    "end": 1.6352,
+    "lufs_100ms": -33.5,
+    "note": ""
+   },
+   {
+    "kind": "title",
+    "t": 0.9,
+    "start": 0.9,
+    "end": 1.8355,
+    "lufs_100ms": -35.1,
+    "note": ""
+   },
+   {
+    "kind": "print",
+    "t": 1.75,
+    "start": 1.75,
+    "end": 2.5812,
+    "lufs_100ms": -24.2,
+    "note": ""
+   },
+   {
+    "kind": "print",
+    "t": 2.63,
+    "start": 2.63,
+    "end": 3.3996,
+    "lufs_100ms": -24.0,
+    "note": ""
+   },
+   {
+    "kind": "print",
+    "t": 3.88,
+    "start": 3.88,
+    "end": 4.6452,
+    "lufs_100ms": -24.3,
+    "note": ""
+   },
+   {
+    "kind": "thread",
+    "t": 6.29,
+    "start": 6.29,
+    "end": 8.0501,
+    "lufs_100ms": -35.6,
+    "note": ""
+   },
+   {
+    "kind": "arrive",
+    "t": 6.509,
+    "start": 6.509,
+    "end": 7.066,
+    "lufs_100ms": -37.0,
+    "note": ""
+   },
+   {
+    "kind": "arrive",
+    "t": 6.693,
+    "start": 6.693,
+    "end": 7.2417,
+    "lufs_100ms": -37.5,
+    "note": ""
+   },
+   {
+    "kind": "arrive",
+    "t": 6.877,
+    "start": 6.877,
+    "end": 7.4544,
+    "lufs_100ms": -37.0,
+    "note": ""
+   },
+   {
+    "kind": "arrive",
+    "t": 7.073,
+    "start": 7.073,
+    "end": 7.6144,
+    "lufs_100ms": -37.0,
+    "note": ""
+   },
+   {
+    "kind": "arrive",
+    "t": 7.268,
+    "start": 7.268,
+    "end": 7.8056,
+    "lufs_100ms": -37.2,
+    "note": ""
+   },
+   {
+    "kind": "arrive",
+    "t": 7.452,
+    "start": 7.452,
+    "end": 7.9896,
+    "lufs_100ms": -36.7,
+    "note": ""
+   },
+   {
+    "kind": "move",
+    "t": 7.75,
+    "start": 7.75,
+    "end": 9.6739,
+    "lufs_100ms": -37.4,
+    "note": ""
+   },
+   {
+    "kind": "speech-fragment",
+    "t": 10.5,
+    "start": 10.5,
+    "end": 10.9233,
+    "lufs_100ms": -31.2,
+    "note": ""
+   },
+   {
+    "kind": "speech-fragment",
+    "t": 11.04,
+    "start": 11.04,
+    "end": 11.4453,
+    "lufs_100ms": -30.5,
+    "note": ""
+   },
+   {
+    "kind": "speech-fragment",
+    "t": 12.74,
+    "start": 12.74,
+    "end": 13.1524,
+    "lufs_100ms": -30.8,
+    "note": ""
+   },
+   {
+    "kind": "speech-fragment",
+    "t": 13.97,
+    "start": 13.97,
+    "end": 14.3829,
+    "lufs_100ms": -30.9,
+    "note": ""
+   },
+   {
+    "kind": "move",
+    "t": 14.3,
+    "start": 14.3,
+    "end": 15.37,
+    "lufs_100ms": -41.2,
+    "note": ""
+   },
+   {
+    "kind": "arrive",
+    "t": 14.8,
+    "start": 14.8,
+    "end": 15.5429,
+    "lufs_100ms": -28.6,
+    "note": ""
+   },
+   {
+    "kind": "speech-fragment",
+    "t": 14.9,
+    "start": 14.9,
+    "end": 15.3146,
+    "lufs_100ms": -35.2,
+    "note": ""
+   },
+   {
+    "kind": "speech-fragment",
+    "t": 15.37,
+    "start": 15.37,
+    "end": 15.7663,
+    "lufs_100ms": -35.2,
+    "note": ""
+   },
+   {
+    "kind": "arrive",
+    "t": 15.47,
+    "start": 15.47,
+    "end": 16.0633,
+    "lufs_100ms": -31.5,
+    "note": ""
+   },
+   {
+    "kind": "arrive",
+    "t": 15.94,
+    "start": 15.94,
+    "end": 16.5245,
+    "lufs_100ms": -32.6,
+    "note": ""
+   },
+   {
+    "kind": "speech-fragment",
+    "t": 16.35,
+    "start": 16.35,
+    "end": 16.7635,
+    "lufs_100ms": -35.2,
+    "note": ""
+   },
+   {
+    "kind": "arrive",
+    "t": 16.92,
+    "start": 16.92,
+    "end": 17.4951,
+    "lufs_100ms": -32.4,
+    "note": ""
+   },
+   {
+    "kind": "speech-fragment",
+    "t": 16.92,
+    "start": 16.92,
+    "end": 17.3208,
+    "lufs_100ms": -35.3,
+    "note": ""
+   },
+   {
+    "kind": "arrive",
+    "t": 17.49,
+    "start": 17.49,
+    "end": 18.0798,
+    "lufs_100ms": -31.7,
+    "note": ""
+   },
+   {
+    "kind": "thread",
+    "t": 18.35,
+    "start": 18.35,
+    "end": 19.3069,
+    "lufs_100ms": -36.5,
+    "note": ""
+   },
+   {
+    "kind": "request",
+    "t": 18.62,
+    "start": 18.62,
+    "end": 20.295,
+    "lufs_100ms": -31.1,
+    "note": ""
+   },
+   {
+    "kind": "arrive",
+    "t": 18.8,
+    "start": 18.8,
+    "end": 19.4029,
+    "lufs_100ms": -31.8,
+    "note": ""
+   },
+   {
+    "kind": "arrive",
+    "t": 19.1,
+    "start": 19.1,
+    "end": 19.6813,
+    "lufs_100ms": -31.6,
+    "note": ""
+   },
+   {
+    "kind": "evidence",
+    "t": 19.67,
+    "start": 19.67,
+    "end": 20.4478,
+    "lufs_100ms": -29.3,
+    "note": ""
+   },
+   {
+    "kind": "evidence",
+    "t": 20.53,
+    "start": 20.53,
+    "end": 21.1852,
+    "lufs_100ms": -27.2,
+    "note": ""
+   },
+   {
+    "kind": "assemble",
+    "t": 21.15,
+    "start": 21.15,
+    "end": 22.2456,
+    "lufs_100ms": -35.5,
+    "note": ""
+   },
+   {
+    "kind": "move",
+    "t": 22.0,
+    "start": 22.0,
+    "end": 23.8391,
+    "lufs_100ms": -37.2,
+    "note": ""
+   },
+   {
+    "kind": "thread",
+    "t": 22.6,
+    "start": 22.6,
+    "end": 23.8799,
+    "lufs_100ms": -36.0,
+    "note": ""
+   },
+   {
+    "kind": "packet",
+    "t": 23.5,
+    "start": 23.5,
+    "end": 24.2796,
+    "lufs_100ms": -38.5,
+    "note": ""
+   },
+   {
+    "kind": "door-close",
+    "t": 23.55,
+    "start": 23.55,
+    "end": 24.7216,
+    "lufs_100ms": -41.0,
+    "note": ""
+   },
+   {
+    "kind": "arrive",
+    "t": 23.7,
+    "start": 23.7,
+    "end": 24.2405,
+    "lufs_100ms": -40.0,
+    "note": ""
+   },
+   {
+    "kind": "move",
+    "t": 23.95,
+    "start": 23.95,
+    "end": 25.1256,
+    "lufs_100ms": -45.0,
+    "note": ""
+   },
+   {
+    "kind": "door-open",
+    "t": 24.0,
+    "start": 24.0,
+    "end": 25.058,
+    "lufs_100ms": -35.5,
+    "note": ""
+   },
+   {
+    "kind": "summon",
+    "t": 24.35,
+    "start": 24.35,
+    "end": 26.3848,
+    "lufs_100ms": -32.6,
+    "note": ""
+   },
+   {
+    "kind": "move",
+    "t": 25.04,
+    "start": 25.04,
+    "end": 26.1954,
+    "lufs_100ms": -44.6,
+    "note": ""
+   },
+   {
+    "kind": "summon",
+    "t": 25.25,
+    "start": 25.25,
+    "end": 27.2303,
+    "lufs_100ms": -32.9,
+    "note": ""
+   },
+   {
+    "kind": "arrive",
+    "t": 25.31,
+    "start": 25.31,
+    "end": 25.9718,
+    "lufs_100ms": -31.0,
+    "note": ""
+   },
+   {
+    "kind": "arrive",
+    "t": 26.13,
+    "start": 26.13,
+    "end": 26.7739,
+    "lufs_100ms": -30.9,
+    "note": ""
+   },
+   {
+    "kind": "summon",
+    "t": 26.15,
+    "start": 26.15,
+    "end": 28.1258,
+    "lufs_100ms": -32.7,
+    "note": ""
+   },
+   {
+    "kind": "arrive",
+    "t": 27.03,
+    "start": 27.03,
+    "end": 27.6709,
+    "lufs_100ms": -31.4,
+    "note": ""
+   },
+   {
+    "kind": "summon",
+    "t": 27.05,
+    "start": 27.05,
+    "end": 29.0316,
+    "lufs_100ms": -33.5,
+    "note": ""
+   },
+   {
+    "kind": "arrive",
+    "t": 27.93,
+    "start": 27.93,
+    "end": 28.5999,
+    "lufs_100ms": -30.7,
+    "note": ""
+   },
+   {
+    "kind": "summon",
+    "t": 27.95,
+    "start": 27.95,
+    "end": 29.8529,
+    "lufs_100ms": -33.0,
+    "note": ""
+   },
+   {
+    "kind": "arrive",
+    "t": 28.83,
+    "start": 28.83,
+    "end": 29.4515,
+    "lufs_100ms": -30.9,
+    "note": ""
+   },
+   {
+    "kind": "move",
+    "t": 28.98,
+    "start": 28.98,
+    "end": 30.2225,
+    "lufs_100ms": -36.0,
+    "note": ""
+   },
+   {
+    "kind": "arrive",
+    "t": 29.83,
+    "start": 29.83,
+    "end": 30.5662,
+    "lufs_100ms": -28.4,
+    "note": ""
+   },
+   {
+    "kind": "packet",
+    "t": 29.86,
+    "start": 29.86,
+    "end": 30.5771,
+    "lufs_100ms": -34.1,
+    "note": ""
+   },
+   {
+    "kind": "thread",
+    "t": 30.4,
+    "start": 30.4,
+    "end": 31.5533,
+    "lufs_100ms": -37.9,
+    "note": ""
+   },
+   {
+    "kind": "door-close",
+    "t": 30.42,
+    "start": 30.42,
+    "end": 31.5811,
+    "lufs_100ms": -35.6,
+    "note": ""
+   },
+   {
+    "kind": "packet",
+    "t": 30.55,
+    "start": 30.55,
+    "end": 31.2669,
+    "lufs_100ms": -37.3,
+    "note": ""
+   },
+   {
+    "kind": "packet",
+    "t": 30.85,
+    "start": 30.85,
+    "end": 31.5379,
+    "lufs_100ms": -37.1,
+    "note": ""
+   },
+   {
+    "kind": "inspect",
+    "t": 31.25,
+    "start": 31.25,
+    "end": 32.1074,
+    "lufs_100ms": -36.0,
+    "note": ""
+   },
+   {
+    "kind": "inspect",
+    "t": 32.07,
+    "start": 32.07,
+    "end": 33.6375,
+    "lufs_100ms": -38.6,
+    "note": ""
+   },
+   {
+    "kind": "inspect",
+    "t": 32.18,
+    "start": 32.18,
+    "end": 32.9672,
+    "lufs_100ms": -34.6,
+    "note": ""
+   },
+   {
+    "kind": "inspect",
+    "t": 32.25,
+    "start": 32.25,
+    "end": 33.164,
+    "lufs_100ms": -35.6,
+    "note": ""
+   },
+   {
+    "kind": "inspect",
+    "t": 32.39,
+    "start": 32.39,
+    "end": 33.9574,
+    "lufs_100ms": -42.2,
+    "note": ""
+   },
+   {
+    "kind": "evidence",
+    "t": 32.72,
+    "start": 32.72,
+    "end": 33.2856,
+    "lufs_100ms": -29.4,
+    "note": ""
+   },
+   {
+    "kind": "request",
+    "t": 32.72,
+    "start": 32.72,
+    "end": 34.3868,
+    "lufs_100ms": -35.4,
+    "note": ""
+   },
+   {
+    "kind": "request",
+    "t": 33.0,
+    "start": 33.0,
+    "end": 34.675,
+    "lufs_100ms": -35.7,
+    "note": ""
+   },
+   {
+    "kind": "return",
+    "t": 33.12,
+    "start": 33.12,
+    "end": 34.2972,
+    "lufs_100ms": -40.3,
+    "note": ""
+   },
+   {
+    "kind": "evidence",
+    "t": 33.16,
+    "start": 33.16,
+    "end": 33.8222,
+    "lufs_100ms": -32.3,
+    "note": ""
+   },
+   {
+    "kind": "door-open",
+    "t": 33.2,
+    "start": 33.2,
+    "end": 34.3386,
+    "lufs_100ms": -34.7,
+    "note": ""
+   },
+   {
+    "kind": "return",
+    "t": 33.44,
+    "start": 33.44,
+    "end": 34.6173,
+    "lufs_100ms": -34.5,
+    "note": ""
+   },
+   {
+    "kind": "return",
+    "t": 33.82,
+    "start": 33.82,
+    "end": 34.9973,
+    "lufs_100ms": -35.0,
+    "note": ""
+   },
+   {
+    "kind": "return",
+    "t": 34.19,
+    "start": 34.19,
+    "end": 35.3673,
+    "lufs_100ms": -34.8,
+    "note": ""
+   },
+   {
+    "kind": "return",
+    "t": 34.56,
+    "start": 34.56,
+    "end": 35.7373,
+    "lufs_100ms": -34.5,
+    "note": ""
+   },
+   {
+    "kind": "return",
+    "t": 34.93,
+    "start": 34.93,
+    "end": 36.1084,
+    "lufs_100ms": -35.2,
+    "note": ""
+   },
+   {
+    "kind": "door-close",
+    "t": 35.85,
+    "start": 35.85,
+    "end": 37.0176,
+    "lufs_100ms": -35.8,
+    "note": ""
+   },
+   {
+    "kind": "assemble",
+    "t": 38.1,
+    "start": 38.1,
+    "end": 39.2099,
+    "lufs_100ms": -35.4,
+    "note": ""
+   },
+   {
+    "kind": "align",
+    "t": 38.4,
+    "start": 38.4,
+    "end": 41.4931,
+    "lufs_100ms": -29.6,
+    "note": ""
+   },
+   {
+    "kind": "move",
+    "t": 38.42,
+    "start": 38.42,
+    "end": 39.6473,
+    "lufs_100ms": -44.2,
+    "note": ""
+   },
+   {
+    "kind": "move",
+    "t": 38.7,
+    "start": 38.7,
+    "end": 39.9853,
+    "lufs_100ms": -43.8,
+    "note": ""
+   },
+   {
+    "kind": "move",
+    "t": 38.98,
+    "start": 38.98,
+    "end": 40.1842,
+    "lufs_100ms": -43.8,
+    "note": ""
+   },
+   {
+    "kind": "lock",
+    "t": 39.49,
+    "start": 39.468,
+    "end": 40.1503,
+    "lufs_100ms": -26.1,
+    "note": ""
+   },
+   {
+    "kind": "door-open",
+    "t": 40.26,
+    "start": 40.26,
+    "end": 41.3819,
+    "lufs_100ms": -34.3,
+    "note": ""
+   },
+   {
+    "kind": "route",
+    "t": 40.26,
+    "start": 40.26,
+    "end": 41.7009,
+    "lufs_100ms": -30.5,
+    "note": ""
+   },
+   {
+    "kind": "arrive",
+    "t": 41.34,
+    "start": 41.34,
+    "end": 41.8848,
+    "lufs_100ms": -35.2,
+    "note": ""
+   },
+   {
+    "kind": "thread",
+    "t": 42.32,
+    "start": 42.32,
+    "end": 43.5248,
+    "lufs_100ms": -39.0,
+    "note": ""
+   },
+   {
+    "kind": "record",
+    "t": 43.05,
+    "start": 43.05,
+    "end": 43.597,
+    "lufs_100ms": -31.9,
+    "note": ""
+   },
+   {
+    "kind": "inspect",
+    "t": 47.81,
+    "start": 47.81,
+    "end": 48.6123,
+    "lufs_100ms": -40.8,
+    "note": ""
+   },
+   {
+    "kind": "deviate",
+    "t": 48.34,
+    "start": 48.34,
+    "end": 51.3321,
+    "lufs_100ms": -25.6,
+    "note": ""
+   },
+   {
+    "kind": "lock",
+    "t": 49.09,
+    "start": 49.072,
+    "end": 49.6543,
+    "lufs_100ms": -38.7,
+    "note": ""
+   },
+   {
+    "kind": "inspect",
+    "t": 49.4,
+    "start": 49.4,
+    "end": 50.9652,
+    "lufs_100ms": -37.5,
+    "note": ""
+   },
+   {
+    "kind": "return",
+    "t": 49.61,
+    "start": 49.61,
+    "end": 50.7881,
+    "lufs_100ms": -39.1,
+    "note": ""
+   },
+   {
+    "kind": "compare",
+    "t": 50.28,
+    "start": 50.28,
+    "end": 50.9049,
+    "lufs_100ms": -33.6,
+    "note": ""
+   },
+   {
+    "kind": "thread",
+    "t": 50.82,
+    "start": 50.82,
+    "end": 51.6761,
+    "lufs_100ms": -42.6,
+    "note": ""
+   },
+   {
+    "kind": "assemble",
+    "t": 52.35,
+    "start": 52.35,
+    "end": 53.7607,
+    "lufs_100ms": -29.4,
+    "note": ""
+   },
+   {
+    "kind": "move",
+    "t": 52.45,
+    "start": 52.45,
+    "end": 53.5901,
+    "lufs_100ms": -41.4,
+    "note": ""
+   },
+   {
+    "kind": "move",
+    "t": 52.85,
+    "start": 52.85,
+    "end": 54.0449,
+    "lufs_100ms": -37.7,
+    "note": ""
+   },
+   {
+    "kind": "packet",
+    "t": 53.55,
+    "start": 53.55,
+    "end": 54.3294,
+    "lufs_100ms": -33.3,
+    "note": ""
+   },
+   {
+    "kind": "escalate",
+    "t": 53.62,
+    "start": 53.62,
+    "end": 55.4195,
+    "lufs_100ms": -29.3,
+    "note": ""
+   },
+   {
+    "kind": "arrive",
+    "t": 54.93,
+    "start": 54.93,
+    "end": 55.6387,
+    "lufs_100ms": -31.1,
+    "note": ""
+   },
+   {
+    "kind": "decision",
+    "t": 55.72,
+    "start": 55.72,
+    "end": 57.9823,
+    "lufs_100ms": -26.7,
+    "note": ""
+   },
+   {
+    "kind": "thread",
+    "t": 57.35,
+    "start": 57.35,
+    "end": 58.4973,
+    "lufs_100ms": -41.4,
+    "note": ""
+   },
+   {
+    "kind": "thread",
+    "t": 57.4,
+    "start": 57.4,
+    "end": 58.5518,
+    "lufs_100ms": -38.9,
+    "note": ""
+   },
+   {
+    "kind": "thread",
+    "t": 57.75,
+    "start": 57.75,
+    "end": 58.8596,
+    "lufs_100ms": -39.1,
+    "note": ""
+   },
+   {
+    "kind": "thread",
+    "t": 58.1,
+    "start": 58.1,
+    "end": 59.2509,
+    "lufs_100ms": -38.8,
+    "note": ""
+   },
+   {
+    "kind": "decision",
+    "t": 58.25,
+    "start": 58.25,
+    "end": 60.5432,
+    "lufs_100ms": -30.7,
+    "note": ""
+   },
+   {
+    "kind": "arrive",
+    "t": 58.4,
+    "start": 58.4,
+    "end": 58.897,
+    "lufs_100ms": -39.2,
+    "note": ""
+   },
+   {
+    "kind": "route",
+    "t": 58.63,
+    "start": 58.63,
+    "end": 59.8129,
+    "lufs_100ms": -38.5,
+    "note": ""
+   },
+   {
+    "kind": "arrive",
+    "t": 58.65,
+    "start": 58.65,
+    "end": 59.1879,
+    "lufs_100ms": -39.7,
+    "note": ""
+   },
+   {
+    "kind": "simulated",
+    "t": 58.8,
+    "start": 58.8,
+    "end": 61.8979,
+    "lufs_100ms": -39.3,
+    "note": ""
+   },
+   {
+    "kind": "simulated",
+    "t": 58.9,
+    "start": 58.9,
+    "end": 61.993,
+    "lufs_100ms": -46.6,
+    "note": ""
+   },
+   {
+    "kind": "move",
+    "t": 59.98,
+    "start": 59.98,
+    "end": 60.9088,
+    "lufs_100ms": -41.4,
+    "note": ""
+   },
+   {
+    "kind": "reject",
+    "t": 60.34,
+    "start": 60.34,
+    "end": 61.1763,
+    "lufs_100ms": -28.7,
+    "note": ""
+   },
+   {
+    "kind": "request",
+    "t": 61.15,
+    "start": 61.15,
+    "end": 62.8172,
+    "lufs_100ms": -37.5,
+    "note": ""
+   },
+   {
+    "kind": "decision",
+    "t": 61.82,
+    "start": 61.82,
+    "end": 64.0792,
+    "lufs_100ms": -28.7,
+    "note": ""
+   },
+   {
+    "kind": "door-open",
+    "t": 62.249,
+    "start": 62.249,
+    "end": 63.3872,
+    "lufs_100ms": -31.6,
+    "note": ""
+   },
+   {
+    "kind": "packet",
+    "t": 62.37,
+    "start": 62.37,
+    "end": 63.1429,
+    "lufs_100ms": -33.9,
+    "note": ""
+   },
+   {
+    "kind": "arrive",
+    "t": 63.02,
+    "start": 63.02,
+    "end": 63.7077,
+    "lufs_100ms": -32.8,
+    "note": ""
+   },
+   {
+    "kind": "lock",
+    "t": 63.37,
+    "start": 63.348,
+    "end": 63.9804,
+    "lufs_100ms": -28.8,
+    "note": ""
+   },
+   {
+    "kind": "record",
+    "t": 64.03,
+    "start": 64.03,
+    "end": 64.5493,
+    "lufs_100ms": -36.5,
+    "note": ""
+   },
+   {
+    "kind": "record",
+    "t": 64.84,
+    "start": 64.84,
+    "end": 65.3886,
+    "lufs_100ms": -35.9,
+    "note": ""
+   },
+   {
+    "kind": "record",
+    "t": 65.11,
+    "start": 65.11,
+    "end": 65.6567,
+    "lufs_100ms": -35.7,
+    "note": ""
+   },
+   {
+    "kind": "record",
+    "t": 65.35,
+    "start": 65.35,
+    "end": 65.8888,
+    "lufs_100ms": -35.4,
+    "note": ""
+   },
+   {
+    "kind": "door-close",
+    "t": 65.5,
+    "start": 65.5,
+    "end": 66.6368,
+    "lufs_100ms": -31.5,
+    "note": ""
+   },
+   {
+    "kind": "decision",
+    "t": 66.28,
+    "start": 66.28,
+    "end": 68.5392,
+    "lufs_100ms": -29.2,
+    "note": ""
+   },
+   {
+    "kind": "door-open",
+    "t": 66.631,
+    "start": 66.631,
+    "end": 67.6741,
+    "lufs_100ms": -30.8,
+    "note": ""
+   },
+   {
+    "kind": "packet",
+    "t": 66.75,
+    "start": 66.75,
+    "end": 67.4696,
+    "lufs_100ms": -33.8,
+    "note": ""
+   },
+   {
+    "kind": "move",
+    "t": 66.91,
+    "start": 66.91,
+    "end": 68.0797,
+    "lufs_100ms": -38.8,
+    "note": ""
+   },
+   {
+    "kind": "arrive",
+    "t": 67.38,
+    "start": 67.38,
+    "end": 68.0856,
+    "lufs_100ms": -32.7,
+    "note": ""
+   },
+   {
+    "kind": "print",
+    "t": 67.56,
+    "start": 67.56,
+    "end": 68.3867,
+    "lufs_100ms": -39.4,
+    "note": ""
+   },
+   {
+    "kind": "compare",
+    "t": 67.66,
+    "start": 67.66,
+    "end": 68.2954,
+    "lufs_100ms": -39.3,
+    "note": ""
+   },
+   {
+    "kind": "compare",
+    "t": 68.02,
+    "start": 68.02,
+    "end": 68.664,
+    "lufs_100ms": -31.4,
+    "note": ""
+   },
+   {
+    "kind": "route",
+    "t": 68.82,
+    "start": 68.82,
+    "end": 70.1802,
+    "lufs_100ms": -39.3,
+    "note": ""
+   },
+   {
+    "kind": "compare",
+    "t": 69.12,
+    "start": 69.12,
+    "end": 69.7763,
+    "lufs_100ms": -30.5,
+    "note": ""
+   },
+   {
+    "kind": "lock",
+    "t": 69.57,
+    "start": 69.548,
+    "end": 70.2291,
+    "lufs_100ms": -27.3,
+    "note": ""
+   },
+   {
+    "kind": "inspect",
+    "t": 69.69,
+    "start": 69.69,
+    "end": 70.2241,
+    "lufs_100ms": -37.3,
+    "note": ""
+   },
+   {
+    "kind": "resolve",
+    "t": 70.14,
+    "start": 70.14,
+    "end": 73.3586,
+    "lufs_100ms": -30.5,
+    "note": ""
+   },
+   {
+    "kind": "move",
+    "t": 70.98,
+    "start": 70.98,
+    "end": 71.9012,
+    "lufs_100ms": -40.7,
+    "note": ""
+   },
+   {
+    "kind": "door-close",
+    "t": 71.3,
+    "start": 71.3,
+    "end": 72.4466,
+    "lufs_100ms": -31.9,
+    "note": ""
+   },
+   {
+    "kind": "decision",
+    "t": 72.08,
+    "start": 72.08,
+    "end": 74.339,
+    "lufs_100ms": -29.2,
+    "note": ""
+   },
+   {
+    "kind": "door-open",
+    "t": 72.33,
+    "start": 72.33,
+    "end": 73.4507,
+    "lufs_100ms": -30.6,
+    "note": ""
+   },
+   {
+    "kind": "packet",
+    "t": 72.43,
+    "start": 72.43,
+    "end": 73.1489,
+    "lufs_100ms": -34.5,
+    "note": ""
+   },
+   {
+    "kind": "simulated",
+    "t": 72.82,
+    "start": 72.82,
+    "end": 75.9199,
+    "lufs_100ms": -33.4,
+    "note": ""
+   },
+   {
+    "kind": "arrive",
+    "t": 73.08,
+    "start": 73.08,
+    "end": 73.7781,
+    "lufs_100ms": -32.5,
+    "note": ""
+   },
+   {
+    "kind": "request",
+    "t": 74.66,
+    "start": 74.66,
+    "end": 76.3274,
+    "lufs_100ms": -35.2,
+    "note": ""
+   },
+   {
+    "kind": "request",
+    "t": 74.78,
+    "start": 74.78,
+    "end": 76.4471,
+    "lufs_100ms": -35.5,
+    "note": ""
+   },
+   {
+    "kind": "request",
+    "t": 74.9,
+    "start": 74.9,
+    "end": 76.5674,
+    "lufs_100ms": -34.4,
+    "note": ""
+   },
+   {
+    "kind": "return",
+    "t": 75.82,
+    "start": 75.82,
+    "end": 76.9613,
+    "lufs_100ms": -36.4,
+    "note": ""
+   },
+   {
+    "kind": "return",
+    "t": 76.02,
+    "start": 76.02,
+    "end": 77.1612,
+    "lufs_100ms": -36.5,
+    "note": ""
+   },
+   {
+    "kind": "return",
+    "t": 76.22,
+    "start": 76.22,
+    "end": 77.3612,
+    "lufs_100ms": -35.6,
+    "note": ""
+   },
+   {
+    "kind": "move",
+    "t": 76.85,
+    "start": 76.85,
+    "end": 78.2784,
+    "lufs_100ms": -37.5,
+    "note": ""
+   },
+   {
+    "kind": "door-close",
+    "t": 77.05,
+    "start": 77.05,
+    "end": 78.2183,
+    "lufs_100ms": -31.7,
+    "note": ""
+   },
+   {
+    "kind": "packet",
+    "t": 77.85,
+    "start": 77.85,
+    "end": 78.6199,
+    "lufs_100ms": -36.5,
+    "note": ""
+   },
+   {
+    "kind": "decision",
+    "t": 78.15,
+    "start": 78.15,
+    "end": 79.6457,
+    "lufs_100ms": -35.1,
+    "note": ""
+   },
+   {
+    "kind": "move",
+    "t": 78.3,
+    "start": 78.3,
+    "end": 79.3291,
+    "lufs_100ms": -38.4,
+    "note": ""
+   },
+   {
+    "kind": "door-open",
+    "t": 78.36,
+    "start": 78.36,
+    "end": 79.5286,
+    "lufs_100ms": -33.9,
+    "note": ""
+   },
+   {
+    "kind": "compare",
+    "t": 78.72,
+    "start": 78.72,
+    "end": 79.3597,
+    "lufs_100ms": -35.3,
+    "note": ""
+   },
+   {
+    "kind": "lock",
+    "t": 79.26,
+    "start": 79.242,
+    "end": 79.7963,
+    "lufs_100ms": -29.7,
+    "note": ""
+   },
+   {
+    "kind": "decision",
+    "t": 79.3,
+    "start": 79.3,
+    "end": 80.7957,
+    "lufs_100ms": -36.2,
+    "note": ""
+   },
+   {
+    "kind": "packet",
+    "t": 79.36,
+    "start": 79.36,
+    "end": 80.1324,
+    "lufs_100ms": -36.9,
+    "note": ""
+   },
+   {
+    "kind": "move",
+    "t": 79.46,
+    "start": 79.46,
+    "end": 80.4584,
+    "lufs_100ms": -38.5,
+    "note": ""
+   },
+   {
+    "kind": "door-open",
+    "t": 79.52,
+    "start": 79.52,
+    "end": 82.2188,
+    "lufs_100ms": -37.5,
+    "note": ""
+   },
+   {
+    "kind": "request",
+    "t": 80.04,
+    "start": 80.04,
+    "end": 81.7071,
+    "lufs_100ms": -35.5,
+    "note": ""
+   },
+   {
+    "kind": "simulated",
+    "t": 80.12,
+    "start": 80.12,
+    "end": 83.2171,
+    "lufs_100ms": -42.9,
+    "note": ""
+   },
+   {
+    "kind": "decision",
+    "t": 80.36,
+    "start": 80.36,
+    "end": 81.8531,
+    "lufs_100ms": -35.7,
+    "note": ""
+   },
+   {
+    "kind": "return",
+    "t": 80.5,
+    "start": 80.5,
+    "end": 81.6415,
+    "lufs_100ms": -36.9,
+    "note": ""
+   },
+   {
+    "kind": "move",
+    "t": 80.52,
+    "start": 80.52,
+    "end": 81.5798,
+    "lufs_100ms": -36.8,
+    "note": ""
+   },
+   {
+    "kind": "door-open",
+    "t": 80.6,
+    "start": 80.6,
+    "end": 81.6427,
+    "lufs_100ms": -35.4,
+    "note": ""
+   },
+   {
+    "kind": "move",
+    "t": 80.64,
+    "start": 80.64,
+    "end": 81.5873,
+    "lufs_100ms": -41.1,
+    "note": ""
+   },
+   {
+    "kind": "inspect",
+    "t": 81.2,
+    "start": 81.2,
+    "end": 81.7388,
+    "lufs_100ms": -39.2,
+    "note": ""
+   },
+   {
+    "kind": "lock",
+    "t": 81.44,
+    "start": 81.418,
+    "end": 82.0915,
+    "lufs_100ms": -28.5,
+    "note": ""
+   },
+   {
+    "kind": "decision",
+    "t": 81.66,
+    "start": 81.66,
+    "end": 83.9532,
+    "lufs_100ms": -28.0,
+    "note": ""
+   },
+   {
+    "kind": "assemble",
+    "t": 82.06,
+    "start": 82.06,
+    "end": 83.156,
+    "lufs_100ms": -33.5,
+    "note": ""
+   },
+   {
+    "kind": "resolve",
+    "t": 82.44,
+    "start": 82.44,
+    "end": 85.6911,
+    "lufs_100ms": -30.9,
+    "note": ""
+   },
+   {
+    "kind": "door-close",
+    "t": 82.72,
+    "start": 82.72,
+    "end": 83.8561,
+    "lufs_100ms": -34.1,
+    "note": ""
+   },
+   {
+    "kind": "move",
+    "t": 83.24,
+    "start": 83.24,
+    "end": 85.0449,
+    "lufs_100ms": -37.3,
+    "note": ""
+   },
+   {
+    "kind": "move",
+    "t": 83.3,
+    "start": 83.3,
+    "end": 85.1704,
+    "lufs_100ms": -38.7,
+    "note": ""
+   },
+   {
+    "kind": "title",
+    "t": 84.7,
+    "start": 84.7,
+    "end": 85.6449,
+    "lufs_100ms": -42.8,
+    "note": ""
+   },
+   {
+    "kind": "arrive",
+    "t": 84.74,
+    "start": 84.74,
+    "end": 85.3665,
+    "lufs_100ms": -34.8,
+    "note": ""
+   },
+   {
+    "kind": "align",
+    "t": 84.8,
+    "start": 84.8,
+    "end": 87.8692,
+    "lufs_100ms": -40.3,
+    "note": ""
+   },
+   {
+    "kind": "record",
+    "t": 84.9,
+    "start": 84.9,
+    "end": 85.458,
+    "lufs_100ms": -32.5,
+    "note": ""
+   },
+   {
+    "kind": "title",
+    "t": 85.1,
+    "start": 85.1,
+    "end": 86.0404,
+    "lufs_100ms": -43.0,
+    "note": ""
+   },
+   {
+    "kind": "print",
+    "t": 85.4,
+    "start": 85.4,
+    "end": 86.1603,
+    "lufs_100ms": -34.5,
+    "note": ""
+   },
+   {
+    "kind": "title",
+    "t": 85.5,
+    "start": 85.5,
+    "end": 86.4606,
+    "lufs_100ms": -42.9,
+    "note": ""
+   },
+   {
+    "kind": "title",
+    "t": 85.8,
+    "start": 85.8,
+    "end": 86.688,
+    "lufs_100ms": -37.5,
+    "note": ""
+   },
+   {
+    "kind": "print",
+    "t": 85.9,
+    "start": 85.9,
+    "end": 86.6821,
+    "lufs_100ms": -39.2,
+    "note": ""
+   },
+   {
+    "kind": "summon",
+    "t": 86.05,
+    "start": 86.05,
+    "end": 88.0842,
+    "lufs_100ms": -44.9,
+    "note": ""
+   },
+   {
+    "kind": "wordmark",
+    "t": 88.4,
+    "start": 88.4,
+    "end": 89.95,
+    "lufs_100ms": -29.5,
+    "note": "tail faded to end by 89.95 s (natural end 90.417 s)"
+   }
+  ]
+ },
+ "warnings": [
+  "duplicate return at 33.45 merged with 33.44"
+ ],
+ "checks": [
+  {
+   "name": "music.wav length",
+   "ok": true,
+   "value": "4320000 samples, 48000 Hz, 2 ch, PCM_24",
+   "target": "4320000 samples, 48000 Hz, 2 ch, PCM_24"
+  },
+  {
+   "name": "music.wav no clipping",
+   "ok": true,
+   "value": 0,
+   "target": 0
+  },
+  {
+   "name": "music.wav DC",
+   "ok": true,
+   "value": [
+    6.22e-09,
+    1.76e-09
+   ],
+   "target": "|mean| < 1e-4"
+  },
+  {
+   "name": "music.wav clean ends",
+   "ok": true,
+   "value": "first 0.0e+00, last 10 ms -240.0 dBFS",
+   "target": "silent first sample and last 10 ms"
+  },
+  {
+   "name": "sfx.wav length",
+   "ok": true,
+   "value": "4320000 samples, 48000 Hz, 2 ch, PCM_24",
+   "target": "4320000 samples, 48000 Hz, 2 ch, PCM_24"
+  },
+  {
+   "name": "sfx.wav no clipping",
+   "ok": true,
+   "value": 0,
+   "target": 0
+  },
+  {
+   "name": "sfx.wav DC",
+   "ok": true,
+   "value": [
+    4.8e-12,
+    9.13e-12
+   ],
+   "target": "|mean| < 1e-4"
+  },
+  {
+   "name": "sfx.wav clean ends",
+   "ok": true,
+   "value": "first 0.0e+00, last 10 ms -240.0 dBFS",
+   "target": "silent first sample and last 10 ms"
+  },
+  {
+   "name": "master.wav length",
+   "ok": true,
+   "value": "4320000 samples, 48000 Hz, 2 ch, PCM_24",
+   "target": "4320000 samples, 48000 Hz, 2 ch, PCM_24"
+  },
+  {
+   "name": "master.wav no clipping",
+   "ok": true,
+   "value": 0,
+   "target": 0
+  },
+  {
+   "name": "master.wav DC",
+   "ok": true,
+   "value": [
+    -5.4e-09,
+    2.55e-08
+   ],
+   "target": "|mean| < 1e-4"
+  },
+  {
+   "name": "master.wav clean ends",
+   "ok": true,
+   "value": "first 0.0e+00, last 10 ms -240.0 dBFS",
+   "target": "silent first sample and last 10 ms"
+  },
+  {
+   "name": "master-no-narration.wav length",
+   "ok": true,
+   "value": "4320000 samples, 48000 Hz, 2 ch, PCM_24",
+   "target": "4320000 samples, 48000 Hz, 2 ch, PCM_24"
+  },
+  {
+   "name": "master-no-narration.wav no clipping",
+   "ok": true,
+   "value": 0,
+   "target": 0
+  },
+  {
+   "name": "master-no-narration.wav DC",
+   "ok": true,
+   "value": [
+    4.6e-10,
+    4.67e-10
+   ],
+   "target": "|mean| < 1e-4"
+  },
+  {
+   "name": "master-no-narration.wav clean ends",
+   "ok": true,
+   "value": "first 0.0e+00, last 10 ms -240.0 dBFS",
+   "target": "silent first sample and last 10 ms"
+  },
+  {
+   "name": "master.wav integrated loudness",
+   "ok": true,
+   "value": -16.0,
+   "target": "-16.0 +- 0.5"
+  },
+  {
+   "name": "master.wav true peak",
+   "ok": true,
+   "value": -1.3,
+   "target": "<= -1.0"
+  },
+  {
+   "name": "master-no-narration.wav integrated loudness",
+   "ok": true,
+   "value": -17.0,
+   "target": "-17.0 +- 0.5"
+  },
+  {
+   "name": "master-no-narration.wav true peak",
+   "ok": true,
+   "value": -2.1,
+   "target": "<= -1.0"
+  },
+  {
+   "name": "narrator over background (every line)",
+   "ok": true,
+   "value": 12.3,
+   "target": ">= 12 LU per line"
+  },
+  {
+   "name": "narrator over music (every line)",
+   "ok": true,
+   "value": 14.6,
+   "target": ">= 14 LU per line"
+  },
+  {
+   "name": "worker over background (no-narration version)",
+   "ok": true,
+   "value": 13.0,
+   "target": ">= 8 LU"
+  },
+  {
+   "name": "music ducked under every narrator line",
+   "ok": true,
+   "value": [
+    -8.0,
+    -8.0,
+    -8.0,
+    -8.0,
+    -8.0,
+    -8.0,
+    -8.0,
+    -8.0,
+    -8.0,
+    -8.0,
+    -8.0,
+    -8.0,
+    -8.0,
+    -8.0
+   ],
+   "target": "-7 to -9 dB throughout each line"
+  },
+  {
+   "name": "music ducked under the worker line",
+   "ok": true,
+   "value": [
+    [
+     -5.0,
+     -5.0
+    ]
+   ],
+   "target": "about -5 dB"
+  },
+  {
+   "name": "no sound before 0 or after 90 s",
+   "ok": true,
+   "value": [
+    0.3,
+    89.95
+   ],
+   "target": "[>= 0, <= 90]"
+  },
+  {
+   "name": "unknown event kinds",
+   "ok": true,
+   "value": [],
+   "target": "none (mapped to a default with a warning)"
+  },
+  {
+   "name": "music in tune (A = 440)",
+   "ok": true,
+   "value": 2.6,
+   "target": "every strong note's centre within 5 cents of 12-TET"
+  },
+  {
+   "name": "music in D major",
+   "ok": true,
+   "value": [],
+   "target": "strongest peaks in D E F# G A B C#"
+  },
+  {
+   "name": "music never drops out (3 to 88.8 s, before ducking)",
+   "ok": true,
+   "value": -34.37,
+   "target": ">= -45 LUFS momentary"
+  },
+  {
+   "name": "music has no hard cuts",
+   "ok": true,
+   "value": 1.75,
+   "target": "<= 4 dB fall within any 100 ms"
+  }
+ ],
+ "all_ok": true
+}

@@ -1,0 +1,1259 @@
+[
+ {
+  "kind": "thread",
+  "t": 0.3,
+  "dur": 1,
+  "gain_db": -6,
+  "material": "pencil"
+ },
+ {
+  "kind": "title",
+  "t": 0.9,
+  "gain_db": -8
+ },
+ {
+  "kind": "print",
+  "t": 1.75,
+  "gain_db": -3
+ },
+ {
+  "kind": "print",
+  "t": 2.63,
+  "gain_db": -3
+ },
+ {
+  "kind": "print",
+  "t": 3.88,
+  "gain_db": -3
+ },
+ {
+  "kind": "thread",
+  "t": 6.29,
+  "dur": 1.35,
+  "gain_db": -9
+ },
+ {
+  "kind": "arrive",
+  "t": 6.509,
+  "gain_db": -14,
+  "pan": -0.8333333333333334,
+  "size": "small"
+ },
+ {
+  "kind": "arrive",
+  "t": 6.693,
+  "gain_db": -14,
+  "pan": -0.5,
+  "size": "small"
+ },
+ {
+  "kind": "arrive",
+  "t": 6.877,
+  "gain_db": -14,
+  "pan": -0.16666666666666666,
+  "size": "small"
+ },
+ {
+  "kind": "arrive",
+  "t": 7.073,
+  "gain_db": -14,
+  "pan": 0.16666666666666666,
+  "size": "small"
+ },
+ {
+  "kind": "arrive",
+  "t": 7.268,
+  "gain_db": -14,
+  "pan": 0.5,
+  "size": "small"
+ },
+ {
+  "kind": "arrive",
+  "t": 7.452,
+  "gain_db": -14,
+  "pan": 0.8333333333333334,
+  "size": "small"
+ },
+ {
+  "kind": "move",
+  "t": 7.75,
+  "dur": 1.65,
+  "gain_db": -10
+ },
+ {
+  "kind": "speech-fragment",
+  "t": 10.5,
+  "gain_db": -8,
+  "pan": -0.2
+ },
+ {
+  "kind": "speech-fragment",
+  "t": 11.04,
+  "gain_db": -8,
+  "pan": -0.2
+ },
+ {
+  "kind": "speech-fragment",
+  "t": 12.74,
+  "gain_db": -8,
+  "pan": -0.2
+ },
+ {
+  "kind": "speech-fragment",
+  "t": 13.97,
+  "gain_db": -8,
+  "pan": -0.2
+ },
+ {
+  "kind": "move",
+  "t": 14.3,
+  "dur": 0.7,
+  "gain_db": -14,
+  "material": "paper"
+ },
+ {
+  "kind": "arrive",
+  "t": 14.8,
+  "gain_db": -6,
+  "size": "case"
+ },
+ {
+  "kind": "speech-fragment",
+  "t": 14.9,
+  "gain_db": -12,
+  "pan": 0.1
+ },
+ {
+  "kind": "speech-fragment",
+  "t": 15.37,
+  "gain_db": -12,
+  "pan": 0.1
+ },
+ {
+  "kind": "arrive",
+  "t": 15.47,
+  "gain_db": -9,
+  "size": "facet",
+  "pan": -0.34641016151377546
+ },
+ {
+  "kind": "arrive",
+  "t": 15.94,
+  "gain_db": -9,
+  "size": "facet",
+  "pan": -7.347880794884119e-17
+ },
+ {
+  "kind": "speech-fragment",
+  "t": 16.35,
+  "gain_db": -12,
+  "pan": 0.1
+ },
+ {
+  "kind": "arrive",
+  "t": 16.92,
+  "gain_db": -9,
+  "size": "facet",
+  "pan": 0.34641016151377535
+ },
+ {
+  "kind": "speech-fragment",
+  "t": 16.92,
+  "gain_db": -12,
+  "pan": 0.1
+ },
+ {
+  "kind": "arrive",
+  "t": 17.49,
+  "gain_db": -9,
+  "size": "facet",
+  "pan": 0.3464101615137755
+ },
+ {
+  "kind": "thread",
+  "t": 18.35,
+  "dur": 0.5,
+  "gain_db": -10
+ },
+ {
+  "kind": "request",
+  "t": 18.62,
+  "gain_db": -6
+ },
+ {
+  "kind": "arrive",
+  "t": 18.8,
+  "gain_db": -9,
+  "size": "facet",
+  "pan": 2.4492935982947065e-17
+ },
+ {
+  "kind": "arrive",
+  "t": 19.1,
+  "gain_db": -9,
+  "size": "facet",
+  "pan": -0.3464101615137755
+ },
+ {
+  "kind": "evidence",
+  "t": 19.67,
+  "gain_db": -6,
+  "part": "send"
+ },
+ {
+  "kind": "evidence",
+  "t": 20.53,
+  "gain_db": -4,
+  "part": "accept"
+ },
+ {
+  "kind": "assemble",
+  "t": 21.15,
+  "gain_db": -10,
+  "size": "small"
+ },
+ {
+  "kind": "move",
+  "t": 22,
+  "dur": 1.5,
+  "gain_db": -10,
+  "pan": -0.3
+ },
+ {
+  "kind": "thread",
+  "t": 22.6,
+  "dur": 1,
+  "gain_db": -9,
+  "material": "pencil"
+ },
+ {
+  "kind": "packet",
+  "t": 23.5,
+  "gain_db": -14,
+  "size": "small",
+  "pan": 0.2
+ },
+ {
+  "kind": "door-close",
+  "t": 23.55,
+  "gain_db": -16,
+  "pan": 0.1
+ },
+ {
+  "kind": "arrive",
+  "t": 23.7,
+  "gain_db": -17,
+  "size": "small",
+  "pan": -0.4
+ },
+ {
+  "kind": "move",
+  "t": 23.95,
+  "gain_db": -18,
+  "material": "paper",
+  "pan": -0.5
+ },
+ {
+  "kind": "door-open",
+  "t": 24,
+  "gain_db": -10,
+  "pan": 0.11
+ },
+ {
+  "kind": "summon",
+  "t": 24.35,
+  "gain_db": -6,
+  "pan": -0.54
+ },
+ {
+  "kind": "move",
+  "t": 25.04,
+  "gain_db": -18,
+  "material": "paper",
+  "pan": -0.5
+ },
+ {
+  "kind": "summon",
+  "t": 25.25,
+  "gain_db": -6,
+  "pan": -0.34
+ },
+ {
+  "kind": "arrive",
+  "t": 25.31,
+  "gain_db": -8,
+  "size": "agent",
+  "agent": "siteRules",
+  "pan": -0.54
+ },
+ {
+  "kind": "arrive",
+  "t": 26.13,
+  "gain_db": -8,
+  "size": "agent",
+  "agent": "insurer",
+  "pan": -0.34
+ },
+ {
+  "kind": "summon",
+  "t": 26.15,
+  "gain_db": -6,
+  "pan": -0.13
+ },
+ {
+  "kind": "arrive",
+  "t": 27.03,
+  "gain_db": -8,
+  "size": "agent",
+  "agent": "fire",
+  "pan": -0.13
+ },
+ {
+  "kind": "summon",
+  "t": 27.05,
+  "gain_db": -6,
+  "pan": -0.54
+ },
+ {
+  "kind": "arrive",
+  "t": 27.93,
+  "gain_db": -8,
+  "size": "agent",
+  "agent": "riskEng",
+  "pan": -0.54
+ },
+ {
+  "kind": "summon",
+  "t": 27.95,
+  "gain_db": -6,
+  "pan": -0.33
+ },
+ {
+  "kind": "arrive",
+  "t": 28.83,
+  "gain_db": -8,
+  "size": "agent",
+  "agent": "evidence",
+  "pan": -0.33
+ },
+ {
+  "kind": "move",
+  "t": 28.98,
+  "dur": 0.85,
+  "gain_db": -9,
+  "material": "case",
+  "pan": 0.1
+ },
+ {
+  "kind": "arrive",
+  "t": 29.83,
+  "gain_db": -6,
+  "size": "case",
+  "pan": -0.3
+ },
+ {
+  "kind": "packet",
+  "t": 29.86,
+  "gain_db": -9,
+  "pan": 0.15
+ },
+ {
+  "kind": "thread",
+  "t": 30.4,
+  "dur": 0.7,
+  "gain_db": -11,
+  "pan": -0.1
+ },
+ {
+  "kind": "door-close",
+  "t": 30.42,
+  "gain_db": -11,
+  "pan": 0.43
+ },
+ {
+  "kind": "packet",
+  "t": 30.55,
+  "gain_db": -12,
+  "size": "small",
+  "pan": 0.25
+ },
+ {
+  "kind": "packet",
+  "t": 30.85,
+  "gain_db": -12,
+  "size": "small",
+  "pan": -0.25
+ },
+ {
+  "kind": "inspect",
+  "t": 31.25,
+  "gain_db": -9,
+  "agent": "siteRules",
+  "material": "ruler",
+  "pan": -0.29
+ },
+ {
+  "kind": "inspect",
+  "t": 32.07,
+  "gain_db": -12,
+  "agent": "fire",
+  "material": "ping",
+  "pan": 0.14
+ },
+ {
+  "kind": "inspect",
+  "t": 32.18,
+  "gain_db": -8,
+  "agent": "insurer",
+  "material": "clasp",
+  "pan": -0.1
+ },
+ {
+  "kind": "inspect",
+  "t": 32.25,
+  "gain_db": -9,
+  "agent": "riskEng",
+  "material": "measure",
+  "dur": 0.8,
+  "pan": -0.29
+ },
+ {
+  "kind": "inspect",
+  "t": 32.39,
+  "gain_db": -15,
+  "agent": "fire",
+  "material": "ping",
+  "pan": 0.14
+ },
+ {
+  "kind": "evidence",
+  "t": 32.72,
+  "gain_db": -7,
+  "part": "focus",
+  "pan": -0.1
+ },
+ {
+  "kind": "request",
+  "t": 32.72,
+  "gain_db": -10,
+  "pan": 0.04
+ },
+ {
+  "kind": "request",
+  "t": 33,
+  "gain_db": -11,
+  "pan": -0.22
+ },
+ {
+  "kind": "return",
+  "t": 33.12,
+  "gain_db": -13,
+  "size": "small",
+  "pan": 0.04
+ },
+ {
+  "kind": "evidence",
+  "t": 33.16,
+  "gain_db": -9,
+  "part": "accept",
+  "pan": -0.1
+ },
+ {
+  "kind": "door-open",
+  "t": 33.2,
+  "gain_db": -10,
+  "pan": 0.46
+ },
+ {
+  "kind": "return",
+  "t": 33.44,
+  "gain_db": -13,
+  "size": "small",
+  "pan": -0.22
+ },
+ {
+  "kind": "return",
+  "t": 33.45,
+  "gain_db": -8,
+  "agent": "fire",
+  "dur": 0.8,
+  "pan": 0.14
+ },
+ {
+  "kind": "return",
+  "t": 33.82,
+  "gain_db": -8,
+  "agent": "insurer",
+  "dur": 0.8,
+  "pan": -0.1
+ },
+ {
+  "kind": "return",
+  "t": 34.19,
+  "gain_db": -8,
+  "agent": "evidence",
+  "dur": 0.8,
+  "pan": -0.1
+ },
+ {
+  "kind": "return",
+  "t": 34.56,
+  "gain_db": -8,
+  "agent": "riskEng",
+  "dur": 0.8,
+  "pan": -0.35
+ },
+ {
+  "kind": "return",
+  "t": 34.93,
+  "gain_db": -8,
+  "agent": "siteRules",
+  "dur": 0.8,
+  "pan": -0.35
+ },
+ {
+  "kind": "door-close",
+  "t": 35.85,
+  "gain_db": -11,
+  "pan": 0.46
+ },
+ {
+  "kind": "assemble",
+  "t": 38.1,
+  "gain_db": -10,
+  "size": "small",
+  "pan": 0.66
+ },
+ {
+  "kind": "align",
+  "t": 38.4,
+  "dur": 0.9,
+  "gain_db": -6
+ },
+ {
+  "kind": "move",
+  "t": 38.42,
+  "gain_db": -17,
+  "material": "step",
+  "agent": "siteRules",
+  "pan": -0.35
+ },
+ {
+  "kind": "move",
+  "t": 38.7,
+  "gain_db": -17,
+  "material": "step",
+  "agent": "siteRules",
+  "pan": -0.38
+ },
+ {
+  "kind": "move",
+  "t": 38.98,
+  "gain_db": -17,
+  "material": "step",
+  "agent": "siteRules",
+  "pan": -0.41
+ },
+ {
+  "kind": "lock",
+  "t": 39.49,
+  "gain_db": -3,
+  "pan": -0.09
+ },
+ {
+  "kind": "door-open",
+  "t": 40.26,
+  "gain_db": -9,
+  "pan": 0.47
+ },
+ {
+  "kind": "route",
+  "t": 40.26,
+  "dur": 1.05,
+  "gain_db": -5
+ },
+ {
+  "kind": "arrive",
+  "t": 41.34,
+  "gain_db": -12,
+  "size": "small",
+  "pan": 0.85
+ },
+ {
+  "kind": "thread",
+  "t": 42.32,
+  "dur": 0.9,
+  "gain_db": -12,
+  "material": "pencil",
+  "pan": 0.1
+ },
+ {
+  "kind": "record",
+  "t": 43.05,
+  "gain_db": -5,
+  "pan": 0.01
+ },
+ {
+  "kind": "inspect",
+  "t": 47.81,
+  "gain_db": -14,
+  "pan": -0.05,
+  "agent": "insurer"
+ },
+ {
+  "kind": "deviate",
+  "t": 48.34,
+  "gain_db": -2,
+  "dur": 1,
+  "pan": -0.05
+ },
+ {
+  "kind": "lock",
+  "t": 49.09,
+  "gain_db": -16,
+  "pan": -0.05,
+  "material": "tick"
+ },
+ {
+  "kind": "inspect",
+  "t": 49.4,
+  "gain_db": -10,
+  "pan": 0.2,
+  "agent": "fire",
+  "material": "ping"
+ },
+ {
+  "kind": "return",
+  "t": 49.61,
+  "gain_db": -12,
+  "pan": -0.05
+ },
+ {
+  "kind": "compare",
+  "t": 50.28,
+  "gain_db": -9,
+  "pan": -0.05
+ },
+ {
+  "kind": "thread",
+  "t": 50.82,
+  "gain_db": -16,
+  "material": "pencil",
+  "dur": 0.5,
+  "pan": 0.3
+ },
+ {
+  "kind": "assemble",
+  "t": 52.35,
+  "gain_db": -4,
+  "dur": 0.8
+ },
+ {
+  "kind": "move",
+  "t": 52.45,
+  "gain_db": -14,
+  "dur": 0.7,
+  "pan": 0.15,
+  "size": "small"
+ },
+ {
+  "kind": "move",
+  "t": 52.85,
+  "gain_db": -11,
+  "dur": 0.75,
+  "pan": 0.1
+ },
+ {
+  "kind": "packet",
+  "t": 53.55,
+  "gain_db": -8,
+  "pan": 0.15
+ },
+ {
+  "kind": "escalate",
+  "t": 53.62,
+  "gain_db": -4,
+  "dur": 1.35,
+  "pan": 0.35
+ },
+ {
+  "kind": "arrive",
+  "t": 54.93,
+  "gain_db": -8,
+  "size": "case",
+  "pan": 0.4
+ },
+ {
+  "kind": "decision",
+  "t": 55.72,
+  "gain_db": -2,
+  "pan": 0.45
+ },
+ {
+  "kind": "thread",
+  "t": 57.35,
+  "gain_db": -14,
+  "dur": 0.8,
+  "pan": 0.4,
+  "material": "pencil"
+ },
+ {
+  "kind": "thread",
+  "t": 57.4,
+  "gain_db": -12,
+  "dur": 0.8,
+  "pan": 0.5,
+  "material": "pencil"
+ },
+ {
+  "kind": "thread",
+  "t": 57.75,
+  "gain_db": -12,
+  "dur": 0.8,
+  "pan": 0.5,
+  "material": "pencil"
+ },
+ {
+  "kind": "thread",
+  "t": 58.1,
+  "gain_db": -12,
+  "dur": 0.8,
+  "pan": 0.5,
+  "material": "pencil"
+ },
+ {
+  "kind": "decision",
+  "t": 58.25,
+  "gain_db": -6,
+  "pan": 0.3
+ },
+ {
+  "kind": "arrive",
+  "t": 58.4,
+  "gain_db": -16,
+  "size": "small",
+  "pan": 0.55
+ },
+ {
+  "kind": "route",
+  "t": 58.63,
+  "gain_db": -14,
+  "dur": 0.75,
+  "pan": 0.5
+ },
+ {
+  "kind": "arrive",
+  "t": 58.65,
+  "gain_db": -17,
+  "size": "small",
+  "pan": 0.6
+ },
+ {
+  "kind": "simulated",
+  "t": 58.8,
+  "gain_db": -10,
+  "pan": 0.6
+ },
+ {
+  "kind": "simulated",
+  "t": 58.9,
+  "gain_db": -18,
+  "pan": 0.65
+ },
+ {
+  "kind": "move",
+  "t": 59.98,
+  "gain_db": -14,
+  "dur": 0.36,
+  "pan": 0.2
+ },
+ {
+  "kind": "reject",
+  "t": 60.34,
+  "gain_db": -4,
+  "pan": 0.1
+ },
+ {
+  "kind": "request",
+  "t": 61.15,
+  "gain_db": -12,
+  "dur": 0.66,
+  "pan": 0.15,
+  "variant": "timer"
+ },
+ {
+  "kind": "decision",
+  "t": 61.82,
+  "gain_db": -4,
+  "dur": 0.55,
+  "pan": 0.5
+ },
+ {
+  "kind": "door-open",
+  "t": 62.249,
+  "gain_db": -6,
+  "pan": 0.6
+ },
+ {
+  "kind": "packet",
+  "t": 62.37,
+  "gain_db": -9,
+  "pan": 0.5
+ },
+ {
+  "kind": "arrive",
+  "t": 63.02,
+  "gain_db": -10,
+  "size": "case",
+  "pan": 0.6
+ },
+ {
+  "kind": "lock",
+  "t": 63.37,
+  "gain_db": -6,
+  "pan": 0.5
+ },
+ {
+  "kind": "record",
+  "t": 64.03,
+  "gain_db": -9,
+  "pan": 0.5
+ },
+ {
+  "kind": "record",
+  "t": 64.84,
+  "gain_db": -9,
+  "pan": 0.5
+ },
+ {
+  "kind": "record",
+  "t": 65.11,
+  "gain_db": -9,
+  "pan": 0.5
+ },
+ {
+  "kind": "record",
+  "t": 65.35,
+  "gain_db": -9,
+  "pan": 0.5
+ },
+ {
+  "kind": "door-close",
+  "t": 65.5,
+  "gain_db": -7,
+  "pan": 0.6
+ },
+ {
+  "kind": "decision",
+  "t": 66.28,
+  "gain_db": -4,
+  "dur": 0.45,
+  "pan": 0.5
+ },
+ {
+  "kind": "door-open",
+  "t": 66.631,
+  "gain_db": -6,
+  "pan": 0.6
+ },
+ {
+  "kind": "packet",
+  "t": 66.75,
+  "gain_db": -9,
+  "pan": 0.5
+ },
+ {
+  "kind": "move",
+  "t": 66.91,
+  "gain_db": -12,
+  "dur": 0.7,
+  "pan": 0.55,
+  "material": "wood"
+ },
+ {
+  "kind": "arrive",
+  "t": 67.38,
+  "gain_db": -10,
+  "size": "case",
+  "pan": 0.6
+ },
+ {
+  "kind": "print",
+  "t": 67.56,
+  "gain_db": -18,
+  "size": "small",
+  "pan": 0.55
+ },
+ {
+  "kind": "compare",
+  "t": 67.66,
+  "gain_db": -14,
+  "pan": 0.55
+ },
+ {
+  "kind": "compare",
+  "t": 68.02,
+  "gain_db": -6,
+  "pan": 0.5
+ },
+ {
+  "kind": "route",
+  "t": 68.82,
+  "gain_db": -14,
+  "pan": 0.6
+ },
+ {
+  "kind": "compare",
+  "t": 69.12,
+  "gain_db": -6,
+  "pan": 0.5
+ },
+ {
+  "kind": "lock",
+  "t": 69.57,
+  "gain_db": -4,
+  "pan": 0.5
+ },
+ {
+  "kind": "inspect",
+  "t": 69.69,
+  "gain_db": -10,
+  "pan": 0.5
+ },
+ {
+  "kind": "resolve",
+  "t": 70.14,
+  "gain_db": -5,
+  "pan": 0.5
+ },
+ {
+  "kind": "move",
+  "t": 70.98,
+  "gain_db": -14,
+  "dur": 0.36,
+  "pan": 0.55
+ },
+ {
+  "kind": "door-close",
+  "t": 71.3,
+  "gain_db": -7,
+  "pan": 0.6
+ },
+ {
+  "kind": "decision",
+  "t": 72.08,
+  "gain_db": -4,
+  "dur": 0.32,
+  "pan": 0.5
+ },
+ {
+  "kind": "door-open",
+  "t": 72.33,
+  "gain_db": -6,
+  "pan": 0.6
+ },
+ {
+  "kind": "packet",
+  "t": 72.43,
+  "gain_db": -9,
+  "pan": 0.5
+ },
+ {
+  "kind": "simulated",
+  "t": 72.82,
+  "gain_db": -4,
+  "pan": 0.6
+ },
+ {
+  "kind": "arrive",
+  "t": 73.08,
+  "gain_db": -10,
+  "size": "case",
+  "pan": 0.6
+ },
+ {
+  "kind": "request",
+  "t": 74.66,
+  "gain_db": -10,
+  "pan": 0.55
+ },
+ {
+  "kind": "request",
+  "t": 74.78,
+  "gain_db": -10,
+  "pan": 0.65
+ },
+ {
+  "kind": "request",
+  "t": 74.9,
+  "gain_db": -10,
+  "pan": 0.75
+ },
+ {
+  "kind": "return",
+  "t": 75.82,
+  "gain_db": -9,
+  "pan": 0.6
+ },
+ {
+  "kind": "return",
+  "t": 76.02,
+  "gain_db": -9,
+  "pan": 0.5499999999999999
+ },
+ {
+  "kind": "return",
+  "t": 76.22,
+  "gain_db": -9,
+  "pan": 0.5
+ },
+ {
+  "kind": "move",
+  "t": 76.85,
+  "gain_db": -10,
+  "dur": 1.05,
+  "pan": 0.3
+ },
+ {
+  "kind": "door-close",
+  "t": 77.05,
+  "gain_db": -7,
+  "pan": 0.6
+ },
+ {
+  "kind": "packet",
+  "t": 77.85,
+  "gain_db": -12,
+  "pan": 0.35
+ },
+ {
+  "kind": "decision",
+  "t": 78.15,
+  "gain_db": -10,
+  "pan": 0.35,
+  "part": "reach"
+ },
+ {
+  "kind": "move",
+  "t": 78.3,
+  "gain_db": -12,
+  "dur": 0.6,
+  "pan": 0.4
+ },
+ {
+  "kind": "door-open",
+  "t": 78.36,
+  "gain_db": -9,
+  "pan": 0.45,
+  "room": "mitigate"
+ },
+ {
+  "kind": "compare",
+  "t": 78.72,
+  "gain_db": -10,
+  "pan": 0.6
+ },
+ {
+  "kind": "lock",
+  "t": 79.26,
+  "gain_db": -7,
+  "pan": 0.45,
+  "size": "small"
+ },
+ {
+  "kind": "decision",
+  "t": 79.3,
+  "gain_db": -11,
+  "pan": 0.35,
+  "part": "reach"
+ },
+ {
+  "kind": "packet",
+  "t": 79.36,
+  "gain_db": -12,
+  "pan": 0.45,
+  "size": "small"
+ },
+ {
+  "kind": "move",
+  "t": 79.46,
+  "gain_db": -11,
+  "dur": 0.5,
+  "pan": 0.4
+ },
+ {
+  "kind": "door-open",
+  "t": 79.52,
+  "gain_db": -10,
+  "pan": 0.45,
+  "room": "transfer"
+ },
+ {
+  "kind": "request",
+  "t": 80.04,
+  "gain_db": -10,
+  "pan": 0.6
+ },
+ {
+  "kind": "simulated",
+  "t": 80.12,
+  "gain_db": -14,
+  "pan": 0.7
+ },
+ {
+  "kind": "decision",
+  "t": 80.36,
+  "gain_db": -11,
+  "pan": 0.35,
+  "part": "reach"
+ },
+ {
+  "kind": "return",
+  "t": 80.5,
+  "gain_db": -10,
+  "pan": 0.5
+ },
+ {
+  "kind": "move",
+  "t": 80.52,
+  "gain_db": -10,
+  "dur": 0.6,
+  "pan": 0.35
+ },
+ {
+  "kind": "door-open",
+  "t": 80.6,
+  "gain_db": -10,
+  "pan": 0.45,
+  "room": "retain"
+ },
+ {
+  "kind": "move",
+  "t": 80.64,
+  "gain_db": -14,
+  "dur": 0.52,
+  "pan": 0.3,
+  "size": "case"
+ },
+ {
+  "kind": "inspect",
+  "t": 81.2,
+  "gain_db": -12,
+  "pan": 0.6,
+  "agent": "retain"
+ },
+ {
+  "kind": "lock",
+  "t": 81.44,
+  "gain_db": -6,
+  "pan": 0.45
+ },
+ {
+  "kind": "decision",
+  "t": 81.66,
+  "gain_db": -3,
+  "pan": 0.3,
+  "dur": 0.8
+ },
+ {
+  "kind": "assemble",
+  "t": 82.06,
+  "gain_db": -8,
+  "pan": 0.3,
+  "size": "small"
+ },
+ {
+  "kind": "resolve",
+  "t": 82.44,
+  "gain_db": -6,
+  "pan": 0.3
+ },
+ {
+  "kind": "door-close",
+  "t": 82.72,
+  "gain_db": -9,
+  "pan": 0.45
+ },
+ {
+  "kind": "move",
+  "t": 83.24,
+  "gain_db": -10,
+  "dur": 1.5,
+  "pan": 0.1
+ },
+ {
+  "kind": "move",
+  "t": 83.3,
+  "gain_db": -12,
+  "dur": 1.6,
+  "pan": 0.2,
+  "size": "case"
+ },
+ {
+  "kind": "title",
+  "t": 84.7,
+  "gain_db": -16,
+  "pan": 0
+ },
+ {
+  "kind": "arrive",
+  "t": 84.74,
+  "gain_db": -12,
+  "pan": 0
+ },
+ {
+  "kind": "align",
+  "t": 84.8,
+  "gain_db": -16,
+  "pan": -0.5,
+  "size": "small"
+ },
+ {
+  "kind": "record",
+  "t": 84.9,
+  "gain_db": -6,
+  "pan": -0.25
+ },
+ {
+  "kind": "title",
+  "t": 85.1,
+  "gain_db": -16,
+  "pan": -0.6041666666666666
+ },
+ {
+  "kind": "print",
+  "t": 85.4,
+  "gain_db": -14,
+  "pan": -0.6
+ },
+ {
+  "kind": "title",
+  "t": 85.5,
+  "gain_db": -16,
+  "pan": 0.6041666666666666
+ },
+ {
+  "kind": "title",
+  "t": 85.8,
+  "gain_db": -10
+ },
+ {
+  "kind": "print",
+  "t": 85.9,
+  "gain_db": -18,
+  "pan": -0.55,
+  "material": "ghost"
+ },
+ {
+  "kind": "summon",
+  "t": 86.05,
+  "gain_db": -18,
+  "pan": -0.6,
+  "material": "ghost"
+ },
+ {
+  "kind": "wordmark",
+  "t": 88.4,
+  "gain_db": -6
+ }
+]
