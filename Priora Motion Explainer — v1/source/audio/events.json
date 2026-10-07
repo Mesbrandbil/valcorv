@@ -88,7 +88,7 @@
  },
  {
   "kind": "packet",
-  "t": 10.6,
+  "t": 10.65,
   "gain_db": -16,
   "size": "small",
   "pan": 0.5
@@ -101,7 +101,7 @@
  },
  {
   "kind": "packet",
-  "t": 11.4,
+  "t": 11.45,
   "gain_db": -16,
   "size": "small",
   "pan": 0.5
@@ -114,7 +114,7 @@
  },
  {
   "kind": "packet",
-  "t": 13,
+  "t": 13.05,
   "gain_db": -16,
   "size": "small",
   "pan": 0.5
@@ -127,7 +127,7 @@
  },
  {
   "kind": "packet",
-  "t": 14,
+  "t": 14.05,
   "gain_db": -16,
   "size": "small",
   "pan": 0.5
@@ -242,371 +242,200 @@
  },
  {
   "kind": "assemble",
-  "t": 21.5,
+  "t": 21.1,
   "gain_db": -10,
   "size": "small"
  },
  {
-  "kind": "move",
-  "t": 22.3,
-  "dur": 1.5,
-  "gain_db": -10,
-  "pan": -0.3
- },
- {
-  "kind": "thread",
-  "t": 23.6,
-  "dur": 0.8,
-  "gain_db": -9,
-  "material": "pencil"
- },
- {
-  "kind": "packet",
+  "kind": "arrive",
   "t": 23.8,
-  "gain_db": -14,
-  "size": "small",
+  "gain_db": -12,
+  "size": "case",
   "pan": 0.3
  },
  {
-  "kind": "arrive",
-  "t": 24.3,
-  "gain_db": -17,
-  "size": "small",
-  "pan": -0.4
- },
- {
   "kind": "door-open",
-  "t": 24.45,
-  "gain_db": -10,
+  "t": 24.05,
+  "gain_db": -11,
   "pan": 0.15
  },
  {
   "kind": "request",
-  "t": 24.62,
-  "gain_db": -16,
+  "t": 24.42,
+  "gain_db": -17,
   "part": "probe",
   "pan": -0.57
  },
  {
   "kind": "request",
-  "t": 25.1,
-  "gain_db": -16,
-  "part": "probe",
-  "pan": -0.02
- },
- {
-  "kind": "request",
-  "t": 25.58,
-  "gain_db": -16,
+  "t": 25.26,
+  "gain_db": -17,
   "part": "probe",
   "pan": -0.1
  },
  {
   "kind": "summon",
-  "t": 26.04,
-  "gain_db": -6,
-  "agent": "evidence",
-  "pan": -0.29
- },
- {
-  "kind": "summon",
-  "t": 26.64,
-  "gain_db": -6,
-  "agent": "riskEng",
-  "pan": -0.49
+  "t": 26.05,
+  "gain_db": -8,
+  "pan": 0.22
  },
  {
   "kind": "arrive",
-  "t": 26.7,
-  "gain_db": -8,
-  "size": "agent",
-  "agent": "evidence",
-  "pan": -0.29
- },
- {
-  "kind": "summon",
-  "t": 27.24,
-  "gain_db": -6,
-  "agent": "siteRules",
-  "pan": -0.49
- },
- {
-  "kind": "arrive",
-  "t": 27.3,
-  "gain_db": -8,
-  "size": "agent",
-  "agent": "riskEng",
-  "pan": -0.49
- },
- {
-  "kind": "summon",
-  "t": 27.84,
-  "gain_db": -6,
-  "agent": "fire",
-  "pan": -0.1
- },
- {
-  "kind": "arrive",
-  "t": 27.9,
-  "gain_db": -8,
-  "size": "agent",
-  "agent": "siteRules",
-  "pan": -0.49
- },
- {
-  "kind": "summon",
-  "t": 28.44,
-  "gain_db": -6,
-  "agent": "insurer",
-  "pan": -0.29
- },
- {
-  "kind": "arrive",
-  "t": 28.5,
-  "gain_db": -8,
-  "size": "agent",
-  "agent": "fire",
-  "pan": -0.1
- },
- {
-  "kind": "arrive",
-  "t": 29.1,
-  "gain_db": -8,
-  "size": "agent",
-  "agent": "insurer",
-  "pan": -0.29
- },
- {
-  "kind": "move",
-  "t": 29.12,
-  "dur": 0.66,
+  "t": 27.01,
   "gain_db": -9,
-  "material": "case",
-  "pan": 0.1
+  "size": "agent",
+  "agent": "evidence",
+  "pan": -0.29
  },
  {
   "kind": "arrive",
-  "t": 29.78,
-  "gain_db": -6,
+  "t": 27.61,
+  "gain_db": -9,
+  "size": "agent",
+  "agent": "riskEng",
+  "pan": -0.49
+ },
+ {
+  "kind": "arrive",
+  "t": 28.21,
+  "gain_db": -9,
+  "size": "agent",
+  "agent": "siteRules",
+  "pan": -0.49
+ },
+ {
+  "kind": "arrive",
+  "t": 28.81,
+  "gain_db": -9,
+  "size": "agent",
+  "agent": "fire",
+  "pan": -0.1
+ },
+ {
+  "kind": "arrive",
+  "t": 29.41,
+  "gain_db": -9,
+  "size": "agent",
+  "agent": "insurer",
+  "pan": -0.29
+ },
+ {
+  "kind": "arrive",
+  "t": 29.97,
+  "gain_db": -7,
   "size": "case",
   "pan": -0.29
  },
  {
   "kind": "packet",
-  "t": 30,
-  "gain_db": -9,
-  "pan": 0.15
- },
- {
-  "kind": "thread",
-  "t": 30.25,
-  "dur": 0.8,
-  "gain_db": -11,
-  "pan": -0.1
- },
- {
-  "kind": "packet",
   "t": 30.35,
-  "gain_db": -12,
-  "size": "small",
-  "pan": 0.1
+  "gain_db": -10,
+  "pan": -0.29
  },
  {
   "kind": "door-close",
-  "t": 30.55,
-  "gain_db": -11,
+  "t": 30.96,
+  "gain_db": -12,
   "pan": 0.15
  },
  {
-  "kind": "packet",
-  "t": 30.65,
-  "gain_db": -12,
-  "size": "small",
-  "pan": -0.1
- },
- {
-  "kind": "packet",
-  "t": 30.95,
-  "gain_db": -12,
-  "size": "small",
-  "pan": -0.3
- },
- {
   "kind": "inspect",
-  "t": 31.72,
-  "gain_db": -12,
+  "t": 31.75,
+  "gain_db": -13,
   "agent": "fire",
   "material": "ping",
   "pan": -0.1
  },
  {
   "kind": "inspect",
-  "t": 31.85,
-  "gain_db": -8,
+  "t": 31.9,
+  "gain_db": -9,
   "agent": "insurer",
   "material": "clasp",
   "pan": -0.29
  },
  {
   "kind": "inspect",
-  "t": 32,
-  "gain_db": -9,
+  "t": 32.52,
+  "gain_db": -10,
   "agent": "riskEng",
   "material": "measure",
-  "dur": 0.8,
-  "pan": -0.43
- },
- {
-  "kind": "inspect",
-  "t": 32.02,
-  "gain_db": -15,
-  "agent": "fire",
-  "material": "ping",
-  "pan": -0.1
+  "pan": -0.44
  },
  {
   "kind": "request",
-  "t": 32.5,
+  "t": 32.98,
   "gain_db": -10,
   "pan": -0.18
- },
- {
-  "kind": "return",
-  "t": 32.86,
-  "gain_db": -13,
-  "size": "small",
-  "pan": -0.18
- },
- {
-  "kind": "evidence",
-  "t": 33.02,
-  "gain_db": -7,
-  "part": "focus",
-  "pan": -0.29
- },
- {
-  "kind": "door-open",
-  "t": 33.05,
-  "gain_db": -10,
-  "pan": 0.15
  },
  {
   "kind": "inspect",
-  "t": 33.2,
-  "gain_db": -9,
+  "t": 33.25,
+  "gain_db": -10,
   "agent": "siteRules",
   "material": "ruler",
   "pan": -0.44
  },
  {
   "kind": "return",
-  "t": 33.2,
-  "gain_db": -8,
-  "agent": "insurer",
-  "dur": 0.8,
-  "pan": -0.29
- },
- {
-  "kind": "evidence",
-  "t": 33.43,
-  "gain_db": -9,
-  "part": "accept",
-  "pan": -0.29
- },
- {
-  "kind": "return",
-  "t": 33.8,
-  "gain_db": -8,
-  "agent": "fire",
-  "dur": 0.8,
-  "pan": -0.1
- },
- {
-  "kind": "request",
-  "t": 33.9,
-  "gain_db": -11,
-  "pan": -0.39
- },
- {
-  "kind": "return",
-  "t": 34.35,
-  "gain_db": -13,
-  "size": "small",
-  "pan": -0.39
- },
- {
-  "kind": "return",
   "t": 34.4,
-  "gain_db": -8,
-  "agent": "riskEng",
-  "dur": 0.8,
-  "pan": -0.49
+  "gain_db": -9,
+  "agent": "insurer",
+  "pan": 0.29
  },
  {
   "kind": "return",
   "t": 35,
-  "gain_db": -8,
-  "agent": "evidence",
-  "dur": 0.8,
-  "pan": -0.29
+  "gain_db": -9,
+  "agent": "fire",
+  "pan": 0.29
  },
  {
   "kind": "return",
   "t": 35.6,
-  "gain_db": -8,
+  "gain_db": -9,
+  "agent": "riskEng",
+  "pan": 0.29
+ },
+ {
+  "kind": "return",
+  "t": 36.15,
+  "gain_db": -9,
+  "agent": "evidence",
+  "pan": 0.29
+ },
+ {
+  "kind": "return",
+  "t": 36.7,
+  "gain_db": -9,
   "agent": "siteRules",
-  "dur": 0.8,
-  "pan": -0.49
+  "pan": 0.29
  },
  {
   "kind": "door-close",
-  "t": 36.3,
-  "gain_db": -11,
+  "t": 36.9,
+  "gain_db": -12,
   "pan": 0.15
  },
  {
   "kind": "assemble",
-  "t": 37.3,
-  "gain_db": -10,
+  "t": 37.62,
+  "gain_db": -11,
   "size": "small",
   "pan": 0.29
  },
  {
   "kind": "assemble",
-  "t": 38,
+  "t": 38.35,
   "gain_db": -14,
   "size": "small",
   "pan": -0.29
  },
  {
   "kind": "align",
-  "t": 38.4,
-  "dur": 0.9,
-  "gain_db": -6
- },
- {
-  "kind": "move",
-  "t": 38.42,
-  "gain_db": -17,
-  "material": "step",
-  "agent": "siteRules",
-  "pan": -0.49
- },
- {
-  "kind": "move",
-  "t": 38.7,
-  "gain_db": -17,
-  "material": "step",
-  "agent": "siteRules",
-  "pan": -0.52
- },
- {
-  "kind": "move",
-  "t": 38.98,
-  "gain_db": -17,
-  "material": "step",
-  "agent": "siteRules",
-  "pan": -0.54
+  "t": 38.5,
+  "dur": 0.8,
+  "gain_db": -7
  },
  {
   "kind": "lock",
@@ -617,30 +446,15 @@
  {
   "kind": "door-open",
   "t": 40.26,
-  "gain_db": -9,
+  "gain_db": -10,
   "pan": 0.15
  },
  {
   "kind": "route",
-  "t": 40.85,
-  "dur": 0.55,
-  "gain_db": -5,
-  "pan": 0.2
- },
- {
-  "kind": "arrive",
-  "t": 41.4,
-  "gain_db": -12,
-  "size": "small",
-  "pan": 0.48
- },
- {
-  "kind": "thread",
-  "t": 42.32,
-  "dur": 0.7,
-  "gain_db": -12,
-  "material": "pencil",
-  "pan": 0.1
+  "t": 40.26,
+  "dur": 0.990000000000002,
+  "gain_db": -6,
+  "pan": 0
  },
  {
   "kind": "record",
@@ -659,12 +473,12 @@
   "kind": "deviate",
   "t": 48.34,
   "gain_db": -2,
-  "dur": 1,
+  "dur": 0.55,
   "pan": -0.29
  },
  {
   "kind": "lock",
-  "t": 49.09,
+  "t": 48.75,
   "gain_db": -16,
   "pan": -0.29,
   "material": "tick"
@@ -679,62 +493,39 @@
  },
  {
   "kind": "return",
-  "t": 49.61,
+  "t": 50.14,
   "gain_db": -12,
-  "pan": -0.25
+  "pan": 0.36
  },
  {
   "kind": "compare",
-  "t": 50.28,
+  "t": 50.33,
   "gain_db": -9,
-  "pan": -0.25
- },
- {
-  "kind": "thread",
-  "t": 50.3,
-  "gain_db": -16,
-  "material": "pencil",
-  "dur": 0.35,
-  "pan": 0.4
- },
- {
-  "kind": "move",
-  "t": 52.1,
-  "gain_db": -15,
-  "dur": 0.5,
-  "pan": 0.29,
-  "size": "small"
+  "pan": 0.36
  },
  {
   "kind": "assemble",
-  "t": 52.12,
-  "gain_db": -4,
-  "dur": 0.45,
-  "pan": -0.29
- },
- {
-  "kind": "move",
-  "t": 52.12,
-  "gain_db": -11,
-  "dur": 0.6,
-  "pan": -0.04
+  "t": 51.95,
+  "gain_db": -5,
+  "dur": 0.5,
+  "pan": -0.07
  },
  {
   "kind": "packet",
-  "t": 52.72,
+  "t": 52.85,
   "gain_db": -8,
   "pan": 0.23
  },
  {
   "kind": "escalate",
-  "t": 53.95,
-  "gain_db": -4,
-  "dur": 1.55,
-  "pan": 0.23
+  "t": 53.45,
+  "gain_db": -5,
+  "dur": 1.2,
+  "pan": 0.12
  },
  {
   "kind": "arrive",
-  "t": 55.45,
+  "t": 54.65,
   "gain_db": -8,
   "size": "case",
   "pan": 0.58
@@ -743,549 +534,284 @@
   "kind": "decision",
   "t": 55.72,
   "gain_db": -2,
-  "dur": 0.68,
+  "dur": 0.65,
   "pan": 0.58
  },
  {
   "kind": "decision",
-  "t": 57.75,
-  "gain_db": -6,
-  "pan": 0.3
- },
- {
-  "kind": "route",
   "t": 58,
-  "gain_db": -14,
-  "dur": 0.25,
-  "pan": 0.5
- },
- {
-  "kind": "thread",
-  "t": 58.045,
-  "gain_db": -12,
-  "dur": 0.45,
-  "pan": 0.5,
-  "material": "pencil"
+  "gain_db": -7,
+  "pan": 0.3,
+  "part": "reach"
  },
  {
   "kind": "simulated",
-  "t": 58.045,
+  "t": 58.245,
   "gain_db": -10,
   "pan": 0.6
  },
  {
-  "kind": "thread",
-  "t": 58.05,
-  "gain_db": -12,
-  "dur": 0.45,
-  "pan": 0.5,
-  "material": "pencil"
- },
- {
-  "kind": "thread",
-  "t": 58.169,
-  "gain_db": -12,
-  "dur": 0.45,
-  "pan": 0.5,
-  "material": "pencil"
- },
- {
   "kind": "arrive",
-  "t": 58.3,
-  "gain_db": -16,
-  "size": "small",
-  "pan": 0.55
- },
- {
-  "kind": "arrive",
-  "t": 58.45,
-  "gain_db": -17,
-  "size": "small",
-  "pan": 0.6
- },
- {
-  "kind": "move",
-  "t": 59.85,
-  "gain_db": -10,
-  "dur": 0.75,
-  "pan": 0.3
- },
- {
-  "kind": "move",
-  "t": 60.65,
-  "gain_db": -14,
-  "dur": 0.27,
-  "pan": 0.3
+  "t": 60.5,
+  "gain_db": -12,
+  "size": "case",
+  "pan": 0.35
  },
  {
   "kind": "reject",
-  "t": 60.92,
+  "t": 60.95,
   "gain_db": -3,
   "pan": 0.35
  },
  {
   "kind": "request",
   "t": 62,
-  "gain_db": -13,
-  "dur": 0.52,
+  "gain_db": -14,
+  "dur": 0.75,
   "pan": 0.3,
   "variant": "timer"
  },
  {
   "kind": "decision",
-  "t": 62.6,
+  "t": 62.95,
   "gain_db": -4,
-  "dur": 0.35,
-  "pan": 0.5
- },
- {
-  "kind": "door-open",
-  "t": 62.887,
-  "gain_db": -6,
-  "pan": 0.6
+  "pan": 0.5,
+  "part": "door"
  },
  {
   "kind": "packet",
-  "t": 63.3,
+  "t": 63.7,
   "gain_db": -9,
-  "pan": 0.5
- },
- {
-  "kind": "arrive",
-  "t": 63.85,
-  "gain_db": -11,
-  "size": "case",
   "pan": 0.6
  },
  {
   "kind": "lock",
-  "t": 64.1,
+  "t": 64,
   "gain_db": -6,
   "pan": 0.5
  },
  {
   "kind": "record",
-  "t": 64.22,
+  "t": 64.41,
   "gain_db": -10,
-  "pan": 0.4
+  "pan": 0.5
  },
  {
-  "kind": "record",
-  "t": 64.22,
-  "gain_db": -10,
-  "pan": 0.6
- },
- {
-  "kind": "record",
-  "t": 64.38,
-  "gain_db": -10,
-  "pan": 0.4
- },
- {
-  "kind": "record",
-  "t": 64.38,
-  "gain_db": -10,
+  "kind": "door-open",
+  "t": 65.6,
+  "gain_db": -8,
   "pan": 0.6
  },
  {
   "kind": "return",
-  "t": 65.62,
+  "t": 66.1,
   "gain_db": -10,
+  "pan": 0.45
+ },
+ {
+  "kind": "door-close",
+  "t": 66.36,
+  "gain_db": -8,
+  "pan": 0.6
+ },
+ {
+  "kind": "arrive",
+  "t": 66.94,
+  "gain_db": -12,
+  "size": "case",
+  "pan": 0.35
+ },
+ {
+  "kind": "decision",
+  "t": 67.25,
+  "gain_db": -4,
+  "pan": 0.5,
+  "part": "door"
+ },
+ {
+  "kind": "packet",
+  "t": 67.95,
+  "gain_db": -9,
+  "pan": 0.6
+ },
+ {
+  "kind": "compare",
+  "t": 68.45,
+  "gain_db": -6,
   "pan": 0.5
  },
  {
   "kind": "door-close",
-  "t": 66.04,
-  "gain_db": -7,
-  "pan": 0.6
- },
- {
-  "kind": "move",
-  "t": 66.04,
-  "gain_db": -10,
-  "dur": 0.72,
-  "pan": 0.3
- },
- {
-  "kind": "decision",
-  "t": 66.85,
-  "gain_db": -4,
-  "dur": 0.22,
-  "pan": 0.5
- },
- {
-  "kind": "door-open",
-  "t": 67.03,
-  "gain_db": -6,
-  "pan": 0.6
- },
- {
-  "kind": "packet",
-  "t": 67.35,
-  "gain_db": -9,
-  "pan": 0.5
- },
- {
-  "kind": "arrive",
-  "t": 67.9,
-  "gain_db": -11,
-  "size": "case",
+  "t": 68.75,
+  "gain_db": -8,
   "pan": 0.6
  },
  {
   "kind": "compare",
-  "t": 67.97,
+  "t": 70.02,
   "gain_db": -6,
-  "pan": 0.5
- },
- {
-  "kind": "route",
-  "t": 68.59,
-  "gain_db": -14,
-  "pan": 0.45
- },
- {
-  "kind": "compare",
-  "t": 69.12,
-  "gain_db": -6,
-  "pan": 0.5
- },
- {
-  "kind": "lock",
-  "t": 69.5,
-  "gain_db": -4,
-  "pan": 0.5
- },
- {
-  "kind": "inspect",
-  "t": 69.75,
-  "gain_db": -10,
   "pan": 0.5
  },
  {
   "kind": "resolve",
-  "t": 70.13,
+  "t": 70.19,
   "gain_db": -5,
   "pan": 0.5
  },
  {
-  "kind": "compare",
-  "t": 70.5,
-  "gain_db": -6,
-  "pan": 0.5
- },
- {
-  "kind": "move",
-  "t": 70.95,
-  "gain_db": -14,
-  "dur": 0.3,
-  "pan": 0.55
+  "kind": "door-open",
+  "t": 70.8,
+  "gain_db": -8,
+  "pan": 0.6
  },
  {
   "kind": "return",
-  "t": 71.15,
+  "t": 71.3,
   "gain_db": -10,
-  "pan": 0.5
+  "pan": 0.45
  },
  {
   "kind": "door-close",
   "t": 71.55,
-  "gain_db": -7,
+  "gain_db": -8,
   "pan": 0.6
- },
- {
-  "kind": "move",
-  "t": 71.57,
-  "gain_db": -10,
-  "dur": 0.62,
-  "pan": 0.3
- },
- {
-  "kind": "decision",
-  "t": 72.23,
-  "gain_db": -4,
-  "dur": 0.28,
-  "pan": 0.5
- },
- {
-  "kind": "door-open",
-  "t": 72.46,
-  "gain_db": -6,
-  "pan": 0.6
- },
- {
-  "kind": "simulated",
-  "t": 72.87,
-  "gain_db": -4,
-  "pan": 0.6
- },
- {
-  "kind": "packet",
-  "t": 72.89,
-  "gain_db": -9,
-  "pan": 0.5
  },
  {
   "kind": "arrive",
-  "t": 73.44,
-  "gain_db": -11,
+  "t": 72.14,
+  "gain_db": -12,
   "size": "case",
-  "pan": 0.6
- },
- {
-  "kind": "request",
-  "t": 74.74,
-  "gain_db": -10,
-  "pan": 0.55
- },
- {
-  "kind": "request",
-  "t": 74.84,
-  "gain_db": -10,
-  "pan": 0.65
- },
- {
-  "kind": "request",
-  "t": 74.94,
-  "gain_db": -10,
-  "pan": 0.75
- },
- {
-  "kind": "return",
-  "t": 75.76,
-  "gain_db": -9,
-  "pan": 0.6
- },
- {
-  "kind": "return",
-  "t": 75.86,
-  "gain_db": -9,
-  "pan": 0.5499999999999999
- },
- {
-  "kind": "return",
-  "t": 75.96,
-  "gain_db": -9,
-  "pan": 0.5
- },
- {
-  "kind": "simulated",
-  "t": 76.51,
-  "gain_db": -14,
-  "pan": 0.6
- },
- {
-  "kind": "return",
-  "t": 77.25,
-  "gain_db": -10,
-  "pan": 0.5
- },
- {
-  "kind": "door-close",
-  "t": 77.63,
-  "gain_db": -7,
-  "pan": 0.6
- },
- {
-  "kind": "move",
-  "t": 79.07,
-  "gain_db": -10,
-  "dur": 0.44,
-  "pan": 0.3,
-  "size": "case"
+  "pan": 0.35
  },
  {
   "kind": "decision",
-  "t": 79.1,
-  "gain_db": -9,
-  "dur": 0.28,
-  "pan": 0.35,
-  "part": "reach"
- },
- {
-  "kind": "door-open",
-  "t": 79.32,
-  "gain_db": -8,
+  "t": 72.5,
+  "gain_db": -4,
   "pan": 0.5,
-  "room": "mitigate",
-  "by": "risk owner"
+  "part": "door"
  },
  {
-  "kind": "compare",
-  "t": 79.42,
-  "gain_db": -10,
-  "pan": 0.6
- },
- {
-  "kind": "lock",
-  "t": 79.8,
+  "kind": "simulated",
+  "t": 73.02,
   "gain_db": -6,
-  "pan": 0.45,
-  "size": "small"
- },
- {
-  "kind": "door-open",
-  "t": 80,
-  "gain_db": -8,
-  "pan": 0.5,
-  "room": "transfer",
-  "by": "risk owner"
- },
- {
-  "kind": "route",
-  "t": 80.04,
-  "gain_db": -9,
-  "dur": 0.34,
-  "pan": 0.5
+  "pan": 0.6
  },
  {
   "kind": "packet",
-  "t": 80.14,
-  "gain_db": -11,
-  "pan": 0.5,
-  "size": "small"
+  "t": 73.2,
+  "gain_db": -9,
+  "pan": 0.6
+ },
+ {
+  "kind": "door-close",
+  "t": 74,
+  "gain_db": -8,
+  "pan": 0.6
  },
  {
   "kind": "request",
-  "t": 80.5,
+  "t": 74.9,
   "gain_db": -10,
   "pan": 0.65
  },
  {
-  "kind": "simulated",
-  "t": 80.56,
-  "gain_db": -14,
-  "pan": 0.7
- },
- {
   "kind": "return",
-  "t": 80.86,
+  "t": 75.62,
   "gain_db": -9,
-  "pan": 0.55
- },
- {
-  "kind": "door-open",
-  "t": 80.92,
-  "gain_db": -8,
-  "pan": 0.5,
-  "room": "retain",
-  "by": "risk owner"
- },
- {
-  "kind": "route",
-  "t": 80.96,
-  "gain_db": -10,
-  "dur": 0.36,
   "pan": 0.5
  },
  {
-  "kind": "move",
-  "t": 81.06,
-  "gain_db": -12,
-  "dur": 0.42,
-  "pan": 0.5,
-  "size": "small"
+  "kind": "return",
+  "t": 75.95,
+  "gain_db": -9,
+  "pan": 0.5
  },
  {
-  "kind": "lock",
-  "t": 81.5,
-  "gain_db": -5,
-  "pan": 0.45
+  "kind": "return",
+  "t": 76.55,
+  "gain_db": -9,
+  "pan": 0.5
  },
  {
   "kind": "decision",
-  "t": 81.8,
-  "gain_db": -2,
-  "pan": 0.3,
-  "dur": 0.6
+  "t": 77.6,
+  "gain_db": -10,
+  "dur": 0.4,
+  "pan": 0.2,
+  "part": "loop"
  },
  {
-  "kind": "assemble",
-  "t": 82.08,
-  "gain_db": -7,
+  "kind": "return",
+  "t": 77.92,
+  "gain_db": -10,
+  "pan": 0.45
+ },
+ {
+  "kind": "compare",
+  "t": 79.84,
+  "gain_db": -9,
+  "pan": 0.45,
+  "room": "mitigate"
+ },
+ {
+  "kind": "lock",
+  "t": 81.26,
+  "gain_db": -9,
+  "pan": 0.45,
+  "room": "retain"
+ },
+ {
+  "kind": "return",
+  "t": 82.6,
+  "gain_db": -9,
+  "pan": 0.4,
+  "room": "transfer"
+ },
+ {
+  "kind": "decision",
+  "t": 82.64,
+  "gain_db": -4,
   "pan": 0.3,
-  "size": "small"
+  "dur": 0.38
  },
  {
   "kind": "resolve",
-  "t": 82.42,
-  "gain_db": -5,
+  "t": 83.02,
+  "gain_db": -12,
   "pan": 0.3
  },
  {
-  "kind": "move",
-  "t": 84.4,
-  "gain_db": -10,
-  "dur": 0.62,
-  "pan": 0.1
+  "kind": "record",
+  "t": 85,
+  "gain_db": -6,
+  "pan": 0.25
  },
  {
-  "kind": "move",
-  "t": 84.4,
+  "kind": "arrive",
+  "t": 85.45,
   "gain_db": -12,
-  "dur": 0.58,
-  "pan": 0.25,
-  "size": "case"
+  "pan": 0
  },
  {
   "kind": "title",
-  "t": 84.6,
+  "t": 85.45,
   "gain_db": -16,
   "pan": 0
  },
  {
-  "kind": "align",
-  "t": 84.85,
-  "gain_db": -16,
-  "pan": -0.5,
-  "size": "small"
- },
- {
-  "kind": "title",
-  "t": 84.9,
-  "gain_db": -16,
-  "pan": -0.6041666666666666
- },
- {
-  "kind": "record",
-  "t": 84.98,
-  "gain_db": -5,
-  "pan": 0.25
- },
- {
-  "kind": "title",
-  "t": 85.2,
-  "gain_db": -16,
-  "pan": 0.6041666666666666
- },
- {
   "kind": "print",
-  "t": 85.4,
-  "gain_db": -14,
+  "t": 85.62,
+  "gain_db": -16,
   "pan": -0.6
  },
  {
-  "kind": "print",
-  "t": 85.7,
-  "gain_db": -18,
-  "pan": -0.55,
-  "material": "ghost"
- },
- {
-  "kind": "summon",
-  "t": 85.75,
-  "gain_db": -18,
-  "pan": -0.6,
-  "material": "ghost"
- },
- {
   "kind": "title",
-  "t": 86.06,
+  "t": 86.07,
   "gain_db": -10
  },
  {
   "kind": "wordmark",
-  "t": 88.75,
+  "t": 88.5,
   "gain_db": -6
  }
 ]

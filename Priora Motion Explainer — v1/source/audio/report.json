@@ -31,14 +31,14 @@
  },
  "gains": {
   "master_gain_db": 0.306,
-  "master_limiter_max_reduction_db": 1.63,
+  "master_limiter_max_reduction_db": 1.66,
   "master_limiter_activity": {
-   "seconds_over_0_5_db": 0.423,
-   "seconds_over_1_db": 0.18,
+   "seconds_over_0_5_db": 0.425,
+   "seconds_over_1_db": 0.182,
    "deepest": [
     {
      "t": 62.7,
-     "db": 1.63
+     "db": 1.66
     },
     {
      "t": 19.0,
@@ -51,8 +51,8 @@
    ]
   },
   "no_narration_worker_gain_db": 0.306,
-  "no_narration_background_gain_db": 10.673,
-  "no_narration_background_over_master_db": 10.367,
+  "no_narration_background_gain_db": 10.682,
+  "no_narration_background_over_master_db": 10.375,
   "no_narration_limiter_max_reduction_db": 0.0,
   "note": "master.wav = TP-limiter(G * voice.wav as dual mono, DC-blocked + music.wav + sfx.wav); the stems are written post-gain G (the level they have inside master.wav, before the limiter). master-no-narration.wav = TP-limiter(G * voice-worker.wav + Gb * (music ducked under W01 only + sfx)), Gb = no_narration_background_gain_db"
  },
@@ -63,22 +63,22 @@
    "sample_rate": 48000,
    "channels": 2,
    "subtype": "PCM_24",
-   "integrated_lufs": -32.27,
-   "true_peak_dbtp": -18.56,
-   "sample_peak_dbfs": -18.56,
-   "max_momentary_lufs": -26.99,
+   "integrated_lufs": -32.26,
+   "true_peak_dbtp": -18.53,
+   "sample_peak_dbfs": -18.54,
+   "max_momentary_lufs": -26.97,
    "max_momentary_at_s": 46.76,
    "clipped_samples": 0,
    "dc_offset": [
-    2.07e-10,
-    3.17e-10
+    2.36e-10,
+    3.33e-10
    ],
    "first_sample_abs": 0.0,
    "last_10ms_peak_dbfs": -240.0,
-   "sha256": "2a0613d6474ab0af6b3a0aa4c7c74057db1e7f6e8292e5b9816cf20ab817a752",
+   "sha256": "07c715701c0a3ec2083689b6662b9d1dbdd2b6b20aa5e7018828767724c82c20",
    "ffmpeg_ebur128": {
     "integrated_lufs": -32.2,
-    "true_peak_dbtp": -18.6
+    "true_peak_dbtp": -18.5
    }
   },
   "sfx.wav": {
@@ -87,22 +87,22 @@
    "sample_rate": 48000,
    "channels": 2,
    "subtype": "PCM_24",
-   "integrated_lufs": -34.7,
-   "true_peak_dbtp": -13.78,
-   "sample_peak_dbfs": -13.79,
-   "max_momentary_lufs": -26.77,
+   "integrated_lufs": -34.72,
+   "true_peak_dbtp": -14.32,
+   "sample_peak_dbfs": -14.33,
+   "max_momentary_lufs": -26.76,
    "max_momentary_at_s": 48.55,
    "clipped_samples": 0,
    "dc_offset": [
-    9.6e-12,
-    -6.37e-12
+    1e-11,
+    8.42e-12
    ],
    "first_sample_abs": 0.0,
    "last_10ms_peak_dbfs": -240.0,
-   "sha256": "baa4d609d3a32f185c19a3d287ab45abc88419d8e6478558caa1a6662e959ccd",
+   "sha256": "fefc8f0f5c8b761aa645d9f7f3603447cf7cd4c1e71155c4fbd8ca0445a21747",
    "ffmpeg_ebur128": {
     "integrated_lufs": -34.7,
-    "true_peak_dbtp": -13.8
+    "true_peak_dbtp": -14.3
    }
   },
   "master.wav": {
@@ -114,16 +114,16 @@
    "integrated_lufs": -16.0,
    "true_peak_dbtp": -1.3,
    "sample_peak_dbfs": -1.31,
-   "max_momentary_lufs": -10.78,
+   "max_momentary_lufs": -10.79,
    "max_momentary_at_s": 87.6,
    "clipped_samples": 0,
    "dc_offset": [
-    1.24e-07,
-    1.14e-07
+    1.27e-07,
+    1.22e-07
    ],
    "first_sample_abs": 0.0,
    "last_10ms_peak_dbfs": -240.0,
-   "sha256": "d74b16ccca62b2d47bd8dafffe82e7014d19d0c555d1b16feebd540220dc8f56",
+   "sha256": "45098d52c199343ec7bd2e8e4cafdbc0d6ba27ab8dffedec56e8c4a0845a8d1c",
    "ffmpeg_ebur128": {
     "integrated_lufs": -16.0,
     "true_peak_dbtp": -1.3
@@ -136,18 +136,18 @@
    "channels": 2,
    "subtype": "PCM_24",
    "integrated_lufs": -17.0,
-   "true_peak_dbtp": -2.55,
-   "sample_peak_dbfs": -2.56,
+   "true_peak_dbtp": -2.59,
+   "sample_peak_dbfs": -2.6,
    "max_momentary_lufs": -12.48,
    "max_momentary_at_s": 11.92,
    "clipped_samples": 0,
    "dc_offset": [
-    -2.92e-09,
-    -4.25e-09
+    -1.66e-09,
+    -2.75e-09
    ],
    "first_sample_abs": 0.0,
    "last_10ms_peak_dbfs": -240.0,
-   "sha256": "ea22822bf346f0feb00dfa83b3af2ee140fec797fe6a269cc12a2a5761334b16",
+   "sha256": "6afa2edc10f2055c9f465d9d26f3d4a997541e7232088c897dd5e26630cabd20",
    "ffmpeg_ebur128": {
     "integrated_lufs": -17.0,
     "true_peak_dbtp": -2.6
@@ -155,8 +155,8 @@
   }
  },
  "music": {
-  "stem_integrated_lufs": -32.27,
-  "loudest_momentary_400ms_lufs": -26.99,
+  "stem_integrated_lufs": -32.26,
+  "loudest_momentary_400ms_lufs": -26.97,
   "loudest_momentary_at_s": 46.76,
   "analysis_before_ducking": {
    "segments": [
@@ -169,7 +169,7 @@
       "A3",
       "E4"
      ],
-     "lufs": -31.55,
+     "lufs": -31.53,
      "strongest_notes": [
       {
        "note": "D3",
@@ -213,7 +213,7 @@
       "A3",
       "E4"
      ],
-     "lufs": -30.55,
+     "lufs": -30.53,
      "strongest_notes": [
       {
        "note": "D3",
@@ -246,7 +246,7 @@
       "C#4",
       "E4"
      ],
-     "lufs": -28.55,
+     "lufs": -28.53,
      "strongest_notes": [
       {
        "note": "F#3",
@@ -297,7 +297,7 @@
       "E4",
       "A4"
      ],
-     "lufs": -28.55,
+     "lufs": -28.54,
      "strongest_notes": [
       {
        "note": "F#3",
@@ -336,7 +336,7 @@
       "B3",
       "F#4"
      ],
-     "lufs": -28.06,
+     "lufs": -28.03,
      "strongest_notes": [
       {
        "note": "D3",
@@ -386,7 +386,7 @@
       "G3",
       "D4"
      ],
-     "lufs": -28.06
+     "lufs": -28.03
     },
     {
      "from": 32.0,
@@ -399,7 +399,7 @@
       "D4",
       "E4"
      ],
-     "lufs": -28.56,
+     "lufs": -28.53,
      "strongest_notes": [
       {
        "note": "B2",
@@ -449,7 +449,7 @@
       "B3",
       "D4"
      ],
-     "lufs": -28.05
+     "lufs": -28.03
     },
     {
      "from": 40.91,
@@ -464,7 +464,7 @@
       "A4",
       "E5"
      ],
-     "lufs": -26.06,
+     "lufs": -26.03,
      "strongest_notes": [
       {
        "note": "F#3",
@@ -515,7 +515,7 @@
       "F#4",
       "A4"
      ],
-     "lufs": -27.05,
+     "lufs": -27.03,
      "strongest_notes": [
       {
        "note": "D3",
@@ -559,7 +559,7 @@
       "A3",
       "C#4"
      ],
-     "lufs": -29.06,
+     "lufs": -29.03,
      "strongest_notes": [
       {
        "note": "B2",
@@ -609,7 +609,7 @@
       "F#3",
       "C#4"
      ],
-     "lufs": -28.05
+     "lufs": -28.04
     },
     {
      "from": 55.73,
@@ -621,7 +621,7 @@
       "G3",
       "D4"
      ],
-     "lufs": -29.05
+     "lufs": -29.03
     },
     {
      "from": 58.3,
@@ -633,7 +633,7 @@
       "B3",
       "E4"
      ],
-     "lufs": -27.06
+     "lufs": -27.03
     },
     {
      "from": 60.85,
@@ -646,7 +646,7 @@
       "B3",
       "F#4"
      ],
-     "lufs": -27.56,
+     "lufs": -27.53,
      "strongest_notes": [
       {
        "note": "D3",
@@ -697,7 +697,7 @@
       "D4",
       "B4"
      ],
-     "lufs": -27.56
+     "lufs": -27.53
     },
     {
      "from": 69.84,
@@ -710,7 +710,7 @@
       "D4",
       "B4"
      ],
-     "lufs": -27.56
+     "lufs": -27.53
     },
     {
      "from": 72.7,
@@ -722,7 +722,7 @@
       "D4",
       "G4"
      ],
-     "lufs": -29.55,
+     "lufs": -29.53,
      "strongest_notes": [
       {
        "note": "B2",
@@ -767,7 +767,7 @@
       "B3",
       "D4"
      ],
-     "lufs": -28.55
+     "lufs": -28.53
     },
     {
      "from": 81.94,
@@ -781,11 +781,11 @@
       "F#4",
       "A4"
      ],
-     "lufs": -27.06
+     "lufs": -27.03
     },
     {
      "from": 84.35,
-     "to": 87.8,
+     "to": 86.4,
      "notes": [
       "D2",
       "A2",
@@ -794,48 +794,48 @@
       "F#4",
       "E5"
      ],
-     "lufs": -26.56,
+     "lufs": -26.54,
      "strongest_notes": [
       {
        "note": "D3",
        "hz_12tet": 146.83,
-       "centre_cents": 1.1,
+       "centre_cents": 1.3,
        "partials": 1
       },
       {
        "note": "E3",
        "hz_12tet": 164.81,
-       "centre_cents": -0.1,
+       "centre_cents": -0.2,
        "partials": 1
       },
       {
        "note": "A3",
        "hz_12tet": 220.0,
-       "centre_cents": -0.6,
+       "centre_cents": -0.4,
        "partials": 2
       },
       {
        "note": "F#4",
        "hz_12tet": 369.99,
-       "centre_cents": -1.3,
+       "centre_cents": -1.6,
        "partials": 3
       },
       {
        "note": "A4",
        "hz_12tet": 440.0,
-       "centre_cents": 0.7,
+       "centre_cents": 0.2,
        "partials": 1
       },
       {
        "note": "E5",
        "hz_12tet": 659.26,
-       "centre_cents": -0.9,
+       "centre_cents": -0.6,
        "partials": 3
       }
      ]
     }
    ],
-   "min_momentary_lufs_3_to_88_8": -34.17,
+   "min_momentary_lufs_3_to_88_8": -34.15,
    "min_momentary_at_s": 5.83,
    "max_fall_in_100ms_db": 1.49,
    "max_fall_at_s": 64.48,
@@ -857,7 +857,7 @@
      "level_db": -8.0,
      "brightness": 0.25,
      "reverb_send": 0.35,
-     "loudness_trim_db": 1.11
+     "loudness_trim_db": 1.1
     },
     {
      "t": 6.32,
@@ -873,7 +873,7 @@
      "level_db": -7.0,
      "brightness": 0.3,
      "reverb_send": 0.38,
-     "loudness_trim_db": 1.11
+     "loudness_trim_db": 1.1
     },
     {
      "t": 7.95,
@@ -888,7 +888,7 @@
      "level_db": -7.0,
      "brightness": 0.25,
      "reverb_send": 0.35,
-     "loudness_trim_db": 0.41
+     "loudness_trim_db": 0.4
     },
     {
      "t": 14.5,
@@ -904,7 +904,7 @@
      "level_db": -5.0,
      "brightness": 0.4,
      "reverb_send": 0.35,
-     "loudness_trim_db": -0.4
+     "loudness_trim_db": -0.41
     },
     {
      "t": 18.67,
@@ -920,7 +920,7 @@
      "level_db": -5.0,
      "brightness": 0.42,
      "reverb_send": 0.35,
-     "loudness_trim_db": -0.67
+     "loudness_trim_db": -0.69
     },
     {
      "t": 23.15,
@@ -936,7 +936,7 @@
      "level_db": -4.5,
      "brightness": 0.38,
      "reverb_send": 0.35,
-     "loudness_trim_db": 0.55
+     "loudness_trim_db": 0.54
     },
     {
      "t": 27.33,
@@ -951,7 +951,7 @@
      "level_db": -4.5,
      "brightness": 0.36,
      "reverb_send": 0.35,
-     "loudness_trim_db": -0.96
+     "loudness_trim_db": -0.97
     },
     {
      "t": 31.0,
@@ -967,7 +967,7 @@
      "level_db": -5.0,
      "brightness": 0.34,
      "reverb_send": 0.35,
-     "loudness_trim_db": 2.07
+     "loudness_trim_db": 2.06
     },
     {
      "t": 36.4,
@@ -982,7 +982,7 @@
      "level_db": -4.5,
      "brightness": 0.36,
      "reverb_send": 0.35,
-     "loudness_trim_db": 1.01
+     "loudness_trim_db": 1.0
     },
     {
      "t": 39.34,
@@ -998,7 +998,7 @@
      "level_db": -3.0,
      "brightness": 0.55,
      "reverb_send": 0.38,
-     "loudness_trim_db": 1.01
+     "loudness_trim_db": 1.0
     },
     {
      "t": 40.41,
@@ -1016,7 +1016,7 @@
      "level_db": -2.5,
      "brightness": 0.68,
      "reverb_send": 0.42,
-     "loudness_trim_db": -2.11
+     "loudness_trim_db": -2.12
     },
     {
      "t": 44.2,
@@ -1032,7 +1032,7 @@
      "level_db": -3.5,
      "brightness": 0.55,
      "reverb_send": 0.38,
-     "loudness_trim_db": 0.27
+     "loudness_trim_db": 0.26
     },
     {
      "t": 48.44,
@@ -1047,7 +1047,7 @@
      "level_db": -5.5,
      "brightness": 0.26,
      "reverb_send": 0.38,
-     "loudness_trim_db": -0.69
+     "loudness_trim_db": -0.7
     },
     {
      "t": 52.5,
@@ -1062,7 +1062,7 @@
      "level_db": -4.5,
      "brightness": 0.24,
      "reverb_send": 0.4,
-     "loudness_trim_db": 1.26
+     "loudness_trim_db": 1.24
     },
     {
      "t": 54.98,
@@ -1077,7 +1077,7 @@
      "level_db": -5.5,
      "brightness": 0.26,
      "reverb_send": 0.4,
-     "loudness_trim_db": -0.55
+     "loudness_trim_db": -0.56
     },
     {
      "t": 57.7,
@@ -1092,7 +1092,7 @@
      "level_db": -3.5,
      "brightness": 0.36,
      "reverb_send": 0.4,
-     "loudness_trim_db": -0.26
+     "loudness_trim_db": -0.27
     },
     {
      "t": 60.1,
@@ -1108,7 +1108,7 @@
      "level_db": -4.0,
      "brightness": 0.3,
      "reverb_send": 0.36,
-     "loudness_trim_db": 2.54
+     "loudness_trim_db": 2.53
     },
     {
      "t": 66.55,
@@ -1124,7 +1124,7 @@
      "level_db": -4.0,
      "brightness": 0.5,
      "reverb_send": 0.36,
-     "loudness_trim_db": 0.56
+     "loudness_trim_db": 0.55
     },
     {
      "t": 69.09,
@@ -1140,7 +1140,7 @@
      "level_db": -4.0,
      "brightness": 0.52,
      "reverb_send": 0.36,
-     "loudness_trim_db": 1.97
+     "loudness_trim_db": 1.96
     },
     {
      "t": 71.95,
@@ -1155,7 +1155,7 @@
      "level_db": -6.0,
      "brightness": 0.2,
      "reverb_send": 0.62,
-     "loudness_trim_db": -0.74
+     "loudness_trim_db": -0.75
     },
     {
      "t": 78.3,
@@ -1171,7 +1171,7 @@
      "level_db": -5.0,
      "brightness": 0.36,
      "reverb_send": 0.4,
-     "loudness_trim_db": -1.32
+     "loudness_trim_db": -1.33
     },
     {
      "t": 81.34,
@@ -1188,7 +1188,7 @@
      "level_db": -3.5,
      "brightness": 0.55,
      "reverb_send": 0.4,
-     "loudness_trim_db": -2.35
+     "loudness_trim_db": -2.36
     },
     {
      "t": 83.55,
@@ -1204,20 +1204,19 @@
      "level_db": -3.0,
      "brightness": 0.6,
      "reverb_send": 0.42,
-     "loudness_trim_db": -1.69
+     "loudness_trim_db": -1.48
     },
     {
-     "t": 88.3,
-     "xfade_s": 1.0,
+     "t": 87.9,
+     "xfade_s": 3.0,
      "notes": [
       "D2",
-      "A2",
-      "A3"
+      "A2"
      ],
-     "level_db": -5.0,
-     "brightness": 0.4,
+     "level_db": -12.0,
+     "brightness": 0.35,
      "reverb_send": 0.42,
-     "loudness_trim_db": -1.69
+     "loudness_trim_db": -1.48
     }
    ],
    "piano": [
@@ -1426,8 +1425,8 @@
   }
  },
  "sfx": {
-  "stem_integrated_lufs": -34.7,
-  "loudest_momentary_400ms_lufs": -26.77,
+  "stem_integrated_lufs": -34.72,
+  "loudest_momentary_400ms_lufs": -26.76,
   "loudest_momentary_at_s": 48.55,
   "bus_leveller": {
    "cap_lufs": -25.0,
@@ -1685,7 +1684,7 @@
     "text": "The risk owner stays in control.",
     "raw_lufs_mix_frame": -16.82,
     "gain_db": 0.82,
-    "master_lufs": -15.7,
+    "master_lufs": -15.71,
     "target_lufs": -16.0
    },
    {
@@ -1728,7 +1727,7 @@
     "kind": "deviate",
     "t": 48.34,
     "lufs_100ms": -25.5,
-    "measured_lufs_100ms": -25.19
+    "measured_lufs_100ms": -25.18
    },
    {
     "kind": "decision",
@@ -1742,25 +1741,25 @@
     "kind": "lock",
     "t": 39.35,
     "lufs_100ms": -28.0,
-    "measured_lufs_100ms": -26.33
+    "measured_lufs_100ms": -26.47
    },
    {
     "kind": "move",
     "t": 38.98,
-    "lufs_100ms": -43.6,
-    "measured_lufs_100ms": -26.37
+    "lufs_100ms": -43.9,
+    "measured_lufs_100ms": -26.5
    },
    {
     "kind": "resolve",
     "t": 70.13,
     "lufs_100ms": -29.8,
-    "measured_lufs_100ms": -27.22
+    "measured_lufs_100ms": -27.46
    },
    {
     "kind": "compare",
     "t": 70.5,
-    "lufs_100ms": -30.5,
-    "measured_lufs_100ms": -27.34
+    "lufs_100ms": -31.0,
+    "measured_lufs_100ms": -27.57
    },
    {
     "kind": "evidence",
@@ -1769,26 +1768,26 @@
     "measured_lufs_100ms": -27.69
    },
    {
-    "kind": "move",
-    "t": 60.65,
-    "lufs_100ms": -40.4,
-    "measured_lufs_100ms": -27.7
+    "kind": "lock",
+    "t": 69.5,
+    "lufs_100ms": -28.0,
+    "measured_lufs_100ms": -27.69
    }
   ],
   "opening_prints_measured": [
-   -27.94,
    -27.73,
-   -28.07
+   -27.96,
+   -28.21
   ],
   "speech_fragments_measured": [
-   -38.18,
-   -38.13,
-   -38.14,
-   -37.04,
-   -38.66,
-   -31.26,
-   -42.42,
-   -41.12
+   -38.88,
+   -38.95,
+   -38.64,
+   -36.77,
+   -38.38,
+   -31.81,
+   -43.19,
+   -40.73
   ]
  },
  "no_narration_small_sounds": {
@@ -1796,7 +1795,7 @@
    "speech-fragment",
    "packet"
   ],
-  "sfx_peak_under_W01_dbfs": -20.32
+  "sfx_peak_under_W01_dbfs": -20.35
  },
  "ending": {
   "duck_after_last_line_db": [
@@ -1808,9 +1807,53 @@
    "seconds": 1.2
   },
   "music_peak_after_fade_dbfs": -240.0,
-  "music_largest_rise_during_fade_db_per_10ms": -0.008,
+  "music_largest_rise_during_fade_db_per_10ms": -0.057,
   "wordmark_t": 88.75,
-  "wordmark_level_at_silent_point_db_re_peak": -64.5,
+  "wordmark_peak_rms_dbfs": -29.3,
+  "wordmark_rms_at_silent_point_dbfs": -61.8,
+  "wordmark_vs_bed_dbfs": [
+   {
+    "t": 88.75,
+    "bed": -39.2,
+    "wordmark": -33.6
+   },
+   {
+    "t": 88.9,
+    "bed": -40.7,
+    "wordmark": -32.8
+   },
+   {
+    "t": 89.05,
+    "bed": -42.9,
+    "wordmark": -37.2
+   },
+   {
+    "t": 89.2,
+    "bed": -45.9,
+    "wordmark": -41.9
+   },
+   {
+    "t": 89.35,
+    "bed": -50.1,
+    "wordmark": -46.4
+   },
+   {
+    "t": 89.5,
+    "bed": -55.1,
+    "wordmark": -50.9
+   },
+   {
+    "t": 89.65,
+    "bed": -63.3,
+    "wordmark": -55.5
+   },
+   {
+    "t": 89.8,
+    "bed": -78.4,
+    "wordmark": -60.1
+   }
+  ],
+  "bed_over_wordmark_at": [],
   "events_after_wordmark": []
  },
  "speech_vs_background": {
@@ -1821,10 +1864,10 @@
     "start": 0.9,
     "end": 4.71,
     "voice_lufs": -15.61,
-    "music_lufs": -36.67,
-    "sfx_lufs": -35.13,
+    "music_lufs": -36.65,
+    "sfx_lufs": -35.14,
     "background_lufs": -34.25,
-    "voice_over_music_lu": 21.1,
+    "voice_over_music_lu": 21.0,
     "voice_over_background_lu": 18.6,
     "music_duck_db": [
      -5.0,
@@ -1837,10 +1880,10 @@
     "start": 5.45,
     "end": 7.59,
     "voice_lufs": -15.63,
-    "music_lufs": -37.31,
-    "sfx_lufs": -39.08,
-    "background_lufs": -35.71,
-    "voice_over_music_lu": 21.7,
+    "music_lufs": -37.28,
+    "sfx_lufs": -39.31,
+    "background_lufs": -35.76,
+    "voice_over_music_lu": 21.6,
     "voice_over_background_lu": 20.1,
     "music_duck_db": [
      -5.0,
@@ -1853,9 +1896,9 @@
     "start": 8.55,
     "end": 13.85,
     "voice_lufs": -16.16,
-    "music_lufs": -35.58,
-    "sfx_lufs": -45.01,
-    "background_lufs": -35.36,
+    "music_lufs": -35.55,
+    "sfx_lufs": -45.27,
+    "background_lufs": -35.34,
     "voice_over_music_lu": 19.4,
     "voice_over_background_lu": 19.2,
     "music_duck_db": [
@@ -1869,10 +1912,10 @@
     "start": 14.8,
     "end": 20.27,
     "voice_lufs": -15.77,
-    "music_lufs": -33.43,
-    "sfx_lufs": -36.94,
-    "background_lufs": -32.09,
-    "voice_over_music_lu": 17.7,
+    "music_lufs": -33.41,
+    "sfx_lufs": -36.9,
+    "background_lufs": -32.06,
+    "voice_over_music_lu": 17.6,
     "voice_over_background_lu": 16.3,
     "music_duck_db": [
      -5.0,
@@ -1885,9 +1928,9 @@
     "start": 23.4,
     "end": 26.82,
     "voice_lufs": -15.68,
-    "music_lufs": -32.98,
-    "sfx_lufs": -37.45,
-    "background_lufs": -31.72,
+    "music_lufs": -32.96,
+    "sfx_lufs": -37.4,
+    "background_lufs": -31.69,
     "voice_over_music_lu": 17.3,
     "voice_over_background_lu": 16.0,
     "music_duck_db": [
@@ -1901,11 +1944,11 @@
     "start": 31.2,
     "end": 33.91,
     "voice_lufs": -15.61,
-    "music_lufs": -33.13,
-    "sfx_lufs": -35.11,
-    "background_lufs": -31.2,
+    "music_lufs": -33.1,
+    "sfx_lufs": -34.89,
+    "background_lufs": -31.1,
     "voice_over_music_lu": 17.5,
-    "voice_over_background_lu": 15.6,
+    "voice_over_background_lu": 15.5,
     "music_duck_db": [
      -5.0,
      -5.0
@@ -1917,11 +1960,11 @@
     "start": 38.6,
     "end": 44.69,
     "voice_lufs": -15.54,
-    "music_lufs": -30.9,
-    "sfx_lufs": -33.59,
-    "background_lufs": -29.48,
-    "voice_over_music_lu": 15.4,
-    "voice_over_background_lu": 13.9,
+    "music_lufs": -30.87,
+    "sfx_lufs": -33.94,
+    "background_lufs": -29.53,
+    "voice_over_music_lu": 15.3,
+    "voice_over_background_lu": 14.0,
     "music_duck_db": [
      -5.0,
      -5.0
@@ -1933,9 +1976,9 @@
     "start": 47.3,
     "end": 51.89,
     "voice_lufs": -15.69,
-    "music_lufs": -33.51,
+    "music_lufs": -33.49,
     "sfx_lufs": -31.1,
-    "background_lufs": -30.13,
+    "background_lufs": -30.12,
     "voice_over_music_lu": 17.8,
     "voice_over_background_lu": 14.4,
     "music_duck_db": [
@@ -1949,11 +1992,11 @@
     "start": 52.4,
     "end": 56.92,
     "voice_lufs": -15.67,
-    "music_lufs": -33.27,
-    "sfx_lufs": -32.17,
-    "background_lufs": -30.34,
+    "music_lufs": -33.25,
+    "sfx_lufs": -32.39,
+    "background_lufs": -30.44,
     "voice_over_music_lu": 17.6,
-    "voice_over_background_lu": 14.7,
+    "voice_over_background_lu": 14.8,
     "music_duck_db": [
      -5.0,
      -5.0
@@ -1965,9 +2008,9 @@
     "start": 57.7,
     "end": 59.41,
     "voice_lufs": -15.75,
-    "music_lufs": -32.45,
-    "sfx_lufs": -34.49,
-    "background_lufs": -30.52,
+    "music_lufs": -32.42,
+    "sfx_lufs": -34.55,
+    "background_lufs": -30.53,
     "voice_over_music_lu": 16.7,
     "voice_over_background_lu": 14.8,
     "music_duck_db": [
@@ -1981,9 +2024,9 @@
     "start": 60.25,
     "end": 61.94,
     "voice_lufs": -15.55,
-    "music_lufs": -32.26,
-    "sfx_lufs": -36.27,
-    "background_lufs": -31.34,
+    "music_lufs": -32.23,
+    "sfx_lufs": -36.31,
+    "background_lufs": -31.33,
     "voice_over_music_lu": 16.7,
     "voice_over_background_lu": 15.8,
     "music_duck_db": [
@@ -1997,9 +2040,9 @@
     "start": 62.6,
     "end": 65.68,
     "voice_lufs": -15.75,
-    "music_lufs": -32.55,
-    "sfx_lufs": -33.8,
-    "background_lufs": -30.9,
+    "music_lufs": -32.53,
+    "sfx_lufs": -33.7,
+    "background_lufs": -30.86,
     "voice_over_music_lu": 16.8,
     "voice_over_background_lu": 15.1,
     "music_duck_db": [
@@ -2013,9 +2056,9 @@
     "start": 66.95,
     "end": 71.17,
     "voice_lufs": -15.8,
-    "music_lufs": -32.65,
-    "sfx_lufs": -32.74,
-    "background_lufs": -29.88,
+    "music_lufs": -32.62,
+    "sfx_lufs": -32.82,
+    "background_lufs": -29.9,
     "voice_over_music_lu": 16.8,
     "voice_over_background_lu": 14.1,
     "music_duck_db": [
@@ -2029,9 +2072,9 @@
     "start": 72.25,
     "end": 77.1,
     "voice_lufs": -15.66,
-    "music_lufs": -34.39,
-    "sfx_lufs": -34.5,
-    "background_lufs": -31.93,
+    "music_lufs": -34.37,
+    "sfx_lufs": -34.63,
+    "background_lufs": -31.97,
     "voice_over_music_lu": 18.7,
     "voice_over_background_lu": 16.3,
     "music_duck_db": [
@@ -2045,9 +2088,9 @@
     "start": 78.6,
     "end": 83.32,
     "voice_lufs": -15.85,
-    "music_lufs": -32.97,
-    "sfx_lufs": -33.75,
-    "background_lufs": -30.29,
+    "music_lufs": -32.94,
+    "sfx_lufs": -33.64,
+    "background_lufs": -30.23,
     "voice_over_music_lu": 17.1,
     "voice_over_background_lu": 14.4,
     "music_duck_db": [
@@ -2061,22 +2104,22 @@
     "start": 83.75,
     "end": 88.43,
     "voice_lufs": -15.76,
-    "music_lufs": -31.68,
-    "sfx_lufs": -38.6,
-    "background_lufs": -31.19,
-    "voice_over_music_lu": 15.9,
-    "voice_over_background_lu": 15.4,
+    "music_lufs": -31.93,
+    "sfx_lufs": -38.65,
+    "background_lufs": -31.43,
+    "voice_over_music_lu": 16.2,
+    "voice_over_background_lu": 15.7,
     "music_duck_db": [
      -5.0,
      -5.0
     ]
    }
   ],
-  "min_narrator_over_background_lu": 13.9,
-  "min_narrator_over_music_lu": 15.4,
+  "min_narrator_over_background_lu": 14.0,
+  "min_narrator_over_music_lu": 15.3,
   "no_narration_worker": {
    "worker_lufs": -16.16,
-   "background_lufs": -25.19,
+   "background_lufs": -25.16,
    "margin_lu": 9.0
   }
  },
@@ -2114,9 +2157,20 @@
   "unknown_kinds": [],
   "span": {
    "earliest_start_s": 0.3,
-   "latest_end_s": 89.91,
+   "latest_end_s": 89.95,
    "moved_from_before_0": [],
-   "faded_at_end": [],
+   "faded_at_end": [
+    {
+     "kind": "wordmark",
+     "t": 88.75,
+     "start": 88.75,
+     "end": 89.95,
+     "lufs_100ms": -28.4,
+     "tier": "other",
+     "note": "tail faded to end by 89.95 s (natural end 90.228 s)",
+     "measured_lufs_100ms": -28.15
+    }
+   ],
    "skipped": []
   },
   "placed": [
@@ -2125,36 +2179,26 @@
     "t": 0.3,
     "start": 0.3,
     "end": 1.6352,
-    "lufs_100ms": -33.5,
+    "lufs_100ms": -33.2,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -33.22
+    "measured_lufs_100ms": -32.93
    },
    {
     "kind": "title",
     "t": 0.9,
     "start": 0.9,
     "end": 1.8355,
-    "lufs_100ms": -35.1,
+    "lufs_100ms": -34.7,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -32.59
+    "measured_lufs_100ms": -32.23
    },
    {
     "kind": "print",
     "t": 1.75,
     "start": 1.75,
     "end": 2.5664,
-    "lufs_100ms": -28.2,
-    "tier": "other",
-    "note": "",
-    "measured_lufs_100ms": -27.94
-   },
-   {
-    "kind": "print",
-    "t": 2.63,
-    "start": 2.63,
-    "end": 3.3905,
     "lufs_100ms": -28.0,
     "tier": "other",
     "note": "",
@@ -2162,33 +2206,43 @@
    },
    {
     "kind": "print",
+    "t": 2.63,
+    "start": 2.63,
+    "end": 3.3905,
+    "lufs_100ms": -28.2,
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -27.96
+   },
+   {
+    "kind": "print",
     "t": 3.88,
     "start": 3.88,
     "end": 4.6412,
-    "lufs_100ms": -28.3,
+    "lufs_100ms": -28.5,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -28.07
+    "measured_lufs_100ms": -28.21
    },
    {
     "kind": "arrive",
     "t": 5.5,
     "start": 5.5,
     "end": 6.1673,
-    "lufs_100ms": -33.5,
+    "lufs_100ms": -34.4,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -33.19
+    "measured_lufs_100ms": -34.09
    },
    {
     "kind": "thread",
     "t": 6.2,
     "start": 6.2,
     "end": 7.4354,
-    "lufs_100ms": -35.9,
+    "lufs_100ms": -36.3,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -33.73
+    "measured_lufs_100ms": -33.95
    },
    {
     "kind": "arrive",
@@ -2198,287 +2252,287 @@
     "lufs_100ms": -38.4,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -33.74
+    "measured_lufs_100ms": -33.96
    },
    {
     "kind": "arrive",
     "t": 6.682,
     "start": 6.682,
     "end": 7.2365,
-    "lufs_100ms": -37.6,
+    "lufs_100ms": -38.1,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -34.28
+    "measured_lufs_100ms": -34.7
    },
    {
     "kind": "arrive",
     "t": 6.704,
     "start": 6.704,
     "end": 7.2493,
-    "lufs_100ms": -38.0,
+    "lufs_100ms": -38.4,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -35.88
+    "measured_lufs_100ms": -36.29
    },
    {
     "kind": "arrive",
     "t": 7.01,
     "start": 7.01,
     "end": 7.5644,
-    "lufs_100ms": -38.4,
+    "lufs_100ms": -37.4,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -38.1
+    "measured_lufs_100ms": -37.12
    },
    {
     "kind": "move",
     "t": 7.95,
     "start": 7.95,
     "end": 9.17,
-    "lufs_100ms": -36.6,
+    "lufs_100ms": -37.2,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -36.25
+    "measured_lufs_100ms": -36.85
    },
    {
     "kind": "speech-fragment",
     "t": 10.5,
     "start": 10.5,
     "end": 10.9453,
-    "lufs_100ms": -38.5,
+    "lufs_100ms": -39.2,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -38.18
+    "measured_lufs_100ms": -38.88
    },
    {
     "kind": "packet",
     "t": 10.6,
     "start": 10.6,
     "end": 11.1822,
-    "lufs_100ms": -40.8,
+    "lufs_100ms": -40.4,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -38.14
+    "measured_lufs_100ms": -38.95
    },
    {
     "kind": "speech-fragment",
     "t": 11.04,
     "start": 11.04,
     "end": 11.4525,
-    "lufs_100ms": -38.4,
+    "lufs_100ms": -39.3,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -38.13
+    "measured_lufs_100ms": -38.95
    },
    {
     "kind": "packet",
     "t": 11.4,
     "start": 11.4,
     "end": 12.0315,
-    "lufs_100ms": -40.9,
+    "lufs_100ms": -40.8,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -40.59
+    "measured_lufs_100ms": -40.52
    },
    {
     "kind": "speech-fragment",
     "t": 12.74,
     "start": 12.74,
     "end": 13.1237,
-    "lufs_100ms": -38.4,
+    "lufs_100ms": -39.0,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -38.14
+    "measured_lufs_100ms": -38.64
    },
    {
     "kind": "packet",
     "t": 13.0,
     "start": 13.0,
     "end": 13.6854,
-    "lufs_100ms": -41.6,
+    "lufs_100ms": -40.9,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -41.25
+    "measured_lufs_100ms": -40.55
    },
    {
     "kind": "speech-fragment",
     "t": 13.97,
     "start": 13.97,
     "end": 14.3933,
-    "lufs_100ms": -39.3,
+    "lufs_100ms": -38.9,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -37.04
+    "measured_lufs_100ms": -36.77
    },
    {
     "kind": "packet",
     "t": 14.0,
     "start": 14.0,
     "end": 14.6841,
-    "lufs_100ms": -40.7,
+    "lufs_100ms": -40.6,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -37.87
+    "measured_lufs_100ms": -38.49
    },
    {
     "kind": "thread",
     "t": 14.25,
     "start": 14.25,
     "end": 15.0725,
-    "lufs_100ms": -38.7,
+    "lufs_100ms": -39.5,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -37.22
+    "measured_lufs_100ms": -37.6
    },
    {
     "kind": "move",
     "t": 14.3,
     "start": 14.3,
     "end": 15.37,
-    "lufs_100ms": -41.2,
+    "lufs_100ms": -40.8,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -37.22
+    "measured_lufs_100ms": -37.6
    },
    {
     "kind": "arrive",
     "t": 14.8,
     "start": 14.8,
     "end": 15.5512,
-    "lufs_100ms": -28.8,
+    "lufs_100ms": -28.6,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -28.36
+    "measured_lufs_100ms": -28.22
    },
    {
     "kind": "speech-fragment",
     "t": 14.9,
     "start": 14.9,
     "end": 15.3425,
-    "lufs_100ms": -43.0,
+    "lufs_100ms": -42.5,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -38.66
+    "measured_lufs_100ms": -38.38
    },
    {
     "kind": "speech-fragment",
     "t": 15.37,
     "start": 15.37,
     "end": 15.7978,
-    "lufs_100ms": -43.0,
+    "lufs_100ms": -43.2,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -31.26
+    "measured_lufs_100ms": -31.81
    },
    {
     "kind": "arrive",
     "t": 15.4,
     "start": 15.4,
     "end": 16.0073,
-    "lufs_100ms": -31.7,
+    "lufs_100ms": -32.3,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -31.43
+    "measured_lufs_100ms": -32.0
    },
    {
     "kind": "arrive",
     "t": 15.87,
     "start": 15.87,
     "end": 16.4758,
-    "lufs_100ms": -32.3,
+    "lufs_100ms": -32.5,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -32.01
+    "measured_lufs_100ms": -32.2
    },
    {
     "kind": "speech-fragment",
     "t": 16.35,
     "start": 16.35,
     "end": 16.7773,
-    "lufs_100ms": -42.7,
+    "lufs_100ms": -43.5,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -42.42
+    "measured_lufs_100ms": -43.19
    },
    {
     "kind": "arrive",
     "t": 16.85,
     "start": 16.85,
     "end": 17.4584,
-    "lufs_100ms": -32.5,
+    "lufs_100ms": -32.0,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -31.8
+    "measured_lufs_100ms": -31.36
    },
    {
     "kind": "speech-fragment",
     "t": 16.92,
     "start": 16.92,
     "end": 17.334,
-    "lufs_100ms": -42.8,
+    "lufs_100ms": -42.5,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -41.12
+    "measured_lufs_100ms": -40.73
    },
    {
     "kind": "arrive",
     "t": 17.42,
     "start": 17.42,
     "end": 18.0257,
-    "lufs_100ms": -32.6,
+    "lufs_100ms": -31.9,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -32.29
+    "measured_lufs_100ms": -31.64
    },
    {
     "kind": "thread",
     "t": 17.89,
     "start": 17.89,
     "end": 18.8746,
-    "lufs_100ms": -37.5,
+    "lufs_100ms": -37.4,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -31.6
+    "measured_lufs_100ms": -31.35
    },
    {
     "kind": "arrive",
     "t": 18.31,
     "start": 18.31,
     "end": 18.9447,
-    "lufs_100ms": -32.4,
+    "lufs_100ms": -32.2,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -31.75
+    "measured_lufs_100ms": -31.56
    },
    {
     "kind": "arrive",
     "t": 18.51,
     "start": 18.51,
     "end": 19.1158,
-    "lufs_100ms": -32.1,
+    "lufs_100ms": -32.4,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -30.91
+    "measured_lufs_100ms": -31.21
    },
    {
     "kind": "request",
     "t": 18.62,
     "start": 18.62,
     "end": 20.295,
-    "lufs_100ms": -31.1,
+    "lufs_100ms": -31.4,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -30.79
+    "measured_lufs_100ms": -31.08
    },
    {
     "kind": "evidence",
     "t": 19.67,
     "start": 19.67,
     "end": 20.4478,
-    "lufs_100ms": -29.3,
+    "lufs_100ms": -29.2,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -29.06
+    "measured_lufs_100ms": -28.91
    },
    {
     "kind": "evidence",
@@ -2495,130 +2549,130 @@
     "t": 21.5,
     "start": 21.5,
     "end": 22.604,
-    "lufs_100ms": -35.1,
+    "lufs_100ms": -35.5,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -34.82
+    "measured_lufs_100ms": -35.16
    },
    {
     "kind": "move",
     "t": 22.3,
     "start": 22.3,
     "end": 24.1187,
-    "lufs_100ms": -36.7,
+    "lufs_100ms": -36.5,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -40.01
+    "measured_lufs_100ms": -39.78
    },
    {
     "kind": "thread",
     "t": 23.6,
     "start": 23.6,
     "end": 24.7428,
-    "lufs_100ms": -35.9,
+    "lufs_100ms": -35.6,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -34.89
+    "measured_lufs_100ms": -34.39
    },
    {
     "kind": "packet",
     "t": 23.8,
     "start": 23.8,
     "end": 24.4301,
-    "lufs_100ms": -39.3,
+    "lufs_100ms": -38.4,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -34.89
+    "measured_lufs_100ms": -34.39
    },
    {
     "kind": "arrive",
     "t": 24.3,
     "start": 24.3,
     "end": 24.8521,
-    "lufs_100ms": -40.5,
+    "lufs_100ms": -39.8,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -34.89
+    "measured_lufs_100ms": -34.34
    },
    {
     "kind": "door-open",
     "t": 24.45,
     "start": 24.45,
     "end": 25.6273,
-    "lufs_100ms": -35.2,
+    "lufs_100ms": -34.7,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -34.89
+    "measured_lufs_100ms": -34.34
    },
    {
     "kind": "request",
     "t": 24.62,
     "start": 24.62,
     "end": 26.2948,
-    "lufs_100ms": -41.2,
+    "lufs_100ms": -41.4,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -35.09
+    "measured_lufs_100ms": -34.54
    },
    {
     "kind": "request",
     "t": 25.1,
     "start": 25.1,
     "end": 26.775,
-    "lufs_100ms": -41.6,
+    "lufs_100ms": -41.5,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -41.29
+    "measured_lufs_100ms": -41.18
    },
    {
     "kind": "request",
     "t": 25.58,
     "start": 25.58,
     "end": 27.2548,
-    "lufs_100ms": -41.2,
+    "lufs_100ms": -40.5,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -37.57
+    "measured_lufs_100ms": -37.96
    },
    {
     "kind": "summon",
     "t": 26.04,
     "start": 26.04,
     "end": 27.9432,
-    "lufs_100ms": -33.1,
+    "lufs_100ms": -33.6,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -32.75
+    "measured_lufs_100ms": -33.24
    },
    {
     "kind": "summon",
     "t": 26.64,
     "start": 26.64,
     "end": 28.622,
-    "lufs_100ms": -33.4,
+    "lufs_100ms": -32.9,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -28.38
+    "measured_lufs_100ms": -28.52
    },
    {
     "kind": "arrive",
     "t": 26.7,
     "start": 26.7,
     "end": 27.2799,
-    "lufs_100ms": -31.0,
+    "lufs_100ms": -31.4,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -28.39
+    "measured_lufs_100ms": -28.54
    },
    {
     "kind": "summon",
     "t": 27.24,
     "start": 27.24,
     "end": 29.2745,
-    "lufs_100ms": -32.5,
+    "lufs_100ms": -32.6,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -28.98
+    "measured_lufs_100ms": -29.02
    },
    {
     "kind": "arrive",
@@ -2628,187 +2682,187 @@
     "lufs_100ms": -31.5,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -29.02
+    "measured_lufs_100ms": -29.06
    },
    {
     "kind": "summon",
     "t": 27.84,
     "start": 27.84,
     "end": 29.8253,
-    "lufs_100ms": -32.6,
+    "lufs_100ms": -32.9,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -29.8
+    "measured_lufs_100ms": -30.25
    },
    {
     "kind": "arrive",
     "t": 27.9,
     "start": 27.9,
     "end": 28.4996,
-    "lufs_100ms": -30.5,
+    "lufs_100ms": -31.3,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -30.54
+    "measured_lufs_100ms": -31.03
    },
    {
     "kind": "summon",
     "t": 28.44,
     "start": 28.44,
     "end": 30.4204,
-    "lufs_100ms": -32.5,
+    "lufs_100ms": -33.5,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -27.79
+    "measured_lufs_100ms": -28.2
    },
    {
     "kind": "arrive",
     "t": 28.5,
     "start": 28.5,
     "end": 29.1616,
-    "lufs_100ms": -30.7,
+    "lufs_100ms": -30.8,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -27.84
+    "measured_lufs_100ms": -28.22
    },
    {
     "kind": "arrive",
     "t": 29.1,
     "start": 29.1,
     "end": 29.7238,
-    "lufs_100ms": -31.3,
+    "lufs_100ms": -30.4,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -31.38
+    "measured_lufs_100ms": -30.66
    },
    {
     "kind": "move",
     "t": 29.12,
     "start": 29.12,
     "end": 30.2127,
-    "lufs_100ms": -36.5,
+    "lufs_100ms": -36.1,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -34.31
+    "measured_lufs_100ms": -33.9
    },
    {
     "kind": "arrive",
     "t": 29.78,
     "start": 29.78,
     "end": 30.5123,
-    "lufs_100ms": -29.1,
+    "lufs_100ms": -29.2,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -28.7
+    "measured_lufs_100ms": -28.8
    },
    {
     "kind": "packet",
     "t": 30.0,
     "start": 30.0,
     "end": 30.7299,
-    "lufs_100ms": -34.6,
+    "lufs_100ms": -33.6,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -34.26
+    "measured_lufs_100ms": -33.29
    },
    {
     "kind": "thread",
     "t": 30.25,
     "start": 30.25,
     "end": 31.4719,
-    "lufs_100ms": -38.4,
+    "lufs_100ms": -37.5,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -33.35
+    "measured_lufs_100ms": -33.08
    },
    {
     "kind": "packet",
     "t": 30.35,
     "start": 30.35,
     "end": 31.0349,
-    "lufs_100ms": -36.7,
+    "lufs_100ms": -37.1,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -33.25
+    "measured_lufs_100ms": -32.87
    },
    {
     "kind": "door-close",
     "t": 30.55,
     "start": 30.55,
     "end": 31.7237,
-    "lufs_100ms": -36.4,
+    "lufs_100ms": -35.5,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -33.25
+    "measured_lufs_100ms": -32.87
    },
    {
     "kind": "packet",
     "t": 30.65,
     "start": 30.65,
     "end": 31.2815,
-    "lufs_100ms": -36.5,
+    "lufs_100ms": -36.8,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -33.25
+    "measured_lufs_100ms": -32.87
    },
    {
     "kind": "packet",
     "t": 30.95,
     "start": 30.95,
     "end": 31.5659,
-    "lufs_100ms": -37.0,
+    "lufs_100ms": -37.1,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -35.53
+    "measured_lufs_100ms": -35.42
    },
    {
     "kind": "inspect",
     "t": 31.72,
     "start": 31.72,
     "end": 33.3028,
-    "lufs_100ms": -39.0,
+    "lufs_100ms": -38.6,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -32.02
+    "measured_lufs_100ms": -31.71
    },
    {
     "kind": "inspect",
     "t": 31.85,
     "start": 31.85,
     "end": 32.6224,
-    "lufs_100ms": -35.4,
+    "lufs_100ms": -35.3,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -32.02
+    "measured_lufs_100ms": -31.71
    },
    {
     "kind": "inspect",
     "t": 32.0,
     "start": 32.0,
     "end": 32.9066,
-    "lufs_100ms": -36.0,
+    "lufs_100ms": -35.4,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -32.02
+    "measured_lufs_100ms": -31.71
    },
    {
     "kind": "inspect",
     "t": 32.02,
     "start": 32.02,
     "end": 33.603,
-    "lufs_100ms": -42.4,
+    "lufs_100ms": -42.6,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -33.19
+    "measured_lufs_100ms": -32.97
    },
    {
     "kind": "request",
     "t": 32.5,
     "start": 32.5,
     "end": 34.1753,
-    "lufs_100ms": -35.3,
+    "lufs_100ms": -34.6,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -33.81
+    "measured_lufs_100ms": -33.27
    },
    {
     "kind": "return",
@@ -2818,97 +2872,97 @@
     "lufs_100ms": -39.6,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -29.74
+    "measured_lufs_100ms": -29.95
    },
    {
     "kind": "evidence",
     "t": 33.02,
     "start": 33.02,
     "end": 33.5856,
-    "lufs_100ms": -30.2,
+    "lufs_100ms": -30.4,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -29.73
+    "measured_lufs_100ms": -29.3
    },
    {
     "kind": "door-open",
     "t": 33.05,
     "start": 33.05,
     "end": 34.1846,
-    "lufs_100ms": -34.9,
+    "lufs_100ms": -34.8,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -29.57
+    "measured_lufs_100ms": -29.14
    },
    {
     "kind": "inspect",
     "t": 33.2,
     "start": 33.2,
     "end": 34.0472,
-    "lufs_100ms": -35.9,
+    "lufs_100ms": -36.2,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -29.57
+    "measured_lufs_100ms": -29.14
    },
    {
     "kind": "return",
     "t": 33.2,
     "start": 33.2,
     "end": 34.3784,
-    "lufs_100ms": -35.6,
+    "lufs_100ms": -34.8,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -29.57
+    "measured_lufs_100ms": -29.14
    },
    {
     "kind": "evidence",
     "t": 33.43,
     "start": 33.43,
     "end": 34.09,
-    "lufs_100ms": -32.2,
+    "lufs_100ms": -31.4,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -29.57
+    "measured_lufs_100ms": -29.14
    },
    {
     "kind": "return",
     "t": 33.8,
     "start": 33.8,
     "end": 34.9783,
-    "lufs_100ms": -35.0,
+    "lufs_100ms": -34.9,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -34.44
+    "measured_lufs_100ms": -34.32
    },
    {
     "kind": "request",
     "t": 33.9,
     "start": 33.9,
     "end": 35.5755,
-    "lufs_100ms": -36.4,
+    "lufs_100ms": -35.9,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -35.89
+    "measured_lufs_100ms": -35.36
    },
    {
     "kind": "return",
     "t": 34.35,
     "start": 34.35,
     "end": 35.5284,
-    "lufs_100ms": -40.1,
+    "lufs_100ms": -40.2,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -33.77
+    "measured_lufs_100ms": -33.57
    },
    {
     "kind": "return",
     "t": 34.4,
     "start": 34.4,
     "end": 35.5784,
-    "lufs_100ms": -35.1,
+    "lufs_100ms": -34.9,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -34.39
+    "measured_lufs_100ms": -34.14
    },
    {
     "kind": "return",
@@ -2918,87 +2972,87 @@
     "lufs_100ms": -34.9,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -34.65
+    "measured_lufs_100ms": -34.66
    },
    {
     "kind": "return",
     "t": 35.6,
     "start": 35.6,
     "end": 36.7772,
-    "lufs_100ms": -34.9,
+    "lufs_100ms": -34.6,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -34.92
+    "measured_lufs_100ms": -34.62
    },
    {
     "kind": "door-close",
     "t": 36.3,
     "start": 36.3,
     "end": 37.4732,
-    "lufs_100ms": -36.4,
+    "lufs_100ms": -35.8,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -36.14
+    "measured_lufs_100ms": -35.56
    },
    {
     "kind": "assemble",
     "t": 37.3,
     "start": 37.3,
     "end": 38.3966,
-    "lufs_100ms": -35.1,
+    "lufs_100ms": -34.7,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -34.78
+    "measured_lufs_100ms": -34.44
    },
    {
     "kind": "assemble",
     "t": 38.0,
     "start": 38.0,
     "end": 39.0244,
-    "lufs_100ms": -38.6,
+    "lufs_100ms": -38.9,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -31.89
+    "measured_lufs_100ms": -32.34
    },
    {
     "kind": "align",
     "t": 38.4,
     "start": 38.4,
     "end": 41.4931,
-    "lufs_100ms": -29.6,
+    "lufs_100ms": -30.1,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -29.19
+    "measured_lufs_100ms": -29.7
    },
    {
     "kind": "move",
     "t": 38.42,
     "start": 38.42,
     "end": 39.0658,
-    "lufs_100ms": -44.3,
+    "lufs_100ms": -43.8,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -29.19
+    "measured_lufs_100ms": -29.7
    },
    {
     "kind": "move",
     "t": 38.7,
     "start": 38.7,
     "end": 39.3302,
-    "lufs_100ms": -44.0,
+    "lufs_100ms": -44.1,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -29.24
+    "measured_lufs_100ms": -29.75
    },
    {
     "kind": "move",
     "t": 38.98,
     "start": 38.98,
     "end": 39.5895,
-    "lufs_100ms": -43.6,
+    "lufs_100ms": -43.9,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -26.37
+    "measured_lufs_100ms": -26.5
    },
    {
     "kind": "lock",
@@ -3008,67 +3062,67 @@
     "lufs_100ms": -28.0,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -26.33
+    "measured_lufs_100ms": -26.47
    },
    {
     "kind": "door-open",
     "t": 40.26,
     "start": 40.26,
     "end": 41.4206,
-    "lufs_100ms": -33.4,
+    "lufs_100ms": -34.3,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -32.29
+    "measured_lufs_100ms": -33.09
    },
    {
     "kind": "route",
     "t": 40.85,
     "start": 40.85,
     "end": 41.8917,
-    "lufs_100ms": -30.3,
+    "lufs_100ms": -29.8,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -30.01
+    "measured_lufs_100ms": -29.5
    },
    {
     "kind": "arrive",
     "t": 41.4,
     "start": 41.4,
     "end": 41.9463,
-    "lufs_100ms": -34.8,
+    "lufs_100ms": -35.3,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -34.46
+    "measured_lufs_100ms": -35.01
    },
    {
     "kind": "thread",
     "t": 42.32,
     "start": 42.32,
     "end": 43.3589,
-    "lufs_100ms": -39.5,
+    "lufs_100ms": -38.7,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -39.17
+    "measured_lufs_100ms": -38.44
    },
    {
     "kind": "record",
     "t": 43.0,
     "start": 43.0,
     "end": 43.5589,
-    "lufs_100ms": -31.8,
+    "lufs_100ms": -31.7,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -31.54
+    "measured_lufs_100ms": -31.43
    },
    {
     "kind": "inspect",
     "t": 48.1,
     "start": 48.1,
     "end": 48.8725,
-    "lufs_100ms": -41.4,
+    "lufs_100ms": -40.8,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -25.19
+    "measured_lufs_100ms": -25.18
    },
    {
     "kind": "deviate",
@@ -3078,27 +3132,27 @@
     "lufs_100ms": -25.5,
     "tier": "key",
     "note": "",
-    "measured_lufs_100ms": -25.19
+    "measured_lufs_100ms": -25.18
    },
    {
     "kind": "lock",
     "t": 49.09,
     "start": 49.072,
     "end": 49.6434,
-    "lufs_100ms": -39.4,
+    "lufs_100ms": -38.6,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -29.78
+    "measured_lufs_100ms": -29.67
    },
    {
     "kind": "inspect",
     "t": 49.4,
     "start": 49.4,
     "end": 50.9829,
-    "lufs_100ms": -37.2,
+    "lufs_100ms": -37.1,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -30.46
+    "measured_lufs_100ms": -30.43
    },
    {
     "kind": "return",
@@ -3108,17 +3162,17 @@
     "lufs_100ms": -39.4,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -31.86
+    "measured_lufs_100ms": -31.83
    },
    {
     "kind": "compare",
     "t": 50.28,
     "start": 50.28,
     "end": 50.9175,
-    "lufs_100ms": -33.9,
+    "lufs_100ms": -34.6,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -31.89
+    "measured_lufs_100ms": -32.3
    },
    {
     "kind": "thread",
@@ -3128,27 +3182,27 @@
     "lufs_100ms": -42.7,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -33.47
+    "measured_lufs_100ms": -33.77
    },
    {
     "kind": "move",
     "t": 52.1,
     "start": 52.1,
     "end": 53.0744,
-    "lufs_100ms": -41.8,
+    "lufs_100ms": -41.4,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -27.89
+    "measured_lufs_100ms": -28.21
    },
    {
     "kind": "assemble",
     "t": 52.12,
     "start": 52.12,
     "end": 53.1322,
-    "lufs_100ms": -28.7,
+    "lufs_100ms": -29.0,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -27.89
+    "measured_lufs_100ms": -28.21
    },
    {
     "kind": "move",
@@ -3158,34 +3212,34 @@
     "lufs_100ms": -37.5,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -27.89
+    "measured_lufs_100ms": -28.21
    },
    {
     "kind": "packet",
     "t": 52.72,
     "start": 52.72,
     "end": 53.5099,
-    "lufs_100ms": -33.2,
+    "lufs_100ms": -33.4,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -32.9
+    "measured_lufs_100ms": -33.14
    },
    {
     "kind": "escalate",
     "t": 53.95,
     "start": 53.95,
     "end": 55.9038,
-    "lufs_100ms": -28.4,
+    "lufs_100ms": -29.2,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -30.11
+    "measured_lufs_100ms": -30.88
    },
    {
     "kind": "arrive",
     "t": 55.45,
     "start": 55.45,
     "end": 56.1739,
-    "lufs_100ms": -31.5,
+    "lufs_100ms": -30.5,
     "tier": "other",
     "note": "",
     "measured_lufs_100ms": -25.22
@@ -3205,40 +3259,40 @@
     "t": 57.75,
     "start": 57.75,
     "end": 60.043,
-    "lufs_100ms": -30.5,
+    "lufs_100ms": -30.4,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -30.2
+    "measured_lufs_100ms": -30.14
    },
    {
     "kind": "route",
     "t": 58.0,
     "start": 58.0,
     "end": 58.8297,
-    "lufs_100ms": -38.8,
+    "lufs_100ms": -38.4,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -31.28
+    "measured_lufs_100ms": -31.5
    },
    {
     "kind": "simulated",
     "t": 58.045,
     "start": 58.045,
     "end": 61.1507,
-    "lufs_100ms": -38.7,
+    "lufs_100ms": -39.6,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -31.28
+    "measured_lufs_100ms": -31.51
    },
    {
     "kind": "thread",
     "t": 58.045,
     "start": 58.045,
     "end": 58.8723,
-    "lufs_100ms": -39.1,
+    "lufs_100ms": -39.6,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -31.28
+    "measured_lufs_100ms": -31.51
    },
    {
     "kind": "thread",
@@ -3248,44 +3302,44 @@
     "lufs_100ms": -39.3,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -31.31
+    "measured_lufs_100ms": -31.59
    },
    {
     "kind": "arrive",
     "t": 58.3,
     "start": 58.3,
     "end": 58.7973,
-    "lufs_100ms": -38.5,
+    "lufs_100ms": -38.8,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -32.21
+    "measured_lufs_100ms": -32.43
    },
    {
     "kind": "arrive",
     "t": 58.45,
     "start": 58.45,
     "end": 58.9876,
-    "lufs_100ms": -40.5,
+    "lufs_100ms": -39.4,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -35.22
+    "measured_lufs_100ms": -34.89
    },
    {
     "kind": "move",
     "t": 59.85,
     "start": 59.85,
     "end": 61.0066,
-    "lufs_100ms": -36.4,
+    "lufs_100ms": -36.7,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -36.11
+    "measured_lufs_100ms": -36.39
    },
    {
     "kind": "move",
     "t": 60.65,
     "start": 60.65,
     "end": 61.4492,
-    "lufs_100ms": -40.4,
+    "lufs_100ms": -40.9,
     "tier": "other",
     "note": "",
     "measured_lufs_100ms": -27.7
@@ -3305,130 +3359,130 @@
     "t": 62.0,
     "start": 62.0,
     "end": 62.9091,
-    "lufs_100ms": -37.8,
+    "lufs_100ms": -37.6,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -37.52
+    "measured_lufs_100ms": -37.32
    },
    {
     "kind": "decision",
     "t": 62.6,
     "start": 62.6,
     "end": 64.8592,
-    "lufs_100ms": -29.4,
+    "lufs_100ms": -28.7,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -29.09
+    "measured_lufs_100ms": -28.44
    },
    {
     "kind": "door-open",
     "t": 62.887,
     "start": 62.887,
     "end": 63.9659,
-    "lufs_100ms": -30.9,
+    "lufs_100ms": -31.6,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -29.16
+    "measured_lufs_100ms": -29.47
    },
    {
     "kind": "packet",
     "t": 63.3,
     "start": 63.3,
     "end": 64.0046,
-    "lufs_100ms": -33.7,
+    "lufs_100ms": -34.2,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -29.96
+    "measured_lufs_100ms": -30.36
    },
    {
     "kind": "arrive",
     "t": 63.85,
     "start": 63.85,
     "end": 64.5693,
-    "lufs_100ms": -34.5,
+    "lufs_100ms": -34.1,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -28.83
+    "measured_lufs_100ms": -28.45
    },
    {
     "kind": "lock",
     "t": 64.1,
     "start": 64.078,
     "end": 64.7409,
-    "lufs_100ms": -29.2,
+    "lufs_100ms": -28.8,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -28.82
+    "measured_lufs_100ms": -28.44
    },
    {
     "kind": "record",
     "t": 64.22,
     "start": 64.22,
     "end": 64.7266,
-    "lufs_100ms": -37.2,
+    "lufs_100ms": -37.4,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -36.58
+    "measured_lufs_100ms": -36.32
    },
    {
     "kind": "record",
     "t": 64.38,
     "start": 64.38,
     "end": 64.9092,
-    "lufs_100ms": -37.3,
+    "lufs_100ms": -36.7,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -36.95
+    "measured_lufs_100ms": -36.32
    },
    {
     "kind": "return",
     "t": 65.62,
     "start": 65.62,
     "end": 66.7614,
-    "lufs_100ms": -37.3,
+    "lufs_100ms": -36.4,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -36.99
+    "measured_lufs_100ms": -36.1
    },
    {
     "kind": "door-close",
     "t": 66.04,
     "start": 66.04,
     "end": 67.2138,
-    "lufs_100ms": -32.4,
+    "lufs_100ms": -31.5,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -31.49
+    "measured_lufs_100ms": -30.56
    },
    {
     "kind": "move",
     "t": 66.04,
     "start": 66.04,
     "end": 67.2138,
-    "lufs_100ms": -37.5,
+    "lufs_100ms": -36.6,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -31.49
+    "measured_lufs_100ms": -30.56
    },
    {
     "kind": "decision",
     "t": 66.85,
     "start": 66.85,
     "end": 69.1091,
-    "lufs_100ms": -28.9,
+    "lufs_100ms": -28.8,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -28.2
+    "measured_lufs_100ms": -28.46
    },
    {
     "kind": "door-open",
     "t": 67.03,
     "start": 67.03,
     "end": 68.2085,
-    "lufs_100ms": -30.6,
+    "lufs_100ms": -31.2,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -28.2
+    "measured_lufs_100ms": -28.46
    },
    {
     "kind": "packet",
@@ -3438,44 +3492,44 @@
     "lufs_100ms": -33.8,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -30.05
+    "measured_lufs_100ms": -30.23
    },
    {
     "kind": "arrive",
     "t": 67.9,
     "start": 67.9,
     "end": 68.5874,
-    "lufs_100ms": -34.5,
+    "lufs_100ms": -33.5,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -29.88
+    "measured_lufs_100ms": -29.33
    },
    {
     "kind": "compare",
     "t": 67.97,
     "start": 67.97,
     "end": 68.594,
-    "lufs_100ms": -31.2,
+    "lufs_100ms": -30.8,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -30.38
+    "measured_lufs_100ms": -29.99
    },
    {
     "kind": "route",
     "t": 68.59,
     "start": 68.59,
     "end": 69.9275,
-    "lufs_100ms": -39.0,
+    "lufs_100ms": -38.8,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -38.95
+    "measured_lufs_100ms": -38.81
    },
    {
     "kind": "compare",
     "t": 69.12,
     "start": 69.12,
     "end": 69.7478,
-    "lufs_100ms": -30.8,
+    "lufs_100ms": -31.5,
     "tier": "other",
     "note": "",
     "measured_lufs_100ms": -27.71
@@ -3488,17 +3542,17 @@
     "lufs_100ms": -28.0,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -27.7
+    "measured_lufs_100ms": -27.69
    },
    {
     "kind": "inspect",
     "t": 69.75,
     "start": 69.75,
     "end": 70.3627,
-    "lufs_100ms": -36.5,
+    "lufs_100ms": -37.1,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -30.86
+    "measured_lufs_100ms": -30.85
    },
    {
     "kind": "resolve",
@@ -3508,487 +3562,487 @@
     "lufs_100ms": -29.8,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -27.22
+    "measured_lufs_100ms": -27.46
    },
    {
     "kind": "compare",
     "t": 70.5,
     "start": 70.5,
     "end": 71.1499,
-    "lufs_100ms": -30.5,
+    "lufs_100ms": -31.0,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -27.34
+    "measured_lufs_100ms": -27.57
    },
    {
     "kind": "move",
     "t": 70.95,
     "start": 70.95,
     "end": 71.8298,
-    "lufs_100ms": -41.0,
+    "lufs_100ms": -40.7,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -32.2
+    "measured_lufs_100ms": -32.02
    },
    {
     "kind": "return",
     "t": 71.15,
     "start": 71.15,
     "end": 72.2913,
-    "lufs_100ms": -37.6,
+    "lufs_100ms": -37.0,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -32.53
+    "measured_lufs_100ms": -32.34
    },
    {
     "kind": "door-close",
     "t": 71.55,
     "start": 71.55,
     "end": 72.7241,
-    "lufs_100ms": -31.4,
+    "lufs_100ms": -31.7,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -29.73
+    "measured_lufs_100ms": -30.07
    },
    {
     "kind": "move",
     "t": 71.57,
     "start": 71.57,
     "end": 72.6701,
-    "lufs_100ms": -36.4,
+    "lufs_100ms": -37.3,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -29.72
+    "measured_lufs_100ms": -30.07
    },
    {
     "kind": "decision",
     "t": 72.23,
     "start": 72.23,
     "end": 74.4892,
-    "lufs_100ms": -29.1,
+    "lufs_100ms": -29.0,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -28.54
+    "measured_lufs_100ms": -28.43
    },
    {
     "kind": "door-open",
     "t": 72.46,
     "start": 72.46,
     "end": 73.5456,
-    "lufs_100ms": -30.6,
+    "lufs_100ms": -31.0,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -28.28
+    "measured_lufs_100ms": -28.46
    },
    {
     "kind": "simulated",
     "t": 72.87,
     "start": 72.87,
     "end": 75.9712,
-    "lufs_100ms": -32.4,
+    "lufs_100ms": -32.7,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -28.19
+    "measured_lufs_100ms": -28.37
    },
    {
     "kind": "packet",
     "t": 72.89,
     "start": 72.89,
     "end": 73.6813,
-    "lufs_100ms": -34.2,
+    "lufs_100ms": -33.9,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -28.79
+    "measured_lufs_100ms": -28.88
    },
    {
     "kind": "arrive",
     "t": 73.44,
     "start": 73.44,
     "end": 74.1595,
-    "lufs_100ms": -33.9,
+    "lufs_100ms": -34.0,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -32.43
+    "measured_lufs_100ms": -32.56
    },
    {
     "kind": "request",
     "t": 74.74,
     "start": 74.74,
     "end": 76.4073,
-    "lufs_100ms": -34.6,
+    "lufs_100ms": -35.4,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -33.45
+    "measured_lufs_100ms": -34.17
    },
    {
     "kind": "request",
     "t": 74.84,
     "start": 74.84,
     "end": 76.5116,
-    "lufs_100ms": -34.9,
+    "lufs_100ms": -35.6,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -33.45
+    "measured_lufs_100ms": -34.17
    },
    {
     "kind": "request",
     "t": 74.94,
     "start": 74.94,
     "end": 76.607,
-    "lufs_100ms": -35.2,
+    "lufs_100ms": -34.7,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -33.45
+    "measured_lufs_100ms": -34.17
    },
    {
     "kind": "return",
     "t": 75.76,
     "start": 75.76,
     "end": 76.9014,
-    "lufs_100ms": -35.6,
+    "lufs_100ms": -36.3,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -32.94
+    "measured_lufs_100ms": -32.95
    },
    {
     "kind": "return",
     "t": 75.86,
     "start": 75.86,
     "end": 77.0013,
-    "lufs_100ms": -36.0,
+    "lufs_100ms": -35.8,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -32.94
+    "measured_lufs_100ms": -32.95
    },
    {
     "kind": "return",
     "t": 75.96,
     "start": 75.96,
     "end": 77.1014,
-    "lufs_100ms": -36.1,
+    "lufs_100ms": -36.0,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -32.94
+    "measured_lufs_100ms": -32.95
    },
    {
     "kind": "simulated",
     "t": 76.51,
     "start": 76.51,
     "end": 79.6112,
-    "lufs_100ms": -42.5,
+    "lufs_100ms": -43.3,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -40.27
+    "measured_lufs_100ms": -40.82
    },
    {
     "kind": "return",
     "t": 77.25,
     "start": 77.25,
     "end": 78.3915,
-    "lufs_100ms": -37.2,
+    "lufs_100ms": -37.0,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -36.85
+    "measured_lufs_100ms": -36.66
    },
    {
     "kind": "door-close",
     "t": 77.63,
     "start": 77.63,
     "end": 78.8039,
-    "lufs_100ms": -32.0,
+    "lufs_100ms": -31.7,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -31.7
+    "measured_lufs_100ms": -31.42
    },
    {
     "kind": "move",
     "t": 79.07,
     "start": 79.07,
     "end": 79.9961,
-    "lufs_100ms": -36.7,
+    "lufs_100ms": -36.9,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -30.56
+    "measured_lufs_100ms": -30.47
    },
    {
     "kind": "decision",
     "t": 79.1,
     "start": 79.1,
     "end": 80.5957,
-    "lufs_100ms": -37.5,
+    "lufs_100ms": -36.5,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -30.56
+    "measured_lufs_100ms": -30.47
    },
    {
     "kind": "door-open",
     "t": 79.32,
     "start": 79.32,
     "end": 80.4016,
-    "lufs_100ms": -33.3,
+    "lufs_100ms": -33.1,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -30.56
+    "measured_lufs_100ms": -30.47
    },
    {
     "kind": "compare",
     "t": 79.42,
     "start": 79.42,
     "end": 80.0727,
-    "lufs_100ms": -34.7,
+    "lufs_100ms": -34.8,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -30.73
+    "measured_lufs_100ms": -30.37
    },
    {
     "kind": "lock",
     "t": 79.8,
     "start": 79.782,
     "end": 80.3359,
-    "lufs_100ms": -32.3,
+    "lufs_100ms": -31.9,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -30.11
+    "measured_lufs_100ms": -30.09
    },
    {
     "kind": "door-open",
     "t": 80.0,
     "start": 80.0,
     "end": 82.7003,
-    "lufs_100ms": -36.6,
+    "lufs_100ms": -36.4,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -30.11
+    "measured_lufs_100ms": -30.09
    },
    {
     "kind": "route",
     "t": 80.04,
     "start": 80.04,
     "end": 80.9457,
-    "lufs_100ms": -34.1,
+    "lufs_100ms": -34.2,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -30.11
+    "measured_lufs_100ms": -30.09
    },
    {
     "kind": "packet",
     "t": 80.14,
     "start": 80.14,
     "end": 80.7012,
-    "lufs_100ms": -35.8,
+    "lufs_100ms": -35.6,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -30.11
+    "measured_lufs_100ms": -30.09
    },
    {
     "kind": "request",
     "t": 80.5,
     "start": 80.5,
     "end": 82.167,
-    "lufs_100ms": -34.9,
+    "lufs_100ms": -34.7,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -31.98
+    "measured_lufs_100ms": -31.88
    },
    {
     "kind": "simulated",
     "t": 80.56,
     "start": 80.56,
     "end": 83.6654,
-    "lufs_100ms": -43.0,
+    "lufs_100ms": -42.6,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -31.98
+    "measured_lufs_100ms": -31.88
    },
    {
     "kind": "return",
     "t": 80.86,
     "start": 80.86,
     "end": 82.0011,
-    "lufs_100ms": -35.6,
+    "lufs_100ms": -35.7,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -31.02
+    "measured_lufs_100ms": -30.92
    },
    {
     "kind": "door-open",
     "t": 80.92,
     "start": 80.92,
     "end": 81.999,
-    "lufs_100ms": -33.6,
+    "lufs_100ms": -33.0,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -31.02
+    "measured_lufs_100ms": -30.92
    },
    {
     "kind": "route",
     "t": 80.96,
     "start": 80.96,
     "end": 81.8173,
-    "lufs_100ms": -34.5,
+    "lufs_100ms": -35.2,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -31.02
+    "measured_lufs_100ms": -30.92
    },
    {
     "kind": "move",
     "t": 81.06,
     "start": 81.06,
     "end": 81.9874,
-    "lufs_100ms": -39.4,
+    "lufs_100ms": -38.7,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -31.08
+    "measured_lufs_100ms": -31.02
    },
    {
     "kind": "lock",
     "t": 81.5,
     "start": 81.478,
     "end": 82.157,
-    "lufs_100ms": -31.1,
+    "lufs_100ms": -31.3,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -29.48
+    "measured_lufs_100ms": -30.06
    },
    {
     "kind": "decision",
     "t": 81.8,
     "start": 81.8,
     "end": 84.093,
-    "lufs_100ms": -29.8,
+    "lufs_100ms": -30.4,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -29.5
+    "measured_lufs_100ms": -30.09
    },
    {
     "kind": "assemble",
     "t": 82.08,
     "start": 82.08,
     "end": 83.1735,
-    "lufs_100ms": -32.2,
+    "lufs_100ms": -32.6,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -29.25
+    "measured_lufs_100ms": -29.01
    },
    {
     "kind": "resolve",
     "t": 82.42,
     "start": 82.42,
     "end": 85.6711,
-    "lufs_100ms": -33.6,
+    "lufs_100ms": -32.5,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -29.21
+    "measured_lufs_100ms": -28.97
    },
    {
     "kind": "move",
     "t": 84.4,
     "start": 84.4,
     "end": 85.4485,
-    "lufs_100ms": -36.6,
+    "lufs_100ms": -37.2,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -34.85
+    "measured_lufs_100ms": -35.07
    },
    {
     "kind": "title",
     "t": 84.6,
     "start": 84.6,
     "end": 85.5286,
-    "lufs_100ms": -43.1,
+    "lufs_100ms": -43.0,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -30.82
+    "measured_lufs_100ms": -31.23
    },
    {
     "kind": "align",
     "t": 84.85,
     "start": 84.85,
     "end": 87.861,
-    "lufs_100ms": -40.3,
+    "lufs_100ms": -40.2,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -30.82
+    "measured_lufs_100ms": -31.23
    },
    {
     "kind": "title",
     "t": 84.9,
     "start": 84.9,
     "end": 85.8202,
-    "lufs_100ms": -43.6,
+    "lufs_100ms": -43.3,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -30.82
+    "measured_lufs_100ms": -31.23
    },
    {
     "kind": "record",
     "t": 84.98,
     "start": 84.98,
     "end": 85.5184,
-    "lufs_100ms": -31.9,
+    "lufs_100ms": -32.5,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -30.82
+    "measured_lufs_100ms": -31.23
    },
    {
     "kind": "title",
     "t": 85.2,
     "start": 85.2,
     "end": 86.1304,
-    "lufs_100ms": -43.2,
+    "lufs_100ms": -42.6,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -33.59
+    "measured_lufs_100ms": -33.77
    },
    {
     "kind": "print",
     "t": 85.4,
     "start": 85.4,
     "end": 86.1603,
-    "lufs_100ms": -34.5,
+    "lufs_100ms": -34.7,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -33.58
+    "measured_lufs_100ms": -33.77
    },
    {
     "kind": "print",
     "t": 85.7,
     "start": 85.7,
     "end": 86.2666,
-    "lufs_100ms": -39.0,
+    "lufs_100ms": -39.4,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -36.15
+    "measured_lufs_100ms": -36.51
    },
    {
     "kind": "summon",
     "t": 85.75,
     "start": 85.75,
     "end": 87.2482,
-    "lufs_100ms": -44.6,
+    "lufs_100ms": -45.3,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -36.15
+    "measured_lufs_100ms": -36.51
    },
    {
     "kind": "title",
     "t": 86.06,
     "start": 86.06,
     "end": 87.0115,
-    "lufs_100ms": -36.6,
+    "lufs_100ms": -37.0,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -36.15
+    "measured_lufs_100ms": -36.51
    },
    {
     "kind": "wordmark",
     "t": 88.75,
     "start": 88.75,
-    "end": 89.91,
-    "lufs_100ms": -29.7,
+    "end": 89.95,
+    "lufs_100ms": -28.4,
     "tier": "other",
-    "note": "",
-    "measured_lufs_100ms": -29.43
+    "note": "tail faded to end by 89.95 s (natural end 90.228 s)",
+    "measured_lufs_100ms": -28.15
    }
   ]
  },
@@ -4016,8 +4070,8 @@
    "name": "music.wav DC",
    "ok": true,
    "value": [
-    2.07e-10,
-    3.17e-10
+    2.36e-10,
+    3.33e-10
    ],
    "target": "|mean| < 1e-4"
   },
@@ -4043,8 +4097,8 @@
    "name": "sfx.wav DC",
    "ok": true,
    "value": [
-    9.6e-12,
-    -6.37e-12
+    1e-11,
+    8.42e-12
    ],
    "target": "|mean| < 1e-4"
   },
@@ -4070,8 +4124,8 @@
    "name": "master.wav DC",
    "ok": true,
    "value": [
-    1.24e-07,
-    1.14e-07
+    1.27e-07,
+    1.22e-07
    ],
    "target": "|mean| < 1e-4"
   },
@@ -4097,8 +4151,8 @@
    "name": "master-no-narration.wav DC",
    "ok": true,
    "value": [
-    -2.92e-09,
-    -4.25e-09
+    -1.66e-09,
+    -2.75e-09
    ],
    "target": "|mean| < 1e-4"
   },
@@ -4129,19 +4183,19 @@
   {
    "name": "master-no-narration.wav true peak",
    "ok": true,
-   "value": -2.55,
+   "value": -2.59,
    "target": "<= -1.0"
   },
   {
    "name": "narrator over background (every line)",
    "ok": true,
-   "value": 13.9,
+   "value": 14.0,
    "target": ">= 12 LU per line"
   },
   {
    "name": "narrator over music (every line)",
    "ok": true,
-   "value": 15.4,
+   "value": 15.3,
    "target": ">= 14 LU per line"
   },
   {
@@ -4190,7 +4244,7 @@
   {
    "name": "music pause cap",
    "ok": true,
-   "value": -26.99,
+   "value": -26.97,
    "target": "<= -26.0 LUFS momentary"
   },
   {
@@ -4202,23 +4256,23 @@
   {
    "name": "deviation and the human's decision are the loudest sounds",
    "ok": true,
-   "value": "keys >= -25.22, next loudest lock at 39.35: -26.33",
+   "value": "keys >= -25.22, next loudest lock at 39.35: -26.47",
    "target": "every key moment louder than every other sound"
   },
   {
    "name": "opening print thuds about -28 LUFS",
    "ok": true,
    "value": [
-    -27.94,
     -27.73,
-    -28.07
+    -27.96,
+    -28.21
    ],
    "target": "-28.0 +- 1.5 LUFS (100 ms)"
   },
   {
    "name": "no-narration: sfx peak under the worker's voice note",
    "ok": true,
-   "value": -20.32,
+   "value": -20.35,
    "target": "<= -20.0 dBFS"
   },
   {
@@ -4233,20 +4287,20 @@
   {
    "name": "bed fades out cleanly",
    "ok": true,
-   "value": "-240.0 dBFS after 89.9 s, largest rise -0.008 dB",
+   "value": "-240.0 dBFS after 89.9 s, largest rise -0.057 dB",
    "target": "one 1.2 s fade from 88.7 s, silent from 89.9 s"
   },
   {
-   "name": "wordmark decays to -60 dB by 89.9 s",
+   "name": "wordmark decays naturally to -60 dBFS by 89.9 s",
    "ok": true,
-   "value": -64.5,
-   "target": "<= -60 dB re its peak"
+   "value": "-61.8 dBFS",
+   "target": "<= -60 dBFS, no fade"
   },
   {
-   "name": "the wordmark is the last sound",
+   "name": "the wordmark is the last thing heard",
    "ok": true,
-   "value": [],
-   "target": "no event starts after it"
+   "value": "events after it: []; bed louder at: []",
+   "target": "no event after it; louder than the fading bed over the final 0.4 s"
   },
   {
    "name": "music ducked under the worker line",
@@ -4264,7 +4318,7 @@
    "ok": true,
    "value": [
     0.3,
-    89.91
+    89.95
    ],
    "target": "[>= 0, <= 90]"
   },
@@ -4289,7 +4343,7 @@
   {
    "name": "music never drops out (3 to 88.8 s, before ducking)",
    "ok": true,
-   "value": -34.17,
+   "value": -34.15,
    "target": ">= -45 LUFS momentary"
   },
   {

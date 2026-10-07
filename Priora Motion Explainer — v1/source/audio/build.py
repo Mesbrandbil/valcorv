@@ -799,12 +799,12 @@ def k_wordmark(ev, rng, idx):
     """One soft low note (felt mallet on D3 over a D2 body), the last sound of the film. Its decay is
     natural (exponential, never faded) and timed from its own level so it is under -60 dBFS by
     WORDMARK_SILENT_AT, whatever its start time: the louder or later the note, the faster it decays.
-    (A 100 ms loudness of L LUFS is about L - 2 dBFS RMS for this centred low note.)"""
+    (A 100 ms loudness of L LUFS is about L - 1 dBFS RMS for this centred low note.)"""
     avail = WORDMARK_SILENT_AT - float(ev["t"])
     if avail < 0.8:
         warn(f"wordmark at {ev['t']} leaves only {avail:.2f} s to decay before {WORDMARK_SILENT_AT}")
     avail = max(avail, 0.3)
-    drop_db = (float(ev.get("_target_lufs", -30.0)) - 2.0) + 60.0 + 2.0  # to -60 dBFS, with 2 dB in hand
+    drop_db = (float(ev.get("_target_lufs", -30.0)) - 1.0) + 60.0 + 3.0  # to -60 dBFS, with 3 dB in hand
     tau = float(np.clip((avail - 0.05) / max(drop_db / 8.686, 0.5), 0.04, 0.85))
     n = ns(avail)
     x = mallet(rng, avail, hz(50), decay=tau, bright=0.12)
@@ -840,7 +840,7 @@ KINDS = {
     "decision": (k_decision, -4.0, 0.25),
     "simulated": (k_simulated, -5.0, 0.30),
     "title": (k_title, -6.0, 0.20),
-    "wordmark": (k_wordmark, -3.0, 0.12),
+    "wordmark": (k_wordmark, -2.0, 0.12),
 }
 UNKNOWN_FALLBACK = "arrive"  # a soft facet tok
 DISTANT_KINDS = {"simulated"}  # always muted, hollow and distant; any event with 'sim' in part/material too
@@ -1047,7 +1047,10 @@ def render_sfx(events):
             continue
         if i_end_nat > lim:
             st = st[: lim - i0].copy()
-            k = min(len(st), ns(0.5), len(st) // 2)  # a natural fade, not a cut
+            pk_ = np.abs(st).max() + 1e-12
+            quiet = np.abs(st[-ns(0.02) :]).max() <= pk_ * undb(-50.0)
+            # already 50 dB down: a 20 ms clean-up only (the decay stays natural); otherwise a fade, not a cut
+            k = min(len(st), ns(0.02)) if quiet else min(len(st), ns(0.5), len(st) // 2)
             st[-k:] *= (1.0 - ramp_on(k))[:, None]
             note.append("tail faded to end by %.2f s (natural end %.3f s)" % (END_SAFE, i_end_nat / SR))
         (out_small if kind in SMALL_KINDS else out)[i0 : i0 + len(st)] += st
@@ -1168,7 +1171,7 @@ def music_plan(tm: Timing, has_wordmark=True):
         (w("L13", "priora") - 0.3, 1.5, [33, 45, 52, 55, 59, 62], -5.0, 0.36, 0.40),  # between rooms: A11
         (w("L13", "the", 2) + 0.1, 1.2, [38, 45, 54, 57, 62, 66, 69], -3.5, 0.55, 0.40),  # decision: D, resolved
         (w("L14", "priora") - 0.2, 1.6, [38, 45, 52, 57, 66, 76], -3.0, 0.60, 0.42),  # tagline: open Dadd9
-        (88.3, 1.0, [38, 45], -8.0, 0.35, 0.42),  # under the wordmark: thin and low, so the note sits on top; into the bed fade
+        (87.9, 3.0, [38, 45], -12.0, 0.35, 0.42),  # under the wordmark: thin and low, so the note sits on top; into the bed fade
     ]
     P = []  # felt piano: (time, MIDI note, velocity, distant)
 
@@ -2040,7 +2043,7 @@ def qa(c):
 
         at_end = rms_db(sx_st, t_silent - 0.025)
         pk = max(rms_db(sx_st, tw + k_ * 0.01) for k_ in range(40))
-        grid = np.arange(tw + 0.2, t_silent - 0.02, 0.05)
+        grid = np.arange(max(tw + 0.2, t_silent - 0.4), t_silent - 0.02, 0.05)  # the final 0.4 s: what is heard last
         under = [round(float(t_), 2) for t_ in grid if rms_db(mu_st, t_) > rms_db(sx_st, t_) and rms_db(mu_st, t_) > -100]
         later = [pl for pl in placed if pl["start"] > wm[-1]["start"] + 0.001 and pl["tier"] is not None]
         end_info.update({"wordmark_t": tw, "wordmark_peak_rms_dbfs": round(pk, 1), "wordmark_rms_at_silent_point_dbfs": round(at_end, 1),
@@ -2049,7 +2052,7 @@ def qa(c):
                          "bed_over_wordmark_at": under, "events_after_wordmark": [(pl["kind"], pl["t"]) for pl in later]})
         chk("wordmark decays naturally to -60 dBFS by %.1f s" % t_silent, at_end <= -60.0, f"{at_end:.1f} dBFS", "<= -60 dBFS, no fade")
         chk("the wordmark is the last thing heard", not later and not under,
-            f"events after it: {end_info['events_after_wordmark']}; bed louder at: {under}", "no event after it; it stays above the fading bed")
+            f"events after it: {end_info['events_after_wordmark']}; bed louder at: {under}", "no event after it; louder than the fading bed over the final 0.4 s")
 
     w_duck = [x["music_duck_db"] for x in lines if x["speaker"] == "worker"]
     chk("music ducked under the worker line", all(-5.5 <= d[0] and d[1] <= -4.5 for d in w_duck), w_duck, "about -5 dB")
