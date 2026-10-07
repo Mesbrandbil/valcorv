@@ -43,7 +43,7 @@
       insurer: { name: "Insurer conditions", slot: 270, aligned: 270 },
       fire: { name: "Fire", slot: 315, aligned: 342 },
       riskEng: { name: "Risk engineering", slot: 135, aligned: 126 },
-      evidence: { name: "Evidence", slot: 90, aligned: 54 },
+      evidence: { name: "Evidence check", slot: 90, aligned: 54 },
     },
   });
   GEO.slot = function (a) {
@@ -116,7 +116,7 @@
     gsap.set(panel.walls, { drawSVG: "0% 0%" });
     gsap.set([panel.leafA, panel.leafB, panel.jambs], { opacity: 0 });
     panel.title = PK.text(W.L.chambers, "Site panel", P.x + 24, P.y + 38, { size: 17, weight: 500 });
-    panel.sub = PK.text(W.L.chambers, "Configured for this site", P.x + 24, P.y + 60, { font: "mono", size: 10, fill: PK.C.grey });
+    panel.sub = PK.text(W.L.chambers, "Configured for this site", P.x + 24, P.y + 60, { font: "mono", size: 10, fill: PK.C.ink2 });
     gsap.set([panel.title, panel.sub], { opacity: 0 });
     panel.slots = GEO.slotAngles.map(function (a) {
       var p = GEO.slot(a);

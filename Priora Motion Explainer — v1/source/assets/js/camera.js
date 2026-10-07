@@ -21,23 +21,25 @@
       // s2 voice note and case (Priora's flight from the orbit rides this move)
       { t0: 7.6, t1: 8.6, to: [950, 548, 980], ease: M },
       // s3 the site panel (Priora carries the case to the door during this move); held through s3
-      { t0: 22.3, t1: 23.9, to: [530, 510, 1044], ease: M },
-      // s4 inside the conditions: pull out to show the route to the real world (before the route draws)
-      { t0: 39.65, t1: 40.85, to: [700, 560, 1300], ease: M },
+      { t0: 22.3, t1: 23.9, to: [540, 514, 1090], ease: M },
+      // s4 inside the conditions: the route starts on "opens" in the still close frame; the camera pulls out
+      // after it, following the route to the real world
+      { t0: 40.35, t1: 41.25, to: [700, 560, 1300], ease: M },
       // s5 a deviation: back to the panel, with the site window still in frame
-      { t0: 46.9, t1: 48.1, to: [530, 510, 1044], ease: M },
-      // assemble happens in this still frame, then the pull out, then the escalation in a still frame
-      { t0: 52.75, t1: 53.95, to: [930, 560, 1340], ease: M },
+      { t0: 46.9, t1: 48.1, to: [540, 514, 1090], ease: M },
+      // assemble happens in this still frame; the pan right follows the packet to the risk owner,
+      // and the decision is held in the still frame it lands on (owner and packet larger than in cut 2)
+      { t0: 53.35, t1: 54.35, to: [930, 600, 1020], ease: M },
       // the decision holds still; then the rooms
       { t0: 56.95, t1: 57.95, to: [1420, 515, 1060], ease: M },
       // s6 the three rooms, each held still
-      { t0: 59.2, t1: 60.2, to: [1500, 330, 760], ease: M },
-      { t0: 65.95, t1: 66.9, to: [1500, 508, 760], ease: M },
-      { t0: 71.3, t1: 72.2, to: [1500, 686, 760], ease: M },
+      { t0: 59.2, t1: 60.2, to: [1475, 330, 760], ease: M },
+      { t0: 66.1, t1: 67.0, to: [1475, 508, 760], ease: M },
+      { t0: 71.3, t1: 72.2, to: [1475, 686, 760], ease: M },
       // s7 the rooms cooperate
-      { t0: 77.6, t1: 78.9, to: [1420, 515, 1170], ease: M },
+      { t0: 77.85, t1: 78.95, to: [1420, 515, 1170], ease: M },
       // s8 the complete system, 1:1
-      { t0: 83.1, t1: 84.4, to: [960, 540, 1920], ease: M },
+      { t0: 83.3, t1: 84.5, to: [960, 540, 1920], ease: M },
     ],
   };
 })();

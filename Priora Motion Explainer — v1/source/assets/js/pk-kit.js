@@ -532,7 +532,8 @@
     var cut = "";
     if (kind === "policy") cut = PK.rectPath(-h * 0.56, -h * 0.14, h * 1.12, h * 0.28, h * 0.1);
     if (kind === "authority") cut = PK.rectPath(-h * 0.22, -h * 0.62, h * 0.44, h * 0.9, h * 0.1);
-    if (kind === "record") cut = PK.circlePath(0, -h * 0.2, h * 0.3) + " " + PK.rectPath(-h * 0.5, h * 0.36, h, h * 0.2, h * 0.08);
+    // a ledger card: a punched hole off to the top left and two ruled lines (never a head and shoulders)
+    if (kind === "record") cut = PK.circlePath(-h * 0.42, -h * 0.42, h * 0.2) + " " + PK.rectPath(-h * 0.6, h * 0.02, h * 1.2, h * 0.17, h * 0.07) + " " + PK.rectPath(-h * 0.6, h * 0.38, h * 0.78, h * 0.17, h * 0.07);
     return token(parent, sq, sq + " " + cut);
   };
 
