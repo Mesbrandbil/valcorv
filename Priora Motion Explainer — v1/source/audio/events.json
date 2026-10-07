@@ -266,13 +266,6 @@
   "pan": -0.54
  },
  {
-  "kind": "move",
-  "t": 25.04,
-  "gain_db": -18,
-  "material": "paper",
-  "pan": -0.5
- },
- {
   "kind": "summon",
   "t": 25.25,
   "gain_db": -6,
@@ -285,6 +278,13 @@
   "size": "agent",
   "agent": "siteRules",
   "pan": -0.54
+ },
+ {
+  "kind": "move",
+  "t": 25.39,
+  "gain_db": -18,
+  "material": "paper",
+  "pan": -0.5
  },
  {
   "kind": "arrive",
@@ -997,13 +997,13 @@
  },
  {
   "kind": "return",
-  "t": 76.04,
+  "t": 76.12,
   "gain_db": -9,
   "pan": 0.5499999999999999
  },
  {
   "kind": "return",
-  "t": 76.26,
+  "t": 76.42,
   "gain_db": -9,
   "pan": 0.5
  },
@@ -1055,26 +1055,11 @@
   "pan": 0.6
  },
  {
-  "kind": "arrive",
-  "t": 78.94,
-  "gain_db": -13,
-  "size": "case",
-  "pan": 0.45
- },
- {
   "kind": "lock",
   "t": 79.26,
   "gain_db": -6,
   "pan": 0.45,
   "size": "small"
- },
- {
-  "kind": "decision",
-  "t": 79.36,
-  "gain_db": -9,
-  "dur": 0.3,
-  "pan": 0.35,
-  "part": "reach"
  },
  {
   "kind": "packet",
@@ -1110,14 +1095,6 @@
   "pan": 0.7
  },
  {
-  "kind": "decision",
-  "t": 80.42,
-  "gain_db": -9,
-  "dur": 0.46,
-  "pan": 0.35,
-  "part": "reach"
- },
- {
   "kind": "return",
   "t": 80.64,
   "gain_db": -9,
@@ -1131,14 +1108,6 @@
   "pan": 0.35
  },
  {
-  "kind": "move",
-  "t": 80.76,
-  "gain_db": -14,
-  "dur": 0.5,
-  "pan": 0.3,
-  "size": "case"
- },
- {
   "kind": "door-open",
   "t": 80.779,
   "gain_db": -8,
@@ -1147,24 +1116,10 @@
  },
  {
   "kind": "door-close",
-  "t": 80.8,
-  "gain_db": -10,
+  "t": 80.95,
+  "gain_db": -11,
   "pan": 0.5,
-  "room": "transfer"
- },
- {
-  "kind": "door-close",
-  "t": 81.06,
-  "gain_db": -10,
-  "pan": 0.5,
-  "room": "mitigate"
- },
- {
-  "kind": "inspect",
-  "t": 81.34,
-  "gain_db": -12,
-  "pan": 0.6,
-  "agent": "retain"
+  "rooms": "transfer, mitigate"
  },
  {
   "kind": "lock",
@@ -1174,17 +1129,10 @@
  },
  {
   "kind": "decision",
-  "t": 81.56,
+  "t": 81.62,
   "gain_db": -2,
   "pan": 0.3,
   "dur": 0.8
- },
- {
-  "kind": "door-close",
-  "t": 82.02,
-  "gain_db": -10,
-  "pan": 0.5,
-  "room": "retain"
  },
  {
   "kind": "assemble",
@@ -1195,7 +1143,7 @@
  },
  {
   "kind": "resolve",
-  "t": 82.34,
+  "t": 82.4,
   "gain_db": -6,
   "pan": 0.3
  },

@@ -761,7 +761,7 @@ PK.section("s6-rooms", 57, 78, function (tl, W, ctx, S) {
     tagsT.push(hd);
   });
   RA.transfer.forEach(function (hx, i) {
-    var t = tAns + i * 0.22;
+    var t = tAns + i * 0.3; // answers 0.3 s apart, so no two tweens on a tag overlap
     var bd = PK.bead(Lth, 2.6, { hollow: true });
     tl.set(bd.g, { opacity: 1 }, t);
     var y = HEX_Y[i];
@@ -778,7 +778,7 @@ PK.section("s6-rooms", 57, 78, function (tl, W, ctx, S) {
         fadeIn(hd.g, tj, 0.18, "none");
         FT(hd.s, { scale: 0.6, svgOrigin: "0 0" }, { scale: 1, svgOrigin: "0 0", duration: 0.3, ease: "back.out(1.4)" }, tj);
       } else {
-        pulse(hd.s, tj, 1.07);
+        FT(hd.s, { scale: 1, svgOrigin: "0 0" }, { keyframes: [{ scale: 1.07, duration: 0.1, ease: "power1.out" }, { scale: 1, duration: 0.17, ease: "power2.inOut" }], svgOrigin: "0 0" }, tj);
       }
     });
   });

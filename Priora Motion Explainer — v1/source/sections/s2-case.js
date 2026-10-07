@@ -134,7 +134,7 @@ PK.section("s2-case", 8, 22, function (tl, W, ctx) {
       var path = PK.curve([0, 0], [dx, dy], 22);
       var t0 = arrive - dur - 0.04 + j * 0.035;
       tl.to(w.el, { motionPath: { path: path }, duration: dur, ease: "power2.inOut" }, t0);
-      tl.to(w.el, { scale: 0.45, svgOrigin: w.cx + " " + (w.y - LS * 0.35), duration: dur, ease: "power2.in" }, t0);
+      tl.to(w.el, { scale: 0.45, transformOrigin: "50% 50%", duration: dur, ease: "power2.in" }, t0);
       tl.to(w.el, { opacity: 0, duration: 0.18, ease: "none" }, t0 + dur - 0.14);
       if (j === 0) PK.trail(tl, W.L.trails, PK.curve([w.cx, w.y - LS * 0.35], target, 22), t0, dur);
     });

@@ -331,29 +331,28 @@ PK.section("s7-cooperate", 78, 84, function (tl, W, ctx, S) {
     pkUp: 80.76, pkUpD: 0.5,
     clampA: 81.34,
     back: 81.72, backD: 0.34,
-    decide: Math.max(PK.word("L13", "risk") + 0.28, 81.56),
+    decide: Math.max(PK.word("L13", "risk") + 0.34, 81.62),
     end: 82.62,
   };
-  function opens(k, at, dur) {
+  function opens(k, at, dur, reachSound) {
     PK.drawOn(tl, own[k], at, dur, "power2.inOut", { later: true });
     RM[k].open(tl, at + dur * 0.78, 0.34);
-    PK.sfx("decision", at, { gain_db: -9, dur: dur, pan: 0.35, part: "reach" });
+    if (reachSound) PK.sfx("decision", at, { gain_db: -9, dur: dur, pan: 0.35, part: "reach" });
     PK.sfx("door-open", at + dur * 0.78, { gain_db: -8, pan: 0.5, room: k });
   }
-  function withdraws(k, at, closeAt) {
+  function withdraws(k, at, closeAt, sound) {
     PK.drawOff(tl, own[k], at, 0.4, "power2.inOut", { to: "start" });
     RM[k].close(tl, closeAt, 0.34);
-    PK.sfx("door-close", closeAt, { gain_db: -10, pan: 0.5, room: k });
+    if (sound) PK.sfx("door-close", closeAt, { gain_db: -10, pan: 0.5, room: k });
   }
 
   // ------------------------------------------------------------ 1. Mitigate: the black line opens it; Priora carries the packet in
-  opens("mitigate", tm.openM, tm.openMd);
+  opens("mitigate", tm.openM, tm.openMd, true);
   var aM = ang(QM, PM);
   FT(W.priora.beadG, { rotation: 0, svgOrigin: "0 0" }, { rotation: aM, svgOrigin: "0 0", duration: 0.5, ease: "power2.inOut" }, tm.goM);
   PK.travel(tl, W.priora.g, PK.curve(Q0, QM, -6), tm.goM, tm.goMd, "power2.inOut");
   PK.travel(tl, cs.g, PK.curve(P0, PM, 16), tm.goM + 0.04, tm.goMd, "power2.inOut");
   PK.sfx("move", tm.goM, { gain_db: -12, dur: tm.goMd, pan: 0.4 });
-  PK.sfx("arrive", tm.goM + tm.goMd, { gain_db: -13, size: "case", pan: 0.45 });
 
   // the library offers the thermal check: a solid copy leaves the rail and fills part of the gap
   var railP = xy(thSrc.g);
@@ -428,7 +427,7 @@ PK.section("s7-cooperate", 78, 84, function (tl, W, ctx, S) {
   labelIn(lT, tm.ask + 0.08);
 
   // ------------------------------------------------------------ 3. Retain: up to Retain, collecting the packet; Retain keeps the rest
-  withdraws("transfer", tm.outT + 0.08, tm.outT + 0.2);
+  withdraws("transfer", tm.outT + 0.08, tm.outT + 0.2, false);
   opens("retain", tm.openR, tm.openRd);
   var aR = ang(QR, SR);
   var legR = "M" + pt(QT) + " C" + f(QT[0] - 50) + " " + f(QT[1] - 120) + " " + f(QR[0] - 60) + " " + f(QR[1] + 140) + " " + pt(QR);
@@ -444,8 +443,8 @@ PK.section("s7-cooperate", 78, 84, function (tl, W, ctx, S) {
   // the packet leaves Mitigate's door as Priora passes and comes up with it
   var legPk = "M" + pt(PM) + " C" + f(PM[0] - 70) + " " + f(PM[1] + 6) + " " + f(PR[0] + 20) + " " + f(PR[1] + 70) + " " + pt(PR);
   PK.travel(tl, cs.g, legPk, tm.pkUp, tm.pkUpD, "power2.inOut");
-  PK.sfx("move", tm.pkUp, { gain_db: -14, dur: tm.pkUpD, pan: 0.3, size: "case" });
-  withdraws("mitigate", tm.pkUp + 0.12, tm.pkUp + 0.3);
+  withdraws("mitigate", tm.pkUp + 0.12, tm.pkUp + 0.3, false);
+  PK.sfx("door-close", tm.outT + 0.35, { gain_db: -11, pan: 0.5, rooms: "transfer, mitigate" });
 
   // the Retain agents attach its terms: three threads converge on the sliver, the clamp snaps on
   ra.retain.forEach(function (a, i) {
@@ -458,7 +457,6 @@ PK.section("s7-cooperate", 78, 84, function (tl, W, ctx, S) {
     FT(th, { opacity: 1 }, { opacity: 0, duration: 0.3, ease: "power1.in" }, tm.clampA + 0.46);
     pulse(a.body, tm.clampA + i * 0.04, 1.14);
   });
-  PK.sfx("inspect", tm.clampA, { gain_db: -12, pan: 0.6, agent: "retain" });
   var tClamp = tm.clampA + 0.22;
   var clO = pt(PK.polar(0, 0, CL1, (slA[0] + slA[1]) / 2));
   FT(ride.cl, { opacity: 0, scale: 1.35, svgOrigin: clO }, { opacity: 1, scale: 1, svgOrigin: clO, duration: 0.24, ease: "power3.out" }, tClamp);
@@ -477,10 +475,10 @@ PK.section("s7-cooperate", 78, 84, function (tl, W, ctx, S) {
   PK.sfx("assemble", tWhole, { gain_db: -7, pan: 0.3, size: "small" });
   var beadEnd = ang(QR, PR);
   FT(W.priora.beadG, { rotation: aR }, { rotation: beadEnd, svgOrigin: "0 0", duration: 0.4, ease: "power2.inOut" }, tm.back);
-  withdraws("retain", tm.back + 0.1, tm.back + 0.3);
+  withdraws("retain", tm.back + 0.1, tm.back + 0.3, false);
 
   // ------------------------------------------------------------ 4. "The risk owner stays in control": the line closes a loop round the packet
-  var LR = 41;
+  var LR = 46; // clear of the clamp (radius 41)
   var dB = Math.hypot(B[0] - PR[0], B[1] - PR[1]);
   var aCB = ang(PR, B);
   var aTan = aCB + (Math.acos(LR / dB) * 180) / Math.PI; // tangent point, so the line runs into the loop smoothly

@@ -108,6 +108,16 @@ def hz(m: float) -> float:
     return A4 * 2.0 ** ((m - 69.0) / 12.0)
 
 
+KEY_PCS = {2, 4, 6, 7, 9, 11, 1}  # D major: D E F# G A B C#
+
+
+def snap(f: float) -> float:
+    """Nearest pitch of the D major collection (A = 440): every pitched sound shares the music's key."""
+    m = 69.0 + 12.0 * math.log2(f / A4)
+    best = min((r for r in range(int(m) - 2, int(m) + 3) if r % 12 in KEY_PCS), key=lambda r: (abs(r - m), r))
+    return hz(best)
+
+
 def seed_of(*parts) -> int:
     return zlib.crc32("|".join(str(p) for p in parts).encode("utf-8"))
 
@@ -226,6 +236,7 @@ def nb_noise(rng, n, fcurve, bw):
 def wood(rng, dur, f, decay=0.05, hard=0.5):
     """Small wooden piece struck: inharmonic modes plus a soft contact noise. hard 0..1 (felt..wood)."""
     n = ns(dur)
+    f = snap(f) * 2.0 ** (rng.uniform(-6, 6) / 1200.0)  # in key, a few cents of natural variation
     ratios = (1.0, 2.57, 4.21, 6.30)
     amps = (1.0, 0.10 + 0.50 * hard, 0.25 * hard, 0.10 * hard)
     taus = (decay, decay * 0.60, decay * 0.40, decay * 0.25)
@@ -239,6 +250,7 @@ def felt_thud(rng, dur, f=80.0, decay=0.09, drop=0.3):
     """Low soft felt thud: a sine whose pitch settles from above, plus low felt noise."""
     n = ns(dur)
     t = tax(n)
+    f = snap(f)
     fc = f * (1.0 + drop * np.exp(-t / 0.018))
     x = np.sin(phase_of(fc)) * env_exp(n, decay, att=0.004)
     x += cnoise(rng, n, 0, 320) * env_exp(n, 0.022, att=0.003) * 0.35
@@ -281,6 +293,7 @@ def hollow(rng, dur, f, decay=0.07, bend=0.0):
     """Hollow wooden tube tok (odd partials); bend > 0 lifts the pitch a little, like a question."""
     n = ns(dur)
     t = tax(n)
+    f = snap(f * (1.0 + bend)) / (1.0 + bend)  # the bend lands in key
     fc = f * (1.0 + bend * smoothstep(t / 0.045))
     ph = phase_of(fc)
     x = np.exp(-t / decay) * np.sin(ph)
@@ -1431,7 +1444,7 @@ def ffmpeg_check(path: Path):
     return {"integrated_lufs": float(mi.group(1)), "true_peak_dbtp": float(mp.group(1)) if mp else None}
 
 
-D_MAJOR = {2, 4, 6, 7, 9, 11, 1}  # pitch classes D E F# G A B C#
+D_MAJOR = KEY_PCS
 
 
 def music_analysis(x, segments, meter):

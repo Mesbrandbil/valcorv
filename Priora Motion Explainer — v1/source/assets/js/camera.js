@@ -20,14 +20,14 @@
       // s3 the site panel
       { t0: 21.7, t1: 23.6, to: [560, 500, 1060], ease: M },
       { t0: 23.6, t1: 29.3, to: [548, 505, 1020], ease: D },
-      { t0: 29.3, t1: 30.8, to: [425, 512, 860], ease: M },
-      { t0: 30.8, t1: 40.3, to: [420, 514, 846], ease: D },
+      { t0: 29.3, t1: 30.8, to: [425, 502, 860], ease: M },
+      { t0: 30.8, t1: 40.3, to: [420, 504, 846], ease: D },
       // s4 inside the conditions: the route to the real world
       { t0: 40.3, t1: 42.2, to: [700, 560, 1300], ease: M },
       { t0: 42.2, t1: 46.8, to: [706, 562, 1282], ease: D },
       // s5 a deviation, the packet, escalation
-      { t0: 46.9, t1: 48.2, to: [430, 520, 900], ease: M },
-      { t0: 48.2, t1: 52.2, to: [432, 520, 884], ease: D },
+      { t0: 46.9, t1: 48.2, to: [430, 482, 840], ease: M },
+      { t0: 48.2, t1: 52.2, to: [432, 482, 816], ease: D },
       { t0: 52.2, t1: 54.4, to: [920, 560, 1340], ease: M },
       { t0: 54.4, t1: 55.8, to: [926, 560, 1322], ease: D },
       // s6 three decision rooms

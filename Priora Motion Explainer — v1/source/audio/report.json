@@ -30,10 +30,10 @@
   }
  },
  "gains": {
-  "master_gain_db": 0.549,
-  "master_limiter_max_reduction_db": 0.41,
-  "no_narration_worker_gain_db": 0.549,
-  "no_narration_background_gain_db": 8.502,
+  "master_gain_db": 0.545,
+  "master_limiter_max_reduction_db": 0.4,
+  "no_narration_worker_gain_db": 0.545,
+  "no_narration_background_gain_db": 8.52,
   "no_narration_limiter_max_reduction_db": 0.0,
   "note": "master.wav = limiter(G * (voice dual-mono + music.wav/G + sfx.wav/G)); music.wav and sfx.wav are written post-gain (the level they have in master.wav, before the limiter)"
  },
@@ -46,17 +46,17 @@
    "subtype": "PCM_24",
    "integrated_lufs": -30.95,
    "true_peak_dbtp": -14.2,
-   "sample_peak_dbfs": -14.2,
+   "sample_peak_dbfs": -14.21,
    "max_momentary_lufs": -21.96,
    "max_momentary_at_s": 45.76,
    "clipped_samples": 0,
    "dc_offset": [
-    6.34e-09,
-    1.9e-09
+    6.32e-09,
+    1.88e-09
    ],
    "first_sample_abs": 0.0,
    "last_10ms_peak_dbfs": -240.0,
-   "sha256": "28f37142de525a63233d39a6c5704bb53982f2cd90590902b22cad1c00a870d2",
+   "sha256": "027b773f5e55c37ff54a66139d693c42541a724f870894e91aefef636fee691a",
    "ffmpeg_ebur128": {
     "integrated_lufs": -30.9,
     "true_peak_dbtp": -14.2
@@ -68,21 +68,21 @@
    "sample_rate": 48000,
    "channels": 2,
    "subtype": "PCM_24",
-   "integrated_lufs": -34.02,
-   "true_peak_dbtp": -11.47,
+   "integrated_lufs": -34.2,
+   "true_peak_dbtp": -11.48,
    "sample_peak_dbfs": -12.18,
    "max_momentary_lufs": -26.54,
    "max_momentary_at_s": 48.55,
    "clipped_samples": 0,
    "dc_offset": [
-    -7.42e-12,
-    8.83e-12
+    9.88e-12,
+    6.26e-12
    ],
    "first_sample_abs": 0.0,
    "last_10ms_peak_dbfs": -240.0,
-   "sha256": "7250aa69c1054b57c616c52bad1cc5262192a2da429d92383d7281eda5d3f3ab",
+   "sha256": "c0e30c9e271997ec83583b926b9dd902b1b4b1b2c80887d3e30f876a56c43605",
    "ffmpeg_ebur128": {
-    "integrated_lufs": -34.0,
+    "integrated_lufs": -34.2,
     "true_peak_dbtp": -11.5
    }
   },
@@ -99,12 +99,12 @@
    "max_momentary_at_s": 11.93,
    "clipped_samples": 0,
    "dc_offset": [
-    -1.82e-09,
-    2.25e-08
+    -1.99e-08,
+    7.17e-09
    ],
    "first_sample_abs": 0.0,
    "last_10ms_peak_dbfs": -240.0,
-   "sha256": "909d2741157bbaaaed97df533fcfcfdd701d0243f9cdfb49bb54d9d59892dd95",
+   "sha256": "20f3fd899d1f6fdbf67bb205a3c7f6daf4ec8cb362f11a92a49276ea8b2b367d",
    "ffmpeg_ebur128": {
     "integrated_lufs": -16.0,
     "true_peak_dbtp": -1.3
@@ -117,21 +117,21 @@
    "channels": 2,
    "subtype": "PCM_24",
    "integrated_lufs": -17.0,
-   "true_peak_dbtp": -1.97,
-   "sample_peak_dbfs": -2.0,
+   "true_peak_dbtp": -2.06,
+   "sample_peak_dbfs": -2.06,
    "max_momentary_lufs": -9.04,
    "max_momentary_at_s": 11.92,
    "clipped_samples": 0,
    "dc_offset": [
-    4.58e-10,
-    4.66e-10
+    4.62e-10,
+    5.11e-10
    ],
    "first_sample_abs": 0.0,
    "last_10ms_peak_dbfs": -240.0,
-   "sha256": "7e18acdecc5a039ced0a9b717c4879a0fa193a29bdf65df7fca5b93ed370c336",
+   "sha256": "ae7abb61173fc2f3639a4931fcaa7b52e828f3cbe4aebaa1daca9f7cad327ea1",
    "ffmpeg_ebur128": {
     "integrated_lufs": -17.0,
-    "true_peak_dbtp": -2.0
+    "true_peak_dbtp": -2.1
    }
   }
  },
@@ -150,7 +150,7 @@
       "A3",
       "E4"
      ],
-     "lufs": -31.04,
+     "lufs": -31.05,
      "strongest_notes": [
       {
        "note": "D3",
@@ -227,7 +227,7 @@
       "C#4",
       "E4"
      ],
-     "lufs": -25.39,
+     "lufs": -25.4,
      "strongest_notes": [
       {
        "note": "F#3",
@@ -592,7 +592,7 @@
       "A3",
       "C#4"
      ],
-     "lufs": -24.29,
+     "lufs": -24.3,
      "strongest_notes": [
       {
        "note": "B2",
@@ -654,7 +654,7 @@
       "G3",
       "D4"
      ],
-     "lufs": -24.67
+     "lufs": -24.68
     },
     {
      "from": 57.95,
@@ -730,7 +730,7 @@
       "D4",
       "B4"
      ],
-     "lufs": -24.2
+     "lufs": -24.21
     },
     {
      "from": 69.29,
@@ -906,7 +906,7 @@
      ]
     }
    ],
-   "min_momentary_lufs_3_to_88_8": -34.04,
+   "min_momentary_lufs_3_to_88_8": -34.05,
    "min_momentary_at_s": 4.15,
    "max_fall_in_100ms_db": 1.75,
    "max_fall_at_s": 64.42,
@@ -1484,7 +1484,7 @@
   }
  },
  "sfx": {
-  "stem_integrated_lufs": -34.02,
+  "stem_integrated_lufs": -34.2,
   "loudest_momentary_400ms_lufs": -26.54,
   "loudest_momentary_at_s": 48.55,
   "bus_leveller": {
@@ -1564,10 +1564,10 @@
     "speaker": "narrator",
     "start": 0.9,
     "end": 4.71,
-    "voice_lufs": -15.52,
-    "music_lufs": -39.36,
-    "sfx_lufs": -30.9,
-    "background_lufs": -32.89,
+    "voice_lufs": -15.53,
+    "music_lufs": -39.37,
+    "sfx_lufs": -30.89,
+    "background_lufs": -32.88,
     "voice_over_music_lu": 23.8,
     "voice_over_background_lu": 17.4,
     "music_duck_db": [
@@ -1582,10 +1582,10 @@
     "end": 7.51,
     "voice_lufs": -13.42,
     "music_lufs": -37.49,
-    "sfx_lufs": -36.47,
-    "background_lufs": -35.0,
+    "sfx_lufs": -36.33,
+    "background_lufs": -34.94,
     "voice_over_music_lu": 24.1,
-    "voice_over_background_lu": 21.6,
+    "voice_over_background_lu": 21.5,
     "music_duck_db": [
      -8.0,
      -8.0
@@ -1599,9 +1599,9 @@
     "voice_lufs": -12.53,
     "music_lufs": -33.2,
     "sfx_lufs": -37.48,
-    "background_lufs": -32.68,
+    "background_lufs": -32.69,
     "voice_over_music_lu": 20.7,
-    "voice_over_background_lu": 20.1,
+    "voice_over_background_lu": 20.2,
     "music_duck_db": [
      -5.0,
      -5.0
@@ -1612,10 +1612,10 @@
     "speaker": "narrator",
     "start": 14.8,
     "end": 20.27,
-    "voice_lufs": -17.92,
-    "music_lufs": -33.72,
-    "sfx_lufs": -36.1,
-    "background_lufs": -32.05,
+    "voice_lufs": -17.93,
+    "music_lufs": -33.73,
+    "sfx_lufs": -36.12,
+    "background_lufs": -32.06,
     "voice_over_music_lu": 15.8,
     "voice_over_background_lu": 14.1,
     "music_duck_db": [
@@ -1630,8 +1630,8 @@
     "end": 26.02,
     "voice_lufs": -16.16,
     "music_lufs": -34.31,
-    "sfx_lufs": -35.22,
-    "background_lufs": -31.7,
+    "sfx_lufs": -35.16,
+    "background_lufs": -31.68,
     "voice_over_music_lu": 18.2,
     "voice_over_background_lu": 15.5,
     "music_duck_db": [
@@ -1644,12 +1644,12 @@
     "speaker": "narrator",
     "start": 31.2,
     "end": 33.91,
-    "voice_lufs": -13.4,
+    "voice_lufs": -13.41,
     "music_lufs": -36.16,
-    "sfx_lufs": -34.74,
-    "background_lufs": -32.58,
-    "voice_over_music_lu": 22.8,
-    "voice_over_background_lu": 19.2,
+    "sfx_lufs": -35.01,
+    "background_lufs": -32.75,
+    "voice_over_music_lu": 22.7,
+    "voice_over_background_lu": 19.3,
     "music_duck_db": [
      -8.0,
      -8.0
@@ -1661,9 +1661,9 @@
     "start": 38.6,
     "end": 44.69,
     "voice_lufs": -15.64,
-    "music_lufs": -30.12,
-    "sfx_lufs": -33.05,
-    "background_lufs": -28.78,
+    "music_lufs": -30.13,
+    "sfx_lufs": -32.94,
+    "background_lufs": -28.75,
     "voice_over_music_lu": 14.5,
     "voice_over_background_lu": 13.1,
     "music_duck_db": [
@@ -1676,12 +1676,12 @@
     "speaker": "narrator",
     "start": 47.3,
     "end": 51.89,
-    "voice_lufs": -15.3,
+    "voice_lufs": -15.31,
     "music_lufs": -32.37,
-    "sfx_lufs": -30.65,
-    "background_lufs": -29.43,
+    "sfx_lufs": -31.03,
+    "background_lufs": -29.62,
     "voice_over_music_lu": 17.1,
-    "voice_over_background_lu": 14.1,
+    "voice_over_background_lu": 14.3,
     "music_duck_db": [
      -8.0,
      -8.0
@@ -1694,10 +1694,10 @@
     "end": 56.92,
     "voice_lufs": -14.12,
     "music_lufs": -34.05,
-    "sfx_lufs": -32.88,
-    "background_lufs": -30.67,
+    "sfx_lufs": -32.78,
+    "background_lufs": -30.63,
     "voice_over_music_lu": 19.9,
-    "voice_over_background_lu": 16.6,
+    "voice_over_background_lu": 16.5,
     "music_duck_db": [
      -8.0,
      -8.0
@@ -1708,12 +1708,12 @@
     "speaker": "narrator",
     "start": 57.35,
     "end": 59.02,
-    "voice_lufs": -16.36,
+    "voice_lufs": -16.37,
     "music_lufs": -33.13,
     "sfx_lufs": -33.97,
-    "background_lufs": -30.54,
+    "background_lufs": -30.52,
     "voice_over_music_lu": 16.8,
-    "voice_over_background_lu": 14.2,
+    "voice_over_background_lu": 14.1,
     "music_duck_db": [
      -8.0,
      -8.0
@@ -1724,10 +1724,10 @@
     "speaker": "narrator",
     "start": 59.45,
     "end": 65.74,
-    "voice_lufs": -17.53,
+    "voice_lufs": -17.54,
     "music_lufs": -34.95,
-    "sfx_lufs": -35.02,
-    "background_lufs": -32.7,
+    "sfx_lufs": -35.18,
+    "background_lufs": -32.75,
     "voice_over_music_lu": 17.4,
     "voice_over_background_lu": 15.2,
     "music_duck_db": [
@@ -1741,9 +1741,9 @@
     "start": 66.4,
     "end": 70.62,
     "voice_lufs": -15.21,
-    "music_lufs": -33.73,
-    "sfx_lufs": -33.54,
-    "background_lufs": -30.96,
+    "music_lufs": -33.74,
+    "sfx_lufs": -33.56,
+    "background_lufs": -30.98,
     "voice_over_music_lu": 18.5,
     "voice_over_background_lu": 15.8,
     "music_duck_db": [
@@ -1756,12 +1756,12 @@
     "speaker": "narrator",
     "start": 72.2,
     "end": 77.05,
-    "voice_lufs": -17.24,
+    "voice_lufs": -17.25,
     "music_lufs": -34.76,
-    "sfx_lufs": -35.05,
-    "background_lufs": -32.48,
+    "sfx_lufs": -35.22,
+    "background_lufs": -32.52,
     "voice_over_music_lu": 17.5,
-    "voice_over_background_lu": 15.2,
+    "voice_over_background_lu": 15.3,
     "music_duck_db": [
      -8.0,
      -8.0
@@ -1774,10 +1774,10 @@
     "end": 83.22,
     "voice_lufs": -16.31,
     "music_lufs": -31.45,
-    "sfx_lufs": -31.65,
-    "background_lufs": -28.67,
+    "sfx_lufs": -32.7,
+    "background_lufs": -29.04,
     "voice_over_music_lu": 15.1,
-    "voice_over_background_lu": 12.4,
+    "voice_over_background_lu": 12.7,
     "music_duck_db": [
      -8.0,
      -8.0
@@ -1790,40 +1790,40 @@
     "end": 89.03,
     "voice_lufs": -15.59,
     "music_lufs": -30.74,
-    "sfx_lufs": -35.41,
-    "background_lufs": -30.01,
+    "sfx_lufs": -35.45,
+    "background_lufs": -30.05,
     "voice_over_music_lu": 15.1,
-    "voice_over_background_lu": 14.4,
+    "voice_over_background_lu": 14.5,
     "music_duck_db": [
      -8.0,
      -8.0
     ]
    }
   ],
-  "min_narrator_over_background_lu": 12.4,
+  "min_narrator_over_background_lu": 12.7,
   "min_narrator_over_music_lu": 14.5,
   "no_narration_worker": {
    "worker_lufs": -12.53,
-   "background_lufs": -25.28,
-   "margin_lu": 12.8
+   "background_lufs": -25.26,
+   "margin_lu": 12.7
   }
  },
  "events": {
-  "count": 191,
+  "count": 184,
   "per_kind": {
    "align": 2,
-   "arrive": 29,
+   "arrive": 28,
    "assemble": 4,
    "compare": 5,
-   "decision": 9,
+   "decision": 7,
    "deviate": 1,
-   "door-close": 9,
+   "door-close": 7,
    "door-open": 9,
    "escalate": 1,
    "evidence": 4,
-   "inspect": 9,
+   "inspect": 8,
    "lock": 6,
-   "move": 21,
+   "move": 20,
    "packet": 10,
    "print": 6,
    "record": 6,
@@ -1877,7 +1877,7 @@
     "kind": "print",
     "t": 1.75,
     "start": 1.75,
-    "end": 2.5812,
+    "end": 2.5664,
     "lufs_100ms": -24.2,
     "note": ""
    },
@@ -1885,7 +1885,7 @@
     "kind": "print",
     "t": 2.63,
     "start": 2.63,
-    "end": 3.3996,
+    "end": 3.3905,
     "lufs_100ms": -24.0,
     "note": ""
    },
@@ -1893,7 +1893,7 @@
     "kind": "print",
     "t": 3.88,
     "start": 3.88,
-    "end": 4.6452,
+    "end": 4.6412,
     "lufs_100ms": -24.3,
     "note": ""
    },
@@ -1909,32 +1909,32 @@
     "kind": "arrive",
     "t": 6.509,
     "start": 6.509,
-    "end": 7.066,
-    "lufs_100ms": -37.0,
+    "end": 7.0547,
+    "lufs_100ms": -36.4,
     "note": ""
    },
    {
     "kind": "arrive",
     "t": 6.693,
     "start": 6.693,
-    "end": 7.2417,
-    "lufs_100ms": -37.5,
+    "end": 7.2149,
+    "lufs_100ms": -37.3,
     "note": ""
    },
    {
     "kind": "arrive",
     "t": 6.877,
     "start": 6.877,
-    "end": 7.4544,
-    "lufs_100ms": -37.0,
+    "end": 7.4311,
+    "lufs_100ms": -37.3,
     "note": ""
    },
    {
     "kind": "arrive",
     "t": 7.073,
     "start": 7.073,
-    "end": 7.6144,
-    "lufs_100ms": -37.0,
+    "end": 7.6189,
+    "lufs_100ms": -36.5,
     "note": ""
    },
    {
@@ -1942,15 +1942,15 @@
     "t": 7.268,
     "start": 7.268,
     "end": 7.8056,
-    "lufs_100ms": -37.2,
+    "lufs_100ms": -36.4,
     "note": ""
    },
    {
     "kind": "arrive",
     "t": 7.452,
     "start": 7.452,
-    "end": 7.9896,
-    "lufs_100ms": -36.7,
+    "end": 7.9897,
+    "lufs_100ms": -37.0,
     "note": ""
    },
    {
@@ -2005,8 +2005,8 @@
     "kind": "arrive",
     "t": 14.8,
     "start": 14.8,
-    "end": 15.5429,
-    "lufs_100ms": -28.6,
+    "end": 15.5512,
+    "lufs_100ms": -28.8,
     "note": ""
    },
    {
@@ -2029,16 +2029,16 @@
     "kind": "arrive",
     "t": 15.47,
     "start": 15.47,
-    "end": 16.0633,
-    "lufs_100ms": -31.5,
+    "end": 16.0836,
+    "lufs_100ms": -31.7,
     "note": ""
    },
    {
     "kind": "arrive",
     "t": 15.94,
     "start": 15.94,
-    "end": 16.5245,
-    "lufs_100ms": -32.6,
+    "end": 16.5537,
+    "lufs_100ms": -32.4,
     "note": ""
    },
    {
@@ -2053,8 +2053,8 @@
     "kind": "arrive",
     "t": 16.92,
     "start": 16.92,
-    "end": 17.4951,
-    "lufs_100ms": -32.4,
+    "end": 17.5338,
+    "lufs_100ms": -32.1,
     "note": ""
    },
    {
@@ -2069,8 +2069,8 @@
     "kind": "arrive",
     "t": 17.49,
     "start": 17.49,
-    "end": 18.0798,
-    "lufs_100ms": -31.7,
+    "end": 18.0664,
+    "lufs_100ms": -31.8,
     "note": ""
    },
    {
@@ -2093,16 +2093,16 @@
     "kind": "arrive",
     "t": 18.8,
     "start": 18.8,
-    "end": 19.4029,
-    "lufs_100ms": -31.8,
+    "end": 19.4059,
+    "lufs_100ms": -32.3,
     "note": ""
    },
    {
     "kind": "arrive",
     "t": 19.1,
     "start": 19.1,
-    "end": 19.6813,
-    "lufs_100ms": -31.6,
+    "end": 19.7098,
+    "lufs_100ms": -32.1,
     "note": ""
    },
    {
@@ -2117,16 +2117,16 @@
     "kind": "evidence",
     "t": 20.53,
     "start": 20.53,
-    "end": 21.1852,
-    "lufs_100ms": -27.2,
+    "end": 21.1741,
+    "lufs_100ms": -27.0,
     "note": ""
    },
    {
     "kind": "assemble",
     "t": 21.15,
     "start": 21.15,
-    "end": 22.2456,
-    "lufs_100ms": -35.5,
+    "end": 22.2583,
+    "lufs_100ms": -34.7,
     "note": ""
    },
    {
@@ -2149,24 +2149,24 @@
     "kind": "packet",
     "t": 23.5,
     "start": 23.5,
-    "end": 24.1232,
-    "lufs_100ms": -39.5,
+    "end": 24.1567,
+    "lufs_100ms": -39.4,
     "note": ""
    },
    {
     "kind": "door-close",
     "t": 23.55,
     "start": 23.55,
-    "end": 24.7216,
-    "lufs_100ms": -41.0,
+    "end": 24.7387,
+    "lufs_100ms": -41.3,
     "note": ""
    },
    {
     "kind": "arrive",
     "t": 23.7,
     "start": 23.7,
-    "end": 24.2405,
-    "lufs_100ms": -40.0,
+    "end": 24.247,
+    "lufs_100ms": -40.4,
     "note": ""
    },
    {
@@ -2181,8 +2181,8 @@
     "kind": "door-open",
     "t": 24.0,
     "start": 24.0,
-    "end": 25.058,
-    "lufs_100ms": -35.5,
+    "end": 25.1253,
+    "lufs_100ms": -34.6,
     "note": ""
    },
    {
@@ -2191,14 +2191,6 @@
     "start": 24.35,
     "end": 26.3848,
     "lufs_100ms": -32.6,
-    "note": ""
-   },
-   {
-    "kind": "move",
-    "t": 25.04,
-    "start": 25.04,
-    "end": 26.1954,
-    "lufs_100ms": -44.6,
     "note": ""
    },
    {
@@ -2213,16 +2205,24 @@
     "kind": "arrive",
     "t": 25.31,
     "start": 25.31,
-    "end": 25.9186,
-    "lufs_100ms": -31.0,
+    "end": 25.8978,
+    "lufs_100ms": -31.2,
+    "note": ""
+   },
+   {
+    "kind": "move",
+    "t": 25.39,
+    "start": 25.39,
+    "end": 26.508,
+    "lufs_100ms": -44.5,
     "note": ""
    },
    {
     "kind": "arrive",
     "t": 26.13,
     "start": 26.13,
-    "end": 26.7828,
-    "lufs_100ms": -30.9,
+    "end": 26.8091,
+    "lufs_100ms": -30.6,
     "note": ""
    },
    {
@@ -2237,8 +2237,8 @@
     "kind": "arrive",
     "t": 27.03,
     "start": 27.03,
-    "end": 27.6657,
-    "lufs_100ms": -31.4,
+    "end": 27.6731,
+    "lufs_100ms": -31.0,
     "note": ""
    },
    {
@@ -2253,8 +2253,8 @@
     "kind": "arrive",
     "t": 27.93,
     "start": 27.93,
-    "end": 28.5388,
-    "lufs_100ms": -30.7,
+    "end": 28.5602,
+    "lufs_100ms": -31.5,
     "note": ""
    },
    {
@@ -2269,8 +2269,8 @@
     "kind": "arrive",
     "t": 28.83,
     "start": 28.83,
-    "end": 29.4707,
-    "lufs_100ms": -30.9,
+    "end": 29.4098,
+    "lufs_100ms": -31.0,
     "note": ""
    },
    {
@@ -2285,16 +2285,16 @@
     "kind": "arrive",
     "t": 29.83,
     "start": 29.83,
-    "end": 30.5662,
-    "lufs_100ms": -28.4,
+    "end": 30.5815,
+    "lufs_100ms": -28.9,
     "note": ""
    },
    {
     "kind": "packet",
     "t": 29.86,
     "start": 29.86,
-    "end": 30.5771,
-    "lufs_100ms": -34.1,
+    "end": 30.577,
+    "lufs_100ms": -34.0,
     "note": ""
    },
    {
@@ -2309,32 +2309,32 @@
     "kind": "door-close",
     "t": 30.42,
     "start": 30.42,
-    "end": 31.5811,
-    "lufs_100ms": -35.6,
+    "end": 31.6053,
+    "lufs_100ms": -35.5,
     "note": ""
    },
    {
     "kind": "packet",
     "t": 30.55,
     "start": 30.55,
-    "end": 31.1931,
-    "lufs_100ms": -37.1,
+    "end": 31.1924,
+    "lufs_100ms": -37.4,
     "note": ""
    },
    {
     "kind": "packet",
     "t": 30.85,
     "start": 30.85,
-    "end": 31.4651,
-    "lufs_100ms": -37.1,
+    "end": 31.5017,
+    "lufs_100ms": -36.6,
     "note": ""
    },
    {
     "kind": "inspect",
     "t": 31.25,
     "start": 31.25,
-    "end": 32.1074,
-    "lufs_100ms": -36.0,
+    "end": 32.1073,
+    "lufs_100ms": -36.1,
     "note": ""
    },
    {
@@ -2342,14 +2342,14 @@
     "t": 32.07,
     "start": 32.07,
     "end": 33.6375,
-    "lufs_100ms": -38.6,
+    "lufs_100ms": -38.5,
     "note": ""
    },
    {
     "kind": "inspect",
     "t": 32.18,
     "start": 32.18,
-    "end": 32.9672,
+    "end": 32.9518,
     "lufs_100ms": -34.6,
     "note": ""
    },
@@ -2357,15 +2357,15 @@
     "kind": "inspect",
     "t": 32.25,
     "start": 32.25,
-    "end": 33.164,
-    "lufs_100ms": -35.6,
+    "end": 33.1639,
+    "lufs_100ms": -36.6,
     "note": ""
    },
    {
     "kind": "inspect",
     "t": 32.39,
     "start": 32.39,
-    "end": 33.9574,
+    "end": 33.9575,
     "lufs_100ms": -42.2,
     "note": ""
    },
@@ -2397,80 +2397,80 @@
     "kind": "return",
     "t": 33.12,
     "start": 33.12,
-    "end": 34.2972,
-    "lufs_100ms": -40.3,
+    "end": 34.2975,
+    "lufs_100ms": -40.4,
     "note": ""
    },
    {
     "kind": "evidence",
     "t": 33.16,
     "start": 33.16,
-    "end": 33.8222,
-    "lufs_100ms": -32.3,
+    "end": 33.8201,
+    "lufs_100ms": -32.4,
     "note": ""
    },
    {
     "kind": "door-open",
     "t": 33.2,
     "start": 33.2,
-    "end": 34.3386,
-    "lufs_100ms": -34.7,
+    "end": 34.3771,
+    "lufs_100ms": -35.1,
     "note": ""
    },
    {
     "kind": "return",
     "t": 33.44,
     "start": 33.44,
-    "end": 34.6173,
-    "lufs_100ms": -34.5,
+    "end": 34.6184,
+    "lufs_100ms": -35.5,
     "note": ""
    },
    {
     "kind": "return",
     "t": 33.82,
     "start": 33.82,
-    "end": 34.9973,
-    "lufs_100ms": -35.0,
+    "end": 34.9984,
+    "lufs_100ms": -35.6,
     "note": ""
    },
    {
     "kind": "return",
     "t": 34.19,
     "start": 34.19,
-    "end": 35.3673,
-    "lufs_100ms": -34.8,
+    "end": 35.3685,
+    "lufs_100ms": -34.9,
     "note": ""
    },
    {
     "kind": "return",
     "t": 34.56,
     "start": 34.56,
-    "end": 35.7373,
-    "lufs_100ms": -34.5,
+    "end": 35.7384,
+    "lufs_100ms": -35.3,
     "note": ""
    },
    {
     "kind": "return",
     "t": 34.93,
     "start": 34.93,
-    "end": 36.1084,
-    "lufs_100ms": -35.2,
+    "end": 36.1082,
+    "lufs_100ms": -35.0,
     "note": ""
    },
    {
     "kind": "door-close",
     "t": 35.85,
     "start": 35.85,
-    "end": 37.0176,
-    "lufs_100ms": -35.8,
+    "end": 37.0242,
+    "lufs_100ms": -36.0,
     "note": ""
    },
    {
     "kind": "assemble",
     "t": 38.1,
     "start": 38.1,
-    "end": 39.2099,
-    "lufs_100ms": -35.4,
+    "end": 39.201,
+    "lufs_100ms": -35.1,
     "note": ""
    },
    {
@@ -2485,40 +2485,40 @@
     "kind": "move",
     "t": 38.42,
     "start": 38.42,
-    "end": 39.052,
-    "lufs_100ms": -44.1,
+    "end": 39.0658,
+    "lufs_100ms": -44.3,
     "note": ""
    },
    {
     "kind": "move",
     "t": 38.7,
     "start": 38.7,
-    "end": 39.338,
-    "lufs_100ms": -44.2,
+    "end": 39.3302,
+    "lufs_100ms": -44.0,
     "note": ""
    },
    {
     "kind": "move",
     "t": 38.98,
     "start": 38.98,
-    "end": 39.5897,
-    "lufs_100ms": -44.0,
+    "end": 39.5895,
+    "lufs_100ms": -43.6,
     "note": ""
    },
    {
     "kind": "lock",
     "t": 39.49,
     "start": 39.468,
-    "end": 40.1503,
-    "lufs_100ms": -26.1,
+    "end": 40.1536,
+    "lufs_100ms": -25.5,
     "note": ""
    },
    {
     "kind": "door-open",
     "t": 40.26,
     "start": 40.26,
-    "end": 41.3819,
-    "lufs_100ms": -34.3,
+    "end": 41.4206,
+    "lufs_100ms": -33.4,
     "note": ""
    },
    {
@@ -2533,7 +2533,7 @@
     "kind": "arrive",
     "t": 41.34,
     "start": 41.34,
-    "end": 41.8848,
+    "end": 41.8373,
     "lufs_100ms": -35.2,
     "note": ""
    },
@@ -2550,15 +2550,15 @@
     "t": 43.05,
     "start": 43.05,
     "end": 43.597,
-    "lufs_100ms": -31.9,
+    "lufs_100ms": -32.6,
     "note": ""
    },
    {
     "kind": "inspect",
     "t": 47.81,
     "start": 47.81,
-    "end": 48.6123,
-    "lufs_100ms": -40.8,
+    "end": 48.5846,
+    "lufs_100ms": -41.0,
     "note": ""
    },
    {
@@ -2573,32 +2573,32 @@
     "kind": "lock",
     "t": 49.09,
     "start": 49.072,
-    "end": 49.6543,
-    "lufs_100ms": -38.7,
+    "end": 49.6434,
+    "lufs_100ms": -39.4,
     "note": ""
    },
    {
     "kind": "inspect",
     "t": 49.4,
     "start": 49.4,
-    "end": 50.9652,
-    "lufs_100ms": -37.5,
+    "end": 50.965,
+    "lufs_100ms": -37.2,
     "note": ""
    },
    {
     "kind": "return",
     "t": 49.61,
     "start": 49.61,
-    "end": 50.7881,
-    "lufs_100ms": -39.1,
+    "end": 50.7882,
+    "lufs_100ms": -39.4,
     "note": ""
    },
    {
     "kind": "compare",
     "t": 50.28,
     "start": 50.28,
-    "end": 50.9049,
-    "lufs_100ms": -33.6,
+    "end": 50.9264,
+    "lufs_100ms": -33.9,
     "note": ""
    },
    {
@@ -2613,8 +2613,8 @@
     "kind": "assemble",
     "t": 52.35,
     "start": 52.35,
-    "end": 53.7607,
-    "lufs_100ms": -29.4,
+    "end": 53.7454,
+    "lufs_100ms": -28.9,
     "note": ""
    },
    {
@@ -2637,8 +2637,8 @@
     "kind": "packet",
     "t": 53.55,
     "start": 53.55,
-    "end": 54.3294,
-    "lufs_100ms": -33.3,
+    "end": 54.3532,
+    "lufs_100ms": -33.5,
     "note": ""
    },
    {
@@ -2653,8 +2653,8 @@
     "kind": "arrive",
     "t": 54.93,
     "start": 54.93,
-    "end": 55.6387,
-    "lufs_100ms": -31.1,
+    "end": 55.652,
+    "lufs_100ms": -30.7,
     "note": ""
    },
    {
@@ -2709,8 +2709,8 @@
     "kind": "arrive",
     "t": 58.4,
     "start": 58.4,
-    "end": 58.897,
-    "lufs_100ms": -39.2,
+    "end": 58.9376,
+    "lufs_100ms": -39.5,
     "note": ""
    },
    {
@@ -2725,15 +2725,15 @@
     "kind": "arrive",
     "t": 58.65,
     "start": 58.65,
-    "end": 59.1879,
-    "lufs_100ms": -39.7,
+    "end": 59.1876,
+    "lufs_100ms": -39.9,
     "note": ""
    },
    {
     "kind": "simulated",
     "t": 58.8,
     "start": 58.8,
-    "end": 61.8979,
+    "end": 61.9061,
     "lufs_100ms": -39.3,
     "note": ""
    },
@@ -2741,7 +2741,7 @@
     "kind": "simulated",
     "t": 58.9,
     "start": 58.9,
-    "end": 61.993,
+    "end": 62.0062,
     "lufs_100ms": -46.6,
     "note": ""
    },
@@ -2757,16 +2757,16 @@
     "kind": "reject",
     "t": 60.34,
     "start": 60.34,
-    "end": 61.1763,
-    "lufs_100ms": -28.7,
+    "end": 61.1453,
+    "lufs_100ms": -29.6,
     "note": ""
    },
    {
     "kind": "request",
     "t": 61.15,
     "start": 61.15,
-    "end": 62.1815,
-    "lufs_100ms": -36.9,
+    "end": 62.1824,
+    "lufs_100ms": -37.1,
     "note": ""
    },
    {
@@ -2781,32 +2781,32 @@
     "kind": "door-open",
     "t": 62.249,
     "start": 62.249,
-    "end": 63.3872,
-    "lufs_100ms": -31.6,
+    "end": 63.4085,
+    "lufs_100ms": -30.6,
     "note": ""
    },
    {
     "kind": "packet",
     "t": 62.37,
     "start": 62.37,
-    "end": 63.1429,
-    "lufs_100ms": -33.9,
+    "end": 63.0907,
+    "lufs_100ms": -33.7,
     "note": ""
    },
    {
     "kind": "arrive",
     "t": 63.02,
     "start": 63.02,
-    "end": 63.7077,
-    "lufs_100ms": -32.8,
+    "end": 63.7308,
+    "lufs_100ms": -33.2,
     "note": ""
    },
    {
     "kind": "lock",
     "t": 63.46,
     "start": 63.438,
-    "end": 64.0569,
-    "lufs_100ms": -28.6,
+    "end": 64.1151,
+    "lufs_100ms": -29.3,
     "note": ""
    },
    {
@@ -2814,7 +2814,7 @@
     "t": 64.03,
     "start": 64.03,
     "end": 64.5493,
-    "lufs_100ms": -36.5,
+    "lufs_100ms": -36.6,
     "note": ""
    },
    {
@@ -2822,7 +2822,7 @@
     "t": 64.84,
     "start": 64.84,
     "end": 65.3886,
-    "lufs_100ms": -35.9,
+    "lufs_100ms": -36.4,
     "note": ""
    },
    {
@@ -2830,7 +2830,7 @@
     "t": 65.11,
     "start": 65.11,
     "end": 65.6567,
-    "lufs_100ms": -35.7,
+    "lufs_100ms": -36.2,
     "note": ""
    },
    {
@@ -2838,14 +2838,14 @@
     "t": 65.35,
     "start": 65.35,
     "end": 65.8888,
-    "lufs_100ms": -35.4,
+    "lufs_100ms": -36.6,
     "note": ""
    },
    {
     "kind": "door-close",
     "t": 65.5,
     "start": 65.5,
-    "end": 66.6368,
+    "end": 66.6856,
     "lufs_100ms": -31.5,
     "note": ""
    },
@@ -2861,16 +2861,16 @@
     "kind": "door-open",
     "t": 66.631,
     "start": 66.631,
-    "end": 67.6741,
-    "lufs_100ms": -30.8,
+    "end": 67.6915,
+    "lufs_100ms": -30.9,
     "note": ""
    },
    {
     "kind": "packet",
     "t": 66.75,
     "start": 66.75,
-    "end": 67.4696,
-    "lufs_100ms": -33.8,
+    "end": 67.4669,
+    "lufs_100ms": -33.5,
     "note": ""
    },
    {
@@ -2885,7 +2885,7 @@
     "kind": "arrive",
     "t": 67.38,
     "start": 67.38,
-    "end": 68.0856,
+    "end": 68.0836,
     "lufs_100ms": -32.7,
     "note": ""
    },
@@ -2893,7 +2893,7 @@
     "kind": "print",
     "t": 67.56,
     "start": 67.56,
-    "end": 68.2682,
+    "end": 68.2742,
     "lufs_100ms": -39.3,
     "note": ""
    },
@@ -2901,16 +2901,16 @@
     "kind": "compare",
     "t": 67.66,
     "start": 67.66,
-    "end": 68.2954,
-    "lufs_100ms": -39.3,
+    "end": 68.2722,
+    "lufs_100ms": -38.8,
     "note": ""
    },
    {
     "kind": "compare",
     "t": 68.02,
     "start": 68.02,
-    "end": 68.664,
-    "lufs_100ms": -31.4,
+    "end": 68.6348,
+    "lufs_100ms": -31.5,
     "note": ""
    },
    {
@@ -2925,8 +2925,8 @@
     "kind": "compare",
     "t": 69.12,
     "start": 69.12,
-    "end": 69.7763,
-    "lufs_100ms": -30.5,
+    "end": 69.7705,
+    "lufs_100ms": -30.8,
     "note": ""
    },
    {
@@ -2934,15 +2934,15 @@
     "t": 69.57,
     "start": 69.548,
     "end": 70.2291,
-    "lufs_100ms": -27.3,
+    "lufs_100ms": -26.9,
     "note": ""
    },
    {
     "kind": "inspect",
     "t": 69.69,
     "start": 69.69,
-    "end": 70.2241,
-    "lufs_100ms": -37.3,
+    "end": 70.218,
+    "lufs_100ms": -37.6,
     "note": ""
    },
    {
@@ -2965,7 +2965,7 @@
     "kind": "door-close",
     "t": 71.3,
     "start": 71.3,
-    "end": 72.4466,
+    "end": 72.4705,
     "lufs_100ms": -31.9,
     "note": ""
    },
@@ -2981,15 +2981,15 @@
     "kind": "door-open",
     "t": 72.33,
     "start": 72.33,
-    "end": 73.4507,
-    "lufs_100ms": -30.6,
+    "end": 73.4947,
+    "lufs_100ms": -31.0,
     "note": ""
    },
    {
     "kind": "packet",
     "t": 72.43,
     "start": 72.43,
-    "end": 73.1489,
+    "end": 73.1491,
     "lufs_100ms": -34.5,
     "note": ""
    },
@@ -3005,8 +3005,8 @@
     "kind": "arrive",
     "t": 73.08,
     "start": 73.08,
-    "end": 73.7781,
-    "lufs_100ms": -32.5,
+    "end": 73.7948,
+    "lufs_100ms": -33.0,
     "note": ""
    },
    {
@@ -3029,7 +3029,7 @@
     "kind": "request",
     "t": 74.9,
     "start": 74.9,
-    "end": 76.5674,
+    "end": 76.5673,
     "lufs_100ms": -34.4,
     "note": ""
    },
@@ -3037,23 +3037,23 @@
     "kind": "return",
     "t": 75.82,
     "start": 75.82,
-    "end": 76.9613,
-    "lufs_100ms": -36.4,
+    "end": 76.9612,
+    "lufs_100ms": -35.5,
     "note": ""
    },
    {
     "kind": "return",
-    "t": 76.04,
-    "start": 76.04,
-    "end": 77.1813,
-    "lufs_100ms": -36.3,
+    "t": 76.12,
+    "start": 76.12,
+    "end": 77.2611,
+    "lufs_100ms": -35.9,
     "note": ""
    },
    {
     "kind": "return",
-    "t": 76.26,
-    "start": 76.26,
-    "end": 77.4011,
+    "t": 76.42,
+    "start": 76.42,
+    "end": 77.5611,
     "lufs_100ms": -35.6,
     "note": ""
    },
@@ -3069,16 +3069,16 @@
     "kind": "door-close",
     "t": 77.05,
     "start": 77.05,
-    "end": 78.2183,
-    "lufs_100ms": -31.7,
+    "end": 78.2238,
+    "lufs_100ms": -32.4,
     "note": ""
    },
    {
     "kind": "packet",
     "t": 77.85,
     "start": 77.85,
-    "end": 78.6199,
-    "lufs_100ms": -36.5,
+    "end": 78.6196,
+    "lufs_100ms": -36.4,
     "note": ""
    },
    {
@@ -3101,48 +3101,32 @@
     "kind": "door-open",
     "t": 78.448,
     "start": 78.448,
-    "end": 79.574,
-    "lufs_100ms": -33.3,
+    "end": 79.6241,
+    "lufs_100ms": -32.8,
     "note": ""
    },
    {
     "kind": "compare",
     "t": 78.72,
     "start": 78.72,
-    "end": 79.3597,
-    "lufs_100ms": -35.3,
-    "note": ""
-   },
-   {
-    "kind": "arrive",
-    "t": 78.94,
-    "start": 78.94,
-    "end": 79.6502,
-    "lufs_100ms": -36.4,
+    "end": 79.3744,
+    "lufs_100ms": -34.6,
     "note": ""
    },
    {
     "kind": "lock",
     "t": 79.26,
     "start": 79.242,
-    "end": 79.7963,
-    "lufs_100ms": -28.7,
-    "note": ""
-   },
-   {
-    "kind": "decision",
-    "t": 79.36,
-    "start": 79.36,
-    "end": 80.8556,
-    "lufs_100ms": -34.1,
+    "end": 79.7604,
+    "lufs_100ms": -28.8,
     "note": ""
    },
    {
     "kind": "packet",
     "t": 79.54,
     "start": 79.54,
-    "end": 80.1633,
-    "lufs_100ms": -36.9,
+    "end": 80.1759,
+    "lufs_100ms": -36.8,
     "note": ""
    },
    {
@@ -3157,8 +3141,8 @@
     "kind": "door-open",
     "t": 79.594,
     "start": 79.594,
-    "end": 82.248,
-    "lufs_100ms": -36.3,
+    "end": 82.27,
+    "lufs_100ms": -35.6,
     "note": ""
    },
    {
@@ -3173,16 +3157,8 @@
     "kind": "simulated",
     "t": 80.28,
     "start": 80.28,
-    "end": 83.3775,
+    "end": 83.3806,
     "lufs_100ms": -43.6,
-    "note": ""
-   },
-   {
-    "kind": "decision",
-    "t": 80.42,
-    "start": 80.42,
-    "end": 81.9157,
-    "lufs_100ms": -33.8,
     "note": ""
    },
    {
@@ -3197,88 +3173,56 @@
     "kind": "return",
     "t": 80.64,
     "start": 80.64,
-    "end": 81.7812,
-    "lufs_100ms": -35.7,
-    "note": ""
-   },
-   {
-    "kind": "move",
-    "t": 80.76,
-    "start": 80.76,
-    "end": 81.722,
-    "lufs_100ms": -40.6,
+    "end": 81.7813,
+    "lufs_100ms": -36.1,
     "note": ""
    },
    {
     "kind": "door-open",
     "t": 80.779,
     "start": 80.779,
-    "end": 81.9099,
-    "lufs_100ms": -32.4,
+    "end": 81.9562,
+    "lufs_100ms": -32.7,
     "note": ""
    },
    {
     "kind": "door-close",
-    "t": 80.8,
-    "start": 80.8,
-    "end": 83.497,
-    "lufs_100ms": -37.5,
-    "note": ""
-   },
-   {
-    "kind": "door-close",
-    "t": 81.06,
-    "start": 81.06,
-    "end": 82.207,
-    "lufs_100ms": -34.5,
-    "note": ""
-   },
-   {
-    "kind": "inspect",
-    "t": 81.34,
-    "start": 81.34,
-    "end": 81.9345,
-    "lufs_100ms": -39.5,
-    "note": ""
-   },
-   {
-    "kind": "decision",
-    "t": 81.56,
-    "start": 81.56,
-    "end": 83.8533,
-    "lufs_100ms": -26.6,
+    "t": 80.95,
+    "start": 80.95,
+    "end": 82.1204,
+    "lufs_100ms": -35.5,
     "note": ""
    },
    {
     "kind": "lock",
     "t": 81.56,
     "start": 81.538,
-    "end": 82.1629,
-    "lufs_100ms": -28.4,
+    "end": 82.2189,
+    "lufs_100ms": -28.1,
     "note": ""
    },
    {
-    "kind": "door-close",
-    "t": 82.02,
-    "start": 82.02,
-    "end": 83.1561,
-    "lufs_100ms": -35.1,
+    "kind": "decision",
+    "t": 81.62,
+    "start": 81.62,
+    "end": 83.913,
+    "lufs_100ms": -27.4,
     "note": ""
    },
    {
     "kind": "assemble",
     "t": 82.06,
     "start": 82.06,
-    "end": 83.156,
-    "lufs_100ms": -32.5,
+    "end": 83.161,
+    "lufs_100ms": -32.3,
     "note": ""
    },
    {
     "kind": "resolve",
-    "t": 82.34,
-    "start": 82.34,
-    "end": 85.591,
-    "lufs_100ms": -30.4,
+    "t": 82.4,
+    "start": 82.4,
+    "end": 85.6511,
+    "lufs_100ms": -30.9,
     "note": ""
    },
    {
@@ -3301,7 +3245,7 @@
     "kind": "title",
     "t": 84.7,
     "start": 84.7,
-    "end": 85.6449,
+    "end": 85.645,
     "lufs_100ms": -42.8,
     "note": ""
    },
@@ -3309,7 +3253,7 @@
     "kind": "arrive",
     "t": 84.74,
     "start": 84.74,
-    "end": 85.3665,
+    "end": 85.3562,
     "lufs_100ms": -34.8,
     "note": ""
    },
@@ -3325,8 +3269,8 @@
     "kind": "record",
     "t": 84.9,
     "start": 84.9,
-    "end": 85.458,
-    "lufs_100ms": -32.5,
+    "end": 85.4857,
+    "lufs_100ms": -33.2,
     "note": ""
    },
    {
@@ -3349,7 +3293,7 @@
     "kind": "title",
     "t": 85.5,
     "start": 85.5,
-    "end": 86.4606,
+    "end": 86.4607,
     "lufs_100ms": -42.9,
     "note": ""
    },
@@ -3407,8 +3351,8 @@
    "name": "music.wav DC",
    "ok": true,
    "value": [
-    6.34e-09,
-    1.9e-09
+    6.32e-09,
+    1.88e-09
    ],
    "target": "|mean| < 1e-4"
   },
@@ -3434,8 +3378,8 @@
    "name": "sfx.wav DC",
    "ok": true,
    "value": [
-    -7.42e-12,
-    8.83e-12
+    9.88e-12,
+    6.26e-12
    ],
    "target": "|mean| < 1e-4"
   },
@@ -3461,8 +3405,8 @@
    "name": "master.wav DC",
    "ok": true,
    "value": [
-    -1.82e-09,
-    2.25e-08
+    -1.99e-08,
+    7.17e-09
    ],
    "target": "|mean| < 1e-4"
   },
@@ -3488,8 +3432,8 @@
    "name": "master-no-narration.wav DC",
    "ok": true,
    "value": [
-    4.58e-10,
-    4.66e-10
+    4.62e-10,
+    5.11e-10
    ],
    "target": "|mean| < 1e-4"
   },
@@ -3520,13 +3464,13 @@
   {
    "name": "master-no-narration.wav true peak",
    "ok": true,
-   "value": -1.97,
+   "value": -2.06,
    "target": "<= -1.0"
   },
   {
    "name": "narrator over background (every line)",
    "ok": true,
-   "value": 12.4,
+   "value": 12.7,
    "target": ">= 12 LU per line"
   },
   {
@@ -3538,7 +3482,7 @@
   {
    "name": "worker over background (no-narration version)",
    "ok": true,
-   "value": 12.8,
+   "value": 12.7,
    "target": ">= 8 LU"
   },
   {
@@ -3603,7 +3547,7 @@
   {
    "name": "music never drops out (3 to 88.8 s, before ducking)",
    "ok": true,
-   "value": -34.04,
+   "value": -34.05,
    "target": ">= -45 LUFS momentary"
   },
   {

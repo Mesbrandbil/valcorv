@@ -205,7 +205,7 @@ PK.section("s8-system", 84, 90, function (tl, W, ctx, S) {
   });
   tl.fromTo(bodies, { opacity: 1 }, { opacity: 0.1, duration: 0.3, ease: "power2.inOut", immediateRender: false }, tGhost);
   tl.fromTo(ghosts, { opacity: 0 }, { opacity: 1, duration: 0.3, ease: "power2.inOut", immediateRender: false }, tGhost);
-  tl.fromTo(ghosts, { opacity: 1 }, { opacity: 0, duration: 0.35, ease: "power2.inOut", immediateRender: false }, tGhost + 0.55);
+  tl.fromTo(ghosts, { opacity: 1 }, { opacity: 0, duration: 0.35, ease: "power2.inOut", immediateRender: false }, tGhost + 0.75);
   tl.fromTo(bodies, { opacity: 0.1 }, { opacity: 1, duration: 0.35, ease: "power2.inOut", immediateRender: false }, tGhost + 0.75);
   PK.sfx("summon", tGhost, { gain_db: -18, pan: -0.6, material: "ghost" });
 
