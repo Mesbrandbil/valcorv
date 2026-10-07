@@ -425,13 +425,26 @@ PK.section("s7-cooperate", 78, 84, function (tl, W, ctx, S) {
   var tSolid = tm.decide + tm.decideD; // 83.02
 
   // the risk owner's black line opens a door and stays in it while the room answers
+  // (s6 opens doors wide, 88 units, with W.doorWide; its lines enter the doorway off-centre, so things pass beside them)
+  function door(k, at, open) {
+    if (W.doorWide) W.doorWide(tl, k, at, open, 0.28);
+    else if (open) RM[k].open(tl, at, 0.28);
+    else RM[k].close(tl, at, 0.28);
+  }
   function opens(k, at) {
-    PK.drawOn(tl, own[k], at, 0.28, "power2.inOut", { later: true });
-    RM[k].open(tl, at + 0.22, 0.28);
+    var wall = own[k].pkWall;
+    if (wall) {
+      FT(own[k], { drawSVG: "0% 0%" }, { drawSVG: "0% " + f(wall) + "%", duration: 0.24, ease: "power2.inOut" }, at);
+      door(k, at + 0.24, true);
+      FT(own[k], { drawSVG: "0% " + f(wall) + "%" }, { drawSVG: "0% 100%", duration: 0.12, ease: "power2.out" }, at + 0.4);
+    } else {
+      PK.drawOn(tl, own[k], at, 0.28, "power2.inOut", { later: true });
+      door(k, at + 0.22, true);
+    }
   }
   function withdraws(k, at) {
     PK.drawOff(tl, own[k], at, 0.28, "power2.inOut", { to: "start" });
-    RM[k].close(tl, at + 0.1, 0.28);
+    door(k, at + 0.12, false);
   }
   // an owner's choice: ink mono beside the packet on a short leader (the leader retracts when the packet leaves)
   function choice(str, P, at, leaveAt) {
@@ -443,6 +456,8 @@ PK.section("s7-cooperate", 78, 84, function (tl, W, ctx, S) {
     labelIn(t, at);
     PK.drawOn(tl, ld, at, 0.2, "power2.out", { later: true });
     if (leaveAt) PK.drawOff(tl, ld, leaveAt, 0.2, "power2.in", { to: "start" });
+    // read for 1.25 s, then it goes: the decided packet carries the result
+    FT(t, { opacity: 1 }, { opacity: 0, duration: 0.3, ease: "power1.in" }, at + 1.25);
     return { t: t, ld: ld };
   }
   function carry(Pfrom, Pto, Qfrom, Qto, at, dur, s0, s1, bend) {
@@ -578,7 +593,7 @@ PK.section("s7-cooperate", 78, 84, function (tl, W, ctx, S) {
     prioraEnd: QT,
     beadEnd: ang(QT, PT),
     packetScale: 1,
-    labels: { done: [cM.t, cR.t], late: [lQ, lD] },
+    labels: { done: [], late: [lQ, lD] },
     shelf: th.g,
     branchPoint: BR0,
   };

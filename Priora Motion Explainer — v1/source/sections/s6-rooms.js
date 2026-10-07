@@ -747,8 +747,9 @@ PK.section("s6-rooms", 57, 78, function (tl, W, ctx, S) {
     fadeOut(gh, at + dur - 0.12, 0.12, "none");
     FT(W.safeguards[k].g, { y: d.pos[1] - 4 }, { y: d.pos[1], duration: 0.2, ease: "power2.inOut" }, at + dur - 0.05);
   }
-  var SY1 = cM[1] + PK_R + 14,
-    SY2 = SY1 + LAB * 1.75;
+  var CO = PK_R + 5; // the verifier's corner brackets
+  var SY1 = cM[1] + CO + 13.5, // result labels sit under the brackets
+    SY2 = SY1 + LAB * 1.7;
   // Thermal check: part of the gap; the rest of the gap stays open, with its tick
   var tTh = 68.0;
   var ghTh = tryIn("thermal", tTh, 0.45); // seats 68.45
@@ -767,7 +768,6 @@ PK.section("s6-rooms", 57, 78, function (tl, W, ctx, S) {
   // "back inside": the verifier's corners land on the joined ring, a tick inside the bracket
   var tBack = PK.word("L11", "back"); // 70.19
   FT(verifier.body, { rotation: 0, svgOrigin: "0 0" }, { rotation: 45, svgOrigin: "0 0", duration: 0.4, ease: "power2.inOut" }, tBack - 0.3);
-  var CO = PK_R + 7.5;
   var cornH = holder(Lcs);
   [[-1, -1], [1, -1], [1, 1], [-1, 1]].forEach(function (k) {
     var L = 9;

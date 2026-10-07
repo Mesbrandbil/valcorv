@@ -1361,7 +1361,7 @@ def note_name(m):
 # ducking
 
 
-def duck_curve(tm: Timing, speakers):
+def duck_curve(tm: Timing, speakers, hold_last=False):
     """Music gain (dB) at control rate 1 kHz: smooth cosine ramps (in dB); the attack ends at the
     first sound of each line, the release starts just after its last. Lines closer than DUCK_BRIDGE
     (whoever speaks) stay ducked through the gap; after the last line the duck is held to the end."""
@@ -1379,10 +1379,10 @@ def duck_curve(tm: Timing, speakers):
         spans.append((k, s, e, depth))
     for i, (k, s, e, depth) in enumerate(spans):
         a0 = s - DUCK_ATTACK
-        r0 = DUR + 1.0 if i == len(spans) - 1 else e + DUCK_HOLD  # after the last line: no release
+        r0 = DUR + 1.0 if (hold_last and i == len(spans) - 1) else e + DUCK_HOLD  # after the last line: no release
         shape = np.where(tc < s, rc((tc - a0) / DUCK_ATTACK), np.where(tc <= r0, 1.0, 1.0 - rc((tc - r0) / DUCK_RELEASE)))
         g = np.minimum(g, -depth * shape)
-    return tc, g, [{"lines": k, "start": round(s, 3), "end": round(e, 3) if i < len(spans) - 1 else "held to the end", "depth_db": d}
+    return tc, g, [{"lines": k, "start": round(s, 3), "end": round(e, 3) if (i < len(spans) - 1 or not hold_last) else "held to the end", "depth_db": d}
                    for i, (k, s, e, d) in enumerate(spans)]
 
 
@@ -1707,7 +1707,7 @@ def main(argv=None):
     music_raw, mplan = render_music(tm, has_wordmark)
 
     print("== voice levelling, ducking and mix")
-    tcd, g_master, duck_spans = duck_curve(tm, {"narrator": DUCK_NARRATOR_DB, "worker": DUCK_WORKER_DB})
+    tcd, g_master, duck_spans = duck_curve(tm, {"narrator": DUCK_NARRATOR_DB, "worker": DUCK_WORKER_DB}, hold_last=True)
     _, g_worker, _ = duck_curve(tm, {"worker": DUCK_WORKER_DB_NONAR})
     music_d = apply_gain_curve(music_raw, tcd, g_master)
     music_w = apply_gain_curve(music_raw, tcd, g_worker)
