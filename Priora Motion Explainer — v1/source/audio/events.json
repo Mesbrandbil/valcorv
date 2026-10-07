@@ -28,56 +28,56 @@
  },
  {
   "kind": "thread",
-  "t": 6.29,
-  "dur": 1.35,
+  "t": 6.22,
+  "dur": 0.7,
   "gain_db": -9
  },
  {
   "kind": "arrive",
-  "t": 6.509,
+  "t": 6.296,
   "gain_db": -14,
   "pan": -0.8333333333333334,
   "size": "small"
  },
  {
   "kind": "arrive",
-  "t": 6.693,
+  "t": 6.392,
   "gain_db": -14,
   "pan": -0.5,
   "size": "small"
  },
  {
   "kind": "arrive",
-  "t": 6.877,
+  "t": 6.488,
   "gain_db": -14,
   "pan": -0.16666666666666666,
   "size": "small"
  },
  {
   "kind": "arrive",
-  "t": 7.073,
+  "t": 6.59,
   "gain_db": -14,
   "pan": 0.16666666666666666,
   "size": "small"
  },
  {
   "kind": "arrive",
-  "t": 7.268,
+  "t": 6.692,
   "gain_db": -14,
   "pan": 0.5,
   "size": "small"
  },
  {
   "kind": "arrive",
-  "t": 7.452,
+  "t": 6.788,
   "gain_db": -14,
   "pan": 0.8333333333333334,
   "size": "small"
  },
  {
   "kind": "move",
-  "t": 7.75,
-  "dur": 1.65,
+  "t": 7.6,
+  "dur": 1,
   "gain_db": -10
  },
  {
@@ -87,10 +87,24 @@
   "pan": -0.2
  },
  {
+  "kind": "packet",
+  "t": 10.6,
+  "gain_db": -16,
+  "size": "small",
+  "pan": 0.5
+ },
+ {
   "kind": "speech-fragment",
   "t": 11.04,
   "gain_db": -8,
   "pan": -0.2
+ },
+ {
+  "kind": "packet",
+  "t": 11.4,
+  "gain_db": -16,
+  "size": "small",
+  "pan": 0.5
  },
  {
   "kind": "speech-fragment",
@@ -99,10 +113,30 @@
   "pan": -0.2
  },
  {
+  "kind": "packet",
+  "t": 13,
+  "gain_db": -16,
+  "size": "small",
+  "pan": 0.5
+ },
+ {
   "kind": "speech-fragment",
   "t": 13.97,
   "gain_db": -8,
   "pan": -0.2
+ },
+ {
+  "kind": "packet",
+  "t": 14,
+  "gain_db": -16,
+  "size": "small",
+  "pan": 0.5
+ },
+ {
+  "kind": "thread",
+  "t": 14.25,
+  "dur": 0.35,
+  "gain_db": -12
  },
  {
   "kind": "move",
@@ -131,14 +165,14 @@
  },
  {
   "kind": "arrive",
-  "t": 15.47,
+  "t": 15.4,
   "gain_db": -9,
   "size": "facet",
   "pan": -0.34641016151377546
  },
  {
   "kind": "arrive",
-  "t": 15.94,
+  "t": 15.87,
   "gain_db": -9,
   "size": "facet",
   "pan": -7.347880794884119e-17
@@ -151,7 +185,7 @@
  },
  {
   "kind": "arrive",
-  "t": 16.92,
+  "t": 16.85,
   "gain_db": -9,
   "size": "facet",
   "pan": 0.34641016151377535
@@ -164,35 +198,35 @@
  },
  {
   "kind": "arrive",
-  "t": 17.49,
+  "t": 17.42,
   "gain_db": -9,
   "size": "facet",
   "pan": 0.3464101615137755
  },
  {
   "kind": "thread",
-  "t": 18.35,
+  "t": 17.89,
   "dur": 0.5,
   "gain_db": -10
  },
  {
-  "kind": "request",
-  "t": 18.62,
-  "gain_db": -6
- },
- {
   "kind": "arrive",
-  "t": 18.8,
+  "t": 18.31,
   "gain_db": -9,
   "size": "facet",
   "pan": 2.4492935982947065e-17
  },
  {
   "kind": "arrive",
-  "t": 19.1,
+  "t": 18.51,
   "gain_db": -9,
   "size": "facet",
   "pan": -0.3464101615137755
+ },
+ {
+  "kind": "request",
+  "t": 18.62,
+  "gain_db": -6
  },
  {
   "kind": "evidence",
@@ -208,321 +242,341 @@
  },
  {
   "kind": "assemble",
-  "t": 21.15,
+  "t": 21.5,
   "gain_db": -10,
   "size": "small"
  },
  {
   "kind": "move",
-  "t": 22,
+  "t": 22.3,
   "dur": 1.5,
   "gain_db": -10,
   "pan": -0.3
  },
  {
   "kind": "thread",
-  "t": 22.6,
-  "dur": 1,
+  "t": 23.6,
+  "dur": 0.8,
   "gain_db": -9,
   "material": "pencil"
  },
  {
   "kind": "packet",
-  "t": 23.5,
+  "t": 23.8,
   "gain_db": -14,
   "size": "small",
-  "pan": 0.2
- },
- {
-  "kind": "door-close",
-  "t": 23.55,
-  "gain_db": -16,
-  "pan": 0.1
+  "pan": 0.3
  },
  {
   "kind": "arrive",
-  "t": 23.7,
+  "t": 24.3,
   "gain_db": -17,
   "size": "small",
   "pan": -0.4
  },
  {
-  "kind": "move",
-  "t": 23.95,
-  "gain_db": -18,
-  "material": "paper",
-  "pan": -0.5
- },
- {
   "kind": "door-open",
-  "t": 24,
+  "t": 24.45,
   "gain_db": -10,
-  "pan": 0.11
+  "pan": 0.17
+ },
+ {
+  "kind": "request",
+  "t": 24.62,
+  "gain_db": -16,
+  "part": "probe",
+  "pan": -0.57
+ },
+ {
+  "kind": "request",
+  "t": 25.1,
+  "gain_db": -16,
+  "part": "probe",
+  "pan": 0
+ },
+ {
+  "kind": "request",
+  "t": 25.58,
+  "gain_db": -16,
+  "part": "probe",
+  "pan": -0.08
  },
  {
   "kind": "summon",
-  "t": 24.35,
+  "t": 26.04,
   "gain_db": -6,
-  "pan": -0.54
+  "agent": "evidence",
+  "pan": -0.29
  },
  {
   "kind": "summon",
-  "t": 25.25,
+  "t": 26.64,
   "gain_db": -6,
-  "pan": -0.34
- },
- {
-  "kind": "arrive",
-  "t": 25.31,
-  "gain_db": -8,
-  "size": "agent",
-  "agent": "siteRules",
-  "pan": -0.54
- },
- {
-  "kind": "move",
-  "t": 25.39,
-  "gain_db": -18,
-  "material": "paper",
-  "pan": -0.5
- },
- {
-  "kind": "arrive",
-  "t": 26.13,
-  "gain_db": -8,
-  "size": "agent",
-  "agent": "insurer",
-  "pan": -0.34
- },
- {
-  "kind": "summon",
-  "t": 26.15,
-  "gain_db": -6,
-  "pan": -0.13
- },
- {
-  "kind": "arrive",
-  "t": 27.03,
-  "gain_db": -8,
-  "size": "agent",
-  "agent": "fire",
-  "pan": -0.13
- },
- {
-  "kind": "summon",
-  "t": 27.05,
-  "gain_db": -6,
-  "pan": -0.54
- },
- {
-  "kind": "arrive",
-  "t": 27.93,
-  "gain_db": -8,
-  "size": "agent",
   "agent": "riskEng",
-  "pan": -0.54
- },
- {
-  "kind": "summon",
-  "t": 27.95,
-  "gain_db": -6,
-  "pan": -0.33
+  "pan": -0.49
  },
  {
   "kind": "arrive",
-  "t": 28.83,
+  "t": 26.7,
   "gain_db": -8,
   "size": "agent",
   "agent": "evidence",
-  "pan": -0.33
+  "pan": -0.29
+ },
+ {
+  "kind": "summon",
+  "t": 27.24,
+  "gain_db": -6,
+  "agent": "siteRules",
+  "pan": -0.49
+ },
+ {
+  "kind": "arrive",
+  "t": 27.3,
+  "gain_db": -8,
+  "size": "agent",
+  "agent": "riskEng",
+  "pan": -0.49
+ },
+ {
+  "kind": "summon",
+  "t": 27.84,
+  "gain_db": -6,
+  "agent": "fire",
+  "pan": -0.08
+ },
+ {
+  "kind": "arrive",
+  "t": 27.9,
+  "gain_db": -8,
+  "size": "agent",
+  "agent": "siteRules",
+  "pan": -0.49
+ },
+ {
+  "kind": "summon",
+  "t": 28.44,
+  "gain_db": -6,
+  "agent": "insurer",
+  "pan": -0.29
+ },
+ {
+  "kind": "arrive",
+  "t": 28.5,
+  "gain_db": -8,
+  "size": "agent",
+  "agent": "fire",
+  "pan": -0.08
+ },
+ {
+  "kind": "arrive",
+  "t": 29.1,
+  "gain_db": -8,
+  "size": "agent",
+  "agent": "insurer",
+  "pan": -0.29
  },
  {
   "kind": "move",
-  "t": 28.98,
-  "dur": 0.85,
+  "t": 29.12,
+  "dur": 0.66,
   "gain_db": -9,
   "material": "case",
   "pan": 0.1
  },
  {
   "kind": "arrive",
-  "t": 29.83,
+  "t": 29.78,
   "gain_db": -6,
   "size": "case",
-  "pan": -0.3
+  "pan": -0.29
  },
  {
   "kind": "packet",
-  "t": 29.86,
+  "t": 30,
   "gain_db": -9,
   "pan": 0.15
  },
  {
   "kind": "thread",
-  "t": 30.4,
-  "dur": 0.7,
+  "t": 30.25,
+  "dur": 0.8,
   "gain_db": -11,
   "pan": -0.1
  },
  {
+  "kind": "packet",
+  "t": 30.35,
+  "gain_db": -12,
+  "size": "small",
+  "pan": 0.1
+ },
+ {
   "kind": "door-close",
-  "t": 30.42,
-  "gain_db": -11,
-  "pan": 0.43
- },
- {
-  "kind": "packet",
   "t": 30.55,
-  "gain_db": -12,
-  "size": "small",
-  "pan": 0.25
+  "gain_db": -11,
+  "pan": 0.17
  },
  {
   "kind": "packet",
-  "t": 30.85,
+  "t": 30.65,
   "gain_db": -12,
   "size": "small",
-  "pan": -0.25
+  "pan": -0.1
+ },
+ {
+  "kind": "packet",
+  "t": 30.95,
+  "gain_db": -12,
+  "size": "small",
+  "pan": -0.3
  },
  {
   "kind": "inspect",
-  "t": 31.25,
-  "gain_db": -9,
-  "agent": "siteRules",
-  "material": "ruler",
+  "t": 31.72,
+  "gain_db": -12,
+  "agent": "fire",
+  "material": "ping",
+  "pan": -0.08
+ },
+ {
+  "kind": "inspect",
+  "t": 31.85,
+  "gain_db": -8,
+  "agent": "insurer",
+  "material": "clasp",
   "pan": -0.29
  },
  {
   "kind": "inspect",
-  "t": 32.07,
-  "gain_db": -12,
-  "agent": "fire",
-  "material": "ping",
-  "pan": 0.14
- },
- {
-  "kind": "inspect",
-  "t": 32.18,
-  "gain_db": -8,
-  "agent": "insurer",
-  "material": "clasp",
-  "pan": -0.1
- },
- {
-  "kind": "inspect",
-  "t": 32.25,
+  "t": 32,
   "gain_db": -9,
   "agent": "riskEng",
   "material": "measure",
   "dur": 0.8,
-  "pan": -0.29
+  "pan": -0.43
  },
  {
   "kind": "inspect",
-  "t": 32.39,
+  "t": 32.02,
   "gain_db": -15,
   "agent": "fire",
   "material": "ping",
-  "pan": 0.14
- },
- {
-  "kind": "evidence",
-  "t": 32.72,
-  "gain_db": -7,
-  "part": "focus",
-  "pan": -0.1
+  "pan": -0.08
  },
  {
   "kind": "request",
-  "t": 32.72,
+  "t": 32.5,
   "gain_db": -10,
-  "pan": 0.04
- },
- {
-  "kind": "request",
-  "t": 33,
-  "gain_db": -11,
-  "pan": -0.22
+  "pan": -0.17
  },
  {
   "kind": "return",
-  "t": 33.12,
+  "t": 32.86,
   "gain_db": -13,
   "size": "small",
-  "pan": 0.04
+  "pan": -0.17
  },
  {
   "kind": "evidence",
-  "t": 33.16,
-  "gain_db": -9,
-  "part": "accept",
-  "pan": -0.1
+  "t": 33.02,
+  "gain_db": -7,
+  "part": "focus",
+  "pan": -0.29
  },
  {
   "kind": "door-open",
-  "t": 33.2,
+  "t": 33.05,
   "gain_db": -10,
-  "pan": 0.46
+  "pan": 0.17
+ },
+ {
+  "kind": "inspect",
+  "t": 33.2,
+  "gain_db": -9,
+  "agent": "siteRules",
+  "material": "ruler",
+  "pan": -0.44
  },
  {
   "kind": "return",
-  "t": 33.44,
-  "gain_db": -13,
-  "size": "small",
-  "pan": -0.22
- },
- {
-  "kind": "return",
-  "t": 33.45,
-  "gain_db": -8,
-  "agent": "fire",
-  "dur": 0.8,
-  "pan": 0.14
- },
- {
-  "kind": "return",
-  "t": 33.82,
+  "t": 33.2,
   "gain_db": -8,
   "agent": "insurer",
   "dur": 0.8,
-  "pan": -0.1
+  "pan": -0.29
+ },
+ {
+  "kind": "evidence",
+  "t": 33.43,
+  "gain_db": -9,
+  "part": "accept",
+  "pan": -0.29
  },
  {
   "kind": "return",
-  "t": 34.19,
+  "t": 33.8,
   "gain_db": -8,
-  "agent": "evidence",
+  "agent": "fire",
   "dur": 0.8,
-  "pan": -0.1
+  "pan": -0.08
+ },
+ {
+  "kind": "request",
+  "t": 33.9,
+  "gain_db": -11,
+  "pan": -0.38
  },
  {
   "kind": "return",
-  "t": 34.56,
+  "t": 34.35,
+  "gain_db": -13,
+  "size": "small",
+  "pan": -0.38
+ },
+ {
+  "kind": "return",
+  "t": 34.4,
   "gain_db": -8,
   "agent": "riskEng",
   "dur": 0.8,
-  "pan": -0.35
+  "pan": -0.49
  },
  {
   "kind": "return",
-  "t": 34.93,
+  "t": 35,
+  "gain_db": -8,
+  "agent": "evidence",
+  "dur": 0.8,
+  "pan": -0.29
+ },
+ {
+  "kind": "return",
+  "t": 35.6,
   "gain_db": -8,
   "agent": "siteRules",
   "dur": 0.8,
-  "pan": -0.35
+  "pan": -0.49
  },
  {
   "kind": "door-close",
-  "t": 35.85,
+  "t": 36.3,
   "gain_db": -11,
-  "pan": 0.46
+  "pan": 0.17
  },
  {
   "kind": "assemble",
-  "t": 38.1,
+  "t": 37.3,
   "gain_db": -10,
   "size": "small",
-  "pan": 0.66
+  "pan": 0.33
+ },
+ {
+  "kind": "assemble",
+  "t": 38,
+  "gain_db": -14,
+  "size": "small",
+  "pan": -0.29
  },
  {
   "kind": "align",
@@ -536,7 +590,7 @@
   "gain_db": -17,
   "material": "step",
   "agent": "siteRules",
-  "pan": -0.35
+  "pan": -0.49
  },
  {
   "kind": "move",
@@ -544,7 +598,7 @@
   "gain_db": -17,
   "material": "step",
   "agent": "siteRules",
-  "pan": -0.38
+  "pan": -0.52
  },
  {
   "kind": "move",
@@ -552,52 +606,53 @@
   "gain_db": -17,
   "material": "step",
   "agent": "siteRules",
-  "pan": -0.41
+  "pan": -0.54
  },
  {
   "kind": "lock",
-  "t": 39.49,
+  "t": 39.35,
   "gain_db": -3,
-  "pan": -0.09
+  "pan": -0.29
  },
  {
   "kind": "door-open",
   "t": 40.26,
   "gain_db": -9,
-  "pan": 0.47
+  "pan": 0
  },
  {
   "kind": "route",
-  "t": 40.26,
-  "dur": 1.05,
-  "gain_db": -5
+  "t": 40.85,
+  "dur": 0.55,
+  "gain_db": -5,
+  "pan": 0.2
  },
  {
   "kind": "arrive",
-  "t": 41.34,
+  "t": 41.4,
   "gain_db": -12,
   "size": "small",
-  "pan": 0.85
+  "pan": 0.48
  },
  {
   "kind": "thread",
   "t": 42.32,
-  "dur": 0.9,
+  "dur": 0.7,
   "gain_db": -12,
   "material": "pencil",
   "pan": 0.1
  },
  {
   "kind": "record",
-  "t": 43.05,
+  "t": 43,
   "gain_db": -5,
   "pan": 0.01
  },
  {
   "kind": "inspect",
-  "t": 47.81,
+  "t": 48.1,
   "gain_db": -14,
-  "pan": -0.05,
+  "pan": -0.29,
   "agent": "insurer"
  },
  {
@@ -605,20 +660,20 @@
   "t": 48.34,
   "gain_db": -2,
   "dur": 1,
-  "pan": -0.05
+  "pan": -0.29
  },
  {
   "kind": "lock",
   "t": 49.09,
   "gain_db": -16,
-  "pan": -0.05,
+  "pan": -0.29,
   "material": "tick"
  },
  {
   "kind": "inspect",
   "t": 49.4,
   "gain_db": -10,
-  "pan": 0.2,
+  "pan": -0.01,
   "agent": "fire",
   "material": "ping"
  },
@@ -626,281 +681,268 @@
   "kind": "return",
   "t": 49.61,
   "gain_db": -12,
-  "pan": -0.05
+  "pan": -0.25
  },
  {
   "kind": "compare",
   "t": 50.28,
   "gain_db": -9,
-  "pan": -0.05
+  "pan": -0.25
  },
  {
   "kind": "thread",
-  "t": 50.82,
+  "t": 50.3,
   "gain_db": -16,
   "material": "pencil",
-  "dur": 0.5,
-  "pan": 0.3
- },
- {
-  "kind": "assemble",
-  "t": 52.35,
-  "gain_db": -4,
-  "dur": 0.8
+  "dur": 0.35,
+  "pan": 0.43
  },
  {
   "kind": "move",
-  "t": 52.45,
-  "gain_db": -14,
-  "dur": 0.7,
-  "pan": 0.15,
+  "t": 52.1,
+  "gain_db": -15,
+  "dur": 0.5,
+  "pan": 0.33,
   "size": "small"
  },
  {
+  "kind": "assemble",
+  "t": 52.12,
+  "gain_db": -4,
+  "dur": 0.45,
+  "pan": -0.29
+ },
+ {
   "kind": "move",
-  "t": 52.85,
+  "t": 52.12,
   "gain_db": -11,
-  "dur": 0.75,
-  "pan": 0.1
+  "dur": 0.6,
+  "pan": -0.02
  },
  {
   "kind": "packet",
-  "t": 53.55,
+  "t": 52.72,
   "gain_db": -8,
-  "pan": 0.15
+  "pan": 0.26
  },
  {
   "kind": "escalate",
-  "t": 53.62,
+  "t": 53.95,
   "gain_db": -4,
-  "dur": 1.35,
-  "pan": 0.35
+  "dur": 1.55,
+  "pan": 0.03
  },
  {
   "kind": "arrive",
-  "t": 54.93,
+  "t": 55.45,
   "gain_db": -8,
   "size": "case",
-  "pan": 0.4
+  "pan": 0.44
  },
  {
   "kind": "decision",
   "t": 55.72,
   "gain_db": -2,
-  "pan": 0.45
- },
- {
-  "kind": "thread",
-  "t": 57.35,
-  "gain_db": -14,
-  "dur": 0.8,
-  "pan": 0.4,
-  "material": "pencil"
- },
- {
-  "kind": "thread",
-  "t": 57.4,
-  "gain_db": -12,
-  "dur": 0.8,
-  "pan": 0.5,
-  "material": "pencil"
- },
- {
-  "kind": "thread",
-  "t": 57.75,
-  "gain_db": -12,
-  "dur": 0.8,
-  "pan": 0.5,
-  "material": "pencil"
- },
- {
-  "kind": "thread",
-  "t": 58.1,
-  "gain_db": -12,
-  "dur": 0.8,
-  "pan": 0.5,
-  "material": "pencil"
+  "dur": 0.68,
+  "pan": 0.44
  },
  {
   "kind": "decision",
-  "t": 58.25,
+  "t": 57.75,
   "gain_db": -6,
   "pan": 0.3
  },
  {
+  "kind": "route",
+  "t": 58,
+  "gain_db": -14,
+  "dur": 0.25,
+  "pan": 0.5
+ },
+ {
+  "kind": "thread",
+  "t": 58.045,
+  "gain_db": -12,
+  "dur": 0.45,
+  "pan": 0.5,
+  "material": "pencil"
+ },
+ {
+  "kind": "simulated",
+  "t": 58.045,
+  "gain_db": -10,
+  "pan": 0.6
+ },
+ {
+  "kind": "thread",
+  "t": 58.05,
+  "gain_db": -12,
+  "dur": 0.45,
+  "pan": 0.5,
+  "material": "pencil"
+ },
+ {
+  "kind": "thread",
+  "t": 58.169,
+  "gain_db": -12,
+  "dur": 0.45,
+  "pan": 0.5,
+  "material": "pencil"
+ },
+ {
   "kind": "arrive",
-  "t": 58.4,
+  "t": 58.3,
   "gain_db": -16,
   "size": "small",
   "pan": 0.55
  },
  {
-  "kind": "route",
-  "t": 58.63,
-  "gain_db": -14,
-  "dur": 0.75,
-  "pan": 0.5
- },
- {
   "kind": "arrive",
-  "t": 58.65,
+  "t": 58.45,
   "gain_db": -17,
   "size": "small",
   "pan": 0.6
  },
  {
-  "kind": "simulated",
-  "t": 58.8,
+  "kind": "move",
+  "t": 59.85,
   "gain_db": -10,
-  "pan": 0.6
- },
- {
-  "kind": "simulated",
-  "t": 58.9,
-  "gain_db": -18,
-  "pan": 0.65
+  "dur": 0.75,
+  "pan": 0.3
  },
  {
   "kind": "move",
-  "t": 59.98,
+  "t": 60.65,
   "gain_db": -14,
-  "dur": 0.36,
-  "pan": 0.2
+  "dur": 0.27,
+  "pan": 0.3
  },
  {
   "kind": "reject",
-  "t": 60.34,
-  "gain_db": -4,
-  "pan": 0.1
+  "t": 60.92,
+  "gain_db": -3,
+  "pan": 0.35
  },
  {
   "kind": "request",
-  "t": 61.15,
-  "gain_db": -12,
-  "dur": 0.66,
-  "pan": 0.15,
+  "t": 62,
+  "gain_db": -13,
+  "dur": 0.52,
+  "pan": 0.3,
   "variant": "timer"
  },
  {
   "kind": "decision",
-  "t": 61.82,
+  "t": 62.6,
   "gain_db": -4,
-  "dur": 0.55,
+  "dur": 0.35,
   "pan": 0.5
  },
  {
   "kind": "door-open",
-  "t": 62.249,
+  "t": 62.887,
   "gain_db": -6,
   "pan": 0.6
  },
  {
   "kind": "packet",
-  "t": 62.37,
+  "t": 63.3,
   "gain_db": -9,
   "pan": 0.5
  },
  {
   "kind": "arrive",
-  "t": 63.02,
-  "gain_db": -10,
+  "t": 63.85,
+  "gain_db": -11,
   "size": "case",
   "pan": 0.6
  },
  {
   "kind": "lock",
-  "t": 63.46,
+  "t": 64.1,
   "gain_db": -6,
   "pan": 0.5
  },
  {
   "kind": "record",
-  "t": 64.03,
-  "gain_db": -9,
-  "pan": 0.5
+  "t": 64.22,
+  "gain_db": -10,
+  "pan": 0.4
  },
  {
   "kind": "record",
-  "t": 64.84,
-  "gain_db": -9,
-  "pan": 0.5
+  "t": 64.22,
+  "gain_db": -10,
+  "pan": 0.6
  },
  {
   "kind": "record",
-  "t": 65.11,
-  "gain_db": -9,
-  "pan": 0.5
+  "t": 64.38,
+  "gain_db": -10,
+  "pan": 0.4
  },
  {
   "kind": "record",
-  "t": 65.35,
-  "gain_db": -9,
+  "t": 64.38,
+  "gain_db": -10,
+  "pan": 0.6
+ },
+ {
+  "kind": "return",
+  "t": 65.62,
+  "gain_db": -10,
   "pan": 0.5
  },
  {
   "kind": "door-close",
-  "t": 65.5,
+  "t": 66.04,
   "gain_db": -7,
   "pan": 0.6
  },
  {
+  "kind": "move",
+  "t": 66.04,
+  "gain_db": -10,
+  "dur": 0.72,
+  "pan": 0.3
+ },
+ {
   "kind": "decision",
-  "t": 66.28,
+  "t": 66.85,
   "gain_db": -4,
-  "dur": 0.45,
+  "dur": 0.22,
   "pan": 0.5
  },
  {
   "kind": "door-open",
-  "t": 66.631,
+  "t": 67.03,
   "gain_db": -6,
   "pan": 0.6
  },
  {
   "kind": "packet",
-  "t": 66.75,
+  "t": 67.35,
   "gain_db": -9,
   "pan": 0.5
  },
  {
-  "kind": "move",
-  "t": 66.91,
-  "gain_db": -12,
-  "dur": 0.7,
-  "pan": 0.55,
-  "material": "wood"
- },
- {
   "kind": "arrive",
-  "t": 67.38,
-  "gain_db": -10,
+  "t": 67.9,
+  "gain_db": -11,
   "size": "case",
   "pan": 0.6
  },
  {
-  "kind": "print",
-  "t": 67.56,
-  "gain_db": -18,
-  "size": "small",
-  "pan": 0.55
- },
- {
   "kind": "compare",
-  "t": 67.66,
-  "gain_db": -14,
-  "pan": 0.55
- },
- {
-  "kind": "compare",
-  "t": 68.02,
+  "t": 67.97,
   "gain_db": -6,
   "pan": 0.5
  },
  {
   "kind": "route",
-  "t": 68.82,
+  "t": 68.59,
   "gain_db": -14,
-  "pan": 0.6
+  "pan": 0.45
  },
  {
   "kind": "compare",
@@ -910,288 +952,311 @@
  },
  {
   "kind": "lock",
-  "t": 69.57,
+  "t": 69.5,
   "gain_db": -4,
   "pan": 0.5
  },
  {
   "kind": "inspect",
-  "t": 69.69,
+  "t": 69.75,
   "gain_db": -10,
   "pan": 0.5
  },
  {
   "kind": "resolve",
-  "t": 70.14,
+  "t": 70.13,
   "gain_db": -5,
   "pan": 0.5
  },
  {
+  "kind": "compare",
+  "t": 70.5,
+  "gain_db": -6,
+  "pan": 0.5
+ },
+ {
   "kind": "move",
-  "t": 70.98,
+  "t": 70.95,
   "gain_db": -14,
-  "dur": 0.36,
+  "dur": 0.3,
   "pan": 0.55
  },
  {
+  "kind": "return",
+  "t": 71.15,
+  "gain_db": -10,
+  "pan": 0.5
+ },
+ {
   "kind": "door-close",
-  "t": 71.3,
+  "t": 71.55,
   "gain_db": -7,
   "pan": 0.6
  },
  {
+  "kind": "move",
+  "t": 71.57,
+  "gain_db": -10,
+  "dur": 0.62,
+  "pan": 0.3
+ },
+ {
   "kind": "decision",
-  "t": 72.08,
+  "t": 72.23,
   "gain_db": -4,
-  "dur": 0.32,
+  "dur": 0.28,
   "pan": 0.5
  },
  {
   "kind": "door-open",
-  "t": 72.33,
+  "t": 72.46,
   "gain_db": -6,
   "pan": 0.6
  },
  {
-  "kind": "packet",
-  "t": 72.43,
-  "gain_db": -9,
-  "pan": 0.5
- },
- {
   "kind": "simulated",
-  "t": 72.82,
+  "t": 72.87,
   "gain_db": -4,
   "pan": 0.6
  },
  {
+  "kind": "packet",
+  "t": 72.89,
+  "gain_db": -9,
+  "pan": 0.5
+ },
+ {
   "kind": "arrive",
-  "t": 73.08,
-  "gain_db": -10,
+  "t": 73.44,
+  "gain_db": -11,
   "size": "case",
   "pan": 0.6
  },
  {
   "kind": "request",
-  "t": 74.66,
+  "t": 74.74,
   "gain_db": -10,
   "pan": 0.55
  },
  {
   "kind": "request",
-  "t": 74.78,
+  "t": 74.84,
   "gain_db": -10,
   "pan": 0.65
  },
  {
   "kind": "request",
-  "t": 74.9,
+  "t": 74.94,
   "gain_db": -10,
   "pan": 0.75
  },
  {
   "kind": "return",
-  "t": 75.82,
+  "t": 75.76,
   "gain_db": -9,
   "pan": 0.6
  },
  {
   "kind": "return",
-  "t": 76.12,
+  "t": 75.86,
   "gain_db": -9,
   "pan": 0.5499999999999999
  },
  {
   "kind": "return",
-  "t": 76.42,
+  "t": 75.96,
   "gain_db": -9,
   "pan": 0.5
  },
  {
-  "kind": "move",
-  "t": 76.85,
+  "kind": "simulated",
+  "t": 76.51,
+  "gain_db": -14,
+  "pan": 0.6
+ },
+ {
+  "kind": "return",
+  "t": 77.25,
   "gain_db": -10,
-  "dur": 1.05,
-  "pan": 0.3
+  "pan": 0.5
  },
  {
   "kind": "door-close",
-  "t": 77.05,
+  "t": 77.63,
   "gain_db": -7,
   "pan": 0.6
  },
  {
-  "kind": "packet",
-  "t": 77.85,
-  "gain_db": -12,
-  "pan": 0.35
+  "kind": "move",
+  "t": 79.07,
+  "gain_db": -10,
+  "dur": 0.44,
+  "pan": 0.3,
+  "size": "case"
  },
  {
   "kind": "decision",
-  "t": 78.12,
+  "t": 79.1,
   "gain_db": -9,
-  "dur": 0.42,
+  "dur": 0.28,
   "pan": 0.35,
   "part": "reach"
  },
  {
-  "kind": "move",
-  "t": 78.32,
-  "gain_db": -12,
-  "dur": 0.62,
-  "pan": 0.4
- },
- {
   "kind": "door-open",
-  "t": 78.448,
+  "t": 79.32,
   "gain_db": -8,
   "pan": 0.5,
-  "room": "mitigate"
+  "room": "mitigate",
+  "by": "risk owner"
  },
  {
   "kind": "compare",
-  "t": 78.72,
+  "t": 79.42,
   "gain_db": -10,
   "pan": 0.6
  },
  {
   "kind": "lock",
-  "t": 79.26,
+  "t": 79.8,
   "gain_db": -6,
   "pan": 0.45,
   "size": "small"
  },
  {
+  "kind": "door-open",
+  "t": 80,
+  "gain_db": -8,
+  "pan": 0.5,
+  "room": "transfer",
+  "by": "risk owner"
+ },
+ {
+  "kind": "route",
+  "t": 80.04,
+  "gain_db": -9,
+  "dur": 0.34,
+  "pan": 0.5
+ },
+ {
   "kind": "packet",
-  "t": 79.54,
-  "gain_db": -12,
-  "pan": 0.45,
+  "t": 80.14,
+  "gain_db": -11,
+  "pan": 0.5,
   "size": "small"
  },
  {
-  "kind": "move",
-  "t": 79.58,
-  "gain_db": -11,
-  "dur": 0.5,
-  "pan": 0.4
- },
- {
-  "kind": "door-open",
-  "t": 79.594,
-  "gain_db": -8,
-  "pan": 0.5,
-  "room": "transfer"
- },
- {
   "kind": "request",
-  "t": 80.18,
+  "t": 80.5,
   "gain_db": -10,
-  "pan": 0.6
+  "pan": 0.65
  },
  {
   "kind": "simulated",
-  "t": 80.28,
+  "t": 80.56,
   "gain_db": -14,
   "pan": 0.7
  },
  {
   "kind": "return",
-  "t": 80.64,
+  "t": 80.86,
   "gain_db": -9,
+  "pan": 0.55
+ },
+ {
+  "kind": "door-open",
+  "t": 80.92,
+  "gain_db": -8,
+  "pan": 0.5,
+  "room": "retain",
+  "by": "risk owner"
+ },
+ {
+  "kind": "route",
+  "t": 80.96,
+  "gain_db": -10,
+  "dur": 0.36,
   "pan": 0.5
  },
  {
   "kind": "move",
-  "t": 80.64,
-  "gain_db": -10,
-  "dur": 0.6,
-  "pan": 0.35
- },
- {
-  "kind": "door-open",
-  "t": 80.779,
-  "gain_db": -8,
+  "t": 81.06,
+  "gain_db": -12,
+  "dur": 0.42,
   "pan": 0.5,
-  "room": "retain"
- },
- {
-  "kind": "door-close",
-  "t": 80.95,
-  "gain_db": -11,
-  "pan": 0.5,
-  "rooms": "transfer, mitigate"
+  "size": "small"
  },
  {
   "kind": "lock",
-  "t": 81.56,
+  "t": 81.5,
   "gain_db": -5,
   "pan": 0.45
  },
  {
   "kind": "decision",
-  "t": 81.62,
+  "t": 81.8,
   "gain_db": -2,
   "pan": 0.3,
-  "dur": 0.8
+  "dur": 0.6
  },
  {
   "kind": "assemble",
-  "t": 82.06,
+  "t": 82.08,
   "gain_db": -7,
   "pan": 0.3,
   "size": "small"
  },
  {
   "kind": "resolve",
-  "t": 82.4,
-  "gain_db": -6,
+  "t": 82.42,
+  "gain_db": -5,
   "pan": 0.3
  },
  {
   "kind": "move",
-  "t": 83.24,
+  "t": 84.4,
   "gain_db": -10,
-  "dur": 1.5,
+  "dur": 0.62,
   "pan": 0.1
  },
  {
   "kind": "move",
-  "t": 83.3,
+  "t": 84.4,
   "gain_db": -12,
-  "dur": 1.6,
-  "pan": 0.2,
+  "dur": 0.58,
+  "pan": 0.25,
   "size": "case"
  },
  {
   "kind": "title",
-  "t": 84.7,
+  "t": 84.6,
   "gain_db": -16,
   "pan": 0
  },
  {
-  "kind": "arrive",
-  "t": 84.74,
-  "gain_db": -12,
-  "pan": 0
- },
- {
   "kind": "align",
-  "t": 84.8,
+  "t": 84.85,
   "gain_db": -16,
   "pan": -0.5,
   "size": "small"
  },
  {
-  "kind": "record",
+  "kind": "title",
   "t": 84.9,
-  "gain_db": -6,
-  "pan": -0.25
+  "gain_db": -16,
+  "pan": -0.6041666666666666
+ },
+ {
+  "kind": "record",
+  "t": 84.98,
+  "gain_db": -5,
+  "pan": 0.25
  },
  {
   "kind": "title",
-  "t": 85.1,
+  "t": 85.2,
   "gain_db": -16,
-  "pan": -0.6041666666666666
+  "pan": 0.6041666666666666
  },
  {
   "kind": "print",
@@ -1200,33 +1265,27 @@
   "pan": -0.6
  },
  {
-  "kind": "title",
-  "t": 85.5,
-  "gain_db": -16,
-  "pan": 0.6041666666666666
- },
- {
-  "kind": "title",
-  "t": 85.8,
-  "gain_db": -10
- },
- {
   "kind": "print",
-  "t": 85.9,
+  "t": 85.7,
   "gain_db": -18,
   "pan": -0.55,
   "material": "ghost"
  },
  {
   "kind": "summon",
-  "t": 86.05,
+  "t": 85.75,
   "gain_db": -18,
   "pan": -0.6,
   "material": "ghost"
  },
  {
+  "kind": "title",
+  "t": 86.06,
+  "gain_db": -10
+ },
+ {
   "kind": "wordmark",
-  "t": 88.5,
+  "t": 88.75,
   "gain_db": -6
  }
 ]
