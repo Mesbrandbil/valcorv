@@ -396,11 +396,11 @@ def ev_dur(ev, default, lo=0.08, hi=4.0):
     return float(np.clip(d, lo, hi))
 
 
-HINT_KEYS = ("part", "material", "size", "agent", "room")
+HINT_KEYS = ("part", "material", "size", "agent", "room", "variant")
 
 
 def hint(ev) -> str:
-    """Free-text hints the picture may add to an event (part, material, size, agent, room)."""
+    """Free-text hints the picture may add to an event (part, material, size, agent, room, variant)."""
     return " ".join(str(ev.get(k, "")) for k in HINT_KEYS).lower()
 
 
@@ -422,7 +422,15 @@ def agent_pitch(ev, idx):
 
 
 def k_print(ev, rng, idx):
+    h = hint(ev)
     s = Snd()
+    if "ghost" in h:  # a faint outline, not a real form: paper only, muted
+        n = ns(0.15)
+        return s.add(lp(cnoise(rng, n, 700, 3500) * env_exp(n, 0.02, att=0.004), 2500))
+    if "small" in h:
+        s.add(felt_thud(rng, 0.3, f=rng.uniform(130, 150), decay=0.05, drop=0.2))
+        s.add(cnoise(rng, ns(0.08), 1200, 5000) * env_exp(ns(0.08), 0.01, att=0.0015), 0.002, gain=0.3)
+        return s
     s.add(felt_thud(rng, 0.45, f=rng.uniform(92, 108), decay=0.075, drop=0.25))
     s.add(cnoise(rng, ns(0.12), 900, 4200) * env_exp(ns(0.12), 0.014, att=0.002), 0.002, gain=0.30)
     s.add(cnoise(rng, ns(0.08), 2500, 8000) * env_exp(ns(0.08), 0.012, att=0.006), 0.05, gain=0.07)
@@ -435,6 +443,8 @@ def k_speech_fragment(ev, rng, idx):
 
 def k_summon(ev, rng, idx):
     s = Snd()
+    if "ghost" in hint(ev):  # agents dim to ghost outlines and back: a muted, short tine
+        return s.add(lp(tine(rng, 0.9, hz(agent_pitch(ev, idx)), decay=0.5, strike=0.15), 1800))
     s.add(tine(rng, 1.4, hz(agent_pitch(ev, idx)), decay=1.0, strike=0.35))
     s.add(cnoise(rng, ns(0.15), 2000, 6000) * arch(ns(0.15), 0.3, 0.6), 0.0, gain=0.025)
     return s
@@ -450,9 +460,23 @@ ARRIVE = {  # f, decay, hardness, felt amount
 }
 
 
+AGENT_TOK = (  # each specialist's token has its own small voice: (key, f, hardness)
+    ("site", 760.0, 0.55), ("rule", 760.0, 0.55),  # rounded square: firmer wood
+    ("insurer", 690.0, 0.45), ("condition", 690.0, 0.45),  # brackets
+    ("fire", 980.0, 0.40),  # small triangle: higher
+    ("risk", 860.0, 0.50), ("engineer", 860.0, 0.50),  # diamond
+    ("evidence", 820.0, 0.35), ("photo", 820.0, 0.35),  # disc with a lens: softer
+)
+
+
 def k_arrive(ev, rng, idx):
     size = str(ev.get("size", "facet")).lower()
     f, dec, hard, felt = ARRIVE.get(size, ARRIVE["facet"])
+    agent = str(ev.get("agent", "")).lower()
+    for key, fa, ha in AGENT_TOK:
+        if agent and key in agent:
+            f, hard = fa, ha
+            break
     mat = str(ev.get("material", "")).lower()
     if "felt" in mat:
         hard *= 0.5
@@ -472,6 +496,12 @@ def k_move(ev, rng, idx):
     h = hint(ev)
     if "paper" in h:
         return Snd().add(paper_slide(rng, d))
+    if "step" in h:  # one short orthogonal step of a token: a tiny slide and a soft tick
+        s = Snd().add(paper_slide(rng, 0.11, 0.3, 0.5), 0.0, gain=0.5)
+        return s.add(wood(rng, 0.1, 1300 * rng.uniform(0.97, 1.03), 0.018, 0.35), 0.1)
+    if "wood" in h:  # a wooden piece slid along a rail
+        n = ns(d)
+        return Snd().add(friction(rng, d, 300, 1800, 70.0) * arch(n, 0.3, 0.35))
     if "case" in h or "packet" in h:  # a small weighted piece slid over paper: lower, softer
         n = ns(d)
         return Snd().add((cnoise(rng, n, 200, 1800) + 0.3 * cnoise(rng, n, 1800, 4000)) * arch(n, 0.35, 0.5))
@@ -505,6 +535,9 @@ def k_thread(ev, rng, idx):
 
 def k_packet(ev, rng, idx):
     s = Snd()
+    if "small" in hint(ev):
+        s.add(paper_flick(rng), 0.0, gain=0.6)
+        return s.add(wood(rng, 0.2, 820 * rng.uniform(0.97, 1.03), 0.035, 0.3), 0.05)
     s.add(paper_flick(rng), 0.0, gain=0.7).add(paper_flick(rng), 0.045, gain=0.5)
     s.add(wood(rng, 0.25, 620 * rng.uniform(0.97, 1.03), 0.05, 0.3), 0.085)
     s.add(felt_thud(rng, 0.25, f=140, decay=0.04), 0.085, gain=0.3)
@@ -556,6 +589,12 @@ def k_evidence(ev, rng, idx):
 
 def k_request(ev, rng, idx):
     s = Snd()
+    if "timer" in hint(ev):  # a dashed timer ring running out: soft ticks, fading, nothing answers
+        d = ev_dur(ev, 0.7, 0.3, 3.0)
+        k_n = max(4, int(round(d / 0.11)))
+        for k in range(k_n):
+            s.add(wood_tick(rng, 2000, 0.2, 0.01), d * k / k_n, gain=0.6 * (1.0 - 0.7 * k / k_n))
+        return s
     for k in range(4):  # the dashed thread
         s.add(graphite_dab(rng, 0.025), 0.07 * k, gain=0.35 * (1.0 - 0.12 * k))
     s.add(hollow(rng, 0.35, 520 * rng.uniform(0.98, 1.02), decay=0.07, bend=0.07), 0.30)
@@ -574,8 +613,11 @@ def k_align(ev, rng, idx):
     s = Snd()
     n = ns(2.4)
     t = tax(n)
-    for m, c0, at, pan, g in ((74, 22.0, 0.0, -0.3, 1.0), (81, -18.0, 0.09, 0.3, 0.8), (78, 14.0, 0.18, 0.0, 0.75)):
-        s.add(tine(rng, 2.4, hz(m), decay=1.7, strike=0.3, cents=c0 * np.exp(-t / 0.22)), at, pan, g)
+    voices = ((74, 22.0, 0.0, -0.3, 1.0), (81, -18.0, 0.09, 0.3, 0.8), (78, 14.0, 0.18, 0.0, 0.75))
+    if "small" in hint(ev):  # two tines, lighter
+        voices = ((74, 16.0, 0.0, -0.2, 1.0), (81, -14.0, 0.08, 0.2, 0.8))
+    for m, c0, at, pan, g in voices:
+        s.add(tine(rng, 2.4, hz(m), decay=1.7 if len(voices) == 3 else 1.1, strike=0.3, cents=c0 * np.exp(-t / 0.22)), at, pan, g)
     return s
 
 
@@ -939,7 +981,7 @@ def render_sfx(events):
             continue
         if i_end_nat > lim:
             st = st[: lim - i0].copy()
-            k = min(len(st), ns(0.12))
+            k = min(len(st), ns(0.5), len(st) // 2)  # a natural fade, not a cut
             st[-k:] *= (1.0 - ramp_on(k))[:, None]
             note.append("tail faded to end by %.2f s (natural end %.3f s)" % (END_SAFE, i_end_nat / SR))
         out[i0 : i0 + len(st)] += st
@@ -1028,16 +1070,16 @@ def music_plan(tm: Timing):
         (w("L06", "holds") + 0.05, 1.0, [38, 45, 54, 57, 62, 66], -3.0, 0.55, 0.38),  # "holds": D major lift
         (w("L06", "opens") + 0.15, 1.0, [38, 45, 54, 57, 62, 66, 69, 76], -2.5, 0.68, 0.42),  # "route opens": opens up
         (w("L06", "disturbed") + 0.2, 2.0, [38, 50, 55, 59, 66, 69], -3.5, 0.55, 0.38),  # G/D, settled
-        (w("L07", "slips") + 0.1, 1.2, [35, 42, 50, 57, 61], -3.5, 0.26, 0.38),  # "slips": Bm9, darker
-        (w("L08", "priora") + 0.1, 1.5, [31, 43, 50, 54, 61], -3.5, 0.24, 0.40),  # Gmaj7#11: tension held
-        (w("L08", "agents") + 0.2, 1.5, [33, 45, 52, 55, 62], -4.0, 0.26, 0.40),  # A7sus4
+        (w("L07", "slips") + 0.1, 1.2, [35, 42, 50, 57, 61], -5.5, 0.26, 0.38),  # "slips": Bm9, darker
+        (w("L08", "priora") + 0.1, 1.5, [31, 43, 50, 54, 61], -4.5, 0.24, 0.40),  # Gmaj7#11: tension held
+        (w("L08", "agents") + 0.2, 1.5, [33, 45, 52, 55, 62], -5.5, 0.26, 0.40),  # A7sus4
         (w("L09", "three"), 1.2, [33, 45, 52, 59, 64], -3.5, 0.36, 0.40),  # the rooms open: Asus2
         (w("L10", "retain") - 0.15, 1.5, [31, 43, 50, 57, 59, 66], -4.0, 0.30, 0.36),  # Retain: G, low, grounded
         (w("L11", "mitigate") - 0.4, 1.5, [40, 47, 54, 55, 62, 71], -4.0, 0.50, 0.36),  # Mitigate: Em9, brighter
         (w("L11", "checks"), 1.5, [40, 47, 54, 57, 62, 71], -4.0, 0.52, 0.36),  # Em11: the inner voice moves
         (w("L12", "transfer") - 0.3, 1.5, [47, 52, 57, 62, 67], -6.0, 0.20, 0.62),  # Transfer: quartal, hollow, far
-        (w("L13", "priora") - 0.3, 1.5, [33, 45, 52, 55, 59, 62], -4.0, 0.36, 0.40),  # between rooms: A11
-        (w("L13", "the", 2) + 0.1, 1.2, [38, 45, 54, 57, 62, 66, 69], -2.5, 0.55, 0.40),  # decision: D, resolved
+        (w("L13", "priora") - 0.3, 1.5, [33, 45, 52, 55, 59, 62], -5.0, 0.36, 0.40),  # between rooms: A11
+        (w("L13", "the", 2) + 0.1, 1.2, [38, 45, 54, 57, 62, 66, 69], -3.5, 0.55, 0.40),  # decision: D, resolved
         (w("L14", "priora") - 0.2, 1.6, [38, 45, 52, 57, 66, 76], -3.0, 0.60, 0.42),  # tagline: open Dadd9
         (88.3, 1.0, [38, 45, 57], -5.0, 0.40, 0.42),  # under the wordmark
         (89.35, 1.0, [], -60.0, 0.40, 0.42),  # silent by 89.85
@@ -1413,13 +1455,13 @@ def music_analysis(x, segments, meter):
         if b - a < 0.5 or not sg["notes"]:
             continue
         row = {"from": round(a, 2), "to": round(b, 2), "notes": sg["notes"], "lufs": segment_lufs(meter, x, a, b)}
-        if b - a >= 3.0:
+        if b - a >= 1.8:
             w = min(5.0, b - a)
             c = 0.5 * (a + b)
             seg = mono[int((c - w / 2) * SR) : int((c + w / 2) * SR)]
             X = np.abs(np.fft.rfft(seg * np.hanning(len(seg)), 4 * len(seg)))
             f = np.fft.rfftfreq(4 * len(seg), 1 / SR)
-            k = np.nonzero((X[1:-1] > X[:-2]) & (X[1:-1] >= X[2:]) & (f[1:-1] > 100) & (f[1:-1] < 2000))[0] + 1
+            k = np.nonzero((X[1:-1] > X[:-2]) & (X[1:-1] >= X[2:]) & (f[1:-1] > 120) & (f[1:-1] < 2000))[0] + 1
             k = k[X[k] > X[k].max() * undb(-24)]
             groups = {}
             for j in k:
@@ -1442,7 +1484,7 @@ def music_analysis(x, segments, meter):
         "min_momentary_lufs_3_to_88_8": round(float(M[i_min]), 2), "min_momentary_at_s": round(float(tcs[i_min]), 2),
         "max_fall_in_100ms_db": round(float(fall[i_fall]), 2), "max_fall_at_s": round(float(t10[i_fall]), 2),
         "worst_note_centre_cents": round(worst_cents, 1), "peaks_outside_d_major": out_of_key,
-        "tuning_method": "per segment of 3 s or more: Hann FFT (5 s max, 4x zero padding), spectral peaks 100 to 2000 Hz within 24 dB of the strongest, grouped by nearest note, magnitude-weighted centre in cents (the pad's chorus spreads each note +-3.5 to 7 cents by design)",
+        "tuning_method": "per segment of 1.8 s or more: Hann FFT (5 s max, 4x zero padding), spectral peaks 120 to 2000 Hz within 24 dB of the strongest, grouped by nearest note, magnitude-weighted centre in cents (the pad's chorus spreads each note +-3.5 to 7 cents by design)",
     }
 
 

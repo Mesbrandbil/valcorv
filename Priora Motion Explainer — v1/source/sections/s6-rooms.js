@@ -14,6 +14,8 @@
   a rail, each with its cost (ink coins) and time (a small arc). Thermal check, tried in the
   gap, fills part of it: PARTIAL, the rest moves on. Extend watch fills it: FULL, the ring
   closes, the verifier's corners land: BACK INSIDE. Previews only: everything reverts.
+  (Thermal check's piece covers 234 to 277 degrees, about 60 percent of the gap; Extend watch
+  and Move weld to workshop cover all of it.)
   Transfer (71.6 to 77.4): dashed, SIMULATED, NO INSURER ON PRIORA YET. Dashed copies of the
   gap go out to three dashed SIM hexagons; each answers with the same four tags, every value
   an empty line. No names, no numbers.
@@ -212,12 +214,11 @@ PK.section("s6-rooms", 57, 78, function (tl, W, ctx, S) {
     mitigate: "M" + gapPt[0] + " " + gapPt[1] + " C1104 552 1190 508 1290 508",
     transfer: "M" + gapPt[0] + " " + gapPt[1] + " C1110 590 1236 686 1290 686",
   };
-  var guides = ["retain", "mitigate", "transfer"].map(function (k, i) {
-    var g = PK.el("path", { d: guideD[k], class: "pk-thread", opacity: 0.4 }, Lth);
+  ["retain", "mitigate", "transfer"].forEach(function (k, i) {
+    var g = PK.el("path", { d: guideD[k], class: "pk-thread", "stroke-opacity": 0.4 }, Lth);
     undrawn(g);
     draw(g, tThree + i * 0.1, 0.6, "power2.out");
     fadeOut(g, 58.75 + i * 0.05, 0.45);
-    return g;
   });
   PK.sfx("thread", tThree, { gain_db: -14, dur: 0.8, pan: 0.4, material: "pencil" });
   pulse(cs.body, tThree - 0.05, 1.05);
@@ -230,7 +231,9 @@ PK.section("s6-rooms", 57, 78, function (tl, W, ctx, S) {
   // inline so the class dash applies, and reveal it with a clip that grows from its door.
   var trClip = PK.el("clipPath", { id: "s6-clip-transfer", clipPathUnits: "userSpaceOnUse" }, defs);
   var trCirc = PK.el("circle", { cx: DOOR.transfer[0], cy: DOOR.transfer[1], r: 0 }, trClip);
-  tl.set(RM.transfer.walls, { attr: { style: "", "clip-path": "url(#s6-clip-transfer)" } }, tCh.transfer);
+  // (the clip is static: before the reveal its circle has r 0, after it r 520 covers the room)
+  RM.transfer.walls.setAttribute("clip-path", "url(#s6-clip-transfer)");
+  tl.set(RM.transfer.walls, { attr: { style: "" } }, tCh.transfer);
   FT(trCirc, { attr: { r: 0 } }, { attr: { r: 520 }, duration: 0.85, ease: "power2.inOut" }, tCh.transfer);
   ["retain", "mitigate", "transfer"].forEach(function (k, i) {
     var t = tCh[k] + 0.55;
@@ -275,7 +278,7 @@ PK.section("s6-rooms", 57, 78, function (tl, W, ctx, S) {
   });
   W.roomOwnerLines = own;
   // B: a small black node where the decision line splits
-  var bNode = hide(PK.el("circle", { cx: B[0], cy: B[1], r: 2.6, fill: C.ink }, Lr));
+  var bNode = (W.branchNode = hide(PK.el("circle", { cx: B[0], cy: B[1], r: 2.6, fill: C.ink }, Lr)));
   fadeIn(bNode, tDec + 0.35, 0.25);
 
   // ------------------------------------------------------------ the rooms' own agents print in, quietly
@@ -300,7 +303,7 @@ PK.section("s6-rooms", 57, 78, function (tl, W, ctx, S) {
   var record = agentAt(function () { return PK.glyph.roomAgent(Ltk, "record", 18); }, [1690, 364], "Record", [15, NS_R * 0.36], "start", NS_R);
   RA.retain = [policy, authority, record];
   var eng = agentAt(function () { return PK.glyph.roomAgent(Ltk, "eng", 18); }, [1468, 452], "Risk engineering", [16, NS_M * 0.36], "start", NS_M);
-  var verifier = agentAt(function () { return PK.glyph.roomAgent(Ltk, "eng", 18); }, [1482, 548], "Verifier", [16, NS_M * 0.36], "start", NS_M);
+  var verifier = agentAt(function () { return PK.glyph.roomAgent(Ltk, "eng", 18); }, [1478, 566], "Verifier", [16, NS_M * 0.36], "start", NS_M);
   RA.mitigate = [eng, verifier];
   var HEX_X = 1738,
     HEX_Y = [662, 700, 738];
@@ -343,6 +346,8 @@ PK.section("s6-rooms", 57, 78, function (tl, W, ctx, S) {
     workshop: { name: ["Move weld", "to workshop"], a0: 234, a1: 306, coins: 3, time: 0.85, shelf: 1748, slot: 1725 },
   };
   var SG_KEYS = ["thermal", "watch", "workshop"];
+  var ROW_COST = RAIL_Y + 15 + NS_M * 1.18 + 9.5,
+    ROW_TIME = ROW_COST + 11.5;
   var SG_YOFF = SG_R0 * Math.sin((54 * Math.PI) / 180) + 0.9; // the sector's lowest corners rest on the rail
   W.safeguards = {};
   SG_KEYS.forEach(function (k, i) {
@@ -365,19 +370,24 @@ PK.section("s6-rooms", 57, 78, function (tl, W, ctx, S) {
     d.name.forEach(function (line, j) {
       sans(info, line, d.slot, RAIL_Y + 15 + j * NS_M * 1.18, NS_M, { anchor: "middle" });
     });
-    var my = RAIL_Y + 16 + d.name.length * NS_M * 1.18 + 4.5;
+    // cost: one to three ink coins; time: a small arc (one row each, aligned across the rail)
     var coins = PK.g(info);
     for (var c = 0; c < d.coins; c++) {
-      var cxp = d.slot - 4 - c * 6.6;
-      PK.el("circle", { cx: cxp, cy: my, r: 2.5, fill: C.ink }, coins);
-      PK.el("circle", { cx: cxp, cy: my, r: 1.35, fill: "none", stroke: C.paper, "stroke-width": 0.45 }, coins);
+      var cxp = d.slot + (c - (d.coins - 1) / 2) * 8;
+      PK.el("circle", { cx: cxp, cy: ROW_COST, r: 3, fill: C.ink }, coins);
+      PK.el("circle", { cx: cxp, cy: ROW_COST, r: 1.7, fill: "none", stroke: C.paper, "stroke-width": 0.5 }, coins);
     }
     var tg = PK.g(info);
-    PK.el("circle", { cx: d.slot + 9, cy: my, r: 4.4, fill: "none", stroke: C.hair, "stroke-width": 1 }, tg);
-    var tarc = PK.el("path", { d: PK.arc(d.slot + 9, my, 4.4, -90, -90 + 360 * d.time), fill: "none", stroke: C.ink, "stroke-width": 1.5, "stroke-linecap": "round" }, tg);
-    PK.el("circle", { cx: d.slot + 9, cy: my, r: 0.8, fill: C.ink }, tg);
+    PK.el("circle", { cx: d.slot, cy: ROW_TIME, r: 4.2, fill: "none", stroke: C.hair, "stroke-width": 1 }, tg);
+    var tarc = PK.el("path", { d: PK.arc(d.slot, ROW_TIME, 4.2, -90, -90 + 360 * d.time), fill: "none", stroke: C.ink, "stroke-width": 1.8, "stroke-linecap": "round" }, tg);
+    PK.el("circle", { cx: d.slot, cy: ROW_TIME, r: 0.8, fill: C.ink }, tg);
     W.safeguards[k] = { g: g, piece: piece, a0: d.a0, a1: d.a1, info: info, coins: coins, timeArc: tarc };
   });
+
+  var LEG = px(68.5, 18);
+  var legend = hide(PK.g(Llb));
+  mono(legend, "Cost", 1508, ROW_COST + LEG * 0.36, LEG, { fill: C.grey, anchor: "end" });
+  mono(legend, "Time", 1508, ROW_TIME + LEG * 0.36, LEG, { fill: C.grey, anchor: "end" });
 
   // ------------------------------------------------------------ Priora turns to Retain
   var BEAD = { retain: -48, mitigate: -21, transfer: 20 };
@@ -472,7 +482,7 @@ PK.section("s6-rooms", 57, 78, function (tl, W, ctx, S) {
   PK.sfx("reject", tPush + 0.36, { gain_db: -4, pan: 0.1 });
   var lab1 = hide(mono(Llb, "An agent cannot choose it", 1340, 302, SR));
   FT(lab1, { opacity: 0, y: 2 }, { opacity: 1, y: 0, duration: 0.3, ease: "power2.out" }, tPush + 0.42);
-  fadeOut(lab1, 61.12, 0.25);
+  fadeOut(lab1, 61.28, 0.22);
 
   // then a dashed timer runs out around the door, and the door still stays shut
   var timer = hide(PK.g(Llb));
@@ -490,7 +500,7 @@ PK.section("s6-rooms", 57, 78, function (tl, W, ctx, S) {
   tl.set(timer, { opacity: 0 }, tTimer + 0.2 + NT * 0.033 + 0.06);
   PK.sfx("request", tTimer + 0.2, { gain_db: -12, dur: NT * 0.033, pan: 0.15, variant: "timer" });
   var lab2 = hide(mono(Llb, "Silence does not choose it", 1340, 302, SR));
-  FT(lab2, { opacity: 0, y: 2 }, { opacity: 1, y: 0, duration: 0.3, ease: "power2.out" }, 61.45);
+  FT(lab2, { opacity: 0, y: 2 }, { opacity: 1, y: 0, duration: 0.3, ease: "power2.out" }, 61.52);
   fadeOut(lab2, 62.45, 0.3);
 
   // "Risk is kept on purpose": the risk owner's line opens it
@@ -512,7 +522,7 @@ PK.section("s6-rooms", 57, 78, function (tl, W, ctx, S) {
     copyR.body,
   );
   undrawn(clamp);
-  var tClamp = tOpenR + 0.5 + 0.08 + 0.62 + 0.05; // just after the copy lands (about 63.07)
+  var tClamp = PK.word("L10", "purpose") + 0.5; // the copy lands open (about 63.0); the clamp follows "purpose"
   draw(clamp, tClamp, 0.42, "power2.out", "middle");
   pulse(copyR.body, tClamp + 0.38, 1.04);
   PK.sfx("lock", tClamp + 0.3, { gain_db: -6, pan: 0.5 });
@@ -589,8 +599,9 @@ PK.section("s6-rooms", 57, 78, function (tl, W, ctx, S) {
     var sg = W.safeguards[k];
     FT(sg.info, { opacity: 0, y: 2 }, { opacity: 1, y: 0, duration: 0.35, ease: "power2.out" }, t);
     draw(sg.timeArc, t + 0.15, 0.4, "power2.out");
-    FT(sg.coins, { scale: 0.4, svgOrigin: f(SG_DEF[k].slot - 8) + " " + f(RAIL_Y + 30) }, { scale: 1, svgOrigin: f(SG_DEF[k].slot - 8) + " " + f(RAIL_Y + 30), duration: 0.35, ease: "back.out(1.6)" }, t + 0.1);
+    FT(sg.coins, { scale: 0.4, svgOrigin: f(SG_DEF[k].slot) + " " + f(ROW_COST) }, { scale: 1, svgOrigin: f(SG_DEF[k].slot) + " " + f(ROW_COST), duration: 0.35, ease: "back.out(1.6)" }, t + 0.1);
   });
+  FT(legend, { opacity: 0 }, { opacity: 1, duration: 0.4, ease: "power2.out" }, tSlide + 0.6);
   PK.sfx("print", tSlide + 0.65, { gain_db: -18, size: "small", pan: 0.55 });
   PK.sfx("compare", tSlide + 0.75, { gain_db: -14, pan: 0.55 });
 
@@ -677,7 +688,7 @@ PK.section("s6-rooms", 57, 78, function (tl, W, ctx, S) {
   FT(copyM.body, { scale: 1, svgOrigin: "0 0" }, { scale: 0.6, svgOrigin: "0 0", duration: 0.35, ease: "power2.in" }, 71.12);
   fadeOut(copyM.g, 71.12, 0.35);
   fadeOut(thM, 71.1, 0.35);
-  var putAway = [lib].concat(RA.mitigate.map(function (a) { return a.name; }), SG_KEYS.map(function (k) { return W.safeguards[k].info; }));
+  var putAway = [lib, legend].concat(RA.mitigate.map(function (a) { return a.name; }), SG_KEYS.map(function (k) { return W.safeguards[k].info; }));
   fadeOut(putAway, 71.42, 0.4);
 
   // ============================================================ TRANSFER (71.6 to 77.4)
@@ -730,50 +741,50 @@ PK.section("s6-rooms", 57, 78, function (tl, W, ctx, S) {
   var tagW = TAGS_T.map(function (s) {
     return monoW(s, ST) + ST * 0.9 + 16;
   });
-  var gapT = 5,
+  var gapT = 9,
     rowW = tagW.reduce(function (a, b) { return a + b; }, 0) + gapT * (TAGS_T.length - 1);
   var rowY = 744,
     tagH = ST * 1.95;
   var tx = CT[0] - rowW / 2;
-  var tagLayers = [[], [], []];
+  var tagsT = [];
   TAGS_T.forEach(function (s, j) {
     var w = tagW[j];
     var cx = tx + w / 2;
     tx += w + gapT;
-    // three answers stack on the same tag: back layers first
-    [2, 1, 0].forEach(function (k) {
-      var hd = holder(Llb);
-      PK.el("rect", { x: -w / 2, y: -tagH / 2, width: w, height: tagH, rx: 2, fill: C.paper, stroke: C.rust, "stroke-width": 0.85, "stroke-dasharray": "2.2 1.5" }, hd.s);
-      if (k === 0) {
-        mono(hd.s, s, -w / 2 + ST * 0.45, ST * 0.36, ST);
-        PK.el("path", { d: "M" + f(w / 2 - 16 - ST * 0.3) + " " + f(ST * 0.36) + " h14", fill: "none", stroke: C.rust, "stroke-width": 0.9, "stroke-linecap": "butt" }, hd.s);
-      }
-      place(hd.g, [cx + k * 2.2, rowY + k * 2.2]);
-      hide(hd.g);
-      tagLayers[k].push(hd);
-    });
+    var hd = holder(Llb);
+    PK.el("rect", { x: -w / 2, y: -tagH / 2, width: w, height: tagH, rx: 2, fill: C.paper, stroke: C.rust, "stroke-width": 0.85, "stroke-dasharray": "2.2 1.5" }, hd.s);
+    mono(hd.s, s, -w / 2 + ST * 0.45, ST * 0.36, ST);
+    // the value: an empty line
+    PK.el("path", { d: "M" + f(w / 2 - 16 - ST * 0.3) + " " + f(ST * 0.36) + " h14", fill: "none", stroke: C.rust, "stroke-width": 0.9, "stroke-linecap": "butt" }, hd.s);
+    place(hd.g, [cx, rowY]);
+    hide(hd.g);
+    tagsT.push(hd);
   });
   RA.transfer.forEach(function (hx, i) {
-    var t = tAns + i * 0.2;
+    var t = tAns + i * 0.22;
     var bd = PK.bead(Lth, 2.6, { hollow: true });
     tl.set(bd.g, { opacity: 1 }, t);
     var y = HEX_Y[i];
     var revD = "M" + f(HEX_X - 13) + " " + y + " L" + f(HEX_X - 82) + " " + y + " C" + f(HEX_X - 150) + " " + y + " " + f(CT[0] + 110) + " " + CT[1] + " " + f(CT[0] + 31) + " " + CT[1];
-    gsap.set(bd.g, { x: HEX_X - 13, y: HEX_Y[i] });
+    gsap.set(bd.g, { x: HEX_X - 13, y: y });
     PK.travel(tl, bd.g, revD, t, 0.5, "power2.inOut");
     tl.set(bd.g, { opacity: 0 }, t + 0.5);
     pulse(hx.body, t - 0.05, 1.12);
     PK.sfx("return", t, { gain_db: -9, pan: 0.6 - i * 0.05 });
-    // the tags land (front layer first time, then a layer behind for each further answer)
-    tagLayers[i].forEach(function (hd, j) {
-      var tj = t + 0.5 + j * 0.07;
-      fadeIn(hd.g, tj, 0.18, "none");
-      FT(hd.s, { scale: 0.6, svgOrigin: "0 0" }, { scale: 1, svgOrigin: "0 0", duration: 0.28, ease: "back.out(1.4)" }, tj);
+    // the first answer lays the four tags out; the next answers land on the same tags, as empty
+    tagsT.forEach(function (hd, j) {
+      var tj = t + 0.48 + j * 0.07;
+      if (i === 0) {
+        fadeIn(hd.g, tj, 0.18, "none");
+        FT(hd.s, { scale: 0.6, svgOrigin: "0 0" }, { scale: 1, svgOrigin: "0 0", duration: 0.3, ease: "back.out(1.4)" }, tj);
+      } else {
+        pulse(hd.s, tj, 1.07);
+      }
     });
   });
   // the door closes, then the room's labels go
   ownerWithdraws("transfer", 76.95, 77.05);
-  var trOut = [noIns, thT, copyT.g, askG].concat(tagLayers[0].concat(tagLayers[1], tagLayers[2]).map(function (hd) { return hd.g; }), RA.transfer.map(function (a) { return a.name; }));
+  var trOut = [noIns, thT, copyT.g, askG].concat(tagsT.map(function (hd) { return hd.g; }), RA.transfer.map(function (a) { return a.name; }));
   fadeOut(trOut, 77.4, 0.38);
 
   // ============================================================ 76.8 to 78.0: Priora collects the packet

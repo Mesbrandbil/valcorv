@@ -1,20 +1,24 @@
 /*
-  s7-cooperate (78 to 84 s): the rooms cooperate, the risk owner stays in control.
-  The same packet moves between the rooms, carried by Priora; only the risk owner's black
-  line opens a door. Mitigate: the packet goes into the open door and a thermal check piece
-  from the library fills part of the gap (MITIGATE PART). The rest of the gap, a dashed
-  sliver, lifts off and Priora carries it to Transfer: the dashed carriers return a PRICE
-  tag with an empty value (WHAT WOULD IT COST?). Priora collects the packet and takes the
-  sliver up to Retain, whose agents clamp it with its terms (KEEP THE REST). The sliver
-  seats back in the packet, which is whole again: part mitigated, rest kept on purpose. On
-  "The risk owner stays in control" the black line draws straight to the packet and closes
-  a loop around it: RISK OWNER DECIDES. Labels fade, the doors close and the reaches of the
-  black line withdraw as the camera pulls back.
+  s7-cooperate (78 to 84 s): the rooms cooperate; the risk owner stays in control.
 
-  Contract at 78.0 (from s6): see docs/storyboard.md. If s3 to s6 are still placeholders,
-  this section builds the 78.0 state itself (stand-ins, created only for missing handles).
-  Hand-over to s8 (same builder): W.coop = { loop, thermalSeat, sliverSeat, clampSeat,
-  packetEnd, prioraEnd, reaches, labels, ownerLabel }.
+  The same packet moves between the rooms, carried by Priora, and only the risk owner's black
+  line opens a door (it runs from the branch point along the dashed branch into the door).
+  Mitigate: Priora carries the packet into the open door; a solid copy of the thermal check
+  piece leaves the library rail and fills part of the gap (MITIGATE PART). The rest of the
+  gap shows as a dashed sliver; it lifts off and Priora carries it to Transfer, where the
+  dashed SIM carriers are asked and a PRICE tag comes back with an empty value (WHAT WOULD
+  IT COST?). Priora takes the sliver up to Retain, collecting the packet on the way; the
+  Retain agents clamp the sliver with its terms (KEEP THE REST) and it seats back in the
+  packet, which is whole again: part mitigated, the rest kept on purpose. On "The risk owner
+  stays in control" the black line swings from the room to the packet and closes a loop
+  around it: RISK OWNER DECIDES. The rooms' labels fade as the camera pulls back.
+
+  Contract at 78.0 (from s6, see docs/storyboard.md) is tl.set below. If s3 to s6 are still
+  placeholders, stand-ins are built for the missing handles only (they mirror s6's geometry).
+  Hand-over to s8 (same builder): W.coop = { loop, packetEnd, prioraEnd, beadEnd, ownerLabel }.
+  At 84.0: Priora at prioraEnd (1210, 300), packet whole at packetEnd (1196, 392) with the
+  thermal piece and the clamped sliver seated in its arcs, the black loop drawn around it,
+  all three doors closed, owner lines withdrawn, room labels gone, "Risk owner decides" gone.
 */
 PK.section("s7-cooperate", 78, 84, function (tl, W, ctx, S) {
   var G = PK.GEO,
@@ -23,13 +27,18 @@ PK.section("s7-cooperate", 78, 84, function (tl, W, ctx, S) {
   var T0 = 78.0;
   var cs = W.caseT;
   var A = W.agents;
-  var ROOMS = W.rooms;
-  var AR = G.alignR; // 40 (local units inside arcsG)
-  var SC = 0.75; // arcsG scale of the packet
+  var RM = W.rooms;
+  var SC = 0.75; // the packet's arcsG scale
   var KEYS = ["siteRules", "insurer", "fire", "riskEng", "evidence"];
   var RK = ["retain", "mitigate", "transfer"];
 
-  // ------------------------------------------------------------ small geometry helpers
+  // ------------------------------------------------------------ helpers
+  function FT(el, from, to, at) {
+    var v = {};
+    for (var k in to) v[k] = to[k];
+    v.immediateRender = false;
+    tl.fromTo(el, from, v, at);
+  }
   function sector(r0, r1, a0, a1) {
     var p0 = PK.polar(0, 0, r1, a0),
       p1 = PK.polar(0, 0, r1, a1),
@@ -47,58 +56,82 @@ PK.section("s7-cooperate", 78, 84, function (tl, W, ctx, S) {
   function sub(a, b) {
     return [a[0] - b[0], a[1] - b[1]];
   }
-  function dist(a, b) {
-    return Math.hypot(a[0] - b[0], a[1] - b[1]);
-  }
   function ang(a, b) {
     return (Math.atan2(b[1] - a[1], b[0] - a[0]) * 180) / Math.PI;
   }
   function pt(p) {
     return f(p[0]) + " " + f(p[1]);
   }
-  function door(k) {
-    return G.roomDoor(k); // [x, y] of the left-wall door
+  // the value a property has at film time t, read from the timeline's own tweens (the latest
+  // one that has finished by t), so positions left by earlier sections are read correctly
+  function valAt(el, prop, t) {
+    var best = null,
+      bestEnd = -1;
+    tl.getTweensOf(el).forEach(function (tw) {
+      var st = tw.startTime(),
+        end = st + tw.duration();
+      if (end > t + 1e-6 || end < bestEnd) return;
+      var v = tw.vars,
+        val;
+      if (v.motionPath && (prop === "x" || prop === "y")) {
+        var mp = v.motionPath.path || v.motionPath;
+        if (typeof mp === "string") {
+          var raw = MotionPathPlugin.getRawPath(mp);
+          var q = MotionPathPlugin.getPositionOnPath(raw, v.motionPath.end !== undefined ? v.motionPath.end : 1);
+          val = prop === "x" ? q.x : q.y;
+        }
+      } else if (v.keyframes && v.keyframes.length) {
+        for (var i = v.keyframes.length - 1; i >= 0; i--) {
+          if (v.keyframes[i][prop] !== undefined) {
+            val = v.keyframes[i][prop];
+            break;
+          }
+        }
+      } else if (v[prop] !== undefined) val = v[prop];
+      if (typeof val === "number") {
+        best = val;
+        bestEnd = end;
+      }
+    });
+    return best !== null ? best : gsap.getProperty(el, prop) || 0;
   }
-  // centre of a group's own drawing, in its local units (for svgOrigin)
-  function localCentre(g) {
-    var b = null;
-    try {
-      b = g.getBBox();
-    } catch (e) {}
-    if (b && (b.width || b.height)) return [b.x + b.width / 2, b.y + b.height / 2];
-    return [0, 0];
+  function xy(g, t) {
+    return [valAt(g, "x", t === undefined ? T0 : t), valAt(g, "y", t === undefined ? T0 : t)];
   }
-  // world position of a group placed with GSAP x/y, plus the centre of its own drawing
-  function posOf(g) {
-    var x = gsap.getProperty(g, "x") || 0,
-      y = gsap.getProperty(g, "y") || 0;
-    var b = null;
-    try {
-      b = g.getBBox();
-    } catch (e) {}
-    if (b && (b.width || b.height)) return [x + b.x + b.width / 2, y + b.y + b.height / 2];
-    return [x, y];
+  function pulse(el, at, s) {
+    FT(el, { scale: 1, svgOrigin: "0 0" }, { keyframes: [{ scale: s || 1.1, duration: 0.11, ease: "power1.out" }, { scale: 1, duration: 0.26, ease: "power2.inOut" }], svgOrigin: "0 0" }, at);
+  }
+  function mono(str, x, y, size, fill, anchor) {
+    var t = PK.text(W.L.labels, str, x, y, { font: "mono", size: size, fill: fill || C.rust, anchor: anchor || "start" });
+    gsap.set(t, { opacity: 0 });
+    return t;
+  }
+  function labelIn(el, at) {
+    FT(el, { opacity: 0, y: 3 }, { opacity: 1, y: 0, duration: 0.32, ease: "power2.out" }, at);
   }
 
-  // ------------------------------------------------------------ stand-ins (only for handles other sections have not made yet)
-  var BP0 = [1262, 600]; // branch point of the risk owner's line (s6)
-  var gapA = W.gap || { a0: 234, a1: 306, r: AR };
+  // ------------------------------------------------------------ geometry shared with s6
+  var B = [1250, 686]; // the branch point of the risk owner's line
+  var DOOR = { retain: G.roomDoor("retain"), mitigate: G.roomDoor("mitigate"), transfer: G.roomDoor("transfer") };
+  var SG_R0 = 28.2,
+    SG_R1 = 31.8; // safeguard pieces: an annular sector on the gap's radius (world units)
+  var gapA = W.gap || { a0: 234, a1: 306, r: G.alignR };
 
+  // ------------------------------------------------------------ stand-ins (only for handles other sections have not made)
   if (!W.align) {
-    // s3/s4 not built yet: panel drawn, door open, five aligned agents, aligned arcs, route, record
     var made = {};
     KEYS.forEach(function (k) {
       var a = G.agents[k].aligned;
-      made[k] = PK.el("path", { d: PK.arc(0, 0, AR, a - 36, a + 36), fill: "none", stroke: C.rust, "stroke-width": 3, "stroke-linecap": "butt" }, cs.arcsG);
+      made[k] = PK.el("path", { d: PK.arc(0, 0, G.alignR, a - 36, a + 36), fill: "none", stroke: C.rust, "stroke-width": 3, "stroke-linecap": "butt" }, cs.arcsG);
       gsap.set(made[k], { opacity: 0 });
     });
     W.align = { arcs: made };
-    var P = W.panel;
-    tl.set(P.walls, { drawSVG: "0% 100%" }, T0);
-    tl.set([P.leafA, P.leafB, P.jambs, P.title, P.sub], { opacity: 1 }, T0);
-    tl.set(P.leafA, { y: -G.panel.gap / 2 + 0.01 }, T0);
-    tl.set(P.leafB, { y: G.panel.gap / 2 - 0.01 }, T0);
-    P.slots.forEach(function (s) {
+    var PN = W.panel;
+    tl.set(PN.walls, { drawSVG: "0% 100%" }, T0);
+    tl.set([PN.leafA, PN.leafB, PN.jambs, PN.title, PN.sub], { opacity: 1 }, T0);
+    tl.set(PN.leafA, { y: -G.panel.gap / 2 + 0.01 }, T0);
+    tl.set(PN.leafB, { y: G.panel.gap / 2 - 0.01 }, T0);
+    PN.slots.forEach(function (s) {
       tl.set(s.el, { opacity: 0 }, T0);
     });
     KEYS.forEach(function (k) {
@@ -110,117 +143,98 @@ PK.section("s7-cooperate", 78, 84, function (tl, W, ctx, S) {
     tl.set(W.route, { drawSVG: "0% 100%" }, T0);
     tl.set(W.record.spine, { drawSVG: "0% 100%" }, T0);
     if (!W.record.ticks.firstElementChild) {
-      var tick0 = PK.el("path", { d: "M" + (G.record.x0 + 12) + " " + (G.record.y - 7) + " V" + (G.record.y + 7), class: "pk-thread" }, W.record.ticks);
+      var tick0 = PK.el("path", { d: "M" + (G.record.x0 + 6) + " " + (G.record.y - 9) + " V" + (G.record.y + 9), fill: "none", stroke: C.rust, "stroke-width": 2.6, "stroke-linecap": "round" }, W.record.ticks);
       gsap.set(tick0, { opacity: 0 });
       tl.set(tick0, { opacity: 1 }, T0);
     }
     tl.set(W.spark, { opacity: 0.8 }, T0);
   }
   if (!W.gap) {
-    // s5 not built yet: the deviation left the insurer tilted and outward, the packet with its gap
     W.gap = gapA;
     var insP0 = G.slot(G.agents.insurer.aligned);
     tl.set(A.insurer.g, { x: insP0[0], y: insP0[1] - 8, opacity: 1 }, T0);
     tl.set(A.insurer.body, { rotation: 12, svgOrigin: "0 0" }, T0);
   }
   if (!W.roomAgents) {
-    // s6 not built yet: three rooms drawn and closed, their agents in place
     RK.forEach(function (k) {
-      var ch = ROOMS[k];
+      var ch = RM[k];
       tl.set(ch.walls, { drawSVG: "0% 100%" }, T0);
       tl.set([ch.leafA, ch.leafB, ch.jambs, ch.name], { opacity: 1 }, T0);
     });
-    tl.set(ROOMS.transfer.chip, { opacity: 1 }, T0);
-    var NS = 9.6;
-    var mk = function (kind, x, y, name) {
-      var t = kind === "carrier" ? PK.glyph.carrier(W.L.tokens, 22) : PK.glyph.roomAgent(W.L.tokens, kind, 18);
-      gsap.set(t.g, { x: x, y: y, opacity: 0 });
+    tl.set(RM.transfer.chip, { opacity: 1, scale: 1.25, svgOrigin: "1719 630" }, T0);
+    var mk = function (t, p) {
+      gsap.set(t.g, { x: p[0], y: p[1], opacity: 0 });
       tl.set(t.g, { opacity: 1 }, T0);
-      if (name) {
-        t.label = PK.text(t.g, name, 0, kind === "carrier" ? 24 : 24, { font: kind === "carrier" ? "mono" : "sans", size: NS, weight: 500, fill: C.ink2, anchor: "middle" });
-      }
       return t;
     };
-    var rr = G.rooms;
     W.roomAgents = {
-      retain: [mk("policy", 1560, rr.retain.y + 78, "Policy"), mk("authority", 1640, rr.retain.y + 78, "Authority"), mk("record", 1720, rr.retain.y + 78, "Record")],
-      mitigate: [mk("eng", 1470, rr.mitigate.y + 52), mk("eng", 1520, rr.mitigate.y + 52)],
-      transfer: [mk("carrier", 1714, rr.transfer.y + 62, "Sim"), mk("carrier", 1714, rr.transfer.y + 100, ""), mk("carrier", 1660, rr.transfer.y + 81, "")],
+      retain: [mk(PK.glyph.roomAgent(W.L.tokens, "policy", 18), [1400, 372]), mk(PK.glyph.roomAgent(W.L.tokens, "authority", 18), [1690, 298]), mk(PK.glyph.roomAgent(W.L.tokens, "record", 18), [1690, 364])],
+      mitigate: [mk(PK.glyph.roomAgent(W.L.tokens, "eng", 18), [1468, 452]), mk(PK.glyph.roomAgent(W.L.tokens, "eng", 18), [1482, 548])],
+      transfer: [mk(PK.glyph.carrier(W.L.tokens, 22), [1738, 662]), mk(PK.glyph.carrier(W.L.tokens, 22), [1738, 700]), mk(PK.glyph.carrier(W.L.tokens, 22), [1738, 738])],
     };
   }
   if (!W.safeguards) {
-    var railY = G.rooms.mitigate.y + 132;
-    var rail = PK.el("path", { d: "M1580 " + railY + " H1752", class: "pk-hair-soft" }, W.L.chambers);
+    var rail = PK.el("path", { d: "M1512 490 H1766", class: "pk-hair" }, W.L.routes);
     gsap.set(rail, { opacity: 0 });
     tl.set(rail, { opacity: 1 }, T0);
-    var pieceSpec = { watch: [234, 306], thermal: [235.5, 276.2], workshop: [234, 306] };
     W.safeguards = {};
-    ["watch", "thermal", "workshop"].forEach(function (k, i) {
-      var g = PK.g(W.L.tokens);
-      var sp = pieceSpec[k];
-      var mid = PK.polar(0, 0, AR * SC, (sp[0] + sp[1]) / 2);
-      var inner = PK.g(g, { transform: "translate(" + f(-mid[0]) + " " + f(-mid[1]) + ") scale(" + SC + ")" });
-      var piece = PK.el("path", { d: sector(34.5, 45.5, sp[0], sp[1]), fill: C.rustPale, stroke: C.rust, "stroke-width": 1.4, "stroke-linejoin": "round" }, inner);
-      gsap.set(g, { x: 1608 + i * 58, y: railY - 7, opacity: 0 });
+    [["thermal", 234, 277, 1555], ["watch", 234, 306, 1640], ["workshop", 234, 306, 1725]].forEach(function (s) {
+      var g = PK.g(W.L.tokens, { class: "pk-token" });
+      var shape = sector(SG_R0, SG_R1, s[1], s[2]);
+      PK.el("path", { d: shape, fill: C.shadow, transform: "translate(1 1.8)" }, g);
+      var piece = PK.el("path", { d: shape, fill: C.rust }, g);
+      var cx = -(PK.polar(0, 0, SG_R1, s[1])[0] + PK.polar(0, 0, SG_R1, s[2])[0]) / 2;
+      gsap.set(g, { x: s[3] + cx, y: 490 + SG_R0 * Math.sin((54 * Math.PI) / 180) + 0.9, opacity: 0 });
       tl.set(g, { opacity: 1 }, T0);
-      W.safeguards[k] = { g: g, piece: piece };
+      W.safeguards[s[0]] = { g: g, piece: piece, a0: s[1], a1: s[2] };
     });
   }
   if (!W.branches) {
-    // the risk owner's line: trunk from the hand to the branch point, dashed branches to the three doors
+    var BR_D = {
+      retain: "M1250 686 V352 Q1250 330 1272 330 H1300",
+      mitigate: "M1250 530 Q1250 508 1272 508 H1300",
+      transfer: "M1250 686 H1300",
+    };
     W.branches = {};
     RK.forEach(function (k) {
-      var d = door(k);
-      var pth = PK.el("path", { d: "M" + pt(BP0) + " C" + f(BP0[0]) + " " + f(BP0[1] + (d[1] - BP0[1]) * 0.55) + " " + f(d[0] - 26) + " " + f(d[1]) + " " + pt(d), class: "pk-decision-dash" }, W.L.routes);
-      gsap.set(pth, { opacity: 0 });
-      tl.set(pth, { opacity: 1 }, T0);
-      W.branches[k] = pth;
+      var p = PK.el("path", { d: BR_D[k], class: "pk-decision-dash" }, W.L.routes);
+      gsap.set(p, { opacity: 0 });
+      tl.set(p, { opacity: 1 }, T0);
+      W.branches[k] = p;
     });
-    var trunk = "M" + pt(G.ownerHand) + " H1226 C1250 710 " + f(BP0[0]) + " 676 " + pt(BP0);
-    tl.set(W.decision, { attr: { d: trunk } }, T0 - 0.01);
+    var bNode = PK.el("circle", { cx: B[0], cy: B[1], r: 2.6, fill: C.ink }, W.L.routes);
+    gsap.set(bNode, { opacity: 0 });
+    tl.set(bNode, { opacity: 1 }, T0);
+    tl.set(W.decision, { attr: { d: "M1174 710 H1226 Q1250 710 1250 686" } }, T0 - 0.01);
     tl.set(W.decision, { opacity: 1, drawSVG: "0% 100%" }, T0);
   }
-
-  // ------------------------------------------------------------ the branch point and the reaches of the black line
-  // A reach is a solid black line that follows a dashed branch from the branch point into a door.
-  function samplePath(el, n) {
-    var L = el.getTotalLength(),
-      out = [];
-    for (var i = 0; i <= n; i++) {
-      var q = el.getPointAtLength((L * i) / n);
-      out.push([q.x, q.y]);
-    }
-    return out;
+  if (!W.roomOwnerLines) {
+    var OWN_D = {
+      retain: "M1250 686 V352 Q1250 330 1272 330 H1305",
+      mitigate: "M1250 686 V530 Q1250 508 1272 508 H1305",
+      transfer: "M1250 686 H1305",
+    };
+    W.roomOwnerLines = {};
+    RK.forEach(function (k) {
+      var p = PK.el("path", { d: OWN_D[k], class: "pk-decision" }, W.L.routes);
+      gsap.set(p, { drawSVG: "0% 0%" });
+      W.roomOwnerLines[k] = p;
+    });
   }
-  var branchPts = {};
-  RK.forEach(function (k) {
-    var pts = samplePath(W.branches[k], 64);
-    // orient each branch from the branch point to the door
-    if (dist(pts[0], door(k)) < dist(pts[pts.length - 1], door(k))) pts.reverse();
-    branchPts[k] = pts;
-  });
-  var BP = [
-    (branchPts.retain[0][0] + branchPts.mitigate[0][0] + branchPts.transfer[0][0]) / 3,
-    (branchPts.retain[0][1] + branchPts.mitigate[0][1] + branchPts.transfer[0][1]) / 3,
-  ];
-  var reach = {};
-  RK.forEach(function (k) {
-    var d = door(k);
-    var pts = branchPts[k];
-    var s = "M" + pt(pts[0]);
-    for (var i = 1; i < pts.length; i++) s += " L" + pt(pts[i]);
-    s += " L" + f(d[0] + 12) + " " + f(d[1]);
-    reach[k] = PK.el("path", { d: s, class: "pk-decision" }, W.L.routes);
-    gsap.set(reach[k], { drawSVG: "0% 0%" });
-  });
+  var own = W.roomOwnerLines;
+  // the branch point is where the owner lines start
+  try {
+    var q0 = own.transfer.getPointAtLength(0);
+    B = [q0.x, q0.y];
+  } catch (e) {}
 
   // ------------------------------------------------------------ contract at 78.0 (everything this section animates)
   var Q0 = [1200, 480],
     P0 = [1200, 528];
   tl.set(W.priora.g, { x: Q0[0], y: Q0[1], opacity: 1 }, T0);
   tl.set(W.priora.body, { scale: 1, svgOrigin: "0 0" }, T0);
-  tl.set(W.priora.beadG, { rotation: 0, svgOrigin: "0 0" }, T0);
-  tl.set([W.priora.orbit, W.priora.beadG], { opacity: 1 }, T0);
+  tl.set(W.priora.beadG, { rotation: 0, svgOrigin: "0 0", opacity: 1 }, T0);
+  tl.set(W.priora.orbit, { opacity: 1 }, T0);
   tl.set(W.priora.label, { opacity: 0 }, T0);
   tl.set(cs.g, { x: P0[0], y: P0[1], opacity: 1 }, T0);
   tl.set(cs.body, { scale: 1, svgOrigin: "0 0" }, T0);
@@ -230,284 +244,263 @@ PK.section("s7-cooperate", 78, 84, function (tl, W, ctx, S) {
   });
   if (W.align.insurerDashed) tl.set(W.align.insurerDashed, { opacity: 0 }, T0);
   RK.forEach(function (k) {
-    tl.set([ROOMS[k].leafA, ROOMS[k].leafB], { x: 0, y: 0 }, T0);
+    tl.set([RM[k].leafA, RM[k].leafB], { x: 0, y: 0, opacity: 1 }, T0);
+    tl.set(own[k], { drawSVG: "0% 0%" }, T0);
   });
   if (W.ownerDecides) tl.set(W.ownerDecides, { opacity: 0 }, T0);
   if (W.caseLabel) tl.set(W.caseLabel, { opacity: 0 }, T0);
+  var ra = W.roomAgents;
+  ra.retain.concat(ra.mitigate, ra.transfer).forEach(function (a) {
+    tl.set(a.body, { scale: 1, svgOrigin: "0 0" }, T0);
+  });
 
-  // ------------------------------------------------------------ the pieces: thermal check (fills part of the gap) and the rest (a dashed sliver)
-  var g0 = gapA.a0,
-    g1 = gapA.a1,
-    gw = g1 - g0;
-  var thA = [g0 + 1.5, g0 + gw * 0.6 - 1]; // about 60 % of the gap
-  var slA = [g0 + gw * 0.6 + 1, g1 - 1.5]; // the remaining 40 %
-  var TR0 = 34.5,
-    TR1 = 45.5;
-  var thMid = PK.polar(0, 0, AR * SC, (thA[0] + thA[1]) / 2); // world offset of each piece's centre from the packet centre
-  var slMid = PK.polar(0, 0, AR * SC, (slA[0] + slA[1]) / 2);
-  var thD = sector(TR0, TR1, thA[0], thA[1]);
-  var slD = sector(TR0, TR1, slA[0], slA[1]);
+  // ------------------------------------------------------------ the pieces (world units, relative to the packet's centre)
+  var thSrc = W.safeguards.thermal;
+  var thD = thSrc.piece.getAttribute("d");
+  var thA0 = thSrc.a0 !== undefined ? thSrc.a0 : 234,
+    thA1 = thSrc.a1 !== undefined ? thSrc.a1 : 277;
+  var slA = [thA1 + 2, gapA.a1]; // the rest of the gap
+  var slD = sector(SG_R0 - 0.6, SG_R1 + 0.6, slA[0], slA[1]);
+  var CL0 = 33.6,
+    CL1 = 41;
   var clampD =
-    "M" + pt(PK.polar(0, 0, TR0 - 1.5, slA[0] - 3.5)) + " L" + pt(PK.polar(0, 0, TR1 + 4.5, slA[0] - 3.5)) +
-    " A" + f(TR1 + 4.5) + " " + f(TR1 + 4.5) + " 0 0 1 " + pt(PK.polar(0, 0, TR1 + 4.5, slA[1] + 3.5)) +
-    " L" + pt(PK.polar(0, 0, TR0 - 1.5, slA[1] + 3.5));
-  function termTicks(parent) {
-    // the terms written on the clamp: four short marks (exposure, authority, conditions, expiry)
-    var g = PK.g(parent);
-    for (var i = 0; i < 4; i++) {
-      var a = slA[0] + ((i + 0.5) * (slA[1] - slA[0])) / 4;
-      PK.el("path", { d: "M" + pt(PK.polar(0, 0, TR1 + 4.5, a)) + " L" + pt(PK.polar(0, 0, TR1 + 10, a)), fill: "none", stroke: C.rust, "stroke-width": 1.6, "stroke-linecap": "round" }, g);
-    }
-    return g;
+    "M" + pt(PK.polar(0, 0, CL0, slA[0] - 2)) + " L" + pt(PK.polar(0, 0, CL1, slA[0] - 2)) +
+    " A" + CL1 + " " + CL1 + " 0 0 1 " + pt(PK.polar(0, 0, CL1, slA[1] + 2)) + " L" + pt(PK.polar(0, 0, CL0, slA[1] + 2));
+  var thMid = PK.polar(0, 0, (SG_R0 + SG_R1) / 2, (thA0 + thA1) / 2);
+  var slMid = PK.polar(0, 0, (SG_R0 + SG_R1) / 2, (slA[0] + slA[1]) / 2);
+  var pieceStyle = { fill: C.rust };
+  var sliverStyle = { fill: C.paper, stroke: C.rust, "stroke-width": 0.9, "stroke-dasharray": "1.6 1.4", "stroke-linejoin": "round" };
+  var clampStyle = { fill: "none", stroke: C.rust, "stroke-width": 2.2, "stroke-linecap": "round", "stroke-linejoin": "round" };
+  function pieceSet(parent, withClamp) {
+    var th = PK.g(parent);
+    PK.el("path", { d: thD, fill: C.shadow, transform: "translate(1 1.8)" }, th);
+    PK.el("path", Object.assign({ d: thD }, pieceStyle), th);
+    var sl = PK.g(parent);
+    PK.el("path", Object.assign({ d: slD }, sliverStyle), sl);
+    var cl = PK.g(sl);
+    PK.el("path", Object.assign({ d: clampD }, clampStyle), cl);
+    return { th: th, sl: sl, cl: cl };
   }
-  var tileStyle = { fill: C.rustPale, stroke: C.rust, "stroke-width": 1.4, "stroke-linejoin": "round" };
-  var sliverStyle = { fill: C.paper, stroke: C.rust, "stroke-width": 1.5, "stroke-linejoin": "round", "stroke-dasharray": "3.2 2.4" };
-  var clampStyle = { fill: "none", stroke: C.rust, "stroke-width": 2.6, "stroke-linecap": "round", "stroke-linejoin": "round" };
-
-  // seated copies inside the packet's arcs (they travel with the packet in s8)
-  var thermalSeat = PK.el("path", Object.assign({ d: thD }, tileStyle), cs.arcsG);
-  var sliverSeatG = PK.g(cs.arcsG);
-  var sliverSeat = PK.el("path", Object.assign({ d: slD }, sliverStyle), sliverSeatG);
-  var clampSeat = PK.g(sliverSeatG);
-  PK.el("path", Object.assign({ d: clampD }, clampStyle), clampSeat);
-  termTicks(clampSeat);
-  gsap.set([thermalSeat, sliverSeatG, clampSeat], { opacity: 0 });
-
-  // the thermal check piece, travelling from the library to the packet
-  var thermT = PK.g(W.L.case);
-  var thermTi = PK.g(thermT, { transform: "scale(" + SC + ")" });
-  PK.el("path", Object.assign({ d: thD }, tileStyle), thermTi);
-  gsap.set(thermT, { opacity: 0 });
-
-  // the sliver, carried by Priora (a child of Priora's group: it rides with it)
+  // seated copies inside the packet's arcs (scaled back to world units): they travel with it in s8
+  var seatG = PK.g(cs.arcsG, { transform: "scale(" + f(1 / SC) + ")" });
+  var seat = pieceSet(seatG);
+  gsap.set([seat.th, seat.sl, seat.cl], { opacity: 0 });
+  // the thermal piece in flight from the rail
+  var thFly = PK.g(W.L.case);
+  var thFlyI = pieceSet(thFly);
+  thFlyI.sl.remove();
+  gsap.set(thFly, { opacity: 0 });
+  // the sliver carried by Priora: a child of Priora's group, so it rides with it; shown larger while away
   var slRide = PK.g(W.priora.g);
-  var slRideI = PK.g(slRide, { transform: "scale(" + SC + ")" });
-  PK.el("path", Object.assign({ d: slD }, sliverStyle), slRideI);
-  var clampRide = PK.g(slRideI);
-  PK.el("path", Object.assign({ d: clampD }, clampStyle), clampRide);
-  termTicks(clampRide);
+  W.priora.g.insertBefore(slRide, W.priora.body);
+  var slBig = PK.g(slRide);
+  var ride = pieceSet(slBig);
+  ride.th.remove();
   gsap.set(slRide, { opacity: 0 });
-  gsap.set(clampRide, { opacity: 0 });
-  W.priora.g.insertBefore(slRide, W.priora.body); // under Priora's body
+  gsap.set(ride.cl, { opacity: 0 });
+  var BIG = 1.7;
+  var slO = pt(slMid);
 
   // ------------------------------------------------------------ positions
-  var dM = door("mitigate"),
-    dT = door("transfer"),
-    dR = door("retain");
-  var PM = [dM[0] + 22, dM[1]]; // the packet in Mitigate's open door (the ring just fits the door)
-  var QM = [1232, 462]; // Priora at the threshold, outside the room
-  var QT = [1214, 634];
-  var ST = [dT[0] + 18, dT[1]]; // the sliver presented in Transfer's door
-  var QR = [1244, 302];
-  var SR = [dR[0] + 18, dR[1]];
-  var PR = [1214, 388]; // the packet, collected, waits by Retain's door for the decision
-  var slDock = PK.polar(0, 0, 44, 0); // where the sliver rides, beside the bead (bead angle set per leg)
+  var dM = DOOR.mitigate,
+    dT = DOOR.transfer,
+    dR = DOOR.retain;
+  var PM = [dM[0] + 22, dM[1]]; // the packet in Mitigate's open door (the ring just fits the doorway)
+  var QM = [1212, 462]; // Priora at the threshold, outside the room
+  var QT = [1206, 626];
+  var ST = [dT[0] + 20, dT[1]]; // the sliver presented in Transfer's door
+  var QR = [1210, 298];
+  var SR = [dR[0] + 20, dR[1]];
+  var PR = [1196, 392]; // the packet, collected, waits by Retain for the decision
   function rideAt(local) {
-    return sub(local, slMid); // group offset that puts the sliver's centre at `local`
+    return sub(local, slMid); // group offset that puts the sliver's centre at `local` (relative to Priora)
   }
-
-  var LS = PK.cam.px(80.2, 19.5); // label size for the rooms shot (about 19.5 px)
+  var LS = PK.cam.px(80.4, 19.5);
 
   // ------------------------------------------------------------ beat times (absolute film seconds)
   var tm = {
-    reachM: 78.15, doorM: 78.36, goM: 78.3, goMd: 0.6,
+    openM: 78.12, openMd: 0.42,
+    goM: 78.32, goMd: 0.62,
     thermal: 78.84, thermalD: 0.42,
-    reachT: 79.3, doorT: 79.52, lift: 79.36, goT: 79.46, goTd: 0.5,
-    ask: 80.04, tag: 80.14, tagD: 0.36,
-    reachR: 80.36, doorR: 80.6, goR: 80.52, goRd: 0.6,
-    clampA: 81.2,
-    decide: PK.word("L13", "risk") + 0.08,
+    openT: 79.36, openTd: 0.3,
+    lift: 79.54, goT: 79.58, goTd: 0.5,
+    ask: 80.18, tag: 80.28, tagD: 0.36,
+    outT: 80.6,
+    openR: 80.42, openRd: 0.46,
+    goR: 80.64, goRd: 0.6,
+    pkUp: 80.76, pkUpD: 0.5,
+    clampA: 81.34,
+    back: 81.72, backD: 0.34,
+    decide: Math.max(PK.word("L13", "risk") + 0.28, 81.56),
     end: 82.62,
   };
+  function opens(k, at, dur) {
+    PK.drawOn(tl, own[k], at, dur, "power2.inOut", { later: true });
+    RM[k].open(tl, at + dur * 0.78, 0.34);
+    PK.sfx("decision", at, { gain_db: -9, dur: dur, pan: 0.35, part: "reach" });
+    PK.sfx("door-open", at + dur * 0.78, { gain_db: -8, pan: 0.5, room: k });
+  }
+  function withdraws(k, at, closeAt) {
+    PK.drawOff(tl, own[k], at, 0.4, "power2.inOut", { to: "start" });
+    RM[k].close(tl, closeAt, 0.34);
+    PK.sfx("door-close", closeAt, { gain_db: -10, pan: 0.5, room: k });
+  }
 
-  // ------------------------------------------------------------ 1. the black line opens Mitigate; Priora carries the packet in
-  PK.drawOn(tl, reach.mitigate, tm.reachM, 0.36, "power2.inOut");
-  PK.sfx("decision", tm.reachM, { gain_db: -10, pan: 0.35, part: "reach" });
-  ROOMS.mitigate.open(tl, tm.doorM, 0.34);
-  PK.sfx("door-open", tm.doorM, { gain_db: -9, pan: 0.45, room: "mitigate" });
-
+  // ------------------------------------------------------------ 1. Mitigate: the black line opens it; Priora carries the packet in
+  opens("mitigate", tm.openM, tm.openMd);
   var aM = ang(QM, PM);
-  tl.fromTo(W.priora.beadG, { rotation: 0, svgOrigin: "0 0" }, { rotation: aM, svgOrigin: "0 0", duration: 0.5, ease: "power2.inOut", immediateRender: false }, tm.goM);
-  PK.travel(tl, W.priora.g, PK.curve(Q0, QM, -8), tm.goM, tm.goMd, "power2.inOut");
-  PK.travel(tl, cs.g, PK.curve(P0, PM, 14), tm.goM + 0.04, tm.goMd, "power2.inOut");
+  FT(W.priora.beadG, { rotation: 0, svgOrigin: "0 0" }, { rotation: aM, svgOrigin: "0 0", duration: 0.5, ease: "power2.inOut" }, tm.goM);
+  PK.travel(tl, W.priora.g, PK.curve(Q0, QM, -6), tm.goM, tm.goMd, "power2.inOut");
+  PK.travel(tl, cs.g, PK.curve(P0, PM, 16), tm.goM + 0.04, tm.goMd, "power2.inOut");
   PK.sfx("move", tm.goM, { gain_db: -12, dur: tm.goMd, pan: 0.4 });
+  PK.sfx("arrive", tm.goM + tm.goMd, { gain_db: -13, size: "case", pan: 0.45 });
 
-  // the library offers the thermal check: a copy flies into the gap and fills part of it
-  var rail = W.safeguards.thermal;
-  var railW = posOf(rail.g);
-  var railL = localCentre(rail.g);
-  tl.fromTo(rail.g, { scale: 1, svgOrigin: pt(railL) }, { keyframes: [{ scale: 1.2, duration: 0.14, ease: "power1.out" }, { scale: 1, duration: 0.3, ease: "power2.inOut" }], svgOrigin: pt(railL), immediateRender: false }, tm.thermal - 0.14);
-  var thPath = PK.curve(sub(railW, thMid), PM, -50);
-  tl.set(thermT, { x: railW[0] - thMid[0], y: railW[1] - thMid[1] }, tm.thermal - 0.01);
-  tl.fromTo(thermT, { opacity: 0 }, { opacity: 1, duration: 0.1, ease: "none", immediateRender: false }, tm.thermal);
-  PK.travel(tl, thermT, thPath, tm.thermal, tm.thermalD, "power2.inOut");
-  PK.trail(tl, W.L.trails, PK.curve(railW, add(PM, thMid), -50), tm.thermal, tm.thermalD);
+  // the library offers the thermal check: a solid copy leaves the rail and fills part of the gap
+  var railP = xy(thSrc.g);
+  FT(thSrc.g, { y: railP[1] }, { keyframes: [{ y: railP[1] - 4, duration: 0.16, ease: "power2.out" }, { y: railP[1], duration: 0.3, ease: "power2.inOut" }] }, tm.thermal - 0.16);
+  var thPath = PK.curve(railP, PM, -46);
+  tl.set(thFly, { x: railP[0], y: railP[1] }, tm.thermal - 0.01);
+  FT(thFly, { opacity: 0 }, { opacity: 1, duration: 0.1, ease: "none" }, tm.thermal);
+  PK.travel(tl, thFly, thPath, tm.thermal, tm.thermalD, "power2.inOut");
+  PK.trail(tl, W.L.trails, PK.curve(add(railP, thMid), add(PM, thMid), -46), tm.thermal, tm.thermalD);
   var tSeat = tm.thermal + tm.thermalD;
-  tl.set(thermT, { opacity: 0 }, tSeat);
-  tl.set(thermalSeat, { opacity: 1 }, tSeat);
-  tl.fromTo(cs.body, { scale: 1, svgOrigin: "0 0" }, { keyframes: [{ scale: 1.05, duration: 0.12, ease: "power1.out" }, { scale: 1, duration: 0.3, ease: "power2.inOut" }], svgOrigin: "0 0", immediateRender: false }, tSeat - 0.02);
+  tl.set(thFly, { opacity: 0 }, tSeat);
+  tl.set(seat.th, { opacity: 1 }, tSeat);
+  pulse(cs.body, tSeat - 0.02, 1.05);
   PK.sfx("compare", tm.thermal - 0.12, { gain_db: -10, pan: 0.6 });
-  PK.sfx("lock", tSeat, { gain_db: -7, pan: 0.45, size: "small" });
+  PK.sfx("lock", tSeat, { gain_db: -6, pan: 0.45, size: "small" });
+  var lM = mono("Mitigate part", dM[0] + 36, dM[1] + 54, LS);
+  labelIn(lM, tSeat - 0.14);
 
-  var lM = PK.text(W.L.labels, "Mitigate part", dM[0] + 66, dM[1] + LS * 0.38, { font: "mono", size: LS, fill: C.rust, anchor: "start" });
-  gsap.set(lM, { opacity: 0 });
-  tl.fromTo(lM, { opacity: 0, x: -6 }, { opacity: 1, x: 0, duration: 0.35, ease: "power2.out", immediateRender: false }, tSeat - 0.16);
-
-  // ------------------------------------------------------------ 2. the rest moves on: Priora carries the sliver to Transfer
-  tl.fromTo(sliverSeatG, { opacity: 0 }, { opacity: 1, duration: 0.1, ease: "none", immediateRender: false }, tSeat + 0.02);
-  tl.set(sliverSeatG, { opacity: 0 }, tm.lift);
+  // ------------------------------------------------------------ 2. Transfer: the rest lifts off; Priora carries it; a price is asked
+  FT(seat.sl, { opacity: 0 }, { opacity: 1, duration: 0.1, ease: "none" }, tSeat + 0.03);
+  tl.set(seat.sl, { opacity: 0 }, tm.lift);
   tl.set(slRide, { opacity: 1 }, tm.lift);
   PK.sfx("packet", tm.lift, { gain_db: -12, pan: 0.45, size: "small" });
-
-  PK.drawOn(tl, reach.transfer, tm.reachT, 0.34, "power2.inOut");
-  PK.sfx("decision", tm.reachT, { gain_db: -11, pan: 0.35, part: "reach" });
-  ROOMS.transfer.open(tl, tm.doorT, 0.3);
-  PK.sfx("door-open", tm.doorT, { gain_db: -10, pan: 0.45, room: "transfer" });
-
+  opens("transfer", tm.openT, tm.openTd);
   var aT = ang(QT, ST);
-  var legT = "M" + pt(QM) + " C" + f(QM[0] - 46) + " " + f(QM[1] + 70) + " " + f(QT[0] - 30) + " " + f(QT[1] - 60) + " " + pt(QT);
+  var legT = "M" + pt(QM) + " C" + f(QM[0] - 44) + " " + f(QM[1] + 60) + " " + f(QT[0] - 40) + " " + f(QT[1] - 70) + " " + pt(QT);
   PK.travel(tl, W.priora.g, legT, tm.goT, tm.goTd, "power2.inOut");
   PK.trail(tl, W.L.trails, legT, tm.goT, tm.goTd);
-  tl.fromTo(W.priora.beadG, { rotation: aM }, { rotation: aT, svgOrigin: "0 0", duration: tm.goTd, ease: "power2.inOut", immediateRender: false }, tm.goT);
+  FT(W.priora.beadG, { rotation: aM }, { rotation: aT, svgOrigin: "0 0", duration: tm.goTd, ease: "power2.inOut" }, tm.goT);
   PK.sfx("move", tm.goT, { gain_db: -11, dur: tm.goTd, pan: 0.4 });
-  // the sliver lifts off the packet and rides beside Priora's bead, then is presented in the open door
+  // the sliver lifts off the packet, grows a little to be seen, rides beside the bead, then is presented in the door
   var lift0 = sub(PM, QM);
-  var dockT = rideAt(PK.polar(0, 0, 44, aT));
+  var dockT = rideAt(PK.polar(0, 0, 48, aT));
   var tArrT = tm.goT + tm.goTd;
-  tl.fromTo(slRide, { x: lift0[0], y: lift0[1] }, { x: dockT[0], y: dockT[1], duration: tArrT - tm.lift - 0.06, ease: "power2.inOut", immediateRender: false }, tm.lift);
+  FT(slRide, { x: lift0[0], y: lift0[1] }, { x: dockT[0], y: dockT[1], duration: tArrT - tm.lift - 0.06, ease: "power2.inOut" }, tm.lift);
+  FT(slBig, { scale: 1, svgOrigin: slO }, { scale: BIG, svgOrigin: slO, duration: 0.4, ease: "power2.out" }, tm.lift);
   var inT = rideAt(sub(ST, QT));
-  tl.fromTo(slRide, { x: dockT[0], y: dockT[1] }, { x: inT[0], y: inT[1], duration: 0.2, ease: "power2.out", immediateRender: false }, tArrT - 0.06);
+  FT(slRide, { x: dockT[0], y: dockT[1] }, { x: inT[0], y: inT[1], duration: 0.22, ease: "power2.out" }, tArrT - 0.06);
 
-  // simulated: the dashed carriers are asked; a PRICE tag comes back with an empty value
-  var hexes = W.roomAgents.transfer;
+  // simulated: the dashed carriers are asked; a PRICE tag comes back, its value an empty line
+  var hexes = ra.transfer;
   var hexP = hexes.map(function (h) {
-    return posOf(h.g);
+    return xy(h.g);
   });
-  var askLines = hexP.map(function (hp) {
-    var d = "M" + pt([ST[0] + 10, ST[1]]) + " L" + pt([hp[0] - 15, hp[1]]);
-    var l = PK.el("path", { d: d, class: "pk-thread-dash" }, W.L.threads);
-    gsap.set(l, { opacity: 0 });
-    return l;
+  var askG = PK.g(W.L.threads);
+  hexP.forEach(function (hp) {
+    PK.el("path", { d: "M" + f(ST[0] + 14) + " " + f(ST[1]) + " C" + f(ST[0] + 120) + " " + f(ST[1]) + " " + f(hp[0] - 120) + " " + f(hp[1]) + " " + f(hp[0] - 14) + " " + f(hp[1]), class: "pk-thread-dash" }, askG);
   });
-  askLines.forEach(function (l, i) {
-    tl.fromTo(l, { opacity: 0 }, { opacity: 1, duration: 0.16, ease: "none", immediateRender: false }, tm.ask + i * 0.04);
+  gsap.set(askG, { opacity: 0 });
+  FT(askG, { opacity: 0 }, { opacity: 1, duration: 0.2, ease: "none" }, tm.ask);
+  hexes.forEach(function (h, i) {
+    pulse(h.body, tm.ask + 0.12 + i * 0.05, 1.14);
   });
   PK.sfx("request", tm.ask, { gain_db: -10, pan: 0.6 });
-  PK.sfx("simulated", tm.ask + 0.08, { gain_db: -14, pan: 0.7 });
-  hexes.forEach(function (h, i) {
-    tl.fromTo(h.body, { scale: 1, svgOrigin: "0 0" }, { keyframes: [{ scale: 1.16, duration: 0.1 }, { scale: 1, duration: 0.24, ease: "power2.inOut" }], svgOrigin: "0 0", immediateRender: false }, tm.ask + 0.1 + i * 0.04);
-  });
-  var TS = PK.cam.px(80.4, 18.5);
-  var tagW = PK.measure("PRICE", "mono500", TS, 0.12) + TS * 3.6,
-    tagH = TS * 1.75;
+  PK.sfx("simulated", tm.ask + 0.1, { gain_db: -14, pan: 0.7 });
+  var TS = PK.cam.px(80.6, 18.5);
+  var tagW = PK.measure("PRICE", "mono500", TS, 0.12) + TS * 0.9 + 18,
+    tagH = TS * 1.95;
   var tag = PK.g(W.L.labels);
-  PK.el("path", { d: PK.rectPath(0, -tagH / 2, tagW, tagH, 3), class: "pk-sim" }, tag);
-  PK.text(tag, "Price", TS * 0.55, TS * 0.36, { font: "mono", size: TS, fill: C.rust });
-  PK.el("path", { d: "M" + f(tagW - TS * 2.6) + " " + f(TS * 0.42) + " H" + f(tagW - TS * 0.55), fill: "none", stroke: C.rust, "stroke-width": 1, "stroke-linecap": "round" }, tag);
+  PK.el("rect", { x: 0, y: -tagH / 2, width: tagW, height: tagH, rx: 2, fill: C.paper, stroke: C.rust, "stroke-width": 0.9, "stroke-dasharray": "2.2 1.5" }, tag);
+  PK.text(tag, "Price", TS * 0.45, TS * 0.36, { font: "mono", size: TS, fill: C.rust });
+  PK.el("path", { d: "M" + f(tagW - 17 - TS * 0.3) + " " + f(TS * 0.36) + " h15", fill: "none", stroke: C.rust, "stroke-width": 0.9 }, tag);
   gsap.set(tag, { opacity: 0 });
-  var src = hexP[0];
-  var tagEnd = [ST[0] + 24, ST[1] - tagH * 0.5 - 14];
-  var tagStart = [src[0] - 18 - tagW, src[1]];
+  var tagStart = [hexP[1][0] - 16 - tagW, hexP[1][1]];
+  var tagEnd = [ST[0] + 24, ST[1]];
   tl.set(tag, { x: tagStart[0], y: tagStart[1] }, tm.tag - 0.01);
-  tl.fromTo(tag, { opacity: 0 }, { opacity: 1, duration: 0.12, ease: "none", immediateRender: false }, tm.tag);
-  PK.travel(tl, tag, PK.curve(tagStart, tagEnd, -18), tm.tag, tm.tagD, "power2.inOut");
-  PK.sfx("return", tm.tag + tm.tagD, { gain_db: -10, pan: 0.5 });
-  var lT = PK.text(W.L.labels, "What would it cost?", ST[0] + 24, ST[1] + LS * 1.6, { font: "mono", size: LS, fill: C.rust, anchor: "start" });
-  gsap.set(lT, { opacity: 0 });
-  tl.fromTo(lT, { opacity: 0, x: -6 }, { opacity: 1, x: 0, duration: 0.35, ease: "power2.out", immediateRender: false }, tm.ask + 0.06);
-  tl.fromTo(askLines, { opacity: 1 }, { opacity: 0, duration: 0.3, ease: "power1.in", immediateRender: false }, tm.tag + tm.tagD);
+  FT(tag, { opacity: 0 }, { opacity: 1, duration: 0.12, ease: "none" }, tm.tag);
+  PK.travel(tl, tag, PK.curve(tagStart, tagEnd, -16), tm.tag, tm.tagD, "power2.inOut");
+  PK.sfx("return", tm.tag + tm.tagD, { gain_db: -9, pan: 0.5 });
+  FT(askG, { opacity: 1 }, { opacity: 0, duration: 0.3, ease: "power1.in" }, tm.tag + tm.tagD - 0.05);
+  var lT = mono("What would it cost?", dT[0] + 36, dT[1] - 26, LS);
+  labelIn(lT, tm.ask + 0.08);
 
-  // ------------------------------------------------------------ 3. Retain: Priora collects the packet and takes the sliver up; Retain keeps the rest
-  PK.drawOn(tl, reach.retain, tm.reachR, 0.36, "power2.inOut");
-  PK.sfx("decision", tm.reachR, { gain_db: -11, pan: 0.35, part: "reach" });
-  ROOMS.retain.open(tl, tm.doorR, 0.3);
-  PK.sfx("door-open", tm.doorR, { gain_db: -10, pan: 0.45, room: "retain" });
-
+  // ------------------------------------------------------------ 3. Retain: up to Retain, collecting the packet; Retain keeps the rest
+  withdraws("transfer", tm.outT + 0.08, tm.outT + 0.2);
+  opens("retain", tm.openR, tm.openRd);
   var aR = ang(QR, SR);
-  var legR = "M" + pt(QT) + " C" + f(QT[0] - 44) + " " + f(QT[1] - 120) + " " + f(QR[0] - 70) + " " + f(QR[1] + 150) + " " + pt(QR);
+  var legR = "M" + pt(QT) + " C" + f(QT[0] - 50) + " " + f(QT[1] - 120) + " " + f(QR[0] - 60) + " " + f(QR[1] + 140) + " " + pt(QR);
   PK.travel(tl, W.priora.g, legR, tm.goR, tm.goRd, "power2.inOut");
   PK.trail(tl, W.L.trails, legR, tm.goR, tm.goRd);
-  tl.fromTo(W.priora.beadG, { rotation: aT }, { rotation: aR, svgOrigin: "0 0", duration: tm.goRd, ease: "power2.inOut", immediateRender: false }, tm.goR);
+  FT(W.priora.beadG, { rotation: aT }, { rotation: aR, svgOrigin: "0 0", duration: tm.goRd, ease: "power2.inOut" }, tm.goR);
   PK.sfx("move", tm.goR, { gain_db: -10, dur: tm.goRd, pan: 0.35 });
-  var dockR = rideAt(PK.polar(0, 0, 44, aR));
+  var dockR = rideAt(PK.polar(0, 0, 48, aR));
   var tArrR = tm.goR + tm.goRd;
-  tl.fromTo(slRide, { x: inT[0], y: inT[1] }, { x: dockR[0], y: dockR[1], duration: tm.goRd + 0.02, ease: "power2.inOut", immediateRender: false }, tm.goR - 0.06);
+  FT(slRide, { x: inT[0], y: inT[1] }, { x: dockR[0], y: dockR[1], duration: tm.goRd + 0.04, ease: "power2.inOut" }, tm.outT);
   var inR = rideAt(sub(SR, QR));
-  tl.fromTo(slRide, { x: dockR[0], y: dockR[1] }, { x: inR[0], y: inR[1], duration: 0.2, ease: "power2.out", immediateRender: false }, tArrR - 0.04);
-  // the packet leaves Mitigate's door as Priora passes and rides up with it
-  var legPk = "M" + pt(PM) + " C" + f(PM[0] - 60) + " " + f(PM[1] + 4) + " " + f(PR[0] + 10) + " " + f(PR[1] + 60) + " " + pt(PR);
-  PK.travel(tl, cs.g, legPk, tm.goR + 0.12, tm.goRd - 0.08, "power2.inOut");
-  PK.sfx("move", tm.goR + 0.12, { gain_db: -14, dur: tm.goRd - 0.08, pan: 0.3, size: "case" });
+  FT(slRide, { x: dockR[0], y: dockR[1] }, { x: inR[0], y: inR[1], duration: 0.2, ease: "power2.out" }, tArrR - 0.04);
+  // the packet leaves Mitigate's door as Priora passes and comes up with it
+  var legPk = "M" + pt(PM) + " C" + f(PM[0] - 70) + " " + f(PM[1] + 6) + " " + f(PR[0] + 20) + " " + f(PR[1] + 70) + " " + pt(PR);
+  PK.travel(tl, cs.g, legPk, tm.pkUp, tm.pkUpD, "power2.inOut");
+  PK.sfx("move", tm.pkUp, { gain_db: -14, dur: tm.pkUpD, pan: 0.3, size: "case" });
+  withdraws("mitigate", tm.pkUp + 0.12, tm.pkUp + 0.3);
 
-  // the Retain agents attach the terms: three short threads, then the clamp
-  var ra = W.roomAgents.retain;
-  ra.forEach(function (a, i) {
-    var ap = posOf(a.g);
-    var d = PK.curve([ap[0] - 12, ap[1]], [SR[0] + 18, SR[1] - 4 + (i - 1) * 4], 12 + i * 6);
+  // the Retain agents attach its terms: three threads converge on the sliver, the clamp snaps on
+  ra.retain.forEach(function (a, i) {
+    var ap = xy(a.g);
+    var to = [SR[0] + 16, SR[1] + 2];
+    var d = PK.curve([ap[0] - 10, ap[1] + 4], to, ap[1] < SR[1] ? 22 : -22);
     var th = PK.thread(W.L.threads, d);
     gsap.set(th, { drawSVG: "0% 0%" });
-    PK.drawOn(tl, th, tm.clampA + i * 0.04, 0.24, "power2.out");
-    tl.fromTo(th, { opacity: 1 }, { opacity: 0, duration: 0.3, ease: "power1.in", immediateRender: false }, tm.clampA + 0.5);
-    tl.fromTo(a.body, { scale: 1, svgOrigin: "0 0" }, { keyframes: [{ scale: 1.14, duration: 0.1 }, { scale: 1, duration: 0.24, ease: "power2.inOut" }], svgOrigin: "0 0", immediateRender: false }, tm.clampA + i * 0.04);
+    PK.drawOn(tl, th, tm.clampA + i * 0.04, 0.24, "power2.out", { later: true });
+    FT(th, { opacity: 1 }, { opacity: 0, duration: 0.3, ease: "power1.in" }, tm.clampA + 0.46);
+    pulse(a.body, tm.clampA + i * 0.04, 1.14);
   });
   PK.sfx("inspect", tm.clampA, { gain_db: -12, pan: 0.6, agent: "retain" });
-  var tClamp = tm.clampA + 0.24;
-  var clampO = pt(PK.polar(0, 0, 40, (slA[0] + slA[1]) / 2));
-  tl.fromTo(clampRide, { opacity: 0, scale: 1.3, svgOrigin: clampO }, { opacity: 1, scale: 1, svgOrigin: clampO, duration: 0.26, ease: "power3.out", immediateRender: false }, tClamp);
-  PK.sfx("lock", tClamp, { gain_db: -6, pan: 0.45 });
-  var lR = PK.text(W.L.labels, "Keep the rest", SR[0] + 24, SR[1] + LS * 1.6, { font: "mono", size: LS, fill: C.rust, anchor: "start" });
-  gsap.set(lR, { opacity: 0 });
-  tl.fromTo(lR, { opacity: 0, x: -6 }, { opacity: 1, x: 0, duration: 0.35, ease: "power2.out", immediateRender: false }, tClamp + 0.02);
+  var tClamp = tm.clampA + 0.22;
+  var clO = pt(PK.polar(0, 0, CL1, (slA[0] + slA[1]) / 2));
+  FT(ride.cl, { opacity: 0, scale: 1.35, svgOrigin: clO }, { opacity: 1, scale: 1, svgOrigin: clO, duration: 0.24, ease: "power3.out" }, tClamp);
+  PK.sfx("lock", tClamp, { gain_db: -5, pan: 0.45 });
+  var lR = mono("Keep the rest", dR[0] + 36, dR[1] - 26, LS);
+  labelIn(lR, tClamp + 0.02);
 
   // the sliver, kept with its terms, seats back in the packet: whole again
-  var tBack = tClamp + 0.3;
   var seatLocal = sub(PR, QR);
-  tl.fromTo(slRide, { x: inR[0], y: inR[1] }, { x: seatLocal[0], y: seatLocal[1], duration: 0.32, ease: "power2.inOut", immediateRender: false }, tBack);
-  var tWhole = tBack + 0.32;
+  FT(slRide, { x: inR[0], y: inR[1] }, { x: seatLocal[0], y: seatLocal[1], duration: tm.backD, ease: "power2.inOut" }, tm.back);
+  FT(slBig, { scale: BIG, svgOrigin: slO }, { scale: 1, svgOrigin: slO, duration: tm.backD, ease: "power2.inOut" }, tm.back);
+  var tWhole = tm.back + tm.backD;
   tl.set(slRide, { opacity: 0 }, tWhole);
-  tl.set([sliverSeatG, clampSeat], { opacity: 1 }, tWhole);
-  tl.fromTo(cs.body, { scale: 1, svgOrigin: "0 0" }, { keyframes: [{ scale: 1.06, duration: 0.12, ease: "power1.out" }, { scale: 1, duration: 0.3, ease: "power2.inOut" }], svgOrigin: "0 0", immediateRender: false }, tWhole - 0.02);
-  PK.sfx("assemble", tWhole, { gain_db: -8, pan: 0.3, size: "small" });
-  tl.fromTo(W.priora.beadG, { rotation: aR }, { rotation: ang(QR, PR), svgOrigin: "0 0", duration: 0.35, ease: "power2.inOut", immediateRender: false }, tBack);
+  tl.set([seat.sl, seat.cl], { opacity: 1 }, tWhole);
+  pulse(cs.body, tWhole - 0.02, 1.06);
+  PK.sfx("assemble", tWhole, { gain_db: -7, pan: 0.3, size: "small" });
+  var beadEnd = ang(QR, PR);
+  FT(W.priora.beadG, { rotation: aR }, { rotation: beadEnd, svgOrigin: "0 0", duration: 0.4, ease: "power2.inOut" }, tm.back);
+  withdraws("retain", tm.back + 0.1, tm.back + 0.3);
 
-  // ------------------------------------------------------------ 4. "The risk owner stays in control": the black line closes a loop around the packet
+  // ------------------------------------------------------------ 4. "The risk owner stays in control": the line closes a loop round the packet
   var LR = 41;
-  var loopStart = [PR[0], PR[1] + LR];
-  var loopD = "M" + pt(BP) + " L" + pt(loopStart);
+  var dB = Math.hypot(B[0] - PR[0], B[1] - PR[1]);
+  var aCB = ang(PR, B);
+  var aTan = aCB + (Math.acos(LR / dB) * 180) / Math.PI; // tangent point, so the line runs into the loop smoothly
+  var tp = PK.polar(PR[0], PR[1], LR, aTan);
+  var loopD = "M" + pt(B) + " L" + pt(tp);
   for (var s = 1; s <= 4; s++) {
-    var pa = PK.polar(PR[0], PR[1], LR, 90 + s * 92); // a little more than a full turn: it closes
-    loopD += " A" + LR + " " + LR + " 0 0 1 " + pt(pa);
+    loopD += " A" + LR + " " + LR + " 0 0 1 " + pt(PK.polar(PR[0], PR[1], LR, aTan + s * 94)); // a little more than one turn: it closes
   }
   var loop = PK.el("path", { d: loopD, class: "pk-decision" }, W.L.routes);
   gsap.set(loop, { drawSVG: "0% 0%" });
-  var tDec = Math.max(tm.decide, tWhole - 0.4);
-  PK.drawOn(tl, loop, tDec, 0.8, "power3.inOut");
-  PK.sfx("decision", tDec, { gain_db: -3, pan: 0.3, dur: 0.8 });
-  PK.sfx("resolve", tDec + 0.78, { gain_db: -6, pan: 0.3 });
-  var DS = PK.cam.px(82.2, 20);
-  var lD = PK.text(W.L.labels, "Risk owner decides", G.owner[0], G.owner[1] - 112 - DS * 1.1, { font: "mono", size: DS, fill: C.ink, anchor: "middle" });
-  gsap.set(lD, { opacity: 0 });
-  tl.fromTo(lD, { opacity: 0, y: 3 }, { opacity: 1, y: 0, duration: 0.4, ease: "power2.out", immediateRender: false }, tDec + 0.5);
+  PK.drawOn(tl, loop, tm.decide, 0.8, "power3.inOut", { later: true });
+  PK.sfx("decision", tm.decide, { gain_db: -2, pan: 0.3, dur: 0.8 });
+  PK.sfx("resolve", tm.decide + 0.78, { gain_db: -6, pan: 0.3 });
+  var DS = PK.cam.px(82.3, 20);
+  var lD = mono("Risk owner decides", G.owner[0], G.owner[1] - 112 - DS * 1.1, DS, C.ink, "middle");
+  labelIn(lD, tm.decide + 0.5);
 
-  // ------------------------------------------------------------ 5. labels fade, doors close, the reaches withdraw (the loop stays for s8)
-  var tEnd = tm.end;
-  tl.fromTo([lM, lT, lR, tag], { opacity: 1 }, { opacity: 0, duration: 0.45, ease: "power1.in", immediateRender: false }, tEnd);
-  RK.forEach(function (k, i) {
-    ROOMS[k].close(tl, tEnd + 0.08 + i * 0.08, 0.34);
-    PK.drawOff(tl, reach[k], tEnd + 0.1 + i * 0.08, 0.45, "power2.inOut", { to: "start" });
-  });
-  PK.sfx("door-close", tEnd + 0.1, { gain_db: -9, pan: 0.45 });
+  // ------------------------------------------------------------ 5. the rooms' labels fade as the camera pulls back
+  FT([lM, lT, lR, tag], { opacity: 1 }, { opacity: 0, duration: 0.45, ease: "power1.in" }, tm.end);
+  FT(lD, { opacity: 1 }, { opacity: 0, duration: 0.4, ease: "power1.in" }, 83.05);
 
-  W.coop = {
-    loop: loop,
-    loopCentre: PR,
-    thermalSeat: thermalSeat,
-    sliverSeat: sliverSeatG,
-    clampSeat: clampSeat,
-    packetEnd: PR,
-    prioraEnd: QR,
-    beadEnd: ang(QR, PR),
-    ownerLabel: lD,
-    branchPoint: BP,
-  };
+  W.coop = { loop: loop, packetEnd: PR, prioraEnd: QR, beadEnd: beadEnd, ownerLabel: lD, branchPoint: B };
 });

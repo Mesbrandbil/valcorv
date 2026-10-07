@@ -19,7 +19,13 @@ PK.section("s8-system", 84, 90, function (tl, W, ctx, S) {
   var cs = W.caseT;
   var A = W.agents;
   var KEYS = ["siteRules", "insurer", "fire", "riskEng", "evidence"];
-  var co = W.coop || { packetEnd: [1214, 388], prioraEnd: [1244, 302], beadEnd: 90, loop: null };
+  var co = W.coop || { packetEnd: [1196, 392], prioraEnd: [1210, 298], beadEnd: 90, loop: null };
+  function FT(el, from, to, at) {
+    var v = {};
+    for (var k in to) v[k] = to[k];
+    v.immediateRender = false;
+    tl.fromTo(el, from, v, at);
+  }
   function pt(p) {
     return f(p[0]) + " " + f(p[1]);
   }
@@ -28,7 +34,7 @@ PK.section("s8-system", 84, 90, function (tl, W, ctx, S) {
   var home = G.prioraHome;
   var tHome = 83.24,
     durHome = 1.5;
-  var legHome = "M" + pt(co.prioraEnd) + " C" + f(co.prioraEnd[0] - 60) + " " + f(co.prioraEnd[1] - 90) + " " + f(home[0] + 150) + " " + f(home[1] - 10) + " " + pt(home);
+  var legHome = "M" + pt(co.prioraEnd) + " C" + f(co.prioraEnd[0] - 50) + " " + f(co.prioraEnd[1] - 80) + " " + f(home[0] + 120) + " " + f(home[1]) + " " + pt(home);
   PK.travel(tl, W.priora.g, legHome, tHome, durHome, "power2.inOut");
   PK.trail(tl, W.L.trails, legHome, tHome, durHome);
   tl.fromTo(W.priora.beadG, { rotation: co.beadEnd }, { rotation: 90, svgOrigin: "0 0", duration: 0.9, ease: "power2.inOut", immediateRender: false }, tHome + durHome - 0.7);
@@ -38,24 +44,27 @@ PK.section("s8-system", 84, 90, function (tl, W, ctx, S) {
   // the black loop lets go (the line rests at the branch point, the trunk stays)
   if (co.loop) PK.drawOff(tl, co.loop, 83.22, 0.7, "power2.inOut", { to: "start" });
 
-  // the record: the second tick sits beside the first
+  // the record: the second tick sits beside the first (same style as the first)
   var ticks = W.record.ticks;
   var first = ticks.lastElementChild;
   var fb = null;
   try {
     fb = first ? first.getBBox() : null;
   } catch (e) {}
-  var fx = fb ? fb.x + fb.width / 2 : G.record.x0 + 12;
-  var tickX = fx + 26,
-    ry = G.record.y;
-  var tick2 = PK.el("path", { d: "M" + f(tickX) + " " + f(ry - 7) + " V" + f(ry + 7), class: "pk-thread" }, ticks);
+  var fx = fb && fb.width < 40 ? fb.x + fb.width / 2 : G.record.x0 + 6;
+  var tickX = fx + 24,
+    ry = G.record.y,
+    th = fb && fb.height > 4 && fb.height < 40 ? fb.height / 2 : 9;
+  var tick2 = PK.el("path", { d: "M" + f(tickX) + " " + f(ry - th) + " V" + f(ry + th), fill: "none", stroke: C.rust, "stroke-width": (first && first.getAttribute("stroke-width")) || 2.6, "stroke-linecap": "round" }, ticks);
+  if (first && first.getAttribute("class")) tick2.setAttribute("class", first.getAttribute("class"));
   gsap.set(tick2, { drawSVG: "50% 50%", opacity: 0 });
 
+  // the decided case drops into the record between the site and the risk owner, then files along it
   var p0 = co.packetEnd;
   var legCase =
     "M" + pt(p0) +
-    " C" + f(p0[0] + 40) + " " + f(p0[1] + 150) + " " + f(1262) + " " + f(ry - 150) + " " + f(1250) + " " + f(ry - 30) +
-    " C" + f(1240) + " " + f(ry) + " " + f(1200) + " " + f(ry) + " " + f(1160) + " " + f(ry) +
+    " C" + f(p0[0] - 46) + " " + f(p0[1] + 78) + " " + f(1077) + " " + f(560) + " " + f(1077) + " " + f(680) +
+    " C" + f(1077) + " " + f(760) + " " + f(1062) + " " + f(ry) + " " + f(1010) + " " + f(ry) +
     " L" + f(tickX) + " " + f(ry);
   var tCase = 83.3,
     durCase = 1.6;
@@ -76,6 +85,43 @@ PK.section("s8-system", 84, 90, function (tl, W, ctx, S) {
   tl.fromTo(A.insurer.body, { rotation: 12, svgOrigin: "0 0" }, { rotation: 0, svgOrigin: "0 0", duration: 0.8, ease: "power2.inOut", immediateRender: false }, tUp);
   PK.sfx("align", tUp + 0.6, { gain_db: -16, pan: -0.5, size: "small" });
 
+  // ------------------------------------------------------------ names sized for the 1:1 view (they grow while the camera pulls back)
+  function grow(el, to, at, dur) {
+    if (!el) return;
+    var b = null;
+    try {
+      b = el.getBBox();
+    } catch (e) {}
+    if (!b) return;
+    var anchor = el.getAttribute("text-anchor") || "start";
+    var ox = anchor === "middle" ? b.x + b.width / 2 : anchor === "end" ? b.x + b.width : b.x;
+    var oy = parseFloat(el.getAttribute("y")) || b.y + b.height;
+    var o = f(ox) + " " + f(oy);
+    FT(el, { scale: 1, svgOrigin: o }, { scale: to, svgOrigin: o, duration: dur || 1.4, ease: "power2.inOut" }, at);
+  }
+  var tGrow = 83.15;
+  ["retain", "mitigate", "transfer"].forEach(function (k) {
+    grow(W.rooms[k].name, 22 / 15, tGrow);
+  });
+  grow(W.panel.title, 22 / 17, tGrow);
+  ["worker", "site", "owner"].forEach(function (k) {
+    grow(W.real.labels[k], 2, tGrow);
+  });
+  // SIMULATED stays legible at 1:1: the room's chip hands over to a larger one in the same place
+  var tr = G.rooms.transfer;
+  var simTS = 18,
+    simW = PK.measure("SIMULATED", "mono500", simTS, 0.12) + 22,
+    simH = 30;
+  // same right edge and centre line as the room's chip (s6 scales it 1.25 about its centre)
+  var simX = tr.x + tr.w - 104 + 43 + 43 * 1.25 - simW,
+    simY = tr.y + 24 - simH / 2;
+  var sim = PK.g(W.L.chambers);
+  PK.el("rect", { x: f(simX), y: f(simY), width: f(simW), height: simH, rx: 3, fill: C.paper, stroke: C.rust, "stroke-width": 1.4 }, sim);
+  PK.text(sim, "Simulated", simX + simW / 2, simY + simH / 2 + simTS * 0.36, { font: "mono", size: simTS, fill: C.rust, anchor: "middle", weight: 600 });
+  gsap.set(sim, { opacity: 0 });
+  FT(W.rooms.transfer.chip, { opacity: 1 }, { opacity: 0, duration: 0.2, ease: "power1.in" }, 83.62);
+  FT(sim, { opacity: 0 }, { opacity: 1, duration: 0.3, ease: "power1.out" }, 83.72);
+
   // ------------------------------------------------------------ 2. the three mono labels at 1:1
   var LS = 20;
   function label(str, x, y, at, fill) {
@@ -95,16 +141,16 @@ PK.section("s8-system", 84, 90, function (tl, W, ctx, S) {
 
   // ------------------------------------------------------------ 3. hot work first, other activities later
   var TS = 18,
-    TR = 0.06,
-    pad = 9,
+    TR = 0.04,
+    pad = 8,
     tabH = 28,
-    gapX = 8;
+    gapX = 7;
   var tabsG = PK.g(W.L.top);
   var x0 = P.x,
-    y1 = P.y + P.h + 26,
-    y2 = y1 + tabH + 12;
+    y1 = P.y + P.h + 33,
+    y2 = y1 + tabH + 10;
   var lw = PK.measure("LATER", "mono500", TS, TR);
-  var tx0 = x0 + lw + 16;
+  var tx0 = x0 + lw + 14;
   function rowLabel(str, y, fill) {
     var t = PK.text(tabsG, str, x0, y + TS * 0.36, { font: "mono", size: TS, fill: fill, track: TR });
     return t;
@@ -139,19 +185,28 @@ PK.section("s8-system", 84, 90, function (tl, W, ctx, S) {
 
   // the panel's agents turn to ghost outlines and back: the panel can be configured for other work
   var tGhost = 86.05;
-  var ghosts = PK.g(W.L.tokens);
+  // each token leaves a dashed outline of its own silhouette while it dims
+  var ghosts = [];
   KEYS.forEach(function (k) {
-    var p = G.slot(G.agents[k].aligned);
-    PK.el("circle", { cx: f(p[0]), cy: f(p[1]), r: 18, class: "pk-ghost" }, ghosts);
+    var a = A[k];
+    var gg = PK.g(a.g);
+    a.g.insertBefore(gg, a.body);
+    Array.prototype.forEach.call(a.body.querySelectorAll("path"), function (pth) {
+      if (pth.getAttribute("fill") !== C.rust) return;
+      var c = PK.el("path", { d: pth.getAttribute("d"), class: "pk-ghost" }, gg);
+      var tr = pth.parentNode !== a.body ? pth.parentNode.getAttribute("transform") : null;
+      if (tr) c.setAttribute("transform", tr);
+    });
+    gsap.set(gg, { opacity: 0 });
+    ghosts.push(gg);
   });
-  gsap.set(ghosts, { opacity: 0 });
   var bodies = KEYS.map(function (k) {
     return A[k].body;
   });
   tl.fromTo(bodies, { opacity: 1 }, { opacity: 0.1, duration: 0.3, ease: "power2.inOut", immediateRender: false }, tGhost);
   tl.fromTo(ghosts, { opacity: 0 }, { opacity: 1, duration: 0.3, ease: "power2.inOut", immediateRender: false }, tGhost);
   tl.fromTo(ghosts, { opacity: 1 }, { opacity: 0, duration: 0.35, ease: "power2.inOut", immediateRender: false }, tGhost + 0.55);
-  tl.fromTo(bodies, { opacity: 0.1 }, { opacity: 1, duration: 0.35, ease: "power2.inOut", immediateRender: false }, tGhost + 0.55);
+  tl.fromTo(bodies, { opacity: 0.1 }, { opacity: 1, duration: 0.35, ease: "power2.inOut", immediateRender: false }, tGhost + 0.75);
   PK.sfx("summon", tGhost, { gain_db: -18, pan: -0.6, material: "ghost" });
 
   // a design proposal, said once

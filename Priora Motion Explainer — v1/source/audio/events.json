@@ -809,7 +809,7 @@
  },
  {
   "kind": "lock",
-  "t": 63.37,
+  "t": 63.46,
   "gain_db": -6,
   "pan": 0.5
  },
@@ -997,13 +997,13 @@
  },
  {
   "kind": "return",
-  "t": 76.02,
+  "t": 76.04,
   "gain_db": -9,
   "pan": 0.5499999999999999
  },
  {
   "kind": "return",
-  "t": 76.22,
+  "t": 76.26,
   "gain_db": -9,
   "pan": 0.5
  },
@@ -1028,23 +1028,24 @@
  },
  {
   "kind": "decision",
-  "t": 78.15,
-  "gain_db": -10,
+  "t": 78.12,
+  "gain_db": -9,
+  "dur": 0.42,
   "pan": 0.35,
   "part": "reach"
  },
  {
   "kind": "move",
-  "t": 78.3,
+  "t": 78.32,
   "gain_db": -12,
-  "dur": 0.6,
+  "dur": 0.62,
   "pan": 0.4
  },
  {
   "kind": "door-open",
-  "t": 78.36,
-  "gain_db": -9,
-  "pan": 0.45,
+  "t": 78.448,
+  "gain_db": -8,
+  "pan": 0.5,
   "room": "mitigate"
  },
  {
@@ -1054,125 +1055,149 @@
   "pan": 0.6
  },
  {
+  "kind": "arrive",
+  "t": 78.94,
+  "gain_db": -13,
+  "size": "case",
+  "pan": 0.45
+ },
+ {
   "kind": "lock",
   "t": 79.26,
-  "gain_db": -7,
+  "gain_db": -6,
   "pan": 0.45,
   "size": "small"
  },
  {
   "kind": "decision",
-  "t": 79.3,
-  "gain_db": -11,
+  "t": 79.36,
+  "gain_db": -9,
+  "dur": 0.3,
   "pan": 0.35,
   "part": "reach"
  },
  {
   "kind": "packet",
-  "t": 79.36,
+  "t": 79.54,
   "gain_db": -12,
   "pan": 0.45,
   "size": "small"
  },
  {
   "kind": "move",
-  "t": 79.46,
+  "t": 79.58,
   "gain_db": -11,
   "dur": 0.5,
   "pan": 0.4
  },
  {
   "kind": "door-open",
-  "t": 79.52,
-  "gain_db": -10,
-  "pan": 0.45,
+  "t": 79.594,
+  "gain_db": -8,
+  "pan": 0.5,
   "room": "transfer"
  },
  {
   "kind": "request",
-  "t": 80.04,
+  "t": 80.18,
   "gain_db": -10,
   "pan": 0.6
  },
  {
   "kind": "simulated",
-  "t": 80.12,
+  "t": 80.28,
   "gain_db": -14,
   "pan": 0.7
  },
  {
   "kind": "decision",
-  "t": 80.36,
-  "gain_db": -11,
+  "t": 80.42,
+  "gain_db": -9,
+  "dur": 0.46,
   "pan": 0.35,
   "part": "reach"
  },
  {
   "kind": "return",
-  "t": 80.5,
-  "gain_db": -10,
+  "t": 80.64,
+  "gain_db": -9,
   "pan": 0.5
  },
  {
   "kind": "move",
-  "t": 80.52,
+  "t": 80.64,
   "gain_db": -10,
   "dur": 0.6,
   "pan": 0.35
  },
  {
-  "kind": "door-open",
-  "t": 80.6,
-  "gain_db": -10,
-  "pan": 0.45,
-  "room": "retain"
- },
- {
   "kind": "move",
-  "t": 80.64,
+  "t": 80.76,
   "gain_db": -14,
-  "dur": 0.52,
+  "dur": 0.5,
   "pan": 0.3,
   "size": "case"
  },
  {
+  "kind": "door-open",
+  "t": 80.779,
+  "gain_db": -8,
+  "pan": 0.5,
+  "room": "retain"
+ },
+ {
+  "kind": "door-close",
+  "t": 80.8,
+  "gain_db": -10,
+  "pan": 0.5,
+  "room": "transfer"
+ },
+ {
+  "kind": "door-close",
+  "t": 81.06,
+  "gain_db": -10,
+  "pan": 0.5,
+  "room": "mitigate"
+ },
+ {
   "kind": "inspect",
-  "t": 81.2,
+  "t": 81.34,
   "gain_db": -12,
   "pan": 0.6,
   "agent": "retain"
  },
  {
   "kind": "lock",
-  "t": 81.44,
-  "gain_db": -6,
+  "t": 81.56,
+  "gain_db": -5,
   "pan": 0.45
  },
  {
   "kind": "decision",
-  "t": 81.66,
-  "gain_db": -3,
+  "t": 81.56,
+  "gain_db": -2,
   "pan": 0.3,
   "dur": 0.8
  },
  {
+  "kind": "door-close",
+  "t": 82.02,
+  "gain_db": -10,
+  "pan": 0.5,
+  "room": "retain"
+ },
+ {
   "kind": "assemble",
   "t": 82.06,
-  "gain_db": -8,
+  "gain_db": -7,
   "pan": 0.3,
   "size": "small"
  },
  {
   "kind": "resolve",
-  "t": 82.44,
+  "t": 82.34,
   "gain_db": -6,
   "pan": 0.3
- },
- {
-  "kind": "door-close",
-  "t": 82.72,
-  "gain_db": -9,
-  "pan": 0.45
  },
  {
   "kind": "move",

@@ -93,8 +93,8 @@
       "path",
       {
         d:
-          "M" + GEO.table[0] + " " + GEO.table[1] + " L" + d0[0] + " " + d0[1] + " L" + (d0[0] + 70) + " " + d0[1] +
-          " C" + (d0[0] + 250) + " " + d0[1] + " " + GEO.packing[0] + " " + (GEO.packing[1] - 150) + " " + GEO.packing[0] + " " + (GEO.packing[1] - 12),
+          "M" + GEO.table[0] + " " + GEO.table[1] + " L" + d0[0] + " " + (d0[1] + 12) + " L" + (d0[0] + 70) + " " + (d0[1] + 12) +
+          " C" + (d0[0] + 250) + " " + (d0[1] + 12) + " " + GEO.packing[0] + " " + (GEO.packing[1] - 150) + " " + GEO.packing[0] + " " + (GEO.packing[1] - 12),
         class: "pk-thread",
       },
       W.L.routes,

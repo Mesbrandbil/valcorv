@@ -30,10 +30,10 @@
   }
  },
  "gains": {
-  "master_gain_db": 0.525,
-  "master_limiter_max_reduction_db": 0.38,
-  "no_narration_worker_gain_db": 0.525,
-  "no_narration_background_gain_db": 8.459,
+  "master_gain_db": 0.549,
+  "master_limiter_max_reduction_db": 0.41,
+  "no_narration_worker_gain_db": 0.549,
+  "no_narration_background_gain_db": 8.502,
   "no_narration_limiter_max_reduction_db": 0.0,
   "note": "master.wav = limiter(G * (voice dual-mono + music.wav/G + sfx.wav/G)); music.wav and sfx.wav are written post-gain (the level they have in master.wav, before the limiter)"
  },
@@ -44,22 +44,22 @@
    "sample_rate": 48000,
    "channels": 2,
    "subtype": "PCM_24",
-   "integrated_lufs": -31.05,
-   "true_peak_dbtp": -14.52,
-   "sample_peak_dbfs": -14.52,
-   "max_momentary_lufs": -22.28,
+   "integrated_lufs": -30.95,
+   "true_peak_dbtp": -14.2,
+   "sample_peak_dbfs": -14.2,
+   "max_momentary_lufs": -21.96,
    "max_momentary_at_s": 45.76,
    "clipped_samples": 0,
    "dc_offset": [
-    6.22e-09,
-    1.76e-09
+    6.34e-09,
+    1.9e-09
    ],
    "first_sample_abs": 0.0,
    "last_10ms_peak_dbfs": -240.0,
-   "sha256": "69d79e085a4d937167611418b8e5ea470efb6663dedc0f8f8cfe23b24c2cc033",
+   "sha256": "28f37142de525a63233d39a6c5704bb53982f2cd90590902b22cad1c00a870d2",
    "ffmpeg_ebur128": {
-    "integrated_lufs": -31.0,
-    "true_peak_dbtp": -14.5
+    "integrated_lufs": -30.9,
+    "true_peak_dbtp": -14.2
    }
   },
   "sfx.wav": {
@@ -68,21 +68,21 @@
    "sample_rate": 48000,
    "channels": 2,
    "subtype": "PCM_24",
-   "integrated_lufs": -34.18,
-   "true_peak_dbtp": -11.5,
-   "sample_peak_dbfs": -12.21,
-   "max_momentary_lufs": -26.56,
+   "integrated_lufs": -34.02,
+   "true_peak_dbtp": -11.47,
+   "sample_peak_dbfs": -12.18,
+   "max_momentary_lufs": -26.54,
    "max_momentary_at_s": 48.55,
    "clipped_samples": 0,
    "dc_offset": [
-    4.8e-12,
-    9.13e-12
+    -7.42e-12,
+    8.83e-12
    ],
    "first_sample_abs": 0.0,
    "last_10ms_peak_dbfs": -240.0,
-   "sha256": "c420150a68b3fb5378d590f918e09c228f8d8f87503db01eb01474bde0a7004e",
+   "sha256": "7250aa69c1054b57c616c52bad1cc5262192a2da429d92383d7281eda5d3f3ab",
    "ffmpeg_ebur128": {
-    "integrated_lufs": -34.1,
+    "integrated_lufs": -34.0,
     "true_peak_dbtp": -11.5
    }
   },
@@ -95,16 +95,16 @@
    "integrated_lufs": -16.0,
    "true_peak_dbtp": -1.3,
    "sample_peak_dbfs": -1.31,
-   "max_momentary_lufs": -9.09,
+   "max_momentary_lufs": -9.07,
    "max_momentary_at_s": 11.93,
    "clipped_samples": 0,
    "dc_offset": [
-    -5.4e-09,
-    2.55e-08
+    -1.82e-09,
+    2.25e-08
    ],
    "first_sample_abs": 0.0,
    "last_10ms_peak_dbfs": -240.0,
-   "sha256": "98d5fd43bdb2c1822afe0af06bd58be7fba4ed6fbbfba45c301aa9bf586ddc81",
+   "sha256": "909d2741157bbaaaed97df533fcfcfdd701d0243f9cdfb49bb54d9d59892dd95",
    "ffmpeg_ebur128": {
     "integrated_lufs": -16.0,
     "true_peak_dbtp": -1.3
@@ -117,27 +117,27 @@
    "channels": 2,
    "subtype": "PCM_24",
    "integrated_lufs": -17.0,
-   "true_peak_dbtp": -2.1,
-   "sample_peak_dbfs": -2.11,
-   "max_momentary_lufs": -9.07,
+   "true_peak_dbtp": -1.97,
+   "sample_peak_dbfs": -2.0,
+   "max_momentary_lufs": -9.04,
    "max_momentary_at_s": 11.92,
    "clipped_samples": 0,
    "dc_offset": [
-    4.6e-10,
-    4.67e-10
+    4.58e-10,
+    4.66e-10
    ],
    "first_sample_abs": 0.0,
    "last_10ms_peak_dbfs": -240.0,
-   "sha256": "b060c480ba38c16aeded769923349182b6d51081c0e050d2ffbf1477407c80d9",
+   "sha256": "7e18acdecc5a039ced0a9b717c4879a0fa193a29bdf65df7fca5b93ed370c336",
    "ffmpeg_ebur128": {
     "integrated_lufs": -17.0,
-    "true_peak_dbtp": -2.1
+    "true_peak_dbtp": -2.0
    }
   }
  },
  "music": {
-  "stem_integrated_lufs": -31.05,
-  "loudest_momentary_400ms_lufs": -22.28,
+  "stem_integrated_lufs": -30.95,
+  "loudest_momentary_400ms_lufs": -21.96,
   "loudest_momentary_at_s": 45.76,
   "analysis_before_ducking": {
    "segments": [
@@ -150,7 +150,39 @@
       "A3",
       "E4"
      ],
-     "lufs": -31.36
+     "lufs": -31.04,
+     "strongest_notes": [
+      {
+       "note": "D3",
+       "hz_12tet": 146.83,
+       "centre_cents": -2.8,
+       "partials": 2
+      },
+      {
+       "note": "A3",
+       "hz_12tet": 220.0,
+       "centre_cents": 1.8,
+       "partials": 3
+      },
+      {
+       "note": "D4",
+       "hz_12tet": 293.66,
+       "centre_cents": 0.2,
+       "partials": 1
+      },
+      {
+       "note": "E4",
+       "hz_12tet": 329.63,
+       "centre_cents": -1.6,
+       "partials": 2
+      },
+      {
+       "note": "D5",
+       "hz_12tet": 587.33,
+       "centre_cents": 0.8,
+       "partials": 1
+      }
+     ]
     },
     {
      "from": 8.75,
@@ -162,14 +194,8 @@
       "A3",
       "E4"
      ],
-     "lufs": -28.49,
+     "lufs": -28.17,
      "strongest_notes": [
-      {
-       "note": "A2",
-       "hz_12tet": 110.0,
-       "centre_cents": 1.0,
-       "partials": 3
-      },
       {
        "note": "D3",
        "hz_12tet": 146.83,
@@ -201,7 +227,45 @@
       "C#4",
       "E4"
      ],
-     "lufs": -25.71
+     "lufs": -25.39,
+     "strongest_notes": [
+      {
+       "note": "F#3",
+       "hz_12tet": 185.0,
+       "centre_cents": -1.1,
+       "partials": 2
+      },
+      {
+       "note": "A3",
+       "hz_12tet": 220.0,
+       "centre_cents": -0.5,
+       "partials": 2
+      },
+      {
+       "note": "C#4",
+       "hz_12tet": 277.18,
+       "centre_cents": 2.4,
+       "partials": 2
+      },
+      {
+       "note": "D4",
+       "hz_12tet": 293.66,
+       "centre_cents": 0.2,
+       "partials": 1
+      },
+      {
+       "note": "E4",
+       "hz_12tet": 329.63,
+       "centre_cents": -3.4,
+       "partials": 1
+      },
+      {
+       "note": "F#4",
+       "hz_12tet": 369.99,
+       "centre_cents": 0.3,
+       "partials": 1
+      }
+     ]
     },
     {
      "from": 19.47,
@@ -214,7 +278,39 @@
       "E4",
       "A4"
      ],
-     "lufs": -25.07
+     "lufs": -24.75,
+     "strongest_notes": [
+      {
+       "note": "F#3",
+       "hz_12tet": 185.0,
+       "centre_cents": 0.5,
+       "partials": 1
+      },
+      {
+       "note": "B3",
+       "hz_12tet": 246.94,
+       "centre_cents": -1.4,
+       "partials": 3
+      },
+      {
+       "note": "E4",
+       "hz_12tet": 329.63,
+       "centre_cents": -2.5,
+       "partials": 2
+      },
+      {
+       "note": "F#4",
+       "hz_12tet": 369.99,
+       "centre_cents": 0.4,
+       "partials": 1
+      },
+      {
+       "note": "A4",
+       "hz_12tet": 440.0,
+       "centre_cents": -2.9,
+       "partials": 2
+      }
+     ]
     },
     {
      "from": 23.35,
@@ -227,7 +323,45 @@
       "B3",
       "F#4"
      ],
-     "lufs": -27.03
+     "lufs": -26.71,
+     "strongest_notes": [
+      {
+       "note": "D3",
+       "hz_12tet": 146.83,
+       "centre_cents": 1.5,
+       "partials": 1
+      },
+      {
+       "note": "F#3",
+       "hz_12tet": 185.0,
+       "centre_cents": -0.2,
+       "partials": 2
+      },
+      {
+       "note": "G3",
+       "hz_12tet": 196.0,
+       "centre_cents": 0.2,
+       "partials": 1
+      },
+      {
+       "note": "A3",
+       "hz_12tet": 220.0,
+       "centre_cents": 3.3,
+       "partials": 1
+      },
+      {
+       "note": "B3",
+       "hz_12tet": 246.94,
+       "centre_cents": -0.9,
+       "partials": 3
+      },
+      {
+       "note": "F#4",
+       "hz_12tet": 369.99,
+       "centre_cents": -3.2,
+       "partials": 3
+      }
+     ]
     },
     {
      "from": 27.53,
@@ -239,7 +373,33 @@
       "G3",
       "D4"
      ],
-     "lufs": -26.26
+     "lufs": -25.94,
+     "strongest_notes": [
+      {
+       "note": "B2",
+       "hz_12tet": 123.47,
+       "centre_cents": -1.0,
+       "partials": 1
+      },
+      {
+       "note": "F#3",
+       "hz_12tet": 185.0,
+       "centre_cents": 0.4,
+       "partials": 2
+      },
+      {
+       "note": "G3",
+       "hz_12tet": 196.0,
+       "centre_cents": -0.5,
+       "partials": 2
+      },
+      {
+       "note": "D4",
+       "hz_12tet": 293.66,
+       "centre_cents": 1.2,
+       "partials": 3
+      }
+     ]
     },
     {
      "from": 32.0,
@@ -252,7 +412,45 @@
       "D4",
       "E4"
      ],
-     "lufs": -28.58
+     "lufs": -28.26,
+     "strongest_notes": [
+      {
+       "note": "B2",
+       "hz_12tet": 123.47,
+       "centre_cents": -0.2,
+       "partials": 1
+      },
+      {
+       "note": "F#3",
+       "hz_12tet": 185.0,
+       "centre_cents": -1.9,
+       "partials": 2
+      },
+      {
+       "note": "A3",
+       "hz_12tet": 220.0,
+       "centre_cents": 1.2,
+       "partials": 2
+      },
+      {
+       "note": "D4",
+       "hz_12tet": 293.66,
+       "centre_cents": -0.3,
+       "partials": 3
+      },
+      {
+       "note": "E4",
+       "hz_12tet": 329.63,
+       "centre_cents": -1.2,
+       "partials": 1
+      },
+      {
+       "note": "F#4",
+       "hz_12tet": 369.99,
+       "centre_cents": 0.8,
+       "partials": 1
+      }
+     ]
     },
     {
      "from": 36.2,
@@ -264,7 +462,27 @@
       "B3",
       "D4"
      ],
-     "lufs": -26.57
+     "lufs": -26.25,
+     "strongest_notes": [
+      {
+       "note": "E3",
+       "hz_12tet": 164.81,
+       "centre_cents": 1.5,
+       "partials": 3
+      },
+      {
+       "note": "B3",
+       "hz_12tet": 246.94,
+       "centre_cents": -2.4,
+       "partials": 3
+      },
+      {
+       "note": "D4",
+       "hz_12tet": 293.66,
+       "centre_cents": 1.9,
+       "partials": 3
+      }
+     ]
     },
     {
      "from": 40.91,
@@ -279,7 +497,45 @@
       "A4",
       "E5"
      ],
-     "lufs": -21.01
+     "lufs": -20.69,
+     "strongest_notes": [
+      {
+       "note": "F#3",
+       "hz_12tet": 185.0,
+       "centre_cents": 0.3,
+       "partials": 2
+      },
+      {
+       "note": "A3",
+       "hz_12tet": 220.0,
+       "centre_cents": -0.7,
+       "partials": 1
+      },
+      {
+       "note": "D4",
+       "hz_12tet": 293.66,
+       "centre_cents": 0.7,
+       "partials": 3
+      },
+      {
+       "note": "F#4",
+       "hz_12tet": 369.99,
+       "centre_cents": -1.9,
+       "partials": 3
+      },
+      {
+       "note": "A4",
+       "hz_12tet": 440.0,
+       "centre_cents": -1.3,
+       "partials": 3
+      },
+      {
+       "note": "E5",
+       "hz_12tet": 659.26,
+       "centre_cents": -1.9,
+       "partials": 3
+      }
+     ]
     },
     {
      "from": 45.2,
@@ -292,7 +548,39 @@
       "F#4",
       "A4"
      ],
-     "lufs": -23.72
+     "lufs": -23.4,
+     "strongest_notes": [
+      {
+       "note": "D3",
+       "hz_12tet": 146.83,
+       "centre_cents": -2.9,
+       "partials": 1
+      },
+      {
+       "note": "G3",
+       "hz_12tet": 196.0,
+       "centre_cents": -0.6,
+       "partials": 3
+      },
+      {
+       "note": "B3",
+       "hz_12tet": 246.94,
+       "centre_cents": -1.7,
+       "partials": 3
+      },
+      {
+       "note": "F#4",
+       "hz_12tet": 369.99,
+       "centre_cents": -3.1,
+       "partials": 3
+      },
+      {
+       "note": "A4",
+       "hz_12tet": 440.0,
+       "centre_cents": -1.9,
+       "partials": 3
+      }
+     ]
     },
     {
      "from": 49.04,
@@ -304,7 +592,45 @@
       "A3",
       "C#4"
      ],
-     "lufs": -22.64
+     "lufs": -24.29,
+     "strongest_notes": [
+      {
+       "note": "B2",
+       "hz_12tet": 123.47,
+       "centre_cents": 0.1,
+       "partials": 1
+      },
+      {
+       "note": "D3",
+       "hz_12tet": 146.83,
+       "centre_cents": 1.2,
+       "partials": 2
+      },
+      {
+       "note": "A3",
+       "hz_12tet": 220.0,
+       "centre_cents": 2.4,
+       "partials": 2
+      },
+      {
+       "note": "B3",
+       "hz_12tet": 246.94,
+       "centre_cents": 0.3,
+       "partials": 1
+      },
+      {
+       "note": "C#4",
+       "hz_12tet": 277.18,
+       "centre_cents": 1.2,
+       "partials": 3
+      },
+      {
+       "note": "F#4",
+       "hz_12tet": 369.99,
+       "centre_cents": 2.8,
+       "partials": 1
+      }
+     ]
     },
     {
      "from": 53.25,
@@ -316,7 +642,7 @@
       "F#3",
       "C#4"
      ],
-     "lufs": -26.92
+     "lufs": -27.6
     },
     {
      "from": 55.73,
@@ -328,7 +654,7 @@
       "G3",
       "D4"
      ],
-     "lufs": -23.5
+     "lufs": -24.67
     },
     {
      "from": 57.95,
@@ -340,7 +666,7 @@
       "B3",
       "E4"
      ],
-     "lufs": -25.41
+     "lufs": -25.07
     },
     {
      "from": 60.05,
@@ -353,7 +679,7 @@
       "B3",
       "F#4"
      ],
-     "lufs": -27.48,
+     "lufs": -27.16,
      "strongest_notes": [
       {
        "note": "D3",
@@ -404,7 +730,7 @@
       "D4",
       "B4"
      ],
-     "lufs": -24.52
+     "lufs": -24.2
     },
     {
      "from": 69.29,
@@ -417,7 +743,39 @@
       "D4",
       "B4"
      ],
-     "lufs": -27.18
+     "lufs": -26.86,
+     "strongest_notes": [
+      {
+       "note": "B2",
+       "hz_12tet": 123.47,
+       "centre_cents": -0.2,
+       "partials": 1
+      },
+      {
+       "note": "F#3",
+       "hz_12tet": 185.0,
+       "centre_cents": 0.2,
+       "partials": 2
+      },
+      {
+       "note": "A3",
+       "hz_12tet": 220.0,
+       "centre_cents": 1.7,
+       "partials": 2
+      },
+      {
+       "note": "D4",
+       "hz_12tet": 293.66,
+       "centre_cents": 2.7,
+       "partials": 2
+      },
+      {
+       "note": "B4",
+       "hz_12tet": 493.88,
+       "centre_cents": -0.6,
+       "partials": 3
+      }
+     ]
     },
     {
      "from": 72.65,
@@ -429,7 +787,7 @@
       "D4",
       "G4"
      ],
-     "lufs": -27.12,
+     "lufs": -26.8,
      "strongest_notes": [
       {
        "note": "B2",
@@ -480,7 +838,7 @@
       "B3",
       "D4"
      ],
-     "lufs": -24.23
+     "lufs": -24.9
     },
     {
      "from": 81.84,
@@ -494,7 +852,7 @@
       "F#4",
       "A4"
      ],
-     "lufs": -21.46
+     "lufs": -21.95
     },
     {
      "from": 85.0,
@@ -507,16 +865,54 @@
       "F#4",
       "E5"
      ],
-     "lufs": -22.45
+     "lufs": -22.13,
+     "strongest_notes": [
+      {
+       "note": "D3",
+       "hz_12tet": 146.83,
+       "centre_cents": 0.8,
+       "partials": 1
+      },
+      {
+       "note": "E3",
+       "hz_12tet": 164.81,
+       "centre_cents": 1.0,
+       "partials": 2
+      },
+      {
+       "note": "A3",
+       "hz_12tet": 220.0,
+       "centre_cents": 1.1,
+       "partials": 1
+      },
+      {
+       "note": "F#4",
+       "hz_12tet": 369.99,
+       "centre_cents": -1.6,
+       "partials": 3
+      },
+      {
+       "note": "A4",
+       "hz_12tet": 440.0,
+       "centre_cents": 0.6,
+       "partials": 1
+      },
+      {
+       "note": "E5",
+       "hz_12tet": 659.26,
+       "centre_cents": -2.0,
+       "partials": 3
+      }
+     ]
     }
    ],
-   "min_momentary_lufs_3_to_88_8": -34.37,
+   "min_momentary_lufs_3_to_88_8": -34.04,
    "min_momentary_at_s": 4.15,
    "max_fall_in_100ms_db": 1.75,
    "max_fall_at_s": 64.42,
-   "worst_note_centre_cents": 2.6,
+   "worst_note_centre_cents": 3.4,
    "peaks_outside_d_major": [],
-   "tuning_method": "per segment of 3 s or more: Hann FFT (5 s max, 4x zero padding), spectral peaks 100 to 2000 Hz within 24 dB of the strongest, grouped by nearest note, magnitude-weighted centre in cents (the pad's chorus spreads each note +-3.5 to 7 cents by design)"
+   "tuning_method": "per segment of 1.8 s or more: Hann FFT (5 s max, 4x zero padding), spectral peaks 120 to 2000 Hz within 24 dB of the strongest, grouped by nearest note, magnitude-weighted centre in cents (the pad's chorus spreads each note +-3.5 to 7 cents by design)"
   },
   "plan": {
    "segments": [
@@ -707,7 +1103,7 @@
       "A3",
       "C#4"
      ],
-     "level_db": -3.5,
+     "level_db": -5.5,
      "brightness": 0.26,
      "reverb_send": 0.38
     },
@@ -721,7 +1117,7 @@
       "F#3",
       "C#4"
      ],
-     "level_db": -3.5,
+     "level_db": -4.5,
      "brightness": 0.24,
      "reverb_send": 0.4
     },
@@ -735,7 +1131,7 @@
       "G3",
       "D4"
      ],
-     "level_db": -4.0,
+     "level_db": -5.5,
      "brightness": 0.26,
      "reverb_send": 0.4
     },
@@ -823,7 +1219,7 @@
       "B3",
       "D4"
      ],
-     "level_db": -4.0,
+     "level_db": -5.0,
      "brightness": 0.36,
      "reverb_send": 0.4
     },
@@ -839,7 +1235,7 @@
       "F#4",
       "A4"
      ],
-     "level_db": -2.5,
+     "level_db": -3.5,
      "brightness": 0.55,
      "reverb_send": 0.4
     },
@@ -1088,8 +1484,8 @@
   }
  },
  "sfx": {
-  "stem_integrated_lufs": -34.18,
-  "loudest_momentary_400ms_lufs": -26.56,
+  "stem_integrated_lufs": -34.02,
+  "loudest_momentary_400ms_lufs": -26.54,
   "loudest_momentary_at_s": 48.55,
   "bus_leveller": {
    "cap_lufs": -25.0,
@@ -1168,11 +1564,11 @@
     "speaker": "narrator",
     "start": 0.9,
     "end": 4.71,
-    "voice_lufs": -15.55,
-    "music_lufs": -39.69,
-    "sfx_lufs": -30.92,
-    "background_lufs": -32.98,
-    "voice_over_music_lu": 24.1,
+    "voice_lufs": -15.52,
+    "music_lufs": -39.36,
+    "sfx_lufs": -30.9,
+    "background_lufs": -32.89,
+    "voice_over_music_lu": 23.8,
     "voice_over_background_lu": 17.4,
     "music_duck_db": [
      -8.0,
@@ -1184,12 +1580,12 @@
     "speaker": "narrator",
     "start": 5.45,
     "end": 7.51,
-    "voice_lufs": -13.44,
-    "music_lufs": -37.81,
-    "sfx_lufs": -36.5,
-    "background_lufs": -35.19,
-    "voice_over_music_lu": 24.4,
-    "voice_over_background_lu": 21.8,
+    "voice_lufs": -13.42,
+    "music_lufs": -37.49,
+    "sfx_lufs": -36.47,
+    "background_lufs": -35.0,
+    "voice_over_music_lu": 24.1,
+    "voice_over_background_lu": 21.6,
     "music_duck_db": [
      -8.0,
      -8.0
@@ -1200,12 +1596,12 @@
     "speaker": "worker",
     "start": 8.55,
     "end": 13.85,
-    "voice_lufs": -12.55,
-    "music_lufs": -33.52,
-    "sfx_lufs": -37.5,
-    "background_lufs": -32.97,
-    "voice_over_music_lu": 21.0,
-    "voice_over_background_lu": 20.4,
+    "voice_lufs": -12.53,
+    "music_lufs": -33.2,
+    "sfx_lufs": -37.48,
+    "background_lufs": -32.68,
+    "voice_over_music_lu": 20.7,
+    "voice_over_background_lu": 20.1,
     "music_duck_db": [
      -5.0,
      -5.0
@@ -1216,12 +1612,12 @@
     "speaker": "narrator",
     "start": 14.8,
     "end": 20.27,
-    "voice_lufs": -17.94,
-    "music_lufs": -34.04,
-    "sfx_lufs": -36.12,
-    "background_lufs": -32.28,
-    "voice_over_music_lu": 16.1,
-    "voice_over_background_lu": 14.3,
+    "voice_lufs": -17.92,
+    "music_lufs": -33.72,
+    "sfx_lufs": -36.1,
+    "background_lufs": -32.05,
+    "voice_over_music_lu": 15.8,
+    "voice_over_background_lu": 14.1,
     "music_duck_db": [
      -8.0,
      -8.0
@@ -1232,12 +1628,12 @@
     "speaker": "narrator",
     "start": 22.6,
     "end": 26.02,
-    "voice_lufs": -16.18,
-    "music_lufs": -34.63,
-    "sfx_lufs": -35.2,
-    "background_lufs": -31.86,
-    "voice_over_music_lu": 18.5,
-    "voice_over_background_lu": 15.7,
+    "voice_lufs": -16.16,
+    "music_lufs": -34.31,
+    "sfx_lufs": -35.22,
+    "background_lufs": -31.7,
+    "voice_over_music_lu": 18.2,
+    "voice_over_background_lu": 15.5,
     "music_duck_db": [
      -8.0,
      -8.0
@@ -1248,12 +1644,12 @@
     "speaker": "narrator",
     "start": 31.2,
     "end": 33.91,
-    "voice_lufs": -13.43,
-    "music_lufs": -36.48,
-    "sfx_lufs": -34.76,
-    "background_lufs": -32.74,
-    "voice_over_music_lu": 23.0,
-    "voice_over_background_lu": 19.3,
+    "voice_lufs": -13.4,
+    "music_lufs": -36.16,
+    "sfx_lufs": -34.74,
+    "background_lufs": -32.58,
+    "voice_over_music_lu": 22.8,
+    "voice_over_background_lu": 19.2,
     "music_duck_db": [
      -8.0,
      -8.0
@@ -1264,12 +1660,12 @@
     "speaker": "narrator",
     "start": 38.6,
     "end": 44.69,
-    "voice_lufs": -15.66,
-    "music_lufs": -30.45,
-    "sfx_lufs": -33.0,
-    "background_lufs": -29.0,
-    "voice_over_music_lu": 14.8,
-    "voice_over_background_lu": 13.3,
+    "voice_lufs": -15.64,
+    "music_lufs": -30.12,
+    "sfx_lufs": -33.05,
+    "background_lufs": -28.78,
+    "voice_over_music_lu": 14.5,
+    "voice_over_background_lu": 13.1,
     "music_duck_db": [
      -8.0,
      -8.0
@@ -1280,12 +1676,12 @@
     "speaker": "narrator",
     "start": 47.3,
     "end": 51.89,
-    "voice_lufs": -15.33,
-    "music_lufs": -31.13,
-    "sfx_lufs": -30.67,
-    "background_lufs": -28.76,
-    "voice_over_music_lu": 15.8,
-    "voice_over_background_lu": 13.4,
+    "voice_lufs": -15.3,
+    "music_lufs": -32.37,
+    "sfx_lufs": -30.65,
+    "background_lufs": -29.43,
+    "voice_over_music_lu": 17.1,
+    "voice_over_background_lu": 14.1,
     "music_duck_db": [
      -8.0,
      -8.0
@@ -1296,12 +1692,12 @@
     "speaker": "narrator",
     "start": 52.4,
     "end": 56.92,
-    "voice_lufs": -14.14,
-    "music_lufs": -33.07,
-    "sfx_lufs": -32.9,
-    "background_lufs": -30.21,
-    "voice_over_music_lu": 18.9,
-    "voice_over_background_lu": 16.1,
+    "voice_lufs": -14.12,
+    "music_lufs": -34.05,
+    "sfx_lufs": -32.88,
+    "background_lufs": -30.67,
+    "voice_over_music_lu": 19.9,
+    "voice_over_background_lu": 16.6,
     "music_duck_db": [
      -8.0,
      -8.0
@@ -1312,12 +1708,12 @@
     "speaker": "narrator",
     "start": 57.35,
     "end": 59.02,
-    "voice_lufs": -16.39,
-    "music_lufs": -33.37,
-    "sfx_lufs": -33.99,
-    "background_lufs": -30.68,
-    "voice_over_music_lu": 17.0,
-    "voice_over_background_lu": 14.3,
+    "voice_lufs": -16.36,
+    "music_lufs": -33.13,
+    "sfx_lufs": -33.97,
+    "background_lufs": -30.54,
+    "voice_over_music_lu": 16.8,
+    "voice_over_background_lu": 14.2,
     "music_duck_db": [
      -8.0,
      -8.0
@@ -1328,12 +1724,12 @@
     "speaker": "narrator",
     "start": 59.45,
     "end": 65.74,
-    "voice_lufs": -17.56,
-    "music_lufs": -35.27,
-    "sfx_lufs": -34.83,
-    "background_lufs": -32.98,
-    "voice_over_music_lu": 17.7,
-    "voice_over_background_lu": 15.4,
+    "voice_lufs": -17.53,
+    "music_lufs": -34.95,
+    "sfx_lufs": -35.02,
+    "background_lufs": -32.7,
+    "voice_over_music_lu": 17.4,
+    "voice_over_background_lu": 15.2,
     "music_duck_db": [
      -8.0,
      -8.0
@@ -1344,12 +1740,12 @@
     "speaker": "narrator",
     "start": 66.4,
     "end": 70.62,
-    "voice_lufs": -15.23,
-    "music_lufs": -34.06,
-    "sfx_lufs": -33.57,
-    "background_lufs": -31.16,
-    "voice_over_music_lu": 18.8,
-    "voice_over_background_lu": 15.9,
+    "voice_lufs": -15.21,
+    "music_lufs": -33.73,
+    "sfx_lufs": -33.54,
+    "background_lufs": -30.96,
+    "voice_over_music_lu": 18.5,
+    "voice_over_background_lu": 15.8,
     "music_duck_db": [
      -8.0,
      -8.0
@@ -1360,12 +1756,12 @@
     "speaker": "narrator",
     "start": 72.2,
     "end": 77.05,
-    "voice_lufs": -17.27,
-    "music_lufs": -35.08,
-    "sfx_lufs": -34.94,
-    "background_lufs": -32.62,
-    "voice_over_music_lu": 17.8,
-    "voice_over_background_lu": 15.3,
+    "voice_lufs": -17.24,
+    "music_lufs": -34.76,
+    "sfx_lufs": -35.05,
+    "background_lufs": -32.48,
+    "voice_over_music_lu": 17.5,
+    "voice_over_background_lu": 15.2,
     "music_duck_db": [
      -8.0,
      -8.0
@@ -1376,12 +1772,12 @@
     "speaker": "narrator",
     "start": 78.5,
     "end": 83.22,
-    "voice_lufs": -16.32,
-    "music_lufs": -30.92,
-    "sfx_lufs": -32.92,
-    "background_lufs": -28.66,
-    "voice_over_music_lu": 14.6,
-    "voice_over_background_lu": 12.3,
+    "voice_lufs": -16.31,
+    "music_lufs": -31.45,
+    "sfx_lufs": -31.65,
+    "background_lufs": -28.67,
+    "voice_over_music_lu": 15.1,
+    "voice_over_background_lu": 12.4,
     "music_duck_db": [
      -8.0,
      -8.0
@@ -1392,36 +1788,36 @@
     "speaker": "narrator",
     "start": 84.4,
     "end": 89.03,
-    "voice_lufs": -15.61,
-    "music_lufs": -31.05,
-    "sfx_lufs": -36.03,
-    "background_lufs": -30.23,
-    "voice_over_music_lu": 15.4,
-    "voice_over_background_lu": 14.6,
+    "voice_lufs": -15.59,
+    "music_lufs": -30.74,
+    "sfx_lufs": -35.41,
+    "background_lufs": -30.01,
+    "voice_over_music_lu": 15.1,
+    "voice_over_background_lu": 14.4,
     "music_duck_db": [
      -8.0,
      -8.0
     ]
    }
   ],
-  "min_narrator_over_background_lu": 12.3,
-  "min_narrator_over_music_lu": 14.6,
+  "min_narrator_over_background_lu": 12.4,
+  "min_narrator_over_music_lu": 14.5,
   "no_narration_worker": {
-   "worker_lufs": -12.55,
-   "background_lufs": -25.56,
-   "margin_lu": 13.0
+   "worker_lufs": -12.53,
+   "background_lufs": -25.28,
+   "margin_lu": 12.8
   }
  },
  "events": {
-  "count": 188,
+  "count": 191,
   "per_kind": {
    "align": 2,
-   "arrive": 28,
+   "arrive": 29,
    "assemble": 4,
    "compare": 5,
    "decision": 9,
    "deviate": 1,
-   "door-close": 7,
+   "door-close": 9,
    "door-open": 9,
    "escalate": 1,
    "evidence": 4,
@@ -1753,8 +2149,8 @@
     "kind": "packet",
     "t": 23.5,
     "start": 23.5,
-    "end": 24.2796,
-    "lufs_100ms": -38.5,
+    "end": 24.1232,
+    "lufs_100ms": -39.5,
     "note": ""
    },
    {
@@ -1817,7 +2213,7 @@
     "kind": "arrive",
     "t": 25.31,
     "start": 25.31,
-    "end": 25.9718,
+    "end": 25.9186,
     "lufs_100ms": -31.0,
     "note": ""
    },
@@ -1825,7 +2221,7 @@
     "kind": "arrive",
     "t": 26.13,
     "start": 26.13,
-    "end": 26.7739,
+    "end": 26.7828,
     "lufs_100ms": -30.9,
     "note": ""
    },
@@ -1841,7 +2237,7 @@
     "kind": "arrive",
     "t": 27.03,
     "start": 27.03,
-    "end": 27.6709,
+    "end": 27.6657,
     "lufs_100ms": -31.4,
     "note": ""
    },
@@ -1857,7 +2253,7 @@
     "kind": "arrive",
     "t": 27.93,
     "start": 27.93,
-    "end": 28.5999,
+    "end": 28.5388,
     "lufs_100ms": -30.7,
     "note": ""
    },
@@ -1873,7 +2269,7 @@
     "kind": "arrive",
     "t": 28.83,
     "start": 28.83,
-    "end": 29.4515,
+    "end": 29.4707,
     "lufs_100ms": -30.9,
     "note": ""
    },
@@ -1921,15 +2317,15 @@
     "kind": "packet",
     "t": 30.55,
     "start": 30.55,
-    "end": 31.2669,
-    "lufs_100ms": -37.3,
+    "end": 31.1931,
+    "lufs_100ms": -37.1,
     "note": ""
    },
    {
     "kind": "packet",
     "t": 30.85,
     "start": 30.85,
-    "end": 31.5379,
+    "end": 31.4651,
     "lufs_100ms": -37.1,
     "note": ""
    },
@@ -2089,24 +2485,24 @@
     "kind": "move",
     "t": 38.42,
     "start": 38.42,
-    "end": 39.6473,
-    "lufs_100ms": -44.2,
+    "end": 39.052,
+    "lufs_100ms": -44.1,
     "note": ""
    },
    {
     "kind": "move",
     "t": 38.7,
     "start": 38.7,
-    "end": 39.9853,
-    "lufs_100ms": -43.8,
+    "end": 39.338,
+    "lufs_100ms": -44.2,
     "note": ""
    },
    {
     "kind": "move",
     "t": 38.98,
     "start": 38.98,
-    "end": 40.1842,
-    "lufs_100ms": -43.8,
+    "end": 39.5897,
+    "lufs_100ms": -44.0,
     "note": ""
    },
    {
@@ -2369,8 +2765,8 @@
     "kind": "request",
     "t": 61.15,
     "start": 61.15,
-    "end": 62.8172,
-    "lufs_100ms": -37.5,
+    "end": 62.1815,
+    "lufs_100ms": -36.9,
     "note": ""
    },
    {
@@ -2407,10 +2803,10 @@
    },
    {
     "kind": "lock",
-    "t": 63.37,
-    "start": 63.348,
-    "end": 63.9804,
-    "lufs_100ms": -28.8,
+    "t": 63.46,
+    "start": 63.438,
+    "end": 64.0569,
+    "lufs_100ms": -28.6,
     "note": ""
    },
    {
@@ -2481,8 +2877,8 @@
     "kind": "move",
     "t": 66.91,
     "start": 66.91,
-    "end": 68.0797,
-    "lufs_100ms": -38.8,
+    "end": 68.0724,
+    "lufs_100ms": -39.3,
     "note": ""
    },
    {
@@ -2497,8 +2893,8 @@
     "kind": "print",
     "t": 67.56,
     "start": 67.56,
-    "end": 68.3867,
-    "lufs_100ms": -39.4,
+    "end": 68.2682,
+    "lufs_100ms": -39.3,
     "note": ""
    },
    {
@@ -2647,17 +3043,17 @@
    },
    {
     "kind": "return",
-    "t": 76.02,
-    "start": 76.02,
-    "end": 77.1612,
-    "lufs_100ms": -36.5,
+    "t": 76.04,
+    "start": 76.04,
+    "end": 77.1813,
+    "lufs_100ms": -36.3,
     "note": ""
    },
    {
     "kind": "return",
-    "t": 76.22,
-    "start": 76.22,
-    "end": 77.3612,
+    "t": 76.26,
+    "start": 76.26,
+    "end": 77.4011,
     "lufs_100ms": -35.6,
     "note": ""
    },
@@ -2687,26 +3083,26 @@
    },
    {
     "kind": "decision",
-    "t": 78.15,
-    "start": 78.15,
-    "end": 79.6457,
-    "lufs_100ms": -35.1,
+    "t": 78.12,
+    "start": 78.12,
+    "end": 79.6157,
+    "lufs_100ms": -34.0,
     "note": ""
    },
    {
     "kind": "move",
-    "t": 78.3,
-    "start": 78.3,
-    "end": 79.3291,
-    "lufs_100ms": -38.4,
+    "t": 78.32,
+    "start": 78.32,
+    "end": 79.4209,
+    "lufs_100ms": -38.7,
     "note": ""
    },
    {
     "kind": "door-open",
-    "t": 78.36,
-    "start": 78.36,
-    "end": 79.5286,
-    "lufs_100ms": -33.9,
+    "t": 78.448,
+    "start": 78.448,
+    "end": 79.574,
+    "lufs_100ms": -33.3,
     "note": ""
    },
    {
@@ -2718,123 +3114,155 @@
     "note": ""
    },
    {
+    "kind": "arrive",
+    "t": 78.94,
+    "start": 78.94,
+    "end": 79.6502,
+    "lufs_100ms": -36.4,
+    "note": ""
+   },
+   {
     "kind": "lock",
     "t": 79.26,
     "start": 79.242,
     "end": 79.7963,
-    "lufs_100ms": -29.7,
+    "lufs_100ms": -28.7,
     "note": ""
    },
    {
     "kind": "decision",
-    "t": 79.3,
-    "start": 79.3,
-    "end": 80.7957,
-    "lufs_100ms": -36.2,
+    "t": 79.36,
+    "start": 79.36,
+    "end": 80.8556,
+    "lufs_100ms": -34.1,
     "note": ""
    },
    {
     "kind": "packet",
-    "t": 79.36,
-    "start": 79.36,
-    "end": 80.1324,
+    "t": 79.54,
+    "start": 79.54,
+    "end": 80.1633,
     "lufs_100ms": -36.9,
     "note": ""
    },
    {
     "kind": "move",
-    "t": 79.46,
-    "start": 79.46,
-    "end": 80.4584,
-    "lufs_100ms": -38.5,
+    "t": 79.58,
+    "start": 79.58,
+    "end": 80.5667,
+    "lufs_100ms": -38.0,
     "note": ""
    },
    {
     "kind": "door-open",
-    "t": 79.52,
-    "start": 79.52,
-    "end": 82.2188,
-    "lufs_100ms": -37.5,
+    "t": 79.594,
+    "start": 79.594,
+    "end": 82.248,
+    "lufs_100ms": -36.3,
     "note": ""
    },
    {
     "kind": "request",
-    "t": 80.04,
-    "start": 80.04,
-    "end": 81.7071,
-    "lufs_100ms": -35.5,
+    "t": 80.18,
+    "start": 80.18,
+    "end": 81.8472,
+    "lufs_100ms": -35.2,
     "note": ""
    },
    {
     "kind": "simulated",
-    "t": 80.12,
-    "start": 80.12,
-    "end": 83.2171,
-    "lufs_100ms": -42.9,
+    "t": 80.28,
+    "start": 80.28,
+    "end": 83.3775,
+    "lufs_100ms": -43.6,
     "note": ""
    },
    {
     "kind": "decision",
-    "t": 80.36,
-    "start": 80.36,
-    "end": 81.8531,
-    "lufs_100ms": -35.7,
-    "note": ""
-   },
-   {
-    "kind": "return",
-    "t": 80.5,
-    "start": 80.5,
-    "end": 81.6415,
-    "lufs_100ms": -36.9,
-    "note": ""
-   },
-   {
-    "kind": "move",
-    "t": 80.52,
-    "start": 80.52,
-    "end": 81.5798,
-    "lufs_100ms": -36.8,
-    "note": ""
-   },
-   {
-    "kind": "door-open",
-    "t": 80.6,
-    "start": 80.6,
-    "end": 81.6427,
-    "lufs_100ms": -35.4,
+    "t": 80.42,
+    "start": 80.42,
+    "end": 81.9157,
+    "lufs_100ms": -33.8,
     "note": ""
    },
    {
     "kind": "move",
     "t": 80.64,
     "start": 80.64,
-    "end": 81.5873,
-    "lufs_100ms": -41.1,
+    "end": 81.7162,
+    "lufs_100ms": -37.5,
+    "note": ""
+   },
+   {
+    "kind": "return",
+    "t": 80.64,
+    "start": 80.64,
+    "end": 81.7812,
+    "lufs_100ms": -35.7,
+    "note": ""
+   },
+   {
+    "kind": "move",
+    "t": 80.76,
+    "start": 80.76,
+    "end": 81.722,
+    "lufs_100ms": -40.6,
+    "note": ""
+   },
+   {
+    "kind": "door-open",
+    "t": 80.779,
+    "start": 80.779,
+    "end": 81.9099,
+    "lufs_100ms": -32.4,
+    "note": ""
+   },
+   {
+    "kind": "door-close",
+    "t": 80.8,
+    "start": 80.8,
+    "end": 83.497,
+    "lufs_100ms": -37.5,
+    "note": ""
+   },
+   {
+    "kind": "door-close",
+    "t": 81.06,
+    "start": 81.06,
+    "end": 82.207,
+    "lufs_100ms": -34.5,
     "note": ""
    },
    {
     "kind": "inspect",
-    "t": 81.2,
-    "start": 81.2,
-    "end": 81.7388,
-    "lufs_100ms": -39.2,
-    "note": ""
-   },
-   {
-    "kind": "lock",
-    "t": 81.44,
-    "start": 81.418,
-    "end": 82.0915,
-    "lufs_100ms": -28.5,
+    "t": 81.34,
+    "start": 81.34,
+    "end": 81.9345,
+    "lufs_100ms": -39.5,
     "note": ""
    },
    {
     "kind": "decision",
-    "t": 81.66,
-    "start": 81.66,
-    "end": 83.9532,
-    "lufs_100ms": -28.0,
+    "t": 81.56,
+    "start": 81.56,
+    "end": 83.8533,
+    "lufs_100ms": -26.6,
+    "note": ""
+   },
+   {
+    "kind": "lock",
+    "t": 81.56,
+    "start": 81.538,
+    "end": 82.1629,
+    "lufs_100ms": -28.4,
+    "note": ""
+   },
+   {
+    "kind": "door-close",
+    "t": 82.02,
+    "start": 82.02,
+    "end": 83.1561,
+    "lufs_100ms": -35.1,
     "note": ""
    },
    {
@@ -2842,23 +3270,15 @@
     "t": 82.06,
     "start": 82.06,
     "end": 83.156,
-    "lufs_100ms": -33.5,
+    "lufs_100ms": -32.5,
     "note": ""
    },
    {
     "kind": "resolve",
-    "t": 82.44,
-    "start": 82.44,
-    "end": 85.6911,
-    "lufs_100ms": -30.9,
-    "note": ""
-   },
-   {
-    "kind": "door-close",
-    "t": 82.72,
-    "start": 82.72,
-    "end": 83.8561,
-    "lufs_100ms": -34.1,
+    "t": 82.34,
+    "start": 82.34,
+    "end": 85.591,
+    "lufs_100ms": -30.4,
     "note": ""
    },
    {
@@ -2897,8 +3317,8 @@
     "kind": "align",
     "t": 84.8,
     "start": 84.8,
-    "end": 87.8692,
-    "lufs_100ms": -40.3,
+    "end": 87.8123,
+    "lufs_100ms": -40.0,
     "note": ""
    },
    {
@@ -2945,16 +3365,16 @@
     "kind": "print",
     "t": 85.9,
     "start": 85.9,
-    "end": 86.6821,
-    "lufs_100ms": -39.2,
+    "end": 86.4329,
+    "lufs_100ms": -38.5,
     "note": ""
    },
    {
     "kind": "summon",
     "t": 86.05,
     "start": 86.05,
-    "end": 88.0842,
-    "lufs_100ms": -44.9,
+    "end": 87.5496,
+    "lufs_100ms": -44.7,
     "note": ""
    },
    {
@@ -2987,8 +3407,8 @@
    "name": "music.wav DC",
    "ok": true,
    "value": [
-    6.22e-09,
-    1.76e-09
+    6.34e-09,
+    1.9e-09
    ],
    "target": "|mean| < 1e-4"
   },
@@ -3014,8 +3434,8 @@
    "name": "sfx.wav DC",
    "ok": true,
    "value": [
-    4.8e-12,
-    9.13e-12
+    -7.42e-12,
+    8.83e-12
    ],
    "target": "|mean| < 1e-4"
   },
@@ -3041,8 +3461,8 @@
    "name": "master.wav DC",
    "ok": true,
    "value": [
-    -5.4e-09,
-    2.55e-08
+    -1.82e-09,
+    2.25e-08
    ],
    "target": "|mean| < 1e-4"
   },
@@ -3068,8 +3488,8 @@
    "name": "master-no-narration.wav DC",
    "ok": true,
    "value": [
-    4.6e-10,
-    4.67e-10
+    4.58e-10,
+    4.66e-10
    ],
    "target": "|mean| < 1e-4"
   },
@@ -3100,25 +3520,25 @@
   {
    "name": "master-no-narration.wav true peak",
    "ok": true,
-   "value": -2.1,
+   "value": -1.97,
    "target": "<= -1.0"
   },
   {
    "name": "narrator over background (every line)",
    "ok": true,
-   "value": 12.3,
+   "value": 12.4,
    "target": ">= 12 LU per line"
   },
   {
    "name": "narrator over music (every line)",
    "ok": true,
-   "value": 14.6,
+   "value": 14.5,
    "target": ">= 14 LU per line"
   },
   {
    "name": "worker over background (no-narration version)",
    "ok": true,
-   "value": 13.0,
+   "value": 12.8,
    "target": ">= 8 LU"
   },
   {
@@ -3171,7 +3591,7 @@
   {
    "name": "music in tune (A = 440)",
    "ok": true,
-   "value": 2.6,
+   "value": 3.4,
    "target": "every strong note's centre within 5 cents of 12-TET"
   },
   {
@@ -3183,7 +3603,7 @@
   {
    "name": "music never drops out (3 to 88.8 s, before ducking)",
    "ok": true,
-   "value": -34.37,
+   "value": -34.04,
    "target": ">= -45 LUFS momentary"
   },
   {

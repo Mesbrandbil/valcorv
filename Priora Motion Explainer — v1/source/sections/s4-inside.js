@@ -106,7 +106,7 @@ PK.section("s4-inside", 38, 47, function (tl, W, ctx, S) {
     var A = W.agents[k].spec.aligned;
     var arc = PK.el("path", { d: PK.arc(0, 0, G.alignR, A - 36, A + 36), fill: "none", stroke: C.rust, "stroke-width": 3.2, "stroke-linecap": "butt" }, cs.arcsG);
     gsap.set(arc, { drawSVG: "50% 50%", opacity: 1 });
-    tl.fromTo(arc, { drawSVG: "50% 50%" }, { drawSVG: "7% 93%", duration: 0.7, ease: "power2.out", immediateRender: false }, tAl + 0.25 + i * 0.06);
+    tl.fromTo(arc, { drawSVG: "50% 50%" }, { drawSVG: "7% 93%", duration: 0.55, ease: "power2.out", immediateRender: false }, tAl + 0.25 + i * 0.05); // ends before the lock
     tl.fromTo(arc, { drawSVG: "7% 93%" }, { drawSVG: "0% 100%", duration: 0.22, ease: "power2.inOut", immediateRender: false }, tHold);
     arcs[k] = arc;
     // and reaches in to it: a short line from the agent to the middle of its arc

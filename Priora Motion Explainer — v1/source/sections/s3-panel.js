@@ -2,7 +2,7 @@
   s3-panel (22 to 38 s): the configurable site panel.
 
   Priora takes the case to the outside of the panel door. The chamber draws, its eight
-  seats appear around the table and the ghosts of other possible specialists (Electrical,
+  seats appear round the table and the ghosts of other possible specialists (Electrical,
   Confined space, Lifting) show in three of them, then fade: this panel is configured for
   this site and this job, it is not a permanent cast. Priora summons five specialists one
   by one: its bead turns to the seat, a thread leaves the bead, runs through the door to
@@ -11,15 +11,17 @@
   opens its facets; Priora stays outside the door (it conducts, it is not on the panel).
   A pulse from Priora, then threads fan out from the case and carry copies of the
   relevant facets to each specialist. Each one inspects in its own way, two focused
-  signals pass between them, and the findings come back out through the door to Priora
-  as five small ticks on its orbit.
+  signals pass between them, and the findings come back out through the door to Priora:
+  five short marks that gather, evenly spaced, on its orbit.
 
-  Contract at 38.0 (for s4, same builder): Priora at (700, 470), bead 180, five ticks on
-  its orbit (W.s3.marks); case at the table centre (380, 520), facets unfolded; agents in
-  their first slots, names visible, seats (rust pale) under them; door closed; empty seats
-  dashed; the table ring visible; Priora's label hidden.
+  State at 38.0 (handed to s4, same builder): Priora at (700, 470), bead 180, five marks
+  on its orbit (W.s3.ringG); case at the table centre (380, 520), facets unfolded; agents
+  in their first slots, names visible (font 10.3), rust pale seats under them; door
+  closed; three empty seats dashed; the table ring visible; Priora's label hidden.
 
-  Shared with s4 through W.s3: marks, seats, ring, beadA, labelSize.
+  Shared with s4 through W.s3: ringG, marks, seats, ring, trail.
+  Note: GSAP's svgOrigin is in the parent's space, so anything that is positioned with
+  x/y and also scaled gets an inner group to scale (see holder()).
 */
 PK.section("s3-panel", 22, 38, function (tl, W, ctx, S) {
   var G = PK.GEO,
@@ -32,7 +34,7 @@ PK.section("s3-panel", 22, 38, function (tl, W, ctx, S) {
   var PRI = [700, 470]; // Priora outside the door (held to the end of s4)
   var DOCK = [704, 536]; // the case rides here, beside Priora
   var DOOR = [G.panel.x + G.panel.w, G.panel.doorY]; // (620, 505)
-  var NAME0 = 11.8; // agent names while they are summoned (about 22 px at width 1040)
+  var NAME0 = 12.2; // agent names while they are summoned (about 22.5 px at width 1040)
   var NAME1 = 10.3; // after the push in to the table (about 23 px at width 846)
   var sh = (W.s3 = { beadA: 180, marks: [], seats: {}, ring: [], labelSize: NAME1 });
 
@@ -92,16 +94,13 @@ PK.section("s3-panel", 22, 38, function (tl, W, ctx, S) {
     gsap.set(g, { x: x, y: y, opacity: 0 });
     return { g: g, inner: inner };
   }
-  // door: track its state so every tween states where it starts
-  var door = { open: false };
+  // the panel door (its leaves slide into the wall); open and close strictly alternate
   function openDoor(at, dur) {
     panel.open(tl, at, dur || 0.4);
-    door.open = true;
     PK.sfx("door-open", at, { gain_db: -10, pan: pan(DOOR[0], at) });
   }
   function closeDoor(at, dur) {
     panel.close(tl, at, dur || 0.35);
-    door.open = false;
     PK.sfx("door-close", at, { gain_db: -11, pan: pan(DOOR[0], at) });
   }
 
@@ -142,7 +141,7 @@ PK.section("s3-panel", 22, 38, function (tl, W, ctx, S) {
   PK.sfx("thread", tWall, { dur: 1.0, gain_db: -9, material: "pencil" });
   PK.show(tl, panel.title, 23.4, 0.45, { later: true });
   PK.show(tl, panel.sub, 23.55, 0.45, { later: true });
-  PK.sfx("door-close", tWall + 0.95, { gain_db: -16, pan: 0.1 });
+  PK.sfx("door-close", tWall + 0.95, { gain_db: -16, pan: 0.1 }); // the closed door settles into the wall
 
   // Priora's name, while it conducts from outside the door
   PK.show(tl, P.label, 23.5, 0.4, { later: true });
@@ -174,12 +173,12 @@ PK.section("s3-panel", 22, 38, function (tl, W, ctx, S) {
     { a: 180, name: "Lifting", shape: PK.polyPath([0, 1, 2, 3, 4].map(function (k) { return PK.polar(0, 1.5, 10.5, -90 + k * 72); })), lab: [-34, 3.8], anchor: "end" },
   ];
   var tGhost = 23.95,
-    tGhostOff = PK.word("L04", "site") + 0.15;
+    tGhostOff = PK.word("L04", "job");
   ghosts.forEach(function (gh, i) {
     var p = G.slot(gh.a);
     var gg = PK.g(W.L.chambers);
     gsap.set(gg, { x: p[0], y: p[1], opacity: 0 });
-    PK.el("path", { d: gh.shape, class: "pk-ghost" }, gg);
+    PK.el("path", { d: gh.shape, class: "pk-ghost", style: "stroke-opacity:1" }, gg);
     PK.text(gg, gh.name, gh.lab[0], gh.lab[1], { size: 11, weight: 500, fill: C.grey, anchor: gh.anchor });
     tl.fromTo(gg, { opacity: 0 }, { opacity: 1, duration: 0.4, ease: "power1.out", immediateRender: false }, tGhost + i * 0.12);
     tl.fromTo(gg, { opacity: 1 }, { opacity: 0, duration: 0.55, ease: "power1.in", immediateRender: false }, tGhostOff + i * 0.1);
@@ -313,6 +312,7 @@ PK.section("s3-panel", 22, 38, function (tl, W, ctx, S) {
   };
   var parkR = { fire: 106, insurer: 106, siteRules: 106, riskEng: 110, evidence: 106 };
   var copies = {};
+  var pulseAt = {};
   var fanOrder = ["fire", "insurer", "siteRules", "riskEng", "evidence"];
   var tFan = 30.4;
   var fanThreads = [];
@@ -337,12 +337,17 @@ PK.section("s3-panel", 22, 38, function (tl, W, ctx, S) {
       tl.fromTo(cg, { opacity: 0 }, { opacity: 1, duration: 0.12, ease: "none", immediateRender: false }, tc);
       tl.fromTo(hd.inner, { scale: 0.5, svgOrigin: "0 0" }, { scale: 1, svgOrigin: "0 0", duration: 0.35, ease: "power2.out", immediateRender: false }, tc);
       PK.travel(tl, cg, "M" + pt(start) + " L" + pt(onTable(parkR[key] - 4, a)) + " L" + pt(dest), tc, 0.5, "power2.inOut");
-      // its facet in the case answers as the copy leaves
-      var fc = cs.facet(fk);
-      tl.fromTo(fc.chip, { scale: 1, svgOrigin: "0 0" }, { scale: 1.3, svgOrigin: "0 0", duration: 0.12, ease: "power2.out", immediateRender: false }, tc);
-      tl.fromTo(fc.chip, { scale: 1.3, svgOrigin: "0 0" }, { scale: 1, svgOrigin: "0 0", duration: 0.3, ease: "power2.inOut", immediateRender: false }, tc + 0.12);
+      // its facet in the case answers as the copy leaves (one pulse per facet, see below)
+      (pulseAt[fk] = pulseAt[fk] || []).push(tc);
       return { g: cg, inner: hd.inner, at: dest, key: fk };
     });
+  });
+  Object.keys(pulseAt).forEach(function (fk) {
+    var fc = cs.facet(fk),
+      t0 = Math.min.apply(null, pulseAt[fk]),
+      t1 = Math.max.apply(null, pulseAt[fk]);
+    tl.fromTo(fc.chip, { scale: 1, svgOrigin: "0 0" }, { scale: 1.3, svgOrigin: "0 0", duration: 0.12, ease: "power2.out", immediateRender: false }, t0);
+    tl.fromTo(fc.chip, { scale: 1.3, svgOrigin: "0 0" }, { scale: 1, svgOrigin: "0 0", duration: 0.3, ease: "power2.inOut", immediateRender: false }, Math.max(t0 + 0.12, t1 + 0.06));
   });
   PK.sfx("thread", tFan, { dur: 0.7, gain_db: -11, pan: -0.1 });
   PK.sfx("packet", tFan + 0.15, { gain_db: -12, size: "small", pan: 0.25 });
@@ -521,8 +526,8 @@ PK.section("s3-panel", 22, 38, function (tl, W, ctx, S) {
   sh.ringG = ringG;
   var returns = [
     { key: "fire", ctl: [566, 452] },
-    { key: "insurer", ctl: [566, 330] },
-    { key: "evidence", ctl: [540, 700] },
+    { key: "insurer", ctl: [478, 462] },
+    { key: "evidence", ctl: [556, 716] },
     { key: "riskEng", ctl: [436, 612] },
     { key: "siteRules", ctl: [436, 430] },
   ];

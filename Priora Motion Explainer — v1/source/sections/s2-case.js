@@ -201,9 +201,9 @@ PK.section("s2-case", 8, 22, function (tl, W, ctx) {
   PK.el("circle", { cx: 2.6, cy: -2.6, r: 1.2, fill: C.paper }, photo);
   gsap.set(photo, { x: wHead[0], y: wHead[1], opacity: 0 });
   var back = PK.curve(wHead, phPos, 34);
-  tl.fromTo(photo, { opacity: 0, scale: 0.5, svgOrigin: "0 0" }, { opacity: 1, scale: 1, svgOrigin: "0 0", duration: 0.25, ease: "power2.out", immediateRender: false }, tSend);
+  tl.fromTo(photo, { opacity: 0, scale: 0.5, transformOrigin: "50% 50%" }, { opacity: 1, scale: 1, transformOrigin: "50% 50%", duration: 0.25, ease: "power2.out", immediateRender: false }, tSend);
   PK.travel(tl, photo, back, tSend + 0.15, 0.7, "power2.inOut");
-  tl.to(photo, { scale: 0.45, svgOrigin: "0 0", duration: 0.3, ease: "power2.in" }, tSend + 0.62);
+  tl.to(photo, { scale: 0.45, transformOrigin: "50% 50%", duration: 0.3, ease: "power2.in" }, tSend + 0.62);
   tl.to(photo, { opacity: 0, duration: 0.12, ease: "none" }, tSend + 0.88);
   PK.sfx("evidence", tSend, { gain_db: -6, part: "send" });
   // answered: the request lines turn solid, then go
