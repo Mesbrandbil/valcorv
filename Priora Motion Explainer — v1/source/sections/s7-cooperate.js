@@ -207,7 +207,7 @@ PK.section("s7-cooperate", 78, 84, function (tl, W, ctx, S) {
     W.roomAgents = {
       retain: [mk(PK.glyph.roomAgent(W.L.tokens, "policy", 18), [1430, 372]), mk(PK.glyph.roomAgent(W.L.tokens, "authority", 18), [1690, 298]), mk(PK.glyph.roomAgent(W.L.tokens, "record", 18), [1690, 364])],
       mitigate: [mk(PK.glyph.roomAgent(W.L.tokens, "eng", 18), [1468, 452]), mk(PK.glyph.roomAgent(W.L.tokens, "eng", 18), [1482, 560])],
-      transfer: [mk(PK.glyph.carrier(W.L.tokens, 34), [1726, 650]), mk(PK.glyph.carrier(W.L.tokens, 34), [1726, 696]), mk(PK.glyph.carrier(W.L.tokens, 34), [1726, 742])],
+      transfer: [mk(PK.glyph.carrier(W.L.tokens, 30), [1736, 674]), mk(PK.glyph.carrier(W.L.tokens, 30), [1736, 710]), mk(PK.glyph.carrier(W.L.tokens, 30), [1736, 746])],
     };
   }
   if (!W.safeguards) {
@@ -232,7 +232,8 @@ PK.section("s7-cooperate", 78, 84, function (tl, W, ctx, S) {
     // the human's line as s5/s6 leave it: from the desk to the packet, once round it, ending at its right side
     var LR0 = 46;
     var dD = "M1180 711 C1196 711 1204 " + f(DOCK[1] + LR0) + " " + pt([DOCK[0], DOCK[1] + LR0]);
-    for (var s0 = 1; s0 <= 3; s0++) dD += " A" + LR0 + " " + LR0 + " 0 0 1 " + pt(PK.polar(DOCK[0], DOCK[1], LR0, 90 + s0 * 90));
+    for (var s0 = 1; s0 <= 4; s0++) dD += " A" + LR0 + " " + LR0 + " 0 0 1 " + pt(PK.polar(DOCK[0], DOCK[1], LR0, 90 + s0 * 90));
+    dD += " C" + f(DOCK[0] + 30) + " " + f(DOCK[1] + LR0) + " " + f(DOCK[0] + LR0) + " " + f(DOCK[1] + 26) + " " + pt([DOCK[0] + LR0, DOCK[1]]);
     W.decisionTip = [DOCK[0] + LR0, DOCK[1]];
     tl.set(W.decision, { attr: { d: dD } }, T0 - 0.01);
     tl.set(W.decision, { opacity: 1, drawSVG: "0% 100%" }, T0);
@@ -356,10 +357,10 @@ PK.section("s7-cooperate", 78, 84, function (tl, W, ctx, S) {
     goD: 0.44,
     openM: 79.1,
     thermal: 79.42, thermalD: 0.38,
-    openT: 79.9,
+    openT: 79.78,
     redirMT: 80.04, rideT: 80.14, rideTD: 0.4,
     ask: 80.5, bead: 80.56, beadD: 0.3,
-    openR: 80.8,
+    openR: 80.7,
     redirTR: 80.96, rideR: 81.06, rideRD: 0.42,
     clamp: 81.5,
     back: 81.78, backD: 0.3,
@@ -388,7 +389,7 @@ PK.section("s7-cooperate", 78, 84, function (tl, W, ctx, S) {
     var dp = samplePath(decD, 240);
     var near = [];
     dp.forEach(function (p, i) {
-      if (dist(p, DOCK) < 60) near.push(i);
+      if (dist(p, DOCK) < 55) near.push(i);
     });
     if (near.length > 40) {
       var i1 = near[0],
@@ -398,9 +399,9 @@ PK.section("s7-cooperate", 78, 84, function (tl, W, ctx, S) {
         var da = ang(DOCK, dp[i]) - ang(DOCK, dp[i - 1]);
         while (da > 180) da -= 360;
         while (da < -180) da += 360;
-        sweep += da;
+        sweep += Math.abs(da);
       }
-      if (Math.abs(sweep) > 240) {
+      if (sweep > 300) {
         var nd = "M" + pt(dp[0]);
         for (var j = 2; j <= i1; j += 2) nd += " L" + pt(dp[j]);
         nd += " L" + pt(dp[i2]);
@@ -430,11 +431,14 @@ PK.section("s7-cooperate", 78, 84, function (tl, W, ctx, S) {
   PK.sfx("decision", tm.openM, { gain_db: -9, dur: 0.28, pan: 0.35, part: "reach" });
 
   // Mitigate: the Thermal check piece slides off the shelf, out through the door, into the gap
+  // the shelf piece's own centre (the object on the shelf may also carry its measures)
   var shelfC = centreAt(th.g, T0);
+  try {
+    var pb = th.piece.getBBox(),
+      gp = xy(th.g, T0);
+    shelfC = [gp[0] + pb.x + pb.width / 2, gp[1] + pb.y + pb.height / 2];
+  } catch (e) {}
   var gapC = add(PM, thOff); // where the piece's centre lands
-  var thStartG = sub(shelfC, thOff); // group position that puts the flyer's centre on the shelf piece
-  var thPath = "M" + pt(thStartG) + " C" + f(thStartG[0] - 60) + " " + f(thStartG[1]) + " " + f(dM[0] + 40) + " " + f(dM[1]) + " " + pt([dM[0] - 2 - thOff[0], dM[1] - thOff[1]]) +
-    " C" + f(dM[0] - 40 - thOff[0]) + " " + f(dM[1] - thOff[1]) + " " + f(PM[0] + 30) + " " + f(PM[1]) + " " + pt(PM);
   var kShelf = 1;
   try {
     var pp = samplePath(th.piece.getAttribute("d"), 40),
@@ -445,7 +449,10 @@ PK.section("s7-cooperate", 78, 84, function (tl, W, ctx, S) {
     rr /= pp.length;
     kShelf = Math.max(0.5, Math.min(1, rr / (gR * K)));
   } catch (e) {}
-  FT(thFly.sc, { scale: K * kShelf, svgOrigin: pt(thMidL) }, { scale: K, svgOrigin: pt(thMidL), duration: tm.thermalD, ease: "power2.inOut" }, tm.thermal);
+  var thStartG = sub(shelfC, mul(thMidL, K * kShelf)); // the flyer's centre starts on the shelf piece, at its size
+  FT(thFly.sc, { scale: K * kShelf, svgOrigin: "0 0" }, { scale: K, svgOrigin: "0 0", duration: tm.thermalD, ease: "power2.inOut" }, tm.thermal);
+  var thPath = "M" + pt(thStartG) + " C" + f(thStartG[0] - 60) + " " + f(thStartG[1]) + " " + f(dM[0] + 40) + " " + f(dM[1]) + " " + pt([dM[0] - 2 - thOff[0], dM[1] - thOff[1]]) +
+    " C" + f(dM[0] - 40 - thOff[0]) + " " + f(dM[1] - thOff[1]) + " " + f(PM[0] + 30) + " " + f(PM[1]) + " " + pt(PM);
   tl.set(thFly.g, { x: thStartG[0], y: thStartG[1] }, tm.thermal - 0.01);
   FT(thFly.g, { opacity: 0 }, { opacity: 1, duration: 0.08, ease: "none" }, tm.thermal);
   FT(th.g, { opacity: 1 }, { opacity: 0.35, duration: 0.2, ease: "none" }, tm.thermal);
@@ -493,7 +500,7 @@ PK.section("s7-cooperate", 78, 84, function (tl, W, ctx, S) {
     return xy(h.g);
   });
   var hMid = hexC[Math.floor(hexC.length / 2)] || [1726, 696];
-  var askD = "M" + f(ST[0] + 18) + " " + f(ST[1] + 6) + " C" + f(ST[0] + 140) + " " + f(ST[1] + 10) + " " + f(hMid[0] - 140) + " " + f(hMid[1]) + " " + f(hMid[0] - 22) + " " + f(hMid[1]);
+  var askD = "M" + f(ST[0] + 18) + " " + f(ST[1] - 4) + " C" + f(ST[0] + 140) + " " + f(ST[1] - 8) + " " + f(hMid[0] - 140) + " " + f(hMid[1]) + " " + f(hMid[0] - 22) + " " + f(hMid[1]);
   var ask = PK.el("path", { d: askD, class: "pk-thread-dash" }, W.L.threads);
   gsap.set(ask, { opacity: 0 });
   FT(ask, { opacity: 0 }, { opacity: 1, duration: 0.14, ease: "none" }, tm.ask);
@@ -507,9 +514,9 @@ PK.section("s7-cooperate", 78, 84, function (tl, W, ctx, S) {
   PK.el("circle", { cx: 0, cy: 0, r: f(BR), fill: C.paper, stroke: C.rust, "stroke-width": 1.2, "stroke-dasharray": "2.4 1.8" }, bead);
   PK.text(bead, "?", 0, LS * 0.36, { font: "mono", size: LS, fill: C.rust, anchor: "middle", upper: false, track: 0 });
   gsap.set(bead, { opacity: 0 });
-  var beadEndP = [ST[0] + 36, ST[1] + 6];
-  var beadD = "M" + f(hMid[0] - 22) + " " + f(hMid[1]) + " C" + f(hMid[0] - 140) + " " + f(hMid[1]) + " " + f(ST[0] + 150) + " " + f(ST[1] + 10) + " " + pt(beadEndP);
-  tl.set(bead, { x: hMid[0] - 22, y: hMid[1] }, tm.bead - 0.01);
+  var beadEndP = [ST[0] + 34, ST[1] + 20];
+  var beadD = "M" + f(hMid[0] - 22) + " " + f(hMid[1] + 4) + " C" + f(hMid[0] - 140) + " " + f(hMid[1] + 20) + " " + f(ST[0] + 150) + " " + f(ST[1] + 24) + " " + pt(beadEndP);
+  tl.set(bead, { x: hMid[0] - 22, y: hMid[1] + 4 }, tm.bead - 0.01);
   FT(bead, { opacity: 0 }, { opacity: 1, duration: 0.08, ease: "none" }, tm.bead);
   PK.travel(tl, bead, beadD, tm.bead, tm.beadD, "power2.inOut");
   PK.sfx("return", tm.bead + tm.beadD, { gain_db: -9, pan: 0.55 });
@@ -517,7 +524,7 @@ PK.section("s7-cooperate", 78, 84, function (tl, W, ctx, S) {
   labelIn(lPrice, tm.bead + tm.beadD - 0.02);
   var lT = mono("What would it cost?", dT[0] + 34, dT[1] + 48);
   labelIn(lT, tm.bead + tm.beadD - 0.02);
-  FT(ask, { opacity: 1 }, { opacity: 0, duration: 0.25, ease: "power1.in" }, tm.bead + tm.beadD);
+  FT(ask, { opacity: 1 }, { opacity: 0, duration: 0.22, ease: "power1.in" }, tm.bead + tm.beadD - 0.12);
   closes("transfer", tm.rideR + 0.32);
 
   // ------------------------------------------------------------ 3. Retain: the rest goes up to Retain, the clamp bar bridges it

@@ -1,16 +1,19 @@
 /*
-  s8-system (84 to 90 s): the complete system.
-  The camera pulls back to the whole sheet (82.8 to 84.6). Priora flies home above the
-  real world; the decided case drops into the record and settles as a second tick; the
-  Insurer conditions token returns upright; the risk owner's line rests. Three mono labels
-  name the mechanism: ONE PRIORA AGENT, A CONFIGURABLE SITE PANEL, THREE DECISION ROOMS.
-  Under the panel, the first use case (HOT WORK) and the later ones, dashed: the panel's
-  agents briefly turn to ghost outlines and back, as if configured for another activity.
-  DESIGN PROPOSAL, small, bottom left. The tagline in two lines. Then the world fades to
-  paper and the Priora wordmark, ink, still, holds to the end.
+  s8-system (84 to 90 s): the complete system. (cut 2)
 
-  Reads W.coop from s7 (same builder). Everything persistent it animates was set to the
-  78.0 contract in s7.
+  The camera pulls back to the whole sheet (83.1 to 84.4); while it does, every label that is
+  not read at 1:1 fades (the panel's agent names, CONFIGURED FOR THIS SITE, the rooms' agent
+  names, the s7 labels) and the names that are read at 1:1 grow to stay legible (room names,
+  the panel title, WORKER / SITE / RISK OWNER, the single SIMULATED chip). In the still 1:1
+  frame: Priora flies home (84.4 to 85.0); the decided case drops into the record as a second
+  tick; the Insurer conditions token returns upright; the route retracts into the panel door.
+  Text, staggered: ONE PRIORA AGENT 84.6, A CONFIGURABLE SITE PANEL 84.9, THREE DECISION ROOMS
+  with DESIGN PROPOSAL under it 85.2, FIRST HOT WORK 85.4, the LATER row 85.7 while one dashed
+  ghost token slides from the LIFTING tab into an empty panel slot and back. The tagline: line
+  one on "risk", line two on "while". The world, the labels and the tabs fade 88.0 to 88.5,
+  the tagline 88.5 to 88.8; the Priora wordmark appears alone at 88.75 and holds to 90.
+
+  Reads W.coop from s7 (same builder).
 */
 PK.section("s8-system", 84, 90, function (tl, W, ctx, S) {
   var G = PK.GEO,
@@ -19,73 +22,56 @@ PK.section("s8-system", 84, 90, function (tl, W, ctx, S) {
   var cs = W.caseT;
   var A = W.agents;
   var KEYS = ["siteRules", "insurer", "fire", "riskEng", "evidence"];
-  var co = W.coop || { packetEnd: [1196, 392], prioraEnd: [1210, 298], beadEnd: 90, loop: null };
+  var co = W.coop || { packetEnd: [1206, 508], prioraEnd: [1130, 432], beadEnd: 45, packetScale: 1.4, labels: [], loop: null };
+  function pt(p) {
+    return f(p[0]) + " " + f(p[1]);
+  }
   function FT(el, from, to, at) {
     var v = {};
     for (var k in to) v[k] = to[k];
     v.immediateRender = false;
     tl.fromTo(el, from, v, at);
   }
-  function pt(p) {
-    return f(p[0]) + " " + f(p[1]);
+  function valAt(el, prop, t) {
+    var best = null,
+      bestEnd = -1;
+    tl.getTweensOf(el).forEach(function (tw) {
+      var end = tw.startTime() + tw.duration();
+      if (end > t + 1e-6 || end < bestEnd) return;
+      var v = tw.vars;
+      if (v[prop] !== undefined && v[prop] !== null) {
+        best = v[prop];
+        bestEnd = end;
+      }
+    });
+    return best;
   }
+  var tPull = 83.1,
+    tStill = 84.4;
 
-  // ------------------------------------------------------------ 1. Priora flies home; the decided case drops into the record
-  var home = G.prioraHome;
-  var tHome = 83.24,
-    durHome = 1.5;
-  var legHome = "M" + pt(co.prioraEnd) + " C" + f(co.prioraEnd[0] - 50) + " " + f(co.prioraEnd[1] - 80) + " " + f(home[0] + 120) + " " + f(home[1]) + " " + pt(home);
-  PK.travel(tl, W.priora.g, legHome, tHome, durHome, "power2.inOut");
-  PK.trail(tl, W.L.trails, legHome, tHome, durHome);
-  tl.fromTo(W.priora.beadG, { rotation: co.beadEnd }, { rotation: 90, svgOrigin: "0 0", duration: 0.9, ease: "power2.inOut", immediateRender: false }, tHome + durHome - 0.7);
-  PK.sfx("move", tHome, { gain_db: -10, dur: durHome, pan: 0.1 });
-  PK.sfx("arrive", tHome + durHome, { gain_db: -12, pan: 0 });
+  // ------------------------------------------------------------ 1. during the pull-out: fade what is not read at 1:1, grow what is
+  var fadeOut = [W.panel.sub];
+  KEYS.forEach(function (k) {
+    if (A[k].label) fadeOut.push(A[k].label);
+  });
+  if (W.roomAgents) {
+    ["retain", "mitigate", "transfer"].forEach(function (k) {
+      (W.roomAgents[k] || []).forEach(function (a) {
+        if (a.name) fadeOut.push(a.name);
+        if (a.label) fadeOut.push(a.label);
+      });
+    });
+  }
+  (co.labels || []).forEach(function (l) {
+    fadeOut.push(l);
+  });
+  fadeOut.forEach(function (el) {
+    var o = valAt(el, "opacity", tPull);
+    if (o === null) o = parseFloat(gsap.getProperty(el, "opacity"));
+    if (!(o > 0)) return; // already hidden
+    FT(el, { opacity: o }, { opacity: 0, duration: 0.4, ease: "power1.in" }, tPull + 0.02);
+  });
 
-  // the black loop lets go (the line rests at the branch point, the trunk stays)
-  if (co.loop) PK.drawOff(tl, co.loop, 83.22, 0.7, "power2.inOut", { to: "start" });
-
-  // the record: the second tick sits beside the first (same style as the first)
-  var ticks = W.record.ticks;
-  var first = ticks.lastElementChild;
-  var fb = null;
-  try {
-    fb = first ? first.getBBox() : null;
-  } catch (e) {}
-  var fx = fb && fb.width < 40 ? fb.x + fb.width / 2 : G.record.x0 + 6;
-  var tickX = fx + 24,
-    ry = G.record.y,
-    th = fb && fb.height > 4 && fb.height < 40 ? fb.height / 2 : 9;
-  var tick2 = PK.el("path", { d: "M" + f(tickX) + " " + f(ry - th) + " V" + f(ry + th), fill: "none", stroke: C.rust, "stroke-width": (first && first.getAttribute("stroke-width")) || 2.6, "stroke-linecap": "round" }, ticks);
-  if (first && first.getAttribute("class")) tick2.setAttribute("class", first.getAttribute("class"));
-  gsap.set(tick2, { drawSVG: "50% 50%", opacity: 0 });
-
-  // the decided case drops into the record between the site and the risk owner, then files along it
-  var p0 = co.packetEnd;
-  var legCase =
-    "M" + pt(p0) +
-    " C" + f(p0[0] - 46) + " " + f(p0[1] + 78) + " " + f(1077) + " " + f(560) + " " + f(1077) + " " + f(680) +
-    " C" + f(1077) + " " + f(760) + " " + f(1062) + " " + f(ry) + " " + f(1010) + " " + f(ry) +
-    " L" + f(tickX) + " " + f(ry);
-  var tCase = 83.3,
-    durCase = 1.6;
-  PK.travel(tl, cs.g, legCase, tCase, durCase, "power2.inOut");
-  PK.trail(tl, W.L.trails, legCase, tCase, durCase);
-  tl.fromTo(cs.body, { scale: 1, svgOrigin: "0 0" }, { scale: 0.32, svgOrigin: "0 0", duration: durCase, ease: "power2.inOut", immediateRender: false }, tCase);
-  var tLand = tCase + durCase;
-  tl.fromTo(cs.g, { opacity: 1 }, { opacity: 0, duration: 0.25, ease: "power1.in", immediateRender: false }, tLand - 0.08);
-  tl.set(tick2, { opacity: 1 }, tLand - 0.06);
-  tl.fromTo(tick2, { drawSVG: "50% 50%" }, { drawSVG: "0% 100%", duration: 0.3, ease: "power2.out", immediateRender: false }, tLand - 0.06);
-  PK.sfx("move", tCase, { gain_db: -12, dur: durCase, pan: 0.2, size: "case" });
-  PK.sfx("record", tLand, { gain_db: -6, pan: -0.25 });
-
-  // the Insurer conditions token returns upright to its aligned place
-  var insP = G.slot(G.agents.insurer.aligned);
-  var tUp = 84.2;
-  tl.fromTo(A.insurer.g, { x: insP[0], y: insP[1] - 8 }, { x: insP[0], y: insP[1], duration: 0.8, ease: "power2.inOut", immediateRender: false }, tUp);
-  tl.fromTo(A.insurer.body, { rotation: 12, svgOrigin: "0 0" }, { rotation: 0, svgOrigin: "0 0", duration: 0.8, ease: "power2.inOut", immediateRender: false }, tUp);
-  PK.sfx("align", tUp + 0.6, { gain_db: -16, pan: -0.5, size: "small" });
-
-  // ------------------------------------------------------------ names sized for the 1:1 view (they grow while the camera pulls back)
   function grow(el, to, at, dur) {
     if (!el) return;
     var b = null;
@@ -97,70 +83,144 @@ PK.section("s8-system", 84, 90, function (tl, W, ctx, S) {
     var ox = anchor === "middle" ? b.x + b.width / 2 : anchor === "end" ? b.x + b.width : b.x;
     var oy = parseFloat(el.getAttribute("y")) || b.y + b.height;
     var o = f(ox) + " " + f(oy);
-    FT(el, { scale: 1, svgOrigin: o }, { scale: to, svgOrigin: o, duration: dur || 1.4, ease: "power2.inOut" }, at);
+    FT(el, { scale: 1, svgOrigin: o }, { scale: to, svgOrigin: o, duration: dur || tStill - tPull, ease: "power2.inOut" }, at);
   }
-  var tGrow = 83.15;
+  function fontSize(el) {
+    var m = /font-size:\s*([\d.]+)px/.exec(el.getAttribute("style") || "");
+    return m ? parseFloat(m[1]) : 15;
+  }
   ["retain", "mitigate", "transfer"].forEach(function (k) {
-    grow(W.rooms[k].name, 22 / 15, tGrow);
+    var n = W.rooms[k].name;
+    grow(n, Math.max(1, 22 / fontSize(n)), tPull);
   });
-  grow(W.panel.title, 22 / 17, tGrow);
+  grow(W.panel.title, Math.max(1, 22 / fontSize(W.panel.title)), tPull);
+  // WORKER / SITE / RISK OWNER are counter-scaled by font-size up to 83.1 (s1): continue from the current value
   ["worker", "site", "owner"].forEach(function (k) {
-    grow(W.real.labels[k], 2, tGrow);
+    tl.to(W.real.labels[k], { fontSize: 18.5, duration: tStill - tPull, ease: "power2.inOut" }, tPull);
   });
-  // SIMULATED stays legible at 1:1: the room's chip hands over to a larger one in the same place
+  // the SIMULATED chip stays one chip: it grows to 19 px type at 1:1 and moves clear of the carriers
+  var chip = W.rooms.transfer.chip;
   var tr = G.rooms.transfer;
-  var simTS = 18,
-    simW = PK.measure("SIMULATED", "mono500", simTS, 0.12) + 22,
-    simH = 30;
-  // same right edge and centre line as the room's chip (s6 scales it 1.25 about its centre)
-  var simX = tr.x + tr.w - 104 + 43 + 43 * 1.25 - simW,
-    simY = tr.y + 24 - simH / 2;
-  var sim = PK.g(W.L.chambers);
-  PK.el("rect", { x: f(simX), y: f(simY), width: f(simW), height: simH, rx: 3, fill: C.paper, stroke: C.rust, "stroke-width": 1.4 }, sim);
-  PK.text(sim, "Simulated", simX + simW / 2, simY + simH / 2 + simTS * 0.36, { font: "mono", size: simTS, fill: C.rust, anchor: "middle", weight: 600 });
-  gsap.set(sim, { opacity: 0 });
-  FT(W.rooms.transfer.chip, { opacity: 1 }, { opacity: 0, duration: 0.2, ease: "power1.in" }, 83.62);
-  FT(sim, { opacity: 0 }, { opacity: 1, duration: 0.3, ease: "power1.out" }, 83.72);
+  var cBox = [tr.x + tr.w - 104, tr.y + 14, 86, 20]; // the chip's own rect (world.js)
+  var cO = valAt(chip, "svgOrigin", 78) || "1719 630";
+  var oxy = String(cO).split(/[ ,]+/).map(parseFloat);
+  var s0 = valAt(chip, "scale", 78);
+  if (s0 === null) s0 = 1;
+  var x0 = valAt(chip, "x", 78) || 0,
+    y0 = valAt(chip, "y", 78) || 0;
+  var s1 = 19 / 9; // the chip's type is 9 units
+  var hexLeft = tr.x + tr.w - 8;
+  if (W.roomAgents && W.roomAgents.transfer) {
+    W.roomAgents.transfer.forEach(function (h) {
+      var hx = valAt(h.g, "x", 78);
+      if (hx === null) hx = gsap.getProperty(h.g, "x");
+      var hb = null;
+      try {
+        hb = h.g.getBBox();
+      } catch (e) {}
+      hexLeft = Math.min(hexLeft, hx + (hb ? hb.x : -17));
+    });
+  }
+  var rightT = Math.min(tr.x + tr.w - 10, hexLeft - 14),
+    topT = tr.y + 8;
+  var x1 = rightT - oxy[0] - s1 * (cBox[0] + cBox[2] - oxy[0]),
+    y1 = topT - oxy[1] - s1 * (cBox[1] - oxy[1]);
+  FT(chip, { scale: s0, x: x0, y: y0, svgOrigin: cO }, { scale: s1, x: x1, y: y1, svgOrigin: cO, duration: tStill - tPull, ease: "power2.inOut" }, tPull);
 
-  // ------------------------------------------------------------ 2. the three mono labels at 1:1
+  // ------------------------------------------------------------ 2. in the still 1:1 frame: Priora home, the case into the record
+  var home = G.prioraHome;
+  var tHome = tStill,
+    durHome = 0.62;
+  var legHome = "M" + pt(co.prioraEnd) + " C" + f(co.prioraEnd[0] - 30) + " " + f(co.prioraEnd[1] - 120) + " " + f(home[0] + 110) + " " + f(home[1]) + " " + pt(home);
+  PK.travel(tl, W.priora.g, legHome, tHome, durHome, "power2.inOut");
+  PK.trail(tl, W.L.trails, legHome, tHome, durHome, "power2.inOut");
+  FT(W.priora.beadG, { rotation: co.beadEnd }, { rotation: 90, svgOrigin: "0 0", duration: durHome, ease: "power2.inOut" }, tHome);
+  PK.sfx("move", tHome, { gain_db: -10, dur: durHome, pan: 0.1 });
+
+  // the human's loop lets go of the decided case (the line rests at the branch point)
+  if (co.loop) PK.drawOff(tl, co.loop, tStill, 0.42, "power2.inOut", { to: "start" });
+
+  // the record: a second tick near the spine's right end, the same style as the first
+  var ticks = W.record.ticks;
+  var first = ticks.firstElementChild;
+  var fb = null;
+  try {
+    fb = first ? first.getBBox() : null;
+  } catch (e) {}
+  var ry = G.record.y,
+    th = fb && fb.height > 4 && fb.height < 40 ? fb.height / 2 : 9;
+  var tickX = G.owner[0] + 24; // under the risk owner: the decision is on the record
+  var tick2 = PK.el("path", { d: "M" + f(tickX) + " " + f(ry - th) + " V" + f(ry + th), fill: "none", stroke: C.rust, "stroke-width": (first && first.getAttribute("stroke-width")) || 2.6, "stroke-linecap": "round" }, ticks);
+  gsap.set(tick2, { drawSVG: "50% 50%", opacity: 0 });
+  var p0 = co.packetEnd;
+  var legCase = "M" + pt(p0) + " C" + f(p0[0] + 40) + " " + f(p0[1] + 90) + " " + f(1254) + " " + f(ry - 120) + " " + f(1254) + " " + f(ry - 30) + " Q" + f(1252) + " " + f(ry) + " " + f(tickX) + " " + f(ry);
+  var tCase = tStill,
+    durCase = 0.58;
+  PK.travel(tl, cs.g, legCase, tCase, durCase, "power2.inOut");
+  PK.trail(tl, W.L.trails, legCase, tCase, durCase, "power2.inOut");
+  FT(cs.body, { scale: co.packetScale || 1.4 }, { scale: 0.28, svgOrigin: "0 0", duration: durCase, ease: "power2.in" }, tCase);
+  var tLand = tCase + durCase;
+  FT(cs.g, { opacity: 1 }, { opacity: 0, duration: 0.12, ease: "none" }, tLand - 0.06);
+  tl.set(tick2, { opacity: 1 }, tLand - 0.06);
+  FT(tick2, { drawSVG: "50% 50%" }, { drawSVG: "0% 100%", duration: 0.2, ease: "power2.out" }, tLand - 0.06);
+  FT(tick2, { scale: 1.5, svgOrigin: f(tickX) + " " + f(ry) }, { scale: 1, svgOrigin: f(tickX) + " " + f(ry), duration: 0.4, ease: "power2.out" }, tLand - 0.06);
+  PK.sfx("move", tCase, { gain_db: -12, dur: durCase, pan: 0.25, size: "case" });
+  PK.sfx("record", tLand, { gain_db: -5, pan: 0.25 });
+
+  // the Insurer conditions token returns upright to its aligned place
+  var insP = G.slot(G.agents.insurer.aligned);
+  FT(A.insurer.g, { x: insP[0], y: insP[1] - 8 }, { x: insP[0], y: insP[1], duration: 0.6, ease: "power2.inOut" }, tStill);
+  FT(A.insurer.body, { rotation: 12, svgOrigin: "0 0" }, { rotation: 0, svgOrigin: "0 0", duration: 0.6, ease: "power2.inOut" }, tStill);
+  PK.sfx("align", tStill + 0.45, { gain_db: -16, pan: -0.5, size: "small" });
+
+  // the route retracts into the panel door (it no longer starts from an empty table)
+  var rl = W.route.getTotalLength(),
+    dDoor = 0;
+  for (var sL = 0; sL < rl; sL += 1) {
+    if (W.route.getPointAtLength(sL).x >= G.panel.x + G.panel.w) {
+      dDoor = sL;
+      break;
+    }
+  }
+  FT(W.route, { drawSVG: "0% 100%" }, { drawSVG: f((dDoor / rl) * 100) + "% 100%", duration: 0.6, ease: "power2.inOut" }, tStill);
+
+  // ------------------------------------------------------------ 3. text, staggered (nothing new after the tagline's second line)
   var LS = 20;
-  function label(str, x, y, at, fill) {
-    var t = PK.text(W.L.top, str, x, y, { font: "mono", size: LS, fill: fill || C.ink, anchor: "middle" });
+  function label(str, x, y, at, o) {
+    o = o || {};
+    var t = PK.text(W.L.top, str, x, y, { font: "mono", size: o.size || LS, fill: o.fill || C.ink, anchor: "middle" });
     gsap.set(t, { opacity: 0 });
-    tl.fromTo(t, { opacity: 0, y: 6 }, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out", immediateRender: false }, at);
-    PK.sfx("title", at, { gain_db: -16, pan: (x - 960) / 960 });
+    FT(t, { opacity: 0, y: 5 }, { opacity: 1, y: 0, duration: 0.4, ease: "power2.out" }, at);
+    if (!o.silent) PK.sfx("title", at, { gain_db: -16, pan: (x - 960) / 960 });
     return t;
   }
   var P = G.panel,
     RR = G.rooms;
-  var labels = [
-    label("One Priora agent", home[0], home[1] - 26 - 22, 84.7),
-    label("A configurable site panel", P.x + P.w / 2, P.y - 22, 85.1),
-    label("Three decision rooms", RR.retain.x + RR.retain.w / 2, RR.retain.y - 22, 85.5),
-  ];
+  var rx = RR.retain.x + RR.retain.w / 2;
+  label("One Priora agent", home[0], home[1] - 26 - 22, 84.6);
+  label("A configurable site panel", P.x + P.w / 2, P.y - 22, 84.9);
+  label("Three decision rooms", rx, RR.retain.y - 50, 85.2);
+  label("Design proposal", rx, RR.retain.y - 22, 85.2, { fill: C.ink2, silent: true });
 
-  // ------------------------------------------------------------ 3. hot work first, other activities later
+  // FIRST HOT WORK, then the LATER row: the row labels sit in the margin, the tabs inside the panel width
   var TS = 18,
-    TR = 0.04,
-    pad = 8,
+    TR = 0.02,
+    pad = 6,
     tabH = 28,
-    gapX = 7;
+    gapX = 5;
   var tabsG = PK.g(W.L.top);
-  var x0 = P.x,
-    y1 = P.y + P.h + 33,
+  var y1 = P.y + P.h + 34,
     y2 = y1 + tabH + 10;
-  var lw = PK.measure("LATER", "mono500", TS, TR);
-  var tx0 = x0 + lw + 14;
+  var tx0 = P.x;
   function rowLabel(str, y, fill) {
-    var t = PK.text(tabsG, str, x0, y + TS * 0.36, { font: "mono", size: TS, fill: fill, track: TR });
-    return t;
+    return PK.text(tabsG, str, P.x - 12, y + TS * 0.36, { font: "mono", size: TS, fill: fill, track: TR, anchor: "end" });
   }
   function tab(str, x, y, solid) {
     var w = PK.measure(str.toUpperCase(), "mono500", TS, TR) + pad * 2;
     var g = PK.g(tabsG);
     PK.el("path", { d: PK.rectPath(x, y - tabH / 2, w, tabH, 4), class: solid ? "pk-hair" : "pk-ghost" }, g);
     PK.text(g, str, x + pad, y + TS * 0.36, { font: "mono", size: TS, fill: solid ? C.ink : C.grey, track: TR });
-    return { g: g, w: w };
+    return { g: g, w: w, x: x, y: y };
   }
   var lFirst = rowLabel("First", y1, C.rust);
   var tHot = tab("Hot work", tx0, y1, true);
@@ -174,52 +234,44 @@ PK.section("s8-system", 84, 90, function (tl, W, ctx, S) {
   });
   gsap.set([lFirst, tHot.g, lLater].concat(later.map(function (t) { return t.g; })), { opacity: 0 });
   var tTab1 = 85.4,
-    tTab2 = 85.8;
-  tl.fromTo([lFirst, tHot.g], { opacity: 0, y: -5 }, { opacity: 1, y: 0, duration: 0.45, ease: "power2.out", immediateRender: false }, tTab1);
+    tTab2 = 85.7;
+  FT([lFirst, tHot.g], { opacity: 0, y: -4 }, { opacity: 1, y: 0, duration: 0.4, ease: "power2.out" }, tTab1);
   PK.sfx("print", tTab1, { gain_db: -14, pan: -0.6 });
-  tl.fromTo(lLater, { opacity: 0, y: -5 }, { opacity: 1, y: 0, duration: 0.45, ease: "power2.out", immediateRender: false }, tTab2);
+  FT(lLater, { opacity: 0, y: -4 }, { opacity: 1, y: 0, duration: 0.4, ease: "power2.out" }, tTab2);
   later.forEach(function (t, i) {
-    tl.fromTo(t.g, { opacity: 0, y: -5 }, { opacity: 1, y: 0, duration: 0.45, ease: "power2.out", immediateRender: false }, tTab2 + 0.1 + i * 0.1);
+    FT(t.g, { opacity: 0, y: -4 }, { opacity: 1, y: 0, duration: 0.4, ease: "power2.out" }, tTab2 + i * 0.08);
   });
-  PK.sfx("print", tTab2 + 0.1, { gain_db: -18, pan: -0.55, material: "ghost" });
+  PK.sfx("print", tTab2, { gain_db: -18, pan: -0.55, material: "ghost" });
 
-  // the panel's agents turn to ghost outlines and back: the panel can be configured for other work
-  var tGhost = 86.05;
-  // each token leaves a dashed outline of its own silhouette while it dims
-  var ghosts = [];
-  KEYS.forEach(function (k) {
-    var a = A[k];
-    var gg = PK.g(a.g);
-    a.g.insertBefore(gg, a.body);
-    Array.prototype.forEach.call(a.body.querySelectorAll("path"), function (pth) {
-      if (pth.getAttribute("fill") !== C.rust) return;
-      var c = PK.el("path", { d: pth.getAttribute("d"), class: "pk-ghost" }, gg);
-      var tr = pth.parentNode !== a.body ? pth.parentNode.getAttribute("transform") : null;
-      if (tr) c.setAttribute("transform", tr);
-    });
-    gsap.set(gg, { opacity: 0 });
-    ghosts.push(gg);
-  });
-  var bodies = KEYS.map(function (k) {
-    return A[k].body;
-  });
-  tl.fromTo(bodies, { opacity: 1 }, { opacity: 0.1, duration: 0.3, ease: "power2.inOut", immediateRender: false }, tGhost);
-  tl.fromTo(ghosts, { opacity: 0 }, { opacity: 1, duration: 0.3, ease: "power2.inOut", immediateRender: false }, tGhost);
-  tl.fromTo(ghosts, { opacity: 1 }, { opacity: 0, duration: 0.35, ease: "power2.inOut", immediateRender: false }, tGhost + 0.75);
-  tl.fromTo(bodies, { opacity: 0.1 }, { opacity: 1, duration: 0.35, ease: "power2.inOut", immediateRender: false }, tGhost + 0.75);
-  PK.sfx("summon", tGhost, { gain_db: -18, pan: -0.6, material: "ghost" });
+  // one dashed ghost token slides from the LIFTING tab into an empty panel slot and back
+  var lift = later[0];
+  var from = [lift.x + lift.w / 2, lift.y - tabH / 2 - 16];
+  var slotA = 90; // between Evidence (54) and Risk engineering (126): an empty place on the ring
+  var to = G.slot(slotA);
+  var ghost = PK.g(W.L.tokens);
+  var gst = { fill: "none", stroke: C.grey, "stroke-width": 1.6, "stroke-dasharray": "3.2 2.6", "stroke-linejoin": "round" };
+  PK.el("path", Object.assign({ d: PK.rectPath(-13, -13, 26, 26, 5) }, gst), ghost);
+  PK.el("path", Object.assign({ d: PK.rectPath(-6, -2, 12, 4, 1.5) }, gst, { "stroke-dasharray": "none", "stroke-width": 1.3 }), ghost);
+  gsap.set(ghost, { x: from[0], y: from[1], opacity: 0 });
+  var slotRing = PK.el("circle", { cx: f(to[0]), cy: f(to[1]), r: 21, fill: "none", stroke: C.hair, "stroke-width": 1.2, "stroke-dasharray": "2 3" }, W.L.tokens);
+  gsap.set(slotRing, { opacity: 0 });
+  var tG = tTab2 + 0.05;
+  var gUp = PK.curve(from, to, 30),
+    gDown = PK.curve(to, from, 30);
+  FT(ghost, { opacity: 0 }, { opacity: 1, duration: 0.1, ease: "none" }, tG);
+  FT(slotRing, { opacity: 0 }, { opacity: 1, duration: 0.15, ease: "none" }, tG);
+  PK.travel(tl, ghost, gUp, tG, 0.24, "power2.inOut");
+  PK.travel(tl, ghost, gDown, tG + 0.32, 0.22, "power2.inOut");
+  FT(ghost, { opacity: 1 }, { opacity: 0, duration: 0.1, ease: "none" }, tG + 0.5);
+  FT(slotRing, { opacity: 1 }, { opacity: 0, duration: 0.2, ease: "none" }, tG + 0.42);
+  PK.sfx("summon", tG, { gain_db: -18, pan: -0.6, material: "ghost" });
 
-  // a design proposal, said once
-  var lDP = PK.text(W.L.top, "Design proposal", P.x, 1036, { font: "mono", size: 18, fill: C.grey });
-  gsap.set(lDP, { opacity: 0 });
-  tl.fromTo(lDP, { opacity: 0 }, { opacity: 1, duration: 0.5, ease: "power1.out", immediateRender: false }, 85.9);
-
-  // ------------------------------------------------------------ 4. the tagline, two lines, under the system
+  // ------------------------------------------------------------ 4. the tagline, keyed to its spoken words
   var tag = document.createElement("div");
   tag.className = "pk-statement";
   tag.style.top = "892px";
-  tag.style.fontSize = "34px";
-  tag.style.lineHeight = "1.32";
+  tag.style.fontSize = "36px";
+  tag.style.lineHeight = "1.3";
   var t1 = document.createElement("div");
   t1.textContent = "Priora turns physical work into explicit risk decisions";
   var t2 = document.createElement("div");
@@ -229,14 +281,16 @@ PK.section("s8-system", 84, 90, function (tl, W, ctx, S) {
   tag.style.opacity = "1";
   ctx.overlay.appendChild(tag);
   gsap.set([t1, t2], { opacity: 0 });
-  tl.fromTo(t1, { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.7, ease: "power3.out", immediateRender: false }, 85.8);
-  tl.fromTo(t2, { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.7, ease: "power3.out", immediateRender: false }, 86.25);
-  PK.sfx("title", 85.8, { gain_db: -10 });
+  var tL1 = PK.word("L14", "risk"),
+    tL2 = PK.word("L14", "while");
+  FT(t1, { opacity: 0, y: 8 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, tL1 - 0.05);
+  FT(t2, { opacity: 0, y: 8 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, tL2 - 0.05);
+  PK.sfx("title", tL1 - 0.05, { gain_db: -10 });
 
-  // ------------------------------------------------------------ 5. the world fades to paper; the wordmark
+  // ------------------------------------------------------------ 5. the world fades to paper; the wordmark alone
   var world = document.getElementById("pk-world");
-  tl.fromTo(world, { opacity: 1 }, { opacity: 0, duration: 0.45, ease: "power1.inOut", immediateRender: false }, 88.2);
-  tl.fromTo(tag, { opacity: 1 }, { opacity: 0, duration: 0.5, ease: "power1.inOut", immediateRender: false }, 88.25);
+  FT(world, { opacity: 1 }, { opacity: 0, duration: 0.5, ease: "power1.inOut" }, 88.0);
+  FT(tag, { opacity: 1 }, { opacity: 0, duration: 0.3, ease: "power1.in" }, 88.5);
 
   var wmW = 440,
     wmH = (wmW * 758) / 2617;
@@ -257,6 +311,6 @@ PK.section("s8-system", 84, 90, function (tl, W, ctx, S) {
     '"/></g></svg>';
   ctx.overlay.appendChild(wm);
   gsap.set(wm, { opacity: 0 });
-  tl.fromTo(wm, { opacity: 0 }, { opacity: 1, duration: 0.5, ease: "power2.inOut", immediateRender: false }, 88.5);
-  PK.sfx("wordmark", 88.5, { gain_db: -6 });
+  FT(wm, { opacity: 0 }, { opacity: 1, duration: 0.35, ease: "power1.out" }, 88.75);
+  PK.sfx("wordmark", 88.75, { gain_db: -6 });
 });
