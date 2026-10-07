@@ -185,36 +185,37 @@ PK.section("s3-panel", 22.3, 38, function (tl, W, ctx, S) {
   });
 
   // ------------------------------------------------------------ 24.5 to 25.75: selection. The bead sweeps the ring and
-  // considers each ghost: a short dashed feeler starts toward it, stops short at the door and retracts. The seat stays empty.
+  // considers each ghost: a dashed feeler starts toward it through the door, stops short of it and retracts. The seat stays empty.
   openDoor(24.45, 0.35);
   var tP = 24.5;
   ghosts.forEach(function (gh, i) {
     var A = Math.round(angleOf(gh.p[0] - PRI[0], gh.p[1] - PRI[1]) * 10) / 10;
-    turnBead(A, tP, 0.13);
-    // the feeler lives in the bead's group, so it points where the bead points
-    var fl = maskedDash(P.beadG, "M31 0 H76");
+    var dist = Math.sqrt(Math.pow(gh.p[0] - PRI[0], 2) + Math.pow(gh.p[1] - PRI[1], 2));
+    turnBead(A, tP, 0.12);
+    // the feeler lives in the bead's group, so it runs straight at the ghost (through the door gap) and stops short of it
+    var fl = maskedDash(P.beadG, "M31 0 H" + f(dist - 52));
     P.beadG.insertBefore(fl.el, P.bead);
-    var t = tP + 0.13;
-    tl.fromTo(fl.reveal, { drawSVG: "0% 0%" }, { drawSVG: "0% 100%", duration: 0.13, ease: "power2.out", immediateRender: false }, t);
-    tl.fromTo(fl.reveal, { drawSVG: "0% 100%" }, { drawSVG: "0% 0%", duration: 0.1, ease: "power2.in", immediateRender: false }, t + 0.19);
+    var t = tP + 0.12;
+    tl.fromTo(fl.reveal, { drawSVG: "0% 0%" }, { drawSVG: "0% 100%", duration: 0.16, ease: "power2.out", immediateRender: false }, t);
+    tl.fromTo(fl.reveal, { drawSVG: "0% 100%" }, { drawSVG: "0% 0%", duration: 0.13, ease: "power2.in", immediateRender: false }, t + 0.22);
     // the ghost answers, once, and stays a ghost
-    tl.fromTo(gh.hd.inner, { scale: 1, svgOrigin: "0 0" }, { scale: 1.16, svgOrigin: "0 0", duration: 0.1, ease: "power2.out", immediateRender: false }, t + 0.1);
-    tl.fromTo(gh.hd.inner, { scale: 1.16, svgOrigin: "0 0" }, { scale: 1, svgOrigin: "0 0", duration: 0.25, ease: "power2.inOut", immediateRender: false }, t + 0.2);
+    tl.fromTo(gh.hd.inner, { scale: 1, svgOrigin: "0 0" }, { scale: 1.18, svgOrigin: "0 0", duration: 0.1, ease: "power2.out", immediateRender: false }, t + 0.14);
+    tl.fromTo(gh.hd.inner, { scale: 1.18, svgOrigin: "0 0" }, { scale: 1, svgOrigin: "0 0", duration: 0.25, ease: "power2.inOut", immediateRender: false }, t + 0.24);
     PK.sfx("request", t, { gain_db: -16, part: "probe", pan: pan(gh.p[0], t) });
-    tP = t + 0.29;
+    tP = t + 0.36;
   });
 
   // ------------------------------------------------------------ 25.8 to 29.05: Priora summons five specialists
   // the bead sweeps back, seat by seat; the facet that makes each one relevant calls it in
   var summons = [
-    { key: "evidence", facet: "photo", ey: 534, fctl: [650, 556] },
-    { key: "riskEng", facet: "place", ey: 528, fctl: [712, 506] },
+    { key: "evidence", facet: "photo", ey: 526, fctl: [650, 552] },
+    { key: "riskEng", facet: "place", ey: 520, fctl: [712, 506] },
     { key: "siteRules", facet: "conditions", ey: 482, fctl: [655, 610] },
     { key: "fire", facet: "hot", ey: 494, fctl: [660, 520] },
     { key: "insurer", facet: "conditions", ey: 488, fctl: [655, 610] },
   ];
   var tS0 = tP + 0.1,
-    SP = 0.64;
+    SP = 0.6;
   // the inside part of each thread, from the door to the seat (control points by hand)
   var inner = {
     siteRules: function (E, u, s) {
@@ -230,7 +231,7 @@ PK.section("s3-panel", 22.3, 38, function (tl, W, ctx, S) {
       return " C" + pt([E[0] + u[0] * 90, E[1] + u[1] * 90]) + " " + pt([s[0] + 56, s[1] - 36]) + " " + pt(s);
     },
     evidence: function (E, u, s) {
-      return " C" + pt([E[0] + u[0] * 70, E[1] + u[1] * 70]) + " " + pt([s[0] + 30, s[1] - 55]) + " " + pt(s);
+      return " C" + pt([E[0] - 60, E[1] + 12]) + " " + pt([s[0] + 10, s[1] - 90]) + " " + pt(s);
     },
   };
   var tLand = 0;
@@ -510,7 +511,7 @@ PK.section("s3-panel", 22.3, 38, function (tl, W, ctx, S) {
     var lab = knockout(PK.text(W.L.labels, "Fire watch", apex[0] + 10, apex[1] - 10, { font: "mono", size: STATUS, fill: C.rust, anchor: "middle" }));
     gsap.set(lab, { opacity: 0 });
     PK.show(tl, lab, t + 0.12, 0.25, { later: true });
-    PK.hide(tl, lab, 33.75, 0.3);
+    PK.hide(tl, lab, 34.05, 0.3); // still for 1.25 s
     tl.fromTo(th, { opacity: 1 }, { opacity: 0, duration: 0.3, ease: "power1.in", immediateRender: false }, 33.2);
     PK.sfx("request", t + 0.1, { gain_db: -10, pan: pan(apex[0], t) });
     PK.sfx("return", t + 0.46, { gain_db: -13, size: "small", pan: pan(apex[0], t) });

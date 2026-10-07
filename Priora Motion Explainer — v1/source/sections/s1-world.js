@@ -31,6 +31,17 @@ PK.section("s1-world", 0, 8, function (tl, W, ctx) {
   PK.show(tl, R.labels.worker, tWorker + 0.2, 0.4);
   PK.show(tl, R.labels.owner, tOwner + 0.3, 0.4);
 
+  // the real world's names stay about 19 px on screen in every shot: their size follows
+  // each camera move (up to the final pull-out, where s8 takes them to the 1:1 size)
+  var nameEls = [R.labels.worker, R.labels.site, R.labels.owner];
+  var nameSize = 9;
+  PK.cam.keys.moves.forEach(function (m) {
+    if (m.t0 < 7.5 || m.t1 > 83.2) return;
+    var size = Math.max(9, 19 / (PK.W / m.to[2]));
+    tl.fromTo(nameEls, { fontSize: nameSize }, { fontSize: size, duration: m.t1 - m.t0, ease: m.ease, immediateRender: false }, m.t0);
+    nameSize = size;
+  });
+
   // ------------------------------------------------------------ the statement
   var l1 = document.createElement("div");
   l1.className = "pk-statement";
