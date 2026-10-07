@@ -291,12 +291,10 @@ PK.section("s5-deviation", 47, 57, function (tl, W, ctx, S) {
   // packet; nothing sticks out of the ring) and a faint grey ghost of where the arc belongs
   var gapGhost = PK.el("path", { d: PK.arc(0, 0, AR, 236, 304), class: "pk-ghost" }, cs.arcsG);
   gsap.set(gapGhost, { opacity: 0 });
+  // cut 3: the gap is marked by its plain butt ends and the ghost alone. Any mark at the two
+  // ends (ticks, hooks, dots) turns the open ring into a little head with ears, so the group
+  // stays empty; it is kept as a handle because s6 and s7 fade it.
   var gapTicks = PK.g(cs.arcsG);
-  [234, 306].forEach(function (a) {
-    var p0 = PK.polar(0, 0, AR - 4.5, a),
-      p1 = PK.polar(0, 0, AR + 1.55, a);
-    PK.el("path", { d: "M" + pt(p0) + " L" + pt(p1), fill: "none", stroke: C.rustDeep, "stroke-width": 1.9, "stroke-linecap": "butt" }, gapTicks);
-  });
   gsap.set(gapTicks, { opacity: 0 });
   var tGap = tSlip + 0.41; // 48.75, as the token settles
   FT(gapTicks, { opacity: 0 }, { opacity: 1, duration: 0.08, ease: "none" }, tGap);

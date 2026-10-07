@@ -220,7 +220,10 @@ PK.section("s2-case", 8, 22.3, function (tl, W, ctx) {
   // the site's own conditions flow up from the building
   var tCond = PK.word("L03", "deadline") + 0.35;
   var cpos = PK.polar(cx, cy, cs.spokeR, 90);
-  var condD = "M" + (G.site[0] + 20) + " " + (G.site[1] - 128) + " C" + (G.site[0] - 30) + " " + (G.site[1] - 150) + " " + PK.fmt(cpos[0] - 120) + " " + PK.fmt(cpos[1] + 30) + " " + PK.fmt(cpos[0] - 90) + " " + PK.fmt(cpos[1]) + " L" + PK.fmt(cpos[0] - 9) + " " + PK.fmt(cpos[1]);
+  // straight up from the roof to just under the facet's label (never through it); the bead
+  // lands there, the facet lights, and the thread draws back down before the request
+  var condEnd = [cx, cpos[1] + 11 + FS * 0.95 + 9];
+  var condD = PK.curve([G.site[0] + 20, G.site[1] - 128], condEnd, -12);
   var cond = PK.thread(W.L.threads, condD);
   PK.drawOn(tl, cond, tCond, 0.5, "power2.out");
   var cb = PK.bead(W.L.threads, 2.6);
@@ -229,7 +232,8 @@ PK.section("s2-case", 8, 22.3, function (tl, W, ctx) {
   tl.set(cb.g, { opacity: 0 }, tCond + 0.5);
   PK.sfx("thread", tCond, { dur: 0.5, gain_db: -10 });
   facetIn("conditions", tCond + 0.42);
-  tl.to(cond, { opacity: 0, duration: 0.5, ease: "power1.in" }, tCond + 1.1);
+  tl.to(cond, { drawSVG: "0% 0%", duration: 0.35, ease: "power2.in" }, tCond + 0.6);
+  tl.set(cond, { opacity: 0 }, tCond + 0.96);
 
   // the photo is missing: a dashed, empty facet with a question mark
   var ph = cs.facet("photo");
