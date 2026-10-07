@@ -331,17 +331,29 @@
   };
 
   /*
-    PK.trail(tl, layer, d, at, dur): a dashed rust trail along d. It reveals with the
-    traveller over [at, at + dur] and fades out over the next 1.1 s. Use for any
-    journey longer than about 150 world units.
+    PK.trail(tl, layer, d, at, dur, ease): a dashed rust trail along d that is revealed
+    BEHIND the traveller (a solid twin inside a mask draws on with the traveller's own
+    duration and ease), then fades over 0.8 s from the arrival. Pass the traveller's ease.
+    Use for any journey longer than about 150 world units. Trails show where information
+    has travelled; they never run ahead of it.
   */
-  PK.trail = function (tl, layer, d, at, dur) {
-    var mask = PK.el("path", { d: d, class: "pk-trail" }, layer);
-    // reveal by clip: a solid twin drives the dash visibility through an opacity ramp
-    gsap.set(mask, { opacity: 0 });
-    tl.fromTo(mask, { opacity: 0 }, { opacity: 1, duration: Math.min(0.25, dur / 3), ease: "none" }, at);
-    tl.to(mask, { opacity: 0, duration: 1.1, ease: "power1.in" }, at + dur);
-    return mask;
+  var trailDefs = null,
+    nTrail = 0;
+  PK.trail = function (tl, layer, d, at, dur, ease) {
+    if (!trailDefs) {
+      var svg = layer.ownerSVGElement || layer;
+      trailDefs = PK.el("defs", {}, svg);
+    }
+    var id = "pk-trail-" + nTrail++;
+    var mask = PK.el("mask", { id: id, maskUnits: "userSpaceOnUse", x: -4000, y: -4000, width: 12000, height: 12000 }, trailDefs);
+    var mp = PK.el("path", { d: d, fill: "none", stroke: "#fff", "stroke-width": 18, "stroke-linecap": "round" }, mask);
+    gsap.set(mp, { drawSVG: "0% 0%" });
+    var tp = PK.el("path", { d: d, class: "pk-trail", mask: "url(#" + id + ")" }, layer);
+    gsap.set(tp, { opacity: 0 });
+    tl.fromTo(mp, { drawSVG: "0% 0%" }, { drawSVG: "0% 100%", duration: dur, ease: ease || "power2.inOut", immediateRender: false }, at);
+    tl.fromTo(tp, { opacity: 0 }, { opacity: 1, duration: 0.05, ease: "none", immediateRender: false }, at);
+    tl.fromTo(tp, { opacity: 1 }, { opacity: 0, duration: 0.8, ease: "power1.in", immediateRender: false }, at + dur);
+    return tp;
   };
 
   /* A small rust bead (information in transit). r in world units. */
@@ -476,17 +488,15 @@
   /* Risk engineering: diamond with a plus cut. */
   PK.glyph.riskEng = function (parent, s) {
     s = s || 30;
-    var h = s / 2,
-      a = s * 0.2,
-      b = s * 0.055;
+    var h = s / 2;
     var dia = PK.polyPath([
       [0, -h],
       [h, 0],
       [0, h],
       [-h, 0],
     ]);
-    var plus = "M" + f(-a) + " " + f(-b) + " H" + f(-b) + " V" + f(-a) + " H" + f(b) + " V" + f(-b) + " H" + f(a) + " V" + f(b) + " H" + f(b) + " V" + f(a) + " H" + f(-b) + " V" + f(b) + " H" + f(-a) + " Z";
-    return token(parent, dia, dia + " " + plus);
+    // aperture: a measuring ring around a centre point (a target), never a plus or a cross
+    return token(parent, dia, dia + " " + PK.circlePath(0, 0, s * 0.2) + " " + PK.circlePath(0, 0, s * 0.085));
   };
 
   /* Evidence: disc with a square lens cut; four viewfinder corner ticks (.corners, hidden). */
@@ -522,12 +532,7 @@
     var cut = "";
     if (kind === "policy") cut = PK.rectPath(-h * 0.56, -h * 0.14, h * 1.12, h * 0.28, h * 0.1);
     if (kind === "authority") cut = PK.rectPath(-h * 0.22, -h * 0.62, h * 0.44, h * 0.9, h * 0.1);
-    if (kind === "record")
-      cut = [-0.42, 0, 0.42]
-        .map(function (y) {
-          return PK.rectPath(-h * 0.5, h * y - h * 0.09, h, h * 0.18, h * 0.08);
-        })
-        .join(" ");
+    if (kind === "record") cut = PK.circlePath(0, -h * 0.2, h * 0.3) + " " + PK.rectPath(-h * 0.5, h * 0.36, h, h * 0.2, h * 0.08);
     return token(parent, sq, sq + " " + cut);
   };
 

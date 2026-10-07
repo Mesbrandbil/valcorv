@@ -94,7 +94,7 @@ body {
 #world .pk-decision {
   fill: none;
   stroke: var(--ink);
-  stroke-width: calc(var(--sw, 1) * 2.75px);
+  stroke-width: calc(var(--sw, 1) * 3.5px);
   stroke-linecap: round;
   stroke-linejoin: round;
 }

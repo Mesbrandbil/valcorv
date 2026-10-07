@@ -92,45 +92,45 @@
   "L02": {
    "speaker": "narrator",
    "section": "s1-world",
-   "text": "Priora places agents around them.",
+   "text": "Priora places agents around it.",
    "start": 5.45,
-   "end": 7.51,
+   "end": 7.59,
    "clip": [
     5.42,
-    7.71
+    7.65
    ],
    "words": [
     {
      "w": "Priora",
      "start": 5.45,
-     "end": 5.93
+     "end": 5.96
     },
     {
      "w": "places",
-     "start": 5.93,
-     "end": 6.44
+     "start": 5.96,
+     "end": 6.47
     },
     {
      "w": "agents",
-     "start": 6.44,
-     "end": 6.95
+     "start": 6.47,
+     "end": 6.98
     },
     {
      "w": "around",
-     "start": 6.95,
-     "end": 7.29
+     "start": 6.98,
+     "end": 7.34
     },
     {
-     "w": "them",
-     "start": 7.29,
-     "end": 7.51
+     "w": "it",
+     "start": 7.34,
+     "end": 7.59
     }
    ],
    "sentences": [
     {
-     "text": "Priora places agents around them.",
+     "text": "Priora places agents around it.",
      "start": 5.45,
-     "end": 7.51
+     "end": 7.59
     }
    ]
   },
@@ -368,74 +368,74 @@
    "speaker": "narrator",
    "section": "s3-panel",
    "text": "Next, it summons only the specialists this site and job need.",
-   "start": 22.6,
-   "end": 26.02,
+   "start": 23.4,
+   "end": 26.82,
    "clip": [
-    22.57,
-    26.08
+    23.37,
+    26.88
    ],
    "words": [
     {
      "w": "Next",
-     "start": 22.6,
-     "end": 23.03
+     "start": 23.4,
+     "end": 23.83
     },
     {
      "w": "it",
-     "start": 23.03,
-     "end": 23.16
+     "start": 23.83,
+     "end": 23.96
     },
     {
      "w": "summons",
-     "start": 23.16,
-     "end": 23.61
+     "start": 23.96,
+     "end": 24.41
     },
     {
      "w": "only",
-     "start": 23.61,
-     "end": 23.92
+     "start": 24.41,
+     "end": 24.72
     },
     {
      "w": "the",
-     "start": 23.92,
-     "end": 23.99
+     "start": 24.72,
+     "end": 24.79
     },
     {
      "w": "specialists",
-     "start": 23.99,
-     "end": 24.68
+     "start": 24.79,
+     "end": 25.48
     },
     {
      "w": "this",
-     "start": 24.68,
-     "end": 24.89
+     "start": 25.48,
+     "end": 25.69
     },
     {
      "w": "site",
-     "start": 24.89,
-     "end": 25.25
+     "start": 25.69,
+     "end": 26.05
     },
     {
      "w": "and",
-     "start": 25.25,
-     "end": 25.39
+     "start": 26.05,
+     "end": 26.19
     },
     {
      "w": "job",
-     "start": 25.39,
-     "end": 25.63
+     "start": 26.19,
+     "end": 26.43
     },
     {
      "w": "need",
-     "start": 25.63,
-     "end": 26.02
+     "start": 26.43,
+     "end": 26.82
     }
    ],
    "sentences": [
     {
      "text": "Next, it summons only the specialists this site and job need.",
-     "start": 22.6,
-     "end": 26.02
+     "start": 23.4,
+     "end": 26.82
     }
    ]
   },
@@ -788,139 +788,149 @@
    "speaker": "narrator",
    "section": "s6-rooms",
    "text": "Three decision rooms open.",
-   "start": 57.35,
-   "end": 59.02,
+   "start": 57.7,
+   "end": 59.41,
    "clip": [
-    57.29,
-    59.2
+    57.64,
+    59.58
    ],
    "words": [
     {
      "w": "Three",
-     "start": 57.35,
-     "end": 57.64
+     "start": 57.7,
+     "end": 57.99
     },
     {
      "w": "decision",
-     "start": 57.64,
-     "end": 58.17
-    },
-    {
-     "w": "rooms",
-     "start": 58.17,
+     "start": 57.99,
      "end": 58.55
     },
     {
-     "w": "open",
+     "w": "rooms",
      "start": 58.55,
-     "end": 59.02
+     "end": 58.92
+    },
+    {
+     "w": "open",
+     "start": 58.92,
+     "end": 59.41
     }
    ],
    "sentences": [
     {
      "text": "Three decision rooms open.",
-     "start": 57.35,
-     "end": 59.02
+     "start": 57.7,
+     "end": 59.41
     }
    ]
   },
   "L10": {
    "speaker": "narrator",
    "section": "s6-rooms",
-   "text": "Retain is never a default. Risk is kept on purpose, with exposure and authority explicit.",
-   "start": 59.45,
-   "end": 65.74,
+   "text": "Retain is never a default.",
+   "start": 60.25,
+   "end": 61.94,
    "clip": [
-    59.42,
-    65.8
+    60.22,
+    62.0
    ],
    "words": [
     {
      "w": "Retain",
-     "start": 59.45,
-     "end": 59.98
+     "start": 60.25,
+     "end": 60.76
     },
     {
      "w": "is",
-     "start": 59.98,
-     "end": 60.18
+     "start": 60.76,
+     "end": 60.92
     },
     {
      "w": "never",
-     "start": 60.18,
-     "end": 60.59
+     "start": 60.92,
+     "end": 61.28
     },
     {
      "w": "a",
-     "start": 60.59,
-     "end": 60.63
-    },
-    {
-     "w": "default",
-     "start": 60.63,
+     "start": 61.28,
      "end": 61.32
     },
     {
-     "w": "Risk",
-     "start": 61.74,
-     "end": 62.09
-    },
-    {
-     "w": "is",
-     "start": 62.09,
-     "end": 62.23
-    },
-    {
-     "w": "kept",
-     "start": 62.23,
-     "end": 62.52
-    },
-    {
-     "w": "on",
-     "start": 62.52,
-     "end": 62.66
-    },
-    {
-     "w": "purpose",
-     "start": 62.66,
-     "end": 63.22
-    },
-    {
-     "w": "with",
-     "start": 63.56,
-     "end": 63.66
-    },
-    {
-     "w": "exposure",
-     "start": 63.66,
-     "end": 64.28
-    },
-    {
-     "w": "and",
-     "start": 64.28,
-     "end": 64.47
-    },
-    {
-     "w": "authority",
-     "start": 64.47,
-     "end": 65.02
-    },
-    {
-     "w": "explicit",
-     "start": 65.02,
-     "end": 65.74
+     "w": "default",
+     "start": 61.32,
+     "end": 61.94
     }
    ],
    "sentences": [
     {
      "text": "Retain is never a default.",
-     "start": 59.45,
-     "end": 61.32
+     "start": 60.25,
+     "end": 61.94
+    }
+   ]
+  },
+  "L10b": {
+   "speaker": "narrator",
+   "section": "s6-rooms",
+   "text": "Risk is kept on purpose, with its terms explicit.",
+   "start": 62.6,
+   "end": 65.68,
+   "clip": [
+    62.58,
+    65.74
+   ],
+   "words": [
+    {
+     "w": "Risk",
+     "start": 62.6,
+     "end": 62.96
     },
     {
-     "text": "Risk is kept on purpose, with exposure and authority explicit.",
-     "start": 61.74,
-     "end": 65.74
+     "w": "is",
+     "start": 62.96,
+     "end": 63.1
+    },
+    {
+     "w": "kept",
+     "start": 63.1,
+     "end": 63.39
+    },
+    {
+     "w": "on",
+     "start": 63.39,
+     "end": 63.53
+    },
+    {
+     "w": "purpose",
+     "start": 63.53,
+     "end": 64.14
+    },
+    {
+     "w": "with",
+     "start": 64.23,
+     "end": 64.38
+    },
+    {
+     "w": "its",
+     "start": 64.38,
+     "end": 64.56
+    },
+    {
+     "w": "terms",
+     "start": 64.56,
+     "end": 64.9
+    },
+    {
+     "w": "explicit",
+     "start": 64.9,
+     "end": 65.68
+    }
+   ],
+   "sentences": [
+    {
+     "text": "Risk is kept on purpose, with its terms explicit.",
+     "start": 62.6,
+     "end": 65.68
     }
    ]
   },
@@ -928,74 +938,74 @@
    "speaker": "narrator",
    "section": "s6-rooms",
    "text": "Mitigate compares safeguards, and checks whether the work is back inside.",
-   "start": 66.4,
-   "end": 70.62,
+   "start": 66.95,
+   "end": 71.17,
    "clip": [
-    66.37,
-    70.679
+    66.92,
+    71.229
    ],
    "words": [
     {
      "w": "Mitigate",
-     "start": 66.4,
-     "end": 66.86
+     "start": 66.95,
+     "end": 67.41
     },
     {
      "w": "compares",
-     "start": 66.86,
-     "end": 67.32
+     "start": 67.41,
+     "end": 67.87
     },
     {
      "w": "safeguards",
-     "start": 67.32,
-     "end": 68.08
+     "start": 67.87,
+     "end": 68.63
     },
     {
      "w": "and",
-     "start": 68.43,
-     "end": 68.54
+     "start": 68.98,
+     "end": 69.09
     },
     {
      "w": "checks",
-     "start": 68.54,
-     "end": 68.88
+     "start": 69.09,
+     "end": 69.43
     },
     {
      "w": "whether",
-     "start": 68.88,
-     "end": 69.12
+     "start": 69.43,
+     "end": 69.67
     },
     {
      "w": "the",
-     "start": 69.12,
-     "end": 69.21
+     "start": 69.67,
+     "end": 69.76
     },
     {
      "w": "work",
-     "start": 69.21,
-     "end": 69.5
+     "start": 69.76,
+     "end": 70.05
     },
     {
      "w": "is",
-     "start": 69.5,
-     "end": 69.64
+     "start": 70.05,
+     "end": 70.19
     },
     {
      "w": "back",
-     "start": 69.64,
-     "end": 69.94
+     "start": 70.19,
+     "end": 70.49
     },
     {
      "w": "inside",
-     "start": 69.94,
-     "end": 70.62
+     "start": 70.49,
+     "end": 71.17
     }
    ],
    "sentences": [
     {
      "text": "Mitigate compares safeguards, and checks whether the work is back inside.",
-     "start": 66.4,
-     "end": 70.62
+     "start": 66.95,
+     "end": 71.17
     }
    ]
   },
@@ -1003,79 +1013,79 @@
    "speaker": "narrator",
    "section": "s6-rooms",
    "text": "Transfer, simulated for now, asks outside capacity for terms and a price.",
-   "start": 72.2,
-   "end": 77.05,
+   "start": 72.25,
+   "end": 77.1,
    "clip": [
-    72.18,
-    77.108
+    72.23,
+    77.158
    ],
    "words": [
     {
      "w": "Transfer",
-     "start": 72.2,
-     "end": 72.79
+     "start": 72.25,
+     "end": 72.84
     },
     {
      "w": "simulated",
-     "start": 72.82,
-     "end": 73.39
+     "start": 72.87,
+     "end": 73.44
     },
     {
      "w": "for",
-     "start": 73.39,
-     "end": 73.52
+     "start": 73.44,
+     "end": 73.57
     },
     {
      "w": "now",
-     "start": 73.52,
-     "end": 73.88
+     "start": 73.57,
+     "end": 73.93
     },
     {
      "w": "asks",
-     "start": 74.28,
-     "end": 74.61
+     "start": 74.33,
+     "end": 74.66
     },
     {
      "w": "outside",
-     "start": 74.61,
-     "end": 75.16
+     "start": 74.66,
+     "end": 75.21
     },
     {
      "w": "capacity",
-     "start": 75.16,
-     "end": 75.76
+     "start": 75.21,
+     "end": 75.81
     },
     {
      "w": "for",
-     "start": 75.76,
-     "end": 75.87
+     "start": 75.81,
+     "end": 75.92
     },
     {
      "w": "terms",
-     "start": 75.87,
-     "end": 76.35
+     "start": 75.92,
+     "end": 76.4
     },
     {
      "w": "and",
-     "start": 76.35,
-     "end": 76.47
+     "start": 76.4,
+     "end": 76.52
     },
     {
      "w": "a",
-     "start": 76.47,
-     "end": 76.5
+     "start": 76.52,
+     "end": 76.55
     },
     {
      "w": "price",
-     "start": 76.5,
-     "end": 77.05
+     "start": 76.55,
+     "end": 77.1
     }
    ],
    "sentences": [
     {
      "text": "Transfer, simulated for now, asks outside capacity for terms and a price.",
-     "start": 72.2,
-     "end": 77.05
+     "start": 72.25,
+     "end": 77.1
     }
    ]
   },
@@ -1083,84 +1093,84 @@
    "speaker": "narrator",
    "section": "s7-cooperate",
    "text": "Priora carries the case between rooms. The risk owner stays in control.",
-   "start": 78.5,
-   "end": 83.22,
+   "start": 78.6,
+   "end": 83.32,
    "clip": [
-    78.47,
-    83.28
+    78.57,
+    83.38
    ],
    "words": [
     {
      "w": "Priora",
-     "start": 78.5,
-     "end": 78.97
+     "start": 78.6,
+     "end": 79.07
     },
     {
      "w": "carries",
-     "start": 78.97,
-     "end": 79.43
+     "start": 79.07,
+     "end": 79.53
     },
     {
      "w": "the",
-     "start": 79.43,
-     "end": 79.51
+     "start": 79.53,
+     "end": 79.61
     },
     {
      "w": "case",
-     "start": 79.51,
-     "end": 79.86
+     "start": 79.61,
+     "end": 79.96
     },
     {
      "w": "between",
-     "start": 79.86,
-     "end": 80.19
+     "start": 79.96,
+     "end": 80.29
     },
     {
      "w": "rooms",
-     "start": 80.19,
-     "end": 80.73
+     "start": 80.29,
+     "end": 80.83
     },
     {
      "w": "The",
-     "start": 81.14,
-     "end": 81.28
+     "start": 81.24,
+     "end": 81.38
     },
     {
      "w": "risk",
-     "start": 81.28,
-     "end": 81.7
+     "start": 81.38,
+     "end": 81.8
     },
     {
      "w": "owner",
-     "start": 81.7,
-     "end": 81.93
+     "start": 81.8,
+     "end": 82.03
     },
     {
      "w": "stays",
-     "start": 81.93,
-     "end": 82.4
+     "start": 82.03,
+     "end": 82.5
     },
     {
      "w": "in",
-     "start": 82.4,
-     "end": 82.54
+     "start": 82.5,
+     "end": 82.64
     },
     {
      "w": "control",
-     "start": 82.54,
-     "end": 83.22
+     "start": 82.64,
+     "end": 83.32
     }
    ],
    "sentences": [
     {
      "text": "Priora carries the case between rooms.",
-     "start": 78.5,
-     "end": 80.73
+     "start": 78.6,
+     "end": 80.83
     },
     {
      "text": "The risk owner stays in control.",
-     "start": 81.14,
-     "end": 83.22
+     "start": 81.24,
+     "end": 83.32
     }
    ]
   },
@@ -1168,79 +1178,79 @@
    "speaker": "narrator",
    "section": "s8-system",
    "text": "Priora turns physical work into explicit risk decisions, while the work happens.",
-   "start": 84.4,
-   "end": 89.03,
+   "start": 83.75,
+   "end": 88.43,
    "clip": [
-    84.37,
-    89.09
+    83.72,
+    88.489
    ],
    "words": [
     {
      "w": "Priora",
-     "start": 84.4,
-     "end": 84.82
+     "start": 83.75,
+     "end": 84.16
     },
     {
      "w": "turns",
-     "start": 84.82,
-     "end": 85.23
+     "start": 84.16,
+     "end": 84.6
     },
     {
      "w": "physical",
-     "start": 85.23,
-     "end": 85.6
+     "start": 84.6,
+     "end": 84.97
     },
     {
      "w": "work",
-     "start": 85.6,
-     "end": 85.9
+     "start": 84.97,
+     "end": 85.3
     },
     {
      "w": "into",
-     "start": 85.9,
-     "end": 86.1
+     "start": 85.3,
+     "end": 85.5
     },
     {
      "w": "explicit",
-     "start": 86.1,
-     "end": 86.7
+     "start": 85.5,
+     "end": 86.11
     },
     {
      "w": "risk",
-     "start": 86.7,
-     "end": 86.96
+     "start": 86.11,
+     "end": 86.36
     },
     {
      "w": "decisions",
-     "start": 86.96,
-     "end": 87.62
+     "start": 86.36,
+     "end": 87.02
     },
     {
      "w": "while",
-     "start": 87.99,
-     "end": 88.11
+     "start": 87.39,
+     "end": 87.51
     },
     {
      "w": "the",
-     "start": 88.11,
-     "end": 88.18
+     "start": 87.51,
+     "end": 87.59
     },
     {
      "w": "work",
-     "start": 88.18,
-     "end": 88.46
+     "start": 87.59,
+     "end": 87.86
     },
     {
      "w": "happens",
-     "start": 88.46,
-     "end": 89.03
+     "start": 87.86,
+     "end": 88.43
     }
    ],
    "sentences": [
     {
      "text": "Priora turns physical work into explicit risk decisions, while the work happens.",
-     "start": 84.4,
-     "end": 89.03
+     "start": 83.75,
+     "end": 88.43
     }
    ]
   }
@@ -1257,6 +1267,7 @@
   "L08",
   "L09",
   "L10",
+  "L10b",
   "L11",
   "L12",
   "L13",
@@ -1483,5 +1494,5 @@
    0.003
   ]
  },
- "narrator_words": 161
+ "narrator_words": 160
 }

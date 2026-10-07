@@ -19,7 +19,13 @@
     packing: [1012, 730.5],
     realLabelY: 786,
     record: { y: 814, x0: 700, x1: 1220 },
-    caseForm: [1000, 410],
+    caseForm: [1000, 455],
+    prioraListen: [1250, 430],
+    // cut 2: where the decision packet waits beside the risk owner (clear of the figure, toward the rooms),
+    // where Priora waits beside it, and the branch point of the risk owner's black line to the three doors
+    dock: [1228, 680],
+    prioraDock: [1186, 612],
+    branch: [1276, 600],
     panel: { x: 140, y: 250, w: 480, h: 510, r: 18, doorY: 505, gap: 70 },
     table: [380, 520],
     slotR: 150,
@@ -94,10 +100,10 @@
       {
         d:
           "M" + GEO.table[0] + " " + GEO.table[1] + " L" + d0[0] + " " + (d0[1] + 12) + " L" + (d0[0] + 70) + " " + (d0[1] + 12) +
-          " C" + (d0[0] + 250) + " " + (d0[1] + 12) + " " + GEO.packing[0] + " " + (GEO.packing[1] - 150) + " " + GEO.packing[0] + " " + (GEO.packing[1] - 12),
+          " C" + (d0[0] + 250) + " " + (d0[1] + 12) + " " + GEO.packing[0] + " " + (GEO.packing[1] - 150) + " " + GEO.packing[0] + " " + (GEO.packing[1] - 3),
         class: "pk-thread",
       },
-      W.L.routes,
+      W.L.threads, // above the real world, so the route is seen reaching the packing line window
     );
     gsap.set(W.route, { drawSVG: "0% 0%" });
     // the risk owner's decision line (black). Sections set its d as needed.

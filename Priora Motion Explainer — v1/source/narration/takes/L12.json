@@ -84,11 +84,11 @@
       ]
     }
   ],
-  "created": "2026-10-07T20:33:13+00:00",
+  "created": "2026-10-07T22:04:34+00:00",
   "provider": "kokoro-onnx 0.6.1 (kokoro-v1.0.onnx, voices-v1.0.bin)",
   "voice": "bf_isabella",
   "speed": 0.92,
-  "window": 5.2,
+  "window": 4.95,
   "fallback_words": 0,
   "pronunciation_checks": []
 }

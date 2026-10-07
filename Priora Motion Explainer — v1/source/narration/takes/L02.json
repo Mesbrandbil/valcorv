@@ -5,51 +5,51 @@
   "guide": true,
   "label": "GUIDE VOICE (local Kokoro). Not the final ElevenLabs performance.",
   "speaker": "narrator",
-  "text": "Priora places agents around them.",
-  "spoken_text": "Priora places agents around them.",
+  "text": "Priora places agents around it.",
+  "spoken_text": "Priora places agents around it.",
   "sample_rate": 48000,
-  "duration": 2.29,
+  "duration": 2.23,
   "speech_start": 0.03,
-  "speech_end": 2.09,
+  "speech_end": 2.17,
   "words": [
     {
       "w": "Priora",
       "start": 0.03,
-      "end": 0.51
+      "end": 0.54
     },
     {
       "w": "places",
-      "start": 0.51,
-      "end": 1.02
+      "start": 0.54,
+      "end": 1.05
     },
     {
       "w": "agents",
-      "start": 1.02,
-      "end": 1.53
+      "start": 1.05,
+      "end": 1.56
     },
     {
       "w": "around",
-      "start": 1.53,
-      "end": 1.87
+      "start": 1.56,
+      "end": 1.92
     },
     {
-      "w": "them",
-      "start": 1.87,
-      "end": 2.09
+      "w": "it",
+      "start": 1.92,
+      "end": 2.17
     }
   ],
   "sentences": [
     {
-      "text": "Priora places agents around them.",
+      "text": "Priora places agents around it.",
       "start": 0.03,
-      "end": 2.09,
+      "end": 2.17,
       "word_range": [
         0,
         5
       ]
     }
   ],
-  "created": "2026-10-07T20:32:32+00:00",
+  "created": "2026-10-07T22:04:21+00:00",
   "provider": "kokoro-onnx 0.6.1 (kokoro-v1.0.onnx, voices-v1.0.bin)",
   "voice": "bf_isabella",
   "speed": 0.92,
@@ -66,7 +66,7 @@
         "P#0": 0.06,
         "R#1": 0.06,
         "IY#2": 0.12,
-        "OW#3": 0.14,
+        "OW#3": 0.17,
         "R#4": 0.06,
         "AH#5": 0.07
       },

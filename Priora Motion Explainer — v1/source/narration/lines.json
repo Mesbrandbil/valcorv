@@ -54,7 +54,7 @@
       "section": "s1-world",
       "at": 5.45,
       "by": 7.75,
-      "text": "Priora places agents around them."
+      "text": "Priora places agents around it."
     },
     {
       "id": "W01",
@@ -76,8 +76,8 @@
       "id": "L04",
       "speaker": "narrator",
       "section": "s3-panel",
-      "at": 22.6,
-      "by": 26.9,
+      "at": 23.4,
+      "by": 27.3,
       "text": "Next, it summons only the specialists this site and job need."
     },
     {
@@ -116,39 +116,47 @@
       "id": "L09",
       "speaker": "narrator",
       "section": "s6-rooms",
-      "at": 57.35,
-      "by": 59.05,
+      "at": 57.7,
+      "by": 59.45,
       "text": "Three decision rooms open."
     },
     {
       "id": "L10",
       "speaker": "narrator",
       "section": "s6-rooms",
-      "at": 59.45,
-      "by": 65.9,
-      "text": "Retain is never a default. Risk is kept on purpose, with exposure and authority explicit."
+      "at": 60.25,
+      "by": 62.0,
+      "text": "Retain is never a default."
+    },
+    {
+      "id": "L10b",
+      "speaker": "narrator",
+      "section": "s6-rooms",
+      "at": 62.6,
+      "by": 65.7,
+      "text": "Risk is kept on purpose, with its terms explicit."
     },
     {
       "id": "L11",
       "speaker": "narrator",
       "section": "s6-rooms",
-      "at": 66.4,
-      "by": 71.45,
+      "at": 66.95,
+      "by": 71.3,
       "text": "Mitigate compares safeguards, and checks whether the work is back inside."
     },
     {
       "id": "L12",
       "speaker": "narrator",
       "section": "s6-rooms",
-      "at": 72.2,
-      "by": 77.4,
+      "at": 72.25,
+      "by": 77.2,
       "text": "Transfer, simulated for now, asks outside capacity for terms and a price."
     },
     {
       "id": "L13",
       "speaker": "narrator",
       "section": "s7-cooperate",
-      "at": 78.5,
+      "at": 78.6,
       "by": 83.45,
       "text": "Priora carries the case between rooms. The risk owner stays in control."
     },
@@ -156,8 +164,8 @@
       "id": "L14",
       "speaker": "narrator",
       "section": "s8-system",
-      "at": 84.4,
-      "by": 89.05,
+      "at": 83.75,
+      "by": 88.45,
       "text": "Priora turns physical work into explicit risk decisions, while the work happens."
     }
   ]

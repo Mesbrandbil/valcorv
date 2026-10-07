@@ -84,10 +84,10 @@ Every agent is a solid rust token with a cut-out **aperture** (the paper shows t
 | Site rules | rounded square | one horizontal slit | moves only in straight orthogonal steps | inspects by drawing a straight ruled line |
 | Insurer conditions | pair of square brackets | the open middle | brackets open and close | embraces what it checks; can fail to close (the deviation) |
 | Fire | triangle, apex up | small round hole | three small dots above the apex when it checks | pings concentric arcs (alarms, sprinklers) |
-| Risk engineering | diamond | plus cut | turns 45 degrees while measuring | draws a dashed exposure radius |
+| Risk engineering | diamond | ring cut (a measuring target) | turns 45 degrees while measuring | draws a dashed exposure radius |
 | Evidence | disc | square cut (lens) | four viewfinder corner ticks | corners contract onto evidence, then a small tick |
 | Retain room: Policy, Authority, Record | small squares (room family) | slit, notch, three slits | | establish exposure, authority, conditions, expiry |
-| Mitigate room: risk engineering | small diamonds | plus | | bring safeguards from the reviewed library, compare, verify |
+| Mitigate room: risk engineering | small diamonds | ring | | bring safeguards from the reviewed library, compare, verify |
 | Transfer room: carrier and capacity agents | hexagons drawn as **dashed outlines only** | | label carries "SIM" | simulated: dashed is the visual rule for simulated |
 
 ### The case

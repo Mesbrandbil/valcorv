@@ -1,0 +1,79 @@
+{
+  "schema": "priora-narration-take/1",
+  "id": "L10b",
+  "engine": "guide",
+  "guide": true,
+  "label": "GUIDE VOICE (local Kokoro). Not the final ElevenLabs performance.",
+  "speaker": "narrator",
+  "text": "Risk is kept on purpose, with its terms explicit.",
+  "spoken_text": "Risk is kept on purpose, with its terms explicit.",
+  "sample_rate": 48000,
+  "duration": 3.16,
+  "speech_start": 0.02,
+  "speech_end": 3.1,
+  "words": [
+    {
+      "w": "Risk",
+      "start": 0.02,
+      "end": 0.38
+    },
+    {
+      "w": "is",
+      "start": 0.38,
+      "end": 0.52
+    },
+    {
+      "w": "kept",
+      "start": 0.52,
+      "end": 0.81
+    },
+    {
+      "w": "on",
+      "start": 0.81,
+      "end": 0.95
+    },
+    {
+      "w": "purpose",
+      "start": 0.95,
+      "end": 1.56
+    },
+    {
+      "w": "with",
+      "start": 1.65,
+      "end": 1.8
+    },
+    {
+      "w": "its",
+      "start": 1.8,
+      "end": 1.98
+    },
+    {
+      "w": "terms",
+      "start": 1.98,
+      "end": 2.32
+    },
+    {
+      "w": "explicit",
+      "start": 2.32,
+      "end": 3.1
+    }
+  ],
+  "sentences": [
+    {
+      "text": "Risk is kept on purpose, with its terms explicit.",
+      "start": 0.02,
+      "end": 3.1,
+      "word_range": [
+        0,
+        9
+      ]
+    }
+  ],
+  "created": "2026-10-07T22:04:29+00:00",
+  "provider": "kokoro-onnx 0.6.1 (kokoro-v1.0.onnx, voices-v1.0.bin)",
+  "voice": "bf_isabella",
+  "speed": 0.92,
+  "window": 3.1,
+  "fallback_words": 0,
+  "pronunciation_checks": []
+}
