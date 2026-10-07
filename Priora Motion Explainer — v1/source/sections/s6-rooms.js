@@ -30,8 +30,8 @@
   W.gapTicks are read from W (a stand-in is built only if s5 has not provided them).
   Contract at 78.0 (for s7): Priora at GEO.prioraDock, bead toward the packet; the packet at
   GEO.dock, arcsG 0.85, insurer arc hidden (gap open), gap ticks visible. W.decision drawn,
-  opacity 1, its loop closed round the packet again (its d is never changed here; the open
-  run used while the packet is away, W.decisionOpenS6, is hidden at 78). W.decisionTrunk
+  opacity 1, its loop closed round the packet again (its d is never changed here: while the
+  packet is away its loop is undrawn back to W.decisionTip with DrawSVG). W.decisionTrunk
   (solid black, W.decisionTip to GEO.branch) and W.branchNode drawn; W.branches = { retain,
   mitigate, transfer } fine dotted grey from GEO.branch to the door centres. W.roomOwnerLines
   undrawn solid black lines from GEO.branch into each doorway (Retain and Mitigate enter low,
@@ -319,7 +319,7 @@ PK.section("s6-rooms", 57, 78, function (tl, W, ctx, S) {
   RK.forEach(function (k) {
     fadeIn([RM[k].leafA, RM[k].leafB, RM[k].jambs], tCh[k] + 0.3, 0.15);
   });
-  PK.sfx("thread", tCh.mitigate, { gain_db: -12, dur: 0.6, pan: 0.5, material: "pencil" });
+  // (no separate sound for the chambers: they start drawing within two frames of the "reach" sound above)
   // SIMULATED appears with the dashed walls, DESIGN PROPOSAL with the other two; then the names
   fadeIn(RM.transfer.chip, tCh.transfer, 0.2);
   PK.sfx("simulated", tCh.transfer + 0.2, { gain_db: -10, pan: 0.6 });
@@ -446,40 +446,36 @@ PK.section("s6-rooms", 57, 78, function (tl, W, ctx, S) {
   });
 
   // ------------------------------------------------------------ the human's loop at the dock lets go while the packet is away
-  // (the same open run E builds at 79.07: the line keeps its run from the desk to the tip, without the loop)
-  var openRun = null,
-    loopStart = 0.5;
+  // W.decisionD is the approach from the desk to the tip, then one turn round the packet back to the tip:
+  // the loop unwinds to the tip when the packet leaves (the line keeps its run from the desk to the tip)
+  // and winds round it again when the packet comes back.
+  var loopPc = null;
   try {
-    var dp = samplePath(W.decisionD, 240);
-    var near = [];
-    dp.forEach(function (p, i) {
-      if (dist(p, DOCK) < 55) near.push(i);
-    });
-    if (near.length > 40) {
-      var i1 = near[0],
-        i2 = near[near.length - 1];
-      var nd = "M" + pt(dp[0]);
-      for (var j = 2; j <= i1; j += 2) nd += " L" + pt(dp[j]);
-      nd += " L" + pt(dp[i2]);
-      for (var j2 = i2 + 2; j2 < dp.length; j2 += 2) nd += " L" + pt(dp[j2]);
-      nd += " L" + pt(dp[dp.length - 1]);
-      openRun = PK.el("path", { d: nd, class: "pk-decision" }, W.L.routes);
-      W.L.routes.insertBefore(openRun, W.decision);
-      gsap.set(openRun, { opacity: 0 });
-      loopStart = i1 / 240;
-      W.decisionOpenS6 = openRun;
+    var dFull = W.decisionD,
+      cut = dFull.indexOf(" A");
+    var tmpA = PK.el("path", { d: cut > 0 ? dFull.slice(0, cut) : dFull }, W.L.routes),
+      tmpF = PK.el("path", { d: dFull }, W.L.routes);
+    if (cut > 0) loopPc = (100 * tmpA.getTotalLength()) / tmpF.getTotalLength();
+    else {
+      // no arc commands: find where the run first comes within the loop radius of the packet
+      var dp = samplePath(dFull, 400),
+        lp = W.decisionLoop || { c: DOCK, r: 42 };
+      for (var i = 0; i < dp.length; i++)
+        if (dist(dp[i], lp.c) < lp.r + 1.5) {
+          loopPc = (100 * i) / 400;
+          break;
+        }
     }
+    tmpA.remove();
+    tmpF.remove();
   } catch (e) {}
   function loopLetsGo(at) {
-    if (!openRun) return;
-    tl.set(openRun, { opacity: 1 }, at);
-    FT(W.decision, { opacity: 1 }, { opacity: 0, duration: 0.3, ease: "power1.inOut" }, at + 0.04);
+    if (loopPc === null) return;
+    FT(W.decision, { drawSVG: "0% 100%" }, { drawSVG: "0% " + f(loopPc) + "%", duration: 0.35, ease: "power2.inOut" }, at);
   }
   function loopCloses(at, dur) {
-    if (!openRun) return;
-    tl.set(W.decision, { opacity: 1 }, at);
-    FT(W.decision, { drawSVG: "0% " + f(loopStart * 100) + "%" }, { drawSVG: "0% 100%", duration: dur, ease: "power2.inOut" }, at);
-    FT(openRun, { opacity: 1 }, { opacity: 0, duration: dur, ease: "power1.in" }, at);
+    if (loopPc === null) return;
+    FT(W.decision, { drawSVG: "0% " + f(loopPc) + "%" }, { drawSVG: "0% 100%", duration: dur, ease: "power2.inOut" }, at);
     PK.sfx("decision", at, { gain_db: -10, dur: dur, pan: 0.2, part: "loop" });
   }
 
@@ -522,21 +518,22 @@ PK.section("s6-rooms", 57, 78, function (tl, W, ctx, S) {
     tl2.fromTo(ch.jambs, { opacity: open ? 1 : 0 }, { opacity: open ? 0 : 1, duration: D * 0.5, ease: "none", immediateRender: false }, open ? at : at + D * 0.5);
   }
   W.doorWide = doorWide;
-  function door(room, at, open, dur) {
+  function door(room, at, open, dur, silent) {
     var D = dur || 0.3;
     doorWide(tl, room, at, open, D);
-    PK.sfx(open ? "door-open" : "door-close", at + (open ? 0.05 : D - 0.05), { gain_db: -8, pan: 0.6 });
+    if (!silent) PK.sfx(open ? "door-open" : "door-close", at + (open ? 0.05 : D - 0.05), { gain_db: -8, pan: 0.6 });
   }
-  // the packet passes through the wide-open door at full size, 0.5 s, with its trail
-  function packetIn(room, at) {
+  // the packet passes through the wide-open door at full size, 0.5 s (0.55 s into Retain), with its trail
+  function packetIn(room, at, dur) {
+    dur = dur || 0.5;
     var d = DOOR[room],
       w = where.k,
       inP = IN[room],
       y = KIN_Y[room];
     var path = "M" + pt(w) + " C" + f(w[0] + 50) + " " + f(w[1]) + " " + f(d[0] - 60) + " " + f(y) + " " + f(d[0]) + " " + f(y) + " C" + f(d[0] + 70) + " " + f(y) + " " + f(inP[0] - 80) + " " + f(inP[1]) + " " + pt(inP);
-    PK.travel(tl, cs.g, path, at, 0.5, "power3.out");
-    PK.trail(tl, W.L.trails, path, at, 0.5, "power3.out");
-    PK.sfx("packet", at + 0.5, { gain_db: -9, pan: 0.6 });
+    PK.travel(tl, cs.g, path, at, dur, "power3.out");
+    PK.trail(tl, W.L.trails, path, at, dur, "power3.out");
+    PK.sfx("packet", at + dur, { gain_db: -9, pan: 0.6 });
   }
   function packetOut(room, at, to) {
     var d = DOOR[room],
@@ -555,7 +552,7 @@ PK.section("s6-rooms", 57, 78, function (tl, W, ctx, S) {
     FT(own[room], { drawSVG: "0% 0%" }, { drawSVG: "0% " + wallPc, duration: dur, ease: "power2.inOut" }, at);
     var tArr = at + dur;
     FT(own[room], { drawSVG: "0% " + wallPc }, { drawSVG: "0% 100%", duration: 0.14, ease: "power2.out" }, tArr + 0.18);
-    door(room, tArr, true);
+    door(room, tArr, true, 0.3, true); // the decision sound is the door's sound here
     PK.sfx("decision", tArr, { gain_db: -4, pan: 0.5, part: "door" });
     if (tag) {
       // the tag rides the tip into the doorway and goes back out with it
@@ -585,7 +582,7 @@ PK.section("s6-rooms", 57, 78, function (tl, W, ctx, S) {
   // ============================================================ RETAIN (camera 59.2 to 60.2)
   // the loop lets go as Priora lifts the packet off the dock; Priora leads, the packet follows
   var tLift = 59.6;
-  loopLetsGo(tLift);
+  loopLetsGo(tLift + 0.12); // the moment the packet itself leaves the dock (fly's lag below)
   turnBead(0, tLift + 0.2, 0.5);
   fly(PW.retain, KW.retain, tLift, 0.9, 34, -70, 0.12); // lands 60.5
   RA.retain.forEach(function (a) {
@@ -640,8 +637,8 @@ PK.section("s6-rooms", 57, 78, function (tl, W, ctx, S) {
   turnBead(ang(PASIDE, DOOR.retain), tArrR - 0.05, 0.4);
   where = { p: PASIDE, k: kBack };
   var tInR = tArrR + 0.2;
-  packetIn("retain", tInR); // 63.05 to 63.55, beside the held line
-  door("retain", tArrR + 1.25, false);
+  packetIn("retain", tInR, 0.55); // 63.15 to 63.70, beside the held line
+  door("retain", tArrR + 1.25, false, 0.3, true); // closes quietly while the terms attach
   RA.retain.forEach(function (a) {
     fadeTo(a.name, 1, 0.35, tInR + 0.5, 0.3);
   });
@@ -654,7 +651,7 @@ PK.section("s6-rooms", 57, 78, function (tl, W, ctx, S) {
       Llb,
     ),
   );
-  var tClamp = tInR + 0.55;
+  var tClamp = tInR + 0.6;
   draw(clamp, tClamp, 0.25, "power2.out", "middle");
   PK.sfx("lock", tClamp + 0.25, { gain_db: -6, pan: 0.5 });
   // the agents attach the terms: plain labels on short leaders, two each side, clear of the bar
@@ -675,7 +672,7 @@ PK.section("s6-rooms", 57, 78, function (tl, W, ctx, S) {
     draw(lead, T.at + 0.24, 0.15, "power2.out");
     var lab = hide(mono(Llb, T.text, cR[0] + T.side * 56, T.y + LAB * 0.36, LAB, { anchor: T.side < 0 ? "end" : "start" }));
     fadeIn(lab, T.at + 0.24, 0.15);
-    if (i % 2 === 0) PK.sfx("record", T.at + 0.26, { gain_db: -10, pan: 0.5 });
+    if (i === 3) PK.sfx("record", T.at + 0.26, { gain_db: -10, pan: 0.5 });
     termEls.push(lead, lab);
   });
   // the kept state holds to 65.45; then the terms go, the door opens, the packet comes out, the door closes
@@ -877,16 +874,16 @@ PK.section("s6-rooms", 57, 78, function (tl, W, ctx, S) {
     var lp = PK.polar(cT[0], cT[1], PK_R + 28, A.a);
     var lab = hide(mono(Llb, A.text, lp[0] + 1, lp[1] + LAB * 0.36, LAB));
     fadeIn(lab, A.land + 0.04, 0.15);
-    PK.sfx("return", A.land, { gain_db: -9, pan: 0.5 });
+    if (A.text !== "Safeguards") PK.sfx("return", A.land, { gain_db: -9, pan: 0.5 }); // at most three sounds a second
     answerEls.push(bh.g, lead, lab);
   });
   // held still to 77.4; then the packet goes back out to Priora and the dock, and the loop closes round it
   var tOutT = 77.4;
   fadeOut(answerEls, tOutT, 0.25);
   fadeOut(RA.transfer.map(function (a) { return a.name; }), tOutT, 0.25);
-  door("transfer", tOutT - 0.02, true);
+  door("transfer", tOutT - 0.02, true, 0.3, true);
   packetOut("transfer", tOutT + 0.02, DOCK); // 77.42 to 77.92
-  door("transfer", tOutT + 0.38, false, 0.2); // after the packet has cleared the doorway, closed by 78.0
+  door("transfer", tOutT + 0.38, false, 0.2, true); // after the packet has cleared the doorway, closed by 78.0
   loopCloses(77.6, 0.4);
   turnBead(BEAD_DOCK, tOutT + 0.1, 0.4);
   FT(RM.transfer.chip, { scale: SC_CLOSE, svgOrigin: CHIP_O }, { scale: SC_END, svgOrigin: CHIP_O, duration: 0.14, ease: "power2.inOut" }, 77.86);

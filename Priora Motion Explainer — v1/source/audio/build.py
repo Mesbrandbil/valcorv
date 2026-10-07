@@ -70,6 +70,7 @@ MUSIC_PAUSE_CAP_LUFS = -26.0  # master frame: the bed never rises above this mom
 MUSIC_MAX_MOVE_DB = 6.0  # QA: the bed never moves more than this within 1 s
 SFX_CAP_LUFS = -25.0  # sfx bus leveller: momentary (400 ms) ceiling, catches pile-ups only
 HIERARCHY_CAP_LUFS = -28.0  # every event except the deviation and the human's decision stays at or under this (100 ms)
+KEY_OVER_CAP_DB = 2.5  # ... and those two sit at least this far above the cap
 S7_SOFTER = (78.0, 84.0, ("lock", "decision", "resolve"), -3.0)  # the densest passage, under "stays in control"
 SMALL_KINDS = ("speech-fragment", "packet")  # not lifted with the background in the no-narration master
 NONAR_SFX_W01_PEAK_DBFS = -20.0  # QA: sfx peak under the worker's voice note in the no-narration master
@@ -88,7 +89,7 @@ LIMITER_CEILING = -1.3  # dBTP the limiter aims at (0.3 dB of safety)
 
 DUCK_NARRATOR_DB = 5.0
 DUCK_WORKER_DB = 5.0
-DUCK_ATTACK = 0.35  # s, the ramp ends at the first sound of the line
+DUCK_ATTACK = 0.50  # s, the ramp ends at the first sound of the line
 DUCK_HOLD = 0.10  # s after the last sound of the line
 DUCK_RELEASE = 1.50  # s
 DUCK_BRIDGE = 2.00  # s, gaps shorter than this stay ducked (no pumping between lines)
@@ -1025,6 +1026,8 @@ def render_sfx(events):
         tier = "key" if (kind == "deviate" or ev is human_decision) else "other"
         if tier == "other" and target > HIERARCHY_CAP_LUFS:
             target = HIERARCHY_CAP_LUFS
+        if tier == "key":  # the deviation and the human's decision stay clearly the loudest sound moments
+            target = max(target, HIERARCHY_CAP_LUFS + KEY_OVER_CAP_DB)
         st *= undb(target - event_loudness(st))
         t0 = ev["t"] - pre
         note = []
@@ -1145,7 +1148,7 @@ def music_plan(tm: Timing, has_wordmark=True):
         (w("L04", "next") - 0.25, 2.0, [43, 50, 54, 57, 59, 66], -4.5, 0.38, 0.35),  # panel: Gmaj9
         (w("L04", "need") + 0.9, 2.0, [40, 47, 54, 55, 62], -4.5, 0.36, 0.35),  # Em9
         (w("L05", "each") - 0.2, 2.0, [35, 47, 54, 57, 62, 64], -5.0, 0.34, 0.35),  # Bm11
-        (w("L06", "when") - 3.4, 2.0, [33, 45, 52, 59, 62], -4.5, 0.36, 0.35),  # Asus4(9): waiting
+        (w("L06", "when") - 2.2, 2.0, [33, 45, 52, 59, 62], -4.5, 0.36, 0.35),  # Asus4(9): waiting (after the L05 release)
         (w("L06", "holds") + 0.05, 1.0, [38, 45, 54, 57, 62, 66], -3.0, 0.55, 0.38),  # "holds": D major lift
         (w("L06", "opens") + 0.15, 1.0, [38, 45, 54, 57, 62, 66, 69, 76], -2.5, 0.68, 0.42),  # "route opens": opens up
         (w("L06", "disturbed") + 0.2, 2.0, [38, 50, 55, 59, 66, 69], -3.5, 0.55, 0.38),  # G/D, settled
@@ -1230,7 +1233,7 @@ def build_curves(S, tc):
         bright[sel] = (pb + (br - pb) * rc(x))[sel]
         send[sel] = (ps + (snd - ps) * rc(x))[sel]
         pb, ps = br, snd
-    return env, bright, send
+    return env, bright, send, turns
 
 
 def pad_voice(m, env_c, tc, rng, out):
@@ -1243,7 +1246,11 @@ def pad_voice(m, env_c, tc, rng, out):
         return
     tri = 0.15 if m < 45 else (0.35 if m < 69 else 0.2)
     spread = float(np.clip((m - 36) / 30.0, 0.1, 0.6))
-    dets = np.array([-1.0, 0.0, 1.0]) * rng.uniform(3.5, 6.5) + rng.uniform(-0.5, 0.5, 3)
+    if f >= 200.0:  # upper voices: a gentle chorus of +-3.5 to 7 cents
+        dets = np.array([-1.0, 0.0, 1.0]) * rng.uniform(3.5, 6.5) + rng.uniform(-0.5, 0.5, 3)
+    else:  # low voices: the beat between oscillators stays slower than 0.1 Hz (10 s or longer), so it is motion, not pulse
+        dhz = rng.uniform(0.06, 0.1)
+        dets = 1200.0 * np.log2(1.0 + np.array([-1.0, 0.0, 1.0]) * dhz / f) + rng.uniform(-0.15, 0.15, 3)
     phs = rng.uniform(0, 2 * np.pi, 3)
     lfo_r = rng.uniform(0.035, 0.11, 3)
     lfo_p = rng.uniform(0, 2 * np.pi, 3)
@@ -1256,6 +1263,10 @@ def pad_voice(m, env_c, tc, rng, out):
         s1 = min(N, int(tc[r[-1]] * SR) + SR // 100)
         t = np.arange(s0, s1) / SR
         e = np.interp(t, tc, env_c)
+        # side oscillators quieter than the centre, so the chorus never cancels the note (no deep beat
+        # troughs: in the bass they would read as the bed breathing); power kept as with three equal ones
+        ws = 0.15 if f < 200.0 else 0.6
+        wts = np.array([ws, 1.0, ws]) * math.sqrt(3.0 / (1.0 + 2.0 * ws * ws))
         for k in range(3):
             fo = f * 2.0 ** (dets[k] / 1200.0)
             ph = 2 * np.pi * fo * t + phs[k]
@@ -1266,10 +1277,10 @@ def pad_voice(m, env_c, tc, rng, out):
                     if fo * h < 6000:
                         trw += sgn * np.sin(h * ph) / (h * h)
                 x = (1 - tri) * x + tri * trw * 8 / np.pi**2
-            am = 1.0 + 0.18 * np.sin(2 * np.pi * lfo_r[k] * t + lfo_p[k])
+            am = 1.0 + PAD_LFO_DEPTH * np.sin(2 * np.pi * lfo_r[k] * t + lfo_p[k])
             pan = (k - 1) * spread
             th = (pan + 1) * np.pi / 4
-            y = x * am * e / 3.0
+            y = x * am * e * wts[k] / 3.0
             out[s0:s1, 0] += y * math.cos(th)
             out[s0:s1, 1] += y * math.sin(th)
 
@@ -1307,10 +1318,36 @@ def felt_piano(m, vel, rng, distant=False):
     return x * vel**1.4
 
 
+def section_trim(music, turns, tc):
+    """Makes each chord section's measured loudness follow the plan's level column (read as LUFS
+    offsets). Low voicings carry more energy than their level suggests; without this a chord turn
+    can add several dB to a duck and the bed seems to pump. Returns the trimmed music and the trims."""
+    meter = pyln.Meter(SR)
+    meas = []
+    for i, (t, w, notes, lev, br, snd) in enumerate(turns):
+        a = t + w / 2
+        b = min(turns[i + 1][0] - turns[i + 1][1] / 2 if i + 1 < len(turns) else DUR, BED_FADE[0])
+        L = meter.integrated_loudness(music[int(a * SR) : int(b * SR)]) if b - a >= 0.6 and notes else None
+        meas.append(L if L is not None and math.isfinite(L) else None)
+    known = [(lev, L) for (t, w, n, lev, br, snd), L in zip(turns, meas) if L is not None]
+    if not known:
+        return music, [0.0] * len(turns)
+    ref = float(np.mean([L - lev for lev, L in known]))
+    trims = []
+    for (t, w, n, lev, br, snd), L in zip(turns, meas):
+        trims.append(round(float(np.clip(lev + ref - L, -6.0, 6.0)), 2) if L is not None else (trims[-1] if trims else 0.0))
+    g = np.full_like(tc, trims[0])
+    for i, (t, w, *_ ) in enumerate(turns[1:], start=1):
+        x = rc((tc - (t - w / 2)) / w)
+        sel = tc >= t - w / 2
+        g[sel] = (trims[i - 1] + (trims[i] - trims[i - 1]) * x)[sel]
+    return apply_gain_curve(music, tc, g), trims
+
+
 def render_music(tm: Timing, has_wordmark=True):
     S, P = music_plan(tm, has_wordmark)
     tc = np.arange(0, int(DUR * 1000) + 1) / 1000.0
-    env, bright, send = build_curves(S, tc)
+    env, bright, send, turns = build_curves(S, tc)
     pad = np.zeros((N, 2))
     for m in sorted(env):
         pad_voice(m, env[m], tc, rng_for("pad", m), pad)
@@ -1341,13 +1378,16 @@ def render_music(tm: Timing, has_wordmark=True):
     # end: a raised-cosine fade of the whole bed, silent from BED_FADE[0] + BED_FADE[1]
     t = np.arange(N) / SR
     music *= (1.0 - rc((t - BED_FADE[0]) / BED_FADE[1]))[:, None]
+    music, trims = section_trim(music, turns, tc)
     L = pyln.Meter(SR).integrated_loudness(music)
     music *= undb(MUSIC_LUFS - L)
-    plan = [{"t": round(x[0], 3), "xfade_s": x[1], "notes": [note_name(m) for m in x[2]], "level_db": x[3], "brightness": x[4], "reverb_send": x[5]} for x in S]
+    plan = [{"t": round(x[0], 3), "xfade_s": x[1], "notes": [note_name(m) for m in x[2]], "level_db": x[3], "brightness": x[4], "reverb_send": x[5],
+             "loudness_trim_db": trims[i]} for i, x in enumerate(S)]
     return music, {"segments": plan, "piano": notes, "pre_duck_lufs": MUSIC_LUFS, "bed_fade": {"from": BED_FADE[0], "seconds": BED_FADE[1]}}
 
 
 PIANO_DB = 3.0  # felt piano bus against the pad
+PAD_LFO_DEPTH = 0.08  # each pad oscillator's slow amplitude motion (+-8 %, 0.035 to 0.11 Hz)
 MUSIC_WET = 1.3  # scales the plan's reverb sends (hall normalised to unity over 200 to 4000 Hz)
 
 NOTE_NAMES = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"]
@@ -1501,6 +1541,21 @@ def limiter(x, ceiling_db, look_ms=2.0, rel_ms=120.0, block=32):
     centres = np.arange(nb) * block + (block - 1) / 2.0
     gain = np.interp(np.arange(len(x)), centres, ge)
     return x * gain[:, None], gain, -db(gain.min())
+
+
+def limiter_activity(gain):
+    """How much of the film the limiter touches, and where its deepest moments are."""
+    grd = -20.0 * np.log10(np.maximum(gain, 1e-12))
+    out = {"seconds_over_0_5_db": round(float(np.sum(grd > 0.5)) / SR, 3), "seconds_over_1_db": round(float(np.sum(grd > 1.0)) / SR, 3)}
+    blocks = grd[: (len(grd) // 4800) * 4800].reshape(-1, 4800).max(axis=1)  # 0.1 s blocks
+    top = []
+    for k in np.argsort(blocks)[::-1]:
+        if blocks[k] < 0.5 or len(top) >= 5:
+            break
+        if all(abs(k - j) > 5 for j, _ in top):
+            top.append((int(k), float(blocks[k])))
+    out["deepest"] = [{"t": round(k * 0.1, 1), "db": round(v, 2)} for k, v in top]
+    return out
 
 
 def end_fade(x):
@@ -1743,11 +1798,25 @@ def main(argv=None):
 
     # no narration: the worker's voice note and the small sounds (flicks, packets) stay at their master
     # level; the music (ducked under W01 only) and the other sounds are raised together to -17 LUFS
-    bg = music_w + sfx_main
-    w_fixed = (worker + sfx_small) * gG
+    w_fixed = worker * gG
+    W01 = next(((float(L["start"]), float(L["end"])) for L in tm.lines.values() if L.get("speaker") == "worker"), None)
 
-    def nonar_lufs(gb_db):
-        return meter.integrated_loudness(end_fade(w_fixed + bg * undb(gb_db)))
+    def nonar_sfx(gb_db, ceiling=True):
+        """sfx bus of the no-narration master: small sounds at master level, the rest lifted, and
+        under the worker's voice note a -20 dBFS peak ceiling (smooth, look-ahead)."""
+        x = sfx_main * undb(gb_db) + sfx_small * gG
+        if W01 is None or not ceiling:
+            return x
+        i0, i1 = max(0, int((W01[0] - 0.8) * SR)), min(N, int((W01[1] + 0.8) * SR))
+        _, gl, _ = limiter(x[i0:i1], NONAR_SFX_W01_PEAK_DBFS - 0.3)
+        tt = np.arange(i0, i1) / SR
+        mask = np.minimum(rc((tt - (W01[0] - 0.35)) / 0.15), 1.0 - rc((tt - (W01[1] + 0.2)) / 0.15))
+        x = x.copy()
+        x[i0:i1] *= (1.0 - (1.0 - gl) * mask)[:, None]
+        return x
+
+    def nonar_lufs(gb_db):  # the W01 ceiling barely moves the loudness; the final loop below includes it
+        return meter.integrated_loudness(end_fade(w_fixed + music_w * undb(gb_db) + nonar_sfx(gb_db, ceiling=False)))
 
     lo, hi = -6.0, 30.0
     for _ in range(30):
@@ -1759,7 +1828,8 @@ def main(argv=None):
     Gb = 0.5 * (lo + hi)
     ceiling = LIMITER_CEILING
     for _ in range(10):
-        y2, gain2, gr2 = limiter(end_fade(w_fixed + bg * undb(Gb)), ceiling)
+        sfx_nn = nonar_sfx(Gb)
+        y2, gain2, gr2 = limiter(end_fade(w_fixed + music_w * undb(Gb) + sfx_nn), ceiling)
         L2 = meter.integrated_loudness(y2)
         tp2 = true_peak_db(quantize24(y2))
         if tp2 > TP_MAX - 0.05:
@@ -1776,7 +1846,7 @@ def main(argv=None):
                duck_spans=duck_spans, source=source, voice=voice, v_raw=v_raw, worker=worker, music_m=music_m, music_d=music_d,
                music_w=music_w, sfx=sfx, sfx_main=sfx_main, sfx_small=sfx_small, G=G, lim_gain=lim_gain, gr=gr, Gb=Gb,
                gain2=gain2, gr2=gr2, gG=gG, tcd=tcd, g_master=g_master, g_worker=g_worker, music_raw=music_raw,
-               segs=segs, rides=rides, tcv=tcv, gv=gv, mcap=mcap, has_wordmark=has_wordmark)
+               segs=segs, rides=rides, tcv=tcv, gv=gv, mcap=mcap, has_wordmark=has_wordmark, sfx_nn=sfx_nn)
     report = qa(ctx)
     REPORT_JSON.write_text(json.dumps(report, indent=1) + "\n")
     bad = [c for c in report["checks"] if not c["ok"]]
@@ -1829,7 +1899,7 @@ def qa(c):
     # the no-narration version: the worker line against its background
     g2 = gain2[:, None]
     w2 = worker * gG * g2
-    sfx2 = (c["sfx_main"] * undb(Gb) + c["sfx_small"] * gG) * g2
+    sfx2 = c["sfx_nn"] * g2
     b2 = music_w * undb(Gb) * g2 + sfx2
     wl = tm.lines.get("W01")
     worker_margin = None
@@ -1994,6 +2064,7 @@ def qa(c):
         "gains": {
             "master_gain_db": round(G, 3),
             "master_limiter_max_reduction_db": round(gr, 2),
+            "master_limiter_activity": limiter_activity(lim_gain),
             "no_narration_worker_gain_db": round(G, 3),
             "no_narration_background_gain_db": round(Gb, 3),
             "no_narration_background_over_master_db": round(Gb - G, 3),

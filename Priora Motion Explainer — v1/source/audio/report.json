@@ -9,7 +9,7 @@
   "duck_narrator_db": 5.0,
   "duck_worker_db": 5.0,
   "duck_worker_db_no_narration": 5.0,
-  "duck_attack_s": 0.35,
+  "duck_attack_s": 0.5,
   "duck_release_s": 1.5,
   "duck_bridge_s": 2.0,
   "music_pre_duck_lufs_mix_frame": -28.5,
@@ -30,12 +30,30 @@
   }
  },
  "gains": {
-  "master_gain_db": 0.3,
-  "master_limiter_max_reduction_db": 1.8,
-  "no_narration_worker_gain_db": 0.3,
-  "no_narration_background_gain_db": 14.325,
-  "no_narration_background_over_master_db": 14.025,
-  "no_narration_limiter_max_reduction_db": 1.88,
+  "master_gain_db": 0.306,
+  "master_limiter_max_reduction_db": 1.63,
+  "master_limiter_activity": {
+   "seconds_over_0_5_db": 0.423,
+   "seconds_over_1_db": 0.18,
+   "deepest": [
+    {
+     "t": 62.7,
+     "db": 1.63
+    },
+    {
+     "t": 19.0,
+     "db": 1.62
+    },
+    {
+     "t": 74.7,
+     "db": 1.49
+    }
+   ]
+  },
+  "no_narration_worker_gain_db": 0.306,
+  "no_narration_background_gain_db": 10.673,
+  "no_narration_background_over_master_db": 10.367,
+  "no_narration_limiter_max_reduction_db": 0.0,
   "note": "master.wav = TP-limiter(G * voice.wav as dual mono, DC-blocked + music.wav + sfx.wav); the stems are written post-gain G (the level they have inside master.wav, before the limiter). master-no-narration.wav = TP-limiter(G * voice-worker.wav + Gb * (music ducked under W01 only + sfx)), Gb = no_narration_background_gain_db"
  },
  "outputs": {
@@ -45,22 +63,22 @@
    "sample_rate": 48000,
    "channels": 2,
    "subtype": "PCM_24",
-   "integrated_lufs": -32.39,
-   "true_peak_dbtp": -17.51,
-   "sample_peak_dbfs": -17.52,
-   "max_momentary_lufs": -26.12,
-   "max_momentary_at_s": 46.88,
+   "integrated_lufs": -32.27,
+   "true_peak_dbtp": -18.56,
+   "sample_peak_dbfs": -18.56,
+   "max_momentary_lufs": -26.99,
+   "max_momentary_at_s": 46.76,
    "clipped_samples": 0,
    "dc_offset": [
-    3.32e-10,
-    2.28e-10
+    2.07e-10,
+    3.17e-10
    ],
    "first_sample_abs": 0.0,
    "last_10ms_peak_dbfs": -240.0,
-   "sha256": "11f1b7ae730c6312416e166803beb1f932c46ac87dcdb7c1074d8515ae990b64",
+   "sha256": "2a0613d6474ab0af6b3a0aa4c7c74057db1e7f6e8292e5b9816cf20ab817a752",
    "ffmpeg_ebur128": {
-    "integrated_lufs": -32.4,
-    "true_peak_dbtp": -17.5
+    "integrated_lufs": -32.2,
+    "true_peak_dbtp": -18.6
    }
   },
   "sfx.wav": {
@@ -69,19 +87,19 @@
    "sample_rate": 48000,
    "channels": 2,
    "subtype": "PCM_24",
-   "integrated_lufs": -34.77,
-   "true_peak_dbtp": -13.79,
+   "integrated_lufs": -34.7,
+   "true_peak_dbtp": -13.78,
    "sample_peak_dbfs": -13.79,
-   "max_momentary_lufs": -26.82,
+   "max_momentary_lufs": -26.77,
    "max_momentary_at_s": 48.55,
    "clipped_samples": 0,
    "dc_offset": [
-    5.74e-12,
-    1.47e-11
+    9.6e-12,
+    -6.37e-12
    ],
    "first_sample_abs": 0.0,
    "last_10ms_peak_dbfs": -240.0,
-   "sha256": "d7823056516544204a4cbc8a3288268f1d2216d4257811084ad3a7f09585c98c",
+   "sha256": "baa4d609d3a32f185c19a3d287ab45abc88419d8e6478558caa1a6662e959ccd",
    "ffmpeg_ebur128": {
     "integrated_lufs": -34.7,
     "true_peak_dbtp": -13.8
@@ -96,16 +114,16 @@
    "integrated_lufs": -16.0,
    "true_peak_dbtp": -1.3,
    "sample_peak_dbfs": -1.31,
-   "max_momentary_lufs": -10.77,
+   "max_momentary_lufs": -10.78,
    "max_momentary_at_s": 87.6,
    "clipped_samples": 0,
    "dc_offset": [
-    1.42e-08,
-    1.74e-07
+    1.24e-07,
+    1.14e-07
    ],
    "first_sample_abs": 0.0,
    "last_10ms_peak_dbfs": -240.0,
-   "sha256": "76569ab63a96459b5a329010a31d9fca7200d64061de92eaa98898ae46a25d20",
+   "sha256": "d74b16ccca62b2d47bd8dafffe82e7014d19d0c555d1b16feebd540220dc8f56",
    "ffmpeg_ebur128": {
     "integrated_lufs": -16.0,
     "true_peak_dbtp": -1.3
@@ -117,29 +135,29 @@
    "sample_rate": 48000,
    "channels": 2,
    "subtype": "PCM_24",
-   "integrated_lufs": -17.01,
-   "true_peak_dbtp": -1.3,
-   "sample_peak_dbfs": -1.31,
-   "max_momentary_lufs": -11.66,
-   "max_momentary_at_s": 48.54,
+   "integrated_lufs": -17.0,
+   "true_peak_dbtp": -2.55,
+   "sample_peak_dbfs": -2.56,
+   "max_momentary_lufs": -12.48,
+   "max_momentary_at_s": 11.92,
    "clipped_samples": 0,
    "dc_offset": [
-    3.7e-07,
-    5.67e-07
+    -2.92e-09,
+    -4.25e-09
    ],
    "first_sample_abs": 0.0,
    "last_10ms_peak_dbfs": -240.0,
-   "sha256": "b21f0e43e1ba20f06d1cd58d773fefc1df453d476fdb560d9d7a03b0b876e56f",
+   "sha256": "ea22822bf346f0feb00dfa83b3af2ee140fec797fe6a269cc12a2a5761334b16",
    "ffmpeg_ebur128": {
     "integrated_lufs": -17.0,
-    "true_peak_dbtp": -1.3
+    "true_peak_dbtp": -2.6
    }
   }
  },
  "music": {
-  "stem_integrated_lufs": -32.39,
-  "loudest_momentary_400ms_lufs": -26.12,
-  "loudest_momentary_at_s": 46.88,
+  "stem_integrated_lufs": -32.27,
+  "loudest_momentary_400ms_lufs": -26.99,
+  "loudest_momentary_at_s": 46.76,
   "analysis_before_ducking": {
    "segments": [
     {
@@ -151,18 +169,18 @@
       "A3",
       "E4"
      ],
-     "lufs": -33.84,
+     "lufs": -31.55,
      "strongest_notes": [
       {
        "note": "D3",
        "hz_12tet": 146.83,
-       "centre_cents": -2.8,
-       "partials": 2
+       "centre_cents": 0.1,
+       "partials": 1
       },
       {
        "note": "A3",
        "hz_12tet": 220.0,
-       "centre_cents": 1.7,
+       "centre_cents": 0.8,
        "partials": 3
       },
       {
@@ -174,7 +192,7 @@
       {
        "note": "E4",
        "hz_12tet": 329.63,
-       "centre_cents": -1.6,
+       "centre_cents": -1.0,
        "partials": 2
       },
       {
@@ -195,25 +213,25 @@
       "A3",
       "E4"
      ],
-     "lufs": -30.97,
+     "lufs": -30.55,
      "strongest_notes": [
       {
        "note": "D3",
        "hz_12tet": 146.83,
-       "centre_cents": -0.2,
-       "partials": 3
+       "centre_cents": 0.1,
+       "partials": 1
       },
       {
        "note": "A3",
        "hz_12tet": 220.0,
-       "centre_cents": 2.1,
+       "centre_cents": 0.9,
        "partials": 3
       },
       {
        "note": "E4",
        "hz_12tet": 329.63,
-       "centre_cents": -2.6,
-       "partials": 3
+       "centre_cents": -1.6,
+       "partials": 2
       }
      ]
     },
@@ -228,25 +246,25 @@
       "C#4",
       "E4"
      ],
-     "lufs": -28.2,
+     "lufs": -28.55,
      "strongest_notes": [
       {
        "note": "F#3",
        "hz_12tet": 185.0,
-       "centre_cents": -1.1,
-       "partials": 2
+       "centre_cents": -0.1,
+       "partials": 1
       },
       {
        "note": "A3",
        "hz_12tet": 220.0,
-       "centre_cents": -0.5,
+       "centre_cents": -0.3,
        "partials": 2
       },
       {
        "note": "C#4",
        "hz_12tet": 277.18,
-       "centre_cents": 2.4,
-       "partials": 2
+       "centre_cents": 0.3,
+       "partials": 1
       },
       {
        "note": "D4",
@@ -257,7 +275,7 @@
       {
        "note": "E4",
        "hz_12tet": 329.63,
-       "centre_cents": -3.4,
+       "centre_cents": -0.8,
        "partials": 1
       },
       {
@@ -279,36 +297,30 @@
       "E4",
       "A4"
      ],
-     "lufs": -28.31,
+     "lufs": -28.55,
      "strongest_notes": [
       {
        "note": "F#3",
        "hz_12tet": 185.0,
-       "centre_cents": 0.5,
-       "partials": 2
+       "centre_cents": 0.1,
+       "partials": 1
       },
       {
        "note": "B3",
        "hz_12tet": 246.94,
-       "centre_cents": -0.8,
+       "centre_cents": -0.6,
        "partials": 3
       },
       {
        "note": "E4",
        "hz_12tet": 329.63,
-       "centre_cents": -2.4,
+       "centre_cents": -1.4,
        "partials": 2
-      },
-      {
-       "note": "F#4",
-       "hz_12tet": 369.99,
-       "centre_cents": 1.0,
-       "partials": 1
       },
       {
        "note": "A4",
        "hz_12tet": 440.0,
-       "centre_cents": -2.5,
+       "centre_cents": -1.4,
        "partials": 3
       }
      ]
@@ -324,19 +336,19 @@
       "B3",
       "F#4"
      ],
-     "lufs": -28.94,
+     "lufs": -28.06,
      "strongest_notes": [
       {
        "note": "D3",
        "hz_12tet": 146.83,
-       "centre_cents": 2.9,
+       "centre_cents": -0.0,
        "partials": 1
       },
       {
        "note": "F#3",
        "hz_12tet": 185.0,
-       "centre_cents": 1.8,
-       "partials": 2
+       "centre_cents": -0.1,
+       "partials": 1
       },
       {
        "note": "G3",
@@ -347,19 +359,19 @@
       {
        "note": "A3",
        "hz_12tet": 220.0,
-       "centre_cents": 3.5,
-       "partials": 2
+       "centre_cents": 1.3,
+       "partials": 3
       },
       {
        "note": "B3",
        "hz_12tet": 246.94,
-       "centre_cents": 0.8,
+       "centre_cents": 0.3,
        "partials": 2
       },
       {
        "note": "F#4",
        "hz_12tet": 369.99,
-       "centre_cents": -3.3,
+       "centre_cents": -1.9,
        "partials": 3
       }
      ]
@@ -374,11 +386,11 @@
       "G3",
       "D4"
      ],
-     "lufs": -28.92
+     "lufs": -28.06
     },
     {
      "from": 32.0,
-     "to": 34.2,
+     "to": 35.4,
      "notes": [
       "B1",
       "B2",
@@ -387,48 +399,48 @@
       "D4",
       "E4"
      ],
-     "lufs": -31.06,
+     "lufs": -28.56,
      "strongest_notes": [
       {
        "note": "B2",
        "hz_12tet": 123.47,
-       "centre_cents": -0.2,
+       "centre_cents": 0.2,
        "partials": 1
       },
       {
        "note": "F#3",
        "hz_12tet": 185.0,
-       "centre_cents": -1.9,
-       "partials": 2
+       "centre_cents": 0.0,
+       "partials": 1
       },
       {
        "note": "A3",
        "hz_12tet": 220.0,
-       "centre_cents": 1.2,
+       "centre_cents": -0.6,
        "partials": 2
       },
       {
        "note": "D4",
        "hz_12tet": 293.66,
-       "centre_cents": -0.3,
+       "centre_cents": 0.1,
        "partials": 3
       },
       {
        "note": "E4",
        "hz_12tet": 329.63,
-       "centre_cents": -1.2,
-       "partials": 1
+       "centre_cents": -1.3,
+       "partials": 2
       },
       {
        "note": "F#4",
        "hz_12tet": 369.99,
-       "centre_cents": 0.8,
+       "centre_cents": 1.2,
        "partials": 1
       }
      ]
     },
     {
-     "from": 36.2,
+     "from": 37.4,
      "to": 38.84,
      "notes": [
       "A1",
@@ -437,27 +449,7 @@
       "B3",
       "D4"
      ],
-     "lufs": -29.05,
-     "strongest_notes": [
-      {
-       "note": "E3",
-       "hz_12tet": 164.81,
-       "centre_cents": 1.5,
-       "partials": 3
-      },
-      {
-       "note": "B3",
-       "hz_12tet": 246.94,
-       "centre_cents": -2.4,
-       "partials": 3
-      },
-      {
-       "note": "D4",
-       "hz_12tet": 293.66,
-       "centre_cents": 1.9,
-       "partials": 3
-      }
-     ]
+     "lufs": -28.05
     },
     {
      "from": 40.91,
@@ -472,13 +464,13 @@
       "A4",
       "E5"
      ],
-     "lufs": -23.49,
+     "lufs": -26.06,
      "strongest_notes": [
       {
        "note": "F#3",
        "hz_12tet": 185.0,
-       "centre_cents": 0.3,
-       "partials": 2
+       "centre_cents": -0.0,
+       "partials": 1
       },
       {
        "note": "A3",
@@ -489,25 +481,25 @@
       {
        "note": "D4",
        "hz_12tet": 293.66,
-       "centre_cents": 0.7,
+       "centre_cents": 0.3,
        "partials": 3
       },
       {
        "note": "F#4",
        "hz_12tet": 369.99,
-       "centre_cents": -1.9,
+       "centre_cents": -1.1,
        "partials": 3
       },
       {
        "note": "A4",
        "hz_12tet": 440.0,
-       "centre_cents": -1.3,
+       "centre_cents": -0.9,
        "partials": 3
       },
       {
        "note": "E5",
        "hz_12tet": 659.26,
-       "centre_cents": -1.9,
+       "centre_cents": -1.2,
        "partials": 3
       }
      ]
@@ -523,36 +515,36 @@
       "F#4",
       "A4"
      ],
-     "lufs": -26.2,
+     "lufs": -27.05,
      "strongest_notes": [
       {
        "note": "D3",
        "hz_12tet": 146.83,
-       "centre_cents": -2.9,
+       "centre_cents": 0.2,
        "partials": 1
       },
       {
        "note": "G3",
        "hz_12tet": 196.0,
-       "centre_cents": -0.6,
-       "partials": 3
+       "centre_cents": -0.2,
+       "partials": 1
       },
       {
        "note": "B3",
        "hz_12tet": 246.94,
-       "centre_cents": -1.7,
+       "centre_cents": -0.9,
        "partials": 3
       },
       {
        "note": "F#4",
        "hz_12tet": 369.99,
-       "centre_cents": -3.1,
+       "centre_cents": -1.8,
        "partials": 3
       },
       {
        "note": "A4",
        "hz_12tet": 440.0,
-       "centre_cents": -1.9,
+       "centre_cents": -1.1,
        "partials": 3
       }
      ]
@@ -567,7 +559,7 @@
       "A3",
       "C#4"
      ],
-     "lufs": -27.1,
+     "lufs": -29.06,
      "strongest_notes": [
       {
        "note": "B2",
@@ -578,13 +570,13 @@
       {
        "note": "D3",
        "hz_12tet": 146.83,
-       "centre_cents": 1.2,
-       "partials": 2
+       "centre_cents": 0.1,
+       "partials": 1
       },
       {
        "note": "A3",
        "hz_12tet": 220.0,
-       "centre_cents": 2.4,
+       "centre_cents": 0.8,
        "partials": 2
       },
       {
@@ -596,7 +588,7 @@
       {
        "note": "C#4",
        "hz_12tet": 277.18,
-       "centre_cents": 1.2,
+       "centre_cents": 0.8,
        "partials": 3
       },
       {
@@ -617,7 +609,7 @@
       "F#3",
       "C#4"
      ],
-     "lufs": -30.4
+     "lufs": -28.05
     },
     {
      "from": 55.73,
@@ -629,7 +621,7 @@
       "G3",
       "D4"
      ],
-     "lufs": -28.03
+     "lufs": -29.05
     },
     {
      "from": 58.3,
@@ -641,7 +633,7 @@
       "B3",
       "E4"
      ],
-     "lufs": -28.2
+     "lufs": -27.06
     },
     {
      "from": 60.85,
@@ -654,13 +646,13 @@
       "B3",
       "F#4"
      ],
-     "lufs": -29.87,
+     "lufs": -27.56,
      "strongest_notes": [
       {
        "note": "D3",
        "hz_12tet": 146.83,
-       "centre_cents": -0.1,
-       "partials": 2
+       "centre_cents": -0.0,
+       "partials": 1
       },
       {
        "note": "G3",
@@ -671,19 +663,19 @@
       {
        "note": "A3",
        "hz_12tet": 220.0,
-       "centre_cents": 2.4,
+       "centre_cents": 1.0,
        "partials": 3
       },
       {
        "note": "B3",
        "hz_12tet": 246.94,
-       "centre_cents": -0.6,
+       "centre_cents": -0.4,
        "partials": 3
       },
       {
        "note": "F#4",
        "hz_12tet": 369.99,
-       "centre_cents": -2.4,
+       "centre_cents": -1.7,
        "partials": 3
       },
       {
@@ -705,7 +697,7 @@
       "D4",
       "B4"
      ],
-     "lufs": -26.1
+     "lufs": -27.56
     },
     {
      "from": 69.84,
@@ -718,7 +710,7 @@
       "D4",
       "B4"
      ],
-     "lufs": -29.05
+     "lufs": -27.56
     },
     {
      "from": 72.7,
@@ -730,43 +722,37 @@
       "D4",
       "G4"
      ],
-     "lufs": -29.28,
+     "lufs": -29.55,
      "strongest_notes": [
       {
        "note": "B2",
        "hz_12tet": 123.47,
-       "centre_cents": -2.2,
-       "partials": 2
+       "centre_cents": -0.1,
+       "partials": 1
       },
       {
        "note": "E3",
        "hz_12tet": 164.81,
-       "centre_cents": -1.2,
-       "partials": 3
+       "centre_cents": 0.1,
+       "partials": 1
       },
       {
        "note": "A3",
        "hz_12tet": 220.0,
-       "centre_cents": 1.0,
+       "centre_cents": 0.3,
        "partials": 3
       },
       {
        "note": "D4",
        "hz_12tet": 293.66,
        "centre_cents": 0.8,
-       "partials": 4
+       "partials": 3
       },
       {
        "note": "G4",
        "hz_12tet": 392.0,
-       "centre_cents": 1.7,
+       "centre_cents": 1.2,
        "partials": 3
-      },
-      {
-       "note": "D5",
-       "hz_12tet": 587.33,
-       "centre_cents": 0.7,
-       "partials": 2
       }
      ]
     },
@@ -781,7 +767,7 @@
       "B3",
       "D4"
      ],
-     "lufs": -27.7
+     "lufs": -28.55
     },
     {
      "from": 81.94,
@@ -795,7 +781,7 @@
       "F#4",
       "A4"
      ],
-     "lufs": -24.24
+     "lufs": -27.06
     },
     {
      "from": 84.35,
@@ -808,7 +794,7 @@
       "F#4",
       "E5"
      ],
-     "lufs": -25.19,
+     "lufs": -26.56,
      "strongest_notes": [
       {
        "note": "D3",
@@ -819,19 +805,19 @@
       {
        "note": "E3",
        "hz_12tet": 164.81,
-       "centre_cents": 1.2,
-       "partials": 3
+       "centre_cents": -0.1,
+       "partials": 1
       },
       {
        "note": "A3",
        "hz_12tet": 220.0,
-       "centre_cents": 1.0,
-       "partials": 3
+       "centre_cents": -0.6,
+       "partials": 2
       },
       {
        "note": "F#4",
        "hz_12tet": 369.99,
-       "centre_cents": -1.6,
+       "centre_cents": -1.3,
        "partials": 3
       },
       {
@@ -843,17 +829,17 @@
       {
        "note": "E5",
        "hz_12tet": 659.26,
-       "centre_cents": -1.8,
+       "centre_cents": -0.9,
        "partials": 3
       }
      ]
     }
    ],
-   "min_momentary_lufs_3_to_88_8": -36.85,
-   "min_momentary_at_s": 4.15,
-   "max_fall_in_100ms_db": 1.78,
-   "max_fall_at_s": 64.45,
-   "worst_note_centre_cents": 3.5,
+   "min_momentary_lufs_3_to_88_8": -34.17,
+   "min_momentary_at_s": 5.83,
+   "max_fall_in_100ms_db": 1.49,
+   "max_fall_at_s": 64.48,
+   "worst_note_centre_cents": 2.8,
    "peaks_outside_d_major": [],
    "tuning_method": "per segment of 1.8 s or more: Hann FFT (5 s max, 4x zero padding), spectral peaks 120 to 2000 Hz within 24 dB of the strongest, grouped by nearest note, magnitude-weighted centre in cents (the pad's chorus spreads each note +-3.5 to 7 cents by design)"
   },
@@ -870,7 +856,8 @@
      ],
      "level_db": -8.0,
      "brightness": 0.25,
-     "reverb_send": 0.35
+     "reverb_send": 0.35,
+     "loudness_trim_db": 1.11
     },
     {
      "t": 6.32,
@@ -885,7 +872,8 @@
      ],
      "level_db": -7.0,
      "brightness": 0.3,
-     "reverb_send": 0.38
+     "reverb_send": 0.38,
+     "loudness_trim_db": 1.11
     },
     {
      "t": 7.95,
@@ -899,7 +887,8 @@
      ],
      "level_db": -7.0,
      "brightness": 0.25,
-     "reverb_send": 0.35
+     "reverb_send": 0.35,
+     "loudness_trim_db": 0.41
     },
     {
      "t": 14.5,
@@ -914,7 +903,8 @@
      ],
      "level_db": -5.0,
      "brightness": 0.4,
-     "reverb_send": 0.35
+     "reverb_send": 0.35,
+     "loudness_trim_db": -0.4
     },
     {
      "t": 18.67,
@@ -929,7 +919,8 @@
      ],
      "level_db": -5.0,
      "brightness": 0.42,
-     "reverb_send": 0.35
+     "reverb_send": 0.35,
+     "loudness_trim_db": -0.67
     },
     {
      "t": 23.15,
@@ -944,7 +935,8 @@
      ],
      "level_db": -4.5,
      "brightness": 0.38,
-     "reverb_send": 0.35
+     "reverb_send": 0.35,
+     "loudness_trim_db": 0.55
     },
     {
      "t": 27.33,
@@ -958,7 +950,8 @@
      ],
      "level_db": -4.5,
      "brightness": 0.36,
-     "reverb_send": 0.35
+     "reverb_send": 0.35,
+     "loudness_trim_db": -0.96
     },
     {
      "t": 31.0,
@@ -973,10 +966,11 @@
      ],
      "level_db": -5.0,
      "brightness": 0.34,
-     "reverb_send": 0.35
+     "reverb_send": 0.35,
+     "loudness_trim_db": 2.07
     },
     {
-     "t": 35.2,
+     "t": 36.4,
      "xfade_s": 2.0,
      "notes": [
       "A1",
@@ -987,7 +981,8 @@
      ],
      "level_db": -4.5,
      "brightness": 0.36,
-     "reverb_send": 0.35
+     "reverb_send": 0.35,
+     "loudness_trim_db": 1.01
     },
     {
      "t": 39.34,
@@ -1002,7 +997,8 @@
      ],
      "level_db": -3.0,
      "brightness": 0.55,
-     "reverb_send": 0.38
+     "reverb_send": 0.38,
+     "loudness_trim_db": 1.01
     },
     {
      "t": 40.41,
@@ -1019,7 +1015,8 @@
      ],
      "level_db": -2.5,
      "brightness": 0.68,
-     "reverb_send": 0.42
+     "reverb_send": 0.42,
+     "loudness_trim_db": -2.11
     },
     {
      "t": 44.2,
@@ -1034,7 +1031,8 @@
      ],
      "level_db": -3.5,
      "brightness": 0.55,
-     "reverb_send": 0.38
+     "reverb_send": 0.38,
+     "loudness_trim_db": 0.27
     },
     {
      "t": 48.44,
@@ -1048,7 +1046,8 @@
      ],
      "level_db": -5.5,
      "brightness": 0.26,
-     "reverb_send": 0.38
+     "reverb_send": 0.38,
+     "loudness_trim_db": -0.69
     },
     {
      "t": 52.5,
@@ -1062,7 +1061,8 @@
      ],
      "level_db": -4.5,
      "brightness": 0.24,
-     "reverb_send": 0.4
+     "reverb_send": 0.4,
+     "loudness_trim_db": 1.26
     },
     {
      "t": 54.98,
@@ -1076,7 +1076,8 @@
      ],
      "level_db": -5.5,
      "brightness": 0.26,
-     "reverb_send": 0.4
+     "reverb_send": 0.4,
+     "loudness_trim_db": -0.55
     },
     {
      "t": 57.7,
@@ -1090,7 +1091,8 @@
      ],
      "level_db": -3.5,
      "brightness": 0.36,
-     "reverb_send": 0.4
+     "reverb_send": 0.4,
+     "loudness_trim_db": -0.26
     },
     {
      "t": 60.1,
@@ -1105,7 +1107,8 @@
      ],
      "level_db": -4.0,
      "brightness": 0.3,
-     "reverb_send": 0.36
+     "reverb_send": 0.36,
+     "loudness_trim_db": 2.54
     },
     {
      "t": 66.55,
@@ -1120,7 +1123,8 @@
      ],
      "level_db": -4.0,
      "brightness": 0.5,
-     "reverb_send": 0.36
+     "reverb_send": 0.36,
+     "loudness_trim_db": 0.56
     },
     {
      "t": 69.09,
@@ -1135,7 +1139,8 @@
      ],
      "level_db": -4.0,
      "brightness": 0.52,
-     "reverb_send": 0.36
+     "reverb_send": 0.36,
+     "loudness_trim_db": 1.97
     },
     {
      "t": 71.95,
@@ -1149,7 +1154,8 @@
      ],
      "level_db": -6.0,
      "brightness": 0.2,
-     "reverb_send": 0.62
+     "reverb_send": 0.62,
+     "loudness_trim_db": -0.74
     },
     {
      "t": 78.3,
@@ -1164,7 +1170,8 @@
      ],
      "level_db": -5.0,
      "brightness": 0.36,
-     "reverb_send": 0.4
+     "reverb_send": 0.4,
+     "loudness_trim_db": -1.32
     },
     {
      "t": 81.34,
@@ -1180,7 +1187,8 @@
      ],
      "level_db": -3.5,
      "brightness": 0.55,
-     "reverb_send": 0.4
+     "reverb_send": 0.4,
+     "loudness_trim_db": -2.35
     },
     {
      "t": 83.55,
@@ -1195,7 +1203,8 @@
      ],
      "level_db": -3.0,
      "brightness": 0.6,
-     "reverb_send": 0.42
+     "reverb_send": 0.42,
+     "loudness_trim_db": -1.69
     },
     {
      "t": 88.3,
@@ -1207,7 +1216,8 @@
      ],
      "level_db": -5.0,
      "brightness": 0.4,
-     "reverb_send": 0.42
+     "reverb_send": 0.42,
+     "loudness_trim_db": -1.69
     }
    ],
    "piano": [
@@ -1416,8 +1426,8 @@
   }
  },
  "sfx": {
-  "stem_integrated_lufs": -34.77,
-  "loudest_momentary_400ms_lufs": -26.82,
+  "stem_integrated_lufs": -34.7,
+  "loudest_momentary_400ms_lufs": -26.77,
   "loudest_momentary_at_s": 48.55,
   "bus_leveller": {
    "cap_lufs": -25.0,
@@ -1460,9 +1470,9 @@
   "no_narration": "worker line W01 only, 5.0 dB",
   "music_pause_cap": {
    "cap_lufs": -26.43,
-   "max_reduction_db": 0.42
+   "max_reduction_db": 0.0
   },
-  "music_max_move_1s_db": 8.62
+  "music_max_move_1s_db": 5.36
  },
  "voice_levelling": {
   "target_narrator_lufs": -16.0,
@@ -1495,7 +1505,7 @@
     "text": "Priora places agents around it.",
     "raw_lufs_mix_frame": -13.53,
     "gain_db": -2.47,
-    "master_lufs": -15.7,
+    "master_lufs": -15.69,
     "target_lufs": -16.0
    },
    {
@@ -1505,7 +1515,7 @@
     "text": "Hey, the bracket by the packing line has cracked again. We're going to weld it before the night shift.",
     "raw_lufs_mix_frame": -13.29,
     "gain_db": -3.21,
-    "master_lufs": -16.2,
+    "master_lufs": -16.19,
     "target_lufs": -16.5
    },
    {
@@ -1555,7 +1565,7 @@
     "text": "When everything holds, the route opens.",
     "raw_lufs_mix_frame": -16.25,
     "gain_db": 0.25,
-    "master_lufs": -15.7,
+    "master_lufs": -15.69,
     "target_lufs": -16.0
    },
    {
@@ -1565,7 +1575,7 @@
     "text": "Work goes on, the record is kept, no one is disturbed.",
     "raw_lufs_mix_frame": -16.5,
     "gain_db": 0.5,
-    "master_lufs": -15.51,
+    "master_lufs": -15.5,
     "target_lufs": -16.0
    },
    {
@@ -1575,7 +1585,7 @@
     "text": "Then one condition slips.",
     "raw_lufs_mix_frame": -14.78,
     "gain_db": -1.22,
-    "master_lufs": -15.7,
+    "master_lufs": -15.69,
     "target_lufs": -16.0
    },
    {
@@ -1585,7 +1595,7 @@
     "text": "The fire watch is half what the policy asks.",
     "raw_lufs_mix_frame": -16.7,
     "gain_db": 0.7,
-    "master_lufs": -15.7,
+    "master_lufs": -15.69,
     "target_lufs": -16.0
    },
    {
@@ -1595,7 +1605,7 @@
     "text": "Priora brings it to the risk owner.",
     "raw_lufs_mix_frame": -14.5,
     "gain_db": -1.5,
-    "master_lufs": -15.7,
+    "master_lufs": -15.69,
     "target_lufs": -16.0
    },
    {
@@ -1605,7 +1615,7 @@
     "text": "Agents prepare; the human decides.",
     "raw_lufs_mix_frame": -15.17,
     "gain_db": -0.83,
-    "master_lufs": -15.7,
+    "master_lufs": -15.69,
     "target_lufs": -16.0
    },
    {
@@ -1625,7 +1635,7 @@
     "text": "Retain is never a default.",
     "raw_lufs_mix_frame": -14.46,
     "gain_db": -1.54,
-    "master_lufs": -15.7,
+    "master_lufs": -15.69,
     "target_lufs": -16.0
    },
    {
@@ -1635,7 +1645,7 @@
     "text": "Risk is kept on purpose, with its terms explicit.",
     "raw_lufs_mix_frame": -18.31,
     "gain_db": 2.31,
-    "master_lufs": -15.85,
+    "master_lufs": -15.83,
     "target_lufs": -16.0
    },
    {
@@ -1675,7 +1685,7 @@
     "text": "The risk owner stays in control.",
     "raw_lufs_mix_frame": -16.82,
     "gain_db": 0.82,
-    "master_lufs": -15.72,
+    "master_lufs": -15.7,
     "target_lufs": -16.0
    },
    {
@@ -1685,7 +1695,7 @@
     "text": "Priora turns physical work into explicit risk decisions, while the work happens.",
     "raw_lufs_mix_frame": -16.43,
     "gain_db": 0.43,
-    "master_lufs": -15.7,
+    "master_lufs": -15.69,
     "target_lufs": -16.0
    }
   ],
@@ -1696,7 +1706,7 @@
     "start": 42.85,
     "end": 43.33,
     "gain_db": 4.0,
-    "word_master_lufs": -18.59
+    "word_master_lufs": -18.58
    }
   ],
   "note": "measured in master.wav's voice component over each sentence (word times -0.03 s / +0.08 s); voice.wav is untouched"
@@ -1717,14 +1727,14 @@
    {
     "kind": "deviate",
     "t": 48.34,
-    "lufs_100ms": -25.6,
-    "measured_lufs_100ms": -25.24
+    "lufs_100ms": -25.5,
+    "measured_lufs_100ms": -25.19
    },
    {
     "kind": "decision",
     "t": 55.72,
-    "lufs_100ms": -26.7,
-    "measured_lufs_100ms": -26.38
+    "lufs_100ms": -25.5,
+    "measured_lufs_100ms": -25.22
    }
   ],
   "loudest_others": [
@@ -1732,7 +1742,7 @@
     "kind": "lock",
     "t": 39.35,
     "lufs_100ms": -28.0,
-    "measured_lufs_100ms": -26.34
+    "measured_lufs_100ms": -26.33
    },
    {
     "kind": "move",
@@ -1744,7 +1754,7 @@
     "kind": "resolve",
     "t": 70.13,
     "lufs_100ms": -29.8,
-    "measured_lufs_100ms": -27.23
+    "measured_lufs_100ms": -27.22
    },
    {
     "kind": "compare",
@@ -1756,7 +1766,7 @@
     "kind": "evidence",
     "t": 20.53,
     "lufs_100ms": -28.0,
-    "measured_lufs_100ms": -27.7
+    "measured_lufs_100ms": -27.69
    },
    {
     "kind": "move",
@@ -1766,18 +1776,18 @@
    }
   ],
   "opening_prints_measured": [
-   -27.95,
-   -27.74,
+   -27.94,
+   -27.73,
    -28.07
   ],
   "speech_fragments_measured": [
    -38.18,
-   -38.14,
+   -38.13,
    -38.14,
    -37.04,
    -38.66,
-   -31.27,
-   -42.43,
+   -31.26,
+   -42.42,
    -41.12
   ]
  },
@@ -1786,7 +1796,7 @@
    "speech-fragment",
    "packet"
   ],
-  "sfx_peak_under_W01_dbfs": -14.16
+  "sfx_peak_under_W01_dbfs": -20.32
  },
  "ending": {
   "duck_after_last_line_db": [
@@ -1798,7 +1808,7 @@
    "seconds": 1.2
   },
   "music_peak_after_fade_dbfs": -240.0,
-  "music_largest_rise_during_fade_db_per_10ms": -0.013,
+  "music_largest_rise_during_fade_db_per_10ms": -0.008,
   "wordmark_t": 88.75,
   "wordmark_level_at_silent_point_db_re_peak": -64.5,
   "events_after_wordmark": []
@@ -1810,12 +1820,12 @@
     "speaker": "narrator",
     "start": 0.9,
     "end": 4.71,
-    "voice_lufs": -15.62,
-    "music_lufs": -39.17,
-    "sfx_lufs": -35.14,
-    "background_lufs": -35.53,
-    "voice_over_music_lu": 23.6,
-    "voice_over_background_lu": 19.9,
+    "voice_lufs": -15.61,
+    "music_lufs": -36.67,
+    "sfx_lufs": -35.13,
+    "background_lufs": -34.25,
+    "voice_over_music_lu": 21.1,
+    "voice_over_background_lu": 18.6,
     "music_duck_db": [
      -5.0,
      -5.0
@@ -1826,10 +1836,10 @@
     "speaker": "narrator",
     "start": 5.45,
     "end": 7.59,
-    "voice_lufs": -15.64,
-    "music_lufs": -37.3,
+    "voice_lufs": -15.63,
+    "music_lufs": -37.31,
     "sfx_lufs": -39.08,
-    "background_lufs": -35.7,
+    "background_lufs": -35.71,
     "voice_over_music_lu": 21.7,
     "voice_over_background_lu": 20.1,
     "music_duck_db": [
@@ -1843,11 +1853,11 @@
     "start": 8.55,
     "end": 13.85,
     "voice_lufs": -16.16,
-    "music_lufs": -36.0,
+    "music_lufs": -35.58,
     "sfx_lufs": -45.01,
-    "background_lufs": -35.76,
-    "voice_over_music_lu": 19.8,
-    "voice_over_background_lu": 19.6,
+    "background_lufs": -35.36,
+    "voice_over_music_lu": 19.4,
+    "voice_over_background_lu": 19.2,
     "music_duck_db": [
      -5.0,
      -5.0
@@ -1858,12 +1868,12 @@
     "speaker": "narrator",
     "start": 14.8,
     "end": 20.27,
-    "voice_lufs": -15.78,
-    "music_lufs": -33.55,
-    "sfx_lufs": -36.95,
-    "background_lufs": -32.17,
-    "voice_over_music_lu": 17.8,
-    "voice_over_background_lu": 16.4,
+    "voice_lufs": -15.77,
+    "music_lufs": -33.43,
+    "sfx_lufs": -36.94,
+    "background_lufs": -32.09,
+    "voice_over_music_lu": 17.7,
+    "voice_over_background_lu": 16.3,
     "music_duck_db": [
      -5.0,
      -5.0
@@ -1875,11 +1885,11 @@
     "start": 23.4,
     "end": 26.82,
     "voice_lufs": -15.68,
-    "music_lufs": -33.77,
+    "music_lufs": -32.98,
     "sfx_lufs": -37.45,
-    "background_lufs": -32.3,
-    "voice_over_music_lu": 18.1,
-    "voice_over_background_lu": 16.6,
+    "background_lufs": -31.72,
+    "voice_over_music_lu": 17.3,
+    "voice_over_background_lu": 16.0,
     "music_duck_db": [
      -5.0,
      -5.0
@@ -1890,12 +1900,12 @@
     "speaker": "narrator",
     "start": 31.2,
     "end": 33.91,
-    "voice_lufs": -15.62,
-    "music_lufs": -35.96,
-    "sfx_lufs": -35.12,
-    "background_lufs": -32.79,
-    "voice_over_music_lu": 20.3,
-    "voice_over_background_lu": 17.2,
+    "voice_lufs": -15.61,
+    "music_lufs": -33.13,
+    "sfx_lufs": -35.11,
+    "background_lufs": -31.2,
+    "voice_over_music_lu": 17.5,
+    "voice_over_background_lu": 15.6,
     "music_duck_db": [
      -5.0,
      -5.0
@@ -1906,12 +1916,12 @@
     "speaker": "narrator",
     "start": 38.6,
     "end": 44.69,
-    "voice_lufs": -15.55,
-    "music_lufs": -29.93,
-    "sfx_lufs": -33.6,
-    "background_lufs": -28.77,
-    "voice_over_music_lu": 14.4,
-    "voice_over_background_lu": 13.2,
+    "voice_lufs": -15.54,
+    "music_lufs": -30.9,
+    "sfx_lufs": -33.59,
+    "background_lufs": -29.48,
+    "voice_over_music_lu": 15.4,
+    "voice_over_background_lu": 13.9,
     "music_duck_db": [
      -5.0,
      -5.0
@@ -1922,12 +1932,12 @@
     "speaker": "narrator",
     "start": 47.3,
     "end": 51.89,
-    "voice_lufs": -15.7,
-    "music_lufs": -32.32,
-    "sfx_lufs": -31.15,
-    "background_lufs": -29.73,
-    "voice_over_music_lu": 16.6,
-    "voice_over_background_lu": 14.0,
+    "voice_lufs": -15.69,
+    "music_lufs": -33.51,
+    "sfx_lufs": -31.1,
+    "background_lufs": -30.13,
+    "voice_over_music_lu": 17.8,
+    "voice_over_background_lu": 14.4,
     "music_duck_db": [
      -5.0,
      -5.0
@@ -1938,12 +1948,12 @@
     "speaker": "narrator",
     "start": 52.4,
     "end": 56.92,
-    "voice_lufs": -15.68,
-    "music_lufs": -33.85,
-    "sfx_lufs": -32.79,
-    "background_lufs": -30.89,
-    "voice_over_music_lu": 18.2,
-    "voice_over_background_lu": 15.2,
+    "voice_lufs": -15.67,
+    "music_lufs": -33.27,
+    "sfx_lufs": -32.17,
+    "background_lufs": -30.34,
+    "voice_over_music_lu": 17.6,
+    "voice_over_background_lu": 14.7,
     "music_duck_db": [
      -5.0,
      -5.0
@@ -1954,12 +1964,12 @@
     "speaker": "narrator",
     "start": 57.7,
     "end": 59.41,
-    "voice_lufs": -15.76,
-    "music_lufs": -33.17,
-    "sfx_lufs": -34.5,
-    "background_lufs": -31.01,
-    "voice_over_music_lu": 17.4,
-    "voice_over_background_lu": 15.3,
+    "voice_lufs": -15.75,
+    "music_lufs": -32.45,
+    "sfx_lufs": -34.49,
+    "background_lufs": -30.52,
+    "voice_over_music_lu": 16.7,
+    "voice_over_background_lu": 14.8,
     "music_duck_db": [
      -5.0,
      -5.0
@@ -1971,11 +1981,11 @@
     "start": 60.25,
     "end": 61.94,
     "voice_lufs": -15.55,
-    "music_lufs": -34.63,
+    "music_lufs": -32.26,
     "sfx_lufs": -36.27,
-    "background_lufs": -33.15,
-    "voice_over_music_lu": 19.1,
-    "voice_over_background_lu": 17.6,
+    "background_lufs": -31.34,
+    "voice_over_music_lu": 16.7,
+    "voice_over_background_lu": 15.8,
     "music_duck_db": [
      -5.0,
      -5.0
@@ -1986,12 +1996,12 @@
     "speaker": "narrator",
     "start": 62.6,
     "end": 65.68,
-    "voice_lufs": -15.77,
-    "music_lufs": -35.27,
-    "sfx_lufs": -33.81,
-    "background_lufs": -31.9,
-    "voice_over_music_lu": 19.5,
-    "voice_over_background_lu": 16.1,
+    "voice_lufs": -15.75,
+    "music_lufs": -32.55,
+    "sfx_lufs": -33.8,
+    "background_lufs": -30.9,
+    "voice_over_music_lu": 16.8,
+    "voice_over_background_lu": 15.1,
     "music_duck_db": [
      -5.0,
      -5.0
@@ -2003,11 +2013,11 @@
     "start": 66.95,
     "end": 71.17,
     "voice_lufs": -15.8,
-    "music_lufs": -33.03,
+    "music_lufs": -32.65,
     "sfx_lufs": -32.74,
-    "background_lufs": -30.14,
-    "voice_over_music_lu": 17.2,
-    "voice_over_background_lu": 14.3,
+    "background_lufs": -29.88,
+    "voice_over_music_lu": 16.8,
+    "voice_over_background_lu": 14.1,
     "music_duck_db": [
      -5.0,
      -5.0
@@ -2019,11 +2029,11 @@
     "start": 72.25,
     "end": 77.1,
     "voice_lufs": -15.66,
-    "music_lufs": -34.14,
-    "sfx_lufs": -34.51,
-    "background_lufs": -31.79,
-    "voice_over_music_lu": 18.5,
-    "voice_over_background_lu": 16.1,
+    "music_lufs": -34.39,
+    "sfx_lufs": -34.5,
+    "background_lufs": -31.93,
+    "voice_over_music_lu": 18.7,
+    "voice_over_background_lu": 16.3,
     "music_duck_db": [
      -5.0,
      -5.0
@@ -2034,12 +2044,12 @@
     "speaker": "narrator",
     "start": 78.6,
     "end": 83.32,
-    "voice_lufs": -15.86,
-    "music_lufs": -31.07,
-    "sfx_lufs": -33.76,
-    "background_lufs": -29.17,
-    "voice_over_music_lu": 15.2,
-    "voice_over_background_lu": 13.3,
+    "voice_lufs": -15.85,
+    "music_lufs": -32.97,
+    "sfx_lufs": -33.75,
+    "background_lufs": -30.29,
+    "voice_over_music_lu": 17.1,
+    "voice_over_background_lu": 14.4,
     "music_duck_db": [
      -5.0,
      -5.0
@@ -2050,24 +2060,24 @@
     "speaker": "narrator",
     "start": 83.75,
     "end": 88.43,
-    "voice_lufs": -15.77,
-    "music_lufs": -30.41,
-    "sfx_lufs": -38.61,
-    "background_lufs": -30.03,
-    "voice_over_music_lu": 14.6,
-    "voice_over_background_lu": 14.3,
+    "voice_lufs": -15.76,
+    "music_lufs": -31.68,
+    "sfx_lufs": -38.6,
+    "background_lufs": -31.19,
+    "voice_over_music_lu": 15.9,
+    "voice_over_background_lu": 15.4,
     "music_duck_db": [
      -5.0,
      -5.0
     ]
    }
   ],
-  "min_narrator_over_background_lu": 13.2,
-  "min_narrator_over_music_lu": 14.4,
+  "min_narrator_over_background_lu": 13.9,
+  "min_narrator_over_music_lu": 15.4,
   "no_narration_worker": {
    "worker_lufs": -16.16,
-   "background_lufs": -21.97,
-   "margin_lu": 5.8
+   "background_lufs": -25.19,
+   "margin_lu": 9.0
   }
  },
  "events": {
@@ -2118,7 +2128,7 @@
     "lufs_100ms": -33.5,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -33.23
+    "measured_lufs_100ms": -33.22
    },
    {
     "kind": "title",
@@ -2128,7 +2138,7 @@
     "lufs_100ms": -35.1,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -32.6
+    "measured_lufs_100ms": -32.59
    },
    {
     "kind": "print",
@@ -2138,7 +2148,7 @@
     "lufs_100ms": -28.2,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -27.95
+    "measured_lufs_100ms": -27.94
    },
    {
     "kind": "print",
@@ -2148,7 +2158,7 @@
     "lufs_100ms": -28.0,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -27.74
+    "measured_lufs_100ms": -27.73
    },
    {
     "kind": "print",
@@ -2178,7 +2188,7 @@
     "lufs_100ms": -35.9,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -33.74
+    "measured_lufs_100ms": -33.73
    },
    {
     "kind": "arrive",
@@ -2188,7 +2198,7 @@
     "lufs_100ms": -38.4,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -33.75
+    "measured_lufs_100ms": -33.74
    },
    {
     "kind": "arrive",
@@ -2198,7 +2208,7 @@
     "lufs_100ms": -37.6,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -34.29
+    "measured_lufs_100ms": -34.28
    },
    {
     "kind": "arrive",
@@ -2208,7 +2218,7 @@
     "lufs_100ms": -38.0,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -35.89
+    "measured_lufs_100ms": -35.88
    },
    {
     "kind": "arrive",
@@ -2218,7 +2228,7 @@
     "lufs_100ms": -38.4,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -38.11
+    "measured_lufs_100ms": -38.1
    },
    {
     "kind": "move",
@@ -2228,7 +2238,7 @@
     "lufs_100ms": -36.6,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -36.26
+    "measured_lufs_100ms": -36.25
    },
    {
     "kind": "speech-fragment",
@@ -2258,7 +2268,7 @@
     "lufs_100ms": -38.4,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -38.14
+    "measured_lufs_100ms": -38.13
    },
    {
     "kind": "packet",
@@ -2338,7 +2348,7 @@
     "lufs_100ms": -28.8,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -28.37
+    "measured_lufs_100ms": -28.36
    },
    {
     "kind": "speech-fragment",
@@ -2358,7 +2368,7 @@
     "lufs_100ms": -43.0,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -31.27
+    "measured_lufs_100ms": -31.26
    },
    {
     "kind": "arrive",
@@ -2368,7 +2378,7 @@
     "lufs_100ms": -31.7,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -31.44
+    "measured_lufs_100ms": -31.43
    },
    {
     "kind": "arrive",
@@ -2378,7 +2388,7 @@
     "lufs_100ms": -32.3,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -32.02
+    "measured_lufs_100ms": -32.01
    },
    {
     "kind": "speech-fragment",
@@ -2388,7 +2398,7 @@
     "lufs_100ms": -42.7,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -42.43
+    "measured_lufs_100ms": -42.42
    },
    {
     "kind": "arrive",
@@ -2398,7 +2408,7 @@
     "lufs_100ms": -32.5,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -31.81
+    "measured_lufs_100ms": -31.8
    },
    {
     "kind": "speech-fragment",
@@ -2428,7 +2438,7 @@
     "lufs_100ms": -37.5,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -31.61
+    "measured_lufs_100ms": -31.6
    },
    {
     "kind": "arrive",
@@ -2438,7 +2448,7 @@
     "lufs_100ms": -32.4,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -31.76
+    "measured_lufs_100ms": -31.75
    },
    {
     "kind": "arrive",
@@ -2448,7 +2458,7 @@
     "lufs_100ms": -32.1,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -30.92
+    "measured_lufs_100ms": -30.91
    },
    {
     "kind": "request",
@@ -2468,7 +2478,7 @@
     "lufs_100ms": -29.3,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -29.07
+    "measured_lufs_100ms": -29.06
    },
    {
     "kind": "evidence",
@@ -2478,7 +2488,7 @@
     "lufs_100ms": -28.0,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -27.7
+    "measured_lufs_100ms": -27.69
    },
    {
     "kind": "assemble",
@@ -2488,7 +2498,7 @@
     "lufs_100ms": -35.1,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -34.83
+    "measured_lufs_100ms": -34.82
    },
    {
     "kind": "move",
@@ -2528,7 +2538,7 @@
     "lufs_100ms": -40.5,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -34.9
+    "measured_lufs_100ms": -34.89
    },
    {
     "kind": "door-open",
@@ -2538,7 +2548,7 @@
     "lufs_100ms": -35.2,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -34.9
+    "measured_lufs_100ms": -34.89
    },
    {
     "kind": "request",
@@ -2548,7 +2558,7 @@
     "lufs_100ms": -41.2,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -35.1
+    "measured_lufs_100ms": -35.09
    },
    {
     "kind": "request",
@@ -2578,7 +2588,7 @@
     "lufs_100ms": -33.1,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -32.76
+    "measured_lufs_100ms": -32.75
    },
    {
     "kind": "summon",
@@ -2598,7 +2608,7 @@
     "lufs_100ms": -31.0,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -28.4
+    "measured_lufs_100ms": -28.39
    },
    {
     "kind": "summon",
@@ -2608,7 +2618,7 @@
     "lufs_100ms": -32.5,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -28.99
+    "measured_lufs_100ms": -28.98
    },
    {
     "kind": "arrive",
@@ -2618,7 +2628,7 @@
     "lufs_100ms": -31.5,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -29.03
+    "measured_lufs_100ms": -29.02
    },
    {
     "kind": "summon",
@@ -2628,7 +2638,7 @@
     "lufs_100ms": -32.6,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -29.81
+    "measured_lufs_100ms": -29.8
    },
    {
     "kind": "arrive",
@@ -2638,7 +2648,7 @@
     "lufs_100ms": -30.5,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -30.55
+    "measured_lufs_100ms": -30.54
    },
    {
     "kind": "summon",
@@ -2648,7 +2658,7 @@
     "lufs_100ms": -32.5,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -27.8
+    "measured_lufs_100ms": -27.79
    },
    {
     "kind": "arrive",
@@ -2668,7 +2678,7 @@
     "lufs_100ms": -31.3,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -31.39
+    "measured_lufs_100ms": -31.38
    },
    {
     "kind": "move",
@@ -2678,7 +2688,7 @@
     "lufs_100ms": -36.5,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -34.32
+    "measured_lufs_100ms": -34.31
    },
    {
     "kind": "arrive",
@@ -2688,7 +2698,7 @@
     "lufs_100ms": -29.1,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -28.71
+    "measured_lufs_100ms": -28.7
    },
    {
     "kind": "packet",
@@ -2698,7 +2708,7 @@
     "lufs_100ms": -34.6,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -34.27
+    "measured_lufs_100ms": -34.26
    },
    {
     "kind": "thread",
@@ -2708,7 +2718,7 @@
     "lufs_100ms": -38.4,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -33.36
+    "measured_lufs_100ms": -33.35
    },
    {
     "kind": "packet",
@@ -2718,7 +2728,7 @@
     "lufs_100ms": -36.7,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -33.26
+    "measured_lufs_100ms": -33.25
    },
    {
     "kind": "door-close",
@@ -2728,7 +2738,7 @@
     "lufs_100ms": -36.4,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -33.26
+    "measured_lufs_100ms": -33.25
    },
    {
     "kind": "packet",
@@ -2738,7 +2748,7 @@
     "lufs_100ms": -36.5,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -33.26
+    "measured_lufs_100ms": -33.25
    },
    {
     "kind": "packet",
@@ -2758,7 +2768,7 @@
     "lufs_100ms": -39.0,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -32.03
+    "measured_lufs_100ms": -32.02
    },
    {
     "kind": "inspect",
@@ -2768,7 +2778,7 @@
     "lufs_100ms": -35.4,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -32.03
+    "measured_lufs_100ms": -32.02
    },
    {
     "kind": "inspect",
@@ -2778,7 +2788,7 @@
     "lufs_100ms": -36.0,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -32.03
+    "measured_lufs_100ms": -32.02
    },
    {
     "kind": "inspect",
@@ -2798,7 +2808,7 @@
     "lufs_100ms": -35.3,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -33.82
+    "measured_lufs_100ms": -33.81
    },
    {
     "kind": "return",
@@ -2808,7 +2818,7 @@
     "lufs_100ms": -39.6,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -29.75
+    "measured_lufs_100ms": -29.74
    },
    {
     "kind": "evidence",
@@ -2818,7 +2828,7 @@
     "lufs_100ms": -30.2,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -29.74
+    "measured_lufs_100ms": -29.73
    },
    {
     "kind": "door-open",
@@ -2868,7 +2878,7 @@
     "lufs_100ms": -35.0,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -34.45
+    "measured_lufs_100ms": -34.44
    },
    {
     "kind": "request",
@@ -2888,7 +2898,7 @@
     "lufs_100ms": -40.1,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -33.78
+    "measured_lufs_100ms": -33.77
    },
    {
     "kind": "return",
@@ -2898,7 +2908,7 @@
     "lufs_100ms": -35.1,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -34.4
+    "measured_lufs_100ms": -34.39
    },
    {
     "kind": "return",
@@ -2908,7 +2918,7 @@
     "lufs_100ms": -34.9,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -34.66
+    "measured_lufs_100ms": -34.65
    },
    {
     "kind": "return",
@@ -2918,7 +2928,7 @@
     "lufs_100ms": -34.9,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -34.93
+    "measured_lufs_100ms": -34.92
    },
    {
     "kind": "door-close",
@@ -2938,7 +2948,7 @@
     "lufs_100ms": -35.1,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -34.79
+    "measured_lufs_100ms": -34.78
    },
    {
     "kind": "assemble",
@@ -2948,7 +2958,7 @@
     "lufs_100ms": -38.6,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -31.9
+    "measured_lufs_100ms": -31.89
    },
    {
     "kind": "align",
@@ -2958,7 +2968,7 @@
     "lufs_100ms": -29.6,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -29.2
+    "measured_lufs_100ms": -29.19
    },
    {
     "kind": "move",
@@ -2968,7 +2978,7 @@
     "lufs_100ms": -44.3,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -29.2
+    "measured_lufs_100ms": -29.19
    },
    {
     "kind": "move",
@@ -2978,7 +2988,7 @@
     "lufs_100ms": -44.0,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -29.25
+    "measured_lufs_100ms": -29.24
    },
    {
     "kind": "move",
@@ -2998,7 +3008,7 @@
     "lufs_100ms": -28.0,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -26.34
+    "measured_lufs_100ms": -26.33
    },
    {
     "kind": "door-open",
@@ -3008,7 +3018,7 @@
     "lufs_100ms": -33.4,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -32.3
+    "measured_lufs_100ms": -32.29
    },
    {
     "kind": "route",
@@ -3028,7 +3038,7 @@
     "lufs_100ms": -34.8,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -34.47
+    "measured_lufs_100ms": -34.46
    },
    {
     "kind": "thread",
@@ -3058,17 +3068,17 @@
     "lufs_100ms": -41.4,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -25.24
+    "measured_lufs_100ms": -25.19
    },
    {
     "kind": "deviate",
     "t": 48.34,
     "start": 48.34,
     "end": 51.3321,
-    "lufs_100ms": -25.6,
+    "lufs_100ms": -25.5,
     "tier": "key",
     "note": "",
-    "measured_lufs_100ms": -25.24
+    "measured_lufs_100ms": -25.19
    },
    {
     "kind": "lock",
@@ -3078,7 +3088,7 @@
     "lufs_100ms": -39.4,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -29.83
+    "measured_lufs_100ms": -29.78
    },
    {
     "kind": "inspect",
@@ -3088,7 +3098,7 @@
     "lufs_100ms": -37.2,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -30.51
+    "measured_lufs_100ms": -30.46
    },
    {
     "kind": "return",
@@ -3098,7 +3108,7 @@
     "lufs_100ms": -39.4,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -31.9
+    "measured_lufs_100ms": -31.86
    },
    {
     "kind": "compare",
@@ -3108,7 +3118,7 @@
     "lufs_100ms": -33.9,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -31.91
+    "measured_lufs_100ms": -31.89
    },
    {
     "kind": "thread",
@@ -3118,7 +3128,7 @@
     "lufs_100ms": -42.7,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -33.51
+    "measured_lufs_100ms": -33.47
    },
    {
     "kind": "move",
@@ -3158,7 +3168,7 @@
     "lufs_100ms": -33.2,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -32.91
+    "measured_lufs_100ms": -32.9
    },
    {
     "kind": "escalate",
@@ -3178,17 +3188,17 @@
     "lufs_100ms": -31.5,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -26.38
+    "measured_lufs_100ms": -25.22
    },
    {
     "kind": "decision",
     "t": 55.72,
     "start": 55.72,
     "end": 57.9245,
-    "lufs_100ms": -26.7,
+    "lufs_100ms": -25.5,
     "tier": "key",
     "note": "",
-    "measured_lufs_100ms": -26.38
+    "measured_lufs_100ms": -25.22
    },
    {
     "kind": "decision",
@@ -3198,7 +3208,7 @@
     "lufs_100ms": -30.5,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -30.21
+    "measured_lufs_100ms": -30.2
    },
    {
     "kind": "route",
@@ -3238,7 +3248,7 @@
     "lufs_100ms": -39.3,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -31.32
+    "measured_lufs_100ms": -31.31
    },
    {
     "kind": "arrive",
@@ -3248,7 +3258,7 @@
     "lufs_100ms": -38.5,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -32.22
+    "measured_lufs_100ms": -32.21
    },
    {
     "kind": "arrive",
@@ -3268,7 +3278,7 @@
     "lufs_100ms": -36.4,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -36.12
+    "measured_lufs_100ms": -36.11
    },
    {
     "kind": "move",
@@ -3298,7 +3308,7 @@
     "lufs_100ms": -37.8,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -37.53
+    "measured_lufs_100ms": -37.52
    },
    {
     "kind": "decision",
@@ -3308,7 +3318,7 @@
     "lufs_100ms": -29.4,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -29.1
+    "measured_lufs_100ms": -29.09
    },
    {
     "kind": "door-open",
@@ -3358,7 +3368,7 @@
     "lufs_100ms": -37.2,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -36.59
+    "measured_lufs_100ms": -36.58
    },
    {
     "kind": "record",
@@ -3368,7 +3378,7 @@
     "lufs_100ms": -37.3,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -36.96
+    "measured_lufs_100ms": -36.95
    },
    {
     "kind": "return",
@@ -3378,7 +3388,7 @@
     "lufs_100ms": -37.3,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -37.0
+    "measured_lufs_100ms": -36.99
    },
    {
     "kind": "door-close",
@@ -3408,7 +3418,7 @@
     "lufs_100ms": -28.9,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -28.21
+    "measured_lufs_100ms": -28.2
    },
    {
     "kind": "door-open",
@@ -3418,7 +3428,7 @@
     "lufs_100ms": -30.6,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -28.21
+    "measured_lufs_100ms": -28.2
    },
    {
     "kind": "packet",
@@ -3428,7 +3438,7 @@
     "lufs_100ms": -33.8,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -30.06
+    "measured_lufs_100ms": -30.05
    },
    {
     "kind": "arrive",
@@ -3438,7 +3448,7 @@
     "lufs_100ms": -34.5,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -29.89
+    "measured_lufs_100ms": -29.88
    },
    {
     "kind": "compare",
@@ -3458,7 +3468,7 @@
     "lufs_100ms": -39.0,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -38.96
+    "measured_lufs_100ms": -38.95
    },
    {
     "kind": "compare",
@@ -3498,7 +3508,7 @@
     "lufs_100ms": -29.8,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -27.23
+    "measured_lufs_100ms": -27.22
    },
    {
     "kind": "compare",
@@ -3528,7 +3538,7 @@
     "lufs_100ms": -37.6,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -32.54
+    "measured_lufs_100ms": -32.53
    },
    {
     "kind": "door-close",
@@ -3548,7 +3558,7 @@
     "lufs_100ms": -36.4,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -29.73
+    "measured_lufs_100ms": -29.72
    },
    {
     "kind": "decision",
@@ -3558,7 +3568,7 @@
     "lufs_100ms": -29.1,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -28.55
+    "measured_lufs_100ms": -28.54
    },
    {
     "kind": "door-open",
@@ -3568,7 +3578,7 @@
     "lufs_100ms": -30.6,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -28.29
+    "measured_lufs_100ms": -28.28
    },
    {
     "kind": "simulated",
@@ -3668,7 +3678,7 @@
     "lufs_100ms": -42.5,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -40.28
+    "measured_lufs_100ms": -40.27
    },
    {
     "kind": "return",
@@ -3678,7 +3688,7 @@
     "lufs_100ms": -37.2,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -36.86
+    "measured_lufs_100ms": -36.85
    },
    {
     "kind": "door-close",
@@ -3728,7 +3738,7 @@
     "lufs_100ms": -34.7,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -30.74
+    "measured_lufs_100ms": -30.73
    },
    {
     "kind": "lock",
@@ -3778,7 +3788,7 @@
     "lufs_100ms": -34.9,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -31.99
+    "measured_lufs_100ms": -31.98
    },
    {
     "kind": "simulated",
@@ -3788,7 +3798,7 @@
     "lufs_100ms": -43.0,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -31.99
+    "measured_lufs_100ms": -31.98
    },
    {
     "kind": "return",
@@ -3798,7 +3808,7 @@
     "lufs_100ms": -35.6,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -31.03
+    "measured_lufs_100ms": -31.02
    },
    {
     "kind": "door-open",
@@ -3808,7 +3818,7 @@
     "lufs_100ms": -33.6,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -31.03
+    "measured_lufs_100ms": -31.02
    },
    {
     "kind": "route",
@@ -3828,7 +3838,7 @@
     "lufs_100ms": -39.4,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -31.09
+    "measured_lufs_100ms": -31.08
    },
    {
     "kind": "lock",
@@ -3868,7 +3878,7 @@
     "lufs_100ms": -33.6,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -29.22
+    "measured_lufs_100ms": -29.21
    },
    {
     "kind": "move",
@@ -3878,7 +3888,7 @@
     "lufs_100ms": -36.6,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -34.86
+    "measured_lufs_100ms": -34.85
    },
    {
     "kind": "title",
@@ -3938,7 +3948,7 @@
     "lufs_100ms": -34.5,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -33.59
+    "measured_lufs_100ms": -33.58
    },
    {
     "kind": "print",
@@ -3978,7 +3988,7 @@
     "lufs_100ms": -29.7,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -29.44
+    "measured_lufs_100ms": -29.43
    }
   ]
  },
@@ -4006,8 +4016,8 @@
    "name": "music.wav DC",
    "ok": true,
    "value": [
-    3.32e-10,
-    2.28e-10
+    2.07e-10,
+    3.17e-10
    ],
    "target": "|mean| < 1e-4"
   },
@@ -4033,8 +4043,8 @@
    "name": "sfx.wav DC",
    "ok": true,
    "value": [
-    5.74e-12,
-    1.47e-11
+    9.6e-12,
+    -6.37e-12
    ],
    "target": "|mean| < 1e-4"
   },
@@ -4060,8 +4070,8 @@
    "name": "master.wav DC",
    "ok": true,
    "value": [
-    1.42e-08,
-    1.74e-07
+    1.24e-07,
+    1.14e-07
    ],
    "target": "|mean| < 1e-4"
   },
@@ -4087,8 +4097,8 @@
    "name": "master-no-narration.wav DC",
    "ok": true,
    "value": [
-    3.7e-07,
-    5.67e-07
+    -2.92e-09,
+    -4.25e-09
    ],
    "target": "|mean| < 1e-4"
   },
@@ -4113,31 +4123,31 @@
   {
    "name": "master-no-narration.wav integrated loudness",
    "ok": true,
-   "value": -17.01,
+   "value": -17.0,
    "target": "-17.0 +- 0.5"
   },
   {
    "name": "master-no-narration.wav true peak",
    "ok": true,
-   "value": -1.3,
+   "value": -2.55,
    "target": "<= -1.0"
   },
   {
    "name": "narrator over background (every line)",
    "ok": true,
-   "value": 13.2,
+   "value": 13.9,
    "target": ">= 12 LU per line"
   },
   {
    "name": "narrator over music (every line)",
    "ok": true,
-   "value": 14.4,
+   "value": 15.4,
    "target": ">= 14 LU per line"
   },
   {
    "name": "worker over background (no-narration version)",
-   "ok": false,
-   "value": 5.8,
+   "ok": true,
+   "value": 9.0,
    "target": ">= 8 LU"
   },
   {
@@ -4167,48 +4177,48 @@
    "ok": true,
    "value": [
     -15.93,
-    -15.51
+    -15.5
    ],
    "target": "every sentence -16.0 +- 1.0 LUFS"
   },
   {
    "name": "worker voice note just under the narrator",
    "ok": true,
-   "value": "-16.2 (narrator median -15.70)",
+   "value": "-16.19 (narrator median -15.70)",
    "target": "0.2 to 1.5 LU under the narrator's median sentence"
   },
   {
    "name": "music pause cap",
    "ok": true,
-   "value": -26.12,
+   "value": -26.99,
    "target": "<= -26.0 LUFS momentary"
   },
   {
    "name": "music never moves more than 6 dB within 1 s",
-   "ok": false,
-   "value": "8.62 dB at 30.61 s",
+   "ok": true,
+   "value": "5.36 dB at 37.73 s",
    "target": "<= 6.0 dB (3.5 s to 88.7 s)"
   },
   {
    "name": "deviation and the human's decision are the loudest sounds",
-   "ok": false,
-   "value": "keys >= -26.38, next loudest lock at 39.35: -26.34",
+   "ok": true,
+   "value": "keys >= -25.22, next loudest lock at 39.35: -26.33",
    "target": "every key moment louder than every other sound"
   },
   {
    "name": "opening print thuds about -28 LUFS",
    "ok": true,
    "value": [
-    -27.95,
-    -27.74,
+    -27.94,
+    -27.73,
     -28.07
    ],
    "target": "-28.0 +- 1.5 LUFS (100 ms)"
   },
   {
    "name": "no-narration: sfx peak under the worker's voice note",
-   "ok": false,
-   "value": -14.16,
+   "ok": true,
+   "value": -20.32,
    "target": "<= -20.0 dBFS"
   },
   {
@@ -4223,7 +4233,7 @@
   {
    "name": "bed fades out cleanly",
    "ok": true,
-   "value": "-240.0 dBFS after 89.9 s, largest rise -0.013 dB",
+   "value": "-240.0 dBFS after 89.9 s, largest rise -0.008 dB",
    "target": "one 1.2 s fade from 88.7 s, silent from 89.9 s"
   },
   {
@@ -4267,7 +4277,7 @@
   {
    "name": "music in tune (A = 440)",
    "ok": true,
-   "value": 3.5,
+   "value": 2.8,
    "target": "every strong note's centre within 5 cents of 12-TET"
   },
   {
@@ -4279,15 +4289,15 @@
   {
    "name": "music never drops out (3 to 88.8 s, before ducking)",
    "ok": true,
-   "value": -36.85,
+   "value": -34.17,
    "target": ">= -45 LUFS momentary"
   },
   {
    "name": "music has no hard cuts",
    "ok": true,
-   "value": 1.78,
+   "value": 1.49,
    "target": "<= 4 dB fall within any 100 ms"
   }
  ],
- "all_ok": false
+ "all_ok": true
 }
