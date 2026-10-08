@@ -8,7 +8,7 @@
   dock the human's loop lets go (the line keeps its run from the desk to the tip); Priora
   carries the same packet to each door in frame; it goes in only through a door the black
   line holds open, and comes back out to Priora. Priora never enters a room. At the end the
-  packet is back at the dock and the loop closes round it again.
+  packet is back at the dock inside the open line (the loop stays let go).
 
   Retain (59.2 to 66.1): Priora leads the packet to the closed door; its bead touches the
   door, the door shakes and Priora recoils: AN AGENT CANNOT CHOOSE IT (under Priora's bead).
@@ -32,9 +32,10 @@
   Contract at 57.0 (from s5): tl.set below; W.decisionD, W.decisionTip, W.gap and
   W.gapTicks are read from W (a stand-in is built only if s5 has not provided them).
   Contract at 78.0 (for s7): Priora at GEO.prioraDock, bead toward the packet; the packet at
-  GEO.dock, arcsG 0.85, insurer arc hidden (gap open), gap ticks visible. W.decision drawn,
-  opacity 1, its loop closed round the packet again (its d is never changed here: while the
-  packet is away its loop is undrawn back to W.decisionTip with DrawSVG). W.decisionTrunk
+  GEO.dock, arcsG 0.85, insurer arc hidden (gap open), gap ticks visible. W.decision opacity 1
+  in its let-go state since 59.34: drawn from the desk to W.decisionTip only, loop open, i.e.
+  drawSVG W.decisionLetGo ("0% 35.021%" with C's current path; its d is never changed here).
+  W.decisionTrunk
   (solid black, W.decisionTip to GEO.branch) and W.branchNode drawn; W.branches = { retain,
   mitigate, transfer } fine dotted grey from GEO.branch to the door centres. W.roomOwnerLines
   undrawn solid black lines from GEO.branch into each doorway (Retain and Mitigate enter low,
@@ -469,7 +470,7 @@ PK.section("s6-rooms", 57, 78, function (tl, W, ctx, S) {
   // ------------------------------------------------------------ the human's loop at the dock lets go while the packet is away
   // W.decisionD is the approach from the desk to the tip, then one turn round the packet back to the tip:
   // the loop unwinds to the tip when the packet leaves (the line keeps its run from the desk to the tip)
-  // and winds round it again when the packet comes back.
+  // and stays open to the end of the section (s7 starts from that state).
   var loopPc = null;
   try {
     var dFull = W.decisionD,
@@ -494,11 +495,7 @@ PK.section("s6-rooms", 57, 78, function (tl, W, ctx, S) {
     if (loopPc === null) return;
     FT(W.decision, { drawSVG: "0% 100%" }, { drawSVG: "0% " + f(loopPc) + "%", duration: 0.35, ease: "power2.inOut" }, at);
   }
-  function loopCloses(at, dur) {
-    if (loopPc === null) return;
-    FT(W.decision, { drawSVG: "0% " + f(loopPc) + "%" }, { drawSVG: "0% 100%", duration: dur, ease: "power2.inOut" }, at);
-    PK.sfx("decision", at, { gain_db: -10, dur: dur, pan: 0.2, part: "loop" });
-  }
+  W.decisionLetGo = loopPc === null ? "0% 100%" : "0% " + f(loopPc) + "%"; // W.decision's drawSVG from 59.69 to 78.0
 
   // ------------------------------------------------------------ Priora, the packet and the doors: shared moves
   var beadNow = BEAD_DOCK;
@@ -916,7 +913,7 @@ PK.section("s6-rooms", 57, 78, function (tl, W, ctx, S) {
     fadeIn(lab, A.land + 0.04, 0.15);
     if (A.text !== "Safeguards") PK.sfx("return", A.land, { gain_db: -9, pan: 0.5 }); // at most three sounds a second
   });
-  // held still to 77.4; then the packet goes back out to Priora and the dock, and the loop closes round it
+  // held still to 77.4; then the packet goes back out to Priora and lands at the dock inside the open line
   var tOutT = 77.4;
   fadeOut(answerEls, tOutT, 0.25);
   PK.travel(tl, ride, outD("transfer", DOCK, cT), tOutT + 0.02, 0.5, "power2.inOut"); // with the packet
@@ -925,7 +922,6 @@ PK.section("s6-rooms", 57, 78, function (tl, W, ctx, S) {
   door("transfer", tOutT - 0.02, true, 0.3, true);
   packetOut("transfer", tOutT + 0.02, DOCK); // 77.42 to 77.92
   door("transfer", tOutT + 0.38, false, 0.2, true); // after the packet has cleared the doorway, closed by 78.0
-  loopCloses(77.6, 0.4);
   turnBead(BEAD_DOCK, tOutT + 0.1, 0.4);
   FT(RM.transfer.chip, { scale: SC_CLOSE, svgOrigin: CHIP_O }, { scale: SC_END, svgOrigin: CHIP_O, duration: 0.14, ease: "power2.inOut" }, 77.86);
 });
