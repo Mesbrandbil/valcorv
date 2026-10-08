@@ -6,14 +6,15 @@
 
   48.10 the Insurer re-checks: its brackets tremble, its arc trembles. On "slips" (48.34) its
   arc rotates out of line and turns dashed (clearly out by 48.55), its tie from s4 goes dashed
-  with it, the token tilts (by 48.75) and its brackets fail to close; 48.75 two short rust-deep
-  ticks lock onto the ring at the gap's edges (a faint grey ghost shows where the arc belongs).
-  CONFIGURED FOR THIS SITE fades at 48.1. Fire pings the Insurer. In the clear paper right of
-  the panel (reported out, above Priora), each label with its own ruler under it from one
-  shared origin tick: FIRE WATCH PLANNED: 30 MIN
-  (a solid 30-minute length, about 150 px) then on "half" POLICY ASKS: 60 MIN (a dashed
-  60-minute length, about 300 px). 50.3 an unengaged dashed grey barrier outline on the route
-  outside the door, the route running over it unbroken: NO HARD STOP CONFIGURED (ink-2).
+  with it, the token tilts (by 48.75) and its brackets fail to close; a faint grey ghost shows
+  where the arc belongs (the gap itself is marked only by the arcs' plain ends). CONFIGURED FOR
+  THIS SITE stays hidden; the record spine steps out of the close-up (back in the pan). 48.9
+  an unengaged dashed grey barrier outline on the route outside the door, the route running
+  over it unbroken: NO HARD STOP CONFIGURED (ink-2), held to 51.55. Fire pings the Insurer. In
+  the clear paper right of the panel (reported out, above Priora), each label with its own
+  ruler under it from one shared origin tick: FIRE WATCH PLANNED: 30 MIN (a solid 30-minute
+  length, about 150 px) then on "half" POLICY ASKS: 60 MIN (a dashed 60-minute length, about
+  300 px), with a faint leader from the gap to the rulers' origin (49.55).
   51.55 the finding and the barrier fade; the five ties retract into their agents; Priora
   steps up clear of the door; its bead pulses and a thread reaches in through the door to the
   ring, which contracts at the table into one compact decision packet (arcsG 0.85, the
@@ -25,7 +26,7 @@
   "Agents prepare". On "the human decides" the risk owner's black line leaves the desk's
   top-right corner on a diagonal, swings under the packet, rises at its right side and loops
   once round it, ending where the loop began, with a round end dot: RISK OWNER DECIDES,
-  above the risk owner. Still to 56.95.
+  beside the desk. Still to 56.95.
 
   Contract at 47.0 (from s4): docs/cut2-plan.md section 2 (unchanged). If s4 has not provided
   W.align, this section builds the 47.0 state itself.
@@ -37,18 +38,18 @@
     Facets folded (chipG untouched) and slid aside: fc.g rotation = W.facetRotations[key]
       (repair 210, hot 330, place 378 = 18, time 66, conditions 114, photo 162), each fc.mark
       with transform attribute rotate(fc.angle - that), so the marks stay upright.
-    W.gapTicks: two short rust-deep radial ticks on the ring line at 234 and 306 degrees
-      (local radius 35.5 to 41.55 inside arcsG: on the arc ends, just inside, pointing to the
-      core; nothing beyond the ring outline).
+    W.gapTicks: an empty group inside arcsG (kept as a handle; the gap is marked by its plain
+      butt ends only).
       W.gap = { a0: 234, a1: 306, r: 40 } (local to arcsG).
     W.decision (pk-decision) d = W.decisionD, drawn, opacity 1: from the desk's top-right
       corner (1182, 710) on a diagonal under the packet, up its right side to W.decisionTip,
       then one turn round the packet (radius W.decisionLoop.r = 42, counter-clockwise on
       screen: right, top, left, bottom, right) ending at W.decisionTip = [1270, 680], heading
       straight up. W.decisionDot: round ink end dot at the tip, opacity 1.
-    W.ownerDecides ("RISK OWNER DECIDES", ink mono, 19 px) above the risk owner, visible.
+    W.ownerDecides ("RISK OWNER DECIDES", ink mono, 19 px) beside the desk, from (1270, 754), visible.
     W.route drawn from the panel door to the window: drawSVG W.routeDraw (start at the door).
     Panel agent names and CONFIGURED FOR THIS SITE at opacity 0 (hidden for the rest of the film).
+    W.record.spine and W.record.ticks back at opacity 1 (faded out 47.0 to 47.3, restored 53.45).
     W.align.insurerDashed opacity 0. The Insurer conditions token tilted 12 degrees and 8 units
     outward, brackets shut. No barrier, no other labels.
 */
@@ -161,7 +162,12 @@ PK.section("s5-deviation", 47, 57, function (tl, W, ctx, S) {
   tl.set([ins.left, ins.right], { x: 0 }, T0);
   tl.set(fire.dots, { opacity: 0 }, T0);
   tl.set(names, { opacity: 1 }, T0);
-  tl.set(W.panel.sub, { opacity: 1 }, T0);
+  // CONFIGURED FOR THIS SITE stays hidden (s4 hides it from 40.45); never bring it back
+  tl.to(W.panel.sub, { opacity: 0, duration: 0.2, ease: "power1.in", immediateRender: false }, T0);
+  // 5: the record spine and its ticks sit on the bottom edge of the deviation frame: out by 47.3,
+  // back during the 53.35 pan (both from the current value)
+  tl.to([W.record.spine, W.record.ticks], { opacity: 0, duration: 0.3, ease: "power1.in", immediateRender: false }, T0);
+  tl.to([W.record.spine, W.record.ticks], { opacity: 1, duration: 0.45, ease: "power1.out", immediateRender: false }, 53.45);
   tl.set(W.route, { drawSVG: "0% 100%" }, T0);
   tl.set(W.decision, { opacity: 0 }, T0);
   cs.facets.forEach(function (fc) {
@@ -230,7 +236,6 @@ PK.section("s5-deviation", 47, 57, function (tl, W, ctx, S) {
 
   // ------------------------------------------------------------ 48.1 (camera landed): the subtitle goes, the Insurer re-checks
   var tCheck = 48.1;
-  FT(W.panel.sub, { opacity: 1 }, { opacity: 0, duration: 0.3, ease: "power1.in" }, tCheck);
   // a visible tremble of the brackets (about 2 world units = 3.5 px) and of its arc, 48.10 to 48.30
   FT(ins.left, { x: 0 }, { keyframes: [{ x: -2, duration: 0.05 }, { x: -0.3, duration: 0.05 }, { x: -2, duration: 0.05 }, { x: 0, duration: 0.05 }] }, tCheck);
   FT(ins.right, { x: 0 }, { keyframes: [{ x: 2, duration: 0.05 }, { x: 0.3, duration: 0.05 }, { x: 2, duration: 0.05 }, { x: 0, duration: 0.05 }] }, tCheck);
@@ -287,8 +292,7 @@ PK.section("s5-deviation", 47, 57, function (tl, W, ctx, S) {
     FT(dashTie, { attr: { d: "M" + pt(tok0) + " L" + pt(arcMid0) } }, { attr: { d: "M" + pt(tok1) + " L" + pt(arcMid1) }, duration: 0.55, ease: "power2.out" }, tSlip);
   }
 
-  // the gap: two short rust-deep ticks lock onto the ring line at its edges (they stay with the
-  // packet; nothing sticks out of the ring) and a faint grey ghost of where the arc belongs
+  // the gap: a faint grey ghost of where the arc belongs
   var gapGhost = PK.el("path", { d: PK.arc(0, 0, AR, 236, 304), class: "pk-ghost" }, cs.arcsG);
   gsap.set(gapGhost, { opacity: 0 });
   // cut 3: the gap is marked by its plain butt ends and the ghost alone. Any mark at the two
@@ -299,7 +303,7 @@ PK.section("s5-deviation", 47, 57, function (tl, W, ctx, S) {
   var tGap = tSlip + 0.41; // 48.75, as the token settles
   FT(gapTicks, { opacity: 0 }, { opacity: 1, duration: 0.08, ease: "none" }, tGap);
   FT(gapGhost, { opacity: 0 }, { opacity: 1, duration: 0.3, ease: "power1.out" }, tGap + 0.05);
-  PK.sfx("lock", tGap, { gain_db: -16, pan: pan(tc[0], tGap), material: "tick" });
+  PK.sfx("lock", tGap + 0.05, { gain_db: -16, pan: pan(tc[0], tGap), material: "tick" }); // as the ghost shows the gap
 
   // ------------------------------------------------------------ "The fire watch ...": Fire pings the Insurer
   var tFire = PK.word("L07", "fire");
@@ -343,6 +347,13 @@ PK.section("s5-deviation", 47, 57, function (tl, W, ctx, S) {
   FT(origin, { drawSVG: "50% 50%" }, { drawSVG: "0% 100%", duration: 0.2, ease: "power2.out" }, tWatch - 0.05);
   PK.drawOn(tl, rulerS, tWatch + 0.05, 0.35, "power2.out", { later: true });
   PK.sfx("return", tWatch + 0.38, { gain_db: -12, pan: pan(ox + U30, tWatch) }); // the 30-minute length lands
+  // a faint leader from the gap to the rulers' shared origin: the comparison explains the gap
+  var leadA = [400, 456],
+    leadB = [ox, yR2 + 6];
+  var leader = PK.el("path", { d: "M" + pt(leadA) + " Q" + pt([520, 372]) + " " + pt(leadB) }, W.L.threads);
+  leader.setAttribute("style", "fill:none;stroke:" + C.rust + ";stroke-opacity:0.4;stroke-width:calc(var(--sw, 1) * 1px);stroke-linecap:butt;");
+  gsap.set(leader, { drawSVG: "0% 0%" });
+  PK.drawOn(tl, leader, 49.55, 0.2, "power1.inOut", { later: true });
   var tHalf = PK.word("L07", "half");
   FT(linePolicy, { opacity: 0, y: 3 }, { opacity: 1, y: 0, duration: 0.3, ease: "power2.out" }, tHalf - 0.05);
   FT(rulerD, { opacity: 0 }, { opacity: 1, duration: 0.2, ease: "power1.out" }, tHalf);
@@ -373,13 +384,13 @@ PK.section("s5-deviation", 47, 57, function (tl, W, ctx, S) {
   var BS = PK.cam.px(50.5, 20);
   var gateLabel = PK.text(W.L.labels, "No hard stop configured", gp[0], gp[1] + barL / 2 + BS * 1.8, { font: "mono", size: BS, fill: INK2, anchor: "middle" });
   gsap.set(gateLabel, { opacity: 0 });
-  var tGate = 50.3;
-  FT(gate, { opacity: 0 }, { opacity: 1, duration: 0.3, ease: "power1.out" }, tGate);
-  FT(gateLabel, { opacity: 0, y: 3 }, { opacity: 1, y: 0, duration: 0.3, ease: "power2.out" }, tGate + 0.12);
+  var tGate = 48.9; // right after the slip settles, before the fire watch comparison; held to 51.55
+  FT(gate, { opacity: 0 }, { opacity: 1, duration: 0.25, ease: "power1.out" }, tGate);
+  FT(gateLabel, { opacity: 0, y: 3 }, { opacity: 1, y: 0, duration: 0.3, ease: "power2.out" }, tGate + 0.1);
 
   // ------------------------------------------------------------ 51.55: the finding is gathered
   var tF = 51.55;
-  FT([findG, gate, gateLabel, twin, gapGhost], { opacity: 1 }, { opacity: 0, duration: 0.2, ease: "power1.in" }, tF);
+  FT([findG, leader, gate, gateLabel, twin, gapGhost], { opacity: 1 }, { opacity: 0, duration: 0.2, ease: "power1.in" }, tF);
   if (dashTie) FT(dashTie, { opacity: 1 }, { opacity: 0, duration: 0.2, ease: "power1.in" }, tF);
   // the ties retract into their agents (51.6 to 51.8), leaving nothing behind
   KEYS.forEach(function (k, i) {
@@ -494,9 +505,10 @@ PK.section("s5-deviation", 47, 57, function (tl, W, ctx, S) {
   var tEnd = tDec + 0.63; // 56.35
   FT(decDot, { opacity: 0, scale: 0.4, svgOrigin: pt(tip) }, { opacity: 1, scale: 1, svgOrigin: pt(tip), duration: 0.12, ease: "power2.out" }, tEnd);
   PK.sfx("decision", tDec, { gain_db: -2, dur: 0.65, pan: pan(DOCK[0], tDec) });
-  // RISK OWNER DECIDES, ink, above the risk owner (clear of Priora, the packet and the trunk s6 draws up from the tip)
+  // RISK OWNER DECIDES, ink, with the human: beside the desk, right of the line's swing under the
+  // packet, above the ground line (well away from Priora's orbit and clear of the RISK OWNER row)
   var DS = PK.cam.px(56.4, 19);
-  W.ownerDecides = PK.text(W.L.labels, "Risk owner decides", 1144, 614, { font: "mono", size: DS, fill: C.ink, anchor: "end" });
+  W.ownerDecides = PK.text(W.L.labels, "Risk owner decides", 1270, 754, { font: "mono", size: DS, fill: C.ink, anchor: "start" });
   gsap.set(W.ownerDecides, { opacity: 0 });
   FT(W.ownerDecides, { opacity: 0, y: 3 }, { opacity: 1, y: 0, duration: 0.25, ease: "power2.out" }, tEnd);
 
