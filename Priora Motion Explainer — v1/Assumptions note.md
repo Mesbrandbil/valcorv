@@ -24,15 +24,16 @@ What I decided on my own while making v1, and what you may want to change.
 - **The deviation:** the fire watch is planned for 30 minutes and the policy asks for 60, the playground definition's own illustrative hot-work example.
 - **Mitigate:** the safeguards (extend the watch, a thermal check, move the weld to the workshop) come from the definition's example and are labelled as suggestions from a reviewed library. Cost and time are relative marks, never prices.
 - **Transfer:** dashed, always marked SIMULATED, with unnamed simulated capacity. Its answers are eligibility, terms, required safeguards and a price shown only as "?". No insurer is named or implied.
-- **Rooms together:** mitigate part with the thermal check, ask what transfer would cost, retain the rest on purpose. One illustration of the combinations the brief allows.
-- **Who decides:** only the risk owner's black line opens a room or settles a decision; agents check, prepare and carry. Retain is shown as never picked by an agent and never applied when nobody answers. No hard stop is used: a dashed, unengaged outline on the route reads "No hard stop configured".
-- **Maturity:** "Design proposal" appears when the rooms open and again under the three rooms in the closing view. Hot work is marked first; lifting, confined space and work at height appear only as later examples.
+- **The specialists:** the panel shows five (Site rules, Insurer conditions, Fire, Risk engineering, Evidence check) and three it did not need (Electrical, Structural, Security), to show that the panel is configured per site and job. "Evidence check" is the brief's Evidence Checking, named so it reads as an agent that checks the photo.
+- **Rooms together:** Priora carries the same case to each door in turn: mitigate part with the thermal check, ask what transfer would cost, keep the rest on purpose. One illustration of the combinations the brief allows.
+- **Who decides:** black is the human, rust is the agents. Only the risk owner's black line opens a room, and what the rooms send back stays dashed (a proposal) until the owner's line closes round the case; only then does it turn solid. Retain is shown as never picked by an agent (Priora is refused at the door) and never applied when nobody answers (a timer runs out, the door stays shut). No hard stop is used: a dashed, unengaged outline on the route reads "No hard stop configured".
+- **Maturity:** Retain and Mitigate carry a "Design proposal" tag in every shot they appear in, Transfer carries SIMULATED, and the closing view says "The complete system is a design proposal". Hot work is marked first; the only other mention is "Possibly later: other insured activities", with no specific activities named, because the definition leaves them to be chosen.
 - **Language:** the word "playground" is never used; the three spaces are decision rooms. No revenue model, prices, internal names, responsibilities or open questions.
-- **Last line:** set without a dash, following your no-em-dash preference.
+- **Last line:** set on two lines with a comma, no dash, following your no-em-dash preference.
 
 ## Sound
 
-Everything except the voices is synthesised offline: quiet physical sounds (paper, felt, wood, fine threads) over a calm bed, no trailer music. Masters are -16 LUFS (with narration) and -17 LUFS (without), true peak at most -1 dBTP. It was checked by measurement only; give it one headphone and one laptop-speaker listen.
+The narrator is levelled line by line in the mix and the worker's voice note sits just under it. Everything except the voices is synthesised offline: quiet physical sounds (paper, felt, wood, fine threads) over a calm bed, no trailer music. Masters are -16 LUFS (with narration) and -17 LUFS (without), true peak at most -1 dBTP. It was checked by measurement only; give it one headphone and one laptop-speaker listen.
 
 ## Rebuilding
 
