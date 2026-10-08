@@ -27,7 +27,7 @@
   gap go to three dashed SIM hexagons and out through the ports; hollow dashed beads come
   back along the threads and settle round the packet near the gap with plain words on short
   leaders: ELIGIBILITY, TERMS, SAFEGUARDS, PRICE "?". Then the packet goes back to the dock,
-  carrying the answers with it; they fade as it arrives (77.85 to 78.0).
+  carrying the answers with it; they fade as they cross the doorway (77.62 to 77.87).
 
   Contract at 57.0 (from s5): tl.set below; W.decisionD, W.decisionTip, W.gap and
   W.gapTicks are read from W (a stand-in is built only if s5 has not provided them).
@@ -920,7 +920,7 @@ PK.section("s6-rooms", 57, 78, function (tl, W, ctx, S) {
   var tOutT = 77.4;
   fadeOut(answerEls, tOutT, 0.25);
   PK.travel(tl, ride, outD("transfer", DOCK, cT), tOutT + 0.02, 0.5, "power2.inOut"); // with the packet
-  fadeOut(ride, 77.85, 0.15);
+  fadeOut(ride, 77.62, 0.25); // gone as they cross the doorway, before the dock (Transfer name, loop, door leaves)
   fadeOut(RA.transfer.map(function (a) { return a.name; }), tOutT, 0.25);
   door("transfer", tOutT - 0.02, true, 0.3, true);
   packetOut("transfer", tOutT + 0.02, DOCK); // 77.42 to 77.92
