@@ -1,0 +1,121 @@
+{
+  "schema": "priora-narration-take/1",
+  "id": "L13",
+  "engine": "guide",
+  "guide": true,
+  "label": "GUIDE VOICE (local Kokoro). Not the final ElevenLabs performance.",
+  "speaker": "narrator",
+  "text": "Priora carries the case between rooms. The risk owner stays in control.",
+  "spoken_text": "Priora carries the case between rooms. The risk owner stays in control.",
+  "sample_rate": 48000,
+  "duration": 4.81,
+  "speech_start": 0.03,
+  "speech_end": 4.75,
+  "words": [
+    {
+      "w": "Priora",
+      "start": 0.03,
+      "end": 0.5
+    },
+    {
+      "w": "carries",
+      "start": 0.5,
+      "end": 0.96
+    },
+    {
+      "w": "the",
+      "start": 0.96,
+      "end": 1.04
+    },
+    {
+      "w": "case",
+      "start": 1.04,
+      "end": 1.39
+    },
+    {
+      "w": "between",
+      "start": 1.39,
+      "end": 1.72
+    },
+    {
+      "w": "rooms",
+      "start": 1.72,
+      "end": 2.26
+    },
+    {
+      "w": "The",
+      "start": 2.67,
+      "end": 2.81
+    },
+    {
+      "w": "risk",
+      "start": 2.81,
+      "end": 3.23
+    },
+    {
+      "w": "owner",
+      "start": 3.23,
+      "end": 3.46
+    },
+    {
+      "w": "stays",
+      "start": 3.46,
+      "end": 3.93
+    },
+    {
+      "w": "in",
+      "start": 3.93,
+      "end": 4.07
+    },
+    {
+      "w": "control",
+      "start": 4.07,
+      "end": 4.75
+    }
+  ],
+  "sentences": [
+    {
+      "text": "Priora carries the case between rooms.",
+      "start": 0.03,
+      "end": 2.26,
+      "word_range": [
+        0,
+        6
+      ]
+    },
+    {
+      "text": "The risk owner stays in control.",
+      "start": 2.67,
+      "end": 4.75,
+      "word_range": [
+        6,
+        12
+      ]
+    }
+  ],
+  "created": "2026-10-07T22:04:37+00:00",
+  "provider": "kokoro-onnx 0.6.1 (kokoro-v1.0.onnx, voices-v1.0.bin)",
+  "voice": "bf_isabella",
+  "speed": 0.92,
+  "window": 4.85,
+  "fallback_words": 0,
+  "pronunciation_checks": [
+    {
+      "word": "Priora",
+      "token_index": 0,
+      "chosen_variant": "P R IY OW R AH",
+      "intended": true,
+      "phones": "P R IY OW R AH",
+      "phone_durations": {
+        "P#0": 0.06,
+        "R#1": 0.06,
+        "IY#2": 0.13,
+        "OW#3": 0.14,
+        "R#4": 0.06,
+        "AH#5": 0.05
+      },
+      "longest_vowel": "OW",
+      "stress_on_middle_syllable": true
+    }
+  ]
+}

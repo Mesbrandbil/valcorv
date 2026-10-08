@@ -1,0 +1,59 @@
+{
+  "schema": "priora-narration-take/1",
+  "id": "L10",
+  "engine": "guide",
+  "guide": true,
+  "label": "GUIDE VOICE (local Kokoro). Not the final ElevenLabs performance.",
+  "speaker": "narrator",
+  "text": "Retain is never a default.",
+  "spoken_text": "Retain is never a default.",
+  "sample_rate": 48000,
+  "duration": 1.78,
+  "speech_start": 0.03,
+  "speech_end": 1.72,
+  "words": [
+    {
+      "w": "Retain",
+      "start": 0.03,
+      "end": 0.54
+    },
+    {
+      "w": "is",
+      "start": 0.54,
+      "end": 0.7
+    },
+    {
+      "w": "never",
+      "start": 0.7,
+      "end": 1.06
+    },
+    {
+      "w": "a",
+      "start": 1.06,
+      "end": 1.1
+    },
+    {
+      "w": "default",
+      "start": 1.1,
+      "end": 1.72
+    }
+  ],
+  "sentences": [
+    {
+      "text": "Retain is never a default.",
+      "start": 0.03,
+      "end": 1.72,
+      "word_range": [
+        0,
+        5
+      ]
+    }
+  ],
+  "created": "2026-10-07T22:04:27+00:00",
+  "provider": "kokoro-onnx 0.6.1 (kokoro-v1.0.onnx, voices-v1.0.bin)",
+  "voice": "bf_isabella",
+  "speed": 0.9978,
+  "window": 1.75,
+  "fallback_words": 0,
+  "pronunciation_checks": []
+}

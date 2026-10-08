@@ -1,0 +1,54 @@
+{
+  "schema": "priora-narration-take/1",
+  "id": "L09",
+  "engine": "guide",
+  "guide": true,
+  "label": "GUIDE VOICE (local Kokoro). Not the final ElevenLabs performance.",
+  "speaker": "narrator",
+  "text": "Three decision rooms open.",
+  "spoken_text": "Three decision rooms open.",
+  "sample_rate": 48000,
+  "duration": 1.94,
+  "speech_start": 0.06,
+  "speech_end": 1.77,
+  "words": [
+    {
+      "w": "Three",
+      "start": 0.06,
+      "end": 0.35
+    },
+    {
+      "w": "decision",
+      "start": 0.35,
+      "end": 0.91
+    },
+    {
+      "w": "rooms",
+      "start": 0.91,
+      "end": 1.28
+    },
+    {
+      "w": "open",
+      "start": 1.28,
+      "end": 1.77
+    }
+  ],
+  "sentences": [
+    {
+      "text": "Three decision rooms open.",
+      "start": 0.06,
+      "end": 1.77,
+      "word_range": [
+        0,
+        4
+      ]
+    }
+  ],
+  "created": "2026-10-07T22:04:24+00:00",
+  "provider": "kokoro-onnx 0.6.1 (kokoro-v1.0.onnx, voices-v1.0.bin)",
+  "voice": "bf_isabella",
+  "speed": 0.92,
+  "window": 1.75,
+  "fallback_words": 0,
+  "pronunciation_checks": []
+}

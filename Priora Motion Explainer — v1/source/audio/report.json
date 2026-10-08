@@ -1,0 +1,3713 @@
+{
+ "schema": "priora-audio-report/1",
+ "targets": {
+  "format": "48 kHz, 24-bit PCM, stereo, 4,320,000 samples (90.000 s)",
+  "master_lufs": -16.0,
+  "no_narration_lufs": -17.0,
+  "lufs_tolerance": 0.5,
+  "true_peak_max_dbtp": -1.0,
+  "duck_narrator_db": 5.0,
+  "duck_worker_db": 5.0,
+  "duck_worker_db_no_narration": 7.0,
+  "duck_attack_s": 0.5,
+  "duck_release_s": 1.5,
+  "duck_bridge_s": 2.0,
+  "music_pre_duck_lufs_mix_frame": -28.5,
+  "event_reference_lufs_100ms": -21.0,
+  "sfx_bus_cap_momentary_lufs": -25.0,
+  "true_peak_method": "4x polyphase oversampling (scipy resample_poly), max of all channels",
+  "loudness_method": "ITU-R BS.1770-4 via pyloudnorm (integrated, gated); momentary = ungated 400 ms K-weighted windows, 10 ms hop"
+ },
+ "inputs": {
+  "events_source": "chrome",
+  "voice": {
+   "file": "assets/audio/voice.wav",
+   "mono_lufs": -19.15
+  },
+  "voice_worker": {
+   "file": "assets/audio/voice-worker.wav",
+   "mono_lufs": -19.48
+  }
+ },
+ "gains": {
+  "master_gain_db": 0.226,
+  "master_limiter_max_reduction_db": 1.54,
+  "master_limiter_activity": {
+   "seconds_over_0_5_db": 0.403,
+   "seconds_over_1_db": 0.148,
+   "deepest": [
+    {
+     "t": 19.0,
+     "db": 1.54
+    },
+    {
+     "t": 62.7,
+     "db": 1.47
+    },
+    {
+     "t": 74.7,
+     "db": 1.41
+    }
+   ]
+  },
+  "no_narration_worker_gain_db": 0.226,
+  "no_narration_background_gain_db": 10.902,
+  "no_narration_background_over_master_db": 10.676,
+  "no_narration_limiter_max_reduction_db": 0.0,
+  "note": "master.wav = TP-limiter(G * voice.wav as dual mono, DC-blocked + music.wav + sfx.wav); the stems are written post-gain G (the level they have inside master.wav, before the limiter). master-no-narration.wav = TP-limiter(G * voice-worker.wav + Gb * (music ducked under W01 only + sfx)), Gb = no_narration_background_gain_db"
+ },
+ "outputs": {
+  "music.wav": {
+   "samples": 4320000,
+   "seconds": 90.0,
+   "sample_rate": 48000,
+   "channels": 2,
+   "subtype": "PCM_24",
+   "integrated_lufs": -32.34,
+   "true_peak_dbtp": -18.61,
+   "sample_peak_dbfs": -18.62,
+   "max_momentary_lufs": -27.05,
+   "max_momentary_at_s": 46.76,
+   "clipped_samples": 0,
+   "dc_offset": [
+    2.07e-10,
+    3.2e-10
+   ],
+   "first_sample_abs": 0.0,
+   "last_10ms_peak_dbfs": -240.0,
+   "sha256": "98a10054e444a542fb3cd32b04b43d9c036cc271a7f74373296e2f86aff0b313",
+   "ffmpeg_ebur128": {
+    "integrated_lufs": -32.3,
+    "true_peak_dbtp": -18.6
+   }
+  },
+  "sfx.wav": {
+   "samples": 4320000,
+   "seconds": 90.0,
+   "sample_rate": 48000,
+   "channels": 2,
+   "subtype": "PCM_24",
+   "integrated_lufs": -35.91,
+   "true_peak_dbtp": -15.46,
+   "sample_peak_dbfs": -15.46,
+   "max_momentary_lufs": -26.85,
+   "max_momentary_at_s": 48.55,
+   "clipped_samples": 0,
+   "dc_offset": [
+    3.91e-11,
+    4.38e-11
+   ],
+   "first_sample_abs": 0.0,
+   "last_10ms_peak_dbfs": -240.0,
+   "sha256": "dea27afe00843f3043c4f57ed979f712a3d53897b17880919facb546c49d5da1",
+   "ffmpeg_ebur128": {
+    "integrated_lufs": -35.9,
+    "true_peak_dbtp": -15.5
+   }
+  },
+  "master.wav": {
+   "samples": 4320000,
+   "seconds": 90.0,
+   "sample_rate": 48000,
+   "channels": 2,
+   "subtype": "PCM_24",
+   "integrated_lufs": -16.0,
+   "true_peak_dbtp": -1.3,
+   "sample_peak_dbfs": -1.31,
+   "max_momentary_lufs": -10.87,
+   "max_momentary_at_s": 87.6,
+   "clipped_samples": 0,
+   "dc_offset": [
+    5.68e-08,
+    3.73e-08
+   ],
+   "first_sample_abs": 0.0,
+   "last_10ms_peak_dbfs": -240.0,
+   "sha256": "f6e43a35995acc60df37c26d557af00c4f791715d490c7192583879a0116cd33",
+   "ffmpeg_ebur128": {
+    "integrated_lufs": -16.0,
+    "true_peak_dbtp": -1.3
+   }
+  },
+  "master-no-narration.wav": {
+   "samples": 4320000,
+   "seconds": 90.0,
+   "sample_rate": 48000,
+   "channels": 2,
+   "subtype": "PCM_24",
+   "integrated_lufs": -17.0,
+   "true_peak_dbtp": -2.62,
+   "sample_peak_dbfs": -2.62,
+   "max_momentary_lufs": -12.35,
+   "max_momentary_at_s": 39.88,
+   "clipped_samples": 0,
+   "dc_offset": [
+    -1.54e-09,
+    -2.76e-09
+   ],
+   "first_sample_abs": 0.0,
+   "last_10ms_peak_dbfs": -240.0,
+   "sha256": "a39261041d71e6399890bd4c0a6a6fe5a2acaf2b13900ae9afeb2574ec3ba0ca",
+   "ffmpeg_ebur128": {
+    "integrated_lufs": -17.0,
+    "true_peak_dbtp": -2.6
+   }
+  }
+ },
+ "music": {
+  "stem_integrated_lufs": -32.34,
+  "loudest_momentary_400ms_lufs": -27.05,
+  "loudest_momentary_at_s": 46.76,
+  "analysis_before_ducking": {
+   "segments": [
+    {
+     "from": 3.2,
+     "to": 5.52,
+     "notes": [
+      "D2",
+      "D3",
+      "A3",
+      "E4"
+     ],
+     "lufs": -31.61,
+     "strongest_notes": [
+      {
+       "note": "D3",
+       "hz_12tet": 146.83,
+       "centre_cents": 0.1,
+       "partials": 1
+      },
+      {
+       "note": "A3",
+       "hz_12tet": 220.0,
+       "centre_cents": 0.8,
+       "partials": 3
+      },
+      {
+       "note": "D4",
+       "hz_12tet": 293.66,
+       "centre_cents": 0.2,
+       "partials": 1
+      },
+      {
+       "note": "E4",
+       "hz_12tet": 329.63,
+       "centre_cents": -1.0,
+       "partials": 2
+      },
+      {
+       "note": "D5",
+       "hz_12tet": 587.33,
+       "centre_cents": 0.7,
+       "partials": 1
+      }
+     ]
+    },
+    {
+     "from": 8.75,
+     "to": 13.7,
+     "notes": [
+      "D2",
+      "A2",
+      "D3",
+      "A3",
+      "E4"
+     ],
+     "lufs": -30.61,
+     "strongest_notes": [
+      {
+       "note": "D3",
+       "hz_12tet": 146.83,
+       "centre_cents": 0.1,
+       "partials": 1
+      },
+      {
+       "note": "A3",
+       "hz_12tet": 220.0,
+       "centre_cents": 0.9,
+       "partials": 3
+      },
+      {
+       "note": "E4",
+       "hz_12tet": 329.63,
+       "centre_cents": -1.6,
+       "partials": 2
+      }
+     ]
+    },
+    {
+     "from": 15.3,
+     "to": 17.87,
+     "notes": [
+      "D2",
+      "A2",
+      "F#3",
+      "A3",
+      "C#4",
+      "E4"
+     ],
+     "lufs": -28.61,
+     "strongest_notes": [
+      {
+       "note": "F#3",
+       "hz_12tet": 185.0,
+       "centre_cents": -0.1,
+       "partials": 1
+      },
+      {
+       "note": "A3",
+       "hz_12tet": 220.0,
+       "centre_cents": -0.3,
+       "partials": 2
+      },
+      {
+       "note": "C#4",
+       "hz_12tet": 277.18,
+       "centre_cents": 0.3,
+       "partials": 1
+      },
+      {
+       "note": "D4",
+       "hz_12tet": 293.66,
+       "centre_cents": 0.2,
+       "partials": 1
+      },
+      {
+       "note": "E4",
+       "hz_12tet": 329.63,
+       "centre_cents": -0.8,
+       "partials": 1
+      },
+      {
+       "note": "F#4",
+       "hz_12tet": 369.99,
+       "centre_cents": 0.3,
+       "partials": 1
+      }
+     ]
+    },
+    {
+     "from": 19.47,
+     "to": 22.15,
+     "notes": [
+      "D2",
+      "A2",
+      "F#3",
+      "B3",
+      "E4",
+      "A4"
+     ],
+     "lufs": -28.62,
+     "strongest_notes": [
+      {
+       "note": "F#3",
+       "hz_12tet": 185.0,
+       "centre_cents": 0.1,
+       "partials": 1
+      },
+      {
+       "note": "B3",
+       "hz_12tet": 246.94,
+       "centre_cents": -0.6,
+       "partials": 3
+      },
+      {
+       "note": "E4",
+       "hz_12tet": 329.63,
+       "centre_cents": -1.4,
+       "partials": 2
+      },
+      {
+       "note": "A4",
+       "hz_12tet": 440.0,
+       "centre_cents": -1.4,
+       "partials": 3
+      }
+     ]
+    },
+    {
+     "from": 24.15,
+     "to": 26.33,
+     "notes": [
+      "G2",
+      "D3",
+      "F#3",
+      "A3",
+      "B3",
+      "F#4"
+     ],
+     "lufs": -28.12,
+     "strongest_notes": [
+      {
+       "note": "D3",
+       "hz_12tet": 146.83,
+       "centre_cents": -0.0,
+       "partials": 1
+      },
+      {
+       "note": "F#3",
+       "hz_12tet": 185.0,
+       "centre_cents": -0.1,
+       "partials": 1
+      },
+      {
+       "note": "G3",
+       "hz_12tet": 196.0,
+       "centre_cents": 0.2,
+       "partials": 1
+      },
+      {
+       "note": "A3",
+       "hz_12tet": 220.0,
+       "centre_cents": 1.3,
+       "partials": 3
+      },
+      {
+       "note": "B3",
+       "hz_12tet": 246.94,
+       "centre_cents": 0.3,
+       "partials": 2
+      },
+      {
+       "note": "F#4",
+       "hz_12tet": 369.99,
+       "centre_cents": -1.9,
+       "partials": 3
+      }
+     ]
+    },
+    {
+     "from": 28.33,
+     "to": 30.0,
+     "notes": [
+      "E2",
+      "B2",
+      "F#3",
+      "G3",
+      "D4"
+     ],
+     "lufs": -28.11
+    },
+    {
+     "from": 32.0,
+     "to": 35.4,
+     "notes": [
+      "B1",
+      "B2",
+      "F#3",
+      "A3",
+      "D4",
+      "E4"
+     ],
+     "lufs": -28.61,
+     "strongest_notes": [
+      {
+       "note": "B2",
+       "hz_12tet": 123.47,
+       "centre_cents": 0.2,
+       "partials": 1
+      },
+      {
+       "note": "F#3",
+       "hz_12tet": 185.0,
+       "centre_cents": 0.0,
+       "partials": 1
+      },
+      {
+       "note": "A3",
+       "hz_12tet": 220.0,
+       "centre_cents": -0.6,
+       "partials": 2
+      },
+      {
+       "note": "D4",
+       "hz_12tet": 293.66,
+       "centre_cents": 0.1,
+       "partials": 3
+      },
+      {
+       "note": "E4",
+       "hz_12tet": 329.63,
+       "centre_cents": -1.3,
+       "partials": 2
+      },
+      {
+       "note": "F#4",
+       "hz_12tet": 369.99,
+       "centre_cents": 1.2,
+       "partials": 1
+      }
+     ]
+    },
+    {
+     "from": 37.4,
+     "to": 38.84,
+     "notes": [
+      "A1",
+      "A2",
+      "E3",
+      "B3",
+      "D4"
+     ],
+     "lufs": -28.11
+    },
+    {
+     "from": 40.91,
+     "to": 43.2,
+     "notes": [
+      "D2",
+      "A2",
+      "F#3",
+      "A3",
+      "D4",
+      "F#4",
+      "A4",
+      "E5"
+     ],
+     "lufs": -26.11,
+     "strongest_notes": [
+      {
+       "note": "F#3",
+       "hz_12tet": 185.0,
+       "centre_cents": -0.0,
+       "partials": 1
+      },
+      {
+       "note": "A3",
+       "hz_12tet": 220.0,
+       "centre_cents": -0.7,
+       "partials": 1
+      },
+      {
+       "note": "D4",
+       "hz_12tet": 293.66,
+       "centre_cents": 0.3,
+       "partials": 3
+      },
+      {
+       "note": "F#4",
+       "hz_12tet": 369.99,
+       "centre_cents": -1.1,
+       "partials": 3
+      },
+      {
+       "note": "A4",
+       "hz_12tet": 440.0,
+       "centre_cents": -0.9,
+       "partials": 3
+      },
+      {
+       "note": "E5",
+       "hz_12tet": 659.26,
+       "centre_cents": -1.2,
+       "partials": 3
+      }
+     ]
+    },
+    {
+     "from": 45.2,
+     "to": 47.84,
+     "notes": [
+      "D2",
+      "D3",
+      "G3",
+      "B3",
+      "F#4",
+      "A4"
+     ],
+     "lufs": -27.11,
+     "strongest_notes": [
+      {
+       "note": "D3",
+       "hz_12tet": 146.83,
+       "centre_cents": 0.2,
+       "partials": 1
+      },
+      {
+       "note": "G3",
+       "hz_12tet": 196.0,
+       "centre_cents": -0.2,
+       "partials": 1
+      },
+      {
+       "note": "B3",
+       "hz_12tet": 246.94,
+       "centre_cents": -0.9,
+       "partials": 3
+      },
+      {
+       "note": "F#4",
+       "hz_12tet": 369.99,
+       "centre_cents": -1.8,
+       "partials": 3
+      },
+      {
+       "note": "A4",
+       "hz_12tet": 440.0,
+       "centre_cents": -1.1,
+       "partials": 3
+      }
+     ]
+    },
+    {
+     "from": 49.04,
+     "to": 51.75,
+     "notes": [
+      "B1",
+      "F#2",
+      "D3",
+      "A3",
+      "C#4"
+     ],
+     "lufs": -29.11,
+     "strongest_notes": [
+      {
+       "note": "B2",
+       "hz_12tet": 123.47,
+       "centre_cents": 0.1,
+       "partials": 1
+      },
+      {
+       "note": "D3",
+       "hz_12tet": 146.83,
+       "centre_cents": 0.1,
+       "partials": 1
+      },
+      {
+       "note": "A3",
+       "hz_12tet": 220.0,
+       "centre_cents": 0.8,
+       "partials": 2
+      },
+      {
+       "note": "B3",
+       "hz_12tet": 246.94,
+       "centre_cents": 0.3,
+       "partials": 1
+      },
+      {
+       "note": "C#4",
+       "hz_12tet": 277.18,
+       "centre_cents": 0.8,
+       "partials": 3
+      },
+      {
+       "note": "F#4",
+       "hz_12tet": 369.99,
+       "centre_cents": 2.8,
+       "partials": 1
+      }
+     ]
+    },
+    {
+     "from": 53.25,
+     "to": 54.23,
+     "notes": [
+      "G1",
+      "G2",
+      "D3",
+      "F#3",
+      "C#4"
+     ],
+     "lufs": -28.12
+    },
+    {
+     "from": 55.73,
+     "to": 57.1,
+     "notes": [
+      "A1",
+      "A2",
+      "E3",
+      "G3",
+      "D4"
+     ],
+     "lufs": -29.11
+    },
+    {
+     "from": 58.3,
+     "to": 59.35,
+     "notes": [
+      "A1",
+      "A2",
+      "E3",
+      "B3",
+      "E4"
+     ],
+     "lufs": -27.11
+    },
+    {
+     "from": 60.85,
+     "to": 65.8,
+     "notes": [
+      "G1",
+      "G2",
+      "D3",
+      "A3",
+      "B3",
+      "F#4"
+     ],
+     "lufs": -27.61,
+     "strongest_notes": [
+      {
+       "note": "D3",
+       "hz_12tet": 146.83,
+       "centre_cents": -0.0,
+       "partials": 1
+      },
+      {
+       "note": "G3",
+       "hz_12tet": 196.0,
+       "centre_cents": 0.4,
+       "partials": 2
+      },
+      {
+       "note": "A3",
+       "hz_12tet": 220.0,
+       "centre_cents": 1.0,
+       "partials": 3
+      },
+      {
+       "note": "B3",
+       "hz_12tet": 246.94,
+       "centre_cents": -0.4,
+       "partials": 3
+      },
+      {
+       "note": "F#4",
+       "hz_12tet": 369.99,
+       "centre_cents": -1.7,
+       "partials": 3
+      },
+      {
+       "note": "B4",
+       "hz_12tet": 493.88,
+       "centre_cents": 0.6,
+       "partials": 1
+      }
+     ]
+    },
+    {
+     "from": 67.3,
+     "to": 68.34,
+     "notes": [
+      "E2",
+      "B2",
+      "F#3",
+      "G3",
+      "D4",
+      "B4"
+     ],
+     "lufs": -27.61
+    },
+    {
+     "from": 69.84,
+     "to": 71.2,
+     "notes": [
+      "E2",
+      "B2",
+      "F#3",
+      "A3",
+      "D4",
+      "B4"
+     ],
+     "lufs": -27.61
+    },
+    {
+     "from": 72.7,
+     "to": 77.55,
+     "notes": [
+      "B2",
+      "E3",
+      "A3",
+      "D4",
+      "G4"
+     ],
+     "lufs": -29.61,
+     "strongest_notes": [
+      {
+       "note": "B2",
+       "hz_12tet": 123.47,
+       "centre_cents": -0.1,
+       "partials": 1
+      },
+      {
+       "note": "E3",
+       "hz_12tet": 164.81,
+       "centre_cents": 0.1,
+       "partials": 1
+      },
+      {
+       "note": "A3",
+       "hz_12tet": 220.0,
+       "centre_cents": 0.3,
+       "partials": 3
+      },
+      {
+       "note": "D4",
+       "hz_12tet": 293.66,
+       "centre_cents": 0.8,
+       "partials": 3
+      },
+      {
+       "note": "G4",
+       "hz_12tet": 392.0,
+       "centre_cents": 1.2,
+       "partials": 3
+      }
+     ]
+    },
+    {
+     "from": 79.05,
+     "to": 80.74,
+     "notes": [
+      "A1",
+      "A2",
+      "E3",
+      "G3",
+      "B3",
+      "D4"
+     ],
+     "lufs": -28.61
+    },
+    {
+     "from": 81.94,
+     "to": 82.75,
+     "notes": [
+      "D2",
+      "A2",
+      "F#3",
+      "A3",
+      "D4",
+      "F#4",
+      "A4"
+     ],
+     "lufs": -27.11
+    },
+    {
+     "from": 84.35,
+     "to": 86.4,
+     "notes": [
+      "D2",
+      "A2",
+      "E3",
+      "A3",
+      "F#4",
+      "E5"
+     ],
+     "lufs": -26.62,
+     "strongest_notes": [
+      {
+       "note": "D3",
+       "hz_12tet": 146.83,
+       "centre_cents": 1.3,
+       "partials": 1
+      },
+      {
+       "note": "E3",
+       "hz_12tet": 164.81,
+       "centre_cents": -0.2,
+       "partials": 1
+      },
+      {
+       "note": "A3",
+       "hz_12tet": 220.0,
+       "centre_cents": -0.4,
+       "partials": 2
+      },
+      {
+       "note": "F#4",
+       "hz_12tet": 369.99,
+       "centre_cents": -1.6,
+       "partials": 3
+      },
+      {
+       "note": "A4",
+       "hz_12tet": 440.0,
+       "centre_cents": 0.2,
+       "partials": 1
+      },
+      {
+       "note": "E5",
+       "hz_12tet": 659.26,
+       "centre_cents": -0.6,
+       "partials": 3
+      }
+     ]
+    }
+   ],
+   "min_momentary_lufs_3_to_88_8": -34.23,
+   "min_momentary_at_s": 5.83,
+   "max_fall_in_100ms_db": 1.49,
+   "max_fall_at_s": 64.48,
+   "worst_note_centre_cents": 2.8,
+   "peaks_outside_d_major": [],
+   "tuning_method": "per segment of 1.8 s or more: Hann FFT (5 s max, 4x zero padding), spectral peaks 120 to 2000 Hz within 24 dB of the strongest, grouped by nearest note, magnitude-weighted centre in cents (the pad's chorus spreads each note +-3.5 to 7 cents by design)"
+  },
+  "plan": {
+   "segments": [
+    {
+     "t": 1.6,
+     "xfade_s": 3.2,
+     "notes": [
+      "D2",
+      "D3",
+      "A3",
+      "E4"
+     ],
+     "level_db": -8.0,
+     "brightness": 0.25,
+     "reverb_send": 0.35,
+     "loudness_trim_db": 1.1
+    },
+    {
+     "t": 6.32,
+     "xfade_s": 1.6,
+     "notes": [
+      "D2",
+      "D3",
+      "A3",
+      "E4",
+      "A4",
+      "E5"
+     ],
+     "level_db": -7.0,
+     "brightness": 0.3,
+     "reverb_send": 0.38,
+     "loudness_trim_db": 1.1
+    },
+    {
+     "t": 7.95,
+     "xfade_s": 1.6,
+     "notes": [
+      "D2",
+      "A2",
+      "D3",
+      "A3",
+      "E4"
+     ],
+     "level_db": -7.0,
+     "brightness": 0.25,
+     "reverb_send": 0.35,
+     "loudness_trim_db": 0.4
+    },
+    {
+     "t": 14.5,
+     "xfade_s": 1.6,
+     "notes": [
+      "D2",
+      "A2",
+      "F#3",
+      "A3",
+      "C#4",
+      "E4"
+     ],
+     "level_db": -5.0,
+     "brightness": 0.4,
+     "reverb_send": 0.35,
+     "loudness_trim_db": -0.41
+    },
+    {
+     "t": 18.67,
+     "xfade_s": 1.6,
+     "notes": [
+      "D2",
+      "A2",
+      "F#3",
+      "B3",
+      "E4",
+      "A4"
+     ],
+     "level_db": -5.0,
+     "brightness": 0.42,
+     "reverb_send": 0.35,
+     "loudness_trim_db": -0.69
+    },
+    {
+     "t": 23.15,
+     "xfade_s": 2.0,
+     "notes": [
+      "G2",
+      "D3",
+      "F#3",
+      "A3",
+      "B3",
+      "F#4"
+     ],
+     "level_db": -4.5,
+     "brightness": 0.38,
+     "reverb_send": 0.35,
+     "loudness_trim_db": 0.54
+    },
+    {
+     "t": 27.33,
+     "xfade_s": 2.0,
+     "notes": [
+      "E2",
+      "B2",
+      "F#3",
+      "G3",
+      "D4"
+     ],
+     "level_db": -4.5,
+     "brightness": 0.36,
+     "reverb_send": 0.35,
+     "loudness_trim_db": -0.97
+    },
+    {
+     "t": 31.0,
+     "xfade_s": 2.0,
+     "notes": [
+      "B1",
+      "B2",
+      "F#3",
+      "A3",
+      "D4",
+      "E4"
+     ],
+     "level_db": -5.0,
+     "brightness": 0.34,
+     "reverb_send": 0.35,
+     "loudness_trim_db": 2.06
+    },
+    {
+     "t": 36.4,
+     "xfade_s": 2.0,
+     "notes": [
+      "A1",
+      "A2",
+      "E3",
+      "B3",
+      "D4"
+     ],
+     "level_db": -4.5,
+     "brightness": 0.36,
+     "reverb_send": 0.35,
+     "loudness_trim_db": 1.0
+    },
+    {
+     "t": 39.34,
+     "xfade_s": 1.0,
+     "notes": [
+      "D2",
+      "A2",
+      "F#3",
+      "A3",
+      "D4",
+      "F#4"
+     ],
+     "level_db": -3.0,
+     "brightness": 0.55,
+     "reverb_send": 0.38,
+     "loudness_trim_db": 1.0
+    },
+    {
+     "t": 40.41,
+     "xfade_s": 1.0,
+     "notes": [
+      "D2",
+      "A2",
+      "F#3",
+      "A3",
+      "D4",
+      "F#4",
+      "A4",
+      "E5"
+     ],
+     "level_db": -2.5,
+     "brightness": 0.68,
+     "reverb_send": 0.42,
+     "loudness_trim_db": -2.12
+    },
+    {
+     "t": 44.2,
+     "xfade_s": 2.0,
+     "notes": [
+      "D2",
+      "D3",
+      "G3",
+      "B3",
+      "F#4",
+      "A4"
+     ],
+     "level_db": -3.5,
+     "brightness": 0.55,
+     "reverb_send": 0.38,
+     "loudness_trim_db": 0.26
+    },
+    {
+     "t": 48.44,
+     "xfade_s": 1.2,
+     "notes": [
+      "B1",
+      "F#2",
+      "D3",
+      "A3",
+      "C#4"
+     ],
+     "level_db": -5.5,
+     "brightness": 0.26,
+     "reverb_send": 0.38,
+     "loudness_trim_db": -0.7
+    },
+    {
+     "t": 52.5,
+     "xfade_s": 1.5,
+     "notes": [
+      "G1",
+      "G2",
+      "D3",
+      "F#3",
+      "C#4"
+     ],
+     "level_db": -4.5,
+     "brightness": 0.24,
+     "reverb_send": 0.4,
+     "loudness_trim_db": 1.24
+    },
+    {
+     "t": 54.98,
+     "xfade_s": 1.5,
+     "notes": [
+      "A1",
+      "A2",
+      "E3",
+      "G3",
+      "D4"
+     ],
+     "level_db": -5.5,
+     "brightness": 0.26,
+     "reverb_send": 0.4,
+     "loudness_trim_db": -0.56
+    },
+    {
+     "t": 57.7,
+     "xfade_s": 1.2,
+     "notes": [
+      "A1",
+      "A2",
+      "E3",
+      "B3",
+      "E4"
+     ],
+     "level_db": -3.5,
+     "brightness": 0.36,
+     "reverb_send": 0.4,
+     "loudness_trim_db": -0.27
+    },
+    {
+     "t": 60.1,
+     "xfade_s": 1.5,
+     "notes": [
+      "G1",
+      "G2",
+      "D3",
+      "A3",
+      "B3",
+      "F#4"
+     ],
+     "level_db": -4.0,
+     "brightness": 0.3,
+     "reverb_send": 0.36,
+     "loudness_trim_db": 2.53
+    },
+    {
+     "t": 66.55,
+     "xfade_s": 1.5,
+     "notes": [
+      "E2",
+      "B2",
+      "F#3",
+      "G3",
+      "D4",
+      "B4"
+     ],
+     "level_db": -4.0,
+     "brightness": 0.5,
+     "reverb_send": 0.36,
+     "loudness_trim_db": 0.55
+    },
+    {
+     "t": 69.09,
+     "xfade_s": 1.5,
+     "notes": [
+      "E2",
+      "B2",
+      "F#3",
+      "A3",
+      "D4",
+      "B4"
+     ],
+     "level_db": -4.0,
+     "brightness": 0.52,
+     "reverb_send": 0.36,
+     "loudness_trim_db": 1.96
+    },
+    {
+     "t": 71.95,
+     "xfade_s": 1.5,
+     "notes": [
+      "B2",
+      "E3",
+      "A3",
+      "D4",
+      "G4"
+     ],
+     "level_db": -6.0,
+     "brightness": 0.2,
+     "reverb_send": 0.62,
+     "loudness_trim_db": -0.75
+    },
+    {
+     "t": 78.3,
+     "xfade_s": 1.5,
+     "notes": [
+      "A1",
+      "A2",
+      "E3",
+      "G3",
+      "B3",
+      "D4"
+     ],
+     "level_db": -5.0,
+     "brightness": 0.36,
+     "reverb_send": 0.4,
+     "loudness_trim_db": -1.33
+    },
+    {
+     "t": 81.34,
+     "xfade_s": 1.2,
+     "notes": [
+      "D2",
+      "A2",
+      "F#3",
+      "A3",
+      "D4",
+      "F#4",
+      "A4"
+     ],
+     "level_db": -3.5,
+     "brightness": 0.55,
+     "reverb_send": 0.4,
+     "loudness_trim_db": -2.36
+    },
+    {
+     "t": 83.55,
+     "xfade_s": 1.6,
+     "notes": [
+      "D2",
+      "A2",
+      "E3",
+      "A3",
+      "F#4",
+      "E5"
+     ],
+     "level_db": -3.0,
+     "brightness": 0.6,
+     "reverb_send": 0.42,
+     "loudness_trim_db": -1.48
+    },
+    {
+     "t": 87.9,
+     "xfade_s": 3.0,
+     "notes": [
+      "D2",
+      "A2"
+     ],
+     "level_db": -12.0,
+     "brightness": 0.35,
+     "reverb_send": 0.42,
+     "loudness_trim_db": -1.48
+    }
+   ],
+   "piano": [
+    {
+     "t": 0.55,
+     "note": "D4",
+     "hz": 293.66,
+     "velocity": 0.28,
+     "distant": false
+    },
+    {
+     "t": 14.55,
+     "note": "D4",
+     "hz": 293.66,
+     "velocity": 0.32,
+     "distant": false
+    },
+    {
+     "t": 14.9,
+     "note": "F#4",
+     "hz": 369.99,
+     "velocity": 0.32,
+     "distant": false
+    },
+    {
+     "t": 23.15,
+     "note": "G3",
+     "hz": 196.0,
+     "velocity": 0.28,
+     "distant": false
+    },
+    {
+     "t": 23.2,
+     "note": "D4",
+     "hz": 293.66,
+     "velocity": 0.28,
+     "distant": false
+    },
+    {
+     "t": 31.05,
+     "note": "F#4",
+     "hz": 369.99,
+     "velocity": 0.26,
+     "distant": false
+    },
+    {
+     "t": 39.29,
+     "note": "D4",
+     "hz": 293.66,
+     "velocity": 0.38,
+     "distant": false
+    },
+    {
+     "t": 39.36,
+     "note": "F#4",
+     "hz": 369.99,
+     "velocity": 0.38,
+     "distant": false
+    },
+    {
+     "t": 39.43,
+     "note": "A4",
+     "hz": 440.0,
+     "velocity": 0.38,
+     "distant": false
+    },
+    {
+     "t": 40.26,
+     "note": "A4",
+     "hz": 440.0,
+     "velocity": 0.3,
+     "distant": false
+    },
+    {
+     "t": 40.6,
+     "note": "D5",
+     "hz": 587.33,
+     "velocity": 0.3,
+     "distant": false
+    },
+    {
+     "t": 48.46,
+     "note": "B2",
+     "hz": 123.47,
+     "velocity": 0.32,
+     "distant": false
+    },
+    {
+     "t": 57.75,
+     "note": "E4",
+     "hz": 329.63,
+     "velocity": 0.28,
+     "distant": false
+    },
+    {
+     "t": 58.1,
+     "note": "A4",
+     "hz": 440.0,
+     "velocity": 0.28,
+     "distant": false
+    },
+    {
+     "t": 58.45,
+     "note": "B4",
+     "hz": 493.88,
+     "velocity": 0.28,
+     "distant": false
+    },
+    {
+     "t": 60.15,
+     "note": "G3",
+     "hz": 196.0,
+     "velocity": 0.3,
+     "distant": false
+    },
+    {
+     "t": 60.21,
+     "note": "B3",
+     "hz": 246.94,
+     "velocity": 0.3,
+     "distant": false
+    },
+    {
+     "t": 66.6,
+     "note": "E4",
+     "hz": 329.63,
+     "velocity": 0.28,
+     "distant": false
+    },
+    {
+     "t": 66.9,
+     "note": "B4",
+     "hz": 493.88,
+     "velocity": 0.28,
+     "distant": false
+    },
+    {
+     "t": 72.0,
+     "note": "D4",
+     "hz": 293.66,
+     "velocity": 0.26,
+     "distant": true
+    },
+    {
+     "t": 72.08,
+     "note": "G4",
+     "hz": 392.0,
+     "velocity": 0.26,
+     "distant": true
+    },
+    {
+     "t": 78.35,
+     "note": "A3",
+     "hz": 220.0,
+     "velocity": 0.26,
+     "distant": false
+    },
+    {
+     "t": 81.24,
+     "note": "D3",
+     "hz": 146.83,
+     "velocity": 0.4,
+     "distant": false
+    },
+    {
+     "t": 81.32,
+     "note": "A3",
+     "hz": 220.0,
+     "velocity": 0.4,
+     "distant": false
+    },
+    {
+     "t": 81.4,
+     "note": "F#4",
+     "hz": 369.99,
+     "velocity": 0.4,
+     "distant": false
+    },
+    {
+     "t": 83.6,
+     "note": "D3",
+     "hz": 146.83,
+     "velocity": 0.3,
+     "distant": false
+    },
+    {
+     "t": 83.81,
+     "note": "A4",
+     "hz": 440.0,
+     "velocity": 0.3,
+     "distant": false
+    },
+    {
+     "t": 84.02,
+     "note": "E5",
+     "hz": 659.26,
+     "velocity": 0.3,
+     "distant": false
+    }
+   ],
+   "pre_duck_lufs": -28.5,
+   "bed_fade": {
+    "from": 88.7,
+    "seconds": 1.2
+   }
+  }
+ },
+ "sfx": {
+  "stem_integrated_lufs": -35.91,
+  "loudest_momentary_400ms_lufs": -26.85,
+  "loudest_momentary_at_s": 48.55,
+  "bus_leveller": {
+   "cap_lufs": -25.0,
+   "max_reduction_db": 0.0
+  }
+ },
+ "ducking": {
+  "master": [
+   {
+    "lines": "L01+L02+W01+L03",
+    "start": 0.87,
+    "end": 20.38,
+    "depth_db": 5.0
+   },
+   {
+    "lines": "L04",
+    "start": 23.37,
+    "end": 26.88,
+    "depth_db": 5.0
+   },
+   {
+    "lines": "L05",
+    "start": 31.17,
+    "end": 33.97,
+    "depth_db": 5.0
+   },
+   {
+    "lines": "L06",
+    "start": 38.58,
+    "end": 44.75,
+    "depth_db": 5.0
+   },
+   {
+    "lines": "L07+L08+L09+L10+L10b+L11+L12+L13+L14",
+    "start": 47.28,
+    "end": "held to the end",
+    "depth_db": 5.0
+   }
+  ],
+  "no_narration": "worker line W01 only, 7.0 dB",
+  "music_pause_cap": {
+   "cap_lufs": -26.35,
+   "max_reduction_db": 0.0
+  },
+  "music_max_move_1s_db": 5.36
+ },
+ "voice_levelling": {
+  "target_narrator_lufs": -16.0,
+  "target_worker_lufs": -16.5,
+  "sentences": [
+   {
+    "line": "L01",
+    "sentence": 1,
+    "speaker": "narrator",
+    "text": "Real work in the middle:",
+    "raw_lufs_mix_frame": -15.78,
+    "gain_db": -0.22,
+    "master_lufs": -15.78,
+    "target_lufs": -16.0
+   },
+   {
+    "line": "L01",
+    "sentence": 2,
+    "speaker": "narrator",
+    "text": "a worker, a site, a risk owner.",
+    "raw_lufs_mix_frame": -16.64,
+    "gain_db": 0.64,
+    "master_lufs": -15.78,
+    "target_lufs": -16.0
+   },
+   {
+    "line": "L02",
+    "sentence": 1,
+    "speaker": "narrator",
+    "text": "Priora places agents around it.",
+    "raw_lufs_mix_frame": -13.53,
+    "gain_db": -2.47,
+    "master_lufs": -15.77,
+    "target_lufs": -16.0
+   },
+   {
+    "line": "W01",
+    "sentence": null,
+    "speaker": "worker",
+    "text": "Hey, the bracket by the packing line has cracked again. We're going to weld it before the night shift.",
+    "raw_lufs_mix_frame": -13.29,
+    "gain_db": -3.21,
+    "master_lufs": -16.27,
+    "target_lufs": -16.5
+   },
+   {
+    "line": "L03",
+    "sentence": 1,
+    "speaker": "narrator",
+    "text": "Priora hears a repair, hot work, a place and a deadline.",
+    "raw_lufs_mix_frame": -19.15,
+    "gain_db": 3.15,
+    "master_lufs": -15.78,
+    "target_lufs": -16.0
+   },
+   {
+    "line": "L03",
+    "sentence": 2,
+    "speaker": "narrator",
+    "text": "Then it asks for a photo.",
+    "raw_lufs_mix_frame": -17.86,
+    "gain_db": 1.86,
+    "master_lufs": -16.0,
+    "target_lufs": -16.0
+   },
+   {
+    "line": "L04",
+    "sentence": 1,
+    "speaker": "narrator",
+    "text": "Next, it summons only the specialists this site and job need.",
+    "raw_lufs_mix_frame": -16.91,
+    "gain_db": 0.91,
+    "master_lufs": -15.78,
+    "target_lufs": -16.0
+   },
+   {
+    "line": "L05",
+    "sentence": 1,
+    "speaker": "narrator",
+    "text": "Each checks its own conditions and reports back.",
+    "raw_lufs_mix_frame": -14.21,
+    "gain_db": -1.79,
+    "master_lufs": -15.78,
+    "target_lufs": -16.0
+   },
+   {
+    "line": "L06",
+    "sentence": 1,
+    "speaker": "narrator",
+    "text": "When everything holds, the route opens.",
+    "raw_lufs_mix_frame": -16.25,
+    "gain_db": 0.25,
+    "master_lufs": -15.77,
+    "target_lufs": -16.0
+   },
+   {
+    "line": "L06",
+    "sentence": 2,
+    "speaker": "narrator",
+    "text": "Work goes on, the record is kept, no one is disturbed.",
+    "raw_lufs_mix_frame": -16.5,
+    "gain_db": 0.5,
+    "master_lufs": -15.58,
+    "target_lufs": -16.0
+   },
+   {
+    "line": "L07",
+    "sentence": 1,
+    "speaker": "narrator",
+    "text": "Then one condition slips.",
+    "raw_lufs_mix_frame": -14.78,
+    "gain_db": -1.22,
+    "master_lufs": -15.77,
+    "target_lufs": -16.0
+   },
+   {
+    "line": "L07",
+    "sentence": 2,
+    "speaker": "narrator",
+    "text": "The fire watch is half what the policy asks.",
+    "raw_lufs_mix_frame": -16.7,
+    "gain_db": 0.7,
+    "master_lufs": -15.77,
+    "target_lufs": -16.0
+   },
+   {
+    "line": "L08",
+    "sentence": 1,
+    "speaker": "narrator",
+    "text": "Priora brings it to the risk owner.",
+    "raw_lufs_mix_frame": -14.5,
+    "gain_db": -1.5,
+    "master_lufs": -15.77,
+    "target_lufs": -16.0
+   },
+   {
+    "line": "L08",
+    "sentence": 2,
+    "speaker": "narrator",
+    "text": "Agents prepare; the human decides.",
+    "raw_lufs_mix_frame": -15.17,
+    "gain_db": -0.83,
+    "master_lufs": -15.77,
+    "target_lufs": -16.0
+   },
+   {
+    "line": "L09",
+    "sentence": 1,
+    "speaker": "narrator",
+    "text": "Three decision rooms open.",
+    "raw_lufs_mix_frame": -16.33,
+    "gain_db": 0.33,
+    "master_lufs": -15.78,
+    "target_lufs": -16.0
+   },
+   {
+    "line": "L10",
+    "sentence": 1,
+    "speaker": "narrator",
+    "text": "Retain is never a default.",
+    "raw_lufs_mix_frame": -14.46,
+    "gain_db": -1.54,
+    "master_lufs": -15.77,
+    "target_lufs": -16.0
+   },
+   {
+    "line": "L10b",
+    "sentence": 1,
+    "speaker": "narrator",
+    "text": "Risk is kept on purpose, with its terms explicit.",
+    "raw_lufs_mix_frame": -18.31,
+    "gain_db": 2.31,
+    "master_lufs": -15.89,
+    "target_lufs": -16.0
+   },
+   {
+    "line": "L11",
+    "sentence": 1,
+    "speaker": "narrator",
+    "text": "Mitigate compares safeguards, and checks whether the work is back inside.",
+    "raw_lufs_mix_frame": -15.82,
+    "gain_db": -0.18,
+    "master_lufs": -15.78,
+    "target_lufs": -16.0
+   },
+   {
+    "line": "L12",
+    "sentence": 1,
+    "speaker": "narrator",
+    "text": "Transfer, simulated for now, asks outside capacity for terms and a price.",
+    "raw_lufs_mix_frame": -18.06,
+    "gain_db": 2.06,
+    "master_lufs": -15.83,
+    "target_lufs": -16.0
+   },
+   {
+    "line": "L13",
+    "sentence": 1,
+    "speaker": "narrator",
+    "text": "Priora carries the case between rooms.",
+    "raw_lufs_mix_frame": -16.91,
+    "gain_db": 0.91,
+    "master_lufs": -15.78,
+    "target_lufs": -16.0
+   },
+   {
+    "line": "L13",
+    "sentence": 2,
+    "speaker": "narrator",
+    "text": "The risk owner stays in control.",
+    "raw_lufs_mix_frame": -16.82,
+    "gain_db": 0.82,
+    "master_lufs": -15.82,
+    "target_lufs": -16.0
+   },
+   {
+    "line": "L14",
+    "sentence": 1,
+    "speaker": "narrator",
+    "text": "Priora turns physical work into explicit risk decisions, while the work happens.",
+    "raw_lufs_mix_frame": -16.43,
+    "gain_db": 0.43,
+    "master_lufs": -15.77,
+    "target_lufs": -16.0
+   }
+  ],
+  "rides": [
+   {
+    "line": "L06",
+    "word": "kept",
+    "start": 42.85,
+    "end": 43.33,
+    "gain_db": 4.0,
+    "word_master_lufs": -18.66
+   }
+  ],
+  "note": "measured in master.wav's voice component over each sentence (word times -0.03 s / +0.08 s); voice.wav is untouched"
+ },
+ "hierarchy": {
+  "cap_others_lufs_100ms": -28.0,
+  "s7_softer": {
+   "from": 78.0,
+   "to": 84.0,
+   "kinds": [
+    "lock",
+    "decision",
+    "resolve"
+   ],
+   "db": -3.0
+  },
+  "key_moments": [
+   {
+    "kind": "deviate",
+    "t": 48.34,
+    "lufs_100ms": -25.5,
+    "measured_lufs_100ms": -25.27
+   },
+   {
+    "kind": "decision",
+    "t": 55.72,
+    "lufs_100ms": -25.5,
+    "measured_lufs_100ms": -25.3
+   }
+  ],
+  "loudest_others": [
+   {
+    "kind": "lock",
+    "t": 39.35,
+    "lufs_100ms": -28.0,
+    "measured_lufs_100ms": -26.62
+   },
+   {
+    "kind": "evidence",
+    "t": 20.53,
+    "lufs_100ms": -28.0,
+    "measured_lufs_100ms": -27.77
+   },
+   {
+    "kind": "reject",
+    "t": 60.95,
+    "lufs_100ms": -28.0,
+    "measured_lufs_100ms": -27.79
+   },
+   {
+    "kind": "print",
+    "t": 1.75,
+    "lufs_100ms": -28.0,
+    "measured_lufs_100ms": -27.81
+   },
+   {
+    "kind": "print",
+    "t": 2.63,
+    "lufs_100ms": -28.2,
+    "measured_lufs_100ms": -28.04
+   },
+   {
+    "kind": "print",
+    "t": 3.88,
+    "lufs_100ms": -28.5,
+    "measured_lufs_100ms": -28.29
+   }
+  ],
+  "opening_prints_measured": [
+   -27.81,
+   -28.04,
+   -28.29
+  ],
+  "speech_fragments_measured": [
+   -38.96,
+   -39.03,
+   -38.73,
+   -38.03,
+   -38.46,
+   -31.89,
+   -43.27,
+   -40.81
+  ]
+ },
+ "no_narration_small_sounds": {
+  "kinds": [
+   "speech-fragment",
+   "packet"
+  ],
+  "sfx_peak_under_W01_dbfs": -20.32
+ },
+ "ending": {
+  "duck_after_last_line_db": [
+   -5.0,
+   -5.0
+  ],
+  "bed_fade": {
+   "from": 88.7,
+   "seconds": 1.2
+  },
+  "music_peak_after_fade_dbfs": -240.0,
+  "music_largest_rise_during_fade_db_per_10ms": -0.057,
+  "wordmark_t": 88.55,
+  "wordmark_peak_rms_dbfs": -30.0,
+  "wordmark_rms_at_silent_point_dbfs": -62.5,
+  "wordmark_vs_bed_dbfs": [
+   {
+    "t": 88.55,
+    "bed": -38.5,
+    "wordmark": -34.2
+   },
+   {
+    "t": 88.7,
+    "bed": -39.1,
+    "wordmark": -32.8
+   },
+   {
+    "t": 88.85,
+    "bed": -40.5,
+    "wordmark": -36.5
+   },
+   {
+    "t": 89.0,
+    "bed": -42.3,
+    "wordmark": -40.4
+   },
+   {
+    "t": 89.15,
+    "bed": -45.1,
+    "wordmark": -44.2
+   },
+   {
+    "t": 89.3,
+    "bed": -48.6,
+    "wordmark": -48.0
+   },
+   {
+    "t": 89.45,
+    "bed": -53.5,
+    "wordmark": -51.8
+   },
+   {
+    "t": 89.6,
+    "bed": -60.3,
+    "wordmark": -55.6
+   },
+   {
+    "t": 89.75,
+    "bed": -71.8,
+    "wordmark": -59.4
+   },
+   {
+    "t": 89.9,
+    "bed": -114.4,
+    "wordmark": -65.9
+   }
+  ],
+  "bed_over_wordmark_at": [],
+  "events_after_wordmark": []
+ },
+ "speech_vs_background": {
+  "master": [
+   {
+    "line": "L01",
+    "speaker": "narrator",
+    "start": 0.9,
+    "end": 4.71,
+    "voice_lufs": -15.69,
+    "music_lufs": -36.73,
+    "sfx_lufs": -35.23,
+    "background_lufs": -34.33,
+    "voice_over_music_lu": 21.0,
+    "voice_over_background_lu": 18.6,
+    "music_duck_db": [
+     -5.0,
+     -5.0
+    ]
+   },
+   {
+    "line": "L02",
+    "speaker": "narrator",
+    "start": 5.45,
+    "end": 7.59,
+    "voice_lufs": -15.71,
+    "music_lufs": -37.36,
+    "sfx_lufs": -39.39,
+    "background_lufs": -35.84,
+    "voice_over_music_lu": 21.6,
+    "voice_over_background_lu": 20.1,
+    "music_duck_db": [
+     -5.0,
+     -5.0
+    ]
+   },
+   {
+    "line": "W01",
+    "speaker": "worker",
+    "start": 8.55,
+    "end": 13.85,
+    "voice_lufs": -16.24,
+    "music_lufs": -35.63,
+    "sfx_lufs": -45.33,
+    "background_lufs": -35.43,
+    "voice_over_music_lu": 19.4,
+    "voice_over_background_lu": 19.2,
+    "music_duck_db": [
+     -5.0,
+     -5.0
+    ]
+   },
+   {
+    "line": "L03",
+    "speaker": "narrator",
+    "start": 14.8,
+    "end": 20.27,
+    "voice_lufs": -15.85,
+    "music_lufs": -33.49,
+    "sfx_lufs": -36.98,
+    "background_lufs": -32.14,
+    "voice_over_music_lu": 17.6,
+    "voice_over_background_lu": 16.3,
+    "music_duck_db": [
+     -5.0,
+     -5.0
+    ]
+   },
+   {
+    "line": "L04",
+    "speaker": "narrator",
+    "start": 23.4,
+    "end": 26.82,
+    "voice_lufs": -15.75,
+    "music_lufs": -33.03,
+    "sfx_lufs": -40.5,
+    "background_lufs": -32.45,
+    "voice_over_music_lu": 17.3,
+    "voice_over_background_lu": 16.7,
+    "music_duck_db": [
+     -5.0,
+     -5.0
+    ]
+   },
+   {
+    "line": "L05",
+    "speaker": "narrator",
+    "start": 31.2,
+    "end": 33.91,
+    "voice_lufs": -15.69,
+    "music_lufs": -33.18,
+    "sfx_lufs": -39.76,
+    "background_lufs": -32.31,
+    "voice_over_music_lu": 17.5,
+    "voice_over_background_lu": 16.6,
+    "music_duck_db": [
+     -5.0,
+     -5.0
+    ]
+   },
+   {
+    "line": "L06",
+    "speaker": "narrator",
+    "start": 38.6,
+    "end": 44.69,
+    "voice_lufs": -15.62,
+    "music_lufs": -30.95,
+    "sfx_lufs": -33.31,
+    "background_lufs": -29.78,
+    "voice_over_music_lu": 15.3,
+    "voice_over_background_lu": 14.2,
+    "music_duck_db": [
+     -5.0,
+     -5.0
+    ]
+   },
+   {
+    "line": "L07",
+    "speaker": "narrator",
+    "start": 47.3,
+    "end": 51.89,
+    "voice_lufs": -15.77,
+    "music_lufs": -33.57,
+    "sfx_lufs": -31.18,
+    "background_lufs": -30.2,
+    "voice_over_music_lu": 17.8,
+    "voice_over_background_lu": 14.4,
+    "music_duck_db": [
+     -5.0,
+     -5.0
+    ]
+   },
+   {
+    "line": "L08",
+    "speaker": "narrator",
+    "start": 52.4,
+    "end": 56.92,
+    "voice_lufs": -15.75,
+    "music_lufs": -33.33,
+    "sfx_lufs": -32.95,
+    "background_lufs": -30.7,
+    "voice_over_music_lu": 17.6,
+    "voice_over_background_lu": 14.9,
+    "music_duck_db": [
+     -5.0,
+     -5.0
+    ]
+   },
+   {
+    "line": "L09",
+    "speaker": "narrator",
+    "start": 57.7,
+    "end": 59.41,
+    "voice_lufs": -15.83,
+    "music_lufs": -32.5,
+    "sfx_lufs": -38.16,
+    "background_lufs": -31.66,
+    "voice_over_music_lu": 16.7,
+    "voice_over_background_lu": 15.8,
+    "music_duck_db": [
+     -5.0,
+     -5.0
+    ]
+   },
+   {
+    "line": "L10",
+    "speaker": "narrator",
+    "start": 60.25,
+    "end": 61.94,
+    "voice_lufs": -15.63,
+    "music_lufs": -32.31,
+    "sfx_lufs": -34.39,
+    "background_lufs": -31.54,
+    "voice_over_music_lu": 16.7,
+    "voice_over_background_lu": 15.9,
+    "music_duck_db": [
+     -5.0,
+     -5.0
+    ]
+   },
+   {
+    "line": "L10b",
+    "speaker": "narrator",
+    "start": 62.6,
+    "end": 65.68,
+    "voice_lufs": -15.81,
+    "music_lufs": -32.6,
+    "sfx_lufs": -34.34,
+    "background_lufs": -31.21,
+    "voice_over_music_lu": 16.8,
+    "voice_over_background_lu": 15.4,
+    "music_duck_db": [
+     -5.0,
+     -5.0
+    ]
+   },
+   {
+    "line": "L11",
+    "speaker": "narrator",
+    "start": 66.95,
+    "end": 71.17,
+    "voice_lufs": -15.88,
+    "music_lufs": -32.7,
+    "sfx_lufs": -33.63,
+    "background_lufs": -30.4,
+    "voice_over_music_lu": 16.8,
+    "voice_over_background_lu": 14.5,
+    "music_duck_db": [
+     -5.0,
+     -5.0
+    ]
+   },
+   {
+    "line": "L12",
+    "speaker": "narrator",
+    "start": 72.25,
+    "end": 77.1,
+    "voice_lufs": -15.73,
+    "music_lufs": -34.44,
+    "sfx_lufs": -36.32,
+    "background_lufs": -32.44,
+    "voice_over_music_lu": 18.7,
+    "voice_over_background_lu": 16.7,
+    "music_duck_db": [
+     -5.0,
+     -5.0
+    ]
+   },
+   {
+    "line": "L13",
+    "speaker": "narrator",
+    "start": 78.6,
+    "end": 83.32,
+    "voice_lufs": -15.94,
+    "music_lufs": -33.03,
+    "sfx_lufs": -39.09,
+    "background_lufs": -32.26,
+    "voice_over_music_lu": 17.1,
+    "voice_over_background_lu": 16.3,
+    "music_duck_db": [
+     -5.0,
+     -5.0
+    ]
+   },
+   {
+    "line": "L14",
+    "speaker": "narrator",
+    "start": 83.75,
+    "end": 88.43,
+    "voice_lufs": -15.84,
+    "music_lufs": -32.01,
+    "sfx_lufs": -41.73,
+    "background_lufs": -31.74,
+    "voice_over_music_lu": 16.2,
+    "voice_over_background_lu": 15.9,
+    "music_duck_db": [
+     -5.0,
+     -5.0
+    ]
+   }
+  ],
+  "min_narrator_over_background_lu": 14.2,
+  "min_narrator_over_music_lu": 15.3,
+  "no_narration_worker": {
+   "worker_lufs": -16.24,
+   "background_lufs": -26.93,
+   "margin_lu": 10.7
+  }
+ },
+ "events": {
+  "count": 122,
+  "per_kind": {
+   "align": 1,
+   "arrive": 23,
+   "assemble": 4,
+   "compare": 4,
+   "decision": 6,
+   "deviate": 1,
+   "door-close": 6,
+   "door-open": 4,
+   "escalate": 1,
+   "evidence": 2,
+   "inspect": 6,
+   "lock": 4,
+   "move": 2,
+   "packet": 9,
+   "print": 4,
+   "record": 3,
+   "reject": 1,
+   "request": 6,
+   "resolve": 2,
+   "return": 13,
+   "route": 1,
+   "simulated": 2,
+   "speech-fragment": 8,
+   "summon": 1,
+   "thread": 4,
+   "title": 3,
+   "wordmark": 1
+  },
+  "unknown_kinds": [],
+  "span": {
+   "earliest_start_s": 0.3,
+   "latest_end_s": 89.95,
+   "moved_from_before_0": [],
+   "faded_at_end": [
+    {
+     "kind": "wordmark",
+     "t": 88.55,
+     "start": 88.55,
+     "end": 89.95,
+     "lufs_100ms": -28.9,
+     "tier": "other",
+     "note": "tail faded to end by 89.95 s (natural end 90.222 s)",
+     "measured_lufs_100ms": -28.7
+    }
+   ],
+   "skipped": []
+  },
+  "placed": [
+   {
+    "kind": "thread",
+    "t": 0.3,
+    "start": 0.3,
+    "end": 1.6352,
+    "lufs_100ms": -33.2,
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -33.01
+   },
+   {
+    "kind": "title",
+    "t": 0.9,
+    "start": 0.9,
+    "end": 1.8355,
+    "lufs_100ms": -34.7,
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -32.31
+   },
+   {
+    "kind": "print",
+    "t": 1.75,
+    "start": 1.75,
+    "end": 2.5664,
+    "lufs_100ms": -28.0,
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -27.81
+   },
+   {
+    "kind": "print",
+    "t": 2.63,
+    "start": 2.63,
+    "end": 3.3905,
+    "lufs_100ms": -28.2,
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -28.04
+   },
+   {
+    "kind": "print",
+    "t": 3.88,
+    "start": 3.88,
+    "end": 4.6412,
+    "lufs_100ms": -28.5,
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -28.29
+   },
+   {
+    "kind": "arrive",
+    "t": 5.5,
+    "start": 5.5,
+    "end": 6.1673,
+    "lufs_100ms": -34.4,
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -34.18
+   },
+   {
+    "kind": "thread",
+    "t": 6.2,
+    "start": 6.2,
+    "end": 7.4354,
+    "lufs_100ms": -36.3,
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -34.03
+   },
+   {
+    "kind": "arrive",
+    "t": 6.516,
+    "start": 6.516,
+    "end": 7.0698,
+    "lufs_100ms": -38.4,
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -34.04
+   },
+   {
+    "kind": "arrive",
+    "t": 6.682,
+    "start": 6.682,
+    "end": 7.2365,
+    "lufs_100ms": -38.1,
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -34.78
+   },
+   {
+    "kind": "arrive",
+    "t": 6.704,
+    "start": 6.704,
+    "end": 7.2493,
+    "lufs_100ms": -38.4,
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -36.37
+   },
+   {
+    "kind": "arrive",
+    "t": 7.01,
+    "start": 7.01,
+    "end": 7.5644,
+    "lufs_100ms": -37.4,
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -37.2
+   },
+   {
+    "kind": "move",
+    "t": 7.95,
+    "start": 7.95,
+    "end": 9.17,
+    "lufs_100ms": -37.2,
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -36.93
+   },
+   {
+    "kind": "speech-fragment",
+    "t": 10.5,
+    "start": 10.5,
+    "end": 10.9453,
+    "lufs_100ms": -39.2,
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -38.96
+   },
+   {
+    "kind": "packet",
+    "t": 10.65,
+    "start": 10.65,
+    "end": 11.2815,
+    "lufs_100ms": -41.3,
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -39.03
+   },
+   {
+    "kind": "speech-fragment",
+    "t": 11.04,
+    "start": 11.04,
+    "end": 11.4525,
+    "lufs_100ms": -39.3,
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -39.03
+   },
+   {
+    "kind": "packet",
+    "t": 11.45,
+    "start": 11.45,
+    "end": 12.1355,
+    "lufs_100ms": -40.9,
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -40.66
+   },
+   {
+    "kind": "speech-fragment",
+    "t": 12.74,
+    "start": 12.74,
+    "end": 13.1237,
+    "lufs_100ms": -39.0,
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -38.73
+   },
+   {
+    "kind": "packet",
+    "t": 13.05,
+    "start": 13.05,
+    "end": 13.7354,
+    "lufs_100ms": -41.0,
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -40.82
+   },
+   {
+    "kind": "speech-fragment",
+    "t": 13.97,
+    "start": 13.97,
+    "end": 14.3933,
+    "lufs_100ms": -38.9,
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -38.03
+   },
+   {
+    "kind": "packet",
+    "t": 14.05,
+    "start": 14.05,
+    "end": 14.6839,
+    "lufs_100ms": -40.4,
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -38.02
+   },
+   {
+    "kind": "thread",
+    "t": 14.25,
+    "start": 14.25,
+    "end": 15.0725,
+    "lufs_100ms": -39.5,
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -37.68
+   },
+   {
+    "kind": "move",
+    "t": 14.3,
+    "start": 14.3,
+    "end": 15.37,
+    "lufs_100ms": -40.8,
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -37.68
+   },
+   {
+    "kind": "arrive",
+    "t": 14.8,
+    "start": 14.8,
+    "end": 15.5512,
+    "lufs_100ms": -28.6,
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -28.3
+   },
+   {
+    "kind": "speech-fragment",
+    "t": 14.9,
+    "start": 14.9,
+    "end": 15.3425,
+    "lufs_100ms": -42.5,
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -38.46
+   },
+   {
+    "kind": "speech-fragment",
+    "t": 15.37,
+    "start": 15.37,
+    "end": 15.7978,
+    "lufs_100ms": -43.2,
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -31.89
+   },
+   {
+    "kind": "arrive",
+    "t": 15.4,
+    "start": 15.4,
+    "end": 16.0073,
+    "lufs_100ms": -32.3,
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -32.08
+   },
+   {
+    "kind": "arrive",
+    "t": 15.87,
+    "start": 15.87,
+    "end": 16.4758,
+    "lufs_100ms": -32.5,
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -32.28
+   },
+   {
+    "kind": "speech-fragment",
+    "t": 16.35,
+    "start": 16.35,
+    "end": 16.7773,
+    "lufs_100ms": -43.5,
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -43.27
+   },
+   {
+    "kind": "arrive",
+    "t": 16.85,
+    "start": 16.85,
+    "end": 17.4584,
+    "lufs_100ms": -32.0,
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -31.44
+   },
+   {
+    "kind": "speech-fragment",
+    "t": 16.92,
+    "start": 16.92,
+    "end": 17.334,
+    "lufs_100ms": -42.5,
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -40.81
+   },
+   {
+    "kind": "arrive",
+    "t": 17.42,
+    "start": 17.42,
+    "end": 18.0257,
+    "lufs_100ms": -31.9,
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -31.72
+   },
+   {
+    "kind": "thread",
+    "t": 17.89,
+    "start": 17.89,
+    "end": 18.8746,
+    "lufs_100ms": -37.4,
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -31.44
+   },
+   {
+    "kind": "arrive",
+    "t": 18.31,
+    "start": 18.31,
+    "end": 18.9447,
+    "lufs_100ms": -32.2,
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -31.64
+   },
+   {
+    "kind": "arrive",
+    "t": 18.51,
+    "start": 18.51,
+    "end": 19.1158,
+    "lufs_100ms": -32.4,
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -31.29
+   },
+   {
+    "kind": "request",
+    "t": 18.62,
+    "start": 18.62,
+    "end": 20.295,
+    "lufs_100ms": -31.4,
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -31.16
+   },
+   {
+    "kind": "evidence",
+    "t": 19.67,
+    "start": 19.67,
+    "end": 20.4478,
+    "lufs_100ms": -29.2,
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -28.99
+   },
+   {
+    "kind": "evidence",
+    "t": 20.53,
+    "start": 20.53,
+    "end": 21.1741,
+    "lufs_100ms": -28.0,
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -27.77
+   },
+   {
+    "kind": "assemble",
+    "t": 21.1,
+    "start": 21.1,
+    "end": 22.1642,
+    "lufs_100ms": -35.3,
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -35.07
+   },
+   {
+    "kind": "arrive",
+    "t": 23.8,
+    "start": 23.8,
+    "end": 24.5165,
+    "lufs_100ms": -35.6,
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -35.37
+   },
+   {
+    "kind": "door-open",
+    "t": 24.05,
+    "start": 24.05,
+    "end": 25.2082,
+    "lufs_100ms": -36.3,
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -36.06
+   },
+   {
+    "kind": "request",
+    "t": 24.42,
+    "start": 24.42,
+    "end": 26.0949,
+    "lufs_100ms": -42.5,
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -40.49
+   },
+   {
+    "kind": "request",
+    "t": 25.26,
+    "start": 25.26,
+    "end": 26.9355,
+    "lufs_100ms": -42.5,
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -42.26
+   },
+   {
+    "kind": "summon",
+    "t": 26.05,
+    "start": 26.05,
+    "end": 28.0716,
+    "lufs_100ms": -35.5,
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -35.26
+   },
+   {
+    "kind": "arrive",
+    "t": 27.01,
+    "start": 27.01,
+    "end": 27.6442,
+    "lufs_100ms": -32.6,
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -31.97
+   },
+   {
+    "kind": "arrive",
+    "t": 27.61,
+    "start": 27.61,
+    "end": 28.2926,
+    "lufs_100ms": -31.6,
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -31.4
+   },
+   {
+    "kind": "arrive",
+    "t": 28.21,
+    "start": 28.21,
+    "end": 28.8124,
+    "lufs_100ms": -31.9,
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -31.68
+   },
+   {
+    "kind": "arrive",
+    "t": 28.81,
+    "start": 28.81,
+    "end": 29.474,
+    "lufs_100ms": -31.7,
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -31.46
+   },
+   {
+    "kind": "arrive",
+    "t": 29.41,
+    "start": 29.41,
+    "end": 30.0914,
+    "lufs_100ms": -32.0,
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -31.82
+   },
+   {
+    "kind": "arrive",
+    "t": 29.97,
+    "start": 29.97,
+    "end": 30.7285,
+    "lufs_100ms": -30.1,
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -29.85
+   },
+   {
+    "kind": "packet",
+    "t": 30.35,
+    "start": 30.35,
+    "end": 31.0741,
+    "lufs_100ms": -35.1,
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -34.91
+   },
+   {
+    "kind": "door-close",
+    "t": 30.96,
+    "start": 30.96,
+    "end": 32.1329,
+    "lufs_100ms": -37.1,
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -36.86
+   },
+   {
+    "kind": "inspect",
+    "t": 31.75,
+    "start": 31.75,
+    "end": 33.333,
+    "lufs_100ms": -40.6,
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -35.04
+   },
+   {
+    "kind": "inspect",
+    "t": 31.9,
+    "start": 31.9,
+    "end": 32.6718,
+    "lufs_100ms": -35.9,
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -35.34
+   },
+   {
+    "kind": "inspect",
+    "t": 32.52,
+    "start": 32.52,
+    "end": 33.4425,
+    "lufs_100ms": -36.7,
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -36.43
+   },
+   {
+    "kind": "request",
+    "t": 32.98,
+    "start": 32.98,
+    "end": 34.6346,
+    "lufs_100ms": -35.4,
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -32.85
+   },
+   {
+    "kind": "inspect",
+    "t": 33.25,
+    "start": 33.25,
+    "end": 34.0649,
+    "lufs_100ms": -36.4,
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -32.85
+   },
+   {
+    "kind": "return",
+    "t": 34.4,
+    "start": 34.4,
+    "end": 35.541,
+    "lufs_100ms": -35.9,
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -35.64
+   },
+   {
+    "kind": "return",
+    "t": 35.0,
+    "start": 35.0,
+    "end": 36.1414,
+    "lufs_100ms": -35.9,
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -35.46
+   },
+   {
+    "kind": "return",
+    "t": 35.6,
+    "start": 35.6,
+    "end": 36.7411,
+    "lufs_100ms": -35.6,
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -35.72
+   },
+   {
+    "kind": "return",
+    "t": 36.15,
+    "start": 36.15,
+    "end": 37.2913,
+    "lufs_100ms": -36.2,
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -35.68
+   },
+   {
+    "kind": "return",
+    "t": 36.7,
+    "start": 36.7,
+    "end": 37.8412,
+    "lufs_100ms": -36.3,
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -35.5
+   },
+   {
+    "kind": "door-close",
+    "t": 36.9,
+    "start": 36.9,
+    "end": 38.1005,
+    "lufs_100ms": -37.0,
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -36.63
+   },
+   {
+    "kind": "assemble",
+    "t": 37.62,
+    "start": 37.62,
+    "end": 38.7092,
+    "lufs_100ms": -36.4,
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -36.18
+   },
+   {
+    "kind": "assemble",
+    "t": 38.35,
+    "start": 38.35,
+    "end": 39.4109,
+    "lufs_100ms": -38.4,
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -30.47
+   },
+   {
+    "kind": "align",
+    "t": 38.5,
+    "start": 38.5,
+    "end": 41.6078,
+    "lufs_100ms": -31.0,
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -30.47
+   },
+   {
+    "kind": "lock",
+    "t": 39.35,
+    "start": 39.328,
+    "end": 40.0101,
+    "lufs_100ms": -28.0,
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -26.62
+   },
+   {
+    "kind": "door-open",
+    "t": 40.22,
+    "start": 40.22,
+    "end": 41.3821,
+    "lufs_100ms": -34.6,
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -29.6
+   },
+   {
+    "kind": "route",
+    "t": 40.28,
+    "start": 40.28,
+    "end": 41.6188,
+    "lufs_100ms": -30.4,
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -29.6
+   },
+   {
+    "kind": "record",
+    "t": 43.0,
+    "start": 43.0,
+    "end": 43.5589,
+    "lufs_100ms": -31.7,
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -31.51
+   },
+   {
+    "kind": "inspect",
+    "t": 48.1,
+    "start": 48.1,
+    "end": 48.8725,
+    "lufs_100ms": -40.8,
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -25.27
+   },
+   {
+    "kind": "deviate",
+    "t": 48.34,
+    "start": 48.34,
+    "end": 51.3321,
+    "lufs_100ms": -25.5,
+    "tier": "key",
+    "note": "",
+    "measured_lufs_100ms": -25.27
+   },
+   {
+    "kind": "lock",
+    "t": 48.8,
+    "start": 48.782,
+    "end": 49.3521,
+    "lufs_100ms": -39.0,
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -28.44
+   },
+   {
+    "kind": "inspect",
+    "t": 49.4,
+    "start": 49.4,
+    "end": 50.9829,
+    "lufs_100ms": -37.1,
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -30.51
+   },
+   {
+    "kind": "return",
+    "t": 50.14,
+    "start": 50.14,
+    "end": 51.2815,
+    "lufs_100ms": -39.1,
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -31.69
+   },
+   {
+    "kind": "compare",
+    "t": 50.33,
+    "start": 50.33,
+    "end": 50.9687,
+    "lufs_100ms": -33.9,
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -31.71
+   },
+   {
+    "kind": "assemble",
+    "t": 51.95,
+    "start": 51.95,
+    "end": 53.051,
+    "lufs_100ms": -29.6,
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -29.42
+   },
+   {
+    "kind": "packet",
+    "t": 52.85,
+    "start": 52.85,
+    "end": 53.6398,
+    "lufs_100ms": -33.4,
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -33.13
+   },
+   {
+    "kind": "escalate",
+    "t": 53.45,
+    "start": 53.45,
+    "end": 55.1278,
+    "lufs_100ms": -29.8,
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -29.83
+   },
+   {
+    "kind": "arrive",
+    "t": 54.65,
+    "start": 54.65,
+    "end": 55.3695,
+    "lufs_100ms": -30.7,
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -30.43
+   },
+   {
+    "kind": "decision",
+    "t": 55.72,
+    "start": 55.72,
+    "end": 57.9245,
+    "lufs_100ms": -25.5,
+    "tier": "key",
+    "note": "",
+    "measured_lufs_100ms": -25.3
+   },
+   {
+    "kind": "decision",
+    "t": 58.0,
+    "start": 58.0,
+    "end": 59.4999,
+    "lufs_100ms": -32.3,
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -32.05
+   },
+   {
+    "kind": "simulated",
+    "t": 58.431,
+    "start": 58.431,
+    "end": 61.5309,
+    "lufs_100ms": -39.6,
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -37.49
+   },
+   {
+    "kind": "arrive",
+    "t": 60.2,
+    "start": 60.2,
+    "end": 60.9236,
+    "lufs_100ms": -34.5,
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -34.28
+   },
+   {
+    "kind": "reject",
+    "t": 60.95,
+    "start": 60.95,
+    "end": 61.6987,
+    "lufs_100ms": -28.0,
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -27.79
+   },
+   {
+    "kind": "request",
+    "t": 62.0,
+    "start": 62.0,
+    "end": 63.1359,
+    "lufs_100ms": -38.6,
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -38.4
+   },
+   {
+    "kind": "decision",
+    "t": 62.95,
+    "start": 62.95,
+    "end": 65.2091,
+    "lufs_100ms": -28.6,
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -28.4
+   },
+   {
+    "kind": "packet",
+    "t": 63.7,
+    "start": 63.7,
+    "end": 64.5031,
+    "lufs_100ms": -33.7,
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -28.96
+   },
+   {
+    "kind": "lock",
+    "t": 64.0,
+    "start": 63.978,
+    "end": 64.6527,
+    "lufs_100ms": -29.4,
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -28.95
+   },
+   {
+    "kind": "record",
+    "t": 64.41,
+    "start": 64.41,
+    "end": 64.9458,
+    "lufs_100ms": -37.1,
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -36.49
+   },
+   {
+    "kind": "door-open",
+    "t": 65.6,
+    "start": 65.6,
+    "end": 66.683,
+    "lufs_100ms": -32.6,
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -32.37
+   },
+   {
+    "kind": "return",
+    "t": 66.1,
+    "start": 66.1,
+    "end": 67.2411,
+    "lufs_100ms": -37.4,
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -35.17
+   },
+   {
+    "kind": "door-close",
+    "t": 66.36,
+    "start": 66.36,
+    "end": 67.534,
+    "lufs_100ms": -32.7,
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -32.45
+   },
+   {
+    "kind": "arrive",
+    "t": 66.94,
+    "start": 66.94,
+    "end": 67.6507,
+    "lufs_100ms": -34.9,
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -28.92
+   },
+   {
+    "kind": "decision",
+    "t": 67.25,
+    "start": 67.25,
+    "end": 69.509,
+    "lufs_100ms": -29.1,
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -28.92
+   },
+   {
+    "kind": "packet",
+    "t": 67.95,
+    "start": 67.95,
+    "end": 68.7533,
+    "lufs_100ms": -33.8,
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -31.51
+   },
+   {
+    "kind": "compare",
+    "t": 68.42,
+    "start": 68.42,
+    "end": 69.0745,
+    "lufs_100ms": -30.9,
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -30.4
+   },
+   {
+    "kind": "door-close",
+    "t": 68.75,
+    "start": 68.75,
+    "end": 69.9354,
+    "lufs_100ms": -32.8,
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -32.56
+   },
+   {
+    "kind": "compare",
+    "t": 70.02,
+    "start": 70.02,
+    "end": 70.6518,
+    "lufs_100ms": -31.5,
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -29.49
+   },
+   {
+    "kind": "resolve",
+    "t": 70.19,
+    "start": 70.19,
+    "end": 73.4086,
+    "lufs_100ms": -29.7,
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -29.49
+   },
+   {
+    "kind": "door-open",
+    "t": 71.0,
+    "start": 71.0,
+    "end": 72.0842,
+    "lufs_100ms": -32.7,
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -29.99
+   },
+   {
+    "kind": "return",
+    "t": 71.5,
+    "start": 71.5,
+    "end": 72.6415,
+    "lufs_100ms": -36.6,
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -32.5
+   },
+   {
+    "kind": "door-close",
+    "t": 71.75,
+    "start": 71.75,
+    "end": 72.9242,
+    "lufs_100ms": -33.1,
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -31.99
+   },
+   {
+    "kind": "decision",
+    "t": 72.5,
+    "start": 72.5,
+    "end": 74.7591,
+    "lufs_100ms": -29.0,
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -28.58
+   },
+   {
+    "kind": "simulated",
+    "t": 73.02,
+    "start": 73.02,
+    "end": 76.1254,
+    "lufs_100ms": -35.4,
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -30.53
+   },
+   {
+    "kind": "packet",
+    "t": 73.2,
+    "start": 73.2,
+    "end": 73.9194,
+    "lufs_100ms": -33.6,
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -30.53
+   },
+   {
+    "kind": "door-close",
+    "t": 74.0,
+    "start": 74.0,
+    "end": 75.1856,
+    "lufs_100ms": -32.8,
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -32.57
+   },
+   {
+    "kind": "request",
+    "t": 74.9,
+    "start": 74.9,
+    "end": 76.5673,
+    "lufs_100ms": -34.6,
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -34.39
+   },
+   {
+    "kind": "return",
+    "t": 75.62,
+    "start": 75.62,
+    "end": 76.7613,
+    "lufs_100ms": -35.6,
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -34.54
+   },
+   {
+    "kind": "return",
+    "t": 75.95,
+    "start": 75.95,
+    "end": 77.0912,
+    "lufs_100ms": -35.7,
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -34.54
+   },
+   {
+    "kind": "return",
+    "t": 76.55,
+    "start": 76.55,
+    "end": 77.6915,
+    "lufs_100ms": -36.0,
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -35.25
+   },
+   {
+    "kind": "return",
+    "t": 77.92,
+    "start": 77.92,
+    "end": 79.0615,
+    "lufs_100ms": -36.7,
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -36.52
+   },
+   {
+    "kind": "compare",
+    "t": 78.94,
+    "start": 78.94,
+    "end": 79.5904,
+    "lufs_100ms": -33.7,
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -33.48
+   },
+   {
+    "kind": "return",
+    "t": 80.07,
+    "start": 80.07,
+    "end": 82.6176,
+    "lufs_100ms": -39.3,
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -39.04
+   },
+   {
+    "kind": "lock",
+    "t": 81.43,
+    "start": 81.408,
+    "end": 82.0847,
+    "lufs_100ms": -34.4,
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -34.14
+   },
+   {
+    "kind": "decision",
+    "t": 82.36,
+    "start": 82.36,
+    "end": 84.6531,
+    "lufs_100ms": -32.6,
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -32.37
+   },
+   {
+    "kind": "resolve",
+    "t": 82.72,
+    "start": 82.72,
+    "end": 85.9711,
+    "lufs_100ms": -39.8,
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -35.69
+   },
+   {
+    "kind": "record",
+    "t": 84.85,
+    "start": 84.85,
+    "end": 85.3912,
+    "lufs_100ms": -32.8,
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -32.55
+   },
+   {
+    "kind": "arrive",
+    "t": 85.1,
+    "start": 85.1,
+    "end": 85.7097,
+    "lufs_100ms": -34.5,
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -33.92
+   },
+   {
+    "kind": "title",
+    "t": 85.1,
+    "start": 85.1,
+    "end": 86.0421,
+    "lufs_100ms": -43.2,
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -33.92
+   },
+   {
+    "kind": "print",
+    "t": 85.55,
+    "start": 85.55,
+    "end": 86.3096,
+    "lufs_100ms": -37.5,
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -37.29
+   },
+   {
+    "kind": "title",
+    "t": 86.07,
+    "start": 86.07,
+    "end": 87.0001,
+    "lufs_100ms": -37.2,
+    "tier": "other",
+    "note": "",
+    "measured_lufs_100ms": -36.96
+   },
+   {
+    "kind": "wordmark",
+    "t": 88.55,
+    "start": 88.55,
+    "end": 89.95,
+    "lufs_100ms": -28.9,
+    "tier": "other",
+    "note": "tail faded to end by 89.95 s (natural end 90.222 s)",
+    "measured_lufs_100ms": -28.7
+   }
+  ]
+ },
+ "warnings": [
+  "duplicate arrive at 6.527 merged with 6.516"
+ ],
+ "checks": [
+  {
+   "name": "music.wav length",
+   "ok": true,
+   "value": "4320000 samples, 48000 Hz, 2 ch, PCM_24",
+   "target": "4320000 samples, 48000 Hz, 2 ch, PCM_24"
+  },
+  {
+   "name": "music.wav no clipping",
+   "ok": true,
+   "value": 0,
+   "target": 0
+  },
+  {
+   "name": "music.wav DC",
+   "ok": true,
+   "value": [
+    2.07e-10,
+    3.2e-10
+   ],
+   "target": "|mean| < 1e-4"
+  },
+  {
+   "name": "music.wav clean ends",
+   "ok": true,
+   "value": "first 0.0e+00, last 10 ms -240.0 dBFS",
+   "target": "silent first sample and last 10 ms"
+  },
+  {
+   "name": "sfx.wav length",
+   "ok": true,
+   "value": "4320000 samples, 48000 Hz, 2 ch, PCM_24",
+   "target": "4320000 samples, 48000 Hz, 2 ch, PCM_24"
+  },
+  {
+   "name": "sfx.wav no clipping",
+   "ok": true,
+   "value": 0,
+   "target": 0
+  },
+  {
+   "name": "sfx.wav DC",
+   "ok": true,
+   "value": [
+    3.91e-11,
+    4.38e-11
+   ],
+   "target": "|mean| < 1e-4"
+  },
+  {
+   "name": "sfx.wav clean ends",
+   "ok": true,
+   "value": "first 0.0e+00, last 10 ms -240.0 dBFS",
+   "target": "silent first sample and last 10 ms"
+  },
+  {
+   "name": "master.wav length",
+   "ok": true,
+   "value": "4320000 samples, 48000 Hz, 2 ch, PCM_24",
+   "target": "4320000 samples, 48000 Hz, 2 ch, PCM_24"
+  },
+  {
+   "name": "master.wav no clipping",
+   "ok": true,
+   "value": 0,
+   "target": 0
+  },
+  {
+   "name": "master.wav DC",
+   "ok": true,
+   "value": [
+    5.68e-08,
+    3.73e-08
+   ],
+   "target": "|mean| < 1e-4"
+  },
+  {
+   "name": "master.wav clean ends",
+   "ok": true,
+   "value": "first 0.0e+00, last 10 ms -240.0 dBFS",
+   "target": "silent first sample and last 10 ms"
+  },
+  {
+   "name": "master-no-narration.wav length",
+   "ok": true,
+   "value": "4320000 samples, 48000 Hz, 2 ch, PCM_24",
+   "target": "4320000 samples, 48000 Hz, 2 ch, PCM_24"
+  },
+  {
+   "name": "master-no-narration.wav no clipping",
+   "ok": true,
+   "value": 0,
+   "target": 0
+  },
+  {
+   "name": "master-no-narration.wav DC",
+   "ok": true,
+   "value": [
+    -1.54e-09,
+    -2.76e-09
+   ],
+   "target": "|mean| < 1e-4"
+  },
+  {
+   "name": "master-no-narration.wav clean ends",
+   "ok": true,
+   "value": "first 0.0e+00, last 10 ms -240.0 dBFS",
+   "target": "silent first sample and last 10 ms"
+  },
+  {
+   "name": "master.wav integrated loudness",
+   "ok": true,
+   "value": -16.0,
+   "target": "-16.0 +- 0.5"
+  },
+  {
+   "name": "master.wav true peak",
+   "ok": true,
+   "value": -1.3,
+   "target": "<= -1.0"
+  },
+  {
+   "name": "master-no-narration.wav integrated loudness",
+   "ok": true,
+   "value": -17.0,
+   "target": "-17.0 +- 0.5"
+  },
+  {
+   "name": "master-no-narration.wav true peak",
+   "ok": true,
+   "value": -2.62,
+   "target": "<= -1.0"
+  },
+  {
+   "name": "narrator over background (every line)",
+   "ok": true,
+   "value": 14.2,
+   "target": ">= 12 LU per line"
+  },
+  {
+   "name": "narrator over music (every line)",
+   "ok": true,
+   "value": 15.3,
+   "target": ">= 14 LU per line"
+  },
+  {
+   "name": "worker over background (no-narration version)",
+   "ok": true,
+   "value": 10.7,
+   "target": ">= 8 LU"
+  },
+  {
+   "name": "music ducked under every narrator line",
+   "ok": true,
+   "value": [
+    -5.0,
+    -5.0,
+    -5.0,
+    -5.0,
+    -5.0,
+    -5.0,
+    -5.0,
+    -5.0,
+    -5.0,
+    -5.0,
+    -5.0,
+    -5.0,
+    -5.0,
+    -5.0,
+    -5.0
+   ],
+   "target": "-5 dB (+-0.5) throughout each line"
+  },
+  {
+   "name": "narrator sentences levelled",
+   "ok": true,
+   "value": [
+    -16.0,
+    -15.58
+   ],
+   "target": "every sentence -16.0 +- 1.0 LUFS"
+  },
+  {
+   "name": "worker voice note just under the narrator",
+   "ok": true,
+   "value": "-16.27 (narrator median -15.78)",
+   "target": "0.2 to 1.5 LU under the narrator's median sentence"
+  },
+  {
+   "name": "music pause cap",
+   "ok": true,
+   "value": -27.05,
+   "target": "<= -26.0 LUFS momentary"
+  },
+  {
+   "name": "music never moves more than 6 dB within 1 s",
+   "ok": true,
+   "value": "5.36 dB at 37.73 s",
+   "target": "<= 6.0 dB (3.5 s to 88.7 s)"
+  },
+  {
+   "name": "deviation and the human's decision are the loudest sounds",
+   "ok": true,
+   "value": "keys >= -25.3, next loudest lock at 39.35: -26.62",
+   "target": "every key moment louder than every other sound"
+  },
+  {
+   "name": "opening print thuds about -28 LUFS",
+   "ok": true,
+   "value": [
+    -27.81,
+    -28.04,
+    -28.29
+   ],
+   "target": "-28.0 +- 1.5 LUFS (100 ms)"
+  },
+  {
+   "name": "no-narration: sfx peak under the worker's voice note",
+   "ok": true,
+   "value": -20.32,
+   "target": "<= -20.0 dBFS"
+  },
+  {
+   "name": "no duck release after the last line",
+   "ok": true,
+   "value": [
+    -5.0,
+    -5.0
+   ],
+   "target": "held at -5 dB to the end"
+  },
+  {
+   "name": "bed fades out cleanly",
+   "ok": true,
+   "value": "-240.0 dBFS after 89.9 s, largest rise -0.057 dB",
+   "target": "one 1.2 s fade from 88.7 s, silent from 89.9 s"
+  },
+  {
+   "name": "wordmark decays naturally to -60 dBFS by 89.9 s",
+   "ok": true,
+   "value": "-62.5 dBFS",
+   "target": "<= -60 dBFS, no fade"
+  },
+  {
+   "name": "the wordmark is the last thing heard",
+   "ok": true,
+   "value": "events after it: []; bed louder at: []",
+   "target": "no event after it; louder than the fading bed over the final 0.4 s"
+  },
+  {
+   "name": "music ducked under the worker line",
+   "ok": true,
+   "value": [
+    [
+     -5.0,
+     -5.0
+    ]
+   ],
+   "target": "about -5 dB"
+  },
+  {
+   "name": "no sound before 0 or after 90 s",
+   "ok": true,
+   "value": [
+    0.3,
+    89.95
+   ],
+   "target": "[>= 0, <= 90]"
+  },
+  {
+   "name": "unknown event kinds",
+   "ok": true,
+   "value": [],
+   "target": "none (mapped to a default with a warning)"
+  },
+  {
+   "name": "music in tune (A = 440)",
+   "ok": true,
+   "value": 2.8,
+   "target": "every strong note's centre within 5 cents of 12-TET"
+  },
+  {
+   "name": "music in D major",
+   "ok": true,
+   "value": [],
+   "target": "strongest peaks in D E F# G A B C#"
+  },
+  {
+   "name": "music never drops out (3 to 88.8 s, before ducking)",
+   "ok": true,
+   "value": -34.23,
+   "target": ">= -45 LUFS momentary"
+  },
+  {
+   "name": "music has no hard cuts",
+   "ok": true,
+   "value": 1.49,
+   "target": "<= 4 dB fall within any 100 ms"
+  }
+ ],
+ "all_ok": true
+}

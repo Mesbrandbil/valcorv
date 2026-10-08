@@ -1,0 +1,187 @@
+/*
+  film.css: tokens and base rules for the Priora motion explainer (1920 x 1080).
+  Colours only through these tokens (mirrored in PK.C in assets/js/pk-kit.js).
+  Never write a font family name anywhere else: use var(--sans) / var(--mono).
+*/
+@import url("./fonts.css");
+
+:root {
+  --paper-ground: #f7f5f0;
+  --paper: #f3f1ec;
+  --ink: #111111;
+  --ink-2: #3a3936;
+  --grey: #8f8c86;
+  --hair: #cfcbc3;
+  --rust: #c4441c;
+  --rust-deep: #9e3514;
+  --rust-pale: #f0ddd3;
+
+  --sans: "IBM Plex Sans", sans-serif;
+  --mono: "IBM Plex Mono", monospace;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  width: 1920px;
+  height: 1080px;
+  overflow: hidden;
+  background: var(--paper-ground);
+}
+
+#root {
+  position: relative;
+  width: 1920px;
+  height: 1080px;
+  overflow: hidden;
+  background: var(--paper-ground);
+  font-family: var(--sans);
+  color: var(--ink);
+}
+
+/* The world: one SVG, framed by the viewBox camera. --sw = world units per screen px. */
+#world {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 1920px;
+  height: 1080px;
+  overflow: hidden;
+}
+
+/* Screen-constant strokes (hairlines, threads): width in screen px at any zoom. */
+#world .pk-hair {
+  fill: none;
+  stroke: var(--ink);
+  stroke-width: calc(var(--sw, 1) * 1.5px);
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+#world .pk-hair-soft {
+  fill: none;
+  stroke: var(--hair);
+  stroke-width: calc(var(--sw, 1) * 1.25px);
+  stroke-linecap: round;
+}
+#world .pk-thread {
+  fill: none;
+  stroke: var(--rust);
+  stroke-width: calc(var(--sw, 1) * 1.75px);
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+#world .pk-thread-dash {
+  fill: none;
+  stroke: var(--rust);
+  stroke-width: calc(var(--sw, 1) * 1.6px);
+  stroke-linecap: round;
+  stroke-dasharray: calc(var(--sw, 1) * 2px) calc(var(--sw, 1) * 7px);
+}
+#world .pk-trail {
+  fill: none;
+  stroke: var(--rust);
+  stroke-opacity: 0.32;
+  stroke-width: calc(var(--sw, 1) * 1.5px);
+  stroke-linecap: round;
+  stroke-dasharray: calc(var(--sw, 1) * 1.5px) calc(var(--sw, 1) * 6px);
+}
+#world .pk-decision {
+  fill: none;
+  stroke: var(--ink);
+  stroke-width: calc(var(--sw, 1) * 3.5px);
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+#world .pk-decision-dash {
+  fill: none;
+  stroke: var(--ink);
+  stroke-opacity: 0.45;
+  stroke-width: calc(var(--sw, 1) * 1.5px);
+  stroke-linecap: round;
+  stroke-dasharray: calc(var(--sw, 1) * 2px) calc(var(--sw, 1) * 6px);
+}
+#world .pk-wall {
+  fill: none;
+  stroke: var(--ink);
+  stroke-width: calc(var(--sw, 1) * 1.6px);
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+#world .pk-wall-dash {
+  fill: none;
+  stroke: var(--ink);
+  stroke-width: calc(var(--sw, 1) * 1.6px);
+  stroke-linecap: round;
+  stroke-dasharray: calc(var(--sw, 1) * 7px) calc(var(--sw, 1) * 6px);
+}
+#world .pk-ghost {
+  fill: none;
+  stroke: var(--grey);
+  stroke-opacity: 0.7;
+  stroke-width: calc(var(--sw, 1) * 1.25px);
+  stroke-dasharray: calc(var(--sw, 1) * 3px) calc(var(--sw, 1) * 4px);
+}
+#world .pk-sim {
+  fill: var(--paper);
+  stroke: var(--rust);
+  stroke-width: calc(var(--sw, 1) * 1.6px);
+  stroke-linejoin: round;
+  stroke-dasharray: calc(var(--sw, 1) * 4px) calc(var(--sw, 1) * 3.5px);
+}
+
+/* Screen overlay: statements, tagline, wordmark. Above the world, below the grain. */
+#overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+.pk-statement {
+  position: absolute;
+  left: 0;
+  width: 1920px;
+  text-align: center;
+  font-family: var(--sans);
+  font-weight: 400;
+  font-size: 56px;
+  line-height: 1.18;
+  letter-spacing: -0.015em;
+  color: var(--ink);
+  opacity: 0;
+}
+.pk-statement .rust {
+  color: var(--rust);
+}
+
+/* The paper surface: a static full-frame grain above everything (printed, tactile). */
+#grain {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-size: 512px 512px;
+  opacity: 0.9;
+}
+#tooth {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-size: 1024px 1024px;
+  opacity: 0.35;
+}
+
+/* An undrawn DrawSVG stroke (dash of length 0) still paints a dot when its caps are round.
+   Hide every zero-length draw: nothing visible is lost, and no section has to remember it. */
+#world [style*="stroke-dasharray: 0px, 999999px"] {
+  visibility: hidden;
+}
+
+/* Small SVG text under a zooming camera: geometric precision makes glyph advances independent
+   of the zoom history, so a label measures the same whatever order the frames are rendered in. */
+#world text {
+  text-rendering: geometricPrecision;
+}

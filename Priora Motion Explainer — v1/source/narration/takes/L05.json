@@ -1,0 +1,74 @@
+{
+  "schema": "priora-narration-take/1",
+  "id": "L05",
+  "engine": "guide",
+  "guide": true,
+  "label": "GUIDE VOICE (local Kokoro). Not the final ElevenLabs performance.",
+  "speaker": "narrator",
+  "text": "Each checks its own conditions and reports back.",
+  "spoken_text": "Each checks its own conditions and reports back.",
+  "sample_rate": 48000,
+  "duration": 2.8,
+  "speech_start": 0.03,
+  "speech_end": 2.74,
+  "words": [
+    {
+      "w": "Each",
+      "start": 0.03,
+      "end": 0.32
+    },
+    {
+      "w": "checks",
+      "start": 0.32,
+      "end": 0.64
+    },
+    {
+      "w": "its",
+      "start": 0.64,
+      "end": 0.81
+    },
+    {
+      "w": "own",
+      "start": 0.81,
+      "end": 1.05
+    },
+    {
+      "w": "conditions",
+      "start": 1.05,
+      "end": 1.73
+    },
+    {
+      "w": "and",
+      "start": 1.73,
+      "end": 1.86
+    },
+    {
+      "w": "reports",
+      "start": 1.86,
+      "end": 2.32
+    },
+    {
+      "w": "back",
+      "start": 2.32,
+      "end": 2.74
+    }
+  ],
+  "sentences": [
+    {
+      "text": "Each checks its own conditions and reports back.",
+      "start": 0.03,
+      "end": 2.74,
+      "word_range": [
+        0,
+        8
+      ]
+    }
+  ],
+  "created": "2026-10-07T20:32:43+00:00",
+  "provider": "kokoro-onnx 0.6.1 (kokoro-v1.0.onnx, voices-v1.0.bin)",
+  "voice": "bf_isabella",
+  "speed": 0.92,
+  "window": 3.4,
+  "fallback_words": 0,
+  "pronunciation_checks": []
+}
