@@ -445,14 +445,14 @@
  },
  {
   "kind": "door-open",
-  "t": 40.26,
+  "t": 40.22,
   "gain_db": -10,
   "pan": 0.15
  },
  {
   "kind": "route",
-  "t": 40.26,
-  "dur": 0.990000000000002,
+  "t": 40.28,
+  "dur": 0.9699999999999989,
   "gain_db": -6,
   "pan": 0
  },
@@ -478,7 +478,7 @@
  },
  {
   "kind": "lock",
-  "t": 48.75,
+  "t": 48.8,
   "gain_db": -16,
   "pan": -0.29,
   "material": "tick"
@@ -546,13 +546,13 @@
  },
  {
   "kind": "simulated",
-  "t": 58.245,
+  "t": 58.431,
   "gain_db": -10,
   "pan": 0.6
  },
  {
   "kind": "arrive",
-  "t": 60.5,
+  "t": 60.2,
   "gain_db": -12,
   "size": "case",
   "pan": 0.35
@@ -636,7 +636,7 @@
  },
  {
   "kind": "compare",
-  "t": 68.45,
+  "t": 68.42,
   "gain_db": -6,
   "pan": 0.5
  },
@@ -660,28 +660,21 @@
  },
  {
   "kind": "door-open",
-  "t": 70.8,
+  "t": 71,
   "gain_db": -8,
   "pan": 0.6
  },
  {
   "kind": "return",
-  "t": 71.3,
+  "t": 71.5,
   "gain_db": -10,
   "pan": 0.45
  },
  {
   "kind": "door-close",
-  "t": 71.55,
+  "t": 71.75,
   "gain_db": -8,
   "pan": 0.6
- },
- {
-  "kind": "arrive",
-  "t": 72.14,
-  "gain_db": -12,
-  "size": "case",
-  "pan": 0.35
  },
  {
   "kind": "decision",
@@ -748,59 +741,59 @@
  },
  {
   "kind": "compare",
-  "t": 79.84,
+  "t": 79.05,
   "gain_db": -9,
   "pan": 0.45,
   "room": "mitigate"
  },
  {
+  "kind": "return",
+  "t": 80.15,
+  "gain_db": -9,
+  "pan": 0.45,
+  "room": "transfer"
+ },
+ {
   "kind": "lock",
-  "t": 81.26,
+  "t": 81.47,
   "gain_db": -9,
   "pan": 0.45,
   "room": "retain"
  },
  {
-  "kind": "return",
-  "t": 82.6,
-  "gain_db": -9,
-  "pan": 0.4,
-  "room": "transfer"
- },
- {
   "kind": "decision",
-  "t": 82.64,
+  "t": 82.33,
   "gain_db": -4,
   "pan": 0.3,
-  "dur": 0.38
+  "dur": 0.37000000000001876
  },
  {
   "kind": "resolve",
-  "t": 83.02,
+  "t": 82.72,
   "gain_db": -12,
   "pan": 0.3
  },
  {
   "kind": "record",
-  "t": 85,
+  "t": 84.85,
   "gain_db": -6,
   "pan": 0.25
  },
  {
   "kind": "arrive",
-  "t": 85.45,
+  "t": 85.1,
   "gain_db": -12,
   "pan": 0
  },
  {
   "kind": "title",
-  "t": 85.45,
+  "t": 85.1,
   "gain_db": -16,
   "pan": 0
  },
  {
   "kind": "print",
-  "t": 85.62,
+  "t": 85.55,
   "gain_db": -16,
   "pan": -0.6
  },
@@ -811,7 +804,7 @@
  },
  {
   "kind": "wordmark",
-  "t": 88.5,
+  "t": 88.55,
   "gain_db": -6
  }
 ]
