@@ -1,7 +1,7 @@
 # Priora — Real work. Explicit decisions.
-## A detailed storyboard for a motion film of about 100 seconds
+## A detailed storyboard for a 96-second motion film
 
-**Format:** 1920 × 1080, 30 frames per second, 99.6 seconds (2988 frames).  
+**Format:** 1920 × 1080, 30 frames per second, 96.1 seconds (2883 frames).  
 **Character:** A moving illustration on warm paper. Precise, tactile and quietly expressive.  
 **Narration:** A calm British voice, conversational and unhurried.  
 **Story:** A worker describes a repair. Priora assembles the relevant agents, checks the conditions and brings a deviation to the person responsible. Three decision rooms explore what can be retained, mitigated or transferred. The human makes the decision.
@@ -81,7 +81,7 @@ The worker’s message sounds like a real phone recording. The narrator sounds c
 ---
 
 ## Sequence 1 — Real work in the middle
-**0:00–0:08 · 240 frames · F0000–0239**
+**0:00–0:07.9 · 238 frames · F0000–0237**
 
 We begin on empty paper.
 
@@ -130,7 +130,7 @@ The first eight seconds establish restraint. Nothing bounces. The three silhouet
 ---
 
 ## Sequence 2 — A voice becomes a case
-**0:08–0:22 · 420 frames · F0240–0659**
+**0:07.9–0:21.8 · 416 frames · F0238–0653**
 
 The camera moves closer to the worker, leaving part of the factory visible to the right.
 
@@ -204,7 +204,7 @@ The words move like pieces of printed paper lifted and placed elsewhere. The pho
 ---
 
 ## Sequence 3 — The site chooses its cast
-**0:22–0:38 · 480 frames · F0660–1139**
+**0:21.8–0:37.5 · 470 frames · F0654–1123**
 
 Priora travels left with the case following just behind it on a short thread. The camera accompanies them.
 
@@ -273,7 +273,7 @@ The agents arrive with subtly different sound signatures from the same family of
 ---
 
 ## Sequence 4 — When the conditions hold
-**0:38–0:47 · 270 frames · F1140–1409**
+**0:37.5–0:46.4 · 268 frames · F1124–1391**
 
 The camera approaches the case at the centre of the panel.
 
@@ -316,7 +316,7 @@ The closed ring resolves with a soft, clear tone. The welding sound remains fain
 ---
 
 ## Sequence 5 — A condition slips
-**0:47–0:57 · 300 frames · F1410–1709**
+**0:46.4–0:56.4 · 299 frames · F1392–1690**
 
 The camera returns towards the panel, following the route backwards.
 
@@ -375,7 +375,7 @@ The separating arc produces a dry, soft tick. The music leaves a small unresolve
 ---
 
 ## Sequence 6 — Three decision rooms
-**0:57–1:19 · 660 frames · F1710–2369**
+**0:56.4–1:18.4 · 660 frames · F1691–2350**
 
 The camera moves right and slightly upwards.
 
@@ -402,7 +402,7 @@ Transfer carries:
 The packet remains the same object, its gap still visible.
 
 ### Retain — a deliberate acceptance
-**0:57–1:05 · 239 frames · F1710–1948**
+**0:56.4–1:04.3 · 239 frames · F1691–1929**
 
 The camera approaches Retain.
 
@@ -438,7 +438,7 @@ The arrangement holds as a concise picture of an explicit retained risk.
 “Retain is never a default. Risk is kept on purpose, with its terms explicit.”
 
 ### Mitigate — compare ways to close the gap
-**1:05–1:12.4 · 224 frames · F1949–2172**
+**1:04.3–1:11.8 · 224 frames · F1930–2153**
 
 The camera glides across the shared forecourt towards Mitigate. The retained-risk treatment falls away, returning the packet to its unresolved state. These are alternative paths being explained.
 
@@ -475,7 +475,7 @@ The full ring is held briefly, then the proposal withdraws and returns to its pl
 “Mitigate compares safeguards, and checks whether the work is back inside.”
 
 ### Transfer — a simulated inquiry
-**1:12.4–1:19 · 197 frames · F2173–2369**
+**1:11.8–1:18.4 · 197 frames · F2154–2350**
 
 The camera continues to Transfer.
 
@@ -516,7 +516,7 @@ The rooms share one sound palette. Retain has a slightly lower contact sound; Mi
 ---
 
 ## Sequence 7 — The rooms work together
-**1:19–1:26.5 · 225 frames · F2370–2594**
+**1:18.4–1:24.3 · 179 frames · F2351–2529**
 
 The camera widens to include all three chambers and the risk owner’s desk.
 
@@ -528,23 +528,21 @@ A small label joins the packet:
 
 **MITIGATE PART**
 
-At Transfer, a simulated inquiry returns a hollow question mark.
-
 At Retain, a proposed coral bridge spans the remaining opening.
 
 **KEEP THE REST**
 
-The risk owner’s black line is drawn only once in this sequence, at the final close: the viewer learned the threshold rule in Sequence 6. Priora brings the packet to each doorway without crossing it, and each room’s proposal comes out to meet it there. The gestures are economical and clear.
+The risk owner’s black line is drawn only once in this sequence, at the final close: the viewer learned the threshold rule in Sequence 6. Priora brings the packet to the Mitigate and Retain doorways without crossing either, and each room’s proposal comes out to meet it there. The dashed answers from the Transfer inquiry travel with the packet. The gestures are economical and clear.
 
 Priora returns to the desk with the packet and a short list of the explored options.
 
 The risk owner’s black line closes around the chosen combination.
 
+**RISK OWNER DECIDES**
+
 The selected mitigation and retention marks become solid. The simulated transfer inquiry remains dashed and off to one side, preserving its status as an explored possibility.
 
 One soft pulse passes through the human line.
-
-**RISK OWNER DECIDES**
 
 **Narration**
 
@@ -557,7 +555,7 @@ The travel is quicker here, but the final arrival pauses. The unresolved musical
 ---
 
 ## Sequence 8 — The whole system
-**1:26.5–1:39.6 · 393 frames · F2595–2987**
+**1:24.3–1:36.1 · 353 frames · F2530–2882**
 
 The camera withdraws smoothly to reveal the complete sheet.
 
@@ -577,13 +575,7 @@ Priora rises to the upper centre of the composition. Its satellite bead settles 
 
 A restrained label appears above the drawing:
 
-**THE COMPLETE SYSTEM IS A DESIGN PROPOSAL**
-
-Three short statements sit beside the structures they describe:
-
-**ONE PRIORA AGENT**  
-**A CONFIGURABLE SITE PANEL**  
-**THREE DECISION ROOMS**
+**A DESIGN PROPOSAL**
 
 The drawing then recedes in contrast. The people, rooms and routes remain faintly visible through the paper-like atmosphere.
 
