@@ -1,20 +1,21 @@
 /*
-  s8-system (84 to 90 s): the complete system. (cut 3)
+  s8-system (84 to 90 s): the complete system. (cut 3b)
 
   The camera pulls back to the whole sheet (83.3 to 84.5). While it does, everything that is
-  not read at 1:1 fades (the s7 labels after their time, the rooms' DESIGN PROPOSAL tags, the
-  inner "Site panel" title, any agent names still on), the Thermal check shelf slot fills
-  again, and what is read at 1:1 grows to stay legible (room names; WORKER / SITE / RISK
-  OWNER from their counter-scaled size; the single SIMULATED chip). In the still 1:1 frame, no
-  more than two movers at a time: the loop unwinds and the decided case drops into the record
-  as a second tick, to the right of RISK OWNER (84.5 to 85.0); Priora flies home (84.95 to
-  85.45); ONE PRIORA AGENT when it lands, with two thin rust threads from its bead to the panel
-  door and to the rooms' branch point (one mechanism). DESIGN PROPOSAL, once for the whole
-  system, above it from 84.6. The headings, FIRST HOT WORK and POSSIBLY LATER: OTHER INSURED
-  ACTIVITIES (a dashed rust ghost token slides from it into an empty panel seat and back), all
-  before the tagline. Tagline line one on "risk" (the world dims to 55%), line two on "while";
-  held to 88.3; the world and the tagline fade together while the wordmark crossfades in at
-  the optical centre (88.5 to 88.8) and holds still to 90.
+  not read at 1:1 fades (the owner's list of choices, the rooms' DESIGN PROPOSAL tags, the inner
+  "Site panel" title, any agent names still on), the Thermal check shelf slot fills again, and
+  what is read at 1:1 grows to stay legible (room names; WORKER / SITE / RISK OWNER from their
+  counter-scaled size, with DECIDES riding after RISK OWNER until it fades, 84.2 to 84.5; the
+  single SIMULATED chip). In the still 1:1 frame, staggered: the loop unwinds and the decided
+  case drops into the record as a second tick, on a path clear of the RISK OWNER label (84.5 to
+  84.85); Priora flies home (84.6 to 85.1); THE COMPLETE SYSTEM IS A DESIGN PROPOSAL (85.0) and
+  ONE PRIORA AGENT (85.1), with two thin rust threads from its bead to the panel door and to the
+  rooms' branch point; A CONFIGURABLE SITE PANEL (85.3), THREE DECISION ROOMS (85.5), FIRST HOT
+  WORK (85.55), POSSIBLY LATER: OTHER INSURED ACTIVITIES (85.6), from which a dashed ghost token
+  goes up the panel's outer wall, in at its door and into an empty seat, where it stays. Tagline
+  line one on "risk" (only the drawing dims, the headings stay), line two on "while"; the world
+  fades out 88.25 to 88.6, the tagline 88.3 to 88.8, and the wordmark comes in at the optical
+  centre (88.55 to 88.85) and holds still to 90.
 
   Reads W.coop from s7 (same builder).
 */
@@ -25,7 +26,7 @@ PK.section("s8-system", 84, 90, function (tl, W, ctx, S) {
   var cs = W.caseT;
   var A = W.agents;
   var KEYS = ["siteRules", "insurer", "fire", "riskEng", "evidence"];
-  var co = W.coop || { dec: null, packetEnd: G.dock || [1228, 680], prioraEnd: [1196, 536], beadEnd: 60, packetScale: 1, labels: { done: [], late: [] }, shelf: null };
+  var co = W.coop || { packetEnd: G.dock || [1228, 680], prioraEnd: [1236, 565], beadEnd: 90, packetScale: 1, shelf: null };
   function pt(p) {
     return f(p[0]) + " " + f(p[1]);
   }
@@ -72,18 +73,26 @@ PK.section("s8-system", 84, 90, function (tl, W, ctx, S) {
     tStill = 84.5;
 
   // ------------------------------------------------------------ 1. the pull-out: fade what is not read at 1:1, grow what is
-  (co.labels.done || []).forEach(function (el) {
-    fadeFromCurrent(el, tPull + 0.02, 0.3);
-  });
-  // the human's question and decision stay readable into the pull-out (their type grows with it), then fade
-  var tLateOut = 84.0;
-  var lateSize = PK.cam.px(tLateOut, 19.5);
-  (co.labels.late || []).forEach(function (el) {
-    // explicit from-value (the authored size read at build time), so the start never depends on seek order
-    // (autoRound off: GSAP rounds px values by default, which would snap the type to whole pixels)
-    FT(el, { fontSize: fontSize(el), autoRound: false }, { fontSize: lateSize, autoRound: false, duration: tLateOut - tPull, ease: "power2.inOut" }, tPull);
-    FT(el, { opacity: 1 }, { opacity: 0, duration: 0.25, ease: "power1.in" }, tLateOut - 0.05);
-  });
+  function fontSize(el) {
+    var m = /font-size:\s*([\d.]+)px/.exec(el.getAttribute("style") || "");
+    return m ? parseFloat(m[1]) : 15;
+  }
+  // the size a property tween leaves on an element at time t, as GSAP renders it (px values are
+  // rounded to whole pixels unless the tween says autoRound: false)
+  function sizeAt(el, t) {
+    var best = null,
+      bestEnd = -1;
+    tl.getTweensOf(el).forEach(function (tw) {
+      var end = tw.startTime() + tw.duration();
+      if (end > t + 1e-6 || end < bestEnd || tw.vars.fontSize === undefined) return;
+      var v = parseFloat(tw.vars.fontSize);
+      best = tw.vars.autoRound === false ? v : Math.round(v);
+      bestEnd = end;
+    });
+    return best === null ? fontSize(el) : best;
+  }
+  // the owner's choices have been read; they go as the camera pulls back
+  if (co.list) FT(co.list, { opacity: 1 }, { opacity: 0, duration: 0.28, ease: "power1.in" }, tPull + 0.02);
   if (W.roomTags) {
     for (var rk in W.roomTags) fadeFromCurrent(W.roomTags[rk], tPull + 0.05, 0.35);
   }
@@ -116,18 +125,22 @@ PK.section("s8-system", 84, 90, function (tl, W, ctx, S) {
     var o = f(ox) + " " + f(oy);
     FT(el, { scale: 1, svgOrigin: o }, { scale: to, svgOrigin: o, duration: dur || tStill - tPull, ease: "power2.inOut" }, at);
   }
-  function fontSize(el) {
-    var m = /font-size:\s*([\d.]+)px/.exec(el.getAttribute("style") || "");
-    return m ? parseFloat(m[1]) : 15;
-  }
   ["retain", "mitigate", "transfer"].forEach(function (k) {
     var n = W.rooms[k].name;
     grow(n, Math.max(1, 22 / fontSize(n)), tPull);
   });
   // WORKER / SITE / RISK OWNER are counter-scaled by s1 up to 83.2: continue from their current size
+  var REAL = 18.5;
   ["worker", "site", "owner"].forEach(function (k) {
-    tl.to(W.real.labels[k], { fontSize: 18.5, autoRound: false, duration: tStill - tPull, ease: "power2.inOut" }, tPull);
+    tl.to(W.real.labels[k], { fontSize: REAL, autoRound: false, duration: tStill - tPull, ease: "power2.inOut" }, tPull);
   });
+  // DECIDES rides after RISK OWNER as it grows (same timing and ease, so it stays one word space away), then goes
+  var dc = co.decides;
+  if (dc && dc.el) {
+    var fsO = sizeAt(dc.label, tPull);
+    FT(dc.el, { fontSize: fsO, attr: { x: dc.x + dc.k * fsO }, autoRound: false }, { fontSize: REAL, attr: { x: dc.x + dc.k * REAL }, autoRound: false, duration: tStill - tPull, ease: "power2.inOut" }, tPull);
+    FT(dc.el, { opacity: 1 }, { opacity: 0, duration: 0.3, ease: "power1.in" }, 84.2);
+  }
   // the SIMULATED chip stays one chip: it grows to 19 px type at 1:1 and moves clear of the carriers
   var chip = W.rooms.transfer.chip;
   var tr = G.rooms.transfer;
@@ -157,15 +170,9 @@ PK.section("s8-system", 84, 90, function (tl, W, ctx, S) {
     y1 = topT - oxy[1] - s1 * (cBox[1] - oxy[1]);
   FT(chip, { scale: s0, x: x0, y: y0, svgOrigin: cO }, { scale: s1, x: x1, y: y1, svgOrigin: cO, duration: tStill - tPull, ease: "power2.inOut" }, tPull);
 
-  // ------------------------------------------------------------ 2. still 1:1: the loop unwinds, the decided case drops into the record
-  var dec = co.dec;
-  if (dec) {
-    tl.set([dec.pre, dec.post, dec.loop, dec.chord].filter(Boolean), { opacity: 1 }, tStill);
-    tl.set(dec.chord, { opacity: 0 }, tStill);
-    tl.set(W.decision, { opacity: 0 }, tStill);
-    FT(dec.loop, { drawSVG: "0% 100%" }, { drawSVG: "0% 0%", duration: 0.34, ease: "power2.inOut" }, tStill);
-    FT(dec.chord, { opacity: 0 }, { opacity: 1, duration: 0.24, ease: "power1.out" }, tStill + 0.12);
-  }
+  // ------------------------------------------------------------ 2. still 1:1: the loop opens, the decided case drops into the record
+  // (the line stays from the desk to the branch node the dotted branches leave from)
+  if (co.arcTop) FT(co.arcTop, { drawSVG: "0% 100%" }, { drawSVG: "0% 0%", duration: 0.3, ease: "power2.inOut" }, tStill);
   var ticks = W.record.ticks;
   var first = ticks.firstElementChild;
   var fb = null;
@@ -178,14 +185,22 @@ PK.section("s8-system", 84, 90, function (tl, W, ctx, S) {
   var tick2 = PK.el("path", { d: "M" + f(tickX) + " " + f(ry - th) + " V" + f(ry + th), fill: "none", stroke: C.rust, "stroke-width": (first && first.getAttribute("stroke-width")) || 2.6, "stroke-linecap": "round" }, ticks);
   gsap.set(tick2, { drawSVG: "50% 50%", opacity: 0 });
   var p0 = co.packetEnd;
-  // a path to the right of the RISK OWNER label, then onto the record
-  var legCase = "M" + pt(p0) + " C" + f(p0[0] + 18) + " " + f(p0[1] + 40) + " " + f(1252) + " " + f(ry - 36) + " " + f(1238) + " " + f(ry - 12) + " Q" + f(1226) + " " + f(ry) + " " + f(tickX) + " " + f(ry);
+  // about 30 units right of the RISK OWNER label at its 1:1 size, then onto the record
+  var oLab = W.real.labels.owner;
+  var labRight = G.owner[0] + 66;
+  try {
+    labRight = parseFloat(oLab.getAttribute("x")) + (oLab.getComputedTextLength() / fontSize(oLab)) * REAL * 0.5;
+  } catch (e) {}
+  // (the shrinking case's own radius, about 16 units as it passes the label, is added to the 30)
+  var xDown = labRight + 30 + 16;
+  var legCase = "M" + pt(p0) + " C" + f(p0[0] + 20) + " " + f(p0[1] + 30) + " " + f(xDown) + " " + f(ry - 100) + " " + f(xDown) + " " + f(ry - 36) +
+    " C" + f(xDown) + " " + f(ry - 10) + " " + f(tickX + 26) + " " + f(ry) + " " + f(tickX) + " " + f(ry);
   var tCase = tStill,
-    durCase = 0.5;
+    durCase = 0.35;
   PK.travel(tl, cs.g, legCase, tCase, durCase, "power2.inOut");
   PK.trail(tl, W.L.trails, legCase, tCase, durCase, "power2.inOut");
-  FT(cs.body, { scale: co.packetScale || 1 }, { scale: 0.32, svgOrigin: "0 0", duration: durCase, ease: "power2.in" }, tCase);
-  var tLand = tCase + durCase;
+  FT(cs.body, { scale: co.packetScale || 1 }, { scale: 0.32, svgOrigin: "0 0", duration: durCase, ease: "power2.out" }, tCase);
+  var tLand = tCase + durCase; // 84.85
   FT(cs.g, { opacity: 1 }, { opacity: 0, duration: 0.1, ease: "none" }, tLand - 0.05);
   tl.set(tick2, { opacity: 1 }, tLand - 0.05);
   FT(tick2, { drawSVG: "50% 50%" }, { drawSVG: "0% 100%", duration: 0.18, ease: "power2.out" }, tLand - 0.05);
@@ -197,33 +212,32 @@ PK.section("s8-system", 84, 90, function (tl, W, ctx, S) {
   FT(A.insurer.g, { x: insP[0], y: insP[1] - 8 }, { x: insP[0], y: insP[1], duration: 0.5, ease: "power2.inOut" }, tStill + 0.1);
   FT(A.insurer.body, { rotation: 12, svgOrigin: "0 0" }, { rotation: 0, svgOrigin: "0 0", duration: 0.5, ease: "power2.inOut" }, tStill + 0.1);
 
-  // Priora flies home once the case has landed
+  // Priora flies home
   var home = G.prioraHome;
-  var tHome = 84.95,
+  var tHome = 84.6,
     durHome = 0.5;
   var legHome = "M" + pt(co.prioraEnd) + " C" + f(co.prioraEnd[0] - 40) + " " + f(co.prioraEnd[1] - 150) + " " + f(home[0] + 120) + " " + f(home[1]) + " " + pt(home);
   PK.travel(tl, W.priora.g, legHome, tHome, durHome, "power2.inOut");
   PK.trail(tl, W.L.trails, legHome, tHome, durHome, "power2.inOut");
   FT(W.priora.beadG, { rotation: co.beadEnd }, { rotation: 90, svgOrigin: "0 0", duration: durHome, ease: "power2.inOut" }, tHome);
-  var tHomeIn = tHome + durHome; // 85.45
+  var tHomeIn = tHome + durHome; // 85.1
   PK.sfx("arrive", tHomeIn, { gain_db: -12, pan: 0 });
 
   // ------------------------------------------------------------ 3. one mechanism: headings, staggered, all before the tagline
   var LS = 20;
-  var tops = [];
   function label(str, x, y, at, o) {
     o = o || {};
     var t = crisp(PK.text(W.L.top, str, x, y, { font: "mono", size: o.size || LS, fill: o.fill || C.ink, anchor: o.anchor || "middle" }));
     gsap.set(t, { opacity: 0 });
     FT(t, { opacity: 0, y: 4 }, { opacity: 1, y: 0, duration: 0.35, ease: "power2.out" }, at);
-    tops.push(t);
     return t;
   }
   var P = G.panel,
     RR = G.rooms;
-  // the maturity of the whole system, said once
-  label("Design proposal", home[0], home[1] - 26 - 22 - 36, 84.6, { fill: C.ink2 });
-  label("One Priora agent", home[0], home[1] - 26 - 22, tHomeIn);
+  var yAgent = home[1] - 26 - 22; // ONE PRIORA AGENT, above Priora's orbit
+  // the maturity of the whole system, said once, centred at the top (50 px or more above ONE PRIORA AGENT)
+  label("The complete system is a design proposal", 960, yAgent - LS * 0.72 - 50, tHomeIn - 0.1, { fill: C.ink2 });
+  label("One Priora agent", home[0], yAgent, tHomeIn);
   PK.sfx("title", tHomeIn, { gain_db: -16, pan: 0 });
   // two thin rust threads from Priora's bead: to the panel door and to the rooms' branch point
   var bead = [home[0], home[1] + 26];
@@ -234,8 +248,8 @@ PK.section("s8-system", 84, 90, function (tl, W, ctx, S) {
   gsap.set([thrA, thrB], { drawSVG: "0% 0%" });
   PK.drawOn(tl, thrA, tHomeIn + 0.02, 0.4, "power2.out", { later: true });
   PK.drawOn(tl, thrB, tHomeIn + 0.02, 0.4, "power2.out", { later: true });
-  label("A configurable site panel", P.x + P.w / 2, P.y - 22, 85.58);
-  label("Three decision rooms", RR.retain.x + RR.retain.w / 2, RR.retain.y - 22, 85.74);
+  label("A configurable site panel", P.x + P.w / 2, P.y - 22, 85.3);
+  label("Three decision rooms", RR.retain.x + RR.retain.w / 2, RR.retain.y - 22, 85.5);
 
   // hot work first; other insured activities possibly later
   var TS = 18,
@@ -254,36 +268,41 @@ PK.section("s8-system", 84, 90, function (tl, W, ctx, S) {
   var laterStr = "Possibly later: other insured activities";
   var laterW = PK.measure(laterStr.toUpperCase(), "mono500", TS, TR);
   var later = PK.g(rowG);
-  crisp(PK.text(later, laterStr, P.x, y2 + TS * 0.36, { font: "mono", size: TS, fill: C.grey, track: TR }));
-  PK.el("path", { d: "M" + f(P.x) + " " + f(y2 + TS * 0.36 + 5) + " H" + f(P.x + laterW), fill: "none", stroke: C.grey, "stroke-width": 1, "stroke-dasharray": "3 3" }, later);
+  crisp(PK.text(later, laterStr, P.x, y2 + TS * 0.36, { font: "mono", size: TS, fill: C.ink2, track: TR }));
+  PK.el("path", { d: "M" + f(P.x) + " " + f(y2 + TS * 0.36 + 5) + " H" + f(P.x + laterW), fill: "none", stroke: C.ink2, "stroke-width": 1, "stroke-dasharray": "3 3" }, later);
   gsap.set([lFirst, hot, later], { opacity: 0 });
-  var tFirst = 85.62,
-    tLater = 85.7;
+  var tFirst = 85.55,
+    tLater = 85.6;
   FT([lFirst, hot], { opacity: 0, y: -4 }, { opacity: 1, y: 0, duration: 0.35, ease: "power2.out" }, tFirst);
   FT(later, { opacity: 0, y: -4 }, { opacity: 1, y: 0, duration: 0.35, ease: "power2.out" }, tLater);
-  // a dashed ghost token slides from that line into an empty panel seat and back
-  var from = [P.x + laterW * 0.55, y2 - tabH / 2 - 8];
-  var seat = G.slot(90); // between Evidence check (54) and Risk engineering (126): an empty seat on the ring
-  var ghost = PK.g(W.L.tokens);
-  var gs = { fill: C.paper, stroke: C.rust, "stroke-width": 1.75, "stroke-dasharray": "4 3", "stroke-linejoin": "round" };
-  PK.el("path", Object.assign({ d: PK.rectPath(-13, -13, 26, 26, 5) }, gs), ghost);
-  PK.el("path", Object.assign({ d: PK.circlePath(0, 0, 4.2) }, gs, { "stroke-dasharray": "2 2", "stroke-width": 1.4 }), ghost);
-  gsap.set(ghost, { x: from[0], y: from[1], opacity: 0 });
-  var tG = 85.72;
-  FT(ghost, { opacity: 0 }, { opacity: 1, duration: 0.08, ease: "none" }, tG);
-  PK.travel(tl, ghost, PK.curve(from, seat, 40), tG, 0.2, "power3.out");
-  PK.travel(tl, ghost, PK.curve(seat, from, 40), tG + 0.26, 0.18, "power2.in");
-  FT(ghost, { opacity: 1 }, { opacity: 0, duration: 0.08, ease: "none" }, tG + 0.38);
   PK.sfx("print", tFirst, { gain_db: -16, pan: -0.6 });
+  // a dashed ghost token (full token size) leaves that line, goes up the panel's outer right wall, in at its
+  // door and into an empty seat on the ring (through the door, never over a wall), and stays there
+  var seat = G.slot(90); // between Evidence check (54) and Risk engineering (126)
+  var gx = P.x + P.w + 28, // outside the right wall
+    dY = P.doorY;
+  var gFrom = [Math.min(P.x + laterW + 22, P.x + P.w + 2), y2];
+  var gPath =
+    "M" + pt(gFrom) + " C" + f(gx - 8) + " " + f(y2) + " " + f(gx) + " " + f(y2 - 12) + " " + f(gx) + " " + f(y2 - 32) +
+    " L" + f(gx) + " " + f(dY + 40) + " C" + f(gx) + " " + f(dY + 14) + " " + f(gx - 10) + " " + f(dY) + " " + f(P.x + P.w) + " " + f(dY) +
+    " L" + f(P.x + P.w - 54) + " " + f(dY) + " C" + f(P.x + P.w - 140) + " " + f(dY) + " " + f(seat[0] + 10) + " " + f(seat[1] - 90) + " " + pt(seat);
+  var ghost = PK.g(W.L.top);
+  var gs = { fill: C.paper, stroke: C.rust, "stroke-width": 2.25, "stroke-dasharray": "5 3.5", "stroke-linejoin": "round" };
+  PK.el("path", Object.assign({ d: PK.rectPath(-13, -13, 26, 26, 5) }, gs), ghost);
+  PK.el("path", Object.assign({ d: PK.circlePath(0, 0, 4.4) }, gs, { "stroke-dasharray": "2.4 2" }), ghost);
+  gsap.set(ghost, { x: gFrom[0], y: gFrom[1], opacity: 0 });
+  var tG = tLater;
+  FT(ghost, { opacity: 0 }, { opacity: 1, duration: 0.1, ease: "none" }, tG);
+  PK.travel(tl, ghost, gPath, tG, 0.55, "power2.inOut");
 
   // ------------------------------------------------------------ 4. the tagline, keyed to its spoken words; the world dims so it reads
   var tag = document.createElement("div");
   tag.className = "pk-statement";
-  tag.style.top = "892px";
-  tag.style.fontSize = "36px";
-  tag.style.lineHeight = "1.3";
+  tag.style.top = "884px";
+  tag.style.fontSize = "48px";
+  tag.style.lineHeight = "1.2";
   var t1 = document.createElement("div");
-  t1.textContent = "Priora turns physical work into explicit risk decisions";
+  t1.textContent = "Priora turns physical work into explicit risk decisions,";
   var t2 = document.createElement("div");
   t2.textContent = "while the work happens.";
   tag.appendChild(t1);
@@ -295,12 +314,18 @@ PK.section("s8-system", 84, 90, function (tl, W, ctx, S) {
     tL2 = PK.word("L14", "while");
   FT(t1, { opacity: 0, y: 8 }, { opacity: 1, y: 0, duration: 0.45, ease: "power3.out" }, tL1 - 0.04);
   FT(t2, { opacity: 0, y: 8 }, { opacity: 1, y: 0, duration: 0.45, ease: "power3.out" }, tL2 - 0.04);
-  var world = document.getElementById("pk-world");
-  FT(world, { opacity: 1 }, { opacity: 0.55, duration: 0.45, ease: "power2.inOut" }, tL1 - 0.04);
+  // only the drawing dims; the headings, the later line and the ghost (the top layer) stay as they are
+  var drawing = ["trails", "routes", "chambers", "real", "threads", "tokens", "case", "priora", "labels"]
+    .map(function (n) {
+      return W.L[n];
+    })
+    .filter(Boolean);
+  FT(drawing, { opacity: 1 }, { opacity: 0.55, duration: 0.45, ease: "power2.inOut" }, tL1 - 0.04);
   PK.sfx("title", tL1 - 0.04, { gain_db: -10 });
 
-  // ------------------------------------------------------------ 5. the end: the world and the tagline fade together, the wordmark crossfades in
-  FT(world, { opacity: 0.55 }, { opacity: 0, duration: 0.5, ease: "power2.inOut" }, 88.3);
+  // ------------------------------------------------------------ 5. the end: the world goes, the tagline follows, the wordmark comes in alone
+  var world = document.getElementById("pk-world");
+  FT(world, { opacity: 1 }, { opacity: 0, duration: 0.35, ease: "power2.inOut" }, 88.25);
   FT(tag, { opacity: 1 }, { opacity: 0, duration: 0.5, ease: "power2.inOut" }, 88.3);
   var wmW = 440,
     wmH = (wmW * 758) / 2617;
@@ -321,6 +346,6 @@ PK.section("s8-system", 84, 90, function (tl, W, ctx, S) {
     '"/></g></svg>';
   ctx.overlay.appendChild(wm);
   gsap.set(wm, { opacity: 0 });
-  FT(wm, { opacity: 0 }, { opacity: 1, duration: 0.3, ease: "power2.inOut" }, 88.5);
-  PK.sfx("wordmark", 88.5, { gain_db: -6 });
+  FT(wm, { opacity: 0 }, { opacity: 1, duration: 0.3, ease: "power2.inOut" }, 88.55);
+  PK.sfx("wordmark", 88.55, { gain_db: -6 });
 });

@@ -1,25 +1,25 @@
 /*
-  s7-cooperate (78 to 84 s): the rooms cooperate; the risk owner stays in control. (cut 3)
+  s7-cooperate (78 to 84 s): the rooms cooperate; the risk owner stays in control. (cut 3b)
 
-  The camera lands at 78.95 and holds still to 83.3. On "carries" (79.07) the risk owner's
-  loop at the dock lets go and Priora carries the same packet, grown to a readable 1.25x, to
-  each door in turn, one mover at a time, along the outside of the rooms. At every door the
-  risk owner's black line opens it and stays in the open door while the room answers; the
-  rooms only propose, so what they send out stays dashed:
-    Mitigate: the Thermal check piece leaves its shelf (the slot stays empty) and seats in
-      part of the gap, dashed: MITIGATE PART.
+  The camera pulls back to the cooperation shot (77.85 to 78.95) and holds still to 83.3.
+  At 78.0 the risk owner's loop lets go of the packet (the loop unwinds to its tip and the line
+  steps aside along the Transfer wall, leaving a bay beside the Transfer door). Then one mover
+  at a time: Priora carries the packet to a door; the risk owner's black line opens the door
+  and stays in it while the room answers; the answer seats on the packet, dashed (rooms only
+  propose); the owner's choice prints beside the packet; the line withdraws and the door closes;
+  only then the next carry. The order is the brief's logic:
+    Mitigate: the Thermal check piece leaves its shelf (the slot stays empty) and seats in part
+      of the gap: MITIGATE PART.
+    Transfer: a dashed "?" comes out of the open door and seats on the ring: WHAT WOULD IT COST?
     Retain: a dashed clamp bar comes out and bridges the rest of the gap: KEEP THE REST.
-    Transfer (its door is beside the dock): a hollow dashed "?" comes back from the
-      carriers: WHAT WOULD IT COST?
-  The owner's choices and question are ink mono beside the packet on short leaders. On
-  "control" the black line closes its loop round the packet at the dock again; only then do
-  the proposals turn solid, with one soft resolve pulse: RISK OWNER DECIDES. Held to 83.3.
-  (Order Mitigate, Retain, Transfer: the brief's own order, "mitigate one part, retain what
-  remains or ask what transfer would cost before deciding"; the Transfer door is the one
-  beside the dock, so the decision lands on "control" without a long last journey.)
+  The choices ride with the packet as a short list on one angled leader (newest at the bottom,
+  nearest the ring). Back at the dock the line slides in to the packet and closes its loop round
+  it, joining the line from the desk tangentially at the lower left; on "control" the loop is
+  closed and only then the proposals turn solid, with one soft resolve pulse; DECIDES prints
+  after the RISK OWNER name under the desk. Held still to 83.3.
 
-  Contract at 78.0 (docs/cut2-plan.md section 2, unchanged in cut 3) is tl.set below;
-  stand-ins are built only for missing handles. Hand-over to s8 (same builder): W.coop.
+  Contract at 78.0 (docs/cut2-plan.md section 2, unchanged since) is tl.set below; stand-ins are
+  built only for missing handles. Hand-over to s8 (same builder): W.coop.
 */
 PK.section("s7-cooperate", 78, 84, function (tl, W, ctx, S) {
   var G = PK.GEO,
@@ -117,12 +117,6 @@ PK.section("s7-cooperate", 78, 84, function (tl, W, ctx, S) {
     } catch (e) {}
     return b && (b.width || b.height) ? [p[0] + b.x + b.width / 2, p[1] + b.y + b.height / 2] : p;
   }
-  // move every coordinate pair of an absolute M/L/C/Q path by an offset
-  function shiftPath(d, off) {
-    return d.replace(/(-?\d+(?:\.\d+)?)[ ,](-?\d+(?:\.\d+)?)/g, function (m, a, b) {
-      return f(+a + off[0]) + " " + f(+b + off[1]);
-    });
-  }
   function samplePath(d, n) {
     var tmp = PK.el("path", { d: d }, W.L.routes);
     var L = tmp.getTotalLength(),
@@ -134,24 +128,12 @@ PK.section("s7-cooperate", 78, 84, function (tl, W, ctx, S) {
     tmp.remove();
     return out;
   }
-  function pulse(el, at, s, o) {
-    FT(el, { scale: 1, svgOrigin: o || "0 0" }, { keyframes: [{ scale: s || 1.1, duration: 0.11, ease: "power1.out" }, { scale: 1, duration: 0.26, ease: "power2.inOut" }], svgOrigin: o || "0 0" }, at);
-  }
-  var LS = PK.cam.px(80, 19.5); // mono status labels in the held cooperation shot (78.9 to 83.1)
+  var LS = PK.cam.px(80, 19.5); // the owner's choices in the held cooperation shot (78.95 to 83.3)
   // unhinted glyph metrics: under the zooming camera Chrome otherwise lays small SVG text out at
   // screen-scale-dependent widths that depend on seek history (a seek-order difference of ~7% in width)
   function crisp(el) {
     el.style.textRendering = "geometricPrecision";
     return el;
-  }
-  function mono(str, x, y, o) {
-    o = o || {};
-    var t = crisp(PK.text(W.L.labels, str, x, y, { font: "mono", size: o.size || LS, fill: o.fill || C.rust, anchor: o.anchor || "start" }));
-    gsap.set(t, { opacity: 0 });
-    return t;
-  }
-  function labelIn(el, at) {
-    FT(el, { opacity: 0, y: 3 }, { opacity: 1, y: 0, duration: 0.3, ease: "power2.out" }, at);
   }
 
   // ------------------------------------------------------------ geometry
@@ -249,7 +231,7 @@ PK.section("s7-cooperate", 78, 84, function (tl, W, ctx, S) {
   if (!W.roomOwnerLines || !W.branches) {
     // trunk from the tip to the branch point, fine dotted grey branches to the doors, undrawn owner lines
     var tip = W.decisionTip;
-    var trunk = PK.el("path", { d: "M" + pt(tip) + " C" + f(tip[0] + 4) + " " + f(tip[1] - 30) + " " + f(BR0[0]) + " " + f(BR0[1] + 40) + " " + pt(BR0), class: "pk-decision" }, W.L.routes);
+    var trunk = W.decisionTrunk = PK.el("path", { d: "M" + pt(tip) + " C" + f(tip[0] + 4) + " " + f(tip[1] - 30) + " " + f(BR0[0]) + " " + f(BR0[1] + 40) + " " + pt(BR0), class: "pk-decision" }, W.L.routes);
     gsap.set(trunk, { opacity: 0 });
     tl.set(trunk, { opacity: 1 }, T0);
     var node = PK.el("circle", { cx: BR0[0], cy: BR0[1], r: 3, fill: C.ink }, W.L.routes);
@@ -302,7 +284,6 @@ PK.section("s7-cooperate", 78, 84, function (tl, W, ctx, S) {
     tl.set([RM[k].leafA, RM[k].leafB], { x: 0, y: 0, opacity: 1 }, T0);
     tl.set(own[k], { drawSVG: "0% 0%" }, T0);
   });
-  tl.set(W.decision, { opacity: 1 }, T0);
   if (W.ownerDecides) tl.set(W.ownerDecides, { opacity: 0 }, T0);
   if (W.caseLabel) tl.set(W.caseLabel, { opacity: 0 }, T0);
   var ra = W.roomAgents;
@@ -310,49 +291,80 @@ PK.section("s7-cooperate", 78, 84, function (tl, W, ctx, S) {
     tl.set(a.body, { scale: 1, svgOrigin: "0 0" }, T0);
   });
 
-  // ------------------------------------------------------------ the human's line, split so its loop can let go and close again
-  // W.decision = desk -> (pre) -> loop round the packet (loopSeg) -> tip (post); the chord replaces the loop while the packet is away
+  // ------------------------------------------------------------ where things are (outside the rooms, clear of the human's line)
+  var DESK = (W.decisionLoop && W.decisionLoop.from) || [1182, 710]; // the desk's top-right corner, where the line leaves
+  var TIPv = W.decisionTip ? (W.decisionTip.length ? W.decisionTip : [W.decisionTip.x, W.decisionTip.y]) : [DOCK[0] + 42, DOCK[1]];
+  // each door: the packet's ring within 40 px of the door gap, above the line that enters it
+  // (Retain and Mitigate lines enter low; the Transfer line enters high and the packet sits in the bay below it)
+  var PP = { mitigate: [1240, 500], transfer: [1236, 662], retain: [1240, 330] };
+  var QOFF = [0, -97]; // Priora above the packet while it carries it (bead down at the packet)
+  var PQ = {};
+  RK.forEach(function (k) {
+    PQ[k] = add(PP[k], QOFF);
+  });
+  // the decided packet at the dock, its loop round it, and Priora parked above
+  var CE = [1224, 670],
+    RL = 51; // 10 px or more clear of the ring, its top pieces and the price bead
+  var QD = [1236, 565];
+
+  // ------------------------------------------------------------ the human's line as one polyline that can change shape
+  var NPT = 200;
+  function polyD(pts) {
+    var s = "M" + pt(pts[0]);
+    for (var i = 1; i < pts.length; i++) s += " L" + pt(pts[i]);
+    return s;
+  }
   var decD = W.decisionD || valAt(W.decision, "attr", T0, "d") || W.decision.getAttribute("d");
-  var dec = null;
-  try {
-    var dp = samplePath(decD, 360);
-    var LC = (W.decisionLoop && W.decisionLoop.c) || DOCK,
-      LRr = (W.decisionLoop && W.decisionLoop.r) || 44;
-    var near = [];
-    dp.forEach(function (p, i) {
-      if (dist(p, LC) < LRr + 6) near.push(i);
-    });
-    if (near.length > 40) {
-      var i1 = near[0],
-        i2 = near[near.length - 1],
-        sweep = 0;
-      for (var i = i1 + 1; i <= i2; i++) {
-        var da = ang(LC, dp[i]) - ang(LC, dp[i - 1]);
-        while (da > 180) da -= 360;
-        while (da < -180) da += 360;
-        sweep += Math.abs(da);
-      }
-      if (sweep > 300) {
-        var poly = function (a, b) {
-          var s = "M" + pt(dp[a]);
-          for (var j = a + 1; j <= b; j++) s += " L" + pt(dp[j]);
-          return s;
-        };
-        dec = {
-          pre: PK.el("path", { d: poly(0, i1), class: "pk-decision" }, W.L.routes),
-          post: i2 < dp.length - 1 ? PK.el("path", { d: poly(i2, dp.length - 1), class: "pk-decision" }, W.L.routes) : null,
-          loop: PK.el("path", { d: poly(i1, i2), class: "pk-decision" }, W.L.routes),
-          chord: PK.el("path", { d: "M" + pt(dp[i1]) + " L" + pt(dp[i2]), class: "pk-decision" }, W.L.routes),
-        };
-        [dec.pre, dec.post, dec.loop, dec.chord].forEach(function (e) {
-          if (!e) return;
-          W.L.routes.insertBefore(e, W.decision);
-          gsap.set(e, { opacity: 0 });
-        });
-        gsap.set(dec.loop, { drawSVG: "0% 100%" });
-      }
-    }
-  } catch (e) {}
+  var stemD = decD,
+    loopD = null;
+  var cutA = decD.indexOf(" A");
+  if (cutA > 0) {
+    stemD = decD.slice(0, cutA);
+    var sEnd = samplePath(stemD, 4)[4];
+    loopD = "M" + pt(sEnd) + decD.slice(cutA);
+  }
+  var trunkD = W.decisionTrunk ? W.decisionTrunk.getAttribute("d") : "M" + pt(TIPv) + " C" + f(TIPv[0] + 3) + " " + f(TIPv[1] - 30) + " " + f(BR0[0]) + " " + f(BR0[1] + 34) + " " + pt(BR0);
+  // A: as s6 leaves it without the loop (desk, under the dock, up to the tip, the trunk to the branch point)
+  var hlA = polyD(samplePath(stemD + " " + trunkD.replace(/^\s*M/, "L"), NPT - 1));
+  // B: stepped aside while the packet is away: under the bay and up along the Transfer wall to the branch point
+  var bayY = 727,
+    riserX = 1292;
+  var hlB = polyD(
+    samplePath(
+      "M" + pt(DESK) + " C" + f(DESK[0] + 16) + " " + f(bayY - 3) + " " + f(DESK[0] + 32) + " " + f(bayY) + " " + f(1240) + " " + f(bayY) +
+        " C" + f(1272) + " " + f(bayY) + " " + f(riserX) + " " + f(bayY - 5) + " " + f(riserX) + " " + f(bayY - 27) +
+        " L" + f(riserX) + " " + f(BR0[1] + 28) + " C" + f(riserX) + " " + f(BR0[1] + 12) + " " + f(riserX - 2) + " " + f(BR0[1] + 2) + " " + pt(BR0),
+      NPT - 1,
+    ),
+  );
+  // C: the decision: the line from the desk joins the loop tangentially at its lower left, runs under the packet,
+  // and leaves it tangentially on the right, straight up to the branch point (no node on the loop)
+  var dq = dist(DESK, CE);
+  var aJ = ang(CE, DESK) - (Math.acos(RL / dq) * 180) / Math.PI;
+  var J = PK.polar(CE[0], CE[1], RL, aJ),
+    E = [CE[0] + RL, CE[1]];
+  var hlC = polyD(
+    samplePath(
+      "M" + pt(DESK) + " L" + pt(J) + " A" + RL + " " + RL + " 0 0 0 " + pt(E) + " C" + f(E[0]) + " " + f(E[1] - 32) + " " + f(BR0[0]) + " " + f(BR0[1] + 30) + " " + pt(BR0),
+      NPT - 1,
+    ),
+  );
+  var hl = PK.el("path", { d: hlA, class: "pk-decision" }, W.L.routes);
+  W.L.routes.insertBefore(hl, W.decision);
+  gsap.set(hl, { opacity: 0 });
+  var loopOld = loopD ? PK.el("path", { d: loopD, class: "pk-decision" }, W.L.routes) : null;
+  if (loopOld) {
+    W.L.routes.insertBefore(loopOld, W.decision);
+    gsap.set(loopOld, { opacity: 0, drawSVG: "0% 100%" });
+  }
+  // the loop that closes at the decision: from where the line leaves on the right, over the top, to the lower left
+  var arcTop = PK.el("path", { d: "M" + pt(E) + " A" + RL + " " + RL + " 0 1 0 " + pt(J), class: "pk-decision" }, W.L.routes);
+  gsap.set(arcTop, { drawSVG: "0% 0%" });
+  // seamless swap at 78.0: the same drawing, now made of this section's own pieces
+  tl.set(W.decision, { opacity: 0 }, T0);
+  if (W.decisionTrunk) tl.set(W.decisionTrunk, { opacity: 0 }, T0);
+  tl.set(hl, { opacity: 1, attr: { d: hlA } }, T0);
+  if (loopOld) tl.set(loopOld, { opacity: 1, drawSVG: "0% 100%" }, T0);
 
   // ------------------------------------------------------------ the pieces, in the packet's arc units (inside arcsG; world = local x ARC x body scale)
   var gR = gapA.r || 40,
@@ -366,7 +378,7 @@ PK.section("s7-cooperate", 78, 84, function (tl, W, ctx, S) {
     return px / PK.cam.zoomAt(80) / K; // a screen width in px as local units of the enlarged packet
   };
   var thD = sector(gR - 2.2, gR + 2.2, thA[0], thA[1]);
-  var CB = gR + 8.5; // the clamp bar's radius
+  var CB = gR + 6; // the clamp bar's radius (close to the ring, so the decision loop stays clear of it)
   var barD =
     "M" + pt(PK.polar(0, 0, gR + 3.2, slA[0] - 2)) + " L" + pt(PK.polar(0, 0, CB, slA[0] - 2)) +
     " A" + CB + " " + CB + " 0 0 1 " + pt(PK.polar(0, 0, CB, slA[1] + 2)) + " L" + pt(PK.polar(0, 0, gR + 3.2, slA[1] + 2));
@@ -386,10 +398,27 @@ PK.section("s7-cooperate", 78, 84, function (tl, W, ctx, S) {
     gsap.set(solid, { opacity: 0 });
     return { g: g, prop: prop, solid: solid };
   }
+  // the price "?": a bead on the ring (body units: the ring is at 34; at the dock the bead is 30 px or more)
+  var QR_ = 9.4,
+    QA = 60; // lower right of the ring, on the Evidence arc, facing the Transfer door
+  var QS = 11.2; // its "?" (18 px or more at the dock)
+  function priceBead(parent, s) {
+    var g0 = PK.g(parent);
+    var g = PK.g(g0);
+    var sw = 1.6 / PK.cam.zoomAt(80) / s;
+    var prop = PK.el("circle", { cx: 0, cy: 0, r: f(QR_), fill: C.paper, stroke: C.rust, "stroke-width": f(sw), "stroke-dasharray": f(3.6 / PK.cam.zoomAt(80) / s) + " " + f(2.6 / PK.cam.zoomAt(80) / s) }, g);
+    var solid = PK.el("circle", { cx: 0, cy: 0, r: f(QR_), fill: C.paper, stroke: C.rust, "stroke-width": f(sw * 1.2) }, g);
+    gsap.set(solid, { opacity: 0 });
+    crisp(PK.text(g, "?", 0, QS * 0.36, { font: "mono", size: QS, fill: C.rust, anchor: "middle", upper: false, track: 0, weight: 600 }));
+    return { g: g0, s: g, prop: prop, solid: solid };
+  }
   // seated copies (they travel with the packet, also in s8)
   var seatTh = thermalPiece(cs.arcsG),
     seatBar = clampBar(cs.arcsG);
-  gsap.set([seatTh.g, seatBar.g], { opacity: 0 });
+  var seatQ = priceBead(cs.body, 1);
+  var qL = PK.polar(0, 0, gR * ARC, QA);
+  gsap.set(seatQ.g, { x: qL[0], y: qL[1] });
+  gsap.set([seatTh.g, seatBar.g, seatQ.g], { opacity: 0 });
   // travelling copies: a group at the packet-centre-equivalent point, a scale group, the piece
   function flyer(make) {
     var g = PK.g(W.L.case);
@@ -401,100 +430,133 @@ PK.section("s7-cooperate", 78, 84, function (tl, W, ctx, S) {
   }
   var thFly = flyer(thermalPiece),
     barFly = flyer(clampBar);
-
-  // ------------------------------------------------------------ positions (outside the rooms, clear of the human's line by 24 units or more)
-  var dM = DOOR.mitigate,
-    dT = DOOR.transfer,
-    dR = DOOR.retain;
-  var RV = gR * K; // the packet's visible radius while carried (42.5)
-  var PM = [1192, dM[1]],
-    QM = [1110, dM[1] - 56];
-  var PR = [1192, dR[1]],
-    QR = [1110, dR[1] - 56];
-  var PT = DOCK, // the Transfer door is the one beside the dock
-    QT = [1196, 536];
+  var qFly = (function () {
+    var g = PK.g(W.L.case);
+    var sc = PK.g(g);
+    priceBead(sc, BIG);
+    gsap.set(g, { opacity: 0 });
+    gsap.set(sc, { scale: BIG, svgOrigin: "0 0" });
+    return { g: g, sc: sc };
+  })();
   var thOff = mul(thMidL, K),
-    barOff = mul(barMidL, K);
+    barOff = mul(barMidL, K),
+    qOff = mul(qL, BIG);
 
-  var tm = {
-    lift: PK.word("L13", "carries"), // 79.07
-    goM: 0.43,
-    openM: 79.12,
-    thermal: 79.5, thermalD: 0.34,
-    leaveM: 80.42, goR: 0.42,
-    openR: 80.7,
-    bar: 81.0, barD: 0.26,
-    leaveR: 81.84, goT: 0.5,
-    openT: 82.0,
-    ask: 82.36, askD: 0.24,
-    decide: PK.word("L13", "control"), // 82.64
-    decideD: 0.38,
-  };
-  var tSolid = tm.decide + tm.decideD; // 83.02
-
-  // the risk owner's black line opens a door and stays in it while the room answers
-  // (s6 opens doors wide, 88 units, with W.doorWide; its lines enter the doorway off-centre, so things pass beside them)
-  function door(k, at, open) {
-    if (W.doorWide) W.doorWide(tl, k, at, open, 0.28);
-    else if (open) RM[k].open(tl, at, 0.28);
-    else RM[k].close(tl, at, 0.28);
+  // ------------------------------------------------------------ the owner's choices: a short list that rides with the packet
+  // one leader, angled 30 degrees, 40 units (66 px) long, from the newest choice to the ring (228 degrees, on the
+  // Site rules arc) with a 3 px dot; older choices step up a line when a new one prints
+  var LA = 228,
+    LL = 40,
+    LANG = 30,
+    LH = LS * 1.45;
+  function leaderStart(R) {
+    var rp = PK.polar(0, 0, R, LA);
+    return [rp[0] - LL * Math.cos((LANG * Math.PI) / 180), rp[1] - LL * Math.sin((LANG * Math.PI) / 180)];
   }
-  function opens(k, at) {
-    var wall = own[k].pkWall;
-    if (wall) {
-      FT(own[k], { drawSVG: "0% 0%" }, { drawSVG: "0% " + f(wall) + "%", duration: 0.24, ease: "power2.inOut" }, at);
-      door(k, at + 0.24, true);
-      FT(own[k], { drawSVG: "0% " + f(wall) + "%" }, { drawSVG: "0% 100%", duration: 0.12, ease: "power2.out" }, at + 0.4);
-    } else {
-      PK.drawOn(tl, own[k], at, 0.28, "power2.inOut", { later: true });
-      door(k, at + 0.22, true);
+  var RB = gR * ARC * BIG,
+    R1 = gR * ARC;
+  var SB = leaderStart(RB),
+    S1 = leaderStart(R1);
+  var lst = PK.g(cs.g);
+  gsap.set(lst, { x: 0, y: 0 });
+  var rpB = PK.polar(0, 0, RB, LA);
+  var lead = PK.el("path", { d: "M" + pt(SB) + " L" + pt(rpB), fill: "none", stroke: C.ink, "stroke-width": f(PK.cam.px(80, 1)), "stroke-linecap": "round" }, lst);
+  var leadDot = PK.el("circle", { cx: f(rpB[0]), cy: f(rpB[1]), r: f(PK.cam.px(80, 1.6)), fill: C.ink }, lst);
+  gsap.set(lead, { drawSVG: "0% 0%" });
+  gsap.set(leadDot, { opacity: 0 });
+  var listEnd = [SB[0] - 3, SB[1] + 4]; // the newest choice ends here (end-anchored), on the leader's start
+  var choices = [];
+  function choice(str, at) {
+    var g = PK.g(lst);
+    var t = crisp(PK.text(g, str, listEnd[0], listEnd[1], { font: "mono", size: LS, fill: C.ink, anchor: "end" }));
+    gsap.set(g, { y: 0 });
+    gsap.set(t, { opacity: 0 });
+    FT(t, { opacity: 0, y: 3 }, { opacity: 1, y: 0, duration: 0.2, ease: "power2.out" }, at);
+    // the ones already there step up a line
+    choices.forEach(function (c, i) {
+      var k = choices.length - i; // its current slot above the bottom
+      FT(c, { y: -LH * (k - 1) }, { y: -LH * k, duration: 0.18, ease: "power2.out" }, at);
+    });
+    if (!choices.length) {
+      FT(lead, { drawSVG: "0% 0%" }, { drawSVG: "0% 100%", duration: 0.14, ease: "power2.out" }, at);
+      FT(leadDot, { opacity: 0 }, { opacity: 1, duration: 0.06, ease: "none" }, at + 0.12);
     }
+    choices.push(g);
+    return t;
   }
-  function withdraws(k, at) {
-    PK.drawOff(tl, own[k], at, 0.28, "power2.inOut", { to: "start" });
-    door(k, at + 0.12, false);
+
+  // ------------------------------------------------------------ moves
+  // the risk owner's black line opens a door: it runs from the branch point to the wall, the door opens wide,
+  // and the line reaches into the doorway, where it stays while the room answers
+  function door(k, at, open, dur) {
+    if (W.doorWide) W.doorWide(tl, k, at, open, dur);
+    else if (open) RM[k].open(tl, at, dur);
+    else RM[k].close(tl, at, dur);
   }
-  // an owner's choice: ink mono beside the packet on a short leader (the leader retracts when the packet leaves)
-  function choice(str, P, at, leaveAt) {
-    var y = P[1] + LS * 0.36,
-      xEnd = P[0] - RV - 22;
-    var t = mono(str, xEnd, y, { fill: C.ink, anchor: "end" });
-    var ld = PK.el("path", { d: "M" + f(xEnd + 5) + " " + f(P[1]) + " H" + f(P[0] - RV - 5), fill: "none", stroke: C.ink, "stroke-width": 1, "stroke-linecap": "round" }, W.L.labels);
-    gsap.set(ld, { drawSVG: "0% 0%" });
-    labelIn(t, at);
-    PK.drawOn(tl, ld, at, 0.2, "power2.out", { later: true });
-    if (leaveAt) PK.drawOff(tl, ld, leaveAt, 0.2, "power2.in", { to: "start" });
-    // read for 1.25 s, then it goes: the decided packet carries the result
-    FT(t, { opacity: 1 }, { opacity: 0, duration: 0.3, ease: "power1.in" }, at + 1.25);
-    return { t: t, ld: ld };
+  function opens(k, at, dw) {
+    var wall = own[k].pkWall || 85;
+    FT(own[k], { drawSVG: "0% 0%" }, { drawSVG: "0% " + f(wall) + "%", duration: dw, ease: "power1.in" }, at);
+    door(k, at + dw - 0.06, true, 0.16);
+    FT(own[k], { drawSVG: "0% " + f(wall) + "%" }, { drawSVG: "0% 100%", duration: 0.08, ease: "power1.out" }, at + dw);
+    return at + dw + 0.1; // the door is open
   }
-  function carry(Pfrom, Pto, Qfrom, Qto, at, dur, s0, s1, bend) {
-    var dP = PK.curve(Pfrom, Pto, bend || 0),
-      dQ = PK.curve(Qfrom, Qto, bend || 0);
+  // ...and withdraws: the line goes back to the branch point while the door closes behind it
+  function withdraws(k, at, dw) {
+    PK.drawOff(tl, own[k], at, dw, "power2.inOut", { to: "start" });
+    var dd = Math.max(0.14, dw - 0.04);
+    door(k, at + 0.04, false, dd);
+    return Math.max(at + dw, at + 0.04 + dd); // all still
+  }
+  var beadNow = ang(PDOCK, DOCK);
+  function carry(dP, dQ, at, dur, s0, s1, beadTo) {
     PK.travel(tl, cs.g, dP, at, dur, "power2.inOut");
     PK.travel(tl, W.priora.g, dQ, at, dur, "power2.inOut");
     PK.trail(tl, W.L.trails, dQ, at, dur, "power2.inOut");
     if (s0 !== s1) FT(cs.body, { scale: s0, svgOrigin: "0 0" }, { scale: s1, svgOrigin: "0 0", duration: dur, ease: "power2.inOut" }, at);
+    if (beadTo !== undefined && Math.abs(beadTo - beadNow) > 0.01) {
+      FT(W.priora.beadG, { rotation: beadNow }, { rotation: beadTo, svgOrigin: "0 0", duration: dur, ease: "power2.inOut" }, at);
+      beadNow = beadTo;
+    }
+    return at + dur;
   }
-  function beadTo(from, to, at, dur) {
-    FT(W.priora.beadG, { rotation: from }, { rotation: to, svgOrigin: "0 0", duration: dur, ease: "power2.inOut" }, at);
+  function cub(p0, c1, c2, p1) {
+    return "M" + pt(p0) + " C" + pt(c1) + " " + pt(c2) + " " + pt(p1);
+  }
+  // the same bend for Priora's path as for the packet's (it stays above the packet)
+  function cubQ(p0, c1, c2, p1, q0, q1) {
+    return cub(q0, add(c1, sub(q0, p0)), add(c2, sub(q1, p1)), q1);
   }
 
-  // ------------------------------------------------------------ 1. "carries": the loop lets go; Priora carries the packet to Mitigate
-  var tL = tm.lift;
-  if (dec) {
-    tl.set([dec.pre, dec.post, dec.chord].filter(Boolean), { opacity: 1 }, tL);
-    FT(W.decision, { opacity: 1 }, { opacity: 0, duration: 0.24, ease: "power1.inOut" }, tL + 0.02);
-  }
-  carry(DOCK, PM, PDOCK, QM, tL, tm.goM, 1, BIG, -24);
-  beadTo(beadDock, ang(QM, PM), tL, tm.goM);
-  opens("mitigate", tm.openM);
-  // Mitigate proposes: the Thermal check piece leaves its shelf (its slot stays empty) and seats in part of the gap, dashed
+  // ------------------------------------------------------------ the timetable (one mover at a time)
+  var tm = {
+    letGo: T0, letGoD: 0.25,
+    c1: 78.12, c1D: 0.45, // to Mitigate, lands 78.57 (the camera is landing too: it follows the packet up)
+    dwM: 0.12, flyM: 0.32,
+    c2D: 0.5, // to Transfer
+    dwT: 0.08, flyT: 0.22,
+    c3D: 0.6, // up to Retain
+    dwR: 0.18, flyR: 0.24,
+    c4D: 0.6, // back to the dock
+    control: PK.word("L13", "control"), // 82.64
+  };
+
+  // ------------------------------------------------------------ 0. the loop lets go: it unwinds to its tip; the line steps aside to the bay
+  if (loopOld) FT(loopOld, { drawSVG: "0% 100%" }, { drawSVG: "0% 0%", duration: tm.letGoD, ease: "power2.inOut" }, tm.letGo);
+  FT(hl, { attr: { d: hlA } }, { attr: { d: hlB }, duration: tm.letGoD, ease: "power2.inOut" }, tm.letGo);
+  if (W.decisionDot) FT(W.decisionDot, { opacity: 1 }, { opacity: 0, duration: 0.12, ease: "none" }, tm.letGo);
+
+  // ------------------------------------------------------------ 1. Mitigate: the Thermal check piece seats in part of the gap
+  var pM = PP.mitigate,
+    qM = PQ.mitigate;
+  var dPM = cub(DOCK, [1200, 640], [1205, 540], pM);
+  var tL = carry(dPM, cub(PDOCK, [1180, 540], [1222, 440], qM), tm.c1, tm.c1D, 1, BIG, 90);
+  var dM = DOOR.mitigate;
+  var tOpen = opens("mitigate", tL, tm.dwM);
   var shelfC = centreAt(th.g, T0);
   try {
     var pb = th.piece.getBBox(),
-      gp = xy(th.g, T0);
-    shelfC = [gp[0] + pb.x + pb.width / 2, gp[1] + pb.y + pb.height / 2];
+      gq = xy(th.g, T0);
+    shelfC = [gq[0] + pb.x + pb.width / 2, gq[1] + pb.y + pb.height / 2];
   } catch (e) {}
   var kShelf = 1;
   try {
@@ -503,105 +565,123 @@ PK.section("s7-cooperate", 78, 84, function (tl, W, ctx, S) {
     pp.forEach(function (q) {
       rr += Math.hypot(q[0], q[1]);
     });
-    kShelf = Math.max(0.5, Math.min(1, rr / pp.length / RV));
+    kShelf = Math.max(0.5, Math.min(1, rr / pp.length / (gR * K)));
   } catch (e) {}
   var thStart = sub(shelfC, mul(thMidL, K * kShelf));
-  var thPath = "M" + pt(thStart) + " C" + f(thStart[0] - 70) + " " + f(thStart[1]) + " " + f(dM[0] + 50) + " " + f(dM[1] - 10 - thOff[1]) + " " + pt([dM[0] - 4 - thOff[0], dM[1] - 10 - thOff[1]]) +
-    " C" + f(dM[0] - 30 - thOff[0]) + " " + f(dM[1] - 10 - thOff[1]) + " " + f(PM[0] + 40) + " " + f(PM[1]) + " " + pt(PM);
-  FT(th.g, { opacity: 1 }, { opacity: 0.28, duration: 0.18, ease: "none" }, tm.thermal);
-  FT(thFly.sc, { scale: K * kShelf, svgOrigin: "0 0" }, { scale: K, svgOrigin: "0 0", duration: tm.thermalD, ease: "power2.inOut" }, tm.thermal);
-  tl.set(thFly.g, { x: thStart[0], y: thStart[1] }, tm.thermal - 0.01);
-  FT(thFly.g, { opacity: 0 }, { opacity: 1, duration: 0.06, ease: "none" }, tm.thermal);
-  PK.travel(tl, thFly.g, thPath, tm.thermal, tm.thermalD, "power3.out");
-  PK.trail(tl, W.L.trails, shiftPath(thPath, thOff), tm.thermal, tm.thermalD, "power3.out");
-  var tSeatM = tm.thermal + tm.thermalD;
-  tl.set(thFly.g, { opacity: 0 }, tSeatM);
-  tl.set(seatTh.g, { opacity: 1 }, tSeatM);
-  PK.sfx("compare", tSeatM, { gain_db: -9, pan: 0.45, room: "mitigate" });
-  var cM = choice("Mitigate part", PM, tSeatM - 0.02, tm.leaveM);
+  var thDoor = sub([dM[0] - 2, dM[1] - 20], thOff); // through the open doorway, above the owner's line
+  var thPath = "M" + pt(thStart) + " C" + f(thStart[0] - 90) + " " + f(thStart[1] - 4) + " " + f(thDoor[0] + 80) + " " + f(thDoor[1]) + " " + pt(thDoor) +
+    " C" + f(thDoor[0] - 30) + " " + f(thDoor[1]) + " " + f(pM[0] + 30) + " " + f(pM[1]) + " " + pt(pM);
+  var tFly = tOpen - 0.06; // the answer comes as the door finishes opening
+  FT(th.g, { opacity: 1 }, { opacity: 0.28, duration: 0.15, ease: "none" }, tFly);
+  FT(thFly.sc, { scale: K * kShelf, svgOrigin: "0 0" }, { scale: K, svgOrigin: "0 0", duration: tm.flyM, ease: "power2.inOut" }, tFly);
+  tl.set(thFly.g, { x: thStart[0], y: thStart[1] }, tFly - 0.01);
+  FT(thFly.g, { opacity: 0 }, { opacity: 1, duration: 0.05, ease: "none" }, tFly);
+  PK.travel(tl, thFly.g, thPath, tFly, tm.flyM, "power3.out");
+  var tSeat = tFly + tm.flyM;
+  tl.set(thFly.g, { opacity: 0 }, tSeat);
+  tl.set(seatTh.g, { opacity: 1 }, tSeat);
+  PK.sfx("compare", tSeat, { gain_db: -9, pan: 0.45, room: "mitigate" });
+  choice("Mitigate part", tSeat);
+  var tGo = withdraws("mitigate", tSeat + 0.06, 0.16) + 0.02;
 
-  // ------------------------------------------------------------ 2. Retain: up to the Retain door; a dashed clamp bar bridges the rest
-  withdraws("mitigate", tm.leaveM);
-  carry(PM, PR, QM, QR, tm.leaveM, tm.goR, BIG, BIG, 0);
-  beadTo(ang(QM, PM), ang(QR, PR), tm.leaveM, tm.goR);
-  opens("retain", tm.openR);
+  // ------------------------------------------------------------ 2. Transfer: down to the bay beside its door; a dashed "?" seats on the ring
+  var pT = PP.transfer,
+    qT = PQ.transfer;
+  var c1T = [1200, 530],
+    c2T = [1200, 640];
+  tL = carry(cub(pM, c1T, c2T, pT), cubQ(pM, c1T, c2T, pT, qM, qT), tGo, tm.c2D, BIG, BIG);
+  tOpen = opens("transfer", tL, tm.dwT);
+  var qSeat = add(pT, qOff);
+  var qFrom = [DOOR.transfer[0] + 36, qSeat[1] - 6];
+  tFly = tOpen - 0.06;
+  tl.set(qFly.g, { x: qFrom[0], y: qFrom[1] }, tFly - 0.01);
+  FT(qFly.g, { opacity: 0 }, { opacity: 1, duration: 0.08, ease: "none" }, tFly);
+  FT(qFly.sc, { scale: BIG * 0.6, svgOrigin: "0 0" }, { scale: BIG, svgOrigin: "0 0", duration: tm.flyT, ease: "power2.out" }, tFly);
+  PK.travel(tl, qFly.g, "M" + pt(qFrom) + " C" + f(qFrom[0] - 20) + " " + f(qFrom[1]) + " " + f(qSeat[0] + 24) + " " + f(qSeat[1]) + " " + pt(qSeat), tFly, tm.flyT, "power3.out");
+  tSeat = tFly + tm.flyT;
+  tl.set(qFly.g, { opacity: 0 }, tSeat);
+  tl.set(seatQ.g, { opacity: 1 }, tSeat);
+  PK.sfx("return", tSeat, { gain_db: -9, pan: 0.45, room: "transfer" });
+  choice("What would it cost?", tSeat);
+  tGo = withdraws("transfer", tSeat + 0.06, 0.12) + 0.02;
+
+  // ------------------------------------------------------------ 3. Retain: up to its door; a dashed clamp bar bridges the rest of the gap
+  var pR = PP.retain,
+    qR = PQ.retain;
+  var c1R = [1196, 610],
+    c2R = [1196, 380];
+  tL = carry(cub(pT, c1R, c2R, pR), cubQ(pT, c1R, c2R, pR, qT, qR), tGo, tm.c3D, BIG, BIG);
+  tOpen = opens("retain", tL, tm.dwR);
+  var dR = DOOR.retain;
   var pol = ra.retain[0];
   var polC = xy(pol.g, T0);
-  var barTarget = PR;
-  var barStart = sub([polC[0] - 6, polC[1] - 22], barOff);
-  var barPath = "M" + pt(barStart) + " C" + f(barStart[0] - 40) + " " + f(barStart[1] - 30) + " " + f(dR[0] + 40 - barOff[0]) + " " + f(dR[1] - 10 - barOff[1]) + " " + pt([dR[0] - 4 - barOff[0], dR[1] - 10 - barOff[1]]) +
-    " C" + f(dR[0] - 34 - barOff[0]) + " " + f(dR[1] - 10 - barOff[1]) + " " + f(barTarget[0] + 40) + " " + f(barTarget[1] - 20) + " " + pt(barTarget);
-  tl.set(barFly.g, { x: barStart[0], y: barStart[1] }, tm.bar - 0.01);
-  FT(barFly.g, { opacity: 0 }, { opacity: 1, duration: 0.08, ease: "none" }, tm.bar);
-  FT(pol.body, { scale: 1, svgOrigin: "0 0" }, { keyframes: [{ scale: 1.12, duration: 0.1 }, { scale: 1, duration: 0.22, ease: "power2.inOut" }], svgOrigin: "0 0" }, tm.bar - 0.06);
-  PK.travel(tl, barFly.g, barPath, tm.bar, tm.barD, "power3.out");
-  var tSeatR = tm.bar + tm.barD;
-  tl.set(barFly.g, { opacity: 0 }, tSeatR);
-  tl.set(seatBar.g, { opacity: 1 }, tSeatR);
-  PK.sfx("lock", tSeatR, { gain_db: -9, pan: 0.45, room: "retain" });
-  var cR = choice("Keep the rest", PR, tSeatR - 0.02, tm.leaveR);
+  var barStart = sub([polC[0] - 8, polC[1] - 20], barOff);
+  var barDoor = sub([dR[0] - 2, dR[1] - 34], barOff); // high in the doorway, above the owner's line
+  var barPath = "M" + pt(barStart) + " C" + f(barStart[0] - 40) + " " + f(barStart[1] - 30) + " " + f(barDoor[0] + 40) + " " + f(barDoor[1]) + " " + pt(barDoor) +
+    " C" + f(barDoor[0] - 24) + " " + f(barDoor[1]) + " " + f(pR[0] + 24) + " " + f(pR[1]) + " " + pt(pR);
+  tFly = tOpen - 0.06;
+  tl.set(barFly.g, { x: barStart[0], y: barStart[1] }, tFly - 0.01);
+  FT(barFly.g, { opacity: 0 }, { opacity: 1, duration: 0.06, ease: "none" }, tFly);
+  PK.travel(tl, barFly.g, barPath, tFly, tm.flyR, "power3.out");
+  tSeat = tFly + tm.flyR;
+  tl.set(barFly.g, { opacity: 0 }, tSeat);
+  tl.set(seatBar.g, { opacity: 1 }, tSeat);
+  PK.sfx("lock", tSeat, { gain_db: -9, pan: 0.45, room: "retain" });
+  choice("Keep the rest", tSeat);
+  tGo = withdraws("retain", tSeat + 0.06, 0.18) + 0.02;
 
-  // ------------------------------------------------------------ 3. Transfer: back down to the dock beside the Transfer door; the carriers answer "?"
-  withdraws("retain", tm.leaveR);
-  carry(PR, PT, QR, QT, tm.leaveR, tm.goT, BIG, 1, -40);
-  beadTo(ang(QR, PR), ang(QT, PT), tm.leaveR, tm.goT);
-  opens("transfer", tm.openT);
-  ra.transfer.forEach(function (h, i) {
-    FT(h.body, { scale: 1, svgOrigin: "0 0" }, { keyframes: [{ scale: 1.1, duration: 0.1 }, { scale: 1, duration: 0.22, ease: "power2.inOut" }], svgOrigin: "0 0" }, tm.ask - 0.24 + i * 0.04);
-  });
-  var BRAD = PK.cam.px(80, 11);
-  var qBead = PK.g(W.L.labels);
-  PK.el("circle", { cx: 0, cy: 0, r: f(BRAD), fill: C.paper, stroke: C.rust, "stroke-width": PK.cam.px(80, 1.6), "stroke-dasharray": f(PK.cam.px(80, 3.6)) + " " + f(PK.cam.px(80, 2.6)) }, qBead);
-  crisp(PK.text(qBead, "?", 0, LS * 0.36, { font: "mono", size: LS, fill: C.rust, anchor: "middle", upper: false, track: 0 }));
-  gsap.set(qBead, { opacity: 0 });
-  // it comes out to the open Transfer doorway, below the owner's line, beside the packet (the human's line runs between)
-  var qFrom = [dT[0] + 64, dT[1] + 16],
-    qTo = [dT[0] + 2, dT[1] + 16];
-  var qPath = "M" + pt(qFrom) + " L" + pt(qTo);
-  tl.set(qBead, { x: qFrom[0], y: qFrom[1] }, tm.ask - 0.01);
-  FT(qBead, { opacity: 0, scale: 0.6, svgOrigin: "0 0" }, { opacity: 1, scale: 1, svgOrigin: "0 0", duration: 0.12, ease: "power2.out" }, tm.ask);
-  PK.travel(tl, qBead, qPath, tm.ask, tm.askD, "power3.out");
-  var tAns = tm.ask + tm.askD;
-  PK.sfx("return", tAns, { gain_db: -9, pan: 0.4, room: "transfer" });
-  // the owner's question sits above the packet (the owner is to its left), its leader to the packet's top
-  var qx = PT[0] + 18,
-    qy = PT[1] - 34 - 32 - LS * 1.45; // the decision will sit below it, nearest the packet
-  var lQ = mono("What would it cost?", qx, qy, { fill: C.ink, anchor: "end" });
-  var ldQ = PK.el("path", { d: "M" + f(qx - 6) + " " + f(qy + 6) + " V" + f(PT[1] - 34 - 4), fill: "none", stroke: C.ink, "stroke-width": 1, "stroke-linecap": "round" }, W.L.labels);
-  gsap.set(ldQ, { drawSVG: "0% 0%" });
-  labelIn(lQ, tAns - 0.02);
-  PK.drawOn(tl, ldQ, tAns - 0.02, 0.2, "power2.out", { later: true });
+  // ------------------------------------------------------------ 4. back to the dock (the packet returns to its size beside the owner)
+  var c1D = [1196, 380],
+    c2D = [1190, 620];
+  var tDock = carry(cub(pR, c1D, c2D, CE), cub(qR, add(c1D, sub(qR, pR)), [QD[0] - 30, QD[1] - 40], QD), tGo, tm.c4D, BIG, 1, ang(QD, CE));
+  // the list and its leader keep their place on the shrinking ring
+  FT(lst, { x: 0, y: 0 }, { x: S1[0] - SB[0], y: S1[1] - SB[1], duration: tm.c4D, ease: "power2.inOut" }, tGo);
 
-  // ------------------------------------------------------------ 4. "control": the black line closes its loop round the packet again; the proposals turn solid
-  withdraws("transfer", tm.decide);
-  if (dec) {
-    tl.set(dec.loop, { opacity: 1 }, tm.decide);
-    FT(dec.loop, { drawSVG: "0% 0%" }, { drawSVG: "0% 100%", duration: tm.decideD, ease: "power2.inOut" }, tm.decide);
-    FT(dec.chord, { opacity: 1 }, { opacity: 0, duration: 0.22, ease: "power1.in" }, tm.decide + 0.1);
-    // seamless swap back to the whole line once the loop is closed
-    tl.set(W.decision, { opacity: 1 }, tSolid);
-    tl.set([dec.pre, dec.post, dec.loop].filter(Boolean), { opacity: 0 }, tSolid);
-  }
-  PK.sfx("decision", tm.decide, { gain_db: -4, pan: 0.3, dur: tm.decideD });
-  FT(ldQ, { opacity: 1 }, { opacity: 0, duration: 0.2, ease: "none" }, tm.decide);
-  // the proposals turn solid, the question has had its answer; one soft resolve pulse
-  [seatTh, seatBar].forEach(function (p) {
+  // ------------------------------------------------------------ 5. "control": the line slides in to the packet and closes its loop round it
+  var tLoop = tDock; // about 82.3
+  FT(hl, { attr: { d: hlB } }, { attr: { d: hlC }, duration: 0.14, ease: "power2.inOut" }, tLoop);
+  var tClose = Math.max(tm.control + 0.06, tLoop + 0.34);
+  FT(arcTop, { drawSVG: "0% 0%" }, { drawSVG: "0% 100%", duration: tClose - (tLoop + 0.04), ease: "power2.inOut" }, tLoop + 0.04);
+  PK.sfx("decision", tLoop, { gain_db: -4, pan: 0.3, dur: tClose - tLoop });
+  // only now the proposals turn solid, with one soft pulse
+  var tSolid = tClose;
+  [seatTh, seatBar, seatQ].forEach(function (p) {
     FT(p.solid, { opacity: 0 }, { opacity: 1, duration: 0.16, ease: "none" }, tSolid);
     FT(p.prop, { opacity: 1 }, { opacity: 0, duration: 0.16, ease: "none" }, tSolid);
   });
-  FT(qBead, { opacity: 1 }, { opacity: 0, duration: 0.2, ease: "power1.in" }, tSolid);
-  FT(cs.body, { scale: 1 }, { keyframes: [{ scale: 1.06, duration: 0.12, ease: "power1.out" }, { scale: 1, duration: 0.18, ease: "power2.inOut" }], svgOrigin: "0 0" }, tSolid);
-  PK.sfx("resolve", tSolid, { gain_db: -12, pan: 0.3 });
-  var lD = mono("Risk owner decides", qx, qy + LS * 1.45, { fill: C.ink, anchor: "end" });
-  labelIn(lD, tSolid);
+  FT([seatTh.g, seatBar.g], { scale: 1 }, { keyframes: [{ scale: 1.08, duration: 0.12, ease: "power1.out" }, { scale: 1, duration: 0.2, ease: "power2.inOut" }], svgOrigin: "0 0" }, tSolid);
+  FT(seatQ.s, { scale: 1 }, { keyframes: [{ scale: 1.12, duration: 0.12, ease: "power1.out" }, { scale: 1, duration: 0.2, ease: "power2.inOut" }], svgOrigin: "0 0" }, tSolid);
+  PK.sfx("resolve", tSolid + 0.02, { gain_db: -12, pan: 0.3 });
+  // RISK OWNER DECIDES: DECIDES prints after the owner's name under the desk (away from the list, across the loop)
+  var oLab = W.real.labels.owner;
+  ["worker", "site", "owner"].forEach(function (k) {
+    if (W.real.labels[k]) crisp(W.real.labels[k]);
+  });
+  var fsBuild = parseFloat((/font-size:\s*([\d.]+)px/.exec(oLab.getAttribute("style") || "") || [0, 9])[1]);
+  var fsNow = parseFloat(valAt(oLab, "fontSize", tSolid)) || fsBuild;
+  var wBuild = 0;
+  try {
+    wBuild = oLab.getComputedTextLength();
+  } catch (e) {}
+  if (!(wBuild > 0)) wBuild = PK.measure ? PK.measure("RISK OWNER", "mono500", fsBuild, 0.12) : fsBuild * 7.2;
+  var oX = parseFloat(oLab.getAttribute("x")) || G.owner[0],
+    oY = parseFloat(oLab.getAttribute("y")) || G.realLabelY;
+  var decK = wBuild / fsBuild / 2 + 0.72; // DECIDES starts this many font sizes right of the name's centre (one word space)
+  var lDec = crisp(PK.text(W.L.real, "Decides", oX + decK * fsNow, oY, { font: "mono", size: fsNow, fill: C.ink, anchor: "start" }));
+  gsap.set(lDec, { opacity: 0 });
+  FT(lDec, { opacity: 0, y: 3 }, { opacity: 1, y: 0, duration: 0.3, ease: "power2.out" }, tSolid + 0.04);
 
   W.coop = {
-    dec: dec,
-    packetEnd: PT,
-    prioraEnd: QT,
-    beadEnd: ang(QT, PT),
+    hl: hl,
+    hlC: hlC,
+    arcTop: arcTop,
+    loop: { c: CE, r: RL, J: J, E: E },
+    packetEnd: CE,
+    prioraEnd: QD,
+    beadEnd: ang(QD, CE),
     packetScale: 1,
-    labels: { done: [], late: [lQ, lD] },
+    list: lst,
+    decides: { el: lDec, label: oLab, k: decK, x: oX, fs: fsNow },
     shelf: th.g,
     branchPoint: BR0,
   };
