@@ -1,7 +1,7 @@
 # Priora — Real work. Explicit decisions.
-## A detailed storyboard for a 90-second motion film
+## A detailed storyboard for a motion film of about 100 seconds
 
-**Format:** 1920 × 1080, 30 frames per second, 90 seconds.  
+**Format:** 1920 × 1080, 30 frames per second, 99.6 seconds (2988 frames).  
 **Character:** A moving illustration on warm paper. Precise, tactile and quietly expressive.  
 **Narration:** A calm British voice, conversational and unhurried.  
 **Story:** A worker describes a repair. Priora assembles the relevant agents, checks the conditions and brings a deviation to the person responsible. Three decision rooms explore what can be retained, mitigated or transferred. The human makes the decision.
@@ -375,7 +375,7 @@ The separating arc produces a dry, soft tick. The music leaves a small unresolve
 ---
 
 ## Sequence 6 — Three decision rooms
-**0:57–1:18 · 630 frames · F1710–2339**
+**0:57–1:19 · 660 frames · F1710–2369**
 
 The camera moves right and slightly upwards.
 
@@ -402,7 +402,7 @@ Transfer carries:
 The packet remains the same object, its gap still visible.
 
 ### Retain — a deliberate acceptance
-**0:57–1:04 · 210 frames**
+**0:57–1:05 · 239 frames · F1710–1948**
 
 The camera approaches Retain.
 
@@ -413,10 +413,6 @@ Priora stops short. Its bead turns towards the doorway, then towards the risk ow
 A short statement appears:
 
 **AN AGENT CANNOT CHOOSE IT**
-
-Beside the doorway, a small grey clock arc completes a turn. The threshold remains closed.
-
-**NO ANSWER DOES NOT CHOOSE IT**
 
 Then the black line from the risk owner reaches the entrance. It opens the threshold and holds the passage clear.
 
@@ -442,7 +438,7 @@ The arrangement holds as a concise picture of an explicit retained risk.
 “Retain is never a default. Risk is kept on purpose, with its terms explicit.”
 
 ### Mitigate — compare ways to close the gap
-**1:04–1:11 · 210 frames**
+**1:05–1:12.4 · 224 frames · F1949–2172**
 
 The camera glides across the shared forecourt towards Mitigate. The retained-risk treatment falls away, returning the packet to its unresolved state. These are alternative paths being explained.
 
@@ -453,10 +449,6 @@ Inside, three safeguard glyphs rest in a neat horizontal arrangement. Their labe
 **Thermal check**  
 **Extend watch to 60 min**  
 **Move weld to workshop**
-
-Above them:
-
-**SUGGESTIONS FROM A REVIEWED LIBRARY**
 
 Each proposal has two small visual measures: a stack of discs for cost and an open clock arc for time. These indicate comparison without inventing numerical estimates.
 
@@ -483,7 +475,7 @@ The full ring is held briefly, then the proposal withdraws and returns to its pl
 “Mitigate compares safeguards, and checks whether the work is back inside.”
 
 ### Transfer — a simulated inquiry
-**1:11–1:18 · 210 frames**
+**1:12.4–1:19 · 197 frames · F2173–2369**
 
 The camera continues to Transfer.
 
@@ -524,7 +516,7 @@ The rooms share one sound palette. Retain has a slightly lower contact sound; Mi
 ---
 
 ## Sequence 7 — The rooms work together
-**1:18–1:24 · 180 frames · F2340–2519**
+**1:19–1:26.5 · 225 frames · F2370–2594**
 
 The camera widens to include all three chambers and the risk owner’s desk.
 
@@ -538,13 +530,11 @@ A small label joins the packet:
 
 At Transfer, a simulated inquiry returns a hollow question mark.
 
-**WHAT WOULD IT COST?**
-
 At Retain, a proposed coral bridge spans the remaining opening.
 
 **KEEP THE REST**
 
-At each threshold, the risk owner’s black line reaches the doorway before Priora crosses it. The gestures are economical and clear.
+The risk owner’s black line is drawn only once in this sequence, at the final close: the viewer learned the threshold rule in Sequence 6. Priora brings the packet to each doorway without crossing it, and each room’s proposal comes out to meet it there. The gestures are economical and clear.
 
 Priora returns to the desk with the packet and a short list of the explored options.
 
@@ -567,7 +557,7 @@ The travel is quicker here, but the final arrival pauses. The unresolved musical
 ---
 
 ## Sequence 8 — The whole system
-**1:24–1:30 · 180 frames · F2520–2699**
+**1:26.5–1:39.6 · 393 frames · F2595–2987**
 
 The camera withdraws smoothly to reveal the complete sheet.
 
@@ -595,12 +585,6 @@ Three short statements sit beside the structures they describe:
 **A CONFIGURABLE SITE PANEL**  
 **THREE DECISION ROOMS**
 
-At the lower edge, a smaller line reads:
-
-**FIRST: HOT WORK · POSSIBLY LATER: OTHER INSURED ACTIVITIES**
-
-One pale, dashed specialist glyph approaches an empty panel position, suggesting that another activity could require another configuration. It stays visibly provisional.
-
 The drawing then recedes in contrast. The people, rooms and routes remain faintly visible through the paper-like atmosphere.
 
 The final statement appears large and dark:
@@ -609,13 +593,13 @@ The final statement appears large and dark:
 into explicit risk decisions,  
 while the work happens.**
 
-The small welding spark remains visible for one last moment beneath the words.
+The small welding spark remains visible for one last moment beneath the words. After the voice ends, the statement holds for half a second in near silence.
 
-Over the final second and a half, the surrounding drawing and statement dissolve, leaving only:
+Over the next second and a half, the surrounding drawing and statement dissolve, leaving only:
 
 **Priora**
 
-Black type, centred on warm paper.
+Black type, centred on warm paper, held alone for a final second.
 
 **Narration**
 
