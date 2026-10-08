@@ -2,7 +2,8 @@
 # Render the Priora motion explainer and deliver the two MP4s.
 #
 # Usage (from anywhere):
-#   scripts/render-film.sh [--quality draft|looks|delivery] [--skip-audio] [--out DIR]
+#   scripts/render-film.sh [--quality draft|looks|delivery] [--crf N] [--skip-audio] [--out DIR]
+#   (default: delivery quality at CRF 14, so the paper grain survives the encode)
 #
 # 1. sound: extracts the picture's sound events and rebuilds the stems and masters (audio/build.py)
 # 2. picture: HyperFrames renders index.html (1920x1080, 30 fps, 2700 frames)
@@ -13,11 +14,13 @@ set -euo pipefail
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd -P)"
 cd "$ROOT"
 QUALITY=delivery
+CRF=14
 AUDIO=1
 OUT="$(cd "$ROOT/.." && pwd -P)"
 while [[ $# -gt 0 ]]; do
   case "$1" in
     --quality) QUALITY="$2"; shift 2 ;;
+    --crf) CRF="$2"; shift 2 ;;
     --skip-audio) AUDIO=0; shift ;;
     --out) OUT="$2"; shift 2 ;;
     *) echo "unknown option $1" >&2; exit 2 ;;
@@ -39,7 +42,7 @@ $HF lint
 
 echo "== 3. picture ($QUALITY)"
 PIC="renders/tmp/picture-$QUALITY.mp4"
-$HF render --quality "$QUALITY" --workers 2 --output "$PIC"
+$HF render --quality "$QUALITY" --crf "$CRF" --workers 2 --output "$PIC"
 
 echo "== 4. mux"
 FULL="$OUT/Priora Motion Explainer v1.mp4"
