@@ -1,5 +1,5 @@
 /*
-  s6-rooms (57 to 78 s): three decision rooms (cut 3).
+  s6-rooms (57 to 78 s): three decision rooms (cut 3b).
 
   The rooms open from the human's line only: the risk owner's black line runs from the
   packet loop to a branch point, fine dotted grey branches run to the three doors, and each
@@ -11,20 +11,23 @@
   packet is back at the dock and the loop closes round it again.
 
   Retain (59.2 to 66.1): Priora leads the packet to the closed door; its bead touches the
-  door, the door shakes and Priora recoils: AN AGENT CANNOT CHOOSE IT. A small dial runs out
-  outside the door and the door stays shut: NO ANSWER DOES NOT CHOOSE IT. The black line
-  (tagged RISK OWNER at its tip) holds the door open while the packet passes in; a rust bar
-  bridges the gap and the room's agents attach its terms: EXPOSURE, AUTHORITY, CONDITIONS,
-  EXPIRY. Kept state held; the packet comes back out.
-  Mitigate (66.1 to 71.3): three safeguards from a reviewed library are objects on a shelf,
+  door, the door shakes and Priora recoils: AN AGENT CANNOT CHOOSE IT (under Priora's bead).
+  A small dial above the waiting packet runs out and the door stays shut: NO ANSWER DOES NOT
+  CHOOSE IT (under the dial). The black line (RISK OWNER beside it, outside the room) holds the
+  door open while Priora steps up and the packet passes in; a rust bar bridges the gap and the
+  room's agents attach its terms: EXPOSURE, AUTHORITY, CONDITIONS, EXPIRY. Kept state held; the
+  packet comes back out.
+  Mitigate (66.1 to 71.55): three safeguards from a reviewed library are objects on a shelf,
   each carrying its own measures (rust-deep discs for cost, a grey clock arc for time). On
   "compares" each lifts in turn and its measures pulse. Two dashed previews are tried in the
   gap: THERMAL CHECK: PARTIAL (the rest of the gap stays open), EXTEND WATCH: FULL (the ring
-  joins), the verifier's corners land: BACK INSIDE. Nothing is applied; everything reverts.
-  Transfer (71.3 to 78.0): dashed, SIMULATED, NO INSURER ON PRIORA YET. Dashed copies of the
+  joins), the verifier's corners land: BACK INSIDE. Nothing is applied; everything reverts
+  (the two results stay written to 71.40 while the packet goes out and on toward Transfer).
+  Transfer (71.55 to 78.0): dashed, SIMULATED, NO INSURER ON PRIORA YET. Dashed copies of the
   gap go to three dashed SIM hexagons and out through the ports; hollow dashed beads come
   back along the threads and settle round the packet near the gap with plain words on short
-  leaders: ELIGIBILITY, TERMS, SAFEGUARDS, PRICE "?". Then the packet goes back to the dock.
+  leaders: ELIGIBILITY, TERMS, SAFEGUARDS, PRICE "?". Then the packet goes back to the dock,
+  carrying the answers with it; they fade as it arrives (77.85 to 78.0).
 
   Contract at 57.0 (from s5): tl.set below; W.decisionD, W.decisionTip, W.gap and
   W.gapTicks are read from W (a stand-in is built only if s5 has not provided them).
@@ -175,7 +178,7 @@ PK.section("s6-rooms", 57, 78, function (tl, W, ctx, S) {
   // Priora and the packet outside each door (Retain: Priora leads at the door, the packet behind)
   var PW = { retain: [1238, 326], mitigate: [1206, 440], transfer: PDOCK };
   var KW = { retain: [1162, 334], mitigate: [1180, 512], transfer: DOCK };
-  var PASIDE = [1206, 262]; // Retain: Priora steps up out of the packet's way
+  var PASIDE = [1264, 246]; // Retain: Priora steps straight up out of the packet's way
   var KIN_Y = { retain: 324, mitigate: 502, transfer: 692 }; // where the packet crosses the doorway
   var LINE_Y = { retain: 368, mitigate: 546, transfer: 648 }; // where the black line holds the doorway
   var IN = { retain: [1540, 330], mitigate: [1420, 512], transfer: [1420, 696] };
@@ -261,7 +264,7 @@ PK.section("s6-rooms", 57, 78, function (tl, W, ctx, S) {
   tl.set(RM.transfer.chip, { opacity: 0, scale: SC_OVER, svgOrigin: CHIP_O }, T0);
 
   // ============================================================ 57.7 to 59.2: three decision rooms open, from the human's line
-  if (W.ownerDecides) fadeOut(W.ownerDecides, 57.9, 0.3);
+  if (W.ownerDecides) fadeOut(W.ownerDecides, 57.3, 0.3); // gone by 57.6, before the Transfer walls draw where it sits
   var tThree = PK.word("L09", "three"); // 57.70
   // the trunk: from the loop's tip up to the branch point
   var trunk = (W.decisionTrunk = undrawn(
@@ -319,10 +322,28 @@ PK.section("s6-rooms", 57, 78, function (tl, W, ctx, S) {
   RK.forEach(function (k) {
     fadeIn([RM[k].leafA, RM[k].leafB, RM[k].jambs], tCh[k] + 0.3, 0.15);
   });
+  // when each chamber's top wall reaches its top right corner (the chip and the tags sit there)
+  var tCorner = {};
+  RK.forEach(function (k) {
+    var r = G.rooms[k],
+      rr = 14,
+      top = r.y + r.h / 2 - G.roomDoorGap / 2;
+    if (k === "transfer") {
+      // revealed by a circle growing from the door to r 520 over 0.45 s, power2.out
+      var q = Math.min(1, dist(DOOR.transfer, [r.x + r.w, r.y]) / 520);
+      tCorner[k] = tCh[k] + 0.45 * (1 - Math.sqrt(1 - q));
+    } else {
+      // drawn from the door with DrawSVG over 0.45 s, power2.out: the run up to the corner over the whole wall
+      var tmpC = PK.el("path", { d: "M" + r.x + " " + top + " V" + (r.y + rr) + " A" + rr + " " + rr + " 0 0 1 " + (r.x + rr) + " " + r.y + " H" + (r.x + r.w - rr) + " A" + rr + " " + rr + " 0 0 1 " + (r.x + r.w) + " " + (r.y + rr) }, W.L.routes);
+      var q2 = Math.min(1, tmpC.getTotalLength() / RM[k].walls.getTotalLength());
+      tmpC.remove();
+      tCorner[k] = tCh[k] + 0.45 * (1 - Math.sqrt(1 - q2));
+    }
+  });
   // (no separate sound for the chambers: they start drawing within two frames of the "reach" sound above)
   // SIMULATED appears with the dashed walls, DESIGN PROPOSAL with the other two; then the names
-  fadeIn(RM.transfer.chip, tCh.transfer, 0.2);
-  PK.sfx("simulated", tCh.transfer + 0.2, { gain_db: -10, pan: 0.6 });
+  fadeIn(RM.transfer.chip, tCorner.transfer, 0.2);
+  PK.sfx("simulated", tCorner.transfer + 0.05, { gain_db: -10, pan: 0.6 });
   W.roomTags = {};
   ["retain", "mitigate"].forEach(function (k) {
     var r = G.rooms[k];
@@ -331,7 +352,7 @@ PK.section("s6-rooms", 57, 78, function (tl, W, ctx, S) {
     PK.text(tag, "Design proposal", 1762, cy + 9.5 * 0.36, { font: "mono", size: 9.5, fill: INK2, anchor: "end", weight: 500 });
     gsap.set(tag, { opacity: 0 });
     tl.set(tag, { scale: SC_OVER, svgOrigin: "1762 " + cy }, T0);
-    fadeIn(tag, tCh[k] + 0.15, 0.25);
+    fadeIn(tag, tCorner[k], 0.25);
     tag.pkOrigin = "1762 " + cy;
     W.roomTags[k] = tag;
   });
@@ -487,7 +508,7 @@ PK.section("s6-rooms", 57, 78, function (tl, W, ctx, S) {
   }
   var where = { p: PDOCK, k: DOCK };
   // Priora and the packet travel outside the rooms, each on its own path (trails behind both)
-  function fly(pTo, kTo, at, dur, bendP, bendK, lagK) {
+  function fly(pTo, kTo, at, dur, bendP, bendK, lagK, silent) {
     var dP = PK.curve(where.p, pTo, bendP || 0),
       dK = PK.curve(where.k, kTo, bendK || 0);
     var lk = lagK || 0;
@@ -495,7 +516,7 @@ PK.section("s6-rooms", 57, 78, function (tl, W, ctx, S) {
     PK.travel(tl, cs.g, dK, at + lk, dur - lk, "power2.inOut");
     if (dist(where.p, pTo) > 150) PK.trail(tl, W.L.trails, dP, at, dur, "power2.inOut");
     if (dist(where.k, kTo) > 150) PK.trail(tl, W.L.trails, dK, at + lk, dur - lk, "power2.inOut");
-    PK.sfx("arrive", at + dur, { gain_db: -12, size: "case", pan: 0.35 });
+    if (!silent) PK.sfx("arrive", at + dur, { gain_db: -12, size: "case", pan: 0.35 });
     where = { p: pTo, k: kTo };
   }
   // a door opened wide: the leaves slide 44 units, and a paper knockout clears the wall between them
@@ -535,11 +556,20 @@ PK.section("s6-rooms", 57, 78, function (tl, W, ctx, S) {
     PK.trail(tl, W.L.trails, path, at, dur, "power3.out");
     PK.sfx("packet", at + dur, { gain_db: -9, pan: 0.6 });
   }
-  function packetOut(room, at, to) {
+  // the way out of a room; with o, every point is offset by -o (a path for something riding with the packet)
+  function outD(room, to, o) {
     var d = DOOR[room],
       inP = IN[room],
-      y = KIN_Y[room];
-    var path = "M" + pt(inP) + " C" + f(inP[0] - 80) + " " + f(inP[1]) + " " + f(d[0] + 70) + " " + f(y) + " " + f(d[0]) + " " + f(y) + " C" + f(d[0] - 60) + " " + f(y) + " " + f(to[0] + 50) + " " + f(to[1]) + " " + pt(to);
+      y = KIN_Y[room],
+      ox = o ? o[0] : 0,
+      oy = o ? o[1] : 0;
+    var P2 = function (x, yy) {
+      return f(x - ox) + " " + f(yy - oy);
+    };
+    return "M" + P2(inP[0], inP[1]) + " C" + P2(inP[0] - 80, inP[1]) + " " + P2(d[0] + 70, y) + " " + P2(d[0], y) + " C" + P2(d[0] - 60, y) + " " + P2(to[0] + 50, to[1]) + " " + P2(to[0], to[1]);
+  }
+  function packetOut(room, at, to) {
+    var path = outD(room, to);
     PK.travel(tl, cs.g, path, at, 0.5, "power2.inOut");
     PK.trail(tl, W.L.trails, path, at, 0.5, "power2.inOut");
     PK.sfx("return", at + 0.5, { gain_db: -10, pan: 0.45 });
@@ -548,6 +578,7 @@ PK.section("s6-rooms", 57, 78, function (tl, W, ctx, S) {
   // the risk owner's line runs along its branch into the doorway and holds the door open
   // it reaches the wall, the door slides open wide for it, and it enters the doorway (the door opens at tArr)
   function ownerHolds(room, at, dur, hold, tag) {
+    // tag: { x, y } where a plain RISK OWNER label sits beside the line, outside the room (right-aligned)
     var wallPc = f(own[room].pkWall) + "%";
     FT(own[room], { drawSVG: "0% 0%" }, { drawSVG: "0% " + wallPc, duration: dur, ease: "power2.inOut" }, at);
     var tArr = at + dur;
@@ -555,15 +586,9 @@ PK.section("s6-rooms", 57, 78, function (tl, W, ctx, S) {
     door(room, tArr, true, 0.3, true); // the decision sound is the door's sound here
     PK.sfx("decision", tArr, { gain_db: -4, pan: 0.5, part: "door" });
     if (tag) {
-      // the tag rides the tip into the doorway and goes back out with it
-      var tip = [1312, LINE_Y[room]];
-      var tg = PK.g(Llb);
-      mono(tg, "Risk owner", 0, LAB * 0.36, LAB, { fill: C.ink });
-      place(tg, [tip[0] + 6 - 26, tip[1]]);
-      hide(tg);
-      FT(tg, { x: tip[0] + 6 - 14 }, { x: tip[0] + 6, duration: 0.14, ease: "power2.out" }, tArr + 0.18);
-      fadeIn(tg, tArr + 0.18, 0.12, "none");
-      FT(tg, { x: tip[0] + 6 }, { x: tip[0] + 6 - 22, duration: 0.18, ease: "power2.in" }, tArr + hold);
+      // on while the line holds the door, gone before the line retracts past it
+      var tg = hide(mono(Llb, "Risk owner", tag.x, tag.y, LAB, { fill: C.ink, anchor: "end" }));
+      FT(tg, { opacity: 0, y: 2 }, { opacity: 1, y: 0, duration: 0.18, ease: "power2.out" }, tArr);
       fadeOut(tg, tArr + hold, 0.16, "none");
     }
     undraw(own[room], tArr + hold, 0.3, "power2.in", "start");
@@ -581,12 +606,13 @@ PK.section("s6-rooms", 57, 78, function (tl, W, ctx, S) {
 
   // ============================================================ RETAIN (camera 59.2 to 60.2)
   // the loop lets go as Priora lifts the packet off the dock; Priora leads, the packet follows
-  var tLift = 59.6;
-  loopLetsGo(tLift + 0.12); // the moment the packet itself leaves the dock (fly's lag below)
+  var tLift = 59.3; // with the camera (59.2 to 60.2), so the pair stays in frame
+  var LAG_R = 0.04;
+  loopLetsGo(tLift + LAG_R); // the moment the packet itself leaves the dock (fly's lag below)
   turnBead(0, tLift + 0.2, 0.5);
-  fly(PW.retain, KW.retain, tLift, 0.9, 34, -70, 0.12); // lands 60.5
+  fly(PW.retain, KW.retain, tLift, 0.9, 34, -25, LAG_R); // a shallow bend keeps the packet in frame; lands 60.2
   RA.retain.forEach(function (a) {
-    fadeIn(a.name, 60.2, 0.3);
+    fadeIn(a.name, 60.35, 0.3);
   });
   // "Retain is never a default": Priora leads the packet to the closed door; its bead touches it
   var tGo = 60.75,
@@ -609,13 +635,18 @@ PK.section("s6-rooms", 57, 78, function (tl, W, ctx, S) {
   move(P.g, pHit, pBack, tHit + 0.05, 0.35, "back.out(1.4)");
   move(cs.g, kHit, kBack, tHit + 0.05, 0.35, "back.out(1.4)");
   PK.sfx("reject", tHit, { gain_db: -3, pan: 0.35 });
-  var LX = 1268,
-    LY = 422; // the captions sit outside the door, under Priora and the packet, left of the branch
-  var lab1 = hide(mono(Llb, "An agent cannot choose it", LX, LY, LAB, { fill: INK2, anchor: "end" }));
+  // AN AGENT CANNOT CHOOSE IT: right-aligned to the door, directly under Priora's bead, clear of the
+  // packet; a paper knockout keeps the dotted branch from running through the words
+  var AX = 1294,
+    AY = 371;
+  var lab1 = hide(PK.g(Llb));
+  PK.el("rect", { x: BR[0] - 7, y: AY - LAB * 0.85, width: 14, height: LAB * 2.5, fill: C.paperGround }, lab1); // over the branch only
+  mono(lab1, "An agent", AX, AY, LAB, { fill: INK2, anchor: "end" });
+  mono(lab1, "cannot choose it", AX, AY + LAB * 1.45, LAB, { fill: INK2, anchor: "end" });
   FT(lab1, { opacity: 0, y: 2 }, { opacity: 1, y: 0, duration: 0.18, ease: "power2.out" }, tHit);
-  fadeOut(lab1, 62.1, 0.12);
-  // then no answer: a small dial outside the door, above the branch, runs out; the door stays shut
-  var DIAL = [1282, 284],
+  fadeOut(lab1, 62.0, 0.25);
+  // then no answer: a small dial outside the door, above the waiting packet, runs out; the door stays shut
+  var DIAL = [1166, 234],
     DR = 7.9;
   var dial = hide(PK.g(Llb));
   PK.el("circle", { cx: DIAL[0], cy: DIAL[1], r: DR, fill: C.paper, stroke: C.grey, "stroke-width": 1 }, dial);
@@ -624,15 +655,18 @@ PK.section("s6-rooms", 57, 78, function (tl, W, ctx, S) {
   FT(dialRun, { drawSVG: "0% 100%" }, { drawSVG: "100% 100%", duration: 0.75, ease: "none" }, 62.0);
   fadeOut(dial, 62.8, 0.2, "none");
   PK.sfx("request", 62.0, { gain_db: -14, dur: 0.75, pan: 0.3, variant: "timer" });
+  // NO ANSWER DOES NOT CHOOSE IT: its own slot, under the dial
   var lab2 = hide(PK.g(Llb));
-  mono(lab2, "No answer", LX, LY - LAB * 1.45, LAB, { fill: INK2, anchor: "end" });
-  mono(lab2, "does not choose it", LX, LY, LAB, { fill: INK2, anchor: "end" });
-  FT(lab2, { opacity: 0, y: 2 }, { opacity: 1, y: 0, duration: 0.18, ease: "power2.out" }, 62.2);
-  fadeOut(lab2, 63.45, 0.15);
+  var BY = DIAL[1] + DR + 4 + LAB;
+  mono(lab2, "No answer", DIAL[0], BY, LAB, { fill: INK2, anchor: "middle" });
+  mono(lab2, "does not choose it", DIAL[0], BY + LAB * 1.45, LAB, { fill: INK2, anchor: "middle" });
+  FT(lab2, { opacity: 0, y: 2 }, { opacity: 1, y: 0, duration: 0.2, ease: "power2.out" }, 62.25);
+  fadeOut(lab2, 63.45, 0.2);
   // the pair settles back off the door, clear of the black line's way
   // "Risk is kept on purpose": the risk owner's line holds the door open; the packet passes in beside it
   var tRisk = PK.word("L10b", "risk"); // 62.60
-  var tArrR = ownerHolds("retain", tRisk, 0.35, 1.0, true); // at the door 62.95, holds the doorway to 63.95
+  // the RISK OWNER tag sits outside the room, beside the line just under its curve (far from the agents)
+  var tArrR = ownerHolds("retain", tRisk, 0.35, 1.0, { x: BR[0] - 8, y: LINE_Y.retain + 22 + 14 }); // at the door 62.95, holds to 63.95
   move(P.g, pBack, PASIDE, tArrR - 0.05, 0.4, "power2.inOut"); // Priora steps up out of the packet's way
   turnBead(ang(PASIDE, DOOR.retain), tArrR - 0.05, 0.4);
   where = { p: PASIDE, k: kBack };
@@ -682,7 +716,7 @@ PK.section("s6-rooms", 57, 78, function (tl, W, ctx, S) {
   packetOut("retain", tExitR + 0.15, KW.retain); // 65.6 to 66.1
   door("retain", tExitR + 0.66, false);
   RA.retain.forEach(function (a) {
-    fadeOut(a.name, tExitR + 0.3, 0.3); // (from the 35 percent they were dimmed to)
+    fadeTo(a.name, 0.35, 0, tExitR + 0.3, 0.3); // from the 35 percent they were dimmed to
   });
 
   // ============================================================ MITIGATE (camera 66.1 to 67.0)
@@ -748,12 +782,12 @@ PK.section("s6-rooms", 57, 78, function (tl, W, ctx, S) {
   var SY1 = cM[1] + CO + 13.5, // result labels sit under the brackets
     SY2 = SY1 + LAB * 1.7;
   // Thermal check: part of the gap; the rest of the gap stays open, with its tick
-  var tTh = 68.0;
-  var ghTh = tryIn("thermal", tTh, 0.45); // seats 68.45
+  var tTh = 67.97; // (after its own compare lift has settled at 67.86)
+  var ghTh = tryIn("thermal", tTh, 0.45); // seats 68.42
   var labP = hide(mono(Llb, SG_DEF.thermal.label, cM[0], SY1, LAB, { anchor: "middle" }));
   FT(labP, { opacity: 0, y: 2 }, { opacity: 1, y: 0, duration: 0.15, ease: "power2.out" }, tTh + 0.45);
-  fadeOut(labP, 69.5, 0.2);
-  tryOut("thermal", ghTh, 69.5, 0.35);
+  fadeOut(labP, 69.62, 0.18); // held 1.2 s, cleared before the next preview seats
+  tryOut("thermal", ghTh, 69.6, 0.35);
   // Extend watch: all of it; the gap ticks give way, the ring joins with one pulse
   var tW = 69.6;
   var ghW = tryIn("watch", tW, 0.42); // seats 70.02
@@ -780,23 +814,26 @@ PK.section("s6-rooms", 57, 78, function (tl, W, ctx, S) {
   PK.sfx("resolve", tBack, { gain_db: -5, pan: 0.5 });
   var labB = hide(mono(Llb, "Back inside", cM[0], SY2, LAB, { anchor: "middle" }));
   FT(labB, { opacity: 0, y: 2 }, { opacity: 1, y: 0, duration: 0.15, ease: "power2.out" }, tBack);
-  // nothing is applied: the preview goes back to its piece, the gap opens again, the packet goes out
-  var tRev = 70.8;
-  fadeOut([labF, labB, prev, cornH.g, tick], tRev, 0.28);
+  // nothing is applied: the preview goes back to its piece and the gap opens again; the results stay
+  // written to 71.40 while the packet goes out (71.0 to 71.5) and on into the camera's move to Transfer
+  var tRev = 70.55;
+  fadeOut([prev, cornH.g, tick], tRev, 0.28);
   tryOut("watch", ghW, tRev, 0.35);
   fadeIn(gapTicks, tRev + 0.2, 0.15, "none");
   FT([eng.body, verifier.body], { rotation: function (i) { return i === 0 ? engTurn : 45; }, svgOrigin: "0 0" }, { rotation: 0, svgOrigin: "0 0", duration: 0.4, ease: "power2.inOut" }, tRev);
-  door("mitigate", tRev - 0.05, true);
-  packetOut("mitigate", tRev, KW.mitigate); // 70.8 to 71.3
-  door("mitigate", tRev + 0.5, false);
-  fadeOut([LIB].concat(RA.mitigate.map(function (a) { return a.name; }), SG_KEYS.map(function (k) { return W.safeguards[k].name; })), 71.3, 0.3);
+  var tOutM = 71.0;
+  door("mitigate", tOutM - 0.05, true);
+  packetOut("mitigate", tOutM, KW.mitigate); // 71.0 to 71.5
+  door("mitigate", tOutM + 0.5, false);
+  fadeOut([LIB].concat(RA.mitigate.map(function (a) { return a.name; }), SG_KEYS.map(function (k) { return W.safeguards[k].name; })), 71.15, 0.3);
+  fadeOut([labF, labB], 71.4, 0.25);
 
-  // ============================================================ TRANSFER (camera 71.3 to 72.2)
-  var tFlyT = 71.32;
+  // ============================================================ TRANSFER (camera 71.55 to 72.4)
+  var tFlyT = 71.44;
   turnBead(ang(PDOCK, DOOR.transfer), tFlyT, 0.5);
-  fly(PDOCK, DOCK, tFlyT, 0.82, 0, 0, 0.06); // a follow move back down beside the Transfer door, lands 72.14
+  fly(PDOCK, DOCK, tFlyT, 0.96, 0, 0, 0.06, true); // a follow move: the packet runs on from the door (71.5) down to the dock, 72.4 (no sound: the line's door sound follows at 72.5)
   RA.transfer.forEach(function (a) {
-    fadeIn(a.name, 72.2, 0.3);
+    fadeIn(a.name, 72.3, 0.3);
   });
   var tArrT = ownerHolds("transfer", PK.word("L12", "transfer") + 0.0, 0.25, 1.0, false); // at the door 72.5, holds to 73.5
   var tInT = tArrT + 0.2;
@@ -848,16 +885,19 @@ PK.section("s6-rooms", 57, 78, function (tl, W, ctx, S) {
     { text: "Price", hex: 1, a: 25, land: PK.word("L12", "price") }, // 76.55
   ];
   var answerEls = [askG, noIns];
+  // the answers ride with the packet when it leaves (a group that follows the packet's way out)
+  var ride = PK.g(Llb);
+  gsap.set(ride, { x: 0, y: 0 });
   ANS.forEach(function (A) {
     var price = A.text === "Price";
     var y = HEX_Y[A.hex];
-    var seat = PK.polar(cT[0], cT[1], PK_R + 6, A.a);
+    var seat = PK.polar(cT[0], cT[1], PK_R + (price ? 8 : 6), A.a);
     var back =
       "M" + f(HEX_X - HEX_R) + " " + y + " L1620 " + y + " Q1606 " + y + " 1606 " + f(y - 14) + " L1606 632 C1580 604 " + f(gapTop[0] + 4) + " " + f(gapTop[1] - 46) + " " + pt(gapTop) +
       " Q" + pt(PK.polar(cT[0], cT[1], PK_R + 10, (270 + A.a) / 2 + (A.a < 90 ? 180 : 0))) + " " + pt(seat);
-    var bh = holder(Llb);
-    PK.el("circle", { cx: 0, cy: 0, r: price ? 5.4 : 3.3, fill: C.paper, stroke: C.rust, "stroke-width": 1, "stroke-dasharray": price ? "1.9 1.3" : "1.5 1.1" }, bh.s);
-    if (price) PK.text(bh.s, "?", 0, LAB * 0.36, { font: "mono", size: LAB, fill: C.rust, anchor: "middle", weight: 600, upper: false, track: 0 });
+    var bh = holder(ride);
+    PK.el("circle", { cx: 0, cy: 0, r: price ? 6.5 : 3.3, fill: C.paper, stroke: C.rust, "stroke-width": 1, "stroke-dasharray": price ? "2.1 1.4" : "1.5 1.1" }, bh.s);
+    if (price) PK.text(bh.s, "?", 0, LAB * 1.15 * 0.36, { font: "mono", size: LAB * 1.15, fill: C.rust, anchor: "middle", weight: 600, upper: false, track: 0 });
     place(bh.g, [HEX_X - HEX_R, y]);
     hide(bh.g);
     var dur = 0.55;
@@ -867,19 +907,20 @@ PK.section("s6-rooms", 57, 78, function (tl, W, ctx, S) {
     PK.travel(tl, bh.g, back, t0, dur, "power3.out");
     FT(bh.s, { scale: 0.6, svgOrigin: "0 0" }, { scale: 1, svgOrigin: "0 0", duration: dur, ease: "power2.out" }, t0);
     // the word on a short leader, fanned out from the bead
-    var l0 = PK.polar(cT[0], cT[1], PK_R + (price ? 12 : 10), A.a),
-      l1 = PK.polar(cT[0], cT[1], PK_R + 24, A.a);
-    var lead = undrawn(PK.el("path", { d: "M" + pt(l0) + " L" + pt(l1), fill: "none", stroke: C.rust, "stroke-width": 1, "stroke-linecap": "round" }, Llb));
+    var l0 = PK.polar(cT[0], cT[1], PK_R + (price ? 17 : 10), A.a),
+      l1 = PK.polar(cT[0], cT[1], PK_R + (price ? 26 : 24), A.a);
+    var lead = undrawn(PK.el("path", { d: "M" + pt(l0) + " L" + pt(l1), fill: "none", stroke: C.rust, "stroke-width": 1, "stroke-linecap": "round" }, ride));
     draw(lead, A.land, 0.14, "power2.out");
-    var lp = PK.polar(cT[0], cT[1], PK_R + 28, A.a);
-    var lab = hide(mono(Llb, A.text, lp[0] + 1, lp[1] + LAB * 0.36, LAB));
+    var lp = PK.polar(cT[0], cT[1], PK_R + (price ? 30 : 28), A.a);
+    var lab = hide(mono(ride, A.text, lp[0] + 1, lp[1] + LAB * 0.36, LAB));
     fadeIn(lab, A.land + 0.04, 0.15);
     if (A.text !== "Safeguards") PK.sfx("return", A.land, { gain_db: -9, pan: 0.5 }); // at most three sounds a second
-    answerEls.push(bh.g, lead, lab);
   });
   // held still to 77.4; then the packet goes back out to Priora and the dock, and the loop closes round it
   var tOutT = 77.4;
   fadeOut(answerEls, tOutT, 0.25);
+  PK.travel(tl, ride, outD("transfer", DOCK, cT), tOutT + 0.02, 0.5, "power2.inOut"); // with the packet
+  fadeOut(ride, 77.85, 0.15);
   fadeOut(RA.transfer.map(function (a) { return a.name; }), tOutT, 0.25);
   door("transfer", tOutT - 0.02, true, 0.3, true);
   packetOut("transfer", tOutT + 0.02, DOCK); // 77.42 to 77.92
