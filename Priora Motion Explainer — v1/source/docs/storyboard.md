@@ -1,3 +1,5 @@
+> Superseded: this is the cut 1 build contract. The film as delivered is described in `../Timed storyboard.md`; the revisions are in `cut2-plan.md` and `cut3-plan.md`.
+
 # Timed storyboard and build contract (v1)
 
 All times are absolute film seconds (30 fps, 90.0 s exactly). Voiceover word times come from `narration/timing.json` (use `PK.word("L06", "route")` in code, never a hard number for anything that syncs with the voice). The camera is `assets/js/camera.js` and belongs to the director; sections read it (`PK.cam.px(t, 20)` gives the world size of 20 screen px at time t) and never move it.
