@@ -920,7 +920,7 @@ PK.section("s6-rooms", 57, 78, function (tl, W, ctx, S) {
   var tOutT = 77.4;
   fadeOut(answerEls, tOutT, 0.25);
   PK.travel(tl, ride, outD("transfer", DOCK, cT), tOutT + 0.02, 0.5, "power2.inOut"); // with the packet
-  fadeOut(ride, 77.62, 0.25); // gone as they cross the doorway, before the dock (Transfer name, loop, door leaves)
+  fadeOut(ride, 77.62, 0.25, "power2.out"); // mostly gone by 77.78, fully as they cross the doorway, before the dock (Transfer name, loop, door leaves)
   fadeOut(RA.transfer.map(function (a) { return a.name; }), tOutT, 0.25);
   door("transfer", tOutT - 0.02, true, 0.3, true);
   packetOut("transfer", tOutT + 0.02, DOCK); // 77.42 to 77.92
