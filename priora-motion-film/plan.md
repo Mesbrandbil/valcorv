@@ -1,6 +1,6 @@
 # Priora motion film: plan
 
-Step 1 of the production brief, kept up to date. Status: **the length is settled; Step 2 (static world) is built and its stills are ready for your review. This file matches what is built.**
+Step 1 of the production brief, kept up to date. Status: **the length is settled, Step 2 (static world) is built, and Step 3 (animation, sequence by sequence) is under way. This file matches what is built.**
 
 ## 0. Where it stands
 
@@ -23,10 +23,15 @@ Your decisions, all written into the storyboard and this plan:
 6. Sequence 8: the four system labels become one restrained line, "A DESIGN PROPOSAL". The scope line and the approaching dashed glyph are cut. The sequence keeps its 45 frames of air: a half second of near silence after the voice, the dissolve, then a full second of "Priora" alone.
 7. Sequences 1 to 5 are trimmed to their rule-clean length (the spare frames were at their ends).
 8. The film is not forced to 2700 frames, no rule was loosened, and the length is settled: no more timing passes.
+9. R · M · T is cut: the full room names are enough.
+10. The Transfer agents are labelled CARRIER, CAPACITY and BROKER. No company names; all three stay dashed.
+11. The closing "Priora" is the Priora wordmark: IBM Plex Sans SemiBold, tracking minus 15/1000 em, ink #111111. The film's ink token is #111111 and its paper #F5F3EE (the brief had #151515 and #F3EEE3).
+12. `renders/` is ignored by git and no video goes into the repo. The H.264 film and the subtitled version are sent in the chat; ProRes is skipped for now.
+13. The three-line voice note stays. Step 3 goes ahead without waiting for a review of the stills; wherever something does not fit, the option that keeps the most empty paper wins, and each such call is reported at the end.
 
 One consequence to note: the brief names F1410 as the frame where the gap opens, which was the first frame of Sequence 5 in the original storyboard. With Sequences 1 to 5 trimmed, Sequence 5 now starts at F1392, so the gap opens at F1392. The rule's meaning (the gap opens as Sequence 5 begins and stays visible until the decision) is unchanged.
 
-Section 12 holds four open questions. Until you answer them, Step 2 follows my recommendation for each.
+Section 12's four questions are answered (decisions 9 to 12).
 
 **Step 2, what changed from the Step 1 numbers.** The stills showed collisions the Step 1 coordinates could not avoid: the rulers' first label did not fit inside the table under the case, the long left agent names touched the table band, and in centred Retain and Mitigate close-ups part of Transfer showed without its SIMULATED label. So the table grew to radius 330 with the seats at 390, shots were reframed (S2_VOICE, S3_PANEL, S3_TABLE, S6_RETAIN, S6_MITIGATE and S6_TRANSFER, with small shifts of S4_CASE, S5_GAP and the two wide room shots), and labels moved onto clean paper. The voice note now sits in three lines, so the camera can stay close on the worker and Priora can hover just above and to its right. No camera move changed its frames. Sections 4 to 6 hold the built values, and section 7.1 lists what Step 3 corrects inside the settled frames.
 
@@ -122,7 +127,7 @@ Key decisions:
 
 ## 3. Design tokens
 
-As in the brief, tuned only after stills: Paper #F3EEE3, Ink #151515, Cobalt #2443B5, Coral #D9785F, Stone #C8C0B0, Cream #E9E2D2, Grey text #8C877D. One extra value: the welding spark is white #FFFFFF, as the storyboard asks.
+As in the brief except where the director changed them: Paper #F5F3EE (brief: #F3EEE3), Ink #111111 (brief: #151515), Cobalt #2443B5, Coral #D9785F, Stone #C8C0B0, Cream #E9E2D2, Grey text #8C877D. One extra value: the welding spark is white #FFFFFF, as the storyboard asks.
 
 Easing: default `cubic-bezier(0.45, 0, 0.15, 1)`; arrivals `cubic-bezier(0.2, 0.7, 0.2, 1)`; nothing else, no springs.
 
@@ -243,12 +248,11 @@ Why the panel grew in Step 2: with the table at radius 300, the rulers' first la
 | PATH_DESK_FORECOURT | from DESK_ORIGIN (3386, 2232) to the forecourt rim at 150° (4345, 1615); cubic, controls (3700, 2232) and (4150, 1720) |
 | Spurs | forecourt rim to each threshold, short and straight; the human line follows the rim from 150° to the right spur |
 | Room labels | names Plex Sans SemiBold, readable sizing 44 px base; statuses mono, readable sizing 27 px base. The stacks are spaced from the actual size at each zoom, so they never collide. Above Retain and Transfer the stack grows upwards from y 950 (Transfer keeps a line reserved for NO INSURER ON PRIORA YET, so nothing moves when it arrives); Mitigate's sits to its right from (4800, 2070), growing downwards |
-| R · M · T | each room's own initial, large and pale stone inside its room, overview only (question Q1) |
 | Focus | in a room close-up the other rooms sit at 25 percent and their labels are hidden |
 | Retain interior | packet (4040, 1320) with the coral bridge; three small room agents; four leaders to EXPOSURE (3960, 1200), AUTHORITY (4110, 1200), CONDITIONS (3960, 1450), EXPIRY (4110, 1450); AN AGENT CANNOT CHOOSE IT centred (4016, 1110) inside the room above the packet; RISK OWNER left aligned at (4325, 1432) in the mouth of the doorway, where the black line arrives; Priora inside at (4016, 1545) |
 | Mitigate interior | packet (4390, 1920); Evidence check's corner marks 96 out from it; FULL and BACK INSIDE left aligned from (4520, 1912), 34 apart; safeguards at (4270, 2120), (4440, 2120), (4610, 2120), names below in one or two lines (Thermal check / Extend watch, to 60 min / Move weld, to workshop), each with a disc stack (cost, left) and an open clock arc (time, right); Priora inside at (4440, 2275) |
 | Transfer interior | packet (4800, 1340); answers ELIGIBILITY, TERMS, SAFEGUARDS, PRICE ? each with a small dashed square, left aligned from (4910, 1250), 40 apart; Priora inside at (4680, 1430) |
-| Transfer agents | three dashed hexagonal glyphs 400 from Transfer's centre at 315°, 5° and 50°: (5147, 1032), (5262, 1350), (5121, 1621); outside the wall, away from the forecourt, clear of the label stack |
+| Transfer agents | three dashed hexagonal glyphs 400 from Transfer's centre at 315°, 5° and 50°: (5147, 1032), (5262, 1350), (5121, 1621); outside the wall, away from the forecourt, clear of the label stack. Labels CARRIER, CAPACITY, BROKER in cobalt mono 24 (29 px at zoom 1.2), left aligned 44 to the right of each glyph |
 | SHORT_LIST (Sequence 7) | MITIGATE PART and KEEP THE REST centred above the packet at (3480, 1925) and (3480, 1971), mono 38 |
 
 Visiting order sweeps one way round the clover: Retain (upper left), across the forecourt to Mitigate (below), on to Transfer (upper right). Sequence 7 continues the same direction, doorway to doorway without crossing: Mitigate, then Retain.
@@ -280,7 +284,7 @@ All glyphs are cobalt with ink texture unless noted. Sizes are world units. `sti
 | Risk engineering | arch with a semicircular opening | 56 | opens out to examine its surroundings |
 | Evidence check | softened square with a small round aperture | 56 | frames and settles over an image |
 | Ghost agents (3) | dashed stone outlines in the same family, names in grey | 56, 30 percent opacity | still; fade during Sequence 4's first move |
-| Transfer agents (3) | dashed hexagons with a small dashed inner mark, lighter than the site agents; unlabelled until question Q2 is answered | 50 | still; answer with hollow pieces |
+| Transfer agents (3) | dashed hexagons with a small dashed inner mark, lighter than the site agents; labelled CARRIER, CAPACITY, BROKER | 50 | still; answer with hollow pieces |
 | Room agents (Retain) | small cobalt dot, half dome and rounded square | 24 | gather round the packet |
 | Safeguards (Mitigate) | ring (thermal check), capsule (longer watch), small house (workshop), each with a disc stack and an open clock arc | 48 | lift, try the gap, return |
 | Case | see 4.5 | 124 open with arcs, 116 as packet | carried; never transforms into another symbol |
@@ -354,7 +358,7 @@ Every move eases in and out with the default curve and lasts at least 40 frames.
 | 3 The site chooses its cast | F0654–F1123 | the site panel: specialists summoned through the entrance, checks at the table, Priora outside | Site panel · CONFIGURED FOR THIS SITE · Electrical · Structural · Security · Evidence check · Risk engineering · Site rules · Fire · Insurer conditions · FIRE WATCH? |
 | 4 When the conditions hold | F1124–F1391 | the ring locking, then the route to the work and the quiet desk | INSIDE THE CONDITIONS · RECORD KEPT · NO ONE DISTURBED |
 | 5 A condition slips | F1392–F1690 | the gap; the fire watch rulers; then the packet carried to the risk owner and the human line | FIRE WATCH PLANNED: 30 MIN · POLICY ASKS: 60 MIN · NO HARD STOP CONFIGURED · DECISION PACKET · RISK OWNER DECIDES |
-| 6 Three decision rooms | F1691–F2350 | the clover, then Retain, Mitigate and Transfer in turn | Retain · Mitigate · Transfer · R · M · T · DESIGN PROPOSAL (×2) · SIMULATED |
+| 6 Three decision rooms | F1691–F2350 | the clover, then Retain, Mitigate and Transfer in turn | Retain · Mitigate · Transfer · DESIGN PROPOSAL (×2) · SIMULATED |
 | 6 Retain | F1691–F1929 | the closed threshold; the human line opens it; the bridged gap | AN AGENT CANNOT CHOOSE IT · RISK OWNER · EXPOSURE · AUTHORITY · CONDITIONS · EXPIRY |
 | 6 Mitigate | F1930–F2153 | two safeguards tried in the gap | Thermal check · Extend watch to 60 min · Move weld to workshop · PARTIAL · FULL · BACK INSIDE |
 | 6 Transfer | F2154–F2350 | the dashed room asking simulated capacity | SIMULATED · NO INSURER ON PRIORA YET · ELIGIBILITY · TERMS · SAFEGUARDS · PRICE ? · (the three agents' role labels, wording open: question Q2) |
@@ -406,7 +410,7 @@ Everything outside the current arrangement is off frame or at 28 percent (`CONTE
 - The specialist and ghost names fade with the ghosts in Sequence 4's first move.
 - Retain's leaders, AN AGENT CANNOT CHOOSE IT and RISK OWNER fade as the retained treatment falls away, in the move to Mitigate.
 - The safeguard names and PARTIAL, FULL, BACK INSIDE fade as the proposal withdraws, before the move to Transfer.
-- The Transfer answers' labels fade before Sequence 7's widening; the dashed answer pieces travel with the packet.
+- The Transfer answers' labels and CARRIER, CAPACITY, BROKER fade before Sequence 7's widening; the dashed answer pieces travel with the packet.
 - MITIGATE PART, KEEP THE REST and RISK OWNER DECIDES fade during Sequence 8's first move (at zoom 0.37 RISK OWNER DECIDES would cross Mitigate's band).
 - SIMULATED never fades while Transfer is in frame. In Sequence 8's recession and dissolve it fades with the room at exactly the room's contrast, never fainter. The dashed Transfer answers carry no label of their own: the room's SIMULATED stays in frame through Sequences 7 and 8 and the answers stay dashed.
 
@@ -837,8 +841,8 @@ Pixel checks on rendered stills: empty paper at least 40 percent of the frame (p
 
 | Deliverable | Settings |
 |---|---|
-| `renders/Priora film master.mp4` | H.264, CRF 14 (better than the CRF 16 floor, so the grain survives), yuv420p |
-| `renders/Priora film master.mov` | ProRes 422 HQ, 10 bit |
+| `renders/Priora film master.mp4` | H.264, CRF 16, yuv420p, 1920 × 1080, 30 fps; sent in the chat, not committed |
+| `renders/Priora film master.mov` | ProRes 422 HQ, 10 bit: skipped for now (decision 12) |
 | `renders/Priora film review with subtitles.mp4` | H.264, the review composition with burned in narration subtitles |
 | Review MP4s | half resolution (960 × 540), one per sequence while building |
 
@@ -848,7 +852,7 @@ Pixel checks on rendered stills: empty paper at least 40 percent of the frame (p
 
 | Risk | What I will do |
 |---|---|
-| The ProRes master is about 2.5 to 3 GB; GitHub refuses files over 100 MB | see question Q4 |
+| Video files are large; GitHub refuses files over 100 MB | `renders/` is ignored by git; the films are sent in the chat (decision 12) |
 | Ink texture filters can shimmer when shapes move by fractions of a pixel | handled in Step 2: fine flecks fade out below zoom 1.0 and are gone at 0.6, and every pattern is fixed to its shape. The stability check still runs on every Step 3 render |
 | Render time with many filters | measured in Step 2; the half resolution review renders keep iteration fast |
 | Text widths come from the Plex font files (Medium and SemiBold estimated from the variable font's default instance) | the Step 2 stills confirmed every placement on screen; `@remotion/layout-utils` measures exactly in the Step 3 checker |
@@ -856,11 +860,11 @@ Pixel checks on rendered stills: empty paper at least 40 percent of the frame (p
 
 ---
 
-## 12. Open questions
+## 12. Questions, answered
 
-| # | Question | My recommendation |
+| # | Question | Answer |
 |---|---|---|
-| Q1 | "R · M · T": the storyboard says the room names "appear in full, with large, spare letters beneath". Is that one line reading R · M · T, or each room's own initial? | Each room's own initial, set large and pale inside its empty room (R in Retain, M in Mitigate, T in Transfer), seen only in the overview and fading as the camera approaches Retain. It gives each room an identity at a glance and leaves the interiors clean for the action. |
-| Q2 | The three dashed Transfer agents need "short labels identifying simulated carrier and capacity roles", but the storyboard gives no words, and the brief says not to add any. | Give me the words (for example "Carrier" twice and "Capacity" once). Until then they stay unlabelled; their dashed, lighter shapes and the room's SIMULATED label already mark them as simulated. |
-| Q3 | The closing "Priora": the storyboard asks for black type. An earlier branch of this repo has a Priora wordmark SVG. | Black IBM Plex Sans SemiBold, as written. I will only use the wordmark if you ask. |
-| Q4 | The ProRes 422 HQ master will be about 2.5 to 3 GB, and GitHub refuses files over 100 MB. | I render and verify it here, and commit a one-command script that renders the identical file on your Mac. The two H.264 files (expected 30 to 60 MB) go in the repo. If Git LFS is enabled on this repository, the ProRes can go there instead. |
+| Q1 | "R · M · T" beneath the room names | Cut. The full room names are enough. |
+| Q2 | Words for the three simulated Transfer agents | CARRIER, CAPACITY and BROKER. No company names; all three stay dashed. |
+| Q3 | The closing "Priora" | The Priora wordmark: IBM Plex Sans SemiBold, tracking minus 15/1000 em, ink #111111. Ink token #111111, paper #F5F3EE. |
+| Q4 | Where the masters go | `renders/` is ignored by git. The H.264 film and the subtitled version are sent in the chat; ProRes is skipped for now. |

@@ -8,6 +8,7 @@ import {
   ROOM_LABEL,
   ROOM_NAME_PX,
   ROOM_STATUS_PX,
+  TRANSFER_AGENT_LABEL_SIZE,
   TRANSFER_INSIDE,
   forecourtRimToward,
   roomCentre,
@@ -26,7 +27,8 @@ export type DecisionRoomsProps = {
   /** In a room close-up, the other rooms sit at 25 percent so there is one focal arrangement. */
   focus?: RoomKey;
   labels?: number;
-  initials?: number;
+  /** CARRIER, CAPACITY and BROKER beside the three simulated agents. */
+  agentLabels?: number;
   noInsurer?: number;
   thresholdClosed?: Partial<Record<RoomKey, boolean>>;
   pathsOpacity?: number;
@@ -34,7 +36,6 @@ export type DecisionRoomsProps = {
 
 const NAME: Record<RoomKey, string> = { retain: 'Retain', mitigate: 'Mitigate', transfer: 'Transfer' };
 const STATUS: Record<RoomKey, string> = { retain: 'DESIGN PROPOSAL', mitigate: 'DESIGN PROPOSAL', transfer: 'SIMULATED' };
-const INITIAL: Record<RoomKey, string> = { retain: 'R', mitigate: 'M', transfer: 'T' };
 
 const Room: React.FC<{ k: RoomKey; closed: boolean }> = ({ k, closed }) => {
   const px = usePx();
@@ -89,7 +90,7 @@ const annulusSectorOuter = (c: readonly [number, number], r: number, a0: number,
   return `M ${x0.toFixed(2)} ${y0.toFixed(2)} A ${r} ${r} 0 ${large} 1 ${x1.toFixed(2)} ${y1.toFixed(2)}`;
 };
 
-export const DecisionRooms: React.FC<DecisionRoomsProps> = ({ opacity = 1, focus, labels = 1, initials = 0, noInsurer = 0, thresholdClosed = {}, pathsOpacity = 1 }) => {
+export const DecisionRooms: React.FC<DecisionRoomsProps> = ({ opacity = 1, focus, labels = 1, agentLabels = 0, noInsurer = 0, thresholdClosed = {}, pathsOpacity = 1 }) => {
   const px = usePx();
   const { zoom } = useCamera();
   const dim = (k: RoomKey) => (focus && focus !== k ? 0.25 : 1);
@@ -121,8 +122,14 @@ export const DecisionRooms: React.FC<DecisionRoomsProps> = ({ opacity = 1, focus
           <TransferAgent key={i} at={a.at} variant={i as 0 | 1 | 2} />
         ))}
       </g>
-      {initials > 0 &&
-        keys.map((k) => <Words key={k} text={INITIAL[k]} at={ROOM_LABEL[k].initial} readablePx={64} weight={600} color={COLOR.stone} opacity={initials * showLabel(k)} />)}
+      {/* the simulated roles, named in plain words: no company names, always dashed */}
+      {agentLabels > 0 && (
+        <g opacity={agentLabels * showLabel('transfer')}>
+          {TRANSFER_INSIDE.agents.map((a) => (
+            <Label key={a.label} text={a.label} at={a.labelAt} anchor="start" size={TRANSFER_AGENT_LABEL_SIZE} color={COLOR.cobalt} />
+          ))}
+        </g>
+      )}
       {labels > 0 && (
         <g opacity={labels}>
           {keys.map((k) => {

@@ -387,9 +387,7 @@ Each room has a clear opening facing the shared space. The walls are drawn as br
 **Mitigate** has a cobalt band.  
 **Transfer** has a pale stone band with a dashed cobalt perimeter.
 
-Their names appear in full, with large, spare letters beneath:
-
-**R · M · T**
+Their names appear in full.
 
 Retain and Mitigate carry the small status:
 
@@ -486,7 +484,13 @@ Its dashed boundary is immediately apparent. Two persistent labels sit above it:
 
 The human line authorises the inquiry at the threshold. Priora carries the packet inside.
 
-Three small dashed agent glyphs sit around the perimeter, with short labels identifying simulated carrier and capacity roles. They are drawn with less visual density than the established site agents.
+Three small dashed agent glyphs sit around the perimeter, with short labels identifying simulated carrier and capacity roles. No company names appear, and all three stay dashed:
+
+**CARRIER**  
+**CAPACITY**  
+**BROKER**
+
+They are drawn with less visual density than the established site agents.
 
 Dashed copies of the unresolved gap travel out from the packet along fine paths. They pass through small openings in the chamber boundary and reach the simulated agents.
 
@@ -591,7 +595,7 @@ Over the next second and a half, the surrounding drawing and statement dissolve,
 
 **Priora**
 
-Black type, centred on warm paper, held alone for a final second.
+The Priora wordmark, set in IBM Plex Sans SemiBold with tracking of minus 15/1000 em, in ink #111111, centred on the paper and held alone for a final second.
 
 **Narration**
 

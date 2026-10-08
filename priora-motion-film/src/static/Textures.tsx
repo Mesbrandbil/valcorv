@@ -12,7 +12,7 @@ export const PaperGrainTile: React.FC = () => (
         <filter id="grain-fine" x="0" y="0" width="100%" height="100%" colorInterpolationFilters="sRGB">
           <feTurbulence type="fractalNoise" baseFrequency="0.62" numOctaves={3} seed={7} stitchTiles="stitch" result="n" />
           {/* dark specks where the noise is high, light specks where it is low */}
-          <feColorMatrix in="n" type="matrix" values="0 0 0 0 0.33  0 0 0 0 0.29  0 0 0 0 0.22  0 0 0 0.62 -0.33" result="dark" />
+          <feColorMatrix in="n" type="matrix" values="0 0 0 0 0.30  0 0 0 0 0.29  0 0 0 0 0.26  0 0 0 0.62 -0.33" result="dark" />
           <feColorMatrix in="n" type="matrix" values="0 0 0 0 1  0 0 0 0 1  0 0 0 0 0.98  0 0 0 -0.62 0.27" result="light" />
           <feMerge>
             <feMergeNode in="dark" />
@@ -21,7 +21,7 @@ export const PaperGrainTile: React.FC = () => (
         </filter>
         <filter id="grain-uneven" x="0" y="0" width="100%" height="100%" colorInterpolationFilters="sRGB">
           <feTurbulence type="fractalNoise" baseFrequency="0.16" numOctaves={2} seed={9} stitchTiles="stitch" result="n" />
-          <feColorMatrix in="n" type="matrix" values="0 0 0 0 0.42  0 0 0 0 0.37  0 0 0 0 0.28  0 0 0 0.12 -0.056" />
+          <feColorMatrix in="n" type="matrix" values="0 0 0 0 0.38  0 0 0 0 0.36  0 0 0 0 0.32  0 0 0 0.12 -0.056" />
         </filter>
       </defs>
       <rect width={1024} height={1024} filter="url(#grain-uneven)" />
@@ -37,7 +37,7 @@ export const PaperMottle: React.FC = () => (
       <defs>
         <filter id="mottle" x="0" y="0" width="100%" height="100%" colorInterpolationFilters="sRGB">
           <feTurbulence type="fractalNoise" baseFrequency="0.0045" numOctaves={4} seed={13} result="n" />
-          <feColorMatrix in="n" type="matrix" values="0 0 0 0 0.40  0 0 0 0 0.35  0 0 0 0 0.26  0 0 0 0.11 -0.042" />
+          <feColorMatrix in="n" type="matrix" values="0 0 0 0 0.37  0 0 0 0 0.35  0 0 0 0 0.31  0 0 0 0.11 -0.042" />
         </filter>
       </defs>
       <rect width={1440} height={810} filter="url(#mottle)" />

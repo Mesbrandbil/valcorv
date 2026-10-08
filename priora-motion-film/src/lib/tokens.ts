@@ -1,14 +1,17 @@
 // Design tokens from the production brief (section 4). Tune only after looking at rendered stills.
 
 export const COLOR = {
-  paper: '#F3EEE3',
-  ink: '#151515',
+  // Director's overrides of the brief's values: paper #F5F3EE (was #F3EEE3), ink #111111 (was #151515).
+  paper: '#F5F3EE',
+  ink: '#111111',
   cobalt: '#2443B5',
   coral: '#D9785F',
   stone: '#C8C0B0',
   cream: '#E9E2D2',
   greyText: '#8C877D',
   spark: '#FFFFFF',
+  /** The deep interior of the factory window, just lighter than ink so the window reads. */
+  windowInterior: '#2A2927',
 } as const;
 
 // On-screen stroke weights at 1080p. World width = px / zoom, so they read the same at every zoom.

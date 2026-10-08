@@ -3,7 +3,7 @@
 import path from 'node:path';
 import { ROOT, makeBundle, still } from './render-lib.mjs';
 
-const SCENES = ['sheet', 'real', 'voice', 'case assembly', 'panel', 'table', 'ring', 'route', 'gap', 'desk', 'rooms', 'retain', 'mitigate', 'transfer', 'system'];
+const SCENES = ['sheet', 'real', 'voice', 'case assembly', 'panel', 'table', 'ring', 'route', 'gap', 'desk', 'rooms', 'retain', 'mitigate', 'transfer', 'system', 'closing'];
 const SHEETS = { 'cast-sheet': 'cast sheet', 'people-sheet': 'people sheet', 'case-sheet': 'case sheet' };
 const only = process.argv.slice(2);
 const want = (n) => only.length === 0 || only.includes(n);

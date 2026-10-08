@@ -63,7 +63,7 @@ export const Site: React.FC<{ opacity?: number }> = ({ opacity = 1 }) => {
       </g>
       {/* window: a fine paper frame round a deep interior, where the spark lives */}
       <rect x={win.c[0] - win.w / 2 - 2} y={win.c[1] - win.h / 2 - 2} width={win.w + 4} height={win.h + 4} fill={COLOR.paper} />
-      <rect x={win.c[0] - win.w / 2} y={win.c[1] - win.h / 2} width={win.w} height={win.h} fill="#262422" />
+      <rect x={win.c[0] - win.w / 2} y={win.c[1] - win.h / 2} width={win.w} height={win.h} fill={COLOR.windowInterior} />
     </g>
   );
 };

@@ -2,7 +2,7 @@ import React from 'react';
 import { SHOTS, type ShotName } from '../camera/shots';
 import type { WorldState } from '../world/World';
 import { COLOR, CONTEXT_OPACITY as DIM } from '../lib/tokens';
-import { Label, Words } from '../lib/text';
+import { Label, Words, Wordmark } from '../lib/text';
 import { polar } from '../lib/geometry';
 import {
   BARRIER,
@@ -271,7 +271,7 @@ export const SCENES: Record<string, WorldState> = {
     shot: shot('S6_ROOMS'),
     real: { labels: 0, record: { line: 1, marks: 1, opacity: DIM }, spark: 1, groundOpacity: DIM, figures: { worker: DIM, site: DIM, riskOwner: 1 } },
     panel: null,
-    rooms: { labels: 1, initials: 1 },
+    rooms: { labels: 1 },
     humanLines: [{ d: humanLoop(false) }],
     priora: { at: [3600, 1960], beadAngle: 30 },
     case: { at: PACKET_DOCK, facetMode: 'tucked', findings: { radius: 58, arcs: packetArcs }, coralEnds: 1 },
@@ -300,7 +300,7 @@ export const SCENES: Record<string, WorldState> = {
     shot: shot('S6_TRANSFER'),
     real: { labels: 0, record: { line: 1, marks: 1 } },
     panel: null,
-    rooms: { labels: 1, focus: 'transfer', noInsurer: 1, thresholdClosed: { transfer: false } },
+    rooms: { labels: 1, focus: 'transfer', noInsurer: 1, agentLabels: 1, thresholdClosed: { transfer: false } },
     humanLines: [{ d: humanPathTo('transfer') }],
     priora: { at: TRANSFER_INSIDE.prioraAt, beadAngle: 330 },
     case: { at: TRANSFER_INSIDE.packet, facetMode: 'tucked', findings: { radius: 58, arcs: packetArcs }, coralEnds: 1 },
@@ -321,6 +321,14 @@ export const SCENES: Record<string, WorldState> = {
         <Label text="RISK OWNER DECIDES" at={RISK_OWNER_DECIDES} anchor="start" readablePx={27} />
       </g>
     ),
+  },
+  // the last second of the film: only the wordmark on the paper
+  closing: {
+    shot: shot('S8_SHEET'),
+    real: { ground: 0, labels: 0, figures: { worker: 0, site: 0, riskOwner: 0 }, record: { line: 0, marks: 0 } },
+    panel: null,
+    rooms: null,
+    overlay: <Wordmark at={[SHOTS.S8_SHEET.x, SHOTS.S8_SHEET.y + 92]} size={260} />,
   },
 };
 

@@ -7,7 +7,7 @@ import { Label } from '../lib/text';
 import { EvidenceCheck, Fire, Ghost, InsurerConditions, Priora, RiskEngineering, RoomAgent, Safeguard, SiteRules, TransferAgent } from '../cast/agents';
 import { Case, PhotoCard, type CaseProps } from '../cast/Case';
 import { RiskOwner, Site, Worker } from '../cast/people';
-import { CASE_TABLE_SCALE, FACET_ANGLE, type FacetKey } from '../lib/layout';
+import { CASE_TABLE_SCALE, FACET_ANGLE, TRANSFER_AGENT_LABEL_SIZE, TRANSFER_INSIDE, type FacetKey } from '../lib/layout';
 import { PaperDefs } from '../world/Paper';
 
 const Frame: React.FC<{ children: React.ReactNode }> = ({ children }) => (
@@ -33,14 +33,27 @@ const CAST: Array<{ name: string; draw: React.ReactNode }> = [
   { name: 'Electrical', draw: <Ghost kind="Electrical" at={[0, 0]} opacity={0.6} /> },
   { name: 'Structural', draw: <Ghost kind="Structural" at={[0, 0]} opacity={0.6} /> },
   { name: 'Security', draw: <Ghost kind="Security" at={[0, 0]} opacity={0.6} /> },
-  { name: 'Transfer agents', draw: <g><TransferAgent at={[-34, 0]} variant={0} scale={0.7} /><TransferAgent at={[0, 0]} variant={1} scale={0.7} /><TransferAgent at={[34, 0]} variant={2} scale={0.7} /></g> },
+  {
+    name: 'Transfer agents',
+    // stacked, each with its role label at its film size and place (to its right)
+    draw: (
+      <g>
+        {TRANSFER_INSIDE.agents.map((a, i) => (
+          <g key={a.label}>
+            <TransferAgent at={[-30, (i - 1) * 64]} variant={i as 0 | 1 | 2} />
+            <Label text={a.label} at={[14, (i - 1) * 64 + 8]} anchor="start" size={TRANSFER_AGENT_LABEL_SIZE} color={COLOR.cobalt} />
+          </g>
+        ))}
+      </g>
+    ),
+  },
 ];
 
 /** Every agent side by side, at three zoom levels: the wide sheet (0.37), the base (1.0) and the closest shot (1.7). */
 export const CastSheet: React.FC = () => {
-  const zooms = [0.37, 1.0, 1.7];
+  const zooms = [0.37, 1.0, 1.75];
   const rowY = [150, 420, 800];
-  const colX = (i: number) => 190 + i * 172;
+  const colX = (i: number) => 160 + i * 163;
   return (
     <Frame>
       {zooms.map((z, r) => (

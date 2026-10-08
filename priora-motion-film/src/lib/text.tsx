@@ -94,3 +94,25 @@ export const Words: React.FC<BaseProps & Sizing & { weight?: 500 | 600; lines?: 
     </text>
   );
 };
+
+/** The Priora wordmark: IBM Plex Sans SemiBold, tracking minus 15/1000 em, ink #111111. */
+export const WORDMARK_TRACKING_EM = -0.015;
+export const Wordmark: React.FC<{ at: Pt; size: number; opacity?: number }> = ({ at, size, opacity = 1 }) => {
+  const tracking = size * WORDMARK_TRACKING_EM;
+  return (
+    <text
+      x={at[0] + tracking / 2}
+      y={at[1]}
+      fontFamily={FONT.sans}
+      fontWeight={600}
+      fontSize={size}
+      letterSpacing={tracking}
+      textAnchor="middle"
+      fill={COLOR.ink}
+      opacity={opacity}
+      style={{ fontKerning: 'normal' }}
+    >
+      Priora
+    </text>
+  );
+};

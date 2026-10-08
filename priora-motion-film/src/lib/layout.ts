@@ -216,10 +216,10 @@ export const forecourtRimToward = (k: RoomKey): Pt => polar(FORECOURT.c, FORECOU
  * the name and its status lines stack upwards from it at every zoom. For Mitigate the stack runs
  * downwards from the name, beside the room.
  */
-export const ROOM_LABEL: Record<RoomKey, { name: Pt; anchor: 'start' | 'middle'; initial: Pt }> = {
-  retain: { name: [4016, 950], anchor: 'middle', initial: [4016, 1340] },
-  mitigate: { name: [4800, 2070], anchor: 'start', initial: [4440, 2075] },
-  transfer: { name: [4864, 950], anchor: 'middle', initial: [4864, 1340] },
+export const ROOM_LABEL: Record<RoomKey, { name: Pt; anchor: 'start' | 'middle' }> = {
+  retain: { name: [4016, 950], anchor: 'middle' },
+  mitigate: { name: [4800, 2070], anchor: 'start' },
+  transfer: { name: [4864, 950], anchor: 'middle' },
 };
 export const ROOM_NAME_PX = 44; // readable sizing, base px at zoom 1
 export const ROOM_STATUS_PX = 27;
@@ -251,11 +251,16 @@ export const MITIGATE_INSIDE = {
   prioraAt: [4440, 2275] as Pt,
 };
 
+/** World size of the simulated agents' role labels: 29 px in the Transfer close-up; they fade before the wide shots. */
+export const TRANSFER_AGENT_LABEL_SIZE = 24;
 export const TRANSFER_INSIDE = {
   packet: [4800, 1340] as Pt,
   prioraAt: [4680, 1430] as Pt,
   // just outside the wall, on the side away from the forecourt and clear of the label stack above
-  agents: [315, 5, 50].map((a) => ({ angle: a, at: polar(roomCentre('transfer'), ROOM.r + 70, a) })),
+  agents: ([[315, 'CARRIER'], [5, 'CAPACITY'], [50, 'BROKER']] as const).map(([a, label]) => {
+    const at = polar(roomCentre('transfer'), ROOM.r + 70, a);
+    return { angle: a, label, at, labelAt: [at[0] + 44, at[1] + 8] as Pt };
+  }),
   answers: [4910, 1250] as Pt,
 };
 
