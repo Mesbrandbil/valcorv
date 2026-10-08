@@ -248,7 +248,8 @@ PK.section("s2-case", 8, 22.3, function (tl, W, ctx) {
   tl.to(W.priora.beadG, { rotation: 152, svgOrigin: "0 0", duration: 0.4, ease: "power2.inOut" }, tAsk - 0.3);
   var wHead = [G.worker[0] + 20, G.worker[1] - 130];
   // the request runs below the case and its labels, straight to the worker
-  var askD = "M" + PK.fmt(beadAt(152)[0]) + " " + PK.fmt(beadAt(152)[1]) + " C1150 560 960 600 " + wHead[0] + " " + wHead[1];
+  // it drops steeply first, so it passes right of the end of BEFORE NIGHT SHIFT and under it
+  var askD = "M" + PK.fmt(beadAt(152)[0]) + " " + PK.fmt(beadAt(152)[1]) + " C1235 540 960 610 " + wHead[0] + " " + wHead[1];
   var ask = PK.el("path", { d: askD, class: "pk-thread-dash" }, W.L.threads);
   PK.fade(tl, ask, 0, 1, tAsk, 0.35, "none");
   var q = PK.bead(W.L.threads, 3, { hollow: true });
@@ -284,6 +285,8 @@ PK.section("s2-case", 8, 22.3, function (tl, W, ctx) {
   PK.drawOn(tl, answer, tSend + 0.15, 0.7, "power2.inOut");
   tl.to(ask, { opacity: 0, duration: 0.3, ease: "none" }, tSend + 0.2);
   var tFill = tSend + 0.86;
+  tl.to(labels.photo, { opacity: 0, duration: 0.15, ease: "power1.in" }, tSend + 0.4);
+  tl.to(labels.photo, { opacity: 1, duration: 0.25, ease: "power1.out" }, tFill + 0.05);
   tl.to(ghost, { opacity: 0, duration: 0.2, ease: "none" }, tFill);
   tl.fromTo(ph.mark, { opacity: 0 }, { opacity: 1, duration: 0.2, ease: "none", immediateRender: false }, tFill);
   tl.fromTo(ph.chip, { scale: 1.35, svgOrigin: "0 0" }, { scale: 1, svgOrigin: "0 0", duration: 0.4, ease: "back.out(2)", immediateRender: false }, tFill);

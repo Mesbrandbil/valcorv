@@ -94,13 +94,13 @@ PK.section("s1-world", 0, 8, function (tl, W, ctx) {
   tl.fromTo(P.body, { scale: 0.2, svgOrigin: "0 0" }, { scale: 0.62, svgOrigin: "0 0", duration: 0.4, ease: "back.out(1.4)", immediateRender: false }, tP);
   if (P.orbit) tl.fromTo([P.orbit, P.beadG], { opacity: 0 }, { opacity: 1, duration: 0.3, ease: "power1.out", immediateRender: false }, tP + 0.1);
   PK.sfx("arrive", tP + 0.03, { gain_db: -11, pan: 0.3, size: "agent" });
-  var pLab = PK.text(W.L.labels, "Priora agent", 0, 0, { size: PK.cam.px(tP, 17), weight: 500, anchor: "middle", fill: C.ink });
-  gsap.set(pLab, { x: at(pP)[0], y: at(pP)[1] - 30, opacity: 0 });
-  tl.fromTo(pLab, { opacity: 0, y: at(pP)[1] - 26 }, { opacity: 1, y: at(pP)[1] - 30, duration: 0.35, ease: "power2.out", immediateRender: false }, tP + 0.15);
+  var pLab = PK.text(W.L.labels, "Priora agent", 0, 0, { size: PK.cam.px(7.0, 24), weight: 500, anchor: "middle", fill: C.ink });
+  gsap.set(pLab, { x: at(pP)[0], y: at(pP)[1] - 33, opacity: 0 });
+  tl.fromTo(pLab, { opacity: 0, y: at(pP)[1] - 29 }, { opacity: 1, y: at(pP)[1] - 33, duration: 0.35, ease: "power2.out", immediateRender: false }, tP + 0.15);
   // Priora rides from the moment the orbit grows; the name rides with it and goes before the flight
   var pFly = pP + rate * (tFly - tGrow);
   tl.fromTo(P.g, { motionPath: { path: ell, start: pP, end: pP } }, { motionPath: { path: ell, start: pP, end: pFly }, duration: tFly - tGrow, ease: "none", immediateRender: false }, tGrow);
-  tl.to(pLab, { x: at(pFly)[0], y: at(pFly)[1] - 30, duration: tFly - tGrow - 0.4, ease: "none" }, tGrow);
+  tl.to(pLab, { x: at(pFly)[0], y: at(pFly)[1] - 33, duration: tFly - tGrow - 0.4, ease: "none" }, tGrow);
   tl.to(pLab, { opacity: 0, duration: 0.3, ease: "power1.in" }, tFly - 0.4);
 
   // the orbit: two halves that start at Priora's place at tGrow and meet on the far side
