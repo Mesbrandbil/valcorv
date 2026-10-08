@@ -1,13 +1,13 @@
 # Priora motion film: plan
 
-Step 1 of the production brief. Status: **final. The length is settled; Step 2 (static world) is under way.**
+Step 1 of the production brief, kept up to date. Status: **the length is settled; Step 2 (static world) is built and its stills are ready for your review. This file matches what is built.**
 
 ## 0. Where it stands
 
 | | |
 |---|---|
 | **Length** | **2883 frames, 96.1 seconds** (F0000–F2882) |
-| Rules | every motion, text and composition rule in the brief, unchanged. A checker verified each one frame by frame for the timings below |
+| Rules | every motion, text and composition rule in the brief, unchanged. The planning checker verified the timing and text rules sequence by sequence; Step 3's checker adds the composition rules and checks across the whole film (section 10.2) |
 | Sequences 1–5 | the storyboard's beats at their tightest rule-clean length: 1691 frames (the storyboard had 1710) |
 | Sequence 6 | 660 frames (Retain 239, Mitigate 224, Transfer 197) |
 | Sequence 7 | 179 frames |
@@ -27,6 +27,8 @@ Your decisions, all written into the storyboard and this plan:
 One consequence to note: the brief names F1410 as the frame where the gap opens, which was the first frame of Sequence 5 in the original storyboard. With Sequences 1 to 5 trimmed, Sequence 5 now starts at F1392, so the gap opens at F1392. The rule's meaning (the gap opens as Sequence 5 begins and stays visible until the decision) is unchanged.
 
 Section 12 holds four open questions. Until you answer them, Step 2 follows my recommendation for each.
+
+**Step 2, what changed from the Step 1 numbers.** The stills showed collisions the Step 1 coordinates could not avoid: the rulers' first label did not fit inside the table under the case, the long left agent names touched the table band, and in centred Retain and Mitigate close-ups part of Transfer showed without its SIMULATED label. So the table grew to radius 330 with the seats at 390, shots were reframed (S2_VOICE, S3_PANEL, S3_TABLE, S6_RETAIN, S6_MITIGATE and S6_TRANSFER, with small shifts of S4_CASE, S5_GAP and the two wide room shots), and labels moved onto clean paper. The voice note now sits in three lines, so the camera can stay close on the worker and Priora can hover just above and to its right. No camera move changed its frames. Sections 4 to 6 hold the built values, and section 7.1 lists what Step 3 corrects inside the settled frames.
 
 Sources, in order of authority:
 
@@ -128,14 +130,16 @@ Easing: default `cubic-bezier(0.45, 0, 0.15, 1)`; arrivals `cubic-bezier(0.2, 0.
 
 ## 4. World layout
 
+Every value below is what `src/lib/layout.ts` and `src/camera/shots.ts` hold after Step 2. Those two files are the source; this section mirrors them.
+
 ### 4.1 Territories
 
 | Territory | Extent (world units) |
 |---|---|
-| Site panel (left) | circle centre (1300, 1500), radius 600, title above to y 790 |
-| Real world (lower centre) | x 2260 to 3500, y 2104 (service block top) to 2352 (labels) |
+| Site panel (left) | circle centre (1300, 1500), wall radius 600, title above to about y 790 |
+| Real world (lower centre) | x 2260 to 3500, y 2096 (service block top) to 2352 (labels) |
 | Record line (under the real world) | y 2440, x 2260 to 3500 |
-| Decision rooms (right) | clover around a forecourt at (4440, 1560); x 3686 to 5194, y 985 to 2380; labels above Retain and Transfer to about y 830, Mitigate's to its right |
+| Decision rooms (right) | clover round a forecourt at (4440, 1560); rooms x 3686 to 5194, y 985 to 2380; Transfer's simulated agents outside its wall to x 5292; labels above Retain and Transfer to about y 770, Mitigate's to its right |
 | Margins | at least 380 units of empty paper to every sheet edge |
 
 The full sheet view (Sequence 8) frames x 386 to 5575, so the sheet edge is never in frame.
@@ -145,22 +149,21 @@ The full sheet view (Sequence 8) frames x 386 to 5575, so the sheet edge is neve
 | Name | Value |
 |---|---|
 | GROUND | y 2300, drawn from x 2260 to 3500 |
-| WORKER | feet (2480, 2300), height 156 (hard hat top y 2144) |
-| WORKER_PHONE_REST | (2510, 2224) |
-| WORKER_PHONE_RAISED | (2526, 2168) |
-| SITE | base centre (2880, 2300); hall x 2740 to 3040, roof y 2190; service block x 2756 to 2836, top y 2104 |
-| SITE_WINDOW | centre (2950, 2240), 30 × 20 |
-| SPARK | (2950, 2240), inside the window |
-| SITE_ROOF_EMIT | (2890, 2190), where the conditions line leaves the factory |
+| WORKER | feet (2480, 2300), height 156 (hard hat top y 2143); phone at rest (2510, 2224), raised (2526, 2168) |
+| SITE | base centre (2880, 2300); hall x 2710 to 3070, roof y 2186 with chamfered corners; one taller service block x 2730 to 2812, top y 2096; no chimney |
+| SITE_WINDOW | centre (2990, 2236), 32 × 20, a fine paper frame round a deep interior |
+| SPARK | inside the window, white |
+| SITE_ROOF_EMIT | (2890, 2186), where the conditions line leaves the factory |
 | RISK_OWNER | base centre (3300, 2300); desk top y 2232, x 3226 to 3386; head centre (3316, 2152) |
-| DESK_ORIGIN | (3386, 2232), desk top right corner. The human decision line starts here, always |
-| PACKET_DOCK | (3480, 2100), where the packet stops at the desk |
-| Labels WORKER, SITE, RISK OWNER | baselines y 2352, centred at x 2480, 2880, 3300; mono 24 |
+| DESK_ORIGIN | (3386, 2232), desk top right corner. The human decision line always starts here, and the escalation route ends here |
+| PACKET_DOCK | (3480, 2100), where the packet stops beside the risk owner (on the escalation route) |
+| Labels WORKER, SITE, RISK OWNER | baselines y 2352, centred at x 2480, 2890, 3300; mono 24 |
 | RECORD_LINE | y 2440, x 2260 to 3500 |
-| RECORD_MARK_1 | x 2950 (under the window), 24 tall, Sequence 4 |
+| RECORD_MARK_1 | x 2990 (under the window), 24 tall, Sequence 4 |
 | RECORD_MARK_2 | x 3300 (under the risk owner), 24 tall, Sequence 8 |
-| RECORD KEPT | centred (2950, 2494) |
+| RECORD KEPT | centred (2990, 2494) |
 | NO ONE DISTURBED | left aligned at (3420, 2166) |
+| RISK OWNER DECIDES | left aligned at (3590, 2306), right of the desk and below the desk path, readable sizing |
 
 ### 4.3 Sequence 1 overlay
 
@@ -168,7 +171,7 @@ The full sheet view (Sequence 8) frames x 386 to 5575, so the sheet edge is neve
 |---|---|
 | SENTENCE_1 "Real work in the middle." | centred (2880, 1764) baseline, Plex Sans SemiBold 52 |
 | SENTENCE_2 "Agents around it." | centred (2880, 1840) baseline, cobalt, 52 |
-| PRIORA_S1 | (2880, 1950), the top of the orbit |
+| PRIORA_S1 | (2880, 1950) |
 | ORBIT_S1 ellipse | centre (2880, 2232), rx 780, ry 282 |
 | Specialist stations on the ellipse | 62°, 128°, 180°, 232°, 298° measured from the top, clockwise |
 
@@ -176,14 +179,14 @@ The full sheet view (Sequence 8) frames x 386 to 5575, so the sheet edge is neve
 
 | Name | Value |
 |---|---|
-| VOICE_TEXT | left edge x 2540; line 1 baseline 1984, line 2 baseline 2030; Plex Sans Medium 30 (45 px at zoom 1.5) |
-| Line breaks | "Hey, the bracket by the packing line has cracked again." / "We're going to weld it before the night shift." |
-| VOICE_WAVE | baseline y 2072, grows from x 2556 to 3450, amplitude up to 16 |
-| VOICE_STEM | short ink stem from WORKER_PHONE_RAISED up to (2556, 2072) |
-| PRIORA_LISTEN | (3520, 1890), above and to the right |
-| LISTEN_THREAD | from Priora's bead down the right side of the text, then left along the waveform baseline to its growing tip, so it never crosses a word |
-| CASE_A | (2890, 1700), directly above the factory roof so the conditions line rises straight into the bottom facet |
-| PRIORA_CASE | (2690, 1670), left of the case, so the photo request thread falls to the worker without crossing the case |
+| VOICE_TEXT | left edge x 2640; baselines 1900, 1936, 1972; Plex Sans Medium 24.5 (44 px at zoom 1.8) |
+| Line breaks | "Hey, the bracket by the packing line" / "has cracked again. We’re going to" / "weld it before the night shift." (401, 375 and 324 units wide). Three lines rather than two keep the close framing on the worker and leave room for Priora on the worker's side |
+| VOICE_WAVE | baseline y 2046, grows from x 2556 to 3060, amplitude up to 15; clear of the service block top (2096) |
+| VOICE_STEM | a fine ink stem from the raised phone up to the start of the waveform |
+| PRIORA_LISTEN | (2560, 1960): just above and to the right of the worker, so the end of Sequence 1 is a glide towards the worker. The dotted listening thread runs from the bead down to the growing tip of the waveform and passes beneath every word |
+| CASE_A | (2890, 1750), directly above the factory roof, so the conditions line rises straight into the bottom facet |
+| PRIORA_CASE | (2610, 1880), left of the case; "Photo of the bracket?" ends at (2540, 1890) |
+| PHOTO | the photo card settles at (2690, 2020), scale 0.8, before it shrinks into its facet |
 
 ### 4.5 The case (local coordinates, never rotates)
 
@@ -191,40 +194,41 @@ The full sheet view (Sequence 8) frames x 386 to 5575, so the sheet edge is neve
 |---|---|
 | Core | ink dot, radius 9: the actual job |
 | Thin ring | cobalt, radius 34, 2.5 wide |
-| Facets | open radius 92 (chip: mark plus label), folded radius 52 (mark only), tucked radius 46 (packet) |
-| Facet angles | REPAIR 270, BEFORE NIGHT SHIFT 330, HOT WORK 30, SITE + INSURANCE CONDITIONS 90, PHOTO 150, PACKING LINE 210 |
-| Findings ring | radius 70 when assembled, 58 in the packet; stroke 9 |
+| Facets | open radius 92, folded radius 52, tucked radius 46 (packet). In Sequence 2 the open chips carry mark and label; at the table (Sequence 3) the open chips show their marks only, the labels having faded at F0650 |
+| Facet angles | REPAIR 270, BEFORE NIGHT SHIFT 330, HOT WORK 30, SITE + INSURANCE CONDITIONS 90 (its label sits to the right of the chip), PHOTO 150, PACKING LINE 210 |
+| Findings ring | radius 70 when assembled, 58 in the packet; band 9 wide; a hairline joint (0.7° each side) between arcs so the five findings read as five pieces |
 | Arcs | Insurer conditions 66 to 114 (48°, the future gap); Evidence check 114 to 192; Risk engineering 192 to 270; Site rules 270 to 348; Fire 348 to 66 |
 | The gap | centred at 90° (6 o'clock), 48° wide; coral caps at 66° and 114° |
-
-Why these angles: in Sequence 2 the conditions line rises from the factory straight below (90°) and the photo comes up from the worker below left (150°). In the panel each facet sits next to the agent that examines it, Fire and Insurer conditions sit side by side for the FIRE WATCH? exchange, and every arc slides at most 29° to lock into the ring. Below the packet is where Mitigate's safeguards rise into the gap.
+| Scale | 1.0 in Sequence 2, 1.15 at the table (Sequences 3 to 5, CASE_TABLE_SCALE), back to 1.0 as it folds into the packet |
 
 ### 4.6 Site panel
 
 | Name | Value |
 |---|---|
 | PANEL_CENTRE P | (1300, 1500) |
-| Wall | circle radius 600, stone, 3 wide; entrance gap centred at 0°, ±14° (chord about 290) |
+| Wall | circle radius 600, stone, 3 wide; entrance gap centred at 0°, ±14° |
 | PANEL_ENTRANCE | (1900, 1500) |
-| Table | open ring, pale cream band 14 wide at radius 300; the inside (radius 293) is clean paper, so labels can sit there |
-| Seats | 8 stone rings, radius 34, at radius 360 from P, at 22.5° + 45°·k |
-| s0 22.5° (1633, 1638) | Fire |
-| s1 67.5° (1438, 1833) | Insurer conditions |
-| s2 112.5° (1162, 1833) | ghost: Electrical |
-| s3 157.5° (967, 1638) | Evidence check |
-| s4 202.5° (967, 1362) | Risk engineering |
-| s5 247.5° (1162, 1167) | ghost: Structural |
-| s6 292.5° (1438, 1167) | Site rules |
-| s7 337.5° (1633, 1362) | ghost: Security |
-| Agent names | Plex Sans Medium 34, on clean paper just outside each seat (below for bottom seats, above for top seats, beside for side seats), inside the wall |
+| Table | open ring, pale cream band 14 wide at radius 330, with two fine stone edges; the inside (radius 323) is clean paper |
+| Seats | 8 stone rings, radius 42, at radius 390 from P, at 22.5° + 45°·k |
+| s0 22.5° (1660, 1649) | Fire |
+| s1 67.5° (1449, 1860) | Insurer conditions |
+| s2 112.5° (1151, 1860) | ghost: Electrical |
+| s3 157.5° (940, 1649) | Evidence check |
+| s4 202.5° (940, 1351) | Risk engineering |
+| s5 247.5° (1151, 1140) | ghost: Structural |
+| s6 292.5° (1449, 1140) | Site rules |
+| s7 337.5° (1660, 1351) | ghost: Security |
+| Agent names | Plex Sans Medium, readable sizing 24 px base; below the bottom seats, above the top seats, to the right of the right seats. The two left seats' names shift 50 units outwards, so the long names clear both the table band and the wall |
 | "Site panel" | centred (1300, 822) baseline, Plex Sans SemiBold 46 |
 | "CONFIGURED FOR THIS SITE" | centred (1300, 868) baseline, mono 32 (23 px at zoom 0.72) |
 | PRIORA_PANEL | (2010, 1470), outside the entrance; Priora conducts, it is never seated |
-| CASE_AT_TABLE | P |
-| Fire watch rulers (Sequence 5) | inside the table, under the case's gap: common origin x 1100; label baselines y 1610 and 1676 (mono 24, 23 px at zoom 0.95); 30 MIN ruler solid, 150 long, under the first label; 60 MIN ruler dashed, 300 long, under the second |
-| Barrier (Sequence 5) | pale incomplete outline across the route just outside the entrance, about (2080, 1560) |
+| CASE_WAIT | (2150, 1560), where the case waits outside before Priora brings it in |
+| FIRE WATCH? | at rest left aligned at (1560, 1770), between Fire and Insurer conditions, clear of the band and the wall |
+| Fire watch rulers (Sequence 5) | inside the table under the case: common origin x 1072; FIRE WATCH PLANNED: 30 MIN baseline 1632, solid ruler 150 long at y 1648; POLICY ASKS: 60 MIN baseline 1688, dashed ruler 300 long at y 1704; mono 26.8 (22 px at zoom 0.82), coral |
+| Barrier (Sequence 5) | an incomplete dashed grey post and half bar across the route at (2070, 1500); NO HARD STOP CONFIGURED left aligned at (2050, 1420), above the route |
+| PRIORA_PAUSE | (2370, 1770), beside the work route, clear of it by 150 units |
 
-The seats are balanced (five agents, three ghosts, no two ghosts adjacent), and the last two to arrive, Fire and Insurer conditions, take the seats nearest the entrance.
+Why the panel grew in Step 2: with the table at radius 300, the rulers' first label (472 units wide at the 22 px floor) could not sit inside the table under the case, and the long left names touched the table band. A table of 330 and seats at 390 fix both without changing the wall or any camera move.
 
 ### 4.7 Decision rooms
 
@@ -234,54 +238,57 @@ The seats are balanced (five agents, three ghosts, no two ghosts adjacent), and 
 | Rooms | radius 330 (outer), broad flat band 28 wide, paper inside, opening of 44° facing F |
 | RETAIN | centre (4016, 1315), F + 490 at 210°; coral band |
 | MITIGATE | centre (4440, 2050), F + 490 at 90°; cobalt band |
-| TRANSFER | centre (4864, 1315), F + 490 at 330°; stone band with a dashed cobalt perimeter |
-| Thresholds (opening mid points) | Retain (4302, 1480); Mitigate (4440, 1720); Transfer (4578, 1480) |
-| PATH_DESK_FORECOURT | from DESK_ORIGIN (3386, 2232) to the forecourt rim (4345, 1615); cubic, controls (3700, 2232) and (4150, 1720) |
-| Spurs | forecourt rim to each threshold, short and straight |
-| Room labels | name (Plex Sans SemiBold, readable sizing, 40 to 46 px) and status (mono, readable sizing, 25 to 28 px): above Retain at (4016, 925) and (4016, 965); right of Mitigate at (4800, 2090) and (4800, 2132); above Transfer |
-| Transfer labels | SIMULATED and NO INSURER ON PRIORA YET stacked above Transfer |
-| Mitigate interior | packet just inside the threshold (4440, 1880); three safeguards in a row near y 2150, each with name, disc stack (cost) and open clock arc (time) |
-| Retain interior | packet at (4030, 1300); coral bridge across its gap; three small room agents; four leaders to EXPOSURE, AUTHORITY, CONDITIONS, EXPIRY |
-| Transfer interior | packet at (4850, 1320); three dashed agents near the outer wall with small openings in the wall beside them |
+| TRANSFER | centre (4864, 1315), F + 490 at 330°; stone band with a dashed cobalt perimeter and three small openings beside its agents |
+| Thresholds (opening mid points) | Retain (4290, 1473); Mitigate (4440, 1734); Transfer (4590, 1473); a fine ink line across each while it is closed |
+| PATH_DESK_FORECOURT | from DESK_ORIGIN (3386, 2232) to the forecourt rim at 150° (4345, 1615); cubic, controls (3700, 2232) and (4150, 1720) |
+| Spurs | forecourt rim to each threshold, short and straight; the human line follows the rim from 150° to the right spur |
+| Room labels | names Plex Sans SemiBold, readable sizing 44 px base; statuses mono, readable sizing 27 px base. The stacks are spaced from the actual size at each zoom, so they never collide. Above Retain and Transfer the stack grows upwards from y 950 (Transfer keeps a line reserved for NO INSURER ON PRIORA YET, so nothing moves when it arrives); Mitigate's sits to its right from (4800, 2070), growing downwards |
+| R · M · T | each room's own initial, large and pale stone inside its room, overview only (question Q1) |
+| Focus | in a room close-up the other rooms sit at 25 percent and their labels are hidden |
+| Retain interior | packet (4040, 1320) with the coral bridge; three small room agents; four leaders to EXPOSURE (3960, 1200), AUTHORITY (4110, 1200), CONDITIONS (3960, 1450), EXPIRY (4110, 1450); AN AGENT CANNOT CHOOSE IT centred (4016, 1110) inside the room above the packet; RISK OWNER left aligned at (4325, 1432) in the mouth of the doorway, where the black line arrives; Priora inside at (4016, 1545) |
+| Mitigate interior | packet (4390, 1920); Evidence check's corner marks 96 out from it; FULL and BACK INSIDE left aligned from (4520, 1912), 34 apart; safeguards at (4270, 2120), (4440, 2120), (4610, 2120), names below in one or two lines (Thermal check / Extend watch, to 60 min / Move weld, to workshop), each with a disc stack (cost, left) and an open clock arc (time, right); Priora inside at (4440, 2275) |
+| Transfer interior | packet (4800, 1340); answers ELIGIBILITY, TERMS, SAFEGUARDS, PRICE ? each with a small dashed square, left aligned from (4910, 1250), 40 apart; Priora inside at (4680, 1430) |
+| Transfer agents | three dashed hexagonal glyphs 400 from Transfer's centre at 315°, 5° and 50°: (5147, 1032), (5262, 1350), (5121, 1621); outside the wall, away from the forecourt, clear of the label stack |
+| SHORT_LIST (Sequence 7) | MITIGATE PART and KEEP THE REST centred above the packet at (3480, 1925) and (3480, 1971), mono 38 |
 
-Visiting order sweeps one way round the clover: Retain (upper left), across the forecourt to Mitigate (below), on to Transfer (upper right). Sequence 7 continues the same direction, doorway to doorway without crossing: Mitigate, then Retain. Transfer sits on the outer edge of the composition, which suits "outside capacity", and has clean paper above it for its two persistent labels.
+Visiting order sweeps one way round the clover: Retain (upper left), across the forecourt to Mitigate (below), on to Transfer (upper right). Sequence 7 continues the same direction, doorway to doorway without crossing: Mitigate, then Retain.
 
 ### 4.8 Paths, defined once
 
 | Path | From → to |
 |---|---|
-| ROUTE_CASE_TO_PANEL | CASE_A → PANEL_ENTRANCE, a gentle arc above the real world (Sequence 3) |
-| ROUTE_WORK | from the closed ring at P, out through PANEL_ENTRANCE, down across the paper to SITE_WINDOW (Sequence 4). Drawn once, visible to the end |
-| ROUTE_ESCALATE | PANEL_ENTRANCE → PACKET_DOCK, arcing above the worker and the factory (Sequence 5) |
+| ROUTE_CASE_TO_PANEL | CASE_A → CASE_WAIT, a gentle arc above the real world (Sequence 3); controls (2700, 1560), (2350, 1480) |
+| ROUTE_WORK | from the closed ring at P (x 1380), out through PANEL_ENTRANCE, then C 2300 1500, 2660 1700 down to the window (Sequence 4). Drawn once, visible to the end |
+| ROUTE_ESCALATE | from (1960, 1500) over the real world to PACKET_DOCK (controls (2500, 1200), (3460, 1800)), then down to the desk corner, so it ends on the desk and not in the air (Sequence 5) |
 | PATH_DESK_FORECOURT plus spurs | the risk owner to every room threshold (Sequence 6), and the route back to the desk (Sequence 7) |
 | DOORWAY_TOUR | forecourt → Mitigate doorway → Retain doorway → PACKET_DOCK (Sequence 7; Priora stops at each threshold and never crosses) |
-| HUMAN_LINE | always starts at DESK_ORIGIN; runs along PATH_DESK_FORECOURT and the spurs in Sequence 6; in Sequence 7 it is drawn once, from the desk round the decided packet at PACKET_DOCK |
-| RECORD_DROP | PACKET_DOCK → RECORD_MARK_2 (Sequence 8) |
+| HUMAN_LINE | always starts at DESK_ORIGIN; in Sequence 5 it loops round the packet at PACKET_DOCK (radius 92); in Sequence 6 it runs along PATH_DESK_FORECOURT, the rim and a spur; in Sequence 7 it is drawn once, round the decided packet |
+| RECORD_DROP | PACKET_DOCK straight down past the end of the desk, then under the risk owner to RECORD_MARK_2 (controls (3480, 2330), (3420, 2400)), the case at half scale (Sequence 8) |
 
 ---
 
 ## 5. Cast
 
-All glyphs are cobalt with ink texture unless noted. Sizes are world units.
+All glyphs are cobalt with ink texture unless noted. Sizes are world units. `stills/cast/cast sheet.png` shows every agent at zoom 0.37, 1.0 and 1.75; `stills/cast/case sheet.png` every state of the case; `stills/cast/people sheet.png` the silhouettes, safeguards, room agents and the photo.
 
 | Character | Silhouette | Size | Movement signature |
 |---|---|---|---|
-| Priora | cobalt ring with a generous paper opening (outer radius 30, inner 14), fine orbit radius 50, one bead radius 6 | 112 across with orbit | long smooth glides; the bead turns to the target about 6 frames before the ring moves |
-| Site rules | two stacked semicircles | 56 | aligns: pieces slide into register |
-| Insurer conditions | two opposing brackets with a narrow opening | 56 | closes around a detail; from Sequence 5 its pieces stay a few units apart |
-| Fire | disc with a clean wedge removed | 56 | turns its wedge towards the activity |
+| Priora | cobalt ring with a generous paper opening (outer radius 30, inner 14), fine orbit radius 50, one bead radius 6.5 | 112 across with orbit | long smooth glides; the bead turns to the target about 6 frames before the ring moves |
+| Site rules | a disc split into two halves by a paper band; the upper half slides into register | 54 | aligns: pieces slide into register |
+| Insurer conditions | two opposing brackets with a narrow opening | 56 | closes round a detail; from Sequence 5 its pieces stay a few units apart |
+| Fire | disc with a clean 40° wedge removed | 56 | turns its wedge towards the activity |
 | Risk engineering | arch with a semicircular opening | 56 | opens out to examine its surroundings |
 | Evidence check | softened square with a small round aperture | 56 | frames and settles over an image |
-| Ghost agents (3) | dashed stone outlines in the same family, labelled Electrical, Structural, Security in grey | 56, about 20 percent opacity | still; fade during Sequence 4's first move |
-| Transfer agents (3) | dashed outline glyphs, lighter than the site agents; role labels pending question Q2 | 50 | still; answer with hollow pieces |
-| Room agents (Retain) | small cobalt dots and half rings | 24 | gather around the packet |
-| Safeguards (Mitigate) | three small glyphs, each with a disc stack and an open clock arc | 48 | lift, try the gap, return |
+| Ghost agents (3) | dashed stone outlines in the same family, names in grey | 56, 30 percent opacity | still; fade during Sequence 4's first move |
+| Transfer agents (3) | dashed hexagons with a small dashed inner mark, lighter than the site agents; unlabelled until question Q2 is answered | 50 | still; answer with hollow pieces |
+| Room agents (Retain) | small cobalt dot, half dome and rounded square | 24 | gather round the packet |
+| Safeguards (Mitigate) | ring (thermal check), capsule (longer watch), small house (workshop), each with a disc stack and an open clock arc | 48 | lift, try the gap, return |
 | Case | see 4.5 | 124 open with arcs, 116 as packet | carried; never transforms into another symbol |
-| Worker, site, risk owner | solid ink silhouettes with a worn texture and barely there contact shadows | as 4.2 | print-like arrivals; the risk owner never moves |
+| Worker, site, risk owner | solid ink silhouettes with a fine worn texture and barely there contact shadows | as 4.2 | print-like arrivals; the risk owner never moves |
 | Human decision line | ink, 5 px on screen | | draws from the desk; in Sequence 6 reaches each threshold before Priora crosses; in Sequence 7 drawn once, at the final close |
 | Agent threads | cobalt, 2 px on screen, dotted where the storyboard says dotted | | dots travel at a steady speed |
 
-A cast sheet (every agent side by side, at three zoom levels) is the first still of Step 2.
+Texture, as built: paper is a seamless 1024 px grain tile (512 world units a tile) plus one whole-sheet low-frequency mottle, both generated once from `feTurbulence` with fixed seeds (`npm run textures`). Ink is one SVG filter per shape and seed: fine flecks cut only inside an eroded copy of the shape (so edges stay clean) and a slow density variation. Fleck strength follows the zoom (full from 1.0 up, none at 0.6 and below), because sub-pixel flecks would shimmer in wide shots; the pattern itself never changes.
 
 ---
 
@@ -294,45 +301,47 @@ Shot = centre (x, y) and zoom. View = 1920/zoom by 1080/zoom world units.
 | Shot | Centre | Zoom | View (world) | Used for |
 |---|---|---|---|---|
 | S1_REAL | (2880, 2100) | 1.00 | x 1920–3840, y 1560–2640 | Sequence 1 |
-| S2_VOICE | (2940, 2110) | 1.50 | x 2300–3580, y 1750–2470 | the voice note |
-| S2_CASE | (2820, 1870) | 1.40 | x 2134–3506, y 1484–2256 | case assembly and the photo |
-| S3_PANEL | (1460, 1440) | 0.72 | x 127–2793, y 690–2190 | panel arrives, specialists summoned |
-| S3_TABLE | (1360, 1500) | 1.15 | x 525–2195, y 1030–1970 | checks at the table, Priora outside |
-| S4_CASE | (1300, 1500) | 1.70 | x 735–1865, y 1182–1818 | arcs lock into the ring |
+| S2_VOICE | (2672, 2075) | 1.80 | x 2139–3205, y 1775–2375 | the voice note: close on the worker, the factory to the right, the risk owner just off frame |
+| S2_CASE | (2800, 1950) | 1.38 | x 2104–3496, y 1559–2341 | case assembly and the photo; the risk owner in frame at context opacity |
+| S3_PANEL | (1390, 1390) | 0.72 | x 57–2723, y 640–2140 | panel arrives, specialists summoned; the worker and the factory stay just off frame |
+| S3_TABLE | (1360, 1507) | 1.10 | x 487–2233, y 1016–1998 | checks at the table, Priora outside |
+| S4_CASE | (1300, 1500) | 1.75 | x 751–1849, y 1191–1809 | arcs lock into the ring; the top and bottom seats stay off frame |
 | S4_ROUTE | (2760, 2000) | 0.96 | x 1760–3760, y 1437–2563 | route to the work, record, no one disturbed |
-| S5_GAP | (2050, 1800) | 0.95 | x 1040–3060, y 1232–2368 | the slip, rulers, barrier, spark in the distance |
+| S5_GAP | (1930, 1720) | 0.82 | x 759–3101, y 1061–2379 | the slip, rulers, barrier, the spark in the distance |
 | S5_DESK | (3330, 2120) | 1.30 | x 2592–4068, y 1705–2535 | the packet at the desk, the human line |
-| S6_ROOMS | (4190, 1610) | 0.62 | x 2642–5738, y 739–2481 | rooms appear |
-| S6_RETAIN | (3990, 1300) | 1.25 | x 3222–4758, y 868–1732 | Retain |
-| S6_MITIGATE | (4440, 2040) | 1.25 | x 3672–5208, y 1608–2472 | Mitigate |
-| S6_TRANSFER | (4864, 1260) | 1.25 | x 4096–5632, y 828–1692 | Transfer |
-| S7_SYSTEM | (4190, 1610) | 0.62 | as S6_ROOMS | rooms working together, the desk |
+| S6_ROOMS | (4190, 1555) | 0.62 | x 2642–5738, y 684–2426 | rooms appear |
+| S6_RETAIN | (3785, 1272) | 1.30 | x 3047–4523, y 857–1687 | Retain; Transfer stays off frame |
+| S6_MITIGATE | (4440, 2110) | 1.25 | x 3672–5208, y 1678–2542 | Mitigate; Retain, Transfer and the forecourt stay off frame |
+| S6_TRANSFER | (4864, 1245) | 1.20 | x 4064–5664, y 795–1695 | Transfer; Retain's edge in frame at 25 percent |
+| S7_SYSTEM | (4190, 1555) | 0.62 | as S6_ROOMS | rooms working together, the desk |
 | S8_SHEET | (2980, 1640) | 0.37 | x 386–5575, y 181–3099 | the whole system |
 
-Text floors this implies (22 px labels, 44 px sentences): at zoom 0.62 a label needs world size 36 or more; at 0.37, 60 or more and sentences 119 or more. Labels sized for a close shot fade before the camera pulls back past their floor.
+Text floors this implies (22 px labels, 44 px sentences): at zoom 0.62 a label needs world size 36 or more; at 0.37, 60 or more and sentences 119 or more. Labels sized for a close shot fade before the camera pulls back past their floor (section 7.1).
+
+Why S6_RETAIN and S6_MITIGATE frame off centre: the brief keeps the SIMULATED label with Transfer every time Transfer is on screen. In a centred Retain or Mitigate close-up, part of Transfer's band shows while its label is off frame. These framings keep Transfer completely out of those two close-ups instead.
 
 ### 6.2 Keyframes
 
-Every move eases in and out with the default curve and lasts at least 40 frames. Between moves the camera is completely still (no drift), so text can appear, checks can be read and decisions can land. These become `camera-keys.ts`.
+Every move eases in and out with the default curve and lasts at least 40 frames. Between moves the camera is completely still (no drift), so text can appear, checks can be read and decisions can land. These become `camera-keys.ts`. The frames are settled; Step 2 changed only shot positions and zooms.
 
-| # | Frames | Camera | Shot (centre x, y, zoom) |
-|---|---|---|---|
-| 1 | F0000 | at S1_REAL | 2880, 2100, 1 |
-| 2 | F0238–F0278 (40 f) | move S1_REAL → S2_VOICE | 2940, 2110, 1.5 |
-| 3 | F0478–F0518 (40 f) | move S2_VOICE → S2_CASE | 2820, 1870, 1.4 |
-| 4 | F0654–F0710 (56 f) | move S2_CASE → S3_PANEL | 1460, 1440, 0.72 |
-| 5 | F0970–F1014 (44 f) | move S3_PANEL → S3_TABLE | 1360, 1500, 1.15 |
-| 6 | F1124–F1168 (44 f) | move S3_TABLE → S4_CASE | 1300, 1500, 1.7 |
-| 7 | F1248–F1300 (52 f) | move S4_CASE → S4_ROUTE | 2760, 2000, 0.96 |
-| 8 | F1392–F1438 (46 f) | move S4_ROUTE → S5_GAP | 2050, 1800, 0.95 |
-| 9 | F1568–F1622 (54 f) | move S5_GAP → S5_DESK | 3330, 2120, 1.3 |
-| 10 | F1691–F1731 (40 f) | move S5_DESK → S6_ROOMS | 4190, 1610, 0.62 |
-| 11 | F1774–F1814 (40 f) | move S6_ROOMS → S6_RETAIN | 3990, 1300, 1.25 |
-| 12 | F1930–F1970 (40 f) | move S6_RETAIN → S6_MITIGATE | 4440, 2040, 1.25 |
-| 13 | F2154–F2194 (40 f) | move S6_MITIGATE → S6_TRANSFER | 4864, 1260, 1.25 |
-| 14 | F2351–F2391 (40 f) | move S6_TRANSFER → S7_SYSTEM | 4190, 1610, 0.62 |
-| 15 | F2530–F2570 (40 f) | move S7_SYSTEM → S8_SHEET | 2980, 1640, 0.37 |
-| 16 | to F2882 | hold S8_SHEET to the end | |
+| # | Frames | Camera |
+|---|---|---|
+| 1 | F0000 | at S1_REAL |
+| 2 | F0238–F0278 (40 f) | move S1_REAL → S2_VOICE |
+| 3 | F0478–F0518 (40 f) | move S2_VOICE → S2_CASE |
+| 4 | F0654–F0710 (56 f) | move S2_CASE → S3_PANEL |
+| 5 | F0970–F1014 (44 f) | move S3_PANEL → S3_TABLE |
+| 6 | F1124–F1168 (44 f) | move S3_TABLE → S4_CASE |
+| 7 | F1248–F1300 (52 f) | move S4_CASE → S4_ROUTE |
+| 8 | F1392–F1438 (46 f) | move S4_ROUTE → S5_GAP |
+| 9 | F1568–F1622 (54 f) | move S5_GAP → S5_DESK |
+| 10 | F1691–F1731 (40 f) | move S5_DESK → S6_ROOMS |
+| 11 | F1774–F1814 (40 f) | move S6_ROOMS → S6_RETAIN |
+| 12 | F1930–F1970 (40 f) | move S6_RETAIN → S6_MITIGATE |
+| 13 | F2154–F2194 (40 f) | move S6_MITIGATE → S6_TRANSFER |
+| 14 | F2351–F2391 (40 f) | move S6_TRANSFER → S7_SYSTEM |
+| 15 | F2530–F2570 (40 f) | move S7_SYSTEM → S8_SHEET |
+| 16 | to F2882 | hold S8_SHEET to the end |
 
 ---
 
@@ -355,16 +364,61 @@ Every move eases in and out with the default curve and lasts at least 40 frames.
 Rules that span sequences, and where they hold:
 
 - **The gap** opens at F1392, the first frame of Sequence 5, and is visible whenever the case is on screen until the human line closes round the decision in Sequence 7 (F2465–F2485). In Retain it is bridged with the original gap readable beneath; in Mitigate's preview the filling piece is dashed, so the gap still reads.
-- **SIMULATED** is a persistent, readable sized label: visible and at least 22 px whenever Transfer is in frame, from F1745 to the end of the film, including the wide shots of Sequences 7 and 8.
+- **SIMULATED** is a persistent, readable sized label: visible and at least 22 px whenever Transfer is in frame, including the wide shots of Sequences 7 and 8. It arrives 4 to 6 frames after Transfer's band first prints, and Transfer stays off frame in the Retain and Mitigate close-ups (section 6.1).
 - **The human line** always starts at DESK_ORIGIN. In Sequence 6 it reaches each doorway before Priora crosses; in Sequence 7 Priora does not cross, and the line is drawn once, at the close.
 - **The spark** flickers from F1274 to the final dissolve, from a fixed, hand-made flicker pattern (no random noise).
 - **The ghosts** fade during Sequence 4's first move and are gone well before Sequence 8.
+
+### 7.1 Corrections Step 3 makes inside the settled frames
+
+An independent check of this plan against the storyboard and the brief found beats in the wrong order and rules the Step 1 beat sheets did not cover yet. Each fix below is made inside the sequence's settled frame range when that sequence is built in Step 3, and the checker then verifies it. No sequence changes length. If a fix cannot fit inside its sequence, I will tell you rather than change a length.
+
+**Order inside the sequences**
+
+- Sequence 1: the five specialists settle before "Agents around it." appears, and the bead's short arc comes before the ellipse grows. The ellipse withdraws and Priora glides towards the worker (to PRIORA_LISTEN, just above and to its right) across Sequence 1's last frames and the first camera move, when no text is appearing.
+- Sequence 2: the bead turns to the waveform about 6 frames before the listening thread extends. The conditions line and its facet (the fifth) arrive before the empty PHOTO position (the sixth). The facets fold to their travelling radius before CASE appears, so CASE never meets the open chip labels. The camera rises only after the voice has ended, the words have faded to grey and the phrases have separated; the grey words are gone before the zoom would take them under 44 px.
+- Sequence 3: short echoes, fading within 8 frames, follow the agents as they enter. The fifth finding joins the others before the marks leave through the entrance. FIRE WATCH? travels on a path clear of Fire's glyph and name.
+- Sequence 4: each finding travels from its mark beside Priora into the ring, arriving from the direction of its agent (the storyboard's image). The facets do not fold here; they fold in Sequence 5.
+- Sequence 5: the slip (the arc loosening, the Insurer conditions glyph separating) starts once the camera has settled on S5_GAP, so the key moment is seen with a still camera.
+- Sequence 6: the room names and statuses arrive 4 to 6 frames after their bands. Priora takes the packet from the desk only after the Sequence 5 loop has let go. Retain's closed threshold line is drawn before Priora stops short. At Mitigate the black line visibly opens the threshold, and at Transfer it authorises the inquiry there, each with a still camera and at least 6 frames before Priora crosses. At Transfer, SIMULATED and NO INSURER ON PRIORA YET are both up before the line arrives. In Mitigate, Priora's bead turns to each option as it attends to it, with a slight lift.
+- Between Sequences 6 and 7: the human line draws back to the desk during the widening move, so the single Sequence 7 line is the only one on screen.
+- Sequence 7: the proposed coral bridge is dashed, with the gap's coral ends visible beneath, until the decision; it turns solid at F2485 together with the mitigation piece.
+- Sequence 8: the decided case lowers and leaves its record mark, the window flickers, and only then does Priora rise.
+- Everywhere: Priora's bead leads each glide by about 6 frames. The Priora component applies the lead to every move, so no beat says "at once".
+
+**One focal arrangement at a time**
+
+Everything outside the current arrangement is off frame or at 28 percent (`CONTEXT_OPACITY`), and opacities change only during camera moves.
+
+| Shot | At context opacity (or off frame) |
+|---|---|
+| S1_REAL, S4_ROUTE, S8_SHEET | nothing: the whole real world is the subject |
+| S2_VOICE | the risk owner is off frame |
+| S2_CASE | the risk owner |
+| S3_PANEL, S3_TABLE, S4_CASE | the real world is off frame; the ghosts sit at 30 percent |
+| S5_GAP | the worker and the record line (the site and its spark stay: the spark "continues in the distance") |
+| S5_DESK | the site, its spark, the work route and the record line |
+| S6_ROOMS, S7_SYSTEM | the site, the ground line and the record line; the risk owner and the desk stay, as the origin of the human line |
+| S6_RETAIN, S6_MITIGATE, S6_TRANSFER | the other rooms at 25 percent with their labels hidden; Transfer is entirely off frame in the Retain and Mitigate close-ups |
+
+**Text exits** (no label shrinks under its floor in a wide shot)
+
+- The specialist and ghost names fade with the ghosts in Sequence 4's first move.
+- Retain's leaders, AN AGENT CANNOT CHOOSE IT and RISK OWNER fade as the retained treatment falls away, in the move to Mitigate.
+- The safeguard names and PARTIAL, FULL, BACK INSIDE fade as the proposal withdraws, before the move to Transfer.
+- The Transfer answers' labels fade before Sequence 7's widening; the dashed answer pieces travel with the packet.
+- MITIGATE PART, KEEP THE REST and RISK OWNER DECIDES fade during Sequence 8's first move (at zoom 0.37 RISK OWNER DECIDES would cross Mitigate's band).
+- SIMULATED never fades while Transfer is in frame. In Sequence 8's recession and dissolve it fades with the room at exactly the room's contrast, never fainter. The dashed Transfer answers carry no label of their own: the room's SIMULATED stays in frame through Sequences 7 and 8 and the answers stay dashed.
+
+**The final statement** sits over the receded drawing, as the storyboard asks. The drawing recedes to 20 percent contrast or less, the spark and the room labels stay clear of the statement's text boxes, and the clean paper check treats the receded layer as paper. In Sequence 8 the drawing keeps ROUTE_WORK, ROUTE_ESCALATE and the desk path with its spurs; the travel-only paths are gone.
+
+**Small items resolved by recommendation** (say if you want otherwise): AN AGENT CANNOT CHOOSE IT is set in Mono capitals like every other all-capitals string; the Transfer agents sit outside the wall; Evidence check's corner marks in Mitigate come from a small Evidence check glyph among Mitigate's room agents, not from a trip across the sheet.
 
 ---
 
 ## 8. Timeline and beat sheets
 
-Generated from the same data the checker reads, so the numbers here are the checked ones. "Readable" is the number of frames each text item is fully visible, inside the frame with a 40 px margin and at or above its size floor; "needed" is 10 frames per word, minimum 20. Positions marked "set in Step 2" have their timing checked here and their exact place fixed against the stills.
+Generated from the same data the checker reads, so the numbers here are the checked ones. These are the Step 1 beat sheets: section 7.1 lists the order fixes Step 3 makes inside the same frames, and the sheets are regenerated as each sequence is built. Frame ranges are inclusive. "Readable" is the number of frames each text item is fully visible, inside the frame with a 40 px margin and at or above its size floor; "needed" is 10 frames per word, minimum 20. Positions marked "set in Step 2" have their timing checked here and their exact place fixed against the stills.
 
 | Part | Storyboard as first written | Rule-clean length | Final range | Length |
 |---|---|---|---|---|
@@ -384,9 +438,9 @@ Generated from the same data the checker reads, so the numbers here are the chec
 
 F0000–F0237, 238 frames (0:00.0–0:07.9). Tightest rule-clean need 238 frames.
 
-Camera: F0000 S1_REAL · hold to F0239
+Camera: F0000 S1_REAL · hold to F0237
 
-Narration: N1 "Real work in the middle: a worker, a site, a risk owner. Priora places agents around it." F0008–F0230 (17 words at 2.3 wps, 222 f)
+Narration: N1 "Real work in the middle: a worker, a site, a risk owner. Priora places agents around it." F0008–F0229 (17 words at 2.3 wps, 222 f)
 
 | Frames | Beat |
 |---|---|
@@ -403,7 +457,7 @@ Narration: N1 "Real work in the middle: a worker, a site, a risk owner. Priora p
 | F0182–F0200 | bead sweeps a short arc across the three |
 | F0186–F0218 | five specialists arrive along it (62°, 298°, 128°, 232°, 180°), stagger 4 to 6, each with its own small turn |
 | F0200–F0209 | text **Agents around it.** (sentence, 52 px, readable 31 f, 30 needed) |
-| F0218–F0238 | hold: the whole relationship visible |
+| F0218–F0237 | hold: the whole relationship visible |
 
 Hand-off: Over the first 26 frames of Sequence 2, under its opening camera move: the ellipse withdraws, the specialists drift to the edges and soften out, both sentences and the three labels fade. The bead turns to the worker at once and Priora glides on through the first 56 frames. No new text.
 
@@ -413,9 +467,9 @@ Checker: every rule passes.
 
 F0238–F0653, 416 frames (0:07.9–0:21.8). Tightest rule-clean need 416 frames.
 
-Camera: F0238 S1_REAL · move to S2_VOICE F0238–F0278 (40 f) · hold to F0478 · move to S2_CASE F0478–F0518 (40 f) · hold to F0658
+Camera: F0238 S1_REAL · move to S2_VOICE F0238–F0278 (40 f) · hold to F0478 · move to S2_CASE F0478–F0518 (40 f) · hold to F0653
 
-Narration: W1 "Hey, the bracket by the packing line has cracked again. We're going to weld it before the night shift." F0272–F0484 (19 words at 2.7 wps, 212 f); N2 "Priora hears the job, and asks for a photo." F0506–F0624 (9 words at 2.3 wps, 118 f)
+Narration: W1 "Hey, the bracket by the packing line has cracked again. We’re going to weld it before the night shift." F0272–F0483 (19 words at 2.7 wps, 212 f); N2 "Priora hears the job, and asks for a photo." F0506–F0623 (9 words at 2.3 wps, 118 f)
 
 | Frames | Beat |
 |---|---|
@@ -428,7 +482,7 @@ Narration: W1 "Hey, the bracket by the packing line has cracked again. We're goi
 | F0336–F0350 | underline "packing line" |
 | F0352–F0361 | text **has cracked again.** (sentence, 44 px, readable 129 f, 30 needed) |
 | F0369–F0381 | coral underline "cracked" |
-| F0385–F0394 | text **We're going to weld it** (sentence, 44 px, readable 96 f, 50 needed) |
+| F0385–F0394 | text **We’re going to weld it** (sentence, 44 px, readable 96 f, 50 needed) |
 | F0424–F0436 | underline "weld" |
 | F0441–F0450 | text **before the night shift.** (sentence, 44 px, readable 40 f, 40 needed) |
 | F0478–F0518 | camera rises with the phrases (no new text: the last words appeared 28 frames earlier) |
@@ -456,7 +510,7 @@ Narration: W1 "Hey, the bracket by the packing line has cracked again. We're goi
 | F0600–F0622 | photo travels up |
 | F0622–F0634 | photo settles into the facet |
 | F0630–F0642 | dashed perimeter becomes continuous |
-| F0634–F0654 | hold on the filled facet (the fold now rides in Sequence 3's travel) |
+| F0634–F0653 | hold on the filled facet (the fold now rides in Sequence 3's travel) |
 | F0638–F0647 | text **CASE** (label, 45 px, readable 71 f, 20 needed) |
 
 Hand-off: Ends with the case, its six facets and "CASE" beneath it, camera still at S2_CASE. The fold onto the core happens during Sequence 3's travel.
@@ -467,9 +521,9 @@ Checker: every rule passes.
 
 F0654–F1123, 470 frames (0:21.8–0:37.5). Tightest rule-clean need 470 frames.
 
-Camera: F0654 S2_CASE · move to S3_PANEL F0654–F0710 (56 f) · hold to F0970 · move to S3_TABLE F0970–F1014 (44 f) · hold to F1134
+Camera: F0654 S2_CASE · move to S3_PANEL F0654–F0710 (56 f) · hold to F0970 · move to S3_TABLE F0970–F1014 (44 f) · hold to F1123
 
-Narration: N3a "Next, it summons only the specialists this site and job need." F0756–F0900 (11 words at 2.3 wps, 144 f); N3b "Each checks its own conditions and reports back." F0988–F1093 (8 words at 2.3 wps, 105 f)
+Narration: N3a "Next, it summons only the specialists this site and job need." F0756–F0899 (11 words at 2.3 wps, 144 f); N3b "Each checks its own conditions and reports back." F0988–F1092 (8 words at 2.3 wps, 105 f)
 
 | Frames | Beat |
 |---|---|
@@ -498,7 +552,7 @@ Narration: N3a "Next, it summons only the specialists this site and job need." F
 | F1064–F1084 | Insurer conditions closes its brackets round the conditions facet |
 | F1076–F1085 | text **FIRE WATCH?** (label, 28 px, readable 39 f, 20 needed) |
 | F1086–F1106 | "FIRE WATCH?" travels from Fire to Insurer conditions |
-| F1094–F1124 | five small marks leave through the entrance and collect beside Priora |
+| F1094–F1123 | five small marks leave through the entrance and collect beside Priora |
 | F1106–F1114 | their answer joins the findings |
 
 Hand-off: The hold on the five marks beside Priora runs on under Sequence 4's first camera move (no new text).
@@ -509,9 +563,9 @@ Checker: every rule passes.
 
 F1124–F1391, 268 frames (0:37.5–0:46.4). Tightest rule-clean need 268 frames.
 
-Camera: F1124 S3_TABLE · move to S4_CASE F1124–F1168 (44 f) · hold to F1248 · move to S4_ROUTE F1248–F1300 (52 f) · hold to F1394
+Camera: F1124 S3_TABLE · move to S4_CASE F1124–F1168 (44 f) · hold to F1248 · move to S4_ROUTE F1248–F1300 (52 f) · hold to F1391
 
-Narration: N4 "When everything holds, the route opens. Work goes on, the record is kept, no one is disturbed." F1170–F1392 (17 words at 2.3 wps, 222 f)
+Narration: N4 "When everything holds, the route opens. Work goes on, the record is kept, no one is disturbed." F1170–F1391 (17 words at 2.3 wps, 222 f)
 
 | Frames | Beat |
 |---|---|
@@ -538,13 +592,13 @@ Checker: every rule passes.
 
 F1392–F1690, 299 frames (0:46.4–0:56.4). Tightest rule-clean need 299 frames.
 
-Camera: F1392 S4_ROUTE · move to S5_GAP F1392–F1438 (46 f) · hold to F1568 · move to S5_DESK F1568–F1622 (54 f) · hold to F1692
+Camera: F1392 S4_ROUTE · move to S5_GAP F1392–F1438 (46 f) · hold to F1568 · move to S5_DESK F1568–F1622 (54 f) · hold to F1690
 
-Narration: N5 "One condition slips: the fire watch is half the policy. Priora brings it to the risk owner. Agents prepare, the human decides." F1404–F1691 (22 words at 2.3 wps, 287 f)
+Narration: N5 "One condition slips: the fire watch is half the policy. Priora brings it to the risk owner. Agents prepare, the human decides." F1404–F1690 (22 words at 2.3 wps, 287 f)
 
 | Frames | Beat |
 |---|---|
-| F1392–F1422 | the gap opens from F1410: the Insurer conditions arc loosens, rotates about 8°, drifts out and turns dashed |
+| F1392–F1422 | the gap opens at F1392: the Insurer conditions arc loosens, rotates about 8°, drifts out and turns dashed |
 | F1392–F1438 | camera follows the route back to the panel |
 | F1398–F1416 | the Insurer conditions glyph separates its two pieces |
 | F1412–F1424 | coral at the two exposed ends |
@@ -571,9 +625,9 @@ Checker: every rule passes.
 
 F1691–F1929, 239 frames (0:56.4–1:04.3). Tightest rule-clean need 239 frames.
 
-Camera: F1691 S5_DESK · move to S6_ROOMS F1691–F1731 (40 f) · hold to F1774 · move to S6_RETAIN F1774–F1814 (40 f) · hold to F1930
+Camera: F1691 S5_DESK · move to S6_ROOMS F1691–F1731 (40 f) · hold to F1774 · move to S6_RETAIN F1774–F1814 (40 f) · hold to F1929
 
-Narration: N6R-a "Retain is never a default." F1745–F1811 (5 words at 2.3 wps, 66 f); N6R-b "Risk is kept on purpose, with its terms explicit." F1811–F1929 (9 words at 2.3 wps, 118 f)
+Narration: N6R-a "Retain is never a default." F1745–F1810 (5 words at 2.3 wps, 66 f); N6R-b "Risk is kept on purpose, with its terms explicit." F1811–F1928 (9 words at 2.3 wps, 118 f)
 
 | Frames | Beat |
 |---|---|
@@ -604,7 +658,7 @@ Narration: N6R-a "Retain is never a default." F1745–F1811 (5 words at 2.3 wps,
 | F1893–F1902 | text **AUTHORITY** (label, 30 px, readable 88 f, 20 needed; exact position set in Step 2) |
 | F1897–F1906 | text **CONDITIONS** (label, 30 px, readable 84 f, 20 needed; exact position set in Step 2) |
 | F1901–F1910 | text **EXPIRY** (label, 30 px, readable 80 f, 20 needed; exact position set in Step 2) |
-| F1910–F1930 | the arrangement holds while the narration finishes |
+| F1910–F1929 | the arrangement holds while the narration finishes |
 
 Checker: every rule passes.
 
@@ -612,9 +666,9 @@ Checker: every rule passes.
 
 F1930–F2153, 224 frames (1:04.3–1:11.8). Tightest rule-clean need 224 frames.
 
-Camera: F1930 S6_RETAIN · move to S6_MITIGATE F1930–F1970 (40 f) · hold to F2154
+Camera: F1930 S6_RETAIN · move to S6_MITIGATE F1930–F1970 (40 f) · hold to F2153
 
-Narration: N6M "Mitigate compares safeguards, and checks whether the work is back inside." F1982–F2126 (11 words at 2.3 wps, 144 f)
+Narration: N6M "Mitigate compares safeguards, and checks whether the work is back inside." F1982–F2125 (11 words at 2.3 wps, 144 f)
 
 | Frames | Beat |
 |---|---|
@@ -636,7 +690,7 @@ Narration: N6M "Mitigate compares safeguards, and checks whether the work is bac
 | F2083–F2092 | text **FULL** (label, 30 px, readable 46 f, 20 needed; exact position set in Step 2) |
 | F2089–F2105 | Evidence check's corner marks settle round the result |
 | F2109–F2118 | text **BACK INSIDE** (label, 30 px, readable 20 f, 20 needed; exact position set in Step 2) |
-| F2138–F2154 | the proposal withdraws; the packet is unresolved again |
+| F2138–F2153 | the proposal withdraws; the packet is unresolved again |
 
 Checker: every rule passes.
 
@@ -644,9 +698,9 @@ Checker: every rule passes.
 
 F2154–F2350, 197 frames (1:11.8–1:18.4). Tightest rule-clean need 197 frames.
 
-Camera: F2154 S6_MITIGATE · move to S6_TRANSFER F2154–F2194 (40 f) · hold to F2351
+Camera: F2154 S6_MITIGATE · move to S6_TRANSFER F2154–F2194 (40 f) · hold to F2350
 
-Narration: N6T "Transfer, simulated for now, asks outside capacity for terms and a price." F2194–F2351 (12 words at 2.3 wps, 157 f)
+Narration: N6T "Transfer, simulated for now, asks outside capacity for terms and a price." F2194–F2350 (12 words at 2.3 wps, 157 f)
 
 | Frames | Beat |
 |---|---|
@@ -654,7 +708,6 @@ Narration: N6T "Transfer, simulated for now, asks outside capacity for terms and
 | F2168–F2192 | the human line reaches the Transfer doorway, before Priora crosses |
 | F2194–F2212 | Priora crosses; packet inside |
 | F2198–F2207 | text **NO INSURER ON PRIORA YET** (label, 28 px, readable 204 f, 50 needed; exact position set in Step 2) |
-| F2204–F2213 | text **(carrier and capacity role labels: words not in the storyboard)** (label, 30 px, readable 198 f, 20 needed; exact position set in Step 2) |
 | F2212–F2242 | dashed copies of the gap travel out through small openings to the three dashed agents |
 | F2242–F2270 | hollow answers return |
 | F2274–F2283 | text **ELIGIBILITY** (label, 30 px, readable 128 f, 20 needed; exact position set in Step 2) |
@@ -662,7 +715,7 @@ Narration: N6T "Transfer, simulated for now, asks outside capacity for terms and
 | F2282–F2291 | text **SAFEGUARDS** (label, 30 px, readable 120 f, 20 needed; exact position set in Step 2) |
 | F2286–F2295 | text **PRICE ?** (label, 30 px, readable 116 f, 20 needed; exact position set in Step 2) |
 | F2315–F2331 | Priora gathers them |
-| F2331–F2351 | Priora brings the packet back to the forecourt, towards the risk owner |
+| F2331–F2350 | Priora brings the packet back to the forecourt, towards the risk owner |
 
 Checker: every rule passes.
 
@@ -670,9 +723,9 @@ Checker: every rule passes.
 
 F2351–F2529, 179 frames (1:18.4–1:24.3). Tightest rule-clean need 179 frames.
 
-Camera: F2351 S6_TRANSFER · move to S7_SYSTEM F2351–F2391 (40 f) · hold to F2530
+Camera: F2351 S6_TRANSFER · move to S7_SYSTEM F2351–F2391 (40 f) · hold to F2529
 
-Narration: N7-a "Priora carries the case between rooms." F2363–F2442 (6 words at 2.3 wps, 79 f); N7-b "The risk owner stays in control." F2451–F2530 (6 words at 2.3 wps, 79 f)
+Narration: N7-a "Priora carries the case between rooms." F2363–F2441 (6 words at 2.3 wps, 79 f); N7-b "The risk owner stays in control." F2451–F2529 (6 words at 2.3 wps, 79 f)
 
 | Frames | Beat |
 |---|---|
@@ -688,7 +741,7 @@ Narration: N7-a "Priora carries the case between rooms." F2363–F2442 (6 words 
 | F2485–F2495 | mitigation and retention marks turn solid; the dashed Transfer inquiry stays dashed, off to one side |
 | F2489–F2498 | text **RISK OWNER DECIDES** (label, 25 px, readable 92 f, 30 needed) |
 | F2495–F2507 | one soft pulse through the human line |
-| F2498–F2530 | the camera stays still while RISK OWNER DECIDES is read and the voice finishes (a decision moment) |
+| F2498–F2529 | the camera stays still while RISK OWNER DECIDES is read and the voice finishes (a decision moment) |
 
 Checker: every rule passes.
 
@@ -696,9 +749,9 @@ Checker: every rule passes.
 
 F2530–F2882, 353 frames (1:24.3–1:36.1). Bare minimum 308 frames; 45 frames of air kept (a moment on the whole system, a half second of near silence after the voice, a full second of the name alone).
 
-Camera: F2530 S7_SYSTEM · move to S8_SHEET F2530–F2570 (40 f) · hold to F2883
+Camera: F2530 S7_SYSTEM · move to S8_SHEET F2530–F2570 (40 f) · hold to F2882
 
-Narration: N8 "Priora turns physical work into explicit risk decisions, while the work happens." F2636–F2793 (12 words at 2.3 wps, 157 f)
+Narration: N8 "Priora turns physical work into explicit risk decisions, while the work happens." F2636–F2792 (12 words at 2.3 wps, 157 f)
 
 | Frames | Beat |
 |---|---|
@@ -715,7 +768,7 @@ Narration: N8 "Priora turns physical work into explicit risk decisions, while th
 | F2793–F2808 | breathing room: the statement holds in near silence after the voice |
 | F2808–F2853 | drawing and statement dissolve; "Priora" fades in during the second half |
 | F2828–F2837 | text **Priora** (name, 111 px, readable 106 f, 20 needed) |
-| F2853–F2883 | breathing room: "Priora" alone, still |
+| F2853–F2882 | breathing room: "Priora" alone, still |
 
 Checker: every rule passes.
 
@@ -728,7 +781,7 @@ Calm narration at 2.3 words per second; the worker's phone message at 2.7. Every
 | Line | Text | Words | Pace | Frames | Placed | Its sequence | Gap to next line |
 |---|---|---|---|---|---|---|---|
 | N1 | "Real work in the middle: a worker, a site, a risk owner. Priora places agents around it." | 17 | 2.3 | 222 | F0008–F0229 | F0000–F0237 | 42 f |
-| W1 | "Hey, the bracket by the packing line has cracked again. We're going to weld it before the night shift." | 19 | 2.7 | 212 | F0272–F0483 | F0238–F0653 | 22 f |
+| W1 | "Hey, the bracket by the packing line has cracked again. We’re going to weld it before the night shift." | 19 | 2.7 | 212 | F0272–F0483 | F0238–F0653 | 22 f |
 | N2 | "Priora hears the job, and asks for a photo." | 9 | 2.3 | 118 | F0506–F0623 | F0238–F0653 | 132 f |
 | N3a | "Next, it summons only the specialists this site and job need." | 11 | 2.3 | 144 | F0756–F0899 | F0654–F1123 | 88 f |
 | N3b | "Each checks its own conditions and reports back." | 8 | 2.3 | 105 | F0988–F1092 | F0654–F1123 | 77 f |
@@ -759,7 +812,7 @@ Exactly the order in the brief, no skipping:
 
 ### 10.2 Automatic checks (`npm run qa`)
 
-The checklist is also enforced by a lint that reads the timeline, layout, camera keys and the text registry, so a broken rule fails before anything is rendered. A working prototype of it already produced every number in sections 8 and 9.
+The checklist is also enforced by a lint that reads the timeline, layout, camera keys and the text registry, so a broken rule fails before anything is rendered. A working prototype produced every number in sections 8 and 9, but it checks each sequence on its own and covers the timing and text rules only. `scripts/qa.ts` checks the whole film in one pass, follows text that persists into later shots, and adds the composition rules below (focus, empty paper, clean paper, the gap, SIMULATED, the human line's lead, the bead's lead).
 
 | Check | Rule |
 |---|---|
@@ -771,7 +824,7 @@ The checklist is also enforced by a lint that reads the timeline, layout, camera
 | Reading time | each text item fully readable for at least 10 frames per word, minimum 20 |
 | Label delay | each label starts 4 to 6 frames after its subject arrives |
 | Clean paper | text boxes (measured with `@remotion/layout-utils`) never intersect a registered line or shape |
-| Verbatim | every on screen string appears in the storyboard's bold text, and every bold string appears on screen |
+| Verbatim | every on screen string comes from one text registry, compared character for character (curly apostrophes included) with an explicit list of the storyboard's on-screen strings. Bold alone is not the test: the storyboard also bolds words that never appear on screen, and the ghost names are not bold |
 | Numbers | no digits on screen except 30 MIN, 60 MIN and "60 min" |
 | Gap | from F1392 (the first frame of Sequence 5) until the decision closes in Sequence 7, the gap is drawn and unobstructed whenever the case is in frame |
 | SIMULATED | whenever the Transfer room is in frame, its SIMULATED label is too, at 22 px or more |
@@ -796,9 +849,9 @@ Pixel checks on rendered stills: empty paper at least 40 percent of the frame (p
 | Risk | What I will do |
 |---|---|
 | The ProRes master is about 2.5 to 3 GB; GitHub refuses files over 100 MB | see question Q4 |
-| Ink texture filters can shimmer when shapes move by fractions of a pixel | test early in Step 2 with the stability check; lower the noise frequency or snap the texture to its shape if needed |
+| Ink texture filters can shimmer when shapes move by fractions of a pixel | handled in Step 2: fine flecks fade out below zoom 1.0 and are gone at 0.6, and every pattern is fixed to its shape. The stability check still runs on every Step 3 render |
 | Render time with many filters | measured in Step 2; the half resolution review renders keep iteration fast |
-| Text widths in this plan come from the Plex font files (Medium and SemiBold estimated from the variable font's default instance) | measured exactly with `@remotion/layout-utils` in Step 2, line breaks fixed by hand |
+| Text widths come from the Plex font files (Medium and SemiBold estimated from the variable font's default instance) | the Step 2 stills confirmed every placement on screen; `@remotion/layout-utils` measures exactly in the Step 3 checker |
 | The recorded voice will not match 2.3 words per second exactly | the timeline reads word times from `narration.ts`; a recording replaces them and the checker reruns |
 
 ---
