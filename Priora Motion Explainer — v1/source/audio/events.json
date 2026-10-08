@@ -726,14 +726,6 @@
   "pan": 0.5
  },
  {
-  "kind": "decision",
-  "t": 77.6,
-  "gain_db": -10,
-  "dur": 0.4,
-  "pan": 0.2,
-  "part": "loop"
- },
- {
   "kind": "return",
   "t": 77.92,
   "gain_db": -10,
@@ -741,31 +733,31 @@
  },
  {
   "kind": "compare",
-  "t": 79.05,
+  "t": 78.94,
   "gain_db": -9,
   "pan": 0.45,
   "room": "mitigate"
  },
  {
   "kind": "return",
-  "t": 80.15,
+  "t": 80.07,
   "gain_db": -9,
   "pan": 0.45,
   "room": "transfer"
  },
  {
   "kind": "lock",
-  "t": 81.47,
+  "t": 81.43,
   "gain_db": -9,
   "pan": 0.45,
   "room": "retain"
  },
  {
   "kind": "decision",
-  "t": 82.33,
+  "t": 82.36,
   "gain_db": -4,
   "pan": 0.3,
-  "dur": 0.37000000000001876
+  "dur": 0.3400000000000034
  },
  {
   "kind": "resolve",

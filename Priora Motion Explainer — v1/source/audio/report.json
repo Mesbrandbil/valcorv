@@ -51,8 +51,8 @@
    ]
   },
   "no_narration_worker_gain_db": 0.226,
-  "no_narration_background_gain_db": 10.903,
-  "no_narration_background_over_master_db": 10.677,
+  "no_narration_background_gain_db": 10.902,
+  "no_narration_background_over_master_db": 10.676,
   "no_narration_limiter_max_reduction_db": 0.0,
   "note": "master.wav = TP-limiter(G * voice.wav as dual mono, DC-blocked + music.wav + sfx.wav); the stems are written post-gain G (the level they have inside master.wav, before the limiter). master-no-narration.wav = TP-limiter(G * voice-worker.wav + Gb * (music ducked under W01 only + sfx)), Gb = no_narration_background_gain_db"
  },
@@ -70,12 +70,12 @@
    "max_momentary_at_s": 46.76,
    "clipped_samples": 0,
    "dc_offset": [
-    2.17e-10,
-    2.81e-10
+    2.07e-10,
+    3.2e-10
    ],
    "first_sample_abs": 0.0,
    "last_10ms_peak_dbfs": -240.0,
-   "sha256": "66cbbc5ac3ecc9d3299c8efee3a33c765c6fee440aca258f132fac9b6d075bcc",
+   "sha256": "98a10054e444a542fb3cd32b04b43d9c036cc271a7f74373296e2f86aff0b313",
    "ffmpeg_ebur128": {
     "integrated_lufs": -32.3,
     "true_peak_dbtp": -18.6
@@ -87,19 +87,19 @@
    "sample_rate": 48000,
    "channels": 2,
    "subtype": "PCM_24",
-   "integrated_lufs": -35.9,
+   "integrated_lufs": -35.91,
    "true_peak_dbtp": -15.46,
    "sample_peak_dbfs": -15.46,
    "max_momentary_lufs": -26.85,
    "max_momentary_at_s": 48.55,
    "clipped_samples": 0,
    "dc_offset": [
-    3.7e-11,
-    6.55e-11
+    3.91e-11,
+    4.38e-11
    ],
    "first_sample_abs": 0.0,
    "last_10ms_peak_dbfs": -240.0,
-   "sha256": "b07a2b475571586aea83d680854660f2c5cc3c6efa689f45f7e68bb721d1cb2b",
+   "sha256": "dea27afe00843f3043c4f57ed979f712a3d53897b17880919facb546c49d5da1",
    "ffmpeg_ebur128": {
     "integrated_lufs": -35.9,
     "true_peak_dbtp": -15.5
@@ -118,12 +118,12 @@
    "max_momentary_at_s": 87.6,
    "clipped_samples": 0,
    "dc_offset": [
-    5.69e-08,
-    3.74e-08
+    5.68e-08,
+    3.73e-08
    ],
    "first_sample_abs": 0.0,
    "last_10ms_peak_dbfs": -240.0,
-   "sha256": "52aa1f42316c41310ef1f98a114b88ace21077027884f911ea26fee3df386bbc",
+   "sha256": "f6e43a35995acc60df37c26d557af00c4f791715d490c7192583879a0116cd33",
    "ffmpeg_ebur128": {
     "integrated_lufs": -16.0,
     "true_peak_dbtp": -1.3
@@ -142,12 +142,12 @@
    "max_momentary_at_s": 39.88,
    "clipped_samples": 0,
    "dc_offset": [
-    -1.55e-09,
-    -2.7e-09
+    -1.54e-09,
+    -2.76e-09
    ],
    "first_sample_abs": 0.0,
    "last_10ms_peak_dbfs": -240.0,
-   "sha256": "cfb87d485dd9f4369a52baf6cfe40be9cec65a8bde4b176af3d36ff34f36842d",
+   "sha256": "a39261041d71e6399890bd4c0a6a6fe5a2acaf2b13900ae9afeb2574ec3ba0ca",
    "ffmpeg_ebur128": {
     "integrated_lufs": -17.0,
     "true_peak_dbtp": -2.6
@@ -1425,7 +1425,7 @@
   }
  },
  "sfx": {
-  "stem_integrated_lufs": -35.9,
+  "stem_integrated_lufs": -35.91,
   "loudest_momentary_400ms_lufs": -26.85,
   "loudest_momentary_at_s": 48.55,
   "bus_leveller": {
@@ -1753,7 +1753,7 @@
     "kind": "reject",
     "t": 60.95,
     "lufs_100ms": -28.0,
-    "measured_lufs_100ms": -27.78
+    "measured_lufs_100ms": -27.79
    },
    {
     "kind": "print",
@@ -1940,7 +1940,7 @@
     "voice_lufs": -15.75,
     "music_lufs": -33.03,
     "sfx_lufs": -40.5,
-    "background_lufs": -32.44,
+    "background_lufs": -32.45,
     "voice_over_music_lu": 17.3,
     "voice_over_background_lu": 16.7,
     "music_duck_db": [
@@ -2099,10 +2099,10 @@
     "end": 83.32,
     "voice_lufs": -15.94,
     "music_lufs": -33.03,
-    "sfx_lufs": -38.89,
-    "background_lufs": -32.35,
+    "sfx_lufs": -39.09,
+    "background_lufs": -32.26,
     "voice_over_music_lu": 17.1,
-    "voice_over_background_lu": 16.4,
+    "voice_over_background_lu": 16.3,
     "music_duck_db": [
      -5.0,
      -5.0
@@ -2116,7 +2116,7 @@
     "voice_lufs": -15.84,
     "music_lufs": -32.01,
     "sfx_lufs": -41.73,
-    "background_lufs": -31.75,
+    "background_lufs": -31.74,
     "voice_over_music_lu": 16.2,
     "voice_over_background_lu": 15.9,
     "music_duck_db": [
@@ -2134,13 +2134,13 @@
   }
  },
  "events": {
-  "count": 123,
+  "count": 122,
   "per_kind": {
    "align": 1,
    "arrive": 23,
    "assemble": 4,
    "compare": 4,
-   "decision": 7,
+   "decision": 6,
    "deviate": 1,
    "door-close": 6,
    "door-open": 4,
@@ -3022,7 +3022,7 @@
     "lufs_100ms": -28.0,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -27.78
+    "measured_lufs_100ms": -27.79
    },
    {
     "kind": "request",
@@ -3285,16 +3285,6 @@
     "measured_lufs_100ms": -35.25
    },
    {
-    "kind": "decision",
-    "t": 77.6,
-    "start": 77.6,
-    "end": 79.9036,
-    "lufs_100ms": -35.0,
-    "tier": "other",
-    "note": "",
-    "measured_lufs_100ms": -34.59
-   },
-   {
     "kind": "return",
     "t": 77.92,
     "start": 77.92,
@@ -3302,47 +3292,47 @@
     "lufs_100ms": -36.7,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -34.65
+    "measured_lufs_100ms": -36.52
    },
    {
     "kind": "compare",
-    "t": 79.05,
-    "start": 79.05,
-    "end": 79.6984,
-    "lufs_100ms": -33.6,
+    "t": 78.94,
+    "start": 78.94,
+    "end": 79.5904,
+    "lufs_100ms": -33.7,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -33.29
+    "measured_lufs_100ms": -33.48
    },
    {
     "kind": "return",
-    "t": 80.15,
-    "start": 80.15,
-    "end": 82.7083,
-    "lufs_100ms": -39.6,
+    "t": 80.07,
+    "start": 80.07,
+    "end": 82.6176,
+    "lufs_100ms": -39.3,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -39.35
+    "measured_lufs_100ms": -39.04
    },
    {
     "kind": "lock",
-    "t": 81.47,
-    "start": 81.448,
-    "end": 82.1112,
-    "lufs_100ms": -35.5,
+    "t": 81.43,
+    "start": 81.408,
+    "end": 82.0847,
+    "lufs_100ms": -34.4,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -35.24
+    "measured_lufs_100ms": -34.14
    },
    {
     "kind": "decision",
-    "t": 82.33,
-    "start": 82.33,
-    "end": 84.6232,
-    "lufs_100ms": -31.7,
+    "t": 82.36,
+    "start": 82.36,
+    "end": 84.6531,
+    "lufs_100ms": -32.6,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -31.52
+    "measured_lufs_100ms": -32.37
    },
    {
     "kind": "resolve",
@@ -3352,7 +3342,7 @@
     "lufs_100ms": -39.8,
     "tier": "other",
     "note": "",
-    "measured_lufs_100ms": -35.47
+    "measured_lufs_100ms": -35.69
    },
    {
     "kind": "record",
@@ -3436,8 +3426,8 @@
    "name": "music.wav DC",
    "ok": true,
    "value": [
-    2.17e-10,
-    2.81e-10
+    2.07e-10,
+    3.2e-10
    ],
    "target": "|mean| < 1e-4"
   },
@@ -3463,8 +3453,8 @@
    "name": "sfx.wav DC",
    "ok": true,
    "value": [
-    3.7e-11,
-    6.55e-11
+    3.91e-11,
+    4.38e-11
    ],
    "target": "|mean| < 1e-4"
   },
@@ -3490,8 +3480,8 @@
    "name": "master.wav DC",
    "ok": true,
    "value": [
-    5.69e-08,
-    3.74e-08
+    5.68e-08,
+    3.73e-08
    ],
    "target": "|mean| < 1e-4"
   },
@@ -3517,8 +3507,8 @@
    "name": "master-no-narration.wav DC",
    "ok": true,
    "value": [
-    -1.55e-09,
-    -2.7e-09
+    -1.54e-09,
+    -2.76e-09
    ],
    "target": "|mean| < 1e-4"
   },
