@@ -1,13 +1,14 @@
 /*
-  s7-cooperate (78 to 84 s): the rooms cooperate; the risk owner stays in control. (cut 3b)
+  s7-cooperate (78 to 84 s): the rooms cooperate; the risk owner stays in control. (cut 3b, last fixes)
 
   The camera pulls back to the cooperation shot (77.85 to 78.95) and holds still to 83.3.
-  At 78.0 the risk owner's loop lets go of the packet (the loop unwinds to its tip and the line
-  steps aside along the Transfer wall, leaving a bay beside the Transfer door). Then one mover
-  at a time: Priora carries the packet to a door; the risk owner's black line opens the door
-  and stays in it while the room answers; the answer seats on the packet, dashed (rooms only
-  propose); the owner's choice prints beside the packet; the line withdraws and the door closes;
-  only then the next carry. The order is the brief's logic:
+  At 78.0 the risk owner's line is already let go (s6: drawn from the desk to its tip, loop open).
+  As Priora lifts the packet the line steps aside along the Transfer wall, leaving a bay beside
+  the Transfer door. At each door: the packet lands; the black line opens the door and reaches
+  in; the owner's choice prints beside the packet and the room's answer seats on it, dashed
+  (rooms only propose); the line holds in the open door until the choice has been read for 0.6 s
+  and withdraws only as Priora lifts off for the next door (the door closes once the line has
+  left it). The order is the brief's logic:
     Mitigate: the Thermal check piece leaves its shelf (the slot stays empty) and seats in part
       of the gap: MITIGATE PART.
     Transfer: a dashed "?" comes out of the open door and seats on the ring: WHAT WOULD IT COST?
@@ -18,7 +19,7 @@
   closed and only then the proposals turn solid, with one soft resolve pulse; DECIDES prints
   after the RISK OWNER name under the desk. Held still to 83.3.
 
-  Contract at 78.0 (docs/cut2-plan.md section 2, unchanged since) is tl.set below; stand-ins are
+  Contract at 78.0 (the line let go, W.decisionLetGo; packet at the dock) is tl.set below; stand-ins are
   built only for missing handles. Hand-over to s8 (same builder): W.coop.
 */
 PK.section("s7-cooperate", 78, 84, function (tl, W, ctx, S) {
@@ -315,16 +316,12 @@ PK.section("s7-cooperate", 78, 84, function (tl, W, ctx, S) {
     return s;
   }
   var decD = W.decisionD || valAt(W.decision, "attr", T0, "d") || W.decision.getAttribute("d");
-  var stemD = decD,
-    loopD = null;
+  // at 78.0 s6 leaves the line let go: drawn from the desk to its tip (the part of W.decisionD before its loop)
+  var stemD = decD;
   var cutA = decD.indexOf(" A");
-  if (cutA > 0) {
-    stemD = decD.slice(0, cutA);
-    var sEnd = samplePath(stemD, 4)[4];
-    loopD = "M" + pt(sEnd) + decD.slice(cutA);
-  }
+  if (cutA > 0) stemD = decD.slice(0, cutA);
   var trunkD = W.decisionTrunk ? W.decisionTrunk.getAttribute("d") : "M" + pt(TIPv) + " C" + f(TIPv[0] + 3) + " " + f(TIPv[1] - 30) + " " + f(BR0[0]) + " " + f(BR0[1] + 34) + " " + pt(BR0);
-  // A: as s6 leaves it without the loop (desk, under the dock, up to the tip, the trunk to the branch point)
+  // A: as s6 leaves it (desk, under the dock, up to the tip, the trunk to the branch point)
   var hlA = polyD(samplePath(stemD + " " + trunkD.replace(/^\s*M/, "L"), NPT - 1));
   // B: stepped aside while the packet is away: under the bay and up along the Transfer wall to the branch point
   var bayY = 727,
@@ -352,11 +349,6 @@ PK.section("s7-cooperate", 78, 84, function (tl, W, ctx, S) {
   var hl = PK.el("path", { d: hlA, class: "pk-decision" }, W.L.routes);
   W.L.routes.insertBefore(hl, W.decision);
   gsap.set(hl, { opacity: 0 });
-  var loopOld = loopD ? PK.el("path", { d: loopD, class: "pk-decision" }, W.L.routes) : null;
-  if (loopOld) {
-    W.L.routes.insertBefore(loopOld, W.decision);
-    gsap.set(loopOld, { opacity: 0, drawSVG: "0% 100%" });
-  }
   // the loop that closes at the decision: from where the line leaves on the right, over the top, to the lower left
   var arcTop = PK.el("path", { d: "M" + pt(E) + " A" + RL + " " + RL + " 0 1 0 " + pt(J), class: "pk-decision" }, W.L.routes);
   gsap.set(arcTop, { drawSVG: "0% 0%" });
@@ -364,7 +356,6 @@ PK.section("s7-cooperate", 78, 84, function (tl, W, ctx, S) {
   tl.set(W.decision, { opacity: 0 }, T0);
   if (W.decisionTrunk) tl.set(W.decisionTrunk, { opacity: 0 }, T0);
   tl.set(hl, { opacity: 1, attr: { d: hlA } }, T0);
-  if (loopOld) tl.set(loopOld, { opacity: 1, drawSVG: "0% 100%" }, T0);
 
   // ------------------------------------------------------------ the pieces, in the packet's arc units (inside arcsG; world = local x ARC x body scale)
   var gR = gapA.r || 40,
@@ -500,12 +491,14 @@ PK.section("s7-cooperate", 78, 84, function (tl, W, ctx, S) {
     FT(own[k], { drawSVG: "0% " + f(wall) + "%" }, { drawSVG: "0% 100%", duration: 0.08, ease: "power1.out" }, at + dw);
     return at + dw + 0.1; // the door is open
   }
-  // ...and withdraws: the line goes back to the branch point while the door closes behind it
-  function withdraws(k, at, dw) {
-    PK.drawOff(tl, own[k], at, dw, "power2.inOut", { to: "start" });
-    var dd = Math.max(0.14, dw - 0.04);
-    door(k, at + 0.04, false, dd);
-    return Math.max(at + dw, at + 0.04 + dd); // all still
+  // ...and withdraws as Priora lifts off for the next door: the line goes back to the branch point during the
+  // carry, and the door closes once the line has left the doorway
+  function withdraws(k, at, dur) {
+    var wall = own[k].pkWall || 85;
+    PK.drawOff(tl, own[k], at, dur, "power2.inOut", { to: "start" });
+    var p = 1 - wall / 100; // the part in the doorway goes first
+    var tf = p < 0.5 ? Math.sqrt(p / 2) : 1 - Math.sqrt((1 - p) / 2);
+    door(k, at + tf * dur + 0.02, false, 0.16);
   }
   var beadNow = ang(PDOCK, DOCK);
   function carry(dP, dQ, at, dur, s0, s1, beadTo) {
@@ -527,23 +520,28 @@ PK.section("s7-cooperate", 78, 84, function (tl, W, ctx, S) {
     return cub(q0, add(c1, sub(q0, p0)), add(c2, sub(q1, p1)), q1);
   }
 
-  // ------------------------------------------------------------ the timetable (one mover at a time)
+  // ------------------------------------------------------------ the timetable
+  // at each door: the packet lands; the line opens the door and reaches in; the owner's choice prints with it and
+  // the room's dashed answer comes out and seats; the line holds in the open door until the choice has been read
+  // for HOLD s; it withdraws only as Priora lifts off for the next door (during the carry)
   var tm = {
-    letGo: T0, letGoD: 0.25,
-    c1: 78.12, c1D: 0.45, // to Mitigate, lands 78.57 (the camera is landing too: it follows the packet up)
-    dwM: 0.12, flyM: 0.32,
-    c2D: 0.5, // to Transfer
-    dwT: 0.08, flyT: 0.22,
-    c3D: 0.6, // up to Retain
-    dwR: 0.18, flyR: 0.24,
-    c4D: 0.6, // back to the dock
+    c1: 78.05, c1D: 0.45, // to Mitigate, lands 78.5 (the camera is landing too: it follows the packet up)
+    dwM: 0.12, flyM: 0.28, outM: 0.24,
+    c2D: 0.45, // to Transfer
+    dwT: 0.08, flyT: 0.22, outT: 0.18,
+    c3D: 0.5, // up to Retain
+    dwR: 0.18, flyR: 0.24, outR: 0.3,
+    c4D: 0.55, // back to the dock
+    hold: 0.62,
     control: PK.word("L13", "control"), // 82.64
   };
+  function liftOff(tLabel, tSeat) {
+    return Math.max(tLabel + tm.hold, tSeat + 0.3);
+  }
 
-  // ------------------------------------------------------------ 0. the loop lets go: it unwinds to its tip; the line steps aside to the bay
-  if (loopOld) FT(loopOld, { drawSVG: "0% 100%" }, { drawSVG: "0% 0%", duration: tm.letGoD, ease: "power2.inOut" }, tm.letGo);
-  FT(hl, { attr: { d: hlA } }, { attr: { d: hlB }, duration: tm.letGoD, ease: "power2.inOut" }, tm.letGo);
-  if (W.decisionDot) FT(W.decisionDot, { opacity: 1 }, { opacity: 0, duration: 0.12, ease: "none" }, tm.letGo);
+  // ------------------------------------------------------------ 0. as Priora lifts the packet, the line steps aside into the bay (no node left at the tip)
+  FT(hl, { attr: { d: hlA } }, { attr: { d: hlB }, duration: 0.3, ease: "power2.inOut" }, tm.c1);
+  if (W.decisionDot) FT(W.decisionDot, { opacity: 1 }, { opacity: 0, duration: 0.15, ease: "none" }, tm.c1);
 
   // ------------------------------------------------------------ 1. Mitigate: the Thermal check piece seats in part of the gap
   var pM = PP.mitigate,
@@ -551,7 +549,7 @@ PK.section("s7-cooperate", 78, 84, function (tl, W, ctx, S) {
   var dPM = cub(DOCK, [1200, 640], [1205, 540], pM);
   var tL = carry(dPM, cub(PDOCK, [1180, 540], [1222, 440], qM), tm.c1, tm.c1D, 1, BIG, 90);
   var dM = DOOR.mitigate;
-  var tOpen = opens("mitigate", tL, tm.dwM);
+  opens("mitigate", tL, tm.dwM);
   var shelfC = centreAt(th.g, T0);
   try {
     var pb = th.piece.getBBox(),
@@ -571,7 +569,8 @@ PK.section("s7-cooperate", 78, 84, function (tl, W, ctx, S) {
   var thDoor = sub([dM[0] - 2, dM[1] - 20], thOff); // through the open doorway, above the owner's line
   var thPath = "M" + pt(thStart) + " C" + f(thStart[0] - 90) + " " + f(thStart[1] - 4) + " " + f(thDoor[0] + 80) + " " + f(thDoor[1]) + " " + pt(thDoor) +
     " C" + f(thDoor[0] - 30) + " " + f(thDoor[1]) + " " + f(pM[0] + 30) + " " + f(pM[1]) + " " + pt(pM);
-  var tFly = tOpen - 0.06; // the answer comes as the door finishes opening
+  var tIn = tL + tm.dwM + 0.04; // the line reaches into the doorway: the choice prints, the answer comes
+  var tFly = tIn;
   FT(th.g, { opacity: 1 }, { opacity: 0.28, duration: 0.15, ease: "none" }, tFly);
   FT(thFly.sc, { scale: K * kShelf, svgOrigin: "0 0" }, { scale: K, svgOrigin: "0 0", duration: tm.flyM, ease: "power2.inOut" }, tFly);
   tl.set(thFly.g, { x: thStart[0], y: thStart[1] }, tFly - 0.01);
@@ -581,8 +580,9 @@ PK.section("s7-cooperate", 78, 84, function (tl, W, ctx, S) {
   tl.set(thFly.g, { opacity: 0 }, tSeat);
   tl.set(seatTh.g, { opacity: 1 }, tSeat);
   PK.sfx("compare", tSeat, { gain_db: -9, pan: 0.45, room: "mitigate" });
-  choice("Mitigate part", tSeat);
-  var tGo = withdraws("mitigate", tSeat + 0.06, 0.16) + 0.02;
+  choice("Mitigate part", tIn);
+  var tGo = liftOff(tIn, tSeat);
+  withdraws("mitigate", tGo, tm.outM);
 
   // ------------------------------------------------------------ 2. Transfer: down to the bay beside its door; a dashed "?" seats on the ring
   var pT = PP.transfer,
@@ -590,10 +590,11 @@ PK.section("s7-cooperate", 78, 84, function (tl, W, ctx, S) {
   var c1T = [1200, 530],
     c2T = [1200, 640];
   tL = carry(cub(pM, c1T, c2T, pT), cubQ(pM, c1T, c2T, pT, qM, qT), tGo, tm.c2D, BIG, BIG);
-  tOpen = opens("transfer", tL, tm.dwT);
+  opens("transfer", tL, tm.dwT);
   var qSeat = add(pT, qOff);
   var qFrom = [DOOR.transfer[0] + 36, qSeat[1] - 6];
-  tFly = tOpen - 0.06;
+  tIn = tL + tm.dwT + 0.04;
+  tFly = tIn;
   tl.set(qFly.g, { x: qFrom[0], y: qFrom[1] }, tFly - 0.01);
   FT(qFly.g, { opacity: 0 }, { opacity: 1, duration: 0.08, ease: "none" }, tFly);
   FT(qFly.sc, { scale: BIG * 0.6, svgOrigin: "0 0" }, { scale: BIG, svgOrigin: "0 0", duration: tm.flyT, ease: "power2.out" }, tFly);
@@ -602,8 +603,9 @@ PK.section("s7-cooperate", 78, 84, function (tl, W, ctx, S) {
   tl.set(qFly.g, { opacity: 0 }, tSeat);
   tl.set(seatQ.g, { opacity: 1 }, tSeat);
   PK.sfx("return", tSeat, { gain_db: -9, pan: 0.45, room: "transfer" });
-  choice("What would it cost?", tSeat);
-  tGo = withdraws("transfer", tSeat + 0.06, 0.12) + 0.02;
+  choice("What would it cost?", tIn);
+  tGo = liftOff(tIn, tSeat);
+  withdraws("transfer", tGo, tm.outT);
 
   // ------------------------------------------------------------ 3. Retain: up to its door; a dashed clamp bar bridges the rest of the gap
   var pR = PP.retain,
@@ -611,7 +613,7 @@ PK.section("s7-cooperate", 78, 84, function (tl, W, ctx, S) {
   var c1R = [1196, 610],
     c2R = [1196, 380];
   tL = carry(cub(pT, c1R, c2R, pR), cubQ(pT, c1R, c2R, pR, qT, qR), tGo, tm.c3D, BIG, BIG);
-  tOpen = opens("retain", tL, tm.dwR);
+  opens("retain", tL, tm.dwR);
   var dR = DOOR.retain;
   var pol = ra.retain[0];
   var polC = xy(pol.g, T0);
@@ -619,7 +621,8 @@ PK.section("s7-cooperate", 78, 84, function (tl, W, ctx, S) {
   var barDoor = sub([dR[0] - 2, dR[1] - 34], barOff); // high in the doorway, above the owner's line
   var barPath = "M" + pt(barStart) + " C" + f(barStart[0] - 40) + " " + f(barStart[1] - 30) + " " + f(barDoor[0] + 40) + " " + f(barDoor[1]) + " " + pt(barDoor) +
     " C" + f(barDoor[0] - 24) + " " + f(barDoor[1]) + " " + f(pR[0] + 24) + " " + f(pR[1]) + " " + pt(pR);
-  tFly = tOpen - 0.06;
+  tIn = tL + tm.dwR + 0.04;
+  tFly = tIn;
   tl.set(barFly.g, { x: barStart[0], y: barStart[1] }, tFly - 0.01);
   FT(barFly.g, { opacity: 0 }, { opacity: 1, duration: 0.06, ease: "none" }, tFly);
   PK.travel(tl, barFly.g, barPath, tFly, tm.flyR, "power3.out");
@@ -627,8 +630,9 @@ PK.section("s7-cooperate", 78, 84, function (tl, W, ctx, S) {
   tl.set(barFly.g, { opacity: 0 }, tSeat);
   tl.set(seatBar.g, { opacity: 1 }, tSeat);
   PK.sfx("lock", tSeat, { gain_db: -9, pan: 0.45, room: "retain" });
-  choice("Keep the rest", tSeat);
-  tGo = withdraws("retain", tSeat + 0.06, 0.18) + 0.02;
+  choice("Keep the rest", tIn);
+  tGo = liftOff(tIn, tSeat);
+  withdraws("retain", tGo, tm.outR);
 
   // ------------------------------------------------------------ 4. back to the dock (the packet returns to its size beside the owner)
   var c1D = [1196, 380],

@@ -67,10 +67,10 @@ The world is one sheet of warm paper. The real world (worker, site, risk owner) 
 
 | Time | Picture | Voice and sound |
 | --- | --- | --- |
-| 77.85 to 79.3 | The camera frames the risk owner and all three rooms. The loop lets go; Priora carries the same packet to the Mitigate door. The owner's line opens it; a dashed Thermal check comes out to the packet: MITIGATE PART. | "Priora carries the case between rooms." |
-| 79.3 to 80.4 | Priora carries the packet down to the Transfer door; the owner's line opens it; a dashed "?" comes back and seats on the packet: WHAT WOULD IT COST? | |
-| 80.4 to 81.7 | Up to the Retain door; the owner's line opens it; a dashed bar bridges the rest of the gap: KEEP THE REST. The three choices ride with the packet as a short list. | "The risk owner stays in control." |
-| 81.7 to 83.3 | Priora brings the packet back to the dock. On "control" (82.64) the black line closes its loop round it; only now do the proposals turn solid, with one soft pulse: RISK OWNER DECIDES. | A low, settled tone. |
+| 77.85 to 79.3 | The camera frames the risk owner and all three rooms. Priora lifts the same packet from the dock and carries it to the Mitigate door (78.05 to 78.5). The owner's black line reaches into the door and holds it open: MITIGATE PART; a dashed Thermal check comes out and seats in part of the gap (78.94). | "Priora carries the case between rooms." |
+| 79.3 to 80.5 | As Priora carries the packet down to the Transfer door, the line withdraws; it reaches into the Transfer door: WHAT WOULD IT COST?; a dashed "?" comes back and seats on the packet (80.07). | |
+| 80.5 to 81.8 | Up to the Retain door; the line holds it open: KEEP THE REST; a dashed bar bridges the rest of the gap (81.43). The three choices ride with the packet as a short list. | "The risk owner stays in control." |
+| 81.8 to 83.3 | Priora brings the packet back to the dock. The black line closes its loop round it (82.36 to 82.70, on "control" 82.64); only now do the proposals turn solid, with one soft pulse: RISK OWNER DECIDES. | A low, settled tone. |
 
 ## 84 to 90: the complete system
 
