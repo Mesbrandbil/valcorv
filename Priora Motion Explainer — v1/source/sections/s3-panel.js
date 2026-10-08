@@ -573,12 +573,12 @@ PK.section("s3-panel", 22.3, 38, function (tl, W, ctx, S) {
     });
     if (rt.key === "fire") tl.fromTo(ag.dots, { opacity: 1 }, { opacity: 0, duration: 0.25, ease: "power1.in", immediateRender: false }, t - 0.25);
     if (rt.key === "riskEng") tl.fromTo(ag.body, { rotation: 45, svgOrigin: "0 0" }, { rotation: 0, svgOrigin: "0 0", duration: 0.35, ease: "power2.inOut", immediateRender: false }, t - 0.4);
-    // the finding and its short line (the tail follows, so the door is clear for the next)
+    // the finding and its line; when the finding lands, the line is taken in toward Priora (never popped off)
     var bd = PK.bead(W.L.threads, 3.2);
     var rl = thread(d);
     tl.fromTo(rl, { drawSVG: "0% 0%" }, { drawSVG: "0% 100%", duration: 0.8, ease: "power2.inOut", immediateRender: false }, t);
-    tl.fromTo(rl, { drawSVG: "0% 100%" }, { drawSVG: "100% 100%", duration: 0.62, ease: "power2.inOut", immediateRender: false }, t + 0.24);
-    tl.fromTo(rl, { opacity: 1 }, { opacity: 0, duration: 0.03, ease: "none", immediateRender: false }, t + 0.86);
+    tl.fromTo(rl, { drawSVG: "0% 100%" }, { drawSVG: "100% 100%", duration: 0.28, ease: "power2.in", immediateRender: false }, t + 0.8);
+    tl.fromTo(rl, { opacity: 1 }, { opacity: 0, duration: 0.03, ease: "none", immediateRender: false }, t + 1.08); // already zero length
     tl.fromTo(bd.g, { opacity: 0 }, { opacity: 1, duration: 0.12, ease: "none", immediateRender: false }, t);
     tl.fromTo(bd.dot, { scale: 0.4, svgOrigin: "0 0" }, { scale: 1, svgOrigin: "0 0", duration: 0.2, ease: "power2.out", immediateRender: false }, t);
     PK.travel(tl, bd.g, d, t, 0.8, "power2.inOut");

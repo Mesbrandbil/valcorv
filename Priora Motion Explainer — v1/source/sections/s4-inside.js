@@ -25,7 +25,7 @@
   (stroke-width 3.2, butt caps, attributes). W.align.ties.{...}: thin rust ties (1 px
   screen, stroke-opacity 0.4, inline style) from each agent to the middle of its arc, in
   W.L.threads. Agents at their aligned angles, opacity 1, names visible (100 percent),
-  body rotation 0. Panel drawn, title and sub visible, door open, seats, slot circles and
+  body rotation 0. Panel drawn, title visible (CONFIGURED FOR THIS SITE hidden since 40.45), door open, seats, slot circles and
   table ring hidden. W.route drawn, spark flickering, W.record.spine drawn with one tick
   in W.record.ticks. No status labels.
 */
@@ -160,19 +160,23 @@ PK.section("s4-inside", 38, 47, function (tl, W, ctx, S) {
   tl.fromTo(names, { opacity: 1 }, { opacity: 0.4, duration: 0.6, ease: "power1.inOut", immediateRender: false }, 40.45);
   tl.fromTo(panel.sub, { opacity: 1 }, { opacity: 0, duration: 0.6, ease: "power1.inOut", immediateRender: false }, 40.45);
   tl.fromTo(names, { opacity: 0.4 }, { opacity: 1, duration: 0.35, ease: "power1.inOut", immediateRender: false }, 46.55);
-  tl.fromTo(panel.sub, { opacity: 0 }, { opacity: 1, duration: 0.35, ease: "power1.inOut", immediateRender: false }, 46.55);
+  // CONFIGURED FOR THIS SITE stays hidden from the pull-out on (no flicker before the deviation)
 
   // ------------------------------------------------------------ on "opens" (40.26): the door opens and the route starts in the still close
   // frame; the camera follows it out (40.35 to 41.25) and its bead lands in the packing line window at 41.25
-  var tDoor = PK.word("L06", "opens");
-  panel.open(tl, tDoor, 0.4);
-  var tRoute = tDoor,
+  // both begin in the still frame on "opens": the leaves part from 40.22 (fast start, visible at once),
+  // the route draws from 40.28 and its bead rides it to the window as the camera follows
+  var tDoor = PK.word("L06", "opens") - 0.04;
+  var half = G.panel.gap / 2 - 0.01;
+  tl.fromTo(panel.leafA, { y: 0 }, { y: -half, duration: 0.35, ease: "power2.out", immediateRender: false }, tDoor);
+  tl.fromTo(panel.leafB, { y: 0 }, { y: half, duration: 0.35, ease: "power2.out", immediateRender: false }, tDoor);
+  var tRoute = tDoor + 0.06,
     dRoute = W.route.getAttribute("d"),
-    RD = 41.25 - tDoor;
-  PK.drawOn(tl, W.route, tRoute, RD, "power2.inOut", { later: true });
+    RD = 41.25 - tRoute;
+  PK.drawOn(tl, W.route, tRoute, RD, "sine.out", { later: true });
   var rb = PK.bead(W.L.threads, 3.6);
   tl.fromTo(rb.g, { opacity: 0 }, { opacity: 1, duration: 0.08, ease: "none", immediateRender: false }, tRoute);
-  PK.travel(tl, rb.g, dRoute, tRoute, RD, "power2.inOut");
+  PK.travel(tl, rb.g, dRoute, tRoute, RD, "sine.out");
   tl.fromTo(rb.g, { opacity: 1 }, { opacity: 0, duration: 0.12, ease: "none", immediateRender: false }, tRoute + RD);
   PK.sfx("door-open", tDoor, { gain_db: -10, pan: pan(620, tDoor) });
   PK.sfx("route", tRoute, { dur: RD, gain_db: -6, pan: 0 });
