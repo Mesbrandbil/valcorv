@@ -234,8 +234,8 @@ export const RETAIN_INSIDE = {
   ],
   // inside the room, above the packet: the room's rule, readable before the threshold opens
   agentCannot: [4016, 1110] as Pt,
-  // in the mouth of the doorway, above the forecourt, where the black line arrives
-  riskOwnerLabel: [4325, 1432] as Pt,
+  // beside the black line where it comes in from the desk, right aligned, below Retain's band
+  riskOwnerLabel: [4232, 1676] as Pt,
   prioraAt: [4016, 1545] as Pt,
 };
 
@@ -269,6 +269,7 @@ export const PATH = {
   caseToPanel: cubic(CASE_A, [2700, 1560], [2350, 1480], CASE_WAIT),
   work: `M ${PANEL.c[0] + CASE.findingsR * CASE_TABLE_SCALE} ${PANEL.c[1]} L ${PANEL_ENTRANCE[0]} ${PANEL_ENTRANCE[1]} C 2300 1500, 2660 1700, ${SITE.window.c[0]} ${SITE.window.c[1] - 14}`,
   // over the real world to the dock beside the risk owner, then down to the corner of the desk
+  escalateToDock: cubic([1960, 1500], [2500, 1200], [3460, 1800], PACKET_DOCK),
   escalate: `${cubic([1960, 1500], [2500, 1200], [3460, 1800], PACKET_DOCK)} C ${PACKET_DOCK[0] + 4} ${PACKET_DOCK[1] + 60}, 3440 2226, ${DESK_ORIGIN[0] + 2} ${DESK_ORIGIN[1] - 3}`,
   deskToForecourt: cubic(DESK_ORIGIN, [3700, 2232], [4150, 1720], polar(FORECOURT.c, FORECOURT.r, 150)),
   // down past the end of the desk, then under the risk owner onto the record line
@@ -299,4 +300,10 @@ export const humanLoop = (closed: boolean): string => {
   const [mx, my] = polar(LOOP.c, LOOP.r, LOOP.entry + 180);
   const [fx, fy] = polar(LOOP.c, LOOP.r, LOOP.entry + 372);
   return `${rise} A ${LOOP.r} ${LOOP.r} 0 0 1 ${mx.toFixed(1)} ${my.toFixed(1)} A ${LOOP.r} ${LOOP.r} 0 0 1 ${fx.toFixed(1)} ${fy.toFixed(1)}`;
+};
+
+/** The part of the human line beyond the desk path: round the forecourt rim from 150° and up the spur to a room's threshold. */
+export const humanRimSpur = (k: RoomKey): string => {
+  const full = humanPathTo(k);
+  return `M ${polar(FORECOURT.c, FORECOURT.r, 150).map((v) => v.toFixed(1)).join(' ')} ${full.slice(full.indexOf(' A '))}`;
 };

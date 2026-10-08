@@ -188,11 +188,12 @@ export type SafeguardKind = 'thermal' | 'watch' | 'workshop';
  * A safeguard proposal: its glyph, a stack of discs for cost and an open clock arc for time.
  * cost is 1 to 3 discs; time 0 to 1 of a turn. No numbers anywhere.
  */
-export const Safeguard: React.FC<Place & { variant: SafeguardKind; cost: number; time: number; lift?: number }> = ({ variant, cost, time, lift = 0, ...place }) => {
+/** glyphOffset moves the glyph alone (it travels to the packet); the cost and time measures stay where they are. */
+export const Safeguard: React.FC<Place & { variant: SafeguardKind; cost: number; time: number; lift?: number; glyphOffset?: Pt; measures?: number }> = ({ variant, cost, time, lift = 0, glyphOffset = [0, 0], measures = 1, ...place }) => {
   const px = usePx();
   return (
     <Placed {...place}>
-      <g transform={`translate(0 ${-lift * 10})`}>
+      <g transform={`translate(${glyphOffset[0].toFixed(2)} ${(glyphOffset[1] - lift * 10).toFixed(2)}) scale(${1 + 0.08 * lift})`}>
         <g filter={ink('cobalt', SEEDS.safeguards)} fill={COLOR.cobalt}>
           {variant === 'thermal' && <path fillRule="evenodd" d="M 18 0 A 18 18 0 1 1 -18 0 A 18 18 0 1 1 18 0 Z M 7 0 A 7 7 0 1 0 -7 0 A 7 7 0 1 0 7 0 Z" />}
           {variant === 'watch' && <rect x={-24} y={-9} width={48} height={18} rx={9} />}
@@ -200,13 +201,13 @@ export const Safeguard: React.FC<Place & { variant: SafeguardKind; cost: number;
         </g>
       </g>
       {/* cost: a stack of discs, left */}
-      <g fill={COLOR.ink} transform="translate(-46 14)">
+      <g fill={COLOR.ink} transform="translate(-46 14)" opacity={measures}>
         {Array.from({ length: cost }, (_, i) => (
           <ellipse key={i} cx={0} cy={-i * 7} rx={8} ry={3.2} opacity={0.85} />
         ))}
       </g>
       {/* time: an open clock arc, right */}
-      <g transform="translate(46 4)" fill="none" stroke={COLOR.ink} strokeLinecap="round">
+      <g transform="translate(46 4)" fill="none" stroke={COLOR.ink} strokeLinecap="round" opacity={measures}>
         <circle r={10} stroke={COLOR.stone} strokeWidth={px(1.2)} />
         <path d={arcSweep(10, time)} strokeWidth={px(2)} />
       </g>

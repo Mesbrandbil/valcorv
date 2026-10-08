@@ -6,6 +6,8 @@ import { World } from './world/World';
 import { SCENES } from './static/scenes';
 import { CaseSheet, CastSheet, PeopleSheet } from './static/Sheets';
 import { PaperGrainTile, PaperMottle } from './static/Textures';
+import { Film } from './film/Film';
+import { FILM_FRAMES } from './lib/timeline';
 
 loadFonts();
 
@@ -13,6 +15,9 @@ const WorldStill: React.FC<{ scene: string }> = ({ scene }) => <World state={SCE
 
 export const Root: React.FC = () => (
   <>
+    {/* the film, and the review version with burned in narration subtitles */}
+    <Composition id="priora-film" component={Film} durationInFrames={FILM_FRAMES} fps={FPS} width={WIDTH} height={HEIGHT} defaultProps={{ subtitles: false, narration: null, sound: null }} />
+    <Composition id="priora-film-review" component={Film} durationInFrames={FILM_FRAMES} fps={FPS} width={WIDTH} height={HEIGHT} defaultProps={{ subtitles: true, narration: null, sound: null }} />
     {/* Step 2: the static world */}
     <Composition id="world-still" component={WorldStill} durationInFrames={1} fps={FPS} width={WIDTH} height={HEIGHT} defaultProps={{ scene: 'sheet' }} />
     <Composition id="cast-sheet" component={CastSheet} durationInFrames={1} fps={FPS} width={WIDTH} height={HEIGHT} />

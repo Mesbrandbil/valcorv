@@ -7,8 +7,10 @@ import { usePx } from '../camera/Camera';
 import { Label } from '../lib/text';
 
 export type FacetMode = 'open' | 'folded' | 'tucked';
-export type FacetState = { visible?: number; filled?: boolean };
-export type ArcState = { opacity?: number; rotate?: number; out?: number; dashed?: boolean };
+/** visible: 0 to 1. For the photo facet: filled false = the empty dashed position; solid 0 to 1 = the photo in place. */
+export type FacetState = { visible?: number; filled?: boolean; solid?: number; pulse?: number };
+/** An arc of the findings ring. dx, dy: arrival offset; trim: extra degrees left open at each end (before they slide together). */
+export type ArcState = { opacity?: number; rotate?: number; out?: number; dashed?: boolean; dx?: number; dy?: number; trim?: number };
 
 export type CaseProps = {
   at: Pt;
@@ -18,8 +20,13 @@ export type CaseProps = {
   core?: number;
   facetMode?: FacetMode;
   facets?: Partial<Record<FacetKey, FacetState>>;
-  chipLabels?: { size: number; opacity?: number };
-  findings?: { radius?: number; opacity?: number; arcs?: Partial<Record<AgentKey, ArcState>> };
+  chipLabels?: { size: number; opacity?: number; each?: Partial<Record<FacetKey, number>> };
+  /** Override the facet radius and chip radius, to animate the fold between modes. */
+  facetR?: number;
+  chipR?: number;
+  /** Opacity of the marks inside the chips (default: shown when open). */
+  marks?: number;
+  findings?: { radius?: number; opacity?: number; pulse?: number; arcs?: Partial<Record<AgentKey, ArcState>> };
   coralEnds?: number;
   bridge?: { opacity: number; dashed?: boolean };
   piece?: { span: number; dashed: boolean; opacity?: number };
@@ -53,14 +60,14 @@ const PhotoMini: React.FC = () => (
   </g>
 );
 
-const chipAnchor = (a: number): 'start' | 'middle' | 'end' => {
+export const chipAnchor = (a: number): 'start' | 'middle' | 'end' => {
   if (a === 90) return 'start';
   const x = Math.cos((a * Math.PI) / 180);
   return x > 0.3 ? 'start' : x < -0.3 ? 'end' : 'middle';
 };
 
 /** Where a chip's label sits: outward from the chip, except the bottom chip, whose label sits to its right. */
-const chipLabelAt = (fr: number, cr: number, a: number, size: number): Pt => {
+export const chipLabelAt = (fr: number, cr: number, a: number, size: number): Pt => {
   if (a === 90) {
     const [x, y] = polar([0, 0], fr, a);
     return [x + cr + 12, y + size * 0.36];
@@ -78,6 +85,9 @@ export const Case: React.FC<CaseProps> = ({
   facetMode = 'folded',
   facets = {},
   chipLabels,
+  facetR,
+  chipR,
+  marks,
   findings,
   coralEnds = 0,
   bridge,
@@ -86,10 +96,11 @@ export const Case: React.FC<CaseProps> = ({
 }) => {
   const px = usePx();
   const dash = `${px(DASH_PX[0]) / scale} ${px(DASH_PX[1]) / scale}`;
-  const fr = FACET_R[facetMode];
-  const cr = CHIP_R[facetMode];
+  const fr = facetR ?? FACET_R[facetMode];
+  const cr = chipR ?? CHIP_R[facetMode];
+  const markOpacity = marks ?? (facetMode === 'open' ? 1 : 0);
   const R = findings?.radius ?? CASE.findingsR;
-  const half = CASE.arcW / 2;
+  const half = (CASE.arcW / 2) * (1 + 0.3 * (findings?.pulse ?? 0));
   const g0 = GAP.centre - GAP.half;
   const g1 = GAP.centre + GAP.half;
   const ringLen = 2 * Math.PI * CASE.ringR;
@@ -105,13 +116,15 @@ export const Case: React.FC<CaseProps> = ({
             const [a0, a1] = ARC_SPAN[k];
             const rot = st.rotate ?? 0;
             const rr = R + (st.out ?? 0);
+            const trim = st.trim ?? 0;
+            const move = st.dx || st.dy ? `translate(${(st.dx ?? 0).toFixed(2)} ${(st.dy ?? 0).toFixed(2)})` : undefined;
             if (st.dashed) {
               return (
-                <path key={k} d={arcPath([0, 0], rr, a0 + rot + 2, a1 + rot - 2)} fill="none" stroke={COLOR.cobalt} strokeWidth={CASE.arcW * 0.42} strokeDasharray={dash} opacity={st.opacity ?? 1} />
+                <path key={k} transform={move} d={arcPath([0, 0], rr, a0 + rot + 2 + trim, a1 + rot - 2 - trim)} fill="none" stroke={COLOR.cobalt} strokeWidth={CASE.arcW * 0.42} strokeDasharray={dash} opacity={st.opacity ?? 1} />
               );
             }
             // a hairline joint between neighbouring arcs keeps the five findings readable as five pieces
-            return <path key={k} d={annulusSector([0, 0], rr - half, rr + half, a0 + rot + JOINT, a1 + rot - JOINT)} fill={COLOR.cobalt} filter={ink('cobalt', SEEDS.caseArcs)} opacity={st.opacity ?? 1} />;
+            return <path key={k} transform={move} d={annulusSector([0, 0], rr - half, rr + half, a0 + rot + JOINT + trim, a1 + rot - JOINT - trim)} fill={COLOR.cobalt} filter={ink('cobalt', SEEDS.caseArcs)} opacity={st.opacity ?? 1} />;
           })}
           {coralEnds > 0 && (
             <g fill={COLOR.coral} opacity={coralEnds} filter={ink('coral', SEEDS.coralBridge)}>
@@ -171,35 +184,36 @@ export const Case: React.FC<CaseProps> = ({
         if (vis <= 0) return null;
         const a = FACET_ANGLE[k];
         const [x, y] = polar([0, 0], fr, a);
-        // the photo position stays empty only until the photo arrives in Sequence 2
-        const empty = k === 'photo' && st?.filled === false;
+        // the photo position: empty and dashed until the photo arrives, then solid
+        const solid = k === 'photo' ? (st?.solid ?? (st?.filled === false ? 0 : 1)) : 1;
+        const pulse = st?.pulse ?? 0;
+        const labelOpacity = (chipLabels?.opacity ?? 1) * (chipLabels?.each?.[k] ?? 1);
         return (
           <g key={k} opacity={vis}>
-            <g transform={`translate(${x.toFixed(2)} ${y.toFixed(2)})`}>
-              {empty ? (
-                <g>
+            <g transform={`translate(${x.toFixed(2)} ${y.toFixed(2)}) scale(${1 + 0.12 * pulse})`}>
+              {solid < 1 && (
+                <g opacity={1 - solid}>
                   <circle r={cr} fill="none" stroke={COLOR.cobalt} strokeWidth={px(2) / scale} strokeDasharray={dash} />
-                  {facetMode === 'open' && (
-                    <text y={6} textAnchor="middle" fontFamily="IBM Plex Mono" fontWeight={500} fontSize={16} fill={COLOR.coral}>
+                  {markOpacity > 0 && (
+                    <text y={6} textAnchor="middle" fontFamily="IBM Plex Mono" fontWeight={500} fontSize={16} fill={COLOR.coral} opacity={markOpacity}>
                       ?
                     </text>
                   )}
                 </g>
-              ) : (
-                <g>
+              )}
+              {solid > 0 && (
+                <g opacity={solid}>
                   <circle r={cr} fill={COLOR.cobalt} filter={ink('cobalt', SEEDS.caseChips)} />
-                  {facetMode === 'open' && <FacetMark k={k} filled={st?.filled} />}
+                  {markOpacity > 0 && (
+                    <g opacity={markOpacity} transform={`scale(${cr / CASE.chipR})`}>
+                      <FacetMark k={k} filled />
+                    </g>
+                  )}
                 </g>
               )}
             </g>
-            {chipLabels && facetMode === 'open' && (
-              <Label
-                text={FACET_LABEL[k]}
-                at={chipLabelAt(fr, cr, a, chipLabels.size)}
-                anchor={chipAnchor(a)}
-                size={chipLabels.size}
-                opacity={chipLabels.opacity ?? 1}
-              />
+            {chipLabels && labelOpacity > 0 && (
+              <Label text={FACET_LABEL[k]} at={chipLabelAt(fr, cr, a, chipLabels.size)} anchor={chipAnchor(a)} size={chipLabels.size} opacity={labelOpacity} />
             )}
           </g>
         );

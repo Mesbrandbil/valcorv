@@ -116,7 +116,7 @@ const RetainInside: React.FC = () => {
         );
       })}
       <Label text="AN AGENT CANNOT CHOOSE IT" at={RETAIN_INSIDE.agentCannot} size={24} />
-      <Label text="RISK OWNER" at={RETAIN_INSIDE.riskOwnerLabel} anchor="start" size={24} />
+      <Label text="RISK OWNER" at={RETAIN_INSIDE.riskOwnerLabel} anchor="end" size={24} />
     </g>
   );
 };

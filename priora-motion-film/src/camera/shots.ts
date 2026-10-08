@@ -12,7 +12,7 @@ export const SHOTS = {
   S5_GAP: { x: 1930, y: 1720, zoom: 0.82 },
   S5_DESK: { x: 3330, y: 2120, zoom: 1.3 },
   S6_ROOMS: { x: 4190, y: 1555, zoom: 0.62 },
-  S6_RETAIN: { x: 3785, y: 1272, zoom: 1.3 },
+  S6_RETAIN: { x: 3760, y: 1288, zoom: 1.25 },
   S6_MITIGATE: { x: 4440, y: 2110, zoom: 1.25 },
   S6_TRANSFER: { x: 4864, y: 1245, zoom: 1.2 },
   S7_SYSTEM: { x: 4190, y: 1555, zoom: 0.62 },

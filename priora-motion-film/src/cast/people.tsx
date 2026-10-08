@@ -18,19 +18,16 @@ export const ContactShadowDefs: React.FC = () => (
 
 export type PhonePose = 'rest' | 'raised' | 'tilted';
 
-/** The worker: hard hat, solid rounded stance, one arm near a phone. Feet at WORKER.feet. */
-export const Worker: React.FC<{ phone?: PhonePose; opacity?: number }> = ({ phone = 'rest', opacity = 1 }) => {
+/**
+ * The worker: hard hat, solid rounded stance, one arm near a phone. Feet at WORKER.feet.
+ * raise 0 to 1 swings the arm from the side to the ear about the shoulder; tilt 0 to 1 turns the phone to show its screen.
+ */
+export const Worker: React.FC<{ phone?: PhonePose; raise?: number; tilt?: number; opacity?: number }> = ({ phone = 'rest', raise, tilt, opacity = 1 }) => {
   const [fx, fy] = WORKER.feet;
-  const arm =
-    phone === 'rest'
-      ? 'M 21 -98 C 30 -92 34 -78 31 -60 L 23 -58 C 25 -72 22 -84 16 -90 Z'
-      : 'M 20 -99 C 30 -104 36 -116 36 -128 L 28 -130 C 27 -120 23 -110 15 -104 Z';
-  const phoneShape =
-    phone === 'rest'
-      ? <rect x={23} y={-64} width={10} height={16} rx={2} transform="rotate(-8 28 -56)" />
-      : phone === 'raised'
-        ? <rect x={27} y={-144} width={10} height={17} rx={2} transform="rotate(10 32 -136)" />
-        : <rect x={27} y={-146} width={10} height={17} rx={2} transform="rotate(48 32 -137)" />;
+  const r = raise ?? (phone === 'rest' ? 0 : 1);
+  const tl = tilt ?? (phone === 'tilted' ? 1 : 0);
+  const shoulder: [number, number] = [20, -98];
+  const armAngle = -136 * r;
   return (
     <g transform={`translate(${fx} ${fy})`} opacity={opacity}>
       <g filter={ink('ink', SEEDS.worker)} fill={COLOR.ink}>
@@ -44,9 +41,11 @@ export const Worker: React.FC<{ phone?: PhonePose; opacity?: number }> = ({ phon
         {/* legs */}
         <path d="M -19 -42 L -17 0 L -3 0 L -2 -42 Z" />
         <path d="M 2 -42 L 3 0 L 17 0 L 19 -42 Z" />
-        {/* arm and phone */}
-        <path d={arm} />
-        {phoneShape}
+        {/* arm and phone, turning about the shoulder */}
+        <g transform={`rotate(${armAngle.toFixed(2)} ${shoulder[0]} ${shoulder[1]})`}>
+          <path d="M 21 -98 C 30 -92 34 -78 31 -60 L 23 -58 C 25 -72 22 -84 16 -90 Z" />
+          <rect x={23} y={-64} width={10} height={16} rx={2} transform={`rotate(${(-8 + 40 * tl).toFixed(2)} 28 -56)`} />
+        </g>
       </g>
     </g>
   );

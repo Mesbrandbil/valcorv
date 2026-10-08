@@ -11,30 +11,49 @@ export type AgentPlace = { at?: Pt; rotation?: number; opacity?: number; state?:
 
 export type SitePanelProps = {
   opacity?: number;
+  /** Arrival: the wall draws round from the entrance, the table and the seats print in. */
+  wall?: number;
+  table?: number;
+  seats?: number;
   titleOpacity?: number;
+  subOpacity?: number;
   ghostOpacity?: number;
   ghostNameOpacity?: number;
+  /** Per ghost name, overriding ghostNameOpacity (they appear one by one). */
+  ghostNames?: Partial<Record<'Electrical' | 'Structural' | 'Security', number>>;
   agents?: Partial<Record<AgentKey, AgentPlace>>;
 };
 
 /** Default resting orientation of a seated agent: Fire's wedge faces the table centre. */
 export const seatedRotation = (k: AgentKey) => (k === 'fire' ? angleTo(seatPos(SEAT_OF.fire), PANEL.c) : 0);
 
-export const SitePanel: React.FC<SitePanelProps> = ({ opacity = 1, titleOpacity = 1, ghostOpacity = 0.3, ghostNameOpacity = 1, agents = {} }) => {
+export const SitePanel: React.FC<SitePanelProps> = ({ opacity = 1, wall = 1, table = 1, seats = 1, titleOpacity = 1, subOpacity, ghostOpacity = 0.3, ghostNameOpacity = 1, ghostNames, agents = {} }) => {
   const px = usePx();
   const c = PANEL.c;
   return (
     <g opacity={opacity}>
       {/* the enclosure, with a generous entrance on the right */}
-      <path d={arcPath(c, PANEL.wallR, PANEL.entranceHalf, 360 - PANEL.entranceHalf)} fill="none" stroke={COLOR.stone} strokeWidth={PANEL.wallW} strokeLinecap="round" />
+      {wall > 0 && (
+        <path
+          d={arcPath(c, PANEL.wallR, PANEL.entranceHalf, 360 - PANEL.entranceHalf)}
+          pathLength={1000}
+          strokeDasharray={`${(wall * 1000).toFixed(1)} 1000`}
+          fill="none"
+          stroke={COLOR.stone}
+          strokeWidth={PANEL.wallW}
+          strokeLinecap="round"
+        />
+      )}
       {/* the open circular table */}
-      <path d={annulusSector(c, PANEL.tableR - PANEL.tableBand / 2, PANEL.tableR + PANEL.tableBand / 2, 0, 359.99)} fill={COLOR.cream} filter={ink('stone', SEEDS.table)} />
-      <circle cx={c[0]} cy={c[1]} r={PANEL.tableR + PANEL.tableBand / 2} fill="none" stroke={COLOR.stone} strokeWidth={px(1.2)} />
-      <circle cx={c[0]} cy={c[1]} r={PANEL.tableR - PANEL.tableBand / 2} fill="none" stroke={COLOR.stone} strokeWidth={px(1.2)} />
+      <g opacity={table}>
+        <path d={annulusSector(c, PANEL.tableR - PANEL.tableBand / 2, PANEL.tableR + PANEL.tableBand / 2, 0, 359.99)} fill={COLOR.cream} filter={ink('stone', SEEDS.table)} />
+        <circle cx={c[0]} cy={c[1]} r={PANEL.tableR + PANEL.tableBand / 2} fill="none" stroke={COLOR.stone} strokeWidth={px(1.2)} />
+        <circle cx={c[0]} cy={c[1]} r={PANEL.tableR - PANEL.tableBand / 2} fill="none" stroke={COLOR.stone} strokeWidth={px(1.2)} />
+      </g>
       {/* eight positions */}
       {Array.from({ length: 8 }, (_, k) => {
         const [x, y] = seatPos(k);
-        return <circle key={k} cx={x} cy={y} r={PANEL.seatRingR} fill="none" stroke={COLOR.stone} strokeWidth={px(1.6)} />;
+        return <circle key={k} cx={x} cy={y} r={PANEL.seatRingR} fill="none" stroke={COLOR.stone} strokeWidth={px(1.6)} opacity={seats} />;
       })}
       {/* ghosts: other specialists this panel could hold */}
       {GHOSTS.map((g) => {
@@ -42,7 +61,7 @@ export const SitePanel: React.FC<SitePanelProps> = ({ opacity = 1, titleOpacity 
         return (
           <g key={g.name}>
             <Ghost kind={g.name} at={seatPos(g.seat)} opacity={ghostOpacity} />
-            <Words text={g.name} at={n.at} anchor={n.anchor} readablePx={PANEL.namePx} color={COLOR.greyText} opacity={ghostNameOpacity * Math.min(1, ghostOpacity * 4)} />
+            <Words text={g.name} at={n.at} anchor={n.anchor} readablePx={PANEL.namePx} color={COLOR.greyText} opacity={(ghostNames?.[g.name] ?? ghostNameOpacity) * Math.min(1, ghostOpacity * 4)} />
           </g>
         );
       })}
@@ -63,7 +82,7 @@ export const SitePanel: React.FC<SitePanelProps> = ({ opacity = 1, titleOpacity 
       {titleOpacity > 0 && (
         <g opacity={titleOpacity}>
           <Words text="Site panel" at={PANEL.title} size={PANEL.titleSize} weight={600} />
-          <Label text="CONFIGURED FOR THIS SITE" at={PANEL.sub} size={PANEL.subSize} />
+          <Label text="CONFIGURED FOR THIS SITE" at={PANEL.sub} size={PANEL.subSize} opacity={subOpacity === undefined ? 1 : subOpacity / Math.max(0.001, titleOpacity)} />
         </g>
       )}
     </g>

@@ -1,6 +1,10 @@
 import React from 'react';
 import { COLOR, DASH_PX, STROKE_PX } from '../lib/tokens';
 import { usePx } from '../camera/Camera';
+import { WORLD } from '../lib/layout';
+
+// Masks in user space cover the whole sheet (the default region is the viewport, far too small in world units).
+const MASK_REGION = { x: -WORLD.width, y: -WORLD.height, width: WORLD.width * 3, height: WORLD.height * 3 };
 
 /**
  * A line that draws on with stroke-dashoffset. progress 0 to 1. A tiny round cap at the
@@ -23,7 +27,7 @@ export const DrawnLine: React.FC<{
     const id = `reveal-${Math.abs(hash(d))}`;
     return (
       <g opacity={opacity}>
-        <mask id={id} maskUnits="userSpaceOnUse">
+        <mask id={id} maskUnits="userSpaceOnUse" {...MASK_REGION}>
           <path d={d} pathLength={1000} stroke="#fff" strokeWidth={w * 3} fill="none" strokeDasharray={`${progress * 1000} 1000`} />
         </mask>
         <path d={d} stroke={color} strokeWidth={w} fill="none" strokeDasharray={`${px(DASH_PX[0])} ${px(DASH_PX[1])}`} mask={`url(#${id})`} strokeLinecap="butt" />
@@ -52,16 +56,16 @@ export const HumanLine: React.FC<{ d: string; progress?: number; opacity?: numbe
 export const Thread: React.FC<{ d: string; progress?: number; opacity?: number; dashed?: boolean }> = (p) => <DrawnLine {...p} color={COLOR.cobalt} px={STROKE_PX.thread} />;
 
 /** A dotted thread: dots travel along it at a steady speed (phase in path units, 0 to 1000). */
-export const DottedThread: React.FC<{ d: string; progress?: number; opacity?: number; phase?: number; spacingPx?: number }> = ({ d, progress = 1, opacity = 1, phase = 0, spacingPx = 9 }) => {
+export const DottedThread: React.FC<{ d: string; progress?: number; opacity?: number; phase?: number; spacingPx?: number; groups?: boolean }> = ({ d, progress = 1, opacity = 1, phase = 0, spacingPx = 9, groups = false }) => {
   const px = usePx();
   if (progress <= 0) return null;
   const id = `dots-${Math.abs(hash(d))}`;
   return (
     <g opacity={opacity}>
-      <mask id={id} maskUnits="userSpaceOnUse">
+      <mask id={id} maskUnits="userSpaceOnUse" {...MASK_REGION}>
         <path d={d} pathLength={1000} stroke="#fff" strokeWidth={px(8)} fill="none" strokeDasharray={`${progress * 1000} 1000`} />
       </mask>
-      <path d={d} stroke={COLOR.cobalt} strokeWidth={px(2.6)} fill="none" strokeLinecap="round" strokeDasharray={`0.01 ${px(spacingPx)}`} strokeDashoffset={-phase} mask={`url(#${id})`} />
+      <path d={d} stroke={COLOR.cobalt} strokeWidth={px(2.6)} fill="none" strokeLinecap="round" strokeDasharray={groups ? `0.01 ${px(spacingPx)} 0.01 ${px(spacingPx)} 0.01 ${px(spacingPx * 3.5)}` : `0.01 ${px(spacingPx)}`} strokeDashoffset={-px(phase * 4)} mask={`url(#${id})`} />
     </g>
   );
 };
