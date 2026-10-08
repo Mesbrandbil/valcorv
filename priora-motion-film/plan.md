@@ -180,7 +180,7 @@ Why these angles: in Sequence 2 the conditions line rises from the factory strai
 | PANEL_CENTRE P | (1300, 1500) |
 | Wall | circle radius 600, stone, 3 wide; entrance gap centred at 0°, ±14° (chord about 290) |
 | PANEL_ENTRANCE | (1900, 1500) |
-| Table | open ring, pale cream band 14 wide at radius 280; the inside is clean paper, so labels can sit there |
+| Table | open ring, pale cream band 14 wide at radius 300; the inside (radius 293) is clean paper, so labels can sit there |
 | Seats | 8 stone rings, radius 34, at radius 360 from P, at 22.5° + 45°·k |
 | s0 22.5° (1633, 1638) | Fire |
 | s1 67.5° (1438, 1833) | Insurer conditions |
@@ -192,10 +192,10 @@ Why these angles: in Sequence 2 the conditions line rises from the factory strai
 | s7 337.5° (1633, 1362) | ghost: Security |
 | Agent names | Plex Sans Medium 34, on clean paper just outside each seat (below for bottom seats, above for top seats, beside for side seats), inside the wall |
 | "Site panel" | centred (1300, 822) baseline, Plex Sans SemiBold 46 |
-| "CONFIGURED FOR THIS SITE" | centred (1300, 866) baseline, mono 30 |
+| "CONFIGURED FOR THIS SITE" | centred (1300, 868) baseline, mono 32 (23 px at zoom 0.72) |
 | PRIORA_PANEL | (2010, 1470), outside the entrance; Priora conducts, it is never seated |
 | CASE_AT_TABLE | P |
-| Fire watch rulers (Sequence 5) | inside the table, under the case: common origin x 1105; 30 MIN solid 150 long at y 1628, 60 MIN dashed 300 long at y 1686; labels above each, mono 24 |
+| Fire watch rulers (Sequence 5) | inside the table, under the case's gap: common origin x 1100; label baselines y 1610 and 1676 (mono 24, 23 px at zoom 0.95); 30 MIN ruler solid, 150 long, under the first label; 60 MIN ruler dashed, 300 long, under the second |
 | Barrier (Sequence 5) | pale incomplete outline across the route just outside the entrance, about (2080, 1560) |
 
 The seats are balanced (five agents, three ghosts, no two ghosts adjacent), and the last two to arrive, Fire and Insurer conditions, take the seats nearest the entrance.
@@ -212,7 +212,7 @@ The seats are balanced (five agents, three ghosts, no two ghosts adjacent), and 
 | Thresholds (opening mid points) | Retain (4302, 1480); Mitigate (4440, 1720); Transfer (4578, 1480) |
 | PATH_DESK_FORECOURT | from DESK_ORIGIN (3386, 2232) to the forecourt rim (4345, 1615); cubic, controls (3700, 2232) and (4150, 1720) |
 | Spurs | forecourt rim to each threshold, short and straight |
-| Room labels | name (Plex Sans SemiBold 60, readable sizing) and status (mono 30) on the outer side of each room: above Retain and Transfer, below Mitigate |
+| Room labels | name (Plex Sans SemiBold, readable sizing, 40 to 46 px) and status (mono, readable sizing, 25 to 28 px): above Retain at (4016, 925) and (4016, 965); right of Mitigate at (4800, 2090) and (4800, 2132); above Transfer |
 | Transfer labels | SIMULATED and NO INSURER ON PRIORA YET stacked above Transfer |
 | Mitigate interior | packet just inside the threshold (4440, 1880); SUGGESTIONS FROM A REVIEWED LIBRARY under it; three safeguards in a row near y 2150, each with name, disc stack (cost) and open clock arc (time) |
 | Retain interior | packet at (4030, 1300); coral bridge across its gap; three small room agents; four leaders to EXPOSURE, AUTHORITY, CONDITIONS, EXPIRY |
@@ -269,17 +269,17 @@ Shot = centre (x, y) and zoom. View = 1920/zoom by 1080/zoom world units.
 | S1_REAL | (2880, 2100) | 1.00 | x 1920–3840, y 1560–2640 | Sequence 1 |
 | S2_VOICE | (2940, 2110) | 1.50 | x 2300–3580, y 1750–2470 | the voice note |
 | S2_CASE | (2820, 1870) | 1.40 | x 2134–3506, y 1484–2256 | case assembly and the photo |
-| S3_PANEL | (1460, 1490) | 0.72 | x 127–2793, y 740–2240 | panel arrives, specialists summoned |
+| S3_PANEL | (1460, 1440) | 0.72 | x 127–2793, y 690–2190 | panel arrives, specialists summoned |
 | S3_TABLE | (1360, 1500) | 1.15 | x 525–2195, y 1030–1970 | checks at the table, Priora outside |
 | S4_CASE | (1300, 1500) | 1.70 | x 735–1865, y 1182–1818 | arcs lock into the ring |
 | S4_ROUTE | (2760, 2000) | 0.96 | x 1760–3760, y 1437–2563 | route to the work, record, no one disturbed |
 | S5_GAP | (2050, 1800) | 0.95 | x 1040–3060, y 1232–2368 | the slip, rulers, barrier, spark in the distance |
 | S5_DESK | (3330, 2120) | 1.30 | x 2592–4068, y 1705–2535 | the packet at the desk, the human line |
-| S6_ROOMS | (4190, 1655) | 0.62 | x 2642–5738, y 784–2526 | rooms appear |
-| S6_RETAIN | (4016, 1300) | 1.25 | x 3248–4784, y 868–1732 | Retain |
+| S6_ROOMS | (4190, 1610) | 0.62 | x 2642–5738, y 739–2481 | rooms appear |
+| S6_RETAIN | (3990, 1300) | 1.25 | x 3222–4758, y 868–1732 | Retain |
 | S6_MITIGATE | (4440, 2040) | 1.25 | x 3672–5208, y 1608–2472 | Mitigate |
 | S6_TRANSFER | (4864, 1260) | 1.25 | x 4096–5632, y 828–1692 | Transfer |
-| S7_SYSTEM | (4190, 1655) | 0.62 | as S6_ROOMS | rooms working together, the desk |
+| S7_SYSTEM | (4190, 1610) | 0.62 | as S6_ROOMS | rooms working together, the desk |
 | S8_SHEET | (2980, 1640) | 0.37 | x 386–5575, y 181–3099 | the whole system |
 
 Text floors this implies (22 px labels, 44 px sentences): at zoom 0.62 a label needs world size 36 or more; at 0.37, 60 or more and sentences 119 or more. Labels sized for a close shot fade before the camera pulls back past their floor.

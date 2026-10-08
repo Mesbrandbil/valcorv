@@ -195,7 +195,7 @@ Beneath it, one word appears:
 
 **Narration, following the worker’s message**
 
-“Priora hears a repair, hot work, a place and a deadline. Then it asks for a photo.”
+“Priora hears the job, and asks for a photo.”
 
 **Motion and sound**
 
@@ -366,7 +366,7 @@ A label appears alongside it:
 
 **Narration**
 
-“Then one condition slips. The fire watch is half what the policy asks. Priora brings it to the risk owner. Agents prepare; the human decides.”
+“One condition slips: the fire watch is half the policy. Priora brings it to the risk owner. Agents prepare, the human decides.”
 
 **Motion and sound**
 
