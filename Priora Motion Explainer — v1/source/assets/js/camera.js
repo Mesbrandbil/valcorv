@@ -33,9 +33,9 @@
       // the decision holds still; then the rooms
       { t0: 56.95, t1: 57.95, to: [1420, 515, 1060], ease: M },
       // s6 the three rooms, each held still
-      { t0: 59.2, t1: 60.2, to: [1475, 330, 760], ease: M },
-      { t0: 66.1, t1: 67.0, to: [1475, 508, 760], ease: M },
-      { t0: 71.3, t1: 72.2, to: [1475, 686, 760], ease: M },
+      { t0: 59.2, t1: 60.2, to: [1462, 330, 760], ease: M },
+      { t0: 66.1, t1: 67.0, to: [1462, 520, 760], ease: M },
+      { t0: 71.55, t1: 72.4, to: [1462, 686, 760], ease: M },
       // s7 the rooms cooperate
       { t0: 77.85, t1: 78.95, to: [1420, 515, 1170], ease: M },
       // s8 the complete system, 1:1
