@@ -14,7 +14,8 @@
     "render:sequence": "node scripts/render-video.mjs sequence",
     "render:film": "node scripts/render-video.mjs film",
     "render:review": "node scripts/render-video.mjs review",
-    "srt": "node scripts/run-ts.mjs scripts/write-srt.ts"
+    "srt": "node scripts/run-ts.mjs scripts/write-srt.ts",
+    "mix": "node scripts/run-ts.mjs scripts/mix-audio.ts"
   },
   "dependencies": {
     "@remotion/bundler": "4.0.534",

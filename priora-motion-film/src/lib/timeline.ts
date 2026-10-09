@@ -2,6 +2,8 @@
 // Sequence lengths are settled (plan section 8). Inside each sequence the beats follow the storyboard's
 // order (plan section 7.1). A pair [a, b] runs from frame a to frame b.
 
+import { VOICE_LENGTH } from './voice-lengths';
+
 export const FILM_FRAMES = 2883;
 
 export type Span = readonly [number, number];
@@ -276,20 +278,35 @@ export const S8 = {
   wordmark: 2824, // straight after, with no empty beat; in by F2836, then well over a second alone
 } as const;
 
-// ---------------------------------------------------------------- Narration (plan section 9; inclusive frames)
-export const NARRATION = [
-  { id: 'N1', from: 8, to: 229, text: 'Real work in the middle: a worker, a site, a risk owner. Priora places agents around it.' },
-  { id: 'W1', from: 272, to: 483, text: 'Hey, the bracket by the packing line has cracked again. We’re going to weld it before the night shift.', who: 'worker' },
-  { id: 'N2', from: 506, to: 623, text: 'Priora hears the job, and asks for a photo.' },
-  { id: 'N3a', from: 756, to: 899, text: 'Next, it summons only the specialists this site and job need.' },
-  { id: 'N3b', from: 988, to: 1092, text: 'Each checks its own conditions and reports back.' },
-  { id: 'N4', from: 1170, to: 1391, text: 'When everything holds, the route opens. Work goes on, the record is kept, no one is disturbed.' },
-  { id: 'N5', from: 1404, to: 1690, text: 'One condition slips: the fire watch is half the policy. Priora brings it to the risk owner. Agents prepare, the human decides.' },
-  { id: 'N6R-a', from: 1745, to: 1810, text: 'Retain is never a default.' },
-  { id: 'N6R-b', from: 1811, to: 1928, text: 'Risk is kept on purpose, with its terms explicit.' },
-  { id: 'N6M', from: 1982, to: 2125, text: 'Mitigate compares safeguards, and checks whether the work is back inside.' },
-  { id: 'N6T', from: 2194, to: 2350, text: 'Transfer, simulated for now, asks outside capacity for terms and a price.' },
-  { id: 'N7-a', from: 2363, to: 2441, text: 'Priora carries the case between rooms.' },
-  { id: 'N7-b', from: 2451, to: 2529, text: 'The risk owner stays in control.' },
-  { id: 'N8', from: 2636, to: 2792, text: 'Priora turns physical work into explicit risk decisions, while the work happens.' },
+// ---------------------------------------------------------------- Narration ("narration script.md"; inclusive frames)
+/** The voice is written to 90 BPM: one beat is 20 frames, one bar of four is 80. Every line starts on a beat. */
+export const BEAT = 20;
+export const BAR = 4 * BEAT;
+/** The recorded lines: each starts on its beat and must be over by frame `by`. */
+export const VOICE = [
+  { id: 'N1a', beat: 1, by: 150, text: 'Real work in the middle: a worker, a site, a risk owner.' },
+  { id: 'N1b', beat: 8, by: 236, text: 'Priora places agents around it.' },
+  { id: 'W1', beat: 14, by: 490, text: 'Hey, the bracket by the packing line has cracked again. We’re going to weld it before the night shift.', who: 'worker' },
+  { id: 'N2', beat: 25, by: 620, text: 'Priora hears the job, and asks for a photo.' },
+  { id: 'N3a', beat: 38, by: 899, text: 'Next, it summons only the specialists this site and job need.' },
+  { id: 'N3b', beat: 50, by: 1100, text: 'Each checks its own conditions and reports back.' },
+  { id: 'N4a', beat: 60, by: 1270, text: 'When everything holds, the route opens.' },
+  { id: 'N4b', beat: 64, by: 1420, text: 'Work goes on, the record is kept, no one is disturbed.' },
+  { id: 'N5a', beat: 72, by: 1560, text: 'One condition slips: the fire watch is half the policy.' },
+  { id: 'N5b', beat: 80, by: 1660, text: 'Priora brings it to the risk owner.' },
+  { id: 'N5c', beat: 84, by: 1760, text: 'Agents prepare, the human decides.' },
+  { id: 'N6Ra', beat: 89, by: 1850, text: 'Retain is never a default.' },
+  { id: 'N6Rb', beat: 93, by: 1940, text: 'Risk is kept on purpose, with its terms explicit.' },
+  { id: 'N6M', beat: 100, by: 2150, text: 'Mitigate compares safeguards, and checks whether the work is back inside.' },
+  { id: 'N6T', beat: 110, by: 2350, text: 'Transfer, simulated for now, asks outside capacity for terms and a price.' },
+  { id: 'N7a', beat: 118, by: 2440, text: 'Priora carries the case between rooms.' },
+  { id: 'N7b', beat: 123, by: 2530, text: 'The risk owner stays in control.' },
+  { id: 'N8', beat: 132, by: 2800, text: 'Priora turns physical work into explicit risk decisions, while the work happens.' },
 ] as const;
+export type VoiceId = (typeof VOICE)[number]['id'];
+/** Each line's window: from its beat for the recorded length (voice-lengths.ts, written by the mix), else to `by`. */
+export const NARRATION = VOICE.map((v) => {
+  const from = v.beat * BEAT;
+  const to = from + (VOICE_LENGTH[v.id] ?? v.by - from) - 1;
+  return 'who' in v ? { id: v.id, from, to, text: v.text, who: v.who } : { id: v.id, from, to, text: v.text };
+});

@@ -17,7 +17,7 @@ How it stays natural: the beat governs where each sentence *starts* and how long
 
 ElevenLabs settings (Text to Speech): model **Eleven Multilingual v2**; Stability 0.55, Similarity 0.75, Style 0.15, Speaker boost on, Speed 0.95 for the narrator and 1.05 for the worker. Suggested voices from the default library: narrator **George** (or Daniel, or Alice for a female narrator); worker **Liam** (or Charlie). One voice and one setting for every narrator line, so the film sounds like one take.
 
-Generate **each clip separately** and keep the takes where the line ends falling, not rising. File names are the clip names (for example `N1a.mp3`).
+Generate **each clip separately** and keep the takes where the line ends falling, not rising. File names are the clip names (for example `N1a.mp3`), saved in `audio sources/voice`.
 
 ## The lines
 
@@ -57,6 +57,17 @@ Where it changes, on bar lines (from `sound cues.md`): the pattern begins under 
 ## Sound effects
 
 ElevenLabs Sound Effects, one short sound each, placed on the frames in `sound cues.md`: a soft paper contact; a dry wooden tick; a fine plucked thread; a muted felt landing; a soft card landing on paper; a faint, local welding crackle (looping, very quiet); a soft, clear bell-like tone for the ring locking; a low wooden note for the human line.
+
+## Where the files go
+
+```
+audio sources/
+  voice/     N1a.mp3, N1b.mp3, W1.mp3, N2.mp3 ... N8.mp3 (one per line in the table above)
+  music.mp3  the bed, cut so its first downbeat is at 0 s
+  effects/   paper.mp3, tick.mp3, thread.mp3, felt.mp3, card.mp3, weld.mp3, tone.mp3, wood.mp3, note.mp3
+```
+
+The effects are: `paper` a soft paper contact; `tick` a dry wooden tick; `thread` a fine plucked thread; `felt` a muted felt landing; `card` a soft card landing on paper; `weld` a faint welding crackle that can loop; `tone` a soft, clear bell-like tone; `wood` a low wooden note; `note` a delicate higher note (the agents arriving, the comparisons in Mitigate). `npm run mix` places every cue from `sound cues.md` and prints each line's length against its window.
 
 ## Mix
 

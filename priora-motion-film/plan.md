@@ -329,7 +329,7 @@ All glyphs are cobalt with ink texture unless noted. Sizes are world units. `sti
 | Safeguards (Mitigate) | ring (thermal check), capsule (longer watch), small house (workshop), each with a disc stack and an open clock arc | 48 | lift, try the gap, return |
 | Finding marks (5) | small cobalt arc pieces, like the arcs they become | about 24 across | appear by their agents, wait near the entrance, leave together, go back in at an even pace and become the arcs |
 | Case | see 4.5 | 124 open with arcs, 116 as packet | carried; never transforms into another symbol |
-| Worker, site, risk owner | solid ink silhouettes with a fine worn texture and barely there contact shadows | as 4.2 | print-like arrivals; the risk owner never moves |
+| Worker, site, risk owner | cut-paper ink silhouettes with a fine worn texture and barely there contact shadows: thin paper-coloured cuts (2 to 2.5 units) separate the parts, so each figure reads as a few overlapping pieces of card. The worker is a standing figure with a hard hat, a slight lean and a jointed arm (two-bone reach) that lifts the phone on an arc; the phone shows its screen as it tips towards Priora. The site is a sawtooth factory hall with a taller service block and a short stack. The risk owner sits in a high-backed chair at a desk with a modesty panel, one forearm on a small open laptop | as 4.2 | print-like arrivals; the risk owner never moves |
 | Human decision line | ink, 5 px on screen | | draws from the desk; loops loosely round the packet in Sequence 5; in Sequence 6 reaches each threshold before Priora crosses; in Sequence 7 drawn once, at the final close |
 | Agent threads | cobalt, 2 px on screen, dotted where the storyboard says dotted | | dots travel at a steady speed |
 
