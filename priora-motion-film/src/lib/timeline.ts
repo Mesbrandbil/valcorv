@@ -181,8 +181,8 @@ export const S6 = {
   paths: [1697, 1721],
   // Transfer prints once the camera has settled, so SIMULATED can arrive with it, 6 frames after it starts
   bands: { retain: [1700, 1726], mitigate: [1706, 1732], transfer: [1733, 1755] },
-  names: { retain: 1731, mitigate: 1735, transfer: 1739 },
-  statuses: { retain: 1733, mitigate: 1737, transfer: 1739 },
+  names: { retain: 1731, mitigate: 1737, transfer: 1739 },
+  statuses: { retain: 1733, mitigate: 1739, transfer: 1739 },
   loopLetsGo: [1741, 1757],
   // Retain
   carryToRetain: [1757, 1811],

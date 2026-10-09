@@ -37,8 +37,13 @@ const serveUrl = await makeBundle();
 const composition = await selectComposition({ serveUrl, id, browserExecutable, logLevel: 'error' });
 const t = Date.now();
 let last = -1;
+// the audio slot: whichever of the two files is in public/audio plays with the film
+const audio = (name) => (fs.existsSync(path.join(ROOT, 'public/audio', name)) ? name : null);
+const inputProps = { ...composition.props, narration: audio('narration.wav'), sound: audio('sound.wav') };
+if (inputProps.narration || inputProps.sound) console.log(`audio: ${[inputProps.narration, inputProps.sound].filter(Boolean).join(', ')}`);
 await renderMedia({
-  composition,
+  composition: { ...composition, props: inputProps },
+  inputProps,
   serveUrl,
   codec: 'h264',
   crf: 16,

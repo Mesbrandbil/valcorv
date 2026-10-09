@@ -4,7 +4,7 @@ Every sound moment in the storyboard, placed on the film's frames (30 fps). The 
 
 The sound world (storyboard): a soft paper contact, a dry wooden tick, a fine plucked thread, a muted felt landing, and a low, warm musical bed that develops gradually. No loud alerts or dramatic rises. Where the storyboard names a sound only in general terms (the thread plucks, the felt landings), the moments it fits are marked "sound world".
 
-The narration lines and their windows are in `narration.srt`. The film plays `public/audio/narration.wav` and `public/audio/sound.wav` when they are present (see `public/audio/README.md`).
+The narration lines and their windows are in `narration.srt`. The render script plays `public/audio/narration.wav` and `public/audio/sound.wav` with the film whenever they are present (see `public/audio/README.md`).
 
 ## Sequence 1: Real work in the middle
 
@@ -13,11 +13,11 @@ The narration lines and their windows are in `narration.srt`. The film plays `pu
 | F0100 | 00:03:10 | Paper contact, soft and print-like: the worker settles on the ground line | The three silhouettes arrive with soft print-like contacts |
 | F0124 | 00:04:04 | Paper contact: the site settles | as above |
 | F0148 | 00:04:28 | Paper contact: the risk owner settles | as above |
-| F0188 | 00:06:08 | First of five delicate, higher notes: Evidence check settles on the ellipse | the agents introduce a few delicate, higher notes |
-| F0192 | 00:06:12 | Higher note: Risk engineering | as above |
-| F0196 | 00:06:16 | Higher note: Site rules | as above |
-| F0200 | 00:06:20 | Higher note: Fire | as above |
-| F0204 | 00:06:24 | Higher note: Insurer conditions | as above |
+| F0188 | 00:06:08 | First of five delicate, higher notes: Site rules settles on the ellipse | the agents introduce a few delicate, higher notes |
+| F0192 | 00:06:12 | Higher note: Insurer conditions | as above |
+| F0196 | 00:06:16 | Higher note: Fire | as above |
+| F0200 | 00:06:20 | Higher note: Risk engineering | as above |
+| F0204 | 00:06:24 | Higher note: Evidence check | as above |
 
 ## Sequence 2: A voice becomes a case
 

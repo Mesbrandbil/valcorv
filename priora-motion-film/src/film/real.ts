@@ -8,6 +8,10 @@ import { S1, S2, S4, S6, S8 } from '../lib/timeline';
 const worker = (f: number) =>
   prog(f, S1.worker[0], S1.worker[1], arrive) *
   keys(f, [
+    [654, 1],
+    [710, DIM], // Sequence 3 is the panel's: the real world steps back as the camera travels there
+    [1264, DIM],
+    [1324, 1], // and comes forward again as the camera follows the route to the factory
     [1392, 1],
     [1438, DIM], // S5_GAP: the worker is context
     [S8.contextBack[0], DIM],
@@ -17,6 +21,10 @@ const worker = (f: number) =>
 const site = (f: number) =>
   prog(f, S1.site[0], S1.site[1], arrive) *
   keys(f, [
+    [654, 1],
+    [710, DIM],
+    [1264, DIM],
+    [1324, 1],
     [1572, 1],
     [1626, DIM], // S5_DESK and the rooms: the factory is context
     [S8.contextBack[0], DIM],
@@ -28,8 +36,8 @@ const riskOwner = (f: number) =>
   keys(f, [
     [498, 1],
     [538, DIM], // the case assembles above the factory: the risk owner is not part of it yet
-    [1248, DIM],
-    [1300, 1],
+    [1264, DIM],
+    [1324, 1],
   ]);
 
 export const realAt = (f: number): RealWorldProps => {

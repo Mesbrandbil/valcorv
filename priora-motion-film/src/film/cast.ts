@@ -152,7 +152,7 @@ const beadRaw = (f: number): number => {
     return keysAngle(f, [
       [S6.thermalRise[0] - 8, toCase(S6.thermalRise[0] - 8)],
       [S6.thermalRise[0], angleBetween(P.mitigateIn, MITIGATE_INSIDE.safeguards[0].at)],
-      [S6.thermalBack[1], angleBetween(P.mitigateIn, MITIGATE_INSIDE.safeguards[0].at)],
+      [S6.thermalBack[0], angleBetween(P.mitigateIn, MITIGATE_INSIDE.safeguards[0].at)],
       [S6.watchRise[0] + 4, angleBetween(P.mitigateIn, MITIGATE_INSIDE.safeguards[1].at)],
       [S6.proposalWithdraws[0], angleBetween(P.mitigateIn, MITIGATE_INSIDE.safeguards[1].at)],
       [S6.proposalWithdraws[0] + 8, toCase(S6.proposalWithdraws[0] + 8)],
