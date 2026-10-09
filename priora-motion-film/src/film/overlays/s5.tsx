@@ -35,8 +35,9 @@ export const Seq5Overlay: React.FC<{ f: number }> = ({ f }) => {
           )}
         </g>
       )}
+      {/* a pale gate across the route: two posts and a top rail, with a piece of the rail and of one post missing */}
       {barrier > 0 && barrierO > 0 && (
-        <DrawnLine d={`M ${x - 22} ${y + 46} V ${y - 46} H ${x + 6}`} progress={barrier} dashed color={COLOR.greyText} px={2.4} opacity={barrierO} />
+        <DrawnLine d={`M ${x - 36} ${y + 44} V ${y - 46} H ${x + 4} M ${x + 22} ${y - 46} H ${x + 36} V ${y + 6}`} progress={barrier} dashed color={COLOR.greyText} px={2.6} opacity={barrierO} />
       )}
     </g>
   );

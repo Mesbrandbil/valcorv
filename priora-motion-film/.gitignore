@@ -3,3 +3,5 @@ out/
 .remotion/
 renders/
 stills/scratch/
+scripts/.qa-bundle.mjs
+scripts/.*-bundle.mjs

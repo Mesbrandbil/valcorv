@@ -7,11 +7,12 @@ import React from 'react';
 
 export type InkKind = 'cobalt' | 'ink' | 'coral' | 'stone';
 
-const PROFILE: Record<InkKind, { fleckFreq: number; fleckCut: number; fleckGain: number; densFreq: number; densLow: number; erode: number }> = {
+const PROFILE: Record<InkKind, { fleckFreq: number; fleckCut: number; fleckGain: number; densFreq: number; densLow: number; erode: number; fleckCap?: number }> = {
   // cobalt: tiny cream flecks, slight density variation
   cobalt: { fleckFreq: 0.62, fleckCut: 0.735, fleckGain: 40, densFreq: 0.03, densLow: 0.88, erode: 2.2 },
-  // ink: a fine worn texture, fewer flecks
-  ink: { fleckFreq: 0.75, fleckCut: 0.785, fleckGain: 40, densFreq: 0.02, densLow: 0.92, erode: 1.8 },
+  // ink: a fine worn texture: sparse flecks that only half open to the paper, so they read warm grey and the
+  // welding spark stays the one bright point in the building
+  ink: { fleckFreq: 0.75, fleckCut: 0.82, fleckGain: 40, densFreq: 0.02, densLow: 0.96, erode: 1.8, fleckCap: 0.45 },
   // coral: softer variations in density, very few flecks
   coral: { fleckFreq: 0.6, fleckCut: 0.77, fleckGain: 36, densFreq: 0.035, densLow: 0.8, erode: 2 },
   stone: { fleckFreq: 0.6, fleckCut: 0.78, fleckGain: 30, densFreq: 0.03, densLow: 0.88, erode: 1.4 },
@@ -36,7 +37,12 @@ const InkFilter: React.FC<{ kind: InkKind; seed: number; strength: number }> = (
   return (
     <filter id={inkId(kind, seed)} x="-5%" y="-5%" width="110%" height="110%" primitiveUnits="userSpaceOnUse" colorInterpolationFilters="sRGB">
       <feTurbulence type="fractalNoise" baseFrequency={p.fleckFreq} numOctaves={2} seed={seed} result="fineNoise" />
-      <feColorMatrix in="fineNoise" type="matrix" values={fleck} result="flecks" />
+      <feColorMatrix in="fineNoise" type="matrix" values={fleck} result={p.fleckCap ? 'fullFlecks' : 'flecks'} />
+      {p.fleckCap && (
+        <feComponentTransfer in="fullFlecks" result="flecks">
+          <feFuncA type="linear" slope={p.fleckCap} />
+        </feComponentTransfer>
+      )}
       <feMorphology in="SourceAlpha" operator="erode" radius={p.erode} result="inner" />
       <feComposite in="flecks" in2="inner" operator="in" result="innerFlecks" />
       <feComposite in="SourceGraphic" in2="innerFlecks" operator="out" result="speckled" />

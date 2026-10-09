@@ -28,6 +28,8 @@ export const roomsAt = (f: number): DecisionRoomsProps | null => {
     if (k === 'retain') threshold = 1 - prog(f, S6.retainOpens[0], S6.retainOpens[1]) + prog(f, S6.lineLeavesRetain[0], S6.lineLeavesRetain[1]);
     if (k === 'mitigate') threshold = 1 - prog(f, S6.mitigateOpens[0], S6.mitigateOpens[1]) + prog(f, S6.lineLeavesMitigate[0], S6.lineLeavesMitigate[1]);
     if (k === 'transfer') threshold = 1 - prog(f, S6.transferOpens[0], S6.transferOpens[1]) + prog(f, S7.lineBack[0], S7.lineBack[0] + 12);
+    // A DESIGN PROPOSAL says it once for the whole sheet: the two room statuses step aside first
+    if (k !== 'transfer') status *= 1 - prog(f, S8.statusesOut[0], S8.statusesOut[1]);
     rooms[k] = { print: prog(f, b0, b1, arrive), opacity, name, status, threshold: Math.min(1, threshold) };
   }
   const agentLabelsOut = 1 - prog(f, S7.transferTextOut, S7.transferTextOut + 10);
@@ -37,16 +39,20 @@ export const roomsAt = (f: number): DecisionRoomsProps | null => {
     forecourt: prog(f, S6.forecourt[0], S6.forecourt[1], arrive),
     pathsOpacity: prog(f, S6.paths[0], S6.paths[1]),
     agents: prog(f, S6.bands.transfer[0] + 4, S6.bands.transfer[1] + 4),
-    noInsurer: prog(f, S6.noInsurer, S6.noInsurer + 10, arrive),
+    // in the whole sheet these would run into Retain's status: they go, and Transfer keeps SIMULATED
+    noInsurer: prog(f, S6.noInsurer, S6.noInsurer + 10, arrive) * (1 - prog(f, S8.textOut, S8.textOut + 10)),
     agentLabels: S6.agentLabels.map((a) => prog(f, a, a + 10, arrive) * agentLabelsOut),
+    holdSimulated: true,
   };
 };
 
 export const routesAt = (f: number) => {
   // the work route stays to the end; it recedes to context at the desk and in the rooms
-  const workOpacity = keys(f, [[1572, 1], [1626, DIM], [S8.contextBack[0], DIM], [S8.contextBack[1], 1]]) * dissolve(f);
+  // it goes completely as the drawing recedes, so the closing statement sits on clean paper
+  const workOpacity = keys(f, [[1572, 1], [1626, DIM], [S8.contextBack[0], DIM], [S8.contextBack[1], 1], [S8.recede[0], 1], [S8.recede[1], 0]]) * dissolve(f);
   const escalate = prog(f, S5.carry[0], S5.carry[1]);
-  const escalateOpacity = 0.5 * keys(f, [[1691, 1], [1731, DIM], [S8.contextBack[0], DIM], [S8.contextBack[1], 1]]) * dissolve(f);
+  // the escalation route has done its job once the packet is at the desk: it goes, so only the human line meets the packet
+  const escalateOpacity = 0.5 * (1 - prog(f, S5.carry[1], S5.carry[1] + 16)) * dissolve(f);
   return { work: prog(f, S4.route[0], S4.route[1]), workOpacity, escalate, escalateOpacity };
 };
 

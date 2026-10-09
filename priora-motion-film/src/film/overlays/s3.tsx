@@ -1,18 +1,18 @@
 // Sequence 3 and the start of Sequence 4: the fine connection between Priora and the case, the summons
 // threads, short echoes behind moving agents, the five checks at the table, and the five findings that
-// leave through the entrance, collect beside Priora and are taken into it.
+// leave through the entrance, collect beside Priora and each become an arc of the ring (src/film/findings.ts).
 import React from 'react';
 import { COLOR, STROKE_PX } from '../../lib/tokens';
 import { arrive, ease, lerp, prog } from '../../lib/motion';
 import { annulusSector, polar, type Pt } from '../../lib/geometry';
-import { CASE, CASE_TABLE_SCALE, FACET_ANGLE, PANEL, PANEL_ENTRANCE, SEAT_OF, seatAngle, type AgentKey, type FacetKey } from '../../lib/layout';
+import { CASE, CASE_TABLE_SCALE, FACET_ANGLE, PANEL, type AgentKey, type FacetKey } from '../../lib/layout';
 import { S3, S4 } from '../../lib/timeline';
 import { usePx } from '../../camera/Camera';
 import { DrawnLine } from '../../cast/lines';
 import { Specialist } from '../../cast/agents';
-import { casePos, prioraPos, SUMMON_ORDER, summonT0 } from '../cast';
+import { caseAt, casePos, prioraPos, SUMMON_ORDER, summonT0 } from '../cast';
+import { findingMarksAt, LAST_ARC_FRAME, MARK_SCALE } from '../findings';
 import { echoesAt, agentAt } from '../panel';
-import { curve } from '../track';
 
 const START: Record<AgentKey, Pt> = {
   evidence: [2860, 1820],
@@ -32,31 +32,21 @@ const between = (a: Pt, ra: number, b: Pt, rb: number) => {
   return `M ${(a[0] + ux * ra).toFixed(1)} ${(a[1] + uy * ra).toFixed(1)} L ${(b[0] - ux * rb).toFixed(1)} ${(b[1] - uy * rb).toFixed(1)}`;
 };
 
-// when each agent's check ends, its finding appears as a small mark just inside the table band
-const FINDING_AT: Record<AgentKey, number> = {
-  evidence: S3.checkEvidence[1],
-  riskEng: S3.checkRiskEng[1],
-  siteRules: S3.checkSiteRules[1],
-  fire: S3.checkFire[1],
-  insurer: S3.answerJoins[0],
-};
-const markHome = (k: AgentKey): Pt => polar(PANEL.c, 270, seatAngle(SEAT_OF[k]));
-const MARK_ROW: Pt[] = [[1955, 1552], [1988, 1563], [2022, 1567], [2056, 1563], [2089, 1552]];
-
-const Mark: React.FC<{ at: Pt; facing: number; opacity: number; scale?: number }> = ({ at, facing, opacity, scale = 1 }) => (
-  <g transform={`translate(${at[0].toFixed(1)} ${at[1].toFixed(1)}) rotate(${facing.toFixed(1)}) scale(${scale})`} opacity={opacity}>
+const Mark: React.FC<{ at: Pt; facing: number; opacity: number }> = ({ at, facing, opacity }) => (
+  <g transform={`translate(${at[0].toFixed(1)} ${at[1].toFixed(1)}) rotate(${facing.toFixed(1)}) scale(${MARK_SCALE})`} opacity={opacity}>
     <path d={annulusSector([0, 0], 11, 17, -28, 28)} fill={COLOR.cobalt} />
   </g>
 );
 
 export const Seq3Overlay: React.FC<{ f: number }> = ({ f }) => {
   const px = usePx();
-  if (f < 640 || f > S4.marksIntoPriora[1] + 2) return null;
+  if (f < 640 || f > LAST_ARC_FRAME + 2) return null;
   const pr = prioraPos(f);
   const cs = casePos(f);
-  const caseR = (f < S3.caseIn[0] ? 60 : 85) * 1; // edge of the folded case, roughly
+  // the fine connection ends on the case's thin ring, between its facets
+  const caseR = CASE.ringR * (caseAt(f)?.scale ?? 1) + 1;
   // the fine connection: from the travel, through the wait outside, to the case at the table
-  const link = prog(f, S3.travel[0], S3.travel[0] + 10) * (1 - prog(f, S4.marksIntoPriora[0], S4.marksIntoPriora[1]));
+  const link = prog(f, S3.travel[0], S3.travel[0] + 10) * (1 - prog(f, S4.linkOut[0], S4.linkOut[1]));
   const items: React.ReactNode[] = [];
   if (link > 0) items.push(<path key="link" d={between(pr, 54, cs, caseR)} stroke={COLOR.cobalt} strokeWidth={px(STROKE_PX.thread * 0.75)} fill="none" opacity={0.7 * link} />);
 
@@ -65,9 +55,15 @@ export const Seq3Overlay: React.FC<{ f: number }> = ({ f }) => {
     const t0 = summonT0(k);
     const reach = prog(f, t0 + 4, t0 + 16) * (1 - prog(f, t0 + 26, t0 + 34));
     if (reach > 0) {
-      const from = cs;
-      const to = START[k];
-      const d = `M ${from[0].toFixed(1)} ${from[1].toFixed(1)} L ${lerp(from[0], to[0], 0.55).toFixed(1)} ${lerp(from[1], to[1], 0.55).toFixed(1)}`;
+      // from the case's edge towards where the agent comes from; once the agent is in view the tip meets it
+      const ag = agentAt(k, f);
+      const target = ag ? ag.at : START[k];
+      const dir = (Math.atan2(target[1] - cs[1], target[0] - cs[0]) * 180) / Math.PI;
+      const from = polar(cs, CASE.ringR * (caseAt(f)?.scale ?? 1) + 3, dir);
+      const meet = ag ? prog(f, t0 + 12, t0 + 18) : 0;
+      const tip = polar(target, -40, dir);
+      const to: Pt = [lerp(lerp(from[0], START[k][0], 0.55), tip[0], meet), lerp(lerp(from[1], START[k][1], 0.55), tip[1], meet)];
+      const d = `M ${from[0].toFixed(1)} ${from[1].toFixed(1)} L ${to[0].toFixed(1)} ${to[1].toFixed(1)}`;
       items.push(<DrawnLine key={`summon-${k}`} d={d} progress={reach} color={COLOR.cobalt} px={STROKE_PX.thread * 0.75} opacity={0.8} />);
     }
   }
@@ -104,7 +100,8 @@ export const Seq3Overlay: React.FC<{ f: number }> = ({ f }) => {
   }
   // Site rules places a short horizontal mark beside the job
   const sr = prog(f, S3.checkSiteRules[0] + 6, S3.checkSiteRules[1]) * (1 - prog(f, S3.marksLeave[0], S3.marksLeave[0] + 10));
-  if (sr > 0) items.push(<line key="sr" x1={PANEL.c[0] + 15} y1={PANEL.c[1]} x2={PANEL.c[0] + 15 + 22 * sr} y2={PANEL.c[1]} stroke={COLOR.cobalt} strokeWidth={px(3)} strokeLinecap="round" />);
+  // under the core, inside the thin ring and off the line of Priora's connection
+  if (sr > 0) items.push(<line key="sr" x1={PANEL.c[0] - 11 * sr} y1={PANEL.c[1] + 20} x2={PANEL.c[0] + 11 * sr} y2={PANEL.c[1] + 20} stroke={COLOR.cobalt} strokeWidth={px(3)} strokeLinecap="round" />);
   // Fire sends a small pulse along its edge
   const firePulse = prog(f, S3.checkFire[0] + 8, S3.checkFire[1]);
   const fire = agentAt('fire', f);
@@ -125,20 +122,8 @@ export const Seq3Overlay: React.FC<{ f: number }> = ({ f }) => {
     );
   }
 
-  // the five findings: appear by their agents, leave through the entrance together, collect beside Priora, are taken in
-  SUMMON_ORDER.forEach((k, i) => {
-    const appear = prog(f, FINDING_AT[k], FINDING_AT[k] + 10, arrive);
-    if (appear <= 0) return;
-    const home = markHome(k);
-    const leave = prog(f, S3.marksLeave[0] + i * 2, S3.marksLeave[1] + 3 + i * 2);
-    const into = prog(f, S4.marksIntoPriora[0], S4.marksIntoPriora[1]);
-    const row = MARK_ROW[i];
-    let at: Pt = home;
-    if (leave > 0) at = curve(home, [lerp(home[0], PANEL_ENTRANCE[0], 0.6), lerp(home[1], 1500, 0.8)], [PANEL_ENTRANCE[0] - 40, 1520], row)(ease(leave));
-    if (into > 0) at = [lerp(row[0], pr[0], ease(into)), lerp(row[1], pr[1], ease(into))];
-    const facing = seatAngle(SEAT_OF[k]) * (1 - leave) + 90 * leave;
-    items.push(<Mark key={`mark-${k}`} at={at} facing={facing} opacity={appear * (1 - into)} scale={1 - 0.5 * into} />);
-  });
+  // the five findings (src/film/findings.ts)
+  for (const m of findingMarksAt(f)) items.push(<Mark key={`mark-${m.k}`} at={m.at} facing={m.facing} opacity={m.opacity} />);
 
   return <g>{items}</g>;
 };

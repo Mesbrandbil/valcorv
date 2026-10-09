@@ -25,7 +25,8 @@ export type SitePanelProps = {
 };
 
 /** Default resting orientation of a seated agent: Fire's wedge faces the table centre. */
-export const seatedRotation = (k: AgentKey) => (k === 'fire' ? angleTo(seatPos(SEAT_OF.fire), PANEL.c) : 0);
+// Fire faces the table; Risk engineering's arch opens towards it (its opening faces down at rotation 0)
+export const seatedRotation = (k: AgentKey) => (k === 'fire' ? angleTo(seatPos(SEAT_OF.fire), PANEL.c) : k === 'riskEng' ? angleTo(seatPos(SEAT_OF.riskEng), PANEL.c) - 90 : 0);
 
 export const SitePanel: React.FC<SitePanelProps> = ({ opacity = 1, wall = 1, table = 1, seats = 1, titleOpacity = 1, subOpacity, ghostOpacity = 0.3, ghostNameOpacity = 1, ghostNames, agents = {} }) => {
   const px = usePx();

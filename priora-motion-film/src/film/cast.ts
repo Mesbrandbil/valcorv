@@ -16,16 +16,15 @@ import {
   PRIORA_PAUSE,
   RETAIN_INSIDE,
   S1 as S1_LAYOUT,
-  SEAT_OF,
   TRANSFER_INSIDE,
   VOICE,
   WORKER,
-  seatPos,
   type AgentKey,
   type FacetKey,
 } from '../lib/layout';
 import { S1, S2, S3, S4, S5, S6, S7, S8 } from '../lib/timeline';
 import { add, along, angleBetween, curve, line, track, type Journey } from './track';
+import { ARC_FROM, arcFrom, arcProgress, arcStartFrame } from './findings';
 
 // ---------------------------------------------------------------- places Priora visits
 export const P = {
@@ -34,7 +33,7 @@ export const P = {
   case: PRIORA_CASE,
   panel: PRIORA_PANEL,
   pause: PRIORA_PAUSE,
-  pickup: [2040, 1590] as Pt, // below the route, clear of NO HARD STOP CONFIGURED
+  pickup: [2040, 1640] as Pt, // below the route and clear of the gate
   desk: [3600, 1960] as Pt,
   retainStop: [4440, 1390] as Pt,
   retainIn: RETAIN_INSIDE.prioraAt,
@@ -44,7 +43,7 @@ export const P = {
   transferIn: TRANSFER_INSIDE.prioraAt,
   mitigateDoor: [4530, 1520] as Pt,
   retainDoor: [4470, 1430] as Pt,
-  deskFinal: [3740, 1990] as Pt,
+  deskFinal: [3780, 1930] as Pt, // clear of the short list and above the desk path
   top: [2980, 1050] as Pt,
 } as const;
 
@@ -59,7 +58,7 @@ export const C = {
   retainIn: RETAIN_INSIDE.packet,
   mitigateWait: [4440, 1600] as Pt,
   mitigateIn: MITIGATE_INSIDE.packet,
-  transferWait: [4520, 1620] as Pt,
+  transferWait: [4552, 1502] as Pt, // on the spur, short of the closed threshold
   transferIn: TRANSFER_INSIDE.packet,
   mitigateDoor: [4440, 1610] as Pt,
   retainDoor: [4380, 1540] as Pt,
@@ -67,7 +66,7 @@ export const C = {
 } as const;
 
 /** While carried along the escalation route, Priora floats just above and ahead of the packet. */
-const carryOffset = (u: number): Pt => [lerp(80, 120, u), lerp(90, -140, u)];
+const carryOffset = (u: number): Pt => [lerp(80, 120, u), lerp(140, -140, u)];
 
 const PRIORA_JOURNEYS: Journey[] = [
   { span: S2.prioraGlide, at: curve(P.s1, [2800, 1890], [2650, 1930], P.listen) },
@@ -77,7 +76,8 @@ const PRIORA_JOURNEYS: Journey[] = [
   { span: S5.prioraToEntrance, at: curve(P.pause, [2250, 1700], [2100, 1620], P.pickup) },
   { span: S5.carry, at: (u) => add(along(PATH.escalateToDock)(u), carryOffset(u)) },
   { span: S6.carryToRetain, at: curve(P.desk, [3950, 1880], [4300, 1600], P.retainStop) },
-  { span: S6.intoRetain, at: curve(P.retainStop, [4330, 1450], [4150, 1560], P.retainIn) },
+  // through the middle of Retain's doorway, clear of both band ends
+  { span: S6.intoRetain, at: curve(P.retainStop, [4360, 1430], [4180, 1470], P.retainIn) },
   { span: S6.carryToMitigate, at: curve(P.retainIn, [4150, 1560], [4330, 1520], P.mitigateWait) },
   { span: S6.intoMitigate, at: curve(P.mitigateWait, [4440, 1700], [4440, 2000], P.mitigateIn) },
   { span: S6.carryToTransfer, at: curve(P.mitigateIn, [4440, 2000], [4440, 1700], P.transferWait) },
@@ -95,7 +95,8 @@ const CASE_JOURNEYS: Journey[] = [
   { span: S5.packetOut, at: line(C.table, C.escStart) },
   { span: S5.carry, at: along(PATH.escalateToDock) },
   { span: [S6.carryToRetain[0] + 4, S6.carryToRetain[1] + 4], at: curve(C.dock, [3800, 2060], [4180, 1720], C.retainWait) },
-  { span: S6.intoRetain, at: curve(C.retainWait, [4320, 1500], [4200, 1420], C.retainIn) },
+  // the packet follows Priora through the doorway, 8 frames behind, so the two never overlap
+  { span: [S6.intoRetain[0] + 8, S6.intoRetain[1] + 8], at: curve(C.retainWait, [4320, 1500], [4200, 1420], C.retainIn) },
   { span: S6.carryToMitigate, at: curve(C.retainIn, [4220, 1430], [4330, 1540], C.mitigateWait) },
   { span: S6.intoMitigate, at: curve(C.mitigateWait, [4440, 1720], [4400, 1820], C.mitigateIn) },
   { span: S6.carryToTransfer, at: curve(C.mitigateIn, [4430, 1800], [4440, 1700], C.transferWait) },
@@ -112,7 +113,7 @@ export const casePos = (f: number): Pt => track(f, C.a, CASE_JOURNEYS);
 // ---------------------------------------------------------------- Priora's bead (it leads by about 6 frames)
 const toCase = (f: number) => angleBetween(prioraPos(f), casePos(f));
 
-export const beadAt = (f: number): number => {
+const beadRaw = (f: number): number => {
   // Sequence 1: a short arc across the three, then it rests looking down at the work
   if (f < S1.beadArc[0]) return 150;
   if (f < S2.prioraBeadToWorker[0]) return keysAngle(f, [[S1.beadArc[0], 150], [S1.beadArc[1], 30]]);
@@ -164,6 +165,25 @@ export const beadAt = (f: number): number => {
   return keysAngle(f, [[S8.prioraRises[0] - 6, toCase(S8.prioraRises[0] - 6)], [S8.prioraRises[0], 250], [S8.prioraRises[1] - 10, 250], [S8.prioraRises[1] + 6, 90]]);
 };
 
+/**
+ * The bead's angle: the keyed angles above, smoothed over a short triangular window so that where one
+ * keyed passage hands over to the next the bead turns through the difference instead of snapping.
+ */
+const BEAD_WINDOW = 7;
+export const beadAt = (f: number): number => {
+  const c = beadRaw(f);
+  let sum = 0;
+  let wsum = 0;
+  for (let k = -BEAD_WINDOW; k <= BEAD_WINDOW; k++) {
+    const g = Math.max(0, f + k);
+    const w = BEAD_WINDOW + 1 - Math.abs(k);
+    const d = ((((beadRaw(g) - c) % 360) + 540) % 360) - 180;
+    sum += w * d;
+    wsum += w;
+  }
+  return c + sum / wsum;
+};
+
 export const prioraAt = (f: number) => {
   if (f < S1.priora[0]) return null;
   const a = prog(f, S1.priora[0], S1.priora[1], arrive);
@@ -187,12 +207,7 @@ const AGENT_FACET: Record<AgentKey, FacetKey> = { evidence: 'photo', riskEng: 'p
 export const SUMMON_ORDER: AgentKey[] = ['evidence', 'riskEng', 'siteRules', 'fire', 'insurer'];
 export const summonT0 = (k: AgentKey) => S3.summonStart + S3.summonEvery * SUMMON_ORDER.indexOf(k);
 
-/** Where an arc arrives from: the direction of its agent's seat, in the case's own coordinates. */
-const arcFrom = (k: AgentKey): Pt => {
-  const [sx, sy] = seatPos(SEAT_OF[k]);
-  return [(sx - PANEL.c[0]) / CASE_TABLE_SCALE, (sy - PANEL.c[1]) / CASE_TABLE_SCALE];
-};
-const ARC_ORDER: AgentKey[] = ['evidence', 'riskEng', 'siteRules', 'fire', 'insurer'];
+const ARC_KEYS: AgentKey[] = ['fire', 'insurer', 'siteRules', 'evidence', 'riskEng'];
 
 export const caseAt = (f: number): CaseProps | null => {
   if (f < S2.circle[0]) return null;
@@ -209,33 +224,34 @@ export const caseAt = (f: number): CaseProps | null => {
   ]);
 
   // facet radius: open in Sequence 2, folded for travel, open at the table, folded for the ring, tucked in the packet
+  // the facets keep their marks, small but legible, until the case becomes the packet in Sequence 5
   const facetR = keys(f, [
-    [S3.travel[0], 92],
-    [S3.travel[0] + 40, 52],
-    [S3.caseOpen[0], 52],
+    [S2.fold[0], 92],
+    [S2.fold[1], 80],
+    [S3.travel[0], 80],
+    [S3.travel[0] + 40, 56],
+    [S3.caseOpen[0], 56],
     [S3.caseOpen[1], 92],
     [S4.fold[0], 92],
-    [S4.fold[1], 52],
-    [S5.fold[0], 52],
+    [S4.fold[1], 50], // clear of the findings ring, which sits at 70
+    [S5.fold[0], 50],
     [S5.fold[1], 46],
   ]);
   const chipR = keys(f, [
-    [S3.travel[0], 16],
-    [S3.travel[0] + 40, 7],
-    [S3.caseOpen[0], 7],
+    [S2.fold[0], 16],
+    [S2.fold[1], 14],
+    [S3.travel[0], 14],
+    [S3.travel[0] + 40, 11],
+    [S3.caseOpen[0], 11],
     [S3.caseOpen[1], 16],
     [S4.fold[0], 16],
-    [S4.fold[1], 7],
-    [S5.fold[0], 7],
+    [S4.fold[1], 11],
+    [S5.fold[0], 11],
     [S5.fold[1], 5.5],
   ]);
   const marks = keys(f, [
-    [S3.travel[0], 1],
-    [S3.travel[0] + 24, 0],
-    [S3.caseOpen[0] + 10, 0],
-    [S3.caseOpen[1], 1],
-    [S4.fold[0], 1],
-    [S4.fold[0] + 12, 0],
+    [S5.fold[0], 1],
+    [S5.fold[0] + 12, 0],
   ]);
 
   // facets arrive one by one in Sequence 2
@@ -265,14 +281,14 @@ export const caseAt = (f: number): CaseProps | null => {
 
   // findings: the five arcs arrive in Sequence 4, the Insurer conditions arc slips in Sequence 5
   let findings: CaseProps['findings'] | undefined;
-  if (f >= S4.arcsStart) {
+  if (f >= Math.min(...ARC_KEYS.map(arcStartFrame))) {
     const arcs: Partial<Record<AgentKey, ArcState>> = {};
-    ARC_ORDER.forEach((k, i) => {
-      const a = S4.arcsStart + i * S4.arcStagger;
-      const u = prog(f, a, a + S4.arcDur, arrive);
+    ARC_KEYS.forEach((k) => {
+      const u = arcProgress(k, f);
       const [fx, fy] = arcFrom(k);
       const slide = 1 - prog(f, S4.arcsSlide[0], S4.arcsSlide[1]);
-      arcs[k] = { opacity: Math.min(1, u * 1.5), dx: fx * 0.8 * (1 - u), dy: fy * 0.8 * (1 - u), trim: 5 * slide };
+      // the arriving mark becomes the arc: a quick cross-fade at the start of the slide (overlays/s3.tsx)
+      arcs[k] = { opacity: Math.min(1, u * 3.3), dx: fx * ARC_FROM * (1 - u), dy: fy * ARC_FROM * (1 - u), trim: 5 * slide };
     });
     // the slip: the Insurer conditions arc loosens, rotates, drifts out and turns dashed, then leaves the packet
     const loose = prog(f, S5.arcLoosens[0], S5.arcLoosens[1]);
@@ -284,7 +300,8 @@ export const caseAt = (f: number): CaseProps | null => {
       opacity: (arcs.insurer?.opacity ?? 1) * (f >= S5.arcDashed ? 0.9 : 1) * (1 - prog(f, S5.fold[0], S5.fold[1])),
     };
     const lockPulse = prog(f, S4.lock[0], S4.lock[0] + 4) * (1 - prog(f, S4.lock[0] + 4, S4.lock[1]));
-    findings = { radius: keys(f, [[S5.fold[0], 70], [S5.fold[1], 58]]), arcs, pulse: lockPulse };
+    // the joints close as the ring locks, so the gap that opens in Sequence 5 is the only break
+    findings = { radius: keys(f, [[S5.fold[0], 70], [S5.fold[1], 58]]), arcs, pulse: lockPulse, joints: 1 - prog(f, S4.lock[0], S4.lock[1]) };
   }
 
   // Retain: the coral bridge; Mitigate: the previewed pieces; Sequence 7: proposed, then decided

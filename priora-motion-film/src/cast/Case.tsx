@@ -2,7 +2,7 @@ import React from 'react';
 import { COLOR, DASH_PX } from '../lib/tokens';
 import { ink, SEEDS } from '../lib/texture';
 import { annulusSector, arcPath, polar, type Pt } from '../lib/geometry';
-import { ARC_SPAN, CASE, FACET_ANGLE, FACET_LABEL, GAP, type AgentKey, type FacetKey } from '../lib/layout';
+import { ANSWER_ASIDE, ARC_SPAN, CASE, FACET_ANGLE, FACET_LABEL, GAP, type AgentKey, type FacetKey } from '../lib/layout';
 import { usePx } from '../camera/Camera';
 import { Label } from '../lib/text';
 
@@ -26,7 +26,8 @@ export type CaseProps = {
   chipR?: number;
   /** Opacity of the marks inside the chips (default: shown when open). */
   marks?: number;
-  findings?: { radius?: number; opacity?: number; pulse?: number; arcs?: Partial<Record<AgentKey, ArcState>> };
+  /** joints: 1 shows the hairline joints between the five arcs, 0 closes them (the ring locks). */
+  findings?: { radius?: number; opacity?: number; pulse?: number; joints?: number; arcs?: Partial<Record<AgentKey, ArcState>> };
   coralEnds?: number;
   bridge?: { opacity: number; dashed?: boolean };
   piece?: { span: number; dashed: boolean; opacity?: number };
@@ -45,7 +46,8 @@ const FacetMark: React.FC<{ k: FacetKey; filled?: boolean }> = ({ k, filled }) =
     case 'repair': return <path d="M -5 -7 V 5 H 7" {...s} />;
     case 'hotWork': return <path d="M 0 -8 L 2 -2 L 8 0 L 2 2 L 0 8 L -2 2 L -8 0 L -2 -2 Z" fill={COLOR.paper} />;
     case 'packingLine': return <path d="M -7 -1 V -7 H -1 M 7 1 V 7 H 1" {...s} />;
-    case 'nightShift': return <path d={`${arcPath([0, 0], 7, -70, 200)} M 0 0 V -5`} {...s} />;
+    // a clock: an open arc with its gap low on the left, away from two short hands at twelve and three
+    case 'nightShift': return <path d={`${arcPath([0, 0], 7.5, 165, 475)} M 0 0 V -4.5 M 0 0 H 3.5`} {...s} />;
     case 'conditions': return <path d="M -7 -3.5 H 7 M -7 3.5 H 3" {...s} />;
     case 'photo': return filled ? <PhotoMini /> : null;
   }
@@ -70,9 +72,9 @@ export const chipAnchor = (a: number): 'start' | 'middle' | 'end' => {
 export const chipLabelAt = (fr: number, cr: number, a: number, size: number): Pt => {
   if (a === 90) {
     const [x, y] = polar([0, 0], fr, a);
-    return [x + cr + 12, y + size * 0.36];
+    return [x + cr + 16, y + size * 0.36];
   }
-  const [x, y] = polar([0, 0], fr + cr + 10, a);
+  const [x, y] = polar([0, 0], fr + cr + (a === 270 ? 14 : 16), a);
   return [x, y + size * 0.36];
 };
 
@@ -124,7 +126,8 @@ export const Case: React.FC<CaseProps> = ({
               );
             }
             // a hairline joint between neighbouring arcs keeps the five findings readable as five pieces
-            return <path key={k} transform={move} d={annulusSector([0, 0], rr - half, rr + half, a0 + rot + JOINT + trim, a1 + rot - JOINT - trim)} fill={COLOR.cobalt} filter={ink('cobalt', SEEDS.caseArcs)} opacity={st.opacity ?? 1} />;
+            const joint = JOINT * (findings.joints ?? 1);
+            return <path key={k} transform={move} d={annulusSector([0, 0], rr - half, rr + half, a0 + rot + joint + trim, a1 + rot - joint - trim)} fill={COLOR.cobalt} filter={ink('cobalt', SEEDS.caseArcs)} opacity={st.opacity ?? 1} />;
           })}
           {coralEnds > 0 && (
             <g fill={COLOR.coral} opacity={coralEnds} filter={ink('coral', SEEDS.coralBridge)}>
@@ -213,7 +216,7 @@ export const Case: React.FC<CaseProps> = ({
               )}
             </g>
             {chipLabels && labelOpacity > 0 && (
-              <Label text={FACET_LABEL[k]} at={chipLabelAt(fr, cr, a, chipLabels.size)} anchor={chipAnchor(a)} size={chipLabels.size} opacity={labelOpacity} />
+              <Label text={FACET_LABEL[k]} at={chipLabelAt(fr, cr, a, chipLabels.size)} anchor={chipAnchor(a)} size={chipLabels.size} opacity={labelOpacity} rise={1 - Math.min(1, chipLabels.each?.[k] ?? 1)} />
             )}
           </g>
         );
@@ -221,18 +224,18 @@ export const Case: React.FC<CaseProps> = ({
 
       {/* the dashed answers from the Transfer inquiry, kept off to one side */}
       {transferAside > 0 && (
-        <g opacity={transferAside} transform={`translate(${R + 40} ${-34})`}>
+        <g opacity={transferAside} transform={`translate(${ANSWER_ASIDE.x} ${ANSWER_ASIDE.y})`}>
           {[0, 1, 2, 3].map((i) => (
             <rect
               key={i}
-              x={-9}
-              y={-9 + i * 22}
-              width={18}
-              height={18}
+              x={(i % 2) * ANSWER_ASIDE.step - ANSWER_ASIDE.size / 2}
+              y={Math.floor(i / 2) * ANSWER_ASIDE.step - ANSWER_ASIDE.size / 2}
+              width={ANSWER_ASIDE.size}
+              height={ANSWER_ASIDE.size}
               fill="none"
               stroke={COLOR.cobalt}
               strokeWidth={px(1.8) / scale}
-              strokeDasharray={`${px(4) / scale} ${px(3) / scale}`}
+              strokeDasharray={`${(px(DASH_PX[0]) * 0.6) / scale} ${(px(DASH_PX[1]) * 0.6) / scale}`}
             />
           ))}
         </g>
@@ -250,6 +253,6 @@ export const PhotoCard: React.FC<{ at: Pt; scale?: number; opacity?: number; rot
     <circle cx={-18} cy={-9} r={2.4} fill={COLOR.cream} />
     <circle cx={12} cy={14} r={2.4} fill={COLOR.cream} />
     {/* the crack, clear at the bend */}
-    <path d="M -25 6 L -19.5 9.5 L -17 7 L -11.5 13 L -9 11 L -6 19" fill="none" stroke={COLOR.cream} strokeWidth={2.6} strokeLinejoin="miter" />
+    <path d="M -25 6 L -19.5 9.5 L -17 7 L -11.5 13 L -9 11 L -6 19" fill="none" stroke={COLOR.cream} strokeWidth={4.2} strokeLinejoin="miter" />
   </g>
 );

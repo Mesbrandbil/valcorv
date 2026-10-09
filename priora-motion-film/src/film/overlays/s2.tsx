@@ -12,7 +12,7 @@ import { S2 } from '../../lib/timeline';
 import { usePx } from '../../camera/Camera';
 import { DottedThread, DrawnLine } from '../../cast/lines';
 import { PhotoCard } from '../../cast/Case';
-import { beadAt, prioraPos, waveProgress, waveTip } from '../cast';
+import { beadAt, caseAt, prioraPos, waveProgress, waveTip } from '../cast';
 
 // ---------------------------------------------------------------- the words
 const WORDS = VOICE.lines.map((l) => l.split(' '));
@@ -49,7 +49,6 @@ const Measure: React.FC<{ refs: React.MutableRefObject<Array<SVGTextElement | nu
 );
 
 const lineOf = (i: number) => (i < WORDS[0].length ? 0 : i < WORDS[0].length + WORDS[1].length ? 1 : 2);
-const chipPos = (k: FacetKey): Pt => polar(CASE_A, CASE.facetOpenR, FACET_ANGLE[k]);
 /** Where the chip's mono label will sit, and how it is anchored: the phrase travels there and becomes it. */
 const labelSpot = (k: FacetKey): { at: Pt; anchor: 'start' | 'middle' | 'end' } => {
   const [x, y] = chipLabelAt(CASE.facetOpenR, CASE.chipR, FACET_ANGLE[k], 18);
@@ -57,6 +56,11 @@ const labelSpot = (k: FacetKey): { at: Pt; anchor: 'start' | 'middle' | 'end' } 
 };
 // the phrase ends about the size of the chip label it becomes
 const PHRASE_END_SCALE = 0.75;
+// Each phrase travels for 20 frames, leaving in turn so that every phrase whose path it will cross has
+// already gone: packing line, bracket, cracked, before the night shift, weld. Offsets from phrasesTravel[0],
+// in PHRASES order (bracket, packing line, cracked, weld, before the night shift).
+const PHRASE_LEAVES = [2, 0, 8, 16, 12];
+const PHRASE_FRAMES = 20;
 
 const PALE = '#BDB8AE';
 const mixColor = (a: string, b: string, t: number) => {
@@ -95,7 +99,6 @@ const VoiceWords: React.FC<{ f: number }> = ({ f }) => {
   const grey = prog(f, S2.wordsGrey[0], S2.wordsGrey[1]);
   const greyOut = 1 - prog(f, S2.greyOut[0], S2.greyOut[1]);
   const separate = prog(f, S2.phrasesSeparate[0], S2.phrasesSeparate[1]);
-  const travel = prog(f, S2.phrasesTravel[0], S2.phrasesTravel[1]);
   return (
     <g>
       {FLAT.map((w, i) => {
@@ -123,21 +126,36 @@ const VoiceWords: React.FC<{ f: number }> = ({ f }) => {
         const phraseStart: Pt = [VOICE.textX + first.x, VOICE.baselines[li] - 10 * separate];
         const spot = labelSpot(ph.chip);
         const widthAll = layout[ph.to].x + layout[ph.to].w - first.x;
-        const scale = lerp(1, PHRASE_END_SCALE, travel);
+        const scale = lerp(1, PHRASE_END_SCALE, prog(f, S2.phrasesTravel[0] + PHRASE_LEAVES[pi], S2.phrasesTravel[0] + PHRASE_LEAVES[pi] + PHRASE_FRAMES));
         const w1 = widthAll * PHRASE_END_SCALE;
-        const dest: Pt = [spot.anchor === 'start' ? spot.at[0] : spot.anchor === 'end' ? spot.at[0] - w1 : spot.at[0] - w1 / 2, spot.at[1]];
-        const p0: Pt = [lerp(phraseStart[0], dest[0], ease(travel)), lerp(phraseStart[1], dest[1], ease(travel))];
+        // "cracked" travels with "bracket" and comes to rest just beside it, where it dissolves into REPAIR
+        const besideBracket = pi === 2 ? ((layout[PHRASES[0].to].x + layout[PHRASES[0].to].w - layout[PHRASES[0].from].x) * PHRASE_END_SCALE) / 2 + 22 + w1 / 2 : 0;
+        const dest: Pt = [(spot.anchor === 'start' ? spot.at[0] : spot.anchor === 'end' ? spot.at[0] - w1 : spot.at[0] - w1 / 2) + besideBracket, spot.at[1]];
+        const leave = S2.phrasesTravel[0] + PHRASE_LEAVES[pi];
+        const tp = ease(prog(f, leave, leave + PHRASE_FRAMES, (t) => t));
+        const p0: Pt = [lerp(phraseStart[0], dest[0], tp), lerp(phraseStart[1], dest[1], tp)];
         // the phrase hands over to the chip's own label as that label arrives
         const chipIdx = ['repair', 'hotWork', 'packingLine', 'nightShift'].indexOf(ph.chip);
         const labelIn = S2.chipsStart + chipIdx * S2.chipStagger + S2.chipDur + S2.chipLabelDelay;
         // "cracked" joins "bracket" in REPAIR: it fades on the way, so the two never sit on top of each other
-        const merge = pi === 2 ? 1 - prog(f, S2.phrasesTravel[0], S2.phrasesTravel[0] + 18) : 1;
-        const o = a * merge * (1 - prog(f, labelIn - 6, labelIn + 4));
-        if (o <= 0) return null;
-        return (
-          <text key={i} x={p0[0] + offset * scale} y={p0[1] + px(rise)} fontFamily={FONT.sans} fontWeight={500} fontSize={VOICE.size * scale} fill={COLOR.ink} opacity={o}>
-            {w}
+        const merge = pi === 2 ? 1 - prog(f, S2.phrasesTravel[1] - 4, S2.phrasesTravel[1] + 8) : 1;
+        // gone before the label prints, so the two are never on top of each other
+        const o = a * merge * (1 - prog(f, labelIn - 8, labelIn));
+        // the sentence's full stop is not part of the phrase: it greys and goes with the ordinary words
+        const stop = i === ph.to && w.endsWith('.');
+        const dot = stop ? (
+          <text key={`${i}-stop`} x={base[0] + layout[i].w - VOICE.size * 0.26} y={base[1] + px(rise)} fontFamily={FONT.sans} fontWeight={500} fontSize={VOICE.size} fill={mixColor(COLOR.ink, PALE, grey)} opacity={a * greyOut}>
+            .
           </text>
+        ) : null;
+        if (o <= 0) return dot;
+        return (
+          <React.Fragment key={i}>
+            <text x={p0[0] + offset * scale} y={p0[1] + px(rise)} fontFamily={FONT.sans} fontWeight={500} fontSize={VOICE.size * scale} fill={COLOR.ink} opacity={o}>
+              {stop ? w.slice(0, -1) : w}
+            </text>
+            {dot}
+          </React.Fragment>
         );
       })}
       {/* short printed underlines under the selected phrases, coral beneath "cracked" */}
@@ -153,7 +171,7 @@ const VoiceWords: React.FC<{ f: number }> = ({ f }) => {
         // the closing full stop is not underlined
         const trailing = FLAT[ph.to].endsWith('.') ? VOICE.size * 0.26 : 0;
         const x1 = VOICE.textX + last.x + last.w - trailing;
-        const y = VOICE.baselines[li] + VOICE.size * 0.22;
+        const y = VOICE.baselines[li] + VOICE.size * 0.42; // clear of the descenders
         return <line key={k} x1={x0} y1={y} x2={x0 + (x1 - x0) * draw} y2={y} stroke={ph.color} strokeWidth={px(3)} strokeLinecap="round" opacity={o} />;
       })}
     </g>
@@ -196,7 +214,8 @@ const ListenThread: React.FC<{ f: number }> = ({ f }) => {
   const pr = prioraPos(f);
   const bead = polar(pr, 50, beadAt(f));
   const tip = waveTip(f);
-  const d = `M ${bead[0].toFixed(1)} ${bead[1].toFixed(1)} Q ${(bead[0] + 6).toFixed(1)} ${(tip[1] - 6).toFixed(1)} ${tip[0].toFixed(1)} ${(tip[1] - 22).toFixed(1)}`;
+  // its long run sits halfway between the last line of the message and the top of the waveform
+  const d = `M ${bead[0].toFixed(1)} ${bead[1].toFixed(1)} Q ${(bead[0] + 6).toFixed(1)} ${(tip[1] - 42).toFixed(1)} ${tip[0].toFixed(1)} ${(tip[1] - 30).toFixed(1)}`;
   return <DottedThread d={d} progress={reach} opacity={o} phase={-(f - S2.listenThread[0]) * 1.6} groups />;
 };
 
@@ -229,8 +248,9 @@ const Photo: React.FC<{ f: number }> = ({ f }) => {
   const o = prog(f, S2.photoTravel[0], S2.photoTravel[0] + 4) * (1 - settle);
   if (o <= 0) return null;
   const from: Pt = [WORKER.phoneRaised[0] + 20, WORKER.phoneRaised[1] - 40];
-  const mid: Pt = [2690, 2020];
-  const to = chipPos('photo');
+  // into the facet wherever the fold has taken it, coming up from below so it never crosses the PHOTO label
+  const to = polar(CASE_A, caseAt(f)?.facetR ?? CASE.facetOpenR, FACET_ANGLE.photo);
+  const mid: Pt = [to[0] + 30, to[1] + 190];
   const u = ease(t);
   const at: Pt = [lerp(lerp(from[0], mid[0], u), lerp(mid[0], to[0], u), u), lerp(lerp(from[1], mid[1], u), lerp(mid[1], to[1], u), u)];
   return <PhotoCard at={at} scale={lerp(0.45, 0.8, Math.sin(Math.PI * Math.min(1, u * 1.2)) ** 0.6) * (1 - 0.6 * settle)} opacity={o} />;

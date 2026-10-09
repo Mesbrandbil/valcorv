@@ -5,10 +5,11 @@ import React from 'react';
 import { COLOR, DASH_PX } from '../../lib/tokens';
 import { arrive, ease, lerp, prog } from '../../lib/motion';
 import { annulusSector, polar, type Pt } from '../../lib/geometry';
-import { GAP, MITIGATE_INSIDE, RETAIN_INSIDE, TRANSFER_INSIDE, CASE } from '../../lib/layout';
+import { ANSWER_ASIDE, GAP, MITIGATE_INSIDE, RETAIN_INSIDE, ROOM, TRANSFER_INSIDE, CASE, roomCentre } from '../../lib/layout';
 import { S6 } from '../../lib/timeline';
 import { usePx } from '../../camera/Camera';
 import { EvidenceCheck, RoomAgent, Safeguard } from '../../cast/agents';
+import { DrawnLine } from '../../cast/lines';
 import { casePos } from '../cast';
 
 const ROOM_AGENTS: Pt[] = [[-96, 40], [92, 44], [8, -98]];
@@ -48,7 +49,7 @@ const Mitigate: React.FC<{ f: number }> = ({ f }) => {
   return (
     <g opacity={out}>
       {MITIGATE_INSIDE.safeguards.map((s, i) => {
-        const print = prog(f, S6.safeguards[0] + i * 4, S6.safeguards[0] + i * 4 + 12, arrive);
+        const print = prog(f, S6.safeguards[0] + S6.safeguardDelay[i], S6.safeguards[0] + S6.safeguardDelay[i] + 12, arrive);
         let lift = 0;
         let move = 0;
         if (s.key === 'thermal') {
@@ -103,12 +104,20 @@ const Transfer: React.FC<{ f: number }> = ({ f }) => {
   const back = prog(f, S6.answersBack[0], S6.answersBack[1]);
   const gather = prog(f, S6.gather[0], S6.gather[1]);
   const items: React.ReactNode[] = [];
-  // copies out through the small openings to each agent
+  // fine dashed paths from the packet out through the small openings, then the copies travel along them
+  // and come to rest just inside each agent, on the side facing the room, never on top of its glyph
+  const [rcx, rcy] = roomCentre('transfer');
   TRANSFER_INSIDE.agents.forEach((a, i) => {
+    const opening = polar([rcx, rcy], ROOM.r - ROOM.band / 2, a.angle);
+    const land = polar([rcx, rcy], ROOM.r + 26, a.angle);
+    const pathIn = prog(f, S6.copiesOut[0] - 8 + i * 3, S6.copiesOut[0] + 6 + i * 3);
+    const pathOut = 1 - prog(f, S6.answersOut, S6.answersOut + 10);
+    if (pathIn > 0 && pathOut > 0) {
+      items.push(<DrawnLine key={`path-${i}`} d={`M ${packet[0]} ${packet[1]} L ${opening[0].toFixed(1)} ${opening[1].toFixed(1)} L ${land[0].toFixed(1)} ${land[1].toFixed(1)}`} progress={pathIn} dashed color={COLOR.cobalt} px={1.2} opacity={0.6 * pathOut} />);
+    }
     if (out <= 0 || back >= 1) return;
     const u = ease(prog(f, S6.copiesOut[0] + i * 3, S6.copiesOut[1] + i * 3));
-    const opening = polar([4864, 1315], 316, a.angle);
-    const p: Pt = u < 0.6 ? [lerp(packet[0], opening[0], u / 0.6), lerp(packet[1], opening[1], u / 0.6)] : [lerp(opening[0], a.at[0], (u - 0.6) / 0.4), lerp(opening[1], a.at[1], (u - 0.6) / 0.4)];
+    const p: Pt = u < 0.6 ? [lerp(packet[0], opening[0], u / 0.6), lerp(packet[1], opening[1], u / 0.6)] : [lerp(opening[0], land[0], (u - 0.6) / 0.4), lerp(opening[1], land[1], (u - 0.6) / 0.4)];
     items.push(<GapCopy key={`copy-${i}`} at={p} opacity={(1 - prog(f, S6.answersBack[0], S6.answersBack[0] + 6)) * Math.min(1, u * 4)} />);
   });
   // hollow answers return, one square for each answer, and settle beside the packet
@@ -118,15 +127,16 @@ const Transfer: React.FC<{ f: number }> = ({ f }) => {
     const agent = TRANSFER_INSIDE.agents[i % 3];
     const u = ease(prog(f, S6.answersBack[0] + i * 3, S6.answersBack[1] + i * 2));
     const home: Pt = [ax + 11, ay + i * 40 - 7];
-    const opening = polar([4864, 1315], 316, agent.angle);
-    let p: Pt = u < 0.4 ? [lerp(agent.at[0], opening[0], u / 0.4), lerp(agent.at[1], opening[1], u / 0.4)] : [lerp(opening[0], home[0], (u - 0.4) / 0.6), lerp(opening[1], home[1], (u - 0.4) / 0.6)];
+    const opening = polar(roomCentre('transfer'), ROOM.r - ROOM.band / 2, agent.angle);
+    const from = polar(roomCentre('transfer'), ROOM.r + 26, agent.angle);
+    let p: Pt = u < 0.4 ? [lerp(from[0], opening[0], u / 0.4), lerp(from[1], opening[1], u / 0.4)] : [lerp(opening[0], home[0], (u - 0.4) / 0.6), lerp(opening[1], home[1], (u - 0.4) / 0.6)];
     // Priora gathers them into the packet, where they stay dashed off to one side
     if (gather > 0) {
-      const aside: Pt = [packet[0] + 58 + 40, packet[1] - 34 + i * 22];
+      const aside: Pt = [packet[0] + ANSWER_ASIDE.x + (i % 2) * ANSWER_ASIDE.step, packet[1] + ANSWER_ASIDE.y + Math.floor(i / 2) * ANSWER_ASIDE.step];
       p = [lerp(home[0], aside[0], ease(gather)), lerp(home[1], aside[1], ease(gather))];
     }
     items.push(
-      <rect key={`answer-${i}`} x={p[0] - 11} y={p[1] - 11} width={22} height={22} fill="none" stroke={COLOR.cobalt} strokeWidth={px(1.6)} strokeDasharray={`${px(4)} ${px(3)}`} opacity={Math.min(1, u * 3) * (1 - gather)} />,
+      <rect key={`answer-${i}`} x={p[0] - 11} y={p[1] - 11} width={22} height={22} fill="none" stroke={COLOR.cobalt} strokeWidth={px(1.6)} strokeDasharray={`${px(DASH_PX[0] * 0.6)} ${px(DASH_PX[1] * 0.6)}`} opacity={Math.min(1, u * 3) * (1 - gather)} />,
     );
   });
   return <g>{items}</g>;

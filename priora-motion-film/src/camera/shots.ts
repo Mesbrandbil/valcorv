@@ -5,7 +5,7 @@ export const SHOTS = {
   S1_REAL: { x: 2880, y: 2100, zoom: 1.0 },
   S2_VOICE: { x: 2672, y: 2075, zoom: 1.8 },
   S2_CASE: { x: 2800, y: 1950, zoom: 1.38 },
-  S3_PANEL: { x: 1390, y: 1390, zoom: 0.72 },
+  S3_PANEL: { x: 1390, y: 1436, zoom: 0.72 }, // even margins above the title and below the wall
   S3_TABLE: { x: 1360, y: 1507, zoom: 1.1 },
   S4_CASE: { x: 1300, y: 1500, zoom: 1.75 },
   S4_ROUTE: { x: 2760, y: 2000, zoom: 0.96 },

@@ -1,0 +1,55 @@
+1
+00:00:00,267 --> 00:00:07,667
+Real work in the middle: a worker, a site, a risk owner. Priora places agents around it.
+
+2
+00:00:09,067 --> 00:00:16,133
+WORKER (phone message): Hey, the bracket by the packing line has cracked again. We’re going to weld it before the night shift.
+
+3
+00:00:16,867 --> 00:00:20,800
+Priora hears the job, and asks for a photo.
+
+4
+00:00:25,200 --> 00:00:30,000
+Next, it summons only the specialists this site and job need.
+
+5
+00:00:32,933 --> 00:00:36,433
+Each checks its own conditions and reports back.
+
+6
+00:00:39,000 --> 00:00:46,400
+When everything holds, the route opens. Work goes on, the record is kept, no one is disturbed.
+
+7
+00:00:46,800 --> 00:00:56,367
+One condition slips: the fire watch is half the policy. Priora brings it to the risk owner. Agents prepare, the human decides.
+
+8
+00:00:58,167 --> 00:01:00,367
+Retain is never a default.
+
+9
+00:01:00,367 --> 00:01:04,300
+Risk is kept on purpose, with its terms explicit.
+
+10
+00:01:06,067 --> 00:01:10,867
+Mitigate compares safeguards, and checks whether the work is back inside.
+
+11
+00:01:13,133 --> 00:01:18,367
+Transfer, simulated for now, asks outside capacity for terms and a price.
+
+12
+00:01:18,767 --> 00:01:21,400
+Priora carries the case between rooms.
+
+13
+00:01:21,700 --> 00:01:24,333
+The risk owner stays in control.
+
+14
+00:01:27,867 --> 00:01:33,100
+Priora turns physical work into explicit risk decisions, while the work happens.

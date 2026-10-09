@@ -1,7 +1,7 @@
 // The text registry: every piece of text in the film, verbatim from the storyboard, with when and where it
 // appears. Free text is drawn by the text layer; text that belongs to a component (room names, chip labels,
 // agent names, the voice note) is listed with drawnBy 'component' so the checker sees it too.
-import type { TextItem } from '../text/TextLayer';
+import type { TextItem } from '../text/items';
 import { COLOR } from '../lib/tokens';
 import type { Pt } from '../lib/geometry';
 import { lerp, prog } from '../lib/motion';
@@ -40,6 +40,7 @@ const leaders = RETAIN_INSIDE.leaders.map((l, i) => ({
   size: 24,
   in: S6.leaderLabels[i],
   out: S6.retainTextOut,
+  outDur: 7,
 }));
 
 const safeguardNames = MITIGATE_INSIDE.safeguards.map((s, i) => ({
@@ -81,18 +82,18 @@ export const TEXTS: TextItem[] = [
 
   // Sequence 2 (the voice note and the chip labels are drawn by their components)
   { id: 'voice', text: 'Hey, the bracket by the packing line has cracked again. We’re going to weld it before the night shift.', kind: 'sentence', font: 'sans500', at: [0, 0], in: S2.voice[0], out: S2.greyOut[0], drawnBy: 'component' },
-  { id: 'chip-labels', text: 'REPAIR HOT WORK PACKING LINE BEFORE NIGHT SHIFT SITE + INSURANCE CONDITIONS PHOTO', kind: 'label', font: 'mono', at: [0, 0], in: S2.chipsStart + S2.chipDur + S2.chipLabelDelay, out: S2.chipLabelsOut, drawnBy: 'component' },
+  ...['REPAIR', 'HOT WORK', 'PACKING LINE', 'BEFORE NIGHT SHIFT', 'SITE + INSURANCE CONDITIONS', 'PHOTO'].map((t) => ({ id: `chip-${t}`, text: t, kind: 'label' as const, font: 'mono' as const, at: [0, 0] as Pt, in: S2.chipsStart, out: S2.chipLabelsOut, drawnBy: 'component' as const })),
   { id: 'request', text: 'Photo of the bracket?', kind: 'sentence', font: 'sans500', at: [2540, 1890], anchor: 'end', size: 32, in: S2.request, out: S2.requestOut, outDur: 8 },
-  { id: 'case-label', text: 'CASE', kind: 'label', font: 'mono', at: below(150), size: 32, in: S2.caseLabelIn, out: S3.caseLabelOut },
+  { id: 'case-label', text: 'CASE', kind: 'label', font: 'mono', at: below(150), size: 32, in: S2.caseLabelIn, inDur: 6, out: S3.caseLabelOut },
 
   // Sequence 3 (title, ghost and agent names are drawn by the panel)
-  { id: 'fire-watch', text: 'FIRE WATCH?', kind: 'label', font: 'mono', anchor: 'start', readablePx: 25, in: S3.fireWatchIn, out: S3.fireWatchOut + 6, at: (f) => {
+  { id: 'fire-watch', text: 'FIRE WATCH?', kind: 'label', font: 'mono', anchor: 'start', readablePx: 25, color: COLOR.coral, in: S3.fireWatchIn, out: S3.fireWatchOut + 6, at: (f) => {
     const u = prog(f, S3.fireWatchRide[0], S3.fireWatchRide[1]);
     return [lerp(FIRE_WATCH_FROM[0], FIRE_WATCH_TO[0], u), lerp(FIRE_WATCH_FROM[1], FIRE_WATCH_TO[1], u)];
   } },
 
   // Sequence 4
-  { id: 'inside', text: 'INSIDE THE CONDITIONS', kind: 'label', font: 'mono', at: [1300, 1660], size: 24, in: S4.insideIn, out: S4.insideOut },
+  { id: 'inside', text: 'INSIDE THE CONDITIONS', kind: 'label', font: 'mono', at: [1300, 1660], size: 24, in: S4.insideIn, out: S4.insideOut, outDur: 6 },
   { id: 'record-kept', text: 'RECORD KEPT', kind: 'label', font: 'mono', at: RECORD.keptLabel, size: 25, in: S4.recordKept, out: 1392 },
   { id: 'no-one-disturbed', text: 'NO ONE DISTURBED', kind: 'label', font: 'mono', at: NO_ONE_DISTURBED, anchor: 'start', size: 25, in: S4.noOneDisturbed, out: 1392 },
 
@@ -100,12 +101,12 @@ export const TEXTS: TextItem[] = [
   { id: 'ruler-1', text: 'FIRE WATCH PLANNED: 30 MIN', kind: 'label', font: 'mono', at: [RULERS.x0, RULERS.label1Y], anchor: 'start', size: RULERS.size, color: COLOR.coral, in: S5.ruler1Label, out: S5.rulersOut },
   { id: 'ruler-2', text: 'POLICY ASKS: 60 MIN', kind: 'label', font: 'mono', at: [RULERS.x0, RULERS.label2Y], anchor: 'start', size: RULERS.size, color: COLOR.coral, in: S5.ruler2Label, out: S5.rulersOut },
   { id: 'no-hard-stop', text: 'NO HARD STOP CONFIGURED', kind: 'label', font: 'mono', at: BARRIER_LABEL, anchor: 'start', size: 28, color: COLOR.greyText, in: S5.barrierLabel, out: S5.barrierOut },
-  { id: 'decision-packet', text: 'DECISION PACKET', kind: 'label', font: 'mono', at: below(108), size: 27, in: S5.packetLabelIn, out: S5.packetLabelOut },
+  { id: 'decision-packet', text: 'DECISION PACKET', kind: 'label', font: 'mono', at: below(108), size: 27, in: S5.packetLabelIn, out: S5.packetLabelOut, outDur: 8 },
   { id: 'decides-5', text: 'RISK OWNER DECIDES', kind: 'label', font: 'mono', at: RISK_OWNER_DECIDES, anchor: 'start', readablePx: 27, in: S5.decidesIn, out: S5.decidesOut },
 
   // Sequence 6 (room names, statuses, NO INSURER ON PRIORA YET and the role labels are drawn by the rooms)
-  { id: 'agent-cannot', text: 'AN AGENT CANNOT CHOOSE IT', kind: 'label', font: 'mono', at: RETAIN_INSIDE.agentCannot, size: 24, in: S6.agentCannot, out: S6.retainTextOut },
-  { id: 'risk-owner-6', text: 'RISK OWNER', kind: 'label', font: 'mono', at: RETAIN_INSIDE.riskOwnerLabel, anchor: 'end', size: 24, in: S6.riskOwnerLabel, out: S6.retainTextOut },
+  { id: 'agent-cannot', text: 'AN AGENT CANNOT CHOOSE IT', kind: 'label', font: 'mono', at: RETAIN_INSIDE.agentCannot, size: 24, in: S6.agentCannot, out: S6.agentCannotOut, outDur: 8 },
+  { id: 'risk-owner-6', text: 'RISK OWNER', kind: 'label', font: 'mono', at: RETAIN_INSIDE.riskOwnerLabel, anchor: 'end', size: 24, in: S6.riskOwnerLabel, out: S6.retainTextOut, outDur: 7 },
   ...leaders,
   ...safeguardNames,
   { id: 'partial', text: 'PARTIAL', kind: 'label', font: 'mono', at: MITIGATE_INSIDE.resultLabel, anchor: 'start', size: MITIGATE_INSIDE.resultSize, in: S6.partial, out: S6.thermalBack[0] },
@@ -114,8 +115,9 @@ export const TEXTS: TextItem[] = [
   ...answers,
 
   // Sequence 7: the short list joins the packet at the desk, then the decision
-  { id: 'mitigate-part', text: 'MITIGATE PART', kind: 'label', font: 'mono', at: SHORT_LIST, size: 38, in: S7.toDesk[1], out: S8.textOut },
-  { id: 'keep-the-rest', text: 'KEEP THE REST', kind: 'label', font: 'mono', at: [SHORT_LIST[0], SHORT_LIST[1] + 46], size: 38, in: S7.toDesk[1] + 6, out: S8.textOut },
+  // the short list builds at the desk, one line as each room's proposal meets the packet at its doorway
+  { id: 'mitigate-part', text: 'MITIGATE PART', kind: 'label', font: 'mono', at: SHORT_LIST, size: 38, in: S7.mitigatePart, out: S8.textOut },
+  { id: 'keep-the-rest', text: 'KEEP THE REST', kind: 'label', font: 'mono', at: [SHORT_LIST[0], SHORT_LIST[1] + 46], size: 38, in: S7.keepTheRest, out: S8.textOut },
   { id: 'decides-7', text: 'RISK OWNER DECIDES', kind: 'label', font: 'mono', at: RISK_OWNER_DECIDES, anchor: 'start', readablePx: 27, in: S7.decides, out: S8.textOut },
 
   // Sequence 8

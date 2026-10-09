@@ -3,7 +3,8 @@ import type { SitePanelProps, AgentPlace } from '../world/SitePanel';
 import { seatedRotation } from '../world/SitePanel';
 import type { Pt } from '../lib/geometry';
 import { polar } from '../lib/geometry';
-import { arrive, lerp, prog } from '../lib/motion';
+import { arrive, keys, lerp, prog } from '../lib/motion';
+import { CONTEXT_OPACITY } from '../lib/tokens';
 import { CASE_TABLE_SCALE, FACET_ANGLE, PANEL, SEAT_OF, seatAngle, seatPos, type AgentKey } from '../lib/layout';
 import { S3, S4, S5, S8 } from '../lib/timeline';
 import { curve } from './track';
@@ -51,6 +52,8 @@ const arrivalPos = (k: AgentKey, phase: 'slide' | 'run', u: number): Pt => {
 export type AgentFrame = AgentPlace & { at: Pt; moving: boolean };
 
 /** One specialist at frame f, or null before its summons. */
+const agentsBack = (f: number) => keys(f, [[S4.arcsSlide[0], 1], [S4.lock[1], CONTEXT_OPACITY], [1392, CONTEXT_OPACITY], [1438, 1]]);
+
 export const agentAt = (k: AgentKey, f: number): AgentFrame | null => {
   const t0 = summonT0(k);
   const slide0 = t0 + 12;
@@ -82,7 +85,8 @@ export const agentAt = (k: AgentKey, f: number): AgentFrame | null => {
   }
   if (k === 'siteRules') state.aligned = prog(f, run0 + RUN - 6, seated, arrive); // the two halves align as it settles
   if (k === 'insurer') state.closed = f < seated ? 0.4 : 0; // travelling together, a small precise gap
-  const opacity = prog(f, slide0, slide0 + 6);
+  // once their findings are in the ring the agents step back to context, and come forward again for the slip
+  const opacity = prog(f, slide0, slide0 + 6) * agentsBack(f);
 
   // the checks at the table (Sequence 3)
   if (k === 'evidence') state.corners = 0;
@@ -120,7 +124,7 @@ export const panelAt = (f: number): SitePanelProps | null => {
     opacity: 1 - prog(f, S8.dissolve[0], S8.dissolve[1]),
     wall: prog(f, S3.wall[0], S3.wall[1]),
     table: prog(f, S3.table[0], S3.table[1], arrive),
-    seats: prog(f, S3.seats[0], S3.seats[1], arrive),
+    seats: prog(f, S3.seats[0], S3.seats[1], arrive) * agentsBack(f),
     // the title is above the table shots: it fades as the camera comes down to the table
     titleOpacity: prog(f, S3.title, S3.title + 10, arrive) * (1 - prog(f, 970, 986)),
     subOpacity: prog(f, S3.sub, S3.sub + 10, arrive) * (1 - prog(f, 970, 986)),

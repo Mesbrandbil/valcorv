@@ -23,24 +23,24 @@ export const SEQ = {
 export const S1 = {
   ground: [0, 34],
   sentence1In: 10,
-  worker: [84, 104],
-  workerLabel: 109,
-  site: [110, 130],
-  siteLabel: 135,
-  riskOwner: [136, 156],
-  riskOwnerLabel: 161,
-  priora: [164, 180],
-  beadArc: [172, 190],
-  ellipse: [186, 204],
+  worker: [80, 100],
+  workerLabel: 105,
+  site: [104, 124],
+  siteLabel: 129,
+  riskOwner: [128, 148],
+  riskOwnerLabel: 153,
+  priora: [152, 168],
+  beadArc: [160, 178],
+  ellipse: [172, 190],
   // five specialists along the ellipse, stagger 4, 12 frames each, each with its own small turn
-  specialistsStart: 190,
+  specialistsStart: 176,
   specialistStagger: 4,
   specialistDur: 12,
-  sentence2In: 218, // after the specialists have settled (F0218)
+  sentence2In: 204, // after the specialists have settled (F0204): the whole relationship then holds still from F0216 to F0238
   // the exit runs under Sequence 2's first camera move
   labelsOut: 244,
   sentence1Out: 246, // leaves the frame as the camera closes in
-  sentence2Out: 262, // stays inside the closing frame, so it can be read for its full 30 frames
+  sentence2Out: 248, // early in the move, so the worker raising the phone is the only subject
   ellipseOut: [240, 258],
   specialistsOut: [244, 270],
 } as const;
@@ -75,12 +75,13 @@ export const S2 = {
   request: 596, // "Photo of the bracket?"
   requestThread: [598, 612],
   requestOut: 646,
-  tiltPhone: [614, 624],
-  photoTravel: [624, 640],
-  photoSettle: [640, 648],
-  photoSolid: [644, 652],
-  chipLabelsOut: 628,
-  caseLabelIn: 638,
+  tiltPhone: [612, 622],
+  photoTravel: [622, 638], // rises from below the facet, clear of the PHOTO label
+  photoSettle: [638, 644],
+  photoSolid: [640, 646],
+  chipLabelsOut: 626,
+  fold: [642, 652], // the six facets fold slightly closer to the centre
+  caseLabelIn: 648, // then CASE, in by F0654 when the camera starts to move
 } as const;
 
 // ---------------------------------------------------------------- Sequence 3: The site chooses its cast
@@ -98,7 +99,7 @@ export const S3 = {
   beadBack: [764, 778],
   summonStart: 782, // one every 18 frames: pulse 8, thread 12, slide in 18, through the entrance 20, settle 8
   summonEvery: 18,
-  caseIn: [924, 948],
+  caseIn: [918, 950],
   // camera to the table F0970 to F1014; the case opens in the move
   caseOpen: [976, 1008],
   checkEvidence: [1016, 1040],
@@ -110,26 +111,36 @@ export const S3 = {
   fireWatchRide: [1086, 1100],
   fireWatchOut: 1102,
   answerJoins: [1100, 1110],
-  marksLeave: [1108, 1123],
+  // the findings (src/film/findings.ts): each waits 6 frames by its agent, then takes 28 to move round inside
+  // the table to wait near the entrance; the fifth joins them; the five leave together, 2 frames apart
+  markWaits: 6,
+  markToSlot: 28,
+  insurerToSlot: [1104, 1122],
+  marksLeave: [1120, 1138],
+  leaveStagger: 2,
+  leaveFrames: 22,
 } as const;
 
 // ---------------------------------------------------------------- Sequence 4: When the conditions hold
 export const S4 = {
-  marksIntoPriora: [1124, 1140],
+  linkOut: [1152, 1166], // Priora's fine connection to the case lets go as the camera approaches
   ghostsOut: [1124, 1150],
   namesOut: 1124,
-  fold: [1134, 1154],
-  arcsStart: 1138, // five arcs, stagger 5, 18 frames each, each from its agent's direction
-  arcStagger: 5,
-  arcDur: 18,
-  arcsSlide: [1176, 1196],
-  lock: [1196, 1204],
-  insideIn: 1208,
-  insideOut: 1250,
-  route: [1224, 1274],
-  prioraBead: [1248, 1254],
-  prioraGlide: [1254, 1304],
-  spark: 1274,
+  fold: [1152, 1172], // the facets draw in to clear the ring; their marks stay
+  // the marks rest beside Priora, then go back in one after another at an even pace, each round to its
+  // agent's side, where it becomes its arc (its slide starts the moment it arrives: src/film/findings.ts)
+  marksIn: 1150,
+  marksInStagger: 3,
+  markSpeed: 16, // world units a frame, on average
+  arcDur: 12,
+  arcsSlide: [1226, 1234], // after the last arc is in (F1228)
+  lock: [1234, 1242],
+  insideIn: 1238, // 4 frames after the lock begins
+  insideOut: 1278,
+  route: [1244, 1292],
+  prioraBead: [1256, 1262],
+  prioraGlide: [1262, 1312],
+  spark: 1292,
   record: [1302, 1322],
   mark1: [1322, 1330],
   recordKept: 1334,
@@ -151,16 +162,16 @@ export const S5 = {
   barrier: [1496, 1512],
   barrierLabel: 1512,
   rulersOut: 1534,
-  prioraToEntrance: [1534, 1562],
+  prioraToEntrance: [1534, 1560],
   fold: [1540, 1560],
   barrierOut: 1562,
   packetLabelIn: 1560,
-  packetOut: [1562, 1580], // through the entrance to Priora
-  carry: [1580, 1636], // along ROUTE_ESCALATE to the dock; the camera follows F1584 to F1638
-  packetLabelOut: 1610,
-  loop: [1648, 1672],
-  decidesIn: 1676,
-  decidesOut: 1716,
+  packetOut: [1560, 1584], // through the entrance to Priora
+  carry: [1584, 1644], // along ROUTE_ESCALATE to the dock; the camera follows F1590 to F1644
+  packetLabelOut: 1592, // read, and gone before Priora's carry swings past it
+  loop: [1650, 1674],
+  decidesIn: 1678,
+  decidesOut: 1718,
 } as const;
 
 // ---------------------------------------------------------------- Sequence 6: Three decision rooms
@@ -168,36 +179,39 @@ export const S6 = {
   contextDim: [1691, 1731],
   forecourt: [1695, 1715],
   paths: [1697, 1721],
-  bands: { retain: [1700, 1726], mitigate: [1706, 1732], transfer: [1712, 1738] },
-  names: { retain: 1731, mitigate: 1737, transfer: 1743 },
-  statuses: { retain: 1733, mitigate: 1739, transfer: 1745 },
+  // Transfer prints once the camera has settled, so SIMULATED can arrive with it, 6 frames after it starts
+  bands: { retain: [1700, 1726], mitigate: [1706, 1732], transfer: [1733, 1755] },
+  names: { retain: 1731, mitigate: 1735, transfer: 1739 },
+  statuses: { retain: 1733, mitigate: 1737, transfer: 1739 },
   loopLetsGo: [1741, 1757],
   // Retain
   carryToRetain: [1757, 1811],
   // camera to Retain F1774 to F1814
   stopShort: [1814, 1828],
   agentCannot: 1830,
-  lineToRetain: [1834, 1852],
-  retainOpens: [1852, 1860],
-  riskOwnerLabel: 1858,
-  intoRetain: [1862, 1880],
-  roomAgents: [1874, 1888],
-  bridge: [1882, 1896],
-  leaders: [1890, 1908],
-  leaderLabels: [1896, 1900, 1904, 1908],
+  agentCannotOut: 1890, // read in full, and gone before the leaders arrive
+  lineToRetain: [1832, 1850],
+  retainOpens: [1850, 1856],
+  riskOwnerLabel: 1856,
+  intoRetain: [1862, 1886],
+  roomAgents: [1880, 1894],
+  bridge: [1884, 1898],
+  leaders: [1892, 1906],
+  leaderLabels: [1894, 1897, 1900, 1903],
   // Mitigate (camera F1930 to F1970)
   retainFalls: [1930, 1946],
-  retainTextOut: 1940,
+  retainTextOut: 1933, // gone before the pan to Mitigate takes them to the frame edge
   lineLeavesRetain: [1936, 1950],
   carryToMitigate: [1934, 1966],
-  lineToMitigate: [1956, 1972],
-  mitigateOpens: [1972, 1980],
-  intoMitigate: [1986, 2004],
-  safeguards: [1996, 2010],
-  safeguardNames: [2006, 2010, 2014],
-  thermalRise: [2020, 2036],
-  thermalPiece: [2036, 2048],
-  partial: 2052,
+  lineToMitigate: [1954, 1970],
+  mitigateOpens: [1970, 1978],
+  intoMitigate: [1984, 2016], // a long way down the room, so a long, even glide
+  safeguards: [1998, 2010], // each prints over 12 frames: thermal at +0, workshop at +4, watch at +10, after Priora has passed it
+  safeguardDelay: [0, 10, 4], // thermal, watch, workshop
+  safeguardNames: [2008, 2018, 2012],
+  thermalRise: [2026, 2040],
+  thermalPiece: [2040, 2050],
+  partial: 2054,
   thermalBack: [2084, 2098],
   watchRise: [2086, 2100],
   watchPiece: [2100, 2112],
@@ -214,7 +228,7 @@ export const S6 = {
   noInsurer: 2196,
   lineToTransfer: [2198, 2212],
   transferOpens: [2212, 2218],
-  intoTransfer: [2222, 2238],
+  intoTransfer: [2222, 2242],
   agentLabels: [2240, 2244, 2248],
   copiesOut: [2242, 2262],
   answersBack: [2262, 2284],
@@ -228,7 +242,7 @@ export const S6 = {
 export const S7 = {
   // camera widens F2351 to F2391
   transferTextOut: 2351,
-  lineBack: [2355, 2391],
+  lineBack: [2351, 2371], // quick, so the only black line drawn in Sequence 7 is the closing one
   toMitigateDoor: [2351, 2391],
   roomsBack: [2351, 2391],
   retainLabelsBack: 2392,
@@ -252,13 +266,14 @@ export const S8 = {
   caseLowers: [2532, 2554],
   mark2: [2554, 2562],
   prioraRises: [2564, 2594],
+  statusesOut: [2574, 2584],
   designProposal: 2596,
   designProposalOut: 2636,
   recede: [2610, 2640],
   statement: 2640,
   dissolve: [2808, 2853],
-  statementOut: [2808, 2826], // the words go first, so the wordmark never sits on them
-  wordmark: 2830, // in by F2850: a full second alone after that
+  statementOut: [2808, 2824], // the words go first, so the wordmark never sits on them
+  wordmark: 2824, // straight after, with no empty beat; in by F2836, then well over a second alone
 } as const;
 
 // ---------------------------------------------------------------- Narration (plan section 9; inclusive frames)

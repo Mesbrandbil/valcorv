@@ -20,6 +20,7 @@ import { ink, SEEDS } from '../lib/texture';
 import { Label, Words } from '../lib/text';
 import { useCamera, usePx } from '../camera/Camera';
 import { TransferAgent } from '../cast/agents';
+import { monoWidth, simulatedAt, transferInFrame } from '../lib/simulated';
 
 /** Per room: print 0 to 1 (arrival), opacity (25 percent when another room is in focus), name and status label opacities, threshold 1 = closed, 0 = opened. */
 export type RoomState = { print?: number; opacity?: number; name?: number; status?: number; threshold?: number };
@@ -39,6 +40,8 @@ export type DecisionRoomsProps = {
   forecourt?: number;
   /** The simulated agents outside Transfer's wall. */
   agents?: number;
+  /** In the film: SIMULATED holds inside the frame edge while any of Transfer is in frame (src/lib/simulated.ts). */
+  holdSimulated?: boolean;
 };
 
 const NAME: Record<RoomKey, string> = { retain: 'Retain', mitigate: 'Mitigate', transfer: 'Transfer' };
@@ -122,9 +125,11 @@ export const DecisionRooms: React.FC<DecisionRoomsProps> = ({
   rooms,
   forecourt = 1,
   agents = 1,
+  holdSimulated = false,
 }) => {
   const px = usePx();
-  const { zoom } = useCamera();
+  const cam = useCamera();
+  const { zoom } = cam;
   const st = (k: RoomKey): Required<RoomState> => {
     const r = rooms?.[k] ?? {};
     const dimmed = focus && focus !== k;
@@ -194,9 +199,14 @@ export const DecisionRooms: React.FC<DecisionRoomsProps> = ({
         return (
           <g key={k}>
             {s.name > 0 && <Words text={NAME[k]} at={[x, nameY]} anchor={anchor} readablePx={ROOM_NAME_PX} weight={600} opacity={s.name} rise={1 - Math.min(1, s.name)} />}
-            {s.status > 0 && (
-              <Label text={STATUS[k]} at={[x, firstStatusY]} anchor={anchor} readablePx={ROOM_STATUS_PX} color={k === 'transfer' ? COLOR.cobalt : COLOR.ink} opacity={s.status} rise={1 - Math.min(1, s.status)} />
+            {s.status > 0 && k !== 'transfer' && (
+              <Label text={STATUS[k]} at={[x, firstStatusY]} anchor={anchor} readablePx={ROOM_STATUS_PX} color={COLOR.ink} opacity={s.status} rise={1 - Math.min(1, s.status)} />
             )}
+            {s.status > 0 && k === 'transfer' && (() => {
+              const at = holdSimulated ? simulatedAt(cam, [x, firstStatusY], monoWidth(STATUS[k], statusW), statusW) : ([x, firstStatusY] as const);
+              const o = s.status * (holdSimulated ? transferInFrame(cam) : 1);
+              return o > 0 ? <Label text={STATUS[k]} at={[at[0], at[1]]} anchor={anchor} readablePx={ROOM_STATUS_PX} color={COLOR.cobalt} opacity={o} rise={1 - Math.min(1, s.status)} /> : null;
+            })()}
             {k === 'transfer' && noInsurer > 0 && (
               <Label text="NO INSURER ON PRIORA YET" at={[x, firstStatusY + gapStatus]} anchor={anchor} readablePx={ROOM_STATUS_PX} opacity={noInsurer} rise={1 - Math.min(1, noInsurer)} color={COLOR.cobalt} />
             )}

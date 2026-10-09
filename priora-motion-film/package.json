@@ -8,7 +8,13 @@
     "studio": "remotion studio src/index.ts",
     "textures": "node scripts/textures.mjs",
     "stills:world": "node scripts/world-stills.mjs",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "qa": "node scripts/qa.mjs",
+    "stills:sequence": "node scripts/sequence-stills.mjs",
+    "render:sequence": "node scripts/render-video.mjs sequence",
+    "render:film": "node scripts/render-video.mjs film",
+    "render:review": "node scripts/render-video.mjs review",
+    "srt": "node scripts/run-ts.mjs scripts/write-srt.ts"
   },
   "dependencies": {
     "@remotion/bundler": "4.0.534",
@@ -23,6 +29,8 @@
   },
   "devDependencies": {
     "@types/react": "19.1.8",
+    "esbuild": "0.28.1",
+    "fontkit": "2.0.4",
     "typescript": "5.8.3"
   }
 }
