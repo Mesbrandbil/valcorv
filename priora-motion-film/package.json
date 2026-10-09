@@ -1,0 +1,37 @@
+{
+  "name": "priora-motion-film",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Priora motion film, built in Remotion from Priora storyboard.md",
+  "type": "module",
+  "scripts": {
+    "studio": "remotion studio src/index.ts",
+    "textures": "node scripts/textures.mjs",
+    "stills:world": "node scripts/world-stills.mjs",
+    "typecheck": "tsc --noEmit",
+    "qa": "node scripts/qa.mjs",
+    "stills:sequence": "node scripts/sequence-stills.mjs",
+    "render:sequence": "node scripts/render-video.mjs sequence",
+    "render:film": "node scripts/render-video.mjs film",
+    "render:review": "node scripts/render-video.mjs review",
+    "srt": "node scripts/run-ts.mjs scripts/write-srt.ts",
+    "mix": "node scripts/run-ts.mjs scripts/mix-audio.ts"
+  },
+  "dependencies": {
+    "@remotion/bundler": "4.0.534",
+    "@remotion/cli": "4.0.534",
+    "@remotion/fonts": "4.0.534",
+    "@remotion/layout-utils": "4.0.534",
+    "@remotion/paths": "4.0.534",
+    "@remotion/renderer": "4.0.534",
+    "react": "19.1.0",
+    "react-dom": "19.1.0",
+    "remotion": "4.0.534"
+  },
+  "devDependencies": {
+    "@types/react": "19.1.8",
+    "esbuild": "0.28.1",
+    "fontkit": "2.0.4",
+    "typescript": "5.8.3"
+  }
+}
