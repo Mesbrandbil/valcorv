@@ -9,13 +9,14 @@ export const Subtitles: React.FC<{ f: number }> = ({ f }) => {
   if (!line) return null;
   const o = fade(f, line.from - 2, 4, line.to + 4, 4);
   const who = 'who' in line ? 'Worker: ' : '';
-  // a solid panel, only as wide as its words (about 12.5 px a character at this size, with room to spare),
-  // so the labels it covers near the bottom edge never show through the subtitle
-  const w = Math.min(1720, (who.length + line.text.length) * 12.5 + 64);
+  // a solid panel, only as wide as its words (they measure about 10.5 px a character at this size; 10.8 leaves
+  // room), so the labels it covers near the bottom edge never show through and it clears the ones beside it
+  const w = Math.min(1720, (who.length + line.text.length) * 10.8 + 56);
   return (
     <g opacity={o}>
-      <rect x={WIDTH / 2 - w / 2} y={HEIGHT - 78} width={w} height={50} rx={6} fill={COLOR.paper} />
-      <text x={WIDTH / 2} y={HEIGHT - 44} textAnchor="middle" fontFamily={FONT.sans} fontWeight={500} fontSize={24} fill={COLOR.ink}>
+      {/* tall enough that a label in the bottom band (RECORD KEPT, the agents' names) is either covered or clear */}
+      <rect x={WIDTH / 2 - w / 2} y={HEIGHT - 92} width={w} height={64} rx={6} fill={COLOR.paper} />
+      <text x={WIDTH / 2} y={HEIGHT - 51} textAnchor="middle" fontFamily={FONT.sans} fontWeight={500} fontSize={24} fill={COLOR.ink}>
         {who}
         {line.text}
       </text>
