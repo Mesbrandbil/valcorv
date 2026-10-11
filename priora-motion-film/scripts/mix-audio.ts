@@ -5,9 +5,10 @@
 // together reach -16 LUFS with peaks under -1 dBTP. It also writes src/lib/voice-lengths.ts, so the
 // subtitles and narration.srt follow the real recordings. Run with: npm run mix   (needs ffmpeg)
 //
-// audio sources/voice/<clip>.mp3 (or .wav)  one file per line, named as in VOICE: N1a, N1b, W1, ...
-// audio sources/music.mp3                   optional: the bed, cut so its first downbeat is at 0 s
-// audio sources/effects/<kind>.mp3          optional: one file per kind in CUES below
+// audio sources/voice/<clip>.flac (or .wav)  one file per line, named as in VOICE: N1a, N1b, W1, ...
+// audio sources/music.flac                  optional: the bed, its first downbeat at 0 s
+// audio sources/effects/<kind>.wav          optional: one file per kind in CUES below; a cue with a variant
+//                                           plays "<kind> <variant>" when that file exists (the five notes)
 import { execFileSync, spawnSync } from 'node:child_process';
 import fs from 'node:fs';
 import path from 'node:path';
@@ -31,16 +32,16 @@ const TARGET_LUFS = -16;
 const TARGET_TP = -1;
 
 // ---------------------------------------------------------------- effects, from "sound cues.md"
-type Cue = { at: number; kind: string; db?: number; until?: number };
+type Cue = { at: number; kind: string; variant?: number; db?: number; until?: number };
 const CUES: Cue[] = [
   // Sequence 1: the silhouettes settle, the agents introduce a few higher notes
   { at: 100, kind: 'paper' }, { at: 124, kind: 'paper' }, { at: 148, kind: 'paper' },
-  ...[188, 192, 196, 200, 204].map((at) => ({ at, kind: 'note', db: -4 })),
+  ...[188, 192, 196, 200, 204].map((at, i) => ({ at, kind: 'note', variant: i + 1, db: -4 })),
   // Sequence 2: the listening thread, the phrases lifted and set down, the request, the photo
   { at: 304, kind: 'thread' }, { at: 506, kind: 'paper', db: -3 }, { at: 538, kind: 'paper', db: -3 },
   { at: 558, kind: 'thread' }, { at: 598, kind: 'thread' }, { at: 640, kind: 'card' },
   // Sequence 3: the summons, each agent settling, the case on the table
-  ...[786, 804, 822, 840, 858].map((at) => ({ at, kind: 'thread', db: -3 })),
+  ...[786, 804, 822, 840, 858].map((at, i) => ({ at, kind: 'thread', variant: i + 1, db: -3 })),
   { at: 840, kind: 'card', db: -3 }, { at: 858, kind: 'felt' }, { at: 876, kind: 'tick' }, { at: 894, kind: 'wood', db: -4 }, { at: 912, kind: 'felt' },
   { at: 950, kind: 'felt' },
   // Sequence 4: the findings settle, the ring locks, the welding, the record mark
@@ -141,19 +142,20 @@ if (music) {
       `volume=${gain.toFixed(2)}dB,volume='pow(10\\,-${DUCK_DB}*(${duckExpr})/20)':eval=frame,` +
       `afade=t=in:d=1.5,afade=t=out:st=${(fadeOut - 2).toFixed(3)}:d=${(FILM_S - fadeOut + 2).toFixed(3)}:curve=qsin[music]`,
   );
-} else console.log('no music.mp3: the sound stem has the effects only');
-const kinds = [...new Set(CUES.map((c) => c.kind))];
-const absent = kinds.filter((k) => !find(path.join(SRC, 'effects'), k));
+} else console.log('no music file: the sound stem has the effects only');
+/** The file a cue plays: its variant when there is one, else its kind. */
+const effectFile = (c: Cue) => (c.variant ? find(path.join(SRC, 'effects'), `${c.kind} ${c.variant}`) : undefined) ?? find(path.join(SRC, 'effects'), c.kind);
+const absent = [...new Set(CUES.filter((c) => !effectFile(c)).map((c) => c.kind))];
 if (absent.length) console.log(`no effect files for: ${absent.join(', ')} (their cues are left out)`);
+// every kind is matched by its plain file, so a kind's variants keep their balance with each other
 const effectGain = new Map<string, number>();
-for (const k of kinds) {
-  const f = find(path.join(SRC, 'effects'), k);
-  if (!f) continue;
-  effectGain.set(k, VOICE_LUFS - EFFECTS_UNDER - measure(f).lufs);
+for (const k of new Set(CUES.map((c) => c.kind))) {
+  const f = find(path.join(SRC, 'effects'), k) ?? CUES.filter((c) => c.kind === k).map(effectFile).find(Boolean);
+  if (f) effectGain.set(k, VOICE_LUFS - EFFECTS_UNDER - measure(f).lufs);
 }
-const cues = CUES.filter((c) => effectGain.has(c.kind));
+const cues = CUES.filter((c) => effectFile(c) && effectGain.has(c.kind));
 for (const c of cues) {
-  const f = find(path.join(SRC, 'effects'), c.kind)!;
+  const f = effectFile(c)!;
   const gain = effectGain.get(c.kind)! + (c.db ?? 0);
   if (c.until) {
     // a looping effect (the welding), faded in and out over its span

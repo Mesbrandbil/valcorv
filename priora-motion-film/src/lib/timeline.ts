@@ -52,7 +52,8 @@ export const S2 = {
   prioraBeadToWorker: [244, 250],
   prioraGlide: [250, 296], // towards the worker, to hover just above and to its right
   raisePhone: [260, 276],
-  voice: [272, 483], // the worker's message at 2.7 words per second (W1)
+  // the worker's message (W1): from its beat (14) for its recorded length, over before the words grey out
+  voice: [280, 280 + Math.min(VOICE_LENGTH.W1 ?? 204, 204) - 1],
   beadToWave: [298, 304],
   listenThread: [304, 314], // the thread reaches the tip; then follows it until the voice ends
   wordsGrey: [484, 494],

@@ -9,6 +9,7 @@ import { polar, type Pt } from '../../lib/geometry';
 import { CASE, CASE_A, FACET_ANGLE, SITE, VOICE, WORKER, type FacetKey } from '../../lib/layout';
 import { chipAnchor, chipLabelAt } from '../../cast/Case';
 import { S2 } from '../../lib/timeline';
+import { W1_WORDS } from '../../lib/voice-words';
 import { usePx } from '../../camera/Camera';
 import { DottedThread, DrawnLine } from '../../cast/lines';
 import { PhotoCard } from '../../cast/Case';
@@ -17,8 +18,9 @@ import { beadAt, caseAt, prioraPos, waveProgress, waveTip } from '../cast';
 // ---------------------------------------------------------------- the words
 const WORDS = VOICE.lines.map((l) => l.split(' '));
 const FLAT = WORDS.flat();
-const PER_WORD = (S2.voice[1] - S2.voice[0]) / FLAT.length; // 2.7 words per second
-const wordAt = (i: number) => S2.voice[0] + i * PER_WORD;
+const PER_WORD = (S2.voice[1] - S2.voice[0]) / FLAT.length;
+// each word as the recording speaks it (voice-words.ts, written by the mix), else evenly through the message
+const wordAt = (i: number) => (W1_WORDS.length === FLAT.length ? W1_WORDS[i] : S2.voice[0] + i * PER_WORD);
 // spoken groups (first word index of each); a group appears just after its first word is spoken
 const GROUPS = [0, 3, 7, 10, 13, 15];
 const groupOf = (i: number) => GROUPS.filter((g) => g <= i).length - 1;
