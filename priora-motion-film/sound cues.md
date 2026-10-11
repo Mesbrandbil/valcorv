@@ -10,14 +10,14 @@ The narration lines and their windows are in `narration.srt`. The render script 
 
 | Frame | Timecode | Sound | Storyboard |
 |---|---|---|---|
-| F0100 | 00:03:10 | Paper contact, soft and print-like: the worker settles on the ground line | The three silhouettes arrive with soft print-like contacts |
-| F0124 | 00:04:04 | Paper contact: the site settles | as above |
-| F0148 | 00:04:28 | Paper contact: the risk owner settles | as above |
-| F0188 | 00:06:08 | First of five delicate, higher notes: Site rules settles on the ellipse | the agents introduce a few delicate, higher notes |
-| F0192 | 00:06:12 | Higher note: Insurer conditions | as above |
-| F0196 | 00:06:16 | Higher note: Fire | as above |
-| F0200 | 00:06:20 | Higher note: Risk engineering | as above |
-| F0204 | 00:06:24 | Higher note: Evidence check | as above |
+| F0084 | 00:02:24 | Paper contact, soft and print-like: the worker prints onto the ground line (about 60 percent visible) | The three silhouettes arrive with soft print-like contacts |
+| F0108 | 00:03:18 | Paper contact: the site prints | as above |
+| F0132 | 00:04:12 | Paper contact: the risk owner prints | as above |
+| F0180 | 00:06:00 | First of five delicate, higher notes: Site rules settles on the ellipse | the agents introduce a few delicate, higher notes |
+| F0184 | 00:06:04 | Higher note: Insurer conditions | as above |
+| F0188 | 00:06:08 | Higher note: Fire | as above |
+| F0192 | 00:06:12 | Higher note: Risk engineering | as above |
+| F0196 | 00:06:16 | Higher note: Evidence check | as above |
 
 ## Sequence 2: A voice becomes a case
 
@@ -37,12 +37,12 @@ The narration lines and their windows are in `narration.srt`. The render script 
 | Frame | Timecode | Sound | Storyboard |
 |---|---|---|---|
 | F0786 | 00:26:06 | Fine thread plucks, one for each summons as its facet pulses and the thread reaches out: F0786 (Evidence check), F0804 (Risk engineering), F0822 (Site rules), F0840 (Fire), F0858 (Insurer conditions) | a fine plucked thread (sound world) |
-| F0840 | 00:28:00 | Paper (light card): Evidence check settles at its seat | different sound signatures from the same family of wood, felt and paper |
-| F0858 | 00:28:18 | Felt landing: Risk engineering settles | as above |
-| F0876 | 00:29:06 | Dry wooden tick: Site rules settles, its two halves aligned | as above |
-| F0894 | 00:29:24 | Wood, slightly fuller: Fire settles, its opening towards the table | as above |
+| F0832 | 00:27:22 | Paper (light card): Evidence check stops in its seat | different sound signatures from the same family of wood, felt and paper |
+| F0850 | 00:28:10 | Felt landing: Risk engineering stops in its seat | as above |
+| F0870 | 00:29:00 | Dry wooden tick: Site rules settles, its two halves aligned | as above |
+| F0886 | 00:29:16 | Wood, slightly fuller: Fire stops in its seat, its opening towards the table | as above |
 | F0912 | 00:30:12 | Felt and paper: Insurer conditions settles, its brackets closed | as above |
-| F0950 | 00:31:20 | Muted felt landing: the case settles at the centre of the table | a muted felt landing (sound world) |
+| F0945 | 00:31:15 | Muted felt landing: the case comes to rest at the centre of the table | a muted felt landing (sound world) |
 | F1016 | 00:33:26 | Checks begin (F1016 to F1084): keep each agent's sound small and separate; the camera is still | The camera remains mostly still during their checks |
 
 ## Sequence 4: When the conditions hold
@@ -52,7 +52,7 @@ The narration lines and their windows are in `narration.srt`. The render script 
 | F1219 | 00:40:19 | Muted felt landings as the five findings settle into the ring: Fire and Insurer conditions F1219, Site rules and Evidence check F1222, Risk engineering F1228 | a muted felt landing (sound world) |
 | F1234 | 00:41:04 | Soft, clear tone: the closed ring resolves (the lock) | The closed ring resolves with a soft, clear tone |
 | F1244 | 00:41:14 | Music opens into a warmer sustained chord as the route draws from the ring (through about F1330) | The music briefly opens into a warmer sustained chord |
-| F1292 | 00:43:02 | Welding starts: faint and local inside the factory, the spark flickers (it continues while the site is in view) | The welding sound remains faint and local |
+| F1292 | 00:43:02 | Welding starts: faint and local inside the factory, the spark flickers (it continues while the site is in view, fading out by F1580) | The welding sound remains faint and local |
 | F1322 | 00:44:02 | Faint paper contact: the first record mark | a soft paper contact (sound world) |
 
 ## Sequence 5: A condition slips
@@ -76,7 +76,7 @@ The narration lines and their windows are in `narration.srt`. The render script 
 | F2086 | 01:09:16 | Second light comparison note: Extend watch to 60 min rises | as above |
 | F2212 | 01:13:22 | Low wooden note: the human line reaches Transfer's threshold | as at Retain |
 | F2242 | 01:14:22 | Thinner, more open tone: dashed copies of the gap travel out to the simulated agents | Transfer has a thinner, more open tone |
-| F2262 | 01:15:12 | The same thin tone, returning: hollow answers come back | as above |
+| F2267 | 01:15:17 | The same thin tone, returning: the first hollow answer comes back | as above |
 
 ## Sequence 7: The rooms work together
 

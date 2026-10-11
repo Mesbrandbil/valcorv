@@ -8,7 +8,7 @@ Priora places agents around it.
 
 3
 00:00:09,333 --> 00:00:13,933
-WORKER (phone message): Hey, the bracket by the packing line has cracked again. We’re going to weld it before the night shift.
+Worker: Hey, the bracket by the packing line has cracked again. We’re going to weld it before the night shift.
 
 4
 00:00:17,333 --> 00:00:19,967

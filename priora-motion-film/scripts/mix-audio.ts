@@ -26,9 +26,10 @@ const sec = (frame: number) => frame / FPS;
 
 // ---------------------------------------------------------------- levels (LUFS / LU)
 const VOICE_LUFS = -18; // every line is matched to this before the mix; the final gain lifts all together
-const MUSIC_UNDER = 13; // music this far under the voice, so it carries the gaps between lines
-const DUCK_DB = 6; // and a further 6 dB down while anyone speaks: 19 dB under the voice
+const MUSIC_UNDER = 10; // music this far under the voice, so it carries the gaps between lines
+const DUCK_DB = 8; // and a further 8 dB down while anyone speaks: 18 dB under the voice
 const EFFECTS_UNDER = 12; // effects quiet and close
+const EFFECTS_DUCK_DB = 3; // and a little lower while anyone speaks, so they fill the pauses, not the words
 const TARGET_LUFS = -16;
 const TARGET_TP = -1;
 
@@ -36,25 +37,27 @@ const TARGET_TP = -1;
 type Cue = { at: number; kind: string; variant?: number; db?: number; until?: number };
 const CUES: Cue[] = [
   // Sequence 1: the silhouettes settle, the agents introduce a few higher notes
-  { at: 100, kind: 'paper' }, { at: 124, kind: 'paper' }, { at: 148, kind: 'paper' },
-  ...[188, 192, 196, 200, 204].map((at, i) => ({ at, kind: 'note', variant: i + 1, db: -4 })),
+  // (each figure prints in over 20 frames: the contact lands as it becomes visible, about 60 percent in)
+  { at: 84, kind: 'paper' }, { at: 108, kind: 'paper' }, { at: 132, kind: 'paper' },
+  ...[180, 184, 188, 192, 196].map((at, i) => ({ at, kind: 'note', variant: i + 1, db: -6 })),
   // Sequence 2: the listening thread, the phrases lifted and set down, the request, the photo
   { at: 304, kind: 'thread' }, { at: 506, kind: 'paper', db: -3 }, { at: 538, kind: 'paper', db: -3 },
   { at: 558, kind: 'thread' }, { at: 598, kind: 'thread' }, { at: 640, kind: 'card' },
   // Sequence 3: the summons, each agent settling, the case on the table
   ...[786, 804, 822, 840, 858].map((at, i) => ({ at, kind: 'thread', variant: i + 1, db: -3 })),
-  { at: 840, kind: 'card', db: -3 }, { at: 858, kind: 'felt' }, { at: 876, kind: 'tick' }, { at: 894, kind: 'wood', db: -4 }, { at: 912, kind: 'felt' },
-  { at: 950, kind: 'felt' },
+  // (on the frame each agent stops in its seat; Insurer conditions when its brackets close)
+  { at: 832, kind: 'card', db: -3 }, { at: 850, kind: 'felt' }, { at: 870, kind: 'tick' }, { at: 886, kind: 'wood', db: -4 }, { at: 912, kind: 'felt' },
+  { at: 945, kind: 'felt' },
   // Sequence 4: the findings settle, the ring locks, the welding, the record mark
   { at: 1219, kind: 'felt', db: -4 }, { at: 1222, kind: 'felt', db: -4 }, { at: 1228, kind: 'felt', db: -4 },
-  { at: 1234, kind: 'tone' }, { at: 1292, kind: 'weld', db: -8, until: 1391 }, { at: 1322, kind: 'paper', db: -4 },
+  { at: 1234, kind: 'tone' }, { at: 1292, kind: 'weld', db: -8, until: 1580 }, { at: 1322, kind: 'paper', db: -4 },
   // Sequence 5: the arc separates, the packet is carried, the human line arrives
-  { at: 1444, kind: 'tick', db: 3 }, { at: 1584, kind: 'paper', db: -4 }, { at: 1650, kind: 'wood' },
+  { at: 1444, kind: 'tick' }, { at: 1584, kind: 'paper', db: -4 }, { at: 1650, kind: 'wood', db: -3 },
   // Sequence 6: the rooms print, the human line at each threshold, the comparisons, the copies out and back
   { at: 1700, kind: 'paper', db: -4 }, { at: 1706, kind: 'paper', db: -4 }, { at: 1733, kind: 'paper', db: -4 },
   { at: 1850, kind: 'wood' }, { at: 1894, kind: 'felt' }, { at: 1970, kind: 'wood' },
-  { at: 2026, kind: 'note', db: -4 }, { at: 2086, kind: 'note', db: -4 },
-  { at: 2212, kind: 'wood' }, { at: 2242, kind: 'tone', db: -3 }, { at: 2262, kind: 'tone', db: -3 },
+  { at: 2026, kind: 'note', db: -6 }, { at: 2086, kind: 'note', db: -6 },
+  { at: 2212, kind: 'wood', db: -2 }, { at: 2242, kind: 'tone', db: -3 }, { at: 2267, kind: 'tone', db: -3 },
   // Sequence 8: the final record mark
   { at: 2554, kind: 'paper', db: -6 },
 ];
@@ -86,11 +89,14 @@ if (missing.length) {
 }
 // trim leading and trailing silence, so each line's first syllable is its beat
 const TRIM = 'silenceremove=start_periods=1:start_threshold=-48dB:start_silence=0.02,areverse,silenceremove=start_periods=1:start_threshold=-48dB:start_silence=0.12,areverse';
+// the narrator: Kokoro's 's' sounds carry a strong band near 10.5 kHz, so a notch and a light de-esser
+// (after the resample, so the de-esser's frequency is set at 48 kHz) take them down without dulling 1 to 4 kHz
+const DEESS = 'equalizer=f=10500:t=q:w=1.0:g=-8,deesser=i=0.45:m=0.35:f=0.5:s=o';
 // the worker's voice note: a telephone band, a little squeeze and a small room
 const PHONE = 'highpass=f=300:poles=2,highpass=f=300:poles=2,lowpass=f=3400:poles=2,lowpass=f=3400:poles=2,acompressor=threshold=-22dB:ratio=3:attack=5:release=80,aecho=0.85:0.5:23|37:0.14|0.08';
 const lines = VOICE.map((v) => {
   const trimmed = path.join(TMP, `${v.id} trimmed.wav`);
-  const chain = ['who' in v ? PHONE : 'anull', TRIM, `aresample=${RATE}`].join(',');
+  const chain = ['who' in v ? PHONE : 'anull', TRIM, `aresample=${RATE}`, 'who' in v ? 'anull' : DEESS].join(',');
   run(['-i', find(path.join(SRC, 'voice'), v.id)!, '-af', chain, '-ac', '1', trimmed]);
   const { lufs } = measure(trimmed);
   const matched = path.join(TMP, `${v.id}.wav`);
@@ -136,11 +142,12 @@ const music = find(SRC, 'music');
 if (music) {
   const { lufs } = measure(music);
   const gain = VOICE_LUFS - MUSIC_UNDER - lufs;
-  const fadeOut = sec(2824);
+  const fadeOut = sec(2824) + 1.5; // nearly silent from F2824: the bed's own last chord is already dying away
   const i = input('-i', music);
   soundParts.push(
     `[${i}]aresample=${RATE},aformat=channel_layouts=stereo,atrim=0:${FILM_S},apad=whole_dur=${FILM_S},` +
-      `volume=${gain.toFixed(2)}dB,volume='pow(10\\,-${DUCK_DB}*(${duckExpr})/20)':eval=frame,` +
+      // the bed leans about 1.7 dB to the left (the soundfont's stereo piano), so it is centred first
+      `pan=stereo|c0=0.909*c0|c1=1.100*c1,volume=${gain.toFixed(2)}dB,volume='pow(10\\,-${DUCK_DB}*(${duckExpr})/20)':eval=frame,` +
       `afade=t=in:d=0.05,afade=t=out:st=${(fadeOut - 2).toFixed(3)}:d=${(FILM_S - fadeOut + 2).toFixed(3)}:curve=qsin[music]`,
   );
 } else console.log('no music file: the sound stem has the effects only');
@@ -170,8 +177,14 @@ for (const c of cues) {
 }
 const soundRaw = path.join(TMP, 'sound raw.wav');
 const labels = soundParts.map((p) => p.slice(p.lastIndexOf('[')));
+const fx = labels.filter((l) => l !== '[music]');
 if (labels.length) {
-  const graph = `${soundParts.join(';')};${labels.join('')}amix=inputs=${labels.length}:normalize=0,apad=whole_dur=${FILM_S},atrim=0:${FILM_S}[out]`;
+  // the effects together, ducked under the voice, then with the music
+  const duckFx = `volume='pow(10\\,-${EFFECTS_DUCK_DB}*(${duckExpr})/20)':eval=frame`;
+  const music = labels.includes('[music]');
+  const effects = fx.length ? `${fx.join('')}amix=inputs=${fx.length}:normalize=0,apad=whole_dur=${FILM_S},atrim=0:${FILM_S},${duckFx}[fx];` : '';
+  const both = music && fx.length ? '[music][fx]amix=inputs=2:normalize=0' : music ? '[music]anull' : '[fx]anull';
+  const graph = `${soundParts.join(';')};${effects}${both},apad=whole_dur=${FILM_S},atrim=0:${FILM_S}[out]`;
   run([...soundInputs, '-filter_complex', graph, '-map', '[out]', '-ar', String(RATE), '-c:a', 'pcm_s24le', soundRaw]);
 } else {
   run(['-f', 'lavfi', '-i', `anullsrc=r=${RATE}:cl=stereo`, '-t', String(FILM_S), '-c:a', 'pcm_s24le', soundRaw]);

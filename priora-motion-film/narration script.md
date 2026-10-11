@@ -79,4 +79,4 @@ The effects are: `paper` a soft paper contact; `tick` a dry wooden tick; `thread
 
 ## Mix
 
-Narration in front and centred; the worker's voice note through a telephone band (about 300 to 3400 Hz) with a little room; music 13 dB under the voice, so it carries the gaps between lines, and ducked a further 6 dB while anyone speaks; effects 12 dB under the voice, quiet and close. Loudness about -16 LUFS integrated with peaks under -1 dBTP, so it plays well online.
+Narration in front and centred, with a light de-esser on the narrator (a notch near 10.5 kHz, where Kokoro's 's' sounds are strong); the worker's voice note through a telephone band (about 300 to 3400 Hz) with a little room; music 10 dB under the voice, so it carries the gaps between lines, and ducked a further 8 dB while anyone speaks; effects 12 dB under the voice, quiet and close, and 3 dB lower while anyone speaks. The music bed is centred in the mix (the soundfont piano leans left). Loudness about -16 LUFS integrated with peaks under -1 dBTP, so it plays well online.

@@ -12,7 +12,7 @@ const stamp = (frame: number) => {
   return `${p(Math.floor(ms / 3600000))}:${p(Math.floor(ms / 60000) % 60)}:${p(Math.floor(ms / 1000) % 60)},${p(ms % 1000, 3)}`;
 };
 const blocks = NARRATION.map((n, i) => {
-  const who = 'who' in n ? 'WORKER (phone message): ' : '';
+  const who = 'who' in n ? 'Worker: ' : ''; // as the burned-in subtitles say it
   return `${i + 1}\n${stamp(n.from)} --> ${stamp(n.to + 1)}\n${who}${n.text}\n`;
 });
 fs.writeFileSync(path.join(ROOT, 'narration.srt'), blocks.join('\n'));
