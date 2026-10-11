@@ -3,7 +3,8 @@
 // effects). Each line is trimmed of its silence and starts exactly on its beat; the worker's line goes
 // through a telephone band; the music sits under the voice and ducks while anyone speaks; the two stems
 // together reach -16 LUFS with peaks under -1 dBTP. It also writes src/lib/voice-lengths.ts, so the
-// subtitles and narration.srt follow the real recordings. Run with: npm run mix   (needs ffmpeg)
+// subtitles and narration.srt follow the real recordings, and src/lib/voice-words.ts, so the worker's words
+// appear on screen as they are spoken. Run with: npm run mix   (needs ffmpeg)
 //
 // audio sources/voice/<clip>.flac (or .wav)  one file per line, named as in VOICE: N1a, N1b, W1, ...
 // audio sources/music.flac                  optional: the bed, its first downbeat at 0 s
@@ -25,9 +26,9 @@ const sec = (frame: number) => frame / FPS;
 
 // ---------------------------------------------------------------- levels (LUFS / LU)
 const VOICE_LUFS = -18; // every line is matched to this before the mix; the final gain lifts all together
-const MUSIC_UNDER = 18; // music this far under the voice
-const DUCK_DB = 4; // and a further 4 dB down while anyone speaks
-const EFFECTS_UNDER = 14; // effects quiet and close
+const MUSIC_UNDER = 13; // music this far under the voice, so it carries the gaps between lines
+const DUCK_DB = 6; // and a further 6 dB down while anyone speaks: 19 dB under the voice
+const EFFECTS_UNDER = 12; // effects quiet and close
 const TARGET_LUFS = -16;
 const TARGET_TP = -1;
 
@@ -48,12 +49,12 @@ const CUES: Cue[] = [
   { at: 1219, kind: 'felt', db: -4 }, { at: 1222, kind: 'felt', db: -4 }, { at: 1228, kind: 'felt', db: -4 },
   { at: 1234, kind: 'tone' }, { at: 1292, kind: 'weld', db: -8, until: 1391 }, { at: 1322, kind: 'paper', db: -4 },
   // Sequence 5: the arc separates, the packet is carried, the human line arrives
-  { at: 1444, kind: 'tick' }, { at: 1584, kind: 'paper', db: -4 }, { at: 1650, kind: 'wood' },
+  { at: 1444, kind: 'tick', db: 3 }, { at: 1584, kind: 'paper', db: -4 }, { at: 1650, kind: 'wood' },
   // Sequence 6: the rooms print, the human line at each threshold, the comparisons, the copies out and back
   { at: 1700, kind: 'paper', db: -4 }, { at: 1706, kind: 'paper', db: -4 }, { at: 1733, kind: 'paper', db: -4 },
   { at: 1850, kind: 'wood' }, { at: 1894, kind: 'felt' }, { at: 1970, kind: 'wood' },
   { at: 2026, kind: 'note', db: -4 }, { at: 2086, kind: 'note', db: -4 },
-  { at: 2212, kind: 'wood' }, { at: 2242, kind: 'tone', db: -6 }, { at: 2262, kind: 'tone', db: -6 },
+  { at: 2212, kind: 'wood' }, { at: 2242, kind: 'tone', db: -3 }, { at: 2262, kind: 'tone', db: -3 },
   // Sequence 8: the final record mark
   { at: 2554, kind: 'paper', db: -6 },
 ];
@@ -140,7 +141,7 @@ if (music) {
   soundParts.push(
     `[${i}]aresample=${RATE},aformat=channel_layouts=stereo,atrim=0:${FILM_S},apad=whole_dur=${FILM_S},` +
       `volume=${gain.toFixed(2)}dB,volume='pow(10\\,-${DUCK_DB}*(${duckExpr})/20)':eval=frame,` +
-      `afade=t=in:d=1.5,afade=t=out:st=${(fadeOut - 2).toFixed(3)}:d=${(FILM_S - fadeOut + 2).toFixed(3)}:curve=qsin[music]`,
+      `afade=t=in:d=0.05,afade=t=out:st=${(fadeOut - 2).toFixed(3)}:d=${(FILM_S - fadeOut + 2).toFixed(3)}:curve=qsin[music]`,
   );
 } else console.log('no music file: the sound stem has the effects only');
 /** The file a cue plays: its variant when there is one, else its kind. */
@@ -202,4 +203,25 @@ fs.writeFileSync(
   path.join(ROOT, 'src/lib/voice-lengths.ts'),
   `// Written by the mix (npm run mix): the length in frames of each recorded line, after its silence is\n// trimmed. Lines not listed here run to their \`by\` frame. Do not edit by hand.\nexport const VOICE_LENGTH: Partial<Record<string, number>> = {\n${body}\n};\n`,
 );
-console.log('wrote public/audio/narration.wav, public/audio/sound.wav and src/lib/voice-lengths.ts; next: npm run srt');
+// ---------------------------------------------------------------- 6. the worker's words, as they are spoken
+// lines.json (from scripts/audio/make-voice.py) holds the recogniser's word times from each file's start; the
+// mix's own trim may take a few more milliseconds off the front of the worker's line, so that is measured
+const report = path.join(SRC, 'voice', 'lines.json');
+const w1 = fs.existsSync(report) ? JSON.parse(fs.readFileSync(report, 'utf8')).lines.find((l: { id: string }) => l.id === 'W1') : null;
+const w1Line = lines.find((l) => l.id === 'W1')!;
+const w1Text = w1Line.text.split(' ');
+let w1Words: number[] = [];
+if (w1?.words?.length === w1Text.length) {
+  const src = find(path.join(SRC, 'voice'), 'W1')!;
+  const lead = path.join(TMP, 'W1 lead.wav');
+  const full = path.join(TMP, 'W1 full.wav');
+  run(['-i', src, '-af', [PHONE, `aresample=${RATE}`].join(','), '-ac', '1', full]);
+  run(['-i', src, '-af', [PHONE, TRIM.split(',')[0], `aresample=${RATE}`].join(','), '-ac', '1', lead]);
+  const cut = duration(full) - duration(lead);
+  w1Words = w1.words.map((w: { start: number }) => w1Line.from + Math.max(0, Math.round((w.start - cut) * FPS)));
+} else console.log('W1 word timings missing or not one per word: the words on screen stay evenly spaced');
+fs.writeFileSync(
+  path.join(ROOT, 'src/lib/voice-words.ts'),
+  `// Written by the mix (npm run mix): the film frame at which each word of the worker's message (W1) is\n// spoken, from the recogniser's word timings. Empty until the recording exists. Do not edit by hand.\nexport const W1_WORDS: number[] = [${w1Words.join(', ')}];\n`,
+);
+console.log('wrote public/audio/narration.wav, public/audio/sound.wav, src/lib/voice-lengths.ts and src/lib/voice-words.ts; next: npm run srt');

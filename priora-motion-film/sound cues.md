@@ -23,7 +23,7 @@ The narration lines and their windows are in `narration.srt`. The render script 
 
 | Frame | Timecode | Sound | Storyboard |
 |---|---|---|---|
-| F0272 | 00:09:02 | The worker's phone message starts (a real phone recording, to F0483) | The worker's message sounds like a real phone recording |
+| F0280 | 00:09:10 | The worker's phone message starts (a real phone recording, to F0417) | The worker's message sounds like a real phone recording |
 | F0304 | 00:10:04 | Fine thread pluck: Priora's listening thread reaches the waveform | a fine plucked thread (sound world) |
 | F0506 | 00:16:26 | Paper lift: the selected phrases are lifted off the message | The words move like pieces of printed paper lifted and placed elsewhere |
 | F0538 | 00:17:28 | Paper set down: the phrases arrive round the new core | as above |

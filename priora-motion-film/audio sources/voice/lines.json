@@ -1,0 +1,1394 @@
+{
+ "generator": "scripts/audio/make-voice.py",
+ "tts": "Kokoro-82M v1.0 (Apache-2.0) via kokoro-onnx, espeak-ng phonemes in the misaki US set",
+ "recogniser": "NVIDIA Parakeet TDT 0.6b v2 (CC-BY-4.0) via sherpa-onnx",
+ "sampleRate": 24000,
+ "fps": 30,
+ "fitRule": "frames = ceil(seconds above -48 dBFS * 30); end = start + frames - 1 <= by (W1 also <= F0483)",
+ "file": "first audible sound at 20 ms, about 150 ms of fading silence after the last; -18 LUFS, 4x oversampled peaks under -1.5 dBFS (W1 -4.5)",
+ "lexicon": {
+  "Priora": "pɹiˈɔɹə",
+  "compares safeguards": "kəmpˈɛɹzs sˈAfɡɑɹdz"
+ },
+ "lines": [
+  {
+   "id": "N1a",
+   "who": "narrator",
+   "voice": "af_heart",
+   "speed": 0.95,
+   "text": "Real work in the middle: a worker, a site, a risk owner.",
+   "phonemes": "ɹˈiəl wˈɜɹk ɪnðə mˈɪdᵊl: ɐ wˈɜɹkəɹ, ɐ sˈIt, ɐ ɹˈɪsk ˈOnəɹ.",
+   "seconds": 3.325,
+   "fileSeconds": 3.495,
+   "frames": 100,
+   "startFrame": 40,
+   "endFrame": 139,
+   "by": 150,
+   "slack": 11,
+   "fits": true,
+   "pauseCuts": [],
+   "mixFrames": 104,
+   "mixEndFrame": 143,
+   "mixSlack": 7,
+   "mixMatchedPeak": -1.96,
+   "loudness": -18.07,
+   "peak": -2.11,
+   "transcript": "Real work in the middle, a worker a site, a risk owner.",
+   "matches": true,
+   "differences": [],
+   "confidence": -0.03072,
+   "words": [
+    {
+     "w": "Real",
+     "start": 0.0,
+     "end": 0.4
+    },
+    {
+     "w": "work",
+     "start": 0.4,
+     "end": 0.64
+    },
+    {
+     "w": "in",
+     "start": 0.64,
+     "end": 0.8
+    },
+    {
+     "w": "the",
+     "start": 0.8,
+     "end": 0.88
+    },
+    {
+     "w": "middle,",
+     "start": 0.88,
+     "end": 1.36
+    },
+    {
+     "w": "a",
+     "start": 1.36,
+     "end": 1.52
+    },
+    {
+     "w": "worker",
+     "start": 1.52,
+     "end": 1.84
+    },
+    {
+     "w": "a",
+     "start": 2.0,
+     "end": 2.08
+    },
+    {
+     "w": "site,",
+     "start": 2.08,
+     "end": 2.56
+    },
+    {
+     "w": "a",
+     "start": 2.56,
+     "end": 2.64
+    },
+    {
+     "w": "risk",
+     "start": 2.64,
+     "end": 2.96
+    },
+    {
+     "w": "owner.",
+     "start": 2.96,
+     "end": 3.44
+    }
+   ]
+  },
+  {
+   "id": "N1b",
+   "who": "narrator",
+   "voice": "af_heart",
+   "speed": 0.95,
+   "text": "Priora places agents around it.",
+   "phonemes": "pɹiˈɔɹə plˈAsᵻz ˈAʤənts əɹˈWnd ɪt.",
+   "seconds": 1.824,
+   "fileSeconds": 1.994,
+   "frames": 55,
+   "startFrame": 160,
+   "endFrame": 214,
+   "by": 236,
+   "slack": 22,
+   "fits": true,
+   "pauseCuts": [],
+   "mixFrames": 59,
+   "mixEndFrame": 218,
+   "mixSlack": 18,
+   "mixMatchedPeak": -2.94,
+   "loudness": -17.91,
+   "peak": -2.93,
+   "transcript": "Priora places agents around it.",
+   "matches": true,
+   "differences": [],
+   "confidence": -0.00937,
+   "words": [
+    {
+     "w": "Priora",
+     "start": 0.0,
+     "end": 0.56
+    },
+    {
+     "w": "places",
+     "start": 0.56,
+     "end": 0.88
+    },
+    {
+     "w": "agents",
+     "start": 0.88,
+     "end": 1.36
+    },
+    {
+     "w": "around",
+     "start": 1.36,
+     "end": 1.6
+    },
+    {
+     "w": "it.",
+     "start": 1.6,
+     "end": 1.92
+    }
+   ]
+  },
+  {
+   "id": "W1",
+   "who": "worker",
+   "voice": "am_puck",
+   "speed": 1.0,
+   "text": "Hey, the bracket by the packing line has cracked again. We’re going to weld it before the night shift.",
+   "phonemes": "hˈA, ðə bɹˈækɪt bI ðə pˈækɪŋ lˈIn həz kɹˈækt əɡˈɛn. wɪɹ ɡˌOɪŋ tə wˈɛld ɪt bᵻfˌɔɹ ðə nˈIt ʃˈɪft.",
+   "seconds": 5.031,
+   "fileSeconds": 5.201,
+   "frames": 151,
+   "startFrame": 280,
+   "endFrame": 430,
+   "by": 490,
+   "slack": 53,
+   "fits": true,
+   "pauseCuts": [],
+   "mixFrames": 138,
+   "mixEndFrame": 417,
+   "mixSlack": 73,
+   "mixMatchedPeak": -0.94,
+   "loudness": -18.12,
+   "peak": -4.7,
+   "transcript": "Hey, the bracket by the packing line has cracked again. We're going to weld it before the night shift.",
+   "matches": true,
+   "differences": [],
+   "confidence": -0.0086,
+   "words": [
+    {
+     "w": "Hey,",
+     "start": 0.0,
+     "end": 0.4
+    },
+    {
+     "w": "the",
+     "start": 0.4,
+     "end": 0.48
+    },
+    {
+     "w": "bracket",
+     "start": 0.48,
+     "end": 0.88
+    },
+    {
+     "w": "by",
+     "start": 0.88,
+     "end": 1.04
+    },
+    {
+     "w": "the",
+     "start": 1.04,
+     "end": 1.12
+    },
+    {
+     "w": "packing",
+     "start": 1.12,
+     "end": 1.52
+    },
+    {
+     "w": "line",
+     "start": 1.52,
+     "end": 1.84
+    },
+    {
+     "w": "has",
+     "start": 1.84,
+     "end": 2.0
+    },
+    {
+     "w": "cracked",
+     "start": 2.0,
+     "end": 2.48
+    },
+    {
+     "w": "again.",
+     "start": 2.48,
+     "end": 2.8
+    },
+    {
+     "w": "We're",
+     "start": 2.8,
+     "end": 3.12
+    },
+    {
+     "w": "going",
+     "start": 3.04,
+     "end": 3.12
+    },
+    {
+     "w": "to",
+     "start": 3.12,
+     "end": 3.28
+    },
+    {
+     "w": "weld",
+     "start": 3.28,
+     "end": 3.6
+    },
+    {
+     "w": "it",
+     "start": 3.6,
+     "end": 3.76
+    },
+    {
+     "w": "before",
+     "start": 3.76,
+     "end": 3.92
+    },
+    {
+     "w": "the",
+     "start": 3.92,
+     "end": 4.08
+    },
+    {
+     "w": "night",
+     "start": 4.08,
+     "end": 4.32
+    },
+    {
+     "w": "shift.",
+     "start": 4.4,
+     "end": 5.12
+    }
+   ],
+   "limit": 483,
+   "candidates": [
+    {
+     "voice": "am_puck",
+     "speed": 1.0,
+     "frames": 151,
+     "endFrame": 430,
+     "fits": true,
+     "transcript": "Hey, the bracket by the packing line has cracked again. We're going to weld it before the night shift.",
+     "differences": [],
+     "confidence": -0.0086
+    },
+    {
+     "voice": "am_michael",
+     "speed": 1.0,
+     "frames": 167,
+     "endFrame": 446,
+     "fits": true,
+     "transcript": "Hey, the bracket by the packing line has cracked again. We're going to weld it before the night's shift.",
+     "differences": [
+      "replace: 'night' -> 'nights'"
+     ],
+     "confidence": -0.03663
+    },
+    {
+     "voice": "am_fenrir",
+     "speed": 1.0,
+     "frames": 154,
+     "endFrame": 433,
+     "fits": true,
+     "transcript": "Hey, the bracket by the packing line has cracked again. We're going to weld it before the night's shift.",
+     "differences": [
+      "replace: 'night' -> 'nights'"
+     ],
+     "confidence": -0.01894
+    }
+   ]
+  },
+  {
+   "id": "N2",
+   "who": "narrator",
+   "voice": "af_heart",
+   "speed": 0.95,
+   "text": "Priora hears the job, and asks for a photo.",
+   "phonemes": "pɹiˈɔɹə hˈɪɹz ðə ʤˈɑb, ænd ˈæsks fəɹə fˈOɾO.",
+   "seconds": 2.486,
+   "fileSeconds": 2.656,
+   "frames": 75,
+   "startFrame": 520,
+   "endFrame": 594,
+   "by": 620,
+   "slack": 26,
+   "fits": true,
+   "pauseCuts": [],
+   "mixFrames": 79,
+   "mixEndFrame": 598,
+   "mixSlack": 22,
+   "mixMatchedPeak": -1.63,
+   "loudness": -18.0,
+   "peak": -1.7,
+   "transcript": "Priora hears the job and asks for a photo.",
+   "matches": true,
+   "differences": [],
+   "confidence": -0.00642,
+   "words": [
+    {
+     "w": "Priora",
+     "start": 0.0,
+     "end": 0.56
+    },
+    {
+     "w": "hears",
+     "start": 0.56,
+     "end": 0.8
+    },
+    {
+     "w": "the",
+     "start": 0.8,
+     "end": 0.88
+    },
+    {
+     "w": "job",
+     "start": 0.88,
+     "end": 1.2
+    },
+    {
+     "w": "and",
+     "start": 1.28,
+     "end": 1.52
+    },
+    {
+     "w": "asks",
+     "start": 1.52,
+     "end": 1.76
+    },
+    {
+     "w": "for",
+     "start": 1.76,
+     "end": 1.92
+    },
+    {
+     "w": "a",
+     "start": 1.92,
+     "end": 2.08
+    },
+    {
+     "w": "photo.",
+     "start": 2.08,
+     "end": 2.64
+    }
+   ]
+  },
+  {
+   "id": "N3a",
+   "who": "narrator",
+   "voice": "af_heart",
+   "speed": 0.95,
+   "text": "Next, it summons only the specialists this site and job need.",
+   "phonemes": "nˈɛkst, ɪt sˈʌmənz ˈOnli ðə spˈɛʃᵊlˌɪsts ðɪs sˈIt ænd ʤˈɑb nˈid.",
+   "seconds": 3.815,
+   "fileSeconds": 3.985,
+   "frames": 115,
+   "startFrame": 760,
+   "endFrame": 874,
+   "by": 899,
+   "slack": 25,
+   "fits": true,
+   "pauseCuts": [],
+   "mixFrames": 118,
+   "mixEndFrame": 877,
+   "mixSlack": 22,
+   "mixMatchedPeak": -1.57,
+   "loudness": -18.06,
+   "peak": -1.7,
+   "transcript": "Next, it summons only the specialists this site and job need.",
+   "matches": true,
+   "differences": [],
+   "confidence": -0.00025,
+   "words": [
+    {
+     "w": "Next,",
+     "start": 0.0,
+     "end": 0.56
+    },
+    {
+     "w": "it",
+     "start": 0.56,
+     "end": 0.72
+    },
+    {
+     "w": "summons",
+     "start": 0.72,
+     "end": 1.28
+    },
+    {
+     "w": "only",
+     "start": 1.28,
+     "end": 1.52
+    },
+    {
+     "w": "the",
+     "start": 1.52,
+     "end": 1.68
+    },
+    {
+     "w": "specialists",
+     "start": 1.68,
+     "end": 2.32
+    },
+    {
+     "w": "this",
+     "start": 2.32,
+     "end": 2.48
+    },
+    {
+     "w": "site",
+     "start": 2.48,
+     "end": 2.88
+    },
+    {
+     "w": "and",
+     "start": 2.96,
+     "end": 3.12
+    },
+    {
+     "w": "job",
+     "start": 3.12,
+     "end": 3.52
+    },
+    {
+     "w": "need.",
+     "start": 3.52,
+     "end": 3.92
+    }
+   ]
+  },
+  {
+   "id": "N3b",
+   "who": "narrator",
+   "voice": "af_heart",
+   "speed": 0.95,
+   "text": "Each checks its own conditions and reports back.",
+   "phonemes": "ˈiʧ ʧˈɛks ɪts ˈOn kəndˈɪʃənz ænd ɹᵻpˈɔɹts bˈæk.",
+   "seconds": 2.584,
+   "fileSeconds": 2.754,
+   "frames": 78,
+   "startFrame": 1000,
+   "endFrame": 1077,
+   "by": 1100,
+   "slack": 23,
+   "fits": true,
+   "pauseCuts": [],
+   "mixFrames": 81,
+   "mixEndFrame": 1080,
+   "mixSlack": 20,
+   "mixMatchedPeak": -2.62,
+   "loudness": -17.89,
+   "peak": -2.57,
+   "transcript": "Each checks its own conditions and reports back.",
+   "matches": true,
+   "differences": [],
+   "confidence": -0.0034,
+   "words": [
+    {
+     "w": "Each",
+     "start": 0.0,
+     "end": 0.32
+    },
+    {
+     "w": "checks",
+     "start": 0.32,
+     "end": 0.64
+    },
+    {
+     "w": "its",
+     "start": 0.64,
+     "end": 0.8
+    },
+    {
+     "w": "own",
+     "start": 0.8,
+     "end": 0.96
+    },
+    {
+     "w": "conditions",
+     "start": 0.96,
+     "end": 1.52
+    },
+    {
+     "w": "and",
+     "start": 1.6,
+     "end": 1.76
+    },
+    {
+     "w": "reports",
+     "start": 1.76,
+     "end": 2.24
+    },
+    {
+     "w": "back.",
+     "start": 2.24,
+     "end": 2.72
+    }
+   ]
+  },
+  {
+   "id": "N4a",
+   "who": "narrator",
+   "voice": "af_heart",
+   "speed": 0.95,
+   "text": "When everything holds, the route opens.",
+   "phonemes": "wˌɛn ˈɛvɹɪθˌɪŋ hˈOldz, ðə ɹˈWt ˈOpənz.",
+   "seconds": 2.057,
+   "fileSeconds": 2.227,
+   "frames": 62,
+   "startFrame": 1200,
+   "endFrame": 1261,
+   "by": 1270,
+   "slack": 9,
+   "fits": true,
+   "pauseCuts": [],
+   "mixFrames": 66,
+   "mixEndFrame": 1265,
+   "mixSlack": 5,
+   "mixMatchedPeak": -1.58,
+   "loudness": -18.21,
+   "peak": -1.7,
+   "transcript": "When everything holds, the route opens.",
+   "matches": true,
+   "differences": [],
+   "confidence": -0.00101,
+   "words": [
+    {
+     "w": "When",
+     "start": 0.0,
+     "end": 0.32
+    },
+    {
+     "w": "everything",
+     "start": 0.32,
+     "end": 0.64
+    },
+    {
+     "w": "holds,",
+     "start": 0.64,
+     "end": 1.12
+    },
+    {
+     "w": "the",
+     "start": 1.12,
+     "end": 1.2
+    },
+    {
+     "w": "route",
+     "start": 1.2,
+     "end": 1.6
+    },
+    {
+     "w": "opens.",
+     "start": 1.6,
+     "end": 2.16
+    }
+   ]
+  },
+  {
+   "id": "N4b",
+   "who": "narrator",
+   "voice": "af_heart",
+   "speed": 0.95,
+   "text": "Work goes on, the record is kept, no one is disturbed.",
+   "phonemes": "wˈɜɹk ɡOz ˈɔn, ðə ɹˈɛkəɹd ɪz kˈɛpt, nˈOwˈʌn ɪz dɪstˈɜɹbd.",
+   "seconds": 3.239,
+   "fileSeconds": 3.409,
+   "frames": 98,
+   "startFrame": 1280,
+   "endFrame": 1377,
+   "by": 1420,
+   "slack": 43,
+   "fits": true,
+   "pauseCuts": [],
+   "mixFrames": 101,
+   "mixEndFrame": 1380,
+   "mixSlack": 40,
+   "mixMatchedPeak": -1.79,
+   "loudness": -17.85,
+   "peak": -1.7,
+   "transcript": "Work goes on, the record is kept, no one is disturbed.",
+   "matches": true,
+   "differences": [],
+   "confidence": -0.03354,
+   "words": [
+    {
+     "w": "Work",
+     "start": 0.0,
+     "end": 0.32
+    },
+    {
+     "w": "goes",
+     "start": 0.32,
+     "end": 0.56
+    },
+    {
+     "w": "on,",
+     "start": 0.56,
+     "end": 0.88
+    },
+    {
+     "w": "the",
+     "start": 0.88,
+     "end": 0.96
+    },
+    {
+     "w": "record",
+     "start": 0.96,
+     "end": 1.28
+    },
+    {
+     "w": "is",
+     "start": 1.28,
+     "end": 1.52
+    },
+    {
+     "w": "kept,",
+     "start": 1.52,
+     "end": 2.08
+    },
+    {
+     "w": "no",
+     "start": 2.08,
+     "end": 2.24
+    },
+    {
+     "w": "one",
+     "start": 2.24,
+     "end": 2.48
+    },
+    {
+     "w": "is",
+     "start": 2.48,
+     "end": 2.64
+    },
+    {
+     "w": "disturbed.",
+     "start": 2.64,
+     "end": 3.36
+    }
+   ]
+  },
+  {
+   "id": "N5a",
+   "who": "narrator",
+   "voice": "af_heart",
+   "speed": 0.95,
+   "text": "One condition slips: the fire watch is half the policy.",
+   "phonemes": "wˈʌn kəndˈɪʃən slˈɪps: ðə fˈIəɹ wˈɑʧ ɪz hˈæf ðə pˈɑlɪsi.",
+   "seconds": 3.4,
+   "fileSeconds": 3.57,
+   "frames": 103,
+   "startFrame": 1440,
+   "endFrame": 1542,
+   "by": 1560,
+   "slack": 18,
+   "fits": true,
+   "pauseCuts": [],
+   "mixFrames": 106,
+   "mixEndFrame": 1545,
+   "mixSlack": 15,
+   "mixMatchedPeak": -1.54,
+   "loudness": -18.09,
+   "peak": -1.7,
+   "transcript": "One condition slips, the fire watch is half the policy.",
+   "matches": true,
+   "differences": [],
+   "confidence": -0.00769,
+   "words": [
+    {
+     "w": "One",
+     "start": 0.0,
+     "end": 0.32
+    },
+    {
+     "w": "condition",
+     "start": 0.32,
+     "end": 0.72
+    },
+    {
+     "w": "slips,",
+     "start": 0.72,
+     "end": 1.44
+    },
+    {
+     "w": "the",
+     "start": 1.44,
+     "end": 1.6
+    },
+    {
+     "w": "fire",
+     "start": 1.6,
+     "end": 2.0
+    },
+    {
+     "w": "watch",
+     "start": 2.0,
+     "end": 2.4
+    },
+    {
+     "w": "is",
+     "start": 2.4,
+     "end": 2.56
+    },
+    {
+     "w": "half",
+     "start": 2.56,
+     "end": 2.8
+    },
+    {
+     "w": "the",
+     "start": 2.8,
+     "end": 2.88
+    },
+    {
+     "w": "policy.",
+     "start": 2.88,
+     "end": 3.52
+    }
+   ]
+  },
+  {
+   "id": "N5b",
+   "who": "narrator",
+   "voice": "af_heart",
+   "speed": 0.95,
+   "text": "Priora brings it to the risk owner.",
+   "phonemes": "pɹiˈɔɹə bɹˈɪŋz ɪt tə ðə ɹˈɪsk ˈOnəɹ.",
+   "seconds": 1.738,
+   "fileSeconds": 1.908,
+   "frames": 53,
+   "startFrame": 1600,
+   "endFrame": 1652,
+   "by": 1660,
+   "slack": 8,
+   "fits": true,
+   "pauseCuts": [],
+   "mixFrames": 56,
+   "mixEndFrame": 1655,
+   "mixSlack": 5,
+   "mixMatchedPeak": -4.05,
+   "loudness": -17.7,
+   "peak": -3.81,
+   "transcript": "Priora brings it to the risk owner.",
+   "matches": true,
+   "differences": [],
+   "confidence": -0.00437,
+   "words": [
+    {
+     "w": "Priora",
+     "start": 0.0,
+     "end": 0.56
+    },
+    {
+     "w": "brings",
+     "start": 0.56,
+     "end": 0.8
+    },
+    {
+     "w": "it",
+     "start": 0.8,
+     "end": 0.88
+    },
+    {
+     "w": "to",
+     "start": 0.88,
+     "end": 1.04
+    },
+    {
+     "w": "the",
+     "start": 1.04,
+     "end": 1.12
+    },
+    {
+     "w": "risk",
+     "start": 1.12,
+     "end": 1.44
+    },
+    {
+     "w": "owner.",
+     "start": 1.44,
+     "end": 1.84
+    }
+   ]
+  },
+  {
+   "id": "N5c",
+   "who": "narrator",
+   "voice": "af_heart",
+   "speed": 0.95,
+   "text": "Agents prepare, the human decides.",
+   "phonemes": "ˈAʤənts pɹɪpˈɛɹ, ðə hjˈumən dᵻsˈIdz.",
+   "seconds": 2.056,
+   "fileSeconds": 2.226,
+   "frames": 62,
+   "startFrame": 1680,
+   "endFrame": 1741,
+   "by": 1760,
+   "slack": 19,
+   "fits": true,
+   "pauseCuts": [],
+   "mixFrames": 66,
+   "mixEndFrame": 1745,
+   "mixSlack": 15,
+   "mixMatchedPeak": -1.69,
+   "loudness": -17.93,
+   "peak": -1.7,
+   "transcript": "Agents prepare, the human decides.",
+   "matches": true,
+   "differences": [],
+   "confidence": -0.00658,
+   "words": [
+    {
+     "w": "Agents",
+     "start": 0.0,
+     "end": 0.56
+    },
+    {
+     "w": "prepare,",
+     "start": 0.56,
+     "end": 1.04
+    },
+    {
+     "w": "the",
+     "start": 1.04,
+     "end": 1.2
+    },
+    {
+     "w": "human",
+     "start": 1.2,
+     "end": 1.52
+    },
+    {
+     "w": "decides.",
+     "start": 1.52,
+     "end": 2.16
+    }
+   ]
+  },
+  {
+   "id": "N6Ra",
+   "who": "narrator",
+   "voice": "af_heart",
+   "speed": 0.95,
+   "text": "Retain is never a default.",
+   "phonemes": "ɹᵻtˈAn ɪz nˈɛvəɹ ɐ dᵻfˈɔlt.",
+   "seconds": 1.583,
+   "fileSeconds": 1.752,
+   "frames": 48,
+   "startFrame": 1780,
+   "endFrame": 1827,
+   "by": 1850,
+   "slack": 23,
+   "fits": true,
+   "pauseCuts": [],
+   "mixFrames": 51,
+   "mixEndFrame": 1830,
+   "mixSlack": 20,
+   "mixMatchedPeak": -1.66,
+   "loudness": -17.96,
+   "peak": -1.7,
+   "transcript": "Retain is never a default.",
+   "matches": true,
+   "differences": [],
+   "confidence": -0.00106,
+   "words": [
+    {
+     "w": "Retain",
+     "start": 0.0,
+     "end": 0.56
+    },
+    {
+     "w": "is",
+     "start": 0.56,
+     "end": 0.72
+    },
+    {
+     "w": "never",
+     "start": 0.72,
+     "end": 0.96
+    },
+    {
+     "w": "a",
+     "start": 0.96,
+     "end": 1.04
+    },
+    {
+     "w": "default.",
+     "start": 1.04,
+     "end": 1.68
+    }
+   ]
+  },
+  {
+   "id": "N6Rb",
+   "who": "narrator",
+   "voice": "af_heart",
+   "speed": 0.95,
+   "text": "Risk is kept on purpose, with its terms explicit.",
+   "phonemes": "ɹˈɪsk ɪz kˈɛpt ˌɔn pˈɜɹpəs, wɪð ɪts tˈɜɹmz ɛksplˈɪsɪt.",
+   "seconds": 2.985,
+   "fileSeconds": 3.155,
+   "frames": 90,
+   "startFrame": 1860,
+   "endFrame": 1949,
+   "by": 1960,
+   "slack": 11,
+   "fits": true,
+   "pauseCuts": [],
+   "mixFrames": 93,
+   "mixEndFrame": 1952,
+   "mixSlack": 8,
+   "mixMatchedPeak": -1.53,
+   "loudness": -18.1,
+   "peak": -1.7,
+   "transcript": "Risk is kept on purpose, with its terms explicit.",
+   "matches": true,
+   "differences": [],
+   "confidence": -0.02939,
+   "words": [
+    {
+     "w": "Risk",
+     "start": 0.0,
+     "end": 0.4
+    },
+    {
+     "w": "is",
+     "start": 0.4,
+     "end": 0.56
+    },
+    {
+     "w": "kept",
+     "start": 0.56,
+     "end": 0.88
+    },
+    {
+     "w": "on",
+     "start": 0.88,
+     "end": 1.04
+    },
+    {
+     "w": "purpose,",
+     "start": 1.04,
+     "end": 1.68
+    },
+    {
+     "w": "with",
+     "start": 1.68,
+     "end": 1.84
+    },
+    {
+     "w": "its",
+     "start": 1.84,
+     "end": 2.0
+    },
+    {
+     "w": "terms",
+     "start": 2.0,
+     "end": 2.32
+    },
+    {
+     "w": "explicit.",
+     "start": 2.32,
+     "end": 3.12
+    }
+   ]
+  },
+  {
+   "id": "N6M",
+   "who": "narrator",
+   "voice": "af_heart",
+   "speed": 0.95,
+   "text": "Mitigate compares safeguards, and checks whether the work is back inside.",
+   "phonemes": "mˈɪɾᵻɡˌAt kəmpˈɛɹzs sˈAfɡɑɹdz, ænd ʧˈɛks wˈɛðəɹ ðə wˈɜɹk ɪz bˈæk ɪnsˈId.",
+   "seconds": 3.934,
+   "fileSeconds": 4.104,
+   "frames": 119,
+   "startFrame": 2040,
+   "endFrame": 2158,
+   "by": 2170,
+   "slack": 12,
+   "fits": true,
+   "pauseCuts": [],
+   "mixFrames": 122,
+   "mixEndFrame": 2161,
+   "mixSlack": 9,
+   "mixMatchedPeak": -2.43,
+   "loudness": -18.16,
+   "peak": -2.65,
+   "transcript": "Mitigate compares safeguards and checks whether the work is back inside.",
+   "matches": true,
+   "differences": [],
+   "confidence": -0.01659,
+   "words": [
+    {
+     "w": "Mitigate",
+     "start": 0.0,
+     "end": 0.56
+    },
+    {
+     "w": "compares",
+     "start": 0.56,
+     "end": 0.96
+    },
+    {
+     "w": "safeguards",
+     "start": 0.96,
+     "end": 1.84
+    },
+    {
+     "w": "and",
+     "start": 1.84,
+     "end": 2.08
+    },
+    {
+     "w": "checks",
+     "start": 2.08,
+     "end": 2.4
+    },
+    {
+     "w": "whether",
+     "start": 2.4,
+     "end": 2.64
+    },
+    {
+     "w": "the",
+     "start": 2.64,
+     "end": 2.8
+    },
+    {
+     "w": "work",
+     "start": 2.8,
+     "end": 2.96
+    },
+    {
+     "w": "is",
+     "start": 2.96,
+     "end": 3.2
+    },
+    {
+     "w": "back",
+     "start": 3.2,
+     "end": 3.44
+    },
+    {
+     "w": "inside.",
+     "start": 3.44,
+     "end": 4.08
+    }
+   ]
+  },
+  {
+   "id": "N6T",
+   "who": "narrator",
+   "voice": "af_heart",
+   "speed": 0.95,
+   "text": "Transfer, simulated for now, asks outside capacity for terms and a price.",
+   "phonemes": "tɹˈænsfɜɹ, sˈɪmjʊlˌAɾᵻd fɔɹ nˈW, ˈæsks WtsˈId kəpˈæsᵻɾi fɔɹ tˈɜɹmz ænd ɐ pɹˈIs.",
+   "seconds": 4.819,
+   "fileSeconds": 4.989,
+   "frames": 145,
+   "startFrame": 2180,
+   "endFrame": 2324,
+   "by": 2350,
+   "slack": 26,
+   "fits": true,
+   "pauseCuts": [],
+   "mixFrames": 149,
+   "mixEndFrame": 2328,
+   "mixSlack": 22,
+   "mixMatchedPeak": -1.53,
+   "loudness": -18.1,
+   "peak": -1.7,
+   "transcript": "Transfer, simulated for now, asks outside capacity for terms and a price.",
+   "matches": true,
+   "differences": [],
+   "confidence": -0.02988,
+   "words": [
+    {
+     "w": "Transfer,",
+     "start": 0.0,
+     "end": 0.72
+    },
+    {
+     "w": "simulated",
+     "start": 0.72,
+     "end": 1.28
+    },
+    {
+     "w": "for",
+     "start": 1.28,
+     "end": 1.44
+    },
+    {
+     "w": "now,",
+     "start": 1.44,
+     "end": 2.0
+    },
+    {
+     "w": "asks",
+     "start": 2.0,
+     "end": 2.4
+    },
+    {
+     "w": "outside",
+     "start": 2.4,
+     "end": 2.96
+    },
+    {
+     "w": "capacity",
+     "start": 2.96,
+     "end": 3.52
+    },
+    {
+     "w": "for",
+     "start": 3.52,
+     "end": 3.76
+    },
+    {
+     "w": "terms",
+     "start": 3.76,
+     "end": 4.16
+    },
+    {
+     "w": "and",
+     "start": 4.16,
+     "end": 4.32
+    },
+    {
+     "w": "a",
+     "start": 4.32,
+     "end": 4.4
+    },
+    {
+     "w": "price.",
+     "start": 4.4,
+     "end": 4.96
+    }
+   ]
+  },
+  {
+   "id": "N7a",
+   "who": "narrator",
+   "voice": "af_heart",
+   "speed": 0.95,
+   "text": "Priora carries the case between rooms.",
+   "phonemes": "pɹiˈɔɹə kˈæɹiz ðə kˈAs bᵻtwˌin ɹˈumz.",
+   "seconds": 1.975,
+   "fileSeconds": 2.145,
+   "frames": 60,
+   "startFrame": 2360,
+   "endFrame": 2419,
+   "by": 2440,
+   "slack": 21,
+   "fits": true,
+   "pauseCuts": [],
+   "mixFrames": 63,
+   "mixEndFrame": 2422,
+   "mixSlack": 18,
+   "mixMatchedPeak": -1.45,
+   "loudness": -18.17,
+   "peak": -1.7,
+   "transcript": "Priora carries the case between rooms.",
+   "matches": true,
+   "differences": [],
+   "confidence": -0.00685,
+   "words": [
+    {
+     "w": "Priora",
+     "start": 0.0,
+     "end": 0.56
+    },
+    {
+     "w": "carries",
+     "start": 0.56,
+     "end": 0.8
+    },
+    {
+     "w": "the",
+     "start": 0.8,
+     "end": 0.88
+    },
+    {
+     "w": "case",
+     "start": 0.88,
+     "end": 1.28
+    },
+    {
+     "w": "between",
+     "start": 1.28,
+     "end": 1.52
+    },
+    {
+     "w": "rooms.",
+     "start": 1.52,
+     "end": 2.08
+    }
+   ]
+  },
+  {
+   "id": "N7b",
+   "who": "narrator",
+   "voice": "af_heart",
+   "speed": 0.95,
+   "text": "The risk owner stays in control.",
+   "phonemes": "ðə ɹˈɪsk ˈOnəɹ stˈAz ɪn kəntɹˈOl.",
+   "seconds": 1.722,
+   "fileSeconds": 1.892,
+   "frames": 52,
+   "startFrame": 2440,
+   "endFrame": 2491,
+   "by": 2530,
+   "slack": 39,
+   "fits": true,
+   "pauseCuts": [],
+   "mixFrames": 55,
+   "mixEndFrame": 2494,
+   "mixSlack": 36,
+   "mixMatchedPeak": -1.55,
+   "loudness": -18.07,
+   "peak": -1.7,
+   "transcript": "The risk owner stays in control.",
+   "matches": true,
+   "differences": [],
+   "confidence": -0.01114,
+   "words": [
+    {
+     "w": "The",
+     "start": 0.0,
+     "end": 0.16
+    },
+    {
+     "w": "risk",
+     "start": 0.16,
+     "end": 0.48
+    },
+    {
+     "w": "owner",
+     "start": 0.48,
+     "end": 0.8
+    },
+    {
+     "w": "stays",
+     "start": 0.8,
+     "end": 1.04
+    },
+    {
+     "w": "in",
+     "start": 1.04,
+     "end": 1.28
+    },
+    {
+     "w": "control.",
+     "start": 1.28,
+     "end": 1.84
+    }
+   ]
+  },
+  {
+   "id": "N8",
+   "who": "narrator",
+   "voice": "af_heart",
+   "speed": 0.95,
+   "text": "Priora turns physical work into explicit risk decisions, while the work happens.",
+   "phonemes": "pɹiˈɔɹə tˈɜɹnz fˈɪzɪkᵊl wˈɜɹk ˌɪntʊ ɛksplˈɪsɪt ɹˈɪsk dᵻsˈɪʒənz, wˌIl ðə wˈɜɹk hˈæpənz.",
+   "seconds": 4.624,
+   "fileSeconds": 4.794,
+   "frames": 139,
+   "startFrame": 2640,
+   "endFrame": 2778,
+   "by": 2800,
+   "slack": 22,
+   "fits": true,
+   "pauseCuts": [],
+   "mixFrames": 143,
+   "mixEndFrame": 2782,
+   "mixSlack": 18,
+   "mixMatchedPeak": -1.63,
+   "loudness": -18.01,
+   "peak": -1.7,
+   "transcript": "Priora turns physical work into explicit risk decisions while the work happens.",
+   "matches": true,
+   "differences": [],
+   "confidence": -0.00424,
+   "words": [
+    {
+     "w": "Priora",
+     "start": 0.0,
+     "end": 0.64
+    },
+    {
+     "w": "turns",
+     "start": 0.64,
+     "end": 0.88
+    },
+    {
+     "w": "physical",
+     "start": 0.88,
+     "end": 1.28
+    },
+    {
+     "w": "work",
+     "start": 1.28,
+     "end": 1.52
+    },
+    {
+     "w": "into",
+     "start": 1.52,
+     "end": 1.76
+    },
+    {
+     "w": "explicit",
+     "start": 1.76,
+     "end": 2.32
+    },
+    {
+     "w": "risk",
+     "start": 2.32,
+     "end": 2.72
+    },
+    {
+     "w": "decisions",
+     "start": 2.72,
+     "end": 3.28
+    },
+    {
+     "w": "while",
+     "start": 3.52,
+     "end": 3.76
+    },
+    {
+     "w": "the",
+     "start": 3.76,
+     "end": 3.92
+    },
+    {
+     "w": "work",
+     "start": 3.92,
+     "end": 4.16
+    },
+    {
+     "w": "happens.",
+     "start": 4.16,
+     "end": 4.72
+    }
+   ]
+  }
+ ]
+}
