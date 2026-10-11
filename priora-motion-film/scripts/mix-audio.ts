@@ -26,9 +26,12 @@ const sec = (frame: number) => frame / FPS;
 
 // ---------------------------------------------------------------- levels (LUFS / LU)
 const VOICE_LUFS = -18; // every line is matched to this before the mix; the final gain lifts all together
+// the lines are matched as mono and then sent to both channels, which reads 3 dB louder as stereo; the music
+// and the effects (stereo files) are set against that stereo level
+const VOICE_STEREO_LUFS = VOICE_LUFS + 10 * Math.log10(2);
 const MUSIC_UNDER = 10; // music this far under the voice, so it carries the gaps between lines
 const DUCK_DB = 8; // and a further 8 dB down while anyone speaks: 18 dB under the voice
-const EFFECTS_UNDER = 12; // effects quiet and close
+const EFFECTS_UNDER = 15; // effects quiet and close
 const EFFECTS_DUCK_DB = 3; // and a little lower while anyone speaks, so they fill the pauses, not the words
 const TARGET_LUFS = -16;
 const TARGET_TP = -1;
@@ -91,7 +94,8 @@ if (missing.length) {
 const TRIM = 'silenceremove=start_periods=1:start_threshold=-48dB:start_silence=0.02,areverse,silenceremove=start_periods=1:start_threshold=-48dB:start_silence=0.12,areverse';
 // the narrator: Kokoro's 's' sounds carry a strong band near 10.5 kHz, so a notch and a light de-esser
 // (after the resample, so the de-esser's frequency is set at 48 kHz) take them down without dulling 1 to 4 kHz
-const DEESS = 'equalizer=f=10500:t=q:w=1.0:g=-8,deesser=i=0.45:m=0.35:f=0.5:s=o';
+// (the low-pass after it removes the faint hiss the de-esser adds above the 24 kHz recording's 12 kHz)
+const DEESS = 'equalizer=f=10500:t=q:w=1.0:g=-8,deesser=i=0.45:m=0.35:f=0.5:s=o,lowpass=f=12500:poles=2,lowpass=f=12500:poles=2';
 // the worker's voice note: a telephone band, a little squeeze and a small room
 const PHONE = 'highpass=f=300:poles=2,highpass=f=300:poles=2,lowpass=f=3400:poles=2,lowpass=f=3400:poles=2,acompressor=threshold=-22dB:ratio=3:attack=5:release=80,aecho=0.85:0.5:23|37:0.14|0.08';
 const lines = VOICE.map((v) => {
@@ -125,11 +129,22 @@ const voiceRaw = path.join(TMP, 'voice raw.wav');
 }
 
 // ---------------------------------------------------------------- 3. the music and effects stem
-const speaking = lines.map((l) => [sec(l.from), sec(l.end + 1)] as const);
-// the duck: down by DUCK_DB with 0.25 s ramps in and 0.5 s out round every line
+// the duck holds through any gap shorter than 1.2 s, so the bed does not bob up between close lines
+const speaking: Array<[number, number]> = [];
+for (const l of lines) {
+  const [a, b] = [sec(l.from), sec(l.end + 1)];
+  const last = speaking[speaking.length - 1];
+  if (last && a - last[1] < 1.2) last[1] = b;
+  else speaking.push([a, b]);
+}
+// down by DUCK_DB with a 0.3 s ramp in before each stretch of speech and a 0.9 s ramp out after it, applied in
+// 5 ms steps (asetnsamples) so the gain moves smoothly
+const DUCK_IN = 0.3;
+const DUCK_OUT = 0.9;
 const duckExpr = speaking
-  .map(([a, b]) => `clip(min((t-${(a - 0.25).toFixed(3)})/0.25\\,(${(b + 0.5).toFixed(3)}-t)/0.5)\\,0\\,1)`)
+  .map(([a, b]) => `clip(min((t-${(a - DUCK_IN).toFixed(3)})/${DUCK_IN}\\,(${(b + DUCK_OUT).toFixed(3)}-t)/${DUCK_OUT})\\,0\\,1)`)
   .reduce((acc, e) => `max(${acc}\\,${e})`);
+const SMOOTH = `asetnsamples=n=${RATE / 200}:p=0`;
 const soundParts: string[] = [];
 const soundInputs: string[] = [];
 let inputCount = 0;
@@ -141,13 +156,13 @@ const input = (...args: string[]) => {
 const music = find(SRC, 'music');
 if (music) {
   const { lufs } = measure(music);
-  const gain = VOICE_LUFS - MUSIC_UNDER - lufs;
+  const gain = VOICE_STEREO_LUFS - MUSIC_UNDER - lufs;
   const fadeOut = sec(2824) + 1.5; // nearly silent from F2824: the bed's own last chord is already dying away
   const i = input('-i', music);
   soundParts.push(
     `[${i}]aresample=${RATE},aformat=channel_layouts=stereo,atrim=0:${FILM_S},apad=whole_dur=${FILM_S},` +
       // the bed leans about 1.7 dB to the left (the soundfont's stereo piano), so it is centred first
-      `pan=stereo|c0=0.909*c0|c1=1.100*c1,volume=${gain.toFixed(2)}dB,volume='pow(10\\,-${DUCK_DB}*(${duckExpr})/20)':eval=frame,` +
+      `pan=stereo|c0=0.909*c0|c1=1.100*c1,volume=${gain.toFixed(2)}dB,${SMOOTH},volume='pow(10\\,-${DUCK_DB}*(${duckExpr})/20)':eval=frame,` +
       `afade=t=in:d=0.05,afade=t=out:st=${(fadeOut - 2).toFixed(3)}:d=${(FILM_S - fadeOut + 2).toFixed(3)}:curve=qsin[music]`,
   );
 } else console.log('no music file: the sound stem has the effects only');
@@ -159,7 +174,7 @@ if (absent.length) console.log(`no effect files for: ${absent.join(', ')} (their
 const effectGain = new Map<string, number>();
 for (const k of new Set(CUES.map((c) => c.kind))) {
   const f = find(path.join(SRC, 'effects'), k) ?? CUES.filter((c) => c.kind === k).map(effectFile).find(Boolean);
-  if (f) effectGain.set(k, VOICE_LUFS - EFFECTS_UNDER - measure(f).lufs);
+  if (f) effectGain.set(k, VOICE_STEREO_LUFS - EFFECTS_UNDER - measure(f).lufs);
 }
 const cues = CUES.filter((c) => effectFile(c) && effectGain.has(c.kind));
 for (const c of cues) {
@@ -182,7 +197,7 @@ if (labels.length) {
   // the effects together, ducked under the voice, then with the music
   const duckFx = `volume='pow(10\\,-${EFFECTS_DUCK_DB}*(${duckExpr})/20)':eval=frame`;
   const music = labels.includes('[music]');
-  const effects = fx.length ? `${fx.join('')}amix=inputs=${fx.length}:normalize=0,apad=whole_dur=${FILM_S},atrim=0:${FILM_S},${duckFx}[fx];` : '';
+  const effects = fx.length ? `${fx.join('')}amix=inputs=${fx.length}:normalize=0,apad=whole_dur=${FILM_S},atrim=0:${FILM_S},${SMOOTH},${duckFx}[fx];` : '';
   const both = music && fx.length ? '[music][fx]amix=inputs=2:normalize=0' : music ? '[music]anull' : '[fx]anull';
   const graph = `${soundParts.join(';')};${effects}${both},apad=whole_dur=${FILM_S},atrim=0:${FILM_S}[out]`;
   run([...soundInputs, '-filter_complex', graph, '-map', '[out]', '-ar', String(RATE), '-c:a', 'pcm_s24le', soundRaw]);
