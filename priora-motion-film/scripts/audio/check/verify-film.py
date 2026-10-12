@@ -10,7 +10,8 @@ For each MP4 given it checks:
     processed line, out/mix/<id>.wav), within half a frame;
   - that a whole-film transcript (the Parakeet recogniser in 12 s pieces) hears every word of every line in its
     window, and no speech outside the windows. "Priora" written by the recogniser as "Priyora" or similar counts
-    as heard, since it is the brand name pronounced as intended.
+    as heard, since it is the brand name pronounced as intended, and so does "route" written as "root" (the
+    narrator's British pronunciation).
 It also reports, per line, how far the voice sits above the music and effects (from the two stems).
 
 Usage (from priora-motion-film, with a Python that has numpy, scipy, soundfile and sherpa-onnx):
@@ -35,6 +36,8 @@ from asr import transcribe  # noqa: E402
 ROOT = Path(__file__).resolve().parents[3]
 FPS, SR = 30, 48000
 BRAND = re.compile(r"^pr\w*ora$")
+# a word said in a correct pronunciation the recogniser writes as its homophone (the narrator's British "route")
+HOMOPHONES = {('route', 'root')}
 
 
 def narration():
@@ -56,7 +59,7 @@ def norm(text):
 
 
 def errors(want, got):
-    same = lambda a, b: a == b or (BRAND.match(a) and BRAND.match(b))
+    same = lambda a, b: a == b or (BRAND.match(a) and BRAND.match(b)) or (a, b) in HOMOPHONES
     d = [[i + j if i * j == 0 else 0 for j in range(len(got) + 1)] for i in range(len(want) + 1)]
     for i in range(1, len(want) + 1):
         for j in range(1, len(got) + 1):

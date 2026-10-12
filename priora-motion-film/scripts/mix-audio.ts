@@ -170,11 +170,15 @@ if (music) {
   const gain = VOICE_STEREO_LUFS - MUSIC_UNDER - lufs;
   const fadeOut = sec(2824) + 1.5; // nearly silent from F2824: the bed's own last chord is already dying away
   const i = input('-i', music);
+  // the bed composed for the film leans about 1.7 dB to the left (the soundfont's stereo piano), so it is
+  // centred first, and its fullest passage (the figure and the warm chord, under N3a to N4b) sits 3 dB lower;
+  // the ElevenLabs folder's bed is centred and cut to the film already (scripts/audio/prepare-elevenlabs.py)
+  const composed = SRC === path.join(ROOT, 'audio sources');
+  const shape = composed ? `pan=stereo|c0=0.909*c0|c1=1.100*c1,` : '';
+  const dip = composed ? `volume='pow(10\\,-3*clip(min((t-24.5)/1\\,(47.5-t)/1)\\,0\\,1)/20)':eval=frame,` : '';
   soundParts.push(
     `[${i}]aresample=${RATE},aformat=channel_layouts=stereo,atrim=0:${FILM_S},apad=whole_dur=${FILM_S},` +
-      // the bed leans about 1.7 dB to the left (the soundfont's stereo piano), so it is centred first
-      // and its fullest passage (the figure and the warm chord, under N3a to N4b) sits 3 dB lower
-      `pan=stereo|c0=0.909*c0|c1=1.100*c1,volume=${gain.toFixed(2)}dB,${SMOOTH},volume='pow(10\\,-3*clip(min((t-24.5)/1\\,(47.5-t)/1)\\,0\\,1)/20)':eval=frame,volume='pow(10\\,-${DUCK_DB}*(${duckExpr})/20)':eval=frame,` +
+      `${shape}volume=${gain.toFixed(2)}dB,${SMOOTH},${dip}volume='pow(10\\,-${DUCK_DB}*(${duckExpr})/20)':eval=frame,` +
       `afade=t=in:d=0.05,afade=t=out:st=${(fadeOut - 2).toFixed(3)}:d=${(FILM_S - fadeOut + 2).toFixed(3)}:curve=qsin[music]`,
   );
 } else console.log('no music file: the sound stem has the effects only');

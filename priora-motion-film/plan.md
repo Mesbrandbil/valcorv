@@ -909,30 +909,30 @@ Checker: every rule passes.
 
 ## 9. Narration fit
 
-The narration is recorded (see `narration script.md`): Kokoro-82M with `af_heart` for every narrator line at speed 0.95 and `am_puck` for the worker at 1.00, made by `scripts/audio/make-voice.py` and checked word for word with a speech recogniser. Every line starts on a beat of the 90 BPM grid (one beat is 20 frames) and ends before its `by` frame; the animation is never sped up to fit a line. The frames below are the lengths the mix measures (`src/lib/voice-lengths.ts`), which also set the subtitle windows and `narration.srt`.
+The narration is recorded (see `narration script.md`): ElevenLabs Eleven Multilingual v2, generated through the invideo connector, with **George** for every narrator line at speed 1.0 and **Liam** for the worker at 1.1. `scripts/audio/prepare-elevenlabs.py` turns the takes into the mix's sources in `audio sources/elevenlabs` and checks each one word for word with a speech recogniser. Every line starts on a beat of the 90 BPM grid (one beat is 20 frames) and ends before its `by` frame; the animation is never sped up to fit a line. The frames below are the lengths the mix measures (`src/lib/voice-lengths.ts`), which also set the subtitle windows and `narration.srt`.
 
 | Line | Text | Voice, speed | Words | Words a second | Frames | Placed | Ends by | Gap to next line |
 |---|---|---|---|---|---|---|---|---|
-| N1a | "Real work in the middle: a worker, a site, a risk owner." | af_heart 0.95 | 12 | 3.5 | 104 | F0040–F0143 | F0150 | 16 f |
-| N1b | "Priora places agents around it." | af_heart 0.95 | 5 | 2.5 | 59 | F0160–F0218 | F0236 | 61 f |
-| W1 | "Hey, the bracket by the packing line has cracked again. We’re going to weld it before the night shift." | am_puck 1.00 | 19 | 4.1 | 138 | F0280–F0417 | F0490 | 102 f |
-| N2 | "Priora hears the job, and asks for a photo." | af_heart 0.95 | 9 | 3.4 | 79 | F0520–F0598 | F0620 | 161 f |
-| N3a | "Next, it summons only the specialists this site and job need." | af_heart 0.95 | 11 | 2.8 | 118 | F0760–F0877 | F0899 | 122 f |
-| N3b | "Each checks its own conditions and reports back." | af_heart 0.95 | 8 | 3.0 | 81 | F1000–F1080 | F1100 | 119 f |
-| N4a | "When everything holds, the route opens." | af_heart 0.95 | 6 | 2.7 | 66 | F1200–F1265 | F1270 | 14 f |
-| N4b | "Work goes on, the record is kept, no one is disturbed." | af_heart 0.95 | 11 | 3.3 | 101 | F1280–F1380 | F1420 | 59 f |
-| N5a | "One condition slips: the fire watch is half the policy." | af_heart 0.95 | 10 | 2.8 | 106 | F1440–F1545 | F1560 | 54 f |
-| N5b | "Priora brings it to the risk owner." | af_heart 0.95 | 7 | 3.8 | 56 | F1600–F1655 | F1660 | 24 f |
-| N5c | "Agents prepare, the human decides." | af_heart 0.95 | 5 | 2.3 | 66 | F1680–F1745 | F1760 | 34 f |
-| N6Ra | "Retain is never a default." | af_heart 0.95 | 5 | 2.9 | 51 | F1780–F1830 | F1838 | 9 f |
-| N6Rb | "Risk is kept on purpose, with its terms explicit." | af_heart 0.95 | 9 | 2.9 | 93 | F1840–F1932 | F1940 | 107 f |
-| N6M | "Mitigate compares safeguards, and checks whether the work is back inside." | af_heart 0.95 | 11 | 2.7 | 122 | F2040–F2161 | F2170 | 18 f |
-| N6T | "Transfer, simulated for now, asks outside capacity for terms and a price." | af_heart 0.95 | 12 | 2.4 | 149 | F2180–F2328 | F2350 | 31 f |
-| N7a | "Priora carries the case between rooms." | af_heart 0.95 | 6 | 2.9 | 63 | F2360–F2422 | F2440 | 17 f |
-| N7b | "The risk owner stays in control." | af_heart 0.95 | 6 | 3.3 | 55 | F2440–F2494 | F2530 | 145 f |
-| N8 | "Priora turns physical work into explicit risk decisions, while the work happens." | af_heart 0.95 | 12 | 2.5 | 143 | F2640–F2782 | F2800 | 100 f to the end |
+| N1a | "Real work in the middle: a worker, a site, a risk owner." | George 1.0 | 12 | 3.7 | 98 | F0040–F0137 | F0150 | 22 f |
+| N1b | "Priora places agents around it." | George 1.0 | 5 | 2.7 | 56 | F0160–F0215 | F0236 | 64 f |
+| W1 | "Hey, the bracket by the packing line has cracked again. We’re going to weld it before the night shift." | Liam 1.1 | 19 | 4.6 | 125 | F0280–F0404 | F0490 | 115 f |
+| N2 | "Priora hears the job, and asks for a photo." | George 1.0 | 9 | 3.6 | 75 | F0520–F0594 | F0620 | 165 f |
+| N3a | "Next, it summons only the specialists this site and job need." | George 1.0 | 11 | 3.3 | 101 | F0760–F0860 | F0899 | 139 f |
+| N3b | "Each checks its own conditions and reports back." | George 1.0 | 8 | 3.2 | 76 | F1000–F1075 | F1100 | 124 f |
+| N4a | "When everything holds, the route opens." | George 1.0 | 6 | 2.7 | 67 | F1200–F1266 | F1270 | 13 f |
+| N4b | "Work goes on, the record is kept, no one is disturbed." | George 1.0 | 11 | 3.2 | 102 | F1280–F1381 | F1420 | 58 f |
+| N5a | "One condition slips: the fire watch is half the policy." | George 1.0 | 10 | 3.2 | 93 | F1440–F1532 | F1560 | 67 f |
+| N5b | "Priora brings it to the risk owner." | George 1.0 | 7 | 4.0 | 52 | F1600–F1651 | F1660 | 28 f |
+| N5c | "Agents prepare, the human decides." | George 1.0 | 5 | 2.3 | 64 | F1680–F1743 | F1760 | 36 f |
+| N6Ra | "Retain is never a default." | George 1.0 | 5 | 3.3 | 45 | F1780–F1824 | F1838 | 15 f |
+| N6Rb | "Risk is kept on purpose, with its terms explicit." | George 1.0 | 9 | 3.1 | 88 | F1840–F1927 | F1940 | 112 f |
+| N6M | "Mitigate compares safeguards, and checks whether the work is back inside." | George 1.0 | 11 | 2.8 | 117 | F2040–F2156 | F2170 | 23 f |
+| N6T | "Transfer, simulated for now, asks outside capacity for terms and a price." | George 1.0 | 12 | 2.7 | 133 | F2180–F2312 | F2350 | 47 f |
+| N7a | "Priora carries the case between rooms." | George 1.0 | 6 | 2.8 | 65 | F2360–F2424 | F2440 | 15 f |
+| N7b | "The risk owner stays in control." | George 1.0 | 6 | 3.3 | 55 | F2440–F2494 | F2530 | 145 f |
+| N8 | "Priora turns physical work into explicit risk decisions, while the work happens." | George 1.0 | 12 | 2.6 | 140 | F2640–F2779 | F2800 | 103 f to the end |
 
-The voice speaks at 2.3 to 3.8 words a second (about 3 on average), faster than the 2.3 planned, so six lines moved one beat to keep their key words on the picture: N1a ("worker", "site" and "risk owner" at F0086, F0102 and F0119, as the three figures land), N2 ("a photo" at F0582, just before the request at F0596), N6M ("back inside" at F2136, with BACK INSIDE), N6T ("terms and a price" from F2293, with the returning answers) N7b ("control" at F2478, as the black line closes) and N6Rb (one beat earlier, so it ends before the camera leaves Retain at F1931 and "terms" lands as the four terms appear). The worker's message runs F0280–F0417, and each of its words appears on screen as it is spoken (`src/lib/voice-words.ts`, from the recogniser's word times); the waveform grows with it. `npm run mix` rewrites both files from the recordings, then `npm run srt` and `npm run qa` run again. For the review copy, `scripts/place-subtitles.py` reads every frame of the rendered master and places each subtitle (bottom or top, one or two rows) where its solid panel slices no label, icon or figure; it writes `src/lib/subtitle-places.ts`, and the review is rendered after it.
+The voice speaks at 2.3 to 4.6 words a second (about 3.1 on average), faster than the 2.3 planned. When the lines were first recorded (with Kokoro), six lines moved one beat to keep their key words on the picture: N1a ("worker", "site" and "risk owner" at F0086, F0102 and F0119, as the three figures land), N2 ("a photo" at F0582, just before the request at F0596), N6M ("back inside" at F2136, with BACK INSIDE), N6T ("terms and a price" from F2293, with the returning answers) N7b ("control" at F2478, as the black line closes) and N6Rb (one beat earlier, so it ends before the camera leaves Retain at F1931 and "terms" lands as the four terms appear). The ElevenLabs takes keep every key word within a few frames of its picture moment, so no beat moved again. The worker's message runs F0280–F0404, and each of its words appears on screen as it is spoken (`src/lib/voice-words.ts`, from the recogniser's word times); the waveform grows with it. `npm run mix` rewrites both files from the recordings, then `npm run srt` and `npm run qa` run again. For the review copy, `scripts/place-subtitles.py` reads every frame of the rendered master and places each subtitle (bottom or top, one or two rows) where its solid panel slices no label, icon or figure; it writes `src/lib/subtitle-places.ts`, and the review is rendered after it.
 
 ---|---|---|---|---|---|---|---|
 | N1 | "Real work in the middle: a worker, a site, a risk owner. Priora places agents around it." | 17 | 2.3 | 222 | F0008–F0229 | F0000–F0237 | 42 f |

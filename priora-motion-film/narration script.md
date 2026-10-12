@@ -15,11 +15,7 @@ How it stays natural: the beat governs where each sentence *starts* and how long
 | Narrator | close and composed (storyboard) | warm, unhurried, mid to low register; a thoughtful guide, not an announcer. No upward inflection at line ends; lists stay level |
 | Worker | the phone message | a real person on site, slightly hurried and casual, recorded on a phone. Processed afterwards with a narrow telephone band so it sounds like a voice note |
 
-**As recorded.** ElevenLabs could not be reached from the machine that built the film, so the lines were recorded locally with Kokoro-82M v1.0 (Apache-2.0) by `scripts/audio/make-voice.py`: narrator `af_heart` at speed 0.95 for every line, worker `am_puck` at 1.00. Each line was checked with a speech recogniser (Parakeet TDT 0.6b v2) and transcribes exactly as written. "Priora" is pronounced "pree-OR-uh" in every line. The ElevenLabs recipe below still works for re-recording: drop the new files into `audio sources/voice` and run `npm run mix`.
-
-ElevenLabs settings (Text to Speech): model **Eleven Multilingual v2**; Stability 0.55, Similarity 0.75, Style 0.15, Speaker boost on, Speed 0.95 for the narrator and 1.05 for the worker. Suggested voices from the default library: narrator **George** (or Daniel, or Alice for a female narrator); worker **Liam** (or Charlie). One voice and one setting for every narrator line, so the film sounds like one take.
-
-Generate **each clip separately** and keep the takes where the line ends falling, not rising. File names are the clip names (for example `N1a.mp3`), saved in `audio sources/voice`.
+**As recorded.** ElevenLabs Text to Speech, model **Eleven Multilingual v2**, generated through the invideo connector (the project "Priora film soundtrack"), which runs ElevenLabs' models on invideo's side: narrator **George** at speed 1.0 (Stability 0.5, Similarity 0.8, Style 0.1, Speaker boost on) for every line, worker **Liam** at speed 1.1 (Stability 0.4, Similarity 0.8, Style 0.2), seed 11, each clip generated separately. One voice and one setting for every narrator line, so the film sounds like one take. The takes are kept in `audio sources/elevenlabs/downloads` (`N1a take1.mp3` and so on); `scripts/audio/prepare-elevenlabs.py` matches each to -18 LUFS with its rare peaks held under -1.5 dBFS, trims it, writes `audio sources/elevenlabs/voice`, and checks it: every first take fits its window as the mix measures it, and the speech recogniser (Parakeet TDT 0.6b v2) hears every word as written. George says "route" the British way, which the recogniser writes as "root", and "Priora" as "pree-OR-uh". The earlier Kokoro recordings in `audio sources/voice` are no longer used.
 
 ## The lines
 
@@ -48,13 +44,15 @@ Frames are absolute film frames at 30 fps; a beat is 20 frames. **Bold** marks t
 
 Six lines moved by one beat once they were recorded, because the voice speaks a little faster (about 3 words a second on average) than this plan assumed: N1a (so "worker", "site" and "risk owner" land with the three figures), N2 ("a photo" just before the request), N6M ("back inside" with BACK INSIDE), N6T ("terms and a price" with the returning answers) and N7b ("control" as the black line closes). N6Rb moved one beat earlier, so it ends before the camera leaves Retain and "terms" lands as the four terms appear.
 
+The ElevenLabs takes speak at about the same pace (2.3 to 4.6 words a second, about 3.1 on average), and every key word above still lands within a few frames of its picture moment, so no beat moved again.
+
 If a recorded clip runs longer than its window, the picture waits for the voice: the following beats move later by whole beats, and the film grows by the same amount. If it runs shorter, the silence after it is simply longer.
 
 ## Music
 
-**As recorded.** An original bed composed for the film by `scripts/audio/make-music.py`: MIDI (kept as `audio sources/music.mid`) rendered with fluidsynth and the MuseScore General soundfont (MIT): Mellow Grand Piano, Vibraphone, Warm Pad, Slow Strings under the warm chord, and a Woodblock tick, in D major, in a small synthetic room. It follows the bar form below exactly.
+**As recorded.** Mureka 9 Instrumental, through the same invideo account: a full-length ElevenLabs Music bed needed 11.9 invideo credits, more than the account had left, and a 30-second ElevenLabs piece repeated three times would have been heard to loop. The prompt below (in its Mureka form) gave a complete 159-second track: felt piano, soft mallets and a warm pad, 90.0 BPM, D minor. `scripts/audio/prepare-elevenlabs.py` brings it to exactly 90 BPM from its first bar line and cuts it to the film's 36 bars: bars 1 to 31, then 35 to 39, leaving out the three bars where a bright, busy figure comes in. The join falls under N7b, while the music is ducked, and the film's last bar is the track's home chord as the mix fades it. Its own form follows the film closely enough: almost empty under the opening, a pattern and a warmer swell under the summons and the route, fuller under the rooms, thinner at the close. The bed composed earlier (`audio sources/music.flac`) is no longer used.
 
-The ElevenLabs brief, for re-recording: one instrumental bed at **90 BPM**, cut on bar lines (one bar is 80 frames) to fit the film:
+The brief: one instrumental bed at **90 BPM**, cut on bar lines (one bar is 80 frames) to fit the film:
 
 > Calm, intimate instrumental at 90 BPM, 4/4, for a thoughtful product film. Felt piano and soft muted mallets over a low warm pad, with a dry wooden tick on some beats. Sparse and restrained; no drums, no build-ups, no big drops. It opens almost empty, settles into a gentle repeating pattern, warms into one sustained chord, thins to leave a small unresolved space, then resolves softly and ends nearly silent.
 
@@ -62,21 +60,25 @@ Where it changes, on bar lines (from `sound cues.md`): the pattern begins under 
 
 ## Sound effects
 
-**As recorded.** Made by `scripts/audio/make-effects.py`: paper, card, felt, tick, the threads (a Karplus-Strong pluck), the weld and the bell tone are synthesised; the low wooden note is the soundfont's marimba and the higher notes its celesta. The five agents arriving and the five summons each play an ascending run in D major.
+**As recorded.** ElevenLabs Sound Effects through invideo, one 3-second take each (the welding a 4-second loop). `scripts/audio/prepare-elevenlabs.py` keeps the one sound in each take (the paper's third take, whose single contact is clean; the first of two ticks; the felt and the card landings without what follows them), trims it to its onset and levels it; the thread, the tone, the low wooden note and the high note are tuned to the music's pentatonic scale (F, G, A, C, D, which sits in D minor), and the five agents arriving and the five summons each climb it. The synthesised effects made earlier (`audio sources/effects`) are no longer used.
 
-The ElevenLabs brief, for re-recording: one short sound each, placed on the frames in `sound cues.md`: a soft paper contact; a dry wooden tick; a fine plucked thread; a muted felt landing; a soft card landing on paper; a faint, local welding crackle (looping, very quiet); a soft, clear bell-like tone for the ring locking; a low wooden note for the human line.
+The brief: one short sound each, placed on the frames in `sound cues.md`: a soft paper contact; a dry wooden tick; a fine plucked thread; a muted felt landing; a soft card landing on paper; a faint, local welding crackle (looping, very quiet); a soft, clear bell-like tone for the ring locking; a low wooden note for the human line.
 
 ## Where the files go
 
 ```
-audio sources/
-  voice/     N1a.mp3, N1b.mp3, W1.mp3, N2.mp3 ... N8.mp3 (one per line in the table above)
-  music.mp3  the bed, cut so its first downbeat is at 0 s
-  effects/   paper.mp3, tick.mp3, thread.mp3, felt.mp3, card.mp3, weld.mp3, tone.mp3, wood.mp3, note.mp3
+audio sources/elevenlabs/
+  downloads/  the takes as generated: N1a take1.mp3 ... N8 take1.mp3, music take1.mp3, effects/<kind> take<n>.mp3
+  voice/      N1a.flac, N1b.flac, W1.flac, N2.flac ... N8.flac (one per line in the table above) and lines.json
+  music.flac  the bed, cut to the film, its first bar line at 0 s
+  effects/    paper.flac, tick.flac, thread.flac, felt.flac, card.flac, weld.flac, tone.flac, wood.flac, note.flac,
+              and the runs: note 1 to 5, thread 1 to 5
 ```
+
+`npm run mix` takes its sources from `audio sources/elevenlabs` once `voice/lines.json` is there.
 
 The effects are: `paper` a soft paper contact; `tick` a dry wooden tick; `thread` a fine plucked thread; `felt` a muted felt landing; `card` a soft card landing on paper; `weld` a faint welding crackle that can loop; `tone` a soft, clear bell-like tone; `wood` a low wooden note; `note` a delicate higher note (the agents arriving, the comparisons in Mitigate). `npm run mix` places every cue from `sound cues.md` and prints each line's length against its window.
 
 ## Mix
 
-Narration in front and centred, with a light de-esser on the narrator (a notch near 10.5 kHz, where Kokoro's 's' sounds are strong); the worker's voice note through a telephone band (about 300 to 3400 Hz) with a little room; music 10 dB under the voice, so it carries the gaps between lines, and ducked a further 8 dB while anyone speaks; effects 12 dB under the voice, quiet and close, and 3 dB lower while anyone speaks. The music bed is centred in the mix (the soundfont piano leans left). Loudness about -16 LUFS integrated with peaks under -1 dBTP, so it plays well online.
+Narration in front and centred, with a light de-esser on the narrator (the full-band ElevenLabs recordings keep their air); the worker's voice note through a telephone band (about 300 to 3400 Hz) with a little room; music 10 dB under the voice, so it carries the gaps between lines, and ducked a further 8 dB while anyone speaks, with a 0.3 s ramp down and a 0.9 s ramp back up; effects 15 dB under the voice, quiet and close, and 3 dB lower while anyone speaks. The music bed is centred as made. Loudness about -16 LUFS integrated with peaks under -1 dBTP, so it plays well online.
