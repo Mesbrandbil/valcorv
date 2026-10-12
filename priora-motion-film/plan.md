@@ -924,15 +924,15 @@ The narration is recorded (see `narration script.md`): Kokoro-82M with `af_heart
 | N5a | "One condition slips: the fire watch is half the policy." | af_heart 0.95 | 10 | 2.8 | 106 | F1440–F1545 | F1560 | 54 f |
 | N5b | "Priora brings it to the risk owner." | af_heart 0.95 | 7 | 3.8 | 56 | F1600–F1655 | F1660 | 24 f |
 | N5c | "Agents prepare, the human decides." | af_heart 0.95 | 5 | 2.3 | 66 | F1680–F1745 | F1760 | 34 f |
-| N6Ra | "Retain is never a default." | af_heart 0.95 | 5 | 2.9 | 51 | F1780–F1830 | F1850 | 29 f |
-| N6Rb | "Risk is kept on purpose, with its terms explicit." | af_heart 0.95 | 9 | 2.9 | 93 | F1860–F1952 | F1960 | 87 f |
+| N6Ra | "Retain is never a default." | af_heart 0.95 | 5 | 2.9 | 51 | F1780–F1830 | F1838 | 9 f |
+| N6Rb | "Risk is kept on purpose, with its terms explicit." | af_heart 0.95 | 9 | 2.9 | 93 | F1840–F1932 | F1940 | 107 f |
 | N6M | "Mitigate compares safeguards, and checks whether the work is back inside." | af_heart 0.95 | 11 | 2.7 | 122 | F2040–F2161 | F2170 | 18 f |
 | N6T | "Transfer, simulated for now, asks outside capacity for terms and a price." | af_heart 0.95 | 12 | 2.4 | 149 | F2180–F2328 | F2350 | 31 f |
 | N7a | "Priora carries the case between rooms." | af_heart 0.95 | 6 | 2.9 | 63 | F2360–F2422 | F2440 | 17 f |
 | N7b | "The risk owner stays in control." | af_heart 0.95 | 6 | 3.3 | 55 | F2440–F2494 | F2530 | 145 f |
 | N8 | "Priora turns physical work into explicit risk decisions, while the work happens." | af_heart 0.95 | 12 | 2.5 | 143 | F2640–F2782 | F2800 | 100 f to the end |
 
-The voice speaks at 2.3 to 3.8 words a second (about 3 on average), faster than the 2.3 planned, so five lines moved one beat to keep their key words on the picture: N1a ("worker", "site" and "risk owner" at F0086, F0102 and F0119, as the three figures land), N2 ("a photo" at F0582, just before the request at F0596), N6M ("back inside" at F2136, with BACK INSIDE), N6T ("terms and a price" from F2293, with the returning answers) and N7b ("control" at F2478, as the black line closes). The worker's message runs F0280–F0417, and each of its words appears on screen as it is spoken (`src/lib/voice-words.ts`, from the recogniser's word times); the waveform grows with it. `npm run mix` rewrites both files from the recordings, then `npm run srt` and `npm run qa` run again.
+The voice speaks at 2.3 to 3.8 words a second (about 3 on average), faster than the 2.3 planned, so six lines moved one beat to keep their key words on the picture: N1a ("worker", "site" and "risk owner" at F0086, F0102 and F0119, as the three figures land), N2 ("a photo" at F0582, just before the request at F0596), N6M ("back inside" at F2136, with BACK INSIDE), N6T ("terms and a price" from F2293, with the returning answers) N7b ("control" at F2478, as the black line closes) and N6Rb (one beat earlier, so it ends before the camera leaves Retain at F1931 and "terms" lands as the four terms appear). The worker's message runs F0280–F0417, and each of its words appears on screen as it is spoken (`src/lib/voice-words.ts`, from the recogniser's word times); the waveform grows with it. `npm run mix` rewrites both files from the recordings, then `npm run srt` and `npm run qa` run again. For the review copy, `scripts/place-subtitles.py` reads every frame of the rendered master and places each subtitle (bottom or top, one or two rows) where its solid panel slices no label, icon or figure; it writes `src/lib/subtitle-places.ts`, and the review is rendered after it.
 
 ---|---|---|---|---|---|---|---|
 | N1 | "Real work in the middle: a worker, a site, a risk owner. Priora places agents around it." | 17 | 2.3 | 222 | F0008–F0229 | F0000–F0237 | 42 f |

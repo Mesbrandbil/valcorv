@@ -38,15 +38,15 @@ Frames are absolute film frames at 30 fps; a beat is 20 frames. **Bold** marks t
 | N5a | beat 72, F1440 | F1560 | One con**di**tion **slips**: the **fire** watch is **half** the **pol**icy. | "slips" as the arc loosens (F1440), then the two rulers (F1470 to F1514) |
 | N5b | beat 80, F1600 | F1660 | **Pri**ora **brings** it to the **risk** owner. | the packet is carried to the desk (F1584 to F1644) |
 | N5c | beat 84, F1680 | F1760 | **A**gents pre**pare**, the **hu**man de**cides**. | the black line has closed round the packet; the rooms begin to print |
-| N6Ra | beat 89, F1780 | F1850 | Re**tain** is **nev**er a de**fault**. | the camera arrives at Retain |
-| N6Rb | beat 93, F1860 | F1960 | **Risk** is kept on **pur**pose, with its **terms** ex**plic**it. | the four terms appear (F1892 to F1906) |
+| N6Ra | beat 89, F1780 | F1838 | Re**tain** is **nev**er a de**fault**. | the camera arrives at Retain |
+| N6Rb | beat 92, F1840 | F1940 | **Risk** is kept on **pur**pose, with its **terms** ex**plic**it. | the four terms appear (F1892 to F1906) |
 | N6M | beat 102, F2040 | F2170 | **Mit**igate com**pares** **safe**guards, and **checks** whether the **work** is back in**side**. | "back inside" with BACK INSIDE (F2134) |
 | N6T | beat 109, F2180 | F2350 | **Trans**fer, **sim**ulated for **now**, asks **out**side ca**pa**city for **terms** and a **price**. | "terms and a price" with the returning answers (F2286 to F2298) |
 | N7a | beat 118, F2360 | F2440 | **Pri**ora **car**ries the **case** be**tween rooms**. | the packet visits the doorways |
 | N7b | beat 122, F2440 | F2530 | The **risk** owner **stays** in con**trol**. | "control" as the black line closes (F2465 to F2485) |
 | N8 | beat 132, F2640 | F2800 | **Pri**ora **turns phys**ical **work** into ex**plic**it **risk** de**ci**sions, while the **work hap**pens. | the closing statement (F2640 to F2808) |
 
-Five lines moved by one beat once they were recorded, because the voice speaks a little faster (about 3 words a second on average) than this plan assumed: N1a (so "worker", "site" and "risk owner" land with the three figures), N2 ("a photo" just before the request), N6M ("back inside" with BACK INSIDE), N6T ("terms and a price" with the returning answers) and N7b ("control" as the black line closes). N6Rb may run to F1960, so it keeps the same calm speed as every other line.
+Six lines moved by one beat once they were recorded, because the voice speaks a little faster (about 3 words a second on average) than this plan assumed: N1a (so "worker", "site" and "risk owner" land with the three figures), N2 ("a photo" just before the request), N6M ("back inside" with BACK INSIDE), N6T ("terms and a price" with the returning answers) and N7b ("control" as the black line closes). N6Rb moved one beat earlier, so it ends before the camera leaves Retain and "terms" lands as the four terms appear.
 
 If a recorded clip runs longer than its window, the picture waits for the voice: the following beats move later by whole beats, and the film grows by the same amount. If it runs shorter, the silence after it is simply longer.
 

@@ -129,12 +129,13 @@ const voiceRaw = path.join(TMP, 'voice raw.wav');
 }
 
 // ---------------------------------------------------------------- 3. the music and effects stem
-// the duck holds through any gap shorter than 1.2 s, so the bed does not bob up between close lines
+// the duck holds through any gap shorter than 2.3 s (its two ramps take 1.2 s, so a shorter gap could only
+// bob the bed up and straight down again)
 const speaking: Array<[number, number]> = [];
 for (const l of lines) {
   const [a, b] = [sec(l.from), sec(l.end + 1)];
   const last = speaking[speaking.length - 1];
-  if (last && a - last[1] < 1.2) last[1] = b;
+  if (last && a - last[1] < 2.3) last[1] = b;
   else speaking.push([a, b]);
 }
 // down by DUCK_DB with a 0.3 s ramp in before each stretch of speech and a 0.9 s ramp out after it, applied in
@@ -162,7 +163,8 @@ if (music) {
   soundParts.push(
     `[${i}]aresample=${RATE},aformat=channel_layouts=stereo,atrim=0:${FILM_S},apad=whole_dur=${FILM_S},` +
       // the bed leans about 1.7 dB to the left (the soundfont's stereo piano), so it is centred first
-      `pan=stereo|c0=0.909*c0|c1=1.100*c1,volume=${gain.toFixed(2)}dB,${SMOOTH},volume='pow(10\\,-${DUCK_DB}*(${duckExpr})/20)':eval=frame,` +
+      // and its fullest passage (the figure and the warm chord, under N3a to N4b) sits 3 dB lower
+      `pan=stereo|c0=0.909*c0|c1=1.100*c1,volume=${gain.toFixed(2)}dB,${SMOOTH},volume='pow(10\\,-3*clip(min((t-24.5)/1\\,(47.5-t)/1)\\,0\\,1)/20)':eval=frame,volume='pow(10\\,-${DUCK_DB}*(${duckExpr})/20)':eval=frame,` +
       `afade=t=in:d=0.05,afade=t=out:st=${(fadeOut - 2).toFixed(3)}:d=${(FILM_S - fadeOut + 2).toFixed(3)}:curve=qsin[music]`,
   );
 } else console.log('no music file: the sound stem has the effects only');
