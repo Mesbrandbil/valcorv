@@ -1,0 +1,1119 @@
+{
+ "source": {
+  "narrator": "George (JBFqnCBsd6RMkjVDRZzb), speed 1.0, stability 0.5, similarity 0.8, style 0.1",
+  "worker": "Liam (TX3LPaxmHKxFdv7VOQHJ), speed 1.1, stability 0.4, similarity 0.8, style 0.2",
+  "model": "ElevenLabs Eleven Multilingual v2 (via invideo)",
+  "seed": 11
+ },
+ "words": "the recogniser's word times, seconds from each file's start",
+ "lines": [
+  {
+   "id": "N1a",
+   "who": "narrator",
+   "text": "Real work in the middle: a worker, a site, a risk owner.",
+   "take": "N1a take1.mp3",
+   "frames": 98,
+   "end": 137,
+   "by": 150,
+   "slack": 13,
+   "peak_in_mix_db": -1.64,
+   "heard": "Real work in the middle, a worker, a site, a risk owner.",
+   "differences": [],
+   "matches": true,
+   "words": [
+    {
+     "w": "Real",
+     "start": 0.0,
+     "end": 0.4
+    },
+    {
+     "w": "work",
+     "start": 0.4,
+     "end": 0.56
+    },
+    {
+     "w": "in",
+     "start": 0.64,
+     "end": 0.8
+    },
+    {
+     "w": "the",
+     "start": 0.8,
+     "end": 0.88
+    },
+    {
+     "w": "middle:",
+     "start": 0.88,
+     "end": 1.28
+    },
+    {
+     "w": "a",
+     "start": 1.28,
+     "end": 1.44
+    },
+    {
+     "w": "worker,",
+     "start": 1.44,
+     "end": 1.84
+    },
+    {
+     "w": "a",
+     "start": 1.84,
+     "end": 2.0
+    },
+    {
+     "w": "site,",
+     "start": 2.0,
+     "end": 2.4
+    },
+    {
+     "w": "a",
+     "start": 2.4,
+     "end": 2.48
+    },
+    {
+     "w": "risk",
+     "start": 2.48,
+     "end": 2.8
+    },
+    {
+     "w": "owner.",
+     "start": 2.8,
+     "end": 3.28
+    }
+   ]
+  },
+  {
+   "id": "N1b",
+   "who": "narrator",
+   "text": "Priora places agents around it.",
+   "take": "N1b take1.mp3",
+   "frames": 56,
+   "end": 215,
+   "by": 236,
+   "slack": 21,
+   "peak_in_mix_db": -1.42,
+   "heard": "Priora places agents around it.",
+   "differences": [],
+   "matches": true,
+   "words": [
+    {
+     "w": "Priora",
+     "start": 0.0,
+     "end": 0.56
+    },
+    {
+     "w": "places",
+     "start": 0.56,
+     "end": 0.88
+    },
+    {
+     "w": "agents",
+     "start": 0.88,
+     "end": 1.28
+    },
+    {
+     "w": "around",
+     "start": 1.28,
+     "end": 1.52
+    },
+    {
+     "w": "it.",
+     "start": 1.52,
+     "end": 1.84
+    }
+   ]
+  },
+  {
+   "id": "W1",
+   "who": "worker",
+   "text": "Hey, the bracket by the packing line has cracked again. We’re going to weld it before the night shift.",
+   "take": "W1 take1.mp3",
+   "frames": 125,
+   "end": 404,
+   "by": 483,
+   "slack": 79,
+   "peak_in_mix_db": -2.19,
+   "heard": "Hey, the bracket by the packing line has cracked again. We're going to weld it before the night shift.",
+   "differences": [],
+   "matches": true,
+   "words": [
+    {
+     "w": "Hey,",
+     "start": 0.0,
+     "end": 0.24
+    },
+    {
+     "w": "the",
+     "start": 0.24,
+     "end": 0.4
+    },
+    {
+     "w": "bracket",
+     "start": 0.4,
+     "end": 0.72
+    },
+    {
+     "w": "by",
+     "start": 0.72,
+     "end": 0.88
+    },
+    {
+     "w": "the",
+     "start": 0.88,
+     "end": 0.96
+    },
+    {
+     "w": "packing",
+     "start": 0.96,
+     "end": 1.28
+    },
+    {
+     "w": "line",
+     "start": 1.28,
+     "end": 1.52
+    },
+    {
+     "w": "has",
+     "start": 1.52,
+     "end": 1.6
+    },
+    {
+     "w": "cracked",
+     "start": 1.6,
+     "end": 2.0
+    },
+    {
+     "w": "again.",
+     "start": 2.0,
+     "end": 2.48
+    },
+    {
+     "w": "We’re",
+     "start": 2.48,
+     "end": 2.8
+    },
+    {
+     "w": "going",
+     "start": 2.72,
+     "end": 2.88
+    },
+    {
+     "w": "to",
+     "start": 2.88,
+     "end": 2.96
+    },
+    {
+     "w": "weld",
+     "start": 2.96,
+     "end": 3.28
+    },
+    {
+     "w": "it",
+     "start": 3.28,
+     "end": 3.44
+    },
+    {
+     "w": "before",
+     "start": 3.44,
+     "end": 3.52
+    },
+    {
+     "w": "the",
+     "start": 3.52,
+     "end": 3.6
+    },
+    {
+     "w": "night",
+     "start": 3.6,
+     "end": 3.84
+    },
+    {
+     "w": "shift.",
+     "start": 3.84,
+     "end": 4.24
+    }
+   ]
+  },
+  {
+   "id": "N2",
+   "who": "narrator",
+   "text": "Priora hears the job, and asks for a photo.",
+   "take": "N2 take1.mp3",
+   "frames": 75,
+   "end": 594,
+   "by": 620,
+   "slack": 26,
+   "peak_in_mix_db": -1.45,
+   "heard": "Priora hears the job and asks for a photo.",
+   "differences": [],
+   "matches": true,
+   "words": [
+    {
+     "w": "Priora",
+     "start": 0.0,
+     "end": 0.64
+    },
+    {
+     "w": "hears",
+     "start": 0.64,
+     "end": 0.8
+    },
+    {
+     "w": "the",
+     "start": 0.8,
+     "end": 0.88
+    },
+    {
+     "w": "job,",
+     "start": 0.88,
+     "end": 1.2
+    },
+    {
+     "w": "and",
+     "start": 1.2,
+     "end": 1.36
+    },
+    {
+     "w": "asks",
+     "start": 1.36,
+     "end": 1.68
+    },
+    {
+     "w": "for",
+     "start": 1.68,
+     "end": 1.76
+    },
+    {
+     "w": "a",
+     "start": 1.76,
+     "end": 1.92
+    },
+    {
+     "w": "photo.",
+     "start": 1.92,
+     "end": 2.48
+    }
+   ]
+  },
+  {
+   "id": "N3a",
+   "who": "narrator",
+   "text": "Next, it summons only the specialists this site and job need.",
+   "take": "N3a take1.mp3",
+   "frames": 101,
+   "end": 860,
+   "by": 899,
+   "slack": 39,
+   "peak_in_mix_db": -1.57,
+   "heard": "Next, it summons only the specialists this site and job need.",
+   "differences": [],
+   "matches": true,
+   "words": [
+    {
+     "w": "Next,",
+     "start": 0.0,
+     "end": 0.48
+    },
+    {
+     "w": "it",
+     "start": 0.48,
+     "end": 0.64
+    },
+    {
+     "w": "summons",
+     "start": 0.64,
+     "end": 1.04
+    },
+    {
+     "w": "only",
+     "start": 1.04,
+     "end": 1.2
+    },
+    {
+     "w": "the",
+     "start": 1.2,
+     "end": 1.36
+    },
+    {
+     "w": "specialists",
+     "start": 1.36,
+     "end": 2.0
+    },
+    {
+     "w": "this",
+     "start": 2.0,
+     "end": 2.16
+    },
+    {
+     "w": "site",
+     "start": 2.16,
+     "end": 2.48
+    },
+    {
+     "w": "and",
+     "start": 2.48,
+     "end": 2.64
+    },
+    {
+     "w": "job",
+     "start": 2.64,
+     "end": 2.96
+    },
+    {
+     "w": "need.",
+     "start": 2.96,
+     "end": 3.36
+    }
+   ]
+  },
+  {
+   "id": "N3b",
+   "who": "narrator",
+   "text": "Each checks its own conditions and reports back.",
+   "take": "N3b take1.mp3",
+   "frames": 76,
+   "end": 1075,
+   "by": 1100,
+   "slack": 25,
+   "peak_in_mix_db": -1.58,
+   "heard": "Each checks its own conditions and reports back.",
+   "differences": [],
+   "matches": true,
+   "words": [
+    {
+     "w": "Each",
+     "start": 0.0,
+     "end": 0.32
+    },
+    {
+     "w": "checks",
+     "start": 0.32,
+     "end": 0.56
+    },
+    {
+     "w": "its",
+     "start": 0.64,
+     "end": 0.8
+    },
+    {
+     "w": "own",
+     "start": 0.8,
+     "end": 1.04
+    },
+    {
+     "w": "conditions",
+     "start": 1.04,
+     "end": 1.6
+    },
+    {
+     "w": "and",
+     "start": 1.52,
+     "end": 1.68
+    },
+    {
+     "w": "reports",
+     "start": 1.68,
+     "end": 2.08
+    },
+    {
+     "w": "back.",
+     "start": 2.08,
+     "end": 2.56
+    }
+   ]
+  },
+  {
+   "id": "N4a",
+   "who": "narrator",
+   "text": "When everything holds, the route opens.",
+   "take": "N4a take1.mp3",
+   "frames": 67,
+   "end": 1266,
+   "by": 1270,
+   "slack": 4,
+   "peak_in_mix_db": -1.51,
+   "heard": "When everything holds, the root opens.",
+   "differences": [],
+   "matches": true,
+   "words": [
+    {
+     "w": "When",
+     "start": 0.0,
+     "end": 0.32
+    },
+    {
+     "w": "everything",
+     "start": 0.32,
+     "end": 0.64
+    },
+    {
+     "w": "holds,",
+     "start": 0.64,
+     "end": 1.12
+    },
+    {
+     "w": "the",
+     "start": 1.12,
+     "end": 1.28
+    },
+    {
+     "w": "route",
+     "start": 1.28,
+     "end": 1.6
+    },
+    {
+     "w": "opens.",
+     "start": 1.68,
+     "end": 2.24
+    }
+   ]
+  },
+  {
+   "id": "N4b",
+   "who": "narrator",
+   "text": "Work goes on, the record is kept, no one is disturbed.",
+   "take": "N4b take1.mp3",
+   "frames": 102,
+   "end": 1381,
+   "by": 1420,
+   "slack": 39,
+   "peak_in_mix_db": -1.57,
+   "heard": "Work goes on, the record is kept, no one is disturbed.",
+   "differences": [],
+   "matches": true,
+   "words": [
+    {
+     "w": "Work",
+     "start": 0.0,
+     "end": 0.4
+    },
+    {
+     "w": "goes",
+     "start": 0.4,
+     "end": 0.64
+    },
+    {
+     "w": "on,",
+     "start": 0.64,
+     "end": 1.04
+    },
+    {
+     "w": "the",
+     "start": 1.04,
+     "end": 1.2
+    },
+    {
+     "w": "record",
+     "start": 1.2,
+     "end": 1.52
+    },
+    {
+     "w": "is",
+     "start": 1.52,
+     "end": 1.68
+    },
+    {
+     "w": "kept,",
+     "start": 1.68,
+     "end": 2.24
+    },
+    {
+     "w": "no",
+     "start": 2.24,
+     "end": 2.4
+    },
+    {
+     "w": "one",
+     "start": 2.4,
+     "end": 2.56
+    },
+    {
+     "w": "is",
+     "start": 2.56,
+     "end": 2.72
+    },
+    {
+     "w": "disturbed.",
+     "start": 2.72,
+     "end": 3.36
+    }
+   ]
+  },
+  {
+   "id": "N5a",
+   "who": "narrator",
+   "text": "One condition slips: the fire watch is half the policy.",
+   "take": "N5a take1.mp3",
+   "frames": 93,
+   "end": 1532,
+   "by": 1560,
+   "slack": 28,
+   "peak_in_mix_db": -1.69,
+   "heard": "One condition slips, the fire watch is half the policy.",
+   "differences": [],
+   "matches": true,
+   "words": [
+    {
+     "w": "One",
+     "start": 0.0,
+     "end": 0.24
+    },
+    {
+     "w": "condition",
+     "start": 0.32,
+     "end": 0.72
+    },
+    {
+     "w": "slips:",
+     "start": 0.72,
+     "end": 1.2
+    },
+    {
+     "w": "the",
+     "start": 1.2,
+     "end": 1.36
+    },
+    {
+     "w": "fire",
+     "start": 1.36,
+     "end": 1.68
+    },
+    {
+     "w": "watch",
+     "start": 1.68,
+     "end": 2.0
+    },
+    {
+     "w": "is",
+     "start": 2.0,
+     "end": 2.16
+    },
+    {
+     "w": "half",
+     "start": 2.16,
+     "end": 2.4
+    },
+    {
+     "w": "the",
+     "start": 2.4,
+     "end": 2.48
+    },
+    {
+     "w": "policy.",
+     "start": 2.48,
+     "end": 3.04
+    }
+   ]
+  },
+  {
+   "id": "N5b",
+   "who": "narrator",
+   "text": "Priora brings it to the risk owner.",
+   "take": "N5b take1.mp3",
+   "frames": 52,
+   "end": 1651,
+   "by": 1660,
+   "slack": 9,
+   "peak_in_mix_db": -1.31,
+   "heard": "Priora brings it to the risk owner.",
+   "differences": [],
+   "matches": true,
+   "words": [
+    {
+     "w": "Priora",
+     "start": 0.0,
+     "end": 0.56
+    },
+    {
+     "w": "brings",
+     "start": 0.56,
+     "end": 0.8
+    },
+    {
+     "w": "it",
+     "start": 0.8,
+     "end": 0.88
+    },
+    {
+     "w": "to",
+     "start": 0.88,
+     "end": 0.96
+    },
+    {
+     "w": "the",
+     "start": 0.96,
+     "end": 1.04
+    },
+    {
+     "w": "risk",
+     "start": 1.04,
+     "end": 1.36
+    },
+    {
+     "w": "owner.",
+     "start": 1.36,
+     "end": 1.76
+    }
+   ]
+  },
+  {
+   "id": "N5c",
+   "who": "narrator",
+   "text": "Agents prepare, the human decides.",
+   "take": "N5c take1.mp3",
+   "frames": 64,
+   "end": 1743,
+   "by": 1760,
+   "slack": 17,
+   "peak_in_mix_db": -1.61,
+   "heard": "Agents prepare, the human decides.",
+   "differences": [],
+   "matches": true,
+   "words": [
+    {
+     "w": "Agents",
+     "start": 0.0,
+     "end": 0.48
+    },
+    {
+     "w": "prepare,",
+     "start": 0.48,
+     "end": 0.96
+    },
+    {
+     "w": "the",
+     "start": 0.96,
+     "end": 1.12
+    },
+    {
+     "w": "human",
+     "start": 1.12,
+     "end": 1.52
+    },
+    {
+     "w": "decides.",
+     "start": 1.52,
+     "end": 2.16
+    }
+   ]
+  },
+  {
+   "id": "N6Ra",
+   "who": "narrator",
+   "text": "Retain is never a default.",
+   "take": "N6Ra take1.mp3",
+   "frames": 45,
+   "end": 1824,
+   "by": 1838,
+   "slack": 14,
+   "peak_in_mix_db": -1.2,
+   "heard": "Retain is never a default.",
+   "differences": [],
+   "matches": true,
+   "words": [
+    {
+     "w": "Retain",
+     "start": 0.0,
+     "end": 0.48
+    },
+    {
+     "w": "is",
+     "start": 0.48,
+     "end": 0.56
+    },
+    {
+     "w": "never",
+     "start": 0.56,
+     "end": 0.8
+    },
+    {
+     "w": "a",
+     "start": 0.8,
+     "end": 0.88
+    },
+    {
+     "w": "default.",
+     "start": 0.88,
+     "end": 1.52
+    }
+   ]
+  },
+  {
+   "id": "N6Rb",
+   "who": "narrator",
+   "text": "Risk is kept on purpose, with its terms explicit.",
+   "take": "N6Rb take1.mp3",
+   "frames": 88,
+   "end": 1927,
+   "by": 1940,
+   "slack": 13,
+   "peak_in_mix_db": -1.78,
+   "heard": "Risk is kept on purpose, with its terms explicit.",
+   "differences": [],
+   "matches": true,
+   "words": [
+    {
+     "w": "Risk",
+     "start": 0.0,
+     "end": 0.48
+    },
+    {
+     "w": "is",
+     "start": 0.48,
+     "end": 0.64
+    },
+    {
+     "w": "kept",
+     "start": 0.64,
+     "end": 0.8
+    },
+    {
+     "w": "on",
+     "start": 0.8,
+     "end": 1.04
+    },
+    {
+     "w": "purpose,",
+     "start": 1.04,
+     "end": 1.52
+    },
+    {
+     "w": "with",
+     "start": 1.52,
+     "end": 1.68
+    },
+    {
+     "w": "its",
+     "start": 1.68,
+     "end": 1.84
+    },
+    {
+     "w": "terms",
+     "start": 1.84,
+     "end": 2.24
+    },
+    {
+     "w": "explicit.",
+     "start": 2.24,
+     "end": 2.96
+    }
+   ]
+  },
+  {
+   "id": "N6M",
+   "who": "narrator",
+   "text": "Mitigate compares safeguards, and checks whether the work is back inside.",
+   "take": "N6M take1.mp3",
+   "frames": 117,
+   "end": 2156,
+   "by": 2170,
+   "slack": 14,
+   "peak_in_mix_db": -1.72,
+   "heard": "Mitigate compares safeguards and checks whether the work is back inside.",
+   "differences": [],
+   "matches": true,
+   "words": [
+    {
+     "w": "Mitigate",
+     "start": 0.0,
+     "end": 0.64
+    },
+    {
+     "w": "compares",
+     "start": 0.64,
+     "end": 1.04
+    },
+    {
+     "w": "safeguards,",
+     "start": 1.04,
+     "end": 1.68
+    },
+    {
+     "w": "and",
+     "start": 1.68,
+     "end": 1.84
+    },
+    {
+     "w": "checks",
+     "start": 1.84,
+     "end": 2.16
+    },
+    {
+     "w": "whether",
+     "start": 2.16,
+     "end": 2.4
+    },
+    {
+     "w": "the",
+     "start": 2.4,
+     "end": 2.56
+    },
+    {
+     "w": "work",
+     "start": 2.56,
+     "end": 2.88
+    },
+    {
+     "w": "is",
+     "start": 2.88,
+     "end": 3.04
+    },
+    {
+     "w": "back",
+     "start": 3.04,
+     "end": 3.28
+    },
+    {
+     "w": "inside.",
+     "start": 3.28,
+     "end": 3.92
+    }
+   ]
+  },
+  {
+   "id": "N6T",
+   "who": "narrator",
+   "text": "Transfer, simulated for now, asks outside capacity for terms and a price.",
+   "take": "N6T take1.mp3",
+   "frames": 133,
+   "end": 2312,
+   "by": 2350,
+   "slack": 38,
+   "peak_in_mix_db": -1.69,
+   "heard": "Transfer simulated for now asks outside capacity for terms and a price.",
+   "differences": [],
+   "matches": true,
+   "words": [
+    {
+     "w": "Transfer,",
+     "start": 0.16,
+     "end": 0.64
+    },
+    {
+     "w": "simulated",
+     "start": 0.72,
+     "end": 1.28
+    },
+    {
+     "w": "for",
+     "start": 1.28,
+     "end": 1.44
+    },
+    {
+     "w": "now,",
+     "start": 1.44,
+     "end": 1.6
+    },
+    {
+     "w": "asks",
+     "start": 1.76,
+     "end": 2.16
+    },
+    {
+     "w": "outside",
+     "start": 2.16,
+     "end": 2.56
+    },
+    {
+     "w": "capacity",
+     "start": 2.56,
+     "end": 3.12
+    },
+    {
+     "w": "for",
+     "start": 3.12,
+     "end": 3.28
+    },
+    {
+     "w": "terms",
+     "start": 3.28,
+     "end": 3.6
+    },
+    {
+     "w": "and",
+     "start": 3.6,
+     "end": 3.76
+    },
+    {
+     "w": "a",
+     "start": 3.76,
+     "end": 3.92
+    },
+    {
+     "w": "price.",
+     "start": 3.92,
+     "end": 4.4
+    }
+   ]
+  },
+  {
+   "id": "N7a",
+   "who": "narrator",
+   "text": "Priora carries the case between rooms.",
+   "take": "N7a take1.mp3",
+   "frames": 65,
+   "end": 2424,
+   "by": 2440,
+   "slack": 16,
+   "peak_in_mix_db": -1.27,
+   "heard": "Priora carries the case between rooms.",
+   "differences": [],
+   "matches": true,
+   "words": [
+    {
+     "w": "Priora",
+     "start": 0.0,
+     "end": 0.64
+    },
+    {
+     "w": "carries",
+     "start": 0.64,
+     "end": 0.88
+    },
+    {
+     "w": "the",
+     "start": 0.88,
+     "end": 0.96
+    },
+    {
+     "w": "case",
+     "start": 0.96,
+     "end": 1.36
+    },
+    {
+     "w": "between",
+     "start": 1.36,
+     "end": 1.6
+    },
+    {
+     "w": "rooms.",
+     "start": 1.6,
+     "end": 2.16
+    }
+   ]
+  },
+  {
+   "id": "N7b",
+   "who": "narrator",
+   "text": "The risk owner stays in control.",
+   "take": "N7b take1.mp3",
+   "frames": 55,
+   "end": 2494,
+   "by": 2530,
+   "slack": 36,
+   "peak_in_mix_db": -1.88,
+   "heard": "The risk owner stays in control.",
+   "differences": [],
+   "matches": true,
+   "words": [
+    {
+     "w": "The",
+     "start": 0.0,
+     "end": 0.16
+    },
+    {
+     "w": "risk",
+     "start": 0.16,
+     "end": 0.48
+    },
+    {
+     "w": "owner",
+     "start": 0.48,
+     "end": 0.8
+    },
+    {
+     "w": "stays",
+     "start": 0.8,
+     "end": 1.04
+    },
+    {
+     "w": "in",
+     "start": 1.04,
+     "end": 1.2
+    },
+    {
+     "w": "control.",
+     "start": 1.2,
+     "end": 1.84
+    }
+   ]
+  },
+  {
+   "id": "N8",
+   "who": "narrator",
+   "text": "Priora turns physical work into explicit risk decisions, while the work happens.",
+   "take": "N8 take1.mp3",
+   "frames": 140,
+   "end": 2779,
+   "by": 2800,
+   "slack": 21,
+   "peak_in_mix_db": -1.45,
+   "heard": "Priora turns physical work into explicit risk decisions, while the work happens.",
+   "differences": [],
+   "matches": true,
+   "words": [
+    {
+     "w": "Priora",
+     "start": 0.0,
+     "end": 0.64
+    },
+    {
+     "w": "turns",
+     "start": 0.64,
+     "end": 0.88
+    },
+    {
+     "w": "physical",
+     "start": 0.88,
+     "end": 1.2
+    },
+    {
+     "w": "work",
+     "start": 1.2,
+     "end": 1.44
+    },
+    {
+     "w": "into",
+     "start": 1.44,
+     "end": 1.68
+    },
+    {
+     "w": "explicit",
+     "start": 1.68,
+     "end": 2.24
+    },
+    {
+     "w": "risk",
+     "start": 2.24,
+     "end": 2.56
+    },
+    {
+     "w": "decisions,",
+     "start": 2.56,
+     "end": 3.36
+    },
+    {
+     "w": "while",
+     "start": 3.36,
+     "end": 3.6
+    },
+    {
+     "w": "the",
+     "start": 3.6,
+     "end": 3.76
+    },
+    {
+     "w": "work",
+     "start": 3.76,
+     "end": 4.0
+    },
+    {
+     "w": "happens.",
+     "start": 4.0,
+     "end": 4.64
+    }
+   ]
+  }
+ ]
+}

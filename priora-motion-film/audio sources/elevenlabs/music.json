@@ -1,0 +1,20 @@
+{
+ "source": "Mureka 9 Instrumental (via invideo)",
+ "take": "music take1.mp3",
+ "generated_bpm": 90.01000000000512,
+ "atempo": 0.9998889012331394,
+ "bpm": 89.99000000000511,
+ "first_bar_line_s": 0.4456791495345023,
+ "edit_bars": [
+  [
+   1,
+   32
+  ],
+  [
+   35,
+   40
+  ]
+ ],
+ "join_pre_s": 0.02,
+ "join_tail_s": 0.4
+}
