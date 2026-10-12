@@ -7,3 +7,4 @@ scripts/.qa-bundle.mjs
 scripts/.*-bundle.mjs
 public/audio/*.wav
 __pycache__/
+.venv-audio/

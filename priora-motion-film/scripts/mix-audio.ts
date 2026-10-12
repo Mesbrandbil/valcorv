@@ -17,7 +17,11 @@ import { FILM_FRAMES, VOICE, BEAT } from '../src/lib/timeline';
 import { FPS } from '../src/lib/tokens';
 
 const ROOT = path.resolve(path.dirname(new URL(import.meta.url).pathname), '..');
-const SRC = process.env.AUDIO_SOURCES ? path.resolve(process.env.AUDIO_SOURCES) : path.join(ROOT, 'audio sources');
+// the ElevenLabs recordings once they exist (scripts/audio/make-elevenlabs.py), else the local ones; AUDIO_SOURCES chooses
+const ELEVENLABS = path.join(ROOT, 'audio sources', 'elevenlabs');
+const SRC = process.env.AUDIO_SOURCES
+  ? path.resolve(ROOT, process.env.AUDIO_SOURCES)
+  : fs.existsSync(path.join(ELEVENLABS, 'voice', 'lines.json')) ? ELEVENLABS : path.join(ROOT, 'audio sources');
 const OUT = path.join(ROOT, 'public/audio');
 const TMP = path.join(ROOT, 'out/mix');
 const RATE = 48000;
@@ -81,6 +85,7 @@ const measure = (file: string) => {
 const find = (dir: string, name: string) => ['.wav', '.mp3', '.flac', '.m4a'].map((e) => path.join(dir, name + e)).find((f) => fs.existsSync(f));
 const db = (x: number) => Math.pow(10, x / 20);
 
+console.log(`sources: ${path.relative(ROOT, SRC)}`);
 fs.mkdirSync(TMP, { recursive: true });
 fs.mkdirSync(OUT, { recursive: true });
 
@@ -92,16 +97,21 @@ if (missing.length) {
 }
 // trim leading and trailing silence, so each line's first syllable is its beat
 const TRIM = 'silenceremove=start_periods=1:start_threshold=-48dB:start_silence=0.02,areverse,silenceremove=start_periods=1:start_threshold=-48dB:start_silence=0.12,areverse';
-// the narrator: Kokoro's 's' sounds carry a strong band near 10.5 kHz, so a notch and a light de-esser
-// (after the resample, so the de-esser's frequency is set at 48 kHz) take them down without dulling 1 to 4 kHz
-// (the low-pass after it removes the faint hiss the de-esser adds above the 24 kHz recording's 12 kHz)
-const DEESS = 'equalizer=f=10500:t=q:w=1.0:g=-8,deesser=i=0.45:m=0.35:f=0.5:s=o,lowpass=f=12500:poles=2,lowpass=f=12500:poles=2';
+// the narrator: a 24 kHz recording (Kokoro) carries a strong band near 10.5 kHz in its 's' sounds, so a notch and
+// a light de-esser (after the resample, so the de-esser's frequency is set at 48 kHz) take it down without
+// dulling 1 to 4 kHz, and a low-pass removes the faint hiss the de-esser adds above that recording's 12 kHz
+const DEESS_24K = 'equalizer=f=10500:t=q:w=1.0:g=-8,deesser=i=0.45:m=0.35:f=0.5:s=o,lowpass=f=12500:poles=2,lowpass=f=12500:poles=2';
+// a full-band recording (ElevenLabs, 44.1 kHz and up) keeps its air: only a light de-esser
+const DEESS_FULL = 'deesser=i=0.3:m=0.3:f=0.5:s=o';
+const sampleRate = (file: string) => Number(execFileSync('ffprobe', ['-v', 'error', '-select_streams', 'a:0', '-show_entries', 'stream=sample_rate', '-of', 'csv=p=0', file]).toString().trim());
 // the worker's voice note: a telephone band, a little squeeze and a small room
 const PHONE = 'highpass=f=300:poles=2,highpass=f=300:poles=2,lowpass=f=3400:poles=2,lowpass=f=3400:poles=2,acompressor=threshold=-22dB:ratio=3:attack=5:release=80,aecho=0.85:0.5:23|37:0.14|0.08';
 const lines = VOICE.map((v) => {
   const trimmed = path.join(TMP, `${v.id} trimmed.wav`);
-  const chain = ['who' in v ? PHONE : 'anull', TRIM, `aresample=${RATE}`, 'who' in v ? 'anull' : DEESS].join(',');
-  run(['-i', find(path.join(SRC, 'voice'), v.id)!, '-af', chain, '-ac', '1', trimmed]);
+  const source = find(path.join(SRC, 'voice'), v.id)!;
+  const deess = sampleRate(source) <= 24000 ? DEESS_24K : DEESS_FULL;
+  const chain = ['who' in v ? PHONE : 'anull', TRIM, `aresample=${RATE}`, 'who' in v ? 'anull' : deess].join(',');
+  run(['-i', source, '-af', chain, '-ac', '1', trimmed]);
   const { lufs } = measure(trimmed);
   const matched = path.join(TMP, `${v.id}.wav`);
   run(['-i', trimmed, '-af', `volume=${(VOICE_LUFS - lufs).toFixed(2)}dB`, '-ac', '1', matched]);
