@@ -145,6 +145,10 @@ def check(film, nar, stems):
         lo, hi = (t + edge if t > 0 else 0), (t + size - edge if t + size < dur else 1e9)
         words += [w for w in transcribe(str(film), t, size)['words'] if lo <= w['start'] < hi]
         t += step
+    # a word on the seam between two pieces can be timed either side of it (the recogniser's steps are 80 ms),
+    # so both pieces keep it: the same word twice within 160 ms is one word (no word is spoken that quickly)
+    words.sort(key=lambda w: w['start'])
+    words = [w for i, w in enumerate(words) if not (i and w['w'].lower() == words[i - 1]['w'].lower() and w['start'] - words[i - 1]['start'] < 0.16)]
     used, per = set(), []
     for ln in nar['lines']:
         a0, b0 = ln['from'] / FPS, (ln['to'] + 1) / FPS

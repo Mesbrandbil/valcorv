@@ -13,7 +13,7 @@ export const SUBTITLE_PLACES: Partial<Record<string, { at: 'bottom' | 'top'; edg
   N5a: { at: 'bottom', edge: 28, rows: ["One condition slips: the fire watch is half the policy."] },
   N5b: { at: 'bottom', edge: 28, rows: ["Priora brings it to the risk owner."] },
   N5c: { at: 'bottom', edge: 28, rows: ["Agents prepare, the human decides."] },
-  N6Ra: { at: 'bottom', edge: 28, rows: ["Retain is never", "a default."] },
+  N6Ra: { at: 'bottom', edge: 14, rows: ["Retain is never", "a default."] },
   N6Rb: { at: 'bottom', edge: 28, rows: ["Risk is kept on purpose, with its terms explicit."] },
   N6M: { at: 'bottom', edge: 28, rows: ["Mitigate compares safeguards, and checks whether the work is back inside."] },
   N6T: { at: 'bottom', edge: 28, rows: ["Transfer, simulated for now, asks", "outside capacity for terms and a price."] },
